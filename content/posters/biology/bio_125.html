@@ -1,168 +1,360 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shoot Modifications</title>
+    <title>Внутренняя среда организма. Кровь</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
-        body { background: #3f2c22; color: #fde68a; min-height: 100vh; font-family: 'Inter'; }
-        .serif { font-family: 'Playfair Display', serif; }
-        .glass { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { border-radius: 1.5rem; cursor: pointer; }
-        .mod-btn { transition: 0.3s; opacity: 0.6; }
-        .mod-btn:hover, .mod-btn.active { opacity: 1; transform: scale(1.05); color: #fff; border-color: #facc15; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #7f1d1d; border-bottom: 3px solid #fca5a5; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #dc2626; background: white; color: #dc2626; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fef2f2; }
+        .lang-btn.active { background: #dc2626; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .blood-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8">
+<body class="bg-slate-50">
 
-<header class="flex justify-between items-center mb-10 border-b border-yellow-500/30 pb-4">
-        <div>
-            <h1 id="title" class="serif text-4xl text-yellow-200"></h1>
-            <p class="text-xs uppercase tracking-widest text-yellow-500/60 mt-2">Underground Treasure</p>
-        </div>
-        <div class="flex gap-2 text-xs font-bold">
-            <button onclick="window.setL('ru')" class="bg-yellow-900 px-3 py-1 rounded hover:bg-yellow-700">RU</button>
-            <button onclick="window.setL('kz')" class="bg-yellow-900 px-3 py-1 rounded hover:bg-yellow-700">KZ</button>
-            <button onclick="window.setL('en')" class="bg-yellow-900 px-3 py-1 rounded hover:bg-yellow-700">EN</button>
-        </div>
-    </header>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="glass p-6 flex flex-col gap-4">
-            <h3 class="text-yellow-400 uppercase text-xs font-bold tracking-widest mb-2">Select Type</h3>
-            <button onclick="window.setMode('rhizome')" id="btn-rhizome" class="mod-btn border-l-4 border-transparent p-4 text-left glass rounded-xl">Rhizome</button>
-            <button onclick="window.setMode('tuber')" id="btn-tuber" class="mod-btn border-l-4 border-transparent p-4 text-left glass rounded-xl">Tuber</button>
-            <button onclick="window.setMode('bulb')" id="btn-bulb" class="mod-btn border-l-4 border-transparent p-4 text-left glass rounded-xl">Bulb</button>
-        </div>
-
-        <div class="lg:col-span-2 relative h-[500px] glass p-0 overflow-hidden flex items-center justify-center bg-black/20">
-            <canvas id="modCanvas" class="w-full h-full"></canvas>
-            
-            <div class="absolute bottom-8 left-8 right-8 glass p-6 border-l-4 border-yellow-500 transition-all duration-500" id="info-box">
-                <h2 id="info-h" class="text-2xl font-bold text-white mb-2"></h2>
-                <p id="info-d" class="text-sm text-white/70 leading-relaxed"></p>
-            </div>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <script>
-        const bio7Data = {
-            ru: {
-                t: "Видоизменения Побега",
-                modes: {
-                    rhizome: {t: "Корневище", d: "Подземный побег с чешуевидными листьями и почками. Служит для запасания веществ и вегетативного размножения (Ландыш, Ирис, Пырей)."},
-                    tuber: {t: "Клубень", d: "Утолщенный подземный побег. Глазки — это почки. Основная функция — запас крахмала (Картофель, Топинамбур)."},
-                    bulb: {t: "Луковица", d: "Укороченный стебель (донце) с сочными листьями (чешуями). Запас воды и сахаров (Лук, Тюльпан, Лилия)."}
-                },
-                ui: {rhizome:"Корневище", tuber:"Клубень", bulb:"Луковица"}
-            },
-            kz: {
-                t: "Өркеннің Түрөзгерістері",
-                modes: {
-                    rhizome: {t: "Тамырсабақ", d: "Қабыршақ жапырақтары мен бүршіктері бар жер асты өркені. Қорек жинау және көбею үшін қызмет етеді (Інжугүл, Құртқашаш)."},
-                    tuber: {t: "Түйнек", d: "Жуандаған жер асты өркені. Көзшелері — бүршіктер. Негізгі қызметі — крахмал жинау (Картоп, Топинамбур)."},
-                    bulb: {t: "Пиязшық", d: "Шырынды жапырақтары (қабыршақтары) бар қысқарған сабақ (түбіртек). Су мен қант қоры (Пияз, Қызғалдақ)."}
-                },
-                ui: {rhizome:"Тамырсабақ", tuber:"Түйнек", bulb:"Пиязшық"}
-            },
-            en: {
-                t: "Shoot Modifications",
-                modes: {
-                    rhizome: {t: "Rhizome", d: "Underground stem with scale-like leaves and buds. Used for storage and vegetative reproduction (Lily of the valley, Ginger)."},
-                    tuber: {t: "Tuber", d: "Swollen underground stem. 'Eyes' are buds. Main function is starch storage (Potato, Jerusalem artichoke)."},
-                    bulb: {t: "Bulb", d: "Shortened stem (basal plate) with fleshy leaves (scales). Stores water and sugars (Onion, Tulip)."}
-                },
-                ui: {rhizome:"Rhizome", tuber:"Tuber", bulb:"Bulb"}
-            }
-        };
+    <header class="header-card text-center mb-10">
+        <p class="text-red-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Ағзаның ішкі ортасы. Қан</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Internal Environment. Blood</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Внутренняя среда организма. Кровь</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-red-100">Қан — сұйық дәнекер ұлпа. Ересек адамда 4-6 литр қан бар. Оттегі, қоректік заттар тасымалдайды, қорғайды.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-red-100">Blood is liquid connective tissue. Adults have 4-6 liters. Transports oxygen, nutrients, and provides protection.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-red-100">Кровь — жидкая соединительная ткань. У взрослого 4-6 литров. Переносит кислород, питательные вещества, защищает.</p>
+    </header>
 
-        let lang='ru', mode='tuber', ctx, cvs;
+    <!-- Внутренняя среда -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Ішкі орта құрамы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Components of Internal Environment</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Компоненты внутренней среды</h2>
 
-        window.setL = (l) => {
-            lang = l;
-            document.getElementById('title').textContent = bio7Data[l].t;
-            document.getElementById('btn-rhizome').textContent = bio7Data[l].ui.rhizome;
-            document.getElementById('btn-tuber').textContent = bio7Data[l].ui.tuber;
-            document.getElementById('btn-bulb').textContent = bio7Data[l].ui.bulb;
-            updateInfo();
-        }
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Кровь -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🩸</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-red-700 mb-3">ҚАН</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-red-700 mb-3">BLOOD</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-red-700 mb-3">КРОВЬ</h3>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Орны:</strong> Қан тамырларында</p>
+                <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Location:</strong> In blood vessels</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Где:</strong> В кровеносных сосудах</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📊 <strong>Көлемі:</strong> 4-6 литр</p>
+                <p lang="en" class="lang-content text-sm mb-2">📊 <strong>Volume:</strong> 4-6 liters</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📊 <strong>Объём:</strong> 4-6 литров</p>
+                
+                <p lang="kk" class="lang-content text-sm">⚙️ <strong>Қызметі:</strong> Тасымалдау, қорғау, реттеу</p>
+                <p lang="en" class="lang-content text-sm">⚙️ <strong>Function:</strong> Transport, protection, regulation</p>
+                <p lang="ru" class="lang-content text-sm">⚙️ <strong>Функция:</strong> Транспорт, защита, регуляция</p>
+            </div>
 
-        window.setMode = (m) => { mode = m; updateInfo(); }
+            <!-- Лимфа -->
+            <div class="card" style="border-top: 5px solid #fbbf24;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">💧</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">ЛИМФА</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">LYMPH</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">ЛИМФА</h3>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Орны:</strong> Лимфа тамырларында</p>
+                <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Location:</strong> In lymph vessels</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Где:</strong> В лимфатических сосудах</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📊 <strong>Көлемі:</strong> 1-2 литр</p>
+                <p lang="en" class="lang-content text-sm mb-2">📊 <strong>Volume:</strong> 1-2 liters</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📊 <strong>Объём:</strong> 1-2 литра</p>
+                
+                <p lang="kk" class="lang-content text-sm">⚙️ <strong>Қызметі:</strong> Иммунитет, сұйықтық қайтару</p>
+                <p lang="en" class="lang-content text-sm">⚙️ <strong>Function:</strong> Immunity, fluid return</p>
+                <p lang="ru" class="lang-content text-sm">⚙️ <strong>Функция:</strong> Иммунитет, возврат жидкости</p>
+            </div>
 
-        function updateInfo() {
-            const d = bio7Data[lang].modes[mode];
-            document.getElementById('info-h').textContent = d.t;
-            document.getElementById('info-d').textContent = d.d;
-            document.querySelectorAll('.mod-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+mode).classList.add('active');
-            draw();
-        }
+            <!-- Тканевая жидкость -->
+            <div class="card" style="border-top: 5px solid #3b82f6;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🫧</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">ҰЛПА СҰЙЫҚТЫҒЫ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">TISSUE FLUID</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">ТКАНЕВАЯ ЖИДКОСТЬ</h3>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Орны:</strong> Жасушалар арасында</p>
+                <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Location:</strong> Between cells</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Где:</strong> Между клетками</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📊 <strong>Көлемі:</strong> ~20 литр</p>
+                <p lang="en" class="lang-content text-sm mb-2">📊 <strong>Volume:</strong> ~20 liters</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📊 <strong>Объём:</strong> ~20 литров</p>
+                
+                <p lang="kk" class="lang-content text-sm">⚙️ <strong>Қызметі:</strong> Заттар алмасуы (қан ↔ жасуша)</p>
+                <p lang="en" class="lang-content text-sm">⚙️ <strong>Function:</strong> Exchange (blood ↔ cells)</p>
+                <p lang="ru" class="lang-content text-sm">⚙️ <strong>Функция:</strong> Обмен веществ (кровь ↔ клетки)</p>
+            </div>
+        </div>
+    </section>
 
-        function draw() {
-            if(!ctx) return;
-            const w = cvs.width, h = cvs.height;
-            const cx = w/2, cy = h/2;
-            ctx.clearRect(0,0,w,h);
+    <!-- Состав крови -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қанның құрамы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Blood Composition</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Состав крови</h2>
 
-            // Soil
-            ctx.fillStyle = '#292524'; ctx.fillRect(0,0,w,h);
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Плазма -->
+                <div class="blood-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-yellow-800 mb-3">💛 ПЛАЗМА (55%)</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-yellow-800 mb-3">💛 PLASMA (55%)</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-yellow-800 mb-3">💛 ПЛАЗМА (55%)</h3>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Сұйық бөлігі, сары түсті</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Liquid part, yellowish color</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Жидкая часть, желтоватого цвета</p>
+                    
+                    <div style="background: white; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm mb-1">💧 <strong>Су</strong> — 90-92%</p>
+                        <p lang="en" class="lang-content text-sm mb-1">💧 <strong>Water</strong> — 90-92%</p>
+                        <p lang="ru" class="lang-content text-sm mb-1">💧 <strong>Вода</strong> — 90-92%</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mb-1">🥚 <strong>Ақуыздар</strong> — 7-8% (альбумин, глобулин, фибриноген)</p>
+                        <p lang="en" class="lang-content text-sm mb-1">🥚 <strong>Proteins</strong> — 7-8% (albumin, globulin, fibrinogen)</p>
+                        <p lang="ru" class="lang-content text-sm mb-1">🥚 <strong>Белки</strong> — 7-8% (альбумин, глобулин, фибриноген)</p>
+                        
+                        <p lang="kk" class="lang-content text-sm">🧂 <strong>Басқа</strong> — глюкоза, тұздар, гормондар, витаминдер</p>
+                        <p lang="en" class="lang-content text-sm">🧂 <strong>Other</strong> — glucose, salts, hormones, vitamins</p>
+                        <p lang="ru" class="lang-content text-sm">🧂 <strong>Другое</strong> — глюкоза, соли, гормоны, витамины</p>
+                    </div>
+                </div>
 
-            if (mode === 'tuber') {
-                // Potato
-                ctx.fillStyle = '#ca8a04';
-                ctx.beginPath(); ctx.ellipse(cx, cy, 100, 70, 0.2, 0, Math.PI*2); ctx.fill();
-                // Eyes
-                ctx.fillStyle = '#713f12';
-                [[cx-40, cy-20], [cx+50, cy-10], [cx, cy+40]].forEach(p => {
-                    ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, Math.PI*2); ctx.fill();
-                    // Sprout
-                    ctx.strokeStyle = '#bef264'; ctx.lineWidth = 2;
-                    ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.quadraticCurveTo(p[0]+10, p[1]-20, p[0]+20, p[1]-10); ctx.stroke();
-                });
-            } else if (mode === 'bulb') {
-                // Onion layers
-                for(let i=6; i>0; i--) {
-                    ctx.fillStyle = i%2===0 ? '#7c2d12' : '#fcd34d';
-                    ctx.beginPath(); ctx.arc(cx, cy+50, 20 + i*15, Math.PI, 0); 
-                    ctx.bezierCurveTo(cx+20+i*15, cy-50-i*10, cx, cy-100-i*20, cx, cy-150);
-                    ctx.bezierCurveTo(cx, cy-100-i*20, cx-20-i*15, cy-50-i*10, cx-20-i*15, cy+50);
-                    ctx.fill();
-                }
-                // Basal plate
-                ctx.fillStyle = '#fff'; ctx.fillRect(cx-20, cy+50, 40, 10);
-                // Roots
-                ctx.strokeStyle = '#fff';
-                for(let i=0; i<10; i++) {
-                    ctx.beginPath(); ctx.moveTo(cx-15+i*3, cy+60); ctx.lineTo(cx-20+i*4 + (Math.random()-0.5)*10, cy+100); ctx.stroke();
-                }
-            } else {
-                // Rhizome (Ginger-like)
-                ctx.fillStyle = '#a16207';
-                ctx.beginPath();
-                ctx.arc(cx-60, cy, 30, 0, Math.PI*2);
-                ctx.arc(cx, cy+20, 35, 0, Math.PI*2);
-                ctx.arc(cx+70, cy-10, 30, 0, Math.PI*2);
-                ctx.fill();
-                // Scale leaves
-                ctx.fillStyle = '#713f12';
-                ctx.beginPath(); ctx.arc(cx, cy+20, 35, 0, Math.PI, true); ctx.stroke();
-            }
-        }
+                <!-- Форменные элементы -->
+                <div class="blood-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #dc2626;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-red-800 mb-3">🔴 ПІШІНДІ ЭЛЕМЕНТТЕР (45%)</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-red-800 mb-3">🔴 FORMED ELEMENTS (45%)</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-red-800 mb-3">🔴 ФОРМЕННЫЕ ЭЛЕМЕНТЫ (45%)</h3>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Қан жасушалары</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Blood cells</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Клетки крови</p>
+                    
+                    <div style="background: white; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm mb-1">🔴 <strong>Эритроциттер</strong> — O₂ тасымалдайды</p>
+                        <p lang="en" class="lang-content text-sm mb-1">🔴 <strong>Erythrocytes</strong> — carry O₂</p>
+                        <p lang="ru" class="lang-content text-sm mb-1">🔴 <strong>Эритроциты</strong> — переносят O₂</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mb-1">⚪ <strong>Лейкоциттер</strong> — қорғаныш (иммунитет)</p>
+                        <p lang="en" class="lang-content text-sm mb-1">⚪ <strong>Leukocytes</strong> — protection (immunity)</p>
+                        <p lang="ru" class="lang-content text-sm mb-1">⚪ <strong>Лейкоциты</strong> — защита (иммунитет)</p>
+                        
+                        <p lang="kk" class="lang-content text-sm">🩸 <strong>Тромбоциттер</strong> — қан ұюы</p>
+                        <p lang="en" class="lang-content text-sm">🩸 <strong>Platelets</strong> — blood clotting</p>
+                        <p lang="ru" class="lang-content text-sm">🩸 <strong>Тромбоциты</strong> — свёртывание крови</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.onload = () => {
-            cvs = document.getElementById('modCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight || 500; updateInfo(); };
-            window.addEventListener('resize', rs); rs();
-            window.setL('ru');
-        };
-    </script>
+    <!-- Клетки крови -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қан жасушалары</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Blood Cells</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Клетки крови</h2>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Эритроциты -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🔴</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-red-700 mb-3">ЭРИТРОЦИТТЕР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-red-700 mb-3">ERYTHROCYTES</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-red-700 mb-3">ЭРИТРОЦИТЫ</h3>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-xs mb-1">📊 <strong>Саны:</strong> 4-5 млн/мм³</p>
+                    <p lang="en" class="lang-content text-xs mb-1">📊 <strong>Count:</strong> 4-5 million/mm³</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">📊 <strong>Количество:</strong> 4-5 млн/мм³</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">🔬 <strong>Пішіні:</strong> Қос ойыс диск, ядросыз</p>
+                    <p lang="en" class="lang-content text-xs mb-1">🔬 <strong>Shape:</strong> Biconcave disc, no nucleus</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">🔬 <strong>Форма:</strong> Двояковогнутый диск, без ядра</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">⏱️ <strong>Өмір:</strong> 120 күн</p>
+                    <p lang="en" class="lang-content text-xs mb-1">⏱️ <strong>Lifespan:</strong> 120 days</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">⏱️ <strong>Жизнь:</strong> 120 дней</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">🏭 <strong>Түзілуі:</strong> Қызыл сүйек кемігі</p>
+                    <p lang="en" class="lang-content text-xs">🏭 <strong>Formation:</strong> Red bone marrow</p>
+                    <p lang="ru" class="lang-content text-xs">🏭 <strong>Образование:</strong> Красный костный мозг</p>
+                </div>
+                
+                <div style="background: #fee2e2; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>⚙️ Қызметі:</strong> Гемоглобин арқылы O₂ және CO₂ тасымалдау</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚙️ Function:</strong> Transport O₂ and CO₂ via hemoglobin</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚙️ Функция:</strong> Перенос O₂ и CO₂ через гемоглобин</p>
+                </div>
+            </div>
 
+            <!-- Лейкоциты -->
+            <div class="card" style="border-top: 5px solid #8b5cf6;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">⚪</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-purple-700 mb-3">ЛЕЙКОЦИТТЕР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-purple-700 mb-3">LEUKOCYTES</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-purple-700 mb-3">ЛЕЙКОЦИТЫ</h3>
+                
+                <div style="background: #f5f3ff; border: 2px solid #c4b5fd; border-radius: 10px; padding: 15px;">
+                    <p lang="kk" class="lang-content text-xs mb-1">📊 <strong>Саны:</strong> 4-9 мың/мм³</p>
+                    <p lang="en" class="lang-content text-xs mb-1">📊 <strong>Count:</strong> 4-9 thousand/mm³</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">📊 <strong>Количество:</strong> 4-9 тыс/мм³</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">🔬 <strong>Пішіні:</strong> Әртүрлі, ядролы</p>
+                    <p lang="en" class="lang-content text-xs mb-1">🔬 <strong>Shape:</strong> Various, with nucleus</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">🔬 <strong>Форма:</strong> Разная, с ядром</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">⏱️ <strong>Өмір:</strong> Бірнеше күннен айларға дейін</p>
+                    <p lang="en" class="lang-content text-xs mb-1">⏱️ <strong>Lifespan:</strong> Days to months</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">⏱️ <strong>Жизнь:</strong> От дней до месяцев</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">🏭 <strong>Түзілуі:</strong> Сүйек кемігі, лимфа түйіндері</p>
+                    <p lang="en" class="lang-content text-xs">🏭 <strong>Formation:</strong> Bone marrow, lymph nodes</p>
+                    <p lang="ru" class="lang-content text-xs">🏭 <strong>Образование:</strong> Костный мозг, лимфоузлы</p>
+                </div>
+                
+                <div style="background: #ede9fe; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>⚙️ Қызметі:</strong> Фагоцитоз, антидене өндіру, иммунитет</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚙️ Function:</strong> Phagocytosis, antibody production, immunity</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚙️ Функция:</strong> Фагоцитоз, выработка антител, иммунитет</p>
+                </div>
+            </div>
+
+            <!-- Тромбоциты -->
+            <div class="card" style="border-top: 5px solid #f97316;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🩸</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-orange-700 mb-3">ТРОМБОЦИТТЕР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-orange-700 mb-3">PLATELETS</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-orange-700 mb-3">ТРОМБОЦИТЫ</h3>
+                
+                <div style="background: #fff7ed; border: 2px solid #fdba74; border-radius: 10px; padding: 15px;">
+                    <p lang="kk" class="lang-content text-xs mb-1">📊 <strong>Саны:</strong> 180-320 мың/мм³</p>
+                    <p lang="en" class="lang-content text-xs mb-1">📊 <strong>Count:</strong> 180-320 thousand/mm³</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">📊 <strong>Количество:</strong> 180-320 тыс/мм³</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">🔬 <strong>Пішіні:</strong> Пластинкалар, ядросыз</p>
+                    <p lang="en" class="lang-content text-xs mb-1">🔬 <strong>Shape:</strong> Platelets, no nucleus</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">🔬 <strong>Форма:</strong> Пластинки, без ядра</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">⏱️ <strong>Өмір:</strong> 5-8 күн</p>
+                    <p lang="en" class="lang-content text-xs mb-1">⏱️ <strong>Lifespan:</strong> 5-8 days</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">⏱️ <strong>Жизнь:</strong> 5-8 дней</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">🏭 <strong>Түзілуі:</strong> Қызыл сүйек кемігі</p>
+                    <p lang="en" class="lang-content text-xs">🏭 <strong>Formation:</strong> Red bone marrow</p>
+                    <p lang="ru" class="lang-content text-xs">🏭 <strong>Образование:</strong> Красный костный мозг</p>
+                </div>
+                
+                <div style="background: #ffedd5; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>⚙️ Қызметі:</strong> Қан ұюы, тромб түзу, қан тоқтату</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚙️ Function:</strong> Blood clotting, thrombus formation, stop bleeding</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚙️ Функция:</strong> Свёртывание крови, образование тромба</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Функции крови -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қанның қызметтері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Functions of Blood</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Функции крови</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="fact-box text-center">
+                    <p class="text-3xl mb-2">🚚</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">ТАСЫМАЛДАУ</p>
+                    <p lang="en" class="lang-content text-sm font-bold">TRANSPORT</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">ТРАНСПОРТНАЯ</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">O₂, CO₂, қоректік заттар, гормондар</p>
+                    <p lang="en" class="lang-content text-xs mt-2">O₂, CO₂, nutrients, hormones</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">O₂, CO₂, питательные вещества, гормоны</p>
+                </div>
+                
+                <div class="fact-box text-center">
+                    <p class="text-3xl mb-2">🛡️</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">ҚОРҒАНЫШ</p>
+                    <p lang="en" class="lang-content text-sm font-bold">PROTECTIVE</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">ЗАЩИТНАЯ</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Лейкоциттер, антиденелер, фагоцитоз</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Leukocytes, antibodies, phagocytosis</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Лейкоциты, антитела, фагоцитоз</p>
+                </div>
+                
+                <div class="fact-box text-center">
+                    <p class="text-3xl mb-2">🌡️</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">РЕТТЕУ</p>
+                    <p lang="en" class="lang-content text-sm font-bold">REGULATORY</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">РЕГУЛЯТОРНАЯ</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Температура, pH, су-тұз балансы</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Temperature, pH, water-salt balance</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Температура, pH, водно-солевой баланс</p>
+                </div>
+                
+                <div class="fact-box text-center">
+                    <p class="text-3xl mb-2">🩹</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">ҰЮ</p>
+                    <p lang="en" class="lang-content text-sm font-bold">CLOTTING</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">СВЁРТЫВАНИЕ</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Тромбоциттер + фибриноген → тромб</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Platelets + fibrinogen → thrombus</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Тромбоциты + фибриноген → тромб</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-radius: 1rem; border-top: 4px solid #dc2626;">
+        <p lang="kk" class="lang-content text-sm font-bold text-red-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-red-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-red-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

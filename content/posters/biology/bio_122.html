@@ -1,162 +1,412 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seed and Fruit Structure</title>
+    <title>Ткани организма человека</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        body { background: #1a2e05; color: white; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px); }
-        .rounded-custom { border-radius: 2rem; }
-        .tab-btn { opacity: 0.5; transition: 0.3s; }
-        .tab-btn.active { opacity: 1; border-bottom: 2px solid #84cc16; color: #84cc16; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #5b21b6; border-bottom: 3px solid #a78bfa; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #7c3aed; margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #7c3aed; background: white; color: #7c3aed; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f5f3ff; }
+        .lang-btn.active { background: #7c3aed; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .highlight { background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%); padding: 20px; border-radius: 0.75rem; border-left: 5px solid #7c3aed; margin: 15px 0; }
+        .tissue-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 100%; }
+        .icon-large { font-size: 48px; text-align: center; margin-bottom: 15px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 15px; }
+        th, td { border: 1px solid #ddd6fe; padding: 10px; text-align: left; font-size: 12px; }
+        th { background-color: #7c3aed; color: white; }
+        tr:nth-child(even) { background-color: #f5f3ff; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8">
+<body class="bg-slate-50">
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
-        <div class="flex flex-col gap-8">
-            <h1 class="text-5xl font-montserrat text-lime-300" id="title"></h1>
-            
-            <div class="flex gap-6 text-sm font-bold uppercase tracking-widest">
-                <button class="tab-btn active" id="tab-seed" onclick="window.setMode('seed')">Seed Structure</button>
-                <button class="tab-btn" id="tab-fruit" onclick="window.setMode('fruit')">Fruit Types</button>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-purple-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Адам ағзасының ұлпалары</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Tissues of the Human Body</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Ткани организма человека</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-purple-100">Ұлпа — құрылысы, қызметі және шығу тегі ұқсас жасушалар тобы. Адам ағзасында 4 негізгі ұлпа түрі бар.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-purple-100">Tissue is a group of cells similar in structure, function, and origin. The human body has 4 main types of tissues.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-purple-100">Ткань — группа клеток, сходных по строению, функции и происхождению. В организме человека 4 основных типа тканей.</p>
+    </header>
+
+    <!-- Определение ткани -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Ұлпа дегеніміз не?</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">What is Tissue?</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Что такое ткань?</h2>
+
+        <div class="rule-card">
+            <div class="highlight">
+                <p lang="kk" class="lang-content"><strong>ҰЛПА</strong> = Жасушалар + Жасушааралық зат</p>
+                <p lang="en" class="lang-content"><strong>TISSUE</strong> = Cells + Intercellular substance</p>
+                <p lang="ru" class="lang-content"><strong>ТКАНЬ</strong> = Клетки + Межклеточное вещество</p>
+                
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div style="background: white; padding: 15px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🔬 <strong>Жасушалар</strong> — ұлпаның негізгі құрылымдық бірліктері</p>
+                        <p lang="en" class="lang-content text-sm">🔬 <strong>Cells</strong> — main structural units of tissue</p>
+                        <p lang="ru" class="lang-content text-sm">🔬 <strong>Клетки</strong> — основные структурные единицы ткани</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">💧 <strong>Жасушааралық зат</strong> — жасушаларды байланыстырады (сұйық, тығыз, минералданған)</p>
+                        <p lang="en" class="lang-content text-sm">💧 <strong>Intercellular substance</strong> — connects cells (liquid, dense, mineralized)</p>
+                        <p lang="ru" class="lang-content text-sm">💧 <strong>Межклеточное вещество</strong> — связывает клетки (жидкое, плотное, минерализованное)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 типа тканей -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">4 негізгі ұлпа түрі</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">4 Main Types of Tissues</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">4 основных типа тканей</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- 1. Эпителиальная -->
+            <div class="tissue-card" style="border-left: 5px solid #f97316;">
+                <div class="icon-large">🧱</div>
+                <h3 lang="kk" class="lang-content text-2xl font-bold text-center text-orange-600 mb-3">1. ЭПИТЕЛИЙ ҰЛПАСЫ</h3>
+                <h3 lang="en" class="lang-content text-2xl font-bold text-center text-orange-600 mb-3">1. EPITHELIAL TISSUE</h3>
+                <h3 lang="ru" class="lang-content text-2xl font-bold text-center text-orange-600 mb-3">1. ЭПИТЕЛИАЛЬНАЯ ТКАНЬ</h3>
+                
+                <div style="background: #fff7ed; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>Ерекшелігі:</strong> Жасушалар тығыз орналасқан, жасушааралық зат аз</p>
+                    <p lang="en" class="lang-content text-sm"><strong>Feature:</strong> Cells closely packed, little intercellular substance</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>Особенность:</strong> Клетки плотно прилегают, мало межклеточного вещества</p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>📍 Орналасуы:</strong></p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>📍 Location:</strong></p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>📍 Расположение:</strong></p>
+                <ul class="text-sm space-y-1 ml-4">
+                    <li lang="kk" class="lang-content">• Тері (сыртқы қабат)</li>
+                    <li lang="en" class="lang-content">• Skin (outer layer)</li>
+                    <li lang="ru" class="lang-content">• Кожа (наружный слой)</li>
+                    
+                    <li lang="kk" class="lang-content">• Ішкі мүшелердің қабығы</li>
+                    <li lang="en" class="lang-content">• Lining of internal organs</li>
+                    <li lang="ru" class="lang-content">• Выстилка внутренних органов</li>
+                    
+                    <li lang="kk" class="lang-content">• Бездер</li>
+                    <li lang="en" class="lang-content">• Glands</li>
+                    <li lang="ru" class="lang-content">• Железы</li>
+                </ul>
+                
+                <p lang="kk" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Қызметі:</strong></p>
+                <p lang="en" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Function:</strong></p>
+                <p lang="ru" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Функции:</strong></p>
+                <ul class="text-sm space-y-1 ml-4">
+                    <li lang="kk" class="lang-content">✓ Қорғаныш</li>
+                    <li lang="en" class="lang-content">✓ Protection</li>
+                    <li lang="ru" class="lang-content">✓ Защитная</li>
+                    
+                    <li lang="kk" class="lang-content">✓ Сіңіру (ішек)</li>
+                    <li lang="en" class="lang-content">✓ Absorption (intestine)</li>
+                    <li lang="ru" class="lang-content">✓ Всасывающая (кишечник)</li>
+                    
+                    <li lang="kk" class="lang-content">✓ Секреция (бездер)</li>
+                    <li lang="en" class="lang-content">✓ Secretion (glands)</li>
+                    <li lang="ru" class="lang-content">✓ Секреторная (железы)</li>
+                </ul>
             </div>
 
-            <div class="glass p-8 rounded-custom">
-                <h2 id="info-h" class="text-2xl font-bold text-lime-100 mb-4"></h2>
-                <p id="info-d" class="text-lime-50/70 leading-relaxed"></p>
-                <div id="stats" class="mt-6 flex gap-4 text-xs font-mono text-lime-400">
-                    <!-- Dynamic -->
+            <!-- 2. Соединительная -->
+            <div class="tissue-card" style="border-left: 5px solid #3b82f6;">
+                <div class="icon-large">🔗</div>
+                <h3 lang="kk" class="lang-content text-2xl font-bold text-center text-blue-600 mb-3">2. ДӘНЕКЕР ҰЛПАСЫ</h3>
+                <h3 lang="en" class="lang-content text-2xl font-bold text-center text-blue-600 mb-3">2. CONNECTIVE TISSUE</h3>
+                <h3 lang="ru" class="lang-content text-2xl font-bold text-center text-blue-600 mb-3">2. СОЕДИНИТЕЛЬНАЯ ТКАНЬ</h3>
+                
+                <div style="background: #eff6ff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>Ерекшелігі:</strong> Жасушааралық зат көп, жасушалар бос орналасқан</p>
+                    <p lang="en" class="lang-content text-sm"><strong>Feature:</strong> Much intercellular substance, cells loosely arranged</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>Особенность:</strong> Много межклеточного вещества, клетки расположены рыхло</p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>📍 Түрлері:</strong></p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>📍 Types:</strong></p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>📍 Виды:</strong></p>
+                <ul class="text-sm space-y-1 ml-4">
+                    <li lang="kk" class="lang-content">• <strong>Қан</strong> — сұйық дәнекер ұлпа</li>
+                    <li lang="en" class="lang-content">• <strong>Blood</strong> — liquid connective tissue</li>
+                    <li lang="ru" class="lang-content">• <strong>Кровь</strong> — жидкая соед. ткань</li>
+                    
+                    <li lang="kk" class="lang-content">• <strong>Сүйек</strong> — қатты, минералданған</li>
+                    <li lang="en" class="lang-content">• <strong>Bone</strong> — hard, mineralized</li>
+                    <li lang="ru" class="lang-content">• <strong>Костная</strong> — твёрдая, минерализованная</li>
+                    
+                    <li lang="kk" class="lang-content">• <strong>Шеміршек</strong> — серпімді</li>
+                    <li lang="en" class="lang-content">• <strong>Cartilage</strong> — elastic</li>
+                    <li lang="ru" class="lang-content">• <strong>Хрящевая</strong> — упругая</li>
+                    
+                    <li lang="kk" class="lang-content">• <strong>Май</strong> — энергия қоры</li>
+                    <li lang="en" class="lang-content">• <strong>Adipose</strong> — energy storage</li>
+                    <li lang="ru" class="lang-content">• <strong>Жировая</strong> — запас энергии</li>
+                </ul>
+                
+                <p lang="kk" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Қызметі:</strong></p>
+                <p lang="en" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Function:</strong></p>
+                <p lang="ru" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Функции:</strong></p>
+                <ul class="text-sm space-y-1 ml-4">
+                    <li lang="kk" class="lang-content">✓ Тірек (сүйек, шеміршек)</li>
+                    <li lang="en" class="lang-content">✓ Support (bone, cartilage)</li>
+                    <li lang="ru" class="lang-content">✓ Опорная (кость, хрящ)</li>
+                    
+                    <li lang="kk" class="lang-content">✓ Тасымалдау (қан)</li>
+                    <li lang="en" class="lang-content">✓ Transport (blood)</li>
+                    <li lang="ru" class="lang-content">✓ Транспортная (кровь)</li>
+                    
+                    <li lang="kk" class="lang-content">✓ Қорғаныш (иммунитет)</li>
+                    <li lang="en" class="lang-content">✓ Protection (immunity)</li>
+                    <li lang="ru" class="lang-content">✓ Защитная (иммунитет)</li>
+                </ul>
+            </div>
+
+            <!-- 3. Мышечная -->
+            <div class="tissue-card" style="border-left: 5px solid #ef4444;">
+                <div class="icon-large">💪</div>
+                <h3 lang="kk" class="lang-content text-2xl font-bold text-center text-red-600 mb-3">3. БҰЛШЫҚЕТ ҰЛПАСЫ</h3>
+                <h3 lang="en" class="lang-content text-2xl font-bold text-center text-red-600 mb-3">3. MUSCLE TISSUE</h3>
+                <h3 lang="ru" class="lang-content text-2xl font-bold text-center text-red-600 mb-3">3. МЫШЕЧНАЯ ТКАНЬ</h3>
+                
+                <div style="background: #fef2f2; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>Ерекшелігі:</strong> Жиырылу қабілеті бар (қозғалыс)</p>
+                    <p lang="en" class="lang-content text-sm"><strong>Feature:</strong> Ability to contract (movement)</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>Особенность:</strong> Способность сокращаться (движение)</p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>📍 Түрлері:</strong></p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>📍 Types:</strong></p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>📍 Виды:</strong></p>
+                
+                <div class="space-y-3 mt-3">
+                    <!-- Скелетная -->
+                    <div style="background: #fee2e2; padding: 12px; border-radius: 8px; border-left: 4px solid #ef4444;">
+                        <p lang="kk" class="lang-content text-sm"><strong>1. Көлденең-жолақты (скелеттік)</strong></p>
+                        <p lang="en" class="lang-content text-sm"><strong>1. Skeletal (striated)</strong></p>
+                        <p lang="ru" class="lang-content text-sm"><strong>1. Поперечно-полосатая (скелетная)</strong></p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-1">📍 Сүйекке бекінген • ⚙️ Ерікті басқарылады</p>
+                        <p lang="en" class="lang-content text-xs mt-1">📍 Attached to bones • ⚙️ Voluntary control</p>
+                        <p lang="ru" class="lang-content text-xs mt-1">📍 Прикреплена к костям • ⚙️ Произвольное управление</p>
+                    </div>
+                    
+                    <!-- Гладкая -->
+                    <div style="background: #fef3c7; padding: 12px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                        <p lang="kk" class="lang-content text-sm"><strong>2. Тегіс</strong></p>
+                        <p lang="en" class="lang-content text-sm"><strong>2. Smooth</strong></p>
+                        <p lang="ru" class="lang-content text-sm"><strong>2. Гладкая</strong></p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-1">📍 Ішкі мүшелер (асқазан, ішек, қан тамырлары) • ⚙️ Еріксіз</p>
+                        <p lang="en" class="lang-content text-xs mt-1">📍 Internal organs (stomach, intestines, blood vessels) • ⚙️ Involuntary</p>
+                        <p lang="ru" class="lang-content text-xs mt-1">📍 Внутренние органы (желудок, кишечник, сосуды) • ⚙️ Непроизвольное</p>
+                    </div>
+                    
+                    <!-- Сердечная -->
+                    <div style="background: #fce7f3; padding: 12px; border-radius: 8px; border-left: 4px solid #ec4899;">
+                        <p lang="kk" class="lang-content text-sm"><strong>3. Жүрек</strong></p>
+                        <p lang="en" class="lang-content text-sm"><strong>3. Cardiac</strong></p>
+                        <p lang="ru" class="lang-content text-sm"><strong>3. Сердечная</strong></p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-1">📍 Тек жүрек • ⚙️ Автоматты (тоқтаусыз жиырылады)</p>
+                        <p lang="en" class="lang-content text-xs mt-1">📍 Only in heart • ⚙️ Automatic (contracts non-stop)</p>
+                        <p lang="ru" class="lang-content text-xs mt-1">📍 Только в сердце • ⚙️ Автоматическое (сокращается непрерывно)</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex gap-2 mt-auto">
-                <button onclick="window.setL('ru')" class="bg-lime-900 px-3 py-1 rounded text-xs hover:bg-lime-700">RU</button>
-                <button onclick="window.setL('kz')" class="bg-lime-900 px-3 py-1 rounded text-xs hover:bg-lime-700">KZ</button>
-                <button onclick="window.setL('en')" class="bg-lime-900 px-3 py-1 rounded text-xs hover:bg-lime-700">EN</button>
+            <!-- 4. Нервная -->
+            <div class="tissue-card" style="border-left: 5px solid #10b981;">
+                <div class="icon-large">⚡</div>
+                <h3 lang="kk" class="lang-content text-2xl font-bold text-center text-emerald-600 mb-3">4. ЖҮЙКЕ ҰЛПАСЫ</h3>
+                <h3 lang="en" class="lang-content text-2xl font-bold text-center text-emerald-600 mb-3">4. NERVOUS TISSUE</h3>
+                <h3 lang="ru" class="lang-content text-2xl font-bold text-center text-emerald-600 mb-3">4. НЕРВНАЯ ТКАНЬ</h3>
+                
+                <div style="background: #ecfdf5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>Ерекшелігі:</strong> Қозуды қабылдау және өткізу</p>
+                    <p lang="en" class="lang-content text-sm"><strong>Feature:</strong> Receives and transmits impulses</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>Особенность:</strong> Воспринимает и проводит возбуждение</p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>📍 Құрамы:</strong></p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>📍 Structure:</strong></p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>📍 Состав:</strong></p>
+                
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div style="background: #d1fae5; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm font-bold">🔴 Нейрон</p>
+                        <p lang="en" class="lang-content text-sm font-bold">🔴 Neuron</p>
+                        <p lang="ru" class="lang-content text-sm font-bold">🔴 Нейрон</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-1">Негізгі жасуша: дене + аксон + дендриттер</p>
+                        <p lang="en" class="lang-content text-xs mt-1">Main cell: body + axon + dendrites</p>
+                        <p lang="ru" class="lang-content text-xs mt-1">Основная клетка: тело + аксон + дендриты</p>
+                    </div>
+                    <div style="background: #d1fae5; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm font-bold">⚪ Нейроглия</p>
+                        <p lang="en" class="lang-content text-sm font-bold">⚪ Neuroglia</p>
+                        <p lang="ru" class="lang-content text-sm font-bold">⚪ Нейроглия</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-1">Көмекші жасушалар: қоректендіру, қорғау</p>
+                        <p lang="en" class="lang-content text-xs mt-1">Support cells: nutrition, protection</p>
+                        <p lang="ru" class="lang-content text-xs mt-1">Вспомогательные: питание, защита</p>
+                    </div>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Қызметі:</strong></p>
+                <p lang="en" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Function:</strong></p>
+                <p lang="ru" class="lang-content text-sm mt-3 mb-2"><strong>⚙️ Функции:</strong></p>
+                <ul class="text-sm space-y-1 ml-4">
+                    <li lang="kk" class="lang-content">✓ Ақпаратты қабылдау (сезім мүшелері)</li>
+                    <li lang="en" class="lang-content">✓ Receiving information (sensory organs)</li>
+                    <li lang="ru" class="lang-content">✓ Восприятие информации (органы чувств)</li>
+                    
+                    <li lang="kk" class="lang-content">✓ Импульстерді өткізу</li>
+                    <li lang="en" class="lang-content">✓ Transmitting impulses</li>
+                    <li lang="ru" class="lang-content">✓ Проведение импульсов</li>
+                    
+                    <li lang="kk" class="lang-content">✓ Ағзаны реттеу</li>
+                    <li lang="en" class="lang-content">✓ Regulating the body</li>
+                    <li lang="ru" class="lang-content">✓ Регуляция организма</li>
+                </ul>
             </div>
         </div>
+    </section>
 
-        <div class="relative glass rounded-custom p-8 flex items-center justify-center bg-black/20">
-            <canvas id="seedCanvas" class="w-full h-full"></canvas>
-            <div class="absolute top-6 right-6 text-xs text-lime-500 font-bold" id="mode-label">DICOT vs MONOCOT</div>
+    <!-- Сравнительная таблица -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Салыстырмалы кесте</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Comparison Table</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Сравнительная таблица</h2>
+
+        <div class="rule-card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- Эпителиальная -->
+                <div style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #f97316;">
+                    <h4 class="text-lg font-bold text-orange-700 mb-3">🧱 
+                        <span lang="kk" class="lang-content">Эпителий ұлпасы</span>
+                        <span lang="en" class="lang-content">Epithelial tissue</span>
+                        <span lang="ru" class="lang-content">Эпителиальная ткань</span>
+                    </h4>
+                    <p lang="kk" class="lang-content text-sm">📊 <strong>Жасушааралық зат:</strong> Аз</p>
+                    <p lang="en" class="lang-content text-sm">📊 <strong>Intercellular substance:</strong> Little</p>
+                    <p lang="ru" class="lang-content text-sm">📊 <strong>Межклеточное в-во:</strong> Мало</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">⚙️ <strong>Қызметі:</strong> Қорғау, секреция</p>
+                    <p lang="en" class="lang-content text-sm mt-2">⚙️ <strong>Function:</strong> Protection, secretion</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">⚙️ <strong>Функция:</strong> Защита, секреция</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">📍 <strong>Мысал:</strong> Тері, ішек қабығы, бездер</p>
+                    <p lang="en" class="lang-content text-sm mt-2">📍 <strong>Example:</strong> Skin, intestinal lining, glands</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">📍 <strong>Пример:</strong> Кожа, выстилка кишечника, железы</p>
+                </div>
+
+                <!-- Соединительная -->
+                <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #3b82f6;">
+                    <h4 class="text-lg font-bold text-blue-700 mb-3">🔗 
+                        <span lang="kk" class="lang-content">Дәнекер ұлпасы</span>
+                        <span lang="en" class="lang-content">Connective tissue</span>
+                        <span lang="ru" class="lang-content">Соединительная ткань</span>
+                    </h4>
+                    <p lang="kk" class="lang-content text-sm">📊 <strong>Жасушааралық зат:</strong> Көп</p>
+                    <p lang="en" class="lang-content text-sm">📊 <strong>Intercellular substance:</strong> Much</p>
+                    <p lang="ru" class="lang-content text-sm">📊 <strong>Межклеточное в-во:</strong> Много</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">⚙️ <strong>Қызметі:</strong> Тірек, тасымалдау</p>
+                    <p lang="en" class="lang-content text-sm mt-2">⚙️ <strong>Function:</strong> Support, transport</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">⚙️ <strong>Функция:</strong> Опора, транспорт</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">� <strong>Мысал:</strong> Сүйек, қан, шеміршек, май</p>
+                    <p lang="en" class="lang-content text-sm mt-2">� <strong>Example:</strong> Bone, blood, cartilage, fat</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">� <strong>Пример:</strong> Кость, кровь, хрящ, жир</p>
+                </div>
+
+                <!-- Мышечная -->
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #ef4444;">
+                    <h4 class="text-lg font-bold text-red-700 mb-3">💪 
+                        <span lang="kk" class="lang-content">Бұлшықет ұлпасы</span>
+                        <span lang="en" class="lang-content">Muscle tissue</span>
+                        <span lang="ru" class="lang-content">Мышечная ткань</span>
+                    </h4>
+                    <p lang="kk" class="lang-content text-sm">📊 <strong>Жасушааралық зат:</strong> Аз</p>
+                    <p lang="en" class="lang-content text-sm">📊 <strong>Intercellular substance:</strong> Little</p>
+                    <p lang="ru" class="lang-content text-sm">📊 <strong>Межклеточное в-во:</strong> Мало</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">⚙️ <strong>Қызметі:</strong> Қозғалыс (жиырылу)</p>
+                    <p lang="en" class="lang-content text-sm mt-2">⚙️ <strong>Function:</strong> Movement (contraction)</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">⚙️ <strong>Функция:</strong> Движение (сокращение)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">📍 <strong>Мысал:</strong> Қол-аяқ, жүрек, асқазан</p>
+                    <p lang="en" class="lang-content text-sm mt-2">📍 <strong>Example:</strong> Limbs, heart, stomach</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">📍 <strong>Пример:</strong> Конечности, сердце, желудок</p>
+                </div>
+
+                <!-- Нервная -->
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #10b981;">
+                    <h4 class="text-lg font-bold text-emerald-700 mb-3">⚡ 
+                        <span lang="kk" class="lang-content">Жүйке ұлпасы</span>
+                        <span lang="en" class="lang-content">Nervous tissue</span>
+                        <span lang="ru" class="lang-content">Нервная ткань</span>
+                    </h4>
+                    <p lang="kk" class="lang-content text-sm">📊 <strong>Жасушааралық зат:</strong> Аз</p>
+                    <p lang="en" class="lang-content text-sm">📊 <strong>Intercellular substance:</strong> Little</p>
+                    <p lang="ru" class="lang-content text-sm">📊 <strong>Межклеточное в-во:</strong> Мало</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">⚙️ <strong>Қызметі:</strong> Реттеу, байланыс</p>
+                    <p lang="en" class="lang-content text-sm mt-2">⚙️ <strong>Function:</strong> Regulation, communication</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">⚙️ <strong>Функция:</strong> Регуляция, связь</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-2">📍 <strong>Мысал:</strong> Ми, жұлын, жүйкелер</p>
+                    <p lang="en" class="lang-content text-sm mt-2">📍 <strong>Example:</strong> Brain, spinal cord, nerves</p>
+                    <p lang="ru" class="lang-content text-sm mt-2">📍 <strong>Пример:</strong> Мозг, спинной мозг, нервы</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        const bio3Data = {
-            ru: { 
-                h: "Семя и Плод", 
-                tabs: {s:"Строение семени", f:"Типы плодов"},
-                seed: {t:"Двудольные vs Однодольные", d:"Семя состоит из кожуры, зародыша и запаса питательных веществ. У двудольных (фасоль) запас в семядолях, у однодольных (пшеница) — в эндосперме.", s:"Зародыш: Корешок + Стебелек + Почечка"},
-                fruit: {t:"Классификация плодов", d:"Плод — это разросшаяся завязь с семенами. Бывают сухие (орех, боб, зерновка) и сочные (ягода, костянка, яблоко).", s:"Функция: Защита и распространение"}
-            },
-            kz: { 
-                h: "Тұқым және Жеміс", 
-                tabs: {s:"Тұқым құрылысы", f:"Жеміс түрлері"},
-                seed: {t:"Қосжарнақты vs Даражарнақты", d:"Тұқым қабықтан, ұрықтан және қоректік заттар қорынан тұрады. Қосжарнақтыларда (үрмебұршақ) қор тұқымжарнақтарда, даражарнақтыларда (бидай) — эндоспермде.", s:"Ұрық: Тамырша + Сабақша + Бүршікше"},
-                fruit: {t:"Жемістер жіктелуі", d:"Жеміс — тұқымдары бар ұлғайған түйін. Құрғақ (жаңғақ, бұршаққап, дән) және шырынды (жидек, сүйекті, алма) болады.", s:"Қызметі: Қорғау және таралу"}
-            },
-            en: { 
-                h: "Seed and Fruit", 
-                tabs: {s:"Seed Structure", f:"Fruit Types"},
-                seed: {t:"Dicot vs Monocot", d:"A seed consists of a coat, an embryo, and nutrients. Dicots (bean) store food in cotyledons, monocots (wheat) in the endosperm.", s:"Embryo: Radicle + Plumule + Cotyledon"},
-                fruit: {t:"Fruit Classification", d:"A fruit is a ripened ovary containing seeds. Types: Dry (nut, legume, grain) and Fleshy (berry, drupe, pome).", s:"Function: Protection & Dispersal"}
-            }
-        };
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%); border-radius: 1rem; border-top: 4px solid #7c3aed;">
+        <p lang="kk" class="lang-content text-sm font-bold text-purple-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-purple-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-purple-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-        let lang='ru', mode='seed', ctx, cvs;
-
-        window.setL = function(l) { 
-            lang = l; update(); 
-        };
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
         
-        window.setMode = function(m) { 
-            mode = m; 
-            document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-            document.getElementById('tab-'+m).classList.add('active');
-            update(); 
-        };
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
-        function update() {
-            const d = bio3Data[lang];
-            document.getElementById('title').textContent = d.h;
-            document.getElementById('tab-seed').textContent = d.tabs.s;
-            document.getElementById('tab-fruit').textContent = d.tabs.f;
-            
-            const data = d[mode];
-            document.getElementById('info-h').textContent = data.t;
-            document.getElementById('info-d').textContent = data.d;
-            document.getElementById('stats').textContent = data.s;
-            document.getElementById('mode-label').textContent = mode.toUpperCase();
-            draw();
-        }
-
-        function draw() {
-            if(!ctx) return;
-            const w = cvs.width, h = cvs.height;
-            ctx.clearRect(0,0,w,h);
-            const cx_ = w/2, cy_ = h/2;
-
-            if (mode === 'seed') {
-                // Bean (Dicot)
-                ctx.fillStyle = '#854d0e'; // Coat
-                ctx.beginPath(); ctx.ellipse(cx_-80, cy_, 60, 100, 0.2, 0, Math.PI*2); ctx.fill();
-                ctx.fillStyle = '#fef08a'; // Cotyledon
-                ctx.beginPath(); ctx.ellipse(cx_-80, cy_, 50, 90, 0.2, 0, Math.PI*2); ctx.fill();
-                // Embryo
-                ctx.fillStyle = '#65a30d';
-                ctx.beginPath(); ctx.arc(cx_-100, cy_+20, 10, 0, Math.PI*2); ctx.fill();
-
-                // Corn (Monocot)
-                ctx.fillStyle = '#fbbf24'; // Endosperm
-                ctx.fillRect(cx_+40, cy_-100, 80, 120);
-                ctx.fillStyle = '#fff'; // Embryo part
-                ctx.beginPath(); ctx.moveTo(cx_+40, cy_+20); ctx.lineTo(cx_+120, cy_+20); ctx.lineTo(cx_+80, cy_+80); ctx.fill();
-                
-            } else {
-                // Apple (Fleshy) - Cross section
-                ctx.fillStyle = '#ef4444'; // Skin
-                ctx.beginPath(); ctx.arc(cx_, cy_, 100, 0, Math.PI*2); ctx.fill();
-                ctx.fillStyle = '#fef9c3'; // Flesh
-                ctx.beginPath(); ctx.arc(cx_, cy_, 95, 0, Math.PI*2); ctx.fill();
-                // Core
-                ctx.strokeStyle = '#a16207'; ctx.lineWidth = 2;
-                ctx.beginPath(); ctx.arc(cx_-20, cy_, 15, 0, Math.PI*2); ctx.stroke();
-                ctx.beginPath(); ctx.arc(cx_+20, cy_, 15, 0, Math.PI*2); ctx.stroke();
-                // Seeds
-                ctx.fillStyle = '#3f2c22';
-                ctx.beginPath(); ctx.ellipse(cx_-20, cy_, 5, 10, 0.2, 0, Math.PI*2); ctx.fill();
-                ctx.beginPath(); ctx.ellipse(cx_+20, cy_, 5, 10, -0.2, 0, Math.PI*2); ctx.fill();
-            }
-        }
-
-        window.onload = function() {
-            cvs = document.getElementById('seedCanvas'); 
-            if(cvs) {
-                ctx = cvs.getContext('2d');
-                cvs.width = cvs.parentElement.clientWidth; 
-                cvs.height = cvs.parentElement.clientHeight || 500;
-                window.setL('ru');
-                draw();
-            }
-        };
-        
-        window.onresize = () => {
-            if(cvs) {
-                cvs.width = cvs.parentElement.clientWidth;
-                cvs.height = cvs.parentElement.clientHeight || 500;
-                draw();
-            }
-        };
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

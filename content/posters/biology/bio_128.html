@@ -1,90 +1,384 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classification of Fruits</title>
+    <title>Кровеносные сосуды</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #431407; color: #fed7aa; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; }
-        .fruit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .f-card { cursor: pointer; transition: 0.2s; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 1rem; }
-        .f-card:hover { background: rgba(255,255,255,0.1); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #5b21b6; border-bottom: 3px solid #c4b5fd; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #7c3aed; background: white; color: #7c3aed; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f5f3ff; }
+        .lang-btn.active { background: #7c3aed; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .vessel-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #f5f3ff; border: 2px solid #c4b5fd; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+<body class="bg-slate-50">
 
-<div class="flex flex-col gap-6">
-        <h1 class="text-4xl font-bold text-orange-400">FRUIT TYPES</h1>
-        <div class="glass p-6">
-            <h3 class="text-orange-200 mb-4 uppercase tracking-widest text-xs font-bold">Dry Fruits</h3>
-            <div class="fruit-grid">
-                <div class="f-card" onclick="draw('nut')">🌰 Nut (Орех)<div class="text-xs opacity-50">Hard shell, indehiscent</div></div>
-                <div class="f-card" onclick="draw('legume')">🫛 Legume (Боб)<div class="text-xs opacity-50">Opens on 2 seams</div></div>
-                <div class="f-card" onclick="draw('capsule')">🏺 Capsule (Коробочка)<div class="text-xs opacity-50">Many seeds (Poppy)</div></div>
-                <div class="f-card" onclick="draw('grain')">🌾 Grain (Зерновка)<div class="text-xs opacity-50">Fused coat (Wheat)</div></div>
-            </div>
-        </div>
-        <div class="glass p-6">
-            <h3 class="text-red-300 mb-4 uppercase tracking-widest text-xs font-bold">Fleshy Fruits</h3>
-            <div class="fruit-grid">
-                <div class="f-card" onclick="draw('drupe')">🍑 Drupe (Костянка)<div class="text-xs opacity-50">One hard stone</div></div>
-                <div class="f-card" onclick="draw('berry')">🫐 Berry (Ягода)<div class="text-xs opacity-50">Many seeds, soft</div></div>
-            </div>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="glass p-8 flex items-center justify-center bg-black/20">
-        <canvas id="fruitCanvas" class="w-full h-full"></canvas>
-    </div>
-
-    <script>
-        let cx, cvs, type = 'drupe';
+    <header class="header-card text-center mb-10">
+        <p class="text-purple-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
         
-        window.draw = (t) => { type = t; render(); }
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Қан тамырлары</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Blood Vessels</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Кровеносные сосуды</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-purple-100">Қан тамырлары — қанды тасымалдайтын түтіктер жүйесі. Жалпы ұзындығы ~100 000 км. 3 түрі: артериялар, веналар, капиллярлар.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-purple-100">Blood vessels are a system of tubes that transport blood. Total length ~100,000 km. 3 types: arteries, veins, capillaries.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-purple-100">Кровеносные сосуды — система трубок для транспорта крови. Общая длина ~100 000 км. 3 типа: артерии, вены, капилляры.</p>
+    </header>
 
-        function render() {
-            if(!cx) return;
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
-            const cx_ = w/2, cy_ = h/2;
+    <!-- Три типа сосудов -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қан тамырларының түрлері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Types of Blood Vessels</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Типы кровеносных сосудов</h2>
 
-            if (type === 'drupe') { // Peach
-                cx.fillStyle = '#fca5a5'; cx.beginPath(); cx.arc(cx_, cy_, 100, 0, Math.PI*2); cx.fill(); // Flesh
-                cx.fillStyle = '#78350f'; cx.beginPath(); cx.ellipse(cx_, cy_, 40, 60, 0, 0, Math.PI*2); cx.fill(); // Stone
-                cx.fillStyle = '#fff'; cx.beginPath(); cx.ellipse(cx_, cy_, 15, 30, 0, 0, Math.PI*2); cx.fill(); // Seed
-            } else if (type === 'legume') { // Pea
-                cx.fillStyle = '#4d7c0f'; 
-                cx.beginPath(); cx.ellipse(cx_, cy_, 40, 150, 0, 0, Math.PI*2); cx.fill(); // Pod
-                cx.fillStyle = '#a3e635';
-                for(let i=-2; i<=2; i++) cx.beginPath(), cx.arc(cx_, cy_ + i*40, 15, 0, Math.PI*2), cx.fill(); // Peas
-            } else if (type === 'berry') { // Tomato/Berry
-                cx.fillStyle = '#ef4444'; cx.beginPath(); cx.arc(cx_, cy_, 100, 0, Math.PI*2); cx.fill();
-                cx.fillStyle = '#fecaca'; 
-                for(let i=0; i<5; i++) {
-                    const ang = i * Math.PI*2/5;
-                    cx.beginPath(); cx.arc(cx_+Math.cos(ang)*50, cy_+Math.sin(ang)*50, 20, 0, Math.PI*2); cx.fill();
-                    cx.fillStyle = '#fef08a'; cx.beginPath(); cx.arc(cx_+Math.cos(ang)*50, cy_+Math.sin(ang)*50, 5, 0, Math.PI*2); cx.fill(); // Seeds
-                    cx.fillStyle = '#fecaca';
-                }
-            } else { // Nut
-                cx.fillStyle = '#92400e'; cx.beginPath(); cx.arc(cx_, cy_, 80, 0, Math.PI*2); cx.fill(); // Shell
-                cx.fillStyle = '#fde68a'; cx.beginPath(); cx.arc(cx_, cy_, 60, 0, Math.PI*2); cx.fill(); // Kernel
-            }
-        }
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Артерии -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🔴</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-red-700 mb-3">АРТЕРИЯЛАР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-red-700 text-center mb-3">ARTERIES</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 text-center mb-3">АРТЕРИИ</h3>
+                
+                <div style="background: #fef2f2; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p lang="kk" class="lang-content text-sm text-center"><em>Жүректен қан әкетеді</em></p>
+                    <p lang="en" class="lang-content text-sm text-center"><em>Carry blood FROM heart</em></p>
+                    <p lang="ru" class="lang-content text-sm text-center"><em>Несут кровь ОТ сердца</em></p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">🩸 <strong>Қан түрі:</strong> Артериялық (O₂-ге бай)*</p>
+                <p lang="en" class="lang-content text-sm mb-2">🩸 <strong>Blood type:</strong> Arterial (O₂-rich)*</p>
+                <p lang="ru" class="lang-content text-sm mb-2">🩸 <strong>Тип крови:</strong> Артериальная (богатая O₂)*</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">🧱 <strong>Қабырға:</strong> Қалың, серпімді, бұлшықетті</p>
+                <p lang="en" class="lang-content text-sm mb-2">🧱 <strong>Wall:</strong> Thick, elastic, muscular</p>
+                <p lang="ru" class="lang-content text-sm mb-2">🧱 <strong>Стенка:</strong> Толстая, эластичная, мышечная</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">💨 <strong>Қысым:</strong> Жоғары (120/80 мм с.б.)</p>
+                <p lang="en" class="lang-content text-sm mb-2">💨 <strong>Pressure:</strong> High (120/80 mmHg)</p>
+                <p lang="ru" class="lang-content text-sm mb-2">💨 <strong>Давление:</strong> Высокое (120/80 мм рт.ст.)</p>
+                
+                <p lang="kk" class="lang-content text-sm">🚀 <strong>Жылдамдық:</strong> 0.5 м/с</p>
+                <p lang="en" class="lang-content text-sm">🚀 <strong>Speed:</strong> 0.5 m/s</p>
+                <p lang="ru" class="lang-content text-sm">🚀 <strong>Скорость:</strong> 0.5 м/с</p>
+                
+                <div style="background: #fee2e2; padding: 10px; border-radius: 8px; margin-top: 12px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Ең үлкені:</strong> Аорта (d = 2.5 см)</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Largest:</strong> Aorta (d = 2.5 cm)</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Крупнейшая:</strong> Аорта (d = 2.5 см)</p>
+                </div>
+            </div>
 
-        window.onload = () => {
-            cvs = document.getElementById('fruitCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; render(); };
-            window.addEventListener('resize', rs); rs();
-        }
-    </script>
+            <!-- Вены -->
+            <div class="card" style="border-top: 5px solid #2563eb;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🔵</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">ВЕНАЛАР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 text-center mb-3">VEINS</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 text-center mb-3">ВЕНЫ</h3>
+                
+                <div style="background: #eff6ff; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p lang="kk" class="lang-content text-sm text-center"><em>Жүрекке қан әкеледі</em></p>
+                    <p lang="en" class="lang-content text-sm text-center"><em>Carry blood TO heart</em></p>
+                    <p lang="ru" class="lang-content text-sm text-center"><em>Несут кровь К сердцу</em></p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">🩸 <strong>Қан түрі:</strong> Венозды (CO₂-ге бай)*</p>
+                <p lang="en" class="lang-content text-sm mb-2">🩸 <strong>Blood type:</strong> Venous (CO₂-rich)*</p>
+                <p lang="ru" class="lang-content text-sm mb-2">🩸 <strong>Тип крови:</strong> Венозная (богатая CO₂)*</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">🧱 <strong>Қабырға:</strong> Жұқа, аз серпімді</p>
+                <p lang="en" class="lang-content text-sm mb-2">🧱 <strong>Wall:</strong> Thin, less elastic</p>
+                <p lang="ru" class="lang-content text-sm mb-2">🧱 <strong>Стенка:</strong> Тонкая, менее эластичная</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">💨 <strong>Қысым:</strong> Төмен (10-15 мм с.б.)</p>
+                <p lang="en" class="lang-content text-sm mb-2">💨 <strong>Pressure:</strong> Low (10-15 mmHg)</p>
+                <p lang="ru" class="lang-content text-sm mb-2">💨 <strong>Давление:</strong> Низкое (10-15 мм рт.ст.)</p>
+                
+                <p lang="kk" class="lang-content text-sm">🚀 <strong>Жылдамдық:</strong> 0.2 м/с</p>
+                <p lang="en" class="lang-content text-sm">🚀 <strong>Speed:</strong> 0.2 m/s</p>
+                <p lang="ru" class="lang-content text-sm">🚀 <strong>Скорость:</strong> 0.2 м/с</p>
+                
+                <div style="background: #dbeafe; padding: 10px; border-radius: 8px; margin-top: 12px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Ерекшелігі:</strong> Қақпақшалар бар (кері ағуды болдырмайды)</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Feature:</strong> Have valves (prevent backflow)</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Особенность:</strong> Есть клапаны (против обратного тока)</p>
+                </div>
+            </div>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+            <!-- Капилляры -->
+            <div class="card" style="border-top: 5px solid #059669;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🟢</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-emerald-700 mb-3">КАПИЛЛЯРЛАР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-emerald-700 text-center mb-3">CAPILLARIES</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-emerald-700 text-center mb-3">КАПИЛЛЯРЫ</h3>
+                
+                <div style="background: #ecfdf5; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p lang="kk" class="lang-content text-sm text-center"><em>Заттар алмасу орны</em></p>
+                    <p lang="en" class="lang-content text-sm text-center"><em>Site of exchange</em></p>
+                    <p lang="ru" class="lang-content text-sm text-center"><em>Место обмена веществ</em></p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">🔬 <strong>Өлшемі:</strong> d = 5-10 мкм (1 жасуша өтеді)</p>
+                <p lang="en" class="lang-content text-sm mb-2">🔬 <strong>Size:</strong> d = 5-10 μm (1 cell passes)</p>
+                <p lang="ru" class="lang-content text-sm mb-2">🔬 <strong>Размер:</strong> d = 5-10 мкм (проходит 1 клетка)</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">🧱 <strong>Қабырға:</strong> 1 қабат эпителий (өте жұқа!)</p>
+                <p lang="en" class="lang-content text-sm mb-2">🧱 <strong>Wall:</strong> 1 layer of epithelium (very thin!)</p>
+                <p lang="ru" class="lang-content text-sm mb-2">🧱 <strong>Стенка:</strong> 1 слой эпителия (очень тонкая!)</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">💨 <strong>Қысым:</strong> Өте төмен</p>
+                <p lang="en" class="lang-content text-sm mb-2">💨 <strong>Pressure:</strong> Very low</p>
+                <p lang="ru" class="lang-content text-sm mb-2">💨 <strong>Давление:</strong> Очень низкое</p>
+                
+                <p lang="kk" class="lang-content text-sm">🚀 <strong>Жылдамдық:</strong> 0.5 мм/с (ең баяу!)</p>
+                <p lang="en" class="lang-content text-sm">🚀 <strong>Speed:</strong> 0.5 mm/s (slowest!)</p>
+                <p lang="ru" class="lang-content text-sm">🚀 <strong>Скорость:</strong> 0.5 мм/с (самая медленная!)</p>
+                
+                <div style="background: #d1fae5; padding: 10px; border-radius: 8px; margin-top: 12px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Қызметі:</strong> O₂, CO₂, қоректік заттар, қалдықтар алмасуы</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Function:</strong> Exchange O₂, CO₂, nutrients, waste</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Функция:</strong> Обмен O₂, CO₂, питательных веществ, отходов</p>
+                </div>
+            </div>
+        </div>
 
+        <div class="fact-box mt-4">
+            <p lang="kk" class="lang-content text-xs">⚠️ *<strong>Ерекшелік:</strong> Өкпе артериясында венозды қан, өкпе венасында артериялық қан ағады!</p>
+            <p lang="en" class="lang-content text-xs">⚠️ *<strong>Exception:</strong> Pulmonary artery carries venous blood, pulmonary vein carries arterial blood!</p>
+            <p lang="ru" class="lang-content text-xs">⚠️ *<strong>Исключение:</strong> В лёгочной артерии — венозная кровь, в лёгочной вене — артериальная!</p>
+        </div>
+    </section>
+
+    <!-- Строение стенки сосуда -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Тамыр қабырғасының құрылысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Structure of Vessel Wall</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Строение стенки сосуда</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">🔴</p>
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">ІШКІ ҚАБЫҚ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">INNER LAYER</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">ВНУТРЕННЯЯ ОБОЛОЧКА</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">Эндотелий (тегіс эпителий)</p>
+                    <p lang="en" class="lang-content text-sm">Endothelium (smooth epithelium)</p>
+                    <p lang="ru" class="lang-content text-sm">Эндотелий (плоский эпителий)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Қанның үйкелісін азайтады</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-600">Reduces blood friction</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Уменьшает трение крови</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">🟡</p>
+                    <h4 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">ОРТАҢҒЫ ҚАБЫҚ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-yellow-700 mb-2">MIDDLE LAYER</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">СРЕДНЯЯ ОБОЛОЧКА</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">Тегіс бұлшықет + серпімді талшықтар</p>
+                    <p lang="en" class="lang-content text-sm">Smooth muscle + elastic fibers</p>
+                    <p lang="ru" class="lang-content text-sm">Гладкая мышца + эластичные волокна</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Тарылу/кеңею (тонус)</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-600">Constriction/dilation (tone)</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Сужение/расширение (тонус)</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">🔵</p>
+                    <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2">СЫРТҚЫ ҚАБЫҚ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2">OUTER LAYER</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2">НАРУЖНАЯ ОБОЛОЧКА</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">Дәнекер ұлпа</p>
+                    <p lang="en" class="lang-content text-sm">Connective tissue</p>
+                    <p lang="ru" class="lang-content text-sm">Соединительная ткань</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Қорғау, бекіту</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-600">Protection, anchoring</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Защита, фиксация</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Движение крови -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қан қозғалысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Blood Movement</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Движение крови</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="vessel-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #dc2626;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-red-800 mb-3">💓 ҚАНДЫ НЕ ҚОЗҒАЙДЫ?</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-red-800 mb-3">💓 WHAT MOVES BLOOD?</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-red-800 mb-3">💓 ЧТО ДВИЖЕТ КРОВЬ?</h3>
+                    
+                    <div class="space-y-2">
+                        <p lang="kk" class="lang-content text-sm">1️⃣ <strong>Жүрек жиырылуы</strong> — негізгі күш</p>
+                        <p lang="en" class="lang-content text-sm">1️⃣ <strong>Heart contraction</strong> — main force</p>
+                        <p lang="ru" class="lang-content text-sm">1️⃣ <strong>Сокращение сердца</strong> — главная сила</p>
+                        
+                        <p lang="kk" class="lang-content text-sm">2️⃣ <strong>Артерия қабырғасының серпімділігі</strong></p>
+                        <p lang="en" class="lang-content text-sm">2️⃣ <strong>Elasticity of artery walls</strong></p>
+                        <p lang="ru" class="lang-content text-sm">2️⃣ <strong>Эластичность стенок артерий</strong></p>
+                        
+                        <p lang="kk" class="lang-content text-sm">3️⃣ <strong>Қаңқа бұлшықеттерінің жиырылуы</strong> (веналарға көмек)</p>
+                        <p lang="en" class="lang-content text-sm">3️⃣ <strong>Skeletal muscle contraction</strong> (helps veins)</p>
+                        <p lang="ru" class="lang-content text-sm">3️⃣ <strong>Сокращение скелетных мышц</strong> (помогает венам)</p>
+                        
+                        <p lang="kk" class="lang-content text-sm">4️⃣ <strong>Тыныс алу</strong> — кеудедегі қысым айырмасы</p>
+                        <p lang="en" class="lang-content text-sm">4️⃣ <strong>Breathing</strong> — chest pressure difference</p>
+                        <p lang="ru" class="lang-content text-sm">4️⃣ <strong>Дыхание</strong> — разница давления в груди</p>
+                    </div>
+                </div>
+
+                <div class="vessel-card" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left: 5px solid #059669;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-emerald-800 mb-3">📊 ҚАН ҚЫСЫМЫ</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-emerald-800 mb-3">📊 BLOOD PRESSURE</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-emerald-800 mb-3">📊 КРОВЯНОЕ ДАВЛЕНИЕ</h3>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                        <p lang="kk" class="lang-content text-sm"><strong>Қалыпты:</strong> 120/80 мм сынап бағанасы</p>
+                        <p lang="en" class="lang-content text-sm"><strong>Normal:</strong> 120/80 mmHg</p>
+                        <p lang="ru" class="lang-content text-sm"><strong>Норма:</strong> 120/80 мм рт.ст.</p>
+                    </div>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">📈 <strong>120</strong> — систолалық (жүрек жиырылғанда)</p>
+                    <p lang="en" class="lang-content text-sm mb-2">📈 <strong>120</strong> — systolic (heart contracts)</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">📈 <strong>120</strong> — систолическое (сердце сокращается)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">📉 <strong>80</strong> — диастолалық (жүрек босаңсығанда)</p>
+                    <p lang="en" class="lang-content text-sm">📉 <strong>80</strong> — diastolic (heart relaxes)</p>
+                    <p lang="ru" class="lang-content text-sm">📉 <strong>80</strong> — диастолическое (сердце расслабляется)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сравнение -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">📊 Салыстыру</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">📊 Comparison</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">📊 Сравнение</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="fact-box" style="border-color: #fca5a5; background: #fef2f2;">
+                    <p class="text-center text-2xl mb-2">🔴</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-red-700">АРТЕРИЯ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-red-700">ARTERY</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-red-700">АРТЕРИЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">• Қалың қабырға</p>
+                    <p lang="en" class="lang-content text-xs mt-2">• Thick wall</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">• Толстая стенка</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Қақпақша жоқ</p>
+                    <p lang="en" class="lang-content text-xs">• No valves</p>
+                    <p lang="ru" class="lang-content text-xs">• Нет клапанов</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Жоғары қысым</p>
+                    <p lang="en" class="lang-content text-xs">• High pressure</p>
+                    <p lang="ru" class="lang-content text-xs">• Высокое давление</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Пульс бар</p>
+                    <p lang="en" class="lang-content text-xs">• Has pulse</p>
+                    <p lang="ru" class="lang-content text-xs">• Есть пульс</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #93c5fd; background: #eff6ff;">
+                    <p class="text-center text-2xl mb-2">🔵</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-blue-700">ВЕНА</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-blue-700">VEIN</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-blue-700">ВЕНА</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">• Жұқа қабырға</p>
+                    <p lang="en" class="lang-content text-xs mt-2">• Thin wall</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">• Тонкая стенка</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Қақпақшалар бар</p>
+                    <p lang="en" class="lang-content text-xs">• Has valves</p>
+                    <p lang="ru" class="lang-content text-xs">• Есть клапаны</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Төмен қысым</p>
+                    <p lang="en" class="lang-content text-xs">• Low pressure</p>
+                    <p lang="ru" class="lang-content text-xs">• Низкое давление</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Пульс жоқ</p>
+                    <p lang="en" class="lang-content text-xs">• No pulse</p>
+                    <p lang="ru" class="lang-content text-xs">• Нет пульса</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #6ee7b7; background: #ecfdf5;">
+                    <p class="text-center text-2xl mb-2">🟢</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-emerald-700">КАПИЛЛЯР</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-emerald-700">CAPILLARY</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-emerald-700">КАПИЛЛЯР</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">• 1 қабат жасуша</p>
+                    <p lang="en" class="lang-content text-xs mt-2">• 1 cell layer</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">• 1 слой клеток</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Қақпақша жоқ</p>
+                    <p lang="en" class="lang-content text-xs">• No valves</p>
+                    <p lang="ru" class="lang-content text-xs">• Нет клапанов</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Өте төмен қысым</p>
+                    <p lang="en" class="lang-content text-xs">• Very low pressure</p>
+                    <p lang="ru" class="lang-content text-xs">• Очень низкое давление</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Заттар алмасуы</p>
+                    <p lang="en" class="lang-content text-xs">• Substance exchange</p>
+                    <p lang="ru" class="lang-content text-xs">• Обмен веществ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-radius: 1rem; border-top: 4px solid #7c3aed;">
+        <p lang="kk" class="lang-content text-sm font-bold text-purple-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-purple-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-purple-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

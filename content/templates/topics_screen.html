@@ -115,6 +115,28 @@
             line-height: 1.4;
         }
 
+        .grade-section {
+            margin-bottom: 50px;
+        }
+
+        .grade-header {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding: 18px 30px;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .grade-header span {
+            color: white;
+            font-weight: 800;
+        }
+
         footer {
             text-align: center;
             opacity: 0.8;
@@ -259,19 +281,73 @@
             const grid = document.getElementById('topics-grid');
             grid.innerHTML = '';
 
+            const hasGrades = allTopics.some(t => t.grade !== undefined);
+
+            if (hasGrades) {
+                grid.style.display = 'block';
+                renderTopicsWithGrades(allTopics, grid);
+            } else {
+                grid.style.display = 'grid';
+                renderTopicsSimple(allTopics, grid);
+            }
+        }
+
+        function renderTopicsWithGrades(topics, container) {
+            const grades = {};
+            topics.forEach(topic => {
+                const grade = topic.grade || 5;
+                if (!grades[grade]) grades[grade] = [];
+                grades[grade].push(topic);
+            });
+
+            const sortedGrades = Object.keys(grades).sort((a, b) => parseInt(a) - parseInt(b));
+
+            let index = 0;
+            sortedGrades.forEach(grade => {
+                const section = document.createElement('div');
+                section.className = 'grade-section';
+
+                const header = document.createElement('div');
+                header.className = 'grade-header';
+                header.innerHTML = `<span>${grade}</span> класс`;
+                section.appendChild(header);
+
+                const gradeGrid = document.createElement('div');
+                gradeGrid.className = 'topics-grid';
+
+                grades[grade].forEach(topic => {
+                    const card = document.createElement('div');
+                    card.className = 'topic-card';
+                    card.setAttribute('data-topic-id', topic.id);
+                    card.style.animationDelay = `${index * 0.03}s`;
+                    card.onclick = () => {
+                        if (bridgeReady && bridge) {
+                            bridge.onTopicClicked(topic.id);
+                        }
+                    };
+                    card.innerHTML = `<h3>${topic.name}</h3>`;
+                    gradeGrid.appendChild(card);
+                    index++;
+                });
+
+                section.appendChild(gradeGrid);
+                container.appendChild(section);
+            });
+        }
+
+        function renderTopicsSimple(topics, container) {
             topics.forEach((topic, index) => {
                 const card = document.createElement('div');
                 card.className = 'topic-card';
                 card.setAttribute('data-topic-id', topic.id);
+                card.style.animationDelay = `${index * 0.03}s`;
                 card.onclick = () => {
-                    console.log("📖 Клик на тему:", topic.id);
                     if (bridgeReady && bridge) {
                         bridge.onTopicClicked(topic.id);
                     }
                 };
-
                 card.innerHTML = `<h3>${topic.name}</h3>`;
-                grid.appendChild(card);
+                container.appendChild(card);
             });
         }
 

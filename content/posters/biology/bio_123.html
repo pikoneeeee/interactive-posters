@@ -1,131 +1,327 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Root System</title>
+    <title>Опорно-двигательная система. Скелет</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #27272a; color: #fff; font-family: 'Inter'; min-height: 100vh; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; }
-        canvas { cursor: crosshair; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #991b1b; border-bottom: 3px solid #fca5a5; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #dc2626; background: white; color: #dc2626; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fef2f2; }
+        .lang-btn.active { background: #dc2626; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .bone-card { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-radius: 12px; padding: 20px; border-left: 5px solid #dc2626; }
+        .fact-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 10px; padding: 15px; margin: 10px 0; }
+        .number-badge { background: #dc2626; color: white; width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<body class="bg-slate-50">
 
-<div class="lg:col-span-1 flex flex-col gap-6">
-        <h1 class="text-4xl font-bold text-amber-500" id="title"></h1>
-        <div class="glass p-6">
-            <h3 class="text-lg font-bold text-amber-200 mb-2">Zones (Зоны)</h3>
-            <ul class="space-y-2 text-sm text-gray-400">
-                <li class="hover:text-white cursor-pointer" onmouseover="window.hl(0)">1. Division / Деления</li>
-                <li class="hover:text-white cursor-pointer" onmouseover="window.hl(1)">2. Elongation / Растяжения</li>
-                <li class="hover:text-white cursor-pointer" onmouseover="window.hl(2)">3. Absorption / Всасывания</li>
-                <li class="hover:text-white cursor-pointer" onmouseover="window.hl(3)">4. Conduction / Проведения</li>
-            </ul>
-        </div>
-        <div class="mt-auto flex gap-2">
-            <button onclick="window.setL('ru')" class="bg-gray-800 px-3 py-1 rounded text-xs font-bold">RU</button>
-            <button onclick="window.setL('kz')" class="bg-gray-800 px-3 py-1 rounded text-xs font-bold">KZ</button>
-            <button onclick="window.setL('en')" class="bg-gray-800 px-3 py-1 rounded text-xs font-bold">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="lg:col-span-2 relative glass p-4 h-[600px] flex justify-center bg-black/40">
-        <canvas id="rootCanvas" class="h-full w-full"></canvas>
-        <div id="zone-tooltip" class="absolute top-4 right-4 text-xs font-mono text-green-400 opacity-0 transition"></div>
-    </div>
-
-    <script>
-        const bio4Data = {
-            ru: "Корень: Зоны и Функции",
-            kz: "Тамыр: Аймақтары мен Қызметі",
-            en: "Root: Zones and Functions"
-        };
+    <header class="header-card text-center mb-10">
+        <p class="text-red-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
         
-        let activeZone = -1;
-        let cx, cvs;
-        let currentLang = 'ru';
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Тірек-қимыл жүйесі. Қаңқа</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Musculoskeletal System. Skeleton</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Опорно-двигательная система. Скелет</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-red-100">Қаңқа — адам денесінің тірегі. 206 сүйектен тұрады. Қорғайды, қозғалыс жасайды, қан жасушаларын өндіреді.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-red-100">The skeleton is the body's framework. It consists of 206 bones. It protects, enables movement, and produces blood cells.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-red-100">Скелет — каркас тела человека. Состоит из 206 костей. Защищает органы, обеспечивает движение, производит клетки крови.</p>
+    </header>
 
-        window.setL = function(l) {
-            currentLang = l;
-            document.getElementById('title').textContent = bio4Data[l];
-        };
+    <!-- Функции скелета -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қаңқаның қызметтері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Functions of the Skeleton</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Функции скелета</h2>
 
-        window.hl = function(z) {
-            activeZone = z;
-            draw();
-        };
-
-        function draw() {
-            if (!cvs || !cx) return;
-            
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0, 0, w, h);
-            const cx_ = w / 2;
-
-            // Draw Root Shape
-            const gradient = cx.createLinearGradient(0, 0, 0, h);
-            gradient.addColorStop(0, '#a16207');
-            gradient.addColorStop(1, '#facc15');
-            
-            // Zones coordinates (approx)
-            const zones = [
-                {y: h*0.85, h: h*0.15, c: '#fde047', n: "Root Cap & Division"}, // Tip
-                {y: h*0.7, h: h*0.15, c: '#facc15', n: "Elongation"},
-                {y: h*0.4, h: h*0.3, c: '#eab308', n: "Absorption"},
-                {y: 0, h: h*0.4, c: '#ca8a04', n: "Conduction"}
-            ];
-
-            zones.forEach((z, i) => {
-                cx.fillStyle = i === activeZone ? '#fff' : z.c;
-                cx.globalAlpha = i === activeZone ? 0.8 : 0.5;
-                cx.fillRect(cx_-40, z.y, 80, z.h);
-                cx.globalAlpha = 1.0;
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Опорная -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 36px; margin-bottom: 10px;">🏗️</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-red-700 mb-2">ТІРЕК</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-red-700 mb-2">SUPPORT</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 mb-2">ОПОРНАЯ</h3>
                 
-                // Root Hairs for Absorption zone
-                if (i === 2) {
-                    cx.strokeStyle = cx.fillStyle;
-                    cx.lineWidth = 1;
-                    for(let j=z.y; j<z.y+z.h; j+=10) {
-                        cx.beginPath(); cx.moveTo(cx_-40, j); cx.lineTo(cx_-70, j-10); cx.stroke();
-                        cx.beginPath(); cx.moveTo(cx_+40, j); cx.lineTo(cx_+70, j-10); cx.stroke();
-                    }
-                }
-            });
-            
-            // Root Cap outline
-            cx.fillStyle = '#854d0e';
-            cx.beginPath(); cx.moveTo(cx_-40, h-10); cx.lineTo(cx_, h); cx.lineTo(cx_+40, h-10); cx.fill();
+                <p lang="kk" class="lang-content text-sm">Денеге пішін береді, ішкі мүшелерді ұстап тұрады. Омыртқа бағанасы — негізгі тірек.</p>
+                <p lang="en" class="lang-content text-sm">Gives shape to the body, holds internal organs. The spine is the main support.</p>
+                <p lang="ru" class="lang-content text-sm">Придаёт форму телу, удерживает внутренние органы. Позвоночник — главная опора.</p>
+            </div>
 
-            if (activeZone !== -1) {
-                const tt = document.getElementById('zone-tooltip');
-                if (tt) {
-                    tt.textContent = zones[activeZone].n.toUpperCase();
-                    tt.style.opacity = 1;
-                }
-            } else {
-                const tt = document.getElementById('zone-tooltip');
-                if(tt) tt.style.opacity = 0;
-            }
-        }
+            <!-- Защитная -->
+            <div class="card" style="border-top: 5px solid #2563eb;">
+                <div style="font-size: 36px; margin-bottom: 10px;">🛡️</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-2">ҚОРҒАНЫШ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-2">PROTECTION</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-2">ЗАЩИТНАЯ</h3>
+                
+                <p lang="kk" class="lang-content text-sm">Бассүйек → миды қорғайды. Қабырғалар → жүрек пен өкпені қорғайды. Жамбас → ішкі мүшелерді қорғайды.</p>
+                <p lang="en" class="lang-content text-sm">Skull → protects brain. Ribs → protect heart and lungs. Pelvis → protects internal organs.</p>
+                <p lang="ru" class="lang-content text-sm">Череп → защищает мозг. Рёбра → защищают сердце и лёгкие. Таз → защищает внутренние органы.</p>
+            </div>
 
-        window.onload = function() {
-            cvs = document.getElementById('rootCanvas');
-            if (cvs) {
-                cx = cvs.getContext('2d');
-                const resize = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight || 600; draw(); };
-                window.addEventListener('resize', resize);
-                resize();
-                window.setL('ru');
-            }
-        };
-    </script>
+            <!-- Двигательная -->
+            <div class="card" style="border-top: 5px solid #16a34a;">
+                <div style="font-size: 36px; margin-bottom: 10px;">🏃</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-green-700 mb-2">ҚОЗҒАЛЫС</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-green-700 mb-2">MOVEMENT</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-green-700 mb-2">ДВИГАТЕЛЬНАЯ</h3>
+                
+                <p lang="kk" class="lang-content text-sm">Бұлшықеттер сүйектерге бекініп, қозғалыс жасайды. Буындар арқылы сүйектер қозғалады.</p>
+                <p lang="en" class="lang-content text-sm">Muscles attach to bones and create movement. Bones move through joints.</p>
+                <p lang="ru" class="lang-content text-sm">Мышцы прикрепляются к костям и создают движение. Кости двигаются через суставы.</p>
+            </div>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+            <!-- Кроветворная -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 36px; margin-bottom: 10px;">🩸</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-red-700 mb-2">ҚАН ТҮЗУ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-red-700 mb-2">BLOOD FORMATION</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 mb-2">КРОВЕТВОРНАЯ</h3>
+                
+                <p lang="kk" class="lang-content text-sm">Қызыл сүйек кемігі қан жасушаларын өндіреді: эритроциттер, лейкоциттер, тромбоциттер.</p>
+                <p lang="en" class="lang-content text-sm">Red bone marrow produces blood cells: erythrocytes, leukocytes, platelets.</p>
+                <p lang="ru" class="lang-content text-sm">Красный костный мозг производит клетки крови: эритроциты, лейкоциты, тромбоциты.</p>
+            </div>
 
+            <!-- Обмен веществ -->
+            <div class="card" style="border-top: 5px solid #ca8a04;">
+                <div style="font-size: 36px; margin-bottom: 10px;">⚗️</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-yellow-700 mb-2">ЗАТ АЛМАСУ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-yellow-700 mb-2">METABOLISM</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-yellow-700 mb-2">ОБМЕН ВЕЩЕСТВ</h3>
+                
+                <p lang="kk" class="lang-content text-sm">Сүйектер кальций (Ca) мен фосфор (P) қоймасы. Қажет кезде қанға шығарады.</p>
+                <p lang="en" class="lang-content text-sm">Bones store calcium (Ca) and phosphorus (P). Release into blood when needed.</p>
+                <p lang="ru" class="lang-content text-sm">Кости — депо кальция (Ca) и фосфора (P). Выделяют в кровь при необходимости.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отделы скелета -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қаңқаның бөлімдері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Parts of the Skeleton</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Отделы скелета</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Осевой скелет -->
+                <div class="bone-card">
+                    <h3 lang="kk" class="lang-content text-xl font-bold mb-4">🦴 ОСЬТІК ҚАҢҚА (80 сүйек)</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold mb-4">🦴 AXIAL SKELETON (80 bones)</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold mb-4">🦴 ОСЕВОЙ СКЕЛЕТ (80 костей)</h3>
+                    
+                    <div class="space-y-3">
+                        <div class="fact-box">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge">1</span><strong>Бассүйек</strong> — 23 сүйек (8 ми + 15 бет)</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge">1</span><strong>Skull</strong> — 23 bones (8 cranial + 15 facial)</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge">1</span><strong>Череп</strong> — 23 кости (8 мозговых + 15 лицевых)</p>
+                        </div>
+                        
+                        <div class="fact-box">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge">2</span><strong>Омыртқа бағанасы</strong> — 33-34 омыртқа (7 мойын + 12 кеуде + 5 бел + 5 сегізкөз + 4-5 құйымшақ)</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge">2</span><strong>Spine</strong> — 33-34 vertebrae (7 cervical + 12 thoracic + 5 lumbar + 5 sacral + 4-5 coccygeal)</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge">2</span><strong>Позвоночник</strong> — 33-34 позвонка (7 шейных + 12 грудных + 5 поясничных + 5 крестцовых + 4-5 копчиковых)</p>
+                        </div>
+                        
+                        <div class="fact-box">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge">3</span><strong>Кеуде қуысы</strong> — 12 жұп қабырға + 1 төс сүйегі</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge">3</span><strong>Rib cage</strong> — 12 pairs of ribs + 1 sternum</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge">3</span><strong>Грудная клетка</strong> — 12 пар рёбер + 1 грудина</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Добавочный скелет -->
+                <div class="bone-card" style="border-left-color: #2563eb; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);">
+                    <h3 lang="kk" class="lang-content text-xl font-bold mb-4">💪 ҚОСЫМША ҚАҢҚА (126 сүйек)</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold mb-4">💪 APPENDICULAR SKELETON (126 bones)</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold mb-4">💪 ДОБАВОЧНЫЙ СКЕЛЕТ (126 костей)</h3>
+                    
+                    <div class="space-y-3">
+                        <div style="background: #dbeafe; border: 2px solid #93c5fd; border-radius: 10px; padding: 15px;">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">1</span><strong>Иық белдеуі</strong> — 2 бұғана + 2 жауырын</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">1</span><strong>Shoulder girdle</strong> — 2 clavicles + 2 scapulae</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">1</span><strong>Плечевой пояс</strong> — 2 ключицы + 2 лопатки</p>
+                        </div>
+                        
+                        <div style="background: #dbeafe; border: 2px solid #93c5fd; border-radius: 10px; padding: 15px;">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">2</span><strong>Қол</strong> — иық + білек (2) + алақан (27) = 30 сүйек × 2</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">2</span><strong>Arm</strong> — humerus + forearm (2) + hand (27) = 30 bones × 2</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">2</span><strong>Рука</strong> — плечо + предплечье (2) + кисть (27) = 30 костей × 2</p>
+                        </div>
+                        
+                        <div style="background: #dbeafe; border: 2px solid #93c5fd; border-radius: 10px; padding: 15px;">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">3</span><strong>Жамбас белдеуі</strong> — 2 жамбас сүйегі (мықын + шат + шонданай)</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">3</span><strong>Pelvic girdle</strong> — 2 hip bones (ilium + ischium + pubis)</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">3</span><strong>Тазовый пояс</strong> — 2 тазовые кости (подвздошная + седалищная + лобковая)</p>
+                        </div>
+                        
+                        <div style="background: #dbeafe; border: 2px solid #93c5fd; border-radius: 10px; padding: 15px;">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">4</span><strong>Аяқ</strong> — сан + асықты жілік (2) + табан (26) = 30 сүйек × 2</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">4</span><strong>Leg</strong> — femur + lower leg (2) + foot (26) = 30 bones × 2</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge" style="background: #2563eb;">4</span><strong>Нога</strong> — бедро + голень (2) + стопа (26) = 30 костей × 2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Типы костей -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Сүйектердің түрлері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Types of Bones</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Типы костей</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Трубчатые -->
+            <div class="card text-center" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 48px; margin-bottom: 10px;">🦴</div>
+                <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">ТҮТІКТІ</h4>
+                <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">TUBULAR</h4>
+                <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">ТРУБЧАТЫЕ</h4>
+                
+                <p lang="kk" class="lang-content text-xs text-gray-600">Ұзын, ішінде қуыс (сары кемік)</p>
+                <p lang="en" class="lang-content text-xs text-gray-600">Long, hollow inside (yellow marrow)</p>
+                <p lang="ru" class="lang-content text-xs text-gray-600">Длинные, внутри полость (жёлтый мозг)</p>
+                
+                <div style="background: #fef2f2; padding: 8px; border-radius: 6px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> сан, иық, білек</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> femur, humerus, forearm</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> бедро, плечо, предплечье</p>
+                </div>
+            </div>
+
+            <!-- Плоские -->
+            <div class="card text-center" style="border-top: 5px solid #2563eb;">
+                <div style="font-size: 48px; margin-bottom: 10px;">📋</div>
+                <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2">ЖАЛПАҚ</h4>
+                <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2">FLAT</h4>
+                <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2">ПЛОСКИЕ</h4>
+                
+                <p lang="kk" class="lang-content text-xs text-gray-600">Жұқа, кең, қорғаныш қызметі</p>
+                <p lang="en" class="lang-content text-xs text-gray-600">Thin, wide, protective function</p>
+                <p lang="ru" class="lang-content text-xs text-gray-600">Тонкие, широкие, защитная функция</p>
+                
+                <div style="background: #eff6ff; padding: 8px; border-radius: 6px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> бассүйек, жауырын, қабырға</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> skull, scapula, ribs</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> череп, лопатка, рёбра</p>
+                </div>
+            </div>
+
+            <!-- Короткие -->
+            <div class="card text-center" style="border-top: 5px solid #16a34a;">
+                <div style="font-size: 48px; margin-bottom: 10px;">🧊</div>
+                <h4 lang="kk" class="lang-content font-bold text-green-700 mb-2">ҚЫСҚА</h4>
+                <h4 lang="en" class="lang-content font-bold text-green-700 mb-2">SHORT</h4>
+                <h4 lang="ru" class="lang-content font-bold text-green-700 mb-2">КОРОТКИЕ</h4>
+                
+                <p lang="kk" class="lang-content text-xs text-gray-600">Текше тәрізді, жүктемені бөледі</p>
+                <p lang="en" class="lang-content text-xs text-gray-600">Cube-shaped, distribute load</p>
+                <p lang="ru" class="lang-content text-xs text-gray-600">Кубовидные, распределяют нагрузку</p>
+                
+                <div style="background: #f0fdf4; padding: 8px; border-radius: 6px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> білезік, тобық сүйектері</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> wrist, ankle bones</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> запястье, кости лодыжки</p>
+                </div>
+            </div>
+
+            <!-- Смешанные -->
+            <div class="card text-center" style="border-top: 5px solid #9333ea;">
+                <div style="font-size: 48px; margin-bottom: 10px;">🔀</div>
+                <h4 lang="kk" class="lang-content font-bold text-purple-700 mb-2">АРАЛАС</h4>
+                <h4 lang="en" class="lang-content font-bold text-purple-700 mb-2">MIXED</h4>
+                <h4 lang="ru" class="lang-content font-bold text-purple-700 mb-2">СМЕШАННЫЕ</h4>
+                
+                <p lang="kk" class="lang-content text-xs text-gray-600">Күрделі пішінді, бірнеше түрдің қосындысы</p>
+                <p lang="en" class="lang-content text-xs text-gray-600">Complex shape, combination of types</p>
+                <p lang="ru" class="lang-content text-xs text-gray-600">Сложной формы, сочетание типов</p>
+                
+                <div style="background: #faf5ff; padding: 8px; border-radius: 6px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> омыртқалар, самай сүйегі</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> vertebrae, temporal bone</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> позвонки, височная кость</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Интересные факты -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Қызықты фактілер</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Interesting Facts</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Интересные факты</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🔢 <strong>Жаңа туған нәрестеде ~270 сүйек</strong>, ересек адамда 206. Себебі: кейбір сүйектер бірігеді.</p>
+                    <p lang="en" class="lang-content text-sm">🔢 <strong>Newborns have ~270 bones</strong>, adults have 206. Reason: some bones fuse together.</p>
+                    <p lang="ru" class="lang-content text-sm">🔢 <strong>У новорождённого ~270 костей</strong>, у взрослого 206. Причина: некоторые срастаются.</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">💪 <strong>Ең берік сүйек — сан сүйегі</strong>. 1500 кг салмақты көтере алады!</p>
+                    <p lang="en" class="lang-content text-sm">💪 <strong>The strongest bone is the femur</strong>. Can support up to 1500 kg!</p>
+                    <p lang="ru" class="lang-content text-sm">💪 <strong>Самая прочная кость — бедренная</strong>. Выдерживает нагрузку до 1500 кг!</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🦴 <strong>Ең кішкентай сүйек — үзеңгі</strong> (құлақта). Ұзындығы 2-3 мм.</p>
+                    <p lang="en" class="lang-content text-sm">🦴 <strong>The smallest bone is the stapes</strong> (in the ear). Length: 2-3 mm.</p>
+                    <p lang="ru" class="lang-content text-sm">🦴 <strong>Самая маленькая кость — стремечко</strong> (в ухе). Длина 2-3 мм.</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🖐️ <strong>Қолда 27 сүйек</strong>, ал табанда 26 сүйек бар. Бұл дене сүйектерінің ~50%!</p>
+                    <p lang="en" class="lang-content text-sm">🖐️ <strong>The hand has 27 bones</strong>, the foot has 26. That's ~50% of body bones!</p>
+                    <p lang="ru" class="lang-content text-sm">🖐️ <strong>В кисти 27 костей</strong>, в стопе 26. Это ~50% костей тела!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-radius: 1rem; border-top: 4px solid #dc2626;">
+        <p lang="kk" class="lang-content text-sm font-bold text-red-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-red-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-red-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

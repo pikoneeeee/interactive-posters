@@ -1,174 +1,315 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flower Anatomy</title>
+    <title>Иммунитет</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
-        body { background: radial-gradient(circle at center, #be185d, #831843, #000); color: white; min-height: 100vh; font-family: 'Inter'; }
-        .serif { font-family: 'Playfair Display', serif; }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { cursor: crosshair; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #059669 0%, #065f46 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #065f46; border-bottom: 3px solid #6ee7b7; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #059669; background: white; color: #059669; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #ecfdf5; }
+        .lang-btn.active { background: #059669; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .immune-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #ecfdf5; border: 2px solid #6ee7b7; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-4 md:p-10">
+<body class="bg-slate-50">
 
-<header class="flex justify-between items-center mb-8 border-b border-pink-400/30 pb-4">
-        <h1 class="serif text-4xl text-pink-300" id="main-title">Flower Anatomy</h1>
-        <div class="flex gap-2 text-xs font-bold text-pink-200">
-            <button onclick="window.setL('ru')" class="hover:text-white">RU</button>
-            <button onclick="window.setL('kz')" class="hover:text-white">KZ</button>
-            <button onclick="window.setL('en')" class="hover:text-white">EN</button>
-        </div>
-    </header>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 h-[600px]">
-        <div class="lg:col-span-2 glass rounded-custom p-8 relative flex items-center justify-center">
-            <canvas id="flowerCanvas" class="w-full h-full"></canvas>
-            <div id="tooltip" class="absolute top-8 right-8 glass p-4 rounded-xl text-right opacity-0 transition duration-300">
-                <h3 id="tt-title" class="text-xl font-bold text-pink-300"></h3>
-                <p id="tt-desc" class="text-xs text-white/80 max-w-[200px]"></p>
-            </div>
-        </div>
-
-        <div class="flex flex-col gap-4">
-            <div class="glass p-6 rounded-2xl border-l-4 border-pink-500">
-                <h2 id="info-h" class="text-2xl font-bold mb-2"></h2>
-                <p id="info-t" class="text-sm leading-relaxed text-white/70"></p>
-            </div>
-            
-            <div class="grid grid-cols-1 gap-2 text-xs font-bold uppercase tracking-widest text-pink-300/60">
-                <div class="p-3 border border-white/10 rounded-lg hover:bg-white/5 cursor-default">♂ Stamen (Тычинка)</div>
-                <div class="p-3 border border-white/10 rounded-lg hover:bg-white/5 cursor-default">♀ Pistil (Пестик)</div>
-                <div class="p-3 border border-white/10 rounded-lg hover:bg-white/5 cursor-default">Perianth (Околоцветник)</div>
-            </div>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <script>
-        const bio8Data = {
-            ru: {
-                title: "Строение Цветка",
-                mainH: "Генеративный орган",
-                mainT: "Цветок — это видоизмененный укороченный побег, служащий для семенного размножения. Главные части цветка — пестик и тычинки.",
-                parts: {
-                    pistil: {t: "Пестик (♀)", d: "Женская часть. Состоит из рыльца, столбика и завязи. В завязи находятся семязачатки."},
-                    stamen: {t: "Тычинка (♂)", d: "Мужская часть. Состоит из тычиночной нити и пыльника, где созревает пыльца."},
-                    petal: {t: "Лепесток", d: "Ярко окрашенная часть венчика. Привлекает насекомых-опылителей."},
-                    sepal: {t: "Чашелистик", d: "Зеленый листок чашечки. Защищает бутон до раскрытия."},
-                    receptacle: {t: "Цветоложе", d: "Расширенная часть цветоножки, к которой крепятся все части цветка."}
-                }
-            },
-            en: {
-                title: "Flower Anatomy",
-                mainH: "Generative Organ",
-                mainT: "A flower is a modified shoot used for sexual reproduction. The main parts are the pistil and stamens.",
-                parts: {
-                    pistil: {t: "Pistil (♀)", d: "Female part. Stigma, style, ovary. Ovules are inside the ovary."},
-                    stamen: {t: "Stamen (♂)", d: "Male part. Filament and anther. Pollen is produced here."},
-                    petal: {t: "Petal", d: "Brightly colored part of the corolla. Attracts pollinators."},
-                    sepal: {t: "Sepal", d: "Green part of the calyx. Protects the bud."},
-                    receptacle: {t: "Receptacle", d: "Base of the flower where parts are attached."}
-                }
-            }
-        };
-        // KZ logic implied
+    <header class="header-card text-center mb-10">
+        <p class="text-emerald-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Иммунитет</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Immunity</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Иммунитет</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-emerald-100">Иммунитет — ағзаның инфекциялар мен бөгде заттардан қорғану қабілеті. Латынша "immunitas" — босату, қорғау.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-emerald-100">Immunity is the body's ability to protect against infections and foreign substances. From Latin "immunitas" — exemption, protection.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-emerald-100">Иммунитет — способность организма защищаться от инфекций и чужеродных веществ. От лат. "immunitas" — освобождение, защита.</p>
+    </header>
 
-        let lang = 'ru', cx, cvs;
+    <!-- Виды иммунитета -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Иммунитет түрлері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Types of Immunity</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Виды иммунитета</h2>
 
-        window.setL = (l) => {
-            lang = l === 'kz' ? 'ru' : l; // Fallback
-            const t = bio8Data[lang];
-            document.getElementById('main-title').textContent = t.title;
-            document.getElementById('info-h').textContent = t.mainH;
-            document.getElementById('info-t').textContent = t.mainT;
-        }
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Врождённый -->
+                <div class="immune-card" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left: 5px solid #059669;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-emerald-800 mb-3">🛒 ТУАБІТТІ (ТАБИҒИ)</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-emerald-800 mb-3">🛡️ INNATE (NATURAL)</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-emerald-800 mb-3">🛡️ ВРОЖДЁННЫЙ (ЕСТЕСТВЕННЫЙ)</h3>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Туғаннан бар, генетикалық</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Present from birth, genetic</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Присутствует с рождения, генетический</p>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🧬 <strong>Түрлік</strong> — адам кейбір жануар ауруларымен ауырмайды (мысалы, ит обасымен)</p>
+                            <p lang="en" class="lang-content text-sm">🧬 <strong>Species</strong> — humans don't get some animal diseases (e.g., canine distemper)</p>
+                            <p lang="ru" class="lang-content text-sm">🧬 <strong>Видовой</strong> — человек не болеет некоторыми болезнями животных (напр., чумкой собак)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">👶 <strong>Жеке</strong> — ата-анадан балаға (плацента арқылы, ана сүтінен)</p>
+                            <p lang="en" class="lang-content text-sm">👶 <strong>Individual</strong> — from parents to child (via placenta, breast milk)</p>
+                            <p lang="ru" class="lang-content text-sm">👶 <strong>Индивидуальный</strong> — от родителей к ребёнку (через плаценту, грудное молоко)</p>
+                        </div>
+                    </div>
+                </div>
 
-        function draw() {
-            if(!cx) return;
-            const w = cvs.width, h = cvs.height;
-            const cx_ = w/2, cy_ = h*0.6;
-            cx.clearRect(0,0,w,h);
+                <!-- Приобретённый -->
+                <div class="immune-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 5px solid #2563eb;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-blue-800 mb-3">💉 ЖҮРЕ ПАЙДА БОЛҒАН</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-blue-800 mb-3">💉 ACQUIRED</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-blue-800 mb-3">💉 ПРИОБРЕТЁННЫЙ</h3>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Өмір барысында қалыптасады</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Develops during life</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Формируется в течение жизни</p>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🦠 <strong>Белсенді</strong> — ауырғаннан кейін немесе вакцинациядан (ағза өзі антидене өндіреді)</p>
+                            <p lang="en" class="lang-content text-sm">🦠 <strong>Active</strong> — after illness or vaccination (body produces antibodies itself)</p>
+                            <p lang="ru" class="lang-content text-sm">🦠 <strong>Активный</strong> — после болезни или вакцинации (организм сам вырабатывает антитела)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">💊 <strong>Енжар</strong> — дайын антиденелер енгізу (сарысу, иммуноглобулин)</p>
+                            <p lang="en" class="lang-content text-sm">💊 <strong>Passive</strong> — introduction of ready antibodies (serum, immunoglobulin)</p>
+                            <p lang="ru" class="lang-content text-sm">💊 <strong>Пассивный</strong> — введение готовых антител (сыворотка, иммуноглобулин)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Pedicel
-            cx.strokeStyle = '#4d7c0f'; cx.lineWidth = 8;
-            cx.beginPath(); cx.moveTo(cx_, h); cx.lineTo(cx_, h*0.7); cx.stroke();
+    <!-- Механизмы защиты -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қорғаныс механизмдері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Defense Mechanisms</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Механизмы защиты</h2>
 
-            // Receptacle
-            cx.fillStyle = '#65a30d';
-            cx.beginPath(); cx.ellipse(cx_, h*0.7, 40, 20, 0, 0, Math.PI*2); cx.fill();
+        <div class="grid md:grid-cols-2 gap-5">
+            <!-- Неспецифический -->
+            <div class="card" style="border-top: 5px solid #f59e0b;">
+                <h3 lang="kk" class="lang-content text-xl font-bold text-yellow-700 mb-4">🔶 АРНАЙЫ ЕМЕС ҚОРҒАНЫС</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-yellow-700 mb-4">🔶 NON-SPECIFIC DEFENSE</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-yellow-700 mb-4">🔶 НЕСПЕЦИФИЧЕСКАЯ ЗАЩИТА</h3>
+                
+                <p lang="kk" class="lang-content text-sm mb-3 text-gray-600">Барлық бөгде заттарға қарсы, бірдей</p>
+                <p lang="en" class="lang-content text-sm mb-3 text-gray-600">Against all foreign substances, universal</p>
+                <p lang="ru" class="lang-content text-sm mb-3 text-gray-600">Против всех чужеродных веществ, одинаковая</p>
+                
+                <div class="space-y-3">
+                    <div style="background: #fef3c7; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🧱 <strong>1-ші тосқауыл:</strong> Тері, шырышты қабық, көз жасы, сілекей, асқазан қышқылы</p>
+                        <p lang="en" class="lang-content text-sm">🧱 <strong>1st barrier:</strong> Skin, mucous membranes, tears, saliva, stomach acid</p>
+                        <p lang="ru" class="lang-content text-sm">🧱 <strong>1-й барьер:</strong> Кожа, слизистые, слёзы, слюна, желудочный сок</p>
+                    </div>
+                    
+                    <div style="background: #fef3c7; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🔥 <strong>Қабыну:</strong> Қызару, ісіну, ауырсыну, температура көтерілуі</p>
+                        <p lang="en" class="lang-content text-sm">🔥 <strong>Inflammation:</strong> Redness, swelling, pain, fever</p>
+                        <p lang="ru" class="lang-content text-sm">🔥 <strong>Воспаление:</strong> Покраснение, отёк, боль, повышение температуры</p>
+                    </div>
+                    
+                    <div style="background: #fef3c7; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🍽️ <strong>Фагоцитоз:</strong> Лейкоциттер (нейтрофилдер, макрофагтар) бактерияларды "жейді"</p>
+                        <p lang="en" class="lang-content text-sm">🍽️ <strong>Phagocytosis:</strong> Leukocytes (neutrophils, macrophages) "eat" bacteria</p>
+                        <p lang="ru" class="lang-content text-sm">🍽️ <strong>Фагоцитоз:</strong> Лейкоциты (нейтрофилы, макрофаги) "поедают" бактерии</p>
+                    </div>
+                </div>
+            </div>
 
-            // Sepals
-            cx.fillStyle = '#4ade80';
-            cx.beginPath(); cx.moveTo(cx_-40, h*0.7); cx.quadraticCurveTo(cx_-60, h*0.6, cx_-50, h*0.5); cx.fill();
-            cx.beginPath(); cx.moveTo(cx_+40, h*0.7); cx.quadraticCurveTo(cx_+60, h*0.6, cx_+50, h*0.5); cx.fill();
+            <!-- Специфический -->
+            <div class="card" style="border-top: 5px solid #8b5cf6;">
+                <h3 lang="kk" class="lang-content text-xl font-bold text-purple-700 mb-4">🔷 АРНАЙЫ ҚОРҒАНЫС</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-purple-700 mb-4">🔷 SPECIFIC DEFENSE</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-purple-700 mb-4">🔷 СПЕЦИФИЧЕСКАЯ ЗАЩИТА</h3>
+                
+                <p lang="kk" class="lang-content text-sm mb-3 text-gray-600">Нақты антигенге қарсы, таңдамалы</p>
+                <p lang="en" class="lang-content text-sm mb-3 text-gray-600">Against specific antigen, selective</p>
+                <p lang="ru" class="lang-content text-sm mb-3 text-gray-600">Против конкретного антигена, избирательная</p>
+                
+                <div class="space-y-3">
+                    <div style="background: #f5f3ff; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🎯 <strong>Антиген</strong> — бөгде зат (вирус, бактерия, уы)</p>
+                        <p lang="en" class="lang-content text-sm">🎯 <strong>Antigen</strong> — foreign substance (virus, bacteria, toxin)</p>
+                        <p lang="ru" class="lang-content text-sm">🎯 <strong>Антиген</strong> — чужеродное вещество (вирус, бактерия, яд)</p>
+                    </div>
+                    
+                    <div style="background: #f5f3ff; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🔑 <strong>Антидене</strong> — антигенге қарсы ақуыз (В-лимфоциттер өндіреді)</p>
+                        <p lang="en" class="lang-content text-sm">🔑 <strong>Antibody</strong> — protein against antigen (produced by B-lymphocytes)</p>
+                        <p lang="ru" class="lang-content text-sm">🔑 <strong>Антитело</strong> — белок против антигена (вырабатывают В-лимфоциты)</p>
+                    </div>
+                    
+                    <div style="background: #f5f3ff; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🧠 <strong>Иммундық жады</strong> — ағза антигенді "есте сақтайды" (қайта кездескенде тез жауап береді)</p>
+                        <p lang="en" class="lang-content text-sm">🧠 <strong>Immune memory</strong> — body "remembers" antigen (responds quickly on re-exposure)</p>
+                        <p lang="ru" class="lang-content text-sm">🧠 <strong>Иммунная память</strong> — организм "запоминает" антиген (быстрый ответ при повторной встрече)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Petals
-            cx.fillStyle = 'rgba(244, 114, 182, 0.8)';
-            for(let i=-2; i<=2; i++) {
-                cx.beginPath();
-                cx.ellipse(cx_ + i*40, cy_ - 50 - Math.abs(i)*10, 50, 100, i*0.2, 0, Math.PI*2);
-                cx.fill();
-                cx.strokeStyle = '#fbcfe8'; cx.lineWidth = 1; cx.stroke();
-            }
+    <!-- Клетки иммунной системы -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Иммундық жүйе жасушалары</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Cells of the Immune System</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Клетки иммунной системы</h2>
 
-            // Stamens
-            cx.strokeStyle = '#fef08a'; cx.lineWidth = 3;
-            for(let i=-1; i<=1; i+=2) {
-                cx.beginPath(); cx.moveTo(cx_ + i*30, h*0.7); cx.lineTo(cx_ + i*40, h*0.4); cx.stroke();
-                cx.fillStyle = '#facc15'; cx.beginPath(); cx.ellipse(cx_ + i*40, h*0.4, 10, 15, 0, 0, Math.PI*2); cx.fill();
-            }
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Т-лимфоциты -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🎖️</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-red-700 mb-3">Т-ЛИМФОЦИТТЕР</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-red-700 mb-3">T-LYMPHOCYTES</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-red-700 mb-3">Т-ЛИМФОЦИТЫ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-gray-500 text-center mb-3">Тимуста (айырша безінде) жетіледі</p>
+                <p lang="en" class="lang-content text-xs text-gray-500 text-center mb-3">Mature in thymus</p>
+                <p lang="ru" class="lang-content text-xs text-gray-500 text-center mb-3">Созревают в тимусе (вилочковой железе)</p>
+                
+                <div class="space-y-2">
+                    <div style="background: #fef2f2; padding: 10px; border-radius: 6px;">
+                        <p lang="kk" class="lang-content text-xs"><strong>Т-киллерлер</strong> — зақымдалған жасушаларды жояды</p>
+                        <p lang="en" class="lang-content text-xs"><strong>T-killers</strong> — destroy infected cells</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>Т-киллеры</strong> — уничтожают заражённые клетки</p>
+                    </div>
+                    <div style="background: #fef2f2; padding: 10px; border-radius: 6px;">
+                        <p lang="kk" class="lang-content text-xs"><strong>Т-хелперлер</strong> — иммунды жауапты реттейді</p>
+                        <p lang="en" class="lang-content text-xs"><strong>T-helpers</strong> — regulate immune response</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>Т-хелперы</strong> — регулируют иммунный ответ</p>
+                    </div>
+                </div>
+            </div>
 
-            // Pistil
-            cx.fillStyle = '#84cc16';
-            cx.beginPath();
-            cx.moveTo(cx_-15, h*0.7); 
-            cx.quadraticCurveTo(cx_-20, h*0.5, cx_-5, h*0.3); // Style
-            cx.lineTo(cx_+5, h*0.3);
-            cx.quadraticCurveTo(cx_+20, h*0.5, cx_+15, h*0.7); // Ovary
-            cx.fill();
-            // Stigma
-            cx.fillStyle = '#a3e635'; cx.beginPath(); cx.arc(cx_, h*0.3, 10, 0, Math.PI*2); cx.fill();
-        }
+            <!-- В-лимфоциты -->
+            <div class="card" style="border-top: 5px solid #2563eb;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🏭</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-blue-700 mb-3">В-ЛИМФОЦИТТЕР</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-blue-700 mb-3">B-LYMPHOCYTES</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-blue-700 mb-3">В-ЛИМФОЦИТЫ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-gray-500 text-center mb-3">Сүйек кемігінде жетіледі</p>
+                <p lang="en" class="lang-content text-xs text-gray-500 text-center mb-3">Mature in bone marrow</p>
+                <p lang="ru" class="lang-content text-xs text-gray-500 text-center mb-3">Созревают в костном мозге</p>
+                
+                <div class="space-y-2">
+                    <div style="background: #eff6ff; padding: 10px; border-radius: 6px;">
+                        <p lang="kk" class="lang-content text-xs"><strong>Плазмалық жасушалар</strong> — антиденелер өндіреді</p>
+                        <p lang="en" class="lang-content text-xs"><strong>Plasma cells</strong> — produce antibodies</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>Плазматические клетки</strong> — производят антитела</p>
+                    </div>
+                    <div style="background: #eff6ff; padding: 10px; border-radius: 6px;">
+                        <p lang="kk" class="lang-content text-xs"><strong>Жады жасушалары</strong> — антигенді есте сақтайды</p>
+                        <p lang="en" class="lang-content text-xs"><strong>Memory cells</strong> — remember antigen</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>Клетки памяти</strong> — запоминают антиген</p>
+                    </div>
+                </div>
+            </div>
 
-        function checkHover(e) {
-            const r = cvs.getBoundingClientRect();
-            const x = e.clientX - r.left, y = e.clientY - r.top;
-            const w = cvs.width, h = cvs.height;
-            const t = bio8Data[lang].parts;
-            let part = null;
+            <!-- Фагоциты -->
+            <div class="card" style="border-top: 5px solid #059669;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🍽️</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-emerald-700 mb-3">ФАГОЦИТТЕР</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-emerald-700 mb-3">PHAGOCYTES</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-emerald-700 mb-3">ФАГОЦИТЫ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-gray-500 text-center mb-3">Грекше "phagein" — жеу</p>
+                <p lang="en" class="lang-content text-xs text-gray-500 text-center mb-3">Greek "phagein" — to eat</p>
+                <p lang="ru" class="lang-content text-xs text-gray-500 text-center mb-3">Греч. "phagein" — поедать</p>
+                
+                <div class="space-y-2">
+                    <div style="background: #ecfdf5; padding: 10px; border-radius: 6px;">
+                        <p lang="kk" class="lang-content text-xs"><strong>Нейтрофилдер</strong> — бактерияларды жейді (70%)</p>
+                        <p lang="en" class="lang-content text-xs"><strong>Neutrophils</strong> — eat bacteria (70%)</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>Нейтрофилы</strong> — поедают бактерии (70%)</p>
+                    </div>
+                    <div style="background: #ecfdf5; padding: 10px; border-radius: 6px;">
+                        <p lang="kk" class="lang-content text-xs"><strong>Макрофагтар</strong> — үлкен бөгде заттарды жейді</p>
+                        <p lang="en" class="lang-content text-xs"><strong>Macrophages</strong> — eat large foreign objects</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>Макрофаги</strong> — поедают крупные чужеродные объекты</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Simplified hitboxes
-            if (Math.abs(x - w/2) < 20 && y < h*0.7 && y > h*0.3) part = t.pistil;
-            else if ((Math.abs(x - w/2 - 40) < 20 || Math.abs(x - w/2 + 40) < 20) && y < h*0.6) part = t.stamen;
-            else if (y < h*0.6) part = t.petal;
-            else if (y > h*0.7) part = t.receptacle;
+    <!-- Вакцинация -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💉 Вакцинация</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💉 Vaccination</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💉 Вакцинация</h2>
 
-            const tt = document.getElementById('tooltip');
-            if (part) {
-                document.getElementById('tt-title').textContent = part.t;
-                document.getElementById('tt-desc').textContent = part.d;
-                tt.style.opacity = 1;
-            } else {
-                tt.style.opacity = 0;
-            }
-        }
+        <div class="card">
+            <div class="fact-box">
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>Вакцина</strong> — әлсіретілген немесе өлтірілген микроорганизмдер. Ағзаға енгізілгенде антиденелер түзіледі, бірақ адам ауырмайды.</p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>Vaccine</strong> — weakened or killed microorganisms. When introduced, antibodies form, but person doesn't get sick.</p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>Вакцина</strong> — ослабленные или убитые микроорганизмы. При введении образуются антитела, но человек не болеет.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+                <div style="background: #ecfdf5; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>✅ Вакцина</strong> — белсенді иммунитет (ұзақ, жылдар)</p>
+                    <p lang="en" class="lang-content text-sm"><strong>✅ Vaccine</strong> — active immunity (long-lasting, years)</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>✅ Вакцина</strong> — активный иммунитет (длительный, годы)</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>💊 Сарысу</strong> — енжар иммунитет (қысқа, аптар)</p>
+                    <p lang="en" class="lang-content text-sm"><strong>💊 Serum</strong> — passive immunity (short, weeks)</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>💊 Сыворотка</strong> — пассивный иммунитет (короткий, недели)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.onload = () => {
-            cvs = document.getElementById('flowerCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; draw(); };
-            window.addEventListener('resize', rs); rs();
-            cvs.addEventListener('mousemove', checkHover);
-            window.setL('ru');
-        }
-    </script>
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 1rem; border-top: 4px solid #059669;">
+        <p lang="kk" class="lang-content text-sm font-bold text-emerald-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-emerald-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-emerald-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

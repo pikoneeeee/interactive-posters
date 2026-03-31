@@ -1,109 +1,336 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seed Dispersal Mechanisms</title>
+    <title>Дыхательная система</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #0284c7; color: white; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { cursor: pointer; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #0369a1; border-bottom: 3px solid #7dd3fc; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #0ea5e9; background: white; color: #0ea5e9; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0f9ff; }
+        .lang-btn.active { background: #0ea5e9; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .breath-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #f0f9ff; border: 2px solid #7dd3fc; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8">
+<body class="bg-slate-50">
 
-<header class="flex justify-between items-center mb-8">
-        <h1 class="text-4xl font-bold text-white">SEED DISPERSAL</h1>
-        <div class="flex gap-2">
-            <button onclick="setMode('wind')" class="bg-white/20 px-4 py-2 rounded hover:bg-white/40">💨 Anemochory</button>
-            <button onclick="setMode('animal')" class="bg-white/20 px-4 py-2 rounded hover:bg-white/40">🐾 Zoochory</button>
-            <button onclick="setMode('self')" class="bg-white/20 px-4 py-2 rounded hover:bg-white/40">💥 Autochory</button>
-        </div>
-    </header>
-
-    <div class="glass rounded-custom h-[600px] relative overflow-hidden">
-        <canvas id="dispCanvas" class="w-full h-full"></canvas>
-        <div class="absolute bottom-8 left-8 text-2xl font-bold opacity-50" id="mode-text">WIND</div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <script>
-        let mode = 'wind';
-        let cx, cvs;
-        let particles = [];
+    <header class="header-card text-center mb-10">
+        <p class="text-sky-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Тыныс алу жүйесі</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Respiratory System</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Дыхательная система</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-sky-100">Тыныс алу — ағзаға O₂ алу және CO₂ шығару процесі. Адам минутына 16-20 рет тыныс алады, күніне ~20 000 рет.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-sky-100">Breathing is the process of taking in O₂ and releasing CO₂. Humans breathe 16-20 times/min, ~20,000 times/day.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-sky-100">Дыхание — процесс получения O₂ и выделения CO₂. Человек дышит 16-20 раз/мин, ~20 000 раз/день.</p>
+    </header>
 
-        window.setMode = (m) => {
-            mode = m; 
-            document.getElementById('mode-text').textContent = m.toUpperCase();
-            initParticles();
-        }
+    <!-- Органы дыхания -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Тыныс алу мүшелері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Respiratory Organs</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Органы дыхания</h2>
 
-        function initParticles() {
-            particles = [];
-            const count = mode === 'wind' ? 50 : (mode === 'self' ? 20 : 1);
-            for(let i=0; i<count; i++) {
-                particles.push({
-                    x: mode === 'self' ? cvs.width/2 : Math.random()*cvs.width,
-                    y: mode === 'self' ? cvs.height/2 : Math.random()*cvs.height,
-                    vx: (Math.random()-0.5) * (mode === 'self' ? 20 : 2),
-                    vy: (Math.random()-0.5) * (mode === 'self' ? 20 : 2),
-                    r: mode === 'animal' ? 20 : 3
-                });
-            }
-        }
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Воздухоносные пути -->
+                <div class="breath-card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-left: 5px solid #0ea5e9;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-sky-800 mb-3">🌬️ АУА ЖОЛДАРЫ</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-sky-800 mb-3">🌬️ AIR PASSAGES</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-sky-800 mb-3">🌬️ ВОЗДУХОНОСНЫЕ ПУТИ</h3>
+                    
+                    <div class="space-y-3">
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">👃 <strong>1. Мұрын қуысы</strong> — ауаны жылытады, ылғалдандырады, тазартады</p>
+                            <p lang="en" class="lang-content text-sm">👃 <strong>1. Nasal cavity</strong> — warms, moistens, cleans air</p>
+                            <p lang="ru" class="lang-content text-sm">👃 <strong>1. Носовая полость</strong> — согревает, увлажняет, очищает воздух</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🗣️ <strong>2. Жұтқыншақ</strong> — ауа мен тамақ жолдарының қиылысы</p>
+                            <p lang="en" class="lang-content text-sm">🗣️ <strong>2. Pharynx</strong> — crossing of air and food passages</p>
+                            <p lang="ru" class="lang-content text-sm">🗣️ <strong>2. Глотка</strong> — перекрёсток воздуха и пищи</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🎤 <strong>3. Көмекей</strong> — дауыс байламдары бар (дыбыс шығару)</p>
+                            <p lang="en" class="lang-content text-sm">🎤 <strong>3. Larynx</strong> — contains vocal cords (sound production)</p>
+                            <p lang="ru" class="lang-content text-sm">🎤 <strong>3. Гортань</strong> — содержит голосовые связки (звукообразование)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🔵 <strong>4. Кеңірдек</strong> — шеміршек сақиналар (ашық ұстайды)</p>
+                            <p lang="en" class="lang-content text-sm">🔵 <strong>4. Trachea</strong> — cartilage rings (keep it open)</p>
+                            <p lang="ru" class="lang-content text-sm">🔵 <strong>4. Трахея</strong> — хрящевые кольца (держат открытой)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🌿 <strong>5. Бронхтар</strong> — кеңірдек 2-ге бөлінеді, содан кейін тармақталады</p>
+                            <p lang="en" class="lang-content text-sm">🌿 <strong>5. Bronchi</strong> — trachea divides into 2, then branches</p>
+                            <p lang="ru" class="lang-content text-sm">🌿 <strong>5. Бронхи</strong> — трахея делится на 2, затем ветвится</p>
+                        </div>
+                    </div>
+                </div>
 
-        function draw() {
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
+                <!-- Лёгкие -->
+                <div class="breath-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #dc2626;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-red-800 mb-3">🫁 ӨКПЕ</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-red-800 mb-3">🫁 LUNGS</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-red-800 mb-3">🫁 ЛЁГКИЕ</h3>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Газ алмасудың негізгі мүшесі</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Main organ of gas exchange</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Главный орган газообмена</p>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">📊 <strong>Оң өкпе:</strong> 3 бөлік | <strong>Сол өкпе:</strong> 2 бөлік</p>
+                            <p lang="en" class="lang-content text-sm">📊 <strong>Right lung:</strong> 3 lobes | <strong>Left lung:</strong> 2 lobes</p>
+                            <p lang="ru" class="lang-content text-sm">📊 <strong>Правое лёгкое:</strong> 3 доли | <strong>Левое:</strong> 2 доли</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🔬 <strong>Альвеолалар</strong> — ~300-500 млн көпіршік (газ алмасу орны)</p>
+                            <p lang="en" class="lang-content text-sm">🔬 <strong>Alveoli</strong> — ~300-500 million bubbles (gas exchange site)</p>
+                            <p lang="ru" class="lang-content text-sm">🔬 <strong>Альвеолы</strong> — ~300-500 млн пузырьков (место газообмена)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">📏 <strong>Альвеолалар беті:</strong> ~100 м² (теннис корты!)</p>
+                            <p lang="en" class="lang-content text-sm">📏 <strong>Alveoli surface:</strong> ~100 m² (tennis court!)</p>
+                            <p lang="ru" class="lang-content text-sm">📏 <strong>Поверхность альвеол:</strong> ~100 м² (теннисный корт!)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🧥 <strong>Плевра</strong> — өкпені қоршаған қабық (2 қабат, арасында сұйықтық)</p>
+                            <p lang="en" class="lang-content text-sm">🧥 <strong>Pleura</strong> — membrane around lungs (2 layers, fluid between)</p>
+                            <p lang="ru" class="lang-content text-sm">🧥 <strong>Плевра</strong> — оболочка вокруг лёгких (2 слоя, жидкость между)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Ground
-            cx.fillStyle = '#0f172a'; cx.fillRect(0, h*0.8, w, h*0.2);
+    <!-- Газообмен -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Газ алмасу</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Gas Exchange</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Газообмен</h2>
 
-            if(mode === 'wind') { // Dandelion
-                particles.forEach(p => {
-                    p.x += p.vx + 2; p.y += p.vy; // Wind bias
-                    if(p.x > w) p.x = 0;
-                    cx.strokeStyle = 'white'; cx.lineWidth = 1;
-                    cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(p.x-5, p.y-5); cx.lineTo(p.x+5, p.y-5); cx.stroke();
-                    cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(p.x, p.y+10); cx.stroke(); // Seed
-                });
-            } else if (mode === 'self') { // Explosion
-                particles.forEach(p => {
-                    p.x += p.vx; p.y += p.vy; p.vy += 0.5; // Gravity
-                    cx.fillStyle = '#fde047'; cx.beginPath(); cx.arc(p.x, p.y, 4, 0, Math.PI*2); cx.fill();
-                    if(p.y > h*0.8) { p.y = h*0.8; p.vx = 0; } // Land
-                });
-                // Pod
-                cx.fillStyle = '#166534'; cx.beginPath(); cx.ellipse(w/2, h/2, 10, 40, 0, 0, Math.PI*2); cx.fill();
-            } else { // Animal (Burr)
-                const p = particles[0];
-                p.x += 2; if(p.x > w) p.x = 0;
-                p.y = h*0.75 + Math.sin(p.x*0.1)*5;
-                cx.fillStyle = '#7f1d1d'; cx.beginPath(); cx.arc(p.x, p.y, 15, 0, Math.PI*2); cx.fill();
-                // Spikes
-                for(let i=0; i<8; i++) {
-                    const ang = i * Math.PI/4;
-                    cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(p.x+Math.cos(ang)*20, p.y+Math.sin(ang)*20); cx.stroke();
-                }
-                cx.fillStyle = 'white'; cx.font = '20px Arial'; cx.fillText('🐺', p.x-10, p.y+5);
-            }
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- В лёгких -->
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #059669;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold text-emerald-800 mb-3">🫁 ӨКПЕДЕГІ ГАЗ АЛМАСУ</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold text-emerald-800 mb-3">🫁 GAS EXCHANGE IN LUNGS</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold text-emerald-800 mb-3">🫁 ГАЗООБМЕН В ЛЁГКИХ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Альвеола ↔ Капилляр</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Alveolus ↔ Capillary</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Альвеола ↔ Капилляр</p>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">✅ <strong>O₂</strong> альвеоладан → қанға (диффузия)</p>
+                        <p lang="en" class="lang-content text-sm">✅ <strong>O₂</strong> from alveolus → blood (diffusion)</p>
+                        <p lang="ru" class="lang-content text-sm">✅ <strong>O₂</strong> из альвеолы → в кровь (диффузия)</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mt-2">❌ <strong>CO₂</strong> қаннан → альвеолаға (диффузия)</p>
+                        <p lang="en" class="lang-content text-sm mt-2">❌ <strong>CO₂</strong> from blood → alveolus (diffusion)</p>
+                        <p lang="ru" class="lang-content text-sm mt-2">❌ <strong>CO₂</strong> из крови → в альвеолу (диффузия)</p>
+                    </div>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-3 text-gray-600">Нәтиже: Венозды қан → Артериялық қан</p>
+                    <p lang="en" class="lang-content text-xs mt-3 text-gray-600">Result: Venous blood → Arterial blood</p>
+                    <p lang="ru" class="lang-content text-xs mt-3 text-gray-600">Результат: Венозная кровь → Артериальная кровь</p>
+                </div>
 
-            requestAnimationFrame(draw);
-        }
+                <!-- В тканях -->
+                <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #f59e0b;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold text-yellow-800 mb-3">🧬 ҰЛПАДАҒЫ ГАЗ АЛМАСУ</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold text-yellow-800 mb-3">🧬 GAS EXCHANGE IN TISSUES</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold text-yellow-800 mb-3">🧬 ГАЗООБМЕН В ТКАНЯХ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Капилляр ↔ Жасуша</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Capillary ↔ Cell</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Капилляр ↔ Клетка</p>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">✅ <strong>O₂</strong> қаннан → жасушаға (тыныс алуға)</p>
+                        <p lang="en" class="lang-content text-sm">✅ <strong>O₂</strong> from blood → cell (for respiration)</p>
+                        <p lang="ru" class="lang-content text-sm">✅ <strong>O₂</strong> из крови → в клетку (для дыхания)</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mt-2">❌ <strong>CO₂</strong> жасушадан → қанға (қалдық)</p>
+                        <p lang="en" class="lang-content text-sm mt-2">❌ <strong>CO₂</strong> from cell → blood (waste)</p>
+                        <p lang="ru" class="lang-content text-sm mt-2">❌ <strong>CO₂</strong> из клетки → в кровь (отход)</p>
+                    </div>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-3 text-gray-600">Нәтиже: Артериялық қан → Венозды қан</p>
+                    <p lang="en" class="lang-content text-xs mt-3 text-gray-600">Result: Arterial blood → Venous blood</p>
+                    <p lang="ru" class="lang-content text-xs mt-3 text-gray-600">Результат: Артериальная кровь → Венозная кровь</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.onload = () => {
-            cvs = document.getElementById('dispCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; initParticles(); };
-            window.addEventListener('resize', rs); rs();
-            draw();
-        }
-    </script>
+    <!-- Механизм дыхания -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Тыныс алу механизмі</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Breathing Mechanism</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Механизм дыхания</h2>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Вдох -->
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-4xl mb-3">😤</p>
+                    <h4 lang="kk" class="lang-content text-xl font-bold text-blue-800 mb-3">ДЕМДІ ІШУ (ВДОХ)</h4>
+                    <h4 lang="en" class="lang-content text-xl font-bold text-blue-800 mb-3">INHALATION</h4>
+                    <h4 lang="ru" class="lang-content text-xl font-bold text-blue-800 mb-3">ВДОХ</h4>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 8px; text-align: left;">
+                        <p lang="kk" class="lang-content text-sm mb-2">1️⃣ Диафрагма <strong>жиырылады</strong> (төмен түседі)</p>
+                        <p lang="en" class="lang-content text-sm mb-2">1️⃣ Diaphragm <strong>contracts</strong> (moves down)</p>
+                        <p lang="ru" class="lang-content text-sm mb-2">1️⃣ Диафрагма <strong>сокращается</strong> (опускается)</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mb-2">2️⃣ Қабырғааралық бұлшықеттер жиырылады</p>
+                        <p lang="en" class="lang-content text-sm mb-2">2️⃣ Intercostal muscles contract</p>
+                        <p lang="ru" class="lang-content text-sm mb-2">2️⃣ Межрёберные мышцы сокращаются</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mb-2">3️⃣ Кеуде қуысы <strong>ұлғаяды</strong></p>
+                        <p lang="en" class="lang-content text-sm mb-2">3️⃣ Chest cavity <strong>expands</strong></p>
+                        <p lang="ru" class="lang-content text-sm mb-2">3️⃣ Грудная полость <strong>расширяется</strong></p>
+                        
+                        <p lang="kk" class="lang-content text-sm">4️⃣ Қысым төмендейді → ауа кіреді</p>
+                        <p lang="en" class="lang-content text-sm">4️⃣ Pressure drops → air enters</p>
+                        <p lang="ru" class="lang-content text-sm">4️⃣ Давление падает → воздух входит</p>
+                    </div>
+                </div>
 
+                <!-- Выдох -->
+                <div style="background: linear-gradient(135deg, #fecaca 0%, #f87171 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-4xl mb-3">😮‍💨</p>
+                    <h4 lang="kk" class="lang-content text-xl font-bold text-red-800 mb-3">ДЕМДІ ШЫҒАРУ (ВЫДОХ)</h4>
+                    <h4 lang="en" class="lang-content text-xl font-bold text-red-800 mb-3">EXHALATION</h4>
+                    <h4 lang="ru" class="lang-content text-xl font-bold text-red-800 mb-3">ВЫДОХ</h4>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 8px; text-align: left;">
+                        <p lang="kk" class="lang-content text-sm mb-2">1️⃣ Диафрагма <strong>босаңсиды</strong> (жоғары көтеріледі)</p>
+                        <p lang="en" class="lang-content text-sm mb-2">1️⃣ Diaphragm <strong>relaxes</strong> (moves up)</p>
+                        <p lang="ru" class="lang-content text-sm mb-2">1️⃣ Диафрагма <strong>расслабляется</strong> (поднимается)</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mb-2">2️⃣ Қабырғааралық бұлшықеттер босаңсиды</p>
+                        <p lang="en" class="lang-content text-sm mb-2">2️⃣ Intercostal muscles relax</p>
+                        <p lang="ru" class="lang-content text-sm mb-2">2️⃣ Межрёберные мышцы расслабляются</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mb-2">3️⃣ Кеуде қуысы <strong>кішірейеді</strong></p>
+                        <p lang="en" class="lang-content text-sm mb-2">3️⃣ Chest cavity <strong>shrinks</strong></p>
+                        <p lang="ru" class="lang-content text-sm mb-2">3️⃣ Грудная полость <strong>уменьшается</strong></p>
+                        
+                        <p lang="kk" class="lang-content text-sm">4️⃣ Қысым жоғарылайды → ауа шығады</p>
+                        <p lang="en" class="lang-content text-sm">4️⃣ Pressure rises → air exits</p>
+                        <p lang="ru" class="lang-content text-sm">4️⃣ Давление растёт → воздух выходит</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Показатели дыхания -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Тыныс алу көрсеткіштері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Respiratory Parameters</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Показатели дыхания</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="fact-box text-center">
+                    <p class="text-2xl mb-2">🔢</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">ЖИІЛІК</p>
+                    <p lang="en" class="lang-content text-sm font-bold">FREQUENCY</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">ЧАСТОТА</p>
+                    
+                    <p lang="kk" class="lang-content text-lg font-bold text-sky-700 mt-2">16-20/мин</p>
+                    <p lang="en" class="lang-content text-lg font-bold text-sky-700 mt-2">16-20/min</p>
+                    <p lang="ru" class="lang-content text-lg font-bold text-sky-700 mt-2">16-20/мин</p>
+                </div>
+                
+                <div class="fact-box text-center">
+                    <p class="text-2xl mb-2">🌬️</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">ТЫНЫС КӨЛЕМІ</p>
+                    <p lang="en" class="lang-content text-sm font-bold">TIDAL VOLUME</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">ДЫХАТЕЛЬНЫЙ ОБЪЁМ</p>
+                    
+                    <p lang="kk" class="lang-content text-lg font-bold text-sky-700 mt-2">~500 мл</p>
+                    <p lang="en" class="lang-content text-lg font-bold text-sky-700 mt-2">~500 ml</p>
+                    <p lang="ru" class="lang-content text-lg font-bold text-sky-700 mt-2">~500 мл</p>
+                </div>
+                
+                <div class="fact-box text-center">
+                    <p class="text-2xl mb-2">🫁</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">ӨКПЕ СЫЙЫМДЫЛЫҒЫ</p>
+                    <p lang="en" class="lang-content text-sm font-bold">VITAL CAPACITY</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">ЖЕЛ (ЖИЗ. ЁМК.)</p>
+                    
+                    <p lang="kk" class="lang-content text-lg font-bold text-sky-700 mt-2">3-5 л</p>
+                    <p lang="en" class="lang-content text-lg font-bold text-sky-700 mt-2">3-5 L</p>
+                    <p lang="ru" class="lang-content text-lg font-bold text-sky-700 mt-2">3-5 л</p>
+                </div>
+                
+                <div class="fact-box text-center">
+                    <p class="text-2xl mb-2">📊</p>
+                    <p lang="kk" class="lang-content text-sm font-bold">МИНУТТЫҚ КӨЛЕМ</p>
+                    <p lang="en" class="lang-content text-sm font-bold">MINUTE VOLUME</p>
+                    <p lang="ru" class="lang-content text-sm font-bold">МИН. ОБЪЁМ</p>
+                    
+                    <p lang="kk" class="lang-content text-lg font-bold text-sky-700 mt-2">8-10 л/мин</p>
+                    <p lang="en" class="lang-content text-lg font-bold text-sky-700 mt-2">8-10 L/min</p>
+                    <p lang="ru" class="lang-content text-lg font-bold text-sky-700 mt-2">8-10 л/мин</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 1rem; border-top: 4px solid #0ea5e9;">
+        <p lang="kk" class="lang-content text-sm font-bold text-sky-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-sky-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-sky-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

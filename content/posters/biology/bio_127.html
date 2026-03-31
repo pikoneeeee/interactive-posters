@@ -1,149 +1,315 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inflorescences</title>
+    <title>Кровеносная система. Сердце</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #111827; color: #fff; font-family: 'Inter'; min-height: 100vh; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        .rounded-custom { border-radius: 1.5rem; }
-        canvas { cursor: pointer; }
-        .type-btn:hover { color: #a3e635; border-color: #a3e635; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #991b1b; border-bottom: 3px solid #fca5a5; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #dc2626; background: white; color: #dc2626; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fef2f2; }
+        .lang-btn.active { background: #dc2626; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .heart-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 flex flex-col h-screen">
+<body class="bg-slate-50">
 
-<div class="flex justify-between mb-8">
-        <h1 class="text-3xl font-bold text-lime-400">INFLORESCENCE</h1>
-        <div class="flex gap-2 text-xs font-bold text-gray-500">
-            <button onclick="window.setL('ru')" class="hover:text-white">RU</button>
-            <button onclick="window.setL('en')" class="hover:text-white">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="flex-grow grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <div class="glass rounded-custom p-6 flex flex-col gap-2">
-            <button onclick="window.setI('raceme')" class="type-btn p-3 border border-white/10 rounded text-left text-sm font-bold">Raceme (Кисть)</button>
-            <button onclick="window.setI('spike')" class="type-btn p-3 border border-white/10 rounded text-left text-sm font-bold">Spike (Колос)</button>
-            <button onclick="window.setI('umbel')" class="type-btn p-3 border border-white/10 rounded text-left text-sm font-bold">Umbel (Зонтик)</button>
-            <button onclick="window.setI('head')" class="type-btn p-3 border border-white/10 rounded text-left text-sm font-bold">Head (Головка)</button>
-            <button onclick="window.setI('panicle')" class="type-btn p-3 border border-white/10 rounded text-left text-sm font-bold text-yellow-200">Panicle (Метелка)</button>
-        </div>
+    <header class="header-card text-center mb-10">
+        <p class="text-red-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Қан айналым жүйесі. Жүрек</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Circulatory System. Heart</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Кровеносная система. Сердце</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-red-100">Жүрек — қан айналымының орталық мүшесі. Күніне ~100 000 рет соғады, өмір бойы ~3 млрд рет. Салмағы 250-350 г.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-red-100">The heart is the central organ of circulation. Beats ~100,000 times/day, ~3 billion in a lifetime. Weight: 250-350 g.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-red-100">Сердце — центральный орган кровообращения. Бьётся ~100 000 раз/день, ~3 млрд за жизнь. Масса 250-350 г.</p>
+    </header>
 
-        <div class="lg:col-span-2 relative glass rounded-custom p-8 bg-black/30 flex items-center justify-center">
-            <canvas id="infCanvas" class="w-full h-full"></canvas>
-        </div>
+    <!-- Строение сердца -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Жүректің құрылысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Structure of the Heart</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Строение сердца</h2>
 
-        <div class="glass rounded-custom p-8 flex flex-col justify-center border-l-4 border-lime-600">
-            <h2 id="i-title" class="text-2xl font-bold mb-4 text-lime-300"></h2>
-            <p id="i-desc" class="text-sm text-gray-400 leading-relaxed"></p>
-            <div class="mt-8 p-4 bg-lime-900/20 rounded-xl text-xs font-mono text-lime-500">
-                BIOLOGICAL SIGNIFICANCE:<br>Increases pollination probability
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- 4 камеры -->
+                <div class="heart-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #dc2626;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-red-800 mb-3">❤️ 4 КАМЕРА</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-red-800 mb-3">❤️ 4 CHAMBERS</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-red-800 mb-3">❤️ 4 КАМЕРЫ</h3>
+                    
+                    <div class="space-y-3">
+                        <div style="background: white; padding: 12px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                            <p lang="kk" class="lang-content text-sm">🔵 <strong>Оң жақ жүрекше</strong> — венадан венозды қан қабылдайды</p>
+                            <p lang="en" class="lang-content text-sm">🔵 <strong>Right atrium</strong> — receives venous blood from veins</p>
+                            <p lang="ru" class="lang-content text-sm">🔵 <strong>Правое предсердие</strong> — принимает венозную кровь из вен</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                            <p lang="kk" class="lang-content text-sm">🔵 <strong>Оң жақ қарынша</strong> — қанды өкпеге жібереді</p>
+                            <p lang="en" class="lang-content text-sm">🔵 <strong>Right ventricle</strong> — pumps blood to lungs</p>
+                            <p lang="ru" class="lang-content text-sm">🔵 <strong>Правый желудочек</strong> — направляет кровь в лёгкие</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px; border-left: 4px solid #dc2626;">
+                            <p lang="kk" class="lang-content text-sm">🔴 <strong>Сол жақ жүрекше</strong> — өкпеден артериялық қан қабылдайды</p>
+                            <p lang="en" class="lang-content text-sm">🔴 <strong>Left atrium</strong> — receives arterial blood from lungs</p>
+                            <p lang="ru" class="lang-content text-sm">🔴 <strong>Левое предсердие</strong> — принимает артериальную кровь из лёгких</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px; border-left: 4px solid #dc2626;">
+                            <p lang="kk" class="lang-content text-sm">🔴 <strong>Сол жақ қарынша</strong> — қанды бүкіл денеге жібереді (қабырғасы қалың!)</p>
+                            <p lang="en" class="lang-content text-sm">🔴 <strong>Left ventricle</strong> — pumps blood to whole body (thick wall!)</p>
+                            <p lang="ru" class="lang-content text-sm">🔴 <strong>Левый желудочек</strong> — направляет кровь по всему телу (толстая стенка!)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Стенки и клапаны -->
+                <div>
+                    <div class="heart-card mb-4" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b;">
+                        <h3 lang="kk" class="lang-content text-lg font-bold text-yellow-800 mb-3">🧱 ЖҮРЕК ҚАБЫРҒАСЫ</h3>
+                        <h3 lang="en" class="lang-content text-lg font-bold text-yellow-800 mb-3">🧱 HEART WALL</h3>
+                        <h3 lang="ru" class="lang-content text-lg font-bold text-yellow-800 mb-3">🧱 СТЕНКА СЕРДЦА</h3>
+                        
+                        <div class="space-y-2">
+                            <p lang="kk" class="lang-content text-sm">1️⃣ <strong>Эпикард</strong> — сыртқы қабық</p>
+                            <p lang="en" class="lang-content text-sm">1️⃣ <strong>Epicardium</strong> — outer layer</p>
+                            <p lang="ru" class="lang-content text-sm">1️⃣ <strong>Эпикард</strong> — наружный слой</p>
+                            
+                            <p lang="kk" class="lang-content text-sm">2️⃣ <strong>Миокард</strong> — бұлшықет қабаты (негізгі!)</p>
+                            <p lang="en" class="lang-content text-sm">2️⃣ <strong>Myocardium</strong> — muscle layer (main!)</p>
+                            <p lang="ru" class="lang-content text-sm">2️⃣ <strong>Миокард</strong> — мышечный слой (основной!)</p>
+                            
+                            <p lang="kk" class="lang-content text-sm">3️⃣ <strong>Эндокард</strong> — ішкі қабық</p>
+                            <p lang="en" class="lang-content text-sm">3️⃣ <strong>Endocardium</strong> — inner layer</p>
+                            <p lang="ru" class="lang-content text-sm">3️⃣ <strong>Эндокард</strong> — внутренний слой</p>
+                        </div>
+                    </div>
+                    
+                    <div class="heart-card" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left: 5px solid #059669;">
+                        <h3 lang="kk" class="lang-content text-lg font-bold text-emerald-800 mb-3">🚪 ҚАҚПАҚШАЛАР</h3>
+                        <h3 lang="en" class="lang-content text-lg font-bold text-emerald-800 mb-3">🚪 VALVES</h3>
+                        <h3 lang="ru" class="lang-content text-lg font-bold text-emerald-800 mb-3">🚪 КЛАПАНЫ</h3>
+                        
+                        <p lang="kk" class="lang-content text-sm mb-2">Қанның кері ағуын болдырмайды:</p>
+                        <p lang="en" class="lang-content text-sm mb-2">Prevent backflow of blood:</p>
+                        <p lang="ru" class="lang-content text-sm mb-2">Препятствуют обратному току крови:</p>
+                        
+                        <p lang="kk" class="lang-content text-xs">• <strong>Жармақтық</strong> — жүрекше мен қарынша арасында</p>
+                        <p lang="en" class="lang-content text-xs">• <strong>Atrioventricular</strong> — between atria and ventricles</p>
+                        <p lang="ru" class="lang-content text-xs">• <strong>Створчатые</strong> — между предсердием и желудочком</p>
+                        
+                        <p lang="kk" class="lang-content text-xs">• <strong>Жартылай айшық</strong> — артериялар шығысында</p>
+                        <p lang="en" class="lang-content text-xs">• <strong>Semilunar</strong> — at artery exits</p>
+                        <p lang="ru" class="lang-content text-xs">• <strong>Полулунные</strong> — у выхода в артерии</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        const bio9Data = {
-            ru: {
-                raceme: {t: "Кисть", d: "Цветки сидят на удлиненной главной оси на цветоножках. (Ландыш, Черемуха, Капуста)"},
-                spike: {t: "Колос", d: "Цветки сидячие (без цветоножек) на удлиненной главной оси. (Подорожник, Осока)"},
-                umbel: {t: "Зонтик", d: "Главная ось укорочена, цветоножки выходят из одной точки, как спицы зонта. (Вишня, Примула)"},
-                head: {t: "Головка", d: "Главная ось утолщена и укорочена, цветки сидячие или на коротких ножках. (Клевер)"},
-                panicle: {t: "Метелка", d: "Сложное соцветие. Главная ось ветвится, несет простые кисти или колосья. (Сирень, Овес)"}
-            },
-            en: {
-                raceme: {t: "Raceme", d: "Flowers are attached to an elongated main axis by pedicels. (Lily of the valley)"},
-                spike: {t: "Spike", d: "Sessile flowers (no pedicels) on an elongated main axis. (Plantain)"},
-                umbel: {t: "Umbel", d: "Main axis shortened, pedicels radiate from a single point. (Cherry)"},
-                head: {t: "Head", d: "Thickened short axis with sessile flowers. (Clover)"},
-                panicle: {t: "Panicle", d: "Complex inflorescence. Branched main axis bearing simple racemes. (Lilac)"}
-            }
-        };
+    <!-- Сердечный цикл -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Жүрек циклі</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Cardiac Cycle</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Сердечный цикл</h2>
 
-        let lang='ru', type='raceme', cx, cvs;
+        <div class="card">
+            <div class="fact-box mb-4">
+                <p lang="kk" class="lang-content text-sm"><strong>Жүрек циклі</strong> = 1 жиырылу + 1 босаңсу ≈ <strong>0.8 секунд</strong> (пульс 75/мин кезінде)</p>
+                <p lang="en" class="lang-content text-sm"><strong>Cardiac cycle</strong> = 1 contraction + 1 relaxation ≈ <strong>0.8 seconds</strong> (at 75 bpm)</p>
+                <p lang="ru" class="lang-content text-sm"><strong>Сердечный цикл</strong> = 1 сокращение + 1 расслабление ≈ <strong>0.8 секунды</strong> (при пульсе 75/мин)</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <div style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">💓</p>
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">1. ЖҮРЕКШЕ СИСТОЛАСЫ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">1. ATRIAL SYSTOLE</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">1. СИСТОЛА ПРЕДСЕРДИЙ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">⏱️ 0.1 сек</p>
+                    <p lang="en" class="lang-content text-sm">⏱️ 0.1 sec</p>
+                    <p lang="ru" class="lang-content text-sm">⏱️ 0.1 сек</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Жүрекшелер жиырылады → қан қарыншаларға өтеді</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Atria contract → blood flows to ventricles</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Предсердия сокращаются → кровь в желудочки</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fecaca 0%, #f87171 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">💪</p>
+                    <h4 lang="kk" class="lang-content font-bold text-red-800 mb-2">2. ҚАРЫНША СИСТОЛАСЫ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-800 mb-2">2. VENTRICULAR SYSTOLE</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-800 mb-2">2. СИСТОЛА ЖЕЛУДОЧКОВ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">⏱️ 0.3 сек</p>
+                    <p lang="en" class="lang-content text-sm">⏱️ 0.3 sec</p>
+                    <p lang="ru" class="lang-content text-sm">⏱️ 0.3 сек</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Қарыншалар жиырылады → қан артерияларға итеріледі</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Ventricles contract → blood pushed to arteries</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Желудочки сокращаются → кровь в артерии</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">😌</p>
+                    <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2">3. ДИАСТОЛА (ПАУЗА)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2">3. DIASTOLE (PAUSE)</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2">3. ДИАСТОЛА (ПАУЗА)</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">⏱️ 0.4 сек</p>
+                    <p lang="en" class="lang-content text-sm">⏱️ 0.4 sec</p>
+                    <p lang="ru" class="lang-content text-sm">⏱️ 0.4 сек</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Бүкіл жүрек босаңсиды → қанмен толады</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Whole heart relaxes → fills with blood</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Всё сердце расслабляется → наполняется кровью</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.setL = (l) => { lang = l; update(); }
-        window.setI = (t) => { type = t; update(); }
+    <!-- Круги кровообращения -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қан айналым шеңберлері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Circulatory Circuits</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Круги кровообращения</h2>
 
-        function update() {
-            const d = bio9Data[lang][type];
-            document.getElementById('i-title').textContent = d.t;
-            document.getElementById('i-desc').textContent = d.d;
-            draw();
-        }
+        <div class="grid md:grid-cols-2 gap-5">
+            <!-- Малый круг -->
+            <div class="card" style="border-top: 5px solid #3b82f6;">
+                <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-4">🔵 КІШІ ШЕҢБЕР (ӨКПЕЛІК)</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-4">🔵 SMALL CIRCUIT (PULMONARY)</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-4">🔵 МАЛЫЙ КРУГ (ЛЁГОЧНЫЙ)</h3>
+                
+                <div style="background: #eff6ff; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm font-bold mb-2">Жолы:</p>
+                    <p lang="en" class="lang-content text-sm font-bold mb-2">Route:</p>
+                    <p lang="ru" class="lang-content text-sm font-bold mb-2">Путь:</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">Оң қарынша → Өкпе артериясы → <strong>ӨКПЕ</strong> (газ алмасу) → Өкпе венасы → Сол жүрекше</p>
+                    <p lang="en" class="lang-content text-sm">Right ventricle → Pulmonary artery → <strong>LUNGS</strong> (gas exchange) → Pulmonary vein → Left atrium</p>
+                    <p lang="ru" class="lang-content text-sm">Правый желудочек → Лёгочная артерия → <strong>ЛЁГКИЕ</strong> (газообмен) → Лёгочная вена → Левое предсердие</p>
+                </div>
+                
+                <div class="fact-box mt-3">
+                    <p lang="kk" class="lang-content text-xs">⚙️ <strong>Қызметі:</strong> CO₂ шығару, O₂ алу</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ <strong>Function:</strong> Release CO₂, get O₂</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ <strong>Функция:</strong> Отдать CO₂, получить O₂</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">⏱️ <strong>Уақыт:</strong> ~4-5 секунд</p>
+                    <p lang="en" class="lang-content text-xs mt-1">⏱️ <strong>Time:</strong> ~4-5 seconds</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">⏱️ <strong>Время:</strong> ~4-5 секунд</p>
+                </div>
+            </div>
 
-        function draw() {
-            if(!cx) return;
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
-            const cx_ = w/2;
+            <!-- Большой круг -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <h3 lang="kk" class="lang-content text-xl font-bold text-red-700 mb-4">🔴 ҮЛКЕН ШЕҢБЕР (ДЕНЕЛІК)</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-red-700 mb-4">🔴 LARGE CIRCUIT (SYSTEMIC)</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 mb-4">🔴 БОЛЬШОЙ КРУГ (ТЕЛЕСНЫЙ)</h3>
+                
+                <div style="background: #fef2f2; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm font-bold mb-2">Жолы:</p>
+                    <p lang="en" class="lang-content text-sm font-bold mb-2">Route:</p>
+                    <p lang="ru" class="lang-content text-sm font-bold mb-2">Путь:</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">Сол қарынша → Аорта → Артериялар → <strong>МҮШЕЛЕР</strong> (заттар алмасу) → Веналар → Қуыс веналар → Оң жүрекше</p>
+                    <p lang="en" class="lang-content text-sm">Left ventricle → Aorta → Arteries → <strong>ORGANS</strong> (exchange) → Veins → Vena cava → Right atrium</p>
+                    <p lang="ru" class="lang-content text-sm">Левый желудочек → Аорта → Артерии → <strong>ОРГАНЫ</strong> (обмен) → Вены → Полые вены → Правое предсердие</p>
+                </div>
+                
+                <div class="fact-box mt-3">
+                    <p lang="kk" class="lang-content text-xs">⚙️ <strong>Қызметі:</strong> O₂ және қоректік заттар жеткізу, CO₂ және қалдықтар әкету</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ <strong>Function:</strong> Deliver O₂ and nutrients, remove CO₂ and waste</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ <strong>Функция:</strong> Доставить O₂ и питательные вещества, унести CO₂ и отходы</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">⏱️ <strong>Уақыт:</strong> ~23-27 секунд</p>
+                    <p lang="en" class="lang-content text-xs mt-1">⏱️ <strong>Time:</strong> ~23-27 seconds</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">⏱️ <strong>Время:</strong> ~23-27 секунд</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            cx.strokeStyle = '#4d7c0f'; cx.lineWidth = 4; cx.lineCap = 'round';
+    <!-- Интересные факты -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Қызықты фактілер</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Interesting Facts</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Интересные факты</h2>
 
-            if (type === 'raceme') {
-                cx.beginPath(); cx.moveTo(cx_, h-50); cx.lineTo(cx_, 50); cx.stroke(); // Main axis
-                for(let i=100; i<h-50; i+=50) {
-                    drawPedicel(cx_, i, 40, true);
-                    drawPedicel(cx_, i+25, 40, false);
-                }
-            } else if (type === 'spike') {
-                cx.beginPath(); cx.moveTo(cx_, h-50); cx.lineTo(cx_, 50); cx.stroke();
-                for(let i=100; i<h-50; i+=40) {
-                    drawFlower(cx_-10, i, '#fbbf24');
-                    drawFlower(cx_+10, i+20, '#fbbf24');
-                }
-            } else if (type === 'umbel') {
-                cx.beginPath(); cx.moveTo(cx_, h); cx.lineTo(cx_, h/2); cx.stroke();
-                const centerY = h/2;
-                for(let i=-3; i<=3; i++) {
-                    cx.beginPath(); cx.moveTo(cx_, centerY); cx.lineTo(cx_ + i*40, centerY-100 + Math.abs(i)*10); cx.stroke();
-                    drawFlower(cx_ + i*40, centerY-100 + Math.abs(i)*10, '#f472b6');
-                }
-            } else if (type === 'head') {
-                cx.beginPath(); cx.moveTo(cx_, h); cx.lineTo(cx_, h/2); cx.stroke();
-                cx.fillStyle = '#4d7c0f'; cx.beginPath(); cx.ellipse(cx_, h/2, 30, 20, 0, 0, Math.PI*2); cx.fill();
-                for(let i=0; i<20; i++) {
-                    drawFlower(cx_ + (Math.random()-0.5)*50, h/2 + (Math.random()-0.5)*30 - 10, '#d8b4fe');
-                }
-            } else { // Panicle
-                drawBranch(cx_, h-20, h*0.8, 0, 0);
-            }
-        }
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">💓 Жүрек <strong>күніне ~7000 литр</strong> қан айдайды</p>
+                    <p lang="en" class="lang-content text-sm">💓 Heart pumps <strong>~7000 liters/day</strong></p>
+                    <p lang="ru" class="lang-content text-sm">💓 Сердце перекачивает <strong>~7000 литров/день</strong></p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🩺 Қалыпты пульс: <strong>60-80</strong> соғыс/мин (ересектерде)</p>
+                    <p lang="en" class="lang-content text-sm">🩺 Normal pulse: <strong>60-80</strong> beats/min (adults)</p>
+                    <p lang="ru" class="lang-content text-sm">🩺 Нормальный пульс: <strong>60-80</strong> уд/мин (взрослые)</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">📏 Қан тамырларының жалпы ұзындығы: <strong>~100 000 км</strong> (Жерді 2.5 рет айнала алады!)</p>
+                    <p lang="en" class="lang-content text-sm">📏 Total length of blood vessels: <strong>~100,000 km</strong> (can circle Earth 2.5 times!)</p>
+                    <p lang="ru" class="lang-content text-sm">📏 Общая длина сосудов: <strong>~100 000 км</strong> (можно обернуть Землю 2.5 раза!)</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">⚡ Жүрек өз электр импульсін өзі өндіреді (синус түйіні — "пейсмейкер")</p>
+                    <p lang="en" class="lang-content text-sm">⚡ Heart generates its own electrical impulse (sinus node — "pacemaker")</p>
+                    <p lang="ru" class="lang-content text-sm">⚡ Сердце само генерирует электрический импульс (синусный узел — "водитель ритма")</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function drawBranch(x, y, len, angle, depth) {
-            if (depth > 2) { drawFlower(x, y, '#a78bfa'); return; }
-            const ex = x + Math.sin(angle)*len;
-            const ey = y - Math.cos(angle)*len;
-            cx.beginPath(); cx.moveTo(x, y); cx.lineTo(ex, ey); cx.stroke();
-            drawBranch(ex, ey, len*0.6, angle - 0.5, depth+1);
-            drawBranch(ex, ey, len*0.6, angle + 0.5, depth+1);
-        }
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-radius: 1rem; border-top: 4px solid #dc2626;">
+        <p lang="kk" class="lang-content text-sm font-bold text-red-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-red-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-red-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-        function drawPedicel(x, y, len, left) {
-            cx.beginPath(); cx.moveTo(x, y); cx.lineTo(left ? x-len : x+len, y-10); cx.stroke();
-            drawFlower(left ? x-len : x+len, y-10, '#fff');
-        }
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
-        function drawFlower(x, y, c) {
-            cx.fillStyle = c;
-            cx.beginPath(); cx.arc(x, y, 8, 0, Math.PI*2); cx.fill();
-        }
-
-        window.onload = () => {
-            cvs = document.getElementById('infCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; draw(); };
-            window.addEventListener('resize', rs); rs();
-            window.setL('ru');
-        }
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

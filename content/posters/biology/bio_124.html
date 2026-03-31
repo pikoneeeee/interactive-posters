@@ -1,136 +1,360 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Root Modifications</title>
+    <title>Строение и работа мышц</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        body { background: #3f2c22; color: #fde68a; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; }
-        canvas { border-radius: 1rem; }
-        .mod-btn { cursor: pointer; transition: 0.3s; opacity: 0.6; }
-        .mod-btn.active { opacity: 1; transform: scale(1.1); color: #fff; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #c2410c; border-bottom: 3px solid #fdba74; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #ea580c; background: white; color: #ea580c; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fff7ed; }
+        .lang-btn.active { background: #ea580c; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .muscle-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #fff7ed; border: 2px solid #fdba74; border-radius: 10px; padding: 15px; margin: 10px 0; }
+        .number-badge { background: #ea580c; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; margin-right: 10px; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 flex flex-col items-center">
+<body class="bg-slate-50">
 
-<h1 class="text-4xl font-montserrat mb-8" id="header-text">METAMORPHOSIS</h1>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
-        <div class="mod-btn text-center" onclick="window.setM(0)">
-            <div class="text-6xl mb-2">🥕</div>
-            <h3 class="font-bold" id="l-tap">Taproot</h3>
-        </div>
-        <div class="mod-btn text-center" onclick="window.setM(1)">
-            <div class="text-6xl mb-2">🍠</div>
-            <h3 class="font-bold" id="l-tuber">Tuber</h3>
-        </div>
-        <div class="mod-btn text-center" onclick="window.setM(2)">
-            <div class="text-6xl mb-2">🦠</div>
-            <h3 class="font-bold" id="l-nodule">Nodules</h3>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="glass p-8 mt-8 w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div class="h-64 bg-black/20 rounded-xl relative">
-            <canvas id="modCanvas" class="w-full h-full"></canvas>
+    <header class="header-card text-center mb-10">
+        <p class="text-orange-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Бұлшықеттердің құрылысы және жұмысы</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Structure and Function of Muscles</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Строение и работа мышц</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-orange-100">Адам денесінде 600+ бұлшықет бар. Олар дене салмағының 40-50% құрайды. Қозғалыс, жылу өндіру, қан айналымы — бұлшықеттер жұмысы.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-orange-100">The human body has 600+ muscles. They make up 40-50% of body weight. Movement, heat production, blood circulation — all muscle work.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-orange-100">В теле человека более 600 мышц. Они составляют 40-50% массы тела. Движение, выработка тепла, кровообращение — работа мышц.</p>
+    </header>
+
+    <!-- Типы мышц -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Бұлшықет түрлері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Types of Muscles</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Типы мышц</h2>
+
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Скелетные -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">💪</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-red-700 mb-3">ҚАҢҚА (СКЕЛЕТТІК)</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-red-700 mb-3">SKELETAL</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-red-700 mb-3">СКЕЛЕТНЫЕ</h3>
+                
+                <div style="background: #fef2f2; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p lang="kk" class="lang-content text-sm text-center"><em>Көлденең-жолақты</em></p>
+                    <p lang="en" class="lang-content text-sm text-center"><em>Striated</em></p>
+                    <p lang="ru" class="lang-content text-sm text-center"><em>Поперечно-полосатые</em></p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Орны:</strong> Сүйектерге бекінген</p>
+                <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Location:</strong> Attached to bones</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Где:</strong> Прикреплены к костям</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">⚙️ <strong>Басқару:</strong> Ерікті (санамен)</p>
+                <p lang="en" class="lang-content text-sm mb-2">⚙️ <strong>Control:</strong> Voluntary (conscious)</p>
+                <p lang="ru" class="lang-content text-sm mb-2">⚙️ <strong>Управление:</strong> Произвольное (сознательное)</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">⚡ <strong>Жиырылу:</strong> Жылдам, күшті, тез шаршайды</p>
+                <p lang="en" class="lang-content text-sm mb-2">⚡ <strong>Contraction:</strong> Fast, strong, tires quickly</p>
+                <p lang="ru" class="lang-content text-sm mb-2">⚡ <strong>Сокращение:</strong> Быстрое, сильное, быстро устаёт</p>
+                
+                <div style="background: #fee2e2; padding: 10px; border-radius: 8px; margin-top: 12px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Бицепс, трицепс, бет бұлшықеттері</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Biceps, triceps, facial muscles</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> Бицепс, трицепс, мышцы лица</p>
+                </div>
+            </div>
+
+            <!-- Гладкие -->
+            <div class="card" style="border-top: 5px solid #16a34a;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">🫁</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-green-700 mb-3">ТЕГІС</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-green-700 mb-3">SMOOTH</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-green-700 mb-3">ГЛАДКИЕ</h3>
+                
+                <div style="background: #f0fdf4; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p lang="kk" class="lang-content text-sm text-center"><em>Жолақсыз</em></p>
+                    <p lang="en" class="lang-content text-sm text-center"><em>Non-striated</em></p>
+                    <p lang="ru" class="lang-content text-sm text-center"><em>Без полос</em></p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Орны:</strong> Ішкі мүшелер қабырғасы</p>
+                <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Location:</strong> Walls of internal organs</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Где:</strong> Стенки внутренних органов</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">⚙️ <strong>Басқару:</strong> Еріксіз (автономды)</p>
+                <p lang="en" class="lang-content text-sm mb-2">⚙️ <strong>Control:</strong> Involuntary (autonomic)</p>
+                <p lang="ru" class="lang-content text-sm mb-2">⚙️ <strong>Управление:</strong> Непроизвольное (автономное)</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">⚡ <strong>Жиырылу:</strong> Баяу, әлсіз, ұзақ жұмыс істейді</p>
+                <p lang="en" class="lang-content text-sm mb-2">⚡ <strong>Contraction:</strong> Slow, weak, works for long time</p>
+                <p lang="ru" class="lang-content text-sm mb-2">⚡ <strong>Сокращение:</strong> Медленное, слабое, работает долго</p>
+                
+                <div style="background: #dcfce7; padding: 10px; border-radius: 8px; margin-top: 12px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Асқазан, ішек, қан тамырлары, көздің қарашығы</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Stomach, intestines, blood vessels, pupil</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> Желудок, кишечник, сосуды, зрачок</p>
+                </div>
+            </div>
+
+            <!-- Сердечная -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 48px; text-align: center; margin-bottom: 15px;">❤️</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-red-700 mb-3">ЖҮРЕК</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-red-700 mb-3">CARDIAC</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-red-700 mb-3">СЕРДЕЧНАЯ</h3>
+                
+                <div style="background: #fef2f2; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p lang="kk" class="lang-content text-sm text-center"><em>Көлденең-жолақты, бірақ ерекше</em></p>
+                    <p lang="en" class="lang-content text-sm text-center"><em>Striated, but special</em></p>
+                    <p lang="ru" class="lang-content text-sm text-center"><em>Поперечно-полосатая, но особая</em></p>
+                </div>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Орны:</strong> Тек жүрек</p>
+                <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Location:</strong> Only in heart</p>
+                <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Где:</strong> Только в сердце</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">⚙️ <strong>Басқару:</strong> Автоматты (тоқтаусыз)</p>
+                <p lang="en" class="lang-content text-sm mb-2">⚙️ <strong>Control:</strong> Automatic (non-stop)</p>
+                <p lang="ru" class="lang-content text-sm mb-2">⚙️ <strong>Управление:</strong> Автоматическое (без остановки)</p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2">⚡ <strong>Жиырылу:</strong> Ырғақты, шаршамайды</p>
+                <p lang="en" class="lang-content text-sm mb-2">⚡ <strong>Contraction:</strong> Rhythmic, never tires</p>
+                <p lang="ru" class="lang-content text-sm mb-2">⚡ <strong>Сокращение:</strong> Ритмичное, не устаёт</p>
+                
+                <div style="background: #fee2e2; padding: 10px; border-radius: 8px; margin-top: 12px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Факт:</strong> Күніне ~100,000 рет жиырылады!</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Fact:</strong> Contracts ~100,000 times per day!</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Факт:</strong> Сокращается ~100 000 раз в сутки!</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <h2 id="m-title" class="text-2xl font-bold text-white mb-4"></h2>
-            <p id="m-desc" class="text-lg opacity-80 leading-relaxed"></p>
+    </section>
+
+    <!-- Строение скелетной мышцы -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Қаңқа бұлшықетінің құрылысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Structure of Skeletal Muscle</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Строение скелетной мышцы</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Макроструктура -->
+                <div class="muscle-card" style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-left: 5px solid #ea580c;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold mb-4">🔍 МАКРОҚҰРЫЛЫМ</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold mb-4">🔍 MACROSTRUCTURE</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold mb-4">🔍 МАКРОСТРУКТУРА</h4>
+                    
+                    <div class="space-y-3">
+                        <div class="fact-box">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge">1</span><strong>Бас (басы)</strong> — сүйекке бекіну нүктесі (қозғалмайтын)</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge">1</span><strong>Origin (head)</strong> — attachment point to bone (immovable)</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge">1</span><strong>Головка (начало)</strong> — точка прикрепления к кости (неподвижная)</p>
+                        </div>
+                        
+                        <div class="fact-box">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge">2</span><strong>Қарын (денесі)</strong> — негізгі етті бөлігі (жиырылады)</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge">2</span><strong>Belly (body)</strong> — main fleshy part (contracts)</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge">2</span><strong>Брюшко (тело)</strong> — основная мясистая часть (сокращается)</p>
+                        </div>
+                        
+                        <div class="fact-box">
+                            <p lang="kk" class="lang-content text-sm"><span class="number-badge">3</span><strong>Құйрық (сіңір)</strong> — сүйекке бекіну (қозғалатын)</p>
+                            <p lang="en" class="lang-content text-sm"><span class="number-badge">3</span><strong>Tail (tendon)</strong> — attachment to bone (movable)</p>
+                            <p lang="ru" class="lang-content text-sm"><span class="number-badge">3</span><strong>Хвост (сухожилие)</strong> — прикрепление к кости (подвижная)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Микроструктура -->
+                <div class="muscle-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-left: 5px solid #dc2626;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold mb-4">🔬 МИКРОҚҰРЫЛЫМ</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold mb-4">🔬 MICROSTRUCTURE</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold mb-4">🔬 МИКРОСТРУКТУРА</h4>
+                    
+                    <div class="space-y-3">
+                        <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #dc2626;">
+                            <p lang="kk" class="lang-content text-sm"><strong>Бұлшықет талшығы</strong> — ұзын жасуша (10 см дейін), көп ядролы</p>
+                            <p lang="en" class="lang-content text-sm"><strong>Muscle fiber</strong> — long cell (up to 10 cm), multinucleated</p>
+                            <p lang="ru" class="lang-content text-sm"><strong>Мышечное волокно</strong> — длинная клетка (до 10 см), многоядерная</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #dc2626;">
+                            <p lang="kk" class="lang-content text-sm"><strong>Миофибрилла</strong> — талшық ішіндегі жіпшелер (жиырылу аппараты)</p>
+                            <p lang="en" class="lang-content text-sm"><strong>Myofibril</strong> — threads inside fiber (contraction apparatus)</p>
+                            <p lang="ru" class="lang-content text-sm"><strong>Миофибрилла</strong> — нити внутри волокна (аппарат сокращения)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #dc2626;">
+                            <p lang="kk" class="lang-content text-sm"><strong>Актин + Миозин</strong> — ақуыз жіпшелері (сырғанау → жиырылу)</p>
+                            <p lang="en" class="lang-content text-sm"><strong>Actin + Myosin</strong> — protein filaments (sliding → contraction)</p>
+                            <p lang="ru" class="lang-content text-sm"><strong>Актин + Миозин</strong> — белковые нити (скольжение → сокращение)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="fixed bottom-4 right-4 flex gap-2 text-xs font-bold text-gray-500">
-        <button onclick="window.updL('ru')" class="hover:text-white">RU</button>
-        <button onclick="window.updL('kz')" class="hover:text-white">KZ</button>
-        <button onclick="window.updL('en')" class="hover:text-white">EN</button>
-    </div>
+    <!-- Работа мышц -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Бұлшықеттер жұмысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">How Muscles Work</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Работа мышц</h2>
 
-    <script>
-        const bio5Data = {
-            ru: { h: "ВИДОИЗМЕНЕНИЯ КОРНЯ", l: ["Корнеплод", "Корнеклубень", "Клубеньки"], m: [
-                {t: "Корнеплод", d: "Утолщение главного корня для запаса питательных веществ. Примеры: морковь, свекла, редис. Двулетние растения."},
-                {t: "Корневые клубни", d: "Утолщение боковых или придаточных корней. Примеры: георгин, батат, чистяк. Служат для размножения и запаса."},
-                {t: "Клубеньки (Симбиоз)", d: "Азотфиксирующие бактерии на корнях бобовых. Растение дает бактериям жилье, бактерии — азот."}
-            ]},
-            kz: { h: "ТАМЫР ТҮРӨЗГЕРІСТЕРІ", l: ["Жемістамыр", "Тамыр түйнегі", "Түйнекшелер"], m: [
-                {t: "Жемістамыр", d: "Негізгі тамырдың қоректік заттарды жинау үшін жуандауы. Мысалы: сәбіз, қызылша. Екі жылдық өсімдіктер."},
-                {t: "Тамыр түйнектері", d: "Жанама немесе қосалқы тамырлардың жуандауы. Мысалы: нарғызгүл, батат. Көбею және қор жинау үшін."},
-                {t: "Түйнекшелер", d: "Бұршақ тұқымдастар тамырындағы азот бекітуші бактериялар. Өсімдік баспана, бактерия азот береді."}
-            ]},
-            en: { h: "ROOT MODIFICATIONS", l: ["Storage Taproot", "Root Tubers", "Nodules"], m: [
-                {t: "Storage Taproot", d: "Thickening of the main root for nutrient storage. Examples: carrot, beet, radish. Biennial plants."},
-                {t: "Root Tubers", d: "Thickening of lateral or adventitious roots. Examples: dahlia, sweet potato. Used for storage and reproduction."},
-                {t: "Root Nodules", d: "Nitrogen-fixing bacteria on legume roots. Symbiosis: plants provide shelter, bacteria provide nitrogen."}
-            ]}
-        };
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Антагонисты -->
+                <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold text-blue-700 mb-3">🔄 АНТАГОНИСТЕР</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold text-blue-700 mb-3">🔄 ANTAGONISTS</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold text-blue-700 mb-3">🔄 АНТАГОНИСТЫ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Қарама-қарсы қозғалыс жасайды:</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Produce opposite movements:</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Производят противоположные движения:</p>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">💪 <strong>Бицепс</strong> (бүгеді) ↔️ <strong>Трицепс</strong> (жазады)</p>
+                        <p lang="en" class="lang-content text-sm">💪 <strong>Biceps</strong> (flexes) ↔️ <strong>Triceps</strong> (extends)</p>
+                        <p lang="ru" class="lang-content text-sm">💪 <strong>Бицепс</strong> (сгибает) ↔️ <strong>Трицепс</strong> (разгибает)</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Бірі жиырылғанда, екіншісі босаңсиды</p>
+                        <p lang="en" class="lang-content text-xs mt-2 text-gray-600">When one contracts, the other relaxes</p>
+                        <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Когда одна сокращается, другая расслабляется</p>
+                    </div>
+                </div>
 
-        let lang='ru', idx=0, cx, cvs;
+                <!-- Синергисты -->
+                <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold text-green-700 mb-3">🤝 СИНЕРГИСТЕР</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold text-green-700 mb-3">🤝 SYNERGISTS</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold text-green-700 mb-3">🤝 СИНЕРГИСТЫ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-3">Бірдей қозғалыс жасайды:</p>
+                    <p lang="en" class="lang-content text-sm mb-3">Produce the same movement:</p>
+                    <p lang="ru" class="lang-content text-sm mb-3">Производят одинаковое движение:</p>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🏋️ <strong>Кеуде + Иық алды + Трицепс</strong> = итеру қозғалысы</p>
+                        <p lang="en" class="lang-content text-sm">🏋️ <strong>Chest + Front deltoid + Triceps</strong> = pushing movement</p>
+                        <p lang="ru" class="lang-content text-sm">🏋️ <strong>Грудь + Передняя дельта + Трицепс</strong> = жим (толкание)</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Бірлесіп жұмыс істейді</p>
+                        <p lang="en" class="lang-content text-xs mt-2 text-gray-600">Work together</p>
+                        <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Работают вместе</p>
+                    </div>
+                </div>
+            </div>
 
-        window.updL = function(l) {
-            lang = l;
-            document.getElementById('header-text').textContent = bio5Data[l].h;
-            document.getElementById('l-tap').textContent = bio5Data[l].l[0];
-            document.getElementById('l-tuber').textContent = bio5Data[l].l[1];
-            document.getElementById('l-nodule').textContent = bio5Data[l].l[2];
-            updateInfo();
-        }
+            <!-- Механизм сокращения -->
+            <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                <h4 lang="kk" class="lang-content text-lg font-bold text-yellow-800 mb-3">⚡ ЖИЫРЫЛУ МЕХАНИЗМІ</h4>
+                <h4 lang="en" class="lang-content text-lg font-bold text-yellow-800 mb-3">⚡ CONTRACTION MECHANISM</h4>
+                <h4 lang="ru" class="lang-content text-lg font-bold text-yellow-800 mb-3">⚡ МЕХАНИЗМ СОКРАЩЕНИЯ</h4>
+                
+                <div class="grid md:grid-cols-4 gap-3">
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <p class="text-2xl mb-2">🧠</p>
+                        <p lang="kk" class="lang-content text-xs"><strong>1.</strong> Ми импульс жібереді</p>
+                        <p lang="en" class="lang-content text-xs"><strong>1.</strong> Brain sends impulse</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>1.</strong> Мозг посылает импульс</p>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <p class="text-2xl mb-2">⚡</p>
+                        <p lang="kk" class="lang-content text-xs"><strong>2.</strong> Жүйке талшығы арқылы</p>
+                        <p lang="en" class="lang-content text-xs"><strong>2.</strong> Through nerve fiber</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>2.</strong> По нервному волокну</p>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <p class="text-2xl mb-2">🔬</p>
+                        <p lang="kk" class="lang-content text-xs"><strong>3.</strong> Ca²⁺ шығады, АТФ ыдырайды</p>
+                        <p lang="en" class="lang-content text-xs"><strong>3.</strong> Ca²⁺ released, ATP breaks</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>3.</strong> Ca²⁺ выходит, АТФ распадается</p>
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 8px; text-align: center;">
+                        <p class="text-2xl mb-2">💪</p>
+                        <p lang="kk" class="lang-content text-xs"><strong>4.</strong> Актин + Миозин сырғанайды</p>
+                        <p lang="en" class="lang-content text-xs"><strong>4.</strong> Actin + Myosin slide</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>4.</strong> Актин + Миозин скользят</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.setM = function(i) { idx = i; updateInfo(); }
+    <!-- Основные группы мышц -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Негізгі бұлшықет топтары</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Main Muscle Groups</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Основные группы мышц</h2>
 
-        function updateInfo() {
-            const data = bio5Data[lang].m[idx];
-            document.getElementById('m-title').textContent = data.t;
-            document.getElementById('m-desc').textContent = data.d;
-            document.querySelectorAll('.mod-btn').forEach((b, k) => {
-                b.classList.toggle('active', k === idx);
-            });
-            draw();
-        }
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="fact-box">
+                    <p class="text-2xl mb-2">😀</p>
+                    <p lang="kk" class="lang-content text-sm"><strong>Бас бұлшықеттері</strong> — мимика (40+), шайнау (4 жұп)</p>
+                    <p lang="en" class="lang-content text-sm"><strong>Head muscles</strong> — facial (40+), chewing (4 pairs)</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>Мышцы головы</strong> — мимические (40+), жевательные (4 пары)</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p class="text-2xl mb-2">🦴</p>
+                    <p lang="kk" class="lang-content text-sm"><strong>Дене бұлшықеттері</strong> — кеуде, арқа, құрсақ (пресс), мойын</p>
+                    <p lang="en" class="lang-content text-sm"><strong>Trunk muscles</strong> — chest, back, abdomen (abs), neck</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>Мышцы туловища</strong> — грудь, спина, живот (пресс), шея</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p class="text-2xl mb-2">🏃</p>
+                    <p lang="kk" class="lang-content text-sm"><strong>Аяқ-қол</strong> — иық, білек, алақан, сан, асықты жілік, табан</p>
+                    <p lang="en" class="lang-content text-sm"><strong>Limbs</strong> — shoulder, forearm, hand, thigh, lower leg, foot</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>Конечности</strong> — плечо, предплечье, кисть, бедро, голень, стопа</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function draw() {
-            if(!cx) return;
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
-            const cx_ = w/2, cy_ = h/2;
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-radius: 1rem; border-top: 4px solid #ea580c;">
+        <p lang="kk" class="lang-content text-sm font-bold text-orange-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-orange-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-orange-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-            if (idx === 0) { // Carrot
-                cx.fillStyle = '#f97316';
-                cx.beginPath(); cx.moveTo(cx_-20, cy_-80); cx.lineTo(cx_+20, cy_-80); cx.lineTo(cx_, cy_+80); cx.fill();
-                // Greens
-                cx.strokeStyle = '#22c55e'; cx.lineWidth = 2;
-                cx.beginPath(); cx.moveTo(cx_, cy_-80); cx.lineTo(cx_, cy_-120); cx.stroke();
-            } else if (idx === 1) { // Sweet potato
-                cx.fillStyle = '#be185d';
-                cx.beginPath(); cx.ellipse(cx_-30, cy_, 20, 40, -0.2, 0, Math.PI*2); cx.fill();
-                cx.beginPath(); cx.ellipse(cx_+30, cy_+10, 25, 45, 0.2, 0, Math.PI*2); cx.fill();
-            } else { // Nodules
-                cx.strokeStyle = '#a16207'; cx.lineWidth = 2;
-                cx.beginPath(); cx.moveTo(cx_, 20); cx.lineTo(cx_, h-20); cx.stroke(); 
-                cx.fillStyle = '#fde047';
-                for(let i=0; i<8; i++) {
-                    cx.beginPath(); cx.arc(cx_ + (i%2==0?10:-10), 50 + i*30, 6, 0, Math.PI*2); cx.fill();
-                }
-            }
-        }
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
-        window.onload = function() {
-            cvs = document.getElementById('modCanvas'); 
-            if(cvs) {
-                cx = cvs.getContext('2d');
-                const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; draw(); };
-                window.addEventListener('resize', rs); rs();
-                window.updL('ru');
-            }
-        }
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

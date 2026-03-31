@@ -460,7 +460,11 @@ class MainWindow(QMainWindow):
         topics_data = []
         for topic in subject.get('topics', []):
             topic_name = topic.get('title_ru') or topic.get('name') or topic['id']
-            topics_data.append({'id': topic['id'], 'name': topic_name})
+            topic_data = {'id': topic['id'], 'name': topic_name}
+            # Добавляем класс если есть
+            if 'grade' in topic:
+                topic_data['grade'] = topic['grade']
+            topics_data.append(topic_data)
 
         topics_json = json.dumps(topics_data, ensure_ascii=False)
         subject_name_escaped = subject_name.replace("'", "\\'").replace('"', '\\"')
@@ -724,6 +728,8 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == '__main__':
+    import os
+    os.environ['PYTHONIOENCODING'] = 'utf-8'
     print("\n" + "=" * 80)
     print("🚀 ЗАПУСК ПРИЛОЖЕНИЯ 'Интерактивные плакаты'")
     print("=" * 80 + "\n")

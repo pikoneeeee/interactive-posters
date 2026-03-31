@@ -1,164 +1,425 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Anatomy</title>
+    <title>Науки о человеке. Место человека в системе органического мира</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:ital,wght@1,900&display=swap" rel="stylesheet">
     <style>
-        body { background: #064e3b; color: #f0fdf4; font-family: 'Inter'; min-height: 100vh; }
-        .glass { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); }
-        .rounded-custom { border-radius: 2rem; }
-        .part-btn { transition: 0.3s; border-left: 4px solid transparent; }
-        .part-btn:hover { background: rgba(255,255,255,0.1); padding-left: 1rem; border-color: #a3e635; }
-        canvas { cursor: crosshair; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #134e4a; border-bottom: 3px solid #14b8a6; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #0f766e; margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #0f766e; background: white; color: #0f766e; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdfa; }
+        .lang-btn.active { background: #0f766e; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #99f6e4; padding: 12px; text-align: left; font-size: 13px; }
+        th { background-color: #0f766e; color: white; }
+        tr:nth-child(even) { background-color: #f0fdfa; }
+        .highlight { background: linear-gradient(135deg, #ccfbf1 0%, #f0fdfa 100%); padding: 20px; border-radius: 0.75rem; border-left: 5px solid #0f766e; margin: 15px 0; }
+        .info-box { background: #f0fdfa; border: 2px solid #14b8a6; border-radius: 0.75rem; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 h-screen flex flex-col">
+<body class="bg-slate-50">
 
-<div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-lime-300 tracking-tight" id="title"></h1>
-        <div class="flex gap-2 text-xs font-bold">
-            <button onclick="window.setL('ru')" class="hover:text-lime-300">RU</button>
-            <button onclick="window.setL('kz')" class="hover:text-lime-300">KZ</button>
-            <button onclick="window.setL('en')" class="hover:text-lime-300">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="glass rounded-custom p-6 flex flex-col justify-center gap-2" id="parts-list">
-            <!-- Buttons injected here -->
-        </div>
+    <header class="header-card text-center mb-10">
+        <p class="text-teal-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Адам туралы ғылымдар. Адамның тірі табиғат жүйесіндегі орны</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Sciences About Humans. Human's Place in the Organic World</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Науки о человеке. Место человека в системе органического мира</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-teal-100">Адам — биологиялық және әлеуметтік тірі жан. Анатомия, физиология және гигиена — адамды зерттейтін негізгі ғылымдар.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-teal-100">Humans are both biological and social beings. Anatomy, physiology, and hygiene are the main sciences studying humans.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-teal-100">Человек — биосоциальное существо. Анатомия, физиология и гигиена — основные науки, изучающие человека.</p>
+    </header>
 
-        <div class="lg:col-span-2 glass rounded-custom p-4 relative overflow-hidden">
-            <canvas id="plantCanvas" class="w-full h-full"></canvas>
-            
-            <div id="info-overlay" class="absolute top-8 right-8 w-64 glass p-6 rounded-2xl border-t-4 border-lime-500 opacity-0 transition duration-500 transform translate-x-4">
-                <h3 id="part-name" class="font-bold text-xl text-lime-200 mb-2"></h3>
-                <p id="part-desc" class="text-sm text-lime-50 leading-snug"></p>
+    <!-- Section 1: Sciences about humans -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">1. Адам туралы ғылымдар</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">1. Sciences About Humans</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">1. Науки о человеке</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Анатомия -->
+            <div class="rule-card" style="border-top-color: #dc2626;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🦴</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-red-700 mb-3">АНАТОМИЯ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-red-700 mb-3">ANATOMY</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-red-700 mb-3">АНАТОМИЯ</h3>
+                
+                <p lang="kk" class="lang-content text-sm text-gray-600 mb-3"><em>грек. "anatomē" — кесу, бөлшектеу</em></p>
+                <p lang="en" class="lang-content text-sm text-gray-600 mb-3"><em>Greek "anatomē" — cutting, dissection</em></p>
+                <p lang="ru" class="lang-content text-sm text-gray-600 mb-3"><em>греч. "anatomē" — рассечение</em></p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>Зерттейді:</strong> Адам денесінің құрылысы, мүшелердің пішіні, орналасуы</p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>Studies:</strong> Structure of human body, shape and position of organs</p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>Изучает:</strong> Строение тела, форму и расположение органов</p>
+                
+                <div style="background: #fef2f2; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Жүректің 4 камерасы бар, салмағы ~300г</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Heart has 4 chambers, weighs ~300g</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> Сердце имеет 4 камеры, масса ~300г</p>
+                </div>
+            </div>
+
+            <!-- Физиология -->
+            <div class="rule-card" style="border-top-color: #2563eb;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">⚡</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">ФИЗИОЛОГИЯ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">PHYSIOLOGY</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">ФИЗИОЛОГИЯ</h3>
+                
+                <p lang="kk" class="lang-content text-sm text-gray-600 mb-3"><em>грек. "physis" — табиғат + "logos" — ғылым</em></p>
+                <p lang="en" class="lang-content text-sm text-gray-600 mb-3"><em>Greek "physis" — nature + "logos" — science</em></p>
+                <p lang="ru" class="lang-content text-sm text-gray-600 mb-3"><em>греч. "physis" — природа + "logos" — наука</em></p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>Зерттейді:</strong> Мүшелердің қызметі, өмірлік процестер</p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>Studies:</strong> Functions of organs, vital processes</p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>Изучает:</strong> Функции органов, жизненные процессы</p>
+                
+                <div style="background: #eff6ff; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Жүрек минутына 60-80 рет соғады</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Heart beats 60-80 times per minute</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> Сердце бьётся 60-80 раз в минуту</p>
+                </div>
+            </div>
+
+            <!-- Гигиена -->
+            <div class="rule-card" style="border-top-color: #16a34a;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🛡️</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-green-700 mb-3">ГИГИЕНА</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-green-700 mb-3">HYGIENE</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-green-700 mb-3">ГИГИЕНА</h3>
+                
+                <p lang="kk" class="lang-content text-sm text-gray-600 mb-3"><em>грек. "hygieinós" — денсаулыққа пайдалы</em></p>
+                <p lang="en" class="lang-content text-sm text-gray-600 mb-3"><em>Greek "hygieinós" — conducive to health</em></p>
+                <p lang="ru" class="lang-content text-sm text-gray-600 mb-3"><em>греч. "hygieinós" — здоровый</em></p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>Зерттейді:</strong> Денсаулықты сақтау және нығайту әдістері</p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>Studies:</strong> Methods of preserving and strengthening health</p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>Изучает:</strong> Способы сохранения и укрепления здоровья</p>
+                
+                <div style="background: #f0fdf4; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Күніне 2 литр су ішу керек</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Drink 2 liters of water daily</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> Нужно пить 2 литра воды в день</p>
+                </div>
+            </div>
+
+            <!-- Психология -->
+            <div class="rule-card" style="border-top-color: #9333ea;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🧠</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-purple-700 mb-3">ПСИХОЛОГИЯ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-purple-700 mb-3">PSYCHOLOGY</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-purple-700 mb-3">ПСИХОЛОГИЯ</h3>
+                
+                <p lang="kk" class="lang-content text-sm text-gray-600 mb-3"><em>грек. "psychē" — жан + "logos" — ғылым</em></p>
+                <p lang="en" class="lang-content text-sm text-gray-600 mb-3"><em>Greek "psychē" — soul + "logos" — science</em></p>
+                <p lang="ru" class="lang-content text-sm text-gray-600 mb-3"><em>греч. "psychē" — душа + "logos" — наука</em></p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>Зерттейді:</strong> Психика, мінез-құлық, ойлау, эмоциялар</p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>Studies:</strong> Psyche, behavior, thinking, emotions</p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>Изучает:</strong> Психику, поведение, мышление, эмоции</p>
+                
+                <div style="background: #faf5ff; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Стресс иммунитетті әлсіретеді</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Stress weakens the immune system</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> Стресс ослабляет иммунитет</p>
+                </div>
+            </div>
+
+            <!-- Антропология -->
+            <div class="rule-card" style="border-top-color: #ca8a04;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🦍</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">АНТРОПОЛОГИЯ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">ANTHROPOLOGY</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">АНТРОПОЛОГИЯ</h3>
+                
+                <p lang="kk" class="lang-content text-sm text-gray-600 mb-3"><em>грек. "anthropos" — адам + "logos" — ғылым</em></p>
+                <p lang="en" class="lang-content text-sm text-gray-600 mb-3"><em>Greek "anthropos" — human + "logos" — science</em></p>
+                <p lang="ru" class="lang-content text-sm text-gray-600 mb-3"><em>греч. "anthropos" — человек + "logos" — наука</em></p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>Зерттейді:</strong> Адамның шығу тегі, эволюциясы, нәсілдер</p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>Studies:</strong> Human origin, evolution, races</p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>Изучает:</strong> Происхождение человека, эволюцию, расы</p>
+                
+                <div style="background: #fefce8; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Homo sapiens 300 000 жыл бұрын пайда болды</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Homo sapiens appeared 300,000 years ago</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> Homo sapiens появился 300 000 лет назад</p>
+                </div>
+            </div>
+
+            <!-- Генетика -->
+            <div class="rule-card" style="border-top-color: #0891b2;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🧬</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-cyan-700 mb-3">ГЕНЕТИКА</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-cyan-700 mb-3">GENETICS</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-cyan-700 mb-3">ГЕНЕТИКА</h3>
+                
+                <p lang="kk" class="lang-content text-sm text-gray-600 mb-3"><em>грек. "genesis" — шығу тегі</em></p>
+                <p lang="en" class="lang-content text-sm text-gray-600 mb-3"><em>Greek "genesis" — origin</em></p>
+                <p lang="ru" class="lang-content text-sm text-gray-600 mb-3"><em>греч. "genesis" — происхождение</em></p>
+                
+                <p lang="kk" class="lang-content text-sm mb-2"><strong>Зерттейді:</strong> Тұқым қуалаушылық, өзгергіштік, гендер</p>
+                <p lang="en" class="lang-content text-sm mb-2"><strong>Studies:</strong> Heredity, variability, genes</p>
+                <p lang="ru" class="lang-content text-sm mb-2"><strong>Изучает:</strong> Наследственность, изменчивость, гены</p>
+                
+                <div style="background: #ecfeff; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Мысал:</strong> Адамда ~20 000 ген бар</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Example:</strong> Humans have ~20,000 genes</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Пример:</strong> У человека ~20 000 генов</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        const bio2Data = {
-            ru: { t: "Строение Растения", parts: {
-                flower: {n: "Цветок", d: "Генеративный орган. Служит для размножения (образования семян и плодов)."},
-                leaf: {n: "Лист", d: "Вегетативный орган. Функции: фотосинтез, дыхание, испарение воды."},
-                stem: {n: "Стебель", d: "Осевая часть побега. Проводит воду и вещества, выносит листья к свету."},
-                root: {n: "Корень", d: "Подземный орган. Закрепляет растение, всасывает воду с минералами."}
-            }},
-            kz: { t: "Өсімдік Құрылысы", parts: {
-                flower: {n: "Гүл", d: "Генеративті мүше. Көбеюге (тұқым мен жеміс түзуге) қызмет етеді."},
-                leaf: {n: "Жапырақ", d: "Вегетативті мүше. Қызметі: фотосинтез, тыныс алу, суды буландыру."},
-                stem: {n: "Сабақ", d: "Өркеннің осьтік бөлігі. Су мен заттарды өткізеді, жапырақты жарыққа шығарады."},
-                root: {n: "Тамыр", d: "Жер асты мүшесі. Өсімдікті бекітеді, су мен минералдарды сорады."}
-            }},
-            en: { t: "Plant Structure", parts: {
-                flower: {n: "Flower", d: "Generative organ. Reproduction center (seed and fruit formation)."},
-                leaf: {n: "Leaf", d: "Vegetative organ. Photosynthesis, respiration, transpiration."},
-                stem: {n: "Stem", d: "Axial part of the shoot. Transport of water/nutrients, supports leaves."},
-                root: {n: "Root", d: "Underground organ. Anchors plant, absorbs water and minerals."}
-            }}
-        };
+    <!-- Section 2: Human's place in taxonomy -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">2. Адамның жүйелік орны</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">2. Human's Place in Taxonomy</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">2. Систематическое положение человека</h2>
 
-        let lang = 'ru', activePart = null;
-        let cx, cvs;
+        <div class="rule-card">
+            <div class="highlight">
+                <p lang="kk" class="lang-content font-bold text-lg mb-3">🔬 Адамның жүйелік жіктелуі:</p>
+                <p lang="en" class="lang-content font-bold text-lg mb-3">🔬 Systematic Classification of Humans:</p>
+                <p lang="ru" class="lang-content font-bold text-lg mb-3">🔬 Систематическая классификация человека:</p>
+                
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="info-box">
+                        <p lang="kk" class="lang-content"><strong>Патшалық:</strong> Жануарлар (Animalia)</p>
+                        <p lang="en" class="lang-content"><strong>Kingdom:</strong> Animals (Animalia)</p>
+                        <p lang="ru" class="lang-content"><strong>Царство:</strong> Животные (Animalia)</p>
+                    </div>
+                    <div class="info-box">
+                        <p lang="kk" class="lang-content"><strong>Тип:</strong> Хордалылар (Chordata)</p>
+                        <p lang="en" class="lang-content"><strong>Phylum:</strong> Chordates (Chordata)</p>
+                        <p lang="ru" class="lang-content"><strong>Тип:</strong> Хордовые (Chordata)</p>
+                    </div>
+                    <div class="info-box">
+                        <p lang="kk" class="lang-content"><strong>Класс:</strong> Сүтқоректілер (Mammalia)</p>
+                        <p lang="en" class="lang-content"><strong>Class:</strong> Mammals (Mammalia)</p>
+                        <p lang="ru" class="lang-content"><strong>Класс:</strong> Млекопитающие (Mammalia)</p>
+                    </div>
+                    <div class="info-box">
+                        <p lang="kk" class="lang-content"><strong>Отряд:</strong> Приматтар (Primates)</p>
+                        <p lang="en" class="lang-content"><strong>Order:</strong> Primates (Primates)</p>
+                        <p lang="ru" class="lang-content"><strong>Отряд:</strong> Приматы (Primates)</p>
+                    </div>
+                    <div class="info-box">
+                        <p lang="kk" class="lang-content"><strong>Тұқымдас:</strong> Адамтектестер (Hominidae)</p>
+                        <p lang="en" class="lang-content"><strong>Family:</strong> Hominids (Hominidae)</p>
+                        <p lang="ru" class="lang-content"><strong>Семейство:</strong> Гоминиды (Hominidae)</p>
+                    </div>
+                    <div class="info-box">
+                        <p lang="kk" class="lang-content"><strong>Түр:</strong> Homo sapiens (Ақылды адам)</p>
+                        <p lang="en" class="lang-content"><strong>Species:</strong> Homo sapiens (Wise man)</p>
+                        <p lang="ru" class="lang-content"><strong>Вид:</strong> Homo sapiens (Человек разумный)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.setL = function(l) {
-            lang = l;
-            document.getElementById('title').textContent = bio2Data[l].t;
-            renderButtons();
-            if(activePart) window.showInfo(activePart);
-        };
+    <!-- Section 3: Signs that indicate human is an animal -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">3. Адамның жануарларға ұқсастығы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">3. Human Similarities with Animals</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">3. Сходство человека с животными</h2>
 
-        function renderButtons() {
-            const list = document.getElementById('parts-list');
-            list.innerHTML = '';
-            Object.keys(bio2Data[lang].parts).forEach(key => {
-                const btn = document.createElement('button');
-                btn.className = 'part-btn py-4 text-left text-lime-100 uppercase tracking-widest font-bold text-sm';
-                btn.textContent = bio2Data[lang].parts[key].n;
-                btn.onclick = () => window.showInfo(key);
-                list.appendChild(btn);
-            });
-        }
+        <div class="rule-card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 lang="kk" class="lang-content font-bold text-teal-700 mb-3">🧬 Сүтқоректілермен ортақ белгілер:</h4>
+                    <h4 lang="en" class="lang-content font-bold text-teal-700 mb-3">🧬 Common features with mammals:</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-teal-700 mb-3">🧬 Общие признаки с млекопитающими:</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li lang="kk" class="lang-content">✓ Тері сүт бездері, тері жамылғысында қыл</li>
+                        <li lang="en" class="lang-content">✓ Mammary glands, hair on skin</li>
+                        <li lang="ru" class="lang-content">✓ Молочные железы, волосяной покров</li>
+                        
+                        <li lang="kk" class="lang-content">✓ Тірі туу, ұрықтың жатырда дамуы</li>
+                        <li lang="en" class="lang-content">✓ Live birth, fetal development in uterus</li>
+                        <li lang="ru" class="lang-content">✓ Живорождение, развитие плода в матке</li>
+                        
+                        <li lang="kk" class="lang-content">✓ Диафрагма, төрт камералы жүрек</li>
+                        <li lang="en" class="lang-content">✓ Diaphragm, four-chambered heart</li>
+                        <li lang="ru" class="lang-content">✓ Диафрагма, четырёхкамерное сердце</li>
+                        
+                        <li lang="kk" class="lang-content">✓ Жылы қанды (температура тұрақты)</li>
+                        <li lang="en" class="lang-content">✓ Warm-blooded (constant body temperature)</li>
+                        <li lang="ru" class="lang-content">✓ Теплокровность (постоянная температура тела)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 lang="kk" class="lang-content font-bold text-teal-700 mb-3">🐒 Приматтармен ұқсастық:</h4>
+                    <h4 lang="en" class="lang-content font-bold text-teal-700 mb-3">🐒 Similarities with primates:</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-teal-700 mb-3">🐒 Сходство с приматами:</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li lang="kk" class="lang-content">✓ Қарама-қарсы қойылған бас бармақ</li>
+                        <li lang="en" class="lang-content">✓ Opposable thumb</li>
+                        <li lang="ru" class="lang-content">✓ Противопоставленный большой палец</li>
+                        
+                        <li lang="kk" class="lang-content">✓ Бинокулярлық көру (кеңістікті көру)</li>
+                        <li lang="en" class="lang-content">✓ Binocular vision (depth perception)</li>
+                        <li lang="ru" class="lang-content">✓ Бинокулярное зрение (объёмное)</li>
+                        
+                        <li lang="kk" class="lang-content">✓ Тырнақтар (тырмақтар емес)</li>
+                        <li lang="en" class="lang-content">✓ Nails (not claws)</li>
+                        <li lang="ru" class="lang-content">✓ Ногти (не когти)</li>
+                        
+                        <li lang="kk" class="lang-content">✓ Шимпанземен ДНҚ ұқсастығы 98%</li>
+                        <li lang="en" class="lang-content">✓ 98% DNA similarity with chimpanzees</li>
+                        <li lang="ru" class="lang-content">✓ Сходство ДНК с шимпанзе 98%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.showInfo = function(key) {
-            activePart = key;
-            const d = bio2Data[lang].parts[key];
-            const el = document.getElementById('info-overlay');
-            document.getElementById('part-name').textContent = d.n;
-            document.getElementById('part-desc').textContent = d.d;
-            el.style.opacity = '1';
-            el.style.transform = 'translateX(0)';
-            draw();
-        };
+    <!-- Section 4: Human differences from animals -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">4. Адамның жануарлардан айырмашылығы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">4. Human Differences from Animals</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">4. Отличия человека от животных</h2>
 
-        function draw() {
-            if(!ctx) return;
-            const w = cvs.width, h = cvs.height;
-            const cx_ = w/2;
-            cx.clearRect(0,0,w,h);
+        <div class="rule-card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="highlight">
+                    <h4 lang="kk" class="lang-content font-bold mb-2">🧠 Биологиялық:</h4>
+                    <h4 lang="en" class="lang-content font-bold mb-2">🧠 Biological:</h4>
+                    <h4 lang="ru" class="lang-content font-bold mb-2">🧠 Биологические:</h4>
+                    <ul class="text-sm space-y-1">
+                        <li lang="kk" class="lang-content">• Тік жүру</li>
+                        <li lang="en" class="lang-content">• Upright walking</li>
+                        <li lang="ru" class="lang-content">• Прямохождение</li>
+                        
+                        <li lang="kk" class="lang-content">• S-тәрізді омыртқа</li>
+                        <li lang="en" class="lang-content">• S-shaped spine</li>
+                        <li lang="ru" class="lang-content">• S-образный позвоночник</li>
+                        
+                        <li lang="kk" class="lang-content">• Үлкен ми көлемі (1400 см³)</li>
+                        <li lang="en" class="lang-content">• Large brain volume (1400 cm³)</li>
+                        <li lang="ru" class="lang-content">• Большой объём мозга (1400 см³)</li>
+                        
+                        <li lang="kk" class="lang-content">• Иек сүйегі</li>
+                        <li lang="en" class="lang-content">• Chin bone</li>
+                        <li lang="ru" class="lang-content">• Подбородочный выступ</li>
+                    </ul>
+                </div>
+                <div class="highlight">
+                    <h4 lang="kk" class="lang-content font-bold mb-2">💬 Әлеуметтік:</h4>
+                    <h4 lang="en" class="lang-content font-bold mb-2">💬 Social:</h4>
+                    <h4 lang="ru" class="lang-content font-bold mb-2">💬 Социальные:</h4>
+                    <ul class="text-sm space-y-1">
+                        <li lang="kk" class="lang-content">• Тіл (сөйлеу қабілеті)</li>
+                        <li lang="en" class="lang-content">• Language (speech ability)</li>
+                        <li lang="ru" class="lang-content">• Речь (способность говорить)</li>
+                        
+                        <li lang="kk" class="lang-content">• Абстрактілі ойлау</li>
+                        <li lang="en" class="lang-content">• Abstract thinking</li>
+                        <li lang="ru" class="lang-content">• Абстрактное мышление</li>
+                        
+                        <li lang="kk" class="lang-content">• Еңбек әрекеті</li>
+                        <li lang="en" class="lang-content">• Labor activity</li>
+                        <li lang="ru" class="lang-content">• Трудовая деятельность</li>
+                        
+                        <li lang="kk" class="lang-content">• Мәдениет, өнер</li>
+                        <li lang="en" class="lang-content">• Culture, art</li>
+                        <li lang="ru" class="lang-content">• Культура, искусство</li>
+                    </ul>
+                </div>
+                <div class="highlight">
+                    <h4 lang="kk" class="lang-content font-bold mb-2">🖐️ Анатомиялық:</h4>
+                    <h4 lang="en" class="lang-content font-bold mb-2">🖐️ Anatomical:</h4>
+                    <h4 lang="ru" class="lang-content font-bold mb-2">🖐️ Анатомические:</h4>
+                    <ul class="text-sm space-y-1">
+                        <li lang="kk" class="lang-content">• Кең жамбас сүйегі</li>
+                        <li lang="en" class="lang-content">• Wide pelvis</li>
+                        <li lang="ru" class="lang-content">• Широкий таз</li>
+                        
+                        <li lang="kk" class="lang-content">• Табанның күмбезі</li>
+                        <li lang="en" class="lang-content">• Foot arch</li>
+                        <li lang="ru" class="lang-content">• Свод стопы</li>
+                        
+                        <li lang="kk" class="lang-content">• Қысқа тұяқты саусақтар</li>
+                        <li lang="en" class="lang-content">• Short toes</li>
+                        <li lang="ru" class="lang-content">• Короткие пальцы на ногах</li>
+                        
+                        <li lang="kk" class="lang-content">• Жұту аппараты</li>
+                        <li lang="en" class="lang-content">• Swallowing apparatus</li>
+                        <li lang="ru" class="lang-content">• Глотательный аппарат</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Soil
-            cx.fillStyle = '#3f2c22'; cx.fillRect(0, h*0.8, w, h*0.2);
+    <!-- Section 5: Human as biosocial being -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">5. Адам — биоәлеуметтік тірі жан</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">5. Human as a Biosocial Being</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">5. Человек — биосоциальное существо</h2>
 
-            // Root
-            cx.strokeStyle = activePart === 'root' ? '#facc15' : '#a8a29e';
-            cx.lineWidth = activePart === 'root' ? 6 : 4;
-            cx.beginPath(); cx.moveTo(cx_, h*0.8); 
-            cx.lineTo(cx_, h*0.95); // Main
-            cx.moveTo(cx_, h*0.85); cx.lineTo(cx_-30, h*0.92);
-            cx.moveTo(cx_, h*0.88); cx.lineTo(cx_+20, h*0.94);
-            cx.stroke();
+        <div class="rule-card">
+            <div class="highlight">
+                <p lang="kk" class="lang-content text-sm">
+                    <strong>Биоәлеуметтік тірі жан</strong> — адам бір жағынан биологиялық заңдарға бағынады (тамақтану, көбею, өлу), екінші жағынан — қоғамда өмір сүреді және әлеуметтік заңдарға бағынады (мәдениет, мораль, заң). Адамның дамуы үшін екеуі де қажет: <em>биологиялық қажеттіліктер</em> (тамақ, су, ұйқы) және <em>әлеуметтік қажеттіліктер</em> (қарым-қатынас, мойындау, өзін-өзі дамыту).
+                </p>
+                <p lang="en" class="lang-content text-sm">
+                    <strong>Biosocial being</strong> — humans are subject to biological laws (nutrition, reproduction, death) on one hand, and on the other — they live in society and follow social laws (culture, morality, legislation). For human development, both are necessary: <em>biological needs</em> (food, water, sleep) and <em>social needs</em> (communication, recognition, self-development).
+                </p>
+                <p lang="ru" class="lang-content text-sm">
+                    <strong>Биосоциальное существо</strong> — человек, с одной стороны, подчиняется биологическим законам (питание, размножение, смерть), с другой — живёт в обществе и следует социальным законам (культура, мораль, право). Для развития человека необходимы оба компонента: <em>биологические потребности</em> (пища, вода, сон) и <em>социальные потребности</em> (общение, признание, самореализация).
+                </p>
+            </div>
+        </div>
+    </section>
 
-            // Stem
-            cx.strokeStyle = activePart === 'stem' ? '#facc15' : '#4d7c0f';
-            cx.lineWidth = activePart === 'stem' ? 8 : 6;
-            cx.beginPath(); cx.moveTo(cx_, h*0.8); cx.quadraticCurveTo(cx_+10, h*0.5, cx_, h*0.2); cx.stroke();
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #ccfbf1 0%, #f0fdfa 100%); border-radius: 1rem; border-top: 4px solid #0f766e;">
+        <p lang="kk" class="lang-content text-sm font-bold text-teal-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-teal-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-teal-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-            // Leaves
-            const drawLeaf = (x, y, dir) => {
-                cx.fillStyle = activePart === 'leaf' ? '#facc15' : '#22c55e';
-                cx.beginPath(); cx.ellipse(x, y, 40, 15, dir, 0, Math.PI*2); cx.fill();
-            }
-            drawLeaf(cx_+5, h*0.6, -0.5);
-            drawLeaf(cx_-5, h*0.4, 0.5);
-
-            // Flower
-            const fy = h*0.2;
-            cx.fillStyle = activePart === 'flower' ? '#facc15' : '#e11d48';
-            for(let i=0; i<6; i++) {
-                cx.beginPath(); cx.arc(cx_ + Math.cos(i)*20, fy + Math.sin(i)*20, 15, 0, Math.PI*2); cx.fill();
-            }
-            cx.fillStyle = '#fff'; cx.beginPath(); cx.arc(cx_, fy, 10, 0, Math.PI*2); cx.fill();
-        }
-
-        window.onload = function() {
-            cvs = document.getElementById('plantCanvas');
-            if(cvs) {
-                cx = cvs.getContext('2d');
-                cvs.width = cvs.parentElement.clientWidth; 
-                cvs.height = cvs.parentElement.clientHeight || 500;
-                window.setL('ru');
-                draw();
-            }
-        };
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
         
-        window.onresize = () => {
-            if(cvs) {
-                cvs.width = cvs.parentElement.clientWidth;
-                cvs.height = cvs.parentElement.clientHeight || 500;
-                draw();
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    // Check URL for language parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.includes(langParam === 'kk' ? 'Қазақша' : langParam === 'en' ? 'English' : 'Русский')) {
+                btn.classList.add('active');
             }
-        };
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+        });
+    }
+</script>
 
 </body>
 </html>
