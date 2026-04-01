@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видообразование. Изоляция</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #001a0d 0%, #14532d 50%, #001a0d 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #14532d 0%, #166534 40%, #16a34a 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(22,163,74,0.5); }
+        .section-heading { color: #166534; border-bottom: 4px solid #86efac; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #166534; background: white; color: #166534; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdf4; }
+        .lang-btn.active { background: linear-gradient(135deg,#14532d,#166534); color: white; box-shadow: 0 4px 12px rgba(22,101,52,0.4); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border-left: 5px solid #166534; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 12px 15px; margin: 7px 0; }
+        table.comp { width: 100%; border-collapse: collapse; }
+        table.comp th { background: linear-gradient(135deg,#14532d,#166534); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.84rem; }
+        table.comp th:first-child { border-radius: 10px 0 0 0; } table.comp th:last-child { border-radius: 0 10px 0 0; }
+        table.comp td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 0.82rem; }
+        table.comp tr:nth-child(even) td { background: #f0fdf4; }
+        table.comp tr:last-child td { border-bottom: none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-green-200 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Эволюция</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase tracking-wide">Түр түзілу. Оқшаулану</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase tracking-wide">Speciation. Isolation</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase tracking-wide">Видообразование. Изоляция</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p lang="kk" class="lang-content text-base font-medium"><b>Түр</b> — морфологиялық, физиологиялық, генетикалық белгілері ұқсас, бір ареалда тіршілік ететін, бір-бірімен еркін будандасатын және тұқымды ұрпақ беретін особьтар тобы. <b>Түр түзілу</b> — жаңа биологиялық түрлердің пайда болу процесі.</p>
+            <p lang="en" class="lang-content text-base font-medium">A <b>species</b> is a group of individuals that share morphological, physiological and genetic traits, inhabit the same range, freely interbreed, and produce fertile offspring. <b>Speciation</b> — the process of forming new biological species.</p>
+            <p lang="ru" class="lang-content text-base font-medium"><b>Вид</b> — совокупность особей со сходными морфологическими, физиологическими и генетическими признаками, обитающих в одном ареале, свободно скрещивающихся и дающих плодовитое потомство. <b>Видообразование</b> — процесс формирования новых биологических видов.</p>
+        </div>
+    </header>
+
+    <!-- SPECIES CRITERIA -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Түр Критерийлері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Species Criteria</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Критерии Вида</h2>
+        <div class="card">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                <div class="tbox text-center" style="border-color:#166534;background:#f0fdf4;"><p class="text-2xl mb-1">🔭</p><p class="font-bold text-green-700"><span lang="kk" class="lang-content">Морфологиялық</span><span lang="en" class="lang-content">Morphological</span><span lang="ru" class="lang-content">Морфологический</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Дене құрылымының ұқсастығы. Ең кең қолданылатын, бірақ жалғыз жеткіліксіз (анастралды жқп).</span><span lang="en" class="lang-content">Similarity of body structure. Most widely used, but insufficient alone (sibling species).</span><span lang="ru" class="lang-content">Сходство строения тела. Наиболее используемый, но недостаточный (виды-двойники).</span></p></div>
+                <div class="tbox text-center" style="border-color:#166534;background:#f0fdf4;"><p class="text-2xl mb-1">⚗️</p><p class="font-bold text-green-700"><span lang="kk" class="lang-content">Физиологиялық</span><span lang="en" class="lang-content">Physiological</span><span lang="ru" class="lang-content">Физиологический</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Тіршілік процестерінің ұқсастығы (зат алмасу, тыныс, т.б.). Гибридтік стерильдік — репродуктивті оқшаулану.</span><span lang="en" class="lang-content">Similarity of life processes (metabolism, respiration, etc.). Hybrid sterility → reproductive isolation.</span><span lang="ru" class="lang-content">Сходство процессов жизнедеятельности (метаболизм, дыхание и пр.). Гибридная стерильность — репродуктивная изоляция.</span></p></div>
+                <div class="tbox text-center" style="border-color:#166534;background:#f0fdf4;"><p class="text-2xl mb-1">🧬</p><p class="font-bold text-green-700"><span lang="kk" class="lang-content">Генетикалық</span><span lang="en" class="lang-content">Genetic</span><span lang="ru" class="lang-content">Генетический</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Хромосомалар саны мен морфологиясының ұқсастығы. Бір түрдің хромосомалар жинағы бірдей.</span><span lang="en" class="lang-content">Similarity in chromosome number and morphology. Same karyotype within a species.</span><span lang="ru" class="lang-content">Сходство числа и морфологии хромосом. Одинаковый кариотип внутри вида.</span></p></div>
+                <div class="tbox text-center" style="border-color:#166534;background:#f0fdf4;"><p class="text-2xl mb-1">🌍</p><p class="font-bold text-green-700"><span lang="kk" class="lang-content">Географиялық</span><span lang="en" class="lang-content">Geographic</span><span lang="ru" class="lang-content">Географический</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Белгілі бір ареалда тіршілік ету. Бірақ космополит түрлер (жалпыланған ареал) болуы мүмкін.</span><span lang="en" class="lang-content">Occupying a specific range (area). But cosmopolitan species can have very wide ranges.</span><span lang="ru" class="lang-content">Занимает определённый ареал. Но космополиты имеют очень широкий ареал.</span></p></div>
+                <div class="tbox text-center" style="border-color:#166534;background:#f0fdf4;"><p class="text-2xl mb-1">🏡</p><p class="font-bold text-green-700"><span lang="kk" class="lang-content">Экологиялық</span><span lang="en" class="lang-content">Ecological</span><span lang="ru" class="lang-content">Экологический</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Экологиялық тауашаның (ниша) ұқсастығы: қоректену, жыртқыштар, абиотикалық факторлар.</span><span lang="en" class="lang-content">Similarity of ecological niche: food, predators, abiotic factors.</span><span lang="ru" class="lang-content">Сходство экологической ниши: питание, хищники, абиотические факторы.</span></p></div>
+                <div class="tbox text-center" style="border-color:#166534;background:#f0fdf4;"><p class="text-2xl mb-1">🐦</p><p class="font-bold text-green-700"><span lang="kk" class="lang-content">Этологиялық</span><span lang="en" class="lang-content">Ethological</span><span lang="ru" class="lang-content">Этологический</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Мінез-құлық ұқсастығы (жұптасу ритуалдары, дыбыстар, феромондар). Жануарларда маңызды.</span><span lang="en" class="lang-content">Behavioural similarity (mating rituals, calls, pheromones). Important in animals.</span><span lang="ru" class="lang-content">Сходство поведения (ритуалы спаривания, звуки, феромоны). Важен для животных.</span></p></div>
+            </div>
+            <div class="fact-box mt-3 text-xs">
+                <span lang="kk" class="lang-content">⚠️ <b>Маңызды:</b> Кез-келген жеке критерий түрді анықтауға жеткіліксіз. «<b>Анастралды жқп (виды-двойники)</b>» — морфологиялық ұқсас, бірақ репродуктивті оқшауланған түрлер (мысалы, Drosophila melanogaster тобы — 7 ұқсас түр).</span>
+                <span lang="en" class="lang-content">⚠️ <b>Important:</b> No single criterion alone identifies a species. <b>Sibling species</b> — morphologically identical but reproductively isolated (e.g., Drosophila melanogaster group — 7 similar species).</span>
+                <span lang="ru" class="lang-content">⚠️ <b>Важно:</b> Ни один отдельный критерий не достаточен для определения вида. <b>Виды-двойники</b> — морфологически идентичные, но репродуктивно изолированные (Drosophila melanogaster — группа из 7 видов).</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TYPES OF SPECIATION + ISOLATION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌿 Түр Түзілу Жолдары және Оқшаулану</h2>
+        <h2 lang="en" class="lang-content section-heading">🌿 Paths of Speciation & Isolation</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌿 Пути Видообразования и Изоляция</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-base mb-3"><span lang="kk" class="lang-content">🗺️ Аллопатриялық (Географиялық) Түр түзілу</span><span lang="en" class="lang-content">🗺️ Allopatric (Geographic) Speciation</span><span lang="ru" class="lang-content">🗺️ Аллопатрическое (Географическое) Видообразование</span></h3>
+                <div lang="kk" class="lang-content text-xs text-gray-600 mb-3">Популяциялар <b>географиялық кедергімен</b> (тау жотасы, теңіз, шөл) бөлінеді → гендер ағымы тоқтайды → тәуелсіз эволюция → репродуктивті оқшаулану → жаңа түрлер.</div>
+                <div lang="en" class="lang-content text-xs text-gray-600 mb-3">Populations separated by a <b>geographic barrier</b> (mountain range, sea, desert) → gene flow stops → independent evolution → reproductive isolation → new species.</div>
+                <div lang="ru" class="lang-content text-xs text-gray-600 mb-3">Популяции разделяются <b>географическим барьером</b> (горный хребет, море, пустыня) → прекращается поток генов → независимая эволюция → репродуктивная изоляция → новые виды.</div>
+                <div class="space-y-1 text-xs">
+                    <div class="tbox" style="border-color:#166534;background:#f0fdf4;">
+                        <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Кезеңдері:</span><span lang="en" class="lang-content">Stages:</span><span lang="ru" class="lang-content">Стадии:</span></p>
+                        <div class="mt-1 space-y-0.5 text-gray-600">
+                            <p>1. <span lang="kk" class="lang-content">Жалпы ата-баба популяция</span><span lang="en" class="lang-content">Single ancestral population</span><span lang="ru" class="lang-content">Единая исходная популяция</span></p>
+                            <p>2. <span lang="kk" class="lang-content">Географиялық бөліну → оқшауланған популяциялар</span><span lang="en" class="lang-content">Geographic separation → isolated populations</span><span lang="ru" class="lang-content">Географическое разделение → изолированные популяции</span></p>
+                            <p>3. <span lang="kk" class="lang-content">Популяцияларда тәуелсіз мутациялар + сұрыпталу</span><span lang="en" class="lang-content">Independent mutations + selection in each population</span><span lang="ru" class="lang-content">Независимые мутации + отбор в каждой популяции</span></p>
+                            <p>4. <span lang="kk" class="lang-content">Репродуктивті оқшаулану (жұптаспайды немесе тұқымсыз гибридтер)</span><span lang="en" class="lang-content">Reproductive isolation (no mating or sterile hybrids)</span><span lang="ru" class="lang-content">Репродуктивная изоляция (не спариваются или бесплодные гибриды)</span></p>
+                            <p>5. <span lang="kk" class="lang-content">✅ Жаңа түрлер!</span><span lang="en" class="lang-content">✅ New species!</span><span lang="ru" class="lang-content">✅ Новые виды!</span></p>
+                        </div>
+                    </div>
+                    <div class="fact-box text-xs">
+                        <span lang="kk" class="lang-content">🦜 <b>Мысал — Дарвин зябликтері:</b> Галапагос аралдарына жеткен аталық зябликтер тобынан 14 түр пайда болды. Тұмсықтары — тамақ табу тауашасына байланысты өзгерді (тұқым, жәндіктер, нектар).</span>
+                        <span lang="en" class="lang-content">🦜 <b>Example — Darwin's finches:</b> 14 species arose from an ancestral finch group that colonised the Galápagos. Beak shapes evolved to match different food niches (seeds, insects, nectar).</span>
+                        <span lang="ru" class="lang-content">🦜 <b>Пример — Вьюрки Дарвина:</b> Из одной группы предковых вьюрков на Галапагосах возникло 14 видов. Форма клюва изменилась в зависимости от пищевой ниши (семена, насекомые, нектар).</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-base mb-3"><span lang="kk" class="lang-content">🏙️ Симпатриялық Түр түзілу</span><span lang="en" class="lang-content">🏙️ Sympatric Speciation</span><span lang="ru" class="lang-content">🏙️ Симпатрическое Видообразование</span></h3>
+                <div lang="kk" class="lang-content text-xs text-gray-600 mb-3">Жаңа түрлер <b>географиялық кедергінсіз</b> пайда болады — бір ареалда тіршілік ете отырып. Репродуктивті оқшаулану — кенет (полиплоидия) немесе бірте-бірте (экологиялық оқшаулану).</div>
+                <div lang="en" class="lang-content text-xs text-gray-600 mb-3">New species form <b>without geographic separation</b> — within the same range. Reproductive isolation arises suddenly (polyploidy) or gradually (ecological isolation).</div>
+                <div lang="ru" class="lang-content text-xs text-gray-600 mb-3">Новые виды образуются <b>без географического разделения</b> — в пределах одного ареала. Репродуктивная изоляция возникает внезапно (полиплоидия) или постепенно (экологическая изоляция).</div>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#166534;background:#f0fdf4;">
+                        <p class="font-bold text-green-700">🌱 <span lang="kk" class="lang-content">Полиплоидия арқылы (өсімдіктерде жиі)</span><span lang="en" class="lang-content">Via polyploidy (common in plants)</span><span lang="ru" class="lang-content">Через полиплоидию (часто у растений)</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">Хромосомалар санының еселік өсуі (4n, 6n...) → жаңа особь ата-анасымен будандаса алмайды → бірден жаңа түр. Мысал: <b>Пшеница</b> (Triticum aestivum, 6n=42), <b>Жасанды түрлер</b>: рапунцель, қант қызылшасы.</span><span lang="en" class="lang-content">Multiple increase in chromosome number (4n, 6n...) → new individual cannot cross with parents → instant new species. Example: <b>Wheat</b> (Triticum aestivum, 6n=42), artificial species: rapeseed, sugar beet.</span><span lang="ru" class="lang-content">Кратное увеличение числа хромосом (4n, 6n...) → новая особь не скрещивается с родителями → мгновенный новый вид. Пример: <b>Пшеница</b> (Triticum aestivum, 6n=42), рапс, сахарная свёкла.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#166534;background:#f0fdf4;">
+                        <p class="font-bold text-green-700">🌾 <span lang="kk" class="lang-content">Экологиялық оқшаулану арқылы</span><span lang="en" class="lang-content">Via ecological isolation</span><span lang="ru" class="lang-content">Через экологическую изоляцию</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">Бір аймақта бірнеше экологиялық тауашаны игеру → эколгиялық формалар → репродуктивті оқшаулану. Мысал: Cichlid балықтары (Виктория көлі — 400+ түр).</span><span lang="en" class="lang-content">Different ecological niches exploited within same range → ecological forms → reproductive isolation. Example: Cichlid fish (Lake Victoria — 400+ species).</span><span lang="ru" class="lang-content">Освоение разных экологических ниш в одном ареале → экологические формы → репродуктивная изоляция. Пример: Цихлиды (озеро Виктория — 400+ видов).</span></p>
+                    </div>
+                </div>
+                <h3 class="font-bold text-green-700 text-sm mb-2 mt-4"><span lang="kk" class="lang-content">🔒 Репродуктивті Оқшаулану Механизмдері</span><span lang="en" class="lang-content">🔒 Reproductive Isolation Mechanisms</span><span lang="ru" class="lang-content">🔒 Механизмы Репродуктивной Изоляции</span></h3>
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th colspan="2"><span lang="kk" class="lang-content">Зигота алдындағы (Презиготикалық)</span><span lang="en" class="lang-content">Pre-zygotic barriers</span><span lang="ru" class="lang-content">Презиготические барьеры</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-semibold text-green-700">🗺️ <span lang="kk" class="lang-content">Географиялық</span><span lang="en" class="lang-content">Geographic</span><span lang="ru" class="lang-content">Географическая</span></td><td><span lang="kk" class="lang-content">Популяциялар физикалық кедергімен бөлінген</span><span lang="en" class="lang-content">Populations separated by physical barrier</span><span lang="ru" class="lang-content">Популяции разделены физическим барьером</span></td></tr>
+                            <tr><td class="font-semibold text-green-700">🕐 <span lang="kk" class="lang-content">Уақытша</span><span lang="en" class="lang-content">Temporal</span><span lang="ru" class="lang-content">Временна́я</span></td><td><span lang="kk" class="lang-content">Жұптасу мерзімдерінің сәйкес келмеуі (көктем/жаз)</span><span lang="en" class="lang-content">Different mating seasons (spring/summer)</span><span lang="ru" class="lang-content">Несовпадение сезонов размножения (весна/лето)</span></td></tr>
+                            <tr><td class="font-semibold text-green-700">🐦 <span lang="kk" class="lang-content">Этологиялық</span><span lang="en" class="lang-content">Ethological</span><span lang="ru" class="lang-content">Этологическая</span></td><td><span lang="kk" class="lang-content">Жұптасу мінез-құлқының сәйкес келмеуі (ырғақтар, феромондар)</span><span lang="en" class="lang-content">Mating behaviour incompatibility (songs, pheromones)</span><span lang="ru" class="lang-content">Несовместимость брачного поведения (пение, феромоны)</span></td></tr>
+                            <tr><td class="font-semibold text-green-700">🔬 <span lang="kk" class="lang-content">Механикалық</span><span lang="en" class="lang-content">Mechanical</span><span lang="ru" class="lang-content">Механическая</span></td><td><span lang="kk" class="lang-content">Жыныстық мүшелердің сәйкес келмеуі; гүлдердің ерекшелігі</span><span lang="en" class="lang-content">Incompatible reproductive structures; flower differences</span><span lang="ru" class="lang-content">Несовместимость половых органов; особенности цветков</span></td></tr>
+                        </tbody>
+                        <thead><tr>
+                            <th colspan="2"><span lang="kk" class="lang-content">Зигота кейінгі (Постзиготикалық)</span><span lang="en" class="lang-content">Post-zygotic barriers</span><span lang="ru" class="lang-content">Постзиготические барьеры</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-semibold text-red-700">💀 <span lang="kk" class="lang-content">Гибрид тіршіліксіздігі</span><span lang="en" class="lang-content">Hybrid inviability</span><span lang="ru" class="lang-content">Гибридная нежизнеспособность</span></td><td><span lang="kk" class="lang-content">Гибридтер жетілмейді немесе жетілмес бұрын өледі</span><span lang="en" class="lang-content">Hybrids die before reaching maturity</span><span lang="ru" class="lang-content">Гибриды гибнут до достижения зрелости</span></td></tr>
+                            <tr><td class="font-semibold text-red-700">⛔ <span lang="kk" class="lang-content">Гибрид стерильдігі</span><span lang="en" class="lang-content">Hybrid sterility</span><span lang="ru" class="lang-content">Гибридная стерильность</span></td><td><span lang="kk" class="lang-content"><b>Есек (Мул)</b> = Жылқы × Есек — тіршілікке жарамды бірақ тұқымсыз</span><span lang="en" class="lang-content"><b>Mule</b> = Horse × Donkey — viable but sterile</span><span lang="ru" class="lang-content"><b>Мул</b> = Лошадь × Осёл — жизнеспособен, но бесплоден</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

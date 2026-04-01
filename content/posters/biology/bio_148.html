@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генетика пола. Сцепленное наследование</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fff1f2 0%, #eff6ff 100%); }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #9f1239 0%, #be185d 40%, #1d4ed8 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(159,18,57,0.3); }
+        .section-heading { color: #9f1239; border-bottom: 4px solid #fca5a5; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #9f1239; background: white; color: #9f1239; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fff1f2; }
+        .lang-btn.active { background: linear-gradient(135deg,#9f1239,#be185d); color: white; box-shadow: 0 4px 12px rgba(159,18,57,0.3); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#fff1f2,#eff6ff); border-left: 5px solid #be185d; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 12px 15px; margin: 7px 0; }
+        .punnett { border-collapse: collapse; margin: 0 auto; }
+        .punnett td, .punnett th { border: 2px solid #9f1239; padding: 10px 14px; text-align: center; font-weight: 700; min-width: 70px; font-size: 0.9rem; }
+        .punnett th { background: #9f1239; color: white; }
+        .punnett .fem { background: #fce7f3; color: #9f1239; }
+        .punnett .mal { background: #dbeafe; color: #1e40af; }
+        .punnett .car { background: #fef3c7; color: #92400e; }
+        .punnett .sic { background: #dcfce7; color: #166534; }
+        table.comp { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        table.comp th { background: linear-gradient(135deg,#9f1239,#be185d); color: white; padding: 10px 14px; text-align: left; font-weight: 700; }
+        table.comp th:first-child { border-radius: 10px 0 0 0; } table.comp th:last-child { border-radius: 0 10px 0 0; }
+        table.comp td { padding: 9px 14px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        table.comp tr:nth-child(even) td { background: #fff1f2; }
+        table.comp tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-rose-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Генетика</p>
+        <h1 lang="kk" class="lang-content text-5xl font-black uppercase tracking-wide">Жыныс генетикасы. Жынысқа байланысты тұқым қуалаушылық</h1>
+        <h1 lang="en" class="lang-content text-5xl font-black uppercase tracking-wide">Sex Genetics. Sex-linked Inheritance</h1>
+        <h1 lang="ru" class="lang-content text-5xl font-black uppercase tracking-wide">Генетика пола. Сцепленное с полом наследование</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p lang="kk" class="lang-content text-lg font-medium">Жыныс хромосомалармен анықталады: аналықтарда — <b>XX</b>, еркектерде — <b>XY</b>. Жыныстық хромосомалардағы гендер жынысқа байланысты тұқым қуалайды. Кейбір аурулар тек немесе жиі белгілі жыныста кездеседі.</p>
+            <p lang="en" class="lang-content text-lg font-medium">Sex is determined by chromosomes: females — <b>XX</b>, males — <b>XY</b>. Genes on sex chromosomes are inherited in a sex-linked manner. Some disorders occur exclusively or more frequently in one sex.</p>
+            <p lang="ru" class="lang-content text-lg font-medium">Пол определяется хромосомами: у самок — <b>XX</b>, у самцов — <b>XY</b>. Гены на половых хромосомах наследуются сцепленно с полом. Некоторые заболевания встречаются только или чаще у одного пола.</p>
+        </div>
+    </header>
+
+    <!-- SEX DETERMINATION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Жыныстың хромосомалық анықталуы</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Chromosomal Sex Determination</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Хромосомное определение пола</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
+                <!-- Human XX/XY -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fff1f2,#fce7f3);">
+                    <h3 class="font-bold text-rose-700 text-lg mb-3">👤 <span lang="kk" class="lang-content">Адам, сүтқоректілер, шыбындар</span><span lang="en" class="lang-content">Humans, Mammals, Flies</span><span lang="ru" class="lang-content">Человек, Млекопитающие, Мухи</span></h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="tbox text-center" style="border-color:#be185d;background:white;">
+                            <div style="font-size:2rem;">♀</div>
+                            <p class="font-black text-rose-700 text-xl">XX</p>
+                            <p class="text-xs text-gray-500 mt-1"><span lang="kk" class="lang-content">Гомогаметті жыныс — бір типті гамета (X)</span><span lang="en" class="lang-content">Homogametic sex — one gamete type (X)</span><span lang="ru" class="lang-content">Гомогаметный пол — один тип гамет (X)</span></p>
+                        </div>
+                        <div class="tbox text-center" style="border-color:#1d4ed8;background:white;">
+                            <div style="font-size:2rem;">♂</div>
+                            <p class="font-black text-blue-700 text-xl">XY</p>
+                            <p class="text-xs text-gray-500 mt-1"><span lang="kk" class="lang-content">Гетерогаметті жыныс — екі типті гамета (X және Y)</span><span lang="en" class="lang-content">Heterogametic sex — two gamete types (X and Y)</span><span lang="ru" class="lang-content">Гетерогаметный пол — два типа гамет (X и Y)</span></p>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto mt-4">
+                        <div class="text-xs text-gray-500 text-center mb-2">P: ♀ XX × ♂ XY</div>
+                        <table class="punnett mx-auto text-sm">
+                            <tr><th></th><th>X</th><th>Y</th></tr>
+                            <tr><th>X</th><td class="fem">XX ♀</td><td class="mal">XY ♂</td></tr>
+                            <tr><th>X</th><td class="fem">XX ♀</td><td class="mal">XY ♂</td></tr>
+                        </table>
+                        <p class="text-center text-xs text-gray-600 mt-2 font-bold"><span lang="kk" class="lang-content">50% аналық : 50% еркек</span><span lang="en" class="lang-content">50% female : 50% male</span><span lang="ru" class="lang-content">50% самок : 50% самцов</span></p>
+                    </div>
+                </div>
+                <!-- Birds ZW/ZZ -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                    <h3 class="font-bold text-blue-700 text-lg mb-3">🐦 <span lang="kk" class="lang-content">Құстар, кейбір балықтар мен бауырымен жорғалаушылар</span><span lang="en" class="lang-content">Birds, Some Fish & Reptiles</span><span lang="ru" class="lang-content">Птицы, Некоторые рыбы и рептилии</span></h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="tbox text-center" style="border-color:#be185d;background:white;">
+                            <div style="font-size:2rem;">♀</div>
+                            <p class="font-black text-rose-700 text-xl">ZW</p>
+                            <p class="text-xs text-gray-500 mt-1"><span lang="kk" class="lang-content">Гетерогаметті жыныс</span><span lang="en" class="lang-content">Heterogametic sex</span><span lang="ru" class="lang-content">Гетерогаметный пол</span></p>
+                        </div>
+                        <div class="tbox text-center" style="border-color:#1d4ed8;background:white;">
+                            <div style="font-size:2rem;">♂</div>
+                            <p class="font-black text-blue-700 text-xl">ZZ</p>
+                            <p class="text-xs text-gray-500 mt-1"><span lang="kk" class="lang-content">Гомогаметті жыныс</span><span lang="en" class="lang-content">Homogametic sex</span><span lang="ru" class="lang-content">Гомогаметный пол</span></p>
+                        </div>
+                    </div>
+                    <div class="fact-box mt-4 text-xs">
+                        <span lang="kk" class="lang-content"><b>Ескерту:</b> Құстарда аналықтар (ZW) гетерогаметті — адамдардан кері! Бал арасында жыныс диплоид/гаплоид арқылы анықталады (XX♀, X♂).</span>
+                        <span lang="en" class="lang-content"><b>Note:</b> In birds, females (ZW) are heterogametic — the reverse of humans! In honeybees, sex is determined by ploidy (diploid=♀, haploid=♂).</span>
+                        <span lang="ru" class="lang-content"><b>Примечание:</b> У птиц самки (ZW) гетерогаметны — обратное ситуации у человека! У пчёл пол определяется плоидностью (диплоид=♀, гаплоид=♂).</span>
+                    </div>
+                    <div class="mt-3 p-3 rounded-xl text-xs" style="background:#f0f9ff;border:1px solid #bae6fd;">
+                        <p class="font-bold text-sky-700 mb-1"><span lang="kk" class="lang-content">Адам кариотипі:</span><span lang="en" class="lang-content">Human karyotype:</span><span lang="ru" class="lang-content">Кариотип человека:</span></p>
+                        <p class="text-gray-700"><span lang="kk" class="lang-content">46 хромосома = 44 аутосома (22 жұп) + 2 жыныстық хромосома.<br>♀ = 46,XX &nbsp;&nbsp; ♂ = 46,XY</span><span lang="en" class="lang-content">46 chromosomes = 44 autosomes (22 pairs) + 2 sex chromosomes.<br>♀ = 46,XX &nbsp;&nbsp; ♂ = 46,XY</span><span lang="ru" class="lang-content">46 хромосом = 44 аутосомы (22 пары) + 2 половые хромосомы.<br>♀ = 46,XX &nbsp;&nbsp; ♂ = 46,XY</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- X-LINKED TRAITS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🧬 X-хромосомамен байланысқан белгілер</h2>
+        <h2 lang="en" class="lang-content section-heading">🧬 X-linked Traits</h2>
+        <h2 lang="ru" class="lang-content section-heading">🧬 Признаки, сцепленные с X-хромосомой</h2>
+        <div class="card">
+            <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">X-хромосомадағы рецессивті гендер жынысқа байланысты тұқым қуалайды. Y-хромосомада сәйкес ген болмағандықтан, <b>еркектер (XY)</b> жалғыз Xᵃ аллелі болса да аурумен ауырады (гемизигота).</div>
+            <div lang="en" class="lang-content text-sm text-gray-600 mb-4">Recessive genes on the X chromosome are inherited in a sex-linked manner. Since the Y chromosome lacks a corresponding gene, <b>males (XY)</b> express the disease with just one Xᵃ allele (hemizygous).</div>
+            <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Рецессивные гены на X-хромосоме наследуются сцепленно с полом. Поскольку Y-хромосома не имеет соответствующего гена, <b>мужчины (XY)</b> проявляют болезнь при одном аллеле Xᵃ (гемизигота).</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
+                <!-- Haemophilia -->
+                <div>
+                    <h3 class="font-bold text-rose-700 text-base mb-3">🩸 <span lang="kk" class="lang-content">Гемофилия — X-байланысты рецессивті</span><span lang="en" class="lang-content">Haemophilia — X-linked recessive</span><span lang="ru" class="lang-content">Гемофилия — X-сцепленная рецессивная</span></h3>
+                    <div class="text-xs text-gray-600 mb-2">
+                        <span lang="kk" class="lang-content">X<sup>H</sup> — норма (доминантты), X<sup>h</sup> — гемофилия (рецессивті)</span>
+                        <span lang="en" class="lang-content">X<sup>H</sup> — normal (dominant), X<sup>h</sup> — haemophilia (recessive)</span>
+                        <span lang="ru" class="lang-content">X<sup>H</sup> — норма (доминантный), X<sup>h</sup> — гемофилия (рецессивный)</span>
+                    </div>
+                    <div class="overflow-x-auto mb-3">
+                        <div class="text-xs text-gray-500 text-center mb-1">
+                            <span lang="kk" class="lang-content">Тасымалдаушы аналық × сау еркек</span>
+                            <span lang="en" class="lang-content">Carrier female × normal male</span>
+                            <span lang="ru" class="lang-content">Носительница × здоровый мужчина</span>
+                        </div>
+                        <div class="text-xs text-gray-500 text-center mb-2">P: X<sup>H</sup>X<sup>h</sup> × X<sup>H</sup>Y</div>
+                        <table class="punnett mx-auto text-xs">
+                            <tr><th></th><th>X<sup>H</sup></th><th>Y</th></tr>
+                            <tr><th>X<sup>H</sup></th><td class="sic">X<sup>H</sup>X<sup>H</sup> ♀ сау</td><td class="sic">X<sup>H</sup>Y ♂ сау</td></tr>
+                            <tr><th>X<sup>h</sup></th><td class="car">X<sup>H</sup>X<sup>h</sup> ♀ тасым.</td><td style="background:#fee2e2;color:#991b1b;">X<sup>h</sup>Y ♂ ауру</td></tr>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="rounded-lg p-2 text-center" style="background:#dcfce7;border:1px solid #16a34a;">
+                            <b class="text-green-700">X<sup>H</sup>X<sup>H</sup></b><br><span lang="kk" class="lang-content">♀ сау (25%)</span><span lang="en" class="lang-content">♀ healthy (25%)</span><span lang="ru" class="lang-content">♀ здорова (25%)</span>
+                        </div>
+                        <div class="rounded-lg p-2 text-center" style="background:#fef3c7;border:1px solid #ca8a04;">
+                            <b class="text-amber-700">X<sup>H</sup>X<sup>h</sup></b><br><span lang="kk" class="lang-content">♀ тасымалдаушы (25%)</span><span lang="en" class="lang-content">♀ carrier (25%)</span><span lang="ru" class="lang-content">♀ носительница (25%)</span>
+                        </div>
+                        <div class="rounded-lg p-2 text-center" style="background:#dcfce7;border:1px solid #16a34a;">
+                            <b class="text-green-700">X<sup>H</sup>Y</b><br><span lang="kk" class="lang-content">♂ сау (25%)</span><span lang="en" class="lang-content">♂ healthy (25%)</span><span lang="ru" class="lang-content">♂ здоров (25%)</span>
+                        </div>
+                        <div class="rounded-lg p-2 text-center" style="background:#fee2e2;border:1px solid #be185d;">
+                            <b class="text-rose-700">X<sup>h</sup>Y</b><br><span lang="kk" class="lang-content">♂ ауру (25%)</span><span lang="en" class="lang-content">♂ ill (25%)</span><span lang="ru" class="lang-content">♂ болен (25%)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Colour blindness -->
+                <div>
+                    <h3 class="font-bold text-rose-700 text-base mb-3">🎨 <span lang="kk" class="lang-content">Түстерді ажыратпаушылық (Дальтонизм)</span><span lang="en" class="lang-content">Colour Blindness (Daltonism)</span><span lang="ru" class="lang-content">Дальтонизм (цветовая слепота)</span></h3>
+                    <div class="text-xs text-gray-600 mb-2">
+                        <span lang="kk" class="lang-content">X<sup>D</sup> — қалыпты (доминантты), X<sup>d</sup> — дальтонизм (рецессивті)</span>
+                        <span lang="en" class="lang-content">X<sup>D</sup> — normal vision (dominant), X<sup>d</sup> — colour blind (recessive)</span>
+                        <span lang="ru" class="lang-content">X<sup>D</sup> — норма (доминантный), X<sup>d</sup> — дальтонизм (рецессивный)</span>
+                    </div>
+                    <div class="overflow-x-auto mb-3">
+                        <div class="text-xs text-gray-500 text-center mb-1">
+                            <span lang="kk" class="lang-content">Тасымалдаушы аналық × дальтоник еркек</span>
+                            <span lang="en" class="lang-content">Carrier female × colour-blind male</span>
+                            <span lang="ru" class="lang-content">Носительница × мужчина-дальтоник</span>
+                        </div>
+                        <div class="text-xs text-gray-500 text-center mb-2">P: X<sup>D</sup>X<sup>d</sup> × X<sup>d</sup>Y</div>
+                        <table class="punnett mx-auto text-xs">
+                            <tr><th></th><th>X<sup>d</sup></th><th>Y</th></tr>
+                            <tr><th>X<sup>D</sup></th><td class="car">X<sup>D</sup>X<sup>d</sup> ♀ тасым.</td><td class="sic">X<sup>D</sup>Y ♂ сау</td></tr>
+                            <tr><th>X<sup>d</sup></th><td style="background:#fee2e2;color:#991b1b;">X<sup>d</sup>X<sup>d</sup> ♀ ауру</td><td style="background:#fee2e2;color:#991b1b;">X<sup>d</sup>Y ♂ ауру</td></tr>
+                        </table>
+                    </div>
+                    <div class="fact-box text-xs">
+                        <span lang="kk" class="lang-content"><b>Аналықтарда дальтонизм</b> тек X<sup>d</sup>X<sup>d</sup> болса ғана көрінеді (гомозигота). Еркектерде X<sup>d</sup>Y жеткілікті. Сондықтан дальтонизм еркектерде жиі: 8% еркек vs 0.4% аналық.</span>
+                        <span lang="en" class="lang-content"><b>Colour blindness in females</b> requires X<sup>d</sup>X<sup>d</sup> (homozygous). Males need only X<sup>d</sup>Y. Therefore more common in males: 8% men vs 0.4% women.</span>
+                        <span lang="ru" class="lang-content"><b>Дальтонизм у женщин</b> проявляется только при X<sup>d</sup>X<sup>d</sup> (гомозигота). У мужчин достаточно X<sup>d</sup>Y. Поэтому среди мужчин он в 20 раз чаще: 8% vs 0,4%.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GENOTYPE TABLE & RULES -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📊 X-байланысты белгілердің генотиптері</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Genotypes for X-linked Traits</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Генотипы при X-сцепленных признаках</h2>
+        <div class="card overflow-x-auto">
+            <table class="comp">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Генотип</span><span lang="en" class="lang-content">Genotype</span><span lang="ru" class="lang-content">Генотип</span></th>
+                    <th><span lang="kk" class="lang-content">Жынысы</span><span lang="en" class="lang-content">Sex</span><span lang="ru" class="lang-content">Пол</span></th>
+                    <th><span lang="kk" class="lang-content">Фенотип</span><span lang="en" class="lang-content">Phenotype</span><span lang="ru" class="lang-content">Фенотип</span></th>
+                    <th><span lang="kk" class="lang-content">Атауы</span><span lang="en" class="lang-content">Name</span><span lang="ru" class="lang-content">Название</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold">X<sup>A</sup>X<sup>A</sup></td>
+                        <td>♀</td>
+                        <td class="text-green-700 font-semibold"><span lang="kk" class="lang-content">Сау</span><span lang="en" class="lang-content">Healthy</span><span lang="ru" class="lang-content">Здорова</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Доминантты гомозигота</span><span lang="en" class="lang-content">Dominant homozygote</span><span lang="ru" class="lang-content">Доминантная гомозигота</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">X<sup>A</sup>X<sup>a</sup></td>
+                        <td>♀</td>
+                        <td class="text-amber-700 font-semibold"><span lang="kk" class="lang-content">Сау (тасымалдаушы)</span><span lang="en" class="lang-content">Healthy (carrier)</span><span lang="ru" class="lang-content">Здорова (носительница)</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Гетерозигота — ауруды тасымалдайды, өзі сырқат болмайды</span><span lang="en" class="lang-content">Heterozygote — carries disease, not affected</span><span lang="ru" class="lang-content">Гетерозигота — носительница, сама не больна</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">X<sup>a</sup>X<sup>a</sup></td>
+                        <td>♀</td>
+                        <td class="text-rose-700 font-semibold"><span lang="kk" class="lang-content">Ауру</span><span lang="en" class="lang-content">Affected</span><span lang="ru" class="lang-content">Больна</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Рецессивті гомозигота — аналықтарда сирек</span><span lang="en" class="lang-content">Recessive homozygote — rare in females</span><span lang="ru" class="lang-content">Рецессивная гомозигота — у женщин редко</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">X<sup>A</sup>Y</td>
+                        <td>♂</td>
+                        <td class="text-green-700 font-semibold"><span lang="kk" class="lang-content">Сау</span><span lang="en" class="lang-content">Healthy</span><span lang="ru" class="lang-content">Здоров</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Гемизигота (доминантты аллель)</span><span lang="en" class="lang-content">Hemizygote (dominant allele)</span><span lang="ru" class="lang-content">Гемизигота (доминантный аллель)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">X<sup>a</sup>Y</td>
+                        <td>♂</td>
+                        <td class="text-rose-700 font-semibold"><span lang="kk" class="lang-content">Ауру</span><span lang="en" class="lang-content">Affected</span><span lang="ru" class="lang-content">Больной</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Гемизигота (рецессивті аллель) — жалғыз аллель ауруды тудырады</span><span lang="en" class="lang-content">Hemizygote (recessive allele) — single allele causes disease</span><span lang="ru" class="lang-content">Гемизигота (рецессивный аллель) — один аллель вызывает болезнь</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- KEY EXAMPLES + RULES -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">⚠️ Маңызды ережелер және мысалдар</h2>
+        <h2 lang="en" class="lang-content section-heading">⚠️ Key Rules & Examples</h2>
+        <h2 lang="ru" class="lang-content section-heading">⚠️ Важные правила и примеры</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-rose-700 text-lg mb-4">📌 <span lang="kk" class="lang-content">X-байланысты тұқым қуалаушылықтың ережелері</span><span lang="en" class="lang-content">Rules of X-linked Inheritance</span><span lang="ru" class="lang-content">Правила X-сцепленного наследования</span></h3>
+                <div class="space-y-3 text-sm">
+                    <div class="tbox" style="border-color:#be185d;background:#fff1f2;">
+                        <p class="font-bold text-rose-700">🔴 <span lang="kk" class="lang-content">Ата рецессивті белгісін қызына береді, ұлына — жоқ</span><span lang="en" class="lang-content">Father passes recessive trait to daughters, NOT to sons</span><span lang="ru" class="lang-content">Отец передаёт рецессивный признак дочерям, НЕ сыновьям</span></p>
+                        <p class="text-gray-500 text-xs mt-1"><span lang="kk" class="lang-content">(себебі ұлдар Y хромосомасын атасынан алады)</span><span lang="en" class="lang-content">(sons get Y chromosome from father)</span><span lang="ru" class="lang-content">(сыновья получают Y от отца)</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#ca8a04;background:#fffbeb;">
+                        <p class="font-bold text-amber-700">🟡 <span lang="kk" class="lang-content">Тасымалдаушы аналықтың ұлдарының 50% ауру, қыздарының 50% тасымалдаушы</span><span lang="en" class="lang-content">Carrier female: 50% of sons affected, 50% of daughters are carriers</span><span lang="ru" class="lang-content">У носительницы: 50% сыновей больны, 50% дочерей — носительницы</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#1d4ed8;background:#eff6ff;">
+                        <p class="font-bold text-blue-700">🔵 <span lang="kk" class="lang-content">Аналықтарда X-байланысты рецессивті ауру — жиі емес (екі X<sup>a</sup> аллелі керек)</span><span lang="en" class="lang-content">X-linked recessive disease is rare in females (need two Xᵃ alleles)</span><span lang="ru" class="lang-content">X-сцепленные рецессивные болезни у женщин редки (нужно два аллеля Xᵃ)</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#7c3aed;background:#fdf4ff;">
+                        <p class="font-bold text-purple-700">🟣 <span lang="kk" class="lang-content">Ауру аналыққа үйленген аурудың барлық қыздары тасымалдаушы болады</span><span lang="en" class="lang-content">If affected father × carrier female, all daughters are carriers or affected</span><span lang="ru" class="lang-content">При браке больного отца и носительницы дочери либо больны, либо носительницы</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-rose-700 text-lg mb-4">📚 <span lang="kk" class="lang-content">X-байланысты аурулардың мысалдары</span><span lang="en" class="lang-content">Examples of X-linked Disorders</span><span lang="ru" class="lang-content">Примеры X-сцепленных заболеваний</span></h3>
+                <div class="space-y-3 text-sm">
+                    <div class="tbox" style="border-color:#be185d;background:#fff1f2;">
+                        <p class="font-bold text-rose-700">🩸 <span lang="kk" class="lang-content">Гемофилия А (VIII фактордың жетіспеушілігі)</span><span lang="en" class="lang-content">Haemophilia A (factor VIII deficiency)</span><span lang="ru" class="lang-content">Гемофилия А (недостаток фактора VIII)</span></p>
+                        <p class="text-xs text-gray-600"><span lang="kk" class="lang-content">Қан ұймайды. Тарихи: Ресей императорының ұлы Алексей ауырды (Виктория патшайымынан тараған).</span><span lang="en" class="lang-content">Blood doesn't clot. Historical case: Russian Tsarevich Alexei (spread by Queen Victoria).</span><span lang="ru" class="lang-content">Кровь не свёртывается. Исторически: Цесаревич Алексей (от королевы Виктории).</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#ca8a04;background:#fffbeb;">
+                        <p class="font-bold text-amber-700">🎨 <span lang="kk" class="lang-content">Дальтонизм (қызыл-жасылды ажыратпаушылық)</span><span lang="en" class="lang-content">Colour blindness (red-green)</span><span lang="ru" class="lang-content">Дальтонизм (красно-зелёная)</span></p>
+                        <p class="text-xs text-gray-600"><span lang="kk" class="lang-content">Ер адамдарда 8%, аналықтарда 0,4%. Джон Дальтон өзі дальтоник болған (1794).</span><span lang="en" class="lang-content">8% of males, 0.4% of females. John Dalton himself was colour blind (1794).</span><span lang="ru" class="lang-content">8% мужчин, 0,4% женщин. Сам Джон Дальтон был дальтоником (1794).</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#0d9488;background:#f0fdfa;">
+                        <p class="font-bold text-teal-700">💪 <span lang="kk" class="lang-content">Дюшен бұлшықет дистрофиясы</span><span lang="en" class="lang-content">Duchenne muscular dystrophy</span><span lang="ru" class="lang-content">Мышечная дистрофия Дюшенна</span></p>
+                        <p class="text-xs text-gray-600"><span lang="kk" class="lang-content">Дистрофин белогының жетіспеушілігі. Тек немесе жиі еркектерде. 3500 ер балада 1-ді зақымдайды.</span><span lang="en" class="lang-content">Dystrophin protein deficiency. Only/mainly in males. Affects 1 in 3500 boys.</span><span lang="ru" class="lang-content">Нехватка белка дистрофина. Только/в основном у мальчиков. 1 на 3500 мальчиков.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#7c3aed;background:#fdf4ff;">
+                        <p class="font-bold text-purple-700">👁️ <span lang="kk" class="lang-content">Пигментті ретинит (кейбір нұсқалары)</span><span lang="en" class="lang-content">Retinitis pigmentosa (some forms)</span><span lang="ru" class="lang-content">Пигментный ретинит (некоторые формы)</span></p>
+                        <p class="text-xs text-gray-600"><span lang="kk" class="lang-content">Торлы қабықтың прогрессивті дегенерациясы → соқырлық.</span><span lang="en" class="lang-content">Progressive degeneration of the retina → blindness.</span><span lang="ru" class="lang-content">Прогрессирующая дегенерация сетчатки → слепота.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

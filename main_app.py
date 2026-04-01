@@ -5,7 +5,7 @@ import json
 import logging
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWebEngineCore import QWebEngineSettings
+from PySide6.QtWebEngineCore import QWebEngineSettings, QWebEngineProfile
 from PySide6.QtWebChannel import QWebChannel
 from PySide6.QtCore import QObject, Slot, QUrl, Qt
 from PySide6.QtGui import QIcon
@@ -106,6 +106,14 @@ class MainWindow(QMainWindow):
 
         self.web_view = QWebEngineView()
 
+        # === КЭШИРОВАНИЕ ДЛЯ БЫСТРОЙ ЗАГРУЗКИ ===
+        profile = QWebEngineProfile.defaultProfile()
+        cache_path = os.path.join(BASE_DIR, '.cache')
+        profile.setCachePath(cache_path)
+        profile.setHttpCacheType(QWebEngineProfile.HttpCacheType.DiskHttpCache)
+        profile.setHttpCacheMaximumSize(100 * 1024 * 1024)  # 100MB кэш
+        # ========================================
+
         # === 1. СОЗДАЕМ КНОПКУ "НАЗАД" ===
         self.btn_back_overlay = QPushButton("← Артқа", self.central_widget)
         self.btn_back_overlay.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -187,9 +195,36 @@ class MainWindow(QMainWindow):
         self.channel.registerObject("bridge", self.bridge)
         self.channel.registerObject("activationBridge", self.activation_bridge)
 
+        # === ФИКС РЕНДЕРИНГА: подключаем сигнал loadFinished ===
+        self.web_view.loadFinished.connect(self._on_page_loaded)
+        # =======================================================
+
         # Загрузка данных и навигация
         self.load_all_data()
         self.navigate()
+
+    def _on_page_loaded(self, ok):
+        """Вызывается после полной загрузки страницы"""
+        if not ok:
+            return
+        
+        # Принудительная перерисовка ПОСЛЕ загрузки страницы
+        if self.current_screen == 'poster':
+            repaint_js = """
+                (function() {
+                    // Принудительная перерисовка
+                    window.scrollTo(0, 1);
+                    setTimeout(function() { window.scrollTo(0, 0); }, 10);
+                    
+                    // Заставляем браузер пересчитать layout
+                    document.body.style.display = 'none';
+                    document.body.offsetHeight; // Trigger reflow
+                    document.body.style.display = '';
+                    
+                    console.log('🎨 Page repaint forced');
+                })();
+            """
+            self.web_view.page().runJavaScript(repaint_js)
 
     def resizeEvent(self, event):
         """Обновляем позиции кнопок при изменении размера окна"""
@@ -564,26 +599,42 @@ class MainWindow(QMainWindow):
         return ids
 
     def go_next_poster(self):
+        print(f"\n➡️ go_next_poster() current_topic_id={self.current_topic_id}, current_subject={self.current_subject}")
         ids = self._get_topics_ids()
+        print(f"   ids count={len(ids)}")
         if not ids or not self.current_topic_id:
+            print(f"   ❌ Empty ids or no current_topic_id")
             return
         try:
             i = ids.index(self.current_topic_id)
         except ValueError:
+            print(f"   ❌ current_topic_id '{self.current_topic_id}' not found in ids")
             return
+        print(f"   Current index={i}, max={len(ids)-1}")
         if i < len(ids) - 1:
+            print(f"   ✅ Navigating to {ids[i + 1]}")
             self.show_poster_screen(ids[i + 1])
+        else:
+            print(f"   ⚠️ Already at last topic")
 
     def go_prev_poster(self):
+        print(f"\n⬅️ go_prev_poster() current_topic_id={self.current_topic_id}, current_subject={self.current_subject}")
         ids = self._get_topics_ids()
+        print(f"   ids count={len(ids)}")
         if not ids or not self.current_topic_id:
+            print(f"   ❌ Empty ids or no current_topic_id")
             return
         try:
             i = ids.index(self.current_topic_id)
         except ValueError:
+            print(f"   ❌ current_topic_id '{self.current_topic_id}' not found in ids")
             return
+        print(f"   Current index={i}")
         if i > 0:
+            print(f"   ✅ Navigating to {ids[i - 1]}")
             self.show_poster_screen(ids[i - 1])
+        else:
+            print(f"   ⚠️ Already at first topic")
 
     def show_poster_screen(self, topic_id):
         """Показываем плакат выбранной темы"""
@@ -608,38 +659,8 @@ class MainWindow(QMainWindow):
                 print(f"   ✅ Загружаю плакат")
                 url = QUrl.fromLocalFile(poster_path)
                 url.setQuery(f"lang={self.current_lang}")
+                self.current_screen = 'poster'  # Устанавливаем ДО загрузки для loadFinished
                 self.web_view.setUrl(url)
-
-                # === ФИНАЛЬНЫЙ ФИКС ЗАВИСАНИЯ ===
-                # Мы запускаем таймер внутри браузера.
-                # Он будет принудительно обновлять экран КАЖДЫЕ 100мс (5 раз подряд).
-                # Это гарантирует, что как только страница загрузится, она сразу перерисуется.
-                aggressive_fix_js = """
-                    var attempts = 0;
-                    function forceRepaint() {
-                        // 1. Микро-скролл
-                        window.scrollBy(0, 1);
-                        setTimeout(function(){ window.scrollBy(0, -1); }, 5);
-
-                        // 2. Передергивание прозрачности (заставляет GPU пересчитать слой)
-                        document.body.style.opacity = '0.99';
-                        setTimeout(function(){ document.body.style.opacity = '1'; }, 5);
-
-                        console.log('👊 Force repaint attempt: ' + attempts);
-                        attempts++;
-
-                        // Повторяем 5 раз (в течение 500мс)
-                        if (attempts < 5) {
-                            setTimeout(forceRepaint, 100);
-                        }
-                    }
-                    // Запускаем через 50мс после старта
-                    setTimeout(forceRepaint, 50);
-                """
-                self.web_view.page().runJavaScript(aggressive_fix_js)
-                # =================================
-
-                self.current_screen = 'poster'
 
                 # === 3. ПОКАЗЫВАЕМ КНОПКУ ===
                 if hasattr(self, 'btn_back_overlay'):

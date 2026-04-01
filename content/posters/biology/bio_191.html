@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Селекция. Методы создания новых сортов и пород</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0a150a 0%, #365314 50%, #0a150a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #365314 0%, #65a30d 40%, #d9f99d 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(101,163,13,0.5); }
+        .section-heading { color: #65a30d; border-bottom: 4px solid #d9f99d; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #65a30d; background: white; color: #65a30d; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#365314,#65a30d); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f7fee7,#ecfccb); border-left: 5px solid #65a30d; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#365314,#65a30d); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f7fee7; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-lime-100 font-semibold mb-3 text-lg">10–11 класс • Биотехнология • Прикладная генетика</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Селекция. Жаңа сорттар мен тұқымдар алу әдістері</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Selection. Methods of Creating New Varieties and Breeds</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Селекция. Методы создания новых сортов и пород</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm flex flex-wrap gap-4 justify-center">
+            <div class="text-center"><span class="text-3xl">🌾</span><p class="text-lime-200 font-bold mt-1"><span lang="kk" class="lang-content">Вавилов орталықтары</span><span lang="en" class="lang-content">Vavilov centres</span><span lang="ru" class="lang-content">Центры Вавилова</span></p></div>
+            <div class="text-center"><span class="text-3xl">💪</span><p class="text-lime-200 font-bold mt-1"><span lang="kk" class="lang-content">Гетерозис</span><span lang="en" class="lang-content">Heterosis</span><span lang="ru" class="lang-content">Гетерозис</span></p></div>
+            <div class="text-center"><span class="text-3xl">🧬</span><p class="text-lime-200 font-bold mt-1">GMO</p></div>
+        </div>
+    </header>
+
+    <!-- METHODS OF SELECTION -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Селекция әдістері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Methods of Selection</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Методы селекции</h2>
+        <div class="card overflow-x-auto">
+            <table class="comp text-xs">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Әдіс</span><span lang="en" class="lang-content">Method</span><span lang="ru" class="lang-content">Метод</span></th>
+                    <th><span lang="kk" class="lang-content">Сипаттамасы</span><span lang="en" class="lang-content">Description</span><span lang="ru" class="lang-content">Описание</span></th>
+                    <th><span lang="kk" class="lang-content">Артықшылықтары / Кемшіліктері</span><span lang="en" class="lang-content">Advantages / Disadvantages</span><span lang="ru" class="lang-content">Достоинства / Недостатки</span></th>
+                    <th><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr><td class="font-bold text-lime-700">🎯 <span lang="kk" class="lang-content">Жаппай іріктеу</span><span lang="en" class="lang-content">Mass selection</span><span lang="ru" class="lang-content">Массовый отбор</span></td>
+                        <td><span lang="kk" class="lang-content">Тиімді фенотиптегі жеке дараларды іріктеп алу. Фенотип бойынша — генотип ескерілмейді.</span><span lang="en" class="lang-content">Selecting individuals with desirable phenotype. Based on phenotype — genotype not considered.</span><span lang="ru" class="lang-content">Отбор особей с нужным фенотипом. По фенотипу — генотип не учитывается.</span></td>
+                        <td><span lang="kk" class="lang-content">+ Жылдам. − Генотип бекімейді, нәтиже тұрақсыз.</span><span lang="en" class="lang-content">+ Fast. − Genotype not fixed, results unstable.</span><span lang="ru" class="lang-content">+ Быстро. − Генотип не закрепляется, результаты нестабильны.</span></td>
+                        <td><span lang="kk" class="lang-content">Мал шаруашылығы, кейбір ауыл шаруашылық мәдениеттері</span><span lang="en" class="lang-content">Livestock, some crop plants</span><span lang="ru" class="lang-content">Животноводство, ряд сельскохоз. культур</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-green-700">🧬 <span lang="kk" class="lang-content">Жеке іріктеу</span><span lang="en" class="lang-content">Individual selection</span><span lang="ru" class="lang-content">Индивидуальный отбор</span></td>
+                        <td><span lang="kk" class="lang-content">Бір жеке дарадан тіктелін ұрпақтар (линия) алу. Гомозиготты линиялар алынады.</span><span lang="en" class="lang-content">Pure lines from a single individual. Homozygous lines obtained.</span><span lang="ru" class="lang-content">Чистые линии от одной особи. Получают гомозиготные линии.</span></td>
+                        <td><span lang="kk" class="lang-content">+ Генотип бекімейді. + Тиімді. − Инбридинг депрессиясы мүмкін.</span><span lang="en" class="lang-content">+ Genotype fixed. + Effective. − Inbreeding depression possible.</span><span lang="ru" class="lang-content">+ Генотип закрепляется. + Эффективно. − Возможна инбредная депрессия.</span></td>
+                        <td><span lang="kk" class="lang-content">Бидай, арпа, күнбағыс сорттары</span><span lang="en" class="lang-content">Wheat, barley, sunflower varieties</span><span lang="ru" class="lang-content">Сорта пшеницы, ячменя, подсолнечника</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-blue-700">🔀 <span lang="kk" class="lang-content">Гибридизация</span><span lang="en" class="lang-content">Hybridisation</span><span lang="ru" class="lang-content">Гибридизация</span></td>
+                        <td><span lang="kk" class="lang-content"><b>Ауқымдас будандастыру</b> — бір түр ішінде. <b>Алыс будандастыру</b> — түрлер арасында (мысалы: бидай × қара бидай → тритикале). Гетерозис — F1 буданы ата-анасынан жоғары.</span><span lang="en" class="lang-content"><b>Intraspecific hybridisation</b> — within one species. <b>Distant hybridisation</b> — between species (e.g. wheat × rye → triticale). Heterosis — F1 hybrid exceeds both parents.</span><span lang="ru" class="lang-content"><b>Внутривидовая гибридизация</b> — в пределах вида. <b>Отдалённая гибридизация</b> — между видами (напр. пшеница × рожь → тритикале). Гетерозис — F1 превосходит оба родителя.</span></td>
+                        <td><span lang="kk" class="lang-content">+ Гетерозис — өнімділік артады. − Алыс буданда ұрықсыздық болуы мүмкін (полиплоидизация арқылы шешіледі).</span><span lang="en" class="lang-content">+ Heterosis — productivity increases. − Sterility in distant hybrids (solved by polyploidisation).</span><span lang="ru" class="lang-content">+ Гетерозис — рост продуктивности. − Стерильность у отдалённых гибридов (решается полиплоидизацией).</span></td>
+                        <td><span lang="kk" class="lang-content">Мичурин (жеміс сорттары), Борлог (карлик бидайлар)</span><span lang="en" class="lang-content">Michurin (fruit varieties), Borlaug (dwarf wheat)</span><span lang="ru" class="lang-content">Мичурин (сорта плодовых), Борлоуг (карликовые пшеницы)</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-purple-700">☢️ <span lang="kk" class="lang-content">Мутагенез</span><span lang="en" class="lang-content">Mutagenesis</span><span lang="ru" class="lang-content">Мутагенез</span></td>
+                        <td><span lang="kk" class="lang-content">Мутагендермен (УК, Х-сәулелері, химиялық заттар) өсімдік тұқымдарын немесе жасушаларын өңдеу → жасанды мутациялар туғызу.</span><span lang="en" class="lang-content">Treating plant seeds or cells with mutagens (UV, X-rays, chemicals) → inducing artificial mutations.</span><span lang="ru" class="lang-content">Обработка семян или клеток растений мутагенами (УФ, рентген, химические вещества) → индукция искусственных мутаций.</span></td>
+                        <td><span lang="kk" class="lang-content">+ Жаңа белгілер. − Мутациялардың көбі зиянды; іріктеу қажет.</span><span lang="en" class="lang-content">+ New traits. − Most mutations harmful; selection required.</span><span lang="ru" class="lang-content">+ Новые признаки. − Большинство мутаций вредны; нужен отбор.</span></td>
+                        <td><span lang="kk" class="lang-content">Карлик бидай (ауруға төзімді), мутанттық арпа сорттары</span><span lang="en" class="lang-content">Disease-resistant dwarf wheat, mutant barley varieties</span><span lang="ru" class="lang-content">Карликовые устойчивые пшеницы, мутантные сорта ячменя</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-orange-700">🔢 <span lang="kk" class="lang-content">Полиплоидизация</span><span lang="en" class="lang-content">Polyploidisation</span><span lang="ru" class="lang-content">Полиплоидизация</span></td>
+                        <td><span lang="kk" class="lang-content">Колхицин (бөліну ұршығын бұзады) → хромосомалар еселенеді. Полиплоидтар (3n, 4n, 6n) ірірек, өнімді болады.</span><span lang="en" class="lang-content">Colchicine (disrupts spindle) → chromosomes multiply. Polyploids (3n, 4n, 6n) are larger and more productive.</span><span lang="ru" class="lang-content">Колхицин (нарушает веретено деления) → хромосомы умножаются. Полиплоиды (3n, 4n, 6n) крупнее и продуктивнее.</span></td>
+                        <td><span lang="kk" class="lang-content">+ Ірі жемістер, жоғары өнімділік. − Ұрықсыздық мүмкін (тритикале: 6n).</span><span lang="en" class="lang-content">+ Large fruits, high yield. − Sterility possible (triticale: 6n).</span><span lang="ru" class="lang-content">+ Крупные плоды, высокий урожай. − Возможна стерильность (тритикале: 6n).</span></td>
+                        <td><span lang="kk" class="lang-content">Тритикале (6n=42), полиплоидты жүгері, жидек</span><span lang="en" class="lang-content">Triticale (6n=42), polyploid maize, strawberry</span><span lang="ru" class="lang-content">Тритикале (6n=42), полиплоидная кукуруза, земляника</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-red-700">🧬 <span lang="kk" class="lang-content">Генетикалық инженерия (ГМО)</span><span lang="en" class="lang-content">Genetic engineering (GMO)</span><span lang="ru" class="lang-content">Генная инженерия (ГМО)</span></td>
+                        <td><span lang="kk" class="lang-content">Рекомбинантты ДНҚ технологиясы. Рестриктаза → ДНҚ кесу. Лигаза → жалғау. Вектор (плазмид, вирус) → хозяинға кіргізу. Трансгендік организмдер.</span><span lang="en" class="lang-content">Recombinant DNA technology. Restriction enzyme → cut DNA. Ligase → join. Vector (plasmid, virus) → insert into host. Transgenic organisms.</span><span lang="ru" class="lang-content">Технология рекомбинантной ДНК. Рестриктаза → разрезание ДНК. Лигаза → сшивание. Вектор (плазмида, вирус) → введение в хозяина. Трансгенные организмы.</span></td>
+                        <td><span lang="kk" class="lang-content">+ Кез келген белгіні кіргізуге болады. − Биоэтикалық мәселелер; экологиялық тәуекелдер.</span><span lang="en" class="lang-content">+ Any trait can be introduced. − Bioethical issues; ecological risks.</span><span lang="ru" class="lang-content">+ Можно ввести любой признак. − Биоэтические проблемы; экологические риски.</span></td>
+                        <td><span lang="kk" class="lang-content">Bt-мысық (инсектицид өндіреді), инсулин өндіретін бактериялар, «Алтын күріш» (A витамині)</span><span lang="en" class="lang-content">Bt crops (produce insecticide), insulin-producing bacteria, Golden Rice (vitamin A)</span><span lang="ru" class="lang-content">Bt-культуры (производят инсектицид), бактерии-производители инсулина, «Золотой рис» (витамин A)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- VAVILOV + HETEROSIS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🌍 Вавилов орталықтары • 💪 Гетерозис</h2>
+        <h2 lang="en" class="lang-content section-heading">🌍 Vavilov Centres • 💪 Heterosis</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌍 Центры Вавилова • 💪 Гетерозис</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="tbox text-xs" style="border-color:#65a30d;background:#f7fee7;">
+                    <p class="font-bold text-lime-700 mb-2"><span lang="kk" class="lang-content">Н.И. Вавилов (1887–1943) — мәдени өсімдіктердің шығу тегі орталықтары:</span><span lang="en" class="lang-content">N.I. Vavilov (1887–1943) — Centres of Origin of Cultivated Plants:</span><span lang="ru" class="lang-content">Н.И. Вавилов (1887–1943) — Центры происхождения культурных растений:</span></p>
+                    <div class="grid grid-cols-2 gap-1 text-gray-600">
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇮🇳 <span lang="kk" class="lang-content">Үнді-Малай</span><span lang="en" class="lang-content">Indo-Malay</span><span lang="ru" class="lang-content">Индо-Малайский</span></p><p><span lang="kk" class="lang-content">Қант қамысы, банан, кокос</span><span lang="en" class="lang-content">Sugarcane, banana, coconut</span><span lang="ru" class="lang-content">Сахарный тростник, банан, кокос</span></p></div>
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇨🇳 <span lang="kk" class="lang-content">Қытай</span><span lang="en" class="lang-content">Chinese</span><span lang="ru" class="lang-content">Китайский</span></p><p><span lang="kk" class="lang-content">Бидай, тары, соя, шай</span><span lang="en" class="lang-content">Wheat, millet, soy, tea</span><span lang="ru" class="lang-content">Пшеница, просо, соя, чай</span></p></div>
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇮🇳 <span lang="kk" class="lang-content">Үнді</span><span lang="en" class="lang-content">Indian</span><span lang="ru" class="lang-content">Индийский</span></p><p><span lang="kk" class="lang-content">Күріш, баклажан, жүгері</span><span lang="en" class="lang-content">Rice, eggplant, millet</span><span lang="ru" class="lang-content">Рис, баклажан, просо</span></p></div>
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇨🇱 <span lang="kk" class="lang-content">Оңтүстік Американ</span><span lang="en" class="lang-content">South American</span><span lang="ru" class="lang-content">Южноамериканский</span></p><p><span lang="kk" class="lang-content">Картоп, томат, мақта, какао</span><span lang="en" class="lang-content">Potato, tomato, cotton, cocoa</span><span lang="ru" class="lang-content">Картофель, томат, хлопок, какао</span></p></div>
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇲🇽 <span lang="kk" class="lang-content">Орталық Американ</span><span lang="en" class="lang-content">Central American</span><span lang="ru" class="lang-content">Центральноамериканский</span></p><p><span lang="kk" class="lang-content">Жүгері, асқабақ, какао</span><span lang="en" class="lang-content">Maize, squash, cocoa</span><span lang="ru" class="lang-content">Кукуруза, тыква, какао</span></p></div>
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇪🇹 <span lang="kk" class="lang-content">Эфиопия</span><span lang="en" class="lang-content">Ethiopian</span><span lang="ru" class="lang-content">Эфиопский</span></p><p><span lang="kk" class="lang-content">Кофе, сорго, арпа</span><span lang="en" class="lang-content">Coffee, sorghum, barley</span><span lang="ru" class="lang-content">Кофе, сорго, ячмень</span></p></div>
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇮🇷 <span lang="kk" class="lang-content">Алдыңғы Азия</span><span lang="en" class="lang-content">Near East</span><span lang="ru" class="lang-content">Переднеазиатский</span></p><p><span lang="kk" class="lang-content">Бидай, арпа, жүзім</span><span lang="en" class="lang-content">Wheat, barley, grape</span><span lang="ru" class="lang-content">Пшеница, ячмень, виноград</span></p></div>
+                        <div class="bg-lime-50 rounded p-1"><p class="font-semibold text-lime-700">🇬🇷 <span lang="kk" class="lang-content">Жерорта теңізі</span><span lang="en" class="lang-content">Mediterranean</span><span lang="ru" class="lang-content">Средиземноморский</span></p><p><span lang="kk" class="lang-content">Зәйтүн, лавр, шашыраткы</span><span lang="en" class="lang-content">Olive, laurel, beet</span><span lang="ru" class="lang-content">Олива, лавр, свёкла</span></p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#65a30d;background:#f7fee7;">
+                    <p class="font-bold text-lime-700 mb-2">💪 <span lang="kk" class="lang-content">Гетерозис (гибридтік күш):</span><span lang="en" class="lang-content">Heterosis (hybrid vigour):</span><span lang="ru" class="lang-content">Гетерозис (гибридная сила):</span></p>
+                    <p class="text-gray-600"><span lang="kk" class="lang-content">F1 буданы ата-аналарының екеуінен де жоғары болуы — өнімділік, тіршілікке қабілеттілік, ауруға төзімділік артады. <b>Механизм:</b> Гетерозиготалықтың артуы → зиянды рецессивті аллельдер жабылады. <b>Кемшілік:</b> F2 ұрпағында гетерозис жойылады → жыл сайын жаңа F1 алу қажет. <b>Мысалдар:</b> Жүгері буданы (АҚШ-та 95% дала жүгерісі — буданды), ет мал тұқымдары, бройлер тауықтары.</span><span lang="en" class="lang-content">F1 hybrid exceeds both parents in productivity, viability, disease resistance. <b>Mechanism:</b> Increased heterozygosity → harmful recessive alleles masked. <b>Disadvantage:</b> Heterosis lost in F2 → must produce new F1 each year. <b>Examples:</b> Hybrid maize (95% US field maize is hybrid), beef cattle breeds, broiler chickens.</span><span lang="ru" class="lang-content">F1 гибрид превосходит обоих родителей по продуктивности, жизнеспособности, устойчивости к болезням. <b>Механизм:</b> Рост гетерозиготности → вредные рецессивные аллели маскируются. <b>Недостаток:</b> Гетерозис исчезает в F2 → нужно ежегодно получать новые F1. <b>Примеры:</b> Гибридная кукуруза (95% посевов США — гибриды), мясные породы КРС, бройлеры.</span></p>
+                </div>
+                <div class="fact-box text-xs">
+                    <p class="font-bold text-lime-700"><span lang="kk" class="lang-content">🌾 Жасыл революция (Норман Борлог, Нобель сыйлығы 1970):</span><span lang="en" class="lang-content">🌾 Green Revolution (Norman Borlaug, Nobel Prize 1970):</span><span lang="ru" class="lang-content">🌾 Зелёная революция (Норман Борлоуг, Нобелевская премия 1970):</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Жаңа «карлик» бидай сорттары → еселенген өнімділік → миллиардтаған адамды ашаршылықтан сақтады. Бірақ: химиялық тыңайтқыштарға, пестицидтерге тәуелділік артты; биоалуандылық азайды. Параллель: дистанттық будандастыру (бидай × қара бидай → тритикале: ауруға төзімді, жоғары өнімді).</span><span lang="en" class="lang-content">New «dwarf» wheat varieties → multiplied yields → saved billions from famine. But: increased dependence on chemical fertilisers, pesticides; biodiversity reduced. Parallel: distant hybridisation (wheat × rye → triticale: disease-resistant, high-yielding).</span><span lang="ru" class="lang-content">Новые «карликовые» сорта пшеницы → кратный рост урожайности → спасло миллиарды от голода. Но: усилилась зависимость от химических удобрений, пестицидов; снизилось биоразнообразие. Параллельно: отдалённая гибридизация (пшеница × рожь → тритикале: устойчивость к болезням + высокий урожай).</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

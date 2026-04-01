@@ -1,141 +1,340 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Double Fertilization</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <title>Обмен веществ и энергии</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #4c0519; color: #fbcfe8; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .lang-btn.active { background: #f472b6; color: #4c0519; font-weight: bold; }
-        canvas { cursor: pointer; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #16a34a; border-bottom: 3px solid #86efac; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #22c55e; background: white; color: #22c55e; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdf4; }
+        .lang-btn.active { background: #22c55e; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .meta-card { border-radius: 12px; padding: 15px; }
+        .fact-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 flex flex-col items-center">
+<body class="bg-slate-50">
 
-<div class="flex justify-between items-center w-full max-w-4xl mb-8">
-        <h1 class="text-4xl font-bold text-pink-300" id="main-title">DOUBLE FERTILIZATION</h1>
-        <div class="flex gap-2">
-            <button onclick="window.setL('ru')" id="btn-ru" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">RU</button>
-            <button onclick="window.setL('kz')" id="btn-kz" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">KZ</button>
-            <button onclick="window.setL('en')" id="btn-en" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="w-full max-w-4xl relative h-[500px] glass rounded-3xl overflow-hidden bg-black/20">
-        <canvas id="doubleCanvas" class="w-full h-full"></canvas>
-        <div class="absolute top-4 left-4 max-w-xs text-xs text-white bg-black/40 p-4 rounded-xl">
-            <h3 class="font-bold text-pink-400 mb-2" id="discovery"></h3>
-            <p id="step1"></p>
-            <p class="mt-2" id="step2"></p>
-        </div>
-        <p class="absolute bottom-4 right-4 text-xs font-mono text-pink-500 animate-pulse" id="hint">Click to animate Pollen Tube</p>
-    </div>
+    <header class="header-card text-center mb-10">
+        <p class="text-green-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Зат және энергия алмасуы</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Metabolism</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Обмен веществ и энергии</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-green-100">Метаболизм — ағзадағы барлық химиялық реакциялар жиынтығы. Тіршіліктің негізі. Энергия АТФ түрінде сақталады.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-green-100">Metabolism is the sum of all chemical reactions in the body. Foundation of life. Energy is stored as ATP.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-green-100">Метаболизм — совокупность всех химических реакций в организме. Основа жизни. Энергия запасается в АТФ.</p>
+    </header>
 
-    <script>
-        const bio22Data = {
-            ru: {
-                title: "ДВОЙНОЕ ОПЛОДОТВОРЕНИЕ",
-                disc: "Открытие С.Г. Навашина (1898)",
-                s1: "1. Спермий (n) + Яйцеклетка (n) = Зигота (2n) -> Зародыш",
-                s2: "2. Спермий (n) + Центральная клетка (2n) = Эндосперм (3n) -> Запас",
-                hint: "Нажмите для анимации пыльцевой трубки"
-            },
-            kz: {
-                title: "ҚОС ҰРЫҚТАНДЫРУ",
-                disc: "С.Г. Навашин ашқан (1898)",
-                s1: "1. Спермий (n) + Жұмыртқа жасуша (n) = Зигота (2n) -> Ұрық",
-                s2: "2. Спермий (n) + Орталық жасуша (2n) = Эндосперм (3n) -> Қор",
-                hint: "Тозаң түтігінің анимациясы үшін басыңыз"
-            },
-            en: {
-                title: "DOUBLE FERTILIZATION",
-                disc: "Discovered by S. Navashin (1898)",
-                s1: "1. Sperm (n) + Egg (n) = Zygote (2n) -> Embryo",
-                s2: "2. Sperm (n) + Central Cell (2n) = Endosperm (3n) -> Food",
-                hint: "Click to animate Pollen Tube"
-            }
-        };
+    <!-- Анаболизм и катаболизм -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Метаболизм түрлері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Types of Metabolism</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Виды метаболизма</h2>
 
-        let lang = 'ru', progress = 0;
-        let cx, cvs;
-
-        window.setL = (l) => {
-            lang = l;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+l).classList.add('active');
-            
-            const d = bio22Data[l];
-            document.getElementById('main-title').textContent = d.title;
-            document.getElementById('discovery').textContent = d.disc;
-            document.getElementById('step1').textContent = d.s1;
-            document.getElementById('step2').textContent = d.s2;
-            document.getElementById('hint').textContent = d.hint;
-        }
-
-        function draw() {
-            if(!cx) return;
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
-            const cx_ = w/2;
-
-            // Pistil
-            cx.strokeStyle = '#f472b6'; cx.lineWidth = 4;
-            cx.beginPath(); 
-            cx.moveTo(cx_-40, 50); // Stigma
-            cx.lineTo(cx_-20, 200); // Style
-            cx.bezierCurveTo(cx_-60, 400, cx_+60, 400, cx_+20, 200); // Ovary
-            cx.lineTo(cx_+40, 50);
-            cx.stroke();
-
-            // Embryo Sac
-            cx.fillStyle = '#831843';
-            cx.beginPath(); cx.ellipse(cx_, 320, 40, 60, 0, 0, Math.PI*2); cx.fill();
-            
-            // Cells
-            cx.fillStyle = 'white';
-            cx.beginPath(); cx.arc(cx_, 360, 5, 0, Math.PI*2); cx.fill(); // Egg
-            cx.beginPath(); cx.arc(cx_, 320, 8, 0, Math.PI*2); cx.fill(); // Central Cell
-
-            // Pollen Tube
-            if (progress > 0) {
-                const ty = 50 + progress * 2.8;
-                cx.strokeStyle = '#facc15'; cx.lineWidth = 3;
-                cx.beginPath(); cx.moveTo(cx_, 50); cx.lineTo(cx_, Math.min(ty, 300)); cx.stroke();
-
-                if(ty < 300) {
-                    cx.fillStyle = '#facc15';
-                    cx.beginPath(); cx.arc(cx_, ty, 4, 0, Math.PI*2); cx.fill();
-                    cx.beginPath(); cx.arc(cx_, ty-10, 4, 0, Math.PI*2); cx.fill();
-                } else {
-                    // Flash
-                    cx.fillStyle = '#facc15'; 
-                    cx.shadowBlur=20; cx.shadowColor='yellow';
-                    cx.beginPath(); cx.arc(cx_, 360, 10, 0, Math.PI*2); cx.fill();
-                    cx.beginPath(); cx.arc(cx_, 320, 15, 0, Math.PI*2); cx.fill();
-                    cx.shadowBlur=0;
-                }
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Анаболизм -->
+            <div class="card" style="border-top: 5px solid #22c55e;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🔼</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-green-700 mb-3">АНАБОЛИЗМ (АССИМИЛЯЦИЯ)</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-green-700 mb-3">ANABOLISM (ASSIMILATION)</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-green-700 mb-3">АНАБОЛИЗМ (АССИМИЛЯЦИЯ)</h3>
                 
-                if (progress < 100) progress += 0.5;
-            }
+                <div style="background: #f0fdf4; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm mb-2"><strong>Анықтамасы:</strong> Қарапайым заттардан күрделі заттар синтезі</p>
+                    <p lang="en" class="lang-content text-sm mb-2"><strong>Definition:</strong> Synthesis of complex substances from simple ones</p>
+                    <p lang="ru" class="lang-content text-sm mb-2"><strong>Определение:</strong> Синтез сложных веществ из простых</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">⚡ Энергия ЖҰМСАЛАДЫ</p>
+                    <p lang="en" class="lang-content text-xs">⚡ Energy is CONSUMED</p>
+                    <p lang="ru" class="lang-content text-xs">⚡ Энергия РАСХОДУЕТСЯ</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2"><strong>Мысалдар:</strong></p>
+                    <p lang="en" class="lang-content text-xs mt-2"><strong>Examples:</strong></p>
+                    <p lang="ru" class="lang-content text-xs mt-2"><strong>Примеры:</strong></p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Ақуыз синтезі (амин қышқылдарынан)</p>
+                    <p lang="en" class="lang-content text-xs">• Protein synthesis (from amino acids)</p>
+                    <p lang="ru" class="lang-content text-xs">• Синтез белков (из аминокислот)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Гликоген синтезі (глюкозадан)</p>
+                    <p lang="en" class="lang-content text-xs">• Glycogen synthesis (from glucose)</p>
+                    <p lang="ru" class="lang-content text-xs">• Синтез гликогена (из глюкозы)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• ДНҚ репликациясы</p>
+                    <p lang="en" class="lang-content text-xs">• DNA replication</p>
+                    <p lang="ru" class="lang-content text-xs">• Репликация ДНК</p>
+                </div>
+            </div>
 
-            requestAnimationFrame(draw);
-        }
+            <!-- Катаболизм -->
+            <div class="card" style="border-top: 5px solid #ef4444;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🔽</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-red-700 mb-3">КАТАБОЛИЗМ (ДИССИМИЛЯЦИЯ)</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-red-700 mb-3">CATABOLISM (DISSIMILATION)</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-red-700 mb-3">КАТАБОЛИЗМ (ДИССИМИЛЯЦИЯ)</h3>
+                
+                <div style="background: #fef2f2; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm mb-2"><strong>Анықтамасы:</strong> Күрделі заттардың қарапайымға ыдырауы</p>
+                    <p lang="en" class="lang-content text-sm mb-2"><strong>Definition:</strong> Breakdown of complex substances to simple ones</p>
+                    <p lang="ru" class="lang-content text-sm mb-2"><strong>Определение:</strong> Распад сложных веществ до простых</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">⚡ Энергия БӨЛІНЕДІ</p>
+                    <p lang="en" class="lang-content text-xs">⚡ Energy is RELEASED</p>
+                    <p lang="ru" class="lang-content text-xs">⚡ Энергия ВЫДЕЛЯЕТСЯ</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2"><strong>Мысалдар:</strong></p>
+                    <p lang="en" class="lang-content text-xs mt-2"><strong>Examples:</strong></p>
+                    <p lang="ru" class="lang-content text-xs mt-2"><strong>Примеры:</strong></p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Глюкоза тотығуы (тыныс алу)</p>
+                    <p lang="en" class="lang-content text-xs">• Glucose oxidation (respiration)</p>
+                    <p lang="ru" class="lang-content text-xs">• Окисление глюкозы (дыхание)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Май ыдырауы</p>
+                    <p lang="en" class="lang-content text-xs">• Fat breakdown</p>
+                    <p lang="ru" class="lang-content text-xs">• Распад жиров</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Ақуыз ыдырауы</p>
+                    <p lang="en" class="lang-content text-xs">• Protein breakdown</p>
+                    <p lang="ru" class="lang-content text-xs">• Распад белков</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.onload = () => {
-            cvs = document.getElementById('doubleCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; draw(); };
-            window.addEventListener('resize', rs); rs();
-            cvs.addEventListener('click', () => { progress = 1; });
-            window.setL('ru');
-        }
-    </script>
+    <!-- Обмен веществ -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Негізгі заттар алмасуы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Main Substance Exchange</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Обмен основных веществ</h2>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+        <div class="grid md:grid-cols-3 gap-4">
+            <!-- Белки -->
+            <div class="card" style="border-left: 5px solid #ef4444;">
+                <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">🥩 АҚУЫЗДАР</h4>
+                <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">🥩 PROTEINS</h4>
+                <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">🥩 БЕЛКИ</h4>
+                
+                <p lang="kk" class="lang-content text-xs mb-2"><strong>Күнделікті норма:</strong> 1 г/кг дене салмағы</p>
+                <p lang="en" class="lang-content text-xs mb-2"><strong>Daily norm:</strong> 1 g/kg body weight</p>
+                <p lang="ru" class="lang-content text-xs mb-2"><strong>Суточная норма:</strong> 1 г/кг массы тела</p>
+                
+                <div style="background: #fef2f2; padding: 8px; border-radius: 6px;">
+                    <p lang="kk" class="lang-content text-xs">• Жасушалар құрайды</p>
+                    <p lang="en" class="lang-content text-xs">• Build cells</p>
+                    <p lang="ru" class="lang-content text-xs">• Строят клетки</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Ферменттер, гормондар</p>
+                    <p lang="en" class="lang-content text-xs">• Enzymes, hormones</p>
+                    <p lang="ru" class="lang-content text-xs">• Ферменты, гормоны</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Соңғы өнім: мочевина, CO₂, H₂O</p>
+                    <p lang="en" class="lang-content text-xs">• End products: urea, CO₂, H₂O</p>
+                    <p lang="ru" class="lang-content text-xs">• Конечные продукты: мочевина, CO₂, H₂O</p>
+                </div>
+            </div>
 
+            <!-- Жиры -->
+            <div class="card" style="border-left: 5px solid #f59e0b;">
+                <h4 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">🧈 МАЙЛАР</h4>
+                <h4 lang="en" class="lang-content font-bold text-yellow-700 mb-2">🧈 FATS</h4>
+                <h4 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">🧈 ЖИРЫ</h4>
+                
+                <p lang="kk" class="lang-content text-xs mb-2"><strong>Күнделікті норма:</strong> 80-100 г</p>
+                <p lang="en" class="lang-content text-xs mb-2"><strong>Daily norm:</strong> 80-100 g</p>
+                <p lang="ru" class="lang-content text-xs mb-2"><strong>Суточная норма:</strong> 80-100 г</p>
+                
+                <div style="background: #fef3c7; padding: 8px; border-radius: 6px;">
+                    <p lang="kk" class="lang-content text-xs">• Энергия қоры (9 ккал/г)</p>
+                    <p lang="en" class="lang-content text-xs">• Energy reserve (9 kcal/g)</p>
+                    <p lang="ru" class="lang-content text-xs">• Запас энергии (9 ккал/г)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Жылу оқшаулау</p>
+                    <p lang="en" class="lang-content text-xs">• Heat insulation</p>
+                    <p lang="ru" class="lang-content text-xs">• Теплоизоляция</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Соңғы өнім: CO₂, H₂O</p>
+                    <p lang="en" class="lang-content text-xs">• End products: CO₂, H₂O</p>
+                    <p lang="ru" class="lang-content text-xs">• Конечные продукты: CO₂, H₂O</p>
+                </div>
+            </div>
+
+            <!-- Углеводы -->
+            <div class="card" style="border-left: 5px solid #3b82f6;">
+                <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2">🍞 КӨМІРСУЛАР</h4>
+                <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2">🍞 CARBOHYDRATES</h4>
+                <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2">🍞 УГЛЕВОДЫ</h4>
+                
+                <p lang="kk" class="lang-content text-xs mb-2"><strong>Күнделікті норма:</strong> 400-500 г</p>
+                <p lang="en" class="lang-content text-xs mb-2"><strong>Daily norm:</strong> 400-500 g</p>
+                <p lang="ru" class="lang-content text-xs mb-2"><strong>Суточная норма:</strong> 400-500 г</p>
+                
+                <div style="background: #eff6ff; padding: 8px; border-radius: 6px;">
+                    <p lang="kk" class="lang-content text-xs">• Негізгі энергия көзі (4 ккал/г)</p>
+                    <p lang="en" class="lang-content text-xs">• Main energy source (4 kcal/g)</p>
+                    <p lang="ru" class="lang-content text-xs">• Главный источник энергии (4 ккал/г)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Гликоген (бауыр, бұлшықет)</p>
+                    <p lang="en" class="lang-content text-xs">• Glycogen (liver, muscles)</p>
+                    <p lang="ru" class="lang-content text-xs">• Гликоген (печень, мышцы)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Соңғы өнім: CO₂, H₂O</p>
+                    <p lang="en" class="lang-content text-xs">• End products: CO₂, H₂O</p>
+                    <p lang="ru" class="lang-content text-xs">• Конечные продукты: CO₂, H₂O</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Энергетический обмен -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">⚡ Энергия алмасуы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">⚡ Energy Exchange</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">⚡ Энергетический обмен</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-2xl mb-2">1️⃣</p>
+                    <h5 lang="kk" class="lang-content font-bold text-red-700 mb-2">ДАЙЫНДЫҚ</h5>
+                    <h5 lang="en" class="lang-content font-bold text-red-700 mb-2">PREPARATORY</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-red-700 mb-2">ПОДГОТОВИТЕЛЬНЫЙ</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">Полимерлер → мономерлер</p>
+                    <p lang="en" class="lang-content text-xs">Polymers → monomers</p>
+                    <p lang="ru" class="lang-content text-xs">Полимеры → мономеры</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Энергия: жылу</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Energy: heat</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Энергия: тепло</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-2xl mb-2">2️⃣</p>
+                    <h5 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">ГЛИКОЛИЗ</h5>
+                    <h5 lang="en" class="lang-content font-bold text-yellow-700 mb-2">GLYCOLYSIS</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">ГЛИКОЛИЗ</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">Глюкоза → 2 ПВК</p>
+                    <p lang="en" class="lang-content text-xs">Glucose → 2 pyruvate</p>
+                    <p lang="ru" class="lang-content text-xs">Глюкоза → 2 ПВК</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Энергия: 2 АТФ</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Energy: 2 ATP</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Энергия: 2 АТФ</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-2xl mb-2">3️⃣</p>
+                    <h5 lang="kk" class="lang-content font-bold text-emerald-700 mb-2">ТОТЫҒУ (O₂)</h5>
+                    <h5 lang="en" class="lang-content font-bold text-emerald-700 mb-2">OXIDATION (O₂)</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-emerald-700 mb-2">ОКИСЛЕНИЕ (O₂)</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">ПВК → CO₂ + H₂O</p>
+                    <p lang="en" class="lang-content text-xs">Pyruvate → CO₂ + H₂O</p>
+                    <p lang="ru" class="lang-content text-xs">ПВК → CO₂ + H₂O</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Энергия: 36 АТФ</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Energy: 36 ATP</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Энергия: 36 АТФ</p>
+                </div>
+            </div>
+            
+            <div class="fact-box mt-4">
+                <p lang="kk" class="lang-content text-sm text-center">📊 <strong>Барлығы:</strong> 1 глюкоза = <strong>38 АТФ</strong> (2 + 36)</p>
+                <p lang="en" class="lang-content text-sm text-center">📊 <strong>Total:</strong> 1 glucose = <strong>38 ATP</strong> (2 + 36)</p>
+                <p lang="ru" class="lang-content text-sm text-center">📊 <strong>Итого:</strong> 1 глюкоза = <strong>38 АТФ</strong> (2 + 36)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основной обмен -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">📊 Негізгі және жалпы алмасу</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">📊 Basal and Total Metabolism</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">📊 Основной и общий обмен</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box" style="border-color: #86efac; background: #f0fdf4;">
+                    <h4 lang="kk" class="lang-content font-bold text-green-700 mb-2">🛏️ НЕГІЗГІ АЛМАСУ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-green-700 mb-2">🛏️ BASAL METABOLIC RATE</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-green-700 mb-2">🛏️ ОСНОВНОЙ ОБМЕН</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">Демалыс кезінде, аш қарын, 18-20°C</p>
+                    <p lang="en" class="lang-content text-sm">At rest, fasting, 18-20°C</p>
+                    <p lang="ru" class="lang-content text-sm">В покое, натощак, 18-20°C</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">≈ <strong>1500-1700 ккал/күн</strong></p>
+                    <p lang="en" class="lang-content text-xs mt-2">≈ <strong>1500-1700 kcal/day</strong></p>
+                    <p lang="ru" class="lang-content text-xs mt-2">≈ <strong>1500-1700 ккал/сут</strong></p>
+                    
+                    <p lang="kk" class="lang-content text-xs text-gray-600">Тіршілікті қолдауға қажет</p>
+                    <p lang="en" class="lang-content text-xs text-gray-600">Required to maintain life</p>
+                    <p lang="ru" class="lang-content text-xs text-gray-600">Для поддержания жизни</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #fca5a5; background: #fef2f2;">
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">🏃 ЖАЛПЫ АЛМАСУ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">🏃 TOTAL METABOLISM</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">🏃 ОБЩИЙ ОБМЕН</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">Негізгі + жұмыс энергиясы</p>
+                    <p lang="en" class="lang-content text-sm">Basal + work energy</p>
+                    <p lang="ru" class="lang-content text-sm">Основной + энергия работы</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">≈ <strong>2500-4000 ккал/күн</strong></p>
+                    <p lang="en" class="lang-content text-xs mt-2">≈ <strong>2500-4000 kcal/day</strong></p>
+                    <p lang="ru" class="lang-content text-xs mt-2">≈ <strong>2500-4000 ккал/сут</strong></p>
+                    
+                    <p lang="kk" class="lang-content text-xs text-gray-600">Еңбек түріне байланысты</p>
+                    <p lang="en" class="lang-content text-xs text-gray-600">Depends on type of work</p>
+                    <p lang="ru" class="lang-content text-xs text-gray-600">Зависит от вида труда</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 1rem; border-top: 4px solid #22c55e;">
+        <p lang="kk" class="lang-content text-sm font-bold text-green-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-green-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-green-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

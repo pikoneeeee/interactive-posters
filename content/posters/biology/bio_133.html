@@ -1,113 +1,315 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transpiration and Leaf Fall</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Головной мозг</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #0f172a; color: #fff; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { cursor: pointer; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #be185d; border-bottom: 3px solid #f9a8d4; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #ec4899; background: white; color: #ec4899; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fdf2f8; }
+        .lang-btn.active { background: #ec4899; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .brain-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #fdf2f8; border: 2px solid #f9a8d4; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 flex flex-col h-screen">
+<body class="bg-slate-50">
 
-<div class="flex justify-between items-center mb-8">
-        <h1 class="text-4xl font-bold text-sky-400" id="header-title">Transpiration</h1>
-        <div class="flex gap-2">
-            <button onclick="setL('ru')" class="bg-gray-800 px-3 py-1 rounded hover:bg-sky-600">RU</button>
-            <button onclick="setL('en')" class="bg-gray-800 px-3 py-1 rounded hover:bg-sky-600">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-1 flex flex-col gap-4">
-            <div class="glass p-6 rounded-2xl cursor-pointer hover:bg-sky-900/30 border-l-4 border-sky-500" onclick="setMode('water')">
-                <h3 class="font-bold text-xl mb-1">Испарение</h3>
-                <p class="text-xs text-gray-400">Движение воды через устьица. Охлаждение листа.</p>
+    <header class="header-card text-center mb-10">
+        <p class="text-pink-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Бас ми</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Brain</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Головной мозг</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-pink-100">Бас ми — ОЖЖ-нің негізгі бөлігі. Салмағы ~1400 г. ~86 млрд нейрон, ~100 трлн синапс. Энергияның 20% пайдаланады.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-pink-100">The brain is the main part of CNS. Weight ~1400 g. ~86 billion neurons, ~100 trillion synapses. Uses 20% of energy.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-pink-100">Головной мозг — главная часть ЦНС. Масса ~1400 г. ~86 млрд нейронов, ~100 трлн синапсов. Потребляет 20% энергии.</p>
+    </header>
+
+    <!-- Отделы мозга -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Бас мидың бөлімдері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Parts of the Brain</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Отделы головного мозга</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Большие полушария -->
+            <div class="card" style="border-top: 5px solid #ec4899;">
+                <div style="font-size: 36px; text-align: center; margin-bottom: 10px;">🧠</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-pink-700 mb-2">ҮЛКЕН МИ СЫҢАРЛАРЫ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-pink-700 mb-2">CEREBRUM</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-pink-700 mb-2">БОЛЬШИЕ ПОЛУШАРИЯ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center mb-2">80% ми массасы</p>
+                <p lang="en" class="lang-content text-xs text-center mb-2">80% of brain mass</p>
+                <p lang="ru" class="lang-content text-xs text-center mb-2">80% массы мозга</p>
+                
+                <div style="background: #fdf2f8; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">⚙️ Ойлау, жады, сана, ерікті қозғалыс, сезім, сөйлеу</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ Thinking, memory, consciousness, voluntary movement, sensation, speech</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ Мышление, память, сознание, произвольные движения, ощущения, речь</p>
+                </div>
             </div>
-            <div class="glass p-6 rounded-2xl cursor-pointer hover:bg-orange-900/30 border-l-4 border-orange-500" onclick="setMode('fall')">
-                <h3 class="font-bold text-xl mb-1">Листопад</h3>
-                <p class="text-xs text-gray-400">Защита от иссушения зимой. Удаление вредных веществ.</p>
+
+            <!-- Промежуточный мозг -->
+            <div class="card" style="border-top: 5px solid #f59e0b;">
+                <div style="font-size: 36px; text-align: center; margin-bottom: 10px;">🎛️</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-yellow-700 mb-2">АРАЛЫҚ МИ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-yellow-700 mb-2">DIENCEPHALON</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-yellow-700 mb-2">ПРОМЕЖУТОЧНЫЙ МОЗГ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center mb-2">Таламус + Гипоталамус</p>
+                <p lang="en" class="lang-content text-xs text-center mb-2">Thalamus + Hypothalamus</p>
+                <p lang="ru" class="lang-content text-xs text-center mb-2">Таламус + Гипоталамус</p>
+                
+                <div style="background: #fef3c7; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">⚙️ Сезім ақпаратын өткізу, температура, аштық, шөл, ұйқы реттеу</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ Relay sensory info, regulate temperature, hunger, thirst, sleep</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ Передача сенсорной инфо, регуляция температуры, голода, жажды, сна</p>
+                </div>
+            </div>
+
+            <!-- Средний мозг -->
+            <div class="card" style="border-top: 5px solid #10b981;">
+                <div style="font-size: 36px; text-align: center; margin-bottom: 10px;">👁️</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-emerald-700 mb-2">ОРТАҢҒЫ МИ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-emerald-700 mb-2">MIDBRAIN</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-emerald-700 mb-2">СРЕДНИЙ МОЗГ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center mb-2">Төрт төмпешік</p>
+                <p lang="en" class="lang-content text-xs text-center mb-2">Four colliculi</p>
+                <p lang="ru" class="lang-content text-xs text-center mb-2">Четверохолмие</p>
+                
+                <div style="background: #ecfdf5; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">⚙️ Көру, есту рефлекстері, бұлшықет тонусы, бағдарлау рефлексі</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ Visual, auditory reflexes, muscle tone, orienting reflex</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ Зрительные, слуховые рефлексы, мышечный тонус, ориентировочный рефлекс</p>
+                </div>
+            </div>
+
+            <!-- Мозжечок -->
+            <div class="card" style="border-top: 5px solid #3b82f6;">
+                <div style="font-size: 36px; text-align: center; margin-bottom: 10px;">🎯</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-blue-700 mb-2">МИ СЫҢАРЫ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-blue-700 mb-2">CEREBELLUM</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-blue-700 mb-2">МОЗЖЕЧОК</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center mb-2">"Кіші ми"</p>
+                <p lang="en" class="lang-content text-xs text-center mb-2">"Little brain"</p>
+                <p lang="ru" class="lang-content text-xs text-center mb-2">"Малый мозг"</p>
+                
+                <div style="background: #eff6ff; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">⚙️ Қозғалыс координациясы, тепе-теңдік, дәл қозғалыстар</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ Movement coordination, balance, precise movements</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ Координация движений, равновесие, точные движения</p>
+                </div>
+            </div>
+
+            <!-- Мост -->
+            <div class="card" style="border-top: 5px solid #8b5cf6;">
+                <div style="font-size: 36px; text-align: center; margin-bottom: 10px;">🌉</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">КӨПІР</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">PONS</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">МОСТ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center mb-2">Варолий көпірі</p>
+                <p lang="en" class="lang-content text-xs text-center mb-2">Pons Varolii</p>
+                <p lang="ru" class="lang-content text-xs text-center mb-2">Варолиев мост</p>
+                
+                <div style="background: #f5f3ff; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">⚙️ Ми сыңарымен байланыс, бет мимикасы, шайнау, тыныс алу</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ Connection with cerebellum, facial expression, chewing, breathing</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ Связь с мозжечком, мимика, жевание, дыхание</p>
+                </div>
+            </div>
+
+            <!-- Продолговатый мозг -->
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 36px; text-align: center; margin-bottom: 10px;">❤️</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-red-700 mb-2">СОПАҚША МИ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-red-700 mb-2">MEDULLA OBLONGATA</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-red-700 mb-2">ПРОДОЛГОВАТЫЙ МОЗГ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center mb-2">Өмірлік маңызды орталықтар</p>
+                <p lang="en" class="lang-content text-xs text-center mb-2">Vital centers</p>
+                <p lang="ru" class="lang-content text-xs text-center mb-2">Жизненно важные центры</p>
+                
+                <div style="background: #fef2f2; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">⚙️ Тыныс алу, жүрек соғу, жұту, құсу, түшкіру, жөтелу орталықтары</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ Breathing, heartbeat, swallowing, vomiting, sneezing, coughing centers</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ Центры дыхания, сердцебиения, глотания, рвоты, чихания, кашля</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="lg:col-span-2 relative glass rounded-custom p-0 overflow-hidden flex items-center justify-center">
-            <canvas id="transCanvas" class="w-full h-full"></canvas>
-            <p class="absolute bottom-6 text-xs text-white/30 uppercase tracking-[0.5em]" id="mode-hint">Click to toggle Season</p>
-        </div>
-    </div>
+    <!-- Кора больших полушарий -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Үлкен ми сыңарларының қыртысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Cerebral Cortex</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Кора больших полушарий</h2>
 
-    <script>
-        const db = {
-            ru: { t: "Испарение и Листопад" },
-            en: { t: "Transpiration & Leaf Fall" }
-        };
-        let lang='ru', mode='water', cx, cvs;
-        let particles = [];
-
-        window.setL = (l) => { lang=l; document.getElementById('header-title').textContent = db[l].t; }
-        window.setMode = (m) => { mode = m; particles = []; }
-
-        function draw() {
-            const w = cvs.width, h = cvs.height;
-            const t = Date.now() * 0.002;
-            cx.clearRect(0,0,w,h);
-
-            // Leaf
-            cx.fillStyle = mode === 'water' ? '#16a34a' : '#d97706';
-            cx.beginPath(); cx.ellipse(w/2, h/2, 100, 200, 0.1, 0, Math.PI*2); cx.fill();
+        <div class="card">
+            <div class="fact-box mb-4">
+                <p lang="kk" class="lang-content text-sm"><strong>Қыртыс</strong> — сұр зат (2-4 мм), қатпарлар (борозда + иірім). Беті ~2200 см². 4 бөлік.</p>
+                <p lang="en" class="lang-content text-sm"><strong>Cortex</strong> — gray matter (2-4 mm), folded (sulci + gyri). Surface ~2200 cm². 4 lobes.</p>
+                <p lang="ru" class="lang-content text-sm"><strong>Кора</strong> — серое вещество (2-4 мм), складки (борозды + извилины). Площадь ~2200 см². 4 доли.</p>
+            </div>
             
-            // Veins
-            cx.strokeStyle = mode === 'water' ? '#14532d' : '#78350f'; cx.lineWidth = 3;
-            cx.beginPath(); cx.moveTo(w/2 - 20, h/2 + 180); cx.lineTo(w/2 + 20, h/2 - 180); cx.stroke();
-
-            if (mode === 'water') {
-                // Stomata opening animation
-                cx.fillStyle = '#0f172a'; // Pore
-                cx.beginPath(); cx.ellipse(w/2, h/2, 10 + Math.sin(t)*5, 20, 0, 0, Math.PI*2); cx.fill();
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Лобная -->
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2 text-center">🔴 МАҢДАЙ БӨЛІК</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2 text-center">🔴 FRONTAL LOBE</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2 text-center">🔴 ЛОБНАЯ ДОЛЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Ерікті қозғалыс</p>
+                    <p lang="en" class="lang-content text-xs">• Voluntary movement</p>
+                    <p lang="ru" class="lang-content text-xs">• Произвольные движения</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Сөйлеу (Брока аймағы)</p>
+                    <p lang="en" class="lang-content text-xs">• Speech (Broca's area)</p>
+                    <p lang="ru" class="lang-content text-xs">• Речь (зона Брока)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Ойлау, жоспарлау, тұлға</p>
+                    <p lang="en" class="lang-content text-xs">• Thinking, planning, personality</p>
+                    <p lang="ru" class="lang-content text-xs">• Мышление, планирование, личность</p>
+                </div>
                 
-                // Water vapor
-                if(Math.random() > 0.8) particles.push({x: w/2, y: h/2, v: 2, a: 1});
-                particles.forEach((p, i) => {
-                    p.y -= p.v; p.x += Math.sin(p.y*0.1)*2; p.a -= 0.01;
-                    cx.fillStyle = `rgba(186, 230, 253, ${p.a})`;
-                    cx.beginPath(); cx.arc(p.x, p.y, 5, 0, Math.PI*2); cx.fill();
-                    if(p.a <= 0) particles.splice(i, 1);
-                });
-            } else {
-                // Abscission layer (Cork)
-                cx.fillStyle = '#713f12';
-                cx.fillRect(w/2 - 30, h/2 + 180, 60, 10);
+                <!-- Теменная -->
+                <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content font-bold text-yellow-700 mb-2 text-center">🟡 ТӨБЕ БӨЛІК</h4>
+                    <h4 lang="en" class="lang-content font-bold text-yellow-700 mb-2 text-center">🟡 PARIETAL LOBE</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-yellow-700 mb-2 text-center">🟡 ТЕМЕННАЯ ДОЛЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Тері сезімі (жанасу, ауырсыну)</p>
+                    <p lang="en" class="lang-content text-xs">• Skin sensation (touch, pain)</p>
+                    <p lang="ru" class="lang-content text-xs">• Кожная чувствительность</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Дене кеңістіктегі орны</p>
+                    <p lang="en" class="lang-content text-xs">• Body position in space</p>
+                    <p lang="ru" class="lang-content text-xs">• Положение тела в пространстве</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Оқу, жазу, есептеу</p>
+                    <p lang="en" class="lang-content text-xs">• Reading, writing, math</p>
+                    <p lang="ru" class="lang-content text-xs">• Чтение, письмо, счёт</p>
+                </div>
                 
-                // Falling leaves particles
-                if(Math.random() > 0.9) particles.push({x: Math.random()*w, y: 0, r: Math.random()*20, c: '#f59e0b'});
-                particles.forEach((p, i) => {
-                    p.y += 2; p.x += Math.sin(p.y*0.05)*2;
-                    cx.fillStyle = p.c;
-                    cx.beginPath(); cx.ellipse(p.x, p.y, 10, 5, 0.5, 0, Math.PI*2); cx.fill();
-                    if(p.y > h) particles.splice(i, 1);
-                });
-            }
+                <!-- Затылочная -->
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2 text-center">🔵 ШҮЙДЕ БӨЛІК</h4>
+                    <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2 text-center">🔵 OCCIPITAL LOBE</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2 text-center">🔵 ЗАТЫЛОЧНАЯ ДОЛЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Көру орталығы</p>
+                    <p lang="en" class="lang-content text-xs">• Visual center</p>
+                    <p lang="ru" class="lang-content text-xs">• Зрительный центр</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Түстерді ажырату</p>
+                    <p lang="en" class="lang-content text-xs">• Color recognition</p>
+                    <p lang="ru" class="lang-content text-xs">• Распознавание цветов</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Көріністі талдау</p>
+                    <p lang="en" class="lang-content text-xs">• Visual processing</p>
+                    <p lang="ru" class="lang-content text-xs">• Обработка изображений</p>
+                </div>
+                
+                <!-- Височная -->
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content font-bold text-emerald-700 mb-2 text-center">🟢 САМАЙ БӨЛІК</h4>
+                    <h4 lang="en" class="lang-content font-bold text-emerald-700 mb-2 text-center">🟢 TEMPORAL LOBE</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-emerald-700 mb-2 text-center">🟢 ВИСОЧНАЯ ДОЛЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Есту орталығы</p>
+                    <p lang="en" class="lang-content text-xs">• Auditory center</p>
+                    <p lang="ru" class="lang-content text-xs">• Слуховой центр</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Сөзді түсіну (Вернике)</p>
+                    <p lang="en" class="lang-content text-xs">• Speech comprehension (Wernicke)</p>
+                    <p lang="ru" class="lang-content text-xs">• Понимание речи (Вернике)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Жады, эмоция</p>
+                    <p lang="en" class="lang-content text-xs">• Memory, emotion</p>
+                    <p lang="ru" class="lang-content text-xs">• Память, эмоции</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            requestAnimationFrame(draw);
-        }
+    <!-- Интересные факты -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Қызықты фактілер</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Interesting Facts</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Интересные факты</h2>
 
-        window.onload = () => {
-            cvs = document.getElementById('transCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; };
-            window.addEventListener('resize', rs); rs();
-            cvs.addEventListener('click', () => mode = mode === 'water' ? 'fall' : 'water');
-            draw();
-        }
-    </script>
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">⚡ Ми <strong>20% оттегі</strong> және <strong>20% глюкоза</strong> пайдаланады (бүкіл денеден)</p>
+                    <p lang="en" class="lang-content text-sm">⚡ Brain uses <strong>20% oxygen</strong> and <strong>20% glucose</strong> (of whole body)</p>
+                    <p lang="ru" class="lang-content text-sm">⚡ Мозг потребляет <strong>20% кислорода</strong> и <strong>20% глюкозы</strong> (от всего тела)</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🔌 Мидың электр белсенділігі <strong>23 Ватт</strong> — шағын лампочка жарықтандыруға жеткілікті!</p>
+                    <p lang="en" class="lang-content text-sm">🔌 Brain's electrical activity is <strong>23 Watts</strong> — enough to power a small light bulb!</p>
+                    <p lang="ru" class="lang-content text-sm">🔌 Электрическая активность мозга — <strong>23 Ватта</strong> — хватит для маленькой лампочки!</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🧠 Сол жақ сыңар — оң жақ денені басқарады (және керісінше)</p>
+                    <p lang="en" class="lang-content text-sm">🧠 Left hemisphere controls right side of body (and vice versa)</p>
+                    <p lang="ru" class="lang-content text-sm">🧠 Левое полушарие управляет правой стороной тела (и наоборот)</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">💭 Ми <strong>ауырсынуды сезбейді</strong> — өзінде ауырсыну рецепторлары жоқ</p>
+                    <p lang="en" class="lang-content text-sm">💭 Brain <strong>doesn't feel pain</strong> — has no pain receptors itself</p>
+                    <p lang="ru" class="lang-content text-sm">💭 Мозг <strong>не чувствует боли</strong> — в нём нет болевых рецепторов</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border-radius: 1rem; border-top: 4px solid #ec4899;">
+        <p lang="kk" class="lang-content text-sm font-bold text-pink-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-pink-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-pink-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Популяция. Структура и динамика</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fefce8 0%, #f0fdf4 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #713f12 0%, #ca8a04 40%, #fde68a 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(202,138,4,0.4); }
+        .section-heading { color: #92400e; border-bottom: 4px solid #fde68a; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.8rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); margin-bottom: 24px; border: 1px solid #fde68a; }
+        .lang-btn { padding: 10px 22px; border: 2px solid #ca8a04; background: white; color: #92400e; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 1rem; }
+        .lang-btn.active { background: linear-gradient(135deg,#713f12,#ca8a04); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#fefce8,#fef9c3); border-left: 5px solid #ca8a04; padding: 16px; border-radius: 0 12px 12px 0; margin: 10px 0; font-size: 0.95rem; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 14px 16px; margin: 8px 0; font-size: 0.95rem; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#713f12,#ca8a04); color:white; padding:11px 14px; font-weight:700; font-size:0.95rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:10px 14px; border-bottom:1px solid #fde68a; font-size:0.92rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#fefce8; }
+        table.comp tr:last-child td { border-bottom:none; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-yellow-100 font-semibold mb-3 text-lg">10–11 класс • Экология • Популяционная биология</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Популяция. Құрылымы және динамикасы</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Population. Structure and Dynamics</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Популяция. Структура и динамика</h1>
+        <div class="mt-5 p-4 bg-white/15 rounded-xl flex flex-wrap gap-6 justify-center text-base">
+            <div class="text-center"><span class="text-3xl">👥</span><p class="font-bold text-yellow-100 mt-1"><span lang="kk" class="lang-content">Тығыздық / саны</span><span lang="en" class="lang-content">Density / size</span><span lang="ru" class="lang-content">Плотность / численность</span></p></div>
+            <div class="text-center"><span class="text-3xl">📈</span><p class="font-bold text-yellow-100 mt-1"><span lang="kk" class="lang-content">Логистикалық өсу</span><span lang="en" class="lang-content">Logistic growth</span><span lang="ru" class="lang-content">Логистический рост</span></p></div>
+            <div class="text-center"><span class="text-3xl">⚖️</span><p class="font-bold text-yellow-100 mt-1"><span lang="kk" class="lang-content">Сыйымдылық шегі K</span><span lang="en" class="lang-content">Carrying capacity K</span><span lang="ru" class="lang-content">Ёмкость среды K</span></p></div>
+        </div>
+    </header>
+
+    <!-- POPULATION CHARACTERISTICS TABLE -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📊 Популяцияның сипаттамалары</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Population Characteristics</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Характеристики популяции</h2>
+        <div class="card overflow-x-auto">
+            <table class="comp">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Сипаттама</span><span lang="en" class="lang-content">Characteristic</span><span lang="ru" class="lang-content">Характеристика</span></th>
+                    <th><span lang="kk" class="lang-content">Анықтама</span><span lang="en" class="lang-content">Definition</span><span lang="ru" class="lang-content">Определение</span></th>
+                    <th><span lang="kk" class="lang-content">Мысал / Маңыздылығы</span><span lang="en" class="lang-content">Example / Significance</span><span lang="ru" class="lang-content">Пример / Значение</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr><td class="font-bold text-yellow-800">👥 <span lang="kk" class="lang-content">Саны (N)</span><span lang="en" class="lang-content">Abundance (N)</span><span lang="ru" class="lang-content">Численность (N)</span></td>
+                        <td><span lang="kk" class="lang-content">Белгілі бір уақытта популяциядағы жеке дарлардың жалпы саны.</span><span lang="en" class="lang-content">Total number of individuals in the population at a given time.</span><span lang="ru" class="lang-content">Общее число особей в популяции в данный момент.</span></td>
+                        <td><span lang="kk" class="lang-content">Сирек кездесетін түр: N < 50 → жойылу қаупі. Тиімді аулау нормасы үшін балықшылар популяция санын білуі керек.</span><span lang="en" class="lang-content">Rare species: N < 50 → extinction risk. Fishermen must know population size for sustainable harvest.</span><span lang="ru" class="lang-content">Редкий вид: N < 50 → угроза вымирания. Рыбаки должны знать численность для устойчивого промысла.</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-amber-700">📏 <span lang="kk" class="lang-content">Тығыздық</span><span lang="en" class="lang-content">Density</span><span lang="ru" class="lang-content">Плотность</span></td>
+                        <td><span lang="kk" class="lang-content">Бірлік аумақ немесе көлемдегі жеке дарлар саны (N/ауд).</span><span lang="en" class="lang-content">Number of individuals per unit area or volume (N/area).</span><span lang="ru" class="lang-content">Число особей на единицу площади или объёма (N/площадь).</span></td>
+                        <td><span lang="kk" class="lang-content">Жоғары тығыздық → ресурстар үшін бәсекелестік ↑, аурулар таралуы ↑. Агрегациялы таралу (кластерлер) — ең жиі кездеседі.</span><span lang="en" class="lang-content">High density → resource competition ↑, disease spread ↑. Clumped distribution (clusters) — most common.</span><span lang="ru" class="lang-content">Высокая плотность → конкуренция за ресурсы ↑, распространение болезней ↑. Агрегированное распределение (кластеры) — наиболее частое.</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-orange-700">🎂 <span lang="kk" class="lang-content">Жас құрылымы</span><span lang="en" class="lang-content">Age structure</span><span lang="ru" class="lang-content">Возрастная структура</span></td>
+                        <td><span lang="kk" class="lang-content">Жас топтарының (пре-репродуктивті, репродуктивті, пост-репродуктивті) үлесі.</span><span lang="en" class="lang-content">Proportion of age groups (pre-reproductive, reproductive, post-reproductive).</span><span lang="ru" class="lang-content">Доля возрастных групп (пре-репродуктивные, репродуктивные, пост-репродуктивные).</span></td>
+                        <td><span lang="kk" class="lang-content">Жас топтарының молдығы → өсу потенциалы жоғары. Популяция «пирамидасы»: кеңейтуші (өсіп жатқан), тұрақты, қысқарушы.</span><span lang="en" class="lang-content">Young cohorts dominant → high growth potential. Population «pyramid»: expanding (growing), stable, shrinking.</span><span lang="ru" class="lang-content">Много молодых → высокий потенциал роста. «Пирамида» популяции: расширяющаяся (растущая), стабильная, суживающаяся.</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-green-700">👶 <span lang="kk" class="lang-content">Туылу жылдамдығы (b)</span><span lang="en" class="lang-content">Birth rate (b)</span><span lang="ru" class="lang-content">Рождаемость (b)</span></td>
+                        <td><span lang="kk" class="lang-content">Уақыт бірлігінде жеке дар санына шаққандағы туылған жаңа жеке дарлар саны.</span><span lang="en" class="lang-content">Number of new individuals born per individual per unit time.</span><span lang="ru" class="lang-content">Число новых особей, рождённых на одну особь в единицу времени.</span></td>
+                        <td><span lang="kk" class="lang-content">b > d болса → популяция өседі. Жоғары туылу = жоғары r (өсу жылдамдығы).</span><span lang="en" class="lang-content">If b > d → population grows. High birth rate = high r (growth rate).</span><span lang="ru" class="lang-content">Если b > d → популяция растёт. Высокая рождаемость = высокий r (скорость роста).</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-red-700">💀 <span lang="kk" class="lang-content">Өлім жылдамдығы (d)</span><span lang="en" class="lang-content">Death rate (d)</span><span lang="ru" class="lang-content">Смертность (d)</span></td>
+                        <td><span lang="kk" class="lang-content">Уақыт бірлігінде жеке дар санына шаққандағы өлген жеке дарлар саны.</span><span lang="en" class="lang-content">Number of individuals dying per individual per unit time.</span><span lang="ru" class="lang-content">Число особей, погибающих на одну особь в единицу времени.</span></td>
+                        <td><span lang="kk" class="lang-content">d > b болса → популяция азаяды. Жоғары өлім = ресурс тапшылығы, жыртқыш қысымы немесе ауру.</span><span lang="en" class="lang-content">If d > b → population declines. High mortality = resource scarcity, predation pressure or disease.</span><span lang="ru" class="lang-content">Если d > b → популяция убывает. Высокая смертность = нехватка ресурсов, хищничество или болезнь.</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- GROWTH MODELS + REGULATION -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📈 Популяция өсу модельдері • ⚖️ Реттелу механизмдері</h2>
+        <h2 lang="en" class="lang-content section-heading">📈 Population Growth Models • ⚖️ Regulation Mechanisms</h2>
+        <h2 lang="ru" class="lang-content section-heading">📈 Модели роста популяции • ⚖️ Механизмы регуляции</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="tbox mb-3" style="border-color:#ca8a04;background:#fefce8;">
+                    <p class="font-bold text-amber-700 text-base mb-2">📈 <span lang="kk" class="lang-content">Экспоненциалды өсу (J-тәрізді қисық):</span><span lang="en" class="lang-content">Exponential growth (J-shaped curve):</span><span lang="ru" class="lang-content">Экспоненциальный рост (J-образная кривая):</span></p>
+                    <div class="bg-yellow-50 rounded-lg p-3 text-center font-bold text-amber-800 mb-2">
+                        <span lang="kk" class="lang-content">dN/dt = r × N</span>
+                        <span lang="en" class="lang-content">dN/dt = r × N</span>
+                        <span lang="ru" class="lang-content">dN/dt = r × N</span>
+                    </div>
+                    <p class="text-gray-700"><span lang="kk" class="lang-content">r — табиғи өсу жылдамдығы (r = b − d). Ресурстар шектелмеген кезде, жаңа аумақта немесе вспышка кезінде. Шексіз жалғаспайды — орта сыйымдылығы шектейді. Мысал: инвазивті түрлер, бактериялар қолайлы жағдайда.</span><span lang="en" class="lang-content">r — intrinsic rate of increase (r = b − d). When resources are unlimited, in new territory or during outbreak. Cannot continue indefinitely — limited by carrying capacity. Example: invasive species, bacteria under optimal conditions.</span><span lang="ru" class="lang-content">r — удельная скорость роста (r = b − d). При неограниченных ресурсах, на новой территории или во время вспышки. Бесконечно не продолжается — ограничивается ёмкостью среды. Пример: инвазивные виды, бактерии в оптимальных условиях.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#ca8a04;background:#fefce8;">
+                    <p class="font-bold text-amber-700 text-base mb-2">📊 <span lang="kk" class="lang-content">Логистикалық өсу (S-тәрізді қисық — Ферхюльст):</span><span lang="en" class="lang-content">Logistic growth (S-shaped curve — Verhulst):</span><span lang="ru" class="lang-content">Логистический рост (S-образная кривая — Ферхюльст):</span></p>
+                    <div class="bg-yellow-50 rounded-lg p-3 text-center font-bold text-amber-800 mb-2">
+                        <span lang="kk" class="lang-content">dN/dt = r × N × (K − N) / K</span>
+                        <span lang="en" class="lang-content">dN/dt = r × N × (K − N) / K</span>
+                        <span lang="ru" class="lang-content">dN/dt = r × N × (K − N) / K</span>
+                    </div>
+                    <p class="text-gray-700"><span lang="kk" class="lang-content"><b>K</b> — орта сыйымдылығы (carrying capacity). N → K болған сайын өсу жылдамдығы азаяды. N = K/2 кезінде өсу ең жоғары. Шындыққа жақын модель. Мысал: аралға кіргізілген қойлар (Tasmaniya), балықтар.</span><span lang="en" class="lang-content"><b>K</b> — carrying capacity. As N → K growth rate decreases. Maximum growth rate when N = K/2. More realistic model. Example: sheep introduced to island (Tasmania), fish populations.</span><span lang="ru" class="lang-content"><b>K</b> — ёмкость среды. По мере N → K скорость роста снижается. Максимальный рост при N = K/2. Более реалистичная модель. Пример: овцы, завезённые на остров (Тасмания), рыбные популяции.</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="tbox mb-3" style="border-color:#ca8a04;background:#fefce8;">
+                    <p class="font-bold text-amber-700 text-base mb-2">⚖️ <span lang="kk" class="lang-content">Популяцияны реттейтін факторлар:</span><span lang="en" class="lang-content">Population-regulating factors:</span><span lang="ru" class="lang-content">Факторы регуляции популяции:</span></p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-red-50 rounded-lg p-3">
+                            <p class="font-semibold text-red-700"><span lang="kk" class="lang-content">Тығыздыққа тәуелді факторлар:</span><span lang="en" class="lang-content">Density-dependent factors:</span><span lang="ru" class="lang-content">Зависящие от плотности:</span></p>
+                            <ul class="text-gray-600 mt-1 space-y-0.5">
+                                <li>🦁 <span lang="kk" class="lang-content">Жыртқыш-жем</span><span lang="en" class="lang-content">Predation</span><span lang="ru" class="lang-content">Хищничество</span></li>
+                                <li>🦠 <span lang="kk" class="lang-content">Аурулар / паразиттер</span><span lang="en" class="lang-content">Disease / parasites</span><span lang="ru" class="lang-content">Болезни / паразиты</span></li>
+                                <li>🌿 <span lang="kk" class="lang-content">Тамақ ресурсы бәсекесі</span><span lang="en" class="lang-content">Food resource competition</span><span lang="ru" class="lang-content">Конкуренция за пищу</span></li>
+                                <li>🏠 <span lang="kk" class="lang-content">Мекен аумағы тапшылығы</span><span lang="en" class="lang-content">Habitat scarcity</span><span lang="ru" class="lang-content">Дефицит территории</span></li>
+                            </ul>
+                            <p class="text-gray-500 text-sm mt-1"><span lang="kk" class="lang-content">N жоғарылаған сайын күшейеді → <b>теріс кері байланыс</b></span><span lang="en" class="lang-content">Intensify as N rises → <b>negative feedback</b></span><span lang="ru" class="lang-content">Усиливаются при росте N → <b>отрицательная обратная связь</b></span></p>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-3">
+                            <p class="font-semibold text-blue-700"><span lang="kk" class="lang-content">Тығыздыққа тәуелсіз:</span><span lang="en" class="lang-content">Density-independent:</span><span lang="ru" class="lang-content">Независящие от плотности:</span></p>
+                            <ul class="text-gray-600 mt-1 space-y-0.5">
+                                <li>🌡️ <span lang="kk" class="lang-content">Температура кенеттен өзгеруі</span><span lang="en" class="lang-content">Sudden temperature change</span><span lang="ru" class="lang-content">Резкое изменение температуры</span></li>
+                                <li>🌊 <span lang="kk" class="lang-content">Су тасқыны / қуаңшылық</span><span lang="en" class="lang-content">Flooding / drought</span><span lang="ru" class="lang-content">Наводнение / засуха</span></li>
+                                <li>🌋 <span lang="kk" class="lang-content">Жер сілкінісі / жанартау</span><span lang="en" class="lang-content">Earthquake / volcano</span><span lang="ru" class="lang-content">Землетрясение / вулкан</span></li>
+                                <li>🏭 <span lang="kk" class="lang-content">Адам іс-әрекеті</span><span lang="en" class="lang-content">Human activity</span><span lang="ru" class="lang-content">Деятельность человека</span></li>
+                            </ul>
+                            <p class="text-gray-500 text-sm mt-1"><span lang="kk" class="lang-content">N-дан тәуелсіз, кез келген санда бірдей әсер</span><span lang="en" class="lang-content">Independent of N, same effect at any size</span><span lang="ru" class="lang-content">Не зависят от N, одинаково при любой численности</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fact-box">
+                    <p class="font-bold text-amber-700"><span lang="kk" class="lang-content">🔁 Жыртқыш-жем тербелістері (Лотка–Вольтерра):</span><span lang="en" class="lang-content">🔁 Predator–prey oscillations (Lotka–Volterra):</span><span lang="ru" class="lang-content">🔁 Колебания хищник–жертва (Лотка–Вольтерра):</span></p>
+                    <p class="text-gray-700 mt-1"><span lang="kk" class="lang-content">Жем саны ↑ → жыртқыш саны кейін ↑ → жем саны ↓ → жыртқыш саны кейін ↓ → жем саны ↑ (цикл қайталанады). Классикалық мысал: Канадалық сілеусін мен қоян (90–100 жылдық цикл). Тепе-теңдіктен жыртқышты жою → жемнің шамадан тыс өсуіне әкелуі мүмкін.</span><span lang="en" class="lang-content">Prey ↑ → predator later ↑ → prey ↓ → predator later ↓ → prey ↑ (cycle repeats). Classic example: Canadian lynx and snowshoe hare (90–100 year cycle). Removing predator from equilibrium → can lead to prey overpopulation.</span><span lang="ru" class="lang-content">Жертва ↑ → хищник позже ↑ → жертва ↓ → хищник позже ↓ → жертва ↑ (цикл повторяется). Классический пример: канадская рысь и заяц-беляк (цикл 90–100 лет). Удаление хищника из равновесия → может привести к перенаселению жертвы.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

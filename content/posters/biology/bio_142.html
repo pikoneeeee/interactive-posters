@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клетка. Строение клетки</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%); }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #0891b2 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(5, 150, 105, 0.3); }
+        .section-heading { color: #059669; border-bottom: 4px solid #34d399; display: inline-block; padding-bottom: 8px; margin-bottom: 30px; font-weight: 800; font-size: 1.8rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #059669; background: white; color: #059669; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #ecfdf5; transform: scale(1.02); }
+        .lang-btn.active { background: linear-gradient(135deg, #059669, #0d9488); color: white; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .organelle-card { border-radius: 16px; padding: 20px; position: relative; overflow: hidden; }
+        .organelle-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; }
+        .fact-highlight { background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 100%); border-left: 5px solid #10b981; padding: 20px; border-radius: 0 12px 12px 0; margin: 15px 0; }
+        .compare-box { border: 2px solid #d1fae5; border-radius: 12px; padding: 16px; background: #f0fdf4; }
+        .icon-lg { font-size: 2.5rem; margin-bottom: 12px; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:24px; gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-emerald-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Цитология</p>
+        
+        <h1 lang="kk" class="lang-content text-5xl font-black uppercase tracking-wide">Жасуша құрылысы</h1>
+        <h1 lang="en" class="lang-content text-5xl font-black uppercase tracking-wide">Cell Structure</h1>
+        <h1 lang="ru" class="lang-content text-5xl font-black uppercase tracking-wide">Строение клетки</h1>
+        
+        <div class="mt-6 p-6 bg-white/10 rounded-xl backdrop-blur">
+            <p lang="kk" class="lang-content text-lg font-medium">Жасуша — тірі ағзалардың құрылымдық және функционалдық бірлігі. Барлық тірі организмдер жасушалардан тұрады (жасуша теориясы, 1838-1839, Шлейден және Шванн). Жасуша тек жасушадан пайда болады (Р. Вирхов, 1858).</p>
+            <p lang="en" class="lang-content text-lg font-medium">Cell is the structural and functional unit of living organisms. All living things are made of cells (cell theory, 1838-1839, Schleiden & Schwann). Cells arise only from pre-existing cells (R. Virchow, 1858).</p>
+            <p lang="ru" class="lang-content text-lg font-medium">Клетка — структурная и функциональная единица живых организмов. Все живое состоит из клеток (клеточная теория, 1838-1839, Шлейден и Шванн). Клетка происходит только от клетки (Р. Вирхов, 1858).</p>
+        </div>
+    </header>
+
+    <!-- Основные положения клеточной теории -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content section-heading">📜 Жасуша теориясының негізгі қағидалары</h2>
+        <h2 lang="en" class="lang-content section-heading">📜 Main Principles of Cell Theory</h2>
+        <h2 lang="ru" class="lang-content section-heading">📜 Основные положения клеточной теории</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="fact-highlight">
+                    <p lang="kk" class="lang-content"><strong>1.</strong> Жасуша — барлық тірі ағзалардың құрылымдық бірлігі. Вирустардан басқа барлық организмдер жасушалардан тұрады.</p>
+                    <p lang="en" class="lang-content"><strong>1.</strong> Cell is the structural unit of all living things. All organisms except viruses consist of cells.</p>
+                    <p lang="ru" class="lang-content"><strong>1.</strong> Клетка — структурная единица всего живого. Все организмы, кроме вирусов, состоят из клеток.</p>
+                </div>
+                <div class="fact-highlight">
+                    <p lang="kk" class="lang-content"><strong>2.</strong> Жасуша — тірі ағзалардың функционалдық бірлігі. Онда зат алмасу, өсу, көбею жүреді.</p>
+                    <p lang="en" class="lang-content"><strong>2.</strong> Cell is the functional unit of life. Metabolism, growth, reproduction occur within it.</p>
+                    <p lang="ru" class="lang-content"><strong>2.</strong> Клетка — функциональная единица живого. В ней происходят обмен веществ, рост, размножение.</p>
+                </div>
+                <div class="fact-highlight">
+                    <p lang="kk" class="lang-content"><strong>3.</strong> Жасуша тек жасушадан пайда болады (бөліну арқылы). Жасушалар өздігінен пайда болмайды.</p>
+                    <p lang="en" class="lang-content"><strong>3.</strong> Cells arise only from pre-existing cells (by division). Cells do not arise spontaneously.</p>
+                    <p lang="ru" class="lang-content"><strong>3.</strong> Клетки возникают только из клеток (путём деления). Самозарождение клеток невозможно.</p>
+                </div>
+                <div class="fact-highlight">
+                    <p lang="kk" class="lang-content"><strong>4.</strong> Барлық жасушалардың химиялық құрамы ұқсас: ДНҚ, РНҚ, ақуыздар, липидтер, көмірсулар.</p>
+                    <p lang="en" class="lang-content"><strong>4.</strong> All cells have similar chemical composition: DNA, RNA, proteins, lipids, carbohydrates.</p>
+                    <p lang="ru" class="lang-content"><strong>4.</strong> Все клетки сходны по химическому составу: ДНК, РНК, белки, липиды, углеводы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Типы клеток -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Жасуша типтері: Прокариоттар vs Эукариоттар</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Cell Types: Prokaryotes vs Eukaryotes</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Типы клеток: Прокариоты vs Эукариоты</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Прокариоты -->
+            <div class="card" style="border: 3px solid #f59e0b;">
+                <div class="text-center mb-4">
+                    <span class="badge" style="background: #fef3c7; color: #b45309;">ПРОКАРИОТЫ / PROKARYOTES</span>
+                </div>
+                <div class="icon-lg text-center">🦠</div>
+                
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-amber-600 mb-4">ПРОКАРИОТТАР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-amber-600 mb-4">PROKARYOTES</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-amber-600 mb-4">ПРОКАРИОТЫ</h3>
+                
+                <div style="background: #fffbeb; padding: 16px; border-radius: 12px;">
+                    <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Өкілдері:</strong> бактериялар, цианобактериялар (көк-жасыл балдырлар), археялар</p>
+                    <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Examples:</strong> bacteria, cyanobacteria (blue-green algae), archaea</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Представители:</strong> бактерии, цианобактерии (сине-зелёные), археи</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">❌ <strong>Ядро:</strong> ЖОҚ (нуклеоид — ДНҚ аймағы)</p>
+                    <p lang="en" class="lang-content text-sm mb-2">❌ <strong>Nucleus:</strong> ABSENT (nucleoid — DNA region)</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">❌ <strong>Ядро:</strong> НЕТ (нуклеоид — область ДНК)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">❌ <strong>Мембраналы органоидтер:</strong> ЖОҚ</p>
+                    <p lang="en" class="lang-content text-sm mb-2">❌ <strong>Membrane organelles:</strong> ABSENT</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">❌ <strong>Мембранные органоиды:</strong> НЕТ</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">📏 <strong>Өлшемі:</strong> 0.5–10 мкм (кішкентай)</p>
+                    <p lang="en" class="lang-content text-sm mb-2">📏 <strong>Size:</strong> 0.5–10 µm (small)</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">📏 <strong>Размер:</strong> 0.5–10 мкм (мелкие)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">🧬 <strong>ДНҚ:</strong> сақиналы, гистонсыз</p>
+                    <p lang="en" class="lang-content text-sm mb-2">🧬 <strong>DNA:</strong> circular, no histones</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">🧬 <strong>ДНК:</strong> кольцевая, без гистонов</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">🔄 <strong>Бөлінуі:</strong> қарапайым бөліну (бинарлық)</p>
+                    <p lang="en" class="lang-content text-sm">🔄 <strong>Division:</strong> binary fission</p>
+                    <p lang="ru" class="lang-content text-sm">🔄 <strong>Деление:</strong> простое (бинарное)</p>
+                </div>
+            </div>
+
+            <!-- Эукариоты -->
+            <div class="card" style="border: 3px solid #059669;">
+                <div class="text-center mb-4">
+                    <span class="badge" style="background: #d1fae5; color: #047857;">ЭУКАРИОТЫ / EUKARYOTES</span>
+                </div>
+                <div class="icon-lg text-center">🧫</div>
+                
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-emerald-600 mb-4">ЭУКАРИОТТАР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-emerald-600 mb-4">EUKARYOTES</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-emerald-600 mb-4">ЭУКАРИОТЫ</h3>
+                
+                <div style="background: #ecfdf5; padding: 16px; border-radius: 12px;">
+                    <p lang="kk" class="lang-content text-sm mb-2">📍 <strong>Өкілдері:</strong> өсімдіктер, жануарлар, саңырауқұлақтар, қарапайымдар</p>
+                    <p lang="en" class="lang-content text-sm mb-2">📍 <strong>Examples:</strong> plants, animals, fungi, protists</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">📍 <strong>Представители:</strong> растения, животные, грибы, простейшие</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">✅ <strong>Ядро:</strong> БАР (қабықпен қоршалған)</p>
+                    <p lang="en" class="lang-content text-sm mb-2">✅ <strong>Nucleus:</strong> PRESENT (membrane-bound)</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">✅ <strong>Ядро:</strong> ЕСТЬ (окружено оболочкой)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">✅ <strong>Мембраналы органоидтер:</strong> БАР (митохондрия, ЭПР, Гольджи...)</p>
+                    <p lang="en" class="lang-content text-sm mb-2">✅ <strong>Membrane organelles:</strong> PRESENT (mitochondria, ER, Golgi...)</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">✅ <strong>Мембранные органоиды:</strong> ЕСТЬ (митохондрии, ЭПС, Гольджи...)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">📏 <strong>Өлшемі:</strong> 10–100 мкм (үлкен)</p>
+                    <p lang="en" class="lang-content text-sm mb-2">📏 <strong>Size:</strong> 10–100 µm (large)</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">📏 <strong>Размер:</strong> 10–100 мкм (крупные)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">🧬 <strong>ДНҚ:</strong> сызықтық, хромосомаларда, гистондармен</p>
+                    <p lang="en" class="lang-content text-sm mb-2">🧬 <strong>DNA:</strong> linear, in chromosomes, with histones</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">🧬 <strong>ДНК:</strong> линейная, в хромосомах, с гистонами</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">🔄 <strong>Бөлінуі:</strong> митоз, мейоз</p>
+                    <p lang="en" class="lang-content text-sm">🔄 <strong>Division:</strong> mitosis, meiosis</p>
+                    <p lang="ru" class="lang-content text-sm">🔄 <strong>Деление:</strong> митоз, мейоз</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Органоиды эукариотической клетки -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Эукариоттық жасуша органоидтері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Eukaryotic Cell Organelles</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Органоиды эукариотической клетки</h2>
+
+        <!-- Ядро -->
+        <div class="card" style="border-left: 6px solid #8b5cf6;">
+            <div class="grid md:grid-cols-12 gap-4 items-center">
+                <div class="md:col-span-2 text-center">
+                    <div style="font-size: 4rem;">🟣</div>
+                    <p class="font-bold text-purple-600">ЯДРО</p>
+                </div>
+                <div class="md:col-span-10">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-purple-700 mb-2">ЯДРО (Nucleus) — жасушаның басқару орталығы</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-purple-700 mb-2">NUCLEUS — control center of the cell</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-purple-700 mb-2">ЯДРО (Nucleus) — центр управления клеткой</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                        <div style="background: #f5f3ff; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm"><strong>Құрылысы:</strong></p>
+                            <p lang="en" class="lang-content text-sm"><strong>Structure:</strong></p>
+                            <p lang="ru" class="lang-content text-sm"><strong>Строение:</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• Ядро қабығы (2 қабатты, кеуектері бар)</p>
+                            <p lang="en" class="lang-content text-xs">• Nuclear envelope (2 membranes, with pores)</p>
+                            <p lang="ru" class="lang-content text-xs">• Ядерная оболочка (2 мембраны, с порами)</p>
+                            <p lang="kk" class="lang-content text-xs">• Ядрошық (рРНҚ синтезі, рибосома құрастыру)</p>
+                            <p lang="en" class="lang-content text-xs">• Nucleolus (rRNA synthesis, ribosome assembly)</p>
+                            <p lang="ru" class="lang-content text-xs">• Ядрышко (синтез рРНК, сборка рибосом)</p>
+                            <p lang="kk" class="lang-content text-xs">• Хроматин/Хромосомалар (ДНҚ + гистондар)</p>
+                            <p lang="en" class="lang-content text-xs">• Chromatin/Chromosomes (DNA + histones)</p>
+                            <p lang="ru" class="lang-content text-xs">• Хроматин/Хромосомы (ДНК + гистоны)</p>
+                        </div>
+                        <div style="background: #f5f3ff; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm"><strong>Қызметтері:</strong></p>
+                            <p lang="en" class="lang-content text-sm"><strong>Functions:</strong></p>
+                            <p lang="ru" class="lang-content text-sm"><strong>Функции:</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• Тұқым қуалау ақпаратын сақтау (ДНҚ)</p>
+                            <p lang="en" class="lang-content text-xs">• Storage of genetic information (DNA)</p>
+                            <p lang="ru" class="lang-content text-xs">• Хранение генетической информации (ДНК)</p>
+                            <p lang="kk" class="lang-content text-xs">• ДНҚ репликациясы (көшірмелеу)</p>
+                            <p lang="en" class="lang-content text-xs">• DNA replication</p>
+                            <p lang="ru" class="lang-content text-xs">• Репликация ДНК</p>
+                            <p lang="kk" class="lang-content text-xs">• Транскрипция (РНҚ синтезі)</p>
+                            <p lang="en" class="lang-content text-xs">• Transcription (RNA synthesis)</p>
+                            <p lang="ru" class="lang-content text-xs">• Транскрипция (синтез РНК)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Митохондрия -->
+        <div class="card" style="border-left: 6px solid #ef4444;">
+            <div class="grid md:grid-cols-12 gap-4 items-center">
+                <div class="md:col-span-2 text-center">
+                    <div style="font-size: 4rem;">🔴</div>
+                    <p class="font-bold text-red-600">МИТОХОНДРИЯ</p>
+                </div>
+                <div class="md:col-span-10">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-red-700 mb-2">МИТОХОНДРИЯ — жасушаның энергия станциясы</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-red-700 mb-2">MITOCHONDRIA — powerhouse of the cell</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 mb-2">МИТОХОНДРИЯ — энергетическая станция клетки</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                        <div style="background: #fef2f2; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm"><strong>Құрылысы:</strong></p>
+                            <p lang="en" class="lang-content text-sm"><strong>Structure:</strong></p>
+                            <p lang="ru" class="lang-content text-sm"><strong>Строение:</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• 2 қабатты мембрана (сыртқы — тегіс, ішкі — кристалар)</p>
+                            <p lang="en" class="lang-content text-xs">• 2 membranes (outer — smooth, inner — cristae)</p>
+                            <p lang="ru" class="lang-content text-xs">• 2 мембраны (наружная — гладкая, внутренняя — кристы)</p>
+                            <p lang="kk" class="lang-content text-xs">• Матрикс (ферменттер, ДНҚ, рибосомалар)</p>
+                            <p lang="en" class="lang-content text-xs">• Matrix (enzymes, DNA, ribosomes)</p>
+                            <p lang="ru" class="lang-content text-xs">• Матрикс (ферменты, ДНК, рибосомы)</p>
+                            <p lang="kk" class="lang-content text-xs">• Өз ДНҚ-сы бар (сақиналы) — жартылай автономды</p>
+                            <p lang="en" class="lang-content text-xs">• Own DNA (circular) — semi-autonomous</p>
+                            <p lang="ru" class="lang-content text-xs">• Своя ДНК (кольцевая) — полуавтономна</p>
+                        </div>
+                        <div style="background: #fef2f2; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm"><strong>Қызметі — жасушалық тыныс алу:</strong></p>
+                            <p lang="en" class="lang-content text-sm"><strong>Function — cellular respiration:</strong></p>
+                            <p lang="ru" class="lang-content text-sm"><strong>Функция — клеточное дыхание:</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• Глюкоза + O₂ → CO₂ + H₂O + <strong>АТФ</strong></p>
+                            <p lang="en" class="lang-content text-xs">• Glucose + O₂ → CO₂ + H₂O + <strong>ATP</strong></p>
+                            <p lang="ru" class="lang-content text-xs">• Глюкоза + O₂ → CO₂ + H₂O + <strong>АТФ</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• 1 глюкоза → 36-38 АТФ молекуласы</p>
+                            <p lang="en" class="lang-content text-xs">• 1 glucose → 36-38 ATP molecules</p>
+                            <p lang="ru" class="lang-content text-xs">• 1 глюкоза → 36-38 молекул АТФ</p>
+                            <p lang="kk" class="lang-content text-xs font-bold mt-1">⚡ Жасушаның 90% энергиясы осында өндіріледі!</p>
+                            <p lang="en" class="lang-content text-xs font-bold mt-1">⚡ 90% of cell's energy is produced here!</p>
+                            <p lang="ru" class="lang-content text-xs font-bold mt-1">⚡ 90% энергии клетки производится здесь!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ЭПС -->
+        <div class="card" style="border-left: 6px solid #3b82f6;">
+            <div class="grid md:grid-cols-12 gap-4 items-center">
+                <div class="md:col-span-2 text-center">
+                    <div style="font-size: 4rem;">🔵</div>
+                    <p class="font-bold text-blue-600">ЭПС</p>
+                </div>
+                <div class="md:col-span-10">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-2">ЭНДОПЛАЗМАЛЫҚ ТІКЕ (ЭПТ) — синтез және тасымалдау жүйесі</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-2">ENDOPLASMIC RETICULUM (ER) — synthesis and transport system</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-2">ЭНДОПЛАЗМАТИЧЕСКАЯ СЕТЬ (ЭПС) — синтез и транспорт</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                        <div style="background: #eff6ff; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm font-bold text-blue-800">🔘 ТҮЙІРШІКТІ (бұдыр) ЭПТ:</p>
+                            <p lang="en" class="lang-content text-sm font-bold text-blue-800">🔘 ROUGH ER:</p>
+                            <p lang="ru" class="lang-content text-sm font-bold text-blue-800">🔘 ШЕРОХОВАТАЯ (гранулярная) ЭПС:</p>
+                            <p lang="kk" class="lang-content text-xs">• Бетінде рибосомалар бар</p>
+                            <p lang="en" class="lang-content text-xs">• Ribosomes on surface</p>
+                            <p lang="ru" class="lang-content text-xs">• Рибосомы на поверхности</p>
+                            <p lang="kk" class="lang-content text-xs">• <strong>Ақуыз синтезі</strong> (секреторлық ақуыздар)</p>
+                            <p lang="en" class="lang-content text-xs">• <strong>Protein synthesis</strong> (secretory proteins)</p>
+                            <p lang="ru" class="lang-content text-xs">• <strong>Синтез белков</strong> (секреторных)</p>
+                        </div>
+                        <div style="background: #eff6ff; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm font-bold text-blue-800">⚪ ТЕГІС (агранулярлық) ЭПТ:</p>
+                            <p lang="en" class="lang-content text-sm font-bold text-blue-800">⚪ SMOOTH ER:</p>
+                            <p lang="ru" class="lang-content text-sm font-bold text-blue-800">⚪ ГЛАДКАЯ (агранулярная) ЭПС:</p>
+                            <p lang="kk" class="lang-content text-xs">• Рибосомасыз</p>
+                            <p lang="en" class="lang-content text-xs">• No ribosomes</p>
+                            <p lang="ru" class="lang-content text-xs">• Без рибосом</p>
+                            <p lang="kk" class="lang-content text-xs">• <strong>Липид синтезі</strong>, Ca²⁺ жинау, детоксикация</p>
+                            <p lang="en" class="lang-content text-xs">• <strong>Lipid synthesis</strong>, Ca²⁺ storage, detoxification</p>
+                            <p lang="ru" class="lang-content text-xs">• <strong>Синтез липидов</strong>, депо Ca²⁺, детоксикация</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Аппарат Гольджи -->
+        <div class="card" style="border-left: 6px solid #f59e0b;">
+            <div class="grid md:grid-cols-12 gap-4 items-center">
+                <div class="md:col-span-2 text-center">
+                    <div style="font-size: 4rem;">🟡</div>
+                    <p class="font-bold text-amber-600">ГОЛЬДЖИ</p>
+                </div>
+                <div class="md:col-span-10">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-amber-700 mb-2">ГОЛЬДЖИ АППАРАТЫ — өңдеу және буып-түю орталығы</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-amber-700 mb-2">GOLGI APPARATUS — processing and packaging center</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-amber-700 mb-2">АППАРАТ ГОЛЬДЖИ — центр обработки и упаковки</h3>
+                    
+                    <div style="background: #fffbeb; padding: 12px; border-radius: 8px; margin-top: 12px;">
+                        <p lang="kk" class="lang-content text-sm"><strong>Құрылысы:</strong> жалпақ цистерналар (диктиосомалар) + көпіршіктер</p>
+                        <p lang="en" class="lang-content text-sm"><strong>Structure:</strong> flat cisternae (dictyosomes) + vesicles</p>
+                        <p lang="ru" class="lang-content text-sm"><strong>Строение:</strong> плоские цистерны (диктиосомы) + пузырьки</p>
+                        
+                        <p lang="kk" class="lang-content text-sm mt-2"><strong>Қызметтері:</strong></p>
+                        <p lang="en" class="lang-content text-sm mt-2"><strong>Functions:</strong></p>
+                        <p lang="ru" class="lang-content text-sm mt-2"><strong>Функции:</strong></p>
+                        <p lang="kk" class="lang-content text-xs">• Ақуыздар мен липидтерді өңдеу (гликозилдеу — қант қосу)</p>
+                        <p lang="en" class="lang-content text-xs">• Processing proteins & lipids (glycosylation — adding sugars)</p>
+                        <p lang="ru" class="lang-content text-xs">• Модификация белков и липидов (гликозилирование)</p>
+                        <p lang="kk" class="lang-content text-xs">• Молекулаларды сұрыптау және буып-түю</p>
+                        <p lang="en" class="lang-content text-xs">• Sorting and packaging molecules</p>
+                        <p lang="ru" class="lang-content text-xs">• Сортировка и упаковка молекул</p>
+                        <p lang="kk" class="lang-content text-xs">• Лизосома түзу, секреция</p>
+                        <p lang="en" class="lang-content text-xs">• Lysosome formation, secretion</p>
+                        <p lang="ru" class="lang-content text-xs">• Образование лизосом, секреция</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Другие органоиды - компактно -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Рибосомы -->
+            <div class="card" style="border-top: 5px solid #10b981;">
+                <div class="text-center icon-lg">⚫</div>
+                <h4 lang="kk" class="lang-content text-lg font-bold text-center text-emerald-700">РИБОСОМАЛАР</h4>
+                <h4 lang="en" class="lang-content text-lg font-bold text-center text-emerald-700">RIBOSOMES</h4>
+                <h4 lang="ru" class="lang-content text-lg font-bold text-center text-emerald-700">РИБОСОМЫ</h4>
+                <div style="background: #ecfdf5; padding: 12px; border-radius: 8px; margin-top: 8px;">
+                    <p lang="kk" class="lang-content text-xs">• РНҚ + ақуыз (мембранасыз!)</p>
+                    <p lang="en" class="lang-content text-xs">• RNA + protein (no membrane!)</p>
+                    <p lang="ru" class="lang-content text-xs">• РНК + белок (без мембраны!)</p>
+                    <p lang="kk" class="lang-content text-xs">• <strong>Ақуыз синтезі</strong> (трансляция)</p>
+                    <p lang="en" class="lang-content text-xs">• <strong>Protein synthesis</strong> (translation)</p>
+                    <p lang="ru" class="lang-content text-xs">• <strong>Синтез белка</strong> (трансляция)</p>
+                    <p lang="kk" class="lang-content text-xs">• Еркін немесе ЭПТ-да орналасқан</p>
+                    <p lang="en" class="lang-content text-xs">• Free or attached to ER</p>
+                    <p lang="ru" class="lang-content text-xs">• Свободные или на ЭПС</p>
+                </div>
+            </div>
+
+            <!-- Лизосомы -->
+            <div class="card" style="border-top: 5px solid #ec4899;">
+                <div class="text-center icon-lg">🟤</div>
+                <h4 lang="kk" class="lang-content text-lg font-bold text-center text-pink-700">ЛИЗОСОМАЛАР</h4>
+                <h4 lang="en" class="lang-content text-lg font-bold text-center text-pink-700">LYSOSOMES</h4>
+                <h4 lang="ru" class="lang-content text-lg font-bold text-center text-pink-700">ЛИЗОСОМЫ</h4>
+                <div style="background: #fdf2f8; padding: 12px; border-radius: 8px; margin-top: 8px;">
+                    <p lang="kk" class="lang-content text-xs">• 1 қабатты мембрана</p>
+                    <p lang="en" class="lang-content text-xs">• Single membrane</p>
+                    <p lang="ru" class="lang-content text-xs">• Одномембранные</p>
+                    <p lang="kk" class="lang-content text-xs">• Гидролитикалық ферменттер (рН 5)</p>
+                    <p lang="en" class="lang-content text-xs">• Hydrolytic enzymes (pH 5)</p>
+                    <p lang="ru" class="lang-content text-xs">• Гидролитические ферменты (рН 5)</p>
+                    <p lang="kk" class="lang-content text-xs">• <strong>Ішкі асқорыту</strong>, аутофагия</p>
+                    <p lang="en" class="lang-content text-xs">• <strong>Intracellular digestion</strong>, autophagy</p>
+                    <p lang="ru" class="lang-content text-xs">• <strong>Внутриклеточное переваривание</strong>, аутофагия</p>
+                </div>
+            </div>
+
+            <!-- Вакуоли -->
+            <div class="card" style="border-top: 5px solid #06b6d4;">
+                <div class="text-center icon-lg">💧</div>
+                <h4 lang="kk" class="lang-content text-lg font-bold text-center text-cyan-700">ВАКУОЛЬДЕР</h4>
+                <h4 lang="en" class="lang-content text-lg font-bold text-center text-cyan-700">VACUOLES</h4>
+                <h4 lang="ru" class="lang-content text-lg font-bold text-center text-cyan-700">ВАКУОЛИ</h4>
+                <div style="background: #ecfeff; padding: 12px; border-radius: 8px; margin-top: 8px;">
+                    <p lang="kk" class="lang-content text-xs">• Өсімдіктерде — үлкен орталық вакуоль</p>
+                    <p lang="en" class="lang-content text-xs">• In plants — large central vacuole</p>
+                    <p lang="ru" class="lang-content text-xs">• У растений — большая центральная</p>
+                    <p lang="kk" class="lang-content text-xs">• Жасуша шырыны (тұздар, қанттар, пигменттер)</p>
+                    <p lang="en" class="lang-content text-xs">• Cell sap (salts, sugars, pigments)</p>
+                    <p lang="ru" class="lang-content text-xs">• Клеточный сок (соли, сахара, пигменты)</p>
+                    <p lang="kk" class="lang-content text-xs">• <strong>Тургор</strong>, сақтау, гомеостаз</p>
+                    <p lang="en" class="lang-content text-xs">• <strong>Turgor</strong>, storage, homeostasis</p>
+                    <p lang="ru" class="lang-content text-xs">• <strong>Тургор</strong>, запас, гомеостаз</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Только у растений -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content section-heading">🌿 Тек өсімдік жасушасында</h2>
+        <h2 lang="en" class="lang-content section-heading">🌿 Only in Plant Cells</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌿 Только в растительной клетке</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Хлоропласты -->
+            <div class="card" style="border: 3px solid #22c55e;">
+                <div class="text-center icon-lg">🟢</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-green-700 mb-3">ХЛОРОПЛАСТТАР</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-green-700 mb-3">CHLOROPLASTS</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-green-700 mb-3">ХЛОРОПЛАСТЫ</h3>
+                
+                <div style="background: #f0fdf4; padding: 16px; border-radius: 12px;">
+                    <p lang="kk" class="lang-content text-sm mb-2"><strong>Құрылысы:</strong> 2 мембрана, стромы, тилакоидтар (граналар), өз ДНҚ</p>
+                    <p lang="en" class="lang-content text-sm mb-2"><strong>Structure:</strong> 2 membranes, stroma, thylakoids (grana), own DNA</p>
+                    <p lang="ru" class="lang-content text-sm mb-2"><strong>Строение:</strong> 2 мембраны, строма, тилакоиды (граны), своя ДНК</p>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2"><strong>Пигмент:</strong> хлорофилл (жасыл) — жарық сіңіреді</p>
+                    <p lang="en" class="lang-content text-sm mb-2"><strong>Pigment:</strong> chlorophyll (green) — absorbs light</p>
+                    <p lang="ru" class="lang-content text-sm mb-2"><strong>Пигмент:</strong> хлорофилл (зелёный) — поглощает свет</p>
+                    
+                    <div class="fact-highlight">
+                        <p lang="kk" class="lang-content text-sm font-bold">☀️ ФОТОСИНТЕЗ:</p>
+                        <p lang="en" class="lang-content text-sm font-bold">☀️ PHOTOSYNTHESIS:</p>
+                        <p lang="ru" class="lang-content text-sm font-bold">☀️ ФОТОСИНТЕЗ:</p>
+                        <p class="text-sm font-mono mt-1">6CO₂ + 6H₂O + жарық → C₆H₁₂O₆ + 6O₂</p>
+                        <p lang="kk" class="lang-content text-xs mt-1">Жарық энергиясы → химиялық энергия (глюкоза)</p>
+                        <p lang="en" class="lang-content text-xs mt-1">Light energy → chemical energy (glucose)</p>
+                        <p lang="ru" class="lang-content text-xs mt-1">Световая энергия → химическая (глюкоза)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Клеточная стенка -->
+            <div class="card" style="border: 3px solid #84cc16;">
+                <div class="text-center icon-lg">🧱</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-lime-700 mb-3">ЖАСУША ҚАБЫРҒАСЫ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-lime-700 mb-3">CELL WALL</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-lime-700 mb-3">КЛЕТОЧНАЯ СТЕНКА</h3>
+                
+                <div style="background: #f7fee7; padding: 16px; border-radius: 12px;">
+                    <p lang="kk" class="lang-content text-sm mb-2"><strong>Құрамы:</strong></p>
+                    <p lang="en" class="lang-content text-sm mb-2"><strong>Composition:</strong></p>
+                    <p lang="ru" class="lang-content text-sm mb-2"><strong>Состав:</strong></p>
+                    <p lang="kk" class="lang-content text-xs">• Өсімдіктер: <strong>целлюлоза</strong></p>
+                    <p lang="en" class="lang-content text-xs">• Plants: <strong>cellulose</strong></p>
+                    <p lang="ru" class="lang-content text-xs">• Растения: <strong>целлюлоза</strong></p>
+                    <p lang="kk" class="lang-content text-xs">• Саңырауқұлақтар: <strong>хитин</strong></p>
+                    <p lang="en" class="lang-content text-xs">• Fungi: <strong>chitin</strong></p>
+                    <p lang="ru" class="lang-content text-xs">• Грибы: <strong>хитин</strong></p>
+                    <p lang="kk" class="lang-content text-xs">• Бактериялар: <strong>муреин</strong></p>
+                    <p lang="en" class="lang-content text-xs">• Bacteria: <strong>murein</strong></p>
+                    <p lang="ru" class="lang-content text-xs">• Бактерии: <strong>муреин</strong></p>
+                    
+                    <p lang="kk" class="lang-content text-sm mt-3"><strong>Қызметі:</strong> механикалық қорғаныс, форманы сақтау, тургор</p>
+                    <p lang="en" class="lang-content text-sm mt-3"><strong>Function:</strong> mechanical protection, shape, turgor</p>
+                    <p lang="ru" class="lang-content text-sm mt-3"><strong>Функция:</strong> механическая защита, форма, тургор</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 35px; background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #ecfeff 100%); border-radius: 1.5rem; border-top: 5px solid #059669;">
+        <p lang="kk" class="lang-content text-lg font-bold text-emerald-800">📚 10 сынып | Жалпы биология | Цитология</p>
+        <p lang="en" class="lang-content text-lg font-bold text-emerald-800">📚 Grade 10 | General Biology | Cytology</p>
+        <p lang="ru" class="lang-content text-lg font-bold text-emerald-800">📚 10 класс | Общая биология | Цитология</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) { switchLang(langParam); }
+</script>
+
+</body>
+</html>

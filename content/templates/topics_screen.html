@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор темы</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
+        /* Используем системный шрифт для быстрой загрузки */
 
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Manrope', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 40px 20px;
@@ -87,19 +87,6 @@
             justify-content: center;
             text-align: center;
             min-height: 120px;
-            animation: fadeIn 0.4s ease forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .topic-card:hover {
@@ -319,7 +306,7 @@
                     const card = document.createElement('div');
                     card.className = 'topic-card';
                     card.setAttribute('data-topic-id', topic.id);
-                    card.style.animationDelay = `${index * 0.03}s`;
+                    // Убрана задержка анимации для быстрой загрузки
                     card.onclick = () => {
                         if (bridgeReady && bridge) {
                             bridge.onTopicClicked(topic.id);
@@ -340,7 +327,7 @@
                 const card = document.createElement('div');
                 card.className = 'topic-card';
                 card.setAttribute('data-topic-id', topic.id);
-                card.style.animationDelay = `${index * 0.03}s`;
+                // Убрана задержка анимации для быстрой загрузки
                 card.onclick = () => {
                     if (bridgeReady && bridge) {
                         bridge.onTopicClicked(topic.id);
@@ -396,7 +383,7 @@
                 filtered.forEach((topic, index) => {
                     const card = document.createElement('div');
                     card.className = 'topic-card';
-                    card.style.animationDelay = `${index * 0.03}s`;
+                    // Убрана задержка анимации для быстрой загрузки
                     card.onclick = () => {
                         if (bridgeReady && bridge) bridge.onTopicClicked(topic.id);
                     };

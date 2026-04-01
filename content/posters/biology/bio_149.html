@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменчивость. Мутации</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fdf4ff 0%, #fff7ed 100%); }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #581c87 0%, #7c3aed 40%, #ea580c 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(88,28,135,0.3); }
+        .section-heading { color: #581c87; border-bottom: 4px solid #c084fc; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #581c87; background: white; color: #581c87; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fdf4ff; }
+        .lang-btn.active { background: linear-gradient(135deg,#581c87,#7c3aed); color: white; box-shadow: 0 4px 12px rgba(88,28,135,0.3); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#fdf4ff,#fff7ed); border-left: 5px solid #7c3aed; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 12px 15px; margin: 7px 0; }
+        table.comp { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        table.comp th { background: linear-gradient(135deg,#581c87,#7c3aed); color: white; padding: 10px 14px; text-align: left; font-weight: 700; }
+        table.comp th:first-child { border-radius: 10px 0 0 0; } table.comp th:last-child { border-radius: 0 10px 0 0; }
+        table.comp td { padding: 9px 14px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        table.comp tr:nth-child(even) td { background: #fdf4ff; }
+        table.comp tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-purple-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Генетика</p>
+        <h1 lang="kk" class="lang-content text-5xl font-black uppercase tracking-wide">Өзгергіштік. Мутациялар</h1>
+        <h1 lang="en" class="lang-content text-5xl font-black uppercase tracking-wide">Variability. Mutations</h1>
+        <h1 lang="ru" class="lang-content text-5xl font-black uppercase tracking-wide">Изменчивость. Мутации</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p lang="kk" class="lang-content text-lg font-medium">Өзгергіштік — организмдердің белгілерінің ата-аналарынан ерекшеленуі. Эволюцияның маңызды материалы. Тұқым қуалайтын және тұқым қуаламайтын деп бөлінеді.</p>
+            <p lang="en" class="lang-content text-lg font-medium">Variability — the ability of organisms to differ from their parents. Key raw material for evolution. Divided into heritable and non-heritable.</p>
+            <p lang="ru" class="lang-content text-lg font-medium">Изменчивость — способность организмов отличаться от родителей. Важнейший материал для эволюции. Делится на наследственную и ненаследственную.</p>
+        </div>
+    </header>
+
+    <!-- TYPES OF VARIABILITY -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌿 Өзгергіштік түрлері</h2>
+        <h2 lang="en" class="lang-content section-heading">🌿 Types of Variability</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌿 Виды изменчивости</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Non-heritable -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+                    <h3 class="font-bold text-green-700 text-lg mb-3">
+                        <span lang="kk" class="lang-content">🍃 Тұқым қуаламайтын (модификациялық)</span>
+                        <span lang="en" class="lang-content">🍃 Non-heritable (Modification)</span>
+                        <span lang="ru" class="lang-content">🍃 Ненаследственная (Модификационная)</span>
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="tbox" style="border-color:#16a34a;background:white;">
+                            <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Анықтамасы</span><span lang="en" class="lang-content">Definition</span><span lang="ru" class="lang-content">Определение</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Қоршаған орта факторларының (температура, жарық, қоректену) генотипті өзгертпестен фенотипке әсері.</span><span lang="en" class="lang-content">Effect of environmental factors (temperature, light, nutrition) on phenotype without changing genotype.</span><span lang="ru" class="lang-content">Влияние факторов среды (температура, свет, питание) на фенотип без изменения генотипа.</span></p>
+                        </div>
+                        <div class="tbox" style="border-color:#16a34a;background:white;">
+                            <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Реакция нормасы</span><span lang="en" class="lang-content">Reaction norm</span><span lang="ru" class="lang-content">Норма реакции</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Берілген генотипте мүмкін болатын фенотиптер диапазоны. Генетикалық жолмен берілген.</span><span lang="en" class="lang-content">Range of possible phenotypes for a given genotype. Genetically determined.</span><span lang="ru" class="lang-content">Диапазон возможных фенотипов для данного генотипа. Генетически обусловлен.</span></p>
+                        </div>
+                        <div class="tbox" style="border-color:#16a34a;background:white;">
+                            <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Қасиеттері</span><span lang="en" class="lang-content">Properties</span><span lang="ru" class="lang-content">Свойства</span></p>
+                            <ul class="text-gray-600 text-xs mt-1 space-y-1">
+                                <li>✅ <span lang="kk" class="lang-content">Тұқым қуаламайды</span><span lang="en" class="lang-content">Not inherited</span><span lang="ru" class="lang-content">Не наследуется</span></li>
+                                <li>✅ <span lang="kk" class="lang-content">Қайтымды (орта өзгерсе, белгі де өзгереді)</span><span lang="en" class="lang-content">Reversible (if environment changes, trait reverts)</span><span lang="ru" class="lang-content">Обратима (при изменении среды признак возвращается)</span></li>
+                                <li>✅ <span lang="kk" class="lang-content">Жаппай сипат — бір генотиптегі барлық особьтарда бірдей</span><span lang="en" class="lang-content">Mass character — same for all individuals of one genotype</span><span lang="ru" class="lang-content">Массовый характер — одинакова для всех особей одного генотипа</span></li>
+                            </ul>
+                        </div>
+                        <div class="fact-box text-xs">
+                            <span lang="kk" class="lang-content"><b>Мысалдар:</b> Күнде жатқан адамның терісінің қарауы; тауда өсетін өсімдіктің аласа болуы; иелігіне байланысты жануардың денесінің салмағы.</span>
+                            <span lang="en" class="lang-content"><b>Examples:</b> Skin tanning in sunlight; dwarf growth of alpine plants; animal body weight dependent on diet.</span>
+                            <span lang="ru" class="lang-content"><b>Примеры:</b> Загар кожи на солнце; низкорослость горных растений; масса тела животного в зависимости от питания.</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Heritable -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fdf4ff,#ede9fe);">
+                    <h3 class="font-bold text-purple-700 text-lg mb-3">
+                        <span lang="kk" class="lang-content">🧬 Тұқым қуалайтын</span>
+                        <span lang="en" class="lang-content">🧬 Heritable</span>
+                        <span lang="ru" class="lang-content">🧬 Наследственная</span>
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="tbox" style="border-color:#7c3aed;background:white;">
+                            <p class="font-bold text-purple-700"><span lang="kk" class="lang-content">Комбинативтік өзгергіштік</span><span lang="en" class="lang-content">Combinative variability</span><span lang="ru" class="lang-content">Комбинативная изменчивость</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Жыныстық көбею кезінде гендердің жаңа комбинацияларының пайда болуы. Мутация емес!</span><span lang="en" class="lang-content">New gene combinations arising through sexual reproduction. NOT mutations!</span><span lang="ru" class="lang-content">Возникновение новых комбинаций генов при половом размножении. НЕ мутации!</span></p>
+                            <div class="mt-2 text-xs space-y-1 text-gray-500">
+                                <p>▸ <span lang="kk" class="lang-content">Кроссинговер (профаза I)</span><span lang="en" class="lang-content">Crossing over (prophase I)</span><span lang="ru" class="lang-content">Кроссинговер (профаза I)</span></p>
+                                <p>▸ <span lang="kk" class="lang-content">Тәуелсіз хромосомалар сортировкасы (мейоз)</span><span lang="en" class="lang-content">Independent chromosome assortment (meiosis)</span><span lang="ru" class="lang-content">Независимое расхождение хромосом (мейоз)</span></p>
+                                <p>▸ <span lang="kk" class="lang-content">Гаметалардың кездейсоқ бірігуі (ұрықтану)</span><span lang="en" class="lang-content">Random fertilization of gametes</span><span lang="ru" class="lang-content">Случайное слияние гамет (оплодотворение)</span></p>
+                            </div>
+                        </div>
+                        <div class="tbox" style="border-color:#be185d;background:white;">
+                            <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Мутациялық өзгергіштік</span><span lang="en" class="lang-content">Mutational variability</span><span lang="ru" class="lang-content">Мутационная изменчивость</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">ДНҚ немесе хромосомалардың тұрақты өзгерістері. Тұқым қуалайды. Кенеттен болады.</span><span lang="en" class="lang-content">Permanent changes in DNA or chromosomes. Heritable. Occur suddenly.</span><span lang="ru" class="lang-content">Стойкие изменения ДНК или хромосом. Наследуются. Возникают внезапно.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUTATIONS CLASSIFICATION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">⚡ Мутациялар жіктемесі</h2>
+        <h2 lang="en" class="lang-content section-heading">⚡ Classification of Mutations</h2>
+        <h2 lang="ru" class="lang-content section-heading">⚡ Классификация мутаций</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+                <!-- Gene mutations -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fff7ed,#fef3c7);">
+                    <div class="text-center mb-3"><div style="font-size:2.2rem;">🔤</div>
+                        <h3 class="font-black text-lg text-amber-700"><span lang="kk" class="lang-content">Гендік (нүктелік) мутациялар</span><span lang="en" class="lang-content">Gene (Point) Mutations</span><span lang="ru" class="lang-content">Генные (точечные) мутации</span></h3>
+                    </div>
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <div class="tbox" style="border-color:#ca8a04;background:#fffbeb;">
+                            <p class="text-xs"><span lang="kk" class="lang-content">Бір немесе бірнеше нуклеотид деңгейіндегі өзгерістер.</span><span lang="en" class="lang-content">Changes at the level of one or a few nucleotides.</span><span lang="ru" class="lang-content">Изменения на уровне одного или нескольких нуклеотидов.</span></p>
+                        </div>
+                        <div class="tbox text-xs" style="border-color:#ca8a04;background:#fffbeb;">
+                            <p class="font-bold text-amber-700"><span lang="kk" class="lang-content">Нуклеотидтерді алмастыру</span><span lang="en" class="lang-content">Substitution</span><span lang="ru" class="lang-content">Замена нуклеотида</span></p>
+                            <p class="font-mono">ATG → ACG</p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Бір амин қышқылы ауысады</span><span lang="en" class="lang-content">One amino acid changes</span><span lang="ru" class="lang-content">Меняется одна аминокислота</span></p>
+                        </div>
+                        <div class="tbox text-xs" style="border-color:#ca8a04;background:#fffbeb;">
+                            <p class="font-bold text-amber-700"><span lang="kk" class="lang-content">Жою (делеция) / Қосу (инсерция)</span><span lang="en" class="lang-content">Deletion / Insertion</span><span lang="ru" class="lang-content">Делеция / Инсерция</span></p>
+                            <p class="font-mono">ATGCG → ATCG</p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">«Рамканы ығыстыру» — ауыр салдар</span><span lang="en" class="lang-content">«Frame-shift» — severe consequences</span><span lang="ru" class="lang-content">«Сдвиг рамки» — тяжёлые последствия</span></p>
+                        </div>
+                        <div class="fact-box text-xs">
+                            <span lang="kk" class="lang-content"><b>Мысал:</b> Орақ тәрізді жасушалы анемия — гемоглобиннің β-тізбегінде 6-шы позициядағы нуклеотид ауыстырылады (A→T): глутамин қышқылы → валин.</span>
+                            <span lang="en" class="lang-content"><b>Example:</b> Sickle cell anaemia — nucleotide substitution at position 6 of haemoglobin β-chain (A→T): glutamic acid → valine.</span>
+                            <span lang="ru" class="lang-content"><b>Пример:</b> Серповидноклеточная анемия — замена нуклеотида в 6-й позиции β-цепи гемоглобина (A→T): глутаминовая кислота → валин.</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chromosomal mutations -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fff1f2,#fce7f3);">
+                    <div class="text-center mb-3"><div style="font-size:2.2rem;">🔀</div>
+                        <h3 class="font-black text-lg text-rose-700"><span lang="kk" class="lang-content">Хромосомдық мутациялар</span><span lang="en" class="lang-content">Chromosomal Mutations</span><span lang="ru" class="lang-content">Хромосомные мутации</span></h3>
+                    </div>
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <div class="tbox" style="border-color:#be185d;background:#fff1f2;"><p class="text-xs"><span lang="kk" class="lang-content">Хромосоманың қайта құрылымдануы.</span><span lang="en" class="lang-content">Structural rearrangements of chromosomes.</span><span lang="ru" class="lang-content">Перестройки структуры хромосом.</span></p></div>
+                        <div class="tbox text-xs" style="border-color:#be185d;background:#fff1f2;">
+                            <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Делеция</span><span lang="en" class="lang-content">Deletion</span><span lang="ru" class="lang-content">Делеция</span></p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Хромосома бөлігін жоғалту</span><span lang="en" class="lang-content">Loss of a chromosome segment</span><span lang="ru" class="lang-content">Потеря участка хромосомы</span></p>
+                            <p class="font-mono">ABCDE → AB_DE</p>
+                        </div>
+                        <div class="tbox text-xs" style="border-color:#be185d;background:#fff1f2;">
+                            <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Дупликация</span><span lang="en" class="lang-content">Duplication</span><span lang="ru" class="lang-content">Дупликация</span></p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Хромосома бөлігін екілендіру</span><span lang="en" class="lang-content">Doubling of a chromosome segment</span><span lang="ru" class="lang-content">Удвоение участка хромосомы</span></p>
+                            <p class="font-mono">ABCDE → ABCCDE</p>
+                        </div>
+                        <div class="tbox text-xs" style="border-color:#be185d;background:#fff1f2;">
+                            <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Инверсия</span><span lang="en" class="lang-content">Inversion</span><span lang="ru" class="lang-content">Инверсия</span></p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Бөліктің 180° бұрылуы</span><span lang="en" class="lang-content">Segment rotated 180°</span><span lang="ru" class="lang-content">Разворот участка на 180°</span></p>
+                            <p class="font-mono">ABCDE → ADCBE</p>
+                        </div>
+                        <div class="tbox text-xs" style="border-color:#be185d;background:#fff1f2;">
+                            <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Транслокация</span><span lang="en" class="lang-content">Translocation</span><span lang="ru" class="lang-content">Транслокация</span></p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Бөліктің басқа хромосомаға ауысуы</span><span lang="en" class="lang-content">Segment moved to another chromosome</span><span lang="ru" class="lang-content">Перенос участка на другую хромосому</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Genomic mutations -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                    <div class="text-center mb-3"><div style="font-size:2.2rem;">🔢</div>
+                        <h3 class="font-black text-lg text-blue-700"><span lang="kk" class="lang-content">Геномдық мутациялар</span><span lang="en" class="lang-content">Genomic Mutations</span><span lang="ru" class="lang-content">Геномные мутации</span></h3>
+                    </div>
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <div class="tbox" style="border-color:#1d4ed8;background:#eff6ff;"><p class="text-xs"><span lang="kk" class="lang-content">Хромосомалар санының өзгеруі.</span><span lang="en" class="lang-content">Changes in chromosome number.</span><span lang="ru" class="lang-content">Изменения числа хромосом.</span></p></div>
+                        <div class="tbox text-xs" style="border-color:#1d4ed8;background:#eff6ff;">
+                            <p class="font-bold text-blue-700"><span lang="kk" class="lang-content">Полиплоидия</span><span lang="en" class="lang-content">Polyploidy</span><span lang="ru" class="lang-content">Полиплоидия</span></p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Толық хромосомалар жиынтығы санының артуы</span><span lang="en" class="lang-content">Increase in complete chromosome sets</span><span lang="ru" class="lang-content">Увеличение числа полных наборов хромосом</span></p>
+                            <p class="font-bold">2n → 3n, 4n, 6n...</p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Өсімдіктерде жиі: бидай 6n=42</span><span lang="en" class="lang-content">Common in plants: wheat 6n=42</span><span lang="ru" class="lang-content">Часто у растений: пшеница 6n=42</span></p>
+                        </div>
+                        <div class="tbox text-xs" style="border-color:#1d4ed8;background:#eff6ff;">
+                            <p class="font-bold text-blue-700"><span lang="kk" class="lang-content">Анеуплоидия (гетероплоидия)</span><span lang="en" class="lang-content">Aneuploidy</span><span lang="ru" class="lang-content">Анеуплоидия (гетероплоидия)</span></p>
+                            <p class="font-bold mt-1">2n+1 = <span lang="kk" class="lang-content">Трисомия</span><span lang="en" class="lang-content">Trisomy</span><span lang="ru" class="lang-content">Трисомия</span></p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Даун синдромы: 21-жұп бойынша трисомия (47 хромосома)</span><span lang="en" class="lang-content">Down syndrome: trisomy 21 (47 chromosomes)</span><span lang="ru" class="lang-content">Синдром Дауна: трисомия по 21 паре (47 хромосом)</span></p>
+                            <p class="font-bold mt-1">2n−1 = <span lang="kk" class="lang-content">Моносомия</span><span lang="en" class="lang-content">Monosomy</span><span lang="ru" class="lang-content">Моносомия</span></p>
+                            <p class="text-gray-500"><span lang="kk" class="lang-content">Шерешевский-Тернер синдромы: 45,X (45 хромосома)</span><span lang="en" class="lang-content">Turner syndrome: 45,X (45 chromosomes)</span><span lang="ru" class="lang-content">Синдром Шерешевского-Тёрнера: 45,X (45 хромосом)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUTAGENS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">☢️ Мутагендер</h2>
+        <h2 lang="en" class="lang-content section-heading">☢️ Mutagens</h2>
+        <h2 lang="ru" class="lang-content section-heading">☢️ Мутагены</h2>
+        <div class="card">
+            <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">Мутагендер — мутациялардың жиілігін арттыратын факторлар.</div>
+            <div lang="en" class="lang-content text-sm text-gray-600 mb-4">Mutagens — factors that increase the frequency of mutations.</div>
+            <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Мутагены — факторы, повышающие частоту мутаций.</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fef3c7,#fffbeb);">
+                    <div class="text-center text-3xl mb-2">☢️</div>
+                    <h3 class="font-bold text-amber-700 text-center mb-3"><span lang="kk" class="lang-content">Физикалық мутагендер</span><span lang="en" class="lang-content">Physical Mutagens</span><span lang="ru" class="lang-content">Физические мутагены</span></h3>
+                    <ul class="text-xs text-gray-700 space-y-1.5">
+                        <li class="tbox" style="border-color:#ca8a04;background:#fffbeb;"><span lang="kk" class="lang-content">☀️ <b>УК-сәуле</b> — тиминді димерлер түзіп ДНҚ зақымдайды</span><span lang="en" class="lang-content">☀️ <b>UV radiation</b> — forms thymine dimers, damages DNA</span><span lang="ru" class="lang-content">☀️ <b>УФ-излучение</b> — образует тиминовые димеры, повреждает ДНК</span></li>
+                        <li class="tbox" style="border-color:#ca8a04;background:#fffbeb;"><span lang="kk" class="lang-content">⚡ <b>Иондаушы сәуле (рентген, γ-сәулелер)</b> — ДНҚ тізбектерін үзеді</span><span lang="en" class="lang-content">⚡ <b>Ionizing radiation (X-ray, γ-rays)</b> — breaks DNA strands</span><span lang="ru" class="lang-content">⚡ <b>Ионизирующее излучение (рентген, γ-лучи)</b> — разрывает нити ДНК</span></li>
+                        <li class="tbox" style="border-color:#ca8a04;background:#fffbeb;"><span lang="kk" class="lang-content">🌡️ <b>Жоғары температура</b> — ДНҚ денатурациясы</span><span lang="en" class="lang-content">🌡️ <b>High temperature</b> — DNA denaturation</span><span lang="ru" class="lang-content">🌡️ <b>Высокая температура</b> — денатурация ДНК</span></li>
+                    </ul>
+                </div>
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+                    <div class="text-center text-3xl mb-2">🧪</div>
+                    <h3 class="font-bold text-green-700 text-center mb-3"><span lang="kk" class="lang-content">Химиялық мутагендер</span><span lang="en" class="lang-content">Chemical Mutagens</span><span lang="ru" class="lang-content">Химические мутагены</span></h3>
+                    <ul class="text-xs text-gray-700 space-y-1.5">
+                        <li class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><span lang="kk" class="lang-content">🧴 <b>Алкилдеуші заттар</b> (азот иприт) — ДНҚ-ға алкил тобын қосады</span><span lang="en" class="lang-content">🧴 <b>Alkylating agents</b> (nitrogen mustard) — add alkyl groups to DNA</span><span lang="ru" class="lang-content">🧴 <b>Алкилирующие вещества</b> (азотистый иприт) — добавляют алкильные группы к ДНК</span></li>
+                        <li class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><span lang="kk" class="lang-content">🚬 <b>Темекі дымы</b> — канцерогендер: бензпирен, нитрозаминдер</span><span lang="en" class="lang-content">🚬 <b>Tobacco smoke</b> — carcinogens: benzopyrene, nitrosamines</span><span lang="ru" class="lang-content">🚬 <b>Табачный дым</b> — канцерогены: бензпирен, нитрозамины</span></li>
+                        <li class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><span lang="kk" class="lang-content">🍺 <b>Этил спирті (алкоголь)</b> — ДНҚ репликациясын бұзады</span><span lang="en" class="lang-content">🍺 <b>Ethyl alcohol</b> — disturbs DNA replication</span><span lang="ru" class="lang-content">🍺 <b>Этиловый спирт</b> — нарушает репликацию ДНК</span></li>
+                        <li class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><span lang="kk" class="lang-content">💊 <b>Кейбір дәрілер мен пестицидтер</b></span><span lang="en" class="lang-content">💊 <b>Some drugs and pesticides</b></span><span lang="ru" class="lang-content">💊 <b>Некоторые препараты и пестициды</b></span></li>
+                    </ul>
+                </div>
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fff1f2,#fce7f3);">
+                    <div class="text-center text-3xl mb-2">🦠</div>
+                    <h3 class="font-bold text-rose-700 text-center mb-3"><span lang="kk" class="lang-content">Биологиялық мутагендер</span><span lang="en" class="lang-content">Biological Mutagens</span><span lang="ru" class="lang-content">Биологические мутагены</span></h3>
+                    <ul class="text-xs text-gray-700 space-y-1.5">
+                        <li class="tbox" style="border-color:#be185d;background:#fff1f2;"><span lang="kk" class="lang-content">🦠 <b>Вирустар</b> — геномға интеграцияланып ДНҚ зақымдайды</span><span lang="en" class="lang-content">🦠 <b>Viruses</b> — integrate into genome, disrupt DNA</span><span lang="ru" class="lang-content">🦠 <b>Вирусы</b> — интегрируются в геном, повреждают ДНК</span></li>
+                        <li class="tbox" style="border-color:#be185d;background:#fff1f2;"><span lang="kk" class="lang-content">🔁 <b>Транспозондар</b> («секіргіш гендер») — геномда орын ауыстырып, гендерді бұзады</span><span lang="en" class="lang-content">🔁 <b>Transposons</b> («jumping genes») — move in genome, disrupting genes</span><span lang="ru" class="lang-content">🔁 <b>Транспозоны</b> («прыгающие гены») — перемещаются в геноме, нарушая гены</span></li>
+                        <li class="tbox" style="border-color:#be185d;background:#fff1f2;"><span lang="kk" class="lang-content">🧫 <b>Кейбір бактерия токсиндері</b></span><span lang="en" class="lang-content">🧫 <b>Some bacterial toxins</b></span><span lang="ru" class="lang-content">🧫 <b>Некоторые бактериальные токсины</b></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUMMARY TABLE + VAVILOV -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📊 Мутациялардың маңызы және Вавилов заңы</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Significance of Mutations & Vavilov's Law</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Значение мутаций и закон Вавилова</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-purple-700 text-lg mb-4">📊 <span lang="kk" class="lang-content">Мутациялардың маңызы</span><span lang="en" class="lang-content">Significance of mutations</span><span lang="ru" class="lang-content">Значение мутаций</span></h3>
+                <div class="space-y-3 text-sm">
+                    <div class="tbox" style="border-color:#ea580c;background:#fff7ed;">
+                        <b class="text-orange-700">⬆️ <span lang="kk" class="lang-content">Эволюция материалы</span><span lang="en" class="lang-content">Evolutionary material</span><span lang="ru" class="lang-content">Материал для эволюции</span></b>
+                        <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Мутациялар табиғи сұрыптаудың бастапқы материалы — эволюцияны қозғаушы күш.</span><span lang="en" class="lang-content">Mutations are the raw material for natural selection — the driving force of evolution.</span><span lang="ru" class="lang-content">Мутации — первичный материал для естественного отбора и движущая сила эволюции.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#7c3aed;background:#fdf4ff;">
+                        <b class="text-purple-700">🌾 <span lang="kk" class="lang-content">Селекциядағы маңызы</span><span lang="en" class="lang-content">Importance in breeding</span><span lang="ru" class="lang-content">Значение в селекции</span></b>
+                        <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Жасанды мутагенез → жаңа сорттар мен тұқымдар. Мысалы: сәулемен өсімдіктерді сәулелендіру.</span><span lang="en" class="lang-content">Artificial mutagenesis → new varieties and breeds. E.g., irradiation of plants with radiation.</span><span lang="ru" class="lang-content">Искусственный мутагенез → новые сорта и породы. Например, облучение растений.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#be185d;background:#fff1f2;">
+                        <b class="text-rose-700">⚠️ <span lang="kk" class="lang-content">Медициналық маңызы</span><span lang="en" class="lang-content">Medical importance</span><span lang="ru" class="lang-content">Медицинское значение</span></b>
+                        <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Мутациялар генетикалық аурулардың, қатерлі ісіктердің себебі. Онкогендер — жасушалардың бақылаусыз бөлінуін тудыратын мутациялар.</span><span lang="en" class="lang-content">Mutations cause genetic diseases and cancer. Oncogenes — mutations causing uncontrolled cell division.</span><span lang="ru" class="lang-content">Мутации вызывают генетические болезни и рак. Онкогены — мутации, вызывающие неконтролируемое деление клеток.</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-purple-700 text-lg mb-4">🌿 <span lang="kk" class="lang-content">Вавиловтың гомологиялық қатарлар заңы (1920)</span><span lang="en" class="lang-content">Vavilov's Law of Homologous Series (1920)</span><span lang="ru" class="lang-content">Закон гомологических рядов Вавилова (1920)</span></h3>
+                <div class="p-4 rounded-xl text-sm mb-4" style="background:linear-gradient(135deg,#fdf4ff,#ede9fe);border:2px solid #7c3aed;">
+                    <p lang="kk" class="lang-content text-gray-700"><b class="text-purple-700">«Генетикалық жағынан жақын туысты тұқымдастар мен тұқымдар генетикалық өзгергіштіктің ұқсас қатарларына ие болады»</b> — Н.И. Вавилов</p>
+                    <p lang="en" class="lang-content text-gray-700"><b class="text-purple-700">«Genetically related genera and species have similar series of heritable variation»</b> — N.I. Vavilov</p>
+                    <p lang="ru" class="lang-content text-gray-700"><b class="text-purple-700">«Генетически близкие роды и виды обладают сходными рядами наследственной изменчивости»</b> — Н.И. Вавилов</p>
+                </div>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#7c3aed;background:#fdf4ff;">
+                        <p class="text-gray-700"><span lang="kk" class="lang-content"><b>Маңызы:</b> Бір туысты түрлерде ұқсас мутациялар кездеседі. Бір түрде табылған мутацияны туыс түрлерде де іздеуге болады — болжамдылықты береді.</span><span lang="en" class="lang-content"><b>Significance:</b> Similar mutations occur in related species. A mutation found in one species can be predicted in related ones — predictive value.</span><span lang="ru" class="lang-content"><b>Значение:</b> У родственных видов встречаются сходные мутации. Найдя мутацию у одного вида, можно её искать у родственных — предсказательная ценность.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#ea580c;background:#fff7ed;">
+                        <p class="text-gray-700"><span lang="kk" class="lang-content"><b>Мысал:</b> Бидайда, арпада, жүгеріде ұқсас пигменттік мутациялар бар (қара, сары, қызыл дән). Бұл туыс өсімдіктер болғандықтан.</span><span lang="en" class="lang-content"><b>Example:</b> Similar pigmentation mutations exist in wheat, barley and maize (black, yellow, red grain) — they are related plants.</span><span lang="ru" class="lang-content"><b>Пример:</b> Сходные мутации пигментации (чёрное, жёлтое, красное зерно) у пшеницы, ячменя, кукурузы — родственных растений.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

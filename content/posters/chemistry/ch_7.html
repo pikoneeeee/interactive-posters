@@ -4,41 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Заттар және химиялық реакциялар</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #fef3c7; }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #b45309; border-bottom: 3px solid #fed7aa; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #d97706; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #d97706; background: white; color: #d97706; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #d97706; color: white; }
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at bottom left, #064e3b, #065f46, #0f172a); color: white; min-height: 100vh; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #34d399; color: #0f172a; font-weight: 800; }
         .lang-content { display: none; }
         .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 12px; text-align: left; font-size: 12px; }
-        th { background-color: #d97706; color: white; }
+        /* Fix table cells: display table-cell instead of block */
+        .lang-kk th.lang-content[lang="kk"],
+        .lang-kk td.lang-content[lang="kk"],
+        .lang-en th.lang-content[lang="en"],
+        .lang-en td.lang-content[lang="en"],
+        .lang-ru th.lang-content[lang="ru"],
+        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
+        table { width: 100%; border-collapse: collapse; }
+        table th { background: rgba(255,255,255,0.08); color: #6ee7b7; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
+        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
+        table tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block { background: rgba(0,0,0,0.5); color: #6ee7b7; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
+        .section-heading { color: #6ee7b7; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
+        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
+        .method-box, .property-box, .substance-box, .info-box, .illustration {
+            background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.25);
+            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        }
+        svg text { fill: white !important; }
+        svg { max-width: 100%; height: auto; }
+    
+        /* Custom content boxes */
+        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
+        .molecule-box, .formula-example, .sign-box, .reaction-box,
+        .calculation-example, .oxide-box, .concept-box, .valency-box,
+        .law-box, .formula-box, .heat-box, .process-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin: 0.75rem 0;
+        }
+        .step-box p, .calculation-box p, .calc-box p, .example-box p,
+        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
+        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
+        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
+            margin-bottom: 0.35rem;
+            line-height: 1.6;
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="bg-amber-50">
+<body class="p-6 md:p-10">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
+        
 
-        <header class="header-card text-center mb-10">
+        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
             <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Заттар және Химиялық Реакциялар</h1>
             <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Substances & Chemical Reactions</h1>
             <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Вещества и химические реакции</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-amber-100">Заттар: қатты, сұйық, газ. Физикалық және химиялық өзгеру. Реакциялар: синтез, ыдырау, алмасу. ЭНДІКТІЛІКтің жағдайында өзгеру!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-amber-100">Substances: solid, liquid, gas. Physical and chemical changes. Reactions: synthesis, decomposition, exchange. EXOTHERMIC & ENDOTHERMIC!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-amber-100">Вещества: твёрдые, жидкие, газы. Физические и химические изменения. Реакции: синтез, разложение, обмен. ЭКЗОТЕРМИЧЕСКИЕ и ЭНДОТЕРМИЧЕСКИЕ!</p>
-        </header>
+            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">Заттар: қатты, сұйық, газ. Физикалық және химиялық өзгеру. Реакциялар: синтез, ыдырау, алмасу. ЭНДІКТІЛІКтің жағдайында өзгеру!</p>
+            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">Substances: solid, liquid, gas. Physical and chemical changes. Reactions: synthesis, decomposition, exchange. EXOTHERMIC & ENDOTHERMIC!</p>
+            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">Вещества: твёрдые, жидкие, газы. Физические и химические изменения. Реакции: синтез, разложение, обмен. ЭКЗОТЕРМИЧЕСКИЕ и ЭНДОТЕРМИЧЕСКИЕ!</p>
+                <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
 
         <section class="mb-12">
             <h2 lang="kk" class="lang-content text-3xl section-heading">1. ХИМИЯЛЫҚ РЕАКЦИЯЛАРДЫҢ 4 ТҮРІ</h2>
@@ -155,7 +193,7 @@
 
             <div class="rule-card">
                 <div class="grid grid-cols-2 gap-4">
-                    <div style="background: #fef3c7; padding: 20px; border-radius: 0.75rem; border-left: 5px solid #d97706;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.2);">
                         <h4 lang="kk" class="lang-content font-bold mb-3">🔄 Физикалық Өзгеру</h4>
                         <h4 lang="en" class="lang-content font-bold mb-3">🔄 Physical Changes</h4>
                         <h4 lang="ru" class="lang-content font-bold mb-3">🔄 Физические изменения</h4>
@@ -178,7 +216,7 @@
                         </ul>
                     </div>
 
-                    <div style="background: #fef3c7; padding: 20px; border-radius: 0.75rem; border-left: 5px solid #d97706;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.2);">
                         <h4 lang="kk" class="lang-content font-bold mb-3">⚗️ Химиялық Өзгеру</h4>
                         <h4 lang="en" class="lang-content font-bold mb-3">⚗️ Chemical Changes</h4>
                         <h4 lang="ru" class="lang-content font-bold mb-3">⚗️ Химические изменения</h4>
@@ -204,10 +242,10 @@
             </div>
         </section>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fed7aa; border-radius: 1rem; border-top: 4px solid #d97706;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-amber-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ЗАКЛЮЧЕНИЕ</h3>
+        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
+            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
+            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
+            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
             <p lang="kk" class="lang-content text-sm">Реакциялары 4 түрі: синтез (A+B→AB, аммиак), ыдырау (AB→A+B, электролиз), алмасу (AB+CD→AD+CB, нейтрализация), орындалу (A+BC→AC+B, металл). Физикалық өзгеру: құрамы өзгермейді, қайта орындалуы мүмкін (мыс: әйтшісі). Химиялық өзгеру: құрамы өзгереді (ЖҚ!), жаңа зат құрылыс, қайта орындалмайды (мыс: төлінген).</p>
             <p lang="en" class="lang-content text-sm">4 types of reactions: synthesis (A+B→AB, ammonia), decomposition (AB→A+B, electrolysis), exchange (AB+CD→AD+CB, neutralization), replacement (A+BC→AC+B, metal). Physical: no change in composition, reversible. Chemical: composition changes, new substance, irreversible.</p>
             <p lang="ru" class="lang-content text-sm">4 типа реакций: синтез (A+B→AB), разложение (AB→A+B), обмен (AB+CD→AD+CB), замещение (A+BC→AC+B). Физические: состав не меняется, обратимы. Химические: состав меняется, новое вещество, необратимы.</p>

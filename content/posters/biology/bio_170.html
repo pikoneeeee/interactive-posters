@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Типы питания. Автотрофы и Гетеротрофы</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0d1f0d 0%, #1a4d1a 50%, #0d1f0d 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #1a4d1a 0%, #2d8a2d 40%, #4ade80 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(45,138,45,0.5); }
+        .section-heading { color: #166534; border-bottom: 4px solid #86efac; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #166534; background: white; color: #166534; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#1a4d1a,#166534); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border-left: 5px solid #166534; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#1a4d1a,#166534); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f0fdf4; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-green-100 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Обмен веществ</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Қоректену түрлері. Автотрофтар мен Гетеротрофтар</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Types of Nutrition. Autotrophs and Heterotrophs</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Типы питания. Автотрофы и Гетеротрофы</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm flex flex-wrap gap-6 justify-center">
+            <div class="text-center"><span class="text-3xl">☀️</span><p class="font-bold text-green-200 mt-1"><span lang="kk" class="lang-content">Автотрофтар</span><span lang="en" class="lang-content">Autotrophs</span><span lang="ru" class="lang-content">Автотрофы</span></p><p class="text-xs text-green-300"><span lang="kk" class="lang-content">Органикасыз заттардан өздері жасайды</span><span lang="en" class="lang-content">Produce own food from inorganic matter</span><span lang="ru" class="lang-content">Сами синтезируют органику</span></p></div>
+            <div class="text-green-300 font-black text-3xl flex items-center">vs</div>
+            <div class="text-center"><span class="text-3xl">🍖</span><p class="font-bold text-green-200 mt-1"><span lang="kk" class="lang-content">Гетеротрофтар</span><span lang="en" class="lang-content">Heterotrophs</span><span lang="ru" class="lang-content">Гетеротрофы</span></p><p class="text-xs text-green-300"><span lang="kk" class="lang-content">Дайын органикалық заттарды тұтынады</span><span lang="en" class="lang-content">Consume ready-made organic matter</span><span lang="ru" class="lang-content">Потребляют готовую органику</span></p></div>
+        </div>
+    </header>
+
+    <!-- AUTOTROPHS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">☀️ Автотрофтар: Фотосинтез және Хемосинтез</h2>
+        <h2 lang="en" class="lang-content section-heading">☀️ Autotrophs: Photosynthesis and Chemosynthesis</h2>
+        <h2 lang="ru" class="lang-content section-heading">☀️ Автотрофы: Фотосинтез и Хемосинтез</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;">
+                    <p class="font-bold text-green-700 mb-2">🌿 <span lang="kk" class="lang-content">Фотоавтотрофтар (Фотосинтез)</span><span lang="en" class="lang-content">Photoautotrophs (Photosynthesis)</span><span lang="ru" class="lang-content">Фотоавтотрофы (Фотосинтез)</span></p>
+                    <p class="text-gray-600 mb-2"><span lang="kk" class="lang-content">Жарық энергиясын пайдаланып органикалық заттар синтездейді. Жалпы теңдеу:</span><span lang="en" class="lang-content">Use light energy to synthesise organic matter. Overall equation:</span><span lang="ru" class="lang-content">Используют энергию света для синтеза органических веществ. Общее уравнение:</span></p>
+                    <div class="bg-green-100 rounded-lg p-2 text-center font-mono font-bold text-green-800 text-xs">6CO₂ + 6H₂O + <span class="text-yellow-600">hν</span> → C₆H₁₂O₆ + 6O₂</div>
+                    <div class="mt-2 space-y-1">
+                        <p><b><span lang="kk" class="lang-content">Жарыққа тәуелді реакция (Гран тилакоид):</span><span lang="en" class="lang-content">Light-dependent reactions (grana thylakoid):</span><span lang="ru" class="lang-content">Световая реакция (тилакоиды гран):</span></b></p>
+                        <p class="text-gray-500"><span lang="kk" class="lang-content">H₂O ыдырауы (фотолиз) → O₂ бөлінеді; АТФ + НАДФН синтезделеді. Фотосистемалар I және II.</span><span lang="en" class="lang-content">H₂O splitting (photolysis) → O₂ released; ATP + NADPH synthesised. Photosystems I and II.</span><span lang="ru" class="lang-content">Расщепление H₂O (фотолиз) → выделяется O₂; синтез АТФ + НАДФН. Фотосистемы I и II.</span></p>
+                        <p><b><span lang="kk" class="lang-content">Жарыққа тәуелсіз реакция (Калвин циклы, строма):</span><span lang="en" class="lang-content">Light-independent reactions (Calvin cycle, stroma):</span><span lang="ru" class="lang-content">Тёмновая реакция (цикл Калвина, строма):</span></b></p>
+                        <p class="text-gray-500"><span lang="kk" class="lang-content">CO₂ + АТФ + НАДФН → глюкоза (С₃ → РуБиФО карбоксилдейді CO₂ → 2× ФГК → Г3Ф → глюкоза).</span><span lang="en" class="lang-content">CO₂ + ATP + NADPH → glucose (RuBisCO carboxylates CO₂ → 2× PGA → G3P → glucose).</span><span lang="ru" class="lang-content">CO₂ + АТФ + НАДФН → глюкоза (РуБиСКО карбоксилирует CO₂ → 2× ФГК → Г3Ф → глюкоза).</span></p>
+                    </div>
+                    <div class="mt-2 bg-green-50 rounded p-2">
+                        <p class="font-semibold text-green-700"><span lang="kk" class="lang-content">Өкілдері:</span><span lang="en" class="lang-content">Representatives:</span><span lang="ru" class="lang-content">Представители:</span></p>
+                        <p class="text-gray-500"><span lang="kk" class="lang-content">Жасыл өсімдіктер, балдырлар, цианобактериялар, кейбір бактериялар (пурпурлы, жасыл күкірт бактериялары)</span><span lang="en" class="lang-content">Green plants, algae, cyanobacteria, some bacteria (purple, green sulphur bacteria)</span><span lang="ru" class="lang-content">Зелёные растения, водоросли, цианобактерии, некоторые бактерии (пурпурные, зелёные серобактерии)</span></p>
+                    </div>
+                </div>
+                <div class="tbox" style="border-color:#0891b2;background:#f0f9ff;">
+                    <p class="font-bold text-cyan-700 mb-2">⚗️ <span lang="kk" class="lang-content">Хемоавтотрофтар (Хемосинтез)</span><span lang="en" class="lang-content">Chemoautotrophs (Chemosynthesis)</span><span lang="ru" class="lang-content">Хемоавтотрофы (Хемосинтез)</span></p>
+                    <p class="text-gray-600 mb-2"><span lang="kk" class="lang-content">Бейорганикалық заттардың тотығу реакциясынан алынған химиялық энергиясын пайдаланады. Жарықсыз, тереңде тіршілік ете алады.</span><span lang="en" class="lang-content">Use chemical energy from oxidation of inorganic substances. Can survive without light, in deep environments.</span><span lang="ru" class="lang-content">Используют химическую энергию от окисления неорганических веществ. Могут жить без света, в глубинах.</span></p>
+                    <div class="space-y-2">
+                        <div class="bg-cyan-50 rounded p-2">
+                            <p class="font-semibold text-cyan-700"><span lang="kk" class="lang-content">Нитрификациялық бактериялар (Нитробактерия):</span><span lang="en" class="lang-content">Nitrifying bacteria (Nitrobacteria):</span><span lang="ru" class="lang-content">Нитрифицирующие бактерии (Nitrobacteria):</span></p>
+                            <p class="font-mono text-xs text-cyan-800">NH₃ → NO₂⁻ → NO₃⁻ + энергия</p>
+                            <p class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Топырақтың азотпен байытылуында маңызды рөл атқарады</span><span lang="en" class="lang-content">Important role in soil nitrogen enrichment</span><span lang="ru" class="lang-content">Важная роль в обогащении почвы азотом</span></p>
+                        </div>
+                        <div class="bg-cyan-50 rounded p-2">
+                            <p class="font-semibold text-cyan-700"><span lang="kk" class="lang-content">Темір бактериялары:</span><span lang="en" class="lang-content">Iron bacteria:</span><span lang="ru" class="lang-content">Железобактерии:</span></p>
+                            <p class="font-mono text-xs text-cyan-800">Fe²⁺ → Fe³⁺ + энергия</p>
+                        </div>
+                        <div class="bg-cyan-50 rounded p-2">
+                            <p class="font-semibold text-cyan-700"><span lang="kk" class="lang-content">Күкірт бактериялары:</span><span lang="en" class="lang-content">Sulphur bacteria:</span><span lang="ru" class="lang-content">Серобактерии:</span></p>
+                            <p class="font-mono text-xs text-cyan-800">H₂S → S → SO₄²⁻ + энергия</p>
+                            <p class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Гидротермальды желіде (мұхит түбінде) тіршілік етеді</span><span lang="en" class="lang-content">Found near hydrothermal vents (ocean floor)</span><span lang="ru" class="lang-content">Обитают у гидротермальных жерл (дно океана)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HETEROTROPHS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🍖 Гетеротрофтар: Сапротрофтар, Паразиттер, Жыртқыштар</h2>
+        <h2 lang="en" class="lang-content section-heading">🍖 Heterotrophs: Saprotrophs, Parasites, Predators</h2>
+        <h2 lang="ru" class="lang-content section-heading">🍖 Гетеротрофы: Сапротрофы, Паразиты, Хищники</h2>
+        <div class="card overflow-x-auto">
+            <table class="comp text-xs">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Тип</span><span lang="en" class="lang-content">Type</span><span lang="ru" class="lang-content">Тип</span></th>
+                    <th><span lang="kk" class="lang-content">Қоректену тәсілі</span><span lang="en" class="lang-content">Feeding method</span><span lang="ru" class="lang-content">Способ питания</span></th>
+                    <th><span lang="kk" class="lang-content">Өкілдері</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Представители</span></th>
+                    <th><span lang="kk" class="lang-content">Экожүйедегі рөлі</span><span lang="en" class="lang-content">Role in ecosystem</span><span lang="ru" class="lang-content">Роль в экосистеме</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr><td class="font-bold text-amber-700">🍄 <span lang="kk" class="lang-content">Сапротрофтар (Ыдыратушылар)</span><span lang="en" class="lang-content">Saprotrophs (Decomposers)</span><span lang="ru" class="lang-content">Сапротрофы (Редуценты)</span></td>
+                        <td><span lang="kk" class="lang-content">Өлі органикалық заттарды сыртта ыдыратып (экзоферменттер), қарапайым заттарды сіңіреді</span><span lang="en" class="lang-content">Break down dead organic matter externally (exoenzymes), absorb simple products</span><span lang="ru" class="lang-content">Разлагают мёртвую органику вне тела (экзоферменты), поглощают простые соединения</span></td>
+                        <td><span lang="kk" class="lang-content">Саңырауқұлақтар, топырақ бактериялары, дождь червтары (ішінара)</span><span lang="en" class="lang-content">Fungi, soil bacteria, earthworms (partly)</span><span lang="ru" class="lang-content">Грибы, почвенные бактерии, дождевые черви (частично)</span></td>
+                        <td><span lang="kk" class="lang-content">Затты айналымда маңызды; ыдырату арқылы минеральды заттарды топыраққа қайтарады</span><span lang="en" class="lang-content">Essential in matter cycling; returns minerals to soil</span><span lang="ru" class="lang-content">Ключевая роль в круговороте веществ; возвращают минералы в почву</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-red-700">🦁 <span lang="kk" class="lang-content">Холозойлы (Жыртқыш / Шөп қоректі)</span><span lang="en" class="lang-content">Holozoic (Predator/Herbivore)</span><span lang="ru" class="lang-content">Голозойный тип (Хищники/Травоядные)</span></td>
+                        <td><span lang="kk" class="lang-content">Тірі немесе жаңа өлген организмдерді жейді; асқорыту — ішкі</span><span lang="en" class="lang-content">Ingests living or freshly dead organisms; digestion internal</span><span lang="ru" class="lang-content">Поедает живые или свежеубитые организмы; пищеварение внутреннее</span></td>
+                        <td><span lang="kk" class="lang-content">Барлық жануарлар — тышқан (шөп қоректі), арыстан (жыртқыш), адам (жемқорлы)</span><span lang="en" class="lang-content">All animals — rabbit (herbivore), lion (carnivore), human (omnivore)</span><span lang="ru" class="lang-content">Все животные — кролик (травоядный), лев (хищник), человек (всеядный)</span></td>
+                        <td><span lang="kk" class="lang-content">Тамақ тізбектерінің консументтері (I, II, III реттілер)</span><span lang="en" class="lang-content">Consumers in food chains (1st, 2nd, 3rd order)</span><span lang="ru" class="lang-content">Консументы пищевых цепей (I, II, III порядки)</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-pink-700">🦠 <span lang="kk" class="lang-content">Паразиттік гетеротрофтар</span><span lang="en" class="lang-content">Parasitic heterotrophs</span><span lang="ru" class="lang-content">Паразитические гетеротрофы</span></td>
+                        <td><span lang="kk" class="lang-content">Тірі иесінің есебінен қоректенеді; иесіне зиян келтіреді</span><span lang="en" class="lang-content">Feed at the expense of a living host; harm the host</span><span lang="ru" class="lang-content">Питаются за счёт живого хозяина; наносят вред хозяину</span></td>
+                        <td><span lang="kk" class="lang-content">Гельминттер (тения, аскарид), малярия плазмодиі, омела өсімдігі, вирустар</span><span lang="en" class="lang-content">Helminths (tapeworm, roundworm), malaria plasmodium, mistletoe, viruses</span><span lang="ru" class="lang-content">Гельминты (цепень, аскарида), малярийный плазмодий, омела, вирусы</span></td>
+                        <td><span lang="kk" class="lang-content">Популяция мөлшерін реттейді; коэволюция жүреді</span><span lang="en" class="lang-content">Regulate population size; drive coevolution</span><span lang="ru" class="lang-content">Регулируют численность популяций; идёт коэволюция</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-purple-700">🌡️ <span lang="kk" class="lang-content">Миксотрофтар (Аралас қоректенушілер)</span><span lang="en" class="lang-content">Mixotrophs</span><span lang="ru" class="lang-content">Миксотрофы</span></td>
+                        <td><span lang="kk" class="lang-content">Автотрофты да, гетеротрофты да қоректену мүмкіндігіне ие</span><span lang="en" class="lang-content">Capable of both autotrophic and heterotrophic nutrition</span><span lang="ru" class="lang-content">Способны как к авто-, так и к гетеротрофному питанию</span></td>
+                        <td><span lang="kk" class="lang-content"><i>Euglena viridis</i> (жасыл эвглена) — жарықта фотосинтез, қараңғыда органиканы сіңіреді; Жәндікқоректі өсімдіктер (Dionaea — Венера мухоловка)</span><span lang="en" class="lang-content"><i>Euglena viridis</i> (green euglena) — photosynthesis in light, absorbs organics in dark; Carnivorous plants (Dionaea — Venus flytrap)</span><span lang="ru" class="lang-content"><i>Euglena viridis</i> (зелёная эвглена) — фотосинтез на свету, поглощение органики в темноте; Насекомоядные растения (Dionaea — венерина мухоловка)</span></td>
+                        <td><span lang="kk" class="lang-content">Қоршаған орта жағдайына байланысты икемді стратегия</span><span lang="en" class="lang-content">Flexible strategy depending on environmental conditions</span><span lang="ru" class="lang-content">Гибкая стратегия в зависимости от условий среды</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="fact-box mt-4 text-xs">
+                <p class="font-bold text-green-700"><span lang="kk" class="lang-content">🔗 Трофикалық деңгейлер және энергия берілуі</span><span lang="en" class="lang-content">🔗 Trophic levels and energy transfer</span><span lang="ru" class="lang-content">🔗 Трофические уровни и передача энергии</span></p>
+                <div class="flex flex-wrap items-center gap-2 mt-2 text-xs">
+                    <div class="bg-green-100 text-green-800 rounded-lg px-3 py-1 font-semibold text-center"><span lang="kk" class="lang-content">Продуценттер<br>(Автотрофтар)</span><span lang="en" class="lang-content">Producers<br>(Autotrophs)</span><span lang="ru" class="lang-content">Продуценты<br>(Автотрофы)</span><br>100%</div>
+                    <span class="text-green-500 font-bold">→ ~10% →</span>
+                    <div class="bg-yellow-100 text-yellow-800 rounded-lg px-3 py-1 font-semibold text-center"><span lang="kk" class="lang-content">I-ретті консументтер<br>(Шөп қоректілер)</span><span lang="en" class="lang-content">1st-order consumers<br>(Herbivores)</span><span lang="ru" class="lang-content">Консументы I порядка<br>(Травоядные)</span><br>10%</div>
+                    <span class="text-green-500 font-bold">→ ~10% →</span>
+                    <div class="bg-orange-100 text-orange-800 rounded-lg px-3 py-1 font-semibold text-center"><span lang="kk" class="lang-content">II-ретті консументтер<br>(Жыртқыштар)</span><span lang="en" class="lang-content">2nd-order consumers<br>(Carnivores)</span><span lang="ru" class="lang-content">Консументы II порядка<br>(Хищники)</span><br>1%</div>
+                    <span class="text-green-500 font-bold">→</span>
+                    <div class="bg-amber-100 text-amber-800 rounded-lg px-3 py-1 font-semibold text-center"><span lang="kk" class="lang-content">Редуценттер<br>(Сапротрофтар)</span><span lang="en" class="lang-content">Decomposers<br>(Saprotrophs)</span><span lang="ru" class="lang-content">Редуценты<br>(Сапротрофы)</span></div>
+                </div>
+                <p class="text-gray-600 mt-2"><span lang="kk" class="lang-content">Линдеман ережесі (10% ережесі): Бір трофикалық деңгейден екіншісіне энергияның тек ~10% ғана берілуі. Қалған 90% жылу ретінде жоғалады.</span><span lang="en" class="lang-content">Lindeman's rule (10% rule): Only ~10% of energy is transferred from one trophic level to the next. The remaining 90% is lost as heat.</span><span lang="ru" class="lang-content">Правило Линдемана (правило 10%): Лишь ~10% энергии передаётся с одного трофического уровня на следующий. Остальные 90% рассеиваются в виде тепла.</span></p>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

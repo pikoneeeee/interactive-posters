@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Взаимодействие генов. Неполное доминирование. Полигенное наследование</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1a0033 0%, #6d28d9 50%, #1a0033 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 40%, #a78bfa 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(109,40,217,0.5); }
+        .section-heading { color: #6d28d9; border-bottom: 4px solid #c4b5fd; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #6d28d9; background: white; color: #6d28d9; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#4c1d95,#6d28d9); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f5f3ff,#ede9fe); border-left: 5px solid #6d28d9; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#4c1d95,#6d28d9); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f5f3ff; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-violet-200 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Генетика</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Гендер өзара әрекеттесуі. Толық емес доминанттылық. Полигенді тұқымқуалау</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Gene Interactions. Incomplete Dominance. Polygenic Inheritance</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Взаимодействие генов. Неполное доминирование. Полигенное наследование</h1>
+    </header>
+
+    <!-- ALLELIC INTERACTIONS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔀 Аллельді гендердің өзара әрекеттесуі</h2>
+        <h2 lang="en" class="lang-content section-heading">🔀 Allelic Gene Interactions</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔀 Взаимодействие аллельных генов</h2>
+        <div class="card overflow-x-auto">
+            <table class="comp text-xs">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Тип</span><span lang="en" class="lang-content">Type</span><span lang="ru" class="lang-content">Тип</span></th>
+                    <th><span lang="kk" class="lang-content">Анықтамасы</span><span lang="en" class="lang-content">Definition</span><span lang="ru" class="lang-content">Определение</span></th>
+                    <th>F₁ <span lang="kk" class="lang-content">фенотипі</span><span lang="en" class="lang-content">phenotype</span><span lang="ru" class="lang-content">фенотип</span></th>
+                    <th>F₂ <span lang="kk" class="lang-content">бөлінуі</span><span lang="en" class="lang-content">split</span><span lang="ru" class="lang-content">расщепление</span></th>
+                    <th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Толық доминанттылық</span><span lang="en" class="lang-content">Complete dominance</span><span lang="ru" class="lang-content">Полное доминирование</span></td>
+                        <td><span lang="kk" class="lang-content">Доминантты аллель рецессивтіні толық жасырады. Гетерозигота = доминантты гомозигота.</span><span lang="en" class="lang-content">Dominant allele completely masks recessive. Heterozygote = dominant homozygote.</span><span lang="ru" class="lang-content">Доминантный аллель полностью маскирует рецессивный. Гетерозигота = доминантная гомозигота.</span></td>
+                        <td><span lang="kk" class="lang-content">Аталық тек доминантты белгіні көрсетеді</span><span lang="en" class="lang-content">Shows only dominant trait</span><span lang="ru" class="lang-content">Только доминантный признак</span></td>
+                        <td class="font-mono">3:1</td>
+                        <td><span lang="kk" class="lang-content">Мендельдің бұршақтары: сары/жасыл тұқым</span><span lang="en" class="lang-content">Mendel's peas: yellow/green seed</span><span lang="ru" class="lang-content">Горох Менделя: жёлтые/зелёные семена</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Толық емес доминанттылық</span><span lang="en" class="lang-content">Incomplete dominance</span><span lang="ru" class="lang-content">Неполное доминирование</span></td>
+                        <td><span lang="kk" class="lang-content">Ешбір аллель толық доминантты болмайды. Гетерозигота — аралық фенотип көрсетеді.</span><span lang="en" class="lang-content">Neither allele is fully dominant. Heterozygote shows an intermediate phenotype.</span><span lang="ru" class="lang-content">Ни один аллель не является полностью доминантным. Гетерозигота имеет промежуточный фенотип.</span></td>
+                        <td><span lang="kk" class="lang-content">Аралық (екі аталыктың «аралығы»)</span><span lang="en" class="lang-content">Intermediate (between two parents)</span><span lang="ru" class="lang-content">Промежуточный (между двумя родителями)</span></td>
+                        <td class="font-mono">1:2:1</td>
+                        <td><span lang="kk" class="lang-content">Мирабилис (Mirabilis): қызыл × ақ → <b>қызғылт</b> (Rr); ал F₂: қызыл:қызғылт:ақ = 1:2:1</span><span lang="en" class="lang-content">Mirabilis jalapa: red × white → <b>pink</b> (Rr); F₂: red:pink:white = 1:2:1</span><span lang="ru" class="lang-content">Мирабилис (Mirabilis): красный × белый → <b>розовый</b> (Rr); F₂: красный:розовый:белый = 1:2:1</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Кодоминанттылық</span><span lang="en" class="lang-content">Codominance</span><span lang="ru" class="lang-content">Кодоминирование</span></td>
+                        <td><span lang="kk" class="lang-content">Екі аллель де тең дәрежеде бірдей болып экспрессияланады. Гетерозигота екі белгіні де бірге көрсетеді.</span><span lang="en" class="lang-content">Both alleles are equally expressed simultaneously. Heterozygote shows both traits.</span><span lang="ru" class="lang-content">Оба аллеля одновременно равно экспрессируются. Гетерозигота проявляет оба признака.</span></td>
+                        <td><span lang="kk" class="lang-content">Екі аталық белгі де бір мезгілде</span><span lang="en" class="lang-content">Both parental traits simultaneously</span><span lang="ru" class="lang-content">Оба родительских признака одновременно</span></td>
+                        <td class="font-mono">1:2:1</td>
+                        <td><span lang="kk" class="lang-content">АВО қан тобы: I<sup>A</sup>I<sup>B</sup> → <b>IV (AB) топ</b> — А және В антигендері бірге. Ірі қара мал: қызыл × ақ → белгілі ала</span><span lang="en" class="lang-content">ABO blood type: I<sup>A</sup>I<sup>B</sup> → <b>type AB</b> — both A and B antigens. Cattle: red × white → roan</span><span lang="ru" class="lang-content">Группы крови АВО: I<sup>A</sup>I<sup>B</sup> → <b>IV (AB) группа</b> — антигены A и B вместе. КРС: красный × белый → чалый</span></td>
+                    </tr>
+                    <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Сверхдоминанттылық (Гетерозис)</span><span lang="en" class="lang-content">Overdominance (Heterosis)</span><span lang="ru" class="lang-content">Сверхдоминирование (Гетерозис)</span></td>
+                        <td><span lang="kk" class="lang-content">Гетерозигота (<i>Aa</i>) екі гомозигота (<i>AA, aa</i>) -дан да жақсы. «Гибридтік күш» феномені.</span><span lang="en" class="lang-content">Heterozygote (<i>Aa</i>) is superior to both homozygotes (<i>AA, aa</i>). "Hybrid vigour" phenomenon.</span><span lang="ru" class="lang-content">Гетерозигота (<i>Aa</i>) превосходит оба гомозиготных состояния. Феномен «гибридной силы».</span></td>
+                        <td><span lang="kk" class="lang-content">Гетерозигота үздік</span><span lang="en" class="lang-content">Heterozygote is best</span><span lang="ru" class="lang-content">Гетерозигота наилучшая</span></td>
+                        <td class="font-mono">—</td>
+                        <td><span lang="kk" class="lang-content">Жүгері гибридтері (алынған шығымдылық); орақ жасушалы анемия — HbS/HbA гетерозиготалар безгегіге төзімді</span><span lang="en" class="lang-content">Hybrid maize (increased yield); sickle cell — HbS/HbA heterozygotes resistant to malaria</span><span lang="ru" class="lang-content">Гибриды кукурузы (повышенный урожай); серповидноклеточная — HbS/HbA гетерозиготы устойчивы к малярии</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- NON-ALLELIC + POLYGENIC -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🧩 Аллельді емес гендердің өзара әрекеттесуі • 📊 Полигенді тұқымқуалау</h2>
+        <h2 lang="en" class="lang-content section-heading">🧩 Non-allelic Gene Interactions • 📊 Polygenic Inheritance</h2>
+        <h2 lang="ru" class="lang-content section-heading">🧩 Взаимодействие неаллельных генов • 📊 Полигенное наследование</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="space-y-3 text-xs">
+                    <div class="tbox" style="border-color:#6d28d9;background:#f5f3ff;">
+                        <p class="font-bold text-violet-700">➕ <span lang="kk" class="lang-content">Комплементарлылық (Толықтырушылық)</span><span lang="en" class="lang-content">Complementarity</span><span lang="ru" class="lang-content">Комплементарность</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Екі доминантты аллель бірге болғанда жаңа белгі пайда болады. F₂: 9:7 немесе 9:3:4 немесе 9:6:1. <b>Мысал:</b> Тәтті бұршақтың гүл түсі: A_B_ = қызыл; A_bb, aaB_, aabb = ақ.</span><span lang="en" class="lang-content">A new trait appears when two dominant alleles are present together. F₂: 9:7 or 9:3:4 or 9:6:1. <b>Example:</b> Sweet pea flower colour: A_B_ = coloured; rest = white.</span><span lang="ru" class="lang-content">Новый признак при совместном действии двух доминантных аллелей. F₂: 9:7 или 9:3:4. <b>Пример:</b> Цвет цветка душистого горошка: A_B_ = окрашенный; остальные = белый.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#6d28d9;background:#f5f3ff;">
+                        <p class="font-bold text-violet-700">🚫 <span lang="kk" class="lang-content">Эпистаз</span><span lang="en" class="lang-content">Epistasis</span><span lang="ru" class="lang-content">Эпистаз</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Бір геннің аллелі екінші геннің экспрессиясын тежейді (жасырады). <b>Доминантты эпистаз</b> (A _ B_→ 12:3:1): А доминантты В экспрессиясын тежейді. <b>Рецессивті эпистаз</b> (A_bb → 9:3:4). <b>Мысал:</b> Жылқы жүнінің түсі — B гені пигмент синтездейді, ал A гені оны тежейді.</span><span lang="en" class="lang-content">An allele of one gene suppresses expression of another gene. <b>Dominant epistasis</b> (12:3:1): A dominant suppresses B expression. <b>Recessive epistasis</b> (9:3:4). <b>Example:</b> Horse coat colour — B gene synthesises pigment, A gene suppresses it.</span><span lang="ru" class="lang-content">Аллель одного гена подавляет экспрессию другого гена. <b>Доминантный эпистаз</b> (12:3:1): доминантный А подавляет ген В. <b>Рецессивный эпистаз</b> (9:3:4). <b>Пример:</b> Масть лошади — ген B синтезирует пигмент, ген A его подавляет.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#6d28d9;background:#f5f3ff;">
+                        <p class="font-bold text-violet-700">🔄 <span lang="kk" class="lang-content">Плейотропия</span><span lang="en" class="lang-content">Pleiotropy</span><span lang="ru" class="lang-content">Плейотропия</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Бір ген бірнеше белгіні реттейді. <b>Мысал:</b> Фенилкетонурия гені (PKU) → ақыл-ой кемістігі + ашық тері + эпилепсия. Орақ жасушалы анемия гені (HbS) → эритроцит формасы + анемия + органдар зақымдалуы.</span><span lang="en" class="lang-content">One gene controls multiple traits. <b>Example:</b> PKU gene → intellectual disability + fair skin + epilepsy. Sickle cell gene (HbS) → erythrocyte shape + anaemia + organ damage.</span><span lang="ru" class="lang-content">Один ген определяет несколько признаков. <b>Пример:</b> Ген ФКУ (PKU) → умственная отсталость + светлая кожа + эпилепсия. Ген серповидноклеточной анемии (HbS) → форма эритроцита + анемия + повреждение органов.</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-violet-700 text-sm mb-3">📊 <span lang="kk" class="lang-content">Полигенді (Полимерлік) тұқымқуалау</span><span lang="en" class="lang-content">Polygenic (Polymeric) Inheritance</span><span lang="ru" class="lang-content">Полигенное (Полимерное) наследование</span></h3>
+                <p class="text-xs text-gray-600 mb-3"><span lang="kk" class="lang-content"><b>Бірнеше ген жұптары</b> бір белгіні бірігіп реттейді. Эффектер қосылады (аддитивтік). Нәтижесінде <b>үздіксіз өзгергіштік</b> — белгілер қалыпты үлестіру қисығын (колоколды) береді.</span><span lang="en" class="lang-content"><b>Multiple gene pairs</b> jointly control a single trait. Effects are additive. Results in <b>continuous variation</b> — traits show a normal distribution (bell curve).</span><span lang="ru" class="lang-content"><b>Несколько пар генов</b> совместно регулируют один признак. Эффекты суммируются (аддитивность). В результате — <b>непрерывная изменчивость</b> — колоколообразное распределение (кривая нормального распределения).</span></p>
+                <div class="tbox text-xs" style="border-color:#6d28d9;background:#f5f3ff;">
+                    <p class="font-bold text-violet-700 mb-2"><span lang="kk" class="lang-content">Мысалдар:</span><span lang="en" class="lang-content">Examples:</span><span lang="ru" class="lang-content">Примеры:</span></p>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>🧑 <b><span lang="kk" class="lang-content">Адам бойы</span><span lang="en" class="lang-content">Human height</span><span lang="ru" class="lang-content">Рост человека</span></b> — <span lang="kk" class="lang-content">>100 ген + орта. 4 ген жұбы → 9 фенотип класс</span><span lang="en" class="lang-content">>100 genes + environment. 4 gene pairs → 9 phenotype classes</span><span lang="ru" class="lang-content">>100 генов + среда. 4 пары генов → 9 классов фенотипа</span></li>
+                        <li>🎨 <b><span lang="kk" class="lang-content">Тері түсі</span><span lang="en" class="lang-content">Skin colour</span><span lang="ru" class="lang-content">Цвет кожи</span></b> — <span lang="kk" class="lang-content">3–4 ген → меланин мөлшерін анықтайды</span><span lang="en" class="lang-content">3–4 genes → determine melanin amount</span><span lang="ru" class="lang-content">3–4 гена → определяют количество меланина</span></li>
+                        <li>🌾 <b><span lang="kk" class="lang-content">Бидайдың масағы</span><span lang="en" class="lang-content">Wheat grain colour</span><span lang="ru" class="lang-content">Цвет зерна пшеницы</span></b> — <span lang="kk" class="lang-content">2 ген A және B: AABB=қоңыр, AaBb=орташа, aabb=ақ</span><span lang="en" class="lang-content">2 genes A and B: AABB=dark red, AaBb=medium, aabb=white</span><span lang="ru" class="lang-content">2 гена A и B: AABB=тёмно-красный, AaBb=средний, aabb=белый</span></li>
+                        <li>🧠 <b><span lang="kk" class="lang-content">Интеллект, салмақ, қан қысымы</span><span lang="en" class="lang-content">Intelligence, weight, blood pressure</span><span lang="ru" class="lang-content">Интеллект, масса тела, артериальное давление</span></b></li>
+                    </ul>
+                </div>
+                <div class="fact-box mt-3 text-xs">
+                    <p class="font-bold text-violet-700"><span lang="kk" class="lang-content">📐 n ген жұбы үшін формула:</span><span lang="en" class="lang-content">📐 Formula for n gene pairs:</span><span lang="ru" class="lang-content">📐 Формула для n пар генов:</span></p>
+                    <ul class="text-gray-600 mt-1 space-y-0.5">
+                        <li><span lang="kk" class="lang-content">Фенотип кластарының саны = <b>2n + 1</b></span><span lang="en" class="lang-content">Number of phenotype classes = <b>2n + 1</b></span><span lang="ru" class="lang-content">Число классов фенотипа = <b>2n + 1</b></span></li>
+                        <li><span lang="kk" class="lang-content">1 ген жұбы → 3 класс (1:2:1)</span><span lang="en" class="lang-content">1 gene pair → 3 classes (1:2:1)</span><span lang="ru" class="lang-content">1 пара генов → 3 класса (1:2:1)</span></li>
+                        <li><span lang="kk" class="lang-content">2 ген жұбы → 5 класс (1:4:6:4:1)</span><span lang="en" class="lang-content">2 gene pairs → 5 classes (1:4:6:4:1)</span><span lang="ru" class="lang-content">2 пары генов → 5 классов (1:4:6:4:1)</span></li>
+                        <li><span lang="kk" class="lang-content">3 ген жұбы → 7 класс (1:6:15:20:15:6:1)</span><span lang="en" class="lang-content">3 gene pairs → 7 classes (1:6:15:20:15:6:1)</span><span lang="ru" class="lang-content">3 пары генов → 7 классов (1:6:15:20:15:6:1)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

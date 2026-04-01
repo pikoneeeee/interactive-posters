@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обмен веществ. Фотосинтез и дыхание</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #fefce8 100%); }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #15803d 0%, #16a34a 40%, #ca8a04 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(21,128,61,0.3); }
+        .section-heading { color: #15803d; border-bottom: 4px solid #4ade80; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .section-heading-amber { color: #b45309; border-bottom: 4px solid #fbbf24; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #15803d; background: white; color: #15803d; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdf4; }
+        .lang-btn.active { background: linear-gradient(135deg,#15803d,#16a34a); color: white; box-shadow: 0 4px 12px rgba(21,128,61,0.3); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box-green { background: linear-gradient(135deg,#f0fdf4,#fefce8); border-left: 5px solid #16a34a; padding: 16px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .fact-box-amber { background: linear-gradient(135deg,#fffbeb,#fef9c3); border-left: 5px solid #ca8a04; padding: 16px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .fact-box-red { background: linear-gradient(135deg,#fff1f2,#fce7f3); border-left: 5px solid #e11d48; padding: 16px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .phase-card { border-radius: 14px; padding: 20px; }
+        .equation { font-family: monospace; background: #1e293b; color: #86efac; padding: 14px 20px; border-radius: 10px; font-size: 1rem; text-align: center; margin: 12px 0; letter-spacing: 0.02em; }
+        .step-box { border: 2px solid; border-radius: 12px; padding: 14px 16px; margin: 8px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        th { background: linear-gradient(135deg,#15803d,#16a34a); color: white; padding: 11px 14px; text-align: left; font-weight: 700; }
+        th:first-child { border-radius: 10px 0 0 0; } th:last-child { border-radius: 0 10px 0 0; }
+        td { padding: 10px 14px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        tr:nth-child(even) td { background: #f0fdf4; }
+        tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-green-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Обмен веществ</p>
+        <h1 lang="kk" class="lang-content text-5xl font-black uppercase tracking-wide">Зат алмасу. Фотосинтез және тыныс алу</h1>
+        <h1 lang="en" class="lang-content text-5xl font-black uppercase tracking-wide">Metabolism. Photosynthesis & Respiration</h1>
+        <h1 lang="ru" class="lang-content text-5xl font-black uppercase tracking-wide">Обмен веществ. Фотосинтез и дыхание</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p lang="kk" class="lang-content text-lg font-medium">Зат алмасу (метаболизм) — жасушадағы барлық химиялық реакциялардың жиынтығы. <b>Анаболизм</b> — күрделі молекулалардың синтезі (энергия жұтылады). <b>Катаболизм</b> — күрделі молекулалардың ыдырауы (энергия бөлінеді).</p>
+            <p lang="en" class="lang-content text-lg font-medium">Metabolism — the sum of all chemical reactions in the cell. <b>Anabolism</b> — synthesis of complex molecules (energy consumed). <b>Catabolism</b> — breakdown of complex molecules (energy released).</p>
+            <p lang="ru" class="lang-content text-lg font-medium">Обмен веществ (метаболизм) — совокупность всех химических реакций клетки. <b>Анаболизм</b> — синтез сложных молекул (энергия поглощается). <b>Катаболизм</b> — расщепление сложных молекул (энергия выделяется).</p>
+        </div>
+    </header>
+
+    <!-- PHOTOSYNTHESIS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌿 Фотосинтез</h2>
+        <h2 lang="en" class="lang-content section-heading">🌿 Photosynthesis</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌿 Фотосинтез</h2>
+
+        <div class="card mb-6">
+            <div lang="kk" class="lang-content">
+                <p class="text-gray-600 text-sm mb-4">Фотосинтез — жарық энергиясын химиялық байланыс энергиясына айналдыру үдерісі. Хлоропластарда жүреді. Тек өсімдіктерде, балдырларда және кейбір бактерияларда болады.</p>
+                <div class="equation">6CO₂ + 6H₂O + жарық → C₆H₁₂O₆ + 6O₂</div>
+            </div>
+            <div lang="en" class="lang-content">
+                <p class="text-gray-600 text-sm mb-4">Photosynthesis — the process of converting light energy into chemical bond energy. Occurs in chloroplasts. Only in plants, algae, and some bacteria.</p>
+                <div class="equation">6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂</div>
+            </div>
+            <div lang="ru" class="lang-content">
+                <p class="text-gray-600 text-sm mb-4">Фотосинтез — процесс преобразования энергии света в энергию химических связей. Протекает в хлоропластах. Только у растений, водорослей и некоторых бактерий.</p>
+                <div class="equation">6CO₂ + 6H₂O + свет → C₆H₁₂O₆ + 6O₂</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <!-- Light phase -->
+                <div class="phase-card" style="background:linear-gradient(135deg,#fefce8,#fef9c3);">
+                    <div class="flex items-center gap-2 mb-3"><span style="font-size:1.8rem;">☀️</span>
+                        <h3 class="font-bold text-xl text-amber-700">
+                            <span lang="kk" class="lang-content">Жарық фазасы</span>
+                            <span lang="en" class="lang-content">Light Reactions</span>
+                            <span lang="ru" class="lang-content">Световая фаза</span>
+                        </h3>
+                        <span class="text-xs font-bold px-2 py-1 rounded-full text-amber-700" style="background:#fef3c7;">
+                            <span lang="kk" class="lang-content">Тилакоидтар</span>
+                            <span lang="en" class="lang-content">Thylakoids</span>
+                            <span lang="ru" class="lang-content">Тилакоиды</span>
+                        </span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="step-box" style="border-color:#ca8a04;background:#fffbeb;">
+                            <p class="font-bold text-amber-700">1. <span lang="kk" class="lang-content">Хлорофилл жарықты сіңіреді</span><span lang="en" class="lang-content">Chlorophyll absorbs light</span><span lang="ru" class="lang-content">Хлорофилл поглощает свет</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">→ Электрондар қозғалысқа келеді (фотосистема I және II)</span><span lang="en" class="lang-content">→ Electrons become excited (Photosystem I & II)</span><span lang="ru" class="lang-content">→ Электроны переходят в возбуждённое состояние (фотосистема I и II)</span></p>
+                        </div>
+                        <div class="step-box" style="border-color:#ca8a04;background:#fffbeb;">
+                            <p class="font-bold text-amber-700">2. <span lang="kk" class="lang-content">Судың фотолизі</span><span lang="en" class="lang-content">Photolysis of water</span><span lang="ru" class="lang-content">Фотолиз воды</span></p>
+                            <p class="text-gray-600 text-xs mt-1">2H₂O → 4H⁺ + 4e⁻ + <b>O₂↑</b><br><span lang="kk" class="lang-content">Оттегі қалдық өнім ретінде бөлінеді</span><span lang="en" class="lang-content">Oxygen is released as a by-product</span><span lang="ru" class="lang-content">Кислород выделяется как побочный продукт</span></p>
+                        </div>
+                        <div class="step-box" style="border-color:#ca8a04;background:#fffbeb;">
+                            <p class="font-bold text-amber-700">3. <span lang="kk" class="lang-content">АТФ және НАДФН синтезі</span><span lang="en" class="lang-content">ATP and NADPH synthesis</span><span lang="ru" class="lang-content">Синтез АТФ и НАДФН</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Электрондар тізбегі → АДФ + Фн → <b>АТФ</b>; НАДФ⁺ + 2H⁺ + 2e⁻ → <b>НАДФН</b></span><span lang="en" class="lang-content">Electron transport chain → ADP + Pi → <b>ATP</b>; NADP⁺ + 2H⁺ + 2e⁻ → <b>NADPH</b></span><span lang="ru" class="lang-content">Цепь переноса электронов → АДФ + Фн → <b>АТФ</b>; НАДФ⁺ + 2H⁺ + 2e⁻ → <b>НАДФН</b></span></p>
+                        </div>
+                        <div class="fact-box-amber text-xs">
+                            <span lang="kk" class="lang-content"><b>Нәтиже:</b> АТФ + НАДФН + O₂ түзіледі. Глюкоза жасалмайды!</span>
+                            <span lang="en" class="lang-content"><b>Result:</b> ATP + NADPH + O₂ produced. Glucose is NOT made yet!</span>
+                            <span lang="ru" class="lang-content"><b>Итог:</b> Образуются АТФ + НАДФН + O₂. Глюкоза ещё не синтезируется!</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dark phase -->
+                <div class="phase-card" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+                    <div class="flex items-center gap-2 mb-3"><span style="font-size:1.8rem;">🌑</span>
+                        <h3 class="font-bold text-xl text-green-700">
+                            <span lang="kk" class="lang-content">Қараңғы фаза (Кальвин циклі)</span>
+                            <span lang="en" class="lang-content">Dark Reactions (Calvin Cycle)</span>
+                            <span lang="ru" class="lang-content">Тёмная фаза (цикл Кальвина)</span>
+                        </h3>
+                        <span class="text-xs font-bold px-2 py-1 rounded-full text-green-700" style="background:#dcfce7;">
+                            <span lang="kk" class="lang-content">Строма</span>
+                            <span lang="en" class="lang-content">Stroma</span>
+                            <span lang="ru" class="lang-content">Строма</span>
+                        </span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="step-box" style="border-color:#16a34a;background:#f0fdf4;">
+                            <p class="font-bold text-green-700">1. <span lang="kk" class="lang-content">CO₂ фиксациясы</span><span lang="en" class="lang-content">CO₂ fixation</span><span lang="ru" class="lang-content">Фиксация CO₂</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">CO₂ + РуБФ (5С) → 2 ФГК (3С) — РуБиСКО ферменті</span><span lang="en" class="lang-content">CO₂ + RuBP (5C) → 2 PGA (3C) — enzyme RuBisCO</span><span lang="ru" class="lang-content">CO₂ + РуБФ (5С) → 2 ФГК (3С) — фермент РуБиСКО</span></p>
+                        </div>
+                        <div class="step-box" style="border-color:#16a34a;background:#f0fdf4;">
+                            <p class="font-bold text-green-700">2. <span lang="kk" class="lang-content">Қалпына келтіру</span><span lang="en" class="lang-content">Reduction</span><span lang="ru" class="lang-content">Восстановление</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">АТФ + НАДФН → ФГА (3С) — жарық фазасының өнімдері жұмсалады</span><span lang="en" class="lang-content">ATP + NADPH → G3P (3C) — uses products of light reactions</span><span lang="ru" class="lang-content">АТФ + НАДФН → ФГА (3С) — расходуются продукты световой фазы</span></p>
+                        </div>
+                        <div class="step-box" style="border-color:#16a34a;background:#f0fdf4;">
+                            <p class="font-bold text-green-700">3. <span lang="kk" class="lang-content">Глюкоза синтезі</span><span lang="en" class="lang-content">Glucose synthesis</span><span lang="ru" class="lang-content">Синтез глюкозы</span></p>
+                            <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">2 ФГА → глюкоза (C₆H₁₂O₆). РуБФ қайта синтезделеді (цикл жалғасады)</span><span lang="en" class="lang-content">2 G3P → glucose (C₆H₁₂O₆). RuBP regenerated (cycle continues)</span><span lang="ru" class="lang-content">2 ФГА → глюкоза (C₆H₁₂O₆). РуБФ регенерируется (цикл продолжается)</span></p>
+                        </div>
+                        <div class="fact-box-green text-xs">
+                            <span lang="kk" class="lang-content"><b>Нәтиже:</b> Глюкоза синтезделеді. Жарық қажет емес, бірақ жарық фазасының АТФ/НАДФН өнімдері керек.</span>
+                            <span lang="en" class="lang-content"><b>Result:</b> Glucose is synthesized. Light not directly needed, but requires ATP/NADPH from light reactions.</span>
+                            <span lang="ru" class="lang-content"><b>Итог:</b> Синтезируется глюкоза. Свет не нужен напрямую, но требуются АТФ/НАДФН световой фазы.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CELLULAR RESPIRATION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading-amber">🔥 Жасушалық тыныс алу</h2>
+        <h2 lang="en" class="lang-content section-heading-amber">🔥 Cellular Respiration</h2>
+        <h2 lang="ru" class="lang-content section-heading-amber">🔥 Клеточное дыхание</h2>
+
+        <div class="card">
+            <div lang="kk" class="lang-content">
+                <p class="text-gray-600 text-sm mb-3">Жасушалық тыныс алу — органикалық заттарды тотықтыру арқылы АТФ синтездеу. Барлық тірі ағзаларда жүреді.</p>
+                <div class="equation">C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 АТФ</div>
+            </div>
+            <div lang="en" class="lang-content">
+                <p class="text-gray-600 text-sm mb-3">Cellular respiration — synthesis of ATP by oxidizing organic substances. Occurs in all living organisms.</p>
+                <div class="equation">C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 ATP</div>
+            </div>
+            <div lang="ru" class="lang-content">
+                <p class="text-gray-600 text-sm mb-3">Клеточное дыхание — синтез АТФ путём окисления органических веществ. Протекает у всех живых организмов.</p>
+                <div class="equation">C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 38 АТФ</div>
+            </div>
+
+            <!-- 3 stages -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
+                <!-- Glycolysis -->
+                <div class="phase-card" style="background:linear-gradient(135deg,#fff7ed,#fef3c7);">
+                    <div class="text-center mb-3">
+                        <span style="font-size:2rem;">⚡</span>
+                        <h3 class="font-bold text-lg text-amber-700">
+                            <span lang="kk" class="lang-content">Гликолиз</span>
+                            <span lang="en" class="lang-content">Glycolysis</span>
+                            <span lang="ru" class="lang-content">Гликолиз</span>
+                        </h3>
+                        <span class="text-xs font-semibold px-2 py-1 rounded-full" style="background:#fef3c7;color:#92400e;">
+                            <span lang="kk" class="lang-content">Цитоплазма • O₂-сіз</span>
+                            <span lang="en" class="lang-content">Cytoplasm • O₂-free</span>
+                            <span lang="ru" class="lang-content">Цитоплазма • без O₂</span>
+                        </span>
+                    </div>
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <p><span lang="kk" class="lang-content">Глюкоза (6С) → 2 пируват (3С)</span><span lang="en" class="lang-content">Glucose (6C) → 2 pyruvate (3C)</span><span lang="ru" class="lang-content">Глюкоза (6С) → 2 пируват (3С)</span></p>
+                        <div class="fact-box-amber text-xs">
+                            <div>✅ <b>2 АТФ</b></div>
+                            <div>✅ <b>2 НАДН</b></div>
+                            <div class="mt-1"><span lang="kk" class="lang-content">10 ферменттік реакция</span><span lang="en" class="lang-content">10 enzymatic reactions</span><span lang="ru" class="lang-content">10 ферментативных реакций</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Krebs cycle -->
+                <div class="phase-card" style="background:linear-gradient(135deg,#fdf4ff,#ede9fe);">
+                    <div class="text-center mb-3">
+                        <span style="font-size:2rem;">🔄</span>
+                        <h3 class="font-bold text-lg text-purple-700">
+                            <span lang="kk" class="lang-content">Кребс циклі</span>
+                            <span lang="en" class="lang-content">Krebs Cycle</span>
+                            <span lang="ru" class="lang-content">Цикл Кребса</span>
+                        </h3>
+                        <span class="text-xs font-semibold px-2 py-1 rounded-full" style="background:#ede9fe;color:#6d28d9;">
+                            <span lang="kk" class="lang-content">Митохондрия матриксы</span>
+                            <span lang="en" class="lang-content">Mitochondrial matrix</span>
+                            <span lang="ru" class="lang-content">Матрикс митохондрии</span>
+                        </span>
+                    </div>
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <p><span lang="kk" class="lang-content">2 пируват → ацетил-КоА → CO₂</span><span lang="en" class="lang-content">2 pyruvate → acetyl-CoA → CO₂</span><span lang="ru" class="lang-content">2 пируват → ацетил-КоА → CO₂</span></p>
+                        <div class="fact-box-amber text-xs" style="border-left-color:#7c3aed;background:linear-gradient(135deg,#fdf4ff,#ede9fe);">
+                            <div>✅ <b>2 АТФ</b></div>
+                            <div>✅ <b>6 НАДН</b></div>
+                            <div>✅ <b>2 ФАДН₂</b></div>
+                            <div>✅ <b>6 CO₂</b> <span lang="kk" class="lang-content">(бөлінеді)</span><span lang="en" class="lang-content">(released)</span><span lang="ru" class="lang-content">(выделяется)</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Oxidative phosphorylation -->
+                <div class="phase-card" style="background:linear-gradient(135deg,#fff1f2,#fce7f3);">
+                    <div class="text-center mb-3">
+                        <span style="font-size:2rem;">🔋</span>
+                        <h3 class="font-bold text-lg text-rose-700">
+                            <span lang="kk" class="lang-content">Тотықтырушы фосфорилирлеу</span>
+                            <span lang="en" class="lang-content">Oxidative Phosphorylation</span>
+                            <span lang="ru" class="lang-content">Окислительное фосфорилирование</span>
+                        </h3>
+                        <span class="text-xs font-semibold px-2 py-1 rounded-full" style="background:#fce7f3;color:#9f1239;">
+                            <span lang="kk" class="lang-content">Ішкі митохондрия мембранасы</span>
+                            <span lang="en" class="lang-content">Inner mitochondrial membrane</span>
+                            <span lang="ru" class="lang-content">Внутренняя мембрана митохондрии</span>
+                        </span>
+                    </div>
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <p><span lang="kk" class="lang-content">НАДН + ФАДН₂ → электрон тізбегі → H₂O</span><span lang="en" class="lang-content">NADH + FADH₂ → electron transport chain → H₂O</span><span lang="ru" class="lang-content">НАДН + ФАДН₂ → цепь переноса электронов → H₂O</span></p>
+                        <div class="fact-box-red text-xs">
+                            <div>✅ <b>34 АТФ</b> — <span lang="kk" class="lang-content">ең көп мөлшер!</span><span lang="en" class="lang-content">the most ATP!</span><span lang="ru" class="lang-content">основная часть!</span></div>
+                            <div>✅ <b>6 H₂O</b> <span lang="kk" class="lang-content">(түзіледі)</span><span lang="en" class="lang-content">(formed)</span><span lang="ru" class="lang-content">(образуется)</span></div>
+                            <div class="mt-1"><span lang="kk" class="lang-content">O₂ — соңғы электрон акцепторы</span><span lang="en" class="lang-content">O₂ is the final electron acceptor</span><span lang="ru" class="lang-content">O₂ — конечный акцептор электронов</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ATP summary bar -->
+            <div class="mt-6 p-5 rounded-xl" style="background:linear-gradient(135deg,#1e293b,#0f172a);">
+                <p class="text-white font-bold text-center text-lg mb-3">
+                    <span lang="kk" class="lang-content">Жалпы энергия шығымы: 2 + 2 + 34 = <span class="text-green-400 text-2xl">38 АТФ</span></span>
+                    <span lang="en" class="lang-content">Total energy yield: 2 + 2 + 34 = <span class="text-green-400 text-2xl">38 ATP</span></span>
+                    <span lang="ru" class="lang-content">Общий выход энергии: 2 + 2 + 34 = <span class="text-green-400 text-2xl">38 АТФ</span></span>
+                </p>
+                <div class="flex gap-2 items-center">
+                    <div class="text-center" style="flex:2;">
+                        <div class="h-8 rounded-lg flex items-center justify-center font-bold text-sm" style="background:#ca8a04;color:white;">
+                            <span lang="kk" class="lang-content">Гликолиз: 2 АТФ</span>
+                            <span lang="en" class="lang-content">Glycolysis: 2 ATP</span>
+                            <span lang="ru" class="lang-content">Гликолиз: 2 АТФ</span>
+                        </div>
+                    </div>
+                    <div class="text-center" style="flex:2;">
+                        <div class="h-8 rounded-lg flex items-center justify-center font-bold text-sm" style="background:#7c3aed;color:white;">
+                            <span lang="kk" class="lang-content">Кребс: 2 АТФ</span>
+                            <span lang="en" class="lang-content">Krebs: 2 ATP</span>
+                            <span lang="ru" class="lang-content">Кребс: 2 АТФ</span>
+                        </div>
+                    </div>
+                    <div class="text-center" style="flex:34;">
+                        <div class="h-8 rounded-lg flex items-center justify-center font-bold text-sm" style="background:#16a34a;color:white;">
+                            <span lang="kk" class="lang-content">Тот. фосфорилирлеу: 34 АТФ</span>
+                            <span lang="en" class="lang-content">Oxidative phosphorylation: 34 ATP</span>
+                            <span lang="ru" class="lang-content">Окислительное фосфорилирование: 34 АТФ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FERMENTATION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🧪 Анаэробты тыныс алу (Ашу)</h2>
+        <h2 lang="en" class="lang-content section-heading">🧪 Anaerobic Respiration (Fermentation)</h2>
+        <h2 lang="ru" class="lang-content section-heading">🧪 Анаэробное дыхание (Брожение)</h2>
+        <div class="card">
+            <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">O₂ жоқ кезде жүреді. Тек гликолиз ғана жүреді (2 АТФ). Пируваттың одан ары өзгеруі жүреді:</div>
+            <div lang="en" class="lang-content text-sm text-gray-600 mb-4">Occurs without O₂. Only glycolysis runs (2 ATP). Further fate of pyruvate:</div>
+            <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Протекает без O₂. Работает только гликолиз (2 АТФ). Дальнейшая судьба пирувата:</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="step-box" style="border-color:#0284c7;background:#f0f9ff;">
+                    <div class="flex items-center gap-2 mb-2"><span style="font-size:1.5rem;">🥛</span>
+                        <p class="font-bold text-sky-700">
+                            <span lang="kk" class="lang-content">Сүт қышқылды ашу</span>
+                            <span lang="en" class="lang-content">Lactic acid fermentation</span>
+                            <span lang="ru" class="lang-content">Молочнокислое брожение</span>
+                        </p>
+                    </div>
+                    <div class="equation" style="font-size:0.85rem;">C₆H₁₂O₆ → 2 C₃H₆O₃ + 2 АТФ</div>
+                    <p class="text-xs text-gray-600 mt-2">
+                        <span lang="kk" class="lang-content"><b>Организмдер:</b> сүт қышқылды бактериялар, бұлшықет жасушалары (қарқынды жаттығу кезінде). <b>Маңызы:</b> йогурт, кефир, пішен дайындау.</span>
+                        <span lang="en" class="lang-content"><b>Organisms:</b> lactic acid bacteria, muscle cells (during intense exercise). <b>Significance:</b> yogurt, kefir, silage production.</span>
+                        <span lang="ru" class="lang-content"><b>Организмы:</b> молочнокислые бактерии, мышечные клетки (при интенсивной нагрузке). <b>Значение:</b> производство йогурта, кефира, силоса.</span>
+                    </p>
+                </div>
+                <div class="step-box" style="border-color:#16a34a;background:#f0fdf4;">
+                    <div class="flex items-center gap-2 mb-2"><span style="font-size:1.5rem;">🍺</span>
+                        <p class="font-bold text-green-700">
+                            <span lang="kk" class="lang-content">Спирттік ашу</span>
+                            <span lang="en" class="lang-content">Alcoholic fermentation</span>
+                            <span lang="ru" class="lang-content">Спиртовое брожение</span>
+                        </p>
+                    </div>
+                    <div class="equation" style="font-size:0.85rem;">C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ + 2 АТФ</div>
+                    <p class="text-xs text-gray-600 mt-2">
+                        <span lang="kk" class="lang-content"><b>Организмдер:</b> ашытқы саңырауқұлақтары (Saccharomyces cerevisiae). <b>Маңызы:</b> нан, сыра, шарап, этанол өндірісі.</span>
+                        <span lang="en" class="lang-content"><b>Organisms:</b> yeast (Saccharomyces cerevisiae). <b>Significance:</b> bread, beer, wine, ethanol production.</span>
+                        <span lang="ru" class="lang-content"><b>Организмы:</b> дрожжи (Saccharomyces cerevisiae). <b>Значение:</b> производство хлеба, пива, вина, этанола.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📊 Фотосинтез пен тыныс алуды салыстыру</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Photosynthesis vs. Respiration</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Сравнение фотосинтеза и дыхания</h2>
+        <div class="card">
+            <div class="overflow-x-auto">
+                <table>
+                    <thead><tr>
+                        <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+                        <th style="background:linear-gradient(135deg,#15803d,#16a34a);">🌿 <span lang="kk" class="lang-content">Фотосинтез</span><span lang="en" class="lang-content">Photosynthesis</span><span lang="ru" class="lang-content">Фотосинтез</span></th>
+                        <th style="background:linear-gradient(135deg,#b45309,#ca8a04);">🔥 <span lang="kk" class="lang-content">Тыныс алу</span><span lang="en" class="lang-content">Respiration</span><span lang="ru" class="lang-content">Дыхание</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold"><span lang="kk" class="lang-content">Энергия</span><span lang="en" class="lang-content">Energy</span><span lang="ru" class="lang-content">Энергия</span></td>
+                            <td class="text-green-700"><span lang="kk" class="lang-content">Жарық энергиясын сіңіреді → химиялық</span><span lang="en" class="lang-content">Absorbs light → stores as chemical energy</span><span lang="ru" class="lang-content">Поглощает свет → запасает в химических связях</span></td>
+                            <td class="text-amber-700"><span lang="kk" class="lang-content">Химиялық энергияны бөледі → АТФ</span><span lang="en" class="lang-content">Releases chemical energy → ATP</span><span lang="ru" class="lang-content">Выделяет химическую энергию → АТФ</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold"><span lang="kk" class="lang-content">Орналасу</span><span lang="en" class="lang-content">Location</span><span lang="ru" class="lang-content">Место</span></td>
+                            <td><span lang="kk" class="lang-content">Хлоропласттар (тилакоид + строма)</span><span lang="en" class="lang-content">Chloroplasts (thylakoid + stroma)</span><span lang="ru" class="lang-content">Хлоропласты (тилакоиды + строма)</span></td>
+                            <td><span lang="kk" class="lang-content">Цитоплазма + митохондриялар</span><span lang="en" class="lang-content">Cytoplasm + mitochondria</span><span lang="ru" class="lang-content">Цитоплазма + митохондрии</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold"><span lang="kk" class="lang-content">Газ алмасу</span><span lang="en" class="lang-content">Gas exchange</span><span lang="ru" class="lang-content">Газообмен</span></td>
+                            <td class="text-green-700"><span lang="kk" class="lang-content">CO₂ сіңіреді, O₂ бөледі</span><span lang="en" class="lang-content">Absorbs CO₂, releases O₂</span><span lang="ru" class="lang-content">Поглощает CO₂, выделяет O₂</span></td>
+                            <td class="text-amber-700"><span lang="kk" class="lang-content">O₂ сіңіреді, CO₂ бөледі</span><span lang="en" class="lang-content">Absorbs O₂, releases CO₂</span><span lang="ru" class="lang-content">Поглощает O₂, выделяет CO₂</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold"><span lang="kk" class="lang-content">Органикалық заттар</span><span lang="en" class="lang-content">Organic matter</span><span lang="ru" class="lang-content">Органические вещества</span></td>
+                            <td class="text-green-700"><span lang="kk" class="lang-content">Түзіледі (глюкоза синтезі)</span><span lang="en" class="lang-content">Created (glucose synthesis)</span><span lang="ru" class="lang-content">Создаются (синтез глюкозы)</span></td>
+                            <td class="text-amber-700"><span lang="kk" class="lang-content">Ыдырайды (глюкоза тотығады)</span><span lang="en" class="lang-content">Broken down (glucose oxidized)</span><span lang="ru" class="lang-content">Расщепляются (окисление глюкозы)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold"><span lang="kk" class="lang-content">Кімде болады</span><span lang="en" class="lang-content">Found in</span><span lang="ru" class="lang-content">У кого</span></td>
+                            <td><span lang="kk" class="lang-content">Өсімдіктер, балдырлар, цианобактериялар</span><span lang="en" class="lang-content">Plants, algae, cyanobacteria</span><span lang="ru" class="lang-content">Растения, водоросли, цианобактерии</span></td>
+                            <td><span lang="kk" class="lang-content">Барлық тірі организмдер</span><span lang="en" class="lang-content">All living organisms</span><span lang="ru" class="lang-content">Все живые организмы</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="fact-box-green mt-5 text-sm">
+                <span lang="kk" class="lang-content"><b>🌍 Биосфера үшін маңызы:</b> Фотосинтез жыл сайын ~120 млрд тонна органикалық зат синтездейді және атмосферадағы O₂ мөлшерін ұстап тұрады (~21%). Жер атмосферасындағы O₂ — фотосинтездің өнімі.</span>
+                <span lang="en" class="lang-content"><b>🌍 Biosphere significance:</b> Photosynthesis synthesizes ~120 billion tons of organic matter per year and maintains atmospheric O₂ (~21%). All O₂ in Earth's atmosphere is the product of photosynthesis.</span>
+                <span lang="ru" class="lang-content"><b>🌍 Значение для биосферы:</b> Фотосинтез ежегодно синтезирует ~120 млрд тонн органических веществ и поддерживает содержание O₂ в атмосфере (~21%). Весь O₂ атмосферы Земли — продукт фотосинтеза.</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

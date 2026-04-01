@@ -1,0 +1,417 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алкены. Этилен. Реакции присоединения. Полимеризация</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at bottom left, #052e16, #14532d, #0f172a);
+            color: white; min-height: 100vh;
+        }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #34d399; color: #052e16; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"],
+        .lang-en .lang-content[lang="en"],
+        .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th {
+            background: rgba(52,211,153,0.15); color: #6ee7b7;
+            padding: 16px 20px; font-weight: 700; font-size: 1.15rem; text-align: left;
+            border-bottom: 2px solid rgba(52,211,153,0.3);
+        }
+        table.t td {
+            padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 1.1rem; vertical-align: top; color: rgba(255,255,255,0.85);
+        }
+        table.t tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block {
+            background: rgba(0,0,0,0.5); color: #6ee7b7; font-family: 'Courier New', monospace;
+            padding: 18px 24px; border-radius: 1rem; font-size: 1.2rem; line-height: 1.7;
+            white-space: pre; overflow-x: auto; border: 1px solid rgba(52,211,153,0.2);
+        }
+        .reaction-row {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            align-items: center; gap: 12px; padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .reaction-row:last-child { border-bottom: none; }
+        .reaction-arrow { color: #34d399; font-size: 1.8rem; font-weight: 900; }
+        .bond-diagram {
+            background: rgba(0,0,0,0.45); border-radius: 1rem;
+            padding: 20px; text-align: center; border: 1px solid rgba(52,211,153,0.15);
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <!-- HEADER -->
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-emerald-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">10 класс · Органическая химия · Углеводороды</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-emerald-400">Алкендер. Этилен. Қосылу реакциялары. Полимерлену</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-emerald-400">Alkenes. Ethylene. Addition Reactions. Polymerisation</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-emerald-400">Алкены. Этилен. Реакции присоединения. Полимеризация</h1>
+        </div>
+        <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: STRUCTURE -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-emerald-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Алкендердің жалпы сипаттамасы · sp²-гибридтену</span>
+            <span lang="en" class="lang-content">General Characteristics of Alkenes · sp² Hybridisation</span>
+            <span lang="ru" class="lang-content">Общая характеристика алкенов · sp²-гибридизация</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-emerald-300 mb-4">
+                    <span lang="kk" class="lang-content">Жалпы формула</span>
+                    <span lang="en" class="lang-content">General Formula</span>
+                    <span lang="ru" class="lang-content">Общая формула</span>
+                </p>
+                <div class="text-center py-5">
+                    <span class="heading-font text-6xl text-emerald-400">C<sub>n</sub>H<sub>2n</sub></span>
+                </div>
+                <p class="text-white/70 text-lg text-center mt-2">
+                    <span lang="kk" class="lang-content">n ≥ 2, бір қос байланыс C=C</span>
+                    <span lang="en" class="lang-content">n ≥ 2, one double bond C=C</span>
+                    <span lang="ru" class="lang-content">n ≥ 2, одна двойная связь C=C</span>
+                </p>
+                <div class="mt-5 space-y-2 text-center">
+                    <span class="inline-block px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-base">
+                        <span lang="kk" class="lang-content">Қанықпаған</span><span lang="en" class="lang-content">Unsaturated</span><span lang="ru" class="lang-content">Ненасыщенные</span>
+                    </span><br>
+                    <span class="inline-block px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-base">sp² · 120°</span>
+                    <span class="inline-block px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-base">σ + π</span>
+                </div>
+            </div>
+
+            <div class="glass rounded-custom p-8 lg:col-span-2">
+                <p class="heading-font text-xl text-emerald-300 mb-4">
+                    <span lang="kk" class="lang-content">Қос байланыстың табиғаты · Этиленнің құрылысы</span>
+                    <span lang="en" class="lang-content">Nature of the Double Bond · Ethylene Structure</span>
+                    <span lang="ru" class="lang-content">Природа двойной связи · Строение этилена</span>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <div class="formula-block">     H      H
+      \    /
+       C = C        CH₂=CH₂
+      /    \
+     H      H
+
+sp²-гибридтену: 120°
+Барлық атомдар бір жазықтықта</div>
+                        <p class="text-white/60 text-base mt-3">
+                            <span lang="kk" class="lang-content">Этилен (C₂H₄) — ең қарапайым алкен. Барлық 6 атом бір жазықтықта орналасқан.</span>
+                            <span lang="en" class="lang-content">Ethylene (C₂H₄) — the simplest alkene. All 6 atoms lie in one plane.</span>
+                            <span lang="ru" class="lang-content">Этилен (C₂H₄) — простейший алкен. Все 6 атомов лежат в одной плоскости.</span>
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bond-diagram">
+                            <p class="text-emerald-300 font-bold text-lg mb-2">σ-байланыс (sigma)</p>
+                            <p class="text-white/75 text-base leading-relaxed">
+                                <span lang="kk" class="lang-content">Атомдар осі бойынша қабаттасу. <b class="text-emerald-300">Берік</b>, айналу бар</span>
+                                <span lang="en" class="lang-content">Overlap along the internuclear axis. <b class="text-emerald-300">Strong</b>, free rotation</span>
+                                <span lang="ru" class="lang-content">Перекрывание вдоль оси. <b class="text-emerald-300">Прочная</b>, есть вращение</span>
+                            </p>
+                        </div>
+                        <div class="bond-diagram border border-emerald-400/40">
+                            <p class="text-emerald-200 font-bold text-lg mb-2">π-байланыс (pi)</p>
+                            <p class="text-white/75 text-base leading-relaxed">
+                                <span lang="kk" class="lang-content">Бүйірлік p-орбитальдар қабаттасуы. <b class="text-emerald-300">Әлсіз</b>, реакцияға түсуге бейім. Айналу <b>жоқ</b> → цис/транс-изомерия</span>
+                                <span lang="en" class="lang-content">Lateral overlap of p-orbitals. <b class="text-emerald-300">Weaker</b>, reactive. No rotation → cis/trans isomerism</span>
+                                <span lang="ru" class="lang-content">Боковое перекрывание p-орбиталей. <b class="text-emerald-300">Слабее</b>, реакционноспособная. Нет вращения → цис/транс-изомерия</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: HOMOLOGOUS SERIES + NOMENCLATURE -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-emerald-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Гомологтық қатар · IUPAC номенклатурасы</span>
+            <span lang="en" class="lang-content">Homologous Series · IUPAC Nomenclature</span>
+            <span lang="ru" class="lang-content">Гомологический ряд · Номенклатура IUPAC</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8 overflow-x-auto">
+                <table class="t">
+                    <thead><tr>
+                        <th>n</th>
+                        <th><span lang="kk" class="lang-content">Формула</span><span lang="en" class="lang-content">Formula</span><span lang="ru" class="lang-content">Формула</span></th>
+                        <th><span lang="kk" class="lang-content">Атауы</span><span lang="en" class="lang-content">Name</span><span lang="ru" class="lang-content">Название</span></th>
+                        <th><span lang="kk" class="lang-content">Қ.н.(°C)</span><span lang="en" class="lang-content">B.p.(°C)</span><span lang="ru" class="lang-content">Т.к.(°C)</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold text-emerald-300">2</td>
+                            <td class="font-bold">C₂H₄</td>
+                            <td><span lang="kk" class="lang-content">Этен (этилен)</span><span lang="en" class="lang-content">Ethene (ethylene)</span><span lang="ru" class="lang-content">Этен (этилен)</span></td>
+                            <td>−104</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-emerald-300">3</td>
+                            <td class="font-bold">C₃H₆</td>
+                            <td><span lang="kk" class="lang-content">Пропен (пропилен)</span><span lang="en" class="lang-content">Propene (propylene)</span><span lang="ru" class="lang-content">Пропен (пропилен)</span></td>
+                            <td>−47</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-emerald-300">4</td>
+                            <td class="font-bold">C₄H₈</td>
+                            <td><span lang="kk" class="lang-content">Бутен (1-бутен, 2-бутен)</span><span lang="en" class="lang-content">Butene (1-butene, 2-butene)</span><span lang="ru" class="lang-content">Бутен (1-бутен, 2-бутен)</span></td>
+                            <td>−6 / +4</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-emerald-300">5</td>
+                            <td class="font-bold">C₅H₁₀</td>
+                            <td><span lang="kk" class="lang-content">Пентен</span><span lang="en" class="lang-content">Pentene</span><span lang="ru" class="lang-content">Пентен</span></td>
+                            <td>30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-emerald-300 mb-4">
+                    <span lang="kk" class="lang-content">📐 Номенклатура ережелері</span>
+                    <span lang="en" class="lang-content">📐 Nomenclature Rules</span>
+                    <span lang="ru" class="lang-content">📐 Правила номенклатуры</span>
+                </p>
+                <div class="text-white/80 text-lg leading-relaxed space-y-3 mb-5">
+                    <p><span lang="kk" class="lang-content"><b class="text-emerald-300">1.</b> Қос байланысты қамтыған ең ұзын тізбек — негізгі<br><b class="text-emerald-300">2.</b> Нөмірлеу: C=C ең кіші нөмір алуы тиіс<br><b class="text-emerald-300">3.</b> Алкан атауындағы «-ан» → «<b>-ен</b>»<br><b class="text-emerald-300">4.</b> Цифр арқылы қос байланыс орны көрсетіледі</span>
+                    <span lang="en" class="lang-content"><b class="text-emerald-300">1.</b> Longest chain containing C=C is parent chain<br><b class="text-emerald-300">2.</b> Number so C=C gets lowest possible number<br><b class="text-emerald-300">3.</b> Replace «-ane» suffix with «<b>-ene</b>»<br><b class="text-emerald-300">4.</b> Position of double bond shown by a number</span>
+                    <span lang="ru" class="lang-content"><b class="text-emerald-300">1.</b> Главная цепь — самая длинная с C=C<br><b class="text-emerald-300">2.</b> Нумерация: C=C получает наименьший номер<br><b class="text-emerald-300">3.</b> Суффикс «-ан» → «<b>-ен</b>»<br><b class="text-emerald-300">4.</b> Положение C=C указывается цифрой</span></p>
+                </div>
+                <div class="formula-block">CH₂=CH-CH₂-CH₃  →  1-бутен
+CH₃-CH=CH-CH₃   →  2-бутен
+
+    CH₃
+    |
+CH₂=C-CH₃        →  2-метилпропен</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ADDITION REACTIONS + MARKOVNIKOV -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-emerald-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Химиялық қасиеттері · Қосылу реакциялары (AE)</span>
+            <span lang="en" class="lang-content">Chemical Properties · Addition Reactions (AE)</span>
+            <span lang="ru" class="lang-content">Химические свойства · Реакции присоединения (AE)</span>
+        </h2>
+        <div class="glass rounded-custom p-8 overflow-x-auto mb-6">
+            <table class="t">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Реакция</span><span lang="en" class="lang-content">Reaction</span><span lang="ru" class="lang-content">Реакция</span></th>
+                    <th><span lang="kk" class="lang-content">Жағдай</span><span lang="en" class="lang-content">Conditions</span><span lang="ru" class="lang-content">Условия</span></th>
+                    <th><span lang="kk" class="lang-content">Теңдеу</span><span lang="en" class="lang-content">Equation</span><span lang="ru" class="lang-content">Уравнение</span></th>
+                    <th><span lang="kk" class="lang-content">Өнім</span><span lang="en" class="lang-content">Product</span><span lang="ru" class="lang-content">Продукт</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold text-sky-300">
+                            <span lang="kk" class="lang-content">Гидрлеу (H₂)</span>
+                            <span lang="en" class="lang-content">Hydrogenation (H₂)</span>
+                            <span lang="ru" class="lang-content">Гидрирование (H₂)</span>
+                        </td>
+                        <td class="text-white/60">Ni / Pt, t°</td>
+                        <td class="font-mono text-emerald-200">CH₂=CH₂ + H₂ →<sup>Ni</sup> CH₃–CH₃</td>
+                        <td><span lang="kk" class="lang-content">Этан (алкан)</span><span lang="en" class="lang-content">Ethane (alkane)</span><span lang="ru" class="lang-content">Этан (алкан)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-amber-300">
+                            <span lang="kk" class="lang-content">Галогендеу (Br₂)</span>
+                            <span lang="en" class="lang-content">Halogenation (Br₂)</span>
+                            <span lang="ru" class="lang-content">Галогенирование (Br₂)</span>
+                        </td>
+                        <td class="text-white/60"><span lang="kk" class="lang-content">CCl₄, бөлме</span><span lang="en" class="lang-content">CCl₄, r.t.</span><span lang="ru" class="lang-content">CCl₄, к.т.</span></td>
+                        <td class="font-mono text-emerald-200">CH₂=CH₂ + Br₂ → CH₂Br–CH₂Br</td>
+                        <td><span lang="kk" class="lang-content">1,2-дибромэтан 🟤→бесренк</span><span lang="en" class="lang-content">1,2-dibromoethane 🟤→colourless</span><span lang="ru" class="lang-content">1,2-дибромэтан 🟤→бесцв.</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-rose-300">
+                            <span lang="kk" class="lang-content">Гидрогалогендеу (HX)</span>
+                            <span lang="en" class="lang-content">Hydrohalogenation (HX)</span>
+                            <span lang="ru" class="lang-content">Гидрогалогенирование (HX)</span>
+                        </td>
+                        <td class="text-white/60">—</td>
+                        <td class="font-mono text-emerald-200">CH₂=CH₂ + HCl → CH₃–CH₂Cl</td>
+                        <td><span lang="kk" class="lang-content">Хлорэтан</span><span lang="en" class="lang-content">Chloroethane</span><span lang="ru" class="lang-content">Хлорэтан</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-cyan-300">
+                            <span lang="kk" class="lang-content">Гидратация (H₂O)</span>
+                            <span lang="en" class="lang-content">Hydration (H₂O)</span>
+                            <span lang="ru" class="lang-content">Гидратация (H₂O)</span>
+                        </td>
+                        <td class="text-white/60">H₃PO₄, t°</td>
+                        <td class="font-mono text-emerald-200">CH₂=CH₂ + H₂O →<sup>H⁺</sup> CH₃–CH₂OH</td>
+                        <td><span lang="kk" class="lang-content">Этанол (спирт) 🍶</span><span lang="en" class="lang-content">Ethanol 🍶</span><span lang="ru" class="lang-content">Этанол (спирт) 🍶</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-orange-300">
+                            🔥 <span lang="kk" class="lang-content">Жану</span>
+                            <span lang="en" class="lang-content">Combustion</span>
+                            <span lang="ru" class="lang-content">Горение</span>
+                        </td>
+                        <td class="text-white/60">O₂</td>
+                        <td class="font-mono text-emerald-200">C₂H₄ + 3O₂ → 2CO₂ + 2H₂O</td>
+                        <td><span lang="kk" class="lang-content">CO₂, H₂O, жылу</span><span lang="en" class="lang-content">CO₂, H₂O, heat</span><span lang="ru" class="lang-content">CO₂, H₂O, теплота</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-purple-300">
+                            🟣 <span lang="kk" class="lang-content">Тотығу (KMnO₄)</span>
+                            <span lang="en" class="lang-content">Oxidation (KMnO₄)</span>
+                            <span lang="ru" class="lang-content">Окисление (KMnO₄)</span>
+                        </td>
+                        <td class="text-white/60">KMnO₄ (суда)</td>
+                        <td class="font-mono text-emerald-200">3CH₂=CH₂ + 2KMnO₄ + 4H₂O →<br>3CH₂OH–CH₂OH + 2MnO₂ + 2KOH</td>
+                        <td><span lang="kk" class="lang-content">Этандиол-1,2 🟣→бесренк</span><span lang="en" class="lang-content">Ethane-1,2-diol 🟣→colourless</span><span lang="ru" class="lang-content">Этандиол-1,2 🟣→бесцв.</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Markovnikov rule -->
+        <div class="glass-accent rounded-custom p-8 border-l-4 border-emerald-500">
+            <p class="heading-font text-xl text-emerald-300 mb-3">
+                ⚖️ <span lang="kk" class="lang-content">Марковников ережесі (1869) — симметриялы емес алкендер үшін</span>
+                <span lang="en" class="lang-content">Markovnikov's Rule (1869) — for unsymmetrical alkenes</span>
+                <span lang="ru" class="lang-content">Правило Марковникова (1869) — для несимметричных алкенов</span>
+            </p>
+            <p class="text-white/85 text-lg leading-relaxed mb-4">
+                <span lang="kk" class="lang-content">Несиметриялы алкенге HX қосылғанда, <b class="text-emerald-300">сутегі (H) — ең көп сутегі бар атомға</b>, ал галоген (X) — аз сутегі бар атомға қосылады.</span>
+                <span lang="en" class="lang-content">When HX adds to an unsymmetrical alkene, <b class="text-emerald-300">H goes to the carbon with more hydrogens</b>, and X goes to the carbon with fewer hydrogens.</span>
+                <span lang="ru" class="lang-content">При присоединении HX к несимметричному алкену <b class="text-emerald-300">H присоединяется к более гидрированному атому углерода</b>, а X — к менее гидрированному.</span>
+            </p>
+            <div class="formula-block">CH₃–CH=CH₂  +  HCl  →  CH₃–CHCl–CH₃   (2-хлорпропан, Марковников ☑)
+                                  →  CH₃–CH₂–CH₂Cl  (1-хлорпропан ✗ — минор)
+
+CH₂=CH–  →  H қосылады CH₂-ге (=2H бар), Cl – CH-ге (=1H бар)</div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: POLYMERISATION + APPLICATIONS -->
+    <section class="mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-emerald-300 mb-5">
+                    🔗 <span lang="kk" class="lang-content">Полимерлену реакциясы</span>
+                    <span lang="en" class="lang-content">Polymerisation Reaction</span>
+                    <span lang="ru" class="lang-content">Реакция полимеризации</span>
+                </p>
+                <p class="text-white/80 text-lg leading-relaxed mb-4">
+                    <span lang="kk" class="lang-content">π-байланыс үзіліп, мономерлер бір-бірімен қосылып, <b class="text-emerald-300">полимер тізбегін</b> түзеді. Катализатор немесе қысым + температура қажет.</span>
+                    <span lang="en" class="lang-content">The π-bond breaks and monomers join to form a <b class="text-emerald-300">polymer chain</b>. Catalyst or pressure + temperature required.</span>
+                    <span lang="ru" class="lang-content">π-связь разрывается, мономеры соединяются в <b class="text-emerald-300">полимерную цепь</b>. Нужен катализатор или давление + температура.</span>
+                </p>
+                <div class="formula-block">n CH₂=CH₂  →<sup>кат, t, P</sup>  (–CH₂–CH₂–)ₙ
+
+мономер   этилен            полиэтилен (ПЭ)
+           C₂H₄                   n ≈ 1000–50 000</div>
+                <p class="text-white/60 text-base mt-3 leading-relaxed">
+                    <span lang="kk" class="lang-content">Полиэтилен — ең кең таралған пластик. Жеңіл, иілімді, суда ерімейді. Қаптама, түтіктер, пленкалар.</span>
+                    <span lang="en" class="lang-content">Polyethylene — the most widespread plastic. Light, flexible, water-resistant. Packaging, pipes, films.</span>
+                    <span lang="ru" class="lang-content">Полиэтилен — самый распространённый пластик. Лёгкий, гибкий, не растворяется в воде. Упаковка, трубы, плёнки.</span>
+                </p>
+            </div>
+
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-emerald-300 mb-5">
+                    🏭 <span lang="kk" class="lang-content">Қолданылуы · Алу жолдары</span>
+                    <span lang="en" class="lang-content">Applications · Production</span>
+                    <span lang="ru" class="lang-content">Применение · Получение</span>
+                </p>
+                <div class="text-white/80 text-lg leading-relaxed space-y-3">
+                    <p class="font-bold text-emerald-200">
+                        <span lang="kk" class="lang-content">Қолданылуы:</span><span lang="en" class="lang-content">Applications:</span><span lang="ru" class="lang-content">Применение:</span>
+                    </p>
+                    <p><span lang="kk" class="lang-content">• <b>Полиэтилен</b> → қаптама, ыдыс-аяқ, түтіктер<br>• <b>Этанол</b> (гидратациядан) → еріткіш, отын<br>• <b>Этиленгликоль</b> → тоңазытқыш (антифриз)<br>• <b>Стирол → полистирол</b> → пенопласт<br>• <b>Хлорвинил → ПВХ</b> → кабель, линолеум<br>• <b>Өсімдіктерге</b>: этилен — жеміс жетілдіруші газ</span>
+                    <span lang="en" class="lang-content">• <b>Polyethylene</b> → packaging, containers, pipes<br>• <b>Ethanol</b> (by hydration) → solvent, fuel<br>• <b>Ethylene glycol</b> → coolant (antifreeze)<br>• <b>Styrene → polystyrene</b> → foam plastic<br>• <b>Vinyl chloride → PVC</b> → cables, linoleum<br>• <b>Plants</b>: ethylene — fruit ripening hormone</span>
+                    <span lang="ru" class="lang-content">• <b>Полиэтилен</b> → упаковка, посуда, трубы<br>• <b>Этанол</b> (гидратация) → растворитель, топливо<br>• <b>Этиленгликоль</b> → антифриз<br>• <b>Стирол → полистирол</b> → пенопласт<br>• <b>Хлорвинил → ПВХ</b> → кабели, линолеум<br>• <b>В растениях</b>: этилен — гормон созревания плодов</span></p>
+                    <p class="font-bold text-emerald-200 mt-3">
+                        <span lang="kk" class="lang-content">Алу жолдары:</span><span lang="en" class="lang-content">Production:</span><span lang="ru" class="lang-content">Получение:</span>
+                    </p>
+                    <p><span lang="kk" class="lang-content">• Алкандардың <b>дегидрлеуі</b>: C₂H₆ →<sup>Ni,t</sup> C₂H₄ + H₂<br>• Спирттердің <b>дегидратациясы</b>: C₂H₅OH →<sup>H₂SO₄,170°</sup> C₂H₄ + H₂O<br>• Мұнай <b>крекингі</b></span>
+                    <span lang="en" class="lang-content">• <b>Dehydrogenation</b> of alkanes: C₂H₆ →<sup>Ni,t</sup> C₂H₄ + H₂<br>• <b>Dehydration</b> of alcohols: C₂H₅OH →<sup>H₂SO₄,170°</sup> C₂H₄ + H₂O<br>• Petroleum <b>cracking</b></span>
+                    <span lang="ru" class="lang-content">• <b>Дегидрирование</b> алканов: C₂H₆ →<sup>Ni,t</sup> C₂H₄ + H₂<br>• <b>Дегидратация</b> спиртов: C₂H₅OH →<sup>H₂SO₄,170°</sup> C₂H₄ + H₂O<br>• <b>Крекинг</b> нефти</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER: CIS/TRANS ISOMERISM -->
+    <footer class="glass rounded-custom p-10">
+        <p class="heading-font text-2xl text-emerald-300 text-center mb-5">
+            <span lang="kk" class="lang-content">🔄 Цис-транс изомерия (геометриялық изомерия)</span>
+            <span lang="en" class="lang-content">🔄 Cis-Trans Isomerism (Geometric Isomerism)</span>
+            <span lang="ru" class="lang-content">🔄 Цис-транс изомерия (геометрическая)</span>
+        </p>
+        <p class="text-white/70 text-lg text-center mb-6 max-w-3xl mx-auto">
+            <span lang="kk" class="lang-content">π-байланыс айналуға жол бермейді → бір C=C атомында екі әртүрлі орынбасарушы болса, <b class="text-emerald-300">цис-</b> және <b class="text-emerald-300">транс-</b>изомерлер пайда болады.</span>
+            <span lang="en" class="lang-content">The π-bond prevents rotation → if each carbon of C=C has two different substituents, <b class="text-emerald-300">cis-</b> and <b class="text-emerald-300">trans-</b>isomers exist.</span>
+            <span lang="ru" class="lang-content">π-связь препятствует вращению → если каждый атом C=C несёт два разных заместителя, возникают <b class="text-emerald-300">цис-</b> и <b class="text-emerald-300">транс-</b>изомеры.</span>
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-xl text-emerald-300 text-center mb-3">цис-2-бутен</p>
+                <div class="formula-block text-center">  CH₃   CH₃
+    \   /
+     C=C
+    /   \
+   H     H
+(бір жақта / same side)</div>
+                <p class="text-white/60 text-base text-center mt-3">
+                    <span lang="kk" class="lang-content">Т.қ. = 3.7°C · Диполь моменті ≠ 0</span>
+                    <span lang="en" class="lang-content">B.p. = 3.7°C · Dipole moment ≠ 0</span>
+                    <span lang="ru" class="lang-content">Т.к. = 3.7°C · Дипольный момент ≠ 0</span>
+                </p>
+            </div>
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-xl text-emerald-300 text-center mb-3">транс-2-бутен</p>
+                <div class="formula-block text-center">  CH₃   H
+    \   /
+     C=C
+    /   \
+   H    CH₃
+(қарама-қарсы / opposite sides)</div>
+                <p class="text-white/60 text-base text-center mt-3">
+                    <span lang="kk" class="lang-content">Т.қ. = 0.9°C · Диполь моменті = 0</span>
+                    <span lang="en" class="lang-content">B.p. = 0.9°C · Dipole moment = 0</span>
+                    <span lang="ru" class="lang-content">Т.к. = 0.9°C · Дипольный момент = 0</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

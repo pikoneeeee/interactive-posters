@@ -1,142 +1,325 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant as a Whole Organism</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <title>Эндокринная система</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #022c22; color: #ecfccb; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { border-radius: 1.5rem; }
-        .lang-btn.active { background: #4ade80; color: #022c22; font-weight: 800; }
-        .pulse-line { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #0d9488; border-bottom: 3px solid #5eead4; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #14b8a6; background: white; color: #14b8a6; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdfa; }
+        .lang-btn.active { background: #14b8a6; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .gland-card { border-radius: 12px; padding: 15px; }
+        .fact-box { background: #f0fdfa; border: 2px solid #5eead4; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-4 md:p-10">
+<body class="bg-slate-50">
 
-<header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center border-b border-green-500/30">
-        <div>
-            <h1 id="main-title" class="font-Montserrat text-3xl md:text-5xl uppercase tracking-tighter text-green-400"></h1>
-            <p id="sub-title" class="mt-2 text-white/40 font-light tracking-widest text-[10px] uppercase"></p>
-        </div>
-        <div class="flex gap-2">
-            <button onclick="window.setLang('ru')" id="btn-ru" class="lang-btn px-4 py-2 rounded-xl border border-white/20 text-xs font-bold transition-all">RU</button>
-            <button onclick="window.setLang('kz')" id="btn-kz" class="lang-btn px-4 py-2 rounded-xl border border-white/20 text-xs font-bold transition-all">KZ</button>
-            <button onclick="window.setLang('en')" id="btn-en" class="lang-btn px-4 py-2 rounded-xl border border-white/20 text-xs font-bold transition-all">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-teal-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Эндокриндік жүйе</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Endocrine System</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Эндокринная система</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-teal-100">Эндокриндік жүйе — гормондар арқылы ағзаны реттейді. Гормондар қанға бөлінеді және нысана мүшелерге әсер етеді. Жүйке жүйесімен бірге жұмыс істейді.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-teal-100">Endocrine system regulates the body through hormones. Hormones are released into blood and affect target organs. Works together with nervous system.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-teal-100">Эндокринная система регулирует организм через гормоны. Гормоны выделяются в кровь и действуют на органы-мишени. Работает вместе с нервной системой.</p>
     </header>
 
-    <main class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        <div class="lg:col-span-2 glass rounded-custom p-8 flex flex-col relative overflow-hidden min-h-[500px]">
-            <h2 id="canvas-heading" class="font-Montserrat text-xl text-green-200 uppercase mb-4 tracking-widest opacity-70"></h2>
-            <canvas id="sysCanvas" class="w-full h-full bg-black/20"></canvas>
-            <div class="absolute bottom-8 left-8 flex flex-col gap-2">
-                <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-400"></span> <span class="text-[10px] uppercase text-white/50">Water Flow (Up)</span></div>
-                <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-pink-400"></span> <span class="text-[10px] uppercase text-white/50">Organic Flow (Down)</span></div>
+    <!-- Железы -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Эндокриндік бездер</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Endocrine Glands</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Эндокринные железы</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Гипофиз -->
+            <div class="card" style="border-top: 5px solid #8b5cf6;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 8px;">🎯</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">ГИПОФИЗ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">PITUITARY GLAND</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">ГИПОФИЗ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center text-gray-500 mb-2">Мида, 0.5 г — "бездердің шебері"</p>
+                <p lang="en" class="lang-content text-xs text-center text-gray-500 mb-2">In brain, 0.5 g — "master gland"</p>
+                <p lang="ru" class="lang-content text-xs text-center text-gray-500 mb-2">В мозге, 0.5 г — "дирижёр желёз"</p>
+                
+                <div style="background: #f5f3ff; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">📌 <strong>СТГ</strong> — өсу гормоны</p>
+                    <p lang="en" class="lang-content text-xs">📌 <strong>GH</strong> — growth hormone</p>
+                    <p lang="ru" class="lang-content text-xs">📌 <strong>СТГ</strong> — гормон роста</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">📌 <strong>ТТГ</strong> — қалқанша безді реттейді</p>
+                    <p lang="en" class="lang-content text-xs">📌 <strong>TSH</strong> — regulates thyroid</p>
+                    <p lang="ru" class="lang-content text-xs">📌 <strong>ТТГ</strong> — регулирует щитовидную</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">📌 <strong>АКТГ</strong> — бүйрекүсті безді реттейді</p>
+                    <p lang="en" class="lang-content text-xs">📌 <strong>ACTH</strong> — regulates adrenals</p>
+                    <p lang="ru" class="lang-content text-xs">📌 <strong>АКТГ</strong> — регулирует надпочечники</p>
+                </div>
+            </div>
+
+            <!-- Щитовидная -->
+            <div class="card" style="border-top: 5px solid #0ea5e9;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 8px;">🦋</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-sky-700 mb-2">ҚАЛҚАНША БЕЗ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-sky-700 mb-2">THYROID GLAND</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-sky-700 mb-2">ЩИТОВИДНАЯ ЖЕЛЕЗА</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center text-gray-500 mb-2">Мойында, көбелек тәрізді, 25-30 г</p>
+                <p lang="en" class="lang-content text-xs text-center text-gray-500 mb-2">In neck, butterfly-shaped, 25-30 g</p>
+                <p lang="ru" class="lang-content text-xs text-center text-gray-500 mb-2">На шее, в форме бабочки, 25-30 г</p>
+                
+                <div style="background: #f0f9ff; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">📌 <strong>Тироксин (T4)</strong> — зат алмасуды жылдамдатады</p>
+                    <p lang="en" class="lang-content text-xs">📌 <strong>Thyroxine (T4)</strong> — speeds metabolism</p>
+                    <p lang="ru" class="lang-content text-xs">📌 <strong>Тироксин (T4)</strong> — ускоряет обмен веществ</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">⚠️ Аз: микседема, кретинизм</p>
+                    <p lang="en" class="lang-content text-xs mt-1">⚠️ Low: myxedema, cretinism</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">⚠️ Мало: микседема, кретинизм</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">⚠️ Көп: Базедов ауруы</p>
+                    <p lang="en" class="lang-content text-xs">⚠️ High: Graves' disease</p>
+                    <p lang="ru" class="lang-content text-xs">⚠️ Много: Базедова болезнь</p>
+                </div>
+            </div>
+
+            <!-- Паращитовидные -->
+            <div class="card" style="border-top: 5px solid #f97316;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 8px;">🔸</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-orange-700 mb-2">ҚАЛҚАНША МАҢЫ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-orange-700 mb-2">PARATHYROID</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-orange-700 mb-2">ПАРАЩИТОВИДНЫЕ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center text-gray-500 mb-2">4 без, қалқанша безде орналасқан</p>
+                <p lang="en" class="lang-content text-xs text-center text-gray-500 mb-2">4 glands, on thyroid</p>
+                <p lang="ru" class="lang-content text-xs text-center text-gray-500 mb-2">4 железы, на щитовидной</p>
+                
+                <div style="background: #fff7ed; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">📌 <strong>Паратгормон</strong> — Ca²⁺ реттейді</p>
+                    <p lang="en" class="lang-content text-xs">📌 <strong>Parathormone</strong> — regulates Ca²⁺</p>
+                    <p lang="ru" class="lang-content text-xs">📌 <strong>Паратгормон</strong> — регулирует Ca²⁺</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">⚠️ Аз: тырысу (тетания)</p>
+                    <p lang="en" class="lang-content text-xs mt-1">⚠️ Low: convulsions (tetany)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">⚠️ Мало: судороги (тетания)</p>
+                </div>
+            </div>
+
+            <!-- Надпочечники -->
+            <div class="card" style="border-top: 5px solid #ef4444;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 8px;">⚡</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-red-700 mb-2">БҮЙРЕКҮСТІ БЕЗ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-red-700 mb-2">ADRENAL GLANDS</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-red-700 mb-2">НАДПОЧЕЧНИКИ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center text-gray-500 mb-2">Бүйректің үстінде, 2 қабат</p>
+                <p lang="en" class="lang-content text-xs text-center text-gray-500 mb-2">Above kidneys, 2 layers</p>
+                <p lang="ru" class="lang-content text-xs text-center text-gray-500 mb-2">Над почками, 2 слоя</p>
+                
+                <div style="background: #fef2f2; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Қыртыс:</strong></p>
+                    <p lang="en" class="lang-content text-xs"><strong>Cortex:</strong></p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Кора:</strong></p>
+                    <p lang="kk" class="lang-content text-xs">📌 Кортизол — стресс, глюкоза</p>
+                    <p lang="en" class="lang-content text-xs">📌 Cortisol — stress, glucose</p>
+                    <p lang="ru" class="lang-content text-xs">📌 Кортизол — стресс, глюкоза</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1"><strong>Милы:</strong></p>
+                    <p lang="en" class="lang-content text-xs mt-1"><strong>Medulla:</strong></p>
+                    <p lang="ru" class="lang-content text-xs mt-1"><strong>Мозговой слой:</strong></p>
+                    <p lang="kk" class="lang-content text-xs">📌 Адреналин — "қаш не ұрыс"</p>
+                    <p lang="en" class="lang-content text-xs">📌 Adrenaline — "fight or flight"</p>
+                    <p lang="ru" class="lang-content text-xs">📌 Адреналин — "бей или беги"</p>
+                </div>
+            </div>
+
+            <!-- Поджелудочная -->
+            <div class="card" style="border-top: 5px solid #22c55e;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 8px;">🍬</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-green-700 mb-2">ҰЙҚ БЕЗ (АРАЛШЫҚТАР)</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-green-700 mb-2">PANCREAS (ISLETS)</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-green-700 mb-2">ПОДЖЕЛУДОЧНАЯ (ОСТРОВКИ)</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center text-gray-500 mb-2">Лангерганс аралшықтары</p>
+                <p lang="en" class="lang-content text-xs text-center text-gray-500 mb-2">Islets of Langerhans</p>
+                <p lang="ru" class="lang-content text-xs text-center text-gray-500 mb-2">Островки Лангерганса</p>
+                
+                <div style="background: #f0fdf4; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">📌 <strong>Инсулин</strong> — глюкозаны ↓ (β-жасушалар)</p>
+                    <p lang="en" class="lang-content text-xs">📌 <strong>Insulin</strong> — glucose ↓ (β-cells)</p>
+                    <p lang="ru" class="lang-content text-xs">📌 <strong>Инсулин</strong> — глюкозу ↓ (β-клетки)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">📌 <strong>Глюкагон</strong> — глюкозаны ↑ (α-жасушалар)</p>
+                    <p lang="en" class="lang-content text-xs">📌 <strong>Glucagon</strong> — glucose ↑ (α-cells)</p>
+                    <p lang="ru" class="lang-content text-xs">📌 <strong>Глюкагон</strong> — глюкозу ↑ (α-клетки)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">⚠️ Инсулин аз: қант диабеті</p>
+                    <p lang="en" class="lang-content text-xs mt-1">⚠️ Low insulin: diabetes</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">⚠️ Мало инсулина: диабет</p>
+                </div>
+            </div>
+
+            <!-- Половые железы -->
+            <div class="card" style="border-top: 5px solid #ec4899;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 8px;">♀♂</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-pink-700 mb-2">ЖЫНЫС БЕЗДЕРІ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-pink-700 mb-2">GONADS</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-pink-700 mb-2">ПОЛОВЫЕ ЖЕЛЕЗЫ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center text-gray-500 mb-2">Аналық/аталық бездер</p>
+                <p lang="en" class="lang-content text-xs text-center text-gray-500 mb-2">Ovaries/Testes</p>
+                <p lang="ru" class="lang-content text-xs text-center text-gray-500 mb-2">Яичники/Яички</p>
+                
+                <div style="background: #fdf2f8; padding: 10px; border-radius: 8px;">
+                    <p lang="kk" class="lang-content text-xs">♀ <strong>Эстроген, прогестерон</strong></p>
+                    <p lang="en" class="lang-content text-xs">♀ <strong>Estrogen, progesterone</strong></p>
+                    <p lang="ru" class="lang-content text-xs">♀ <strong>Эстроген, прогестерон</strong></p>
+                    <p lang="kk" class="lang-content text-xs text-gray-600">Әйел белгілері, жүктілік</p>
+                    <p lang="en" class="lang-content text-xs text-gray-600">Female traits, pregnancy</p>
+                    <p lang="ru" class="lang-content text-xs text-gray-600">Женские признаки, беременность</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">♂ <strong>Тестостерон</strong></p>
+                    <p lang="en" class="lang-content text-xs mt-1">♂ <strong>Testosterone</strong></p>
+                    <p lang="ru" class="lang-content text-xs mt-1">♂ <strong>Тестостерон</strong></p>
+                    <p lang="kk" class="lang-content text-xs text-gray-600">Ер белгілері, бұлшықет</p>
+                    <p lang="en" class="lang-content text-xs text-gray-600">Male traits, muscles</p>
+                    <p lang="ru" class="lang-content text-xs text-gray-600">Мужские признаки, мышцы</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="glass rounded-custom p-10 flex flex-col justify-center border-l-4 border-green-500">
-            <h3 id="info-title" class="font-Montserrat text-3xl mb-6 text-green-300"></h3>
-            <div id="info-text" class="text-lg font-light leading-relaxed text-white/80 space-y-6"></div>
+    <!-- Сравнение с нервной -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Жүйке және эндокриндік реттеу</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Nervous vs Endocrine Regulation</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Нервная vs Эндокринная регуляция</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box" style="border-color: #a5b4fc; background: #eef2ff;">
+                    <h4 lang="kk" class="lang-content font-bold text-indigo-700 mb-2">⚡ ЖҮЙКЕ РЕТТЕУІ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-indigo-700 mb-2">⚡ NERVOUS REGULATION</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-indigo-700 mb-2">⚡ НЕРВНАЯ РЕГУЛЯЦИЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">🚀 Жылдам (мс)</p>
+                    <p lang="en" class="lang-content text-xs">🚀 Fast (ms)</p>
+                    <p lang="ru" class="lang-content text-xs">🚀 Быстрая (мс)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">🎯 Нақты мүшеге</p>
+                    <p lang="en" class="lang-content text-xs">🎯 Specific organ</p>
+                    <p lang="ru" class="lang-content text-xs">🎯 На конкретный орган</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">⏱️ Қысқа әсер</p>
+                    <p lang="en" class="lang-content text-xs">⏱️ Short effect</p>
+                    <p lang="ru" class="lang-content text-xs">⏱️ Короткое действие</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">📡 Импульстер арқылы</p>
+                    <p lang="en" class="lang-content text-xs">📡 Via impulses</p>
+                    <p lang="ru" class="lang-content text-xs">📡 Через импульсы</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #5eead4; background: #f0fdfa;">
+                    <h4 lang="kk" class="lang-content font-bold text-teal-700 mb-2">💧 ГУМОРАЛЬДЫҚ РЕТТЕУ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-teal-700 mb-2">💧 HUMORAL REGULATION</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-teal-700 mb-2">💧 ГУМОРАЛЬНАЯ РЕГУЛЯЦИЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">🐢 Баяу (сек-мин)</p>
+                    <p lang="en" class="lang-content text-xs">🐢 Slow (sec-min)</p>
+                    <p lang="ru" class="lang-content text-xs">🐢 Медленная (сек-мин)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">🌐 Бүкіл денеге</p>
+                    <p lang="en" class="lang-content text-xs">🌐 Whole body</p>
+                    <p lang="ru" class="lang-content text-xs">🌐 На весь организм</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">⏱️ Ұзақ әсер</p>
+                    <p lang="en" class="lang-content text-xs">⏱️ Long effect</p>
+                    <p lang="ru" class="lang-content text-xs">⏱️ Длительное действие</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">🩸 Гормондар арқылы (қан)</p>
+                    <p lang="en" class="lang-content text-xs">🩸 Via hormones (blood)</p>
+                    <p lang="ru" class="lang-content text-xs">🩸 Через гормоны (кровь)</p>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <script>
-        const translations = {
-            ru: {
-                title: "Единый Организм", subtitle: "Взаимосвязь органов растения",
-                canvasHeading: "Физиологическая система",
-                defaultTitle: "Целостность системы",
-                defaultText: "Растение — это не набор органов, а единая живая система. Корни зависят от сахаров, производимых листьями, а листья не могут жить без воды, добываемой корнями. Связь осуществляется через проводящие ткани и гормоны (фитогормоны)."
-            },
-            kz: {
-                title: "Біртұтас Ағза", subtitle: "Өсімдік мүшелерінің байланысы",
-                canvasHeading: "Физиологиялық жүйе",
-                defaultTitle: "Жүйе тұтастығы",
-                defaultText: "Өсімдік — мүшелер жиынтығы емес, біртұтас тірі жүйе. Тамырлар жапырақ өндіретін қантқа мұқтаж, ал жапырақтар тамыр табатын сусыз өмір сүре алмайды. Байланыс өткізгіш ұлпалар мен фитогормондар арқылы жүзеге асады."
-            },
-            en: {
-                title: "Unified Organism", subtitle: "Interconnection of Plant Organs",
-                canvasHeading: "Physiological System",
-                defaultTitle: "System Integrity",
-                defaultText: "A plant is not a set of organs, but a unified living system. Roots depend on sugars produced by leaves, while leaves cannot survive without water absorbed by roots. Connection is maintained via vascular tissues and phytohormones."
-            }
-        };
+    <!-- Интересные факты -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Қызықты фактілер</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Interesting Facts</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Интересные факты</h2>
 
-        let currentLang = 'ru', canvas, ctx, particles = [];
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">📊 Адам ағзасында <strong>50+ гормон</strong> бар</p>
+                    <p lang="en" class="lang-content text-sm">📊 Human body has <strong>50+ hormones</strong></p>
+                    <p lang="ru" class="lang-content text-sm">📊 В организме человека <strong>50+ гормонов</strong></p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">⚡ Адреналин жүрек соғуын <strong>2-3 есе</strong> жылдамдатады</p>
+                    <p lang="en" class="lang-content text-sm">⚡ Adrenaline speeds heart rate <strong>2-3 times</strong></p>
+                    <p lang="ru" class="lang-content text-sm">⚡ Адреналин ускоряет сердце <strong>в 2-3 раза</strong></p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🦋 Қалқанша безге <strong>йод</strong> қажет (теңіз өнімдері!)</p>
+                    <p lang="en" class="lang-content text-sm">🦋 Thyroid needs <strong>iodine</strong> (seafood!)</p>
+                    <p lang="ru" class="lang-content text-sm">🦋 Щитовидной нужен <strong>йод</strong> (морепродукты!)</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🌙 Мелатонин (эпифиз) — ұйқы гормоны, қараңғыда бөлінеді</p>
+                    <p lang="en" class="lang-content text-sm">🌙 Melatonin (pineal) — sleep hormone, released in dark</p>
+                    <p lang="ru" class="lang-content text-sm">🌙 Мелатонин (эпифиз) — гормон сна, выделяется в темноте</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.setLang = function(l) {
-            currentLang = l;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-${l}`).classList.add('active');
-            updateUI();
-        }
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border-radius: 1rem; border-top: 4px solid #14b8a6;">
+        <p lang="kk" class="lang-content text-sm font-bold text-teal-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-teal-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-teal-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-        function updateUI() {
-            const t = translations[currentLang];
-            document.getElementById('main-title').textContent = t.title;
-            document.getElementById('sub-title').textContent = t.subtitle;
-            document.getElementById('canvas-heading').textContent = t.canvasHeading;
-            document.getElementById('info-title').textContent = t.defaultTitle;
-            document.getElementById('info-text').textContent = t.defaultText;
-        }
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
-        function draw() {
-            const w = canvas.width, h = canvas.height;
-            const t = Date.now() * 0.001;
-            ctx.clearRect(0,0,w,h);
-
-            // Plant Skeleton
-            ctx.strokeStyle = '#4d7c0f'; ctx.lineWidth = 10; ctx.lineCap = 'round';
-            ctx.beginPath(); ctx.moveTo(w/2, h*0.9); ctx.quadraticCurveTo(w/2, h*0.5, w/2, h*0.2); ctx.stroke(); // Stem
-            
-            // Roots
-            ctx.strokeStyle = '#a16207'; ctx.lineWidth = 6;
-            ctx.beginPath(); ctx.moveTo(w/2, h*0.9); ctx.lineTo(w/2-50, h); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(w/2, h*0.9); ctx.lineTo(w/2+50, h); ctx.stroke();
-
-            // Leaf
-            ctx.fillStyle = '#4ade80';
-            ctx.beginPath(); ctx.ellipse(w/2+60, h*0.4, 60, 20, 0.3, 0, Math.PI*2); ctx.fill();
-            ctx.beginPath(); ctx.ellipse(w/2-60, h*0.5, 60, 20, -0.3, 0, Math.PI*2); ctx.fill();
-
-            // Particles logic
-            if(Math.random() > 0.9) particles.push({x: w/2, y: h, type: 'up', life: 100}); // Water
-            if(Math.random() > 0.9) particles.push({x: w/2 + (Math.random()>0.5?60:-60), y: h*0.4, type: 'down', life: 100}); // Sugar
-
-            particles.forEach((p, i) => {
-                p.life--;
-                if(p.type === 'up') {
-                    p.y -= 2;
-                    ctx.fillStyle = '#60a5fa';
-                } else {
-                    p.y += 2; 
-                    p.x += (w/2 - p.x) * 0.02; // Move to stem
-                    ctx.fillStyle = '#f472b6';
-                }
-                ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI*2); ctx.fill();
-                if(p.life <= 0) particles.splice(i, 1);
-            });
-
-            requestAnimationFrame(draw);
-        }
-
-        window.onload = () => {
-            canvas = document.getElementById('sysCanvas'); ctx = canvas.getContext('2d');
-            const resize = () => { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight || 500; };
-            window.addEventListener('resize', resize); resize();
-            setLang('ru'); draw();
-        };
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

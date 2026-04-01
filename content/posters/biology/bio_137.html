@@ -1,159 +1,334 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Reproduction Methods</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <title>Размножение и развитие человека</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #064e3b; color: #fff; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { border-radius: 1.5rem; }
-        .lang-btn.active { background: #a3e635; color: #064e3b; font-weight: 800; }
-        .mode-btn { transition: 0.3s; opacity: 0.6; }
-        .mode-btn.active { opacity: 1; transform: scale(1.05); border-left: 4px solid #a3e635; background: rgba(255,255,255,0.05); }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #be185d; border-bottom: 3px solid #f9a8d4; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #ec4899; background: white; color: #ec4899; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fdf2f8; }
+        .lang-btn.active { background: #ec4899; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .dev-card { border-radius: 12px; padding: 15px; }
+        .fact-box { background: #fdf2f8; border: 2px solid #f9a8d4; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8">
+<body class="bg-slate-50">
 
-<div class="flex justify-between items-center mb-8">
-        <h1 class="text-4xl font-Montserrat text-lime-400" id="main-title">REPRODUCTION</h1>
-        <div class="flex gap-2">
-            <button onclick="window.setL('ru')" id="btn-ru" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">RU</button>
-            <button onclick="window.setL('kz')" id="btn-kz" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">KZ</button>
-            <button onclick="window.setL('en')" id="btn-en" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="glass p-6 rounded-custom flex flex-col gap-4">
-            <h3 class="text-lime-200 uppercase tracking-widest text-xs font-bold mb-2">Select Type</h3>
-            <button onclick="window.setMode('asexual')" id="btn-asexual" class="mode-btn p-4 rounded-xl text-left">
-                <div class="text-xl">🌱 <span id="lbl-asexual">Asexual</span></div>
-                <div class="text-xs text-gray-400 mt-1" id="sub-asexual">Vegetative & Spore</div>
-            </button>
-            <button onclick="window.setMode('sexual')" id="btn-sexual" class="mode-btn p-4 rounded-xl text-left">
-                <div class="text-xl">🧬 <span id="lbl-sexual">Sexual</span></div>
-                <div class="text-xs text-gray-400 mt-1" id="sub-sexual">Gametes & Fertilization</div>
-            </button>
-        </div>
+    <header class="header-card text-center mb-10">
+        <p class="text-pink-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Адамның көбеюі және дамуы</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Human Reproduction and Development</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Размножение и развитие человека</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-pink-100">Адам жыныстық жолмен көбейеді. Ұрықтанудан туғанға дейін ~40 апта (280 күн). Жаңа адам бір жасушадан дамиды.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-pink-100">Humans reproduce sexually. From fertilization to birth ~40 weeks (280 days). A new person develops from one cell.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-pink-100">Человек размножается половым путём. От оплодотворения до рождения ~40 недель (280 дней). Новый человек развивается из одной клетки.</p>
+    </header>
 
-        <div class="lg:col-span-2 relative h-[500px] glass p-0 flex items-center justify-center bg-black/30 rounded-custom overflow-hidden">
-            <canvas id="repCanvas" class="w-full h-full"></canvas>
-            <div class="absolute bottom-8 right-8 text-right max-w-xs">
-                <h4 id="info-h" class="text-2xl font-bold text-lime-300 mb-2"></h4>
-                <p id="info-d" class="text-sm text-gray-300"></p>
+    <!-- Половые клетки -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Жыныс жасушалары</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Sex Cells (Gametes)</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Половые клетки (гаметы)</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Сперматозоид -->
+            <div class="card" style="border-top: 5px solid #3b82f6;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🔵</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">СПЕРМАТОЗОИД (♂)</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">SPERM (♂)</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-blue-700 mb-3">СПЕРМАТОЗОИД (♂)</h3>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div style="background: #eff6ff; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-xs">📏 <strong>Өлшемі:</strong> 50-60 мкм</p>
+                        <p lang="en" class="lang-content text-xs">📏 <strong>Size:</strong> 50-60 μm</p>
+                        <p lang="ru" class="lang-content text-xs">📏 <strong>Размер:</strong> 50-60 мкм</p>
+                    </div>
+                    
+                    <div style="background: #eff6ff; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-xs">🔢 <strong>Саны:</strong> ~300 млн/мл</p>
+                        <p lang="en" class="lang-content text-xs">🔢 <strong>Count:</strong> ~300 million/ml</p>
+                        <p lang="ru" class="lang-content text-xs">🔢 <strong>Количество:</strong> ~300 млн/мл</p>
+                    </div>
+                </div>
+                
+                <div style="background: #dbeafe; padding: 12px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Құрылысы:</strong> Бас (ядро + акросома) + мойын + құйрық</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Structure:</strong> Head (nucleus + acrosome) + neck + tail</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Строение:</strong> Головка (ядро + акросома) + шейка + хвост</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1"><strong>Хромосома:</strong> 23 (22 + X немесе Y)</p>
+                    <p lang="en" class="lang-content text-xs mt-1"><strong>Chromosomes:</strong> 23 (22 + X or Y)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1"><strong>Хромосомы:</strong> 23 (22 + X или Y)</p>
+                </div>
+            </div>
+
+            <!-- Яйцеклетка -->
+            <div class="card" style="border-top: 5px solid #ec4899;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🔴</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-pink-700 mb-3">ЖҰМЫРТҚА ЖАСУША (♀)</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-pink-700 mb-3">EGG CELL (♀)</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-pink-700 mb-3">ЯЙЦЕКЛЕТКА (♀)</h3>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div style="background: #fdf2f8; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-xs">📏 <strong>Өлшемі:</strong> 100-150 мкм</p>
+                        <p lang="en" class="lang-content text-xs">📏 <strong>Size:</strong> 100-150 μm</p>
+                        <p lang="ru" class="lang-content text-xs">📏 <strong>Размер:</strong> 100-150 мкм</p>
+                    </div>
+                    
+                    <div style="background: #fdf2f8; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-xs">🔢 <strong>Саны:</strong> 1/ай</p>
+                        <p lang="en" class="lang-content text-xs">🔢 <strong>Count:</strong> 1/month</p>
+                        <p lang="ru" class="lang-content text-xs">🔢 <strong>Количество:</strong> 1/месяц</p>
+                    </div>
+                </div>
+                
+                <div style="background: #fce7f3; padding: 12px; border-radius: 8px; margin-top: 10px;">
+                    <p lang="kk" class="lang-content text-xs"><strong>Құрылысы:</strong> Үлкен, қозғалмайды, қоректік заттар бар</p>
+                    <p lang="en" class="lang-content text-xs"><strong>Structure:</strong> Large, immobile, contains nutrients</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>Строение:</strong> Крупная, неподвижная, содержит питательные вещества</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1"><strong>Хромосома:</strong> 23 (22 + X)</p>
+                    <p lang="en" class="lang-content text-xs mt-1"><strong>Chromosomes:</strong> 23 (22 + X)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1"><strong>Хромосомы:</strong> 23 (22 + X)</p>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <div class="fact-box mt-4">
+            <p lang="kk" class="lang-content text-sm text-center">🧬 <strong>Жынысты не анықтайды?</strong> Сперматозоид: X + X = ♀ қыз | X + Y = ♂ ұл</p>
+            <p lang="en" class="lang-content text-sm text-center">🧬 <strong>What determines sex?</strong> Sperm: X + X = ♀ girl | X + Y = ♂ boy</p>
+            <p lang="ru" class="lang-content text-sm text-center">🧬 <strong>Что определяет пол?</strong> Сперматозоид: X + X = ♀ девочка | X + Y = ♂ мальчик</p>
+        </div>
+    </section>
 
-    <script>
-        const bio19Data = {
-            ru: {
-                title: "РАЗМНОЖЕНИЕ",
-                lblAsexual: "Бесполое", subAsexual: "Вегетативное и Спорами",
-                lblSexual: "Половое", subSexual: "Гаметы и Оплодотворение",
-                asexual: {t: "Бесполое размножение", d: "Участвует одна особь. Потомство — точные генетические копии (клоны). Способы: спорами (мхи, папоротники) или вегетативными органами (корни, побеги). Быстрое заселение территории."},
-                sexual: {t: "Половое размножение", d: "Участвуют две особи (или два органа). Происходит слияние гамет (n) с образованием зиготы (2n). Обеспечивает генетическое разнообразие потомства."}
-            },
-            kz: {
-                title: "КӨБЕЮ",
-                lblAsexual: "Жыныссыз", subAsexual: "Вегетативті және Спорлармен",
-                lblSexual: "Жынысты", subSexual: "Гаметалар және Ұрықтану",
-                asexual: {t: "Жыныссыз көбею", d: "Бір дара қатысады. Ұрпақ — нақты генетикалық көшірмелер (клондар). Тәсілдері: споралармен немесе вегетативті мүшелермен. Аумақты тез басып алу."},
-                sexual: {t: "Жынысты көбею", d: "Екі дара қатысады. Гаметалардың (n) қосылуы нәтижесінде зигота (2n) түзіледі. Ұрпақтың генетикалық алуантүрлілігін қамтамасыз етеді."}
-            },
-            en: {
-                title: "REPRODUCTION",
-                lblAsexual: "Asexual", subAsexual: "Vegetative & Spore",
-                lblSexual: "Sexual", subSexual: "Gametes & Fertilization",
-                asexual: {t: "Asexual Reproduction", d: "One parent involved. Offspring are genetic clones. Methods: spores or vegetative parts. Advantage: Rapid colonization."},
-                sexual: {t: "Sexual Reproduction", d: "Two parents involved. Fusion of gametes (n) to form a zygote (2n). Advantage: Genetic diversity."}
-            }
-        };
+    <!-- Оплодотворение -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Ұрықтану</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Fertilization</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Оплодотворение</h2>
 
-        let lang='ru', mode='asexual', cx, cvs;
-        let particles = [];
-
-        window.setL = (l) => {
-            lang = l;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+l).classList.add('active');
-            updateUI();
-        }
-
-        window.setMode = (m) => { mode = m; particles = []; updateUI(); }
-
-        function updateUI() {
-            const d = bio19Data[lang];
-            document.getElementById('main-title').textContent = d.title;
-            document.getElementById('lbl-asexual').textContent = d.lblAsexual;
-            document.getElementById('sub-asexual').textContent = d.subAsexual;
-            document.getElementById('lbl-sexual').textContent = d.lblSexual;
-            document.getElementById('sub-sexual').textContent = d.subSexual;
-
-            const info = d[mode];
-            document.getElementById('info-h').textContent = info.t;
-            document.getElementById('info-d').textContent = info.d;
-            
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+mode).classList.add('active');
-        }
-
-        function draw() {
-            if(!cx) return;
-            const w = cvs.width, h = cvs.height;
-            const t = Date.now() * 0.002;
-            cx.clearRect(0,0,w,h);
-            const cx_ = w/2, cy_ = h/2;
-
-            if (mode === 'asexual') {
-                // Cloning: One cell splits into two identical
-                const split = (Math.sin(t) + 1) / 2; // 0 to 1
-                cx.fillStyle = '#4ade80';
-                cx.beginPath(); cx.arc(cx_ - split*50, cy_, 40, 0, Math.PI*2); cx.fill();
-                cx.beginPath(); cx.arc(cx_ + split*50, cy_, 40, 0, Math.PI*2); cx.fill();
-                // DNA
-                cx.fillStyle = 'white'; cx.font = '20px Arial'; cx.textAlign='center';
-                cx.fillText('2n', cx_ - split*50, cy_+5);
-                cx.fillText('2n', cx_ + split*50, cy_+5);
-            } else {
-                // Sexual: Two cells merge
-                const merge = (Math.sin(t) + 1) / 2; // 0 to 1
-                cx.fillStyle = '#f472b6'; // Female
-                cx.beginPath(); cx.arc(cx_ - 100 + merge*100, cy_, 30, 0, Math.PI*2); cx.fill();
-                cx.fillStyle = '#60a5fa'; // Male
-                cx.beginPath(); cx.arc(cx_ + 100 - merge*100, cy_, 30, 0, Math.PI*2); cx.fill();
+        <div class="card">
+            <div class="grid md:grid-cols-4 gap-3">
+                <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-2xl mb-2">1️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Овуляция</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Ovulation</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Овуляция</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">Жұмыртқа жасуша шығады</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Egg is released</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Яйцеклетка выходит</p>
+                </div>
                 
-                if (merge > 0.9) { // Flash
-                    cx.fillStyle = '#facc15';
-                    cx.shadowBlur = 40; cx.shadowColor = 'yellow';
-                    cx.beginPath(); cx.arc(cx_, cy_, 50, 0, Math.PI*2); cx.fill();
-                    cx.shadowBlur = 0;
-                    cx.fillStyle = 'black'; cx.fillText('ZYGOTE', cx_, cy_);
-                } else {
-                    cx.fillStyle = 'white'; 
-                    cx.fillText('n', cx_ - 100 + merge*100, cy_);
-                    cx.fillText('n', cx_ + 100 - merge*100, cy_);
-                }
-            }
+                <div style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-2xl mb-2">2️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Кездесу</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Meeting</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Встреча</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">Жатыр түтігінде</p>
+                    <p lang="en" class="lang-content text-xs mt-1">In fallopian tube</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">В маточной трубе</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-2xl mb-2">3️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Қосылу</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Fusion</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Слияние</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">1 сперматозоид кіреді</p>
+                    <p lang="en" class="lang-content text-xs mt-1">1 sperm enters</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">1 сперматозоид входит</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-2xl mb-2">4️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Зигота</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Zygote</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Зигота</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">46 хромосома (23+23)</p>
+                    <p lang="en" class="lang-content text-xs mt-1">46 chromosomes (23+23)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">46 хромосом (23+23)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            requestAnimationFrame(draw);
-        }
+    <!-- Эмбриональное развитие -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Эмбрионалдық даму</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Embryonic Development</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Эмбриональное развитие</h2>
 
-        window.onload = () => {
-            cvs = document.getElementById('repCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; };
-            window.addEventListener('resize', rs); rs();
-            window.setL('ru'); draw();
-        }
-    </script>
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="dev-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #ef4444;">
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">📅 1-ші ТРИМЕСТР (1-12 апта)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">📅 1st TRIMESTER (weeks 1-12)</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">📅 1-й ТРИМЕСТР (1-12 недель)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Зигота → бластула → гаструла</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Zygote → blastula → gastrula</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Зигота → бластула → гаструла</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Имплантация (7 күн)</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Implantation (day 7)</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Имплантация (7 день)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Барлық мүшелер қалыптасады</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• All organs form</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Формируются все органы</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• 8 аптадан — ұрық (плод)</p>
+                    <p lang="en" class="lang-content text-xs">• From week 8 — fetus</p>
+                    <p lang="ru" class="lang-content text-xs">• С 8 недели — плод</p>
+                </div>
+                
+                <div class="dev-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b;">
+                    <h4 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">📅 2-ші ТРИМЕСТР (13-27 апта)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-yellow-700 mb-2">📅 2nd TRIMESTER (weeks 13-27)</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">📅 2-й ТРИМЕСТР (13-27 недель)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Мүшелер өседі, жетіледі</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Organs grow and mature</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Органы растут и созревают</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Қозғалыс сезіледі (16-20 апта)</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Movement felt (weeks 16-20)</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Чувствуется движение (16-20 нед)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Жынысы анықталады</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Sex can be determined</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Определяется пол</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Шаш, тырнақ өседі</p>
+                    <p lang="en" class="lang-content text-xs">• Hair, nails grow</p>
+                    <p lang="ru" class="lang-content text-xs">• Растут волосы, ногти</p>
+                </div>
+                
+                <div class="dev-card" style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); border-left: 5px solid #10b981;">
+                    <h4 lang="kk" class="lang-content font-bold text-emerald-700 mb-2">📅 3-ші ТРИМЕСТР (28-40 апта)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-emerald-700 mb-2">📅 3rd TRIMESTER (weeks 28-40)</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-emerald-700 mb-2">📅 3-й ТРИМЕСТР (28-40 недель)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Тез өсу, салмақ қосу</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Rapid growth, weight gain</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Быстрый рост, набор веса</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Өкпе жетіледі</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Lungs mature</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Лёгкие созревают</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1">• Бас төмен бұрылады</p>
+                    <p lang="en" class="lang-content text-xs mb-1">• Head turns down</p>
+                    <p lang="ru" class="lang-content text-xs mb-1">• Голова поворачивается вниз</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Туу (~3.5 кг, ~50 см)</p>
+                    <p lang="en" class="lang-content text-xs">• Birth (~3.5 kg, ~50 cm)</p>
+                    <p lang="ru" class="lang-content text-xs">• Роды (~3.5 кг, ~50 см)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <!-- Плацента -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Бала орны (плацента)</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Placenta</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Плацента</h2>
 
+        <div class="card">
+            <div class="fact-box">
+                <p lang="kk" class="lang-content text-sm"><strong>Бала орны</strong> — ана мен ұрық арасындағы байланыс мүшесі. Кіндік арқылы қосылған. Ұрық қаны мен ана қаны араласпайды!</p>
+                <p lang="en" class="lang-content text-sm"><strong>Placenta</strong> — connection organ between mother and fetus. Connected via umbilical cord. Fetal and maternal blood don't mix!</p>
+                <p lang="ru" class="lang-content text-sm"><strong>Плацента</strong> — орган связи матери и плода. Соединена пуповиной. Кровь плода и матери не смешивается!</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-3 mt-4">
+                <div style="background: #fef2f2; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">🫁</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Тыныс алу</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Respiration</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Дыхание</p>
+                    <p lang="kk" class="lang-content text-xs">O₂ → ұрыққа</p>
+                    <p lang="en" class="lang-content text-xs">O₂ → fetus</p>
+                    <p lang="ru" class="lang-content text-xs">O₂ → плоду</p>
+                </div>
+                
+                <div style="background: #ecfdf5; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">🍽️</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Қоректену</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Nutrition</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Питание</p>
+                    <p lang="kk" class="lang-content text-xs">Қоректік заттар</p>
+                    <p lang="en" class="lang-content text-xs">Nutrients</p>
+                    <p lang="ru" class="lang-content text-xs">Питательные вещества</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">🚽</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Бөлу</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Excretion</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Выделение</p>
+                    <p lang="kk" class="lang-content text-xs">CO₂, қалдықтар</p>
+                    <p lang="en" class="lang-content text-xs">CO₂, waste</p>
+                    <p lang="ru" class="lang-content text-xs">CO₂, отходы</p>
+                </div>
+                
+                <div style="background: #f5f3ff; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">🛡️</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Қорғау</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Protection</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Защита</p>
+                    <p lang="kk" class="lang-content text-xs">Антиденелер, барьер</p>
+                    <p lang="en" class="lang-content text-xs">Antibodies, barrier</p>
+                    <p lang="ru" class="lang-content text-xs">Антитела, барьер</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border-radius: 1rem; border-top: 4px solid #ec4899;">
+        <p lang="kk" class="lang-content text-sm font-bold text-pink-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-pink-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-pink-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

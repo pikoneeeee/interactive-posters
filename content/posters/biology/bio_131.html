@@ -1,124 +1,367 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photosynthesis: The Engine of Life</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <title>Выделительная система</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #064e3b; color: #dcfce7; font-family: 'Inter'; min-height: 100vh; }
-        .glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn.active { background: #4ade80; color: #064e3b; font-weight: 800; }
-        canvas { cursor: pointer; border-radius: 1.5rem; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #6d28d9; border-bottom: 3px solid #c4b5fd; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #8b5cf6; background: white; color: #8b5cf6; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f5f3ff; }
+        .lang-btn.active { background: #8b5cf6; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .kidney-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #f5f3ff; border: 2px solid #c4b5fd; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8">
+<body class="bg-slate-50">
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
-        <div class="flex flex-col gap-8">
-            <header>
-                <div class="text-green-400 font-bold tracking-[0.3em] text-xs mb-2 uppercase">Autotrophic Nutrition</div>
-                <h1 class="text-5xl font-Montserrat text-white mb-4" id="title"></h1>
-            </header>
-
-            <div class="glass p-8 rounded-custom border-l-4 border-green-500">
-                <div class="font-mono text-xl text-green-300 mb-4 bg-black/20 p-4 rounded-xl text-center">
-                    6CO₂ + 6H₂O + ☀️ → C₆H₁₂O₆ + 6O₂
-                </div>
-                <p id="desc" class="text-lg leading-relaxed opacity-80"></p>
-            </div>
-
-            <div class="flex gap-4 mt-auto">
-                <button onclick="setL('ru')" id="btn-ru" class="lang-btn px-4 py-2 rounded-lg border border-white/20 text-xs">RU</button>
-                <button onclick="setL('kz')" id="btn-kz" class="lang-btn px-4 py-2 rounded-lg border border-white/20 text-xs">KZ</button>
-                <button onclick="setL('en')" id="btn-en" class="lang-btn px-4 py-2 rounded-lg border border-white/20 text-xs">EN</button>
-            </div>
-        </div>
-
-        <div class="relative h-[600px] glass p-4 rounded-custom bg-black/20 overflow-hidden group">
-            <canvas id="photoCanvas" class="w-full h-full"></canvas>
-            <div class="absolute top-6 left-6 text-xs text-green-200 font-bold uppercase tracking-widest pointer-events-none">
-                Chloroplast Interior<br>Click to Toggle Day/Night
-            </div>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <script>
-        const db = {
-            ru: { t: "Фотосинтез", d: "Процесс образования органических веществ (глюкозы) из углекислого газа и воды на свету. Происходит в хлоропластах благодаря пигменту хлорофиллу. Побочный продукт — кислород, необходимый для дыхания всего живого." },
-            kz: { t: "Фотосинтез", d: "Жарықта көмірқышқыл газы мен судан органикалық заттардың (глюкоза) түзілу процесі. Хлоропласттарда хлорофилл пигментінің арқасында жүреді. Жанама өнім — оттегі." },
-            en: { t: "Photosynthesis", d: "The process of creating organic matter (glucose) from carbon dioxide and water using light. Occurs in chloroplasts thanks to chlorophyll. Oxygen is released as a byproduct." }
-        };
+    <header class="header-card text-center mb-10">
+        <p class="text-purple-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Зәр шығару жүйесі</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Excretory System</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Выделительная система</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-purple-100">Зәр шығару жүйесі — зат алмасу қалдықтарын шығарады. Бүйрек күніне ~180 л қанды сүзеді, ~1.5 л несеп шығарады.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-purple-100">The excretory system removes metabolic waste. Kidneys filter ~180 L blood/day, produce ~1.5 L urine.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-purple-100">Выделительная система удаляет продукты обмена веществ. Почки фильтруют ~180 л крови/день, образуют ~1.5 л мочи.</p>
+    </header>
 
-        let lang='ru', isDay=true, cx, cvs;
-        let particles = [];
+    <!-- Органы выделения -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Зәр шығару мүшелері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Excretory Organs</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Органы выделения</h2>
 
-        window.setL = (l) => {
-            lang = l;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+l).classList.add('active');
-            document.getElementById('title').textContent = db[l].t;
-            document.getElementById('desc').textContent = db[l].d;
-        }
-
-        function draw() {
-            const w = cvs.width, h = cvs.height;
-            const t = Date.now() * 0.002;
-            cx.clearRect(0,0,w,h);
-
-            // Chloroplast Background
-            const bg = isDay ? '#15803d' : '#022c22';
-            cx.fillStyle = bg; cx.fillRect(0,0,w,h);
-            
-            // Thylakoid Stacks (Grana)
-            cx.fillStyle = isDay ? '#4ade80' : '#064e3b';
-            for(let i=0; i<3; i++) {
-                const x = w*0.3 + i*100;
-                for(let j=0; j<5; j++) {
-                    cx.beginPath(); cx.ellipse(x, h*0.3 + j*20, 40, 10, 0, 0, Math.PI*2); cx.fill();
-                }
-            }
-
-            if(isDay) {
-                // Sun Rays
-                cx.strokeStyle = 'rgba(253, 224, 71, 0.3)'; cx.lineWidth = 4;
-                for(let i=0; i<10; i++) {
-                    cx.beginPath(); cx.moveTo(0, 0); cx.lineTo(w, h*0.8 + Math.sin(t+i)*100); cx.stroke();
-                }
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card" style="border-top: 5px solid #8b5cf6;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🫘</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">БҮЙРЕК</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">KIDNEYS</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-purple-700 mb-2">ПОЧКИ</h3>
                 
-                // Reaction Particles
-                if(Math.random()>0.8) particles.push({x: Math.random()*w, y: 0, type: 'CO2'}); // In
-                if(Math.random()>0.8) particles.push({x: Math.random()*w, y: h, type: 'O2'}); // Out
-            }
+                <p lang="kk" class="lang-content text-xs text-center">Негізгі мүше. Несеп түзеді, қанды тазартады.</p>
+                <p lang="en" class="lang-content text-xs text-center">Main organ. Forms urine, cleans blood.</p>
+                <p lang="ru" class="lang-content text-xs text-center">Главный орган. Образует мочу, очищает кровь.</p>
+            </div>
+            
+            <div class="card" style="border-top: 5px solid #f97316;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🫁</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-orange-700 mb-2">ӨКПЕ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-orange-700 mb-2">LUNGS</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-orange-700 mb-2">ЛЁГКИЕ</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center">CO₂ және су буы шығарады.</p>
+                <p lang="en" class="lang-content text-xs text-center">Remove CO₂ and water vapor.</p>
+                <p lang="ru" class="lang-content text-xs text-center">Выводят CO₂ и пары воды.</p>
+            </div>
+            
+            <div class="card" style="border-top: 5px solid #059669;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🧴</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-emerald-700 mb-2">ТЕРІ</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-emerald-700 mb-2">SKIN</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-emerald-700 mb-2">КОЖА</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center">Тер (су, тұздар, мочевина).</p>
+                <p lang="en" class="lang-content text-xs text-center">Sweat (water, salts, urea).</p>
+                <p lang="ru" class="lang-content text-xs text-center">Пот (вода, соли, мочевина).</p>
+            </div>
+            
+            <div class="card" style="border-top: 5px solid #dc2626;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">〰️</div>
+                <h3 lang="kk" class="lang-content text-lg font-bold text-center text-red-700 mb-2">ІШЕК</h3>
+                <h3 lang="en" class="lang-content text-lg font-bold text-center text-red-700 mb-2">INTESTINE</h3>
+                <h3 lang="ru" class="lang-content text-lg font-bold text-center text-red-700 mb-2">КИШЕЧНИК</h3>
+                
+                <p lang="kk" class="lang-content text-xs text-center">Қорытылмаған қалдықтар, өт пигменттері.</p>
+                <p lang="en" class="lang-content text-xs text-center">Undigested waste, bile pigments.</p>
+                <p lang="ru" class="lang-content text-xs text-center">Непереваренные остатки, пигменты желчи.</p>
+            </div>
+        </div>
+    </section>
 
-            particles.forEach((p, i) => {
-                if(p.type === 'CO2') {
-                    p.y += 2; cx.fillStyle = '#d1d5db'; // Grey
-                    if(p.y > h*0.4) { particles.splice(i, 1); } // Consumed
-                } else {
-                    p.y -= 2; cx.fillStyle = '#38bdf8'; // Blue (O2)
-                    if(p.y < 0) particles.splice(i, 1);
-                }
-                cx.beginPath(); cx.arc(p.x, p.y, 4, 0, Math.PI*2); cx.fill();
-            });
+    <!-- Мочевыделительная система -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Несеп шығару жолдары</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Urinary System</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Мочевыделительная система</h2>
 
-            requestAnimationFrame(draw);
-        }
+        <div class="card">
+            <div class="grid md:grid-cols-4 gap-4">
+                <div style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">🫘</p>
+                    <h4 lang="kk" class="lang-content font-bold text-purple-700 mb-2">1. БҮЙРЕКТЕР</h4>
+                    <h4 lang="en" class="lang-content font-bold text-purple-700 mb-2">1. KIDNEYS</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-purple-700 mb-2">1. ПОЧКИ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">2 дана, бұршақ тәрізді, 150 г</p>
+                    <p lang="en" class="lang-content text-xs">2 organs, bean-shaped, 150 g</p>
+                    <p lang="ru" class="lang-content text-xs">2 органа, бобовидные, 150 г</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 font-bold">Несеп түзеді</p>
+                    <p lang="en" class="lang-content text-xs mt-2 font-bold">Form urine</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 font-bold">Образуют мочу</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">⬇️</p>
+                    <h4 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">2. НЕСЕПАҒАР</h4>
+                    <h4 lang="en" class="lang-content font-bold text-yellow-700 mb-2">2. URETERS</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">2. МОЧЕТОЧНИКИ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">2 түтік, 25-30 см</p>
+                    <p lang="en" class="lang-content text-xs">2 tubes, 25-30 cm</p>
+                    <p lang="ru" class="lang-content text-xs">2 трубки, 25-30 см</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 font-bold">Несепті қуыққа жеткізеді</p>
+                    <p lang="en" class="lang-content text-xs mt-2 font-bold">Deliver urine to bladder</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 font-bold">Доставляют мочу в пузырь</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">🎈</p>
+                    <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2">3. ҚУЫҚ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2">3. BLADDER</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2">3. МОЧ. ПУЗЫРЬ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">Сыйымдылығы 300-500 мл</p>
+                    <p lang="en" class="lang-content text-xs">Capacity 300-500 ml</p>
+                    <p lang="ru" class="lang-content text-xs">Ёмкость 300-500 мл</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 font-bold">Несепті жинайды</p>
+                    <p lang="en" class="lang-content text-xs mt-2 font-bold">Stores urine</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 font-bold">Накапливает мочу</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">⬇️</p>
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">4. НЕСЕП ӨЗЕГІ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">4. URETHRA</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">4. УРЕТРА</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">Әйелдерде ~4 см, ерлерде ~20 см</p>
+                    <p lang="en" class="lang-content text-xs">Women ~4 cm, men ~20 cm</p>
+                    <p lang="ru" class="lang-content text-xs">Женщины ~4 см, мужчины ~20 см</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 font-bold">Несепті сыртқа шығарады</p>
+                    <p lang="en" class="lang-content text-xs mt-2 font-bold">Removes urine outside</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 font-bold">Выводит мочу наружу</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        window.onload = () => {
-            cvs = document.getElementById('photoCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; };
-            window.addEventListener('resize', rs); rs();
-            cvs.addEventListener('click', () => isDay = !isDay);
-            setL('ru'); draw();
-        }
-    </script>
+    <!-- Строение почки -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Бүйректің құрылысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Kidney Structure</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Строение почки</h2>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Внешнее строение -->
+                <div class="kidney-card" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-left: 5px solid #8b5cf6;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-purple-800 mb-3">🔍 СЫРТҚЫ ҚҰРЫЛЫСЫ</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-purple-800 mb-3">🔍 EXTERNAL STRUCTURE</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-purple-800 mb-3">🔍 ВНЕШНЕЕ СТРОЕНИЕ</h3>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🟤 <strong>Қыртыс қабат</strong> — сыртқы, қою түсті (нефрондар)</p>
+                            <p lang="en" class="lang-content text-sm">🟤 <strong>Cortex</strong> — outer, dark colored (nephrons)</p>
+                            <p lang="ru" class="lang-content text-sm">🟤 <strong>Корковый слой</strong> — наружный, тёмный (нефроны)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🔴 <strong>Милы қабат</strong> — ішкі, ашық түсті (пирамидалар)</p>
+                            <p lang="en" class="lang-content text-sm">🔴 <strong>Medulla</strong> — inner, lighter (pyramids)</p>
+                            <p lang="ru" class="lang-content text-sm">🔴 <strong>Мозговой слой</strong> — внутренний, светлый (пирамиды)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🟡 <strong>Бүйрек астауы</strong> — несеп жинайтын қуыс</p>
+                            <p lang="en" class="lang-content text-sm">🟡 <strong>Renal pelvis</strong> — cavity that collects urine</p>
+                            <p lang="ru" class="lang-content text-sm">🟡 <strong>Почечная лоханка</strong> — полость, собирающая мочу</p>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Нефрон -->
+                <div class="kidney-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #dc2626;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-red-800 mb-3">🔬 НЕФРОН (құрылымдық бірлік)</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-red-800 mb-3">🔬 NEPHRON (structural unit)</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-red-800 mb-3">🔬 НЕФРОН (структурная единица)</h3>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-3 text-gray-600">Бір бүйректе ~1 млн нефрон</p>
+                    <p lang="en" class="lang-content text-xs mb-3 text-gray-600">~1 million nephrons per kidney</p>
+                    <p lang="ru" class="lang-content text-xs mb-3 text-gray-600">~1 млн нефронов в каждой почке</p>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🔴 <strong>Шумақ (клубочек)</strong> — капиллярлар торы (сүзу)</p>
+                            <p lang="en" class="lang-content text-sm">🔴 <strong>Glomerulus</strong> — capillary network (filtration)</p>
+                            <p lang="ru" class="lang-content text-sm">🔴 <strong>Клубочек</strong> — сеть капилляров (фильтрация)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🟡 <strong>Капсула (Боумен)</strong> — шумақты қоршаған</p>
+                            <p lang="en" class="lang-content text-sm">🟡 <strong>Capsule (Bowman's)</strong> — surrounds glomerulus</p>
+                            <p lang="ru" class="lang-content text-sm">🟡 <strong>Капсула (Боумена)</strong> — окружает клубочек</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">〰️ <strong>Түтікше</strong> — қайта сіңіру орны</p>
+                            <p lang="en" class="lang-content text-sm">〰️ <strong>Tubule</strong> — site of reabsorption</p>
+                            <p lang="ru" class="lang-content text-sm">〰️ <strong>Канальцы</strong> — место реабсорбции</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Образование мочи -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Несеп түзілуі</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Urine Formation</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Образование мочи</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Фильтрация -->
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold text-blue-800 mb-3">1️⃣ СҮЗУ (ФИЛЬТРАЦИЯ)</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold text-blue-800 mb-3">1️⃣ FILTRATION</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold text-blue-800 mb-3">1️⃣ ФИЛЬТРАЦИЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">📍 Орны: Шумақ → Капсула</p>
+                    <p lang="en" class="lang-content text-sm mb-2">📍 Location: Glomerulus → Capsule</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">📍 Где: Клубочек → Капсула</p>
+                    
+                    <div style="background: white; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">Қан плазмасы сүзіледі (ақуыздар мен жасушалардан басқасы)</p>
+                        <p lang="en" class="lang-content text-sm">Blood plasma is filtered (except proteins and cells)</p>
+                        <p lang="ru" class="lang-content text-sm">Плазма крови фильтруется (кроме белков и клеток)</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-2 font-bold text-blue-700">= Бірінші несеп (~180 л/күн)</p>
+                        <p lang="en" class="lang-content text-xs mt-2 font-bold text-blue-700">= Primary urine (~180 L/day)</p>
+                        <p lang="ru" class="lang-content text-xs mt-2 font-bold text-blue-700">= Первичная моча (~180 л/сут)</p>
+                    </div>
+                </div>
+
+                <!-- Реабсорбция -->
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); padding: 20px; border-radius: 12px;">
+                    <h4 lang="kk" class="lang-content text-lg font-bold text-emerald-800 mb-3">2️⃣ ҚАЙТА СІҢІРУ (РЕАБСОРБЦИЯ)</h4>
+                    <h4 lang="en" class="lang-content text-lg font-bold text-emerald-800 mb-3">2️⃣ REABSORPTION</h4>
+                    <h4 lang="ru" class="lang-content text-lg font-bold text-emerald-800 mb-3">2️⃣ РЕАБСОРБЦИЯ</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">📍 Орны: Түтікшелер</p>
+                    <p lang="en" class="lang-content text-sm mb-2">📍 Location: Tubules</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">📍 Где: Канальцы</p>
+                    
+                    <div style="background: white; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">Пайдалы заттар қанға қайтарылады: глюкоза, амин қышқылдары, су (99%), тұздар</p>
+                        <p lang="en" class="lang-content text-sm">Useful substances return to blood: glucose, amino acids, water (99%), salts</p>
+                        <p lang="ru" class="lang-content text-sm">Полезные вещества возвращаются в кровь: глюкоза, аминокислоты, вода (99%), соли</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-2 font-bold text-emerald-700">= Соңғы несеп (~1.5 л/күн)</p>
+                        <p lang="en" class="lang-content text-xs mt-2 font-bold text-emerald-700">= Final urine (~1.5 L/day)</p>
+                        <p lang="ru" class="lang-content text-xs mt-2 font-bold text-emerald-700">= Конечная моча (~1.5 л/сут)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Состав мочи -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Несептің құрамы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Urine Composition</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Состав мочи</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box">
+                    <h4 lang="kk" class="lang-content font-bold text-purple-700 mb-2">✅ Қалыпты құрам:</h4>
+                    <h4 lang="en" class="lang-content font-bold text-purple-700 mb-2">✅ Normal composition:</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-purple-700 mb-2">✅ Нормальный состав:</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">💧 Су — 95%</p>
+                    <p lang="en" class="lang-content text-sm">💧 Water — 95%</p>
+                    <p lang="ru" class="lang-content text-sm">💧 Вода — 95%</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">🟡 Мочевина — 2% (ақуыз ыдырауы)</p>
+                    <p lang="en" class="lang-content text-sm">🟡 Urea — 2% (protein breakdown)</p>
+                    <p lang="ru" class="lang-content text-sm">🟡 Мочевина — 2% (распад белков)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">🧂 Тұздар — 2% (NaCl, т.б.)</p>
+                    <p lang="en" class="lang-content text-sm">🧂 Salts — 2% (NaCl, etc.)</p>
+                    <p lang="ru" class="lang-content text-sm">🧂 Соли — 2% (NaCl и др.)</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">🔴 Несеп қышқылы — 0.05%</p>
+                    <p lang="en" class="lang-content text-sm">🔴 Uric acid — 0.05%</p>
+                    <p lang="ru" class="lang-content text-sm">🔴 Мочевая кислота — 0.05%</p>
+                </div>
+                
+                <div class="fact-box" style="background: #fef2f2; border-color: #fca5a5;">
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">⚠️ Қалыпты емес (ауру белгісі):</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">⚠️ Abnormal (disease sign):</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">⚠️ Ненормально (признак болезни):</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm">🍬 Глюкоза → қант диабеті</p>
+                    <p lang="en" class="lang-content text-sm">🍬 Glucose → diabetes</p>
+                    <p lang="ru" class="lang-content text-sm">🍬 Глюкоза → сахарный диабет</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">🥚 Ақуыз → бүйрек ауруы</p>
+                    <p lang="en" class="lang-content text-sm">🥚 Protein → kidney disease</p>
+                    <p lang="ru" class="lang-content text-sm">🥚 Белок → болезнь почек</p>
+                    
+                    <p lang="kk" class="lang-content text-sm">🩸 Қан → бүйрек/қуық зақымы</p>
+                    <p lang="en" class="lang-content text-sm">🩸 Blood → kidney/bladder damage</p>
+                    <p lang="ru" class="lang-content text-sm">🩸 Кровь → повреждение почек/пузыря</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-radius: 1rem; border-top: 4px solid #8b5cf6;">
+        <p lang="kk" class="lang-content text-sm font-bold text-purple-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-purple-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-purple-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

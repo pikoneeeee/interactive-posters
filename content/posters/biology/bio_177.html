@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Макроэволюция. Ароморфоз. Идиоадаптация</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0a1a0a 0%, #14532d 50%, #0a1a0a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #14532d 0%, #15803d 40%, #4ade80 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(21,128,61,0.5); }
+        .section-heading { color: #15803d; border-bottom: 4px solid #86efac; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #15803d; background: white; color: #15803d; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#14532d,#15803d); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border-left: 5px solid #15803d; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#14532d,#15803d); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f0fdf4; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-green-100 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Макроэволюция</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Макроэволюция. Ароморфоз. Идиоадаптация. Биологиялық прогресс</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Macroevolution. Aromorphosis. Idioadaptation. Biological Progress</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Макроэволюция. Ароморфоз. Идиоадаптация. Биологический прогресс</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm">
+            <p lang="kk" class="lang-content text-green-100"><b>Макроэволюция</b> — түрлер, туыстар, отбасылар деңгейінен жоғары дамудың кең ауқымды эволюциялық өзгерістері. Ароморфоздар мен идиоадаптациялар арқылы жүзеге асады. Северцев-Шмальгаузен теориясы.</p>
+            <p lang="en" class="lang-content text-green-100"><b>Macroevolution</b> — large-scale evolutionary changes above the species/genus/family level. Realised through aromorphoses and idioadaptations. Severtsov-Schmalhausen theory.</p>
+            <p lang="ru" class="lang-content text-green-100"><b>Макроэволюция</b> — крупномасштабные эволюционные изменения выше уровня вида/рода/семейства. Осуществляется через ароморфозы и идиоадаптации. Теория Северцова–Шмальгаузена.</p>
+        </div>
+    </header>
+
+    <!-- MAIN DIRECTIONS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔼 Эволюцияның негізгі бағыттары (Северцев бойынша)</h2>
+        <h2 lang="en" class="lang-content section-heading">🔼 Main Directions of Evolution (Severtsov's classification)</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔼 Основные направления эволюции (по Северцеву)</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-green-700 text-white rounded-full px-3 py-1 font-black text-sm">↑↑</span>
+                        <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Ароморфоз (Морфофизиологиялық прогресс)</span><span lang="en" class="lang-content">Aromorphosis (Morphophysiological progress)</span><span lang="ru" class="lang-content">Ароморфоз (Морфофизиологический прогресс)</span></p>
+                    </div>
+                    <p class="text-gray-600 mb-2"><span lang="kk" class="lang-content">Организмнің жалпы ұйымдасу деңгейін жоғарылататын ірі прогрессивті өзгеріс. Жаңа типтер мен кластарды тудырады. Жаңа экологиялық нишаларды игеруге мүмкіндік береді.</span><span lang="en" class="lang-content">Major progressive change that raises the organism's general level of organisation. Gives rise to new types and classes. Enables conquest of new ecological niches.</span><span lang="ru" class="lang-content">Крупное прогрессивное изменение, повышающее уровень общей организации. Даёт начало новым типам и классам. Открывает доступ к новым экологическим нишам.</span></p>
+                    <div class="bg-green-50 rounded p-2">
+                        <p class="font-semibold text-green-700 mb-1"><span lang="kk" class="lang-content">Мысалдар:</span><span lang="en" class="lang-content">Examples:</span><span lang="ru" class="lang-content">Примеры:</span></p>
+                        <ul class="text-gray-600 space-y-0.5">
+                            <li>🐟→🦎 <span lang="kk" class="lang-content">Жерде тыныс алу мүшелерінің (өкпе) пайда болуы</span><span lang="en" class="lang-content">Development of lungs for terrestrial breathing</span><span lang="ru" class="lang-content">Развитие лёгких для дыхания на суше</span></li>
+                            <li>🌿 <span lang="kk" class="lang-content">Тұқымның пайда болуы (сеплерофиттер)</span><span lang="en" class="lang-content">Origin of the seed (spermatophytes)</span><span lang="ru" class="lang-content">Возникновение семени (семенные растения)</span></li>
+                            <li>🦎→🐦 <span lang="kk" class="lang-content">Жылықандылықтың пайда болуы</span><span lang="en" class="lang-content">Origin of warm-bloodedness</span><span lang="ru" class="lang-content">Возникновение теплокровности</span></li>
+                            <li>🧠 <span lang="kk" class="lang-content">Ми мидасының күрделенуі (серебральды кортекс)</span><span lang="en" class="lang-content">Cerebral cortex development</span><span lang="ru" class="lang-content">Развитие коры больших полушарий</span></li>
+                            <li>🌸 <span lang="kk" class="lang-content">Гүлдің пайда болуы (ашық тұқымды → жабық тұқымды)</span><span lang="en" class="lang-content">Origin of the flower (gymnosperms → angiosperms)</span><span lang="ru" class="lang-content">Возникновение цветка (голосеменные → покрытосеменные)</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tbox" style="border-color:#0891b2;background:#f0f9ff;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-cyan-700 text-white rounded-full px-3 py-1 font-black text-sm">→</span>
+                        <p class="font-bold text-cyan-700"><span lang="kk" class="lang-content">Идиоадаптация (Алломорфоз)</span><span lang="en" class="lang-content">Idioadaptation (Allomorphosis)</span><span lang="ru" class="lang-content">Идиоадаптация (Алломорфоз)</span></p>
+                    </div>
+                    <p class="text-gray-600 mb-2"><span lang="kk" class="lang-content">Жалпы ұйымдасу деңгейін өзгертпей, белгілі бір орта жағдайларына жергілікті бейімделу. Жаңа типтер бермейді, бірақ түрлер санын арттырады.</span><span lang="en" class="lang-content">Local adaptation to specific environmental conditions without changing the general level of organisation. Does not produce new types, but increases species numbers.</span><span lang="ru" class="lang-content">Частное приспособление к конкретным условиям среды без изменения общего уровня организации. Не даёт новых типов, но увеличивает число видов.</span></p>
+                    <div class="bg-cyan-50 rounded p-2">
+                        <p class="font-semibold text-cyan-700 mb-1"><span lang="kk" class="lang-content">Мысалдар:</span><span lang="en" class="lang-content">Examples:</span><span lang="ru" class="lang-content">Примеры:</span></p>
+                        <ul class="text-gray-600 space-y-0.5">
+                            <li>🌵 <span lang="kk" class="lang-content">Кактустардың су жинайтын жапырақтары</span><span lang="en" class="lang-content">Water-storing leaves of cacti</span><span lang="ru" class="lang-content">Водозапасающие листья кактуса</span></li>
+                            <li>🐠 <span lang="kk" class="lang-content">Дарвин қызылтамақтарының түрлі тұмсықтары</span><span lang="en" class="lang-content">Diverse beaks of Darwin's finches</span><span lang="ru" class="lang-content">Разные клювы вьюрков Дарвина</span></li>
+                            <li>🦅 <span lang="kk" class="lang-content">Жыртқыш құстардың тырнағы</span><span lang="en" class="lang-content">Talons of birds of prey</span><span lang="ru" class="lang-content">Когти хищных птиц</span></li>
+                            <li>🐘 <span lang="kk" class="lang-content">Пілдің хортобасы (хобот)</span><span lang="en" class="lang-content">Elephant's trunk</span><span lang="ru" class="lang-content">Хобот слона</span></li>
+                            <li>🐋 <span lang="kk" class="lang-content">Кит жүзу жүздіктері (ескек)</span><span lang="en" class="lang-content">Whale flippers for swimming</span><span lang="ru" class="lang-content">Ласты кита для плавания</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tbox" style="border-color:#dc2626;background:#fff5f5;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-red-600 text-white rounded-full px-3 py-1 font-black text-sm">↓</span>
+                        <p class="font-bold text-red-700"><span lang="kk" class="lang-content">Жалпы дегенерация (Катаморфоз)</span><span lang="en" class="lang-content">General degeneration (Catamorphosis)</span><span lang="ru" class="lang-content">Общая дегенерация (Катаморфоз)</span></p>
+                    </div>
+                    <p class="text-gray-600 mb-2"><span lang="kk" class="lang-content">Паразиттік немесе оқшаулаушы өмір салтымен байланысты ұйымдасу деңгейінің жалпы жеңілдеуі. Организм күрделілігін жоғалтады, бірақ биологиялық прогресс байқалады.</span><span lang="en" class="lang-content">General simplification of organisation associated with parasitic or sedentary lifestyle. Organism loses complexity, but biological progress may still occur.</span><span lang="ru" class="lang-content">Общее упрощение организации в связи с паразитическим или прикреплённым образом жизни. Организм теряет сложность, но биологический прогресс сохраняется.</span></p>
+                    <div class="bg-red-50 rounded p-2">
+                        <p class="font-semibold text-red-700 mb-1"><span lang="kk" class="lang-content">Мысалдар:</span><span lang="en" class="lang-content">Examples:</span><span lang="ru" class="lang-content">Примеры:</span></p>
+                        <ul class="text-gray-600 space-y-0.5">
+                            <li>🪱 <span lang="kk" class="lang-content">Тениялар (tapeworm): асқазан жоқ, тек жұтылу жолы</span><span lang="en" class="lang-content">Tapeworms: no digestive system, absorb nutrients</span><span lang="ru" class="lang-content">Цепень: нет органов пищеварения, всасывание</span></li>
+                            <li>🌿 <span lang="kk" class="lang-content">Повилика (Cuscuta): жапырақ жоқ, тамыр жоқ — паразит</span><span lang="en" class="lang-content">Dodder (Cuscuta): no leaves or roots — parasite</span><span lang="ru" class="lang-content">Повилика (Cuscuta): нет листьев и корней — паразит</span></li>
+                            <li>🦐 <span lang="kk" class="lang-content">Балтопрос (бастиқ: Sacculina) — дегенеративті қатпарларды жоғалту</span><span lang="en" class="lang-content">Sacculina (barnacle parasite) — loss of adult organs</span><span lang="ru" class="lang-content">Саккулина — утрата большинства органов взрослой особи</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BIOLOGICAL PROGRESS/REGRESS + EVOLUTION FORMS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📈 Биологиялық прогресс / регресс • 🌿 Эволюция формалары</h2>
+        <h2 lang="en" class="lang-content section-heading">📈 Biological Progress / Regress • 🌿 Forms of Evolution</h2>
+        <h2 lang="ru" class="lang-content section-heading">📈 Биологический прогресс / регресс • 🌿 Формы эволюции</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Критерий</span><span lang="en" class="lang-content">Criterion</span><span lang="ru" class="lang-content">Критерий</span></th>
+                            <th>📈 <span lang="kk" class="lang-content">Биол. прогресс</span><span lang="en" class="lang-content">Bio. progress</span><span lang="ru" class="lang-content">Биол. прогресс</span></th>
+                            <th>📉 <span lang="kk" class="lang-content">Биол. регресс</span><span lang="en" class="lang-content">Bio. regress</span><span lang="ru" class="lang-content">Биол. регресс</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Дараларлар саны</span><span lang="en" class="lang-content">Individual numbers</span><span lang="ru" class="lang-content">Численность особей</span></td><td class="text-green-700 font-bold">↑ <span lang="kk" class="lang-content">Артады</span><span lang="en" class="lang-content">Increases</span><span lang="ru" class="lang-content">Растёт</span></td><td class="text-red-600 font-bold">↓ <span lang="kk" class="lang-content">Азаяды</span><span lang="en" class="lang-content">Decreases</span><span lang="ru" class="lang-content">Убывает</span></td></tr>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Таралу аумағы</span><span lang="en" class="lang-content">Distribution range</span><span lang="ru" class="lang-content">Ареал распространения</span></td><td class="text-green-700 font-bold">↑ <span lang="kk" class="lang-content">Кеңейеді</span><span lang="en" class="lang-content">Expands</span><span lang="ru" class="lang-content">Расширяется</span></td><td class="text-red-600 font-bold">↓ <span lang="kk" class="lang-content">Тарылады</span><span lang="en" class="lang-content">Narrows</span><span lang="ru" class="lang-content">Сужается</span></td></tr>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Түр санасы</span><span lang="en" class="lang-content">Species diversity</span><span lang="ru" class="lang-content">Число видов</span></td><td class="text-green-700 font-bold">↑ <span lang="kk" class="lang-content">Артады</span><span lang="en" class="lang-content">Increases</span><span lang="ru" class="lang-content">Растёт</span></td><td class="text-red-600 font-bold">↓ <span lang="kk" class="lang-content">Азаяды</span><span lang="en" class="lang-content">Decreases</span><span lang="ru" class="lang-content">Убывает</span></td></tr>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></td><td><span lang="kk" class="lang-content">Жәндіктер, гүлді өсімдіктер, кеміргіштер, бактериялар</span><span lang="en" class="lang-content">Insects, flowering plants, rodents, bacteria</span><span lang="ru" class="lang-content">Насекомые, покрытосеменные, грызуны, бактерии</span></td><td><span lang="kk" class="lang-content">Латимерия, гинкго, тарпан (жойылған), пандалар</span><span lang="en" class="lang-content">Coelacanth, ginkgo, tarpan (extinct), pandas</span><span lang="ru" class="lang-content">Латимерия, гинкго, тарпан (вымер), панды</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="fact-box mt-3 text-xs">
+                    <p class="font-bold text-green-700"><span lang="kk" class="lang-content">💡 Маңызды байланыс:</span><span lang="en" class="lang-content">💡 Key connection:</span><span lang="ru" class="lang-content">💡 Важная связь:</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Ароморфоз → биологиялық прогресс (жаңа кластар, типтер). Идиоадаптация → биологиялық прогресс (жаңа түрлер). Дегенерация → паразиттер үшін биологиялық прогресс мүмкін.</span><span lang="en" class="lang-content">Aromorphosis → biological progress (new classes/phyla). Idioadaptation → biological progress (new species). Degeneration → can lead to biological progress for parasites.</span><span lang="ru" class="lang-content">Ароморфоз → биологический прогресс (новые классы, типы). Идиоадаптация → биологический прогресс (новые виды). Дегенерация → биологический прогресс возможен для паразитов.</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-sm mb-3"><span lang="kk" class="lang-content">🌿 Эволюция формалары</span><span lang="en" class="lang-content">🌿 Forms of Evolution</span><span lang="ru" class="lang-content">🌿 Формы эволюции</span></h3>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                        <p class="font-bold text-green-700">📡 <span lang="kk" class="lang-content">Дивергенция (Бейімделгіш радиация)</span><span lang="en" class="lang-content">Divergence (Adaptive radiation)</span><span lang="ru" class="lang-content">Дивергенция (Адаптивная радиация)</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Ортақ ата-бабадан шыққан популяциялардың бөлек экологиялық нишаларда алшақтауы. Гомологтық мүшелер пайда болады. <b>Мысал:</b> Дарвин қызылтамақтары — 1 ата-бабадан 14 түр.</span><span lang="en" class="lang-content">Populations from a common ancestor diverge into separate ecological niches. Produces homologous structures. <b>Example:</b> Darwin's finches — 14 species from 1 ancestor.</span><span lang="ru" class="lang-content">Расхождение популяций от общего предка по разным нишам. Приводит к гомологичным органам. <b>Пример:</b> Вьюрки Дарвина — 14 видов от 1 предка.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#0891b2;background:#f0f9ff;">
+                        <p class="font-bold text-cyan-700">🔄 <span lang="kk" class="lang-content">Конвергенция</span><span lang="en" class="lang-content">Convergence</span><span lang="ru" class="lang-content">Конвергенция</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Туыстас емес организмдердің ұқсас орта жағдайларына тәуелсіз бейімделуі. Аналогтық мүшелер пайда болады. <b>Мысал:</b> Акула (балық) vs Дельфин (сүтқоректі) — дене пішіні ұқсас; Жарқанат пен жәндік қанаттары.</span><span lang="en" class="lang-content">Independent adaptation of unrelated organisms to similar environments. Produces analogous structures. <b>Example:</b> Shark (fish) vs Dolphin (mammal) — similar body shape; bat and insect wings.</span><span lang="ru" class="lang-content">Независимое приспособление неродственных организмов к схожим условиям. Приводит к аналогичным органам. <b>Пример:</b> Акула (рыба) vs Дельфин (млекопитающее) — схожая форма тела; крылья летучей мыши и насекомого.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#9333ea;background:#faf5ff;">
+                        <p class="font-bold text-purple-700">⟷ <span lang="kk" class="lang-content">Параллелизм</span><span lang="en" class="lang-content">Parallelism</span><span lang="ru" class="lang-content">Параллелизм</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Бір ортақ ата-бабадан шыққан жуық туыстас организмдердің тәуелсіз ұқсас белгілерін дамытуы. <b>Мысал:</b> Саблезубый тигр (Smilodon) мен Thylacosmilus — ар жалпы сүтқоректі ата-бабасынан бірдей тіс дамытқан.</span><span lang="en" class="lang-content">Closely related organisms independently developing similar traits. <b>Example:</b> Smilodon and Thylacosmilus — both developed sabre teeth independently from a common mammal ancestor.</span><span lang="ru" class="lang-content">Близкородственные организмы независимо развивают схожие признаки. <b>Пример:</b> Смилодон и Thylacosmilus — оба независимо выработали саблевидные зубы от общего предка.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

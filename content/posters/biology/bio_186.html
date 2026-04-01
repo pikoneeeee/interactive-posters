@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клеточный цикл. Митоз. Мейоз</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f0820 0%, #4c1d95 50%, #0f0820 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 40%, #c4b5fd 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(124,58,237,0.5); }
+        .section-heading { color: #7c3aed; border-bottom: 4px solid #c4b5fd; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #7c3aed; background: white; color: #7c3aed; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#4c1d95,#7c3aed); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f5f3ff,#ede9fe); border-left: 5px solid #7c3aed; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#4c1d95,#7c3aed); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f5f3ff; }
+        table.comp tr:last-child td { border-bottom:none; }
+        .phase-badge { display:inline-block; border-radius:6px; padding:2px 8px; font-weight:700; font-size:0.75rem; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-violet-200 font-semibold mb-3 text-lg">10–11 класс • Цитология • Деление клетки</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Жасуша циклі. Митоз. Мейоз</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Cell Cycle. Mitosis. Meiosis</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Клеточный цикл. Митоз. Мейоз</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm flex flex-wrap gap-6 justify-center">
+            <div class="text-center"><p class="font-mono font-black text-white text-lg">2n→2n</p><p class="text-violet-200 text-xs"><span lang="kk" class="lang-content">Митоз</span><span lang="en" class="lang-content">Mitosis</span><span lang="ru" class="lang-content">Митоз</span></p></div>
+            <div class="text-center"><p class="font-mono font-black text-white text-lg">2n→n</p><p class="text-violet-200 text-xs"><span lang="kk" class="lang-content">Мейоз</span><span lang="en" class="lang-content">Meiosis</span><span lang="ru" class="lang-content">Мейоз</span></p></div>
+            <div class="text-center"><p class="font-mono font-black text-white text-lg">G1→S→G2→M</p><p class="text-violet-200 text-xs"><span lang="kk" class="lang-content">Жасуша циклі</span><span lang="en" class="lang-content">Cell cycle</span><span lang="ru" class="lang-content">Клеточный цикл</span></p></div>
+        </div>
+    </header>
+
+    <!-- CELL CYCLE + MITOSIS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔄 Жасуша циклі • 🔬 Митоз кезеңдері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔄 Cell Cycle • 🔬 Phases of Mitosis</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔄 Клеточный цикл • 🔬 Фазы митоза</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div>
+                    <div class="tbox mb-3" style="border-color:#7c3aed;background:#f5f3ff;">
+                        <p class="font-bold text-violet-700 mb-2"><span lang="kk" class="lang-content">Жасуша циклінің кезеңдері:</span><span lang="en" class="lang-content">Stages of the cell cycle:</span><span lang="ru" class="lang-content">Стадии клеточного цикла:</span></p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li><span class="phase-badge bg-blue-100 text-blue-700">G₁</span> <b><span lang="kk" class="lang-content">Пресинтетикалық фаза:</span><span lang="en" class="lang-content">Pre-synthetic (gap 1):</span><span lang="ru" class="lang-content">Пресинтетическая (G₁):</span></b> <span lang="kk" class="lang-content">Жасуша өседі, ақуыздар мен органоидтар синтезделеді. ДНҚ репликациясына дайындалу. Ұзақтылық: ең ұзын (сағаттан айларға дейін).</span><span lang="en" class="lang-content">Cell grows, proteins and organelles synthesised. Preparation for DNA replication. Duration: longest (hours to months).</span><span lang="ru" class="lang-content">Рост клетки, синтез белков и органелл. Подготовка к репликации ДНК. Продолжительность: наибольшая (часы–месяцы).</span></li>
+                            <li><span class="phase-badge bg-orange-100 text-orange-700">S</span> <b><span lang="kk" class="lang-content">Синтетикалық фаза:</span><span lang="en" class="lang-content">Synthetic (S):</span><span lang="ru" class="lang-content">Синтетическая (S):</span></b> <span lang="kk" class="lang-content">ДНҚ репликациясы. Хромосомалар 2× қайталанады → хроматидтер пайда болады. Гистондар синтезделеді.</span><span lang="en" class="lang-content">DNA replication. Chromosomes doubled → chromatids formed. Histones synthesised.</span><span lang="ru" class="lang-content">Репликация ДНК. Хромосомы удваиваются → хроматиды. Синтез гистонов.</span></li>
+                            <li><span class="phase-badge bg-green-100 text-green-700">G₂</span> <b><span lang="kk" class="lang-content">Постсинтетикалық фаза:</span><span lang="en" class="lang-content">Post-synthetic (gap 2):</span><span lang="ru" class="lang-content">Постсинтетическая (G₂):</span></b> <span lang="kk" class="lang-content">Бөліну үшін жасуша дайындалады. Митозды кинестестарлары (веретено) синтезделеді. G₂/M тексеру нүктесі — ДНҚ зақымдалуын тексеру.</span><span lang="en" class="lang-content">Cell prepares for division. Spindle components synthesised. G₂/M checkpoint — checks for DNA damage.</span><span lang="ru" class="lang-content">Подготовка к делению. Синтез компонентов веретена. Контрольная точка G₂/M — проверка повреждений ДНК.</span></li>
+                            <li><span class="phase-badge bg-purple-100 text-purple-700">M</span> <b><span lang="kk" class="lang-content">Митотикалық фаза:</span><span lang="en" class="lang-content">Mitotic (M):</span><span lang="ru" class="lang-content">Митотическая (M):</span></b> <span lang="kk" class="lang-content">Бөліну: профаза → метафаза → анафаза → телофаза + цитокинез.</span><span lang="en" class="lang-content">Division: prophase → metaphase → anaphase → telophase + cytokinesis.</span><span lang="ru" class="lang-content">Деление: профаза → метафаза → анафаза → телофаза + цитокинез.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="tbox" style="border-color:#7c3aed;background:#f5f3ff;">
+                        <p class="font-bold text-violet-700 mb-2">🔬 <span lang="kk" class="lang-content">Митоздың негізгі кезеңдері (2n→2n):</span><span lang="en" class="lang-content">Key phases of mitosis (2n→2n):</span><span lang="ru" class="lang-content">Основные фазы митоза (2n→2n):</span></p>
+                        <div class="space-y-1">
+                            <div class="flex gap-2 items-start"><span class="phase-badge bg-pink-100 text-pink-700 mt-0.5 shrink-0"><span lang="kk" class="lang-content">Профаза</span><span lang="en" class="lang-content">Prophase</span><span lang="ru" class="lang-content">Профаза</span></span><p class="text-gray-600"><span lang="kk" class="lang-content">Хроматин тығызданады → хромосомалар (2 хроматид). Ядрошық ыдырайды. Бөліну ұршығы құрылады. Ядро қабықшасы ыдырайды.</span><span lang="en" class="lang-content">Chromatin condenses → chromosomes (2 chromatids). Nucleolus disappears. Spindle forms. Nuclear envelope breaks down.</span><span lang="ru" class="lang-content">Хроматин конденсируется → хромосомы (2 хроматиды). Ядрышко исчезает. Веретено формируется. Ядерная оболочка разрушается.</span></p></div>
+                            <div class="flex gap-2 items-start"><span class="phase-badge bg-orange-100 text-orange-700 mt-0.5 shrink-0"><span lang="kk" class="lang-content">Метафаза</span><span lang="en" class="lang-content">Metaphase</span><span lang="ru" class="lang-content">Метафаза</span></span><p class="text-gray-600"><span lang="kk" class="lang-content">Хромосомалар экватор жазықтығына (метафазалық пластинка) тізіледі. Спиндель жіптері центромераларға байланады. Хромосомалар ең жақсы көрінеді → кариотип зерттеу.</span><span lang="en" class="lang-content">Chromosomes align on the equatorial plate. Spindle fibres attach to centromeres. Chromosomes most visible → karyotype study.</span><span lang="ru" class="lang-content">Хромосомы выстраиваются по экватору. Нити веретена прикрепляются к центромерам. Хромосомы наиболее видны → кариотип.</span></p></div>
+                            <div class="flex gap-2 items-start"><span class="phase-badge bg-red-100 text-red-700 mt-0.5 shrink-0"><span lang="kk" class="lang-content">Анафаза</span><span lang="en" class="lang-content">Anaphase</span><span lang="ru" class="lang-content">Анафаза</span></span><p class="text-gray-600"><span lang="kk" class="lang-content">Центромералар бөлінеді → сестралық хроматидтер полюстерге тартылады (хромосоматар × 2). Жасуша ұзарады.</span><span lang="en" class="lang-content">Centromeres split → sister chromatids pulled to poles (chromosomes × 2). Cell elongates.</span><span lang="ru" class="lang-content">Центромеры делятся → сестринские хроматиды расходятся к полюсам (хромосомы × 2). Клетка удлиняется.</span></p></div>
+                            <div class="flex gap-2 items-start"><span class="phase-badge bg-blue-100 text-blue-700 mt-0.5 shrink-0"><span lang="kk" class="lang-content">Телофаза</span><span lang="en" class="lang-content">Telophase</span><span lang="ru" class="lang-content">Телофаза</span></span><p class="text-gray-600"><span lang="kk" class="lang-content">Хромосомалар деконденсацияланады. Ядро қабықшасы қайта пайда болады. Ядрошық пайда болады. Цитокинез: жануарда — шектелу сақинасы; өсімдікте — жасуша пластинкасы.</span><span lang="en" class="lang-content">Chromosomes decondense. Nuclear envelope reforms. Nucleolus reappears. Cytokinesis: animals — cleavage furrow; plants — cell plate.</span><span lang="ru" class="lang-content">Хромосомы деконденсируются. Ядерная оболочка восстанавливается. Ядрышко появляется. Цитокинез: у животных — борозда; у растений — клеточная пластинка.</span></p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEIOSIS + COMPARISON -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔀 Мейоз • 📊 Митоз vs Мейоз</h2>
+        <h2 lang="en" class="lang-content section-heading">🔀 Meiosis • 📊 Mitosis vs Meiosis</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔀 Мейоз • 📊 Митоз vs Мейоз</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#7c3aed;background:#f5f3ff;">
+                    <p class="font-bold text-violet-700 mb-2"><span lang="kk" class="lang-content">Мейоз I — репукциялық (2n → n):</span><span lang="en" class="lang-content">Meiosis I — reductional (2n → n):</span><span lang="ru" class="lang-content">Мейоз I — редукционное деление (2n → n):</span></p>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>🔴 <b><span lang="kk" class="lang-content">Профаза I (ең ұзын):</span><span lang="en" class="lang-content">Prophase I (longest):</span><span lang="ru" class="lang-content">Профаза I (самая длинная):</span></b>
+                            <span lang="kk" class="lang-content">Лептотена → Зиготена (гомологтар конъюгациясы) → Пахитена (<b>кроссинговер!</b> хиазмалар) → Диплотена → Диакинез.</span>
+                            <span lang="en" class="lang-content">Leptotene → Zygotene (synapsis of homologs) → Pachytene (<b>crossing-over!</b> chiasmata) → Diplotene → Diakinesis.</span>
+                            <span lang="ru" class="lang-content">Лептотена → Зиготена (конъюгация гомологов) → Пахитена (<b>кроссинговер!</b> хиазмы) → Диплотена → Диакинез.</span>
+                        </li>
+                        <li>🟡 <b><span lang="kk" class="lang-content">Метафаза I:</span><span lang="en" class="lang-content">Metaphase I:</span><span lang="ru" class="lang-content">Метафаза I:</span></b> <span lang="kk" class="lang-content">Бивалент (тетрада) экватор жазықтығына тізіледі. Кездейсоқ бағдарлау — генетикалық алуандылықтың қайнары.</span><span lang="en" class="lang-content">Bivalents (tetrads) align on equator. Random orientation — source of genetic variation.</span><span lang="ru" class="lang-content">Биваленты (тетрады) выстраиваются по экватору. Случайная ориентация — источник генетического разнообразия.</span></li>
+                        <li>🔴 <b><span lang="kk" class="lang-content">Анафаза I:</span><span lang="en" class="lang-content">Anaphase I:</span><span lang="ru" class="lang-content">Анафаза I:</span></b> <span lang="kk" class="lang-content">Гомологтық хромосомалар ажырасады (не сестралық хроматидтер!). Хромосомалар саны 2 есе азаяды.</span><span lang="en" class="lang-content">Homologous chromosomes separate (NOT sister chromatids!). Chromosome number halved.</span><span lang="ru" class="lang-content">Гомологичные хромосомы расходятся (не сестринские хроматиды!). Число хромосом уменьшается вдвое.</span></li>
+                    </ul>
+                </div>
+                <div class="tbox text-xs" style="border-color:#059669;background:#f0fdf4;">
+                    <p class="font-bold text-green-700 mb-2"><span lang="kk" class="lang-content">Мейоз II — эквациялық (n → n):</span><span lang="en" class="lang-content">Meiosis II — equational (n → n):</span><span lang="ru" class="lang-content">Мейоз II — уравнительное деление (n → n):</span></p>
+                    <p class="text-gray-600"><span lang="kk" class="lang-content">Митозға ұқсас, бірақ интерфазада ДНҚ репликациясы жоқ. Профаза II → Метафаза II → Анафаза II (сестралық хроматидтер ажырасады) → Телофаза II. Нәтиже: 4 гаплоидтық жасуша (n). Аталық жасушаларда: 4 сперматид → сперматозоидтар. Аналық жасушаларда: 1 жетілген жұмыртқа жасушасы + 3 бағыттаушы денешіктер.</span><span lang="en" class="lang-content">Similar to mitosis but no DNA replication in interphase. Prophase II → Metaphase II → Anaphase II (sister chromatids separate) → Telophase II. Result: 4 haploid cells (n). In males: 4 spermatids → sperm. In females: 1 mature oocyte + 3 polar bodies.</span><span lang="ru" class="lang-content">Похоже на митоз, но без репликации ДНК в интерфазе. Профаза II → Метафаза II → Анафаза II (сестринские хроматиды расходятся) → Телофаза II. Результат: 4 гаплоидные клетки (n). У самцов: 4 сперматиды → сперматозоиды. У самок: 1 зрелая яйцеклетка + 3 полярных тельца.</span></p>
+                </div>
+            </div>
+            <div class="card overflow-x-auto">
+                <table class="comp text-xs">
+                    <thead><tr>
+                        <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+                        <th>⚙️ <span lang="kk" class="lang-content">Митоз</span><span lang="en" class="lang-content">Mitosis</span><span lang="ru" class="lang-content">Митоз</span></th>
+                        <th>🔀 <span lang="kk" class="lang-content">Мейоз</span><span lang="en" class="lang-content">Meiosis</span><span lang="ru" class="lang-content">Мейоз</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="font-bold"><span lang="kk" class="lang-content">Бөлінулер саны</span><span lang="en" class="lang-content">Number of divisions</span><span lang="ru" class="lang-content">Число делений</span></td><td>1</td><td>2</td></tr>
+                        <tr><td class="font-bold"><span lang="kk" class="lang-content">Нәтижелік жасушалар</span><span lang="en" class="lang-content">Resulting cells</span><span lang="ru" class="lang-content">Итоговые клетки</span></td><td>2 <span lang="kk" class="lang-content">диплоидты</span><span lang="en" class="lang-content">diploid</span><span lang="ru" class="lang-content">диплоидных</span> (2n)</td><td>4 <span lang="kk" class="lang-content">гаплоидты</span><span lang="en" class="lang-content">haploid</span><span lang="ru" class="lang-content">гаплоидных</span> (n)</td></tr>
+                        <tr><td class="font-bold"><span lang="kk" class="lang-content">Кроссинговер</span><span lang="en" class="lang-content">Crossing-over</span><span lang="ru" class="lang-content">Кроссинговер</span></td><td class="text-red-600">❌</td><td class="text-green-600">✅ <span lang="kk" class="lang-content">Профаза I-де</span><span lang="en" class="lang-content">In Prophase I</span><span lang="ru" class="lang-content">В Профазе I</span></td></tr>
+                        <tr><td class="font-bold"><span lang="kk" class="lang-content">Гомологтар конъюгациясы</span><span lang="en" class="lang-content">Synapsis of homologs</span><span lang="ru" class="lang-content">Конъюгация гомологов</span></td><td class="text-red-600">❌</td><td class="text-green-600">✅</td></tr>
+                        <tr><td class="font-bold"><span lang="kk" class="lang-content">Генетикалық тепе-теңдік</span><span lang="en" class="lang-content">Genetic identity</span><span lang="ru" class="lang-content">Генетическое тождество</span></td><td><span lang="kk" class="lang-content">Аналық жасушамен бірдей</span><span lang="en" class="lang-content">Identical to parent cell</span><span lang="ru" class="lang-content">Идентичны материнской</span></td><td><span lang="kk" class="lang-content">Алуан (кроссинговер + кездейсоқ)</span><span lang="en" class="lang-content">Genetically diverse</span><span lang="ru" class="lang-content">Генетически разнообразные</span></td></tr>
+                        <tr><td class="font-bold"><span lang="kk" class="lang-content">Қайда жүреді</span><span lang="en" class="lang-content">Where it occurs</span><span lang="ru" class="lang-content">Где происходит</span></td><td><span lang="kk" class="lang-content">Соматикалық жасушалар</span><span lang="en" class="lang-content">Somatic cells</span><span lang="ru" class="lang-content">Соматические клетки</span></td><td><span lang="kk" class="lang-content">Жыныс бездері</span><span lang="en" class="lang-content">Gonads (sex organs)</span><span lang="ru" class="lang-content">Половые железы</span></td></tr>
+                        <tr><td class="font-bold"><span lang="kk" class="lang-content">Биологиялық маңызы</span><span lang="en" class="lang-content">Biological significance</span><span lang="ru" class="lang-content">Биологическое значение</span></td><td><span lang="kk" class="lang-content">Өсу, регенерация, жыныссыз көбею</span><span lang="en" class="lang-content">Growth, regeneration, asexual reproduction</span><span lang="ru" class="lang-content">Рост, регенерация, бесполое размножение</span></td><td><span lang="kk" class="lang-content">Жыныс жасушалары (гаметалар), генетикалық алуандылық</span><span lang="en" class="lang-content">Sex cells (gametes), genetic diversity</span><span lang="ru" class="lang-content">Половые клетки (гаметы), генетическое разнообразие</span></td></tr>
+                    </tbody>
+                </table>
+                <div class="fact-box mt-3 text-xs">
+                    <p class="font-bold text-violet-700"><span lang="kk" class="lang-content">🦀 Кроссинговер (рекомбинация):</span><span lang="en" class="lang-content">🦀 Crossing-over (recombination):</span><span lang="ru" class="lang-content">🦀 Кроссинговер (рекомбинация):</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Мейоз I профазасының пахитена кезінде гомологтық хромосомалардың арасында гендердің алмасуы. <b>Хиазмалар</b> — кроссинговер нүктелері. Нәтиже: рекомбинантты хромосомалар → генетикалық алуандылық артады. Жыныстық көбеюде маңызды.</span><span lang="en" class="lang-content">Exchange of genes between homologous chromosomes during pachytene of Prophase I. <b>Chiasmata</b> — crossing-over points. Result: recombinant chromosomes → increased genetic variation. Important in sexual reproduction.</span><span lang="ru" class="lang-content">Обмен генами между гомологичными хромосомами в пахитене Профазы I. <b>Хиазмы</b> — точки кроссинговера. Результат: рекомбинантные хромосомы → увеличение генетического разнообразия. Важнейшая роль в половом размножении.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

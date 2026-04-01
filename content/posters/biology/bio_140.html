@@ -1,123 +1,316 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vegetative Reproduction</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Витамины</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #0f172a; color: #bae6fd; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .grid-btn { cursor: default; transition: 0.3s; border: 1px solid transparent; }
-        .grid-btn:hover { background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; }
-        .lang-btn.active { background: #38bdf8; color: #0f172a; font-weight: bold; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #ea580c; border-bottom: 3px solid #fdba74; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #f97316; background: white; color: #f97316; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fff7ed; }
+        .lang-btn.active { background: #f97316; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .vitamin-card { border-radius: 10px; padding: 12px; }
+        .fact-box { background: #fff7ed; border: 2px solid #fdba74; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8">
+<body class="bg-slate-50">
 
-<header class="flex justify-between items-center mb-10">
-        <div>
-            <h1 class="text-4xl font-bold text-sky-400 mb-2" id="main-title">VEGETATIVE PROPAGATION</h1>
-            <p class="text-sm opacity-60" id="sub-title">Cloning in Nature and Agriculture</p>
-        </div>
-        <div class="flex gap-2">
-            <button onclick="window.setL('ru')" id="btn-ru" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">RU</button>
-            <button onclick="window.setL('kz')" id="btn-kz" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">KZ</button>
-            <button onclick="window.setL('en')" id="btn-en" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">EN</button>
-        </div>
-    </header>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="glass p-6 rounded-2xl grid-btn">
-            <div class="text-4xl mb-4">🍓</div>
-            <h3 class="text-xl font-bold text-white mb-2" id="t-runners"></h3>
-            <p class="text-sm text-gray-400" id="d-runners"></p>
-        </div>
-        
-        <div class="glass p-6 rounded-2xl grid-btn">
-            <div class="text-4xl mb-4">🥔</div>
-            <h3 class="text-xl font-bold text-white mb-2" id="t-tubers"></h3>
-            <p class="text-sm text-gray-400" id="d-tubers"></p>
-        </div>
-
-        <div class="glass p-6 rounded-2xl grid-btn">
-            <div class="text-4xl mb-4">🧅</div>
-            <h3 class="text-xl font-bold text-white mb-2" id="t-bulbs"></h3>
-            <p class="text-sm text-gray-400" id="d-bulbs"></p>
-        </div>
-
-        <div class="glass p-6 rounded-2xl grid-btn">
-            <div class="text-4xl mb-4">✂️</div>
-            <h3 class="text-xl font-bold text-white mb-2" id="t-cuttings"></h3>
-            <p class="text-sm text-gray-400" id="d-cuttings"></p>
-        </div>
-
-        <div class="glass p-6 rounded-2xl grid-btn">
-            <div class="text-4xl mb-4">🔪</div>
-            <h3 class="text-xl font-bold text-white mb-2" id="t-grafting"></h3>
-            <p class="text-sm text-gray-400" id="d-grafting"></p>
-        </div>
-        
-        <div class="glass p-6 rounded-2xl border border-sky-500/50 flex flex-col justify-center items-center text-center">
-            <div class="text-2xl font-bold text-sky-300" id="t-value"></div>
-            <p class="text-xs mt-2 text-sky-100" id="d-value"></p>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <script>
-        const bio23Data = {
-            ru: {
-                title: "ВЕГЕТАТИВНОЕ РАЗМНОЖЕНИЕ", sub: "Клонирование в природе и агротехнике",
-                t1: "Усы", d1: "Надземные ползучие побеги. В узлах образуются розетки листьев и корни. (Земляника, Хлорофитум)",
-                t2: "Клубни", d2: "Подземные побеги с запасом веществ. Размножение глазками. (Картофель)",
-                t3: "Луковицы", d3: "Подземные побеги с сочными чешуями. Образуют детки. (Тюльпан, Чеснок)",
-                t4: "Черенкование", d4: "Искусственный метод. Укоренение части стебля, листа или корня. (Роза, Фиалка)",
-                t5: "Прививка", d5: "Пересадка части одного растения (привой) на другое (подвой). (Яблони, Груши)",
-                tv: "Значение", dv: "Сохранение ценных сортовых признаков и быстрое получение урожая."
-            },
-            kz: {
-                title: "ВЕГЕТАТИВТІ КӨБЕЮ", sub: "Табиғаттағы және агротехникадағы клондау",
-                t1: "Мұртшалар", d1: "Жер үсті суармалы өркендер. Буындарда жапырақ және тамыр түзіледі. (Бүлдірген)",
-                t2: "Түйнектер", d2: "Қоректік заттары бар жер асты өркендері. Көзшелер арқылы көбейеді. (Картоп)",
-                t3: "Пиязшықтар", d3: "Шырынды қабыршақтары бар жер асты өркендері. Балапандар түзеді. (Қызғалдақ)",
-                t4: "Қалемшелеу", d4: "Жасанды әдіс. Сабақ, жапырақ немесе тамыр бөлігін тамырландыру. (Раушан)",
-                t5: "Телу", d5: "Бір өсімдік бөлігін (қалемше) екіншісіне (телітуші) отырғызу. (Алма)",
-                tv: "Маңызы", dv: "Бағалы сұрыптық белгілерді сақтау және өнімді тез алу."
-            },
-            en: {
-                title: "VEGETATIVE PROPAGATION", sub: "Cloning in Nature and Agriculture",
-                t1: "Runners", d1: "Above-ground creeping stems. Form new plants at nodes. (Strawberry)",
-                t2: "Tubers", d2: "Underground stems storing nutrients. Reproduce via 'eyes'. (Potato)",
-                t3: "Bulbs", d3: "Underground stems with fleshy scales. Form offsets. (Tulip, Garlic)",
-                t4: "Cuttings", d4: "Artificial method. Rooting a part of stem, leaf, or root. (Rose, Violet)",
-                t5: "Grafting", d5: "Joining parts of two plants (scion and stock) to grow as one. (Apple trees)",
-                tv: "Value", dv: "Preservation of valuable variety traits and rapid harvest production."
-            }
-        };
+    <header class="header-card text-center mb-10">
+        <p class="text-orange-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Дәрумендер</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Vitamins</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Витамины</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-orange-100">Дәрумендер — ағзаға аз мөлшерде қажет органикалық заттар. Зат алмасуды реттейді. Ағзада синтезделмейді (D, K-дан басқа).</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-orange-100">Vitamins are organic substances needed in small amounts. Regulate metabolism. Not synthesized in body (except D, K).</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-orange-100">Витамины — органические вещества, нужные в малых количествах. Регулируют обмен веществ. Не синтезируются в организме (кроме D, K).</p>
+    </header>
 
-        window.setL = (l) => {
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+l).classList.add('active');
-            
-            const d = bio23Data[l];
-            document.getElementById('main-title').textContent = d.title;
-            document.getElementById('sub-title').textContent = d.sub;
-            
-            document.getElementById('t-runners').textContent = d.t1; document.getElementById('d-runners').textContent = d.d1;
-            document.getElementById('t-tubers').textContent = d.t2; document.getElementById('d-tubers').textContent = d.d2;
-            document.getElementById('t-bulbs').textContent = d.t3; document.getElementById('d-bulbs').textContent = d.d3;
-            document.getElementById('t-cuttings').textContent = d.t4; document.getElementById('d-cuttings').textContent = d.d4;
-            document.getElementById('t-grafting').textContent = d.t5; document.getElementById('d-grafting').textContent = d.d5;
-            document.getElementById('t-value').textContent = d.tv; document.getElementById('d-value').textContent = d.dv;
-        }
+    <!-- Жирорастворимые -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">🧈 Майда еритін дәрумендер</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">🧈 Fat-Soluble Vitamins</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">🧈 Жирорастворимые витамины</h2>
 
-        window.onload = () => window.setL('ru');
-    </script>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- A -->
+            <div class="card" style="border-top: 5px solid #f97316;">
+                <h3 class="text-xl font-bold text-center text-orange-600 mb-2">A (ретинол)</h3>
+                
+                <div class="vitamin-card" style="background: #fff7ed;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🥕 Көзі:</strong> сәбіз, бауыр, сары май</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🥕 Sources:</strong> carrot, liver, butter</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🥕 Источники:</strong> морковь, печень, масло</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> көру, тері, өсу</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> vision, skin, growth</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> зрение, кожа, рост</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> түнде соқырлық</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> night blindness</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> куриная слепота</p>
+                </div>
+            </div>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+            <!-- D -->
+            <div class="card" style="border-top: 5px solid #eab308;">
+                <h3 class="text-xl font-bold text-center text-yellow-600 mb-2">D (кальциферол)</h3>
+                
+                <div class="vitamin-card" style="background: #fef9c3;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>☀️ Көзі:</strong> балық майы, күн сәулесі</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>☀️ Sources:</strong> fish oil, sunlight</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>☀️ Источники:</strong> рыбий жир, солнце</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> Ca, P сіңіру, сүйек</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> Ca, P absorption, bones</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> усвоение Ca, P, кости</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> рахит</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> rickets</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> рахит</p>
+                </div>
+            </div>
 
+            <!-- E -->
+            <div class="card" style="border-top: 5px solid #22c55e;">
+                <h3 class="text-xl font-bold text-center text-green-600 mb-2">E (токоферол)</h3>
+                
+                <div class="vitamin-card" style="background: #f0fdf4;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🌻 Көзі:</strong> өсімдік майы, жаңғақ</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🌻 Sources:</strong> vegetable oil, nuts</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🌻 Источники:</strong> растит. масло, орехи</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> антиоксидант, көбею</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> antioxidant, reproduction</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> антиоксидант, размножение</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> бұлшықет әлсіздігі</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> muscle weakness</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> мышечная слабость</p>
+                </div>
+            </div>
+
+            <!-- K -->
+            <div class="card" style="border-top: 5px solid #8b5cf6;">
+                <h3 class="text-xl font-bold text-center text-purple-600 mb-2">K (филлохинон)</h3>
+                
+                <div class="vitamin-card" style="background: #f5f3ff;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🥬 Көзі:</strong> жасыл көкөніс, ішек бактериялары</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🥬 Sources:</strong> green veg, gut bacteria</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🥬 Источники:</strong> зелень, бактерии кишечника</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> қан ұю</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> blood clotting</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> свёртывание крови</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> қан кету</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> bleeding</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> кровотечения</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Водорастворимые -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💧 Суда еритін дәрумендер</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💧 Water-Soluble Vitamins</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💧 Водорастворимые витамины</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- C -->
+            <div class="card" style="border-top: 5px solid #f97316;">
+                <h3 class="text-xl font-bold text-center text-orange-600 mb-2">C (аскорбин қышқылы)</h3>
+                
+                <div class="vitamin-card" style="background: #fff7ed;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🍋 Көзі:</strong> цитрус, қызанақ, итмұрын</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🍋 Sources:</strong> citrus, pepper, rosehip</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🍋 Источники:</strong> цитрусы, перец, шиповник</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> иммунитет, коллаген, антиоксидант</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> immunity, collagen, antioxidant</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> иммунитет, коллаген, антиоксидант</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> цинга (қызыл иек)</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> scurvy (bleeding gums)</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> цинга (кровоточ. дёсны)</p>
+                </div>
+            </div>
+
+            <!-- B1 -->
+            <div class="card" style="border-top: 5px solid #eab308;">
+                <h3 class="text-xl font-bold text-center text-yellow-600 mb-2">B₁ (тиамин)</h3>
+                
+                <div class="vitamin-card" style="background: #fef9c3;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🌾 Көзі:</strong> қара нан, ет, бұршақ</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🌾 Sources:</strong> bread, meat, legumes</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🌾 Источники:</strong> хлеб, мясо, бобовые</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> жүйке жүйесі, көмірсу алмасуы</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> nervous system, carb metabolism</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> нервная система, обмен углеводов</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> бери-бери</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> beriberi</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> бери-бери</p>
+                </div>
+            </div>
+
+            <!-- B2 -->
+            <div class="card" style="border-top: 5px solid #22c55e;">
+                <h3 class="text-xl font-bold text-center text-green-600 mb-2">B₂ (рибофлавин)</h3>
+                
+                <div class="vitamin-card" style="background: #f0fdf4;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🥛 Көзі:</strong> сүт, бауыр, жұмыртқа</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🥛 Sources:</strong> milk, liver, eggs</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🥛 Источники:</strong> молоко, печень, яйца</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> тері, көз, энергия алмасуы</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> skin, eyes, energy metabolism</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> кожа, глаза, энергообмен</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> ерін жарылуы</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> cracked lips</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> трещины губ</p>
+                </div>
+            </div>
+
+            <!-- B6 -->
+            <div class="card" style="border-top: 5px solid #3b82f6;">
+                <h3 class="text-xl font-bold text-center text-blue-600 mb-2">B₆ (пиридоксин)</h3>
+                
+                <div class="vitamin-card" style="background: #eff6ff;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🐟 Көзі:</strong> балық, ет, бұршақ</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🐟 Sources:</strong> fish, meat, legumes</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🐟 Источники:</strong> рыба, мясо, бобовые</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> ақуыз алмасуы, гемоглобин</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> protein metabolism, hemoglobin</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> обмен белков, гемоглобин</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> анемия, дерматит</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> anemia, dermatitis</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> анемия, дерматит</p>
+                </div>
+            </div>
+
+            <!-- B12 -->
+            <div class="card" style="border-top: 5px solid #ec4899;">
+                <h3 class="text-xl font-bold text-center text-pink-600 mb-2">B₁₂ (кобаламин)</h3>
+                
+                <div class="vitamin-card" style="background: #fdf2f8;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🥩 Көзі:</strong> ет, бауыр, балық (ТЕК жануар)</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🥩 Sources:</strong> meat, liver, fish (ANIMAL only)</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🥩 Источники:</strong> мясо, печень, рыба (ТОЛЬКО жив.)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> қан түзу, жүйке жүйесі</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> blood formation, nervous system</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> кроветворение, нервная система</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> анемия</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> anemia</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> анемия</p>
+                </div>
+            </div>
+
+            <!-- PP -->
+            <div class="card" style="border-top: 5px solid #8b5cf6;">
+                <h3 class="text-xl font-bold text-center text-purple-600 mb-2">PP (ниацин, B₃)</h3>
+                
+                <div class="vitamin-card" style="background: #f5f3ff;">
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>🥜 Көзі:</strong> ет, жаңғақ, қара нан</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>🥜 Sources:</strong> meat, nuts, bread</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>🥜 Источники:</strong> мясо, орехи, хлеб</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mb-1"><strong>⚙️ Қызметі:</strong> тері, ас қорыту, жүйке</p>
+                    <p lang="en" class="lang-content text-xs mb-1"><strong>⚙️ Function:</strong> skin, digestion, nerves</p>
+                    <p lang="ru" class="lang-content text-xs mb-1"><strong>⚙️ Функция:</strong> кожа, пищеварение, нервы</p>
+                    
+                    <p lang="kk" class="lang-content text-xs"><strong>⚠️ Жетіспесе:</strong> пеллагра (3D)</p>
+                    <p lang="en" class="lang-content text-xs"><strong>⚠️ Deficiency:</strong> pellagra (3D)</p>
+                    <p lang="ru" class="lang-content text-xs"><strong>⚠️ При дефиците:</strong> пеллагра (3D)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Авитаминоз -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Дәрумен тапшылығы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Vitamin Deficiency</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Дефицит витаминов</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="fact-box" style="border-color: #fca5a5; background: #fef2f2;">
+                    <h4 lang="kk" class="lang-content font-bold text-red-700">❌ АВИТАМИНОЗ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700">❌ AVITAMINOSIS</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700">❌ АВИТАМИНОЗ</h4>
+                    <p lang="kk" class="lang-content text-xs mt-1">Толық жетіспеушілік</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Complete deficiency</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Полное отсутствие</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #fde68a; background: #fef3c7;">
+                    <h4 lang="kk" class="lang-content font-bold text-yellow-700">⚠️ ГИПОВИТАМИНОЗ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-yellow-700">⚠️ HYPOVITAMINOSIS</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-yellow-700">⚠️ ГИПОВИТАМИНОЗ</h4>
+                    <p lang="kk" class="lang-content text-xs mt-1">Ішінара жетіспеушілік</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Partial deficiency</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Частичный недостаток</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #a5b4fc; background: #eef2ff;">
+                    <h4 lang="kk" class="lang-content font-bold text-indigo-700">⬆️ ГИПЕРВИТАМИНОЗ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-indigo-700">⬆️ HYPERVITAMINOSIS</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-indigo-700">⬆️ ГИПЕРВИТАМИНОЗ</h4>
+                    <p lang="kk" class="lang-content text-xs mt-1">Артық мөлшер (A, D — қауіпті!)</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Excess (A, D — dangerous!)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Избыток (A, D — опасно!)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-radius: 1rem; border-top: 4px solid #f97316;">
+        <p lang="kk" class="lang-content text-sm font-bold text-orange-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-orange-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-orange-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

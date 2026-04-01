@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Систематика. Классификация живых организмов</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1a0a2e 0%, #3d1080 50%, #1a0a2e 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #3d1080 0%, #7c3aed 40%, #a78bfa 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(124,58,237,0.5); }
+        .section-heading { color: #7c3aed; border-bottom: 4px solid #c4b5fd; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #7c3aed; background: white; color: #7c3aed; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#3d1080,#7c3aed); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f5f3ff,#ede9fe); border-left: 5px solid #7c3aed; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#3d1080,#7c3aed); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f5f3ff; }
+        table.comp tr:last-child td { border-bottom:none; }
+        .rank-row { display:flex; align-items:center; gap:10px; padding:6px 12px; border-radius:8px; margin:4px 0; font-size:0.82rem; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-violet-200 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Систематика</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Систематика. Тірі организмдерді жіктеу</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Systematics. Classification of Living Organisms</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Систематика. Классификация живых организмов</h1>
+        <p lang="kk" class="lang-content mt-4 text-violet-100 text-sm"><b>Систематика (Таксономия)</b> — организмдерді жіктеу, атау және олардың туыстық байланыстарын анықтаумен айналысатын биология саласы. Негізін Карл Линней (1758) қалады.</p>
+        <p lang="en" class="lang-content mt-4 text-violet-100 text-sm"><b>Systematics (Taxonomy)</b> — the branch of biology concerned with classifying, naming, and determining the evolutionary relationships of organisms. Founded by Carl Linnaeus (1758).</p>
+        <p lang="ru" class="lang-content mt-4 text-violet-100 text-sm"><b>Систематика (Таксономия)</b> — раздел биологии, занимающийся классификацией, наименованием и определением эволюционных связей организмов. Основана Карлом Линнеем (1758).</p>
+    </header>
+
+    <!-- TAXONOMIC RANKS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📊 Таксономиялық Рангтер</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Taxonomic Ranks</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Таксономические Ранги</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <p class="font-bold text-violet-700 text-sm mb-3"><span lang="kk" class="lang-content">Негізгі таксономиялық категориялар (жоғарыдан төменге):</span><span lang="en" class="lang-content">Main taxonomic categories (highest to lowest):</span><span lang="ru" class="lang-content">Основные таксономические категории (от высшего к низшему):</span></p>
+                <div class="space-y-1">
+                    <div class="rank-row" style="background:#f5f3ff;"><span class="font-black text-violet-800 w-8">👑</span><span class="font-bold text-violet-700 w-24"><span lang="kk" class="lang-content">Домен</span><span lang="en" class="lang-content">Domain</span><span lang="ru" class="lang-content">Домен</span></span><span class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Бактерия, Архея, Эукария</span><span lang="en" class="lang-content">Bacteria, Archaea, Eukarya</span><span lang="ru" class="lang-content">Бактерии, Археи, Эукариоты</span></span></div>
+                    <div class="rank-row" style="background:#ede9fe;"><span class="font-black text-violet-800 w-8">🌍</span><span class="font-bold text-violet-700 w-24"><span lang="kk" class="lang-content">Патша (Царство)</span><span lang="en" class="lang-content">Kingdom</span><span lang="ru" class="lang-content">Царство</span></span><span class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Бактериялар, Саңырауқұлақтар, Өсімдіктер, Жануарлар</span><span lang="en" class="lang-content">Bacteria, Fungi, Plantae, Animalia</span><span lang="ru" class="lang-content">Бактерии, Грибы, Растения, Животные</span></span></div>
+                    <div class="rank-row" style="background:#f5f3ff;"><span class="font-black text-violet-800 w-8">🔷</span><span class="font-bold text-violet-700 w-24"><span lang="kk" class="lang-content">Тип (Бөлім)</span><span lang="en" class="lang-content">Phylum</span><span lang="ru" class="lang-content">Тип (Отдел)</span></span><span class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Хордалылар, Буынаяқтылар, Гүлді өсімдіктер</span><span lang="en" class="lang-content">Chordata, Arthropoda, Angiospermae</span><span lang="ru" class="lang-content">Хордовые, Членистоногие, Цветковые</span></span></div>
+                    <div class="rank-row" style="background:#ede9fe;"><span class="font-black text-violet-800 w-8">📦</span><span class="font-bold text-violet-700 w-24"><span lang="kk" class="lang-content">Класс</span><span lang="en" class="lang-content">Class</span><span lang="ru" class="lang-content">Класс</span></span><span class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Сүтқоректілер, Бауырымен жорғалаушылар, Құстар</span><span lang="en" class="lang-content">Mammalia, Reptilia, Aves</span><span lang="ru" class="lang-content">Млекопитающие, Рептилии, Птицы</span></span></div>
+                    <div class="rank-row" style="background:#f5f3ff;"><span class="font-black text-violet-800 w-8">📂</span><span class="font-bold text-violet-700 w-24"><span lang="kk" class="lang-content">Отряд (Қатар)</span><span lang="en" class="lang-content">Order</span><span lang="ru" class="lang-content">Отряд</span></span><span class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Жыртқыштар (Carnivora), Приматтар</span><span lang="en" class="lang-content">Carnivora, Primates</span><span lang="ru" class="lang-content">Хищные (Carnivora), Приматы</span></span></div>
+                    <div class="rank-row" style="background:#ede9fe;"><span class="font-black text-violet-800 w-8">👨‍👩‍👧</span><span class="font-bold text-violet-700 w-24"><span lang="kk" class="lang-content">Тұқымдас (Семейство)</span><span lang="en" class="lang-content">Family</span><span lang="ru" class="lang-content">Семейство</span></span><span class="text-gray-500 text-xs"><span lang="kk" class="lang-content">Мысықтар (Felidae), Иттер (Canidae)</span><span lang="en" class="lang-content">Felidae (cats), Canidae (dogs)</span><span lang="ru" class="lang-content">Кошачьи (Felidae), Псовые (Canidae)</span></span></div>
+                    <div class="rank-row" style="background:#f5f3ff;"><span class="font-black text-violet-800 w-8">👥</span><span class="font-bold text-violet-700 w-24"><span lang="kk" class="lang-content">Туыс (Род)</span><span lang="en" class="lang-content">Genus</span><span lang="ru" class="lang-content">Род</span></span><span class="text-gray-500 text-xs"><span lang="kk" class="lang-content"><i>Felis</i> (үй мысығы туысы), <i>Panthera</i> (үлкен мысықтар)</span><span lang="en" class="lang-content"><i>Felis</i> (domestic cats), <i>Panthera</i> (big cats)</span><span lang="ru" class="lang-content"><i>Felis</i> (домашние кошки), <i>Panthera</i> (большие кошки)</span></span></div>
+                    <div class="rank-row font-bold" style="background:#7c3aed;color:white;"><span class="w-8">⭐</span><span class="w-24"><span lang="kk" class="lang-content">Түр (Вид)</span><span lang="en" class="lang-content">Species</span><span lang="ru" class="lang-content">Вид</span></span><span class="text-violet-200 text-xs"><span lang="kk" class="lang-content"><i>Felis catus</i> (үй мысығы), <i>Homo sapiens</i> (адам)</span><span lang="en" class="lang-content"><i>Felis catus</i> (house cat), <i>Homo sapiens</i> (human)</span><span lang="ru" class="lang-content"><i>Felis catus</i> (домашняя кошка), <i>Homo sapiens</i> (человек)</span></span></div>
+                </div>
+                <div class="fact-box mt-3 text-xs">
+                    <p class="font-bold text-violet-700"><span lang="kk" class="lang-content">🔤 Екілік номенклатура (Линней)</span><span lang="en" class="lang-content">🔤 Binomial nomenclature (Linnaeus)</span><span lang="ru" class="lang-content">🔤 Бинарная номенклатура (Линней)</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Әрбір түрдің атауы <b>екі сөзден</b> тұрады: <b>1.</b> Туыс аты (бас әрпінен) + <b>2.</b> Түр эпитеті (кіші әрпінен). Латын тілінде жазылады, курсивпен. Мысал: <i>Homo sapiens</i>, <i>Panthera leo</i>, <i>Rosa canina</i>.</span><span lang="en" class="lang-content">Each species has <b>two-part</b> Latin name: <b>1.</b> Genus (capitalised) + <b>2.</b> specific epithet (lowercase). Written in italics. Example: <i>Homo sapiens</i>, <i>Panthera leo</i>, <i>Rosa canina</i>.</span><span lang="ru" class="lang-content">Название каждого вида состоит из <b>двух слов</b>: <b>1.</b> Род (с заглавной буквы) + <b>2.</b> видовой эпитет (со строчной). Пишется курсивом на латыни. Пример: <i>Homo sapiens</i>, <i>Panthera leo</i>, <i>Rosa canina</i>.</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-violet-700 text-sm mb-3"><span lang="kk" class="lang-content">🌐 Тірі организмдерді жіктеу жүйелері</span><span lang="en" class="lang-content">🌐 Classification Systems</span><span lang="ru" class="lang-content">🌐 Системы классификации организмов</span></h3>
+                <div class="overflow-x-auto mb-4">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Патша / Домен</span><span lang="en" class="lang-content">Kingdom / Domain</span><span lang="ru" class="lang-content">Царство / Домен</span></th>
+                            <th><span lang="kk" class="lang-content">Негізгі белгілері</span><span lang="en" class="lang-content">Key features</span><span lang="ru" class="lang-content">Ключевые признаки</span></th>
+                            <th><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-bold text-blue-700">🦠 <span lang="kk" class="lang-content">Бактериялар</span><span lang="en" class="lang-content">Bacteria</span><span lang="ru" class="lang-content">Бактерии</span></td>
+                                <td><span lang="kk" class="lang-content">Прокариоттар; жасуша қабырғасы (пептидогликан); ядросы жоқ</span><span lang="en" class="lang-content">Prokaryotes; cell wall (peptidoglycan); no nucleus</span><span lang="ru" class="lang-content">Прокариоты; клеточная стенка (пептидогликан); нет ядра</span></td>
+                                <td><i>E. coli, Bacillus, Streptococcus</i></td>
+                            </tr>
+                            <tr><td class="font-bold text-teal-700">🔵 <span lang="kk" class="lang-content">Архейлер</span><span lang="en" class="lang-content">Archaea</span><span lang="ru" class="lang-content">Археи</span></td>
+                                <td><span lang="kk" class="lang-content">Прокариоттар; ерекше липидтер; экстремофилдер (ыстық, тұзды)</span><span lang="en" class="lang-content">Prokaryotes; unique lipids; extremophiles (hot springs, salt lakes)</span><span lang="ru" class="lang-content">Прокариоты; уникальные липиды; экстремофилы (гейзеры, солёные озёра)</span></td>
+                                <td><i>Methanobacterium, Halobacterium</i></td>
+                            </tr>
+                            <tr><td class="font-bold text-green-700">🌿 <span lang="kk" class="lang-content">Өсімдіктер</span><span lang="en" class="lang-content">Plantae</span><span lang="ru" class="lang-content">Растения</span></td>
+                                <td><span lang="kk" class="lang-content">Эукариоттар; фотосинтез; жасуша қабырғасы (целлюлоза); қозғалыссыз</span><span lang="en" class="lang-content">Eukaryotes; photosynthesis; cell wall (cellulose); sessile</span><span lang="ru" class="lang-content">Эукариоты; фотосинтез; клеточная стенка (целлюлоза); неподвижные</span></td>
+                                <td><span lang="kk" class="lang-content">Балдырлар, мүктер, қырықбуындар, ашық тұқымдылар, жабық тұқымдылар</span><span lang="en" class="lang-content">Algae, mosses, ferns, gymnosperms, angiosperms</span><span lang="ru" class="lang-content">Водоросли, мхи, папоротники, голосемянные, покрытосемянные</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-amber-700">🍄 <span lang="kk" class="lang-content">Саңырауқұлақтар</span><span lang="en" class="lang-content">Fungi</span><span lang="ru" class="lang-content">Грибы</span></td>
+                                <td><span lang="kk" class="lang-content">Эукариоттар; гетеротрофтар (сапротрофтар); хитинді қабырға; спора арқылы көбейеді</span><span lang="en" class="lang-content">Eukaryotes; heterotrophs (saprotrophs); chitin cell wall; reproduce by spores</span><span lang="ru" class="lang-content">Эукариоты; гетеротрофы (сапротрофы); хитиновая стенка; размножение спорами</span></td>
+                                <td><i>Agaricus, Penicillium, Saccharomyces</i></td>
+                            </tr>
+                            <tr><td class="font-bold text-red-700">🐾 <span lang="kk" class="lang-content">Жануарлар</span><span lang="en" class="lang-content">Animalia</span><span lang="ru" class="lang-content">Животные</span></td>
+                                <td><span lang="kk" class="lang-content">Эукариоттар; гетеротрофтар; қозғалмалы; жасуша қабырғасы жоқ; көпжасушалылар</span><span lang="en" class="lang-content">Eukaryotes; heterotrophs; mobile; no cell wall; multicellular</span><span lang="ru" class="lang-content">Эукариоты; гетеротрофы; подвижные; нет клеточной стенки; многоклеточные</span></td>
+                                <td><span lang="kk" class="lang-content">Губкалар, Жалпақ құрттар ... Хордалылар</span><span lang="en" class="lang-content">Sponges, Flatworms ... Chordates</span><span lang="ru" class="lang-content">Губки, Плоские черви ... Хордовые</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-purple-700">🔮 <span lang="kk" class="lang-content">Қарапайымдылар (Протисттер)</span><span lang="en" class="lang-content">Protista</span><span lang="ru" class="lang-content">Протисты</span></td>
+                                <td><span lang="kk" class="lang-content">Эукариоттар; бір немесе аз жасушалы; гетерогенді топ; судағы тіршілік иелері</span><span lang="en" class="lang-content">Eukaryotes; unicellular or few cells; heterogeneous group; aquatic</span><span lang="ru" class="lang-content">Эукариоты; одно- или малоклеточные; гетерогенная группа; водные организмы</span></td>
+                                <td><i>Amoeba, Paramecium, Plasmodium, Chlamydomonas</i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="fact-box text-xs">
+                    <p class="font-bold text-violet-700"><span lang="kk" class="lang-content">🌳 Адамның толық жіктелімі мысал ретінде:</span><span lang="en" class="lang-content">🌳 Human classification as an example:</span><span lang="ru" class="lang-content">🌳 Пример классификации человека:</span></p>
+                    <div class="mt-2 flex flex-wrap gap-1 text-xs">
+                        <span class="bg-violet-100 text-violet-700 px-2 py-0.5 rounded font-semibold"><span lang="kk" class="lang-content">Домен:</span><span lang="en" class="lang-content">Domain:</span><span lang="ru" class="lang-content">Домен:</span> Eukarya</span>
+                        <span class="text-gray-400">›</span>
+                        <span class="bg-violet-100 text-violet-700 px-2 py-0.5 rounded font-semibold"><span lang="kk" class="lang-content">Патша:</span><span lang="en" class="lang-content">Kingdom:</span><span lang="ru" class="lang-content">Царство:</span> Animalia</span>
+                        <span class="text-gray-400">›</span>
+                        <span class="bg-violet-100 text-violet-700 px-2 py-0.5 rounded font-semibold"><span lang="kk" class="lang-content">Тип:</span><span lang="en" class="lang-content">Phylum:</span><span lang="ru" class="lang-content">Тип:</span> Chordata</span>
+                        <span class="text-gray-400">›</span>
+                        <span class="bg-violet-100 text-violet-700 px-2 py-0.5 rounded font-semibold"><span lang="kk" class="lang-content">Класс:</span><span lang="en" class="lang-content">Class:</span><span lang="ru" class="lang-content">Класс:</span> Mammalia</span>
+                        <span class="text-gray-400">›</span>
+                        <span class="bg-violet-100 text-violet-700 px-2 py-0.5 rounded font-semibold"><span lang="kk" class="lang-content">Отряд:</span><span lang="en" class="lang-content">Order:</span><span lang="ru" class="lang-content">Отряд:</span> Primates</span>
+                        <span class="text-gray-400">›</span>
+                        <span class="bg-violet-100 text-violet-700 px-2 py-0.5 rounded font-semibold"><span lang="kk" class="lang-content">Тұқымдас:</span><span lang="en" class="lang-content">Family:</span><span lang="ru" class="lang-content">Семейство:</span> Hominidae</span>
+                        <span class="text-gray-400">›</span>
+                        <span class="bg-violet-100 text-violet-700 px-2 py-0.5 rounded font-semibold"><span lang="kk" class="lang-content">Туыс:</span><span lang="en" class="lang-content">Genus:</span><span lang="ru" class="lang-content">Род:</span> <i>Homo</i></span>
+                        <span class="text-gray-400">›</span>
+                        <span class="bg-violet-700 text-white px-2 py-0.5 rounded font-bold"><span lang="kk" class="lang-content">Түр:</span><span lang="en" class="lang-content">Species:</span><span lang="ru" class="lang-content">Вид:</span> <i>Homo sapiens</i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

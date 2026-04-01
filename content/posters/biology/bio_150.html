@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы селекции</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #fefce8 100%); }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #14532d 0%, #15803d 40%, #ca8a04 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(20,83,45,0.3); }
+        .section-heading { color: #14532d; border-bottom: 4px solid #4ade80; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #14532d; background: white; color: #14532d; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdf4; }
+        .lang-btn.active { background: linear-gradient(135deg,#14532d,#15803d); color: white; box-shadow: 0 4px 12px rgba(20,83,45,0.3); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#fefce8); border-left: 5px solid #16a34a; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 12px 15px; margin: 7px 0; }
+        table.comp { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        table.comp th { background: linear-gradient(135deg,#14532d,#15803d); color: white; padding: 10px 14px; text-align: left; font-weight: 700; }
+        table.comp th:first-child { border-radius: 10px 0 0 0; } table.comp th:last-child { border-radius: 0 10px 0 0; }
+        table.comp td { padding: 9px 14px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        table.comp tr:nth-child(even) td { background: #f0fdf4; }
+        table.comp tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-green-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Прикладная генетика</p>
+        <h1 lang="kk" class="lang-content text-5xl font-black uppercase tracking-wide">Селекция негіздері</h1>
+        <h1 lang="en" class="lang-content text-5xl font-black uppercase tracking-wide">Fundamentals of Selection (Breeding)</h1>
+        <h1 lang="ru" class="lang-content text-5xl font-black uppercase tracking-wide">Основы селекции</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p lang="kk" class="lang-content text-lg font-medium">Селекция — <b>жаңа сорттар, тұқымдар және штаммдар</b> шығару мақсатымен тіршілік иелерін мақсатты бағыттағы өзгертудің ғылымы мен практикасы. Н.И. Мендель заңдары мен мутагенез теориясына сүйенеді.</p>
+            <p lang="en" class="lang-content text-lg font-medium">Selection (Breeding) — the science and practice of purposefully changing living organisms to produce <b>new varieties, breeds and strains</b>. Based on Mendel's laws and mutation theory.</p>
+            <p lang="ru" class="lang-content text-lg font-medium">Селекция — наука и практика целенаправленного изменения организмов с целью получения <b>новых сортов, пород и штаммов</b>. Основана на законах Менделя и теории мутагенеза.</p>
+        </div>
+    </header>
+
+    <!-- CORE TERMS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📖 Негізгі ұғымдар</h2>
+        <h2 lang="en" class="lang-content section-heading">📖 Key Terms</h2>
+        <h2 lang="ru" class="lang-content section-heading">📖 Основные понятия</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🌾 <span lang="kk" class="lang-content">Сорт (өсімдіктер)</span><span lang="en" class="lang-content">Variety / Cultivar (plants)</span><span lang="ru" class="lang-content">Сорт (растения)</span></p>
+                    <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Адам шығарған, белгілі пайдалы белгілері бар өсімдіктер тобы. Мысалы: «Безостая 1» бидайы.</span><span lang="en" class="lang-content">A group of plants bred by humans with defined useful traits. E.g., 'Bezostaya 1' wheat.</span><span lang="ru" class="lang-content">Группа растений, выведенная человеком с определёнными полезными признаками. Пример: пшеница «Безостая 1».</span></p>
+                </div>
+                <div class="tbox" style="border-color:#ca8a04;background:#fefce8;">
+                    <p class="font-bold text-amber-700">🐄 <span lang="kk" class="lang-content">Тұқым (жануарлар)</span><span lang="en" class="lang-content">Breed (animals)</span><span lang="ru" class="lang-content">Порода (животные)</span></p>
+                    <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Адам шығарған, ортақ пайдалы белгілері мен шығу тегі бар жануарлар тобы. Мысалы: Симментал сиыры.</span><span lang="en" class="lang-content">A group of animals bred by humans with common traits and origin. E.g., Simmental cow.</span><span lang="ru" class="lang-content">Группа животных с общими признаками и происхождением. Пример: корова симментальской породы.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#7c3aed;background:#fdf4ff;">
+                    <p class="font-bold text-purple-700">🦠 <span lang="kk" class="lang-content">Штамм (микроорганизмдер)</span><span lang="en" class="lang-content">Strain (microorganisms)</span><span lang="ru" class="lang-content">Штамм (микроорганизмы)</span></p>
+                    <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Белгілі бір белгілері бар микроорганизмдер мәдениеті. Мысалы: антибиотик өндіретін Penicillium штаммы.</span><span lang="en" class="lang-content">A culture of microorganisms with specific traits. E.g., Penicillium strain producing antibiotics.</span><span lang="ru" class="lang-content">Культура микроорганизмов с определёнными признаками. Пример: штамм Penicillium, производящий антибиотики.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METHODS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Селекция әдістері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Breeding Methods</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Методы селекции</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Selection -->
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-lg mb-3">🎯 <span lang="kk" class="lang-content">Жасанды сұрыптау</span><span lang="en" class="lang-content">Artificial Selection</span><span lang="ru" class="lang-content">Искусственный отбор</span></h3>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-3">Адам белгілі белгілері бар особьтарды таңдап алып, қалғандарын шығаруды болдырмайды.</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-3">Humans select individuals with desired traits and prevent others from reproducing.</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-3">Человек отбирает особей с нужными признаками, не допуская размножения остальных.</div>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;">
+                        <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Жаппай сұрыптау</span><span lang="en" class="lang-content">Mass selection</span><span lang="ru" class="lang-content">Массовый отбор</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Топ бойынша сұрыптайды. Жылдам, бірақ генотипке жол бермейді. Өсімдіктерде, жануарларда қолданылады.</span><span lang="en" class="lang-content">Selects by group. Fast, but doesn't control genotype. Used in plants and animals.</span><span lang="ru" class="lang-content">Отбор по группе. Быстрый, но не контролирует генотип. Применяется у растений и животных.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                        <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Жеке сұрыптау</span><span lang="en" class="lang-content">Individual selection</span><span lang="ru" class="lang-content">Индивидуальный отбор</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Жеке особь бойынша, ұрпақтарын тексереді. Нәтижелі, бірақ баяу. Тұқымдарды шығаруда тиімді.</span><span lang="en" class="lang-content">Selects by individual, tests offspring. Effective but slow. Efficient for breeds.</span><span lang="ru" class="lang-content">По каждой особи, тестирует потомство. Результативен, но медленный. Эффективен для пород.</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Hybridisation -->
+            <div class="card">
+                <h3 class="font-bold text-amber-700 text-lg mb-3">🔗 <span lang="kk" class="lang-content">Будандастыру (Гибридизация)</span><span lang="en" class="lang-content">Hybridisation</span><span lang="ru" class="lang-content">Гибридизация</span></h3>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#ca8a04;background:#fffbeb;">
+                        <p class="font-bold text-amber-700"><span lang="kk" class="lang-content">Туысаралық (аутбридинг)</span><span lang="en" class="lang-content">Outbreeding (outcrossing)</span><span lang="ru" class="lang-content">Аутбридинг (межлинейная гибридизация)</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Туыс емес линияларды немесе тұқымдарды будандастыру → <b>гетерозис</b> (будан күші). F₁ ата-аналарынан артық болады.</span><span lang="en" class="lang-content">Crossing unrelated lines/breeds → <b>heterosis</b> (hybrid vigour). F₁ exceeds both parents.</span><span lang="ru" class="lang-content">Скрещивание неродственных линий/пород → <b>гетерозис</b> (гибридная мощь). F₁ превосходит родителей.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#ca8a04;background:#fffbeb;">
+                        <p class="font-bold text-amber-700"><span lang="kk" class="lang-content">Туысаралық (инбридинг)</span><span lang="en" class="lang-content">Inbreeding</span><span lang="ru" class="lang-content">Инбридинг (близкородственное скрещивание)</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Туысты жеке тұлғаларды будандастыру → таза линиялар алу. Рецессивті зиянды аллельдер гомозиготаланады → «инбредная депрессия».</span><span lang="en" class="lang-content">Crossing related individuals → pure lines. Recessive harmful alleles become homozygous → «inbreeding depression».</span><span lang="ru" class="lang-content">Скрещивание родственных особей → чистые линии. Вредные рецессивные аллели гомозиготируются → «инбредная депрессия».</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#ea580c;background:#fff7ed;">
+                        <p class="font-bold text-orange-700"><span lang="kk" class="lang-content">Түраралық (отдалённая) гибридизация</span><span lang="en" class="lang-content">Distant (interspecific) hybridisation</span><span lang="ru" class="lang-content">Отдалённая (межвидовая) гибридизация</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Әртүрлі түрлерді будандастыру. Жиі бесплодный буданнар туады. Мысал: қашыр (at×есек), тритикале (бидай×қара бидай).</span><span lang="en" class="lang-content">Crossing different species. Often gives sterile hybrids. Example: mule (horse×donkey), triticale (wheat×rye).</span><span lang="ru" class="lang-content">Скрещивание разных видов. Часто даёт стерильные гибриды. Пример: мул (лошадь×осёл), тритикале (пшеница×рожь).</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Mutagenesis + Polyploidy -->
+            <div class="card">
+                <h3 class="font-bold text-rose-700 text-lg mb-3">⚡ <span lang="kk" class="lang-content">Жасанды мутагенез</span><span lang="en" class="lang-content">Artificial Mutagenesis</span><span lang="ru" class="lang-content">Искусственный мутагенез</span></h3>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-3">Жасанды мутагендермен мутациялар жиілігін арттырып, жаңа белгілермен формалар алу.</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-3">Using artificial mutagens to increase mutation frequency and obtain new forms.</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-3">Повышение частоты мутаций искусственными мутагенами для получения новых форм.</div>
+                <div class="grid grid-cols-2 gap-3 text-xs mb-4">
+                    <div class="tbox" style="border-color:#be185d;background:#fff1f2;">
+                        <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Физикалық мутагендер</span><span lang="en" class="lang-content">Physical mutagens</span><span lang="ru" class="lang-content">Физические мутагены</span></p>
+                        <p class="text-gray-500"><span lang="kk" class="lang-content">Гамма-сәулелер, рентген, УК-сәулелер → ядролық сорттар.</span><span lang="en" class="lang-content">Gamma rays, X-rays, UV → nuclear varieties.</span><span lang="ru" class="lang-content">Гамма-лучи, рентген, УФ → ядерные сорта.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#be185d;background:#fff1f2;">
+                        <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Химиялық мутагендер</span><span lang="en" class="lang-content">Chemical mutagens</span><span lang="ru" class="lang-content">Химические мутагены</span></p>
+                        <p class="text-gray-500"><span lang="kk" class="lang-content">Колхицин, этиленимин → тиімді нүктелік мутациялар.</span><span lang="en" class="lang-content">Colchicine, ethylenimine → effective point mutations.</span><span lang="ru" class="lang-content">Колхицин, этиленимин → эффективные точечные мутации.</span></p>
+                    </div>
+                </div>
+                <div class="tbox" style="border-color:#1d4ed8;background:#eff6ff;">
+                    <p class="font-bold text-blue-700 text-xs">🔢 <span lang="kk" class="lang-content">Полиплоидия — өсімдіктер селекциясында</span><span lang="en" class="lang-content">Polyploidy — in plant breeding</span><span lang="ru" class="lang-content">Полиплоидия — в селекции растений</span></p>
+                    <p class="text-gray-500 text-xs mt-1"><span lang="kk" class="lang-content">Колхицин ұршық жіптерін бұзады → хромосомалар жиынтығы екіленеді (2n → 4n). Полиплоидтар жиі ірі, өнімді. Мысал: 6n=42 бидай, 4n=28 помидор.</span><span lang="en" class="lang-content">Colchicine disrupts spindle → chromosome set doubles (2n → 4n). Polyploids are often larger, more productive. Example: wheat 6n=42, tomato 4n=28.</span><span lang="ru" class="lang-content">Колхицин нарушает веретено → набор хромосом удваивается (2n → 4n). Полиплоиды часто крупнее, урожайнее. Пример: пшеница 6n=42, томат 4n=28.</span></p>
+                </div>
+            </div>
+            <!-- Biotechnology -->
+            <div class="card">
+                <h3 class="font-bold text-purple-700 text-lg mb-3">🧬 <span lang="kk" class="lang-content">Биотехнология және генетикалық инженерия</span><span lang="en" class="lang-content">Biotechnology & Genetic Engineering</span><span lang="ru" class="lang-content">Биотехнология и генная инженерия</span></h3>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#7c3aed;background:#fdf4ff;">
+                        <p class="font-bold text-purple-700"><span lang="kk" class="lang-content">Генетикалық инженерия</span><span lang="en" class="lang-content">Genetic engineering</span><span lang="ru" class="lang-content">Генная инженерия</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Организмнің ДНҚ-на сыртқы гендерді енгізу → трансгенді организмдер (ТМО). Мысал: Адам инсулинін өндіретін E.coli бактериясы.</span><span lang="en" class="lang-content">Inserting foreign genes into an organism's DNA → transgenic organisms (GMO). Example: E.coli producing human insulin.</span><span lang="ru" class="lang-content">Введение чужеродных генов в ДНК организма → трансгенные организмы (ГМО). Пример: E.coli, производящая инсулин человека.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#7c3aed;background:#fdf4ff;">
+                        <p class="font-bold text-purple-700"><span lang="kk" class="lang-content">Клондау</span><span lang="en" class="lang-content">Cloning</span><span lang="ru" class="lang-content">Клонирование</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Сомалық жасуша ядросын жұмыртқа жасушасына ауыстыру → генетикалық бірдей особь. Долли қой (1996).</span><span lang="en" class="lang-content">Somatic cell nucleus transferred to egg cell → genetically identical organism. Dolly the sheep (1996).</span><span lang="ru" class="lang-content">Ядро соматической клетки переносят в яйцеклетку → генетически идентичная особь. Овца Долли (1996).</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#0d9488;background:#f0fdfa;">
+                        <p class="font-bold text-teal-700"><span lang="kk" class="lang-content">In vitro өсімдік культурасы</span><span lang="en" class="lang-content">Plant tissue culture (in vitro)</span><span lang="ru" class="lang-content">Культура тканей растений (in vitro)</span></p>
+                        <p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Бір жасушадан немесе ұлпадан толық өсімдік алу. Вирус жоқ сорттар шығаруға мүмкіндік береді.</span><span lang="en" class="lang-content">Growing a complete plant from a single cell or tissue. Enables virus-free varieties.</span><span lang="ru" class="lang-content">Выращивание целого растения из клетки или ткани. Позволяет получать безвирусные сорта.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VAVILOV CENTRES + HETEROSIS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌍 Вавиловтың шыққан тегі орталықтары және гетерозис</h2>
+        <h2 lang="en" class="lang-content section-heading">🌍 Vavilov's Centres of Origin & Heterosis</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌍 Центры происхождения Вавилова и гетерозис</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-lg mb-3">🌍 <span lang="kk" class="lang-content">Н.И. Вавиловтың мәдени өсімдіктер шыққан тегінің орталықтары</span><span lang="en" class="lang-content">N.I. Vavilov's Centres of Origin of Cultivated Plants</span><span lang="ru" class="lang-content">Центры происхождения культурных растений Н.И. Вавилова</span></h3>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-3">Вавилов дүние жүзін аралап, мәдени өсімдіктердің ең көп алуантүрлілігі кездесетін 8 орталықты анықтады.</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-3">Vavilov traveled the world and identified 8 centres with the greatest diversity of cultivated plants.</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-3">Вавилов объездил весь мир и выявил 8 центров наибольшего разнообразия культурных растений.</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><b class="text-green-700">🇨🇳 <span lang="kk" class="lang-content">Қытай</span><span lang="en" class="lang-content">Chinese</span><span lang="ru" class="lang-content">Китайский</span></b><p class="text-gray-500 mt-0.5"><span lang="kk" class="lang-content">Күріш, соя, шай</span><span lang="en" class="lang-content">Rice, soybean, tea</span><span lang="ru" class="lang-content">Рис, соя, чай</span></p></div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><b class="text-green-700">🇮🇳 <span lang="kk" class="lang-content">Үнді</span><span lang="en" class="lang-content">Indian</span><span lang="ru" class="lang-content">Индийский</span></b><p class="text-gray-500 mt-0.5"><span lang="kk" class="lang-content">Жалпы бидай, баклажан</span><span lang="en" class="lang-content">Common wheat, eggplant</span><span lang="ru" class="lang-content">Пшеница мягкая, баклажан</span></p></div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><b class="text-green-700">🌍 <span lang="kk" class="lang-content">Эфиопия</span><span lang="en" class="lang-content">Ethiopian</span><span lang="ru" class="lang-content">Эфиопский</span></b><p class="text-gray-500 mt-0.5"><span lang="kk" class="lang-content">Арпа, кофе, сорго</span><span lang="en" class="lang-content">Barley, coffee, sorghum</span><span lang="ru" class="lang-content">Ячмень, кофе, сорго</span></p></div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><b class="text-green-700">🌿 <span lang="kk" class="lang-content">Жерорта теңізі</span><span lang="en" class="lang-content">Mediterranean</span><span lang="ru" class="lang-content">Средиземноморский</span></b><p class="text-gray-500 mt-0.5"><span lang="kk" class="lang-content">Зәйтүн, арпа, бидай</span><span lang="en" class="lang-content">Olive, beet, oat</span><span lang="ru" class="lang-content">Олива, свёкла, овёс</span></p></div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><b class="text-green-700">🌎 <span lang="kk" class="lang-content">Орталық Америка</span><span lang="en" class="lang-content">Central American</span><span lang="ru" class="lang-content">Центральноамериканский</span></b><p class="text-gray-500 mt-0.5"><span lang="kk" class="lang-content">Жүгері, какао, үйеңкі</span><span lang="en" class="lang-content">Maize, cocoa, squash</span><span lang="ru" class="lang-content">Кукуруза, какао, тыква</span></p></div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;"><b class="text-green-700">🌎 <span lang="kk" class="lang-content">Оңтүстік Американдық</span><span lang="en" class="lang-content">South American</span><span lang="ru" class="lang-content">Южноамериканский</span></b><p class="text-gray-500 mt-0.5"><span lang="kk" class="lang-content">Картоп, помидор, темекі</span><span lang="en" class="lang-content">Potato, tomato, tobacco</span><span lang="ru" class="lang-content">Картофель, томат, табак</span></p></div>
+                </div>
+                <div class="fact-box mt-3 text-xs">
+                    <span lang="kk" class="lang-content"><b>Маңызы:</b> Осы орталықтардың жабайы туыстары — селекция үшін бағалы гендер қоймасы (генофонд).</span>
+                    <span lang="en" class="lang-content"><b>Significance:</b> Wild relatives from these centres are a valuable gene pool for breeding.</span>
+                    <span lang="ru" class="lang-content"><b>Значение:</b> Дикие родственники из этих центров — ценный генофонд для селекции.</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-amber-700 text-lg mb-4">💪 <span lang="kk" class="lang-content">Гетерозис (Будан күші)</span><span lang="en" class="lang-content">Heterosis (Hybrid Vigour)</span><span lang="ru" class="lang-content">Гетерозис (Гибридная мощь)</span></h3>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">Туыс емес линиялардың F₁ буданы ата-аналардың екеуінен де барлық белгілер бойынша артып кетуі.</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-4">F₁ hybrid of unrelated lines surpasses both parents in all traits.</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Гибрид F₁ неродственных линий превосходит обоих родителей по всем признакам.</div>
+                <div class="tbox mb-3" style="border-color:#ca8a04;background:#fffbeb;">
+                    <p class="font-bold text-amber-700 text-sm"><span lang="kk" class="lang-content">Механизмі</span><span lang="en" class="lang-content">Mechanism</span><span lang="ru" class="lang-content">Механизм</span></p>
+                    <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Гетерозиготалықтың жоғарылауы → зиянды рецессивті аллельдер жасырынады. F₁ барлық жасушалық функцияларда максималды гетерозиготалы.</span><span lang="en" class="lang-content">Increased heterozygosity → harmful recessive alleles are masked. F₁ is maximally heterozygous in all cellular functions.</span><span lang="ru" class="lang-content">Повышение гетерозиготности → вредные рецессивные аллели скрываются. F₁ максимально гетерозиготна по всем функциям.</span></p>
+                </div>
+                <div class="tbox mb-3" style="border-color:#ca8a04;background:#fffbeb;">
+                    <p class="font-bold text-amber-700 text-sm"><span lang="kk" class="lang-content">Пайдалану</span><span lang="en" class="lang-content">Application</span><span lang="ru" class="lang-content">Применение</span></p>
+                    <p class="text-xs text-gray-600 mt-1"><span lang="kk" class="lang-content">Гибридті жүгері (АҚШ-та 20% өнімділік артуы); гибридті бидай, күнбағыс, қауын. <b>МАҢЫЗДЫ:</b> F₂ гетерозисті жоғалтады → жыл сайын F₁ тұқым сатып алу керек.</span><span lang="en" class="lang-content">Hybrid maize (20% yield increase in USA); hybrid wheat, sunflower, melon. <b>NOTE:</b> F₂ loses heterosis → seeds must be repurchased yearly.</span><span lang="ru" class="lang-content">Гибридная кукуруза (прибавка урожая 20%); гибридная пшеница, подсолнечник. <b>ВАЖНО:</b> F₂ теряет гетерозис → нужно ежегодно покупать F₁ семена.</span></p>
+                </div>
+                <div class="fact-box text-xs">
+                    <span lang="kk" class="lang-content"><b>Гетерозис vs Инбредная депрессия:</b> Инбридинг рецессивті зиянды аллельдерді гомозиготаландырады → өнімділіктің төмендеуі. Аутбридинг оларды жасырады → гетерозис.</span>
+                    <span lang="en" class="lang-content"><b>Heterosis vs Inbreeding depression:</b> Inbreeding homozygosises harmful recessive alleles → reduced productivity. Outbreeding masks them → heterosis.</span>
+                    <span lang="ru" class="lang-content"><b>Гетерозис vs Инбредная депрессия:</b> Инбридинг гомозиготирует вредные рецессивные аллели → снижение продуктивности. Аутбридинг их маскирует → гетерозис.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📊 Өсімдіктер / Жануарлар / Микроорганизмдер селекциясы</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Plant / Animal / Microorganism Breeding</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Селекция растений / животных / микроорганизмов</h2>
+        <div class="card overflow-x-auto">
+            <table class="comp">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Сипат</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+                    <th>🌾 <span lang="kk" class="lang-content">Өсімдіктер</span><span lang="en" class="lang-content">Plants</span><span lang="ru" class="lang-content">Растения</span></th>
+                    <th>🐄 <span lang="kk" class="lang-content">Жануарлар</span><span lang="en" class="lang-content">Animals</span><span lang="ru" class="lang-content">Животные</span></th>
+                    <th>🦠 <span lang="kk" class="lang-content">Микроорганизмдер</span><span lang="en" class="lang-content">Microorganisms</span><span lang="ru" class="lang-content">Микроорганизмы</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Результат</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Сорт</span><span lang="en" class="lang-content">Variety</span><span lang="ru" class="lang-content">Сорт</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Тұқым</span><span lang="en" class="lang-content">Breed</span><span lang="ru" class="lang-content">Порода</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Штамм</span><span lang="en" class="lang-content">Strain</span><span lang="ru" class="lang-content">Штамм</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Негізгі әдіс</span><span lang="en" class="lang-content">Main methods</span><span lang="ru" class="lang-content">Основные методы</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Сұрыптау, будандастыру, полиплоидия, мутагенез</span><span lang="en" class="lang-content">Selection, hybridisation, polyploidy, mutagenesis</span><span lang="ru" class="lang-content">Отбор, гибридизация, полиплоидия, мутагенез</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Жеке сұрыптау, отдалённая гибридизация, гетерозис</span><span lang="en" class="lang-content">Individual selection, distant hybridisation, heterosis</span><span lang="ru" class="lang-content">Индивидуальный отбор, отдалённая гибридизация, гетерозис</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Мутагенез, генетикалық инженерия, клондау</span><span lang="en" class="lang-content">Mutagenesis, genetic engineering, cloning</span><span lang="ru" class="lang-content">Мутагенез, генная инженерия, клонирование</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Ерекшелігі</span><span lang="en" class="lang-content">Special feature</span><span lang="ru" class="lang-content">Особенность</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Полиплоидия жиі пайдалы; өздігінен тозаңданатындарда инбридинг жеңіл</span><span lang="en" class="lang-content">Polyploidy often useful; inbreeding easier in self-pollinating plants</span><span lang="ru" class="lang-content">Полиплоидия часто полезна; инбридинг легче у самоопыляемых</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Полиплоидия тиімсіз; ұрпақты тексеру баяу; вегетативтік көбею жоқ</span><span lang="en" class="lang-content">Polyploidy not effective; progeny testing is slow; no vegetative propagation</span><span lang="ru" class="lang-content">Полиплоидия неэффективна; проверка потомства медленная; нет вегетативного размножения</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Тез өседі; зертханада оңай өзгертіледі; ауқымды скрининг мүмкін</span><span lang="en" class="lang-content">Grow rapidly; easily manipulated in lab; large-scale screening possible</span><span lang="ru" class="lang-content">Быстро размножаются; легко манипулировать; возможен масштабный скрининг</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Безостая 1 бидайы, гибридті жүгері</span><span lang="en" class="lang-content">Bezostaya 1 wheat, hybrid maize</span><span lang="ru" class="lang-content">Пшеница Безостая 1, гибридная кукуруза</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Холмогор сиыры, Меринос қойы, Орлов жылқысы</span><span lang="en" class="lang-content">Kholmogory cow, Merino sheep, Orlov horse</span><span lang="ru" class="lang-content">Холмогорская корова, овца Меринос, Орловский рысак</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Инсулин өндіретін E.coli, пенициллин өндіретін Penicillium</span><span lang="en" class="lang-content">E.coli producing insulin, Penicillium producing penicillin</span><span lang="ru" class="lang-content">E.coli — инсулин, Penicillium — пенициллин</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

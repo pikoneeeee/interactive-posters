@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Теория строения органических соединений Бутлерова. Изомерия</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #451a03, #78350f, #1c1917);
+            color: white; min-height: 100vh;
+        }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #f59e0b; color: #451a03; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"],
+        .lang-en .lang-content[lang="en"],
+        .lang-ru .lang-content[lang="ru"] { display: block; }
+        .principle-num {
+            width: 56px; height: 56px; min-width: 56px; border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.5rem; color: #451a03;
+        }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th {
+            background: rgba(245,158,11,0.2); color: #fbbf24;
+            padding: 16px 20px; font-weight: 700; font-size: 1.15rem; text-align: left;
+            border-bottom: 2px solid rgba(251,191,36,0.3);
+        }
+        table.t td {
+            padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 1.1rem; vertical-align: top; color: rgba(255,255,255,0.85);
+        }
+        table.t tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block {
+            background: rgba(0,0,0,0.5); color: #fbbf24; font-family: 'Courier New', monospace;
+            padding: 18px 24px; border-radius: 1rem; font-size: 1.2rem; line-height: 1.7;
+            white-space: pre; overflow-x: auto; border: 1px solid rgba(251,191,36,0.2);
+        }
+        .badge-iso {
+            display: inline-block; padding: 5px 14px; border-radius: 999px;
+            font-weight: 700; font-size: 0.95rem; margin-top: 4px;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-amber-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">10 класс · Органическая химия</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-amber-400">Бутлеровтің органикалық қосылыстар құрылысының теориясы. Изомерия</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-amber-400">Butlerov's Theory of Organic Compound Structure. Isomerism</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-amber-400">Теория строения органических соединений Бутлерова. Изомерия</h1>
+        </div>
+        <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: 4 PRINCIPLES -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-amber-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Бутлеров теориясының негізгі қағидалары (1861)</span>
+            <span lang="en" class="lang-content">Key Principles of Butlerov's Theory (1861)</span>
+            <span lang="ru" class="lang-content">Основные положения теории Бутлерова (1861)</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <div class="flex items-start gap-5">
+                    <div class="principle-num">I</div>
+                    <div>
+                        <p class="font-bold text-amber-300 text-xl mb-2">
+                            <span lang="kk" class="lang-content">Атомдардың белгілі тәртіпте байланысуы</span>
+                            <span lang="en" class="lang-content">Atoms are connected in a definite order</span>
+                            <span lang="ru" class="lang-content">Атомы соединяются в определённом порядке</span>
+                        </p>
+                        <p class="text-white/75 text-lg leading-relaxed">
+                            <span lang="kk" class="lang-content">Молекуладағы атомдар белгілі бір тәртіпте химиялық байланыс арқылы жалғанады. Бұл тәртіп — <b class="text-amber-300">химиялық құрылыс</b>, ол <b class="text-amber-300">құрылымдық формула</b> арқылы көрсетіледі.</span>
+                            <span lang="en" class="lang-content">Atoms in a molecule are connected by chemical bonds in a definite order. This order is called <b class="text-amber-300">chemical structure</b> and is shown by a <b class="text-amber-300">structural formula</b>.</span>
+                            <span lang="ru" class="lang-content">Атомы в молекуле соединяются химическими связями в определённом порядке. Этот порядок — <b class="text-amber-300">химическое строение</b>, выражается <b class="text-amber-300">структурной формулой</b>.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <div class="flex items-start gap-5">
+                    <div class="principle-num">II</div>
+                    <div>
+                        <p class="font-bold text-amber-300 text-xl mb-2">
+                            <span lang="kk" class="lang-content">Қасиеттер байланыс тәртібіне тәуелді</span>
+                            <span lang="en" class="lang-content">Properties depend on bond order</span>
+                            <span lang="ru" class="lang-content">Свойства зависят от порядка связей</span>
+                        </p>
+                        <p class="text-white/75 text-lg leading-relaxed">
+                            <span lang="kk" class="lang-content">Заттардың қасиеттері тек құрамына ғана емес, <b class="text-amber-300">атомдардың байланысу тәртібіне</b> де байланысты. Бірдей формулалы заттардың қасиеттері әртүрлі — бұл <b class="text-amber-300">изомерия</b>.</span>
+                            <span lang="en" class="lang-content">Properties depend not only on composition, but on <b class="text-amber-300">the bonding order</b>. Substances with the same formula can differ — this is <b class="text-amber-300">isomerism</b>.</span>
+                            <span lang="ru" class="lang-content">Свойства зависят не только от состава, но и от <b class="text-amber-300">порядка соединения атомов</b>. Вещества с одинаковой формулой могут различаться — это <b class="text-amber-300">изомерия</b>.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <div class="flex items-start gap-5">
+                    <div class="principle-num">III</div>
+                    <div>
+                        <p class="font-bold text-amber-300 text-xl mb-2">
+                            <span lang="kk" class="lang-content">Атомдар бір-біріне өзара әсер етеді</span>
+                            <span lang="en" class="lang-content">Atoms mutually influence each other</span>
+                            <span lang="ru" class="lang-content">Атомы взаимно влияют друг на друга</span>
+                        </p>
+                        <p class="text-white/75 text-lg leading-relaxed">
+                            <span lang="kk" class="lang-content">Молекуладағы атомдар тікелей көршілерге ғана емес, <b class="text-amber-300">жанама түрде де</b> әсер етеді. Бұл реакцияға түсу қабілетін, қышқылдығын, негіздігін түсіндіреді.</span>
+                            <span lang="en" class="lang-content">Atoms influence not only direct neighbours but also have an <b class="text-amber-300">indirect effect</b>. This explains reactivity, acidity and basicity.</span>
+                            <span lang="ru" class="lang-content">Атомы влияют не только на прямых соседей, но и оказывают <b class="text-amber-300">косвенное воздействие</b>. Это объясняет реакционную способность, кислотность и основность.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <div class="flex items-start gap-5">
+                    <div class="principle-num">IV</div>
+                    <div>
+                        <p class="font-bold text-amber-300 text-xl mb-2">
+                            <span lang="kk" class="lang-content">Құрылысты тәжірибе арқылы анықтауға болады</span>
+                            <span lang="en" class="lang-content">Structure can be determined experimentally</span>
+                            <span lang="ru" class="lang-content">Строение можно определить опытным путём</span>
+                        </p>
+                        <p class="text-white/75 text-lg leading-relaxed">
+                            <span lang="kk" class="lang-content">Химиялық құрылысты <b class="text-amber-300">реакцияларды зерттеу</b> арқылы анықтауға болады. Белгілі құрылыс бойынша қасиеттерді <b class="text-amber-300">алдын ала болжауға</b> болады.</span>
+                            <span lang="en" class="lang-content">Structure can be found by <b class="text-amber-300">studying reactions</b>. Knowing structure lets us <b class="text-amber-300">predict properties</b> in advance.</span>
+                            <span lang="ru" class="lang-content">Строение можно установить <b class="text-amber-300">изучением реакций</b>. Зная строение, можно <b class="text-amber-300">предсказать свойства</b> вещества.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="glass-accent rounded-custom p-8 mt-6 border-l-4 border-amber-500">
+            <p class="font-bold text-amber-300 text-xl mb-2">
+                <span lang="kk" class="lang-content">💡 Неліктен Бутлеров теориясы революциялық?</span>
+                <span lang="en" class="lang-content">💡 Why was Butlerov's theory revolutionary?</span>
+                <span lang="ru" class="lang-content">💡 Почему теория Бутлерова была революционной?</span>
+            </p>
+            <p class="text-white/80 text-lg leading-relaxed">
+                <span lang="kk" class="lang-content">1861 жылға дейін химиктер молекула формуласын (C₂H₆O) жазса да, <b class="text-amber-300">атомдардың қалай байланысқанын</b> білмеді. Бутлеров «химиялық құрылыс» ұғымын енгізді: C₂H₆O — этанол (CH₃–CH₂–OH) немесе диметил эфирі (CH₃–O–CH₃). Бір формула — екі түрлі зат!</span>
+                <span lang="en" class="lang-content">Before 1861, chemists wrote molecular formulas (C₂H₆O) but didn't know <b class="text-amber-300">how atoms were connected</b>. Butlerov introduced «chemical structure»: C₂H₆O can be ethanol (CH₃–CH₂–OH) or dimethyl ether (CH₃–O–CH₃). One formula — two substances!</span>
+                <span lang="ru" class="lang-content">До 1861 года химики записывали формулы (C₂H₆O), но не знали, <b class="text-amber-300">как именно связаны атомы</b>. Бутлеров ввёл понятие «химического строения»: C₂H₆O — это этанол (CH₃–CH₂–OH) или диметиловый эфир (CH₃–O–CH₃). Одна формула — два разных вещества!</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: CARBON + FORMULAS -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-amber-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Көміртек атомы · Формула жазу тәсілдері</span>
+            <span lang="en" class="lang-content">Carbon Atom · Ways to Write Formulas</span>
+            <span lang="ru" class="lang-content">Атом углерода · Способы записи формул</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-amber-300 mb-5">
+                    <span lang="kk" class="lang-content">Көміртек — органикалық химияның негізі</span>
+                    <span lang="en" class="lang-content">Carbon — the Foundation of Organic Chemistry</span>
+                    <span lang="ru" class="lang-content">Углерод — основа органической химии</span>
+                </p>
+                <table class="t">
+                    <thead><tr>
+                        <th><span lang="kk" class="lang-content">Қасиет</span><span lang="en" class="lang-content">Property</span><span lang="ru" class="lang-content">Свойство</span></th>
+                        <th><span lang="kk" class="lang-content">Мәні</span><span lang="en" class="lang-content">Value</span><span lang="ru" class="lang-content">Значение</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold text-amber-300"><span lang="kk" class="lang-content">Валенттілік</span><span lang="en" class="lang-content">Valence</span><span lang="ru" class="lang-content">Валентность</span></td>
+                            <td><span lang="kk" class="lang-content"><b>IV</b> — әрқашан 4 байланыс түзеді</span><span lang="en" class="lang-content"><b>IV</b> — always forms 4 bonds</span><span lang="ru" class="lang-content"><b>IV</b> — всегда образует 4 связи</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-amber-300"><span lang="kk" class="lang-content">Байланыс түрлері</span><span lang="en" class="lang-content">Bond types</span><span lang="ru" class="lang-content">Типы связей</span></td>
+                            <td><span lang="kk" class="lang-content">Жеке (C–C), қос (C=C), үштік (C≡C)</span><span lang="en" class="lang-content">Single (C–C), double (C=C), triple (C≡C)</span><span lang="ru" class="lang-content">Одинарная (C–C), двойная (C=C), тройная (C≡C)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-amber-300"><span lang="kk" class="lang-content">Тізбек формалары</span><span lang="en" class="lang-content">Chain forms</span><span lang="ru" class="lang-content">Формы цепей</span></td>
+                            <td><span lang="kk" class="lang-content">Түзу, тармақталған, циклдік</span><span lang="en" class="lang-content">Straight, branched, cyclic</span><span lang="ru" class="lang-content">Прямая, разветвлённая, циклическая</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-amber-300"><span lang="kk" class="lang-content">Гибридтену</span><span lang="en" class="lang-content">Hybridisation</span><span lang="ru" class="lang-content">Гибридизация</span></td>
+                            <td><b>sp³</b> — 109.5° · <b>sp²</b> — 120° · <b>sp</b> — 180°</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-amber-300 mb-5">
+                    <span lang="kk" class="lang-content">C₂H₆O — формула жазу тәсілдері</span>
+                    <span lang="en" class="lang-content">C₂H₆O — formula writing methods</span>
+                    <span lang="ru" class="lang-content">C₂H₆O — способы записи формул</span>
+                </p>
+                <div class="space-y-4">
+                    <div>
+                        <p class="font-bold text-amber-200 text-lg mb-1">
+                            <span lang="kk" class="lang-content">📝 Молекулалық формула</span>
+                            <span lang="en" class="lang-content">📝 Molecular formula</span>
+                            <span lang="ru" class="lang-content">📝 Молекулярная формула</span>
+                        </p>
+                        <div class="formula-block">C₂H₆O</div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-green-300 text-lg mb-1">
+                            <span lang="kk" class="lang-content">🔗 Толық құрылымдық формула</span>
+                            <span lang="en" class="lang-content">🔗 Full structural formula</span>
+                            <span lang="ru" class="lang-content">🔗 Полная структурная формула</span>
+                        </p>
+                        <div class="formula-block">    H  H
+    |  |
+H — C — C — O — H     (этанол)
+    |  |
+    H  H</div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-sky-300 text-lg mb-1">
+                            <span lang="kk" class="lang-content">✏️ Қысқартылған формулалар</span>
+                            <span lang="en" class="lang-content">✏️ Condensed formulas</span>
+                            <span lang="ru" class="lang-content">✏️ Сокращённые формулы</span>
+                        </p>
+                        <div class="formula-block">CH₃–CH₂–OH    (этанол,    т.к. 78°C)
+CH₃–O–CH₃     (дим.эфир,  т.к. −24°C)</div>
+                        <p class="text-amber-400 font-bold mt-3 text-lg">
+                            <span lang="kk" class="lang-content">⚡ Бірдей C₂H₆O — бірақ қасиеттері мүлдем басқа!</span>
+                            <span lang="en" class="lang-content">⚡ Same C₂H₆O — but completely different properties!</span>
+                            <span lang="ru" class="lang-content">⚡ Одинаковая C₂H₆O — но свойства совершенно разные!</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ISOMERISM TYPES -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-amber-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Изомерия түрлері</span>
+            <span lang="en" class="lang-content">Types of Isomerism</span>
+            <span lang="ru" class="lang-content">Типы изомерии</span>
+        </h2>
+        <div class="glass rounded-custom p-8 overflow-x-auto">
+            <table class="t">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Изомерия түрі</span><span lang="en" class="lang-content">Type</span><span lang="ru" class="lang-content">Тип изомерии</span></th>
+                    <th><span lang="kk" class="lang-content">Сипаттама</span><span lang="en" class="lang-content">Description</span><span lang="ru" class="lang-content">Описание</span></th>
+                    <th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold text-amber-300">
+                            <span lang="kk" class="lang-content">🔗 Тізбек изомериясы</span>
+                            <span lang="en" class="lang-content">🔗 Chain isomerism</span>
+                            <span lang="ru" class="lang-content">🔗 Изомерия цепи</span><br>
+                            <span class="badge-iso bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                            <span lang="kk" class="lang-content">Құрылымдық</span><span lang="en" class="lang-content">Structural</span><span lang="ru" class="lang-content">Структурная</span></span>
+                        </td>
+                        <td><span lang="kk" class="lang-content">Көміртек тізбегінің формасы ерекшеленеді (түзу / тармақталған)</span><span lang="en" class="lang-content">Carbon chain shape differs (straight / branched)</span><span lang="ru" class="lang-content">Различается форма углеродной цепи (прямая / разветвлённая)</span></td>
+                        <td><span lang="kk" class="lang-content"><b>C₄H₁₀</b>: Бутан CH₃–CH₂–CH₂–CH₃ (қ.н. −0.5°C) мен Изобутан CH₃–CH(CH₃)–CH₃ (қ.н. −11.7°C)</span><span lang="en" class="lang-content"><b>C₄H₁₀</b>: Butane CH₃–CH₂–CH₂–CH₃ (b.p. −0.5°C) and Isobutane CH₃–CH(CH₃)–CH₃ (b.p. −11.7°C)</span><span lang="ru" class="lang-content"><b>C₄H₁₀</b>: Бутан CH₃–CH₂–CH₂–CH₃ (т.к. −0.5°C) и Изобутан CH₃–CH(CH₃)–CH₃ (т.к. −11.7°C)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-sky-300">
+                            <span lang="kk" class="lang-content">📍 Орын изомериясы</span>
+                            <span lang="en" class="lang-content">📍 Position isomerism</span>
+                            <span lang="ru" class="lang-content">📍 Изомерия положения</span><br>
+                            <span class="badge-iso bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                            <span lang="kk" class="lang-content">Құрылымдық</span><span lang="en" class="lang-content">Structural</span><span lang="ru" class="lang-content">Структурная</span></span>
+                        </td>
+                        <td><span lang="kk" class="lang-content">Функционалдық топтың немесе еселік байланыстың тізбектегі орны ерекшеленеді</span><span lang="en" class="lang-content">Position of functional group or multiple bond differs along the chain</span><span lang="ru" class="lang-content">Различается положение функц. группы или кратной связи в цепи</span></td>
+                        <td><span lang="kk" class="lang-content"><b>C₄H₈</b>: Бутен-1 CH₂=CH–CH₂–CH₃ мен Бутен-2 CH₃–CH=CH–CH₃</span><span lang="en" class="lang-content"><b>C₄H₈</b>: But-1-ene CH₂=CH–CH₂–CH₃ and But-2-ene CH₃–CH=CH–CH₃</span><span lang="ru" class="lang-content"><b>C₄H₈</b>: Бутен-1 CH₂=CH–CH₂–CH₃ и Бутен-2 CH₃–CH=CH–CH₃</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-purple-300">
+                            <span lang="kk" class="lang-content">⚗️ Класаралық изомерия</span>
+                            <span lang="en" class="lang-content">⚗️ Functional group isomerism</span>
+                            <span lang="ru" class="lang-content">⚗️ Межклассовая изомерия</span><br>
+                            <span class="badge-iso bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                            <span lang="kk" class="lang-content">Құрылымдық</span><span lang="en" class="lang-content">Structural</span><span lang="ru" class="lang-content">Структурная</span></span>
+                        </td>
+                        <td><span lang="kk" class="lang-content">Изомерлер <b>әртүрлі класстарға</b> жатады, функционалдық топ түрі ерекшеленеді</span><span lang="en" class="lang-content">Isomers belong to <b>different classes</b>, functional group type differs</span><span lang="ru" class="lang-content">Изомеры относятся к <b>разным классам</b>, различается тип функц. группы</span></td>
+                        <td><span lang="kk" class="lang-content"><b>C₂H₆O</b>: Этанол CH₃–CH₂–OH (спирт, 78°C) мен Диметил эфирі CH₃–O–CH₃ (эфир, −24°C)</span><span lang="en" class="lang-content"><b>C₂H₆O</b>: Ethanol CH₃–CH₂–OH (alcohol, 78°C) and Dimethyl ether CH₃–O–CH₃ (ether, −24°C)</span><span lang="ru" class="lang-content"><b>C₂H₆O</b>: Этанол CH₃–CH₂–OH (спирт, 78°C) и Диметиловый эфир CH₃–O–CH₃ (эфир, −24°C)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-green-300">
+                            <span lang="kk" class="lang-content">↔️ Геометриялық (цис-транс)</span>
+                            <span lang="en" class="lang-content">↔️ Geometric (cis-trans)</span>
+                            <span lang="ru" class="lang-content">↔️ Геометрическая (цис-транс)</span><br>
+                            <span class="badge-iso bg-green-500/20 text-green-300 border border-green-500/30">
+                            <span lang="kk" class="lang-content">Кеңістіктік</span><span lang="en" class="lang-content">Spatial</span><span lang="ru" class="lang-content">Пространственная</span></span>
+                        </td>
+                        <td><span lang="kk" class="lang-content">Қос байланыс бойынша алмастырушылардың кеңістіктегі орналасуы ерекшеленеді. C=C бойынша бұрылу мүмкін емес</span><span lang="en" class="lang-content">Spatial arrangement of substituents around double bond differs. No rotation around C=C</span><span lang="ru" class="lang-content">Различается расположение заместителей относительно C=C. Вращение вокруг двойной связи невозможно</span></td>
+                        <td><span lang="kk" class="lang-content"><b>C₄H₈</b>: цис-бутен-2 (CH₃ бір жағында, 3.7°C) мен транс-бутен-2 (CH₃ қарсы жағында, 0.9°C)</span><span lang="en" class="lang-content"><b>C₄H₈</b>: cis-but-2-ene (CH₃ same side, 3.7°C) and trans-but-2-ene (CH₃ opposite, 0.9°C)</span><span lang="ru" class="lang-content"><b>C₄H₈</b>: цис-бутен-2 (CH₃ по одну сторону, 3.7°C) и транс-бутен-2 (CH₃ по разные стороны, 0.9°C)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-rose-300">
+                            <span lang="kk" class="lang-content">🪞 Оптикалық</span>
+                            <span lang="en" class="lang-content">🪞 Optical</span>
+                            <span lang="ru" class="lang-content">🪞 Оптическая</span><br>
+                            <span class="badge-iso bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                            <span lang="kk" class="lang-content">Кеңістіктік</span><span lang="en" class="lang-content">Spatial</span><span lang="ru" class="lang-content">Пространственная</span></span>
+                        </td>
+                        <td><span lang="kk" class="lang-content">Молекула айна бейнесімен <b>сәйкес келмейді</b>. Хиральды орталық — 4 түрлі алмастырушысы бар C* атомы</span><span lang="en" class="lang-content">Molecule is <b>non-superimposable</b> on its mirror image. Chiral centre — C* with 4 different substituents</span><span lang="ru" class="lang-content">Молекула <b>не совмещается</b> со своим зеркальным отражением. Хиральный центр — C* с 4 разными заместителями</span></td>
+                        <td><span lang="kk" class="lang-content"><b>C₃H₇NO₂</b>: D- және L-аланин. Поляризацияланған жарықты қарама-қарсы бағытта бұрады</span><span lang="en" class="lang-content"><b>C₃H₇NO₂</b>: D- and L-alanine. Rotate polarized light in opposite directions</span><span lang="ru" class="lang-content"><b>C₃H₇NO₂</b>: D- и L-аланин. Вращают поляризованный свет в противоположных направлениях</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- CLASSIFICATION DIAGRAM -->
+    <footer class="glass rounded-custom p-10 text-center">
+        <p class="heading-font text-2xl text-amber-300 mb-5">
+            <span lang="kk" class="lang-content">Изомерия жіктемесі</span>
+            <span lang="en" class="lang-content">Isomerism Classification</span>
+            <span lang="ru" class="lang-content">Классификация изомерии</span>
+        </p>
+        <div class="inline-block bg-amber-500/20 rounded-2xl px-10 py-4 heading-font font-bold text-amber-300 text-2xl border border-amber-500/30 mb-4">
+            <span lang="kk" class="lang-content">ИЗОМЕРИЯ</span><span lang="en" class="lang-content">ISOMERISM</span><span lang="ru" class="lang-content">ИЗОМЕРИЯ</span>
+        </div>
+        <div class="text-amber-500 text-3xl mb-4">↙ &emsp;&emsp;&emsp;&emsp; ↘</div>
+        <div class="flex gap-10 justify-center flex-wrap">
+            <div>
+                <div class="bg-sky-500/15 rounded-2xl px-8 py-3 heading-font font-bold text-sky-300 text-xl border border-sky-500/25 mb-3">
+                    <span lang="kk" class="lang-content">ҚҰРЫЛЫМДЫҚ</span><span lang="en" class="lang-content">STRUCTURAL</span><span lang="ru" class="lang-content">СТРУКТУРНАЯ</span>
+                </div>
+                <div class="flex gap-3 justify-center flex-wrap">
+                    <span class="badge-iso bg-amber-500/15 text-amber-300 border border-amber-500/25 text-base"><span lang="kk" class="lang-content">Тізбек</span><span lang="en" class="lang-content">Chain</span><span lang="ru" class="lang-content">Цепи</span></span>
+                    <span class="badge-iso bg-sky-500/15 text-sky-300 border border-sky-500/25 text-base"><span lang="kk" class="lang-content">Орын</span><span lang="en" class="lang-content">Position</span><span lang="ru" class="lang-content">Положения</span></span>
+                    <span class="badge-iso bg-purple-500/15 text-purple-300 border border-purple-500/25 text-base"><span lang="kk" class="lang-content">Класаралық</span><span lang="en" class="lang-content">Func. group</span><span lang="ru" class="lang-content">Межклассовая</span></span>
+                </div>
+            </div>
+            <div>
+                <div class="bg-green-500/15 rounded-2xl px-8 py-3 heading-font font-bold text-green-300 text-xl border border-green-500/25 mb-3">
+                    <span lang="kk" class="lang-content">КЕҢІСТІКТІК</span><span lang="en" class="lang-content">SPATIAL</span><span lang="ru" class="lang-content">ПРОСТРАНСТВЕННАЯ</span>
+                </div>
+                <div class="flex gap-3 justify-center flex-wrap">
+                    <span class="badge-iso bg-green-500/15 text-green-300 border border-green-500/25 text-base"><span lang="kk" class="lang-content">Геометриялық</span><span lang="en" class="lang-content">Geometric</span><span lang="ru" class="lang-content">Геометрическая</span></span>
+                    <span class="badge-iso bg-rose-500/15 text-rose-300 border border-rose-500/25 text-base"><span lang="kk" class="lang-content">Оптикалық</span><span lang="en" class="lang-content">Optical</span><span lang="ru" class="lang-content">Оптическая</span></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Размножение организмов. Гаметогенез</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0d1f1a 0%, #14532d 50%, #0d1f1a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #14532d 0%, #15803d 40%, #22c55e 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(21,128,61,0.5); }
+        .section-heading { color: #15803d; border-bottom: 4px solid #86efac; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #15803d; background: white; color: #15803d; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdf4; }
+        .lang-btn.active { background: linear-gradient(135deg,#14532d,#15803d); color: white; box-shadow: 0 4px 12px rgba(21,128,61,0.4); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#f7fee7); border-left: 5px solid #15803d; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 12px 15px; margin: 7px 0; }
+        table.comp { width: 100%; border-collapse: collapse; }
+        table.comp th { background: linear-gradient(135deg,#14532d,#15803d); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.84rem; }
+        table.comp th:first-child { border-radius: 10px 0 0 0; } table.comp th:last-child { border-radius: 0 10px 0 0; }
+        table.comp td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 0.82rem; }
+        table.comp tr:nth-child(even) td { background: #f0fdf4; }
+        table.comp tr:last-child td { border-bottom: none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-green-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Размножение</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase tracking-wide">Организмдердің көбеюі. Гаметогенез</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase tracking-wide">Reproduction of Organisms. Gametogenesis</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase tracking-wide">Размножение организмов. Гаметогенез</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl flex flex-wrap gap-4 justify-center">
+            <div class="text-center"><span class="text-3xl">🌿</span><p class="font-bold text-green-200 mt-1"><span lang="kk" class="lang-content">Жынысыз көбею</span><span lang="en" class="lang-content">Asexual reproduction</span><span lang="ru" class="lang-content">Бесполое размножение</span></p><p class="text-xs text-green-300"><span lang="kk" class="lang-content">1 ата-ана, клондар</span><span lang="en" class="lang-content">1 parent, clones</span><span lang="ru" class="lang-content">1 родитель, клоны</span></p></div>
+            <div class="text-green-300 font-black text-3xl flex items-center">vs</div>
+            <div class="text-center"><span class="text-3xl">💑</span><p class="font-bold text-green-200 mt-1"><span lang="kk" class="lang-content">Жыныстық көбею</span><span lang="en" class="lang-content">Sexual reproduction</span><span lang="ru" class="lang-content">Половое размножение</span></p><p class="text-xs text-green-300"><span lang="kk" class="lang-content">2 ата-ана, алуан түрлілік</span><span lang="en" class="lang-content">2 parents, genetic variation</span><span lang="ru" class="lang-content">2 родителя, генетическое разнообразие</span></p></div>
+        </div>
+    </header>
+
+    <!-- ASEXUAL REPRODUCTION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌿 Жынысыз Көбею</h2>
+        <h2 lang="en" class="lang-content section-heading">🌿 Asexual Reproduction</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌿 Бесполое Размножение</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+                <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🔬 <span lang="kk" class="lang-content">Екіге бөліну (Бинарное деление)</span><span lang="en" class="lang-content">Binary fission</span><span lang="ru" class="lang-content">Бинарное деление</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Бактериялар, қарапайымдылар. Жасуша 2-ге бөлінеді → 2 тең особь.</span><span lang="en" class="lang-content">Bacteria, protozoans. Cell divides into 2 equal individuals.</span><span lang="ru" class="lang-content">Бактерии, простейшие. Клетка делится на 2 равные особи.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🌱 <span lang="kk" class="lang-content">Споры арқылы (Спорообразование)</span><span lang="en" class="lang-content">Sporulation</span><span lang="ru" class="lang-content">Спорообразование</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Папоротниктер, мхтар, саңырауқұлақтар. Споралар митозбен (өсімдіктер) немесе мейозбен (саңырауқұлақтар) түзіледі.</span><span lang="en" class="lang-content">Ferns, mosses, fungi. Spores formed by mitosis (plants) or meiosis (fungi).</span><span lang="ru" class="lang-content">Папоротники, мхи, грибы. Споры образуются митозом (растения) или мейозом (грибы).</span></p>
+                </div>
+                <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🌿 <span lang="kk" class="lang-content">Вегетативтік (Вегетативное)</span><span lang="en" class="lang-content">Vegetative</span><span lang="ru" class="lang-content">Вегетативное</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Өсімдіктер. Тамырсабақ (ризома), жусан, сіргелер (усы), пиязшықтар, тарамдар (черенок), жапырақ.</span><span lang="en" class="lang-content">Plants. Rhizomes, runners (stolons), bulbs, cuttings, leaf propagation.</span><span lang="ru" class="lang-content">Растения. Корневища, усы (столоны), луковицы, черенки, листья.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🧫 <span lang="kk" class="lang-content">Жаңаөсімдіктер арқылы (Почкование)</span><span lang="en" class="lang-content">Budding</span><span lang="ru" class="lang-content">Почкование</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Ашытқылар (дрожжи), гидра. Денеде кіші бүр пайда болады → жеке организм. Ашытқыда — жасушалық; гидрада — мүшелік.</span><span lang="en" class="lang-content">Yeast, hydra. A small bud grows on the body → becomes separate organism.</span><span lang="ru" class="lang-content">Дрожжи, гидра. На теле вырастает маленькая почка → отдельный организм.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🔀 <span lang="kk" class="lang-content">Фрагментация</span><span lang="en" class="lang-content">Fragmentation</span><span lang="ru" class="lang-content">Фрагментация</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Жалпақ құрттар, морские звёзды, ламинария. Дене бөлшектеріне бөлінеді → әрқайсысы толық организм.</span><span lang="en" class="lang-content">Flatworms, starfish, kelp. Body breaks into fragments → each regenerates a full organism.</span><span lang="ru" class="lang-content">Плоские черви, морские звёзды, ламинария. Тело делится на фрагменты → каждый регенерирует.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🥚 <span lang="kk" class="lang-content">Партеногенез</span><span lang="en" class="lang-content">Parthenogenesis</span><span lang="ru" class="lang-content">Партеногенез</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Ұрықтанбаған жұмыртқадан жаңа особь дамиды. Аралар, дафниялар, кейбір бауырымен жорғалаушылар. <b>Дрон (трутень)</b> — партеногенезбен дамиды (гаплоид).</span><span lang="en" class="lang-content">New organism develops from unfertilised egg. Bees, Daphnia, some reptiles. <b>Drone bees</b> develop by parthenogenesis (haploid).</span><span lang="ru" class="lang-content">Новая особь из неоплодотворённой яйцеклетки. Пчёлы, дафнии, некоторые рептилии. <b>Трутень</b> — партеногенез (гаплоид).</span></p>
+                </div>
+            </div>
+            <div class="fact-box mt-3 text-xs">
+                <span lang="kk" class="lang-content"><b>Клондау</b> — жасанды жынысыз көбеюдің бір түрі. Ядроны соматикалық жасушадан жұмыртқаға ауыстыру. <b>Долли</b> (1996) — клондалған бірінші сүтқоректі (қой). Медицинада — дің жасушаларын алу үшін зерттеледі.</span>
+                <span lang="en" class="lang-content"><b>Cloning</b> — artificial asexual reproduction. Transfer of nucleus from somatic cell to enucleated egg. <b>Dolly</b> (1996) — first cloned mammal (sheep). In medicine — studied for stem cell production.</span>
+                <span lang="ru" class="lang-content"><b>Клонирование</b> — искусственное бесполое размножение. Перенос ядра из соматической клетки в безъядерную яйцеклетку. <b>Долли</b> (1996) — первое клонированное млекопитающее (овца). В медицине — изучается для получения стволовых клеток.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEXUAL REPRODUCTION + GAMETOGENESIS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">💑 Жыныстық Көбею және Гаметогенез</h2>
+        <h2 lang="en" class="lang-content section-heading">💑 Sexual Reproduction & Gametogenesis</h2>
+        <h2 lang="ru" class="lang-content section-heading">💑 Половое Размножение и Гаметогенез</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-base mb-3"><span lang="kk" class="lang-content">🔬 Гаметогенез — гаметалардың пайда болу процесі</span><span lang="en" class="lang-content">🔬 Gametogenesis — formation of gametes</span><span lang="ru" class="lang-content">🔬 Гаметогенез — процесс образования гамет</span></h3>
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th></th>
+                            <th>♂ <span lang="kk" class="lang-content">Сперматогенез</span><span lang="en" class="lang-content">Spermatogenesis</span><span lang="ru" class="lang-content">Сперматогенез</span></th>
+                            <th>♀ <span lang="kk" class="lang-content">Оогенез</span><span lang="en" class="lang-content">Oogenesis</span><span lang="ru" class="lang-content">Овогенез</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">1. Көбею аймағы</span><span lang="en" class="lang-content">1. Multiplication zone</span><span lang="ru" class="lang-content">1. Зона размножения</span></td>
+                                <td><span lang="kk" class="lang-content">Сперматогония (2n) — митоз</span><span lang="en" class="lang-content">Spermatogonia (2n) — mitosis</span><span lang="ru" class="lang-content">Сперматогонии (2n) — митоз</span></td>
+                                <td><span lang="kk" class="lang-content">Оогония (2n) — митоз</span><span lang="en" class="lang-content">Oogonia (2n) — mitosis</span><span lang="ru" class="lang-content">Оогонии (2n) — митоз</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">2. Өсу аймағы</span><span lang="en" class="lang-content">2. Growth zone</span><span lang="ru" class="lang-content">2. Зона роста</span></td>
+                                <td><span lang="kk" class="lang-content">Сперматоцит 1-ші реттік (2n)</span><span lang="en" class="lang-content">Primary spermatocyte (2n)</span><span lang="ru" class="lang-content">Первичный сперматоцит (2n)</span></td>
+                                <td><span lang="kk" class="lang-content">Ооцит 1-ші реттік (2n) — <b>ең ұзақ кезең!</b></span><span lang="en" class="lang-content">Primary oocyte (2n) — <b>longest stage!</b></span><span lang="ru" class="lang-content">Первичный ооцит (2n) — <b>самая долгая стадия!</b></span></td>
+                            </tr>
+                            <tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">3. Пісу аймағы</span><span lang="en" class="lang-content">3. Maturation zone</span><span lang="ru" class="lang-content">3. Зона созревания</span></td>
+                                <td><span lang="kk" class="lang-content">Мейоз I → 2 сперматоцит 2-ші (n)<br>Мейоз II → 4 сперматид (n)</span><span lang="en" class="lang-content">Meiosis I → 2 secondary spermatocytes (n)<br>Meiosis II → 4 spermatids (n)</span><span lang="ru" class="lang-content">Мейоз I → 2 вторичных сперматоцита (n)<br>Мейоз II → 4 сперматиды (n)</span></td>
+                                <td><span lang="kk" class="lang-content">Мейоз I → 1 ооцит 2 (n) + 1 бағыттаушы дене<br>Мейоз II → 1 жетілген жұмыртқа + 2-3 бағыттаушы дене</span><span lang="en" class="lang-content">Meiosis I → 1 secondary oocyte (n) + 1 polar body<br>Meiosis II → 1 mature egg + 2-3 polar bodies</span><span lang="ru" class="lang-content">Мейоз I → 1 вторичный ооцит (n) + 1 направит. тельце<br>Мейоз II → 1 зрелая яйцеклетка + 2-3 направит. тельца</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">4. Пішіндену</span><span lang="en" class="lang-content">4. Differentiation</span><span lang="ru" class="lang-content">4. Формирование</span></td>
+                                <td><span lang="kk" class="lang-content">4 сперматид → 4 сперматозоид (жылжымалы)</span><span lang="en" class="lang-content">4 spermatids → 4 spermatozoa (motile)</span><span lang="ru" class="lang-content">4 сперматиды → 4 сперматозоида (подвижные)</span></td>
+                                <td><span lang="kk" class="lang-content">1 жетілген жұмыртқа (үлкен, қозғалмайды)</span><span lang="en" class="lang-content">1 mature egg cell (large, immotile)</span><span lang="ru" class="lang-content">1 зрелая яйцеклетка (крупная, неподвижная)</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-purple-700"><span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Итог</span></td>
+                                <td class="font-bold text-blue-700"><span lang="kk" class="lang-content">1 жасушадан → 4 сперматозоид</span><span lang="en" class="lang-content">1 cell → 4 spermatozoa</span><span lang="ru" class="lang-content">1 клетка → 4 сперматозоида</span></td>
+                                <td class="font-bold text-red-700"><span lang="kk" class="lang-content">1 жасушадан → 1 жұмыртқа + 3 бағыттаушы дене</span><span lang="en" class="lang-content">1 cell → 1 egg + 3 polar bodies</span><span lang="ru" class="lang-content">1 клетка → 1 яйцеклетка + 3 полярных тельца</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-base mb-3"><span lang="kk" class="lang-content">🥚 Ұрықтану және Ұрықтану түрлері</span><span lang="en" class="lang-content">🥚 Fertilisation Types</span><span lang="ru" class="lang-content">🥚 Оплодотворение и его типы</span></h3>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#1d4ed8;background:#eff6ff;">
+                        <p class="font-bold text-blue-700"><span lang="kk" class="lang-content">Сыртқы ұрықтану (Наружное)</span><span lang="en" class="lang-content">External fertilisation</span><span lang="ru" class="lang-content">Наружное оплодотворение</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">Сыртқы ортада жүреді (судың ішінде). Балықтар, қосмекенділер. Гамета саны өте көп, өйткені жоғалу ықтималдығы жоғары.</span><span lang="en" class="lang-content">Occurs in the external environment (water). Fish, amphibians. Many gametes needed — high loss probability.</span><span lang="ru" class="lang-content">Происходит во внешней среде (в воде). Рыбы, земноводные. Много гамет — высокая вероятность гибели.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                        <p class="font-bold text-green-700"><span lang="kk" class="lang-content">Ішкі ұрықтану (Внутреннее)</span><span lang="en" class="lang-content">Internal fertilisation</span><span lang="ru" class="lang-content">Внутреннее оплодотворение</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">Аналық денесінде жүреді. Бауырымен жорғалаушылар, құстар, сүтқоректілер. Гамета саны аз, бірақ шабаң пен нәресте одан гөрі жақсы қорғалған.</span><span lang="en" class="lang-content">Inside the female body. Reptiles, birds, mammals. Fewer gametes needed; offspring better protected.</span><span lang="ru" class="lang-content">Внутри тела самки. Рептилии, птицы, млекопитающие. Меньше гамет; потомство лучше защищено.</span></p>
+                    </div>
+                    <div class="fact-box text-xs">
+                        <p class="font-bold text-green-700"><span lang="kk" class="lang-content">⚡ Ұрықтану механизмі (акросома реакциясы)</span><span lang="en" class="lang-content">⚡ Fertilisation mechanism (acrosome reaction)</span><span lang="ru" class="lang-content">⚡ Механизм оплодотворения (акросомная реакция)</span></p>
+                        <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Сперматозоид жұмыртқаға жақындайды → акросомдық реакция (ферменттер қабықшаны ерітеді) → ядролар бірігеді → зигота (2n) пайда болады. Кортикальды реакция — кейіңгі сперматозоидтарды блоктайды.</span><span lang="en" class="lang-content">Sperm approaches egg → acrosome reaction (enzymes dissolve zona pellucida) → nuclei fuse → zygote (2n) forms. Cortical reaction blocks additional sperm.</span><span lang="ru" class="lang-content">Сперматозоид подходит к яйцу → акросомная реакция (ферменты растворяют оболочку) → ядра сливаются → зигота (2n). Кортикальная реакция блокирует остальные сперматозоиды.</span></p>
+                    </div>
+                </div>
+                <h3 class="font-bold text-green-700 text-base mb-2 mt-4"><span lang="kk" class="lang-content">Жыныстық және Жынысыз көбеюдің салыстырмасы</span><span lang="en" class="lang-content">Comparison of Sexual vs Asexual Reproduction</span><span lang="ru" class="lang-content">Сравнение полового и бесполого размножения</span></h3>
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+                            <th>🌿 <span lang="kk" class="lang-content">Жынысыз</span><span lang="en" class="lang-content">Asexual</span><span lang="ru" class="lang-content">Бесполое</span></th>
+                            <th>💑 <span lang="kk" class="lang-content">Жыныстық</span><span lang="en" class="lang-content">Sexual</span><span lang="ru" class="lang-content">Половое</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Ата-ана саны</span><span lang="en" class="lang-content">Parents</span><span lang="ru" class="lang-content">Число родителей</span></td>
+                                <td><span lang="kk" class="lang-content">1</span><span lang="en" class="lang-content">1</span><span lang="ru" class="lang-content">1</span></td>
+                                <td><span lang="kk" class="lang-content">2</span><span lang="en" class="lang-content">2</span><span lang="ru" class="lang-content">2</span></td>
+                            </tr>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Ұрпақтың генетикасы</span><span lang="en" class="lang-content">Offspring genetics</span><span lang="ru" class="lang-content">Генетика потомков</span></td>
+                                <td><span lang="kk" class="lang-content">Ата-анамен бірдей (клон)</span><span lang="en" class="lang-content">Identical to parent (clone)</span><span lang="ru" class="lang-content">Идентична родителю (клон)</span></td>
+                                <td><span lang="kk" class="lang-content">Алуан түрлі (рекомбинация)</span><span lang="en" class="lang-content">Varied (recombination)</span><span lang="ru" class="lang-content">Разнообразная (рекомбинация)</span></td>
+                            </tr>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Жылдамдығы</span><span lang="en" class="lang-content">Speed</span><span lang="ru" class="lang-content">Скорость</span></td>
+                                <td><span lang="kk" class="lang-content">Тез, жаппай</span><span lang="en" class="lang-content">Fast, mass</span><span lang="ru" class="lang-content">Быстрое, массовое</span></td>
+                                <td><span lang="kk" class="lang-content">Баяу</span><span lang="en" class="lang-content">Slower</span><span lang="ru" class="lang-content">Медленнее</span></td>
+                            </tr>
+                            <tr><td class="font-semibold"><span lang="kk" class="lang-content">Эволюциялық маңызы</span><span lang="en" class="lang-content">Evolutionary value</span><span lang="ru" class="lang-content">Эволюционное значение</span></td>
+                                <td><span lang="kk" class="lang-content">Тұрақты жағдайда тиімді</span><span lang="en" class="lang-content">Effective in stable environments</span><span lang="ru" class="lang-content">Эффективно в стабильной среде</span></td>
+                                <td><span lang="kk" class="lang-content">Өзгеретін жағдайда тиімді (бейімделу)</span><span lang="en" class="lang-content">Effective in changing environments (adaptation)</span><span lang="ru" class="lang-content">Эффективно в меняющейся среде (адаптация)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

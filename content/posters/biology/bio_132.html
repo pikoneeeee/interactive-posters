@@ -1,107 +1,338 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Respiration</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <title>Нервная система</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #451a03; color: #fed7aa; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { border-radius: 1.5rem; }
-        .lang-btn.active { background: #f97316; color: #451a03; font-weight: 800; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #0e7490; border-bottom: 3px solid #67e8f9; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #0891b2; background: white; color: #0891b2; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #ecfeff; }
+        .lang-btn.active { background: #0891b2; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .nerve-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #ecfeff; border: 2px solid #67e8f9; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<body class="bg-slate-50">
 
-<div class="space-y-8">
-        <header>
-            <h1 class="text-5xl font-Montserrat text-orange-400 mb-2" id="title"></h1>
-            <div class="h-1 w-20 bg-orange-600 rounded"></div>
-        </header>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
 
-        <div class="glass p-8 rounded-custom">
-            <p id="desc" class="text-lg leading-relaxed opacity-90"></p>
-            
-            <div class="mt-8 grid grid-cols-2 gap-4 text-xs font-bold uppercase tracking-widest text-orange-300/60">
-                <div class="border border-white/10 p-4 rounded-xl">24/7 Process</div>
-                <div class="border border-white/10 p-4 rounded-xl">Mitochondria</div>
+    <header class="header-card text-center mb-10">
+        <p class="text-cyan-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Жүйке жүйесі</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Nervous System</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Нервная система</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-cyan-100">Жүйке жүйесі — ағзаның басқару орталығы. Мида ~86 млрд нейрон бар. Импульс жылдамдығы 120 м/с дейін.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-cyan-100">The nervous system is the body's control center. Brain has ~86 billion neurons. Impulse speed up to 120 m/s.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-cyan-100">Нервная система — центр управления организмом. В мозге ~86 млрд нейронов. Скорость импульса до 120 м/с.</p>
+    </header>
+
+    <!-- Отделы нервной системы -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Жүйке жүйесінің бөлімдері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Divisions of Nervous System</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Отделы нервной системы</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- ЦНС -->
+                <div class="nerve-card" style="background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); border-left: 5px solid #0891b2;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-cyan-800 mb-3">🧠 ОРТАЛЫҚ ЖҮЙКЕ ЖҮЙЕСІ (ОЖЖ)</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-cyan-800 mb-3">🧠 CENTRAL NERVOUS SYSTEM (CNS)</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-cyan-800 mb-3">🧠 ЦЕНТРАЛЬНАЯ НЕРВНАЯ СИСТЕМА (ЦНС)</h3>
+                    
+                    <div class="space-y-3">
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🧠 <strong>Ми</strong> — ойлау, жады, сезім, қозғалыс орталығы</p>
+                            <p lang="en" class="lang-content text-sm">🧠 <strong>Brain</strong> — center of thought, memory, sensation, movement</p>
+                            <p lang="ru" class="lang-content text-sm">🧠 <strong>Головной мозг</strong> — центр мышления, памяти, ощущений, движения</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🦴 <strong>Жұлын</strong> — рефлекстер, импульстерді өткізу</p>
+                            <p lang="en" class="lang-content text-sm">🦴 <strong>Spinal cord</strong> — reflexes, impulse transmission</p>
+                            <p lang="ru" class="lang-content text-sm">🦴 <strong>Спинной мозг</strong> — рефлексы, проведение импульсов</p>
+                        </div>
+                    </div>
+                    
+                    <div class="fact-box mt-3">
+                        <p lang="kk" class="lang-content text-xs">🛡️ <strong>Қорғаныс:</strong> Сүйектер (бассүйек, омыртқа) + 3 қабық + ми-жұлын сұйықтығы</p>
+                        <p lang="en" class="lang-content text-xs">🛡️ <strong>Protection:</strong> Bones (skull, spine) + 3 membranes + cerebrospinal fluid</p>
+                        <p lang="ru" class="lang-content text-xs">🛡️ <strong>Защита:</strong> Кости (череп, позвоночник) + 3 оболочки + спинномозговая жидкость</p>
+                    </div>
+                </div>
+
+                <!-- ПНС -->
+                <div class="nerve-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b;">
+                    <h3 lang="kk" class="lang-content text-xl font-bold text-yellow-800 mb-3">⚡ ШЕТКІ ЖҮЙКЕ ЖҮЙЕСІ (ШЖЖ)</h3>
+                    <h3 lang="en" class="lang-content text-xl font-bold text-yellow-800 mb-3">⚡ PERIPHERAL NERVOUS SYSTEM (PNS)</h3>
+                    <h3 lang="ru" class="lang-content text-xl font-bold text-yellow-800 mb-3">⚡ ПЕРИФЕРИЧЕСКАЯ НЕРВНАЯ СИСТЕМА (ПНС)</h3>
+                    
+                    <div class="space-y-3">
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🔌 <strong>Жүйкелер</strong> — 12 жұп бассүйек + 31 жұп жұлын жүйкелері</p>
+                            <p lang="en" class="lang-content text-sm">🔌 <strong>Nerves</strong> — 12 pairs cranial + 31 pairs spinal nerves</p>
+                            <p lang="ru" class="lang-content text-sm">🔌 <strong>Нервы</strong> — 12 пар черепных + 31 пара спинномозговых</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 12px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-sm">🔘 <strong>Жүйке түйіндері</strong> — нейрон денелерінің жиналуы</p>
+                            <p lang="en" class="lang-content text-sm">🔘 <strong>Ganglia</strong> — clusters of neuron cell bodies</p>
+                            <p lang="ru" class="lang-content text-sm">🔘 <strong>Нервные узлы</strong> — скопления тел нейронов</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 10px; border-radius: 8px; margin-top: 12px;">
+                        <p lang="kk" class="lang-content text-xs"><strong>Соматикалық</strong> (ерікті) + <strong>Вегетативті</strong> (еріксіз)</p>
+                        <p lang="en" class="lang-content text-xs"><strong>Somatic</strong> (voluntary) + <strong>Autonomic</strong> (involuntary)</p>
+                        <p lang="ru" class="lang-content text-xs"><strong>Соматическая</strong> (произвольная) + <strong>Вегетативная</strong> (непроизвольная)</p>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="flex gap-2">
-            <button onclick="setL('ru')" id="btn-ru" class="lang-btn px-4 py-2 rounded-lg border border-white/20 text-xs">RU</button>
-            <button onclick="setL('kz')" id="btn-kz" class="lang-btn px-4 py-2 rounded-lg border border-white/20 text-xs">KZ</button>
-            <button onclick="setL('en')" id="btn-en" class="lang-btn px-4 py-2 rounded-lg border border-white/20 text-xs">EN</button>
+    <!-- Нейрон -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Нейрон — жүйке жасушасы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Neuron — Nerve Cell</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Нейрон — нервная клетка</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">🔴</p>
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">ДЕНЕ (СОМА)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">CELL BODY (SOMA)</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">ТЕЛО (СОМА)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">Ядро + органоидтер</p>
+                    <p lang="en" class="lang-content text-xs">Nucleus + organelles</p>
+                    <p lang="ru" class="lang-content text-xs">Ядро + органоиды</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Зат алмасу орталығы</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-600">Metabolic center</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Центр обмена веществ</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">🌿</p>
+                    <h4 lang="kk" class="lang-content font-bold text-emerald-700 mb-2">ДЕНДРИТТЕР</h4>
+                    <h4 lang="en" class="lang-content font-bold text-emerald-700 mb-2">DENDRITES</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-emerald-700 mb-2">ДЕНДРИТЫ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">Қысқа, тармақталған өсінділер</p>
+                    <p lang="en" class="lang-content text-xs">Short, branched extensions</p>
+                    <p lang="ru" class="lang-content text-xs">Короткие, ветвящиеся отростки</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Импульсті ҚАБЫЛДАЙДЫ</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-600">RECEIVE impulse</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">ПРИНИМАЮТ импульс</p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                    <p class="text-3xl mb-2">➡️</p>
+                    <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2">АКСОН</h4>
+                    <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2">AXON</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2">АКСОН</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">Ұзын өсінді (1 м дейін)</p>
+                    <p lang="en" class="lang-content text-xs">Long extension (up to 1 m)</p>
+                    <p lang="ru" class="lang-content text-xs">Длинный отросток (до 1 м)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Импульсті ӨТКІЗЕДІ</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-600">TRANSMIT impulse</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">ПЕРЕДАЁТ импульс</p>
+                </div>
+            </div>
+            
+            <div class="fact-box mt-4">
+                <p lang="kk" class="lang-content text-sm"><strong>🔗 Синапс</strong> — нейрондар арасындағы байланыс. Нейромедиаторлар (ацетилхолин, дофамин) арқылы импульс өтеді.</p>
+                <p lang="en" class="lang-content text-sm"><strong>🔗 Synapse</strong> — connection between neurons. Impulse passes via neurotransmitters (acetylcholine, dopamine).</p>
+                <p lang="ru" class="lang-content text-sm"><strong>🔗 Синапс</strong> — связь между нейронами. Импульс передаётся через нейромедиаторы (ацетилхолин, дофамин).</p>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="h-[600px] glass p-4 rounded-custom flex items-center justify-center bg-black/20">
-        <canvas id="respCanvas" class="w-full h-full"></canvas>
-    </div>
+    <!-- Типы нейронов -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Нейрон түрлері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Types of Neurons</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Типы нейронов</h2>
 
-    <script>
-        const db = {
-            ru: { t: "Дыхание Растений", d: "Процесс, обратный фотосинтезу. Растения дышат круглосуточно, поглощая кислород и выделяя углекислый газ. В митохондриях происходит окисление органических веществ с выделением энергии, необходимой для роста и развития." },
-            kz: { t: "Өсімдік тынысы", d: "Фотосинтезге кері процесс. Өсімдіктер тәулік бойы тыныс алып, оттегі жұтады және көмірқышқыл газын бөледі. Митохондрияларда энергия бөлінуімен органикалық заттардың тотығуы жүреді." },
-            en: { t: "Plant Respiration", d: "The reverse of photosynthesis. Plants respire 24/7, absorbing oxygen and releasing CO2. In mitochondria, organic matter is oxidized to release energy needed for growth." }
-        };
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="fact-box" style="border-color: #fca5a5; background: #fef2f2;">
+                    <p class="text-center text-2xl mb-2">📥</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-red-700">СЕЗІМТАЛ (АФФЕРЕНТТІК)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-red-700">SENSORY (AFFERENT)</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-red-700">ЧУВСТВИТЕЛЬНЫЕ (АФФЕРЕНТНЫЕ)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-center">Рецепторлардан → ОЖЖ-ге</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-center">From receptors → CNS</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-center">От рецепторов → ЦНС</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-500 text-center">Ақпаратты жеткізеді</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-500 text-center">Deliver information</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-500 text-center">Доставляют информацию</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #fde68a; background: #fef3c7;">
+                    <p class="text-center text-2xl mb-2">🔄</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-yellow-700">АРАЛЫҚ (ИНТЕРНЕЙРОН)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-yellow-700">INTERNEURON</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-yellow-700">ВСТАВОЧНЫЕ (ИНТЕРНЕЙРОНЫ)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-center">ОЖЖ ішінде</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-center">Within CNS</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-center">Внутри ЦНС</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-500 text-center">Ақпаратты өңдейді</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-500 text-center">Process information</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-500 text-center">Обрабатывают информацию</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #93c5fd; background: #eff6ff;">
+                    <p class="text-center text-2xl mb-2">📤</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-blue-700">ҚОЗҒАУШЫ (ЭФФЕРЕНТТІК)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-blue-700">MOTOR (EFFERENT)</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-blue-700">ДВИГАТЕЛЬНЫЕ (ЭФФЕРЕНТНЫЕ)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-center">ОЖЖ-ден → мүшелерге</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-center">From CNS → organs</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-center">От ЦНС → органам</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2 text-gray-500 text-center">Бұйрықты жеткізеді</p>
+                    <p lang="en" class="lang-content text-xs mt-2 text-gray-500 text-center">Deliver commands</p>
+                    <p lang="ru" class="lang-content text-xs mt-2 text-gray-500 text-center">Доставляют команды</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        let lang='ru', cx, cvs;
+    <!-- Рефлекс -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Рефлекс және рефлекторлық доға</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Reflex and Reflex Arc</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Рефлекс и рефлекторная дуга</h2>
 
-        window.setL = (l) => {
-            lang = l;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+l).classList.add('active');
-            document.getElementById('title').textContent = db[l].t;
-            document.getElementById('desc').textContent = db[l].d;
-        }
+        <div class="card">
+            <div class="fact-box mb-4">
+                <p lang="kk" class="lang-content text-sm"><strong>Рефлекс</strong> — тітіркендіргішке жүйке жүйесі арқылы берілетін жауап реакция. (И.П. Павлов)</p>
+                <p lang="en" class="lang-content text-sm"><strong>Reflex</strong> — response to stimulus through nervous system. (I.P. Pavlov)</p>
+                <p lang="ru" class="lang-content text-sm"><strong>Рефлекс</strong> — ответная реакция на раздражитель через нервную систему. (И.П. Павлов)</p>
+            </div>
+            
+            <h4 lang="kk" class="lang-content font-bold text-cyan-700 mb-3">🔄 Рефлекторлық доға (5 буын):</h4>
+            <h4 lang="en" class="lang-content font-bold text-cyan-700 mb-3">🔄 Reflex Arc (5 parts):</h4>
+            <h4 lang="ru" class="lang-content font-bold text-cyan-700 mb-3">🔄 Рефлекторная дуга (5 звеньев):</h4>
+            
+            <div class="grid md:grid-cols-5 gap-3">
+                <div style="background: #fef2f2; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">1️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">РЕЦЕПТОР</p>
+                    <p lang="en" class="lang-content text-xs font-bold">RECEPTOR</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">РЕЦЕПТОР</p>
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-500">Тітіркенуді қабылдайды</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-500">Receives stimulus</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-500">Воспринимает раздражение</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">2️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">СЕЗІМТАЛ ЖҮЙКЕ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">SENSORY NERVE</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ЧУВСТВ. НЕРВ</p>
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-500">ОЖЖ-ге жеткізеді</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-500">To CNS</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-500">Передаёт в ЦНС</p>
+                </div>
+                
+                <div style="background: #ecfdf5; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">3️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ЖҮЙКЕ ОРТАЛЫҒЫ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">NERVE CENTER</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">НЕРВНЫЙ ЦЕНТР</p>
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-500">Өңдеу (ми/жұлын)</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-500">Processing (brain/cord)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-500">Обработка (мозг)</p>
+                </div>
+                
+                <div style="background: #dbeafe; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">4️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ҚОЗҒАУШЫ ЖҮЙКЕ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">MOTOR NERVE</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ДВИГАТ. НЕРВ</p>
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-500">Мүшеге жеткізеді</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-500">To effector</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-500">Передаёт к органу</p>
+                </div>
+                
+                <div style="background: #f5f3ff; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">5️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ЭФФЕКТОР</p>
+                    <p lang="en" class="lang-content text-xs font-bold">EFFECTOR</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ЭФФЕКТОР</p>
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-500">Жауап береді (бұлшықет/без)</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-500">Response (muscle/gland)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-500">Отвечает (мышца/железа)</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+                <div style="background: #ecfeff; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>🔵 Шартсыз рефлекстер</strong> — туабітті (жұту, көз қысу, тізе рефлексі)</p>
+                    <p lang="en" class="lang-content text-sm"><strong>🔵 Unconditioned reflexes</strong> — innate (swallowing, blinking, knee jerk)</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>🔵 Безусловные рефлексы</strong> — врождённые (глотание, моргание, коленный)</p>
+                </div>
+                
+                <div style="background: #fff7ed; padding: 15px; border-radius: 10px;">
+                    <p lang="kk" class="lang-content text-sm"><strong>🟡 Шартты рефлекстер</strong> — өмірде қалыптасқан (оқу, жүру, сөйлеу)</p>
+                    <p lang="en" class="lang-content text-sm"><strong>🟡 Conditioned reflexes</strong> — acquired (reading, walking, speaking)</p>
+                    <p lang="ru" class="lang-content text-sm"><strong>🟡 Условные рефлексы</strong> — приобретённые (чтение, ходьба, речь)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function draw() {
-            const w = cvs.width, h = cvs.height;
-            const t = Date.now() * 0.001;
-            cx.clearRect(0,0,w,h);
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); border-radius: 1rem; border-top: 4px solid #0891b2;">
+        <p lang="kk" class="lang-content text-sm font-bold text-cyan-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-cyan-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-cyan-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-            // Mitochondria Shape
-            const cx_ = w/2, cy_ = h/2;
-            cx.fillStyle = '#7c2d12';
-            cx.beginPath(); cx.ellipse(cx_, cy_, 120, 200, 0.2, 0, Math.PI*2); cx.fill();
-            cx.strokeStyle = '#ea580c'; cx.lineWidth = 4; cx.stroke();
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
-            // Cristae (folds)
-            cx.strokeStyle = '#fdba74'; cx.lineWidth = 2;
-            for(let i=0; i<10; i++) {
-                const y = cy_ - 150 + i*30;
-                cx.beginPath(); 
-                cx.moveTo(cx_-80, y); 
-                cx.quadraticCurveTo(cx_, y + Math.sin(t+i)*20, cx_+80, y); 
-                cx.stroke();
-            }
-
-            // Energy Sparks (ATP)
-            for(let i=0; i<5; i++) {
-                const x = cx_ + (Math.random()-0.5)*150;
-                const y = cy_ + (Math.random()-0.5)*300;
-                cx.fillStyle = '#facc15';
-                cx.beginPath(); cx.arc(x, y, 4 + Math.sin(t*10 + i)*2, 0, Math.PI*2); cx.fill();
-            }
-
-            requestAnimationFrame(draw);
-        }
-
-        window.onload = () => {
-            cvs = document.getElementById('respCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; };
-            window.addEventListener('resize', rs); rs();
-            setL('ru'); draw();
-        }
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

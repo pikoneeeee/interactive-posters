@@ -1,89 +1,381 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transport of Substances</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <title>Органы чувств. Зрение</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #172554; color: #dbeafe; font-family: 'Inter'; min-height: 100vh; }
-        .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .rounded-custom { border-radius: 2rem; }
-        canvas { border-radius: 1.5rem; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #4338ca; border-bottom: 3px solid #a5b4fc; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #6366f1; background: white; color: #6366f1; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #eef2ff; }
+        .lang-btn.active { background: #6366f1; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .eye-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #eef2ff; border: 2px solid #a5b4fc; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+<body class="bg-slate-50">
 
-<div class="flex flex-col gap-6">
-        <h1 class="text-4xl font-bold text-blue-300">VASCULAR SYSTEM</h1>
-        <div class="glass p-8 rounded-custom border-l-8 border-blue-500">
-            <h2 class="text-2xl font-bold mb-4">Два потока (Two Flows)</h2>
-            <p class="text-sm opacity-80 leading-relaxed mb-4">
-                1. <strong>Ксилема (Древесина)</strong>: Восходящий ток. Вода и минералы от корней к листьям. Движущая сила: корневое давление и испарение.<br><br>
-                2. <strong>Флоэма (Луб)</strong>: Нисходящий ток. Растворы сахаров (органика) от листьев ко всем органам.
-            </p>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="h-[600px] glass p-4 rounded-custom relative bg-black/30">
-        <canvas id="transpCanvas" class="w-full h-full"></canvas>
-        <div class="absolute bottom-4 left-0 right-0 text-center text-xs flex justify-center gap-8">
-            <span class="text-blue-400">↑ XYLEM (Water)</span>
-            <span class="text-pink-400">↓ PHLOEM (Sugar)</span>
+    <header class="header-card text-center mb-10">
+        <p class="text-indigo-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Сезім мүшелері. Көру</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Sense Organs. Vision</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Органы чувств. Зрение</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-indigo-100">Көз — көру мүшесі. Адам ақпараттың 80%-ін көру арқылы алады. Көз ~7 млн түсті және ~120 млн жарықты ажыратады.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-indigo-100">Eye is the organ of vision. Humans receive 80% of information through sight. Eye distinguishes ~7 million colors and ~120 million light levels.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-indigo-100">Глаз — орган зрения. Человек получает 80% информации через зрение. Глаз различает ~7 млн цветов и ~120 млн оттенков света.</p>
+    </header>
+
+    <!-- Строение глаза -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Көздің құрылысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Eye Structure</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Строение глаза</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Оболочки -->
+                <div class="eye-card" style="background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-left: 5px solid #6366f1;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-indigo-800 mb-3">🔵 ҚАБЫҚТАР (3)</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-indigo-800 mb-3">🔵 TUNICS (3)</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-indigo-800 mb-3">🔵 ОБОЛОЧКИ (3)</h3>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs"><strong>1. Сыртқы (фиброзды):</strong></p>
+                            <p lang="en" class="lang-content text-xs"><strong>1. Outer (fibrous):</strong></p>
+                            <p lang="ru" class="lang-content text-xs"><strong>1. Наружная (фиброзная):</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• Склера (ақ) — қорғау</p>
+                            <p lang="en" class="lang-content text-xs">• Sclera (white) — protection</p>
+                            <p lang="ru" class="lang-content text-xs">• Склера (белая) — защита</p>
+                            <p lang="kk" class="lang-content text-xs">• Мүйізді қабық (мөлдір) — жарық сындыру</p>
+                            <p lang="en" class="lang-content text-xs">• Cornea (transparent) — light refraction</p>
+                            <p lang="ru" class="lang-content text-xs">• Роговица (прозрачная) — преломление</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs"><strong>2. Ортаңғы (тамырлы):</strong></p>
+                            <p lang="en" class="lang-content text-xs"><strong>2. Middle (vascular):</strong></p>
+                            <p lang="ru" class="lang-content text-xs"><strong>2. Средняя (сосудистая):</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• Тамырлы қабық — қоректендіру</p>
+                            <p lang="en" class="lang-content text-xs">• Choroid — nutrition</p>
+                            <p lang="ru" class="lang-content text-xs">• Сосудистая — питание</p>
+                            <p lang="kk" class="lang-content text-xs">• Кірпікшелі дене — линза пішінін өзгертеді</p>
+                            <p lang="en" class="lang-content text-xs">• Ciliary body — changes lens shape</p>
+                            <p lang="ru" class="lang-content text-xs">• Ресничное тело — меняет форму линзы</p>
+                            <p lang="kk" class="lang-content text-xs">• Нұрлы қабық (ирис) — көз түсі, қарашық</p>
+                            <p lang="en" class="lang-content text-xs">• Iris — eye color, pupil</p>
+                            <p lang="ru" class="lang-content text-xs">• Радужка — цвет глаз, зрачок</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs"><strong>3. Ішкі (торлы):</strong></p>
+                            <p lang="en" class="lang-content text-xs"><strong>3. Inner (retina):</strong></p>
+                            <p lang="ru" class="lang-content text-xs"><strong>3. Внутренняя (сетчатка):</strong></p>
+                            <p lang="kk" class="lang-content text-xs">• Рецепторлар: таяқшалар + колбочкалар</p>
+                            <p lang="en" class="lang-content text-xs">• Receptors: rods + cones</p>
+                            <p lang="ru" class="lang-content text-xs">• Рецепторы: палочки + колбочки</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Оптическая система -->
+                <div class="eye-card" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left: 5px solid #10b981;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-emerald-800 mb-3">🔍 ОПТИКАЛЫҚ ЖҮЙЕ</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-emerald-800 mb-3">🔍 OPTICAL SYSTEM</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-emerald-800 mb-3">🔍 ОПТИЧЕСКАЯ СИСТЕМА</h3>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">1️⃣ <strong>Мүйізді қабық</strong> — негізгі сындыру (40 диоптрия)</p>
+                            <p lang="en" class="lang-content text-xs">1️⃣ <strong>Cornea</strong> — main refraction (40 diopters)</p>
+                            <p lang="ru" class="lang-content text-xs">1️⃣ <strong>Роговица</strong> — основное преломление (40 диоптрий)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">2️⃣ <strong>Қарашық</strong> — жарық мөлшерін реттейді (2-8 мм)</p>
+                            <p lang="en" class="lang-content text-xs">2️⃣ <strong>Pupil</strong> — regulates light amount (2-8 mm)</p>
+                            <p lang="ru" class="lang-content text-xs">2️⃣ <strong>Зрачок</strong> — регулирует количество света (2-8 мм)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">3️⃣ <strong>Хрусталик</strong> — фокустау (аккомодация)</p>
+                            <p lang="en" class="lang-content text-xs">3️⃣ <strong>Lens</strong> — focusing (accommodation)</p>
+                            <p lang="ru" class="lang-content text-xs">3️⃣ <strong>Хрусталик</strong> — фокусировка (аккомодация)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">4️⃣ <strong>Шыны дене</strong> — мөлдір гель, пішінді сақтайды</p>
+                            <p lang="en" class="lang-content text-xs">4️⃣ <strong>Vitreous body</strong> — transparent gel, maintains shape</p>
+                            <p lang="ru" class="lang-content text-xs">4️⃣ <strong>Стекловидное тело</strong> — прозрачный гель, поддерживает форму</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Сетчатка -->
+                <div class="eye-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-yellow-800 mb-3">👁️ ТОРЛЫ ҚАБЫҚ (СЕТЧАТКА)</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-yellow-800 mb-3">👁️ RETINA</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-yellow-800 mb-3">👁️ СЕТЧАТКА</h3>
+                    
+                    <div class="space-y-2">
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">🔘 <strong>Таяқшалар</strong> (~120 млн)</p>
+                            <p lang="en" class="lang-content text-xs">🔘 <strong>Rods</strong> (~120 million)</p>
+                            <p lang="ru" class="lang-content text-xs">🔘 <strong>Палочки</strong> (~120 млн)</p>
+                            <p lang="kk" class="lang-content text-xs text-gray-600">Жарық/қараңғылық, түнгі көру</p>
+                            <p lang="en" class="lang-content text-xs text-gray-600">Light/dark, night vision</p>
+                            <p lang="ru" class="lang-content text-xs text-gray-600">Свет/темнота, ночное зрение</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">🎨 <strong>Колбочкалар</strong> (~7 млн)</p>
+                            <p lang="en" class="lang-content text-xs">🎨 <strong>Cones</strong> (~7 million)</p>
+                            <p lang="ru" class="lang-content text-xs">🎨 <strong>Колбочки</strong> (~7 млн)</p>
+                            <p lang="kk" class="lang-content text-xs text-gray-600">Түстер (қызыл, жасыл, көк)</p>
+                            <p lang="en" class="lang-content text-xs text-gray-600">Colors (red, green, blue)</p>
+                            <p lang="ru" class="lang-content text-xs text-gray-600">Цвета (красный, зелёный, синий)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">🟡 <strong>Сары дақ</strong> — ең анық көру (колбочкалар көп)</p>
+                            <p lang="en" class="lang-content text-xs">🟡 <strong>Yellow spot (macula)</strong> — clearest vision (most cones)</p>
+                            <p lang="ru" class="lang-content text-xs">🟡 <strong>Жёлтое пятно</strong> — чёткое зрение (много колбочек)</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <p lang="kk" class="lang-content text-xs">⚫ <strong>Соқыр дақ</strong> — рецепторлар жоқ (жүйке шығады)</p>
+                            <p lang="en" class="lang-content text-xs">⚫ <strong>Blind spot</strong> — no receptors (nerve exits)</p>
+                            <p lang="ru" class="lang-content text-xs">⚫ <strong>Слепое пятно</strong> — нет рецепторов (выход нерва)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        let cx, cvs;
-        let pUp = [], pDown = [];
+    <!-- Механизм зрения -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Көру механизмі</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Mechanism of Vision</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Механизм зрения</h2>
 
-        function draw() {
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
+        <div class="card">
+            <div class="grid md:grid-cols-5 gap-3">
+                <div style="background: #fef2f2; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">1️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ЖАРЫҚ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">LIGHT</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">СВЕТ</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">Заттан шағылысады</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Reflects from object</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Отражается от предмета</p>
+                </div>
+                
+                <div style="background: #ecfdf5; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">2️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">СЫНДЫРУ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">REFRACTION</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ПРЕЛОМЛЕНИЕ</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">Мүйізді қабық + хрусталик</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Cornea + lens</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Роговица + хрусталик</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">3️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">БЕЙНЕ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">IMAGE</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ИЗОБРАЖЕНИЕ</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">Торлы қабықта (төңкерілген!)</p>
+                    <p lang="en" class="lang-content text-xs mt-1">On retina (inverted!)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">На сетчатке (перевёрнутое!)</p>
+                </div>
+                
+                <div style="background: #dbeafe; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">4️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ИМПУЛЬС</p>
+                    <p lang="en" class="lang-content text-xs font-bold">IMPULSE</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ИМПУЛЬС</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">Көру жүйкесі арқылы</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Via optic nerve</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">По зрительному нерву</p>
+                </div>
+                
+                <div style="background: #f5f3ff; padding: 15px; border-radius: 10px; text-align: center;">
+                    <p class="text-xl mb-1">5️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ТАЛДАУ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">ANALYSIS</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">АНАЛИЗ</p>
+                    <p lang="kk" class="lang-content text-xs mt-1">Шүйде бөлігі (қыртыс)</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Occipital lobe (cortex)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Затылочная доля (кора)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Stem Cross-section logic
-            const tubeW = 60;
-            const x1 = w/2 - 50; // Xylem
-            const x2 = w/2 + 50; // Phloem
+    <!-- Нарушения зрения -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Көру бұзылыстары</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Vision Disorders</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Нарушения зрения</h2>
 
-            // Pipes
-            cx.fillStyle = 'rgba(59, 130, 246, 0.1)'; cx.fillRect(x1 - tubeW/2, 20, tubeW, h-40);
-            cx.strokeStyle = '#3b82f6'; cx.lineWidth = 2; cx.strokeRect(x1 - tubeW/2, 20, tubeW, h-40);
+        <div class="card">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="fact-box" style="border-color: #fca5a5; background: #fef2f2;">
+                    <p class="text-center text-2xl mb-2">📕</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-red-700">МИОПИЯ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-red-700">MYOPIA</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-red-700">БЛИЗОРУКОСТЬ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Жақынды көреді, алысты — жоқ</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Sees near, not far</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Видит близко, не далеко</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Себебі: көз ұзын, бейне торлы қабық алдында</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Cause: long eye, image before retina</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Причина: длинный глаз, изображение перед сетчаткой</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 font-bold">🔧 Шашыратқыш линза (—)</p>
+                    <p lang="en" class="lang-content text-xs mt-1 font-bold">🔧 Concave lens (—)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 font-bold">🔧 Рассеивающая линза (—)</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #93c5fd; background: #eff6ff;">
+                    <p class="text-center text-2xl mb-2">📘</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-blue-700">ГИПЕРМЕТРОПИЯ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-blue-700">HYPEROPIA</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-blue-700">ДАЛЬНОЗОРКОСТЬ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Алысты көреді, жақынды — жоқ</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Sees far, not near</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Видит далеко, не близко</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Себебі: көз қысқа, бейне торлы қабық артында</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Cause: short eye, image behind retina</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Причина: короткий глаз, изображение за сетчаткой</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 font-bold">🔧 Жинағыш линза (+)</p>
+                    <p lang="en" class="lang-content text-xs mt-1 font-bold">🔧 Convex lens (+)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 font-bold">🔧 Собирающая линза (+)</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #a5b4fc; background: #eef2ff;">
+                    <p class="text-center text-2xl mb-2">🌀</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-indigo-700">АСТИГМАТИЗМ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-indigo-700">ASTIGMATISM</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-indigo-700">АСТИГМАТИЗМ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Бұлыңғыр көру</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Blurred vision</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Размытое зрение</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Себебі: мүйізді қабық пішіні бұзылған</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Cause: irregular cornea shape</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Причина: неровная форма роговицы</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 font-bold">🔧 Цилиндрлік линза</p>
+                    <p lang="en" class="lang-content text-xs mt-1 font-bold">🔧 Cylindrical lens</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 font-bold">🔧 Цилиндрическая линза</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #a3a3a3; background: #f5f5f5;">
+                    <p class="text-center text-2xl mb-2">🎨</p>
+                    <h4 lang="kk" class="lang-content font-bold text-center text-gray-700">ДАЛЬТОНИЗМ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-center text-gray-700">COLOR BLINDNESS</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-center text-gray-700">ДАЛЬТОНИЗМ</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-2">Түстерді ажыратпау</p>
+                    <p lang="en" class="lang-content text-xs mt-2">Can't distinguish colors</p>
+                    <p lang="ru" class="lang-content text-xs mt-2">Не различает цвета</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Себебі: колбочкалар жетіспеушілігі (тұқым қуалайды)</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Cause: cone deficiency (hereditary)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Причина: дефект колбочек (наследственный)</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 font-bold">⚠️ Емделмейді</p>
+                    <p lang="en" class="lang-content text-xs mt-1 font-bold">⚠️ No treatment</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 font-bold">⚠️ Не лечится</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            cx.fillStyle = 'rgba(236, 72, 153, 0.1)'; cx.fillRect(x2 - tubeW/2, 20, tubeW, h-40);
-            cx.strokeStyle = '#ec4899'; cx.strokeRect(x2 - tubeW/2, 20, tubeW, h-40);
+    <!-- Гигиена зрения -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Көру гигиенасы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Eye Hygiene</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Гигиена зрения</h2>
 
-            // Particles Up (Water)
-            if(pUp.length < 50) pUp.push({x: x1 + (Math.random()-0.5)*40, y: h-20, v: 2+Math.random()});
-            pUp.forEach((p, i) => {
-                p.y -= p.v;
-                cx.fillStyle = '#60a5fa'; cx.beginPath(); cx.arc(p.x, p.y, 3, 0, Math.PI*2); cx.fill();
-                if(p.y < 20) pUp.splice(i, 1);
-            });
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">✅ Жарықтандыру сол жақтан түссін</p>
+                    <p lang="en" class="lang-content text-sm">✅ Light should come from the left</p>
+                    <p lang="ru" class="lang-content text-sm">✅ Освещение слева</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">✅ Кітаптан қашықтық 30-35 см</p>
+                    <p lang="en" class="lang-content text-sm">✅ Distance to book 30-35 cm</p>
+                    <p lang="ru" class="lang-content text-sm">✅ Расстояние до книги 30-35 см</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">✅ Әр 30-40 минут сайын демалыс</p>
+                    <p lang="en" class="lang-content text-sm">✅ Break every 30-40 minutes</p>
+                    <p lang="ru" class="lang-content text-sm">✅ Перерыв каждые 30-40 минут</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">✅ Көзге арналған жаттығулар жасау</p>
+                    <p lang="en" class="lang-content text-sm">✅ Do eye exercises</p>
+                    <p lang="ru" class="lang-content text-sm">✅ Делать гимнастику для глаз</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Particles Down (Sugar)
-            if(pDown.length < 50) pDown.push({x: x2 + (Math.random()-0.5)*40, y: 20, v: 1+Math.random()});
-            pDown.forEach((p, i) => {
-                p.y += p.v;
-                cx.fillStyle = '#f472b6'; cx.fillRect(p.x, p.y, 6, 6); // Squares for sugar
-                if(p.y > h-20) pDown.splice(i, 1);
-            });
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-radius: 1rem; border-top: 4px solid #6366f1;">
+        <p lang="kk" class="lang-content text-sm font-bold text-indigo-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-indigo-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-indigo-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-            requestAnimationFrame(draw);
-        }
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
-        window.onload = () => {
-            cvs = document.getElementById('transpCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; };
-            window.addEventListener('resize', rs); rs();
-            draw();
-        }
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

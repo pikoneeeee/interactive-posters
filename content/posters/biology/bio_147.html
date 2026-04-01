@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генетика. Законы Менделя</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #fefce8 100%); }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #166534 0%, #15803d 40%, #ca8a04 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(22,101,52,0.3); }
+        .section-heading { color: #166534; border-bottom: 4px solid #4ade80; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #166534; background: white; color: #166534; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #f0fdf4; }
+        .lang-btn.active { background: linear-gradient(135deg,#166534,#15803d); color: white; box-shadow: 0 4px 12px rgba(22,101,52,0.3); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#fefce8); border-left: 5px solid #16a34a; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .term-box { border: 2px solid; border-radius: 10px; padding: 10px 14px; margin: 6px 0; }
+        .punnett { border-collapse: collapse; margin: 0 auto; }
+        .punnett td, .punnett th { border: 2px solid #166534; padding: 10px 14px; text-align: center; font-weight: 700; min-width: 60px; font-size: 1rem; }
+        .punnett th { background: #166534; color: white; }
+        .punnett .dom { background: #dcfce7; color: #166534; }
+        .punnett .rec { background: #fef3c7; color: #92400e; }
+        .punnett .het { background: #dbeafe; color: #1e40af; }
+        table.comp { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        table.comp th { background: linear-gradient(135deg,#166534,#15803d); color: white; padding: 10px 14px; text-align: left; font-weight: 700; }
+        table.comp th:first-child { border-radius: 10px 0 0 0; } table.comp th:last-child { border-radius: 0 10px 0 0; }
+        table.comp td { padding: 9px 14px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        table.comp tr:nth-child(even) td { background: #f0fdf4; }
+        table.comp tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-green-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Генетика</p>
+        <h1 lang="kk" class="lang-content text-5xl font-black uppercase tracking-wide">Генетика. Мендель заңдары</h1>
+        <h1 lang="en" class="lang-content text-5xl font-black uppercase tracking-wide">Genetics. Mendel's Laws</h1>
+        <h1 lang="ru" class="lang-content text-5xl font-black uppercase tracking-wide">Генетика. Законы Менделя</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p lang="kk" class="lang-content text-lg font-medium">Генетика — тұқым қуалаушылық пен өзгергіштікті зерттейтін ғылым. Негізін қалаушы — <b>Грегор Мендель</b> (1865). Ол бұршақтармен тәжірибелер жүргізіп, тұқым қуалаушылықтың <b>3 заңын</b> ашты.</p>
+            <p lang="en" class="lang-content text-lg font-medium">Genetics — the science of heredity and variation. Founded by <b>Gregor Mendel</b> (1865). Through experiments with pea plants, he discovered <b>3 laws of inheritance</b>.</p>
+            <p lang="ru" class="lang-content text-lg font-medium">Генетика — наука о наследственности и изменчивости. Основоположник — <b>Грегор Мендель</b> (1865). Проводя опыты с горохом, он открыл <b>3 закона наследственности</b>.</p>
+        </div>
+    </header>
+
+    <!-- KEY TERMS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📖 Негізгі ұғымдар</h2>
+        <h2 lang="en" class="lang-content section-heading">📖 Key Terms</h2>
+        <h2 lang="ru" class="lang-content section-heading">📖 Основные понятия</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                <div class="term-box" style="border-color:#166534;background:#f0fdf4;">
+                    <p class="font-bold text-green-800">🧬 <span lang="kk" class="lang-content">Ген</span><span lang="en" class="lang-content">Gene</span><span lang="ru" class="lang-content">Ген</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">ДНҚ-ның белгілі бір белгіні анықтайтын учаскесі</span><span lang="en" class="lang-content">A segment of DNA that determines a specific trait</span><span lang="ru" class="lang-content">Участок ДНК, определяющий конкретный признак</span></p>
+                </div>
+                <div class="term-box" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700">🔤 <span lang="kk" class="lang-content">Аллель</span><span lang="en" class="lang-content">Allele</span><span lang="ru" class="lang-content">Аллель</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Геннің балама нұсқалары (А немесе а). Гомологиялық хромосомаларда орналасады.</span><span lang="en" class="lang-content">Alternative forms of a gene (A or a). Located on homologous chromosomes.</span><span lang="ru" class="lang-content">Альтернативные варианты гена (А или а). Расположены на гомологичных хромосомах.</span></p>
+                </div>
+                <div class="term-box" style="border-color:#ca8a04;background:#fefce8;">
+                    <p class="font-bold text-amber-700">👑 <span lang="kk" class="lang-content">Доминантты аллель (A)</span><span lang="en" class="lang-content">Dominant allele (A)</span><span lang="ru" class="lang-content">Доминантный аллель (A)</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Гетерозиготада өзін көрсететін аллель. Үлкен әріппен белгіленеді.</span><span lang="en" class="lang-content">Allele expressed in heterozygotes. Written in uppercase.</span><span lang="ru" class="lang-content">Аллель, проявляющийся у гетерозигот. Обозначается заглавной буквой.</span></p>
+                </div>
+                <div class="term-box" style="border-color:#92400e;background:#fff7ed;">
+                    <p class="font-bold text-amber-900">🔽 <span lang="kk" class="lang-content">Рецессивті аллель (a)</span><span lang="en" class="lang-content">Recessive allele (a)</span><span lang="ru" class="lang-content">Рецессивный аллель (a)</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Тек гомозиготада (аа) көрінетін аллель. Кіші әріппен белгіленеді.</span><span lang="en" class="lang-content">Expressed only in homozygotes (aa). Written in lowercase.</span><span lang="ru" class="lang-content">Проявляется только у гомозигот (aa). Обозначается строчной буквой.</span></p>
+                </div>
+                <div class="term-box" style="border-color:#1d4ed8;background:#eff6ff;">
+                    <p class="font-bold text-blue-700">🎯 <span lang="kk" class="lang-content">Генотип</span><span lang="en" class="lang-content">Genotype</span><span lang="ru" class="lang-content">Генотип</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Организмнің генетикалық құрамы (AA, Aa, aa). Тікелей байқалмайды.</span><span lang="en" class="lang-content">Genetic composition (AA, Aa, aa). Not directly observable.</span><span lang="ru" class="lang-content">Генетический состав организма (AA, Aa, aa). Не наблюдается напрямую.</span></p>
+                </div>
+                <div class="term-box" style="border-color:#7c3aed;background:#fdf4ff;">
+                    <p class="font-bold text-purple-700">👁️ <span lang="kk" class="lang-content">Фенотип</span><span lang="en" class="lang-content">Phenotype</span><span lang="ru" class="lang-content">Фенотип</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Организмнің сыртқы белгілері (сары/жасыл, тегіс/бүрісті). Байқалады.</span><span lang="en" class="lang-content">Observable traits (yellow/green, smooth/wrinkled). Observable.</span><span lang="ru" class="lang-content">Внешние признаки организма (жёлтый/зелёный, гладкий/морщинистый). Наблюдаемый.</span></p>
+                </div>
+                <div class="term-box" style="border-color:#be185d;background:#fff1f2;">
+                    <p class="font-bold text-rose-700">🟰 <span lang="kk" class="lang-content">Гомозигота (AA / aa)</span><span lang="en" class="lang-content">Homozygote (AA / aa)</span><span lang="ru" class="lang-content">Гомозигота (AA / aa)</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Екі бірдей аллельі бар организм. Таза будан.</span><span lang="en" class="lang-content">Organism with two identical alleles. Pure breeding.</span><span lang="ru" class="lang-content">Организм с двумя одинаковыми аллелями. Чистая линия.</span></p>
+                </div>
+                <div class="term-box" style="border-color:#0d9488;background:#f0fdfa;">
+                    <p class="font-bold text-teal-700">⚖️ <span lang="kk" class="lang-content">Гетерозигота (Aa)</span><span lang="en" class="lang-content">Heterozygote (Aa)</span><span lang="ru" class="lang-content">Гетерозигота (Aa)</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Әртүрлі аллельдері бар организм. Будан.</span><span lang="en" class="lang-content">Organism with different alleles. Hybrid.</span><span lang="ru" class="lang-content">Организм с разными аллелями. Гибрид.</span></p>
+                </div>
+                <div class="term-box" style="border-color:#475569;background:#f8fafc;">
+                    <p class="font-bold text-slate-700">🔬 <span lang="kk" class="lang-content">Будандастыру (Гибридизация)</span><span lang="en" class="lang-content">Hybridization</span><span lang="ru" class="lang-content">Гибридизация</span></p>
+                    <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Р (ата-ана) × → F₁ (1-ші ұрпақ) → F₂ (2-ші ұрпақ)</span><span lang="en" class="lang-content">P (parents) × → F₁ (1st generation) → F₂ (2nd generation)</span><span lang="ru" class="lang-content">Р (родители) × → F₁ (1-е поколение) → F₂ (2-е поколение)</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAW 1 & 2: MONOHYBRID -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌿 Моногибридті будандастыру — Мендель заңы I және II</h2>
+        <h2 lang="en" class="lang-content section-heading">🌿 Monohybrid Cross — Mendel's Laws I & II</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌿 Моногибридное скрещивание — I и II законы Менделя</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Law 1 -->
+            <div class="card">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-3xl font-black text-white w-12 h-12 rounded-full flex items-center justify-center" style="background:#166534;">I</span>
+                    <div>
+                        <h3 class="font-black text-lg text-green-800">
+                            <span lang="kk" class="lang-content">Бірінші ұрпақтың біркелкілігі заңы</span>
+                            <span lang="en" class="lang-content">Law of Uniformity (Dominance)</span>
+                            <span lang="ru" class="lang-content">Закон единообразия F₁</span>
+                        </h3>
+                    </div>
+                </div>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">Таза линиялы ата-аналарды (AA × aa) будандастырғанда, F₁ буданының <b>барлығы бірдей фенотипке</b> ие болады — доминантты белгі.</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-4">When pure-breeding parents (AA × aa) are crossed, <b>all F₁ hybrids are phenotypically uniform</b> — showing the dominant trait.</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">При скрещивании чистых линий (AA × aa) <b>все гибриды F₁ фенотипически одинаковы</b> — проявляется доминантный признак.</div>
+                <!-- Punnett F1 -->
+                <div class="overflow-x-auto mb-4">
+                    <div class="text-center text-xs text-gray-500 mb-2">P: AA (🟡) × aa (🟢) → F₁</div>
+                    <table class="punnett mx-auto">
+                        <tr><th></th><th>a</th><th>a</th></tr>
+                        <tr><th>A</th><td class="het">Aa</td><td class="het">Aa</td></tr>
+                        <tr><th>A</th><td class="het">Aa</td><td class="het">Aa</td></tr>
+                    </table>
+                </div>
+                <div class="fact-box text-xs">
+                    <span lang="kk" class="lang-content"><b>F₁ нәтижесі:</b> 100% Aa — барлығы гетерозигота, доминантты фенотип 🟡. Рецессивті белгі «жасырынады».</span>
+                    <span lang="en" class="lang-content"><b>F₁ result:</b> 100% Aa — all heterozygotes, dominant phenotype 🟡. Recessive trait is «hidden».</span>
+                    <span lang="ru" class="lang-content"><b>Результат F₁:</b> 100% Aa — все гетерозиготы, доминантный фенотип 🟡. Рецессивный признак «скрывается».</span>
+                </div>
+            </div>
+            <!-- Law 2 -->
+            <div class="card">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-3xl font-black text-white w-12 h-12 rounded-full flex items-center justify-center" style="background:#ca8a04;">II</span>
+                    <div>
+                        <h3 class="font-black text-lg text-amber-800">
+                            <span lang="kk" class="lang-content">Бөліну заңы</span>
+                            <span lang="en" class="lang-content">Law of Segregation</span>
+                            <span lang="ru" class="lang-content">Закон расщепления</span>
+                        </h3>
+                    </div>
+                </div>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">F₁ будандарын өзімен будандастырғанда (Aa × Aa), F₂-де белгілер <b>3:1 қатынасында</b> бөлінеді (фенотип бойынша).</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-4">When F₁ hybrids are self-crossed (Aa × Aa), F₂ shows <b>3:1 phenotype ratio</b>.</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">При скрещивании гибридов F₁ (Aa × Aa) в F₂ признаки расщепляются в <b>соотношении 3:1</b> по фенотипу.</div>
+                <!-- Punnett F2 -->
+                <div class="overflow-x-auto mb-4">
+                    <div class="text-center text-xs text-gray-500 mb-2">F₁ × F₁: Aa × Aa → F₂</div>
+                    <table class="punnett mx-auto">
+                        <tr><th></th><th>A</th><th>a</th></tr>
+                        <tr><th>A</th><td class="dom">AA</td><td class="het">Aa</td></tr>
+                        <tr><th>a</th><td class="het">Aa</td><td class="rec">aa</td></tr>
+                    </table>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div class="rounded-xl p-3 text-center text-xs" style="background:#dcfce7;border:2px solid #166534;">
+                        <p class="font-bold text-green-800"><span lang="kk" class="lang-content">Фенотип бойынша</span><span lang="en" class="lang-content">By phenotype</span><span lang="ru" class="lang-content">По фенотипу</span></p>
+                        <p class="text-2xl font-black text-green-700 my-1">3 : 1</p>
+                        <p class="text-gray-600">🟡🟡🟡 : 🟢</p>
+                    </div>
+                    <div class="rounded-xl p-3 text-center text-xs" style="background:#dbeafe;border:2px solid #1d4ed8;">
+                        <p class="font-bold text-blue-800"><span lang="kk" class="lang-content">Генотип бойынша</span><span lang="en" class="lang-content">By genotype</span><span lang="ru" class="lang-content">По генотипу</span></p>
+                        <p class="text-2xl font-black text-blue-700 my-1">1 : 2 : 1</p>
+                        <p class="text-gray-600">AA : Aa : aa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAW 3: DIHYBRID -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌱 Дигибридті будандастыру — III заң</h2>
+        <h2 lang="en" class="lang-content section-heading">🌱 Dihybrid Cross — Law III</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌱 Дигибридное скрещивание — III закон</h2>
+        <div class="card">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-3xl font-black text-white w-12 h-12 rounded-full flex items-center justify-center" style="background:#7c3aed;">III</span>
+                <div>
+                    <h3 class="font-black text-lg text-purple-800">
+                        <span lang="kk" class="lang-content">Тәуелсіз үйлесім заңы</span>
+                        <span lang="en" class="lang-content">Law of Independent Assortment</span>
+                        <span lang="ru" class="lang-content">Закон независимого наследования</span>
+                    </h3>
+                </div>
+            </div>
+            <div lang="kk" class="lang-content text-sm text-gray-600 mb-5">Екі жұп белгі <b>бір-бірінен тәуелсіз</b> тұқым қуалайды (егер гендер әртүрлі хромосомаларда болса). AaBb × AaBb → F₂: <b>9:3:3:1</b></div>
+            <div lang="en" class="lang-content text-sm text-gray-600 mb-5">Two pairs of traits are inherited <b>independently</b> of each other (if genes are on different chromosomes). AaBb × AaBb → F₂: <b>9:3:3:1</b></div>
+            <div lang="ru" class="lang-content text-sm text-gray-600 mb-5">Два признака наследуются <b>независимо</b> друг от друга (если гены в разных хромосомах). AaBb × AaBb → F₂: <b>9:3:3:1</b></div>
+            <div class="overflow-x-auto mb-5">
+                <div class="text-xs text-gray-500 text-center mb-2">
+                    <span lang="kk" class="lang-content">P: AABB (🟡 тегіс) × aabb (🟢 бүрісті) → F₁: AaBb (🟡 тегіс) → F₁ × F₁ → F₂:</span>
+                    <span lang="en" class="lang-content">P: AABB (🟡 smooth) × aabb (🟢 wrinkled) → F₁: AaBb (🟡 smooth) → F₁ × F₁ → F₂:</span>
+                    <span lang="ru" class="lang-content">P: AABB (🟡 гладкий) × aabb (🟢 морщинистый) → F₁: AaBb (🟡 гладкий) → F₁ × F₁ → F₂:</span>
+                </div>
+                <table class="punnett mx-auto text-xs">
+                    <tr><th></th><th>AB</th><th>Ab</th><th>aB</th><th>ab</th></tr>
+                    <tr><th>AB</th><td class="dom">AABB</td><td class="dom">AABb</td><td class="dom">AaBB</td><td class="dom">AaBb</td></tr>
+                    <tr><th>Ab</th><td class="dom">AABb</td><td class="dom">AAbb</td><td class="dom">AaBb</td><td class="rec" style="background:#fce7f3;color:#9f1239;">Aabb</td></tr>
+                    <tr><th>aB</th><td class="dom">AaBB</td><td class="dom">AaBb</td><td class="rec" style="background:#e0f2fe;color:#075985;">aaBB</td><td class="rec" style="background:#e0f2fe;color:#075985;">aaBb</td></tr>
+                    <tr><th>ab</th><td class="dom">AaBb</td><td class="rec" style="background:#fce7f3;color:#9f1239;">Aabb</td><td class="rec" style="background:#e0f2fe;color:#075985;">aaBb</td><td class="rec">aabb</td></tr>
+                </table>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-center">
+                <div class="rounded-xl p-3" style="background:#dcfce7;border:2px solid #166534;">
+                    <div class="text-2xl font-black text-green-700">9</div>
+                    <div class="font-bold text-green-800">A_B_</div>
+                    <p class="text-gray-600">🟡<span lang="kk" class="lang-content"> тегіс</span><span lang="en" class="lang-content"> smooth</span><span lang="ru" class="lang-content"> гладкий</span></p>
+                </div>
+                <div class="rounded-xl p-3" style="background:#fce7f3;border:2px solid #be185d;">
+                    <div class="text-2xl font-black text-rose-700">3</div>
+                    <div class="font-bold text-rose-800">A_bb</div>
+                    <p class="text-gray-600">🟡<span lang="kk" class="lang-content"> бүрісті</span><span lang="en" class="lang-content"> wrinkled</span><span lang="ru" class="lang-content"> морщинистый</span></p>
+                </div>
+                <div class="rounded-xl p-3" style="background:#e0f2fe;border:2px solid #0284c7;">
+                    <div class="text-2xl font-black text-sky-700">3</div>
+                    <div class="font-bold text-sky-800">aaB_</div>
+                    <p class="text-gray-600">🟢<span lang="kk" class="lang-content"> тегіс</span><span lang="en" class="lang-content"> smooth</span><span lang="ru" class="lang-content"> гладкий</span></p>
+                </div>
+                <div class="rounded-xl p-3" style="background:#fef3c7;border:2px solid #ca8a04;">
+                    <div class="text-2xl font-black text-amber-700">1</div>
+                    <div class="font-bold text-amber-800">aabb</div>
+                    <p class="text-gray-600">🟢<span lang="kk" class="lang-content"> бүрісті</span><span lang="en" class="lang-content"> wrinkled</span><span lang="ru" class="lang-content"> морщинистый</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INCOMPLETE DOMINANCE & TEST CROSS -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🌸 Толық емес доминирлеу және анализдік будандастыру</h2>
+        <h2 lang="en" class="lang-content section-heading">🌸 Incomplete Dominance & Test Cross</h2>
+        <h2 lang="ru" class="lang-content section-heading">🌸 Неполное доминирование и анализирующее скрещивание</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-rose-700 text-lg mb-3">🌸 <span lang="kk" class="lang-content">Толық емес доминирлеу</span><span lang="en" class="lang-content">Incomplete Dominance</span><span lang="ru" class="lang-content">Неполное доминирование</span></h3>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-3">Гетерозиготада (Aa) ешбір аллель толық үстемдік етпейді → аралық фенотип пайда болады.</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-3">In heterozygotes (Aa), neither allele fully dominates → intermediate phenotype appears.</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-3">У гетерозигот (Aa) ни один аллель не доминирует полностью → проявляется промежуточный фенотип.</div>
+                <div class="overflow-x-auto mb-3">
+                    <div class="text-xs text-gray-500 text-center mb-2">
+                        <span lang="kk" class="lang-content">P: AA (🔴 қызыл) × aa (⚪ ақ) → F₁: Aa (🩷 қызғылт)</span>
+                        <span lang="en" class="lang-content">P: AA (🔴 red) × aa (⚪ white) → F₁: Aa (🩷 pink)</span>
+                        <span lang="ru" class="lang-content">P: AA (🔴 красный) × aa (⚪ белый) → F₁: Aa (🩷 розовый)</span>
+                    </div>
+                    <div class="text-xs text-gray-500 text-center mb-2">F₁ × F₁: Aa × Aa → F₂</div>
+                    <table class="punnett mx-auto">
+                        <tr><th></th><th>A</th><th>a</th></tr>
+                        <tr><th>A</th><td class="dom">AA 🔴</td><td class="het">Aa 🩷</td></tr>
+                        <tr><th>a</th><td class="het">Aa 🩷</td><td class="rec">aa ⚪</td></tr>
+                    </table>
+                </div>
+                <div class="grid grid-cols-2 gap-3 text-xs text-center mt-2">
+                    <div class="rounded-xl p-2" style="background:#ffe4e6;border:2px solid #be185d;"><b class="text-rose-700"><span lang="kk" class="lang-content">Фенотип</span><span lang="en" class="lang-content">Phenotype</span><span lang="ru" class="lang-content">Фенотип</span></b><div class="text-lg font-black text-rose-600 mt-0.5">1 : 2 : 1</div><div>🔴 : 🩷 : ⚪</div></div>
+                    <div class="rounded-xl p-2" style="background:#dbeafe;border:2px solid #1d4ed8;"><b class="text-blue-700"><span lang="kk" class="lang-content">Генотип</span><span lang="en" class="lang-content">Genotype</span><span lang="ru" class="lang-content">Генотип</span></b><div class="text-lg font-black text-blue-600 mt-0.5">1 : 2 : 1</div><div>AA : Aa : aa</div></div>
+                </div>
+                <div class="fact-box mt-3 text-xs">
+                    <span lang="kk" class="lang-content"><b>Мысалдар:</b> Мираль гүлінің (ночная красавица) түсі, қояндардың шашы, адамның сары шашы</span>
+                    <span lang="en" class="lang-content"><b>Examples:</b> Four o'clock flower color, rabbit fur, human blonde hair</span>
+                    <span lang="ru" class="lang-content"><b>Примеры:</b> Цвет цветков ночной красавицы, шерсть кроликов, светлые волосы человека</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-teal-700 text-lg mb-3">🔍 <span lang="kk" class="lang-content">Анализдік будандастыру</span><span lang="en" class="lang-content">Test Cross (Backcross)</span><span lang="ru" class="lang-content">Анализирующее скрещивание</span></h3>
+                <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">Организмнің генотипін анықтау үшін оны <b>рецессивті гомозиготамен</b> (aa) будандастырады.</div>
+                <div lang="en" class="lang-content text-sm text-gray-600 mb-4">To determine an organism's genotype, it is crossed with a <b>recessive homozygote</b> (aa).</div>
+                <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Для определения генотипа организм скрещивают с <b>рецессивной гомозиготой</b> (aa).</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="rounded-xl p-4" style="background:#f0fdf4;border:2px solid #16a34a;">
+                        <p class="font-bold text-green-700 text-sm text-center mb-2">AA × aa</p>
+                        <table class="punnett mx-auto text-xs">
+                            <tr><th></th><th>a</th><th>a</th></tr>
+                            <tr><th>A</th><td class="dom text-xs">Aa</td><td class="dom text-xs">Aa</td></tr>
+                            <tr><th>A</th><td class="dom text-xs">Aa</td><td class="dom text-xs">Aa</td></tr>
+                        </table>
+                        <div class="text-center mt-2 text-xs font-bold text-green-700">
+                            <span lang="kk" class="lang-content">100% доминантты</span>
+                            <span lang="en" class="lang-content">100% dominant</span>
+                            <span lang="ru" class="lang-content">100% доминантных</span>
+                        </div>
+                        <div class="text-center text-xs text-gray-500">→ <span lang="kk" class="lang-content">Гомозигота AA</span><span lang="en" class="lang-content">Homozygote AA</span><span lang="ru" class="lang-content">Гомозигота AA</span></div>
+                    </div>
+                    <div class="rounded-xl p-4" style="background:#fefce8;border:2px solid #ca8a04;">
+                        <p class="font-bold text-amber-700 text-sm text-center mb-2">Aa × aa</p>
+                        <table class="punnett mx-auto text-xs">
+                            <tr><th></th><th>a</th><th>a</th></tr>
+                            <tr><th>A</th><td class="dom text-xs">Aa</td><td class="dom text-xs">Aa</td></tr>
+                            <tr><th>a</th><td class="rec text-xs">aa</td><td class="rec text-xs">aa</td></tr>
+                        </table>
+                        <div class="text-center mt-2 text-xs font-bold text-amber-700">1 : 1</div>
+                        <div class="text-center text-xs text-gray-500">→ <span lang="kk" class="lang-content">Гетерозигота Aa</span><span lang="en" class="lang-content">Heterozygote Aa</span><span lang="ru" class="lang-content">Гетерозигота Aa</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUMMARY TABLE -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📊 Менделдің заңдары: қорытынды кесте</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Mendel's Laws: Summary</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Законы Менделя: сводная таблица</h2>
+        <div class="card overflow-x-auto">
+            <table class="comp">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Заң</span><span lang="en" class="lang-content">Law</span><span lang="ru" class="lang-content">Закон</span></th>
+                    <th><span lang="kk" class="lang-content">Будандастыру</span><span lang="en" class="lang-content">Cross</span><span lang="ru" class="lang-content">Скрещивание</span></th>
+                    <th><span lang="kk" class="lang-content">F₁ нәтижесі</span><span lang="en" class="lang-content">F₁ result</span><span lang="ru" class="lang-content">Результат F₁</span></th>
+                    <th><span lang="kk" class="lang-content">F₂ бөлінуі</span><span lang="en" class="lang-content">F₂ ratio</span><span lang="ru" class="lang-content">Расщепление F₂</span></th>
+                    <th><span lang="kk" class="lang-content">Шарт</span><span lang="en" class="lang-content">Condition</span><span lang="ru" class="lang-content">Условие</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold text-green-800">I — <span lang="kk" class="lang-content">Біркелкілік</span><span lang="en" class="lang-content">Uniformity</span><span lang="ru" class="lang-content">Единообразие</span></td>
+                        <td>AA × aa</td>
+                        <td class="font-bold">100% Aa 🟡</td>
+                        <td>—</td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Таза линиялар, толық доминирлеу</span><span lang="en" class="lang-content">Pure lines, complete dominance</span><span lang="ru" class="lang-content">Чистые линии, полное доминирование</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-amber-800">II — <span lang="kk" class="lang-content">Бөліну</span><span lang="en" class="lang-content">Segregation</span><span lang="ru" class="lang-content">Расщепление</span></td>
+                        <td>Aa × Aa</td>
+                        <td>—</td>
+                        <td class="font-bold">3🟡 : 1🟢 (фенотип)<br>1AA : 2Aa : 1aa (генотип)</td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Толық доминирлеу, 1 ген жұбы</span><span lang="en" class="lang-content">Complete dominance, 1 gene pair</span><span lang="ru" class="lang-content">Полное доминирование, 1 пара генов</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-purple-800">III — <span lang="kk" class="lang-content">Тәуелсіздік</span><span lang="en" class="lang-content">Independence</span><span lang="ru" class="lang-content">Независимость</span></td>
+                        <td>AaBb × AaBb</td>
+                        <td>100% AaBb</td>
+                        <td class="font-bold">9 : 3 : 3 : 1</td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Гендер әртүрлі хромосомаларда (байланыссыз)</span><span lang="en" class="lang-content">Genes on different chromosomes (unlinked)</span><span lang="ru" class="lang-content">Гены в разных хромосомах (несцепленные)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-rose-700"><span lang="kk" class="lang-content">Толық емес доминирлеу</span><span lang="en" class="lang-content">Incomplete dominance</span><span lang="ru" class="lang-content">Неполное доминирование</span></td>
+                        <td>Aa × Aa</td>
+                        <td>100% Aa 🩷</td>
+                        <td class="font-bold">1🔴 : 2🩷 : 1⚪</td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Ешбір аллель толық үстемдік етпейді</span><span lang="en" class="lang-content">Neither allele is fully dominant</span><span lang="ru" class="lang-content">Ни один аллель не доминирует полностью</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

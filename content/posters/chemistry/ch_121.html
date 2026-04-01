@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Электролиз. Законы Фарадея. Применение</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #1e1b4b, #3730a3, #0f172a); color: white; min-height: 100vh; font-size: 1.15rem; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12); }
+        .glass-accent { background: rgba(129,140,248,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(129,140,248,0.3); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 12px 28px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.15rem; transition: all 0.2s; }
+        .lang-btn.active { background: #818cf8; color: #1e1b4b; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th { background: rgba(129,140,248,0.18); color: #c7d2fe; padding: 18px 22px; font-weight: 700; font-size: 1.25rem; text-align: left; border-bottom: 2px solid rgba(129,140,248,0.4); }
+        table.t td { padding: 16px 22px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1.25rem; vertical-align: top; color: rgba(255,255,255,0.88); line-height: 1.5; }
+        table.t tr:hover td { background: rgba(255,255,255,0.04); }
+        .formula-block { background: rgba(0,0,0,0.55); color: #c7d2fe; font-family: 'Courier New', monospace; padding: 20px 26px; border-radius: 1.2rem; font-size: 1.3rem; line-height: 1.8; white-space: pre; overflow-x: auto; border: 1px solid rgba(129,140,248,0.25); }
+        .info-text { font-size: 1.2rem; line-height: 1.65; color: rgba(255,255,255,0.85); }
+        .card-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">11 класс · Общая химия · Электрохимия</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-indigo-400">Электролиз. Фарадей заңдары. Қолданылуы</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-indigo-400">Electrolysis. Faraday's Laws. Applications</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-indigo-400">Электролиз. Законы Фарадея. Применение</h1>
+        </div>
+        <div class="flex gap-3 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: CONCEPT + ELECTRODE PROCESSES -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-indigo-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Электролиз — электр тогымен ОВР · Электрод процестері</span>
+            <span lang="en" class="lang-content">Electrolysis — Redox by Electric Current · Electrode Processes</span>
+            <span lang="ru" class="lang-content">Электролиз — ОВР с помощью тока · Процессы на электродах</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-2xl text-indigo-300 mb-4">
+                    <span lang="kk" class="lang-content">Электролиз дегеніміз не?</span>
+                    <span lang="en" class="lang-content">What is Electrolysis?</span>
+                    <span lang="ru" class="lang-content">Что такое электролиз?</span>
+                </p>
+                <p class="info-text mb-5">
+                    <span lang="kk" class="lang-content">Электролиз — еріген немесе балқытылған электролит арқылы <b class="text-indigo-300">тұрақты электр тогы</b> өткізгенде жүретін ОВР процесі.</span>
+                    <span lang="en" class="lang-content">Electrolysis — redox process driven by passing <b class="text-indigo-300">direct electric current</b> through a molten or dissolved electrolyte.</span>
+                    <span lang="ru" class="lang-content">Электролиз — процесс ОВР, протекающий при пропускании <b class="text-indigo-300">постоянного электрического тока</b> через расплав или раствор электролита.</span>
+                </p>
+                <div class="formula-block">Схема ячейки:
+Источник тока
+  (+) → Анод   → тотығу
+  (−) → Катод  → тотықсыздану
+
+Иондар бағыты:
+Катиондар (+) → катодқа (−)
+Аниондар (−) → анодқа (+)</div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-2xl text-indigo-300 mb-4">
+                    🔴 <span lang="kk" class="lang-content">Анодтағы процесс (тотығу)</span>
+                    <span lang="en" class="lang-content">Anode — Oxidation</span>
+                    <span lang="ru" class="lang-content">Анод — Окисление</span>
+                </p>
+                <div class="formula-block">Белсенді анод (Cu, Zn, Fe):
+Me → Meⁿ⁺ + ne⁻
+(металл ериді)
+
+Инертті анод (Pt, C, графит):
+Оксисизды тұздар (SO₄²⁻, NO₃⁻):
+  2H₂O − 4e⁻ → O₂↑ + 4H⁺
+
+Галогенид (Cl⁻, Br⁻, I⁻):
+  2Cl⁻ − 2e⁻ → Cl₂↑
+
+SO₄²⁻ → H₂O тотығады (O₂)
+Cl⁻   → Cl₂ бөлінеді</div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-2xl text-indigo-300 mb-4">
+                    🔵 <span lang="kk" class="lang-content">Катодтағы процесс (тотықсыздану)</span>
+                    <span lang="en" class="lang-content">Cathode — Reduction</span>
+                    <span lang="ru" class="lang-content">Катод — Восстановление</span>
+                </p>
+                <div class="formula-block">Белсенді металл (Li→Al): 
+  H₂O немесе H⁺ тотықсызданады:
+  2H₂O + 2e⁻ → H₂↑ + 2OH⁻
+
+Орта белсенді (Zn→Pb):
+  Концентрациясына байланысты:
+  Ме²⁺ + 2e⁻ → Me  немесе H₂↑
+
+Белсенді емес (Cu→Au):
+  Cu²⁺ + 2e⁻ → Cu
+  (металл тұнады)
+
+Сутек (H⁺):
+  2H⁺ + 2e⁻ → H₂↑</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: FARADAY LAWS -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-indigo-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">⚡ Фарадей заңдары · Есеп шығару формулалары</span>
+            <span lang="en" class="lang-content">⚡ Faraday's Laws · Calculation Formulas</span>
+            <span lang="ru" class="lang-content">⚡ Законы Фарадея · Расчётные формулы</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-indigo-300 mb-5">
+                    <span lang="kk" class="lang-content">1-ші заң · 2-ші заң</span>
+                    <span lang="en" class="lang-content">1st Law · 2nd Law</span>
+                    <span lang="ru" class="lang-content">1-й закон · 2-й закон</span>
+                </p>
+                <div class="formula-block">1-ші Фарадей заңы:
+m = k · q = k · I · t
+
+m — зат массасы (г)
+k — электрохимиялық эквивалент (г/Кл)
+I — ток күші (А)
+t — уақыт (с)
+
+2-ші Фарадей заңы:
+      M · I · t
+m = ————————————
+        n · F
+
+M — молярлы масса (г/моль)
+n — электрондар саны (валенттілік)
+F — Фарадей тұрақтысы = 96 485 Кл/моль
+    ≈ 96 500 Кл/моль (есепте)</div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-indigo-300 mb-5">
+                    <span lang="kk" class="lang-content">Мысалдар — NaCl ерітіндісінің электролизі</span>
+                    <span lang="en" class="lang-content">Example — Electrolysis of NaCl solution</span>
+                    <span lang="ru" class="lang-content">Пример — Электролиз раствора NaCl</span>
+                </p>
+                <div class="formula-block">NaCl (сулы) электролизі:
+Катод (−): 2H₂O + 2e⁻ → H₂↑ + 2OH⁻
+Анод  (+): 2Cl⁻ − 2e⁻ → Cl₂↑
+Жалпы: 2NaCl + 2H₂O →
+       H₂↑ + Cl₂↑ + 2NaOH
+
+NaCl (балқыма) электролизі:
+Катод: Na⁺ + e⁻ → Na (металл Na!)
+Анод:  2Cl⁻ − 2e⁻ → Cl₂↑
+
+CuSO₄ (сулы) электролизі:
+Катод: Cu²⁺ + 2e⁻ → Cu↓
+Анод:  2H₂O − 4e⁻ → O₂↑ + 4H⁺</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-8">
+        <h2 class="heading-font text-2xl text-indigo-300 uppercase tracking-widest mb-5 text-center">
+            <span lang="kk" class="lang-content">🏭 Электролиздің практикалық қолданылуы</span>
+            <span lang="en" class="lang-content">🏭 Practical Applications of Electrolysis</span>
+            <span lang="ru" class="lang-content">🏭 Практическое применение электролиза</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div class="glass-accent rounded-2xl p-5 text-center">
+                <p class="text-4xl mb-3">⚙️</p>
+                <p class="font-bold text-indigo-200 text-xl mb-2"><span lang="kk" class="lang-content">Металл алу</span><span lang="en" class="lang-content">Metal extraction</span><span lang="ru" class="lang-content">Получение металлов</span></p>
+                <p class="info-text text-white/75"><span lang="kk" class="lang-content">Na, K, Al, Mg, Ca — балқымадан<br>Cu, Ni, Zn — ерітіндіден</span><span lang="en" class="lang-content">Na, K, Al, Mg, Ca — from melt<br>Cu, Ni, Zn — from solution</span><span lang="ru" class="lang-content">Na, K, Al, Mg, Ca — из расплава<br>Cu, Ni, Zn — из раствора</span></p>
+            </div>
+            <div class="glass-accent rounded-2xl p-5 text-center">
+                <p class="text-4xl mb-3">✨</p>
+                <p class="font-bold text-indigo-200 text-xl mb-2"><span lang="kk" class="lang-content">Гальваноқаптау</span><span lang="en" class="lang-content">Electroplating</span><span lang="ru" class="lang-content">Гальванопокрытие</span></p>
+                <p class="info-text text-white/75"><span lang="kk" class="lang-content">Хромдау, никельдеу, алтындау, күмістеу — коррозиядан қорғау және сәндеу</span><span lang="en" class="lang-content">Chrome, nickel, gold, silver plating — corrosion protection and decoration</span><span lang="ru" class="lang-content">Хромирование, никелирование, золочение, серебрение — защита и декор</span></p>
+            </div>
+            <div class="glass-accent rounded-2xl p-5 text-center">
+                <p class="text-4xl mb-3">🧪</p>
+                <p class="font-bold text-indigo-200 text-xl mb-2"><span lang="kk" class="lang-content">Химиялық синтез</span><span lang="en" class="lang-content">Chemical synthesis</span><span lang="ru" class="lang-content">Химический синтез</span></p>
+                <p class="info-text text-white/75"><span lang="kk" class="lang-content">Cl₂, NaOH, HF, H₂O₂, KMnO₄, фторорганика өндірісі</span><span lang="en" class="lang-content">Production of Cl₂, NaOH, HF, H₂O₂, KMnO₄, fluoroorganics</span><span lang="ru" class="lang-content">Производство Cl₂, NaOH, HF, H₂O₂, KMnO₄, фторорганика</span></p>
+            </div>
+            <div class="glass-accent rounded-2xl p-5 text-center">
+                <p class="text-4xl mb-3">🔋</p>
+                <p class="font-bold text-indigo-200 text-xl mb-2"><span lang="kk" class="lang-content">Тазарту</span><span lang="en" class="lang-content">Electro-refining</span><span lang="ru" class="lang-content">Электроочистка</span></p>
+                <p class="info-text text-white/75"><span lang="kk" class="lang-content">Cu, Ni, Ag тазарту: белсенді анод → иондар → катодта таза металл тұнады</span><span lang="en" class="lang-content">Purifying Cu, Ni, Ag: active anode → ions → pure metal deposits at cathode</span><span lang="ru" class="lang-content">Рафинирование Cu, Ni, Ag: активный анод → ионы → чистый металл на катоде</span></p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

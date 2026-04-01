@@ -1,93 +1,353 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seed Germination</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <title>Слух и равновесие</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #3f2c22; color: #fcd34d; font-family: 'Inter'; min-height: 100vh; }
-        .glass { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        canvas { border-radius: 1.5rem; cursor: pointer; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #ea580c; border-bottom: 3px solid #fdba74; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #f97316; background: white; color: #f97316; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fff7ed; }
+        .lang-btn.active { background: #f97316; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .ear-card { border-radius: 12px; padding: 20px; }
+        .fact-box { background: #fff7ed; border: 2px solid #fdba74; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8">
+<body class="bg-slate-50">
 
-<header class="flex justify-between items-center mb-8">
-        <h1 class="text-4xl font-Montserrat text-green-400">GERMINATION</h1>
-        <div class="text-xs uppercase font-bold text-gray-400">Click to grow</div>
-    </header>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div class="relative h-[500px] glass p-0 flex items-center justify-center bg-black/40 rounded-3xl overflow-hidden">
-            <canvas id="germCanvas" class="w-full h-full"></canvas>
-            <div class="absolute bottom-4 left-4 text-xs font-mono text-green-500" id="stage-text">STAGE 1: DORMANT</div>
-        </div>
-
-        <div class="flex flex-col gap-6">
-            <div class="glass p-8 rounded-3xl border-l-4 border-green-600">
-                <h2 class="text-2xl font-bold mb-4 text-white">Условия прорастания</h2>
-                <ul class="list-disc pl-5 space-y-2 text-sm opacity-80">
-                    <li><strong>Вода:</strong> Необходима для набухания семени и активации ферментов.</li>
-                    <li><strong>Кислород:</strong> Нужен для дыхания (получения энергии для роста).</li>
-                    <li><strong>Тепло:</strong> Ускоряет химические реакции. У каждого растения свой минимум.</li>
-                    <li><strong>Живой зародыш:</strong> Семена с погибшим зародышем не прорастут.</li>
-                </ul>
-            </div>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <script>
-        let stage = 0;
-        let cx, cvs;
+    <header class="header-card text-center mb-10">
+        <p class="text-orange-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Есту және тепе-теңдік</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Hearing and Balance</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Слух и равновесие</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-orange-100">Құлақ — есту және тепе-теңдік мүшесі. Адам 20 Гц – 20 000 Гц жиіліктегі дыбыстарды естиді. Құлақ 3 бөліктен тұрады.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-orange-100">Ear is the organ of hearing and balance. Humans hear sounds from 20 Hz to 20,000 Hz. Ear consists of 3 parts.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-orange-100">Ухо — орган слуха и равновесия. Человек слышит звуки от 20 Гц до 20 000 Гц. Ухо состоит из 3 частей.</p>
+    </header>
 
-        function draw() {
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
-            const cx_ = w/2, cy_ = h*0.6;
+    <!-- Строение уха -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Құлақтың құрылысы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Ear Structure</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Строение уха</h2>
 
-            // Soil Line
-            cx.fillStyle = '#57534e'; cx.fillRect(0, h*0.6, w, h*0.4);
+        <div class="grid md:grid-cols-3 gap-5">
+            <!-- Наружное ухо -->
+            <div class="card" style="border-top: 5px solid #f97316;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">👂</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-orange-700 mb-3">СЫРТҚЫ ҚҰЛАҚ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-orange-700 mb-3">OUTER EAR</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-orange-700 mb-3">НАРУЖНОЕ УХО</h3>
+                
+                <div class="space-y-2">
+                    <div style="background: #fff7ed; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🔊 <strong>Құлақ қалқаны</strong></p>
+                        <p lang="en" class="lang-content text-sm">🔊 <strong>Pinna (auricle)</strong></p>
+                        <p lang="ru" class="lang-content text-sm">🔊 <strong>Ушная раковина</strong></p>
+                        <p lang="kk" class="lang-content text-xs text-gray-600">Дыбыс толқындарын жинайды</p>
+                        <p lang="en" class="lang-content text-xs text-gray-600">Collects sound waves</p>
+                        <p lang="ru" class="lang-content text-xs text-gray-600">Собирает звуковые волны</p>
+                    </div>
+                    
+                    <div style="background: #fff7ed; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">📏 <strong>Сыртқы есту жолы</strong></p>
+                        <p lang="en" class="lang-content text-sm">📏 <strong>Ear canal</strong></p>
+                        <p lang="ru" class="lang-content text-sm">📏 <strong>Слуховой проход</strong></p>
+                        <p lang="kk" class="lang-content text-xs text-gray-600">~2.5 см, күкірт өндіреді</p>
+                        <p lang="en" class="lang-content text-xs text-gray-600">~2.5 cm, produces wax</p>
+                        <p lang="ru" class="lang-content text-xs text-gray-600">~2.5 см, вырабатывает серу</p>
+                    </div>
+                </div>
+                
+                <div class="fact-box mt-3">
+                    <p lang="kk" class="lang-content text-xs">⚙️ <strong>Қызметі:</strong> Дыбысты жинау және өткізу</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ <strong>Function:</strong> Collect and conduct sound</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ <strong>Функция:</strong> Улавливание и проведение звука</p>
+                </div>
+            </div>
 
-            // Seed Base
-            const scale = 1 + stage * 0.2;
-            
-            if(stage >= 1) { // Root
-                cx.strokeStyle = '#fef08a'; cx.lineWidth = 4;
-                cx.beginPath(); cx.moveTo(cx_, cy_); 
-                cx.quadraticCurveTo(cx_+10, cy_+50, cx_-10, cy_+100); 
-                cx.stroke();
-            }
-            
-            if(stage >= 2) { // Shoot
-                cx.strokeStyle = '#4ade80'; cx.lineWidth = 4;
-                cx.beginPath(); cx.moveTo(cx_, cy_); 
-                cx.quadraticCurveTo(cx_-10, cy_-50, cx_, cy_-100); 
-                cx.stroke();
-                // Leaf
-                cx.fillStyle = '#22c55e';
-                cx.beginPath(); cx.ellipse(cx_, cy_-100, 20, 10, 0, 0, Math.PI*2); cx.fill();
-            }
+            <!-- Среднее ухо -->
+            <div class="card" style="border-top: 5px solid #eab308;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🔔</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">ОРТАҢҒЫ ҚҰЛАҚ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">MIDDLE EAR</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-yellow-700 mb-3">СРЕДНЕЕ УХО</h3>
+                
+                <div class="space-y-2">
+                    <div style="background: #fef9c3; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🥁 <strong>Дабыл қабықшасы</strong></p>
+                        <p lang="en" class="lang-content text-sm">🥁 <strong>Eardrum (tympanic membrane)</strong></p>
+                        <p lang="ru" class="lang-content text-sm">🥁 <strong>Барабанная перепонка</strong></p>
+                        <p lang="kk" class="lang-content text-xs text-gray-600">Дыбыстан тербеледі</p>
+                        <p lang="en" class="lang-content text-xs text-gray-600">Vibrates from sound</p>
+                        <p lang="ru" class="lang-content text-xs text-gray-600">Вибрирует от звука</p>
+                    </div>
+                    
+                    <div style="background: #fef9c3; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🦴 <strong>3 сүйекше:</strong></p>
+                        <p lang="en" class="lang-content text-sm">🦴 <strong>3 ossicles:</strong></p>
+                        <p lang="ru" class="lang-content text-sm">🦴 <strong>3 косточки:</strong></p>
+                        <p lang="kk" class="lang-content text-xs">Балғашық → Төсшік → Үзеңгі</p>
+                        <p lang="en" class="lang-content text-xs">Malleus → Incus → Stapes</p>
+                        <p lang="ru" class="lang-content text-xs">Молоточек → Наковальня → Стремечко</p>
+                        <p lang="kk" class="lang-content text-xs text-gray-600">(Ең кішкентай сүйектер!)</p>
+                        <p lang="en" class="lang-content text-xs text-gray-600">(Smallest bones!)</p>
+                        <p lang="ru" class="lang-content text-xs text-gray-600">(Самые маленькие кости!)</p>
+                    </div>
+                    
+                    <div style="background: #fef9c3; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🔗 <strong>Евстахий түтігі</strong></p>
+                        <p lang="en" class="lang-content text-sm">🔗 <strong>Eustachian tube</strong></p>
+                        <p lang="ru" class="lang-content text-sm">🔗 <strong>Евстахиева труба</strong></p>
+                        <p lang="kk" class="lang-content text-xs text-gray-600">Жұтқыншаққа байланыстырады, қысымды теңестіреді</p>
+                        <p lang="en" class="lang-content text-xs text-gray-600">Connects to pharynx, equalizes pressure</p>
+                        <p lang="ru" class="lang-content text-xs text-gray-600">Соединяет с глоткой, выравнивает давление</p>
+                    </div>
+                </div>
+                
+                <div class="fact-box mt-3">
+                    <p lang="kk" class="lang-content text-xs">⚙️ <strong>Қызметі:</strong> Дыбысты күшейту (20-22 есе!)</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ <strong>Function:</strong> Amplify sound (20-22 times!)</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ <strong>Функция:</strong> Усиление звука (в 20-22 раза!)</p>
+                </div>
+            </div>
 
-            // Seed Body
-            cx.fillStyle = stage === 0 ? '#a16207' : '#ca8a04'; // Dark to Light (Swelling)
-            cx.beginPath(); cx.ellipse(cx_, cy_, 30*scale, 20*scale, 0, 0, Math.PI*2); cx.fill();
+            <!-- Внутреннее ухо -->
+            <div class="card" style="border-top: 5px solid #10b981;">
+                <div style="font-size: 40px; text-align: center; margin-bottom: 10px;">🐚</div>
+                <h3 lang="kk" class="lang-content text-xl font-bold text-center text-emerald-700 mb-3">ІШКІ ҚҰЛАҚ</h3>
+                <h3 lang="en" class="lang-content text-xl font-bold text-center text-emerald-700 mb-3">INNER EAR</h3>
+                <h3 lang="ru" class="lang-content text-xl font-bold text-center text-emerald-700 mb-3">ВНУТРЕННЕЕ УХО</h3>
+                
+                <div class="space-y-2">
+                    <div style="background: #ecfdf5; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🐌 <strong>Ұлу (улитка)</strong></p>
+                        <p lang="en" class="lang-content text-sm">🐌 <strong>Cochlea</strong></p>
+                        <p lang="ru" class="lang-content text-sm">🐌 <strong>Улитка</strong></p>
+                        <p lang="kk" class="lang-content text-xs text-gray-600">Спираль, 2.5 орам, сұйықтықпен толы</p>
+                        <p lang="en" class="lang-content text-xs text-gray-600">Spiral, 2.5 turns, filled with fluid</p>
+                        <p lang="ru" class="lang-content text-xs text-gray-600">Спираль, 2.5 оборота, заполнена жидкостью</p>
+                        <p lang="kk" class="lang-content text-xs font-bold text-emerald-700">→ ЕСТУ мүшесі (Корти мүшесі)</p>
+                        <p lang="en" class="lang-content text-xs font-bold text-emerald-700">→ HEARING organ (Organ of Corti)</p>
+                        <p lang="ru" class="lang-content text-xs font-bold text-emerald-700">→ Орган СЛУХА (Кортиев орган)</p>
+                    </div>
+                    
+                    <div style="background: #ecfdf5; padding: 10px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">🔄 <strong>Вестибулярлық аппарат</strong></p>
+                        <p lang="en" class="lang-content text-sm">🔄 <strong>Vestibular apparatus</strong></p>
+                        <p lang="ru" class="lang-content text-sm">🔄 <strong>Вестибулярный аппарат</strong></p>
+                        <p lang="kk" class="lang-content text-xs text-gray-600">3 жартылай шеңбер каналы + 2 қалташа</p>
+                        <p lang="en" class="lang-content text-xs text-gray-600">3 semicircular canals + 2 sacs</p>
+                        <p lang="ru" class="lang-content text-xs text-gray-600">3 полукружных канала + 2 мешочка</p>
+                        <p lang="kk" class="lang-content text-xs font-bold text-emerald-700">→ ТЕПЕ-ТЕҢДІК мүшесі</p>
+                        <p lang="en" class="lang-content text-xs font-bold text-emerald-700">→ BALANCE organ</p>
+                        <p lang="ru" class="lang-content text-xs font-bold text-emerald-700">→ Орган РАВНОВЕСИЯ</p>
+                    </div>
+                </div>
+                
+                <div class="fact-box mt-3">
+                    <p lang="kk" class="lang-content text-xs">⚙️ <strong>Қызметі:</strong> Дыбысты/қозғалысты импульске айналдыру</p>
+                    <p lang="en" class="lang-content text-xs">⚙️ <strong>Function:</strong> Convert sound/movement to impulse</p>
+                    <p lang="ru" class="lang-content text-xs">⚙️ <strong>Функция:</strong> Преобразование звука/движения в импульс</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            document.getElementById('stage-text').textContent = `STAGE ${stage}: ${['DORMANT', 'ROOTING', 'SPROUTING'][stage]}`;
-        }
+    <!-- Механизм слуха -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Есту механизмі</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Mechanism of Hearing</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Механизм слуха</h2>
 
-        window.onload = () => {
-            cvs = document.getElementById('germCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; draw(); };
-            window.addEventListener('resize', rs); rs();
-            cvs.addEventListener('click', () => { stage = (stage+1)%3; draw(); });
-        }
-    </script>
+        <div class="card">
+            <div class="grid md:grid-cols-6 gap-2">
+                <div style="background: #fff7ed; padding: 12px; border-radius: 10px; text-align: center;">
+                    <p class="text-lg mb-1">1️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Дыбыс толқыны</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Sound wave</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Звуковая волна</p>
+                </div>
+                
+                <div style="background: #fef9c3; padding: 12px; border-radius: 10px; text-align: center;">
+                    <p class="text-lg mb-1">2️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Дабыл қабықшасы</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Eardrum</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Барабанная перепонка</p>
+                    <p lang="kk" class="lang-content text-xs">тербеледі</p>
+                    <p lang="en" class="lang-content text-xs">vibrates</p>
+                    <p lang="ru" class="lang-content text-xs">вибрирует</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 12px; border-radius: 10px; text-align: center;">
+                    <p class="text-lg mb-1">3️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">3 сүйекше</p>
+                    <p lang="en" class="lang-content text-xs font-bold">3 ossicles</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">3 косточки</p>
+                    <p lang="kk" class="lang-content text-xs">күшейтеді</p>
+                    <p lang="en" class="lang-content text-xs">amplify</p>
+                    <p lang="ru" class="lang-content text-xs">усиливают</p>
+                </div>
+                
+                <div style="background: #ecfdf5; padding: 12px; border-radius: 10px; text-align: center;">
+                    <p class="text-lg mb-1">4️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Ұлу сұйықтығы</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Cochlear fluid</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Жидкость улитки</p>
+                    <p lang="kk" class="lang-content text-xs">тербеледі</p>
+                    <p lang="en" class="lang-content text-xs">waves</p>
+                    <p lang="ru" class="lang-content text-xs">колеблется</p>
+                </div>
+                
+                <div style="background: #dbeafe; padding: 12px; border-radius: 10px; text-align: center;">
+                    <p class="text-lg mb-1">5️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Корти мүшесі</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Organ of Corti</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Кортиев орган</p>
+                    <p lang="kk" class="lang-content text-xs">импульс</p>
+                    <p lang="en" class="lang-content text-xs">impulse</p>
+                    <p lang="ru" class="lang-content text-xs">импульс</p>
+                </div>
+                
+                <div style="background: #f5f3ff; padding: 12px; border-radius: 10px; text-align: center;">
+                    <p class="text-lg mb-1">6️⃣</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">Самай бөлігі</p>
+                    <p lang="en" class="lang-content text-xs font-bold">Temporal lobe</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">Височная доля</p>
+                    <p lang="kk" class="lang-content text-xs">талдау</p>
+                    <p lang="en" class="lang-content text-xs">analysis</p>
+                    <p lang="ru" class="lang-content text-xs">анализ</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <!-- Вестибулярный аппарат -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Вестибулярлық аппарат</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Vestibular Apparatus</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Вестибулярный аппарат</h2>
 
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="ear-card" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left: 5px solid #3b82f6;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-blue-800 mb-3">🔄 ЖАРТЫЛАЙ ШЕҢБЕР КАНАЛДАРЫ</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-blue-800 mb-3">🔄 SEMICIRCULAR CANALS</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-blue-800 mb-3">🔄 ПОЛУКРУЖНЫЕ КАНАЛЫ</h3>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">3 канал — 3 жазықтықта орналасқан</p>
+                    <p lang="en" class="lang-content text-sm mb-2">3 canals — in 3 planes</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">3 канала — в 3-х плоскостях</p>
+                    
+                    <div style="background: white; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">⚙️ <strong>Қызметі:</strong> Бастың айналуын сезу</p>
+                        <p lang="en" class="lang-content text-sm">⚙️ <strong>Function:</strong> Detect head rotation</p>
+                        <p lang="ru" class="lang-content text-sm">⚙️ <strong>Функция:</strong> Ощущение вращения головы</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Сұйықтық қозғалады → түкшелер иіледі → импульс</p>
+                        <p lang="en" class="lang-content text-xs mt-2 text-gray-600">Fluid moves → hair cells bend → impulse</p>
+                        <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Жидкость движется → волоски сгибаются → импульс</p>
+                    </div>
+                </div>
+
+                <div class="ear-card" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-left: 5px solid #8b5cf6;">
+                    <h3 lang="kk" class="lang-content text-lg font-bold text-purple-800 mb-3">📦 ҚАЛТАШАЛАР (ОТОЛИТТІК МҮШЕ)</h3>
+                    <h3 lang="en" class="lang-content text-lg font-bold text-purple-800 mb-3">📦 SACS (OTOLITH ORGANS)</h3>
+                    <h3 lang="ru" class="lang-content text-lg font-bold text-purple-800 mb-3">📦 МЕШОЧКИ (ОТОЛИТОВЫЙ ОРГАН)</h3>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">2 қалташа: сопақша + дөңгелек</p>
+                    <p lang="en" class="lang-content text-sm mb-2">2 sacs: utricle + saccule</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">2 мешочка: эллиптический + сферический</p>
+                    
+                    <div style="background: white; padding: 12px; border-radius: 8px;">
+                        <p lang="kk" class="lang-content text-sm">⚙️ <strong>Қызметі:</strong> Бастың орнын және түзу сызықты қозғалысты сезу</p>
+                        <p lang="en" class="lang-content text-sm">⚙️ <strong>Function:</strong> Detect head position and linear movement</p>
+                        <p lang="ru" class="lang-content text-sm">⚙️ <strong>Функция:</strong> Положение головы и прямолинейное движение</p>
+                        
+                        <p lang="kk" class="lang-content text-xs mt-2 text-gray-600">Отолиттер (кристалдар) түкшелерге қысым жасайды</p>
+                        <p lang="en" class="lang-content text-xs mt-2 text-gray-600">Otoliths (crystals) press on hair cells</p>
+                        <p lang="ru" class="lang-content text-xs mt-2 text-gray-600">Отолиты (кристаллы) давят на волоски</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Гигиена слуха -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💡 Есту гигиенасы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💡 Hearing Hygiene</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💡 Гигиена слуха</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🔊 Қатты дыбыстан қорғану (85 дБ+ — қауіпті!)</p>
+                    <p lang="en" class="lang-content text-sm">🔊 Protect from loud sounds (85 dB+ — dangerous!)</p>
+                    <p lang="ru" class="lang-content text-sm">🔊 Защита от громких звуков (85 дБ+ — опасно!)</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🎧 Құлаққаптарды ұзақ пайдаланбау</p>
+                    <p lang="en" class="lang-content text-sm">🎧 Don't use headphones too long</p>
+                    <p lang="ru" class="lang-content text-sm">🎧 Не использовать наушники долго</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🧹 Құлақты өткір заттармен тазаламау</p>
+                    <p lang="en" class="lang-content text-sm">🧹 Don't clean ears with sharp objects</p>
+                    <p lang="ru" class="lang-content text-sm">🧹 Не чистить уши острыми предметами</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p lang="kk" class="lang-content text-sm">🏥 Құлақ ауруларын уақытында емдеу</p>
+                    <p lang="en" class="lang-content text-sm">🏥 Treat ear diseases promptly</p>
+                    <p lang="ru" class="lang-content text-sm">🏥 Своевременно лечить болезни ушей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-radius: 1rem; border-top: 4px solid #f97316;">
+        <p lang="kk" class="lang-content text-sm font-bold text-orange-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-orange-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-orange-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

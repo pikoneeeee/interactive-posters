@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Арены. Бензол. Строение. Реакции замещения</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at center, #2d1b69, #4a1942, #0f172a);
+            color: white; min-height: 100vh;
+        }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(192,132,252,0.08); border: 1px solid rgba(192,132,252,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #c084fc; color: #2d1b69; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"],
+        .lang-en .lang-content[lang="en"],
+        .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th {
+            background: rgba(192,132,252,0.15); color: #d8b4fe;
+            padding: 16px 20px; font-weight: 700; font-size: 1.15rem; text-align: left;
+            border-bottom: 2px solid rgba(192,132,252,0.3);
+        }
+        table.t td {
+            padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 1.1rem; vertical-align: top; color: rgba(255,255,255,0.85);
+        }
+        table.t tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block {
+            background: rgba(0,0,0,0.5); color: #d8b4fe; font-family: 'Courier New', monospace;
+            padding: 18px 24px; border-radius: 1rem; font-size: 1.2rem; line-height: 1.7;
+            white-space: pre; overflow-x: auto; border: 1px solid rgba(192,132,252,0.2);
+        }
+        /* Benzene ring SVG style */
+        .benzene-wrap { display: flex; justify-content: center; align-items: center; padding: 16px; }
+        .struct-box {
+            background: rgba(0,0,0,0.4); border-radius: 1rem; padding: 16px 20px;
+            border: 1px solid rgba(192,132,252,0.2);
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <!-- HEADER -->
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-purple-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">10 класс · Органическая химия · Ароматические углеводороды</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-purple-400">Арендер. Бензол. Құрылысы. Алмасу реакциялары</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-purple-400">Arenes. Benzene. Structure. Substitution Reactions</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-purple-400">Арены. Бензол. Строение. Реакции замещения</h1>
+        </div>
+        <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: BENZENE STRUCTURE -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-purple-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Бензолдың құрылысы · Ароматтылық</span>
+            <span lang="en" class="lang-content">Structure of Benzene · Aromaticity</span>
+            <span lang="ru" class="lang-content">Строение бензола · Ароматичность</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <div class="glass rounded-custom p-8 flex flex-col items-center justify-center">
+                <p class="heading-font text-xl text-purple-300 mb-2 text-center">C₆H₆</p>
+                <!-- SVG benzene ring -->
+                <div class="benzene-wrap">
+                    <svg width="180" height="180" viewBox="0 0 180 180">
+                        <!-- Outer hexagon -->
+                        <polygon points="90,15 155,52 155,128 90,165 25,128 25,52"
+                            fill="none" stroke="#c084fc" stroke-width="3"/>
+                        <!-- Inner circle (delocalised) -->
+                        <circle cx="90" cy="90" r="42" fill="none" stroke="#e9d5ff" stroke-width="2.5" stroke-dasharray="6,4"/>
+                        <!-- H labels -->
+                        <text x="90" y="5" text-anchor="middle" fill="#d8b4fe" font-size="14" font-family="Courier New">H</text>
+                        <text x="168" y="57" text-anchor="start" fill="#d8b4fe" font-size="14" font-family="Courier New">H</text>
+                        <text x="168" y="135" text-anchor="start" fill="#d8b4fe" font-size="14" font-family="Courier New">H</text>
+                        <text x="90" y="180" text-anchor="middle" fill="#d8b4fe" font-size="14" font-family="Courier New">H</text>
+                        <text x="2" y="135" fill="#d8b4fe" font-size="14" font-family="Courier New">H</text>
+                        <text x="2" y="57" fill="#d8b4fe" font-size="14" font-family="Courier New">H</text>
+                        <!-- C labels at vertices -->
+                        <text x="90" y="26" text-anchor="middle" fill="#c084fc" font-size="12" font-weight="bold">C</text>
+                        <text x="152" y="58" fill="#c084fc" font-size="12" font-weight="bold">C</text>
+                        <text x="152" y="128" fill="#c084fc" font-size="12" font-weight="bold">C</text>
+                        <text x="90" y="160" text-anchor="middle" fill="#c084fc" font-size="12" font-weight="bold">C</text>
+                        <text x="14" y="128" fill="#c084fc" font-size="12" font-weight="bold">C</text>
+                        <text x="14" y="58" fill="#c084fc" font-size="12" font-weight="bold">C</text>
+                    </svg>
+                </div>
+                <p class="text-white/60 text-base text-center mt-2">
+                    <span lang="kk" class="lang-content">Делокализданған π-электрон жүйесі. Барлық C–C байланыстар тең (0.140 нм)</span>
+                    <span lang="en" class="lang-content">Delocalised π-electron system. All C–C bonds equal (0.140 nm)</span>
+                    <span lang="ru" class="lang-content">Делокализованная π-электронная система. Все C–C связи равны (0.140 нм)</span>
+                </p>
+            </div>
+
+            <div class="glass rounded-custom p-8 lg:col-span-2">
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    <span lang="kk" class="lang-content">Ароматтылық белгілері · Хюккель ережесі</span>
+                    <span lang="en" class="lang-content">Signs of Aromaticity · Hückel's Rule</span>
+                    <span lang="ru" class="lang-content">Признаки ароматичности · Правило Хюккеля</span>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                    <div class="struct-box">
+                        <p class="font-bold text-purple-200 text-lg mb-3">
+                            <span lang="kk" class="lang-content">4 критерий (Хюккель, 1931):</span>
+                            <span lang="en" class="lang-content">4 criteria (Hückel, 1931):</span>
+                            <span lang="ru" class="lang-content">4 критерия (Хюккель, 1931):</span>
+                        </p>
+                        <div class="text-white/80 text-lg leading-relaxed space-y-2">
+                            <p><span lang="kk" class="lang-content">✅ <b>Циклдік</b> молекула<br>✅ <b>Тегіс</b> (жазық)<br>✅ Барлық атом <b>sp²-гибридтенуде</b><br>✅ π-электрондар саны = <b>4n+2</b><br><span class="text-purple-300">(n=1: 6e⁻ → бензол ✓)</span></span>
+                            <span lang="en" class="lang-content">✅ <b>Cyclic</b> molecule<br>✅ <b>Planar</b><br>✅ All atoms <b>sp²-hybridised</b><br>✅ Number of π-electrons = <b>4n+2</b><br><span class="text-purple-300">(n=1: 6e⁻ → benzene ✓)</span></span>
+                            <span lang="ru" class="lang-content">✅ <b>Циклическая</b> молекула<br>✅ <b>Плоская</b><br>✅ Все атомы в <b>sp²-гибридизации</b><br>✅ Число π-электронов = <b>4n+2</b><br><span class="text-purple-300">(n=1: 6e⁻ → бензол ✓)</span></span></p>
+                        </div>
+                    </div>
+                    <div class="struct-box">
+                        <p class="font-bold text-purple-200 text-lg mb-3">
+                            <span lang="kk" class="lang-content">Кеклуле формуласы — неге дұрыс емес?</span>
+                            <span lang="en" class="lang-content">Kekulé formula — why it is wrong?</span>
+                            <span lang="ru" class="lang-content">Формула Кекуле — почему она неверна?</span>
+                        </p>
+                        <div class="formula-block" style="font-size:1.05rem;">  Кекуле (1865):
+  чередующиеся C=C и C–C
+  → предсказал бы 2 изомера
+    орто-дихлорбензола ✗
+
+  Реально:
+  все C–C = 0.140 нм (между
+  одинарной 0.154 и двойной 0.134)
+  → 1 изомер орто- ✓</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-3 text-center text-base">
+                    <div class="struct-box">
+                        <p class="text-purple-300 font-bold">C–C одинарная</p>
+                        <p class="text-white/70 mt-1">0.154 нм</p>
+                    </div>
+                    <div class="struct-box border border-purple-400/50">
+                        <p class="text-purple-200 font-bold text-lg">C–C в бензоле</p>
+                        <p class="text-purple-300 font-bold text-xl mt-1">0.140 нм</p>
+                        <p class="text-white/50 text-sm">промежуточная!</p>
+                    </div>
+                    <div class="struct-box">
+                        <p class="text-purple-300 font-bold">C=C двойная</p>
+                        <p class="text-white/70 mt-1">0.134 нм</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: REACTIONS -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-purple-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Химиялық қасиеттері</span>
+            <span lang="en" class="lang-content">Chemical Properties</span>
+            <span lang="ru" class="lang-content">Химические свойства</span>
+        </h2>
+        <div class="glass rounded-custom p-8 overflow-x-auto mb-6">
+            <table class="t">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Реакция</span><span lang="en" class="lang-content">Reaction</span><span lang="ru" class="lang-content">Реакция</span></th>
+                    <th><span lang="kk" class="lang-content">Жағдай / катализатор</span><span lang="en" class="lang-content">Conditions / catalyst</span><span lang="ru" class="lang-content">Условия / катализатор</span></th>
+                    <th><span lang="kk" class="lang-content">Теңдеу</span><span lang="en" class="lang-content">Equation</span><span lang="ru" class="lang-content">Уравнение</span></th>
+                    <th><span lang="kk" class="lang-content">Өнім</span><span lang="en" class="lang-content">Product</span><span lang="ru" class="lang-content">Продукт</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold text-amber-300">
+                            🔶 <span lang="kk" class="lang-content">Нитрлеу (SR)</span>
+                            <span lang="en" class="lang-content">Nitration (SR)</span>
+                            <span lang="ru" class="lang-content">Нитрование (SR)</span>
+                        </td>
+                        <td class="text-white/70">HNO₃ (конц.) + H₂SO₄ (конц.), 60°C</td>
+                        <td class="font-mono text-purple-200 text-base">C₆H₆ + HNO₃ →<sup>H₂SO₄</sup> C₆H₅NO₂ + H₂O</td>
+                        <td><span lang="kk" class="lang-content">Нитробензол 🟡 (сарғыш сұйық)</span><span lang="en" class="lang-content">Nitrobenzene 🟡 (yellow liquid)</span><span lang="ru" class="lang-content">Нитробензол 🟡 (жёлтая жидкость)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-sky-300">
+                            🔷 <span lang="kk" class="lang-content">Галогендеу (SR)</span>
+                            <span lang="en" class="lang-content">Halogenation (SR)</span>
+                            <span lang="ru" class="lang-content">Галогенирование (SR)</span>
+                        </td>
+                        <td class="text-white/70">Br₂, AlBr₃ (Lewis қышқылы)</td>
+                        <td class="font-mono text-purple-200 text-base">C₆H₆ + Br₂ →<sup>AlBr₃</sup> C₆H₅Br + HBr</td>
+                        <td><span lang="kk" class="lang-content">Бромбензол</span><span lang="en" class="lang-content">Bromobenzene</span><span lang="ru" class="lang-content">Бромбензол</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-green-300">
+                            🟢 <span lang="kk" class="lang-content">Алкилдеу — Фридель-Крафтс (SR)</span>
+                            <span lang="en" class="lang-content">Alkylation — Friedel-Crafts (SR)</span>
+                            <span lang="ru" class="lang-content">Алкилирование — Фридель-Крафтс (SR)</span>
+                        </td>
+                        <td class="text-white/70">RX + AlCl₃</td>
+                        <td class="font-mono text-purple-200 text-base">C₆H₆ + CH₃Cl →<sup>AlCl₃</sup> C₆H₅CH₃ + HCl</td>
+                        <td><span lang="kk" class="lang-content">Толуол (метилбензол)</span><span lang="en" class="lang-content">Toluene (methylbenzene)</span><span lang="ru" class="lang-content">Толуол (метилбензол)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-orange-300">
+                            🔥 <span lang="kk" class="lang-content">Жану</span>
+                            <span lang="en" class="lang-content">Combustion</span>
+                            <span lang="ru" class="lang-content">Горение</span>
+                        </td>
+                        <td class="text-white/70">O₂</td>
+                        <td class="font-mono text-purple-200 text-base">2C₆H₆ + 15O₂ → 12CO₂ + 6H₂O</td>
+                        <td><span lang="kk" class="lang-content">Күйелі жалын (C:H жоғары)</span><span lang="en" class="lang-content">Sooty flame (high C:H ratio)</span><span lang="ru" class="lang-content">Коптящее пламя (высокое C:H)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-teal-300">
+                            🔵 <span lang="kk" class="lang-content">Гидрлеу (қосылу)</span>
+                            <span lang="en" class="lang-content">Hydrogenation (addition)</span>
+                            <span lang="ru" class="lang-content">Гидрирование (присоединение)</span>
+                        </td>
+                        <td class="text-white/70">Ni / Pt, 200°C, P↑</td>
+                        <td class="font-mono text-purple-200 text-base">C₆H₆ + 3H₂ →<sup>Ni, t, P</sup> C₆H₁₂</td>
+                        <td><span lang="kk" class="lang-content">Циклогексан (<b>қиын!</b>)</span><span lang="en" class="lang-content">Cyclohexane (<b>difficult!</b>)</span><span lang="ru" class="lang-content">Циклогексан (<b>трудно!</b>)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-rose-300">
+                            ⚡ <span lang="kk" class="lang-content">Галогендеу жарықта (SR — тізбек)</span>
+                            <span lang="en" class="lang-content">Halogenation in light (radical SR)</span>
+                            <span lang="ru" class="lang-content">Галогенирование на свету (радик. SR)</span>
+                        </td>
+                        <td class="text-white/70">Cl₂, hν</td>
+                        <td class="font-mono text-purple-200 text-base">C₆H₆ + 3Cl₂ →<sup>hν</sup> C₆H₆Cl₆</td>
+                        <td><span lang="kk" class="lang-content">Гексахлорциклогексан (линдан)</span><span lang="en" class="lang-content">Hexachlorocyclohexane (lindane)</span><span lang="ru" class="lang-content">Гексахлорциклогексан (линдан)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SE mechanism highlight -->
+        <div class="glass-accent rounded-custom p-8 border-l-4 border-purple-500 mb-6">
+            <p class="heading-font text-xl text-purple-300 mb-3">
+                ⚙️ <span lang="kk" class="lang-content">SE механизмі — электрофилді алмасу (2 кезең)</span>
+                <span lang="en" class="lang-content">SE Mechanism — Electrophilic Substitution (2 steps)</span>
+                <span lang="ru" class="lang-content">Механизм SE — электрофильное замещение (2 стадии)</span>
+            </p>
+            <div class="formula-block">1. Электрофил түзілуі (катализатор):
+   Br₂ + AlBr₃  →  Br⁺ [AlBr₄]⁻       (электрофиль Br⁺)
+
+2. Электрофилдің бензол сақинасына шабуылы:
+   C₆H₆ + Br⁺  →  [C₆H₆Br]⁺  →  C₆H₅Br + H⁺
+
+Нәтиже: H — Br-ге ауысады, ароматтылық САҚТАЛАДЫ
+(Алкендермен салыстыр: алкендерде — қосылу, ароматтылық жойылар еді)</div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ORIENTATION RULES + HOMOLOGUES -->
+    <section class="mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    🧭 <span lang="kk" class="lang-content">Бағыттаушы орынбасарушылар</span>
+                    <span lang="en" class="lang-content">Directing Substituents</span>
+                    <span lang="ru" class="lang-content">Ориентирующие заместители</span>
+                </p>
+                <p class="text-white/75 text-lg leading-relaxed mb-4">
+                    <span lang="kk" class="lang-content">Бензол сақинасындағы орынбасарушы келесі реакцияның <b class="text-purple-300">орнын анықтайды</b>:</span>
+                    <span lang="en" class="lang-content">A substituent already on the ring <b class="text-purple-300">directs</b> where the next group goes:</span>
+                    <span lang="ru" class="lang-content">Заместитель на кольце <b class="text-purple-300">определяет положение</b> следующего заместителя:</span>
+                </p>
+                <div class="overflow-x-auto">
+                    <table class="t">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Бағыт</span><span lang="en" class="lang-content">Direction</span><span lang="ru" class="lang-content">Направление</span></th>
+                            <th><span lang="kk" class="lang-content">Орын</span><span lang="en" class="lang-content">Position</span><span lang="ru" class="lang-content">Положение</span></th>
+                            <th><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold text-green-300">
+                                    <span lang="kk" class="lang-content">I орін (орто-, пара-)</span>
+                                    <span lang="en" class="lang-content">I type (ortho-, para-)</span>
+                                    <span lang="ru" class="lang-content">I рода (орто-, пара-)</span>
+                                </td>
+                                <td class="text-green-200">1,2 / 1,4</td>
+                                <td>–CH₃, –OH, –NH₂, –Cl, –Br</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-rose-300">
+                                    <span lang="kk" class="lang-content">II орін (мета-)</span>
+                                    <span lang="en" class="lang-content">II type (meta-)</span>
+                                    <span lang="ru" class="lang-content">II рода (мета-)</span>
+                                </td>
+                                <td class="text-rose-200">1,3</td>
+                                <td>–NO₂, –COOH, –CHO, –SO₃H</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="formula-block mt-4" style="font-size:1.05rem;">Толуол (–CH₃ = I орін бағыттаушы):
+C₆H₅CH₃ + HNO₃ → орто- + пара-нитротолуол (71% пара)</div>
+            </div>
+
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    🏭 <span lang="kk" class="lang-content">Бензол гомологтары · Қолданылуы</span>
+                    <span lang="en" class="lang-content">Benzene Homologues · Applications</span>
+                    <span lang="ru" class="lang-content">Гомологи бензола · Применение</span>
+                </p>
+                <div class="overflow-x-auto mb-4">
+                    <table class="t">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Формула</span><span lang="en" class="lang-content">Formula</span><span lang="ru" class="lang-content">Формула</span></th>
+                            <th><span lang="kk" class="lang-content">Атауы</span><span lang="en" class="lang-content">Name</span><span lang="ru" class="lang-content">Название</span></th>
+                            <th><span lang="kk" class="lang-content">Қолдан.</span><span lang="en" class="lang-content">Use</span><span lang="ru" class="lang-content">Прим.</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold">C₆H₆</td>
+                                <td><span lang="kk" class="lang-content">Бензол</span><span lang="en" class="lang-content">Benzene</span><span lang="ru" class="lang-content">Бензол</span></td>
+                                <td class="text-white/60 text-base"><span lang="kk" class="lang-content">Еріткіш, шикізат (❗канцероген)</span><span lang="en" class="lang-content">Solvent, feedstock (❗carcinogen)</span><span lang="ru" class="lang-content">Растворитель, сырьё (❗канцероген)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">C₆H₅CH₃</td>
+                                <td><span lang="kk" class="lang-content">Толуол</span><span lang="en" class="lang-content">Toluene</span><span lang="ru" class="lang-content">Толуол</span></td>
+                                <td class="text-white/60 text-base"><span lang="kk" class="lang-content">Еріткіш, ТНТ синтезі</span><span lang="en" class="lang-content">Solvent, TNT synthesis</span><span lang="ru" class="lang-content">Растворитель, синтез ТНТ</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">C₆H₄(CH₃)₂</td>
+                                <td><span lang="kk" class="lang-content">Ксилол (о, м, п)</span><span lang="en" class="lang-content">Xylene (o, m, p)</span><span lang="ru" class="lang-content">Ксилол (о, м, п)</span></td>
+                                <td class="text-white/60 text-base"><span lang="kk" class="lang-content">Еріткіш, лак</span><span lang="en" class="lang-content">Solvent, lacquers</span><span lang="ru" class="lang-content">Растворитель, лаки</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold">C₆H₅C₂H₅</td>
+                                <td><span lang="kk" class="lang-content">Этилбензол</span><span lang="en" class="lang-content">Ethylbenzene</span><span lang="ru" class="lang-content">Этилбензол</span></td>
+                                <td class="text-white/60 text-base"><span lang="kk" class="lang-content">→ стирол → полистирол</span><span lang="en" class="lang-content">→ styrene → polystyrene</span><span lang="ru" class="lang-content">→ стирол → полистирол</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-white/80 text-lg leading-relaxed">
+                    <p class="font-bold text-purple-200 mb-2">
+                        <span lang="kk" class="lang-content">Алу жолдары:</span><span lang="en" class="lang-content">Production:</span><span lang="ru" class="lang-content">Получение:</span>
+                    </p>
+                    <p><span lang="kk" class="lang-content">• Мұнайды <b>риформинг</b> (каталитик): алкандар → арендер<br>• Ацетиленнің <b>тримерленуі</b>: 3C₂H₂ →<sup>600°C</sup> C₆H₆<br>• <b>Коксохимия</b>: тас көмірді кокстеу</span>
+                    <span lang="en" class="lang-content">• <b>Catalytic reforming</b> of petroleum: alkanes → arenes<br>• <b>Trimerisation</b> of acetylene: 3C₂H₂ →<sup>600°C</sup> C₆H₆<br>• <b>Coking</b> of coal</span>
+                    <span lang="ru" class="lang-content">• <b>Каталитический риформинг</b> нефти: алканы → арены<br>• <b>Тримеризация</b> ацетилена: 3C₂H₂ →<sup>600°C</sup> C₆H₆<br>• <b>Коксование</b> угля</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER: BENZENE VS ALKENES -->
+    <footer class="glass rounded-custom p-10">
+        <p class="heading-font text-2xl text-purple-300 text-center mb-6">
+            <span lang="kk" class="lang-content">⚖️ Бензол — алкеннен неге өзгеше?</span>
+            <span lang="en" class="lang-content">⚖️ Why is benzene different from alkenes?</span>
+            <span lang="ru" class="lang-content">⚖️ Почему бензол отличается от алкенов?</span>
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-xl text-rose-300 mb-3">
+                    <span lang="kk" class="lang-content">❌ Бромды су ағартпайды</span>
+                    <span lang="en" class="lang-content">❌ Does not decolourise bromine water</span>
+                    <span lang="ru" class="lang-content">❌ Не обесцвечивает бромную воду</span>
+                </p>
+                <p class="text-white/70 text-lg">
+                    <span lang="kk" class="lang-content">Катализатор жоқ болса Br₂ қосылмайды. π-электрондар делокализданған → тұрақты</span>
+                    <span lang="en" class="lang-content">Without catalyst Br₂ doesn't add. π-electrons are delocalised → stable</span>
+                    <span lang="ru" class="lang-content">Без катализатора Br₂ не присоединяется. π-электроны делокализованы → устойчив</span>
+                </p>
+            </div>
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-xl text-rose-300 mb-3">
+                    <span lang="kk" class="lang-content">❌ KMnO₄ тотықтырмайды</span>
+                    <span lang="en" class="lang-content">❌ Not oxidised by KMnO₄</span>
+                    <span lang="ru" class="lang-content">❌ Не окисляется KMnO₄</span>
+                </p>
+                <p class="text-white/70 text-lg">
+                    <span lang="kk" class="lang-content">Бензол ерітіндісі KMnO₄-ті жоймайды. Ароматтылық тотығуға қарсы тұрады</span>
+                    <span lang="en" class="lang-content">Benzene doesn't decolourise KMnO₄. Aromaticity resists oxidation</span>
+                    <span lang="ru" class="lang-content">Бензол не обесцвечивает KMnO₄. Ароматичность устойчива к окислению</span>
+                </p>
+            </div>
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-xl text-green-300 mb-3">
+                    <span lang="kk" class="lang-content">✅ SE реакциясы жүреді</span>
+                    <span lang="en" class="lang-content">✅ Undergoes SE reactions</span>
+                    <span lang="ru" class="lang-content">✅ Идут реакции SE</span>
+                </p>
+                <p class="text-white/70 text-lg">
+                    <span lang="kk" class="lang-content">Нитрлеу, галогендеу (кат.), алкилдеу — ароматтылық сақталады</span>
+                    <span lang="en" class="lang-content">Nitration, halogenation (cat.), alkylation — aromaticity preserved</span>
+                    <span lang="ru" class="lang-content">Нитрование, галогенирование (кат.), алкилирование — ароматичность сохраняется</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Химическое равновесие. Принцип Ле Шателье</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at bottom right, #1e3a5f, #1d4ed8, #0f172a); color: white; min-height: 100vh; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(99,102,241,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(99,102,241,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #6366f1; color: #1e3a5f; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th { background: rgba(99,102,241,0.15); color: #c7d2fe; padding: 16px 20px; font-weight: 700; font-size: 1.15rem; text-align: left; border-bottom: 2px solid rgba(99,102,241,0.3); }
+        table.t td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.1rem; vertical-align: top; color: rgba(255,255,255,0.85); }
+        table.t tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block { background: rgba(0,0,0,0.5); color: #c7d2fe; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.15rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(99,102,241,0.2); }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">11 класс · Общая химия · Химическое равновесие</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-indigo-400">Химиялық тепе-теңдік. Ле Шателье принципі</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-indigo-400">Chemical Equilibrium. Le Chatelier's Principle</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-indigo-400">Химическое равновесие. Принцип Ле Шателье</h1>
+        </div>
+        <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: DEFINITION + Kc -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-indigo-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Тепе-теңдік · Тепе-теңдік константасы Kc</span>
+            <span lang="en" class="lang-content">Equilibrium · Equilibrium Constant Kc</span>
+            <span lang="ru" class="lang-content">Равновесие · Константа равновесия Kc</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-indigo-300 mb-4">
+                    <span lang="kk" class="lang-content">Тепе-теңдік дегеніміз не?</span>
+                    <span lang="en" class="lang-content">What is Equilibrium?</span>
+                    <span lang="ru" class="lang-content">Что такое равновесие?</span>
+                </p>
+                <div class="formula-block">Қайтымды реакция:
+aA + bB ⇌ cC + dD
+(тура)      (кері)
+
+Тепе-теңдік шарты:
+v(тура) = v(кері)
+
+→ Концентрациялар өзгермейді
+→ Реакция тоқтамайды (динамикалық!)
+→ Тепе-теңдік — статикалық емес!</div>
+                <div class="mt-4 glass-accent rounded-xl p-4 text-lg text-white/80">
+                    <span lang="kk" class="lang-content">Тепе-теңдік — <b class="text-indigo-300">динамикалық</b> процесс: тура және кері реакциялар бір уақытта бірдей жылдамдықпен жүреді.</span>
+                    <span lang="en" class="lang-content">Equilibrium is a <b class="text-indigo-300">dynamic</b> process: forward and reverse reactions proceed simultaneously at equal rates.</span>
+                    <span lang="ru" class="lang-content">Равновесие — <b class="text-indigo-300">динамический</b> процесс: прямая и обратная реакции идут одновременно с одинаковой скоростью.</span>
+                </div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-indigo-300 mb-4">
+                    <span lang="kk" class="lang-content">Тепе-теңдік константасы Kc</span>
+                    <span lang="en" class="lang-content">Equilibrium Constant Kc</span>
+                    <span lang="ru" class="lang-content">Константа равновесия Kc</span>
+                </p>
+                <div class="formula-block">aA + bB ⇌ cC + dD
+
+       [C]ᶜ · [D]ᵈ
+Kc = ————————————
+       [A]ᵃ · [B]ᵇ
+
+(тепе-теңдік концентрациялары)
+
+Kc >> 1 → тура реакция үстем (өнімдер көп)
+Kc << 1 → кері реакция үстем (реагенттер көп)
+Kc = 1  → тепе-теңдікте тең мөлшерде</div>
+                <p class="text-white/60 text-base mt-3">
+                    <span lang="kk" class="lang-content">Kc тек температураға байланысты. Қатты заттар мен таза сұйықтар Kc өрнегіне кірмейді.</span>
+                    <span lang="en" class="lang-content">Kc depends only on temperature. Pure solids and liquids are excluded from Kc expression.</span>
+                    <span lang="ru" class="lang-content">Kc зависит только от температуры. Чистые твёрдые вещества и жидкости не включаются в выражение Kc.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: LE CHATELIER -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-indigo-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">⚖️ Ле Шателье принципі</span>
+            <span lang="en" class="lang-content">⚖️ Le Chatelier's Principle</span>
+            <span lang="ru" class="lang-content">⚖️ Принцип Ле Шателье</span>
+        </h2>
+        <div class="glass-accent rounded-custom p-6 mb-6 text-center">
+            <p class="text-xl font-bold text-indigo-200 leading-relaxed">
+                <span lang="kk" class="lang-content">«Егер тепе-теңдіктегі жүйеге сыртқы әсер тисе, тепе-теңдік осы әсерді <b class="text-indigo-300">азайтатын</b> бағытқа қарай ығысады»</span>
+                <span lang="en" class="lang-content">"If a system at equilibrium is subjected to an external stress, the equilibrium shifts in the direction that <b class="text-indigo-300">counteracts</b> that stress"</span>
+                <span lang="ru" class="lang-content">«Если на систему, находящуюся в равновесии, оказать внешнее воздействие, равновесие смещается в направлении, <b class="text-indigo-300">ослабляющем</b> это воздействие»</span>
+            </p>
+        </div>
+        <div class="glass rounded-custom p-8 overflow-x-auto">
+            <table class="t">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Сыртқы әсер</span><span lang="en" class="lang-content">External stress</span><span lang="ru" class="lang-content">Внешнее воздействие</span></th>
+                    <th><span lang="kk" class="lang-content">Тепе-теңдік ығысуы</span><span lang="en" class="lang-content">Equilibrium shift</span><span lang="ru" class="lang-content">Смещение равновесия</span></th>
+                    <th><span lang="kk" class="lang-content">Себеп</span><span lang="en" class="lang-content">Reason</span><span lang="ru" class="lang-content">Причина</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr><td class="font-bold text-orange-300">↑ <span lang="kk" class="lang-content">Реагент концентрациясы</span><span lang="en" class="lang-content">Reactant concentration</span><span lang="ru" class="lang-content">Концентрация реагента</span></td><td class="text-green-300 font-bold"><span lang="kk" class="lang-content">→ Тура реакция (өнімдерге)</span><span lang="en" class="lang-content">→ Forward reaction (to products)</span><span lang="ru" class="lang-content">→ Прямая (к продуктам)</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Артық реагент «тұтынылады»</span><span lang="en" class="lang-content">Excess reactant is consumed</span><span lang="ru" class="lang-content">Избыток реагента «поглощается»</span></td></tr>
+                    <tr><td class="font-bold text-sky-300">↑ <span lang="kk" class="lang-content">Температура (эндотермиялық үшін)</span><span lang="en" class="lang-content">Temperature (for endothermic)</span><span lang="ru" class="lang-content">Температура (эндотерм.)</span></td><td class="text-green-300 font-bold"><span lang="kk" class="lang-content">→ Тура реакция (жылу сіңіреді)</span><span lang="en" class="lang-content">→ Forward (absorbs heat)</span><span lang="ru" class="lang-content">→ Прямая (поглощает теплоту)</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Жүйе артық жылуды сіңіреді</span><span lang="en" class="lang-content">System absorbs excess heat</span><span lang="ru" class="lang-content">Система поглощает избыточную теплоту</span></td></tr>
+                    <tr><td class="font-bold text-rose-300">↑ <span lang="kk" class="lang-content">Температура (экзотермиялық үшін)</span><span lang="en" class="lang-content">Temperature (for exothermic)</span><span lang="ru" class="lang-content">Температура (экзотерм.)</span></td><td class="text-rose-300 font-bold"><span lang="kk" class="lang-content">← Кері реакция</span><span lang="en" class="lang-content">← Reverse reaction</span><span lang="ru" class="lang-content">← Обратная реакция</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Жылу бөлінуін азайту</span><span lang="en" class="lang-content">Reduces heat release</span><span lang="ru" class="lang-content">Уменьшение выделения теплоты</span></td></tr>
+                    <tr><td class="font-bold text-yellow-300">↑ <span lang="kk" class="lang-content">Қысым (газды реакция)</span><span lang="en" class="lang-content">Pressure (gas reaction)</span><span lang="ru" class="lang-content">Давление (газовая)</span></td><td class="text-yellow-300 font-bold"><span lang="kk" class="lang-content">→ Газ молі аз жаққа</span><span lang="en" class="lang-content">→ Side with fewer gas moles</span><span lang="ru" class="lang-content">→ Сторона с меньшим числом молей газов</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Қысымды азайту үшін газ мөлшері кемиді</span><span lang="en" class="lang-content">Fewer gas moles reduces pressure</span><span lang="ru" class="lang-content">Меньше молей газа — ниже давление</span></td></tr>
+                    <tr><td class="font-bold text-purple-300">⚗️ <span lang="kk" class="lang-content">Катализатор</span><span lang="en" class="lang-content">Catalyst</span><span lang="ru" class="lang-content">Катализатор</span></td><td class="text-white/60 font-bold"><span lang="kk" class="lang-content">Ығыспайды</span><span lang="en" class="lang-content">No shift</span><span lang="ru" class="lang-content">Не смещается</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Тура және кері реакциялар бірдей дәрежеде жеделдетіледі</span><span lang="en" class="lang-content">Speeds both forward and reverse equally</span><span lang="ru" class="lang-content">Ускоряет прямую и обратную одинаково</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-8">
+        <p class="heading-font text-xl text-indigo-300 text-center mb-6">
+            🏭 <span lang="kk" class="lang-content">Габер процесі (аммиак синтезі) — Ле Шателье мысалы</span>
+            <span lang="en" class="lang-content">Haber Process (NH₃ synthesis) — Le Chatelier example</span>
+            <span lang="ru" class="lang-content">Процесс Габера (синтез NH₃) — пример принципа Ле Шателье</span>
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="formula-block">N₂(г) + 3H₂(г) ⇌ 2NH₃(г)  ΔH = −92 кДж
+
+Газ молі: сол 4 → оң 2 (қысым ↑ → тура →)
+Экзотермиялық: t↑ → кері ← (NH₃ азаяды)
+Жоғары t° кинетика үшін қажет (жылдамдық)
+
+Оптималды өнеркәсіптік жағдай:
+• t° = 400–500°C  (баланс кинетика / термодинамика)
+• P = 150–300 атм (тепе-теңдік → NH₃ жаққа)
+• Катализатор: Fe + K₂O + Al₂O₃</div>
+            <div class="text-white/80 text-lg leading-relaxed">
+                <p class="font-bold text-indigo-300 mb-3"><span lang="kk" class="lang-content">Неге жоғары t° қолданады (150–500°C), дегенмен кері реакция үстем болса?</span><span lang="en" class="lang-content">Why use high t° (400–500°C) even though it favours reverse reaction?</span><span lang="ru" class="lang-content">Почему используют высокую t° (400–500°C), хотя она смещает равновесие назад?</span></p>
+                <p><span lang="kk" class="lang-content">✅ Жоғары t° — <b>реакция жылдамдығы</b> үшін қажет (Аррениус). Термодинамикалық шығым азаяды, бірақ <b>NH₃ үздіксіз шығарылып отырса</b> (Ле Шателье), реакция алға жылжиды. Катализатор ≤500°C-та тиімді жұмыс істейді.</span><span lang="en" class="lang-content">✅ Higher t° needed for <b>reaction rate</b> (Arrhenius). Thermodynamic yield decreases, but if <b>NH₃ is continuously removed</b> (Le Chatelier), equilibrium shifts forward. Catalyst works efficiently at ≤500°C.</span><span lang="ru" class="lang-content">✅ Высокая t° нужна для <b>скорости реакции</b> (Аррениус). Термодинамический выход уменьшается, но если <b>NH₃ постоянно отводится</b> (Ле Шателье), равновесие смещается вперёд. Катализатор эффективен при ≤500°C.</span></p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

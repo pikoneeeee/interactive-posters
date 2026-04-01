@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Транскрипция и трансляция. Биосинтез белка</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0d0d2b 0%, #1e1b4b 50%, #0d0d2b 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 40%, #a78bfa 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(79,70,229,0.5); }
+        .section-heading { color: #4f46e5; border-bottom: 4px solid #c4b5fd; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #4f46e5; background: white; color: #4f46e5; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#1e1b4b,#4f46e5); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f5f3ff,#ede9fe); border-left: 5px solid #4f46e5; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#1e1b4b,#4f46e5); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f5f3ff; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-violet-200 font-semibold mb-3 text-lg">10–11 класс • Молекулярная биология • Экспрессия генов</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Транскрипция және Трансляция. Ақуыз биосинтезі</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Transcription and Translation. Protein Biosynthesis</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Транскрипция и Трансляция. Биосинтез белка</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl">
+            <p class="font-mono text-base font-black text-white">ДНК → мРНК → Белок</p>
+            <p class="font-mono text-sm text-violet-200 mt-1">(Транскрипция) → (Трансляция)</p>
+            <p class="text-violet-100 text-sm mt-2"><span lang="kk" class="lang-content">Молекулалық биологияның Орталық Догмасы (Крик, 1958). Генетикалық ақпарат ДНҚ-дан РНҚ-ға, РНҚ-дан ақуызға беріледі.</span><span lang="en" class="lang-content">Central Dogma of Molecular Biology (Crick, 1958). Genetic information flows from DNA → RNA → Protein.</span><span lang="ru" class="lang-content">Центральная догма молекулярной биологии (Крик, 1958). Генетическая информация передаётся от ДНК → РНК → Белок.</span></p>
+        </div>
+    </header>
+
+    <!-- GENETIC CODE + TRANSCRIPTION -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔤 Генетикалық код • 📝 Транскрипция</h2>
+        <h2 lang="en" class="lang-content section-heading">🔤 Genetic Code • 📝 Transcription</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔤 Генетический код • 📝 Транскрипция</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div>
+                    <div class="tbox mb-3" style="border-color:#4f46e5;background:#f5f3ff;">
+                        <p class="font-bold text-violet-700 mb-2"><span lang="kk" class="lang-content">Генетикалық кодтың қасиеттері:</span><span lang="en" class="lang-content">Properties of the genetic code:</span><span lang="ru" class="lang-content">Свойства генетического кода:</span></p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>🔢 <b><span lang="kk" class="lang-content">Триплеттік (кодон = 3 нуклеотид):</span><span lang="en" class="lang-content">Triplet (codon = 3 nucleotides):</span><span lang="ru" class="lang-content">Триплетность (кодон = 3 нуклеотида):</span></b> <span lang="kk" class="lang-content">64 мүмкін кодон. 61-і аминқышқылдарды кодтайды, 3-і СТОП (UAA, UAG, UGA).</span><span lang="en" class="lang-content">64 possible codons. 61 encode amino acids, 3 are STOP codons (UAA, UAG, UGA).</span><span lang="ru" class="lang-content">64 возможных кодона. 61 кодирует аминокислоты, 3 — СТОП (UAA, UAG, UGA).</span></li>
+                            <li>🔁 <b><span lang="kk" class="lang-content">Дегенеративтік (артық):</span><span lang="en" class="lang-content">Degenerate (redundant):</span><span lang="ru" class="lang-content">Вырожденность (избыточность):</span></b> <span lang="kk" class="lang-content">Бір аминқышқылын бірнеше кодон кодтайды (мысалы: Лейцин — 6 кодон). Мутацияға «буфер» рөл атқарады.</span><span lang="en" class="lang-content">One amino acid coded by multiple codons (e.g. Leucine — 6 codons). Acts as a mutation buffer.</span><span lang="ru" class="lang-content">Одну аминокислоту кодируют несколько кодонов (напр. Лейцин — 6 кодонов). Служит буфером против мутаций.</span></li>
+                            <li>🌍 <b><span lang="kk" class="lang-content">Жаратылысы бір (Универсал):</span><span lang="en" class="lang-content">Universal:</span><span lang="ru" class="lang-content">Универсальность:</span></b> <span lang="kk" class="lang-content">Барлық тіршілік иелерінде бірдей (бактериядан адамға дейін). Ерекшеліктер: митохондриялық геном.</span><span lang="en" class="lang-content">The same in all living organisms (bacteria to humans). Exceptions: mitochondrial genome.</span><span lang="ru" class="lang-content">Одинаков у всех живых организмов (от бактерии до человека). Исключения: митохондриальный геном.</span></li>
+                            <li>📌 <b><span lang="kk" class="lang-content">Өзара жабыспаушылық:</span><span lang="en" class="lang-content">Non-overlapping:</span><span lang="ru" class="lang-content">Неперекрывающийся:</span></b> <span lang="kk" class="lang-content">Кодондар бір-бірімен жабыспайды. Жан-жақты оқылады (5'→3').</span><span lang="en" class="lang-content">Codons do not overlap. Read sequentially (5'→3').</span><span lang="ru" class="lang-content">Кодоны не перекрываются. Считываются последовательно (5'→3').</span></li>
+                            <li>🚦 <b><span lang="kk" class="lang-content">Бірмағыналы:</span><span lang="en" class="lang-content">Unambiguous:</span><span lang="ru" class="lang-content">Однозначность:</span></b> <span lang="kk" class="lang-content">Әр кодон тек бір аминқышқылды кодтайды (немесе СТОП). AUG — бастапқы кодон (Метионин).</span><span lang="en" class="lang-content">Each codon codes for only one amino acid (or STOP). AUG — start codon (Methionine).</span><span lang="ru" class="lang-content">Каждый кодон кодирует только одну аминокислоту (или СТОП). AUG — стартовый кодон (Метионин).</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="tbox" style="border-color:#4f46e5;background:#f5f3ff;">
+                        <p class="font-bold text-violet-700 mb-2">📝 <span lang="kk" class="lang-content">Транскрипция (Ядрода)</span><span lang="en" class="lang-content">Transcription (in nucleus)</span><span lang="ru" class="lang-content">Транскрипция (в ядре)</span></p>
+                        <ol class="text-gray-600 space-y-1 list-decimal list-inside">
+                            <li><b><span lang="kk" class="lang-content">Инициация:</span><span lang="en" class="lang-content">Initiation:</span><span lang="ru" class="lang-content">Инициация:</span></b> <span lang="kk" class="lang-content">РНҚ-полимераза ДНҚ-ның промоторына байланады. ДНҚ ашылады.</span><span lang="en" class="lang-content">RNA polymerase binds to DNA promoter. DNA unwinds.</span><span lang="ru" class="lang-content">РНК-полимераза связывается с промотором ДНК. ДНК расплетается.</span></li>
+                            <li><b><span lang="kk" class="lang-content">Элонгация:</span><span lang="en" class="lang-content">Elongation:</span><span lang="ru" class="lang-content">Элонгация:</span></b> <span lang="kk" class="lang-content">РНҚ-полимераза матрицалық ДНҚ тізбегін (3'→5') оқып, мРНҚ-ны 5'→3' бағытта синтездейді. Комплементарлық: ДНҚ-G → РНҚ-C; ДНҚ-A → РНҚ-U.</span><span lang="en" class="lang-content">RNA polymerase reads the template DNA strand (3'→5'), synthesising mRNA 5'→3'. Complementarity: DNA-G → RNA-C; DNA-A → RNA-U.</span><span lang="ru" class="lang-content">РНК-полимераза считывает матричную цепь ДНК (3'→5'), синтезируя мРНК 5'→3'. Комплементарность: ДНК-G → РНК-C; ДНК-A → РНК-U.</span></li>
+                            <li><b><span lang="kk" class="lang-content">Терминация:</span><span lang="en" class="lang-content">Termination:</span><span lang="ru" class="lang-content">Терминация:</span></b> <span lang="kk" class="lang-content">РНҚ-полимераза терминатор сигналына жеткенде тоқтайды. пре-мРНҚ бөлінеді.</span><span lang="en" class="lang-content">RNA polymerase stops at terminator signal. Pre-mRNA is released.</span><span lang="ru" class="lang-content">РНК-полимераза останавливается на терминаторе. пре-мРНК отсоединяется.</span></li>
+                            <li><b><span lang="kk" class="lang-content">мРНҚ өңдеу (эукариоттарда):</span><span lang="en" class="lang-content">mRNA processing (eukaryotes):</span><span lang="ru" class="lang-content">Процессинг мРНК (эукариоты):</span></b> <span lang="kk" class="lang-content">5'-кэп (7-метилгуанозин) + 3'-поли-А хвост қосылады. Сплайсинг: интрондар алынады, экзондар жалғастырылады.</span><span lang="en" class="lang-content">5'-cap (7-methylguanosine) + 3'-poly-A tail added. Splicing: introns removed, exons joined.</span><span lang="ru" class="lang-content">Добавляется 5'-кэп (7-метилгуанозин) + 3'-поли-А-хвост. Сплайсинг: интроны удаляются, экзоны сшиваются.</span></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSLATION -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🏭 Трансляция (Рибосомада)</h2>
+        <h2 lang="en" class="lang-content section-heading">🏭 Translation (at the Ribosome)</h2>
+        <h2 lang="ru" class="lang-content section-heading">🏭 Трансляция (на рибосоме)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#4f46e5;background:#f5f3ff;">
+                    <p class="font-bold text-violet-700 mb-2"><span lang="kk" class="lang-content">Трансляция компоненттері:</span><span lang="en" class="lang-content">Translation components:</span><span lang="ru" class="lang-content">Компоненты трансляции:</span></p>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>🔵 <b>мРНҚ/mRNA —</b> <span lang="kk" class="lang-content">матрица, кодондар тізбегі</span><span lang="en" class="lang-content">template, sequence of codons</span><span lang="ru" class="lang-content">матрица, последовательность кодонов</span></li>
+                        <li>🟢 <b>тРНҚ/tRNA —</b> <span lang="kk" class="lang-content">«жапырақ» тәрізді пішін. Антикодон (3 нуклеотид) кодонмен сәйкес келеді. 3'-ұшына аминқышқыл (–CCA–OH) бекиді. Аминоацил-тРНҚ-синтетаза ферменті аминқышқылын тРНҚ-ға жалғайды (АТФ жұмсалады).</span><span lang="en" class="lang-content">cloverleaf shape. Anticodon (3 nucleotides) matches the codon. Amino acid attaches at 3'-end (–CCA–OH). Aminoacyl-tRNA synthetase loads amino acid (uses ATP).</span><span lang="ru" class="lang-content">Форма «клеверного листа». Антикодон (3 нуклеотида) соответствует кодону. Аминокислота присоединяется на 3'-конце (–CCA–OH). Аминоацил-тРНК-синтетаза заряжает тРНК (расходует АТФ).</span></li>
+                        <li>⚙️ <b><span lang="kk" class="lang-content">Рибосома</span><span lang="en" class="lang-content">Ribosome</span><span lang="ru" class="lang-content">Рибосома</span></b> — <span lang="kk" class="lang-content">кіші (40S/30S) + үлкен (60S/50S) суббірліктер. Три учаске (А, П, Е): А — аминоацил (жаңа тРНҚ), П — пептидил (өсуші тізбек), Е — шығу (босатылатын тРНҚ).</span><span lang="en" class="lang-content">small (40S/30S) + large (60S/50S) subunits. Three sites (A, P, E): A — aminoacyl (new tRNA), P — peptidyl (growing chain), E — exit (released tRNA).</span><span lang="ru" class="lang-content">малая (40S/30S) + большая (60S/50S) субъединицы. Три участка (A, P, E): A — аминоацильный (новая тРНК), P — пептидильный (растущая цепь), E — выход (освобождаемая тРНК).</span></li>
+                    </ul>
+                </div>
+                <div class="tbox text-xs" style="border-color:#4f46e5;background:#f5f3ff;">
+                    <p class="font-bold text-violet-700 mb-2"><span lang="kk" class="lang-content">Трансляция кезеңдері:</span><span lang="en" class="lang-content">Stages of translation:</span><span lang="ru" class="lang-content">Этапы трансляции:</span></p>
+                    <ol class="text-gray-600 space-y-1 list-decimal list-inside">
+                        <li><b><span lang="kk" class="lang-content">Инициация:</span><span lang="en" class="lang-content">Initiation:</span><span lang="ru" class="lang-content">Инициация:</span></b> <span lang="kk" class="lang-content">Кіші суббірлік мРНҚ-мен байланысады. Бастапқы кодон AUG-ны Met-тРНҚ антикодоны таниды. Үлкен суббірлік қосылады.</span><span lang="en" class="lang-content">Small subunit binds mRNA. Start codon AUG recognised by Met-tRNA anticodon. Large subunit joins.</span><span lang="ru" class="lang-content">Малая субъединица связывается с мРНК. Старт-кодон AUG распознаётся антикодоном Met-тРНК. Присоединяется большая субъединица.</span></li>
+                        <li><b><span lang="kk" class="lang-content">Элонгация:</span><span lang="en" class="lang-content">Elongation:</span><span lang="ru" class="lang-content">Элонгация:</span></b> <span lang="kk" class="lang-content">Жаңа аминоацил-тРНҚ А-учаскеге кіреді → пептидтік байланыс түзіледі → транслокация (рибосома 1 кодонға жылжиды). ГТФ жұмсалады.</span><span lang="en" class="lang-content">New aminoacyl-tRNA enters A-site → peptide bond forms → translocation (ribosome moves one codon). GTP consumed.</span><span lang="ru" class="lang-content">Новая аминоацил-тРНК входит в А-участок → образуется пептидная связь → транслокация (рибосома сдвигается на 1 кодон). Расходуется ГТФ.</span></li>
+                        <li><b><span lang="kk" class="lang-content">Терминация:</span><span lang="en" class="lang-content">Termination:</span><span lang="ru" class="lang-content">Терминация:</span></b> <span lang="kk" class="lang-content">СТОП-кодон (UAA, UAG, UGA) А-учаскеге келеді. Релиз-факторлар гидролизді катализдейді. Ақуыз тізбегі және рибосома бөлінеді.</span><span lang="en" class="lang-content">Stop codon (UAA, UAG, UGA) reaches A-site. Release factors catalyse hydrolysis. Polypeptide and ribosome dissociate.</span><span lang="ru" class="lang-content">Стоп-кодон (UAA, UAG, UGA) попадает в А-участок. Факторы высвобождения катализируют гидролиз. Полипептид и рибосома разъединяются.</span></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#4f46e5;background:#f5f3ff;">
+                    <p class="font-bold text-violet-700 mb-2">🔗 <span lang="kk" class="lang-content">Полирибосома (Полисома)</span><span lang="en" class="lang-content">Polyribosome (Polysome)</span><span lang="ru" class="lang-content">Полирибосома (Полисома)</span></p>
+                    <p class="text-gray-600"><span lang="kk" class="lang-content">Бір мРНҚ молекуласы бойынша бірнеше рибосома бір мезгілде жылжиды → бір мРНҚ-дан бірнеше ақуыз тізбегі синтезделеді. Ақуыз синтезін тездетеді.</span><span lang="en" class="lang-content">Multiple ribosomes translate the same mRNA molecule simultaneously → several polypeptide chains synthesised from one mRNA. Speeds up protein synthesis.</span><span lang="ru" class="lang-content">Несколько рибосом одновременно движутся по одной мРНК → синтезируется несколько белковых цепей с одной мРНК. Ускоряет синтез белка.</span></p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Кезең</span><span lang="en" class="lang-content">Stage</span><span lang="ru" class="lang-content">Этап</span></th>
+                            <th><span lang="kk" class="lang-content">Орны</span><span lang="en" class="lang-content">Location</span><span lang="ru" class="lang-content">Место</span></th>
+                            <th><span lang="kk" class="lang-content">Негізгі фермент</span><span lang="en" class="lang-content">Key enzyme</span><span lang="ru" class="lang-content">Ключевой фермент</span></th>
+                            <th><span lang="kk" class="lang-content">Энергия</span><span lang="en" class="lang-content">Energy</span><span lang="ru" class="lang-content">Энергия</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Транскрипция</span><span lang="en" class="lang-content">Transcription</span><span lang="ru" class="lang-content">Транскрипция</span></td><td><span lang="kk" class="lang-content">Ядро</span><span lang="en" class="lang-content">Nucleus</span><span lang="ru" class="lang-content">Ядро</span></td><td><span lang="kk" class="lang-content">РНҚ-полимераза</span><span lang="en" class="lang-content">RNA polymerase</span><span lang="ru" class="lang-content">РНК-полимераза</span></td><td>АТФ</td></tr>
+                            <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Сплайсинг</span><span lang="en" class="lang-content">Splicing</span><span lang="ru" class="lang-content">Сплайсинг</span></td><td><span lang="kk" class="lang-content">Ядро</span><span lang="en" class="lang-content">Nucleus</span><span lang="ru" class="lang-content">Ядро</span></td><td>Сплайсосома</td><td>АТФ</td></tr>
+                            <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Трансляция</span><span lang="en" class="lang-content">Translation</span><span lang="ru" class="lang-content">Трансляция</span></td><td><span lang="kk" class="lang-content">Рибосома (цитоплазма / ЭПС)</span><span lang="en" class="lang-content">Ribosome (cytoplasm / ER)</span><span lang="ru" class="lang-content">Рибосома (цитоплазма / ЭПС)</span></td><td><span lang="kk" class="lang-content">Пептидилтрансфераза (рРНҚ)</span><span lang="en" class="lang-content">Peptidyl transferase (rRNA)</span><span lang="ru" class="lang-content">Пептидилтрансфераза (рРНК)</span></td><td>АТФ + ГТФ</td></tr>
+                            <tr><td class="font-bold text-violet-700"><span lang="kk" class="lang-content">Посттрансляция</span><span lang="en" class="lang-content">Post-translational</span><span lang="ru" class="lang-content">Посттрансляционная</span></td><td><span lang="kk" class="lang-content">ЭПС, Гольджи</span><span lang="en" class="lang-content">ER, Golgi</span><span lang="ru" class="lang-content">ЭПС, Гольджи</span></td><td><span lang="kk" class="lang-content">Фолдаза, шаперондар</span><span lang="en" class="lang-content">Foldases, chaperones</span><span lang="ru" class="lang-content">Фолдазы, шапероны</span></td><td>АТФ</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="fact-box mt-3 text-xs">
+                    <p class="font-bold text-violet-700"><span lang="kk" class="lang-content">💡 Бактериялар мен эукариоттардағы айырмашылықтар:</span><span lang="en" class="lang-content">💡 Prokaryote vs eukaryote differences:</span><span lang="ru" class="lang-content">💡 Прокариоты vs эукариоты:</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Бактериялар: транскрипция мен трансляция бір мезгілде жүреді (ядро жоқ). мРНҚ өңдеу жоқ (интрон жоқ). Рибосома 70S (30S + 50S). Эукариоттар: транскрипция ядрода, трансляция цитоплазмада. мРНҚ өңделеді (5'-кэп, поли-А, сплайсинг). Рибосома 80S (40S + 60S).</span><span lang="en" class="lang-content">Bacteria: transcription and translation occur simultaneously (no nucleus). No mRNA processing (no introns). Ribosome 70S (30S + 50S). Eukaryotes: transcription in nucleus, translation in cytoplasm. mRNA processed (5'-cap, poly-A, splicing). Ribosome 80S (40S + 60S).</span><span lang="ru" class="lang-content">Бактерии: транскрипция и трансляция идут одновременно (нет ядра). Нет процессинга мРНК (нет интронов). Рибосома 70S (30S + 50S). Эукариоты: транскрипция в ядре, трансляция в цитоплазме. Процессинг мРНК (5'-кэп, поли-А, сплайсинг). Рибосома 80S (40S + 60S).</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мутации. Мутагены. Изменчивость</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0a0f0a 0%, #14532d 30%, #1e3a5f 70%, #0a0f0a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #1e3a5f 0%, #15803d 40%, #86efac 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(21,128,61,0.4); }
+        .section-heading { color: #15803d; border-bottom: 4px solid #86efac; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #15803d; background: white; color: #15803d; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#14532d,#15803d); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border-left: 5px solid #15803d; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#14532d,#15803d); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f0fdf4; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-green-100 font-semibold mb-3 text-lg">10–11 класс • Генетика • Молекулярная биология</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Мутациялар. Мутагендер. Өзгергіштік</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Mutations. Mutagens. Variability</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Мутации. Мутагены. Изменчивость</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm flex flex-wrap gap-6 justify-center">
+            <div class="text-center"><span class="text-3xl">🧬</span><p class="font-bold text-green-200 mt-1"><span lang="kk" class="lang-content">Модификациялық</span><span lang="en" class="lang-content">Modification</span><span lang="ru" class="lang-content">Модификационная</span></p></div>
+            <div class="text-center"><span class="text-3xl">🔀</span><p class="font-bold text-green-200 mt-1"><span lang="kk" class="lang-content">Комбинативтік</span><span lang="en" class="lang-content">Combinative</span><span lang="ru" class="lang-content">Комбинативная</span></p></div>
+            <div class="text-center"><span class="text-3xl">⚡</span><p class="font-bold text-green-200 mt-1"><span lang="kk" class="lang-content">Мутациялық</span><span lang="en" class="lang-content">Mutation</span><span lang="ru" class="lang-content">Мутационная</span></p></div>
+        </div>
+    </header>
+
+    <!-- VARIABILITY TYPES -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📊 Өзгергіштік түрлері • ⚡ Мутациялар жіктелуі</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Types of Variability • ⚡ Classification of Mutations</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Типы изменчивости • ⚡ Классификация мутаций</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div>
+                    <div class="tbox mb-3" style="border-color:#15803d;background:#f0fdf4;">
+                        <p class="font-bold text-green-700 mb-2"><span lang="kk" class="lang-content">Өзгергіштік 3 түрі:</span><span lang="en" class="lang-content">3 types of variability:</span><span lang="ru" class="lang-content">3 типа изменчивости:</span></p>
+                        <div class="space-y-2">
+                            <div class="bg-blue-50 rounded p-2">
+                                <p class="font-semibold text-blue-700">🌡️ <span lang="kk" class="lang-content">Модификациялық (фенотиптік):</span><span lang="en" class="lang-content">Modification (phenotypic):</span><span lang="ru" class="lang-content">Модификационная (фенотипическая):</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Тұқым қуаламайды. ДНҚ өзгермейді. Орта жағдайына бейімделу. <b>Реакция нормасы</b> — генотипке байланысты феноотип өзгеруінің шегі. Мысалы: күн тигенде тері қарайып кетеді; суықта белгі береді.</span><span lang="en" class="lang-content">Not hereditary. DNA unchanged. Adaptation to environment. <b>Reaction norm</b> — limits of phenotypic variation determined by genotype. E.g. skin tans in sun; stunted growth in poor soil.</span><span lang="ru" class="lang-content">Не наследуется. ДНК не изменяется. Адаптация к условиям среды. <b>Норма реакции</b> — пределы фенотипических изменений, определённые генотипом. Напр. загар; задержка роста растений при плохой почве.</span></p>
+                            </div>
+                            <div class="bg-purple-50 rounded p-2">
+                                <p class="font-semibold text-purple-700">🔀 <span lang="kk" class="lang-content">Комбинативтік:</span><span lang="en" class="lang-content">Combinative:</span><span lang="ru" class="lang-content">Комбинативная:</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Тұқым қуалайды. ДНҚ өзгермейді. Жыныстық көбеюде пайда болады. Қайнары: 1) Кроссинговер (мейоз профаза I); 2) Метафаза I-де хромосомалардың кездейсоқ бағытталуы; 3) Гаметалардың кездейсоқ ұйқасуы (Менделдің 3-ші заңы). Эволюцияда маңызды.</span><span lang="en" class="lang-content">Hereditary. DNA unchanged. Occurs in sexual reproduction. Sources: 1) Crossing-over (Prophase I); 2) Random orientation in Metaphase I; 3) Random fertilisation (Mendel's law of independent assortment). Important in evolution.</span><span lang="ru" class="lang-content">Наследуется. ДНК не изменяется. Возникает при половом размножении. Источники: 1) Кроссинговер (Профаза I); 2) Случайная ориентация в Метафазе I; 3) Случайное слияние гамет (3-й закон Менделя). Важна для эволюции.</span></p>
+                            </div>
+                            <div class="bg-red-50 rounded p-2">
+                                <p class="font-semibold text-red-700">⚡ <span lang="kk" class="lang-content">Мутациялық:</span><span lang="en" class="lang-content">Mutational:</span><span lang="ru" class="lang-content">Мутационная:</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Тұқым қуалайды (герминативтік мутацияда). ДНҚ-ның тізбегі өзгереді. Кездейсоқ немесе мутагендерден. Пайдалы (эволюция), бейтарап, зиянды (ауру).</span><span lang="en" class="lang-content">Hereditary (germline mutations). DNA sequence changes. Random or induced by mutagens. Beneficial (evolution), neutral, harmful (disease).</span><span lang="ru" class="lang-content">Наследуется (герминативные мутации). Изменяется последовательность ДНК. Случайные или вызванные мутагенами. Полезные (эволюция), нейтральные, вредные (болезни).</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="tbox" style="border-color:#15803d;background:#f0fdf4;">
+                        <p class="font-bold text-green-700 mb-2"><span lang="kk" class="lang-content">Мутациялар жіктелуі деңгейі бойынша:</span><span lang="en" class="lang-content">Classification of mutations by level:</span><span lang="ru" class="lang-content">Классификация мутаций по уровню:</span></p>
+                        <div class="space-y-1">
+                            <div class="bg-orange-50 rounded p-2">
+                                <p class="font-semibold text-orange-700"><span lang="kk" class="lang-content">🔴 Гендік мутациялар (нүктелік):</span><span lang="en" class="lang-content">🔴 Gene mutations (point):</span><span lang="ru" class="lang-content">🔴 Генные мутации (точечные):</span></p>
+                                <ul class="text-gray-500 space-y-0.5 mt-1">
+                                    <li><b><span lang="kk" class="lang-content">Алмастыру:</span><span lang="en" class="lang-content">Substitution:</span><span lang="ru" class="lang-content">Замена:</span></b> <span lang="kk" class="lang-content">Бір нуклеотид алмасады → кодон өзгереді. Мысалы: ОЖК анемия (HbS — E6V). Тыныш мутация (синоним кодон).</span><span lang="en" class="lang-content">One nucleotide replaced → codon changes. E.g. sickle cell anaemia (HbS — E6V). Silent mutation (synonymous codon).</span><span lang="ru" class="lang-content">Замена одного нуклеотида → изменение кодона. Напр. серповидноклеточная анемия (HbS — E6V). Молчащая мутация (синонимичный кодон).</span></li>
+                                    <li><b><span lang="kk" class="lang-content">Инсерция/делеция (шифт мутация):</span><span lang="en" class="lang-content">Insertion/deletion (frameshift):</span><span lang="ru" class="lang-content">Инсерция/делеция (сдвиг рамки):</span></b> <span lang="kk" class="lang-content">Нуклеотид қосылуы/жойылуы → оқу рамкасы ауысады → барлық кейінгі аминқышқылдар өзгереді → ауыр зардап.</span><span lang="en" class="lang-content">Nucleotide added/removed → reading frame shifts → all downstream amino acids change → severe effect.</span><span lang="ru" class="lang-content">Добавление/удаление нуклеотида → сдвиг рамки считывания → все последующие аминокислоты меняются → тяжёлые последствия.</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-yellow-50 rounded p-2">
+                                <p class="font-semibold text-yellow-700"><span lang="kk" class="lang-content">🟡 Хромосомалық мутациялар (аберрациялар):</span><span lang="en" class="lang-content">🟡 Chromosomal mutations (aberrations):</span><span lang="ru" class="lang-content">🟡 Хромосомные мутации (аберрации):</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content"><b>Делеция</b> — сегмент жоғалу; <b>Дупликация</b> — сегмент қайталану; <b>Инверсия</b> — сегмент 180° айналу; <b>Транслокация</b> — сегменттің басқа хромосомаға ауысуы (Даун синдромы = транслокация 21→14).</span><span lang="en" class="lang-content"><b>Deletion</b> — segment lost; <b>Duplication</b> — segment repeated; <b>Inversion</b> — segment rotated 180°; <b>Translocation</b> — segment moves to non-homologous chromosome (Down syndrome = translocation 21→14).</span><span lang="ru" class="lang-content"><b>Делеция</b> — потеря сегмента; <b>Дупликация</b> — повторение сегмента; <b>Инверсия</b> — поворот сегмента на 180°; <b>Транслокация</b> — перемещение сегмента на негомологичную хромосому (синдром Дауна = транслокация 21→14).</span></p>
+                            </div>
+                            <div class="bg-blue-50 rounded p-2">
+                                <p class="font-semibold text-blue-700"><span lang="kk" class="lang-content">🔵 Геномдік мутациялар:</span><span lang="en" class="lang-content">🔵 Genomic mutations:</span><span lang="ru" class="lang-content">🔵 Геномные мутации:</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content"><b>Полиплоидия</b> — хромосома жиынтығының еселенуі (3n, 4n). Өсімдіктерде жиі (бидай 6n=42). Жануарларда өлімге алып келеді. <b>Анеуплоидия</b> — жеке хромосомалар саны өзгереді: Трисомия (+1): Даун (21+1), Клайнфельтер (XXY); Моносомия (−1): Тернер (X0).</span><span lang="en" class="lang-content"><b>Polyploidy</b> — whole genome sets multiplied (3n, 4n). Common in plants (wheat 6n=42). Lethal in animals. <b>Aneuploidy</b> — individual chromosome numbers altered: Trisomy (+1): Down (21+1), Klinefelter (XXY); Monosomy (−1): Turner (X0).</span><span lang="ru" class="lang-content"><b>Полиплоидия</b> — кратное увеличение числа наборов хромосом (3n, 4n). Часто у растений (пшеница 6n=42). У животных летальна. <b>Анеуплоидия</b> — изменение числа отдельных хромосом: Трисомия (+1): Даун (21+1), Клайнфельтер (XXY); Моносомия (−1): Тёрнер (X0).</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUTAGENS + REPAIR -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">☢️ Мутагендер • 🔧 ДНҚ-ны жөндеу</h2>
+        <h2 lang="en" class="lang-content section-heading">☢️ Mutagens • 🔧 DNA Repair</h2>
+        <h2 lang="ru" class="lang-content section-heading">☢️ Мутагены • 🔧 Репарация ДНК</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card overflow-x-auto">
+                <table class="comp text-xs">
+                    <thead><tr>
+                        <th><span lang="kk" class="lang-content">Мутаген түрі</span><span lang="en" class="lang-content">Mutagen type</span><span lang="ru" class="lang-content">Тип мутагена</span></th>
+                        <th><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></th>
+                        <th><span lang="kk" class="lang-content">Механизмі</span><span lang="en" class="lang-content">Mechanism</span><span lang="ru" class="lang-content">Механизм</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="font-bold text-yellow-700">☢️ <span lang="kk" class="lang-content">Физикалық</span><span lang="en" class="lang-content">Physical</span><span lang="ru" class="lang-content">Физические</span></td>
+                            <td><span lang="kk" class="lang-content">УК сәулесі (260 нм), X-сәулесі, γ-сәулесі, α және β бөлшектер, жоғары температура</span><span lang="en" class="lang-content">UV (260 nm), X-rays, γ-rays, α and β particles, high temperature</span><span lang="ru" class="lang-content">УФ (260 нм), рентген, γ-лучи, α и β частицы, высокая температура</span></td>
+                            <td><span lang="kk" class="lang-content">УК → тимин димерлерін тудырады; Иондаушы сәулелер → ДНҚ тізбегін үзеді</span><span lang="en" class="lang-content">UV → thymine dimers; Ionising radiation → DNA strand breaks</span><span lang="ru" class="lang-content">УФ → тиминовые димеры; Ионизирующее излучение → разрывы цепей ДНК</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-blue-700">⚗️ <span lang="kk" class="lang-content">Химиялық</span><span lang="en" class="lang-content">Chemical</span><span lang="ru" class="lang-content">Химические</span></td>
+                            <td><span lang="kk" class="lang-content">Алкилдеуші заттар (иприт), азот қышқылы (HNO₂), акридин бояулары, бензпирен (темекі), формальдегид, колхицин (ұршық)></span><span lang="en" class="lang-content">Alkylating agents (mustard gas), nitrous acid (HNO₂), acridine dyes, benzopyrene (tobacco), formaldehyde, colchicine (spindle)</span><span lang="ru" class="lang-content">Алкилирующие агенты (иприт), азотистая кислота (HNO₂), акридиновые красители, бензпирен (табак), формальдегид, колхицин (веретено)</span></td>
+                            <td><span lang="kk" class="lang-content">Негіздерді химиялық өзгертеді, интеркаляциялайды, ДНҚ метилдейді</span><span lang="en" class="lang-content">Chemically alter bases, intercalate, methylate DNA</span><span lang="ru" class="lang-content">Химически изменяют основания, интеркалируют, метилируют ДНК</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-green-700">🦠 <span lang="kk" class="lang-content">Биологиялық</span><span lang="en" class="lang-content">Biological</span><span lang="ru" class="lang-content">Биологические</span></td>
+                            <td><span lang="kk" class="lang-content">Ретровирустар (ВИЧ, онкогендік вирустар), транспозондар (прыгающие гендер), бактериялық токсиндер</span><span lang="en" class="lang-content">Retroviruses (HIV, oncogenic viruses), transposons (jumping genes), bacterial toxins</span><span lang="ru" class="lang-content">Ретровирусы (ВИЧ, онкогенные вирусы), транспозоны (прыгающие гены), бактериальные токсины</span></td>
+                            <td><span lang="kk" class="lang-content">Геномға кірістіреді; проонкогендерді белсендіреді</span><span lang="en" class="lang-content">Insert into genome; activate proto-oncogenes</span><span lang="ru" class="lang-content">Встраиваются в геном; активируют протоонкогены</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#15803d;background:#f0fdf4;">
+                    <p class="font-bold text-green-700 mb-2">🔧 <span lang="kk" class="lang-content">ДНҚ-ны жөндеу механизмдері:</span><span lang="en" class="lang-content">DNA repair mechanisms:</span><span lang="ru" class="lang-content">Механизмы репарации ДНК:</span></p>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>☀️ <b><span lang="kk" class="lang-content">Фотолиаза (фотореактивация):</span><span lang="en" class="lang-content">Photolyase (photoreactivation):</span><span lang="ru" class="lang-content">Фотолиаза (фотореактивация):</span></b> <span lang="kk" class="lang-content">Жарық энергиясын пайдаланып тимин димерлерін қалпына келтіреді. Бактериялар мен өсімдіктерде.</span><span lang="en" class="lang-content">Uses light energy to repair thymine dimers. Bacteria and plants.</span><span lang="ru" class="lang-content">Использует световую энергию для исправления тиминовых димеров. Бактерии и растения.</span></li>
+                        <li>✂️ <b><span lang="kk" class="lang-content">Экцизиялық жөндеу (NER):</span><span lang="en" class="lang-content">Nucleotide excision repair (NER):</span><span lang="ru" class="lang-content">Нуклеотидная эксцизионная репарация (NER):</span></b> <span lang="kk" class="lang-content">Зақымдалған сегменті кесіп алады → ДНҚ-полимераза толтырады → Лигаза жалғайды. Ксеродерма пигментоза — NER ақауы.</span><span lang="en" class="lang-content">Damaged segment cut out → DNA polymerase fills → Ligase seals. Xeroderma pigmentosum — NER defect.</span><span lang="ru" class="lang-content">Вырезает повреждённый участок → ДНК-полимераза заполняет → Лигаза сшивает. Пигментная ксеродерма — дефект NER.</span></li>
+                        <li>🔁 <b><span lang="kk" class="lang-content">Сәйкессіздікті жөндеу (MMR):</span><span lang="en" class="lang-content">Mismatch repair (MMR):</span><span lang="ru" class="lang-content">Репарация несоответствий (MMR):</span></b> <span lang="kk" class="lang-content">Репликациядан кейінгі қате жұптасуларды түзетеді. MMR ақауы → колоректальды рак.</span><span lang="en" class="lang-content">Corrects mismatches after replication. MMR defect → colorectal cancer.</span><span lang="ru" class="lang-content">Исправляет ошибочные пары после репликации. Дефект MMR → колоректальный рак.</span></li>
+                        <li>🛡️ <b>p53:</b> <span lang="kk" class="lang-content">«Геном қорғаушысы» ақуызы. G₁/S тексеру нүктесінде зақымдалған жасушаны апоптозға жіберіп немесе жөндеу механизмдерін іске қосады. p53 мутациясы → 50%+ онкологиялық аурулар.</span><span lang="en" class="lang-content">«Guardian of the genome» protein. At G₁/S checkpoint — triggers apoptosis or repair in damaged cells. p53 mutation → 50%+ cancers.</span><span lang="ru" class="lang-content">Белок — «страж генома». В G₁/S контрольной точке — запускает апоптоз или репарацию. Мутация p53 → 50%+ онкозаболеваний.</span></li>
+                    </ul>
+                </div>
+                <div class="fact-box text-xs">
+                    <p class="font-bold text-green-700"><span lang="kk" class="lang-content">📌 Мутациялардың эволюциялық маңызы:</span><span lang="en" class="lang-content">📌 Evolutionary significance of mutations:</span><span lang="ru" class="lang-content">📌 Эволюционное значение мутаций:</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Мутациялар — <b>эволюцияның алғашқы материалы</b>. Табиғи іріктелу пайдалы мутацияларды сақтайды, зиянды мутацияларды жояды. Бейтарап мутациялар популяцияда жинақталады (молекулалық сағат). Ауыл шаруашылығында: мутанттық сорттар мен тұқымдар алу (мутациялық іріктеу). Медицинада: онкогендер, ісік супрессорлары.</span><span lang="en" class="lang-content">Mutations are the <b>primary raw material of evolution</b>. Natural selection preserves beneficial mutations, eliminates harmful ones. Neutral mutations accumulate in populations (molecular clock). Agriculture: mutant varieties and breeds (mutation breeding). Medicine: oncogenes, tumour suppressors.</span><span lang="ru" class="lang-content">Мутации — <b>первичный материал эволюции</b>. Естественный отбор сохраняет полезные мутации, устраняет вредные. Нейтральные мутации накапливаются в популяции (молекулярные часы). В сельском хозяйстве: мутантные сорта и породы (мутационная селекция). В медицине: онкогены, супрессоры опухолей.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

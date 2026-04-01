@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генетика популяций. Закон Харди-Вайнберга</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0c1a3a 0%, #1e3a8a 50%, #0c1a3a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 40%, #60a5fa 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(29,78,216,0.5); }
+        .section-heading { color: #1d4ed8; border-bottom: 4px solid #93c5fd; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #1d4ed8; background: white; color: #1d4ed8; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#1e3a8a,#1d4ed8); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#eff6ff,#dbeafe); border-left: 5px solid #1d4ed8; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#1e3a8a,#1d4ed8); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#eff6ff; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-blue-200 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Популяционная генетика</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Популяциялар генетикасы. Харди-Вайнберг заңы</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Population Genetics. Hardy-Weinberg Law</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Генетика популяций. Закон Харди-Вайнберга</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm">
+            <p lang="kk" class="lang-content text-blue-100"><b>Популяциялар генетикасы</b> — популяциялардағы аллель жиіліктерінің заңдылықтарын зерттейтін ғылым. Микроэволюцияның математикалық негізі. Харди-Вайнберг заңы (1908) — идеал популяциядағы аллель жиіліктері буыннан буынға өзгермейді.</p>
+            <p lang="en" class="lang-content text-blue-100"><b>Population genetics</b> — the science studying patterns of allele frequencies in populations. Mathematical basis of microevolution. Hardy-Weinberg law (1908) — allele frequencies in an ideal population remain constant from generation to generation.</p>
+            <p lang="ru" class="lang-content text-blue-100"><b>Генетика популяций</b> — наука, изучающая закономерности частот аллелей в популяциях. Математическая основа микроэволюции. Закон Харди-Вайнберга (1908) — частоты аллелей в идеальной популяции остаются постоянными из поколения в поколение.</p>
+        </div>
+    </header>
+
+    <!-- HW LAW -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📐 Харди-Вайнберг Заңы</h2>
+        <h2 lang="en" class="lang-content section-heading">📐 Hardy-Weinberg Law</h2>
+        <h2 lang="ru" class="lang-content section-heading">📐 Закон Харди-Вайнберга</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div>
+                    <div class="tbox mb-3" style="border-color:#1d4ed8;background:#eff6ff;">
+                        <p class="font-bold text-blue-700 mb-2"><span lang="kk" class="lang-content">Аллель жиілігінің теңдеуі:</span><span lang="en" class="lang-content">Allele frequency equation:</span><span lang="ru" class="lang-content">Уравнение частот аллелей:</span></p>
+                        <div class="bg-blue-100 rounded-lg p-3 font-mono text-base font-black text-blue-900 text-center">p + q = 1</div>
+                        <ul class="text-gray-600 mt-2 space-y-0.5">
+                            <li><b>p</b> = <span lang="kk" class="lang-content">доминантты аллельдің жиілігі (A)</span><span lang="en" class="lang-content">frequency of dominant allele (A)</span><span lang="ru" class="lang-content">частота доминантного аллеля (A)</span></li>
+                            <li><b>q</b> = <span lang="kk" class="lang-content">рецессивті аллельдің жиілігі (a)</span><span lang="en" class="lang-content">frequency of recessive allele (a)</span><span lang="ru" class="lang-content">частота рецессивного аллеля (a)</span></li>
+                        </ul>
+                    </div>
+                    <div class="tbox" style="border-color:#1d4ed8;background:#eff6ff;">
+                        <p class="font-bold text-blue-700 mb-2"><span lang="kk" class="lang-content">Генотип жиіліктерінің теңдеуі:</span><span lang="en" class="lang-content">Genotype frequency equation:</span><span lang="ru" class="lang-content">Уравнение частот генотипов:</span></p>
+                        <div class="bg-blue-100 rounded-lg p-3 font-mono text-base font-black text-blue-900 text-center">p² + 2pq + q² = 1</div>
+                        <ul class="text-gray-600 mt-2 space-y-0.5">
+                            <li><b>p²</b> = AA <span lang="kk" class="lang-content">(доминантты гомозигота жиілігі)</span><span lang="en" class="lang-content">(dominant homozygote frequency)</span><span lang="ru" class="lang-content">(частота доминантной гомозиготы)</span></li>
+                            <li><b>2pq</b> = Aa <span lang="kk" class="lang-content">(гетерозигота жиілігі)</span><span lang="en" class="lang-content">(heterozygote frequency)</span><span lang="ru" class="lang-content">(частота гетерозиготы)</span></li>
+                            <li><b>q²</b> = aa <span lang="kk" class="lang-content">(рецессивті гомозигота жиілігі)</span><span lang="en" class="lang-content">(recessive homozygote frequency)</span><span lang="ru" class="lang-content">(частота рецессивной гомозиготы)</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="tbox mb-3" style="border-color:#1d4ed8;background:#eff6ff;">
+                        <p class="font-bold text-blue-700 mb-2"><span lang="kk" class="lang-content">Мысал есеп:</span><span lang="en" class="lang-content">Example problem:</span><span lang="ru" class="lang-content">Пример задачи:</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Популяцияда aa рецессивтілер үлесі = 9% (0,09). p және q-ны тап.</span><span lang="en" class="lang-content">In a population, the proportion of aa recessives = 9% (0.09). Find p and q.</span><span lang="ru" class="lang-content">В популяции доля рецессивных aa = 9% (0,09). Найдите p и q.</span></p>
+                        <div class="bg-blue-50 rounded-lg p-2 mt-2 font-mono text-xs text-blue-900 space-y-1">
+                            <p>q² = 0,09 → q = √0,09 = <b>0,3</b></p>
+                            <p>p = 1 - q = 1 - 0,3 = <b>0,7</b></p>
+                            <p>AA (p²) = 0,49 = <b>49%</b></p>
+                            <p>Aa (2pq) = 2×0,7×0,3 = <b>42%</b></p>
+                            <p>aa (q²) = <b>9%</b> ✓</p>
+                        </div>
+                    </div>
+                    <div class="fact-box">
+                        <p class="font-bold text-blue-700 mb-1"><span lang="kk" class="lang-content">💡 Маңызды:</span><span lang="en" class="lang-content">💡 Important:</span><span lang="ru" class="lang-content">💡 Важно:</span></p>
+                        <p class="text-gray-600 text-xs"><span lang="kk" class="lang-content">Рецессивті гомозигота жиілігі (q²) тікелей байқалатын фенотиптен есептеледі. Осыдан q → p анықталады. ХВ заңы <b>тек идеал популяцияда</b> сақталады.</span><span lang="en" class="lang-content">Recessive homozygote frequency (q²) is calculated from the directly observable phenotype. From this q → p is determined. HW law holds only in an <b>ideal population</b>.</span><span lang="ru" class="lang-content">Частота рецессивной гомозиготы (q²) определяется из наблюдаемого фенотипа. Из неё q → p. Закон ХВ соблюдается <b>только в идеальной популяции</b>.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONDITIONS + FACTORS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">⚖️ Идеал популяция шарттары және Эволюция факторлары</h2>
+        <h2 lang="en" class="lang-content section-heading">⚖️ Ideal Population Conditions and Evolutionary Forces</h2>
+        <h2 lang="ru" class="lang-content section-heading">⚖️ Условия идеальной популяции и Факторы эволюции</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card text-xs">
+                <h3 class="font-bold text-blue-700 mb-3"><span lang="kk" class="lang-content">✅ Идеал популяция шарттары (ХВ заңы орындалу үшін):</span><span lang="en" class="lang-content">✅ Ideal population conditions (for HW law to hold):</span><span lang="ru" class="lang-content">✅ Условия идеальной популяции (для соблюдения закона ХВ):</span></h3>
+                <ul class="space-y-1 text-gray-600">
+                    <li>1️⃣ <span lang="kk" class="lang-content"><b>Үлкен өлшем</b> — генетикалық дрейф болмайды</span><span lang="en" class="lang-content"><b>Large size</b> — no genetic drift</span><span lang="ru" class="lang-content"><b>Большой размер</b> — нет генетического дрейфа</span></li>
+                    <li>2️⃣ <span lang="kk" class="lang-content"><b>Кездейсоқ шағылысу (Панмиксия)</b> — гомогамия жоқ</span><span lang="en" class="lang-content"><b>Random mating (Panmixia)</b> — no assortative mating</span><span lang="ru" class="lang-content"><b>Случайное скрещивание (Панмиксия)</b> — нет гомогамии</span></li>
+                    <li>3️⃣ <span lang="kk" class="lang-content"><b>Мутация жоқ</b> — аллель жиіліктері өзгермейді</span><span lang="en" class="lang-content"><b>No mutation</b> — allele frequencies do not change</span><span lang="ru" class="lang-content"><b>Нет мутаций</b> — частоты аллелей не изменяются</span></li>
+                    <li>4️⃣ <span lang="kk" class="lang-content"><b>Миграция жоқ</b> — гендер ағымы болмайды</span><span lang="en" class="lang-content"><b>No migration</b> — no gene flow</span><span lang="ru" class="lang-content"><b>Нет миграции</b> — нет потока генов</span></li>
+                    <li>5️⃣ <span lang="kk" class="lang-content"><b>Табиғи сұрыпталу жоқ</b> — барлық генотиптер тең бейімделген</span><span lang="en" class="lang-content"><b>No natural selection</b> — all genotypes equally fit</span><span lang="ru" class="lang-content"><b>Нет естественного отбора</b> — все генотипы одинаково приспособлены</span></li>
+                </ul>
+                <div class="fact-box mt-3">
+                    <p class="text-gray-600"><span lang="kk" class="lang-content">⚠️ Шынайы популяцияларда бұл шарттардың бірі бұзылса — <b>аллель жиіліктері өзгереді</b> → эволюция болады.</span><span lang="en" class="lang-content">⚠️ In real populations, if any condition is violated — <b>allele frequencies change</b> → evolution occurs.</span><span lang="ru" class="lang-content">⚠️ В реальных популяциях нарушение любого условия → <b>частоты аллелей меняются</b> → происходит эволюция.</span></p>
+                </div>
+            </div>
+            <div class="card overflow-x-auto">
+                <h3 class="font-bold text-blue-700 text-xs mb-3"><span lang="kk" class="lang-content">🔄 Аллель жиіліктерін өзгертетін факторлар (Эволюциялық күштер)</span><span lang="en" class="lang-content">🔄 Factors that change allele frequencies (Evolutionary forces)</span><span lang="ru" class="lang-content">🔄 Факторы, изменяющие частоты аллелей (Эволюционные силы)</span></h3>
+                <table class="comp text-xs">
+                    <thead><tr>
+                        <th><span lang="kk" class="lang-content">Фактор</span><span lang="en" class="lang-content">Factor</span><span lang="ru" class="lang-content">Фактор</span></th>
+                        <th><span lang="kk" class="lang-content">Механизмі</span><span lang="en" class="lang-content">Mechanism</span><span lang="ru" class="lang-content">Механизм</span></th>
+                        <th><span lang="kk" class="lang-content">Бағытталуы</span><span lang="en" class="lang-content">Directed?</span><span lang="ru" class="lang-content">Направленность</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="font-bold text-blue-700"><span lang="kk" class="lang-content">Табиғи сұрыпталу</span><span lang="en" class="lang-content">Natural selection</span><span lang="ru" class="lang-content">Естественный отбор</span></td>
+                            <td><span lang="kk" class="lang-content">Бейімделуі жоғары генотиптер артық ұрпақ қалдырады → бейімді аллельдер жиіленеді</span><span lang="en" class="lang-content">More fit genotypes leave more offspring → favoured alleles increase in frequency</span><span lang="ru" class="lang-content">Более приспособленные генотипы оставляют больше потомков → частота адаптивных аллелей растёт</span></td>
+                            <td><span lang="kk" class="lang-content">✅ Бағытталған</span><span lang="en" class="lang-content">✅ Directional</span><span lang="ru" class="lang-content">✅ Направлен</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-blue-700"><span lang="kk" class="lang-content">Мутациялар</span><span lang="en" class="lang-content">Mutations</span><span lang="ru" class="lang-content">Мутации</span></td>
+                            <td><span lang="kk" class="lang-content">Жаңа аллельдер пайда болады; мутация қысымы → аллель жиіліктерін өзгертеді</span><span lang="en" class="lang-content">New alleles arise; mutation pressure → changes allele frequencies</span><span lang="ru" class="lang-content">Возникают новые аллели; давление мутаций → изменяет частоты аллелей</span></td>
+                            <td><span lang="kk" class="lang-content">❌ Бағытталмаған</span><span lang="en" class="lang-content">❌ Non-directional</span><span lang="ru" class="lang-content">❌ Ненаправленный</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-blue-700"><span lang="kk" class="lang-content">Гендер дрейфі</span><span lang="en" class="lang-content">Genetic drift</span><span lang="ru" class="lang-content">Генетический дрейф</span></td>
+                            <td><span lang="kk" class="lang-content">Кіші популяцияда кездейсоқ аллель жиілігі өзгеруі. <b>«Бутылка мойны» эффекті</b> — апаттан кейін популяция мөлшері күрт азаяды. <b>Негізін салушы эффект</b> — жаңа популяция аздаған бастапқы адамнан</span><span lang="en" class="lang-content">Random change of allele frequencies in small populations. <b>"Bottleneck" effect</b> — sharp population reduction after catastrophe. <b>Founder effect</b> — new population from few founders</span><span lang="ru" class="lang-content">Случайное изменение частот аллелей в малых популяциях. <b>Эффект «бутылочного горлышка»</b> — резкое сокращение популяции. <b>Эффект основателя</b> — новая популяция от малого числа особей</span></td>
+                            <td><span lang="kk" class="lang-content">❌ Кездейсоқ</span><span lang="en" class="lang-content">❌ Random</span><span lang="ru" class="lang-content">❌ Случайный</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-blue-700"><span lang="kk" class="lang-content">Гендер ағымы (Миграция)</span><span lang="en" class="lang-content">Gene flow (Migration)</span><span lang="ru" class="lang-content">Поток генов (Миграция)</span></td>
+                            <td><span lang="kk" class="lang-content">Особьтар немесе гаметалар популяциялар арасында ауысады → аллель жиіліктерін теңестіреді</span><span lang="en" class="lang-content">Individuals or gametes move between populations → homogenises allele frequencies</span><span lang="ru" class="lang-content">Перемещение особей или гамет между популяциями → выравнивает частоты аллелей</span></td>
+                            <td><span lang="kk" class="lang-content">↔ Теңестіруші</span><span lang="en" class="lang-content">↔ Homogenising</span><span lang="ru" class="lang-content">↔ Выравнивающий</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

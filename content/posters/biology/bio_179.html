@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотосинтез. Световая и тёмновая фазы</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #071a07 0%, #166534 50%, #071a07 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #14532d 0%, #16a34a 40%, #86efac 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(22,163,74,0.5); }
+        .section-heading { color: #16a34a; border-bottom: 4px solid #86efac; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #16a34a; background: white; color: #16a34a; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#14532d,#16a34a); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border-left: 5px solid #16a34a; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#14532d,#16a34a); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#f0fdf4; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-green-100 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Обмен веществ</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Фотосинтез. Жарық және Қараңғы фазалар</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Photosynthesis. Light and Dark Phases</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Фотосинтез. Световая и Тёмновая фазы</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl">
+            <p class="font-mono text-lg font-black text-white">6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</p>
+            <p class="text-green-100 text-sm mt-2"><span lang="kk" class="lang-content">Жарық энергиясы (хлоропластта). Энергия АТФ түрінде жинақталады. O₂ — фотосинтездің қосымша өнімі.</span><span lang="en" class="lang-content">Light energy (in chloroplast). Energy stored as ATP. O₂ is a by-product of photosynthesis.</span><span lang="ru" class="lang-content">Световая энергия (в хлоропласте). Энергия запасается в виде АТФ. O₂ — побочный продукт фотосинтеза.</span></p>
+        </div>
+    </header>
+
+    <!-- CHLOROPLAST STRUCTURE -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Хлоропласт құрылысы • ☀️ Жарық фаза (Тилакоид мембранасы)</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Chloroplast Structure • ☀️ Light Phase (Thylakoid membrane)</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Строение хлоропласта • ☀️ Световая фаза (Мембрана тилакоида)</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div>
+                    <div class="tbox mb-3" style="border-color:#16a34a;background:#f0fdf4;">
+                        <p class="font-bold text-green-700 mb-2"><span lang="kk" class="lang-content">Хлоропласт бөліктері:</span><span lang="en" class="lang-content">Chloroplast compartments:</span><span lang="ru" class="lang-content">Отделы хлоропласта:</span></p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>🟢 <b><span lang="kk" class="lang-content">Тилакоид мембранасы (Грана)</span><span lang="en" class="lang-content">Thylakoid membrane (Grana)</span><span lang="ru" class="lang-content">Мембрана тилакоида (Граны)</span></b> — <span lang="kk" class="lang-content">жарық фаза. Хлорофилл мен фотожүйелер (ФЖ I, ФЖ II) осында.</span><span lang="en" class="lang-content">light phase. Chlorophyll and photosystems (PS I, PS II) here.</span><span lang="ru" class="lang-content">световая фаза. Здесь хлорофилл и фотосистемы (ФС I, ФС II).</span></li>
+                            <li>🟡 <b><span lang="kk" class="lang-content">Строма</span><span lang="en" class="lang-content">Stroma</span><span lang="ru" class="lang-content">Строма</span></b> — <span lang="kk" class="lang-content">қараңғы фаза (Кальвин циклы). Хлоропластқа тән рибосомалар, ДНҚ, крахмал дәндері осында.</span><span lang="en" class="lang-content">dark phase (Calvin cycle). Chloroplast ribosomes, DNA, starch granules here.</span><span lang="ru" class="lang-content">тёмновая фаза (цикл Кальвина). Здесь рибосомы хлоропласта, ДНК, гранулы крахмала.</span></li>
+                        </ul>
+                    </div>
+                    <div class="tbox" style="border-color:#ca8a04;background:#fefce8;">
+                        <p class="font-bold text-yellow-700 mb-2">☀️ <span lang="kk" class="lang-content">Жарық фаза — тилакоид мембранасы</span><span lang="en" class="lang-content">Light phase — thylakoid membrane</span><span lang="ru" class="lang-content">Световая фаза — мембрана тилакоида</span></p>
+                        <ol class="text-gray-600 space-y-1 list-decimal list-inside">
+                            <li><span lang="kk" class="lang-content"><b>ФЖ II жарық сіңіреді</b> → хлорофилл қозады → Su фотолизі: 2H₂O → 4H⁺ + 4e⁻ + O₂↑. <b>Оттек бөлінеді</b> — атмосфераның O₂ қайнары.</span><span lang="en" class="lang-content"><b>PS II absorbs light</b> → chlorophyll excited → water photolysis: 2H₂O → 4H⁺ + 4e⁻ + O₂↑. <b>Oxygen released</b> — source of atmospheric O₂.</span><span lang="ru" class="lang-content"><b>ФС II поглощает свет</b> → хлорофилл возбуждается → фотолиз воды: 2H₂O → 4H⁺ + 4e⁻ + O₂↑. <b>Выделяется кислород</b> — источник атмосферного O₂.</span></li>
+                            <li><span lang="kk" class="lang-content"><b>Электрон тасымалдау тізбегі</b> → протондар (H⁺) тилакоид ішіне жинақталады → АТФ-синтаза → <b>АТФ синтезі (фотофосфорилдену)</b>.</span><span lang="en" class="lang-content"><b>Electron transport chain</b> → protons (H⁺) accumulate inside thylakoid → ATP synthase → <b>ATP synthesis (photophosphorylation)</b>.</span><span lang="ru" class="lang-content"><b>Цепь переноса электронов</b> → протоны (H⁺) накапливаются внутри тилакоида → АТФ-синтаза → <b>синтез АТФ (фотофосфорилирование)</b>.</span></li>
+                            <li><span lang="kk" class="lang-content"><b>ФЖ I жарық сіңіреді</b> → НАДФ⁺ + 2e⁻ + H⁺ → <b>НАДФ·H (НАДФН) синтезі</b>. Қараңғы фаза үшін.</span><span lang="en" class="lang-content"><b>PS I absorbs light</b> → NADP⁺ + 2e⁻ + H⁺ → <b>NADPH synthesis</b>. For the dark phase.</span><span lang="ru" class="lang-content"><b>ФС I поглощает свет</b> → НАДФ⁺ + 2e⁻ + H⁺ → <b>синтез НАДФН</b>. Для тёмной фазы.</span></li>
+                        </ol>
+                        <div class="mt-2 bg-yellow-50 rounded p-2 font-mono text-xs text-yellow-900">
+                            <p><span lang="kk" class="lang-content">Жарық фазасының нәтижелері:</span><span lang="en" class="lang-content">Light phase products:</span><span lang="ru" class="lang-content">Продукты световой фазы:</span></p>
+                            <p>✅ АТФ (фотофосфорилдену) | ✅ НАДФН | ✅ O₂↑</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;">
+                        <p class="font-bold text-green-700 mb-2">🌑 <span lang="kk" class="lang-content">Қараңғы фаза (Кальвин циклы) — строма</span><span lang="en" class="lang-content">Dark phase (Calvin cycle) — stroma</span><span lang="ru" class="lang-content">Тёмновая фаза (цикл Кальвина) — строма</span></p>
+                        <p class="text-gray-500 mb-2 text-xs"><span lang="kk" class="lang-content">Жарыққа тәуелсіз (тікелей емес). АТФ + НАДФН — жарық фазасынан алынады.</span><span lang="en" class="lang-content">Light-independent (not direct). ATP + NADPH — obtained from light phase.</span><span lang="ru" class="lang-content">Светонезависимая (не прямая). АТФ + НАДФН — получены из световой фазы.</span></p>
+                        <ol class="text-gray-600 space-y-1 list-decimal list-inside">
+                            <li><b><span lang="kk" class="lang-content">CO₂ фиксациясы:</span><span lang="en" class="lang-content">CO₂ fixation:</span><span lang="ru" class="lang-content">Фиксация CO₂:</span></b> <span lang="kk" class="lang-content">CO₂ + РуБФ (5С) → РуБФ-карбоксилаза (RuBisCO) → 2 молекула 3-ФГА (3C). Ең жиі кездесетін фермент жер бетінде.</span><span lang="en" class="lang-content">CO₂ + RuBP (5C) → RuBisCO → 2 × 3-PGA (3C). Most abundant enzyme on Earth.</span><span lang="ru" class="lang-content">CO₂ + РуБФ (5С) → РуБФ-карбоксилаза (RuBisCO) → 2 молекулы 3-ФГК (3C). Самый распространённый фермент на Земле.</span></li>
+                            <li><b><span lang="kk" class="lang-content">Редукция:</span><span lang="en" class="lang-content">Reduction:</span><span lang="ru" class="lang-content">Восстановление:</span></b> <span lang="kk" class="lang-content">3-ФГА + АТФ + НАДФН → Г-3-Ф (глицеральдегид-3-фосфат). Глюкоза, крахмал, май қышқылдары синтезіне жұмсалады.</span><span lang="en" class="lang-content">3-PGA + ATP + NADPH → G3P (glyceraldehyde-3-phosphate). Used for glucose, starch, fatty acid synthesis.</span><span lang="ru" class="lang-content">3-ФГК + АТФ + НАДФН → Г-3-Ф (глицеральдегид-3-фосфат). Используется для синтеза глюкозы, крахмала, жирных кислот.</span></li>
+                            <li><b><span lang="kk" class="lang-content">РуБФ регенерациясы:</span><span lang="en" class="lang-content">RuBP regeneration:</span><span lang="ru" class="lang-content">Регенерация РуБФ:</span></b> <span lang="kk" class="lang-content">Г-3-Ф + АТФ → РуБФ (5С). Цикл жалғасады.</span><span lang="en" class="lang-content">G3P + ATP → RuBP (5C). Cycle continues.</span><span lang="ru" class="lang-content">Г-3-Ф + АТФ → РуБФ (5С). Цикл продолжается.</span></li>
+                        </ol>
+                        <div class="mt-2 bg-green-50 rounded p-2 font-mono text-xs text-green-900">
+                            <p><span lang="kk" class="lang-content">Кальвин циклынан 1 глюкоза үшін:</span><span lang="en" class="lang-content">For 1 glucose from Calvin cycle:</span><span lang="ru" class="lang-content">Для 1 глюкозы из цикла Кальвина:</span></p>
+                            <p>6CO₂ + 18 АТФ + 12 НАДФН → C₆H₁₂O₆ + 18 АДФ + 12 НАДФ⁺</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACTORS + C3 vs C4 -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📊 Фотосинтезге әсер ету факторлары • 🌱 C3 vs C4 өсімдіктер</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Factors Affecting Photosynthesis • 🌱 C3 vs C4 Plants</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Факторы, влияющие на фотосинтез • 🌱 Растения C3 и C4</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Фактор</span><span lang="en" class="lang-content">Factor</span><span lang="ru" class="lang-content">Фактор</span></th>
+                            <th><span lang="kk" class="lang-content">Оңтайлы мән</span><span lang="en" class="lang-content">Optimal value</span><span lang="ru" class="lang-content">Оптимальное значение</span></th>
+                            <th><span lang="kk" class="lang-content">Артық/кем болса</span><span lang="en" class="lang-content">Effect of excess/deficit</span><span lang="ru" class="lang-content">Избыток/дефицит</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-bold text-green-700">☀️ <span lang="kk" class="lang-content">Жарық қарқындылығы</span><span lang="en" class="lang-content">Light intensity</span><span lang="ru" class="lang-content">Интенсивность света</span></td>
+                                <td><span lang="kk" class="lang-content">Орта — жоғары</span><span lang="en" class="lang-content">Medium–high</span><span lang="ru" class="lang-content">Средняя–высокая</span></td>
+                                <td><span lang="kk" class="lang-content">Артық → фотоингибиция (хлорофилл бұзылады). Кем → фотосинтез азаяды.</span><span lang="en" class="lang-content">Excess → photoinhibition (chlorophyll damaged). Deficit → rate decreases.</span><span lang="ru" class="lang-content">Избыток → фотоингибиция (разрушение хлорофилла). Дефицит → снижение скорости.</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-green-700">🌡️ <span lang="kk" class="lang-content">Температура</span><span lang="en" class="lang-content">Temperature</span><span lang="ru" class="lang-content">Температура</span></td>
+                                <td>25–35°C</td>
+                                <td><span lang="kk" class="lang-content">Артық (>40°C) → ферменттер денатурациясы (RuBisCO). Кем (<5°C) → ферменттер баяулайды.</span><span lang="en" class="lang-content">Excess (>40°C) → enzyme denaturation (RuBisCO). Low (&lt;5°C) → enzymes slow down.</span><span lang="ru" class="lang-content">Избыток (>40°C) → денатурация ферментов (RuBisCO). Дефицит (&lt;5°C) → замедление ферментов.</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-green-700">💨 CO₂</td>
+                                <td>0,04% (400 ppm)</td>
+                                <td><span lang="kk" class="lang-content">Артық → фотосинтезді жеделдетеді (жылыжайлар үшін). Кем → шектеуші фактор.</span><span lang="en" class="lang-content">Excess → accelerates photosynthesis (greenhouses). Deficit → limiting factor.</span><span lang="ru" class="lang-content">Избыток → ускоряет фотосинтез (теплицы). Дефицит → лимитирующий фактор.</span></td>
+                            </tr>
+                            <tr><td class="font-bold text-green-700">💧 <span lang="kk" class="lang-content">Су</span><span lang="en" class="lang-content">Water</span><span lang="ru" class="lang-content">Вода</span></td>
+                                <td><span lang="kk" class="lang-content">Жеткілікті</span><span lang="en" class="lang-content">Sufficient</span><span lang="ru" class="lang-content">Достаточная</span></td>
+                                <td><span lang="kk" class="lang-content">Кем → устьицалар жабылады → CO₂ кіре алмайды → фотосинтез тоқтайды.</span><span lang="en" class="lang-content">Deficit → stomata close → CO₂ can't enter → photosynthesis stops.</span><span lang="ru" class="lang-content">Дефицит → устьица закрываются → CO₂ не поступает → фотосинтез останавливается.</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+                            <th>🌿 C3</th>
+                            <th>🌾 C4</th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-bold"><span lang="kk" class="lang-content">Алғашқы өнім</span><span lang="en" class="lang-content">First product</span><span lang="ru" class="lang-content">Первый продукт</span></td>
+                                <td><span lang="kk" class="lang-content">3-ФГА (3С)</span><span lang="en" class="lang-content">3-PGA (3C)</span><span lang="ru" class="lang-content">3-ФГК (3С)</span></td>
+                                <td><span lang="kk" class="lang-content">Оксалоацетат (4С)</span><span lang="en" class="lang-content">Oxaloacetate (4C)</span><span lang="ru" class="lang-content">Оксалоацетат (4С)</span></td>
+                            </tr>
+                            <tr><td class="font-bold"><span lang="kk" class="lang-content">Фотодыхание</span><span lang="en" class="lang-content">Photorespiration</span><span lang="ru" class="lang-content">Фотодыхание</span></td>
+                                <td><span lang="kk" class="lang-content">Жоғары (жылы, ашық ауа-райда эффективтілік азаяды)</span><span lang="en" class="lang-content">High (loses efficiency in hot, sunny conditions)</span><span lang="ru" class="lang-content">Высокое (снижает эффективность при жаре)</span></td>
+                                <td><span lang="kk" class="lang-content">Өте төмен (CO₂ шоғырландырушы механизм бар)</span><span lang="en" class="lang-content">Very low (CO₂-concentrating mechanism)</span><span lang="ru" class="lang-content">Очень низкое (механизм концентрации CO₂)</span></td>
+                            </tr>
+                            <tr><td class="font-bold"><span lang="kk" class="lang-content">Қай климатта тиімді</span><span lang="en" class="lang-content">Best climate</span><span lang="ru" class="lang-content">Лучший климат</span></td>
+                                <td><span lang="kk" class="lang-content">Салқын, ылғалды</span><span lang="en" class="lang-content">Cool, moist</span><span lang="ru" class="lang-content">Прохладный, влажный</span></td>
+                                <td><span lang="kk" class="lang-content">Ыстық, құрғақ, жарық</span><span lang="en" class="lang-content">Hot, dry, sunny</span><span lang="ru" class="lang-content">Жаркий, сухой, солнечный</span></td>
+                            </tr>
+                            <tr><td class="font-bold"><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></td>
+                                <td><span lang="kk" class="lang-content">Бидай, күріш, картоп, теректер</span><span lang="en" class="lang-content">Wheat, rice, potato, trees</span><span lang="ru" class="lang-content">Пшеница, рис, картофель, деревья</span></td>
+                                <td><span lang="kk" class="lang-content">Жүгері (кукуруза), қант қамысы, сорго</span><span lang="en" class="lang-content">Maize (corn), sugarcane, sorghum</span><span lang="ru" class="lang-content">Кукуруза, сахарный тростник, сорго</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="fact-box mt-3 text-xs">
+                    <p class="font-bold text-green-700">🆚 <span lang="kk" class="lang-content">Фотосинтез vs Хемосинтез:</span><span lang="en" class="lang-content">Photosynthesis vs Chemosynthesis:</span><span lang="ru" class="lang-content">Фотосинтез vs Хемосинтез:</span></p>
+                    <div class="grid grid-cols-2 gap-2 mt-1 text-xs">
+                        <div><p class="font-semibold text-green-700"><span lang="kk" class="lang-content">Фотосинтез</span><span lang="en" class="lang-content">Photosynthesis</span><span lang="ru" class="lang-content">Фотосинтез</span></p><p class="text-gray-500"><span lang="kk" class="lang-content">Жарық → АТФ. Хлорофилл бар. Фотоавтотрофтар: өсімдіктер, балдырлар, цианобактериялар.</span><span lang="en" class="lang-content">Light → ATP. Chlorophyll present. Photoautotrophs: plants, algae, cyanobacteria.</span><span lang="ru" class="lang-content">Свет → АТФ. Есть хлорофилл. Фотоавтотрофы: растения, водоросли, цианобактерии.</span></p></div>
+                        <div><p class="font-semibold text-green-700"><span lang="kk" class="lang-content">Хемосинтез</span><span lang="en" class="lang-content">Chemosynthesis</span><span lang="ru" class="lang-content">Хемосинтез</span></p><p class="text-gray-500"><span lang="kk" class="lang-content">Химиялық реакция → АТФ. Жарыққа тәуелсіз. Хемоавтотрофтар: Nitrosomonas, күкірт бактериялары, теңіз дифундаттары.</span><span lang="en" class="lang-content">Chemical reaction → ATP. Light-independent. Chemoautotrophs: Nitrosomonas, sulfur bacteria, deep-sea vent bacteria.</span><span lang="ru" class="lang-content">Химическая реакция → АТФ. Не зависит от света. Хемоавтотрофы: Nitrosomonas, серобактерии, бактерии термальных источников.</span></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

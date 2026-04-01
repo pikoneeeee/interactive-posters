@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хромосомная теория наследственности. Сцепление генов</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f0a2e 0%, #3730a3 50%, #0f0a2e 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #3730a3 0%, #4f46e5 40%, #818cf8 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(79,70,229,0.5); }
+        .section-heading { color: #4338ca; border-bottom: 4px solid #a5b4fc; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #4338ca; background: white; color: #4338ca; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#3730a3,#4338ca); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#eef2ff,#e0e7ff); border-left: 5px solid #4338ca; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#3730a3,#4338ca); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#eef2ff; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-indigo-200 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Генетика</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Тұқымқуалаушылықтың хромосомалық теориясы. Гендердің байланысуы</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Chromosomal Theory of Heredity. Gene Linkage</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Хромосомная теория наследственности. Сцепление генов</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm">
+            <p lang="kk" class="lang-content text-indigo-100"><b>Томас Хант Морган (1910-1920)</b> — дрозофила шыбындарымен тәжірибе жүргізіп, гендердің хромосомаларда орналасатынын дәлелдеді. 1933 жылы Нобель сыйлығын алды. Морган теориясы Мендель заңдарын толықтырады.</p>
+            <p lang="en" class="lang-content text-indigo-100"><b>Thomas Hunt Morgan (1910–1920)</b> — proved genes are located on chromosomes through experiments with fruit flies (Drosophila). Nobel Prize 1933. Morgan's theory complements Mendel's laws.</p>
+            <p lang="ru" class="lang-content text-indigo-100"><b>Томас Хант Морган (1910–1920)</b> — доказал, что гены расположены на хромосомах, в экспериментах с плодовыми мушками (дрозофилами). Нобелевская премия 1933. Теория Моргана дополняет законы Менделя.</p>
+        </div>
+    </header>
+
+    <!-- MAIN POSTULATES -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">📜 Хромосомалық теорияның негізгі ережелері</h2>
+        <h2 lang="en" class="lang-content section-heading">📜 Main Postulates of Chromosomal Theory</h2>
+        <h2 lang="ru" class="lang-content section-heading">📜 Основные положения хромосомной теории</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">
+                    <p class="font-bold text-indigo-700">1. <span lang="kk" class="lang-content">Гендер хромосомаларда сызықты орналасқан</span><span lang="en" class="lang-content">Genes are arranged linearly on chromosomes</span><span lang="ru" class="lang-content">Гены расположены линейно на хромосомах</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Әр ген хромосомада белгілі бір орынды (локусты) алады. Аллельді гендер гомологтік хромосомалардың бірдей локустарында орналасады.</span><span lang="en" class="lang-content">Each gene occupies a specific position (locus) on a chromosome. Allelic genes are at identical loci on homologous chromosomes.</span><span lang="ru" class="lang-content">Каждый ген занимает определённое место (локус) на хромосоме. Аллельные гены расположены в одинаковых локусах гомологичных хромосом.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">
+                    <p class="font-bold text-indigo-700">2. <span lang="kk" class="lang-content">Бір хромосомадағы гендер байланысқан топ құрады</span><span lang="en" class="lang-content">Genes on the same chromosome form a linkage group</span><span lang="ru" class="lang-content">Гены одной хромосомы образуют группу сцепления</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Байланысқан гендер бірге тұқымқуалайды (Мендельдің тәуелсіз ажырасу заңынан ауытқу). Байланыс тобының саны = хромосома саны (гаплоид жиынтықта).</span><span lang="en" class="lang-content">Linked genes are inherited together (deviation from Mendel's law of independent assortment). Number of linkage groups = number of chromosomes (in haploid set).</span><span lang="ru" class="lang-content">Сцепленные гены наследуются вместе (отклонение от закона Менделя). Число групп сцепления = числу хромосом (в гаплоидном наборе).</span></p>
+                </div>
+                <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">
+                    <p class="font-bold text-indigo-700">3. <span lang="kk" class="lang-content">Кроссинговер байланысты бұзады</span><span lang="en" class="lang-content">Crossing-over breaks linkage</span><span lang="ru" class="lang-content">Кроссинговер нарушает сцепление</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Мейоздың профаза I кезінде гомологтік хромосомалар учаскелерімен алмасады. Нәтиже — рекомбинантты гаметалар. Жиілігі — хромосомалық карта үшін негіз.</span><span lang="en" class="lang-content">During prophase I of meiosis, homologous chromosomes exchange segments. Result — recombinant gametes. Frequency = basis for chromosome mapping.</span><span lang="ru" class="lang-content">В профазе I мейоза гомологичные хромосомы обмениваются участками. Результат — рекомбинантные гаметы. Частота = основа для хромосомного картирования.</span></p>
+                </div>
+                <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">
+                    <p class="font-bold text-indigo-700">4. <span lang="kk" class="lang-content">Кроссинговер жиілігі — гендер арасындағы қашықтыққа пропорционал</span><span lang="en" class="lang-content">Crossover frequency is proportional to distance between genes</span><span lang="ru" class="lang-content">Частота кроссинговера пропорциональна расстоянию между генами</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Гендер бір-біріне жақын болса, байланыс күшті (кроссинговер сирек). Алыс болса — тәуелсіз ажырасуға ұқсайды. <b>Морган бірлігі (сМ) = 1% кроссинговер.</b></span><span lang="en" class="lang-content">Genes close together → strong linkage (rare crossover). Genes far apart → resemble independent assortment. <b>Morgan unit (cM) = 1% crossover frequency.</b></span><span lang="ru" class="lang-content">Близкие гены — сильное сцепление (редкий кроссинговер). Далёкие гены — напоминают независимое расщепление. <b>Единица Моргана (сМ) = 1% частоты кроссинговера.</b></span></p>
+                </div>
+                <div class="tbox md:col-span-2" style="border-color:#4338ca;background:#eef2ff;">
+                    <p class="font-bold text-indigo-700">5. <span lang="kk" class="lang-content">Хромосомалық карталар</span><span lang="en" class="lang-content">Chromosome maps (genetic maps)</span><span lang="ru" class="lang-content">Хромосомные карты (генетические карты)</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Кроссинговер жиілігі бойынша гендердің хромосомадағы салыстырмалы орнын анықтауға болады. Морган Дрозофилада алғаш рет жасады. Қазіргі уақытта ДНҚ-реттілеу арқылы нақты карталар алынады.</span><span lang="en" class="lang-content">Using crossover frequencies, relative positions of genes on chromosomes can be determined. Morgan first created these for Drosophila. Now precise maps obtained via DNA sequencing.</span><span lang="ru" class="lang-content">По частоте кроссинговера можно определить относительное расположение генов на хромосоме. Морган впервые составил карту для дрозофилы. Сейчас точные карты получают секвенированием ДНК.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPLETE vs INCOMPLETE LINKAGE + DROSOPHILA -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔗 Толық / Толық емес байланыс • 🪰 Дрозофила тәжірибелері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔗 Complete / Incomplete Linkage • 🪰 Drosophila Experiments</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔗 Полное / Неполное сцепление • 🪰 Опыты на дрозофиле</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#4338ca;background:#eef2ff;">
+                    <p class="font-bold text-indigo-700 mb-2">🔒 <span lang="kk" class="lang-content">Толық байланыс</span><span lang="en" class="lang-content">Complete linkage</span><span lang="ru" class="lang-content">Полное сцепление</span></p>
+                    <p class="text-gray-600"><span lang="kk" class="lang-content">Кроссинговер болмайды. Байланысқан гендер тұрақты бірге тұқымқуалайды. <b>Мысал:</b> Морган — сарғыш тән + руди қанат (Дрозофила аналық жолы). Тек 2 фенотипті ұрпақ туады (аталық топтарға сәйкес).</span><span lang="en" class="lang-content">No crossing-over. Linked genes always inherited together. <b>Example:</b> Morgan — yellow body + rudimentary wing (Drosophila female line). Only 2 phenotypes in offspring (matching parental types).</span><span lang="ru" class="lang-content">Кроссинговер отсутствует. Сцепленные гены всегда наследуются вместе. <b>Пример:</b> Морган — жёлтое тело + зачаточное крыло (линия дрозофилы). Только 2 фенотипа потомства (совпадают с родительскими).</span></p>
+                    <div class="mt-2 p-2 bg-indigo-50 rounded font-mono text-xs text-indigo-800">
+                        <p>AB/ab × ab/ab</p>
+                        <p>→ 50% AB/ab + 50% ab/ab</p>
+                        <p class="text-indigo-600"><span lang="kk" class="lang-content">(тек аталық фенотиптер)</span><span lang="en" class="lang-content">(only parental phenotypes)</span><span lang="ru" class="lang-content">(только родительские фенотипы)</span></p>
+                    </div>
+                </div>
+                <div class="tbox text-xs" style="border-color:#7c3aed;background:#faf5ff;">
+                    <p class="font-bold text-purple-700 mb-2">🔓 <span lang="kk" class="lang-content">Толық емес байланыс (Кроссинговермен)</span><span lang="en" class="lang-content">Incomplete linkage (with crossing-over)</span><span lang="ru" class="lang-content">Неполное сцепление (с кроссинговером)</span></p>
+                    <p class="text-gray-600"><span lang="kk" class="lang-content">Кроссинговер нәтижесінде рекомбинантты гаметалар пайда болады. 4 фенотипті ұрпақ туады: аталық тип (жиі) + рекомбинантты тип (сирек). Рекомбинантты үлес = кроссинговер жиілігі = Морган бірлігі (сМ).</span><span lang="en" class="lang-content">Crossing-over produces recombinant gametes. 4 phenotypes in offspring: parental (frequent) + recombinant (rare). Recombinant proportion = crossover frequency = Morgan unit (cM).</span><span lang="ru" class="lang-content">Кроссинговер образует рекомбинантные гаметы. 4 фенотипа потомства: родительский (часто) + рекомбинантный (редко). Доля рекомбинантов = частота кроссинговера = единица Моргана (сМ).</span></p>
+                    <div class="mt-2 p-2 bg-purple-50 rounded font-mono text-xs text-purple-800">
+                        <p>AB/ab × ab/ab</p>
+                        <p>→ AB/ab (41%) + ab/ab (41%)</p>
+                        <p>→ Ab/ab (9%) + aB/ab (9%)</p>
+                        <p class="text-purple-600"><span lang="kk" class="lang-content">(18% рекомбинация → 18 сМ арақашықтық)</span><span lang="en" class="lang-content">(18% recombination → 18 cM distance)</span><span lang="ru" class="lang-content">(18% рекомбинация → 18 сМ расстояния)</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-indigo-700 text-sm mb-3">🪰 <span lang="kk" class="lang-content">Морганның Дрозофиламен жұмысы</span><span lang="en" class="lang-content">Morgan's Work with Drosophila</span><span lang="ru" class="lang-content">Работа Моргана с дрозофилой</span></h3>
+                <div class="fact-box text-xs mb-3">
+                    <p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Неге Дрозофила (жеміс шыбыны)?</span><span lang="en" class="lang-content">Why Drosophila (fruit fly)?</span><span lang="ru" class="lang-content">Почему дрозофила?</span></p>
+                    <ul class="text-gray-600 mt-1 space-y-0.5">
+                        <li>✅ <span lang="kk" class="lang-content">Ұрпақ циклы қысқа (~2 апта)</span><span lang="en" class="lang-content">Short generation time (~2 weeks)</span><span lang="ru" class="lang-content">Короткий цикл (~2 недели)</span></li>
+                        <li>✅ <span lang="kk" class="lang-content">Бір ұрпақта жүздеген ұрпақ береді</span><span lang="en" class="lang-content">Hundreds of offspring per generation</span><span lang="ru" class="lang-content">Сотни потомков за поколение</span></li>
+                        <li>✅ <span lang="kk" class="lang-content">Хромосомалар саны аз (2n=8, тек 4 жұп)</span><span lang="en" class="lang-content">Few chromosomes (2n=8, only 4 pairs)</span><span lang="ru" class="lang-content">Мало хромосом (2n=8, всего 4 пары)</span></li>
+                        <li>✅ <span lang="kk" class="lang-content">Полиморфизм: анқызыл/ақ көз, ұзын/кыска қанат</span><span lang="en" class="lang-content">Polymorphism: red/white eye, long/vestigial wing</span><span lang="ru" class="lang-content">Полиморфизм: красный/белый глаз, длинное/зачаточное крыло</span></li>
+                    </ul>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="comp text-xs">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Тәжірибе</span><span lang="en" class="lang-content">Experiment</span><span lang="ru" class="lang-content">Опыт</span></th>
+                            <th><span lang="kk" class="lang-content">Күтілген нәтиже (Мендель)</span><span lang="en" class="lang-content">Expected (Mendel)</span><span lang="ru" class="lang-content">Ожидаемый (Мендель)</span></th>
+                            <th><span lang="kk" class="lang-content">Шынайы нәтиже (Морган)</span><span lang="en" class="lang-content">Actual (Morgan)</span><span lang="ru" class="lang-content">Фактический (Морган)</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td><span lang="kk" class="lang-content">Сарғыш тән + Кыска қанат дигетерозигота × рецессивті гомозигота</span><span lang="en" class="lang-content">Yellow body + rudimentary wing diheterozygote × recessive homozygote</span><span lang="ru" class="lang-content">Жёлтое тело + зачаточное крыло дигетерозигота × рецессивная гомозигота</span></td>
+                                <td><span lang="kk" class="lang-content">1:1:1:1 (4 фенотип тең)</span><span lang="en" class="lang-content">1:1:1:1 (4 equal phenotypes)</span><span lang="ru" class="lang-content">1:1:1:1 (4 равных фенотипа)</span></td>
+                                <td><span lang="kk" class="lang-content">Аталық тип >> рекомбинантты: байланысқанын дәлелдейді</span><span lang="en" class="lang-content">Parental types >> recombinants: proves linkage</span><span lang="ru" class="lang-content">Родительские >> рекомбинанты: доказывает сцепление</span></td>
+                            </tr>
+                            <tr><td><span lang="kk" class="lang-content">Ақ көз + Сары тән (X-байланысты)</span><span lang="en" with>White eye + yellow body (X-linked)</span><span lang="ru" class="lang-content">Белый глаз + жёлтое тело (X-сцепленные)</span></td>
+                                <td><span lang="kk" class="lang-content">Жынысқа байланысты + тәуелсіз</span><span lang="en" class="lang-content">Sex-linked + independent</span><span lang="ru" class="lang-content">Сцепленные с полом + независимые</span></td>
+                                <td><span lang="kk" class="lang-content">Екі ген де X хромосомасында — бірге тұқымқуалайды</span><span lang="en" class="lang-content">Both genes on X — inherited together</span><span lang="ru" class="lang-content">Оба гена на X — наследуются вместе</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

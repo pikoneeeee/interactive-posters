@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Молекулярная биология. Синтез белка</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 40%, #4f46e5 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(67,56,202,0.5); }
+        .section-heading { color: #4338ca; border-bottom: 4px solid #a5b4fc; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #4338ca; background: white; color: #4338ca; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #eef2ff; }
+        .lang-btn.active { background: linear-gradient(135deg,#1e1b4b,#4338ca); color: white; box-shadow: 0 4px 12px rgba(67,56,202,0.4); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#eef2ff,#f0f9ff); border-left: 5px solid #4338ca; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 12px 15px; margin: 7px 0; }
+        .step-arrow { color: #6366f1; font-size: 1.5rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+        table.comp { width: 100%; border-collapse: collapse; }
+        table.comp th { background: linear-gradient(135deg,#1e1b4b,#4338ca); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.84rem; }
+        table.comp th:first-child { border-radius: 10px 0 0 0; } table.comp th:last-child { border-radius: 0 10px 0 0; }
+        table.comp td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 0.82rem; }
+        table.comp tr:nth-child(even) td { background: #eef2ff; }
+        table.comp tr:last-child td { border-bottom: none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-indigo-200 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Молекулярная биология</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase tracking-wide">Молекулярлық биология. Ақуыз синтезі</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase tracking-wide">Molecular Biology. Protein Synthesis</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase tracking-wide">Молекулярная биология. Синтез белка</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p class="font-bold text-indigo-200 text-lg mb-3"><span lang="kk" class="lang-content">Молекулярлық биологияның орталық догмасы:</span><span lang="en" class="lang-content">The Central Dogma of Molecular Biology:</span><span lang="ru" class="lang-content">Центральная догма молекулярной биологии:</span></p>
+            <div class="flex flex-wrap gap-2 justify-center items-center">
+                <div class="bg-white/20 rounded-xl px-5 py-3 text-center"><span class="text-2xl">🧬</span><p class="font-black text-xl">ДНК</p><p class="text-xs text-indigo-200"><span lang="kk" class="lang-content">Тұқымқуалаушылық ақпарат</span><span lang="en" class="lang-content">Hereditary info</span><span lang="ru" class="lang-content">Хранение информации</span></p></div>
+                <div class="step-arrow text-yellow-300 text-2xl font-black">⟶<br><span class="text-xs font-normal text-indigo-200"><span lang="kk" class="lang-content">Репликация</span><span lang="en" class="lang-content">Replication</span><span lang="ru" class="lang-content">Репликация</span></span></div>
+                <div class="bg-white/20 rounded-xl px-5 py-3 text-center"><span class="text-2xl">🧬</span><p class="font-black text-xl">ДНК</p><p class="text-xs text-indigo-200"><span lang="kk" class="lang-content">Жаңа ДНК</span><span lang="en" class="lang-content">New DNA</span><span lang="ru" class="lang-content">Новая ДНК</span></p></div>
+                <div class="step-arrow text-green-300 text-2xl font-black">⟶<br><span class="text-xs font-normal text-indigo-200"><span lang="kk" class="lang-content">Транскрипция</span><span lang="en" class="lang-content">Transcription</span><span lang="ru" class="lang-content">Транскрипция</span></span></div>
+                <div class="bg-white/20 rounded-xl px-5 py-3 text-center"><span class="text-2xl">📜</span><p class="font-black text-xl">иРНК</p><p class="text-xs text-indigo-200">mRNA</p></div>
+                <div class="step-arrow text-orange-300 text-2xl font-black">⟶<br><span class="text-xs font-normal text-indigo-200"><span lang="kk" class="lang-content">Трансляция</span><span lang="en" class="lang-content">Translation</span><span lang="ru" class="lang-content">Трансляция</span></span></div>
+                <div class="bg-white/20 rounded-xl px-5 py-3 text-center"><span class="text-2xl">⚙️</span><p class="font-black text-xl"><span lang="kk" class="lang-content">Ақуыз</span><span lang="en" class="lang-content">Protein</span><span lang="ru" class="lang-content">Белок</span></p><p class="text-xs text-indigo-200"><span lang="kk" class="lang-content">Полипептид</span><span lang="en" class="lang-content">Polypeptide</span><span lang="ru" class="lang-content">Полипептид</span></p></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- REPLICATION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🔁 ДНҚ Репликациясы</h2>
+        <h2 lang="en" class="lang-content section-heading">🔁 DNA Replication</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔁 Репликация ДНК</h2>
+        <div class="card">
+            <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">Репликация — ДНҚ-ның екі еселенуі. Митоздың S-кезеңінде жүреді. Принципі — <b>жартылай консервативтік</b> (полуконсервативный): әр жаңа молекулада бір ескі тізбек + бір жаңа тізбек.</div>
+            <div lang="en" class="lang-content text-sm text-gray-600 mb-4">Replication — DNA doubling. Occurs in S-phase of mitosis. Principle — <b>semi-conservative</b>: each new molecule contains one old strand + one new strand.</div>
+            <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Репликация — удвоение ДНК. Происходит в S-фазе клеточного цикла (перед митозом). Принцип — <b>полуконсервативный</b>: в каждой новой молекуле одна старая цепь + одна новая.</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2 text-xs">
+                    <p class="font-bold text-indigo-700 text-sm"><span lang="kk" class="lang-content">Негізгі ферменттер:</span><span lang="en" class="lang-content">Key enzymes:</span><span lang="ru" class="lang-content">Ключевые ферменты:</span></p>
+                    <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">🔓 <b>Геликаза (Helicase)</b> — <span lang="kk" class="lang-content">ДНҚ тізбектерін ажыратады (H-байланыстарды үзеді)</span><span lang="en" class="lang-content">unwinds the DNA double helix (breaks H-bonds)</span><span lang="ru" class="lang-content">разматывает двойную спираль ДНК (разрывает Н-связи)</span></div>
+                    <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">✂️ <b>Топоизомераза (Topoisomerase)</b> — <span lang="kk" class="lang-content">ДНҚ алдындағы кернеуді жояды</span><span lang="en" class="lang-content">relieves torsional stress ahead of replication fork</span><span lang="ru" class="lang-content">снимает торсионное напряжение перед вилкой репликации</span></div>
+                    <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">🧩 <b>Праймаза (Primase)</b> — <span lang="kk" class="lang-content">РНК-праймер синтездейді (бастама)</span><span lang="en" class="lang-content">synthesises short RNA primer (start point)</span><span lang="ru" class="lang-content">синтезирует короткий РНК-праймер (точка старта)</span></div>
+                    <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">🏗️ <b>ДНҚ-полимераза (DNA Polymerase)</b> — <span lang="kk" class="lang-content">жаңа тізбек синтездейді (5'→3' бағытта). Қателерді түзейді.</span><span lang="en" class="lang-content">synthesises new strand (5'→3' direction). Proofreads errors.</span><span lang="ru" class="lang-content">синтезирует новую цепь (направление 5'→3'). Корректирует ошибки.</span></div>
+                    <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">🔗 <b>ДНҚ-лигаза (DNA Ligase)</b> — <span lang="kk" class="lang-content">Оказаки фрагменттерін біріктіреді</span><span lang="en" class="lang-content">joins Okazaki fragments on the lagging strand</span><span lang="ru" class="lang-content">сшивает фрагменты Оказаки на отстающей цепи</span></div>
+                </div>
+                <div>
+                    <div class="fact-box text-xs mb-3">
+                        <p class="font-bold text-indigo-700 mb-1"><span lang="kk" class="lang-content">Жетекші және кешіккен тізбектер</span><span lang="en" class="lang-content">Leading and lagging strands</span><span lang="ru" class="lang-content">Ведущая и запаздывающая цепи</span></p>
+                        <p><span lang="kk" class="lang-content"><b>Жетекші тізбек (Leading strand)</b> — үздіксіз синтезделеді (5'→3'). <b>Кешіккен тізбек (Lagging strand)</b> — Оказаки фрагменттерімен үзік-үзік синтезделеді.</span><span lang="en" class="lang-content"><b>Leading strand</b> — synthesised continuously (5'→3'). <b>Lagging strand</b> — synthesised discontinuously as Okazaki fragments.</span><span lang="ru" class="lang-content"><b>Ведущая цепь</b> — синтезируется непрерывно (5'→3'). <b>Запаздывающая цепь</b> — синтезируется прерывисто в виде фрагментов Оказаки.</span></p>
+                    </div>
+                    <div class="tbox text-xs" style="border-color:#7c3aed;background:#fdf4ff;">
+                        <p class="font-bold text-purple-700"><span lang="kk" class="lang-content">Комплементарлық принципі (АТФ хатталуы)</span><span lang="en" class="lang-content">Complementarity rule (base pairing)</span><span lang="ru" class="lang-content">Принцип комплементарности</span></p>
+                        <div class="flex gap-4 justify-center mt-2 font-mono text-sm font-bold">
+                            <div class="text-center"><p class="text-red-600">А — Т</p><p class="text-blue-600">Г — Ц</p></div>
+                            <div class="text-center text-gray-400">(2H)<br>(3H)</div>
+                            <div class="text-center"><p class="text-green-600">А — U*</p><p class="text-blue-600">Г — Ц</p></div>
+                        </div>
+                        <p class="text-gray-400 text-center mt-1">* <span lang="kk" class="lang-content">РНК-да Т орнына У (урацил)</span><span lang="en" class="lang-content">in RNA, T is replaced by U (uracil)</span><span lang="ru" class="lang-content">в РНК Т заменён на У (урацил)</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSCRIPTION + TRANSLATION -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📜 Транскрипция және Трансляция</h2>
+        <h2 lang="en" class="lang-content section-heading">📜 Transcription & Translation</h2>
+        <h2 lang="ru" class="lang-content section-heading">📜 Транскрипция и Трансляция</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Transcription -->
+            <div class="card">
+                <h3 class="font-bold text-green-700 text-lg mb-3">📜 <span lang="kk" class="lang-content">Транскрипция (ДНҚ → иРНК)</span><span lang="en" class="lang-content">Transcription (DNA → mRNA)</span><span lang="ru" class="lang-content">Транскрипция (ДНК → мРНК)</span></h3>
+                <div lang="kk" class="lang-content text-xs text-gray-500 mb-3">Транскрипция — ДНҚ-ның матрица тізбегі бойынша иРНК синтезі. Ядрода жүреді. Фермент — <b>РНҚ-полимераза.</b></div>
+                <div lang="en" class="lang-content text-xs text-gray-500 mb-3">Transcription — synthesis of mRNA using the DNA template strand. Occurs in the nucleus. Enzyme — <b>RNA polymerase.</b></div>
+                <div lang="ru" class="lang-content text-xs text-gray-500 mb-3">Транскрипция — синтез мРНК на матричной цепи ДНК. Происходит в ядре. Фермент — <b>РНК-полимераза.</b></div>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;">
+                        <p class="font-bold text-green-700">1️⃣ <span lang="kk" class="lang-content">Инициация (Бастау)</span><span lang="en" class="lang-content">Initiation</span><span lang="ru" class="lang-content">Инициация</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">РНҚ-полимераза <b>промотерге</b> (промотор) байланысады → ДНҚ тізбектері ашылады.</span><span lang="en" class="lang-content">RNA polymerase binds to the <b>promoter</b> → DNA strands separate.</span><span lang="ru" class="lang-content">РНК-полимераза связывается с <b>промотором</b> → цепи ДНК расходятся.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;">
+                        <p class="font-bold text-green-700">2️⃣ <span lang="kk" class="lang-content">Элонгация (Өсу)</span><span lang="en" class="lang-content">Elongation</span><span lang="ru" class="lang-content">Элонгация</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">РНҚ-полимераза матрица тізбегін 3'→5' оқиды, иРНҚ-ны 5'→3' синтездейді.</span><span lang="en" class="lang-content">RNA polymerase reads template 3'→5', synthesises mRNA 5'→3'.</span><span lang="ru" class="lang-content">РНК-полимераза считывает матрицу 3'→5', синтезирует мРНК 5'→3'.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#16a34a;background:#f0fdf4;">
+                        <p class="font-bold text-green-700">3️⃣ <span lang="kk" class="lang-content">Терминация (Аяқтау)</span><span lang="en" class="lang-content">Termination</span><span lang="ru" class="lang-content">Терминация</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">РНҚ-полимераза <b>терминаторға</b> жеткенде иРНҚ босатылады.</span><span lang="en" class="lang-content">RNA polymerase reaches the <b>terminator</b> → mRNA is released.</span><span lang="ru" class="lang-content">РНК-полимераза достигает <b>терминатора</b> → мРНК высвобождается.</span></p>
+                    </div>
+                    <div class="tbox text-xs" style="border-color:#ca8a04;background:#fffbeb;">
+                        <p class="font-bold text-amber-700"><span lang="kk" class="lang-content">🔬 Эукариоттарда — процессинг (өңдеу)</span><span lang="en" class="lang-content">🔬 In eukaryotes — mRNA processing</span><span lang="ru" class="lang-content">🔬 У эукариот — процессинг мРНК</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content"><b>Интрондар</b> (мағынасыз бөліктер) кесіліп тасталады, <b>экзондар</b> (мағыналы) сплайсинг арқылы байланысады. 5'-кэп және 3'-poly-A хвост қосылады.</span><span lang="en" class="lang-content"><b>Introns</b> (non-coding) are removed; <b>exons</b> (coding) joined by splicing. 5'-cap and 3'-poly-A tail are added.</span><span lang="ru" class="lang-content"><b>Интроны</b> (некодирующие) вырезаются, <b>экзоны</b> (кодирующие) соединяются сплайсингом. Добавляется 5'-кэп и 3'-poly-A хвост.</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Translation -->
+            <div class="card">
+                <h3 class="font-bold text-orange-700 text-lg mb-3">⚙️ <span lang="kk" class="lang-content">Трансляция (иРНК → Ақуыз)</span><span lang="en" class="lang-content">Translation (mRNA → Protein)</span><span lang="ru" class="lang-content">Трансляция (мРНК → Белок)</span></h3>
+                <div lang="kk" class="lang-content text-xs text-gray-500 mb-3">Трансляция — иРНҚ-ның нуклеотид тізбегінің аминқышқылдар тізбегіне (ақуызға) аударылуы. Рибосомаларда жүреді.</div>
+                <div lang="en" class="lang-content text-xs text-gray-500 mb-3">Translation — conversion of mRNA nucleotide sequence into an amino acid sequence (protein). Occurs on ribosomes.</div>
+                <div lang="ru" class="lang-content text-xs text-gray-500 mb-3">Трансляция — перевод нуклеотидной последовательности мРНК в аминокислотную последовательность (белок). Происходит на рибосомах.</div>
+                <div class="space-y-2 text-xs">
+                    <div class="tbox" style="border-color:#ea580c;background:#fff7ed;">
+                        <p class="font-bold text-orange-700">🧪 <span lang="kk" class="lang-content">Компоненттер</span><span lang="en" class="lang-content">Components</span><span lang="ru" class="lang-content">Компоненты</span></p>
+                        <ul class="text-gray-600 mt-1 space-y-0.5">
+                            <li>▸ <b>иРНҚ (mRNA)</b> — <span lang="kk" class="lang-content">матрица</span><span lang="en" class="lang-content">template</span><span lang="ru" class="lang-content">матрица</span></li>
+                            <li>▸ <b>тРНҚ (tRNA)</b> — <span lang="kk" class="lang-content">аминқышқылдарды тасымалдайды. Антикодон ↔ кодон</span><span lang="en" class="lang-content">carries amino acids. Anticodon ↔ codon</span><span lang="ru" class="lang-content">переносит аминокислоты. Антикодон ↔ кодон</span></li>
+                            <li>▸ <b><span lang="kk" class="lang-content">Рибосома</span><span lang="en" class="lang-content">Ribosome</span><span lang="ru" class="lang-content">Рибосома</span></b> — <span lang="kk" class="lang-content">кіші+үлкен суббірліктер. А, P, E учаскелері бар</span><span lang="en" class="lang-content">small+large subunits. Has A, P, E sites</span><span lang="ru" class="lang-content">малая+большая субъединицы. Сайты А, P, E</span></li>
+                        </ul>
+                    </div>
+                    <div class="tbox" style="border-color:#ea580c;background:#fff7ed;">
+                        <p class="font-bold text-orange-700">1️⃣ <span lang="kk" class="lang-content">Инициация</span><span lang="en" class="lang-content">Initiation</span><span lang="ru" class="lang-content">Инициация</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">Рибосома иРНҚ-ны 5'-ұшынан байланысады. Бастаушы кодон — <b>AUG</b> (метионин). Инициациялық тРНҚ А-учаскеге кіреді.</span><span lang="en" class="lang-content">Ribosome binds mRNA at 5'-end. Start codon — <b>AUG</b> (methionine). Initiator tRNA enters A-site.</span><span lang="ru" class="lang-content">Рибосома связывается с мРНК с 5'-конца. Стартовый кодон — <b>AUG</b> (метионин). Инициаторная тРНК входит в А-сайт.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#ea580c;background:#fff7ed;">
+                        <p class="font-bold text-orange-700">2️⃣ <span lang="kk" class="lang-content">Элонгация</span><span lang="en" class="lang-content">Elongation</span><span lang="ru" class="lang-content">Элонгация</span></p>
+                        <p class="text-gray-600 mt-0.5"><span lang="kk" class="lang-content">тРНҚ А-учаскеге кіреді → пептидтік байланыс түзіледі → рибосома иРНҚ бойымен жылжиды (транслокация). Полипептид тізбегі ұзарады.</span><span lang="en" class="lang-content">tRNA enters A-site → peptide bond forms → ribosome moves along mRNA (translocation). Polypeptide chain grows.</span><span lang="ru" class="lang-content">тРНК входит в А-сайт → образуется пептидная связь → рибосома движется по мРНК (транслокация). Полипептид растёт.</span></p>
+                    </div>
+                    <div class="tbox" style="border-color:#dc2626;background:#fef2f2;">
+                        <p class="font-bold text-red-700">3️⃣ <span lang="kk" class="lang-content">Терминация (Стоп-кодондар)</span><span lang="en" class="lang-content">Termination (Stop codons)</span><span lang="ru" class="lang-content">Терминация (Стоп-кодоны)</span></p>
+                        <p class="text-gray-600 mt-0.5 font-mono"><b>UAA, UAG, UGA</b> — <span lang="kk" class="lang-content">полипептид босатылады, рибосома ыдырайды</span><span lang="en" class="lang-content">polypeptide released, ribosome dissociates</span><span lang="ru" class="lang-content">полипептид высвобождается, рибосома диссоциирует</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GENETIC CODE -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🔐 Генетикалық Код және Оның Қасиеттері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔐 The Genetic Code & Its Properties</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔐 Генетический Код и Его Свойства</h2>
+        <div class="card">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs mb-4">
+                <div class="tbox text-center" style="border-color:#4338ca;background:#eef2ff;"><p class="text-2xl mb-1">3️⃣</p><p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Триплеттілік</span><span lang="en" class="lang-content">Triplet</span><span lang="ru" class="lang-content">Триплетность</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">3 нуклеотид = 1 аминқышқыл (кодон)</span><span lang="en" class="lang-content">3 nucleotides = 1 amino acid (codon)</span><span lang="ru" class="lang-content">3 нуклеотида = 1 аминокислота (кодон)</span></p></div>
+                <div class="tbox text-center" style="border-color:#4338ca;background:#eef2ff;"><p class="text-2xl mb-1">🔤</p><p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Бірмәнді</span><span lang="en" class="lang-content">Unambiguous</span><span lang="ru" class="lang-content">Однозначность</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Бір кодон — тек бір аминқышқыл</span><span lang="en" class="lang-content">One codon → only one amino acid</span><span lang="ru" class="lang-content">Один кодон → только одна аминокислота</span></p></div>
+                <div class="tbox text-center" style="border-color:#4338ca;background:#eef2ff;"><p class="text-2xl mb-1">🔁</p><p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Артықтық</span><span lang="en" class="lang-content">Redundancy</span><span lang="ru" class="lang-content">Вырожденность</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Бір аминқышқылды бірнеше кодон кодтайды</span><span lang="en" class="lang-content">One amino acid may have multiple codons</span><span lang="ru" class="lang-content">Одну аминокислоту кодируют несколько кодонов</span></p></div>
+                <div class="tbox text-center" style="border-color:#4338ca;background:#eef2ff;"><p class="text-2xl mb-1">🚫</p><p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Үйіспеушілік</span><span lang="en" class="lang-content">Non-overlapping</span><span lang="ru" class="lang-content">Неперекрываемость</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Кодондар қабаттаспайды; 3-3 нуклеотид оқылады</span><span lang="en" class="lang-content">Codons don't overlap; read 3 at a time</span><span lang="ru" class="lang-content">Кодоны не перекрываются; читаются по 3</span></p></div>
+                <div class="tbox text-center" style="border-color:#4338ca;background:#eef2ff;"><p class="text-2xl mb-1">🌍</p><p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Жалпылама</span><span lang="en" class="lang-content">Universal</span><span lang="ru" class="lang-content">Универсальность</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">Барлық тіршілік иелерінде бірдей (митох. кодымен ерекшелік бар)</span><span lang="en" class="lang-content">Same in all living organisms (minor exceptions in mitochondria)</span><span lang="ru" class="lang-content">Одинаков у всех организмов (малые исключения в митохондриях)</span></p></div>
+                <div class="tbox text-center" style="border-color:#4338ca;background:#eef2ff;"><p class="text-2xl mb-1">📍</p><p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Полярлылық</span><span lang="en" class="lang-content">Polarity</span><span lang="ru" class="lang-content">Полярность</span></p><p class="text-gray-500 mt-1"><span lang="kk" class="lang-content">иРНҚ 5'→3' бағытта оқылады</span><span lang="en" class="lang-content">mRNA is read 5'→3'</span><span lang="ru" class="lang-content">мРНК считывается 5'→3'</span></p></div>
+            </div>
+            <div class="fact-box text-xs">
+                <p class="font-bold text-indigo-700 mb-1"><span lang="kk" class="lang-content">📊 Кодондар санауы: 4³ = <b>64 кодон</b></span><span lang="en" class="lang-content">📊 Counting codons: 4³ = <b>64 codons</b></span><span lang="ru" class="lang-content">📊 Число кодонов: 4³ = <b>64 кодона</b></span></p>
+                <span lang="kk" class="lang-content">20 аминқышқылды кодтайды. 3 кодон — стоп-сигнал (UAA, UAG, UGA). 1 кодон — бастаушы (AUG = Мет). Митоза аминқышқылы — Мет (прокариоттарда — fMet).</span>
+                <span lang="en" class="lang-content">Encodes 20 amino acids. 3 are stop signals (UAA, UAG, UGA). 1 is start (AUG = Met). First amino acid always Met (fMet in prokaryotes).</span>
+                <span lang="ru" class="lang-content">Кодируют 20 аминокислот. 3 кодона — стоп-сигналы (UAA, UAG, UGA). 1 — стартовый (AUG = Мет). Первая аминокислота всегда Мет (fMet у прокариот).</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

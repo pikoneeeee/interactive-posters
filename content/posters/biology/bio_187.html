@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Строение и функции белков</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1a0a0a 0%, #7f1d1d 50%, #1a0a0a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 40%, #fca5a5 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(185,28,28,0.5); }
+        .section-heading { color: #b91c1c; border-bottom: 4px solid #fca5a5; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #b91c1c; background: white; color: #b91c1c; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#7f1d1d,#b91c1c); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#fff5f5,#fee2e2); border-left: 5px solid #b91c1c; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#7f1d1d,#b91c1c); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#fff5f5; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-red-200 font-semibold mb-3 text-lg">10–11 класс • Биохимия • Молекулярная биология</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Ақуыздар құрылысы және қызметтері</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Protein Structure and Functions</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Строение и функции белков</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm">
+            <p lang="kk" class="lang-content text-red-100">Ақуыздар — тіршіліктің негізгі молекулалары. 20 аминқышқылдан тұратын полипептидтік тізбек. Жасушаның кез келген қызметін атқарады: ферменттер, рецепторлар, тіректік, тасымалдаушы молекулалар.</p>
+            <p lang="en" class="lang-content text-red-100">Proteins are the fundamental molecules of life. Polypeptide chains built from 20 amino acids. Perform virtually every cellular function: enzymes, receptors, structural, transport molecules.</p>
+            <p lang="ru" class="lang-content text-red-100">Белки — основные молекулы жизни. Полипептидные цепи из 20 аминокислот. Выполняют практически любую клеточную функцию: ферменты, рецепторы, структурные, транспортные молекулы.</p>
+        </div>
+    </header>
+
+    <!-- AMINO ACIDS + STRUCTURE LEVELS -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔤 Аминқышқылдар • 🏗️ Ақуыз құрылысының деңгейлері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔤 Amino Acids • 🏗️ Levels of Protein Structure</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔤 Аминокислоты • 🏗️ Уровни структуры белков</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div>
+                    <div class="tbox mb-3" style="border-color:#b91c1c;background:#fff5f5;">
+                        <p class="font-bold text-red-700 mb-2"><span lang="kk" class="lang-content">Аминқышқылдың жалпы формуласы:</span><span lang="en" class="lang-content">General structure of an amino acid:</span><span lang="ru" class="lang-content">Общая формула аминокислоты:</span></p>
+                        <div class="bg-red-50 rounded p-2 text-center font-mono font-bold text-red-900 mb-2">H₂N–CH(R)–COOH</div>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>🔵 <b>–NH₂</b> <span lang="kk" class="lang-content">(амин тобы) — негіздік қасиет береді</span><span lang="en" class="lang-content">(amino group) — gives basic properties</span><span lang="ru" class="lang-content">(аминогруппа) — придаёт основные свойства</span></li>
+                            <li>🔴 <b>–COOH</b> <span lang="kk" class="lang-content">(карбоксил тобы) — қышқылдық қасиет береді</span><span lang="en" class="lang-content">(carboxyl group) — gives acidic properties</span><span lang="ru" class="lang-content">(карбоксильная группа) — придаёт кислотные свойства</span></li>
+                            <li>🟡 <b>–R</b> <span lang="kk" class="lang-content">(радикал) — аминқышқылды бірін-бірінен ажыратады. Полярлы, полярсыз, заряды бар.</span><span lang="en" class="lang-content">(side chain/R group) — distinguishes one amino acid from another. Polar, nonpolar, charged.</span><span lang="ru" class="lang-content">(радикал) — отличает аминокислоты друг от друга. Полярный, неполярный, заряженный.</span></li>
+                        </ul>
+                        <p class="text-gray-500 mt-2"><span lang="kk" class="lang-content">20 стандартты аминқышқыл: 9-ы маңызды (тамақпен алынады), 11-і маңызды емес (дене синтездейді). Пептидтік байланыс: –CO–NH– (бір аминқышқылдың COOH + екіншісінің NH₂; су бөлінеді).</span><span lang="en" class="lang-content">20 standard amino acids: 9 essential (from diet), 11 non-essential (body synthesises). Peptide bond: –CO–NH– (COOH of one AA + NH₂ of next; water released).</span><span lang="ru" class="lang-content">20 стандартных аминокислот: 9 незаменимых (из пищи), 11 заменимых (синтезируются в организме). Пептидная связь: –CO–NH– (COOH одной АК + NH₂ следующей; выделяется вода).</span></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="tbox" style="border-color:#b91c1c;background:#fff5f5;">
+                        <p class="font-bold text-red-700 mb-2"><span lang="kk" class="lang-content">Ақуыз құрылысының 4 деңгейі:</span><span lang="en" class="lang-content">4 levels of protein structure:</span><span lang="ru" class="lang-content">4 уровня структуры белка:</span></p>
+                        <div class="space-y-2">
+                            <div class="bg-blue-50 rounded p-2">
+                                <p class="font-semibold text-blue-700">1️⃣ <span lang="kk" class="lang-content">Бірінші реттік (Первичная)</span><span lang="en" class="lang-content">Primary</span><span lang="ru" class="lang-content">Первичная</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Аминқышқылдардың бір-бірімен пептидтік байланыстармен жалғасқан тізбегі. ДНҚ-да кодталған. Ақуыздың қалған барлық деңгейін анықтайды.</span><span lang="en" class="lang-content">Sequence of amino acids linked by peptide bonds. Encoded in DNA. Determines all other structural levels.</span><span lang="ru" class="lang-content">Последовательность аминокислот, связанных пептидными связями. Закодирована в ДНК. Определяет все остальные уровни.</span></p>
+                            </div>
+                            <div class="bg-green-50 rounded p-2">
+                                <p class="font-semibold text-green-700">2️⃣ <span lang="kk" class="lang-content">Екінші реттік (Вторичная)</span><span lang="en" class="lang-content">Secondary</span><span lang="ru" class="lang-content">Вторичная</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Сутектік байланыстардан пайда болатын α-спираль және β-қатпарлы парақ. Тізбектің жергілікті бүктелуі.</span><span lang="en" class="lang-content">α-helix and β-pleated sheet formed by hydrogen bonds. Local folding of the chain.</span><span lang="ru" class="lang-content">α-спираль и β-складчатый лист, образованные водородными связями. Локальное складывание цепи.</span></p>
+                            </div>
+                            <div class="bg-yellow-50 rounded p-2">
+                                <p class="font-semibold text-yellow-700">3️⃣ <span lang="kk" class="lang-content">Үшінші реттік (Третичная)</span><span lang="en" class="lang-content">Tertiary</span><span lang="ru" class="lang-content">Третичная</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Глобула немесе фибрилла тәрізді 3D пішін. Байланыстар: гидрофобты (+ең басты), дисульфидтік (-S-S-), ионды, сутектік. Жасуша ортасында спонтанды бүктеледі.</span><span lang="en" class="lang-content">3D globular or fibrous shape. Bonds: hydrophobic (main), disulfide (-S-S-), ionic, hydrogen. Spontaneous folding in cell environment.</span><span lang="ru" class="lang-content">3D глобулярная или фибриллярная форма. Связи: гидрофобные (главные), дисульфидные (-S-S-), ионные, водородные. Спонтанное складывание в среде клетки.</span></p>
+                            </div>
+                            <div class="bg-red-50 rounded p-2">
+                                <p class="font-semibold text-red-700">4️⃣ <span lang="kk" class="lang-content">Төртінші реттік (Четвертичная)</span><span lang="en" class="lang-content">Quaternary</span><span lang="ru" class="lang-content">Четвертичная</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Бірнеше полипептидтік тізбек (суббірліктер) бірігеді. Мысалы: Гемоглобин — 4 суббірлік (2α + 2β). Инсулин — 2 тізбек. Барлық ақуыздарда болмайды.</span><span lang="en" class="lang-content">Multiple polypeptide chains (subunits) associate. E.g. Haemoglobin — 4 subunits (2α + 2β). Insulin — 2 chains. Not present in all proteins.</span><span lang="ru" class="lang-content">Несколько полипептидных цепей (субъединицы) объединяются. Напр. Гемоглобин — 4 субъединицы (2α + 2β). Инсулин — 2 цепи. Есть не у всех белков.</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNCTIONS + DENATURATION -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">⚙️ Ақуыздар қызметтері • 🌡️ Денатурация</h2>
+        <h2 lang="en" class="lang-content section-heading">⚙️ Protein Functions • 🌡️ Denaturation</h2>
+        <h2 lang="ru" class="lang-content section-heading">⚙️ Функции белков • 🌡️ Денатурация</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card overflow-x-auto">
+                <table class="comp text-xs">
+                    <thead><tr>
+                        <th><span lang="kk" class="lang-content">Қызмет</span><span lang="en" class="lang-content">Function</span><span lang="ru" class="lang-content">Функция</span></th>
+                        <th><span lang="kk" class="lang-content">Мысалдар</span><span lang="en" class="lang-content">Examples</span><span lang="ru" class="lang-content">Примеры</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="font-bold text-orange-700">⚗️ <span lang="kk" class="lang-content">Ферментативтік</span><span lang="en" class="lang-content">Enzymatic (catalytic)</span><span lang="ru" class="lang-content">Ферментативная</span></td>
+                            <td><span lang="kk" class="lang-content">РуБиКО (фотосинтез), ДНҚ-полимераза (репликация), амилаза (крахмал ыдырату), пепсин (ас қорыту)</span><span lang="en" class="lang-content">RuBisCO (photosynthesis), DNA polymerase (replication), amylase (starch digestion), pepsin (digestion)</span><span lang="ru" class="lang-content">РуБиКО (фотосинтез), ДНК-полимераза (репликация), амилаза (переваривание крахмала), пепсин (пищеварение)</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-blue-700">🚢 <span lang="kk" class="lang-content">Тасымалдаушы</span><span lang="en" class="lang-content">Transport</span><span lang="ru" class="lang-content">Транспортная</span></td>
+                            <td><span lang="kk" class="lang-content">Гемоглобин (O₂ тасымалы), альбумин (май қышқылдары), трансферрин (темір), Na⁺/K⁺-АТФаза (иондар)</span><span lang="en" class="lang-content">Haemoglobin (O₂ transport), albumin (fatty acids), transferrin (iron), Na⁺/K⁺-ATPase (ions)</span><span lang="ru" class="lang-content">Гемоглобин (O₂), альбумин (жирные кислоты), трансферрин (железо), Na⁺/K⁺-АТФаза (ионы)</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-green-700">🏗️ <span lang="kk" class="lang-content">Құрылымдық</span><span lang="en" class="lang-content">Structural</span><span lang="ru" class="lang-content">Структурная</span></td>
+                            <td><span lang="kk" class="lang-content">Коллаген (дәнекер тін), кератин (шаш, тырнақ, мүйіз), актин мен миозин (бұлшықет талшықтары), тубулин (цитоскелет)</span><span lang="en" class="lang-content">Collagen (connective tissue), keratin (hair, nails, horn), actin & myosin (muscle fibres), tubulin (cytoskeleton)</span><span lang="ru" class="lang-content">Коллаген (соединительная ткань), кератин (волосы, ногти, рог), актин и миозин (мышечные волокна), тубулин (цитоскелет)</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-purple-700">💉 <span lang="kk" class="lang-content">Қорғаушы (иммундық)</span><span lang="en" class="lang-content">Protective (immune)</span><span lang="ru" class="lang-content">Защитная (иммунная)</span></td>
+                            <td><span lang="kk" class="lang-content">Антиденелер (иммуноглобулиндер) — антигендерге байланады. Интерферондар (вирустан қорғаныс). Тромбин, фибриноген (қан ұю)</span><span lang="en" class="lang-content">Antibodies (immunoglobulins) — bind antigens. Interferons (viral defence). Thrombin, fibrinogen (blood clotting)</span><span lang="ru" class="lang-content">Антитела (иммуноглобулины) — связывают антигены. Интерфероны (защита от вирусов). Тромбин, фибриноген (свёртывание крови)</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-yellow-700">📡 <span lang="kk" class="lang-content">Гормондық (сигналдық)</span><span lang="en" class="lang-content">Hormonal (signalling)</span><span lang="ru" class="lang-content">Гормональная</span></td>
+                            <td><span lang="kk" class="lang-content">Инсулин (қан қантын реттейді), глюкагон, өсу гормоны (СТГ), эпидермальды өсу факторы (EGF)</span><span lang="en" class="lang-content">Insulin (regulates blood glucose), glucagon, growth hormone (GH), epidermal growth factor (EGF)</span><span lang="ru" class="lang-content">Инсулин (регулирует сахар крови), глюкагон, гормон роста (СТГ), эпидермальный фактор роста (EGF)</span></td>
+                        </tr>
+                        <tr><td class="font-bold text-red-700">💪 <span lang="kk" class="lang-content">Қозғаушы (моторлы)</span><span lang="en" class="lang-content">Motor</span><span lang="ru" class="lang-content">Двигательная</span></td>
+                            <td><span lang="kk" class="lang-content">Миозин (бұлшықет жиырылуы), кинезин + динеин (везикула тасымалы, жасуша бөлінуі), бактерия флагеллині</span><span lang="en" class="lang-content">Myosin (muscle contraction), kinesin + dynein (vesicle transport, cell division), bacterial flagellin</span><span lang="ru" class="lang-content">Миозин (сокращение мышц), кинезин + динеин (перенос везикул, деление клетки), флагеллин бактерий</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#b91c1c;background:#fff5f5;">
+                    <p class="font-bold text-red-700 mb-2">🌡️ <span lang="kk" class="lang-content">Денатурация және ренатурация:</span><span lang="en" class="lang-content">Denaturation and renaturation:</span><span lang="ru" class="lang-content">Денатурация и ренатурация:</span></p>
+                    <div class="space-y-2">
+                        <div class="bg-red-50 rounded p-2">
+                            <p class="font-semibold text-red-700"><span lang="kk" class="lang-content">Денатурация — бастапқы реттікті сақтай отырып, 3D пішінінің жойылуы:</span><span lang="en" class="lang-content">Denaturation — loss of 3D shape while keeping primary sequence:</span><span lang="ru" class="lang-content">Денатурация — разрушение 3D-структуры при сохранении первичной последовательности:</span></p>
+                            <ul class="text-gray-500 space-y-0.5 mt-1">
+                                <li>🔥 <span lang="kk" class="lang-content">Температура артуы (>40-60°C) → сутектік + гидрофобты байланыстар үзіледі</span><span lang="en" class="lang-content">Increased temperature (>40-60°C) → H-bonds + hydrophobic interactions broken</span><span lang="ru" class="lang-content">Повышение температуры (>40-60°C) → разрыв водородных + гидрофобных связей</span></li>
+                                <li>⚗️ <span lang="kk" class="lang-content">рН өзгеруі → зарядталған R-топтарды бейтараптайды → ионды байланыстар үзіледі</span><span lang="en" class="lang-content">pH change → neutralises charged R-groups → ionic bonds broken</span><span lang="ru" class="lang-content">Изменение рН → нейтрализует заряженные R-группы → разрыв ионных связей</span></li>
+                                <li>🧪 <span lang="kk" class="lang-content">Химиялық заттар: мочевина, SDS — сутектік байланыстарды бұзады</span><span lang="en" class="lang-content">Chemicals: urea, SDS — disrupt hydrogen bonds</span><span lang="ru" class="lang-content">Химические вещества: мочевина, SDS — разрушают водородные связи</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded p-2">
+                            <p class="font-semibold text-green-700"><span lang="kk" class="lang-content">Ренатурация — денатурациялаушы факторлар алынып тасталған соң ақуыздың табиғи пішінін қалпына келтіруі (шаперондар көмегімен). Барлық ақуыздарда мүмкін емес.</span><span lang="en" class="lang-content">Renaturation — recovery of native shape after removing denaturing agents (with chaperone help). Not possible for all proteins.</span><span lang="ru" class="lang-content">Ренатурация — восстановление нативной формы после устранения денатурирующего фактора (с помощью шаперонов). Возможна не для всех белков.</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fact-box text-xs">
+                    <p class="font-bold text-red-700"><span lang="kk" class="lang-content">⚡ Ферменттер — биологиялық катализаторлар:</span><span lang="en" class="lang-content">⚡ Enzymes — biological catalysts:</span><span lang="ru" class="lang-content">⚡ Ферменты — биологические катализаторы:</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Реакцияның активтендіру энергиясын төмендетеді (шығын болмайды). Субстрат → Активті орталық → Фермент-субстрат кешені → Өнімдер. <b>Белсенді орталық (Active site)</b> — субстрат дәл сәйкес келетін ойыс. <b>"Кілт-Кілтжиек" моделі</b> (Эмиль Фишер) — қатаң сәйкестік. <b>"Индуцирленген сәйкестік" моделі</b> (Кошланд) — активті орталық икемді, субстратпен бірге өзгереді. Ингибиторлар: конкурентті (активті орталыққа бәсекелеседі) және конкурентті емес (аллостериялық орталыққа).</span><span lang="en" class="lang-content">Lower activation energy of reactions (not consumed). Substrate → Active site → Enzyme-substrate complex → Products. <b>Active site</b> — specific pocket where substrate fits. <b>Lock-and-key model</b> (Emil Fischer) — rigid complementarity. <b>Induced fit model</b> (Koshland) — active site is flexible, changes with substrate. Inhibitors: competitive (compete for active site) and non-competitive (bind allosteric site).</span><span lang="ru" class="lang-content">Снижают энергию активации реакций (не расходуются). Субстрат → Активный центр → Фермент-субстратный комплекс → Продукты. <b>Активный центр</b> — карман, куда точно подходит субстрат. <b>Модель «ключ-замок»</b> (Эмиль Фишер) — жёсткое соответствие. <b>Модель «индуцированного соответствия»</b> (Кошланд) — активный центр гибкий, меняется с субстратом. Ингибиторы: конкурентные (конкурируют за активный центр) и неконкурентные (связывают аллостерический центр).</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

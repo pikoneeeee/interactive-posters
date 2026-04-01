@@ -1,139 +1,326 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seed Plant Reproduction</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <title>ВНД. Память и мышление</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <style>
-        body { background: #3f2c22; color: #fed7aa; min-height: 100vh; font-family: 'Inter'; }
-        .glass { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        canvas { border-radius: 1.5rem; cursor: pointer; }
-        .lang-btn.active { background: #f97316; color: #451a03; font-weight: bold; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .container { max-width: 1400px; margin: auto; padding: 20px; }
+        .header-card { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 40px; border-radius: 1rem; }
+        .section-heading { color: #4f46e5; border-bottom: 3px solid #a5b4fc; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
+        .card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .lang-btn { padding: 8px 16px; border: 2px solid #6366f1; background: white; color: #6366f1; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #eef2ff; }
+        .lang-btn.active { background: #6366f1; color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .mind-card { border-radius: 12px; padding: 15px; }
+        .fact-box { background: #eef2ff; border: 2px solid #a5b4fc; border-radius: 10px; padding: 15px; margin: 10px 0; }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="p-8 flex flex-col items-center">
+<body class="bg-slate-50">
 
-<div class="w-full max-w-6xl flex justify-between items-center mb-8">
-        <h1 class="text-4xl font-Montserrat text-orange-300" id="main-title"></h1>
-        <div class="flex gap-2">
-            <button onclick="window.setL('ru')" id="btn-ru" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">RU</button>
-            <button onclick="window.setL('kz')" id="btn-kz" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">KZ</button>
-            <button onclick="window.setL('en')" id="btn-en" class="lang-btn px-3 py-1 rounded text-xs border border-white/20">EN</button>
-        </div>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-        <div class="relative h-[400px] glass p-0 flex items-center justify-center bg-black/20 rounded-3xl overflow-hidden">
-            <canvas id="gymnoCanvas" class="w-full h-full"></canvas>
-            <div class="absolute bottom-4 left-4 text-xs font-mono text-orange-400" id="cycle-label"></div>
-        </div>
+    <header class="header-card text-center mb-10">
+        <p class="text-indigo-200 font-semibold mb-2">9 класс • Биология • Анатомия человека</p>
+        
+        <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">ЖЖҚ. Жады және ойлау</h1>
+        <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">HNA. Memory and Thinking</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">ВНД. Память и мышление</h1>
+        
+        <p lang="kk" class="lang-content mt-3 text-lg font-medium text-indigo-100">Жоғарғы жүйке қызметі (ЖЖҚ) — ми қыртысының қызметі: ойлау, жады, сөйлеу, сана. И.П. Павлов негізін қалады.</p>
+        <p lang="en" class="lang-content mt-3 text-lg font-medium text-indigo-100">Higher Nervous Activity (HNA) is cerebral cortex function: thinking, memory, speech, consciousness. Founded by I.P. Pavlov.</p>
+        <p lang="ru" class="lang-content mt-3 text-lg font-medium text-indigo-100">Высшая нервная деятельность (ВНД) — функция коры мозга: мышление, память, речь, сознание. Основоположник — И.П. Павлов.</p>
+    </header>
 
-        <div class="glass p-8 rounded-3xl border-r-4 border-orange-600 flex flex-col justify-center">
-            <h2 class="text-2xl font-bold mb-4 text-white" id="info-h"></h2>
-            <p class="text-lg leading-relaxed opacity-80 mb-6" id="info-text"></p>
-            <div class="grid grid-cols-2 gap-4 text-xs uppercase tracking-widest text-orange-500 font-bold">
-                <div class="p-4 bg-white/5 rounded-xl border border-white/10">
-                    <span id="lbl-cone-t"></span><br>
-                    <span class="text-white normal-case" id="lbl-cone-d"></span>
+    <!-- Память -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">🧠 Жады (память)</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">🧠 Memory</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">🧠 Память</h2>
+
+        <div class="card">
+            <div class="fact-box mb-4">
+                <p lang="kk" class="lang-content text-sm"><strong>Жады</strong> — ақпаратты қабылдау, сақтау және қайта жаңғырту қабілеті. Синапстық байланыстар нығаюымен қалыптасады.</p>
+                <p lang="en" class="lang-content text-sm"><strong>Memory</strong> — ability to receive, store, and retrieve information. Formed by strengthening synaptic connections.</p>
+                <p lang="ru" class="lang-content text-sm"><strong>Память</strong> — способность воспринимать, хранить и воспроизводить информацию. Формируется укреплением синаптических связей.</p>
+            </div>
+
+            <h4 lang="kk" class="lang-content font-bold text-indigo-700 mb-3">Уақытына қарай:</h4>
+            <h4 lang="en" class="lang-content font-bold text-indigo-700 mb-3">By duration:</h4>
+            <h4 lang="ru" class="lang-content font-bold text-indigo-700 mb-3">По длительности:</h4>
+
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div class="mind-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #ef4444;">
+                    <h5 lang="kk" class="lang-content font-bold text-red-700 mb-2">⚡ ЛЕЗДЕ (СЕНСОРЛЫҚ)</h5>
+                    <h5 lang="en" class="lang-content font-bold text-red-700 mb-2">⚡ INSTANT (SENSORY)</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-red-700 mb-2">⚡ МГНОВЕННАЯ (СЕНСОРНАЯ)</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">⏱️ 0.1-0.5 секунд</p>
+                    <p lang="en" class="lang-content text-xs">⏱️ 0.1-0.5 seconds</p>
+                    <p lang="ru" class="lang-content text-xs">⏱️ 0.1-0.5 секунды</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">Сезім мүшелерінің "ізі"</p>
+                    <p lang="en" class="lang-content text-xs mt-1">"Trace" from sense organs</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">"След" от органов чувств</p>
                 </div>
-                <div class="p-4 bg-white/5 rounded-xl border border-white/10">
-                    <span id="lbl-seed-t"></span><br>
-                    <span class="text-white normal-case" id="lbl-seed-d"></span>
+                
+                <div class="mind-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b;">
+                    <h5 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">📝 ҚЫСҚА МЕРЗІМДІ</h5>
+                    <h5 lang="en" class="lang-content font-bold text-yellow-700 mb-2">📝 SHORT-TERM</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">📝 КРАТКОВРЕМЕННАЯ</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">⏱️ Секундтар — минуттар</p>
+                    <p lang="en" class="lang-content text-xs">⏱️ Seconds — minutes</p>
+                    <p lang="ru" class="lang-content text-xs">⏱️ Секунды — минуты</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">7±2 элемент (телефон №)</p>
+                    <p lang="en" class="lang-content text-xs mt-1">7±2 elements (phone #)</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">7±2 элемента (номер тел.)</p>
+                </div>
+                
+                <div class="mind-card" style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); border-left: 5px solid #10b981;">
+                    <h5 lang="kk" class="lang-content font-bold text-emerald-700 mb-2">💾 ҰЗАҚ МЕРЗІМДІ</h5>
+                    <h5 lang="en" class="lang-content font-bold text-emerald-700 mb-2">💾 LONG-TERM</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-emerald-700 mb-2">💾 ДОЛГОВРЕМЕННАЯ</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">⏱️ Күндер — өмір бойы</p>
+                    <p lang="en" class="lang-content text-xs">⏱️ Days — lifetime</p>
+                    <p lang="ru" class="lang-content text-xs">⏱️ Дни — всю жизнь</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1">Шексіз көлем, консолидация</p>
+                    <p lang="en" class="lang-content text-xs mt-1">Unlimited capacity, consolidation</p>
+                    <p lang="ru" class="lang-content text-xs mt-1">Безграничный объём, консолидация</p>
+                </div>
+            </div>
+
+            <h4 lang="kk" class="lang-content font-bold text-indigo-700 mb-3">Түріне қарай:</h4>
+            <h4 lang="en" class="lang-content font-bold text-indigo-700 mb-3">By type:</h4>
+            <h4 lang="ru" class="lang-content font-bold text-indigo-700 mb-3">По типу:</h4>
+
+            <div class="grid md:grid-cols-4 gap-3">
+                <div style="background: #eff6ff; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">👁️</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">КӨРУ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">VISUAL</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ЗРИТЕЛЬНАЯ</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">👂</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ЕСТУ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">AUDITORY</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">СЛУХОВАЯ</p>
+                </div>
+                
+                <div style="background: #ecfdf5; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">💪</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ҚОЗҒАЛЫС</p>
+                    <p lang="en" class="lang-content text-xs font-bold">MOTOR</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ДВИГАТЕЛЬНАЯ</p>
+                </div>
+                
+                <div style="background: #fdf2f8; padding: 12px; border-radius: 8px; text-align: center;">
+                    <p class="text-xl mb-1">❤️</p>
+                    <p lang="kk" class="lang-content text-xs font-bold">ЭМОЦИОНАЛДЫҚ</p>
+                    <p lang="en" class="lang-content text-xs font-bold">EMOTIONAL</p>
+                    <p lang="ru" class="lang-content text-xs font-bold">ЭМОЦИОНАЛЬНАЯ</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        const bio21Data = {
-            ru: {
-                title: "ГОЛОСЕМЕННЫЕ",
-                h: "Эволюционный скачок",
-                text: "Семенные растения (Голосеменные и Покрытосеменные) размножаются семенами. Главное отличие от споровых — <strong>независимость оплодотворения от воды</strong>. Пыльца переносится ветром или насекомыми.",
-                cycle: "ЦИКЛ: ОПЫЛЕНИЕ -> СЕМЯ",
-                cone: {t: "Шишка", d: "Орган размножения"},
-                seed: {t: "Семя", d: "Зародыш + Запас пищи"}
-            },
-            kz: {
-                title: "АШЫҚТҰҚЫМДЫЛАР",
-                h: "Эволюциялық секіріс",
-                text: "Тұқымды өсімдіктер тұқым арқылы көбейеді. Споралылардан басты айырмашылығы — <strong>ұрықтанудың суға тәуелсіздігі</strong>. Тозаң жел немесе жәндіктер арқылы тасымалданады.",
-                cycle: "ЦИКЛ: ТОЗАҢДАНУ -> ТҰҚЫМ",
-                cone: {t: "Бүр", d: "Көбею мүшесі"},
-                seed: {t: "Тұқым", d: "Ұрық + Қорек қоры"}
-            },
-            en: {
-                title: "GYMNOSPERMS",
-                h: "Evolutionary Leap",
-                text: "Seed plants reproduce via seeds. The main difference from spore plants is <strong>fertilization independence from water</strong>. Pollen is carried by wind or insects.",
-                cycle: "CYCLE: POLLINATION -> SEED",
-                cone: {t: "Cone", d: "Reproductive organ"},
-                seed: {t: "Seed", d: "Embryo + Food store"}
-            }
-        };
+    <!-- Мышление -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">💭 Ойлау (мышление)</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">💭 Thinking</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">💭 Мышление</h2>
 
-        let lang = 'ru', cx, cvs;
-        let pollen = [];
+        <div class="card">
+            <div class="fact-box mb-4">
+                <p lang="kk" class="lang-content text-sm"><strong>Ойлау</strong> — шындықтың жалпылама және жанама бейнесі. Ұғымдар, пайымдаулар, тұжырымдар арқылы жүзеге асады. Тілмен тығыз байланысты.</p>
+                <p lang="en" class="lang-content text-sm"><strong>Thinking</strong> — generalized and indirect reflection of reality. Operates through concepts, judgments, conclusions. Closely connected with language.</p>
+                <p lang="ru" class="lang-content text-sm"><strong>Мышление</strong> — обобщённое и опосредованное отражение действительности. Оперирует понятиями, суждениями, умозаключениями. Тесно связано с речью.</p>
+            </div>
 
-        window.setL = (l) => {
-            lang = l;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-'+l).classList.add('active');
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="mind-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border-left: 5px solid #ef4444;">
+                    <h5 lang="kk" class="lang-content font-bold text-red-700 mb-2">🧩 КӨРНЕКІ-ӘРЕКЕТТІК</h5>
+                    <h5 lang="en" class="lang-content font-bold text-red-700 mb-2">🧩 VISUAL-ACTION</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-red-700 mb-2">🧩 НАГЛЯДНО-ДЕЙСТВЕННОЕ</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">Заттармен тікелей әрекет</p>
+                    <p lang="en" class="lang-content text-xs">Direct action with objects</p>
+                    <p lang="ru" class="lang-content text-xs">Прямое действие с предметами</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Мысалы: құрастыру, жөндеу</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Example: assembly, repair</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Пример: сборка, ремонт</p>
+                </div>
+                
+                <div class="mind-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b;">
+                    <h5 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">🖼️ КӨРНЕКІ-БЕЙНЕЛІ</h5>
+                    <h5 lang="en" class="lang-content font-bold text-yellow-700 mb-2">🖼️ VISUAL-IMAGE</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">🖼️ НАГЛЯДНО-ОБРАЗНОЕ</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">Бейнелермен ойлау</p>
+                    <p lang="en" class="lang-content text-xs">Thinking in images</p>
+                    <p lang="ru" class="lang-content text-xs">Мышление образами</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Мысалы: суретші, дизайнер</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Example: artist, designer</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Пример: художник, дизайнер</p>
+                </div>
+                
+                <div class="mind-card" style="background: linear-gradient(135deg, #eef2ff 0%, #c7d2fe 100%); border-left: 5px solid #6366f1;">
+                    <h5 lang="kk" class="lang-content font-bold text-indigo-700 mb-2">📚 АБСТРАКТІЛІ-ЛОГИКАЛЫҚ</h5>
+                    <h5 lang="en" class="lang-content font-bold text-indigo-700 mb-2">📚 ABSTRACT-LOGICAL</h5>
+                    <h5 lang="ru" class="lang-content font-bold text-indigo-700 mb-2">📚 АБСТРАКТНО-ЛОГИЧЕСКОЕ</h5>
+                    
+                    <p lang="kk" class="lang-content text-xs">Ұғымдармен, символдармен</p>
+                    <p lang="en" class="lang-content text-xs">With concepts, symbols</p>
+                    <p lang="ru" class="lang-content text-xs">Понятиями, символами</p>
+                    
+                    <p lang="kk" class="lang-content text-xs mt-1 text-gray-600">Мысалы: математика, философия</p>
+                    <p lang="en" class="lang-content text-xs mt-1 text-gray-600">Example: math, philosophy</p>
+                    <p lang="ru" class="lang-content text-xs mt-1 text-gray-600">Пример: математика, философия</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сигнальные системы -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">Сигнал жүйелері</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">Signal Systems</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">Сигнальные системы</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="fact-box" style="border-color: #fca5a5; background: #fef2f2;">
+                    <h4 lang="kk" class="lang-content font-bold text-red-700 mb-2">🐕 1-ШІ СИГНАЛ ЖҮЙЕСІ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-red-700 mb-2">🐕 1st SIGNAL SYSTEM</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-red-700 mb-2">🐕 1-я СИГНАЛЬНАЯ СИСТЕМА</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">Нақты тітіркендіргіштерге жауап</p>
+                    <p lang="en" class="lang-content text-sm mb-2">Response to concrete stimuli</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">Реакция на конкретные раздражители</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">✓ Адамда және жануарларда бар</p>
+                    <p lang="en" class="lang-content text-xs">✓ Present in humans and animals</p>
+                    <p lang="ru" class="lang-content text-xs">✓ Есть у человека и животных</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">✓ Сезім мүшелері арқылы</p>
+                    <p lang="en" class="lang-content text-xs">✓ Through sense organs</p>
+                    <p lang="ru" class="lang-content text-xs">✓ Через органы чувств</p>
+                </div>
+                
+                <div class="fact-box" style="border-color: #a5b4fc; background: #eef2ff;">
+                    <h4 lang="kk" class="lang-content font-bold text-indigo-700 mb-2">🗣️ 2-ШІ СИГНАЛ ЖҮЙЕСІ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-indigo-700 mb-2">🗣️ 2nd SIGNAL SYSTEM</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-indigo-700 mb-2">🗣️ 2-я СИГНАЛЬНАЯ СИСТЕМА</h4>
+                    
+                    <p lang="kk" class="lang-content text-sm mb-2">Сөзге, тілге жауап</p>
+                    <p lang="en" class="lang-content text-sm mb-2">Response to words, language</p>
+                    <p lang="ru" class="lang-content text-sm mb-2">Реакция на слова, речь</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">✓ ТЕК АДАМДА!</p>
+                    <p lang="en" class="lang-content text-xs">✓ ONLY IN HUMANS!</p>
+                    <p lang="ru" class="lang-content text-xs">✓ ТОЛЬКО У ЧЕЛОВЕКА!</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">✓ Абстрактілі ойлау, жалпылау</p>
+                    <p lang="en" class="lang-content text-xs">✓ Abstract thinking, generalization</p>
+                    <p lang="ru" class="lang-content text-xs">✓ Абстрактное мышление, обобщение</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сон -->
+    <section class="mb-12">
+        <h2 lang="kk" class="lang-content text-3xl section-heading">😴 Ұйқы</h2>
+        <h2 lang="en" class="lang-content text-3xl section-heading">😴 Sleep</h2>
+        <h2 lang="ru" class="lang-content text-3xl section-heading">😴 Сон</h2>
+
+        <div class="card">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div style="background: #dbeafe; padding: 15px; border-radius: 10px;">
+                    <h4 lang="kk" class="lang-content font-bold text-blue-700 mb-2">🌙 БАЯУ ҰЙҚ</h4>
+                    <h4 lang="en" class="lang-content font-bold text-blue-700 mb-2">🌙 SLOW-WAVE SLEEP</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-blue-700 mb-2">🌙 МЕДЛЕННЫЙ СОН</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">• 75-80% ұйқы</p>
+                    <p lang="en" class="lang-content text-xs">• 75-80% of sleep</p>
+                    <p lang="ru" class="lang-content text-xs">• 75-80% сна</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Дене демалады, қалпына келеді</p>
+                    <p lang="en" class="lang-content text-xs">• Body rests and recovers</p>
+                    <p lang="ru" class="lang-content text-xs">• Тело отдыхает и восстанавливается</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Өсу гормоны бөлінеді</p>
+                    <p lang="en" class="lang-content text-xs">• Growth hormone released</p>
+                    <p lang="ru" class="lang-content text-xs">• Выделяется гормон роста</p>
+                </div>
+                
+                <div style="background: #fef3c7; padding: 15px; border-radius: 10px;">
+                    <h4 lang="kk" class="lang-content font-bold text-yellow-700 mb-2">⚡ ЖЫЛДАМ ҰЙҚ (REM)</h4>
+                    <h4 lang="en" class="lang-content font-bold text-yellow-700 mb-2">⚡ REM SLEEP</h4>
+                    <h4 lang="ru" class="lang-content font-bold text-yellow-700 mb-2">⚡ БЫСТРЫЙ СОН (REM)</h4>
+                    
+                    <p lang="kk" class="lang-content text-xs">• 20-25% ұйқы</p>
+                    <p lang="en" class="lang-content text-xs">• 20-25% of sleep</p>
+                    <p lang="ru" class="lang-content text-xs">• 20-25% сна</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Түс көру, көз қозғалысы</p>
+                    <p lang="en" class="lang-content text-xs">• Dreams, eye movement</p>
+                    <p lang="ru" class="lang-content text-xs">• Сновидения, движение глаз</p>
+                    
+                    <p lang="kk" class="lang-content text-xs">• Жады консолидациясы</p>
+                    <p lang="en" class="lang-content text-xs">• Memory consolidation</p>
+                    <p lang="ru" class="lang-content text-xs">• Консолидация памяти</p>
+                </div>
+            </div>
             
-            const d = bio21Data[l];
-            document.getElementById('main-title').textContent = d.title;
-            document.getElementById('info-h').textContent = d.h;
-            document.getElementById('info-text').innerHTML = d.text;
-            document.getElementById('cycle-label').textContent = d.cycle;
-            document.getElementById('lbl-cone-t').textContent = d.cone.t;
-            document.getElementById('lbl-cone-d').textContent = d.cone.d;
-            document.getElementById('lbl-seed-t').textContent = d.seed.t;
-            document.getElementById('lbl-seed-d').textContent = d.seed.d;
-        }
+            <div class="fact-box mt-4">
+                <p lang="kk" class="lang-content text-sm text-center">⏰ Ересектерге <strong>7-9 сағат</strong> ұйқы қажет. Жасөспірімдерге — <strong>8-10 сағат</strong>.</p>
+                <p lang="en" class="lang-content text-sm text-center">⏰ Adults need <strong>7-9 hours</strong> of sleep. Teenagers need <strong>8-10 hours</strong>.</p>
+                <p lang="ru" class="lang-content text-sm text-center">⏰ Взрослым нужно <strong>7-9 часов</strong> сна. Подросткам — <strong>8-10 часов</strong>.</p>
+            </div>
+        </div>
+    </section>
 
-        function draw() {
-            if(!cx) return;
-            const w = cvs.width, h = cvs.height;
-            cx.clearRect(0,0,w,h);
+    <footer style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-radius: 1rem; border-top: 4px solid #6366f1;">
+        <p lang="kk" class="lang-content text-sm font-bold text-indigo-800">📚 9 сынып | Биология | Адам анатомиясы</p>
+        <p lang="en" class="lang-content text-sm font-bold text-indigo-800">📚 Grade 9 | Biology | Human Anatomy</p>
+        <p lang="ru" class="lang-content text-sm font-bold text-indigo-800">📚 9 класс | Биология | Анатомия человека</p>
+    </footer>
+</div>
 
-            // Tree Branch
-            cx.strokeStyle = '#57534e'; cx.lineWidth = 4;
-            cx.beginPath(); cx.moveTo(0, h*0.8); cx.lineTo(w*0.4, h*0.5); cx.stroke();
+<script>
+    function switchLang(lang) {
+        const container = document.getElementById('poster-container');
+        container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
+        container.classList.add('lang-' + lang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
-            // Female Cone (Reddish)
-            cx.fillStyle = '#9f1239';
-            cx.beginPath(); cx.ellipse(w*0.4, h*0.5, 20, 30, -0.5, 0, Math.PI*2); cx.fill();
-
-            // Male Cone (Yellowish)
-            cx.fillStyle = '#fde047';
-            cx.beginPath(); cx.ellipse(w*0.2, h*0.7, 10, 15, 0, 0, Math.PI*2); cx.fill();
-
-            // Pollen
-            if(Math.random() > 0.8) pollen.push({x: w*0.2, y: h*0.7, vx: 2, vy: -1});
-            
-            cx.fillStyle = '#fef08a';
-            pollen.forEach((p, i) => {
-                p.x += p.vx; p.y += p.vy;
-                cx.beginPath(); cx.arc(p.x, p.y, 2, 0, Math.PI*2); cx.fill();
-                if(p.x > w || p.y < 0) pollen.splice(i, 1);
-            });
-
-            requestAnimationFrame(draw);
-        }
-
-        window.onload = () => {
-            cvs = document.getElementById('gymnoCanvas'); cx = cvs.getContext('2d');
-            const rs = () => { cvs.width = cvs.parentElement.clientWidth; cvs.height = cvs.parentElement.clientHeight; draw(); };
-            window.addEventListener('resize', rs); rs();
-            window.setL('ru');
-        }
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['kk', 'en', 'ru'].includes(langParam)) {
+        switchLang(langParam);
+    }
+</script>
 
 </body>
 </html>

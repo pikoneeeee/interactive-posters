@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мейоз</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fdf2f8 0%, #eff6ff 100%); }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #be185d 0%, #7c3aed 50%, #1d4ed8 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(190,24,93,0.3); }
+        .section-heading { color: #be185d; border-bottom: 4px solid #f9a8d4; display: inline-block; padding-bottom: 8px; margin-bottom: 28px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 24px; border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+        .lang-btn { padding: 10px 20px; border: 2px solid #be185d; background: white; color: #be185d; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover { background: #fdf2f8; }
+        .lang-btn.active { background: linear-gradient(135deg,#be185d,#7c3aed); color: white; box-shadow: 0 4px 12px rgba(190,24,93,0.3); }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#fdf2f8,#eff6ff); border-left: 5px solid #be185d; padding: 15px; border-radius: 0 12px 12px 0; margin: 10px 0; }
+        .pm { border-radius: 12px; padding: 13px 15px; margin: 6px 0; border: 2px solid; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        th { background: linear-gradient(135deg,#be185d,#7c3aed); color: white; padding: 11px 14px; text-align: left; font-weight: 700; }
+        th:first-child { border-radius: 10px 0 0 0; } th:last-child { border-radius: 0 10px 0 0; }
+        td { padding: 10px 14px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        tr:nth-child(even) td { background: #fdf2f8; }
+        tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-12">
+        <p class="text-pink-200 font-semibold mb-3 text-lg">10 класс • Общая биология • Размножение</p>
+        <h1 lang="kk" class="lang-content text-5xl font-black uppercase tracking-wide">Мейоз</h1>
+        <h1 lang="en" class="lang-content text-5xl font-black uppercase tracking-wide">Meiosis</h1>
+        <h1 lang="ru" class="lang-content text-5xl font-black uppercase tracking-wide">Мейоз</h1>
+        <div class="mt-6 p-5 bg-white/10 rounded-xl">
+            <p lang="kk" class="lang-content text-lg font-medium">Мейоз — жыныс жасушаларының (гаметалардың) түзілуіне арналған бөліну түрі. Диплоидты (2n) жасуша <b>екі кезекті бөлінуден</b> өтіп, <b>4 гаплоидты (n) жасуша</b> береді. Генетикалық алуантүрлілікті қамтамасыз етеді.</p>
+            <p lang="en" class="lang-content text-lg font-medium">Meiosis — specialized division producing sex cells (gametes). A diploid (2n) cell undergoes <b>two successive divisions</b>, yielding <b>4 haploid (n) cells</b>. The source of genetic diversity.</p>
+            <p lang="ru" class="lang-content text-lg font-medium">Мейоз — специализированное деление для образования половых клеток (гамет). Диплоидная (2n) клетка проходит <b>два последовательных деления</b> и даёт <b>4 гаплоидные (n) клетки</b>. Обеспечивает генетическое разнообразие.</p>
+        </div>
+    </header>
+
+    <!-- FLOW DIAGRAM -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📋 Жалпы схема</h2>
+        <h2 lang="en" class="lang-content section-heading">📋 Overview</h2>
+        <h2 lang="ru" class="lang-content section-heading">📋 Общая схема</h2>
+        <div class="card">
+            <div class="overflow-x-auto">
+                <div class="flex items-center gap-1 min-w-max py-2">
+                    <div class="text-center px-3 py-3 rounded-xl font-bold text-sm min-w-24" style="background:#f0fdf4;border:2px solid #16a34a;color:#166534;">
+                        <div class="text-xl">🔵</div>
+                        <div lang="kk" class="lang-content">Диплоидты жасуша</div><div lang="en" class="lang-content">Diploid cell</div><div lang="ru" class="lang-content">Диплоидная клетка</div>
+                        <div class="text-xs font-normal mt-1 text-green-700">2n = 46</div>
+                    </div>
+                    <div class="text-gray-400 font-bold text-lg">→</div>
+                    <div class="text-center px-2 py-2 rounded-xl font-bold text-xs" style="background:#fff1f2;border:2px solid #be185d;color:#9f1239;min-width:80px;">
+                        <div class="text-lg">Ⅰ</div>
+                        <div lang="kk" class="lang-content">Мейоз I</div><div lang="en" class="lang-content">Meiosis I</div><div lang="ru" class="lang-content">Мейоз I</div>
+                        <div class="text-xs font-normal">редукционное</div>
+                    </div>
+                    <div class="text-gray-400 font-bold text-lg">→</div>
+                    <div class="text-center px-3 py-3 rounded-xl font-bold text-sm min-w-24" style="background:#fdf4ff;border:2px solid #7c3aed;color:#4c1d95;">
+                        <div class="text-xl">🟣🟣</div>
+                        <div lang="kk" class="lang-content">2 гаплоидты</div><div lang="en" class="lang-content">2 haploid</div><div lang="ru" class="lang-content">2 гаплоидных</div>
+                        <div class="text-xs font-normal mt-1">n = 23, 2c</div>
+                    </div>
+                    <div class="text-gray-400 font-bold text-lg">→</div>
+                    <div class="text-center px-2 py-2 rounded-xl font-bold text-xs" style="background:#eff6ff;border:2px solid #1d4ed8;color:#1e40af;min-width:80px;">
+                        <div class="text-lg">Ⅱ</div>
+                        <div lang="kk" class="lang-content">Мейоз II</div><div lang="en" class="lang-content">Meiosis II</div><div lang="ru" class="lang-content">Мейоз II</div>
+                        <div class="text-xs font-normal">эквационное</div>
+                    </div>
+                    <div class="text-gray-400 font-bold text-lg">→</div>
+                    <div class="text-center px-3 py-3 rounded-xl font-bold text-sm min-w-28" style="background:#fefce8;border:2px solid #ca8a04;color:#92400e;">
+                        <div class="text-xl">🟡🟡🟡🟡</div>
+                        <div lang="kk" class="lang-content">4 гаплоидты жасуша</div><div lang="en" class="lang-content">4 haploid cells</div><div lang="ru" class="lang-content">4 гаплоидных клетки</div>
+                        <div class="text-xs font-normal mt-1">n = 23, 1c</div>
+                    </div>
+                </div>
+            </div>
+            <div class="fact-box mt-4 text-sm">
+                <span lang="kk" class="lang-content"><b>Негізгі айырмашылық митоздан:</b> Мейозда гомологиялық хромосомалар жұптасады (синапсис) және кроссинговер жүреді → еншілес жасушалар генетикалық жағынан БІРДЕЙ ЕМЕС.</span>
+                <span lang="en" class="lang-content"><b>Key difference from mitosis:</b> In meiosis, homologous chromosomes pair up (synapsis) and crossing over occurs → daughter cells are NOT genetically identical.</span>
+                <span lang="ru" class="lang-content"><b>Главное отличие от митоза:</b> В мейозе гомологичные хромосомы конъюгируют (синапсис) и происходит кроссинговер → дочерние клетки генетически НЕ ИДЕНТИЧНЫ.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEIOSIS I -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">Мейоз I — Редукциялық бөліну</h2>
+        <h2 lang="en" class="lang-content section-heading">Meiosis I — Reductive Division</h2>
+        <h2 lang="ru" class="lang-content section-heading">Мейоз I — Редукционное деление</h2>
+        <div class="card">
+            <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">Мейоз I — хромосомалар саны екі есе азаятын бөліну (2n → n). Ең маңызды ерекшелігі — <b>профаза I-дегі синапсис пен кроссинговер.</b></div>
+            <div lang="en" class="lang-content text-sm text-gray-600 mb-4">Meiosis I — division that halves the chromosome number (2n → n). Key feature: <b>synapsis and crossing over in Prophase I.</b></div>
+            <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Мейоз I — деление, уменьшающее число хромосом вдвое (2n → n). Ключевая особенность: <b>синапсис и кроссинговер в профазе I.</b></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Prophase I -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fff1f2,#fce7f3);">
+                    <div class="text-center mb-3"><div style="font-size:2.2rem;">🌀</div>
+                        <h3 class="font-black text-lg text-rose-700"><span lang="kk" class="lang-content">Профаза I</span><span lang="en" class="lang-content">Prophase I</span><span lang="ru" class="lang-content">Профаза I</span></h3>
+                        <span class="text-xs font-bold px-2 py-0.5 rounded-full" style="background:#fecdd3;color:#9f1239;"><span lang="kk" class="lang-content">ең ұзақ фаза</span><span lang="en" class="lang-content">longest phase</span><span lang="ru" class="lang-content">самая длинная</span></span>
+                    </div>
+                    <ul class="text-xs text-gray-700 space-y-2">
+                        <li class="pm" style="border-color:#be185d;background:#fff1f2;">
+                            <b class="text-rose-700"><span lang="kk" class="lang-content">Лептотена</span><span lang="en" class="lang-content">Leptotene</span><span lang="ru" class="lang-content">Лептотена</span></b>
+                            <p class="mt-0.5"><span lang="kk" class="lang-content">Хромосомалар конденсациясы басталады</span><span lang="en" class="lang-content">Chromosomes begin condensing</span><span lang="ru" class="lang-content">Начинается конденсация хромосом</span></p>
+                        </li>
+                        <li class="pm" style="border-color:#be185d;background:#fff1f2;">
+                            <b class="text-rose-700"><span lang="kk" class="lang-content">Зиготена — СИНАПСИС</span><span lang="en" class="lang-content">Zygotene — SYNAPSIS</span><span lang="ru" class="lang-content">Зиготена — СИНАПСИС</span></b>
+                            <p class="mt-0.5"><span lang="kk" class="lang-content">Гомологиялық хромосомалар жұптасады → <b>бивалент (тетрада)</b> түзіледі</span><span lang="en" class="lang-content">Homologous chromosomes pair up → form <b>bivalent (tetrad)</b></span><span lang="ru" class="lang-content">Гомологичные хромосомы конъюгируют → образуется <b>бивалент (тетрада)</b></span></p>
+                        </li>
+                        <li class="pm" style="border-color:#be185d;background:#fff1f2;">
+                            <b class="text-rose-700"><span lang="kk" class="lang-content">Пахитена — КРОССИНГОВЕР</span><span lang="en" class="lang-content">Pachytene — CROSSING OVER</span><span lang="ru" class="lang-content">Пахитена — КРОССИНГОВЕР</span></b>
+                            <p class="mt-0.5"><span lang="kk" class="lang-content">Хроматидтер учаскелерімен алмасады (хиазма) → жаңа ген комбинациялары</span><span lang="en" class="lang-content">Chromatids exchange segments (chiasma) → new gene combinations</span><span lang="ru" class="lang-content">Хроматиды обмениваются участками (хиазма) → новые комбинации генов</span></p>
+                        </li>
+                        <li class="pm" style="border-color:#be185d;background:#fff1f2;">
+                            <b class="text-rose-700"><span lang="kk" class="lang-content">Диплотена-Диакинез</span><span lang="en" class="lang-content">Diplotene-Diakinesis</span><span lang="ru" class="lang-content">Диплотена-Диакинез</span></b>
+                            <p class="mt-0.5"><span lang="kk" class="lang-content">Биваленттер ажырай бастайды; ядро қабығы ыдырайды</span><span lang="en" class="lang-content">Bivalents begin separating; nuclear envelope dissolves</span><span lang="ru" class="lang-content">Биваленты начинают расходиться; ядерная оболочка растворяется</span></p>
+                        </li>
+                    </ul>
+                    <div class="mt-2 text-xs font-bold text-center py-1.5 rounded-lg" style="background:#fecdd3;color:#9f1239;">2n 4c</div>
+                </div>
+                <!-- Metaphase I -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#fdf4ff,#ede9fe);">
+                    <div class="text-center mb-3"><div style="font-size:2.2rem;">📏</div>
+                        <h3 class="font-black text-lg text-purple-700"><span lang="kk" class="lang-content">Метафаза I</span><span lang="en" class="lang-content">Metaphase I</span><span lang="ru" class="lang-content">Метафаза I</span></h3>
+                    </div>
+                    <ul class="text-xs text-gray-700 space-y-2">
+                        <li class="pm" style="border-color:#7c3aed;background:#faf5ff;"><span lang="kk" class="lang-content">Биваленттер экватор бойына орналасады (митоздан айырмашылығы: жеке хромосомалар емес, <b>жұптар!</b>)</span><span lang="en" class="lang-content">Bivalents align at equator (unlike mitosis: <b>pairs</b>, not individual chromosomes!)</span><span lang="ru" class="lang-content">Биваленты выстраиваются по экватору (в отличие от митоза: <b>пары</b>, а не одиночные хромосомы!)</span></li>
+                        <li class="pm" style="border-color:#7c3aed;background:#faf5ff;"><span lang="kk" class="lang-content">Ұршық жіптері гомологиялық хромосомалардың центромерлеріне бекиді</span><span lang="en" class="lang-content">Spindle fibers attach to centromeres of homologous chromosomes</span><span lang="ru" class="lang-content">Нити веретена прикрепляются к центромерам гомологичных хромосом</span></li>
+                        <li class="pm" style="border-color:#7c3aed;background:#faf5ff;"><span lang="kk" class="lang-content"><b>Тәуелсіз сортировка:</b> гомологтардың кез-келген жұптасуы мүмкін → 2²³ = 8 млн комбинация (адамда)</span><span lang="en" class="lang-content"><b>Independent assortment:</b> any pairing of homologs → 2²³ = 8 million combinations (in humans)</span><span lang="ru" class="lang-content"><b>Независимое расхождение:</b> любое сочетание гомологов → 2²³ = 8 млн комбинаций (у человека)</span></li>
+                    </ul>
+                    <div class="mt-2 text-xs font-bold text-center py-1.5 rounded-lg" style="background:#ddd6fe;color:#4c1d95;">2n 4c</div>
+                </div>
+                <!-- Anaphase I -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                    <div class="text-center mb-3"><div style="font-size:2.2rem;">⬆️</div>
+                        <h3 class="font-black text-lg text-blue-700"><span lang="kk" class="lang-content">Анафаза I</span><span lang="en" class="lang-content">Anaphase I</span><span lang="ru" class="lang-content">Анафаза I</span></h3>
+                    </div>
+                    <ul class="text-xs text-gray-700 space-y-2">
+                        <li class="pm" style="border-color:#1d4ed8;background:#eff6ff;"><span lang="kk" class="lang-content"><b>Гомологиялық хромосомалар</b> полюстарға ажырайды (митоздан айырмашылығы: центромерлер ажырамайды!)</span><span lang="en" class="lang-content"><b>Homologous chromosomes</b> separate to poles (unlike mitosis: centromeres do NOT split!)</span><span lang="ru" class="lang-content"><b>Гомологичные хромосомы</b> расходятся к полюсам (в отличие от митоза: центромеры НЕ расщепляются!)</span></li>
+                        <li class="pm" style="border-color:#1d4ed8;background:#eff6ff;"><span lang="kk" class="lang-content">Әр полюске 23 хромосома (2 хроматидтен) бағытталады</span><span lang="en" class="lang-content">23 chromosomes (each with 2 chromatids) move to each pole</span><span lang="ru" class="lang-content">К каждому полюсу отходит 23 хромосомы (каждая из 2 хроматид)</span></li>
+                        <li class="pm" style="border-color:#1d4ed8;background:#eff6ff;"><span lang="kk" class="lang-content">Хромосомалар саны азаяды: 46 → 23+23</span><span lang="en" class="lang-content">Chromosome number is halved: 46 → 23+23</span><span lang="ru" class="lang-content">Число хромосом уменьшается: 46 → 23+23</span></li>
+                    </ul>
+                    <div class="mt-2 text-xs font-bold text-center py-1.5 rounded-lg" style="background:#bfdbfe;color:#1e40af;">n 2c (каждый полюс)</div>
+                </div>
+                <!-- Telophase I -->
+                <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+                    <div class="text-center mb-3"><div style="font-size:2.2rem;">🔵🔵</div>
+                        <h3 class="font-black text-lg text-green-700"><span lang="kk" class="lang-content">Телофаза I</span><span lang="en" class="lang-content">Telophase I</span><span lang="ru" class="lang-content">Телофаза I</span></h3>
+                    </div>
+                    <ul class="text-xs text-gray-700 space-y-2">
+                        <li class="pm" style="border-color:#16a34a;background:#f0fdf4;"><span lang="kk" class="lang-content">Ядро қабығы қалпына келеді (кейбір ағзаларда жоқ)</span><span lang="en" class="lang-content">Nuclear envelope reforms (absent in some organisms)</span><span lang="ru" class="lang-content">Восстанавливается ядерная оболочка (у некоторых отсутствует)</span></li>
+                        <li class="pm" style="border-color:#16a34a;background:#f0fdf4;"><span lang="kk" class="lang-content">Цитокинез I → 2 гаплоидты жасуша</span><span lang="en" class="lang-content">Cytokinesis I → 2 haploid cells</span><span lang="ru" class="lang-content">Цитокинез I → 2 гаплоидные клетки</span></li>
+                        <li class="pm" style="border-color:#16a34a;background:#f0fdf4;"><span lang="kk" class="lang-content"><b>Интеркинез</b> — Мейоз I мен II арасындағы қысқа аракідік (ДНҚ репликациясы БОЛМАЙДЫ!)</span><span lang="en" class="lang-content"><b>Interkinesis</b> — brief pause between Meiosis I and II (NO DNA replication!)</span><span lang="ru" class="lang-content"><b>Интеркинез</b> — короткий перерыв между мейозом I и II (репликации ДНК НЕТ!)</span></li>
+                    </ul>
+                    <div class="mt-2 text-xs font-bold text-center py-1.5 rounded-lg" style="background:#bbf7d0;color:#14532d;">n 2c × 2</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEIOSIS II -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">Мейоз II — Эквациялық бөліну</h2>
+        <h2 lang="en" class="lang-content section-heading">Meiosis II — Equational Division</h2>
+        <h2 lang="ru" class="lang-content section-heading">Мейоз II — Эквационное деление</h2>
+        <div class="card">
+            <div lang="kk" class="lang-content text-sm text-gray-600 mb-4">Мейоз II — митозға ұқсас, бірақ <b>гаплоидты жасушалардан</b> басталады. Хромосомалар саны өзгермейді (n → n), тек хроматидтер бөлінеді.</div>
+            <div lang="en" class="lang-content text-sm text-gray-600 mb-4">Meiosis II — similar to mitosis, but begins with <b>haploid cells</b>. Chromosome number does not change (n → n); only chromatids separate.</div>
+            <div lang="ru" class="lang-content text-sm text-gray-600 mb-4">Мейоз II — аналогичен митозу, но начинается с <b>гаплоидных клеток</b>. Число хромосом не меняется (n → n); расходятся только хроматиды.</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
+                <div class="rounded-xl p-4 text-center text-xs" style="background:#fff7ed;border:2px solid #f59e0b;">
+                    <div class="text-2xl mb-1">🌀</div>
+                    <b class="text-amber-700"><span lang="kk" class="lang-content">Профаза II</span><span lang="en" class="lang-content">Prophase II</span><span lang="ru" class="lang-content">Профаза II</span></b>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Хромосомалар конденсациясы, ұршық жаңадан түзіледі</span><span lang="en" class="lang-content">Chromosomes condense, new spindle forms</span><span lang="ru" class="lang-content">Хромосомы конденсируются, новое веретено</span></p>
+                    <div class="mt-2 font-bold text-amber-700">n 2c</div>
+                </div>
+                <div class="rounded-xl p-4 text-center text-xs" style="background:#eff6ff;border:2px solid #1d4ed8;">
+                    <div class="text-2xl mb-1">📏</div>
+                    <b class="text-blue-700"><span lang="kk" class="lang-content">Метафаза II</span><span lang="en" class="lang-content">Metaphase II</span><span lang="ru" class="lang-content">Метафаза II</span></b>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Хромосомалар экватор бойына орналасады (жалғыз, жұп емес)</span><span lang="en" class="lang-content">Chromosomes align at equator (single, not paired)</span><span lang="ru" class="lang-content">Хромосомы выстраиваются у экватора (одиночные)</span></p>
+                    <div class="mt-2 font-bold text-blue-700">n 2c</div>
+                </div>
+                <div class="rounded-xl p-4 text-center text-xs" style="background:#fdf4ff;border:2px solid #7c3aed;">
+                    <div class="text-2xl mb-1">⬆️</div>
+                    <b class="text-purple-700"><span lang="kk" class="lang-content">Анафаза II</span><span lang="en" class="lang-content">Anaphase II</span><span lang="ru" class="lang-content">Анафаза II</span></b>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">Центромерлер ажырайды — хроматидтер полюстарға тартылады (митоздағыдай)</span><span lang="en" class="lang-content">Centromeres split — chromatids pulled to poles (like mitosis)</span><span lang="ru" class="lang-content">Центромеры расщепляются — хроматиды к полюсам (как в митозе)</span></p>
+                    <div class="mt-2 font-bold text-purple-700">n 1c × 2</div>
+                </div>
+                <div class="rounded-xl p-4 text-center text-xs" style="background:#f0fdf4;border:2px solid #16a34a;">
+                    <div class="text-2xl mb-1">🟡🟡🟡🟡</div>
+                    <b class="text-green-700"><span lang="kk" class="lang-content">Телофаза II + Цитокинез</span><span lang="en" class="lang-content">Telophase II + Cytokinesis</span><span lang="ru" class="lang-content">Телофаза II + Цитокинез</span></b>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">4 гаплоидты жасуша түзіледі — гаметалар</span><span lang="en" class="lang-content">4 haploid cells formed — gametes</span><span lang="ru" class="lang-content">Образуются 4 гаплоидные клетки — гаметы</span></p>
+                    <div class="mt-2 font-bold text-green-700">n 1c × 4</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CROSSING OVER + SIGNIFICANCE -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">🧬 Кроссинговер және мейоздың маңызы</h2>
+        <h2 lang="en" class="lang-content section-heading">🧬 Crossing Over & Significance</h2>
+        <h2 lang="ru" class="lang-content section-heading">🧬 Кроссинговер и значение мейоза</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-rose-700 text-lg mb-4">🔀 <span lang="kk" class="lang-content">Кроссинговер (Өзара алмасу)</span><span lang="en" class="lang-content">Crossing Over (Recombination)</span><span lang="ru" class="lang-content">Кроссинговер (Рекомбинация)</span></h3>
+                <div class="space-y-3 text-sm">
+                    <div class="pm" style="border-color:#be185d;background:#fff1f2;">
+                        <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Не болады?</span><span lang="en" class="lang-content">What happens?</span><span lang="ru" class="lang-content">Что происходит?</span></p>
+                        <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Профаза I-де гомологиялық хромосомалардың хроматидтері бір-бірімен қиылысып, учаскелерімен алмасады. Алмасу нүктесі — <b>хиазма</b>.</span><span lang="en" class="lang-content">During Prophase I, chromatids of homologous chromosomes cross and exchange segments. The point of exchange is called a <b>chiasma</b>.</span><span lang="ru" class="lang-content">В профазе I хроматиды гомологичных хромосом перекрещиваются и обмениваются участками. Точка обмена — <b>хиазма</b>.</span></p>
+                    </div>
+                    <div class="pm" style="border-color:#be185d;background:#fff1f2;">
+                        <p class="font-bold text-rose-700"><span lang="kk" class="lang-content">Нәтижесі?</span><span lang="en" class="lang-content">Result?</span><span lang="ru" class="lang-content">Результат?</span></p>
+                        <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Рекомбинантты хромосомалар түзіледі — аналық-аталық генетикалық материалдың жаңа үйлесімі. Бұл <b>генетикалық алуантүрлілікті</b> қамтамасыз етеді.</span><span lang="en" class="lang-content">Recombinant chromosomes are formed — new combinations of maternal and paternal genetic material. This ensures <b>genetic diversity</b>.</span><span lang="ru" class="lang-content">Образуются рекомбинантные хромосомы — новые сочетания отцовского и материнского генетического материала. Это обеспечивает <b>генетическое разнообразие</b>.</span></p>
+                    </div>
+                    <div class="fact-box text-xs">
+                        <span lang="kk" class="lang-content">Кроссинговер + тәуелсіз сортировка → теоретикалық тұрғыда адам <b>шексіз</b> бірегей гамета жасай алады. Сондықтан әр адам тарихта бірден-бір болып табылады!</span>
+                        <span lang="en" class="lang-content">Crossing over + independent assortment → a human can theoretically produce <b>virtually unlimited</b> unique gametes. That's why every person is genetically unique in history!</span>
+                        <span lang="ru" class="lang-content">Кроссинговер + независимое расхождение → теоретически человек может произвести <b>практически неограниченное</b> число уникальных гамет. Поэтому каждый человек генетически уникален!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="font-bold text-rose-700 text-lg mb-4">✅ <span lang="kk" class="lang-content">Мейоздың маңызы</span><span lang="en" class="lang-content">Significance of Meiosis</span><span lang="ru" class="lang-content">Значение мейоза</span></h3>
+                <div class="space-y-3 text-sm">
+                    <div class="pm" style="border-color:#be185d;background:#fff1f2;">
+                        <b class="text-rose-700">🧬 <span lang="kk" class="lang-content">Гаметалар түзілуі</span><span lang="en" class="lang-content">Gamete formation</span><span lang="ru" class="lang-content">Образование гамет</span></b>
+                        <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Еркекте: сперматогенез → 4 сперматозоид; Аналықта: оогенез → 1 жұмыртқа + 3 редукциялық дене</span><span lang="en" class="lang-content">In males: spermatogenesis → 4 spermatozoa; In females: oogenesis → 1 egg + 3 polar bodies</span><span lang="ru" class="lang-content">У самцов: сперматогенез → 4 сперматозоида; У самок: оогенез → 1 яйцеклетка + 3 редукционных тельца</span></p>
+                    </div>
+                    <div class="pm" style="border-color:#7c3aed;background:#faf5ff;">
+                        <b class="text-purple-700">🔢 <span lang="kk" class="lang-content">Хромосомалар санының тұрақтылығы</span><span lang="en" class="lang-content">Chromosome number stability</span><span lang="ru" class="lang-content">Постоянство числа хромосом</span></b>
+                        <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Жыныстық көбею кезінде ұрпақтан ұрпаққа хромосомалар санының 2 есе артуының алдын алады (n + n = 2n)</span><span lang="en" class="lang-content">Prevents doubling of chromosome number each generation during sexual reproduction (n + n = 2n)</span><span lang="ru" class="lang-content">Предотвращает удвоение числа хромосом при половом размножении (n + n = 2n)</span></p>
+                    </div>
+                    <div class="pm" style="border-color:#1d4ed8;background:#eff6ff;">
+                        <b class="text-blue-700">🌈 <span lang="kk" class="lang-content">Генетикалық алуантүрлілік</span><span lang="en" class="lang-content">Genetic diversity</span><span lang="ru" class="lang-content">Генетическое разнообразие</span></b>
+                        <p class="text-gray-600 text-xs mt-1"><span lang="kk" class="lang-content">Кроссинговер + тәуелсіз сортировка → табиғи сұрыптаудың материалы, популяция эволюциясының негізі</span><span lang="en" class="lang-content">Crossing over + independent assortment → raw material for natural selection, basis for population evolution</span><span lang="ru" class="lang-content">Кроссинговер + независимое расхождение → материал для естественного отбора, основа эволюции популяции</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <section class="mb-10">
+        <h2 lang="kk" class="lang-content section-heading">📊 Митоз / Мейоз I / Мейоз II салыстыруы</h2>
+        <h2 lang="en" class="lang-content section-heading">📊 Mitosis / Meiosis I / Meiosis II</h2>
+        <h2 lang="ru" class="lang-content section-heading">📊 Сравнение: Митоз / Мейоз I / Мейоз II</h2>
+        <div class="card overflow-x-auto">
+            <table>
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+                    <th style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">Митоз</th>
+                    <th style="background:linear-gradient(135deg,#be185d,#ec4899);">Мейоз I</th>
+                    <th style="background:linear-gradient(135deg,#7c3aed,#a855f7);">Мейоз II</th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Бастапқы жасуша</span><span lang="en" class="lang-content">Starting cell</span><span lang="ru" class="lang-content">Исходная клетка</span></td>
+                        <td class="text-xs">2n</td><td class="text-xs">2n</td><td class="text-xs">n</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Синапсис/кроссинговер</span><span lang="en" class="lang-content">Synapsis/crossing over</span><span lang="ru" class="lang-content">Синапсис/кроссинговер</span></td>
+                        <td class="text-xs text-red-500"><span lang="kk" class="lang-content">Жоқ</span><span lang="en" class="lang-content">No</span><span lang="ru" class="lang-content">Нет</span></td>
+                        <td class="text-xs text-green-600 font-bold"><span lang="kk" class="lang-content">Бар (профаза I)</span><span lang="en" class="lang-content">Yes (prophase I)</span><span lang="ru" class="lang-content">Да (профаза I)</span></td>
+                        <td class="text-xs text-red-500"><span lang="kk" class="lang-content">Жоқ</span><span lang="en" class="lang-content">No</span><span lang="ru" class="lang-content">Нет</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Метафазадағы тізілу</span><span lang="en" class="lang-content">Metaphase alignment</span><span lang="ru" class="lang-content">Выравнивание в метафазе</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Жеке хромосомалар</span><span lang="en" class="lang-content">Individual chromosomes</span><span lang="ru" class="lang-content">Одиночные хромосомы</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Биваленттер (жұптар)</span><span lang="en" class="lang-content">Bivalents (pairs)</span><span lang="ru" class="lang-content">Биваленты (пары)</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Жеке хромосомалар</span><span lang="en" class="lang-content">Individual chromosomes</span><span lang="ru" class="lang-content">Одиночные хромосомы</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Анафазада бөлінетін</span><span lang="en" class="lang-content">Anaphase separation</span><span lang="ru" class="lang-content">Расходятся в анафазе</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Хроматидтер (центромер ажырайды)</span><span lang="en" class="lang-content">Chromatids (centromere splits)</span><span lang="ru" class="lang-content">Хроматиды (центромера делится)</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Гомологиялық хромосомалар (центромер сақталады)</span><span lang="en" class="lang-content">Homologous chromosomes (centromere intact)</span><span lang="ru" class="lang-content">Гомологичные хромосомы (центромера цела)</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Хроматидтер (центромер ажырайды)</span><span lang="en" class="lang-content">Chromatids (centromere splits)</span><span lang="ru" class="lang-content">Хроматиды (центромера делится)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Результат</span></td>
+                        <td class="text-xs font-bold text-blue-700">2 × 2n</td>
+                        <td class="text-xs font-bold text-rose-700">2 × n</td>
+                        <td class="text-xs font-bold text-purple-700">4 × n (суммарно)</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold text-xs"><span lang="kk" class="lang-content">Еншілес жасушалар</span><span lang="en" class="lang-content">Daughter cells</span><span lang="ru" class="lang-content">Дочерние клетки</span></td>
+                        <td class="text-xs"><span lang="kk" class="lang-content">Аналықтай (бірдей)</span><span lang="en" class="lang-content">Identical to parent</span><span lang="ru" class="lang-content">Идентичны материнской</span></td>
+                        <td colspan="2" class="text-xs"><span lang="kk" class="lang-content">Генетикалық жағынан бірдей емес (кроссинговер + тәуелсіз сортировка)</span><span lang="en" class="lang-content">Genetically diverse (crossing over + independent assortment)</span><span lang="ru" class="lang-content">Генетически разнообразны (кроссинговер + независимое расхождение)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

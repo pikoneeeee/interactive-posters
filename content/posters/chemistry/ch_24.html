@@ -4,42 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ауа - газдарының қоспасы</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #fef3c7; }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #b45309; border-bottom: 3px solid #fed7aa; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #d97706; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #d97706; background: white; color: #d97706; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #d97706; color: white; }
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #451a03, #78350f, #1c1917); color: white; min-height: 100vh; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #f59e0b; color: #0f172a; font-weight: 800; }
         .lang-content { display: none; }
         .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 12px; text-align: center; font-size: 12px; }
-        th { background-color: #d97706; color: white; }
-        .component-box { background: linear-gradient(135deg, #fed7aa 0%, #fef3c7 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #d97706; margin: 10px 0; }
+        /* Fix table cells: display table-cell instead of block */
+        .lang-kk th.lang-content[lang="kk"],
+        .lang-kk td.lang-content[lang="kk"],
+        .lang-en th.lang-content[lang="en"],
+        .lang-en td.lang-content[lang="en"],
+        .lang-ru th.lang-content[lang="ru"],
+        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
+        table { width: 100%; border-collapse: collapse; }
+        table th { background: rgba(255,255,255,0.08); color: #fbbf24; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
+        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
+        table tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block { background: rgba(0,0,0,0.5); color: #fbbf24; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
+        .section-heading { color: #fbbf24; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
+        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
+        .method-box, .property-box, .substance-box, .info-box, .illustration {
+            background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25);
+            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        }
+        svg text { fill: white !important; }
+        svg { max-width: 100%; height: auto; }
+    
+        /* Custom content boxes */
+        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
+        .molecule-box, .formula-example, .sign-box, .reaction-box,
+        .calculation-example, .oxide-box, .concept-box, .valency-box,
+        .law-box, .formula-box, .heat-box, .process-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin: 0.75rem 0;
+        }
+        .step-box p, .calculation-box p, .calc-box p, .example-box p,
+        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
+        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
+        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
+            margin-bottom: 0.35rem;
+            line-height: 1.6;
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="bg-amber-50">
+<body class="p-6 md:p-10">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
+        
 
-        <header class="header-card text-center mb-10">
+        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
             <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Ауа - Газдарының Қоспасы!</h1>
             <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Air - Mixture of Gases!</h1>
             <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Воздух - смесь газов!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-amber-100">Ауа 78% N₂, 21% O₂, 1% Ar және басқа газдар. Құрамы өзгеріс емес (физикалық құрамдас). БАРЛЫҚ ӨМІРДІҢ НЕГІЗДЕРІ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-amber-100">Air is 78% N₂, 21% O₂, 1% Ar and other gases. Composition varies by location (physical mixture). FOUNDATION OF ALL LIFE!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-amber-100">Воздух состоит из 78% N₂, 21% O₂, 1% Ar и других газов. Состав варьирует (физическая смесь). ОСНОВА ВСЕЙ ЖИЗНИ!</p>
-        </header>
+            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">Ауа 78% N₂, 21% O₂, 1% Ar және басқа газдар. Құрамы өзгеріс емес (физикалық құрамдас). БАРЛЫҚ ӨМІРДІҢ НЕГІЗДЕРІ!</p>
+            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">Air is 78% N₂, 21% O₂, 1% Ar and other gases. Composition varies by location (physical mixture). FOUNDATION OF ALL LIFE!</p>
+            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">Воздух состоит из 78% N₂, 21% O₂, 1% Ar и других газов. Состав варьирует (физическая смесь). ОСНОВА ВСЕЙ ЖИЗНИ!</p>
+                <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
 
         <section class="mb-12">
             <h2 lang="kk" class="lang-content text-3xl section-heading">1. АУА ҚҰРАМЫ - ДИАГРАММА</h2>
@@ -48,7 +85,7 @@
 
             <div class="rule-card">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div style="background: #fef3c7; padding: 20px; border-radius: 0.75rem; border-left: 5px solid #d97706;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.2);">
                         <p lang="kk" class="lang-content text-sm font-bold mb-3">📊 АУАНЫҢ ҚҰРАМЫ:</p>
                         <svg viewBox="0 0 200 200" style="max-width: 200px; margin: 10px auto;">
                             <!-- Nitrogen pie chart section -->
@@ -76,7 +113,7 @@
                         <p lang="ru" class="lang-content text-sm">• 1% Аргон (Ar), CO₂, H₂O и т.д</p>
                     </div>
 
-                    <div style="background: #fef3c7; padding: 20px; border-radius: 0.75rem; border-left: 5px solid #d97706;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.2);">
                         <p lang="kk" class="lang-content text-sm font-bold mb-3">⚗️ АУАНЫҢ ҚАСИЕТТЕРІ:</p>
                         <p lang="kk" class="lang-content text-sm">✓ Түссіз газдар қоспасы</p>
                         <p lang="kk" class="lang-content text-sm">✓ Иіссіз (немесе өте сұлақ иісі)</p>
@@ -192,10 +229,10 @@
             </div>
         </section>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fed7aa; border-radius: 1rem; border-top: 4px solid #d97706;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-amber-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ЗАКЛЮЧЕНИЕ</h3>
+        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
+            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
+            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
+            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
             <p lang="kk" class="lang-content text-sm">Ауа - физикалық құрамдас (химиялық емес): 78% N₂, 21% O₂, 1% Ar және басқалар. Оттегі өмір үшін өте қажет. Азот инерт, тыныштыруды қажет емес. CO₂ өндіктіліге ұлығап болады. Ауа барлық органикалық өмірдің негіздері!</p>
             <p lang="en" class="lang-content text-sm">Air - physical mixture (not chemical): 78% N₂, 21% O₂, 1% Ar and others. Oxygen is essential for life. Nitrogen is inert, not needed for breathing. CO₂ affects climate. Air is the foundation of all organic life!</p>
             <p lang="ru" class="lang-content text-sm">Воздух - физическая смесь (не химическая): 78% N₂, 21% O₂, 1% Ar и др. Кислород необходим для жизни. Азот инертен, не нужен для дыхания. CO₂ влияет на климат. Воздух - основание всей органической жизни!</p>

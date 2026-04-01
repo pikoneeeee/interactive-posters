@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вирусы. Структура и жизненный цикл</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <style>
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f0f1a 0%, #312e81 50%, #0f0f1a 100%); min-height: 100vh; }
+        .container { max-width: 1500px; margin: auto; padding: 24px; }
+        .header-card { background: linear-gradient(135deg, #312e81 0%, #4338ca 40%, #818cf8 100%); color: white; padding: 50px; border-radius: 1.5rem; box-shadow: 0 20px 40px rgba(67,56,202,0.5); }
+        .section-heading { color: #4338ca; border-bottom: 4px solid #a5b4fc; display: inline-block; padding-bottom: 8px; margin-bottom: 24px; font-weight: 800; font-size: 1.7rem; }
+        .card { background: white; border-radius: 1rem; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 10px 20px; border: 2px solid #4338ca; background: white; color: #4338ca; border-radius: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .lang-btn.active { background: linear-gradient(135deg,#312e81,#4338ca); color: white; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        .fact-box { background: linear-gradient(135deg,#eef2ff,#e0e7ff); border-left: 5px solid #4338ca; padding: 14px; border-radius: 0 10px 10px 0; margin: 8px 0; }
+        .tbox { border: 2px solid; border-radius: 10px; padding: 11px 14px; margin: 6px 0; }
+        table.comp { width:100%; border-collapse:collapse; }
+        table.comp th { background: linear-gradient(135deg,#312e81,#4338ca); color:white; padding:9px 11px; font-weight:700; font-size:0.82rem; text-align:left; }
+        table.comp th:first-child { border-radius:10px 0 0 0; } table.comp th:last-child { border-radius:0 10px 0 0; }
+        table.comp td { padding:7px 11px; border-bottom:1px solid #e2e8f0; font-size:0.81rem; vertical-align:top; }
+        table.comp tr:nth-child(even) td { background:#eef2ff; }
+        table.comp tr:last-child td { border-bottom:none; }
+
+        /* Visibility fix: section heading on dark background */
+        .section-heading { color: white !important; }
+        /* Smartboard fix: text large enough */
+        .text-xs { font-size: 0.92rem !important; line-height: 1.45rem !important; }
+        .text-sm { font-size: 1.0rem !important; line-height: 1.55rem !important; }
+        table.comp td, table.comp th { font-size: 0.92rem !important; }
+    </style>
+</head>
+<body>
+<div id="poster-container" class="container lang-ru">
+    <div style="display:flex;justify-content:center;margin-bottom:24px;gap:12px;">
+        <button class="lang-btn" onclick="switchLang('kk')">Қазақша</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header class="header-card text-center mb-10">
+        <p class="text-indigo-200 font-semibold mb-3 text-lg">10–11 класс • Общая биология • Вирусология</p>
+        <h1 lang="kk" class="lang-content text-4xl font-black uppercase">Вирустар. Құрылысы және тіршілік циклы</h1>
+        <h1 lang="en" class="lang-content text-4xl font-black uppercase">Viruses. Structure and Life Cycle</h1>
+        <h1 lang="ru" class="lang-content text-4xl font-black uppercase">Вирусы. Структура и жизненный цикл</h1>
+        <div class="mt-5 p-4 bg-white/10 rounded-xl text-sm flex flex-wrap gap-6 justify-center">
+            <div class="text-center"><span class="text-3xl">🦠</span><p class="font-bold text-indigo-200 mt-1"><span lang="kk" class="lang-content">Жасушасыз тіршілік формалары</span><span lang="en" class="lang-content">Non-cellular life forms</span><span lang="ru" class="lang-content">Неклеточные формы жизни</span></p></div>
+            <div class="text-center"><span class="text-3xl">🧬</span><p class="font-bold text-indigo-200 mt-1"><span lang="kk" class="lang-content">ДНҚ немесе РНҚ</span><span lang="en" class="lang-content">DNA or RNA only</span><span lang="ru" class="lang-content">Только ДНК или РНК</span></p></div>
+            <div class="text-center"><span class="text-3xl">⚡</span><p class="font-bold text-indigo-200 mt-1"><span lang="kk" class="lang-content">Тек иеде көбейеді</span><span lang="en" class="lang-content">Replicate only in host</span><span lang="ru" class="lang-content">Размножаются только в хозяине</span></p></div>
+        </div>
+    </header>
+
+    <!-- STRUCTURE -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔬 Вирустың Құрылысы және Типтері</h2>
+        <h2 lang="en" class="lang-content section-heading">🔬 Virus Structure and Types</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔬 Строение вируса и Типы</h2>
+        <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div>
+                    <div class="tbox mb-3" style="border-color:#4338ca;background:#eef2ff;">
+                        <p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Вирустың негізгі компоненттері:</span><span lang="en" class="lang-content">Main virus components:</span><span lang="ru" class="lang-content">Основные компоненты вируса:</span></p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>🧬 <b><span lang="kk" class="lang-content">Нуклеин қышқылы (геном)</span><span lang="en" class="lang-content">Nucleic acid (genome)</span><span lang="ru" class="lang-content">Нуклеиновая кислота (геном)</span></b> — <span lang="kk" class="lang-content">ДНҚ немесе РНҚ (екеуі бірге болмайды). Бір немесе екі жіпті, сызықты немесе сақиналы.</span><span lang="en" class="lang-content">DNA or RNA (never both). Single- or double-stranded, linear or circular.</span><span lang="ru" class="lang-content">ДНК или РНК (никогда оба). Одно- или двухцепочечная, линейная или кольцевая.</span></li>
+                            <li>🛡️ <b><span lang="kk" class="lang-content">Капсид</span><span lang="en" class="lang-content">Capsid</span><span lang="ru" class="lang-content">Капсид</span></b> — <span lang="kk" class="lang-content">ақуызды қабықша. Капсомерлерден тұрады. Геномды қорғайды. Иесінің жасушасына жабысуды қамтамасыз етеді.</span><span lang="en" class="lang-content">Protein coat. Made of capsomers. Protects genome. Mediates attachment to host cell.</span><span lang="ru" class="lang-content">Белковая оболочка. Состоит из капсомеров. Защищает геном. Обеспечивает прикрепление к клетке-хозяину.</span></li>
+                            <li>💊 <b><span lang="kk" class="lang-content">Суперкапсид (Конверт)</span><span lang="en" class="lang-content">Envelope (Supercapsid)</span><span lang="ru" class="lang-content">Суперкапсид (Конверт)</span></b> — <span lang="kk" class="lang-content">Тек кейбір вирустарда. Иенің плазма мембранасынан алынған. Гликопротеиндік шипттер бар (мысалы: инфлюэнца — HA, NA; SARS-CoV-2 — S-ақуызы). Конвертті вирустар спиртпен инактивтеледі.</span><span lang="en" class="lang-content">Only in some viruses. Derived from host plasma membrane. Contains glycoprotein spikes (e.g., influenza — HA, NA; SARS-CoV-2 — S protein). Enveloped viruses inactivated by alcohol.</span><span lang="ru" class="lang-content">Только у некоторых вирусов. Получен из плазматической мембраны хозяина. Содержит гликопротеиновые шипы (гриппа — HA, NA; SARS-CoV-2 — S-белок). Оболочечные вирусы инактивируются спиртом.</span></li>
+                        </ul>
+                    </div>
+                    <div class="tbox" style="border-color:#4338ca;background:#eef2ff;">
+                        <p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Вирустардың классификациясы (геном бойынша):</span><span lang="en" class="lang-content">Virus classification (by genome):</span><span lang="ru" class="lang-content">Классификация вирусов (по геному):</span></p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="bg-blue-50 rounded p-2 text-center">
+                                <p class="font-bold text-blue-700">ДНҚ/DNA</p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Герпес, Аденовирус, Оспа, ВПЧ</span><span lang="en" class="lang-content">Herpes, Adenovirus, Smallpox, HPV</span><span lang="ru" class="lang-content">Герпес, Аденовирус, Оспа, ВПЧ</span></p>
+                            </div>
+                            <div class="bg-purple-50 rounded p-2 text-center">
+                                <p class="font-bold text-purple-700">РНҚ/RNA</p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">Грипп, Полио, Кір, SARS-CoV-2</span><span lang="en" class="lang-content">Influenza, Polio, Measles, SARS-CoV-2</span><span lang="ru" class="lang-content">Грипп, Полио, Корь, SARS-CoV-2</span></p>
+                            </div>
+                            <div class="bg-red-50 rounded p-2 text-center col-span-2">
+                                <p class="font-bold text-red-700"><span lang="kk" class="lang-content">Ретровирустар (РНҚ → ДНҚ)</span><span lang="en" class="lang-content">Retroviruses (RNA → DNA)</span><span lang="ru" class="lang-content">Ретровирусы (РНК → ДНК)</span></p>
+                                <p class="text-gray-500"><span lang="kk" class="lang-content">ВИЧ/АИТВ — кері транскриптаза арқылы. Геномды иенің хромосомасына кіріктіреді.</span><span lang="en" class="lang-content">HIV — via reverse transcriptase. Integrates genome into host chromosome.</span><span lang="ru" class="lang-content">ВИЧ — через обратную транскриптазу. Интегрирует геном в хромосому хозяина.</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="tbox mb-3" style="border-color:#4338ca;background:#eef2ff;">
+                        <p class="font-bold text-indigo-700 mb-2">🔁 <span lang="kk" class="lang-content">Литикалық цикл (Лизис)</span><span lang="en" class="lang-content">Lytic cycle (Lysis)</span><span lang="ru" class="lang-content">Литический цикл (Лизис)</span></p>
+                        <ol class="text-gray-600 space-y-1 list-decimal list-inside">
+                            <li><span lang="kk" class="lang-content"><b>Жабысу</b> — вирус рецепторлары иенің жасуша рецепторларына байланады</span><span lang="en" class="lang-content"><b>Attachment</b> — virus receptors bind to host cell receptors</span><span lang="ru" class="lang-content"><b>Адсорбция</b> — рецепторы вируса связываются с рецепторами клетки-хозяина</span></li>
+                            <li><span lang="kk" class="lang-content"><b>Ену (Инъекция)</b> — нуклеин қышқылы жасушаға енеді</span><span lang="en" class="lang-content"><b>Injection/Entry</b> — nucleic acid enters the cell</span><span lang="ru" class="lang-content"><b>Инъекция/Проникновение</b> — нуклеиновая кислота входит в клетку</span></li>
+                            <li><span lang="kk" class="lang-content"><b>Синтез</b> — иенің рибосомасы мен ферменттері вирустық ақуыздар мен геномды синтездейді</span><span lang="en" class="lang-content"><b>Synthesis</b> — host ribosomes and enzymes synthesise viral proteins and genome copies</span><span lang="ru" class="lang-content"><b>Синтез</b> — рибосомы и ферменты хозяина синтезируют вирусные белки и копии генома</span></li>
+                            <li><span lang="kk" class="lang-content"><b>Жинақтау</b> — жаңа вирустар жиналады</span><span lang="en" class="lang-content"><b>Assembly</b> — new virus particles assembled</span><span lang="ru" class="lang-content"><b>Сборка</b> — сборка новых вирусных частиц</span></li>
+                            <li><span lang="kk" class="lang-content"><b>Босату (Лизис)</b> — жасуша жарылып 100–1000 жаңа вирус шығады</span><span lang="en" class="lang-content"><b>Release (Lysis)</b> — cell bursts releasing 100–1000 new viruses</span><span lang="ru" class="lang-content"><b>Высвобождение (Лизис)</b> — клетка разрывается, выделяя 100–1000 вирусов</span></li>
+                        </ol>
+                    </div>
+                    <div class="tbox" style="border-color:#7c3aed;background:#faf5ff;">
+                        <p class="font-bold text-purple-700 mb-2">🌙 <span lang="kk" class="lang-content">Лизогенді цикл (тек бактериофагтарда)</span><span lang="en" class="lang-content">Lysogenic cycle (bacteriophages only)</span><span lang="ru" class="lang-content">Лизогенный цикл (у бактериофагов)</span></p>
+                        <p class="text-gray-600"><span lang="kk" class="lang-content">Фаг геномы (профаг) бактерия хромосомасына кіріктіріледі → бактериямен бірге репликацияланады → стресс болса активтеніп, литикалық цикл басталады.</span><span lang="en" class="lang-content">Phage genome (prophage) integrates into bacterial chromosome → replicates with bacteria → under stress, activates and enters lytic cycle.</span><span lang="ru" class="lang-content">Геном фага (профаг) встраивается в хромосому бактерии → реплицируется вместе с ней → при стрессе активируется и переходит в литический цикл.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIV + IMPORTANT VIRUSES -->
+    <section class="mb-8">
+        <h2 lang="kk" class="lang-content section-heading">🔴 ВИЧ / АИТВ • 🌐 Маңызды вирустар</h2>
+        <h2 lang="en" class="lang-content section-heading">🔴 HIV / AIDS • 🌐 Important Viruses</h2>
+        <h2 lang="ru" class="lang-content section-heading">🔴 ВИЧ / СПИД • 🌐 Важные вирусы</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <div class="tbox text-xs mb-3" style="border-color:#dc2626;background:#fff5f5;">
+                    <p class="font-bold text-red-700 mb-2">🔴 <span lang="kk" class="lang-content">ВИЧ (Адам иммун тапшылығы вирусы)</span><span lang="en" class="lang-content">HIV (Human Immunodeficiency Virus)</span><span lang="ru" class="lang-content">ВИЧ (Вирус иммунодефицита человека)</span></p>
+                    <ul class="text-gray-600 space-y-1">
+                        <li>▸ <span lang="kk" class="lang-content"><b>Ретровирус, РНҚ-вирус</b> → кері транскриптаза: РНҚ → ДНҚ → хромосомаға кіріктіріледі (провирус).</span><span lang="en" class="lang-content"><b>Retrovirus, RNA virus</b> → reverse transcriptase: RNA → DNA → integrates into chromosome (provirus).</span><span lang="ru" class="lang-content"><b>Ретровирус, РНК-вирус</b> → обратная транскриптаза: РНК → ДНК → встраивается в хромосому (провирус).</span></li>
+                        <li>▸ <span lang="kk" class="lang-content"><b>Нишана жасушалар:</b> CD4⁺ T-лимфоциттер (Т-хелперлер), макрофагтар, дендритті жасушалар.</span><span lang="en" class="lang-content"><b>Target cells:</b> CD4⁺ T lymphocytes (T-helper cells), macrophages, dendritic cells.</span><span lang="ru" class="lang-content"><b>Клетки-мишени:</b> CD4⁺ Т-лимфоциты (Т-хелперы), макрофаги, дендритные клетки.</span></li>
+                        <li>▸ <span lang="kk" class="lang-content"><b>АИТВ/СПИД:</b> CD4⁺ жасушалар азайғанда иммунитет тапшылығы → оппортунисті инфекциялар, онкология.</span><span lang="en" class="lang-content"><b>AIDS:</b> CD4⁺ cell depletion → immunodeficiency → opportunistic infections, cancers.</span><span lang="ru" class="lang-content"><b>СПИД:</b> истощение CD4⁺ клеток → иммунодефицит → оппортунистические инфекции, онкология.</span></li>
+                        <li>▸ <span lang="kk" class="lang-content"><b>Берілу жолдары:</b> Жыныстық, қан арқылы (инъекция), анадан балаға (жатыр, сүт).</span><span lang="en" class="lang-content"><b>Transmission:</b> Sexual, blood (injection), mother-to-child (placenta, breast milk).</span><span lang="ru" class="lang-content"><b>Пути передачи:</b> Половой, через кровь (инъекции), мать–ребёнок (плацента, грудное молоко).</span></li>
+                        <li>▸ <span lang="kk" class="lang-content"><b>Емі:</b> АРТ (Антиретровирустық терапия) — толық ем жоқ, бірақ вирусты басады.</span><span lang="en" class="lang-content"><b>Treatment:</b> ART (Antiretroviral therapy) — no cure, but suppresses virus.</span><span lang="ru" class="lang-content"><b>Лечение:</b> АРТ (антиретровирусная терапия) — полного лечения нет, но подавляет вирус.</span></li>
+                    </ul>
+                </div>
+                <div class="fact-box text-xs">
+                    <p class="font-bold text-indigo-700"><span lang="kk" class="lang-content">🌍 COVID-19 (SARS-CoV-2)</span><span lang="en" class="lang-content">🌍 COVID-19 (SARS-CoV-2)</span><span lang="ru" class="lang-content">🌍 COVID-19 (SARS-CoV-2)</span></p>
+                    <p class="text-gray-600 mt-1"><span lang="kk" class="lang-content">РНҚ коронавирусы. Конвертті. S-ақуыз (шип) ACE2 рецепторына (тыныс алу жолдары) байланады. мРНҚ вакциналары (Pfizer, Moderna) S-ақуызына антидене өндіруге үйретеді.</span><span lang="en" class="lang-content">RNA coronavirus. Enveloped. S protein (spike) binds to ACE2 receptor (respiratory tract). mRNA vaccines (Pfizer, Moderna) train body to make antibodies against S protein.</span><span lang="ru" class="lang-content">РНК-коронавирус. Оболочечный. S-белок (шип) связывается с рецептором ACE2 (дыхательные пути). мРНК-вакцины (Pfizer, Moderna) обучают организм вырабатывать антитела к S-белку.</span></p>
+                </div>
+            </div>
+            <div class="card overflow-x-auto">
+                <table class="comp text-xs">
+                    <thead><tr>
+                        <th><span lang="kk" class="lang-content">Вирус</span><span lang="en" class="lang-content">Virus</span><span lang="ru" class="lang-content">Вирус</span></th>
+                        <th><span lang="kk" class="lang-content">Геном</span><span lang="en" class="lang-content">Genome</span><span lang="ru" class="lang-content">Геном</span></th>
+                        <th><span lang="kk" class="lang-content">Ауру</span><span lang="en" class="lang-content">Disease</span><span lang="ru" class="lang-content">Болезнь</span></th>
+                        <th><span lang="kk" class="lang-content">Ескертпе</span><span lang="en" class="lang-content">Note</span><span lang="ru" class="lang-content">Примечание</span></th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="font-bold">🤧 <span lang="kk" class="lang-content">Грипп</span><span lang="en" class="lang-content">Influenza</span><span lang="ru" class="lang-content">Грипп</span></td><td>РНҚ/RNA/-RNA</td><td><span lang="kk" class="lang-content">Респираторлы</span><span lang="en" class="lang-content">Respiratory</span><span lang="ru" class="lang-content">Респираторное</span></td><td><span lang="kk" class="lang-content">HA мутациясы → жаңа штаммдар</span><span lang="en" class="lang-content">HA mutation → new strains</span><span lang="ru" class="lang-content">Мутация HA → новые штаммы</span></td></tr>
+                        <tr><td class="font-bold">🌊 <span lang="kk" class="lang-content">Полиомиелит</span><span lang="en" class="lang-content">Polio</span><span lang="ru" class="lang-content">Полиомиелит</span></td><td>+ssRNA</td><td><span lang="kk" class="lang-content">Сал ауруы</span><span lang="en" class="lang-content">Paralysis</span><span lang="ru" class="lang-content">Паралич</span></td><td><span lang="kk" class="lang-content">Вакцинамен жойылды (дерлік)</span><span lang="en" class="lang-content">Near eradicated by vaccine</span><span lang="ru" class="lang-content">Почти ликвидирован вакцинацией</span></td></tr>
+                        <tr><td class="font-bold">💔 <span lang="kk" class="lang-content">Гепатит B</span><span lang="en" class="lang-content">Hepatitis B</span><span lang="ru" class="lang-content">Гепатит B</span></td><td>ДНҚ/DNA</td><td><span lang="kk" class="lang-content">Бауыр сирроз, Гепатоцеллюлярлы карцинома</span><span lang="en" class="lang-content">Liver cirrhosis, Hepatocellular carcinoma</span><span lang="ru" class="lang-content">Цирроз печени, Гепатоцеллюлярная карцинома</span></td><td><span lang="kk" class="lang-content">Вакцина бар</span><span lang="en" class="lang-content">Vaccine available</span><span lang="ru" class="lang-content">Вакцина есть</span></td></tr>
+                        <tr><td class="font-bold">🌿 <span lang="kk" class="lang-content">Тамақ мозаикасы вирусы (ТМВ)</span><span lang="en" class="lang-content">Tobacco mosaic virus (TMV)</span><span lang="ru" class="lang-content">Вирус табачной мозаики (ВТМ)</span></td><td>+ssRNA</td><td><span lang="kk" class="lang-content">Темекі жапырақтары зақымдалады</span><span lang="en" class="lang-content">Tobacco leaf damage</span><span lang="ru" class="lang-content">Поражение листьев табака</span></td><td><span lang="kk" class="lang-content">Ивановский 1892 жылы ашты — алғашқы белгілі вирус</span><span lang="en" class="lang-content">Ivanovsky 1892 — first known virus</span><span lang="ru" class="lang-content">Ивановский 1892 — первый известный вирус</span></td></tr>
+                        <tr><td class="font-bold">🦠 <span lang="kk" class="lang-content">Бактериофаг T4</span><span lang="en" class="lang-content">Bacteriophage T4</span><span lang="ru" class="lang-content">Бактериофаг T4</span></td><td>ДНҚ/DNA</td><td><span lang="kk" class="lang-content">E. coli лизисі</span><span lang="en" class="lang-content">E. coli lysis</span><span lang="ru" class="lang-content">Лизис E. coli</span></td><td><span lang="kk" class="lang-content">Молекулалық биологияда модель организм</span><span lang="en" class="lang-content">Model organism in molecular biology</span><span lang="ru" class="lang-content">Модельный организм в молекулярной биологии</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

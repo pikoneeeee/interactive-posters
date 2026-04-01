@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Окислительно-восстановительные реакции. Метод электронного баланса</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at bottom left, #4a1942, #7e22ce, #0f172a); color: white; min-height: 100vh; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(192,132,252,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(192,132,252,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #c084fc; color: #4a1942; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th { background: rgba(192,132,252,0.15); color: #e9d5ff; padding: 16px 20px; font-weight: 700; font-size: 1.15rem; text-align: left; border-bottom: 2px solid rgba(192,132,252,0.3); }
+        table.t td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.1rem; vertical-align: top; color: rgba(255,255,255,0.85); }
+        table.t tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block { background: rgba(0,0,0,0.5); color: #e9d5ff; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.15rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(192,132,252,0.2); }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-purple-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">11 класс · Общая химия · Окислительно-восстановительные реакции</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl uppercase tracking-tight text-purple-400">ТТР. Тотығу дәрежесі. Электрон баланс әдісі</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl uppercase tracking-tight text-purple-400">Redox Reactions. Oxidation State. Electron Balance Method</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl uppercase tracking-tight text-purple-400">ОВР. Степень окисления. Метод электронного баланса</h1>
+        </div>
+        <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: KEY CONCEPTS -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-purple-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Негізгі ұғымдар · Тотығу дәрежесі ережелері</span>
+            <span lang="en" class="lang-content">Key Concepts · Oxidation State Rules</span>
+            <span lang="ru" class="lang-content">Ключевые понятия · Правила степени окисления</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="glass-accent rounded-custom p-7">
+                <p class="heading-font text-xl text-red-300 mb-4 text-center">🔺 <span lang="kk" class="lang-content">Тотығу (окисление)</span><span lang="en" class="lang-content">Oxidation</span><span lang="ru" class="lang-content">Окисление</span></p>
+                <div class="formula-block text-center">e⁻ береді
+(отдаёт e⁻)
+
+ТД ↑ артады
+(степень окисл. ↑)
+
+Fe⁰ → Fe²⁺ + 2e⁻
+(тотығады)
+
+Тотықтырғыш:
+(окисляемое вещество)
+= тотықтырушы агент</div>
+            </div>
+            <div class="glass-accent rounded-custom p-7">
+                <p class="heading-font text-xl text-blue-300 mb-4 text-center">🔻 <span lang="kk" class="lang-content">Тотықсыздану (восстановление)</span><span lang="en" class="lang-content">Reduction</span><span lang="ru" class="lang-content">Восстановление</span></p>
+                <div class="formula-block text-center">e⁻ қабылдайды
+(принимает e⁻)
+
+ТД ↓ кемиді
+(степень окисл. ↓)
+
+Cl₂ + 2e⁻ → 2Cl⁻
+(тотықсызданады)
+
+Тотықсыздандырғыш:
+(восстанавливаемое)
+= восст. агент</div>
+            </div>
+            <div class="glass rounded-custom p-7">
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    <span lang="kk" class="lang-content">ТД анықтау ережелері</span>
+                    <span lang="en" class="lang-content">Oxidation State Rules</span>
+                    <span lang="ru" class="lang-content">Правила определения СО</span>
+                </p>
+                <div class="text-lg text-white/80 space-y-2 leading-relaxed">
+                    <p><span lang="kk" class="lang-content">• Жай зат: ТД = <b class="text-purple-300">0</b> (Fe⁰, Cl₂⁰)<br>• Иондар: ТД = заряд (Na⁺ = +1, Cl⁻ = −1)<br>• H: <b class="text-purple-300">+1</b> (металл гидридтерінде −1)<br>• O: <b class="text-purple-300">−2</b> (пероксидтерде −1, OF₂-де +2)<br>• F: <b class="text-purple-300">−1</b> (барлық қосылыста)<br>• Металл: оң ТД (Na: +1, Ca: +2, Al: +3)<br>• Молекула ТД қосындысы = <b class="text-purple-300">0</b><br>• Ионда ТД қосындысы = <b class="text-purple-300">заряд</b></span>
+                    <span lang="en" class="lang-content">• Free element: SO = <b class="text-purple-300">0</b> (Fe⁰, Cl₂⁰)<br>• Monatomic ion: SO = charge (Na⁺=+1, Cl⁻=−1)<br>• H: <b class="text-purple-300">+1</b> (−1 in metal hydrides)<br>• O: <b class="text-purple-300">−2</b> (−1 in peroxides, +2 in OF₂)<br>• F: <b class="text-purple-300">−1</b> (always)<br>• Metals: positive SO (Na:+1, Ca:+2, Al:+3)<br>• Sum of SO in molecule = <b class="text-purple-300">0</b><br>• Sum of SO in ion = <b class="text-purple-300">charge</b></span>
+                    <span lang="ru" class="lang-content">• Простое вещество: СО = <b class="text-purple-300">0</b> (Fe⁰, Cl₂⁰)<br>• Ионы: СО = заряд (Na⁺=+1, Cl⁻=−1)<br>• H: <b class="text-purple-300">+1</b> (−1 в гидридах металлов)<br>• O: <b class="text-purple-300">−2</b> (−1 в пероксидах, +2 в OF₂)<br>• F: <b class="text-purple-300">−1</b> (всегда)<br>• Металлы: положительная СО<br>• Сумма СО в молекуле = <b class="text-purple-300">0</b><br>• Сумма СО в ионе = <b class="text-purple-300">заряд</b></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: ELECTRON BALANCE METHOD -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-purple-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">⚖️ Электрон баланс әдісі — коэффициент қою алгоритмі</span>
+            <span lang="en" class="lang-content">⚖️ Electron Balance Method — Algorithm for Balancing</span>
+            <span lang="ru" class="lang-content">⚖️ Метод электронного баланса — алгоритм расстановки коэффициентов</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    <span lang="kk" class="lang-content">Мысал: Fe + Cl₂ → FeCl₃</span>
+                    <span lang="en" class="lang-content">Example: Fe + Cl₂ → FeCl₃</span>
+                    <span lang="ru" class="lang-content">Пример: Fe + Cl₂ → FeCl₃</span>
+                </p>
+                <div class="formula-block">1) ТД анықтаймыз:
+   Fe⁰ + Cl₂⁰ → Fe⁺³Cl₃⁻¹
+
+2) Электрон балансын жазамыз:
+   Fe⁰ − 3e⁻ → Fe³⁺  |×2 (тотығу)
+   Cl₂⁰ + 2e⁻ → 2Cl⁻ |×3 (тотықсыздану)
+
+3) НАК (НОК берілген) табамыз:
+   3 e⁻ × 2 = 6 e⁻  |  2 e⁻ × 3 = 6 e⁻
+   → 6 электрон (тең!)
+
+4) Коэффициенттер:
+   2Fe + 3Cl₂ → 2FeCl₃ ✓
+
+→ Fe — тотықтырғыш (e⁻ береді)
+→ Cl₂ — тотықсыздандырғыш (e⁻ қабылдайды)</div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    <span lang="kk" class="lang-content">Алгоритм (5 қадам)</span>
+                    <span lang="en" class="lang-content">Algorithm (5 steps)</span>
+                    <span lang="ru" class="lang-content">Алгоритм (5 шагов)</span>
+                </p>
+                <div class="space-y-3 text-lg text-white/80">
+                    <div class="flex gap-3 items-start"><span class="text-purple-300 font-bold text-xl shrink-0">1.</span><p><span lang="kk" class="lang-content">Барлық элементтердің <b>тотығу дәрежесін</b> анықта</span><span lang="en" class="lang-content">Determine <b>oxidation states</b> of all elements</span><span lang="ru" class="lang-content">Определить <b>степени окисления</b> всех элементов</span></p></div>
+                    <div class="flex gap-3 items-start"><span class="text-purple-300 font-bold text-xl shrink-0">2.</span><p><span lang="kk" class="lang-content"><b>ТД өзгерген</b> элементтерді тап (тотығу/тотықсыздану)</span><span lang="en" class="lang-content">Find elements that <b>change SO</b> (oxidised/reduced)</span><span lang="ru" class="lang-content">Найти элементы, <b>изменившие СО</b> (окисление/восстановление)</span></p></div>
+                    <div class="flex gap-3 items-start"><span class="text-purple-300 font-bold text-xl shrink-0">3.</span><p><span lang="kk" class="lang-content">Жартылай реакцияларды жаз: <b>электрондар саны = ТД өзгерісі</b></span><span lang="en" class="lang-content">Write half-reactions: <b>e⁻ count = SO change</b></span><span lang="ru" class="lang-content">Записать полуреакции: <b>число e⁻ = изменение СО</b></span></p></div>
+                    <div class="flex gap-3 items-start"><span class="text-purple-300 font-bold text-xl shrink-0">4.</span><p><span lang="kk" class="lang-content"><b>НАК</b> тап → берілген/қабылданған e⁻ санын теңестір</span><span lang="en" class="lang-content">Find <b>LCM</b> → equalise electrons donated and accepted</span><span lang="ru" class="lang-content">Найти <b>НОК</b> → уравнять число отданных и принятых e⁻</span></p></div>
+                    <div class="flex gap-3 items-start"><span class="text-purple-300 font-bold text-xl shrink-0">5.</span><p><span lang="kk" class="lang-content"><b>Коэффициенттерді</b> теңдеуге орналастыр, қалған атомдарды балансқа кел</span><span lang="en" class="lang-content">Place <b>coefficients</b> in equation, balance remaining atoms</span><span lang="ru" class="lang-content">Расставить <b>коэффициенты</b>, уравновесить остальные атомы</span></p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    <span lang="kk" class="lang-content">📋 ОВР жіктелуі</span>
+                    <span lang="en" class="lang-content">📋 Types of Redox Reactions</span>
+                    <span lang="ru" class="lang-content">📋 Классификация ОВР</span>
+                </p>
+                <div class="overflow-x-auto">
+                    <table class="t">
+                        <thead><tr>
+                            <th><span lang="kk" class="lang-content">Түрі</span><span lang="en" class="lang-content">Type</span><span lang="ru" class="lang-content">Тип</span></th>
+                            <th><span lang="kk" class="lang-content">Сипаттамасы</span><span lang="en" class="lang-content">Description</span><span lang="ru" class="lang-content">Описание</span></th>
+                            <th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th>
+                        </tr></thead>
+                        <tbody>
+                            <tr><td class="font-bold text-red-300"><span lang="kk" class="lang-content">Молекулааралық</span><span lang="en" class="lang-content">Intermolecular</span><span lang="ru" class="lang-content">Межмолекулярное</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Тотықтырғыш пен тотықсыздандырғыш — әр зат</span><span lang="en" class="lang-content">Oxidiser and reducer are different substances</span><span lang="ru" class="lang-content">Окислитель и восстановитель — разные вещества</span></td><td class="font-mono text-purple-300">2Fe + 3Cl₂→2FeCl₃</td></tr>
+                            <tr><td class="font-bold text-yellow-300"><span lang="kk" class="lang-content">Диспропорционирование</span><span lang="en" class="lang-content">Disproportionation</span><span lang="ru" class="lang-content">Диспропорционирование</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Бір элемент бір мезгілде тотығады да, тотықсызданады да</span><span lang="en" class="lang-content">Same element simultaneously oxidised and reduced</span><span lang="ru" class="lang-content">Один элемент одновременно и окисляется, и восстанавливается</span></td><td class="font-mono text-purple-300">Cl₂+2NaOH→NaCl+NaClO+H₂O</td></tr>
+                            <tr><td class="font-bold text-green-300"><span lang="kk" class="lang-content">Ішкімолекулалық</span><span lang="en" class="lang-content">Intramolecular</span><span lang="ru" class="lang-content">Внутримолекулярное</span></td><td class="text-white/70"><span lang="kk" class="lang-content">Бір молекула ішіндегі атомдар арасындағы e⁻ ауысу</span><span lang="en" class="lang-content">e⁻ transfer between atoms within same molecule</span><span lang="ru" class="lang-content">Перенос e⁻ между атомами одной молекулы</span></td><td class="font-mono text-purple-300">2KNO₃→2KNO₂+O₂</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <p class="heading-font text-xl text-purple-300 mb-4">
+                    <span lang="kk" class="lang-content">🔝 Жиі кездесетін тотықтырғыштар мен тотықсыздандырғыштар</span>
+                    <span lang="en" class="lang-content">🔝 Common Oxidisers and Reducers</span>
+                    <span lang="ru" class="lang-content">🔝 Частые окислители и восстановители</span>
+                </p>
+                <div class="grid grid-cols-2 gap-4 text-lg">
+                    <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-4">
+                        <p class="font-bold text-red-300 mb-2"><span lang="kk" class="lang-content">Тотықтырғыштар (e⁻ қабылдайды):</span><span lang="en" class="lang-content">Oxidisers (accept e⁻):</span><span lang="ru" class="lang-content">Окислители (принимают e⁻):</span></p>
+                        <p class="text-white/75 font-mono text-base">O₂, F₂, Cl₂, Br₂<br>KMnO₄, K₂Cr₂O₇<br>HNO₃, H₂SO₄(конц.)<br>MnO₂, PbO₂<br>H₂O₂, Fe³⁺, Cu²⁺</p>
+                    </div>
+                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4">
+                        <p class="font-bold text-blue-300 mb-2"><span lang="kk" class="lang-content">Тотықсыздандырғыштар (e⁻ береді):</span><span lang="en" class="lang-content">Reducers (donate e⁻):</span><span lang="ru" class="lang-content">Восстановители (отдают e⁻):</span></p>
+                        <p class="text-white/75 font-mono text-base">Металдар: Na,Mg,Fe,Zn<br>H₂, C, CO<br>H₂S, HI, HBr<br>SO₂, FeSO₄<br>Органик. заттар</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

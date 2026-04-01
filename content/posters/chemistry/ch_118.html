@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Электролитическая диссоциация. Теория</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #064e3b, #047857, #0f172a); color: white; min-height: 100vh; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(52,211,153,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(52,211,153,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #34d399; color: #064e3b; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th { background: rgba(52,211,153,0.15); color: #a7f3d0; padding: 16px 20px; font-weight: 700; font-size: 1.15rem; text-align: left; border-bottom: 2px solid rgba(52,211,153,0.3); }
+        table.t td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.1rem; vertical-align: top; color: rgba(255,255,255,0.85); }
+        table.t tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block { background: rgba(0,0,0,0.5); color: #a7f3d0; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.15rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(52,211,153,0.2); }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-emerald-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">11 класс · Общая химия · Растворы электролитов</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-emerald-400">Электролиттік диссоциация теориясы. Аррениус</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-emerald-400">Electrolytic Dissociation. Arrhenius Theory</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-emerald-400">Электролитическая диссоциация. Теория Аррениуса</h1>
+        </div>
+        <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: STRONG vs WEAK -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-emerald-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Күшті және әлсіз электролиттер</span>
+            <span lang="en" class="lang-content">Strong and Weak Electrolytes</span>
+            <span lang="ru" class="lang-content">Сильные и слабые электролиты</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="glass rounded-custom p-7 border-t-4 border-emerald-400">
+                <p class="heading-font text-xl text-emerald-300 mb-4 text-center">
+                    ⚡ <span lang="kk" class="lang-content">Күшті электролиттер</span>
+                    <span lang="en" class="lang-content">Strong Electrolytes</span>
+                    <span lang="ru" class="lang-content">Сильные электролиты</span>
+                </p>
+                <p class="text-white/60 text-base text-center mb-3"><span lang="kk" class="lang-content">α ≈ 100% (толық диссоциация)</span><span lang="en" class="lang-content">α ≈ 100% (complete dissociation)</span><span lang="ru" class="lang-content">α ≈ 100% (полная диссоциация)</span></p>
+                <div class="formula-block" style="font-size:1.05rem;">Күшті қышқылдар:
+HCl, HBr, HI, HNO₃,
+H₂SO₄, HClO₄
+
+Сілтілер (ерігіш негіздер):
+NaOH, KOH, Ba(OH)₂,
+Ca(OH)₂
+
+Ерігіш тұздардың бәрі:
+NaCl, KNO₃, BaSO₄*...</div>
+                <p class="text-white/50 text-sm mt-2">*BaSO₄ — ерімейді, сондықтан электролит емес</p>
+            </div>
+            <div class="glass rounded-custom p-7 border-t-4 border-yellow-400">
+                <p class="heading-font text-xl text-yellow-300 mb-4 text-center">
+                    ⚠️ <span lang="kk" class="lang-content">Әлсіз электролиттер</span>
+                    <span lang="en" class="lang-content">Weak Electrolytes</span>
+                    <span lang="ru" class="lang-content">Слабые электролиты</span>
+                </p>
+                <p class="text-white/60 text-base text-center mb-3"><span lang="kk" class="lang-content">α «1% (жартылай диссоциация)</span><span lang="en" class="lang-content">α «1% (partial dissociation)</span><span lang="ru" class="lang-content">α «1% (частичная диссоциация)</span></p>
+                <div class="formula-block" style="font-size:1.05rem;">Әлсіз қышқылдар:
+CH₃COOH, H₂CO₃,
+H₂S, HF, HCN, H₃PO₄
+
+Нашар ерігіш негіздер:
+NH₄OH (NH₃·H₂O),
+Mg(OH)₂, Fe(OH)₂
+
+Су:
+H₂O ⇌ H⁺ + OH⁻
+(Kw = 10⁻¹⁴ при 25°C)</div>
+            </div>
+            <div class="glass rounded-custom p-7 border-t-4 border-rose-400">
+                <p class="heading-font text-xl text-rose-300 mb-4 text-center">
+                    ❌ <span lang="kk" class="lang-content">Электролит емес</span>
+                    <span lang="en" class="lang-content">Non-electrolytes</span>
+                    <span lang="ru" class="lang-content">Неэлектролиты</span>
+                </p>
+                <p class="text-white/60 text-base text-center mb-3"><span lang="kk" class="lang-content">α = 0 (диссоциация жоқ)</span><span lang="en" class="lang-content">α = 0 (no dissociation)</span><span lang="ru" class="lang-content">α = 0 (нет диссоциации)</span></p>
+                <div class="formula-block" style="font-size:1.05rem;">Органикалық заттар:
+C₆H₁₂O₆ (глюкоза),
+C₂H₅OH (этанол),
+Май, қант
+
+Газдар суда:
+O₂, N₂, CO₂ (ерігенде)
+
+Ерімейтін тұздар:
+BaSO₄, AgCl, CaCO₃</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: DISSOCIATION EQUATIONS + pH -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-emerald-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Диссоциация теңдеулері · pH шкаласы</span>
+            <span lang="en" class="lang-content">Dissociation Equations · pH Scale</span>
+            <span lang="ru" class="lang-content">Уравнения диссоциации · Шкала pH</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-emerald-300 mb-4">
+                    <span lang="kk" class="lang-content">Диссоциация теңдеулері</span>
+                    <span lang="en" class="lang-content">Dissociation Equations</span>
+                    <span lang="ru" class="lang-content">Уравнения диссоциации</span>
+                </p>
+                <div class="formula-block">Күшті қышқыл (→):
+HCl → H⁺ + Cl⁻
+H₂SO₄ → 2H⁺ + SO₄²⁻
+HNO₃ → H⁺ + NO₃⁻
+
+Сілті (→):
+NaOH → Na⁺ + OH⁻
+Ba(OH)₂ → Ba²⁺ + 2OH⁻
+
+Тұз (→):
+NaCl → Na⁺ + Cl⁻
+Na₂SO₄ → 2Na⁺ + SO₄²⁻
+
+Әлсіз қышқыл (⇌):
+CH₃COOH ⇌ CH₃COO⁻ + H⁺
+H₂CO₃ ⇌ H⁺ + HCO₃⁻  (1-ші саты)
+HCO₃⁻ ⇌ H⁺ + CO₃²⁻   (2-ші саты)</div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-xl text-emerald-300 mb-4">
+                    <span lang="kk" class="lang-content">pH шкаласы · Суда ионды тепе-теңдік</span>
+                    <span lang="en" class="lang-content">pH Scale · Ionic Equilibrium in Water</span>
+                    <span lang="ru" class="lang-content">Шкала pH · Ионное равновесие в воде</span>
+                </p>
+                <div class="formula-block">H₂O ⇌ H⁺ + OH⁻
+Kw = [H⁺]·[OH⁻] = 10⁻¹⁴ (25°C)
+
+pH = −lg[H⁺]
+
+рН < 7  → Қышқылдық орта  (H⁺ > OH⁻)
+рН = 7  → Нейтрал орта     ([H⁺] = [OH⁻])
+рН > 7  → Сілтілік орта    (OH⁻ > H⁺)
+
+Мысалдар:
+0.1M HCl:   [H⁺]=0.1  → pH=1 (қышқыл)
+Таза су:              → pH=7 (нейтрал)
+0.1M NaOH:  [OH⁻]=0.1 → pH=13 (сілтілік)</div>
+                <div class="mt-4 flex justify-between items-center text-lg font-bold">
+                    <span class="text-red-400">pH 0–6<br><span class="font-normal text-white/60 text-sm"><span lang="kk" class="lang-content">Қышқыл</span><span lang="en" class="lang-content">Acidic</span><span lang="ru" class="lang-content">Кислая</span></span></span>
+                    <span class="text-white/60">→→→→→→→</span>
+                    <span class="text-emerald-400">pH 7<br><span class="font-normal text-white/60 text-sm"><span lang="kk" class="lang-content">Нейтрал</span><span lang="en" class="lang-content">Neutral</span><span lang="ru" class="lang-content">Нейтральная</span></span></span>
+                    <span class="text-white/60">→→→→→→→</span>
+                    <span class="text-blue-400">pH 8–14<br><span class="font-normal text-white/60 text-sm"><span lang="kk" class="lang-content">Сілтілік</span><span lang="en" class="lang-content">Alkaline</span><span lang="ru" class="lang-content">Щелочная</span></span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-8">
+        <p class="heading-font text-xl text-emerald-300 mb-4 text-center">
+            <span lang="kk" class="lang-content">⚖️ Диссоциация константасы (Ka) · Оствальд сұйылту заңы</span>
+            <span lang="en" class="lang-content">⚖️ Dissociation Constant (Ka) · Ostwald Dilution Law</span>
+            <span lang="ru" class="lang-content">⚖️ Константа диссоциации (Ka) · Закон разбавления Оствальда</span>
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="formula-block">HA ⇌ H⁺ + A⁻
+
+      [H⁺]·[A⁻]
+Ka = —————————
+        [HA]
+
+Ka үлкен → күштірек қышқыл
+Ka кіші → әлсізірек қышқыл
+
+Мысал: CH₃COOH → Ka = 1.8×10⁻⁵ (әлсіз)
+        HCl → толық диссоциация (күшті)</div>
+            <div class="text-white/80 text-lg leading-relaxed">
+                <p class="font-bold text-emerald-300 mb-2"><span lang="kk" class="lang-content">Оствальд сұйылту заңы:</span><span lang="en" class="lang-content">Ostwald dilution law:</span><span lang="ru" class="lang-content">Закон разбавления Оствальда:</span></p>
+                <div class="formula-block" style="font-size:1.05rem;">Ka = α² · c / (1 − α)
+≈ α² · c  (α «1 болса)
+
+α = √(Ka/c)
+
+Сұйылтқанда (c↓) → α ↑
+(диссоциация дәрежесі артады)</div>
+                <p class="text-white/60 text-sm mt-2"><span lang="kk" class="lang-content">α — диссоциация дәрежесі (0-ден 1-ге дейін), c — молярлы концентрация</span><span lang="en" class="lang-content">α — degree of dissociation (0 to 1), c — molar concentration</span><span lang="ru" class="lang-content">α — степень диссоциации (0 до 1), c — молярная концентрация</span></p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

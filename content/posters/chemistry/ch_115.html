@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нуклеиновые кислоты. ДНК и РНК</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #0c4a6e, #075985, #0f172a); color: white; min-height: 100vh; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-accent { background: rgba(56,189,248,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(56,189,248,0.25); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+        .lang-btn.active { background: #38bdf8; color: #0c4a6e; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th { background: rgba(56,189,248,0.15); color: #bae6fd; padding: 16px 20px; font-weight: 700; font-size: 1.15rem; text-align: left; border-bottom: 2px solid rgba(56,189,248,0.3); }
+        table.t td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.1rem; vertical-align: top; color: rgba(255,255,255,0.85); }
+        table.t tr:hover td { background: rgba(255,255,255,0.03); }
+        .formula-block { background: rgba(0,0,0,0.5); color: #bae6fd; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.15rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(56,189,248,0.2); }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">10 класс · Органическая химия · Биополимеры</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-sky-400">Нуклеин қышқылдары. ДНҚ және РНҚ</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-sky-400">Nucleic Acids. DNA and RNA</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-sky-400">Нуклеиновые кислоты. ДНК и РНК</h1>
+        </div>
+        <div class="flex gap-2 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: NUCLEOTIDE STRUCTURE -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-sky-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Нуклеотид — нуклеин қышқылының мономері</span>
+            <span lang="en" class="lang-content">Nucleotide — Monomer of Nucleic Acid</span>
+            <span lang="ru" class="lang-content">Нуклеотид — мономер нуклеиновых кислот</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="glass rounded-custom p-8 text-center">
+                <p class="heading-font text-xl text-sky-300 mb-4">
+                    <span lang="kk" class="lang-content">Нуклеотидтің 3 компоненті</span>
+                    <span lang="en" class="lang-content">3 Components of a Nucleotide</span>
+                    <span lang="ru" class="lang-content">3 компонента нуклеотида</span>
+                </p>
+                <div class="space-y-3 text-lg">
+                    <div class="bg-sky-900/30 border border-sky-500/30 rounded-xl p-4">
+                        <p class="font-bold text-sky-300 text-xl mb-1">1️⃣ <span lang="kk" class="lang-content">Азотты негіз</span><span lang="en" class="lang-content">Nitrogenous base</span><span lang="ru" class="lang-content">Азотистое основание</span></p>
+                        <p class="text-white/70"><span lang="kk" class="lang-content">Пурин (A, G) немесе Пиримидин (C, T/U)</span><span lang="en" class="lang-content">Purine (A, G) or Pyrimidine (C, T/U)</span><span lang="ru" class="lang-content">Пурин (A, G) или Пиримидин (C, T/U)</span></p>
+                    </div>
+                    <div class="bg-sky-900/30 border border-sky-500/30 rounded-xl p-4">
+                        <p class="font-bold text-sky-300 text-xl mb-1">2️⃣ <span lang="kk" class="lang-content">Пентоза (5C қанты)</span><span lang="en" class="lang-content">Pentose (5C sugar)</span><span lang="ru" class="lang-content">Пентоза (5C сахар)</span></p>
+                        <p class="text-white/70"><span lang="kk" class="lang-content">ДНҚ: <b class="text-sky-300">дезоксирибоза</b> (–ОН жоқ 2' орнында)<br>РНҚ: <b class="text-sky-300">рибоза</b> (–ОН бар 2' орнында)</span><span lang="en" class="lang-content">DNA: <b class="text-sky-300">deoxyribose</b> (no –OH at 2')<br>RNA: <b class="text-sky-300">ribose</b> (–OH at 2')</span><span lang="ru" class="lang-content">ДНК: <b class="text-sky-300">дезоксирибоза</b> (нет –OH в 2')<br>РНК: <b class="text-sky-300">рибоза</b> (–OH в 2')</span></p>
+                    </div>
+                    <div class="bg-sky-900/30 border border-sky-500/30 rounded-xl p-4">
+                        <p class="font-bold text-sky-300 text-xl mb-1">3️⃣ <span lang="kk" class="lang-content">Фосфат тобы</span><span lang="en" class="lang-content">Phosphate group</span><span lang="ru" class="lang-content">Остаток фосфорной кислоты</span></p>
+                        <p class="text-white/70">–H₂PO₄<br><span lang="kk" class="lang-content">Тізбекте фосфодиэфир байланысы түзеді</span><span lang="en" class="lang-content">Forms phosphodiester bond in chain</span><span lang="ru" class="lang-content">Образует фосфодиэфирную связь в цепи</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass rounded-custom p-8 lg:col-span-2">
+                <p class="heading-font text-xl text-sky-300 mb-4">
+                    <span lang="kk" class="lang-content">Азотты негіздер — Комплементарлық принцип</span>
+                    <span lang="en" class="lang-content">Nitrogenous Bases — Complementarity Principle</span>
+                    <span lang="ru" class="lang-content">Азотистые основания — Принцип комплементарности</span>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <p class="font-bold text-sky-300 text-lg mb-2"><span lang="kk" class="lang-content">ДНҚ-дағы негіздер:</span><span lang="en" class="lang-content">DNA bases:</span><span lang="ru" class="lang-content">Основания ДНК:</span></p>
+                        <div class="formula-block" style="font-size:1.05rem;">Пурины:
+  A = Аденин (adenine)
+  G = Гуанин (guanine)
+
+Пиримидины:
+  C = Цитозин (cytosine)
+  T = Тимин (thymine)</div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-sky-300 text-lg mb-2"><span lang="kk" class="lang-content">РНҚ-дағы негіздер:</span><span lang="en" class="lang-content">RNA bases:</span><span lang="ru" class="lang-content">Основания РНК:</span></p>
+                        <div class="formula-block" style="font-size:1.05rem;">Пурины:
+  A = Аденин
+  G = Гуанин
+
+Пиримидины:
+  C = Цитозин
+  U = Урацил (тимин емес!)</div>
+                    </div>
+                </div>
+                <div class="glass-accent rounded-2xl p-5">
+                    <p class="font-bold text-sky-300 text-xl text-center mb-3">
+                        <span lang="kk" class="lang-content">🔑 Комплементарлық (Уотсон–Крик, 1953)</span>
+                        <span lang="en" class="lang-content">🔑 Complementarity (Watson–Crick, 1953)</span>
+                        <span lang="ru" class="lang-content">🔑 Комплементарность (Уотсон–Крик, 1953)</span>
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 text-center text-xl font-bold">
+                        <div class="bg-white/10 rounded-xl p-4">
+                            <span class="text-green-400">A</span>
+                            <span class="text-white/60"> ═══ </span>
+                            <span class="text-orange-400">T</span>
+                            <p class="text-white/60 font-normal text-base mt-1"><span lang="kk" class="lang-content">2 сутектік байланыс</span><span lang="en" class="lang-content">2 hydrogen bonds</span><span lang="ru" class="lang-content">2 водородные связи</span></p>
+                        </div>
+                        <div class="bg-white/10 rounded-xl p-4">
+                            <span class="text-sky-400">G</span>
+                            <span class="text-white/60"> ≡≡≡ </span>
+                            <span class="text-rose-400">C</span>
+                            <p class="text-white/60 font-normal text-base mt-1"><span lang="kk" class="lang-content">3 сутектік байланыс</span><span lang="en" class="lang-content">3 hydrogen bonds</span><span lang="ru" class="lang-content">3 водородные связи</span></p>
+                        </div>
+                    </div>
+                    <p class="text-white/70 text-base text-center mt-3">
+                        <span lang="kk" class="lang-content">РНҚ-да: A–U жұбы (T орнына U). Комплементарлық принципі репликацияда, транскрипцияда қолданылады.</span>
+                        <span lang="en" class="lang-content">In RNA: A–U pair (U instead of T). Complementarity is used in replication and transcription.</span>
+                        <span lang="ru" class="lang-content">В РНК: пара A–U (вместо T — U). Принцип комплементарности используется при репликации и транскрипции.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: DNA vs RNA -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-sky-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">⚖️ ДНҚ мен РНҚ-ның салыстыруы</span>
+            <span lang="en" class="lang-content">⚖️ DNA vs RNA Comparison</span>
+            <span lang="ru" class="lang-content">⚖️ Сравнение ДНК и РНК</span>
+        </h2>
+        <div class="glass rounded-custom p-8 overflow-x-auto">
+            <table class="t">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+                    <th class="text-sky-300">🧬 ДНҚ / DNA</th>
+                    <th class="text-teal-300">🔗 РНҚ / RNA</th>
+                </tr></thead>
+                <tbody>
+                    <tr><td class="font-bold"><span lang="kk" class="lang-content">Қант</span><span lang="en" class="lang-content">Sugar</span><span lang="ru" class="lang-content">Сахар</span></td><td class="text-sky-200"><b>Дезоксирибоза</b></td><td class="text-teal-200"><b>Рибоза</b></td></tr>
+                    <tr><td class="font-bold"><span lang="kk" class="lang-content">Тізбек саны</span><span lang="en" class="lang-content">Strands</span><span lang="ru" class="lang-content">Цепей</span></td><td class="text-sky-200"><span lang="kk" class="lang-content"><b>Екі</b> тізбек (қос спираль)</span><span lang="en" class="lang-content"><b>Two</b> strands (double helix)</span><span lang="ru" class="lang-content"><b>Две</b> цепи (двойная спираль)</span></td><td class="text-teal-200"><span lang="kk" class="lang-content"><b>Бір</b> тізбек</span><span lang="en" class="lang-content"><b>Single</b> strand</span><span lang="ru" class="lang-content"><b>Одна</b> цепь</span></td></tr>
+                    <tr><td class="font-bold"><span lang="kk" class="lang-content">Азотты негіздер</span><span lang="en" class="lang-content">Bases</span><span lang="ru" class="lang-content">Основания</span></td><td class="text-sky-200">A, G, C, <b>T</b> (Тимин)</td><td class="text-teal-200">A, G, C, <b>U</b> (Урацил)</td></tr>
+                    <tr><td class="font-bold"><span lang="kk" class="lang-content">Орналасуы</span><span lang="en" class="lang-content">Location</span><span lang="ru" class="lang-content">Расположение</span></td><td class="text-sky-200"><span lang="kk" class="lang-content">Ядрода (хромосомада), митохондрияда</span><span lang="en" class="lang-content">Nucleus (chromosomes), mitochondria</span><span lang="ru" class="lang-content">Ядро (хромосомы), митохондрии</span></td><td class="text-teal-200"><span lang="kk" class="lang-content">Ядро, цитоплазма, рибосома</span><span lang="en" class="lang-content">Nucleus, cytoplasm, ribosome</span><span lang="ru" class="lang-content">Ядро, цитоплазма, рибосомы</span></td></tr>
+                    <tr><td class="font-bold"><span lang="kk" class="lang-content">Қызметі</span><span lang="en" class="lang-content">Function</span><span lang="ru" class="lang-content">Функция</span></td><td class="text-sky-200"><span lang="kk" class="lang-content">Тұқым қуалайтын ақпарат сақтаушы</span><span lang="en" class="lang-content">Stores hereditary information</span><span lang="ru" class="lang-content">Хранение наследственной информации</span></td><td class="text-teal-200"><span lang="kk" class="lang-content">мРНҚ — матрица, тРНҚ — тасымалдаушы, рРНҚ — рибосома</span><span lang="en" class="lang-content">mRNA — template, tRNA — transfer, rRNA — ribosome</span><span lang="ru" class="lang-content">мРНК — матрица, тРНК — транспорт, рРНК — рибосома</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-lg text-sky-300 mb-3">🔄 <span lang="kk" class="lang-content">Репликация (ДНҚ → ДНҚ)</span><span lang="en" class="lang-content">Replication (DNA → DNA)</span><span lang="ru" class="lang-content">Репликация (ДНК → ДНК)</span></p>
+                <p class="text-white/80 text-lg leading-relaxed">
+                    <span lang="kk" class="lang-content">ДНҚ тізбектері ажырайды → әр тізбек матрица ретінде қолданылады → комплементарлық принцип бойынша жаңа тізбек синтезделеді → <b class="text-sky-300">2 идентикалық ДНҚ</b></span>
+                    <span lang="en" class="lang-content">DNA strands separate → each strand acts as template → new strand synthesised by complementarity → <b class="text-sky-300">2 identical DNA molecules</b></span>
+                    <span lang="ru" class="lang-content">Цепи ДНК расходятся → каждая служит матрицей → новая цепь синтезируется по комплементарности → <b class="text-sky-300">2 идентичные молекулы ДНК</b></span>
+                </p>
+            </div>
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-lg text-sky-300 mb-3">📝 <span lang="kk" class="lang-content">Транскрипция (ДНҚ → мРНҚ)</span><span lang="en" class="lang-content">Transcription (DNA → mRNA)</span><span lang="ru" class="lang-content">Транскрипция (ДНК → мРНК)</span></p>
+                <p class="text-white/80 text-lg leading-relaxed">
+                    <span lang="kk" class="lang-content">ДНҚ тізбегі матрица → РНҚ-полимераза ферменті → мРНҚ синтезделеді. <b class="text-sky-300">Мысал: ДНҚ: 3'-ААТЦГТ-5' → мРНҚ: 5'-УУГАЦУ-3'</b></span>
+                    <span lang="en" class="lang-content">DNA strand is template → RNA polymerase enzyme → mRNA synthesised. <b class="text-sky-300">Example: DNA: 3'-AATCGT-5' → mRNA: 5'-UUGACU-3'</b></span>
+                    <span lang="ru" class="lang-content">Цепь ДНК — матрица → фермент РНК-полимераза → синтез мРНК. <b class="text-sky-300">Пример: ДНК: 3'-ААТЦГТ-5' → мРНК: 5'-УУГАЦУ-3'</b></span>
+                </p>
+            </div>
+            <div class="glass-accent rounded-2xl p-6">
+                <p class="heading-font text-lg text-sky-300 mb-3">⚙️ <span lang="kk" class="lang-content">Трансляция (мРНҚ → Ақуыз)</span><span lang="en" class="lang-content">Translation (mRNA → Protein)</span><span lang="ru" class="lang-content">Трансляция (мРНК → Белок)</span></p>
+                <p class="text-white/80 text-lg leading-relaxed">
+                    <span lang="kk" class="lang-content">мРНҚ рибосомаға келеді → тРНҚ кодонды таниды (3 нуклеотид) → аминқышқылын жеткізеді → пептидтік байланыс түзіледі → <b class="text-sky-300">ақуыз тізбегі</b>. 1 кодон = 1 амқышқыл.</span>
+                    <span lang="en" class="lang-content">mRNA arrives at ribosome → tRNA recognises codon (3 nucleotides) → delivers amino acid → peptide bond forms → <b class="text-sky-300">protein chain</b>. 1 codon = 1 amino acid.</span>
+                    <span lang="ru" class="lang-content">мРНК приходит к рибосоме → тРНК распознаёт кодон (3 нуклеотида) → доставляет аминокислоту → образуется пептидная связь → <b class="text-sky-300">белковая цепь</b>. 1 кодон = 1 аминокислота.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

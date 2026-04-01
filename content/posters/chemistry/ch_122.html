@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коррозия металлов. Виды и защита</title>
+    <link rel="stylesheet" href="../../libs/tailwind.min.css">
+    <link rel="stylesheet" href="../../libs/fonts.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top left, #7c2d12, #9a3412, #0f172a); color: white; min-height: 100vh; font-size: 1.15rem; }
+        .heading-font { font-family: 'Montserrat', sans-serif; }
+        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12); }
+        .glass-accent { background: rgba(251,146,60,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(251,146,60,0.3); }
+        .rounded-custom { border-radius: 2rem; }
+        .lang-btn { padding: 12px 28px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.15rem; transition: all 0.2s; }
+        .lang-btn.active { background: #fb923c; color: #7c2d12; font-weight: 800; }
+        .lang-content { display: none; }
+        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
+        table.t { width: 100%; border-collapse: collapse; }
+        table.t th { background: rgba(251,146,60,0.18); color: #fed7aa; padding: 18px 22px; font-weight: 700; font-size: 1.25rem; text-align: left; border-bottom: 2px solid rgba(251,146,60,0.4); }
+        table.t td { padding: 16px 22px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1.25rem; vertical-align: top; color: rgba(255,255,255,0.88); line-height: 1.5; }
+        table.t tr:hover td { background: rgba(255,255,255,0.04); }
+        .formula-block { background: rgba(0,0,0,0.55); color: #fed7aa; font-family: 'Courier New', monospace; padding: 20px 26px; border-radius: 1.2rem; font-size: 1.3rem; line-height: 1.8; white-space: pre; overflow-x: auto; border: 1px solid rgba(251,146,60,0.25); }
+        .info-text { font-size: 1.2rem; line-height: 1.65; color: rgba(255,255,255,0.85); }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto;">
+
+    <header class="glass rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-orange-500/30">
+        <div>
+            <p class="text-white/40 font-light tracking-widest text-sm uppercase mb-2">11 класс · Общая химия · Металлы</p>
+            <h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-orange-400">Металдардың коррозиясы. Түрлері. Қорғау</h1>
+            <h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-orange-400">Corrosion of Metals. Types and Protection</h1>
+            <h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl uppercase tracking-tight text-orange-400">Коррозия металлов. Виды и защита</h1>
+        </div>
+        <div class="flex gap-3 mt-4 md:mt-0">
+            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
+            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
+            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <!-- SECTION 1: TYPES OF CORROSION -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-orange-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">Коррозия түрлері</span>
+            <span lang="en" class="lang-content">Types of Corrosion</span>
+            <span lang="ru" class="lang-content">Виды коррозии</span>
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-2xl text-orange-300 mb-4">🔥 <span lang="kk" class="lang-content">Химиялық коррозия</span><span lang="en" class="lang-content">Chemical Corrosion</span><span lang="ru" class="lang-content">Химическая коррозия</span></p>
+                <p class="info-text mb-4">
+                    <span lang="kk" class="lang-content">Металл тікелей химиялық реагентпен (ток жоқ) реакцияласады. Электролит жоқ ортада жүреді.</span>
+                    <span lang="en" class="lang-content">Metal directly reacts with chemical reagent (no electric current). Occurs without electrolyte.</span>
+                    <span lang="ru" class="lang-content">Металл взаимодействует с реагентом напрямую (без тока). Протекает без электролита.</span>
+                </p>
+                <div class="formula-block">Мысалдар:
+
+1) Жоғары температурада тотығу:
+   4Fe + 3O₂ →<sup>t°</sup> 2Fe₂O₃ (темір тотығы)
+   2Cu + O₂ →<sup>t°</sup> 2CuO    (мыс тотығы)
+
+2) Күкіртсутекпен:
+   Fe + H₂S → FeS + H₂
+
+3) Хлормен:
+   2Fe + 3Cl₂ → 2FeCl₃</div>
+            </div>
+            <div class="glass rounded-custom p-8">
+                <p class="heading-font text-2xl text-orange-300 mb-4">⚡ <span lang="kk" class="lang-content">Электрохимиялық коррозия</span><span lang="en" class="lang-content">Electrochemical Corrosion</span><span lang="ru" class="lang-content">Электрохимическая коррозия</span></p>
+                <p class="info-text mb-4">
+                    <span lang="kk" class="lang-content">Электролит болған кезде (ылғал, тұздар) гальваникалық жұп пайда болады. Ең жиі кездесетін және зиянды түр.</span>
+                    <span lang="en" class="lang-content">In the presence of electrolyte (moisture, salts), a galvanic cell forms. The most common and damaging type.</span>
+                    <span lang="ru" class="lang-content">В присутствии электролита (влага, соли) возникает гальваническая пара. Наиболее распространённый и опасный вид.</span>
+                </p>
+                <div class="formula-block">Мысал: Fe–Cu жұбы (ылғалды ауада)
+
+Анод (−) = Fe (белсендірек):
+Fe − 2e⁻ → Fe²⁺  (тотығу, ЗИЯН)
+
+Катод (+) = Cu (белсенді емес):
+2H₂O + O₂ + 4e⁻ → 4OH⁻  (тотықсыздану)
+
+Жалпы: 4Fe + 3O₂ + 6H₂O → 4Fe(OH)₃
+                       → Fe₂O₃·nH₂O (тот!)</div>
+            </div>
+        </div>
+        <div class="glass-accent rounded-custom p-6 mt-6">
+            <p class="heading-font text-xl text-orange-200 mb-3">
+                <span lang="kk" class="lang-content">⚠️ Гальваникалық жұп: Металдардың белсенділік қатарынан алыс болған сайын — коррозия тезірек!</span>
+                <span lang="en" class="lang-content">⚠️ Galvanic pair: The greater the distance in the activity series between two metals — the faster the corrosion!</span>
+                <span lang="ru" class="lang-content">⚠️ Гальваническая пара: Чем дальше металлы в ряду активности — тем интенсивнее коррозия!</span>
+            </p>
+            <p class="info-text text-white/80">
+                <span lang="kk" class="lang-content">Мысал: Fe–Cu жұбы → Fe тез жемірілeді; Fe–Zn жұбы → Fe қорғалады (Zn жемірілeді, себебі Zn белсендірек)</span>
+                <span lang="en" class="lang-content">Example: Fe–Cu pair → Fe corrodes rapidly; Fe–Zn pair → Fe protected (Zn corrodes as it is more active)</span>
+                <span lang="ru" class="lang-content">Пример: пара Fe–Cu → Fe разрушается быстро; пара Fe–Zn → Fe защищено (Zn разрушается, т.к. более активен)</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: PROTECTION METHODS -->
+    <section class="mb-8">
+        <h2 class="heading-font text-2xl text-orange-300 uppercase tracking-widest mb-6">
+            <span lang="kk" class="lang-content">🛡️ Коррозиядан қорғау тәсілдері</span>
+            <span lang="en" class="lang-content">🛡️ Corrosion Protection Methods</span>
+            <span lang="ru" class="lang-content">🛡️ Методы защиты от коррозии</span>
+        </h2>
+        <div class="glass rounded-custom p-8 overflow-x-auto">
+            <table class="t">
+                <thead><tr>
+                    <th><span lang="kk" class="lang-content">Қорғау тәсілі</span><span lang="en" class="lang-content">Protection Method</span><span lang="ru" class="lang-content">Метод защиты</span></th>
+                    <th><span lang="kk" class="lang-content">Принципі</span><span lang="en" class="lang-content">Principle</span><span lang="ru" class="lang-content">Принцип</span></th>
+                    <th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold text-yellow-300">🎨 <span lang="kk" class="lang-content">Бояу, лак, эмаль</span><span lang="en" class="lang-content">Paint, lacquer, enamel</span><span lang="ru" class="lang-content">Краска, лак, эмаль</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Металл бетін ылғалдан, ауадан оқшаулайды</span><span lang="en" class="lang-content">Isolates metal surface from moisture and air</span><span lang="ru" class="lang-content">Изолирует поверхность от влаги и воздуха</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Автокөліктер, металл конструкциялар</span><span lang="en" class="lang-content">Cars, metal structures</span><span lang="ru" class="lang-content">Автомобили, металлоконструкции</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-sky-300">💧 <span lang="kk" class="lang-content">Металл қаптама</span><span lang="en" class="lang-content">Metal coating</span><span lang="ru" class="lang-content">Металлическое покрытие</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content"><b class="text-sky-300">Катодтық:</b> Ni, Cu, Cr, Sn — химиялық қорғаныш<br><b class="text-green-300">Анодтық:</b> Zn, Al — электрохимиялық қорғаныш</span><span lang="en" class="lang-content"><b class="text-sky-300">Cathodic:</b> Ni, Cu, Cr, Sn — mechanical barrier<br><b class="text-green-300">Anodic:</b> Zn, Al — electrochemical protection</span><span lang="ru" class="lang-content"><b class="text-sky-300">Катодное:</b> Ni, Cu, Cr, Sn — механическая защита<br><b class="text-green-300">Анодное:</b> Zn, Al — электрохимическая</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Мырыштанған Fe (кровля), қалайы (консерва)</span><span lang="en" class="lang-content">Galvanised Fe (roofing), tinplate (cans)</span><span lang="ru" class="lang-content">Оцинкованное Fe (кровля), белая жесть (консервы)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-green-300">⚡ <span lang="kk" class="lang-content">Протекторлық қорғаныш</span><span lang="en" class="lang-content">Cathodic (sacrificial) protection</span><span lang="ru" class="lang-content">Протекторная защита</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Белсендірек металл (протектор, Mg, Zn, Al) қорғалатын металлмен байланысады. Протектор жемірілeді, негізгі металл аман қалады.</span><span lang="en" class="lang-content">More active metal (protector, Mg, Zn, Al) is connected to protected metal. Protector corrodes; main metal is preserved.</span><span lang="ru" class="lang-content">Более активный металл (протектор, Mg, Zn, Al) присоединяется к защищаемому. Протектор разрушается, основной — сохраняется.</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Кеме корпустары, су асты құбырлары, резервуарлар</span><span lang="en" class="lang-content">Ship hulls, underground pipelines, tanks</span><span lang="ru" class="lang-content">Корпуса кораблей, подземные трубопроводы, резервуары</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-purple-300">🧪 <span lang="kk" class="lang-content">Ингибиторлар</span><span lang="en" class="lang-content">Inhibitors</span><span lang="ru" class="lang-content">Ингибиторы</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Ортаға ингибитор қосу → электродтық реакция жылдамдығын тежейді</span><span lang="en" class="lang-content">Adding inhibitor to medium → slows electrode reactions</span><span lang="ru" class="lang-content">Введение ингибитора в среду → замедляет электродные реакции</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Суытқыш жүйелерге, қышқылдық орталарға (хроматтар, нитриттер)</span><span lang="en" class="lang-content">Cooling systems, acid environments (chromates, nitrites)</span><span lang="ru" class="lang-content">Системы охлаждения, кислые среды (хроматы, нитриты)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-rose-300">🔩 <span lang="kk" class="lang-content">Легирлеу (коррозияға төзімді болат)</span><span lang="en" class="lang-content">Alloying (stainless steel)</span><span lang="ru" class="lang-content">Легирование (нержавеющая сталь)</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Cr, Ni, Mo қоспалары металдың тотығу потенциалын арттырады</span><span lang="en" class="lang-content">Cr, Ni, Mo additives raise the oxidation potential of the alloy</span><span lang="ru" class="lang-content">Добавки Cr, Ni, Mo повышают окислительный потенциал сплава</span></td>
+                        <td class="info-text"><span lang="kk" class="lang-content">Нержавеющий болат: 18% Cr + 8% Ni + Fe</span><span lang="en" class="lang-content">Stainless steel: 18% Cr + 8% Ni + Fe</span><span lang="ru" class="lang-content">Нержавеющая сталь: 18% Cr + 8% Ni + Fe</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <p class="heading-font text-xl text-orange-300 mb-3">
+                    <span lang="kk" class="lang-content">💰 Коррозияның экономикалық зардабы</span>
+                    <span lang="en" class="lang-content">💰 Economic Impact of Corrosion</span>
+                    <span lang="ru" class="lang-content">💰 Экономический ущерб от коррозии</span>
+                </p>
+                <p class="info-text">
+                    <span lang="kk" class="lang-content">Дүниежүзінде жыл сайын <b class="text-orange-300">ЖҰӨ-нің 3–5%</b> (жылына ~2,5 триллион доллар) коррозия зиянын жабуға жұмсалады. Өндірілетін болаттың <b class="text-orange-300">~25%</b> коррозия нәтижесінде жоғалады. Авиация, мұнай-газ, медицина, инфрақұрылым — коррозия ең үлкен шығын тудыратын салалар.</span>
+                    <span lang="en" class="lang-content">Worldwide, <b class="text-orange-300">3–5% of GDP</b> (~$2.5 trillion/year) is spent on corrosion damage. About <b class="text-orange-300">25%</b> of all steel produced is lost to corrosion. Aviation, oil & gas, medicine, infrastructure — highest corrosion costs.</span>
+                    <span lang="ru" class="lang-content">Ежегодно в мире на ликвидацию коррозионного ущерба тратится <b class="text-orange-300">3–5% ВВП</b> (~2,5 трлн $/год). Около <b class="text-orange-300">25%</b> производимой стали теряется из-за коррозии. Авиация, нефтегаз, медицина, инфраструктура — наибольшие потери.</span>
+                </p>
+            </div>
+            <div>
+                <p class="heading-font text-xl text-orange-300 mb-3">
+                    <span lang="kk" class="lang-content">🌍 Коррозияны тездететін факторлар</span>
+                    <span lang="en" class="lang-content">🌍 Factors Accelerating Corrosion</span>
+                    <span lang="ru" class="lang-content">🌍 Факторы, ускоряющие коррозию</span>
+                </p>
+                <div class="info-text space-y-2">
+                    <p><span lang="kk" class="lang-content">💧 <b>Ылғалдылық</b> — электролит ортасын жасайды<br>🧂 <b>Тұздар</b> (NaCl, теңіз суы) — проводимостьты арттырады<br>⚗️ <b>Қышқылды орта</b> (қышқыл жаңбыр, pH↓) — потенциал айырмашылығы↑<br>🌡️ <b>Температура</b> — реакция жылдамдығы↑<br>⚡ <b>Механикалық кернеу</b> — оксид қабықшасы бұзылады<br>🔌 <b>Жылжымалы токтар</b> — электрохимиялық коррозияны күшейтеді</span>
+                    <span lang="en" class="lang-content">💧 <b>Humidity</b> — creates electrolyte environment<br>🧂 <b>Salts</b> (NaCl, seawater) — increase conductivity<br>⚗️ <b>Acidic medium</b> (acid rain, low pH) — higher potential difference<br>🌡️ <b>Temperature</b> — higher reaction rate<br>⚡ <b>Mechanical stress</b> — breaks oxide layer<br>🔌 <b>Stray currents</b> — enhance electrochemical corrosion</span>
+                    <span lang="ru" class="lang-content">💧 <b>Влажность</b> — создаёт электролитную среду<br>🧂 <b>Соли</b> (NaCl, морская вода) — повышают проводимость<br>⚗️ <b>Кислая среда</b> (кислотный дождь, pH↓) — разность потенциалов↑<br>🌡️ <b>Температура</b> — скорость реакции↑<br>⚡ <b>Мех. напряжение</b> — разрушает оксидную плёнку<br>🔌 <b>Блуждающие токи</b> — усиливают электрохим. коррозию</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+function switchLang(lang) {
+    const c = document.getElementById('poster-container');
+    c.className = c.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
