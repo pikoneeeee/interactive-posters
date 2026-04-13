@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор предмета</title>
+    <style>
+        /* Системный шрифт для быстрой загрузки */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 180px;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-card:active {
+            transform: scale(0.97);
+        }
+
+        .subject-card h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subject-card .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <header>
+            <h1>Интерактивные плакаты</h1>
+        </header>
+
+        <div class="subjects-grid" id="subjects-grid">
+            <!-- Содержимое будет загружено из Kotlin -->
+        </div>
+
+        <footer>
+            <p>© 2024 Интерактивные электронные плакаты</p>
+        </footer>
+    </div>
+
+    <script>
+        // Иконки для предметов
+        const subjectIcons = {
+            'kazakhlang': '🇰🇿',
+            'russianlang': '🇷🇺',
+            'englishlang': 'en',
+            'math': '🔢',
+            'mathematics': '🔢',
+            'physics': '⚛️',
+            'chemistry': '🧪',
+            'informatics': '💻',
+            'geography': '🗺️',
+            'biology': '🧬',
+            'historykaz': '📜',
+            'worldhistory': '🌍'
+        };
+
+        function renderSubjects(subjects) {
+            console.log("renderSubjects() called with", subjects.length, "subjects");
+            const grid = document.getElementById('subjects-grid');
+            grid.innerHTML = '';
+
+            subjects.forEach(subject => {
+                const card = document.createElement('div');
+                card.className = 'subject-card';
+                card.onclick = () => {
+                    console.log("Click subject:", subject.id);
+                    if (typeof Android !== 'undefined') {
+                        Android.onSubjectSelected(subject.id);
+                    }
+                };
+
+                const icon = subjectIcons[subject.id] || '📚';
+                card.innerHTML = '<div class="icon">' + icon + '</div><h2>' + subject.name + '</h2>';
+                grid.appendChild(card);
+            });
+        }
+
+        // Инициализация: Android JavascriptInterface доступен сразу
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOMContentLoaded - subjects_screen");
+            if (typeof Android !== 'undefined') {
+                console.log("Android bridge found");
+                Android.onFrontEndReady();
+            } else {
+                console.error("Android bridge not found!");
+            }
+        });
+    </script>
+</body>
+</html>

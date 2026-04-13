@@ -90,7 +90,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'icon.svg')))
 
         # Переменные состояния
-        self.current_lang = 'kz'
+        self.current_lang = 'ru'
         self.current_subject = None
         self.current_topic_id = None
         self.current_screen = 'activation'  # activation, subjects, topics, poster
@@ -210,21 +210,22 @@ class MainWindow(QMainWindow):
         
         # Принудительная перерисовка ПОСЛЕ загрузки страницы
         if self.current_screen == 'poster':
-            repaint_js = """
-                (function() {
-                    // Принудительная перерисовка
-                    window.scrollTo(0, 1);
-                    setTimeout(function() { window.scrollTo(0, 0); }, 10);
-                    
-                    // Заставляем браузер пересчитать layout
-                    document.body.style.display = 'none';
-                    document.body.offsetHeight; // Trigger reflow
-                    document.body.style.display = '';
-                    
-                    console.log('🎨 Page repaint forced');
-                })();
+            # Устанавливаем правильный язык для обоих типов плакатов
+            # switchLang использует 'kk', setLang использует 'kz'
+            lang_kk = 'kk' if self.current_lang == 'kz' else self.current_lang
+            lang_js = f"""
+                (function() {{
+                    var lang = '{self.current_lang}';
+                    var langKK = '{lang_kk}';
+                    if (typeof switchLang === 'function') {{
+                        switchLang(langKK);
+                    }}
+                    if (typeof setLang === 'function') {{
+                        setLang(lang);
+                    }}
+                }})();
             """
-            self.web_view.page().runJavaScript(repaint_js)
+            self.web_view.page().runJavaScript(lang_js)
 
     def resizeEvent(self, event):
         """Обновляем позиции кнопок при изменении размера окна"""
@@ -536,50 +537,14 @@ class MainWindow(QMainWindow):
             window.isLangSubject = {str(is_lang_subject).lower()};
 
             if (typeof renderTopics === 'function') {{
-                // Сначала отрисовываем карточки
-                renderTopics(window.topicsData);
-
-                // Сразу после отрисовки вызываем скролл
-                {scroll_script}
-            }}
-
-            // Настройка кнопок языка
-            var langControls = document.getElementById('language-controls');
-            if (langControls) {{
-                langControls.style.display = window.isLangSubject ? 'none' : 'flex';
-                if (!window.isLangSubject) {{
-                    document.querySelectorAll('.lang-btn').forEach(btn => {{
-                        btn.classList.remove('active');
-                    }});
-                    var activeLangBtn = document.getElementById('lang-{self.current_lang}');
-                    if (activeLangBtn) activeLangBtn.classList.add('active');
-                }}
-            }}
-        """
-        self.web_view.page().runJavaScript(js_code)
-
-        js_code = f"""
-            document.getElementById('subject-title').innerText = '{subject_name_escaped}';
-            window.topicsData = {topics_json};
-            window.isLangSubject = {str(is_lang_subject).lower()};
-
-            if (typeof renderTopics === 'function') {{
                 renderTopics(window.topicsData);
                 {scroll_script}
             }}
 
-            var langControls = document.getElementById('language-controls');
-            if (langControls) {{
-                langControls.style.display = window.isLangSubject ? 'none' : 'flex';
-                if (!window.isLangSubject) {{
-                    document.querySelectorAll('.lang-btn').forEach(btn => {{
-                        btn.classList.remove('active');
-                    }});
-                    var activeLangBtn = document.getElementById('lang-{self.current_lang}');
-                    if (activeLangBtn) {{
-                        activeLangBtn.classList.add('active');
-                    }}
-                }}
+            // Скрываем селектор языка для языковых предметов
+            var langSel = document.getElementById('lang-selector');
+            if (langSel) {{
+                langSel.style.display = window.isLangSubject ? 'none' : 'flex';
             }}
         """
         self.web_view.page().runJavaScript(js_code)
