@@ -147,7 +147,12 @@
             stepsDiv.innerHTML = t.steps.map(s => `<span class="font-black text-sky-900 text-xs uppercase">${s}</span>`).join('<span class="text-sky-200">▶</span>');
         }
 
-        window.onload = () => setLang('ru');
+        // Читаем язык из URL параметра
+        const urlParams = new URLSearchParams(window.location.search);
+        const lang = urlParams.get('lang') || 'ru';
+        console.log('Плакат: язык из URL =', lang);
+        
+        window.onload = () => setLang(lang);
     </script>
 <<<<<<< HEAD
 

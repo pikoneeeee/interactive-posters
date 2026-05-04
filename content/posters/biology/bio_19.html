@@ -371,7 +371,16 @@
                 container.classList.add('lang-' + lang);
             }
 
-            document.querySelectorAll('.lang-btn').forEach(btn => {
+            
+
+        // Инициализация языка из URL при загрузке
+        document.addEventListener(\'DOMContentLoaded\', (event) => {
+            // Читаем параметр языка из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get(\'lang\') || \'kk\'; // По умолчанию казахский
+            console.log(\'🌐 Плакат загружен с языком:\', lang);
+            switchLang(lang);
+        });document.querySelectorAll('.lang-btn').forEach(btn => {
                 if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
                     btn.classList.add('active');
                 } else {

@@ -170,7 +170,16 @@
             container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
             container.classList.add('lang-' + lang);
         }
-        var buttons = document.querySelectorAll('.lang-btn');
+        
+
+        // Инициализация языка из URL при загрузке
+        document.addEventListener(\'DOMContentLoaded\', (event) => {
+            // Читаем параметр языка из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get(\'lang\') || \'kk\'; // По умолчанию казахский
+            console.log(\'🌐 Плакат загружен с языком:\', lang);
+            switchLang(lang);
+        });var buttons = document.querySelectorAll('.lang-btn');
         buttons.forEach(function(btn) {
             btn.classList.remove('active');
             if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {

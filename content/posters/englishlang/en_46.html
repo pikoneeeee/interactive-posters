@@ -752,7 +752,16 @@
             if (lang === 'en') {
                 document.getElementById('en-section').classList.add('active');
                 document.querySelectorAll('.lang-btn')[0].classList.add('active');
-            } else if (lang === 'ru') {
+            } 
+
+        // Инициализация языка из URL при загрузке
+        document.addEventListener(\'DOMContentLoaded\', (event) => {
+            // Читаем параметр языка из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get(\'lang\') || \'kk\'; // По умолчанию казахский
+            console.log(\'🌐 Плакат загружен с языком:\', lang);
+            switchLang(lang);
+        });else if (lang === 'ru') {
                 document.getElementById('ru-section').classList.add('active');
                 document.querySelectorAll('.lang-btn')[1].classList.add('active');
             } else if (lang === 'kk') {

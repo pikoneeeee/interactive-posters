@@ -145,7 +145,12 @@
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
         }
-        window.onload = () => setLang('ru');
+        // Читаем язык из URL параметра
+        const urlParams = new URLSearchParams(window.location.search);
+        const lang = urlParams.get('lang') || 'ru';
+        console.log('Плакат: язык из URL =', lang);
+        
+        window.onload = () => setLang(lang);
     </script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>

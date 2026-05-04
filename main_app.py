@@ -36,6 +36,18 @@ class Bridge(QObject):
         self.window.select_subject(subject_id)
 
     @Slot(str)
+    def onLanguageSelected(self, lang_code):
+        """Пользователь выбрал язык"""
+        print(f"DEBUG: onLanguageSelected({lang_code})")
+        self.window.select_language(lang_code)
+
+    @Slot(int)
+    def onGradeSelected(self, grade):
+        """Пользователь выбрал класс"""
+        print(f"DEBUG: onGradeSelected({grade})")
+        self.window.select_grade(grade)
+
+    @Slot(str)
     def onTopicClicked(self, topic_id):
         """Пользователь выбрал тему"""
         print(f"DEBUG: onTopicClicked({topic_id})")
@@ -92,10 +104,13 @@ class MainWindow(QMainWindow):
         # Переменные состояния
         self.current_lang = 'kz'
         self.current_subject = None
+        self.current_grade = None  # int: 5–11
         self.current_topic_id = None
-        self.current_screen = 'activation'  # activation, subjects, topics, poster
+        self.current_screen = 'activation'  # activation, subjects, grades, topics, poster
         self.translations = {}
         self.subjects_structure = {}
+        self.classes_structure = {}
+        self.grades_structure = {}
 
         self.current_topic = None
         # Построение UI
@@ -370,6 +385,78 @@ class MainWindow(QMainWindow):
                 </html>
             """)
 
+    def show_languages_screen(self):
+        """Экран выбора языка"""
+        print(f"\n🖥️ show_languages_screen()")
+        self.current_screen = 'languages'
+        template_path = os.path.join(CONTENT_ROOT, 'templates', 'languages_screen.html')
+
+        if hasattr(self, 'btn_back_overlay'):
+            self.btn_back_overlay.hide()
+
+        print(f"   Путь: {template_path}")
+        print(f"   Существует: {os.path.exists(template_path)}")
+
+        if os.path.exists(template_path):
+            print(f"   ✅ Загружаю HTML")
+            url = QUrl.fromLocalFile(template_path)
+            self.web_view.setUrl(url)
+        else:
+            print(f"   ❌ Файл не найден!")
+            self.web_view.setHtml(f"""
+                <html>
+                <head><meta charset="UTF-8"></head>
+                <body style="font-family: Arial; padding: 50px; background: #f0f0f0;">
+                    <h1>❌ Ошибка</h1>
+                    <p>Файл languages_screen не найден:</p>
+                    <p><code>{template_path}</code></p>
+                </body>
+                </html>
+            """)
+
+    def select_language(self, lang_code):
+        """Пользователь выбрал язык"""
+        print(f"\n🌐 select_language({lang_code})")
+        self.current_lang = lang_code
+        print(f"   ✅ Выбран язык: {lang_code}")
+        self.show_grades_screen()
+
+    def show_grades_screen(self):
+        """Экран выбора класса"""
+        print(f"\n🖥️ show_grades_screen()")
+        self.current_screen = 'grades'
+        template_path = os.path.join(CONTENT_ROOT, 'templates', 'grades_screen.html')
+
+        if hasattr(self, 'btn_back_overlay'):
+            self.btn_back_overlay.hide()
+
+        print(f"   Путь: {template_path}")
+        print(f"   Существует: {os.path.exists(template_path)}")
+
+        if os.path.exists(template_path):
+            print(f"   ✅ Загружаю HTML")
+            url = QUrl.fromLocalFile(template_path)
+            self.web_view.setUrl(url)
+        else:
+            print(f"   ❌ Файл не найден!")
+            self.web_view.setHtml(f"""
+                <html>
+                <head><meta charset="UTF-8"></head>
+                <body style="font-family: Arial; padding: 50px; background: #f0f0f0;">
+                    <h1>❌ Ошибка</h1>
+                    <p>Файл grades_screen не найден:</p>
+                    <p><code>{template_path}</code></p>
+                </body>
+                </html>
+            """)
+
+    def select_grade(self, grade):
+        """Пользователь выбрал класс"""
+        print(f"\n🎓 select_grade({grade})")
+        self.current_grade = grade
+        print(f"   ✅ Выбран класс: {grade}")
+        self.show_topics_screen()
+
     def show_topics_screen(self):
         """Экран выбора темы внутри предмета"""
         print(f"\n🖥️ show_topics_screen()")
@@ -404,15 +491,8 @@ class MainWindow(QMainWindow):
             self.current_subject = subject_id
             subject = self.subjects_structure[subject_id]
 
-            # Определяем язык для языковых предметов
-            if subject.get('is_language_subject', False):
-                lang_map = {'kazakhlang': 'kz', 'russianlang': 'ru', 'englishlang': 'en'}
-                self.current_lang = lang_map.get(subject_id, 'kz')
-                print(f"   🌐 Языковой предмет, язык: {self.current_lang}")
-                logging.info(
-                    f"Выбран языковой предмет: {subject_id}, язык: {self.current_lang}")
-
-            self.show_topics_screen()
+            # Показываем сразу экран классов (язык можно поменять там)
+            self.show_grades_screen()
         else:
             print(f"   ❌ Предмет {subject_id} не найден!")
             logging.error(f"Предмет {subject_id} не найден в структуре")
@@ -422,6 +502,8 @@ class MainWindow(QMainWindow):
         print(f"\n📊 update_content() - текущий экран: {self.current_screen}")
         if self.current_screen == 'subjects':
             self.update_subjects_screen()
+        elif self.current_screen == 'grades':
+            self.update_grades_screen()
         elif self.current_screen == 'topics':
             self.update_topics_screen()
 
@@ -447,6 +529,93 @@ class MainWindow(QMainWindow):
         print(f"   ✅ Отправляю {len(subjects_data)} предметов в JavaScript")
         self.web_view.page().runJavaScript(js_code)
 
+    def update_languages_screen(self):
+        """Отправляем данные языков на экран"""
+        print(f"   🌐 update_languages_screen()")
+        
+        # Доступные языки
+        languages_data = [
+            {
+                'code': 'kz',
+                'flag': '🇰🇿',
+                'name': 'Қазақша',
+                'native': 'Казахский',
+                'desc': 'Оқыту қазақ тілінде'
+            },
+            {
+                'code': 'ru',
+                'flag': '🇷🇺',
+                'name': 'Русский',
+                'native': 'Русский язык',
+                'desc': 'Обучение на русском языке'
+            },
+            {
+                'code': 'en',
+                'flag': '🇬🇧',
+                'name': 'English',
+                'native': 'Английский',
+                'desc': 'Learning in English'
+            }
+        ]
+
+        languages_json = json.dumps(languages_data, ensure_ascii=False)
+        subject_name = self._get_translation(self.subjects_structure.get(self.current_subject, {}).get('name_key', self.current_subject))
+        subject_name_escaped = subject_name.replace("'", "\\'").replace('"', '\\"')
+
+        js_code = f"""
+            document.getElementById('subject-title').innerText = 'Выбор языка для {subject_name_escaped}';
+            window.languagesData = {languages_json};
+            if (typeof renderLanguages === 'function') {{
+                renderLanguages(window.languagesData);
+            }}
+        """
+        print(f"   ✅ Отправляю {len(languages_data)} языков в JavaScript")
+        self.web_view.page().runJavaScript(js_code)
+
+    def update_grades_screen(self):
+        """Отправляем данные классов на экран"""
+        print(f"   📚 update_grades_screen()")
+        if not self.current_subject:
+            return
+
+        subject = self.subjects_structure.get(self.current_subject)
+        if not subject:
+            return
+
+        # Собираем уникальные классы и считаем количество тем
+        grade_counts = {}
+        for topic in subject.get('topics', []):
+            grade = topic.get('grade')
+            if grade and isinstance(grade, int):
+                grade_counts[grade] = grade_counts.get(grade, 0) + 1
+
+        # Создаем массив данных для JS с локализацией
+        grades_data = []
+        for grade in sorted(grade_counts.keys()):
+            grades_data.append({
+                'grade': grade,
+                'count': grade_counts[grade],
+                'grade_text': self._get_translation(f'grade_{grade}'),
+                'count_text': self._get_translation('posters_count')
+            })
+
+        grades_json = json.dumps(grades_data, ensure_ascii=False)
+        subject_name = self._get_translation(subject.get('name_key', self.current_subject))
+        subject_name_escaped = subject_name.replace("'", "\\'").replace('"', '\\"')
+
+        js_code = f"""
+            document.getElementById('subject-title').innerText = '{subject_name_escaped}';
+            window.gradesData = {grades_json};
+            if (typeof renderGrades === 'function') {{
+                renderGrades(window.gradesData);
+            }}
+            if (typeof updateLanguageButtons === 'function') {{
+                updateLanguageButtons('{self.current_lang}');
+            }}
+        """
+        print(f"   ✅ Отправляю {len(grades_data)} классов в JavaScript")
+        self.web_view.page().runJavaScript(js_code)
+
     def update_topics_screen(self):
         """Отправляем темы и скроллим к нужной МГНОВЕННО"""
         if not self.current_subject:
@@ -457,13 +626,36 @@ class MainWindow(QMainWindow):
             return
 
         subject_name = self._get_translation(subject.get('name_key', self.current_subject))
+        
+        # Фильтруем темы по текущему классу
         topics_data = []
-        for topic in subject.get('topics', []):
-            topic_name = topic.get('title_ru') or topic.get('name') or topic['id']
+        all_topics = subject.get('topics', [])
+        
+        if self.current_grade:
+            # Фильтруем по классу
+            filtered_topics = [t for t in all_topics if t.get('grade') == self.current_grade]
+            print(f"   🎓 Фильтруем по классу {self.current_grade}: {len(filtered_topics)} из {len(all_topics)} тем")
+        else:
+            # Показываем все темы (если класс не выбран)
+            filtered_topics = all_topics
+            print(f"   📚 Показываем все темы: {len(all_topics)}")
+        
+        for topic in filtered_topics:
+            # Локализуем название темы
+            topic_key = topic.get('name_key', topic['id'])
+            topic_name = self._get_translation(topic_key)
             topics_data.append({'id': topic['id'], 'name': topic_name})
 
         topics_json = json.dumps(topics_data, ensure_ascii=False)
-        subject_name_escaped = subject_name.replace("'", "\\'").replace('"', '\\"')
+        
+        # Добавляем класс в заголовок с локализацией
+        if self.current_grade:
+            grade_text = self._get_translation(f'grade_{self.current_grade}')
+            title_with_grade = f"{subject_name} — {grade_text}"
+        else:
+            title_with_grade = subject_name
+            
+        subject_name_escaped = title_with_grade.replace("'", "\\'").replace('"', '\\"')
         is_lang_subject = subject.get('is_language_subject', False)
 
         # !!! ЛОГИКА ПРОКРУТКИ (БЕЗ ЗАДЕРЖКИ) !!!
@@ -546,17 +738,27 @@ class MainWindow(QMainWindow):
         self.web_view.page().runJavaScript(js_code)
 
     def _get_topics_ids(self):
-        """Список topic_id в текущем предмете в порядке subjects.json"""
+        """Список topic_id в текущем предмете/классе в порядке subjects.json"""
         subj = self.subjects_structure.get(self.current_subject)
         if not subj:
             return []
         topics = subj.get("topics", [])
         ids = []
+        
         for t in topics:
-            if isinstance(t, dict) and "id" in t:
-                ids.append(t["id"])
-            elif isinstance(t, str):
-                ids.append(t)
+            # Фильтруем по классу, если он выбран
+            if self.current_grade:
+                if isinstance(t, dict) and t.get('grade') == self.current_grade:
+                    if "id" in t:
+                        ids.append(t["id"])
+                elif isinstance(t, str):
+                    ids.append(t)
+            else:
+                # Если класс не выбран, берем все темы
+                if isinstance(t, dict) and "id" in t:
+                    ids.append(t["id"])
+                elif isinstance(t, str):
+                    ids.append(t)
         return ids
 
     def go_next_poster(self):
@@ -602,9 +804,12 @@ class MainWindow(QMainWindow):
 
             if os.path.exists(poster_path):
                 print(f"   ✅ Загружаю плакат")
+                print(f"   🌐 Текущий язык: {self.current_lang}")
                 url = QUrl.fromLocalFile(poster_path)
                 url.setQuery(f"lang={self.current_lang}")
+                print(f"   🔗 URL плаката: {url.toString()}")
                 self.web_view.setUrl(url)
+                logging.info(f"Открыт плакат: {self.current_subject}/{topic_id} на языке {self.current_lang}")
 
                 # === ФИНАЛЬНЫЙ ФИКС ЗАВИСАНИЯ ===
                 # Мы запускаем таймер внутри браузера.
@@ -693,20 +898,36 @@ class MainWindow(QMainWindow):
             self.show_topics_screen()
 
         elif self.current_screen == 'topics':
-            print("   ➜ Возвращаюсь на экран предметов")
+            print("   ➜ Возвращаюсь на экран классов")
 
             self.current_topic = None
             self.current_topic_id = None
+            self.current_screen = 'grades'
+            self.show_grades_screen()
+
+        elif self.current_screen == 'grades':
+            print("   ➜ Возвращаюсь на экран предметов")
+
+            self.current_grade = None
             self.current_screen = 'subjects'
             self.show_subjects_screen()
 
     def change_language(self, lang_code):
         """Пользователь переключил язык"""
         print(f"\n🌐 change_language({lang_code})")
+        print(f"   🔄 Текущий язык до смены: {self.current_lang}")
         if lang_code in self.translations:
             self.current_lang = lang_code
             print(f"   ✅ Язык изменен на: {lang_code}")
             logging.info(f"Язык изменен на: {lang_code}")
+            
+            # Обновляем текущий экран
+            if self.current_screen == 'grades':
+                print(f"   📚 Обновляем экран классов")
+                self.update_grades_screen()
+            elif self.current_screen == 'topics':
+                print(f"   🎓 Обновляем экран тем")
+                self.update_topics_screen()
         else:
             print(f"   ❌ Язык {lang_code} не доступен")
             logging.warning(f"Язык {lang_code} не доступен")

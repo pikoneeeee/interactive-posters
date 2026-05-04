@@ -126,7 +126,16 @@
         container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
         container.classList.add('lang-' + lang);
     }
-</script>
+
+
+        // Инициализация языка из URL при загрузке
+        document.addEventListener(\'DOMContentLoaded\', (event) => {
+            // Читаем параметр языка из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get(\'lang\') || \'kk\'; // По умолчанию казахский
+            console.log(\'🌐 Плакат загружен с языком:\', lang);
+            switchLang(lang);
+        });</script>
 
 </body>
 </html>

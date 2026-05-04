@@ -357,7 +357,12 @@
             resizeCanvas();
         }
 
-        window.onload = () => setLang('ru');
+        // Читаем язык из URL параметра
+        const urlParams = new URLSearchParams(window.location.search);
+        const lang = urlParams.get('lang') || 'ru';
+        console.log('Плакат: язык из URL =', lang);
+        
+        window.onload = () => setLang(lang);
         window.onresize = resizeCanvas;
     </script>
 

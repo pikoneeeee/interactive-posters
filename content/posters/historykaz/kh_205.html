@@ -247,7 +247,13 @@
             initChart(lang);
         }
 
-        window.onload = () => changeLang('ru');
+        window.onload = () => {
+            // Читаем параметр языка из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang') || 'ru'; // По умолчанию русский
+            console.log('🌐 Плакат загружен с языком:', lang);
+            changeLang(lang);
+        };
     </script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>

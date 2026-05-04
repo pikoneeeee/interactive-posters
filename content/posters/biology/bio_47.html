@@ -198,6 +198,15 @@
                 btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
             });
         }
+
+        // Инициализация языка из URL при загрузке
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Читаем параметр языка из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang') || 'kk'; // По умолчанию казахский
+            console.log('🌐 Плакат загружен с языком:', lang);
+            switchLang(lang);
+        });
     </script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>

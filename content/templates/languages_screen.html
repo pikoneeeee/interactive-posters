@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор языка</title>
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .back-button {
+            background: #2196F3;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+        }
+
+        .back-button:hover {
+            background: #1976D2;
+            transform: translateX(-5px);
+        }
+
+        header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .language-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .language-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .language-flag {
+            font-size: 64px;
+            margin-bottom: 15px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .language-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .language-native {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .language-desc {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <button class="back-button" id="back-btn" onclick="goBack()">← Назад</button>
+                <div>
+                    <h1 id="subject-title">Выбор языка</h1>
+                    <p>Выберите язык обучения</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="languages-container" class="languages-grid">
+                <div class="loading">Загрузка...</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let bridge = null;
+
+        function initializeBridge() {
+            new QWebChannel(qt.webChannelTransport, function(channel) {
+                bridge = channel.objects.bridge;
+                bridge.onFrontEndReady();
+            });
+        }
+
+        function renderLanguages(languages) {
+            const container = document.getElementById('languages-container');
+            container.innerHTML = '';
+
+            languages.forEach(lang => {
+                const card = document.createElement('div');
+                card.className = 'language-card';
+                card.onclick = () => selectLanguage(lang.code);
+                
+                card.innerHTML = `
+                    <div class="language-flag">${lang.flag}</div>
+                    <div class="language-name">${lang.name}</div>
+                    <div class="language-native">${lang.native}</div>
+                    <div class="language-desc">${lang.desc}</div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        function selectLanguage(langCode) {
+            console.log('Выбран язык:', langCode);
+            if (bridge && bridge.onLanguageSelected) {
+                bridge.onLanguageSelected(langCode);
+            }
+        }
+
+        function goBack() {
+            if (bridge) {
+                bridge.onBackClicked();
+            }
+        }
+
+        // Инициализация при загрузке
+        if (window.qt) {
+            initializeBridge();
+        } else {
+            console.error('QWebChannel не доступен');
+        }
+    </script>
+</body>
+</html>

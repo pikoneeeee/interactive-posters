@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор класса</title>
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 4px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            background: #2196F3;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+        }
+
+        .back-button:hover {
+            background: #1976D2;
+            transform: translateX(-5px);
+        }
+
+        header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .grades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .grade-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grade-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .grade-number {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grade-label {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .grade-count {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <button class="back-button" id="back-btn" onclick="goBack()">← Назад</button>
+                <div>
+                    <h1 id="subject-title">Выбор класса</h1>
+                    <p>Выберите класс для изучения</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="lang-switcher" id="lang-switcher">
+                    <button class="lang-btn" data-lang="kz" onclick="changeLanguage('kz')">Қаз</button>
+                    <button class="lang-btn" data-lang="ru" onclick="changeLanguage('ru')">Рус</button>
+                    <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">Eng</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="grades-container" class="grades-grid">
+                <div class="loading">Загрузка...</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let bridge = null;
+
+        function initializeBridge() {
+            new QWebChannel(qt.webChannelTransport, function(channel) {
+                bridge = channel.objects.bridge;
+                bridge.onFrontEndReady();
+            });
+        }
+
+        function renderGrades(grades) {
+            console.log("📚 renderGrades() вызвана с", grades.length, "классами");
+            const container = document.getElementById('grades-container');
+            container.innerHTML = '';
+
+            grades.forEach(gradeData => {
+                const card = document.createElement('div');
+                card.className = 'grade-card';
+                card.onclick = () => selectGrade(gradeData.grade);
+                
+                card.innerHTML = `
+                    <div class="grade-number">${gradeData.grade}</div>
+                    <div class="grade-text">${gradeData.grade_text}</div>
+                    <div class="grade-count">${gradeData.count} ${gradeData.count_text}</div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        function selectGrade(grade) {
+            console.log('Выбран класс:', grade);
+            if (bridge && bridge.onGradeSelected) {
+                bridge.onGradeSelected(grade);
+            }
+        }
+
+        function changeLanguage(langCode) {
+            console.log('Переключаем язык на:', langCode);
+            
+            // Обновляем активную кнопку
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${langCode}"]`).classList.add('active');
+            
+            // Отправляем в Python
+            if (bridge && bridge.onLangChanged) {
+                bridge.onLangChanged(langCode);
+            }
+        }
+
+        function updateLanguageButtons(currentLang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${currentLang}"]`).classList.add('active');
+        }
+
+        function goBack() {
+            if (bridge) {
+                bridge.onBackClicked();
+            }
+        }
+
+        // Инициализация при загрузке
+        if (window.qt) {
+            initializeBridge();
+        } else {
+            console.error('QWebChannel не доступен');
+        }
+    </script>
+</body>
+</html>

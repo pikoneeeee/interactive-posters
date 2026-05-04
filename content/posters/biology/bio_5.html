@@ -316,7 +316,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
+            // Читаем параметр языка из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang') || 'kk'; // По умолчанию казахский
+            console.log('🌐 Плакат загружен с языком:', lang);
+            switchLang(lang);
         });
 
         // QWebChannel Integration for Back Button
