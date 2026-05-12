@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Функции и процедуры в Python</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 10 · Python</span>
+<span lang="ru" class="lang-content">10 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Функциялар мен процедуралар</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Functions and procedures</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Функции и процедуры в Python</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧩 Функция — не?</span>
+<span lang="en" class="lang-content">🧩 What is a function?</span>
+<span lang="ru" class="lang-content">🧩 Что такое функция?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Функция</b> — <b>атауы бар</b> код блогы: бір рет жазасың, <b>мыңдаған рет шақырасың</b>. Ол <b>DRY</b> (Don't Repeat Yourself) принципін орындайды, бағдарламаны <b>оқу, тестілеу, жөндеу оңай</b> етеді. Python-да функция <b><code>def</code></b> сөзімен анықталады. Мән қайтармаса — <b>процедура</b> деп атайды (қайтаратын мәні <code>None</code>).</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">function</b> is a <b>named block</b> of code: write once, <b>call thousands of times</b>. It enforces <b>DRY</b> (Don't Repeat Yourself) and makes code <b>easier to read, test, debug</b>. Python functions are defined with <b><code>def</code></b>. A function that returns nothing is called a <b>procedure</b> (returns <code>None</code>).</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Функция</b> — блок кода с <b>именем</b>: пишешь один раз, <b>вызываешь тысячи</b>. Она реализует принцип <b>DRY</b> (Don't Repeat Yourself), делает код <b>проще для чтения, тестирования и отладки</b>. В Python функция определяется словом <b><code>def</code></b>. Если значение не возвращается — это <b>процедура</b> (возвращает <code>None</code>).</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Анатомия</span>
+<span lang="en" class="lang-content">📐 Anatomy</span>
+<span lang="ru" class="lang-content">📐 Анатомия функции</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="kw">def</span> <span class="fn">area_rect</span>(a, b=<span class="num">1</span>):      <span class="com"># ← сигнатура: имя + параметры</span>
+    <span class="str">"""Вернуть площадь прямоугольника."""</span>  <span class="com"># ← docstring</span>
+    s = a * b                 <span class="com"># ← тело (локальные переменные)</span>
+    <span class="kw">return</span> s                  <span class="com"># ← результат</span>
+
+<span class="fn">print</span>(<span class="fn">area_rect</span>(<span class="num">3</span>, <span class="num">4</span>))       <span class="com"># 12</span>
+<span class="fn">print</span>(<span class="fn">area_rect</span>(<span class="num">5</span>))          <span class="com"># 5  (b=1 по умолчанию)</span>
+<span class="fn">print</span>(<span class="fn">area_rect</span>(a=<span class="num">2</span>, b=<span class="num">7</span>))     <span class="com"># 14 (именованные аргументы)</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
+<div class="tile"><div class="tile-emoji">🏷</div><p class="heading-font text-sky-700 text-sm">def <span class="fn">name</span></p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">атауы</span><span lang="en" class="lang-content">name</span><span lang="ru" class="lang-content">имя</span></p></div>
+<div class="tile"><div class="tile-emoji">📦</div><p class="heading-font text-sky-700 text-sm">(a, b=1)</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">параметрлер</span><span lang="en" class="lang-content">params</span><span lang="ru" class="lang-content">параметры</span></p></div>
+<div class="tile"><div class="tile-emoji">⚙</div><p class="heading-font text-sky-700 text-sm">body</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">денесі</span><span lang="en" class="lang-content">logic</span><span lang="ru" class="lang-content">логика</span></p></div>
+<div class="tile"><div class="tile-emoji">↩</div><p class="heading-font text-sky-700 text-sm">return</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">нәтиже</span><span lang="en" class="lang-content">result</span><span lang="ru" class="lang-content">результат</span></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎚 Параметр түрлері</span>
+<span lang="en" class="lang-content">🎚 Parameter kinds</span>
+<span lang="ru" class="lang-content">🎚 Виды параметров</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Түрі</span><span lang="en" class="lang-content">Kind</span><span lang="ru" class="lang-content">Вид</span></th>
+<th><span lang="kk" class="lang-content">Синтаксис</span><span lang="en" class="lang-content">Syntax</span><span lang="ru" class="lang-content">Синтаксис</span></th>
+<th><span lang="kk" class="lang-content">Сипаттама</span><span lang="en" class="lang-content">Description</span><span lang="ru" class="lang-content">Описание</span></th></tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">Позициялық</span><span lang="en" class="lang-content">Positional</span><span lang="ru" class="lang-content">Позиционный</span></td><td><code>f(1, 2)</code></td><td><span lang="kk" class="lang-content">ретімен беріледі</span><span lang="en" class="lang-content">passed in order</span><span lang="ru" class="lang-content">передаются по порядку</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Аталған</span><span lang="en" class="lang-content">Keyword</span><span lang="ru" class="lang-content">Именованный</span></td><td><code>f(a=1, b=2)</code></td><td><span lang="kk" class="lang-content">аты = мәні</span><span lang="en" class="lang-content">name = value</span><span lang="ru" class="lang-content">имя = значение</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Үнсіз</span><span lang="en" class="lang-content">Default</span><span lang="ru" class="lang-content">По умолчанию</span></td><td><code>def f(x=0)</code></td><td><span lang="kk" class="lang-content">міндетті емес</span><span lang="en" class="lang-content">optional</span><span lang="ru" class="lang-content">необязательный</span></td></tr>
+<tr><td>*args</td><td><code>def f(*xs)</code></td><td><span lang="kk" class="lang-content">N позиц. арг.</span><span lang="en" class="lang-content">N positional</span><span lang="ru" class="lang-content">N позиц. арг.</span></td></tr>
+<tr><td>**kwargs</td><td><code>def f(**kw)</code></td><td><span lang="kk" class="lang-content">N аталған арг.</span><span lang="en" class="lang-content">N keyword</span><span lang="ru" class="lang-content">N именов. арг.</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔍 Локалды vs глобалды</span>
+<span lang="en" class="lang-content">🔍 Local vs global scope</span>
+<span lang="ru" class="lang-content">🔍 Локальная и глобальная область</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+x = <span class="num">10</span>              <span class="com"># глобальная</span>
+
+<span class="kw">def</span> <span class="fn">demo</span>():
+    y = <span class="num">5</span>          <span class="com"># локальная</span>
+    <span class="fn">print</span>(x, y)    <span class="com"># 10 5  — читать глобальную можно</span>
+
+<span class="fn">demo</span>()
+<span class="fn">print</span>(y)          <span class="com"># NameError: y не существует!</span>
+
+<span class="kw">def</span> <span class="fn">change</span>():
+    <span class="kw">global</span> x      <span class="com"># хотим ИЗМЕНИТЬ глобальную</span>
+    x = <span class="num">99</span>
+</div>
+<p class="text-slate-500 text-sm mt-3">
+<span lang="kk" class="lang-content">💡 <b>LEGB</b> ережесі: Local → Enclosing → Global → Built-in.</span>
+<span lang="en" class="lang-content">💡 <b>LEGB</b> rule: Local → Enclosing → Global → Built-in.</span>
+<span lang="ru" class="lang-content">💡 Правило <b>LEGB</b>: Local → Enclosing → Global → Built-in.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💼 Нақты мысалдар</span>
+<span lang="en" class="lang-content">💼 Real examples</span>
+<span lang="ru" class="lang-content">💼 Реальные примеры</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2">
+<span lang="kk" class="lang-content">💰 КҚС есептегіш</span><span lang="en" class="lang-content">💰 VAT calculator</span><span lang="ru" class="lang-content">💰 Расчёт НДС</span></p>
+<div class="code-block text-xs">
+<span class="kw">def</span> <span class="fn">vat</span>(price, rate=<span class="num">0.12</span>):
+    <span class="kw">return</span> price * rate
+
+<span class="fn">vat</span>(<span class="num">1000</span>)          <span class="com"># 120.0</span>
+<span class="fn">vat</span>(<span class="num">500</span>, <span class="num">0.20</span>)      <span class="com"># 100.0</span>
+</div></div>
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2">
+<span lang="kk" class="lang-content">🎲 Процедура — экранға шығу</span><span lang="en" class="lang-content">🎲 Procedure — print only</span><span lang="ru" class="lang-content">🎲 Процедура — только вывод</span></p>
+<div class="code-block text-xs">
+<span class="kw">def</span> <span class="fn">greet</span>(name):
+    <span class="fn">print</span>(<span class="str">f"Hi, {name}!"</span>)
+    <span class="com"># нет return → None</span>
+
+<span class="fn">greet</span>(<span class="str">"Aida"</span>)       <span class="com"># Hi, Aida!</span>
+</div></div>
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2">
+<span lang="kk" class="lang-content">🔢 Бірнеше мән қайтару</span><span lang="en" class="lang-content">🔢 Return multiple</span><span lang="ru" class="lang-content">🔢 Вернуть несколько значений</span></p>
+<div class="code-block text-xs">
+<span class="kw">def</span> <span class="fn">minmax</span>(a):
+    <span class="kw">return</span> <span class="fn">min</span>(a), <span class="fn">max</span>(a)
+
+lo, hi = <span class="fn">minmax</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">9</span>,<span class="num">2</span>])
+<span class="com"># lo=1, hi=9</span>
+</div></div>
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2">
+<span lang="kk" class="lang-content">🔁 Рекурсия — факториал</span><span lang="en" class="lang-content">🔁 Recursion — factorial</span><span lang="ru" class="lang-content">🔁 Рекурсия — факториал</span></p>
+<div class="code-block text-xs">
+<span class="kw">def</span> <span class="fn">fact</span>(n):
+    <span class="kw">if</span> n &lt;= <span class="num">1</span>:
+        <span class="kw">return</span> <span class="num">1</span>
+    <span class="kw">return</span> n * <span class="fn">fact</span>(n-<span class="num">1</span>)
+
+<span class="fn">fact</span>(<span class="num">5</span>)    <span class="com"># 120</span>
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✅ Жазу ережелері</span>
+<span lang="en" class="lang-content">✅ Writing rules</span>
+<span lang="ru" class="lang-content">✅ Правила хорошей функции</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card card-emerald rounded-2xl p-6"><p class="heading-font text-emerald-700 mb-2">✅ <span lang="kk" class="lang-content">Жақсы</span><span lang="en" class="lang-content">Good</span><span lang="ru" class="lang-content">Хорошо</span></p>
+<ul class="text-slate-600 text-sm space-y-1">
+<li>• <span lang="kk" class="lang-content">1 функция — 1 міндет (SRP)</span><span lang="en" class="lang-content">One function — one task (SRP)</span><span lang="ru" class="lang-content">Одна функция — одна задача (SRP)</span></li>
+<li>• <span lang="kk" class="lang-content">Атауы етістік: <code>calc_tax</code></span><span lang="en" class="lang-content">Verb name: <code>calc_tax</code></span><span lang="ru" class="lang-content">Имя-глагол: <code>calc_tax</code></span></li>
+<li>• <span lang="kk" class="lang-content">≤ 20 жол кода</span><span lang="en" class="lang-content">≤ 20 lines of code</span><span lang="ru" class="lang-content">≤ 20 строк</span></li>
+<li>• <span lang="kk" class="lang-content">Docstring қосу</span><span lang="en" class="lang-content">Add docstring</span><span lang="ru" class="lang-content">Есть docstring</span></li>
+</ul></div>
+<div class="card card-rose rounded-2xl p-6"><p class="heading-font text-rose-700 mb-2">❌ <span lang="kk" class="lang-content">Жаман</span><span lang="en" class="lang-content">Bad</span><span lang="ru" class="lang-content">Плохо</span></p>
+<ul class="text-slate-600 text-sm space-y-1">
+<li>• <span lang="kk" class="lang-content">100+ жол «құбыжық»-функция</span><span lang="en" class="lang-content">100+ line «god-function»</span><span lang="ru" class="lang-content">100+ строк «бог-функция»</span></li>
+<li>• <span lang="kk" class="lang-content">Атаулары: <code>f1, tmp, do_stuff</code></span><span lang="en" class="lang-content">Names: <code>f1, tmp, do_stuff</code></span><span lang="ru" class="lang-content">Имена: <code>f1, tmp, do_stuff</code></span></li>
+<li>• <span lang="kk" class="lang-content">Бүйір әсерлер (global өзгерту)</span><span lang="en" class="lang-content">Side effects (mutating globals)</span><span lang="ru" class="lang-content">Побочные эффекты (меняет global)</span></li>
+<li>• <span lang="kk" class="lang-content">10+ параметр</span><span lang="en" class="lang-content">10+ parameters</span><span lang="ru" class="lang-content">10+ параметров</span></li>
+</ul></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧩</div>
+<p class="heading-font text-xl text-sky-700 mb-2">def</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">функцияны жариялау</span><span lang="en" class="lang-content">declare function</span><span lang="ru" class="lang-content">объявление функции</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">↩</div>
+<p class="heading-font text-xl text-sky-700 mb-2">return</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">мәнді қайтару</span><span lang="en" class="lang-content">return value</span><span lang="ru" class="lang-content">вернуть значение</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">♻</div>
+<p class="heading-font text-xl text-sky-700 mb-2">DRY</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">қайталамай қайта пайдалану</span><span lang="en" class="lang-content">don't repeat yourself</span><span lang="ru" class="lang-content">не повторяйся</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

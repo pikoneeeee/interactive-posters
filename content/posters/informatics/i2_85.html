@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Постановка задачи и модель</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 8 · Algorithms</span>
+<span lang="ru" class="lang-content">8 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Есептің қойылуы және моделі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Problem statement &amp; model</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Постановка задачи и модель</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">«Есепті қой» деген не?</span>
+<span lang="en" class="lang-content">What is «problem statement»?</span>
+<span lang="ru" class="lang-content">Что такое постановка задачи?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Ұлы инженер <b>Ричард Фейнман</b>: «Есеп <b>қойылған кезде — ол жарты шешілген</b>». Басымдылық — <b>кодты жазбастан бұрын</b> не істеу керек, <b>қандай деректер</b> бар, <b>қандай нәтиже</b> қажет екенін анықтау. Бағдарламашылар үшін бұл фаза <b>«analysis»</b> деп аталады. Есепті нақты қою үшін біз оны математика/информатика <b>тіліне</b> аударамыз, <b>модель</b> жасаймыз. Модельсіз код — бағытсыз қайық!</span>
+<span lang="en" class="lang-content">Engineer <b>Richard Feynman</b>: «A problem <b>well stated is half solved</b>». Before writing any code we need to understand <b>what must be done</b>, <b>what data</b> we have and <b>what result</b> is expected. Programmers call this phase <b>«analysis»</b>. We translate the task into the language of maths/CS — we build a <b>model</b>. Code without a model is a boat without a rudder!</span>
+<span lang="ru" class="lang-content">Великий инженер <b>Ричард Фейнман</b> говорил: «<b>Хорошо поставленная задача — наполовину решённая</b>». До написания кода нужно понять <b>что сделать</b>, <b>какие есть данные</b>, <b>какой результат</b> нужен. Программисты называют этот этап <b>«анализ»</b>. Мы переводим задачу на язык математики/информатики — строим <b>модель</b>. Код без модели — лодка без руля!</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-accent rounded-xl p-5 text-center"><div class="text-4xl mb-2">📥</div>
+<p class="heading-font text-sky-700">Input</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">қандай деректер беріледі</span><span lang="en" class="lang-content">what data we have</span><span lang="ru" class="lang-content">какие данные на входе</span></p></div>
+<div class="card-accent rounded-xl p-5 text-center"><div class="text-4xl mb-2">⚙️</div>
+<p class="heading-font text-sky-700">Process</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">нені жасау керек</span><span lang="en" class="lang-content">what must be done</span><span lang="ru" class="lang-content">что нужно сделать</span></p></div>
+<div class="card-accent rounded-xl p-5 text-center"><div class="text-4xl mb-2">📤</div>
+<p class="heading-font text-sky-700">Output</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">нәтиже қандай болады</span><span lang="en" class="lang-content">what result is expected</span><span lang="ru" class="lang-content">какой результат</span></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧩 Модель — ол не?</span>
+<span lang="en" class="lang-content">🧩 What is a model?</span>
+<span lang="ru" class="lang-content">🧩 Что такое модель?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content"><b class="text-sky-700">Модель</b> — есептің «жеңілдетілген картинкасы». Тек <b>маңызды жақтарын</b> қалдырады, қалғанын тастайды. Қағаздан жасалған ұшақ — нағыз Boeing-нің <b>моделі</b>.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">model</b> is a simplified picture of the problem. Keep only the <b>essentials</b>, drop the rest. A paper plane is a <b>model</b> of a Boeing.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Модель</b> — упрощённая картинка задачи. Оставляет только <b>самое важное</b>, лишнее — выбрасывает. Бумажный самолётик — <b>модель</b> Boeing.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="tile"><div class="tile-emoji">🔢</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Математикалық</span><span lang="en" class="lang-content">Mathematical</span><span lang="ru" class="lang-content">Математическая</span></p>
+<p class="text-slate-600 text-xs">y = kx + b</p></div>
+
+<div class="tile"><div class="tile-emoji">📋</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Кестелік</span><span lang="en" class="lang-content">Tabular</span><span lang="ru" class="lang-content">Табличная</span></p>
+<p class="text-slate-600 text-xs">Excel, DB</p></div>
+
+<div class="tile"><div class="tile-emoji">📐</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Графикалық</span><span lang="en" class="lang-content">Graphical</span><span lang="ru" class="lang-content">Графическая</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">блок-схема</span><span lang="en" class="lang-content">flowchart</span><span lang="ru" class="lang-content">блок-схема</span></p></div>
+
+<div class="tile"><div class="tile-emoji">🎮</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Имитациялық</span><span lang="en" class="lang-content">Simulation</span><span lang="ru" class="lang-content">Имитационная</span></p>
+<p class="text-slate-600 text-xs">Monte Carlo</p></div>
+
+<div class="tile"><div class="tile-emoji">🧠</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Логикалық</span><span lang="en" class="lang-content">Logical</span><span lang="ru" class="lang-content">Логическая</span></p>
+<p class="text-slate-600 text-xs">if/then rules</p></div>
+
+<div class="tile"><div class="tile-emoji">🌐</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Желі (граф)</span><span lang="en" class="lang-content">Network (graph)</span><span lang="ru" class="lang-content">Сеть (граф)</span></p>
+<p class="text-slate-600 text-xs">nodes + edges</p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Есеп қойылуының 5 қадамы</span>
+<span lang="en" class="lang-content">🛠 5 steps of problem stating</span>
+<span lang="ru" class="lang-content">🛠 5 шагов постановки задачи</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-3 text-slate-700 text-lg">
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">1</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Шартты оқы, негізгі сөздерді белгіле</span><span lang="en" class="lang-content">Read, highlight keywords</span><span lang="ru" class="lang-content">Прочти, выдели ключевые слова</span></b></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">2</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Кіріс деректерді анықта</span><span lang="en" class="lang-content">Identify inputs</span><span lang="ru" class="lang-content">Определи входные данные</span></b> (N, массив, жол…)</li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">3</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Шектеулер</span><span lang="en" class="lang-content">Constraints</span><span lang="ru" class="lang-content">Ограничения</span></b> (N ≤ 10⁶, t &lt; 1 s)</li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">4</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Күтілетін шығысты сипатта</span><span lang="en" class="lang-content">Describe expected output</span><span lang="ru" class="lang-content">Опиши ожидаемый выход</span></b></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">5</span> <b class="text-sky-700"><span lang="kk" class="lang-content">3+ мысалды қолмен шеш</span><span lang="en" class="lang-content">Solve 3+ examples by hand</span><span lang="ru" class="lang-content">Реши 3+ примера вручную</span></b></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Мысал — «дүкен» есебі</span>
+<span lang="en" class="lang-content">🎯 Example — shop problem</span>
+<span lang="ru" class="lang-content">🎯 Пример — задача про магазин</span></h2>
+<div class="card rounded-custom p-8">
+<div class="card-accent rounded-xl p-5 mb-4">
+<p class="heading-font text-sky-700 mb-2">📋 <span lang="kk" class="lang-content">Шарт</span><span lang="en" class="lang-content">Task</span><span lang="ru" class="lang-content">Условие</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Айдар дүкенде 3 кг алма әр 450 ₸-ден және 2 л сүт әр 600 ₸-ден сатып алды. Ол 5 000 ₸-лік купюра берді. Кассир қайсы қайтаруы керек?</span>
+<span lang="en" class="lang-content">Aidar buys 3 kg of apples at 450 ₸/kg and 2 L of milk at 600 ₸/L. He pays with 5 000 ₸. What's the change?</span>
+<span lang="ru" class="lang-content">Айдар купил 3 кг яблок по 450 ₸ и 2 л молока по 600 ₸. Он дал 5 000 ₸. Сколько сдачи?</span></p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">📥 Input</p>
+<ul class="text-slate-700 text-sm">
+<li>a = 3 <span lang="kk" class="lang-content">(кг)</span><span lang="en" class="lang-content">(kg)</span><span lang="ru" class="lang-content">(кг)</span></li>
+<li>pa = 450 ₸</li>
+<li>b = 2 <span lang="kk" class="lang-content">(л)</span><span lang="en" class="lang-content">(L)</span><span lang="ru" class="lang-content">(л)</span></li>
+<li>pb = 600 ₸</li>
+<li>paid = 5000</li>
+</ul></div>
+
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">🧮 Model</p>
+<div class="code-block text-sm">
+total = a*pa + b*pb
+change = paid - total
+</div></div>
+
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">📤 Output</p>
+<p class="text-slate-700 text-sm">total = 2550 ₸<br>change = <b>2450 ₸</b></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Тест-мысалдар</span>
+<span lang="en" class="lang-content">🧪 Test cases</span>
+<span lang="ru" class="lang-content">🧪 Тест-кейсы</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Код жазбастан бұрын 3+ тест-мысал ойлап шығар:</span>
+<span lang="en" class="lang-content">Come up with 3+ test cases before coding:</span>
+<span lang="ru" class="lang-content">До кода придумай 3+ тест-кейса:</span></p>
+<table class="t"><thead><tr>
+<th>#</th><th>Input</th><th>Expected</th><th><span lang="kk" class="lang-content">Не тексереді</span><span lang="en" class="lang-content">Checks</span><span lang="ru" class="lang-content">Что проверяет</span></th>
+</tr></thead><tbody>
+<tr><td>1</td><td>a=3, pa=450, b=2, pb=600, paid=5000</td><td>2450</td><td><span lang="kk" class="lang-content">қарапайым</span><span lang="en" class="lang-content">basic</span><span lang="ru" class="lang-content">базовый</span></td></tr>
+<tr><td>2</td><td>... paid=2000</td><td>-550 ⚠</td><td><span lang="kk" class="lang-content">жетіспеушілік</span><span lang="en" class="lang-content">underpay</span><span lang="ru" class="lang-content">не хватает</span></td></tr>
+<tr><td>3</td><td>a=0, b=0, paid=1000</td><td>1000</td><td><span lang="kk" class="lang-content">бос тапсырыс</span><span lang="en" class="lang-content">empty order</span><span lang="ru" class="lang-content">пустой заказ</span></td></tr>
+<tr><td>4</td><td>a=100, ..., paid=50000</td><td>...</td><td><span lang="kk" class="lang-content">үлкен сандар</span><span lang="en" class="lang-content">big numbers</span><span lang="ru" class="lang-content">большие числа</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Модельдің 3 деңгейі</span>
+<span lang="en" class="lang-content">📐 3 model levels</span>
+<span lang="ru" class="lang-content">📐 3 уровня модели</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-2xl p-5 text-center">
+<div class="text-4xl mb-2">1️⃣</div>
+<p class="heading-font text-sky-700">Abstract</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Есептің ашық сипаты: «Максималды саны»</span><span lang="en" class="lang-content">«Find maximum»</span><span lang="ru" class="lang-content">«Найти максимум»</span></p></div>
+
+<div class="card rounded-2xl p-5 text-center">
+<div class="text-4xl mb-2">2️⃣</div>
+<p class="heading-font text-sky-700">Math</p>
+<p class="text-slate-700 text-sm">max = x₁ · <span lang="kk" class="lang-content">барлық x-ке сал</span><span lang="en" class="lang-content">for all x: if &gt; max → max = x</span><span lang="ru" class="lang-content">для всех x: если больше — обновить</span></p></div>
+
+<div class="card rounded-2xl p-5 text-center">
+<div class="text-4xl mb-2">3️⃣</div>
+<p class="heading-font text-sky-700">Code</p>
+<div class="code-block text-xs text-left">
+m = nums[<span class="num">0</span>]
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x &gt; m: m = x
+</div></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">❓</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Дұрыс қойылған = жартысы шешілген</span><span lang="en" class="lang-content">Well stated = half solved</span><span lang="ru" class="lang-content">Хорошо поставлено = полдела</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧩</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Input · Process · Output</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧪</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Тестер → код</span><span lang="en" class="lang-content">Tests → code</span><span lang="ru" class="lang-content">Тесты до кода</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

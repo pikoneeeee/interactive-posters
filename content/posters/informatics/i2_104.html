@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Алгоритмы сортировки</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 9 · Algorithms</span>
+<span lang="ru" class="lang-content">9 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Сұрыптау: көпіршік пен таңдау</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Sorting: bubble &amp; selection</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Сортировка: пузырёк и выбор</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Сұрыптау — не?</span>
+<span lang="en" class="lang-content">What is sorting?</span>
+<span lang="ru" class="lang-content">Что такое сортировка?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Сұрыптау</b> — массивтің элементтерін <b>реттелген</b> тәртіппен қою (өсу немесе кему бойынша). Бұл — информатикадағы <b>ең көне</b> есеп: Herman Hollerith 1890 жылы АҚШ халық санағында перфокарталарды механикалық сұрыптап, дамуды ұштады. Бүгінде <b>әрбір іздеу жүйесі</b>, <b>БД</b>, <b>таблица</b>, <b>ойын лидерборды</b> сұрыптауды қолданады. Жүздеген әдіс бар, бірақ <b>2 классиканы</b> бәрі үйренеді: <b>көпіршік</b> және <b>таңдаумен</b>.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Sorting</b> arranges an array in a specific order (ascending or descending). It's one of the <b>oldest</b> CS problems — Herman Hollerith's 1890 US census machine sorted punch cards mechanically. Today every <b>search engine</b>, <b>DB</b>, <b>spreadsheet</b> and <b>leaderboard</b> relies on sorting. Hundreds of algorithms exist but everyone starts with the <b>2 classics</b>: <b>bubble</b> and <b>selection</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Сортировка</b> — расстановка элементов массива в <b>определённом порядке</b> (возр./убыв.). Одна из <b>древнейших</b> задач в информатике: машина Холлерита (1890, перепись США) уже сортировала перфокарты. Сегодня <b>любая</b> поисковая система, БД, таблица и таблица рекордов — держится на сортировке. Алгоритмов сотни, но начинают все с <b>2 классик</b>: <b>пузырьком</b> и <b>выбором</b>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🫧 Көпіршікті сұрыптау (Bubble)</span>
+<span lang="en" class="lang-content">🫧 Bubble sort</span>
+<span lang="ru" class="lang-content">🫧 Пузырьковая</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><b>Идея</b>: көршілес жұпты салыстыр. Сол > оң болса — swap. Өтуді n рет қайтала — ең үлкен әр өту сайын соңына «көпіршіктенеді».</span>
+<span lang="en" class="lang-content"><b>Idea</b>: compare each adjacent pair; if left > right — swap. Repeat n times — on every pass the biggest «bubbles» to the end.</span>
+<span lang="ru" class="lang-content"><b>Идея</b>: сравниваем соседей. Левый > правого — меняем. За n проходов самое большое «всплывает» в конец.</span></p>
+
+<div class="code-block">
+<span class="kw">def</span> <span class="fn">bubble</span>(a):
+    n = <span class="fn">len</span>(a)
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n - <span class="num">1</span>):
+        swapped = <span class="num">False</span>
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(n - <span class="num">1</span> - i):
+            <span class="kw">if</span> a[j] &gt; a[j + <span class="num">1</span>]:
+                a[j], a[j + <span class="num">1</span>] = a[j + <span class="num">1</span>], a[j]
+                swapped = <span class="num">True</span>
+        <span class="kw">if</span> <span class="kw">not</span> swapped:
+            <span class="kw">break</span>                <span class="com"># <span lang="kk" class="lang-content">оңтайландыру</span>early-exit<span lang="ru" class="lang-content">оптимизация</span></span>
+</div>
+
+<p class="text-slate-700 mt-4 mb-2"><b><span lang="kk" class="lang-content">Өту мысалы</span><span lang="en" class="lang-content">Trace example</span><span lang="ru" class="lang-content">Пример прохода</span></b> [5 · 3 · 8 · 1 · 4]:</p>
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Өту</span><span lang="en" class="lang-content">Pass</span><span lang="ru" class="lang-content">Проход</span></th>
+<th><span lang="kk" class="lang-content">Массив</span><span lang="en" class="lang-content">Array</span><span lang="ru" class="lang-content">Массив</span></th>
+<th><span lang="kk" class="lang-content">Swap-тар</span><span lang="en" class="lang-content">Swaps</span><span lang="ru" class="lang-content">Обменов</span></th>
+</tr></thead><tbody>
+<tr><td>0 (<span lang="kk" class="lang-content">бастапқы</span><span lang="en" class="lang-content">init</span><span lang="ru" class="lang-content">исход.</span>)</td><td>5 3 8 1 4</td><td>—</td></tr>
+<tr><td>1</td><td>3 5 1 4 <b>8</b></td><td>3</td></tr>
+<tr><td>2</td><td>3 1 4 <b>5</b> <b>8</b></td><td>2</td></tr>
+<tr><td>3</td><td>1 3 <b>4 5 8</b></td><td>1</td></tr>
+<tr><td>4</td><td>✅ 1 3 4 5 8</td><td>0 → stop</td></tr>
+</tbody></table>
+<p class="text-slate-500 text-sm mt-2">O(n²) <span lang="kk" class="lang-content">орташа / нашар</span><span lang="en" class="lang-content">average / worst</span><span lang="ru" class="lang-content">средняя / худшая</span> · O(n) <span lang="kk" class="lang-content">реттелген кіріске</span><span lang="en" class="lang-content">on sorted input</span><span lang="ru" class="lang-content">на уже отсортированном</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Таңдаумен сұрыптау (Selection)</span>
+<span lang="en" class="lang-content">🎯 Selection sort</span>
+<span lang="ru" class="lang-content">🎯 Сортировка выбором</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><b>Идея</b>: әрбір өтуде <b>ең кіші</b> элементті тап → оны сол жақ шекараға алмастыр.</span>
+<span lang="en" class="lang-content"><b>Idea</b>: on each pass find the <b>minimum</b> and swap it to the left boundary.</span>
+<span lang="ru" class="lang-content"><b>Идея</b>: на каждом проходе находим <b>минимум</b> и ставим на левую границу.</span></p>
+
+<div class="code-block">
+<span class="kw">def</span> <span class="fn">selection</span>(a):
+    n = <span class="fn">len</span>(a)
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n - <span class="num">1</span>):
+        mn = i
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(i + <span class="num">1</span>, n):
+            <span class="kw">if</span> a[j] &lt; a[mn]:
+                mn = j
+        a[i], a[mn] = a[mn], a[i]
+</div>
+
+<p class="text-slate-700 mt-4 mb-2">[5 · 3 · 8 · 1 · 4]:</p>
+<table class="t"><thead><tr>
+<th>i</th><th>min</th><th>swap</th><th><span lang="kk" class="lang-content">нәтиже</span><span lang="en" class="lang-content">result</span><span lang="ru" class="lang-content">результат</span></th>
+</tr></thead><tbody>
+<tr><td>0</td><td>1 (idx 3)</td><td>a[0]↔a[3]</td><td><b>1</b> 3 8 5 4</td></tr>
+<tr><td>1</td><td>3 (idx 1)</td><td>—</td><td>1 <b>3</b> 8 5 4</td></tr>
+<tr><td>2</td><td>4 (idx 4)</td><td>a[2]↔a[4]</td><td>1 3 <b>4</b> 5 8</td></tr>
+<tr><td>3</td><td>5 (idx 3)</td><td>—</td><td>1 3 4 <b>5</b> 8</td></tr>
+<tr><td>4</td><td>✅</td><td>—</td><td>1 3 4 5 8</td></tr>
+</tbody></table>
+<p class="text-slate-500 text-sm mt-2">O(n²) <span lang="kk" class="lang-content">бәрінде</span><span lang="en" class="lang-content">always</span><span lang="ru" class="lang-content">всегда</span> · <span lang="kk" class="lang-content">swap саны аз (n-1)</span><span lang="en" class="lang-content">few swaps (n-1)</span><span lang="ru" class="lang-content">мало обменов (n-1)</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Салыстыру кестесі</span>
+<span lang="en" class="lang-content">📊 Comparison</span>
+<span lang="ru" class="lang-content">📊 Сравнение</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Алгоритм</span><span lang="en" class="lang-content">Algorithm</span><span lang="ru" class="lang-content">Алгоритм</span></th>
+<th><span lang="kk" class="lang-content">Ең жақсы</span><span lang="en" class="lang-content">Best</span><span lang="ru" class="lang-content">Лучший</span></th>
+<th><span lang="kk" class="lang-content">Орташа</span><span lang="en" class="lang-content">Avg</span><span lang="ru" class="lang-content">Средний</span></th>
+<th><span lang="kk" class="lang-content">Нашар</span><span lang="en" class="lang-content">Worst</span><span lang="ru" class="lang-content">Худший</span></th>
+<th>Swap</th>
+<th>Stable</th>
+</tr></thead><tbody>
+<tr><td>🫧 Bubble</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>✅</td></tr>
+<tr><td>🎯 Selection</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(n)</td><td>❌</td></tr>
+<tr><td>📥 Insertion</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>✅</td></tr>
+<tr><td>⚡ Quick</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(n log n)</td><td>❌</td></tr>
+<tr><td>🧩 Merge</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>—</td><td>✅</td></tr>
+<tr><td>🐍 Python <code>sorted()</code></td><td>O(n)</td><td>O(n log n)</td><td>O(n log n)</td><td>—</td><td>✅</td></tr>
+</tbody></table>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 Python Timsort-ты пайдаланады — Merge + Insertion араласы.</span>
+<span lang="en" class="lang-content">💡 Python uses Timsort — a Merge + Insertion hybrid.</span>
+<span lang="ru" class="lang-content">💡 Python использует Timsort — гибрид Merge + Insertion.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎨 Визуалды көрініс</span>
+<span lang="en" class="lang-content">🎨 Visual bars</span>
+<span lang="ru" class="lang-content">🎨 Визуальные столбики</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap">
+<svg viewBox="0 0 700 200" style="width:100%;max-width:700px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="13">
+<text x="10" y="20" fill="#0369a1" font-weight="bold"><span lang="kk" class="lang-content">Бастапқы</span><tspan>Before</tspan></text>
+<rect x="10" y="100" width="30" height="60" fill="#0369a1"/>
+<rect x="50" y="130" width="30" height="30" fill="#0369a1"/>
+<rect x="90" y="60" width="30" height="100" fill="#0369a1"/>
+<rect x="130" y="150" width="30" height="10" fill="#0369a1"/>
+<rect x="170" y="115" width="30" height="45" fill="#0369a1"/>
+<rect x="210" y="80" width="30" height="80" fill="#0369a1"/>
+<rect x="250" y="140" width="30" height="20" fill="#0369a1"/>
+
+<text x="360" y="20" fill="#16a34a" font-weight="bold"><span lang="kk" class="lang-content">Сұрыпталған</span><tspan>Sorted</tspan></text>
+<rect x="360" y="150" width="30" height="10" fill="#16a34a"/>
+<rect x="400" y="140" width="30" height="20" fill="#16a34a"/>
+<rect x="440" y="130" width="30" height="30" fill="#16a34a"/>
+<rect x="480" y="115" width="30" height="45" fill="#16a34a"/>
+<rect x="520" y="100" width="30" height="60" fill="#16a34a"/>
+<rect x="560" y="80" width="30" height="80" fill="#16a34a"/>
+<rect x="600" y="60" width="30" height="100" fill="#16a34a"/>
+
+<path d="M 300 100 L 350 100 L 345 95 M 350 100 L 345 105" stroke="#64748b" stroke-width="2" fill="none"/>
+<text x="305" y="90" fill="#64748b">sort</text>
+</g></svg></div>
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">🎞 visualgo.net немесе Sound of Sorting видеосынан қара.</span>
+<span lang="en" class="lang-content">🎞 Watch visualgo.net or «Sound of Sorting» on YouTube.</span>
+<span lang="ru" class="lang-content">🎞 Смотри visualgo.net или «Sound of Sorting» на YouTube.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🫧</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Bubble = swap <span lang="kk" class="lang-content">көршілер</span><span lang="en" class="lang-content">neighbours</span><span lang="ru" class="lang-content">соседи</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎯</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Selection = min → <span lang="kk" class="lang-content">алды</span><span lang="en" class="lang-content">front</span><span lang="ru" class="lang-content">в начало</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⏱</div>
+<p class="heading-font text-xl text-sky-700 mb-2">O(n²) · <span lang="kk" class="lang-content">оқуға</span><span lang="en" class="lang-content">learning</span><span lang="ru" class="lang-content">учебные</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

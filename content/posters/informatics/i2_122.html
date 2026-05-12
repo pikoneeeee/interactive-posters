@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Таблицы истинности</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Логика</span>
+<span lang="en" class="lang-content">Grade 10 · Logic</span>
+<span lang="ru" class="lang-content">10 класс · Логика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Ақиқаттық кестелер</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Truth tables</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Таблицы истинности</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📋 Ақиқаттық кесте — не?</span>
+<span lang="en" class="lang-content">📋 What is a truth table?</span>
+<span lang="ru" class="lang-content">📋 Что такое таблица истинности?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Ақиқаттық кесте</b> — логикалық өрнектің <b>барлық</b> мүмкін кіріс мәндері мен <b>шығыстарын</b> көрсететін кесте. 1 өрнек = 1 кесте. Ол <b>күмәнді тексерудің</b> ең қарапайым жолы: егер <b>барлық жолда шығыс 1</b> болса — <b>тавтология</b> (әрдайым ақиқат), барлығы 0 болса — <b>қайшылық</b>. Кіріс саны <b>n</b> болса — кестеде <b>2ⁿ</b> жол болады: 2 айнымалы → 4 жол, 3 → 8, 4 → 16.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">truth table</b> lists <b>every</b> possible input combination of a logical expression and its <b>output</b>. One formula = one table. It's the simplest <b>proof engine</b>: if <b>every row outputs 1</b>, the formula is a <b>tautology</b>; if all are 0, it's a <b>contradiction</b>. With <b>n</b> inputs the table has <b>2ⁿ</b> rows: 2 vars → 4, 3 → 8, 4 → 16.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Таблица истинности</b> перечисляет <b>все</b> наборы входов логического выражения и его <b>выход</b>. Одна формула = одна таблица. Это простейший <b>движок доказательства</b>: если во <b>всех строках 1</b> — <b>тавтология</b>; все 0 — <b>противоречие</b>. Для <b>n</b> входов получим <b>2ⁿ</b> строк: 2 → 4, 3 → 8, 4 → 16.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Құрастыру — 4 қадам</span>
+<span lang="en" class="lang-content">🛠 Building in 4 steps</span>
+<span lang="ru" class="lang-content">🛠 Построение — 4 шага</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-3 text-slate-700 text-lg">
+<li><b>1.</b> <span lang="kk" class="lang-content">Айнымалыларды сана (A, B, C…) → <b>2ⁿ</b> жол шығады.</span><span lang="en" class="lang-content">Count variables → table will have <b>2ⁿ</b> rows.</span><span lang="ru" class="lang-content">Посчитай переменные → <b>2ⁿ</b> строк.</span></li>
+<li><b>2.</b> <span lang="kk" class="lang-content">Кірістерді <b>екілік санау</b> тәрізді жаз: 000, 001, 010, 011…</span><span lang="en" class="lang-content">Fill inputs like <b>binary counting</b>: 000, 001, 010…</span><span lang="ru" class="lang-content">Заполни входы как <b>двоичный счёт</b>: 000, 001, 010…</span></li>
+<li><b>3.</b> <span lang="kk" class="lang-content">Аралық бағандарды жаз (¬A, A ∧ B, …).</span><span lang="en" class="lang-content">Add intermediate columns (¬A, A ∧ B, …).</span><span lang="ru" class="lang-content">Добавь промежуточные столбцы (¬A, A ∧ B, …).</span></li>
+<li><b>4.</b> <span lang="kk" class="lang-content">Соңғы өрнекті есепте, басымдықты ұмытпа.</span><span lang="en" class="lang-content">Evaluate the final formula, respect precedence.</span><span lang="ru" class="lang-content">Вычисли итог, соблюдая приоритет.</span></li>
+</ol>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 Басымдық: ( ) &gt; ¬ &gt; ∧ &gt; ∨ &gt; → &gt; ↔</span>
+<span lang="en" class="lang-content">💡 Precedence: ( ) &gt; ¬ &gt; ∧ &gt; ∨ &gt; → &gt; ↔</span>
+<span lang="ru" class="lang-content">💡 Приоритет: ( ) &gt; ¬ &gt; ∧ &gt; ∨ &gt; → &gt; ↔</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Мысал 1: F = (A ∧ B) ∨ ¬C</span>
+<span lang="en" class="lang-content">🧪 Example 1: F = (A ∧ B) ∨ ¬C</span>
+<span lang="ru" class="lang-content">🧪 Пример 1: F = (A ∧ B) ∨ ¬C</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr><th>A</th><th>B</th><th>C</th><th>A∧B</th><th>¬C</th><th><b>F</b></th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td style="background:rgba(14,165,233,.1)"><b>1</b></td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td style="background:rgba(14,165,233,.1)"><b>1</b></td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td style="background:rgba(14,165,233,.1)"><b>1</b></td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td style="background:rgba(14,165,233,.1)"><b>1</b></td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td style="background:rgba(14,165,233,.1)"><b>1</b></td></tr>
+</tbody></table>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">🎯 8 жолдың 5-уі 1 — <b>орындалушы</b>, бірақ тавтология емес.</span>
+<span lang="en" class="lang-content">🎯 5 of 8 rows = 1 → <b>satisfiable</b> but not a tautology.</span>
+<span lang="ru" class="lang-content">🎯 5 из 8 строк = 1 → <b>выполнимое</b>, но не тавтология.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Мысал 2: Де Моргандық дәлел</span>
+<span lang="en" class="lang-content">🧪 Example 2: De Morgan check</span>
+<span lang="ru" class="lang-content">🧪 Пример 2: Проверка Де Моргана</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 mb-3"><span lang="kk" class="lang-content"><b>¬(A ∧ B) = ¬A ∨ ¬B</b> екенін дәлелдейік.</span>
+<span lang="en" class="lang-content">Let's prove <b>¬(A ∧ B) = ¬A ∨ ¬B</b>.</span>
+<span lang="ru" class="lang-content">Докажем <b>¬(A ∧ B) = ¬A ∨ ¬B</b>.</span></p>
+
+<div class="overflow-x-auto">
+<table class="t"><thead><tr><th>A</th><th>B</th><th>A∧B</th><th>¬(A∧B)</th><th>¬A</th><th>¬B</th><th>¬A∨¬B</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td><b>1</b></td><td>1</td><td>1</td><td><b>1</b></td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td><b>1</b></td><td>1</td><td>0</td><td><b>1</b></td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td><b>1</b></td><td>0</td><td>1</td><td><b>1</b></td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td><b>0</b></td><td>0</td><td>0</td><td><b>0</b></td></tr>
+</tbody></table></div>
+<p class="text-slate-700 mt-3"><span lang="kk" class="lang-content">✅ Екі баған бірдей — <b>эквивалент</b>.</span>
+<span lang="en" class="lang-content">✅ Columns match → <b>equivalent</b>.</span>
+<span lang="ru" class="lang-content">✅ Столбцы совпали → <b>эквивалентно</b>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧠 Терминология</span>
+<span lang="en" class="lang-content">🧠 Terminology</span>
+<span lang="ru" class="lang-content">🧠 Терминология</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">✅ <span lang="kk" class="lang-content">Тавтология</span><span lang="en" class="lang-content">Tautology</span><span lang="ru" class="lang-content">Тавтология</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Барлық жолда F = 1.</span><span lang="en" class="lang-content">F = 1 on every row.</span><span lang="ru" class="lang-content">F = 1 во всех строках.</span></p>
+<div class="code-block text-xs mt-1">A ∨ ¬A ≡ 1</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">❌ <span lang="kk" class="lang-content">Қайшылық</span><span lang="en" class="lang-content">Contradiction</span><span lang="ru" class="lang-content">Противоречие</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Барлық жолда F = 0.</span><span lang="en" class="lang-content">F = 0 on every row.</span><span lang="ru" class="lang-content">F = 0 во всех строках.</span></p>
+<div class="code-block text-xs mt-1">A ∧ ¬A ≡ 0</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">🔀 <span lang="kk" class="lang-content">Орындалушы</span><span lang="en" class="lang-content">Satisfiable</span><span lang="ru" class="lang-content">Выполнимое</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Кемінде 1 жолда F = 1.</span><span lang="en" class="lang-content">At least one row = 1.</span><span lang="ru" class="lang-content">Хотя бы в одной F = 1.</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">⚖️ <span lang="kk" class="lang-content">Эквивалент</span><span lang="en" class="lang-content">Equivalent</span><span lang="ru" class="lang-content">Эквивалентные</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">2 өрнектің бағандары бірдей.</span><span lang="en" class="lang-content">Output columns identical.</span><span lang="ru" class="lang-content">Столбцы-итоги совпадают.</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">📐 SOP / POS</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Кестеден қалыпты форма құрастыру.</span><span lang="en" class="lang-content">Canonical forms from the table.</span><span lang="ru" class="lang-content">СДНФ / СКНФ из таблицы.</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">🧩 2ⁿ <span lang="kk" class="lang-content">жол</span><span lang="en" class="lang-content">rows</span><span lang="ru" class="lang-content">строк</span></p>
+<p class="text-slate-700 text-sm">n=4 → 16, n=10 → 1024</p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐍 Python-да жинақтау</span>
+<span lang="en" class="lang-content">🐍 Build in Python</span>
+<span lang="ru" class="lang-content">🐍 Построить на Python</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">from</span> itertools <span class="kw">import</span> product
+
+<span class="kw">def</span> <span class="fn">F</span>(A, B, C):
+    <span class="kw">return</span> (A <span class="kw">and</span> B) <span class="kw">or</span> <span class="kw">not</span> C
+
+<span class="fn">print</span>(<span class="str">"A B C | F"</span>)
+<span class="kw">for</span> A, B, C <span class="kw">in</span> <span class="fn">product</span>([<span class="num">0</span>, <span class="num">1</span>], repeat=<span class="num">3</span>):
+    <span class="fn">print</span>(A, B, C, <span class="str">"|"</span>, <span class="fn">int</span>(<span class="fn">F</span>(A, B, C)))
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">⚡ <code>itertools.product</code> — <b>2ⁿ</b> комбинацияны бір жолмен жасайды.</span>
+<span lang="en" class="lang-content">⚡ <code>itertools.product</code> generates all <b>2ⁿ</b> tuples in one line.</span>
+<span lang="ru" class="lang-content">⚡ <code>itertools.product</code> выдаёт все <b>2ⁿ</b> комбинаций за одну строку.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📋</div>
+<p class="heading-font text-xl text-sky-700 mb-2">2ⁿ <span lang="kk" class="lang-content">жол</span><span lang="en" class="lang-content">rows</span><span lang="ru" class="lang-content">строк</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">✅</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Тавтология</span><span lang="en" class="lang-content">Tautology</span><span lang="ru" class="lang-content">Тавтология</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Бағандар бірдей</span><span lang="en" class="lang-content">Matching cols</span><span lang="ru" class="lang-content">Совпали столбцы</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

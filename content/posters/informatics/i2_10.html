@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Работа с кривыми Безье</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">5 сынып · Компьютерлік графика</span>
+<span lang="en" class="lang-content">Grade 5 · Computer graphics</span>
+<span lang="ru" class="lang-content">5 класс · Компьютерная графика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Безье қисықтарымен жұмыс</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Working with Bezier curves</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Работа с кривыми Безье</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌀 Безье қисығы деген не?</span>
+<span lang="en" class="lang-content">🌀 What is a Bezier curve?</span>
+<span lang="ru" class="lang-content">🌀 Что такое кривая Безье?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Безье қисығы</b> — бірнеше нүкте арқылы анықталатын <b>тегіс қисық</b>. Оны 1962 жылы француз инженері <b>Пьер Безье</b> автомобиль кузовтарының (Renault) <b>тегіс формаларын</b> сипаттау үшін ойлап тапты. Бүгінде Bezier барлық жерде: <b>әріптердің контурлары</b> (әр шрифт!), <b>Photoshop-тағы Pen Tool</b>, <b>CSS-анимация</b>, <b>3D-модельдер</b>, <b>мультфильмдер</b>, <b>роботтардың қозғалыс траекториясы</b>. Қисық «<b>тіректі нүктелер</b>» (control points) арқылы басқарылады — олар магнит сияқты сызықты иіп тартады.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">Bezier curve</b> is a <b>smooth curve</b> defined by a few points. It was invented in 1962 by French engineer <b>Pierre Bezier</b> to describe the <b>smooth shapes</b> of Renault car bodies. Today Bezier is everywhere: <b>font outlines</b> (every letter!), <b>Pen Tool</b> in Photoshop, <b>CSS animation</b>, <b>3D models</b>, <b>cartoons</b>, <b>robot motion paths</b>. The curve is steered by <b>control points</b> — like magnets that pull and bend the line.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Кривая Безье</b> — <b>гладкая кривая</b>, заданная несколькими точками. Её придумал в 1962 г. французский инженер <b>Пьер Безье</b> для описания <b>плавных форм</b> кузовов автомобилей Renault. Сегодня Безье — повсюду: <b>контуры букв</b> (каждый шрифт!), <b>Pen Tool в Photoshop</b>, <b>CSS-анимация</b>, <b>3D-модели</b>, <b>мультфильмы</b>, <b>траектории роботов</b>. Кривая управляется <b>опорными точками</b> (control points) — они, как магниты, тянут и изгибают линию.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Қалай құрастырылады?</span>
+<span lang="en" class="lang-content">🎯 How is it built?</span>
+<span lang="ru" class="lang-content">🎯 Как она строится?</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-3">📍 <span lang="kk" class="lang-content">Квадраттық (3 нүкте)</span><span lang="en" class="lang-content">Quadratic (3 points)</span><span lang="ru" class="lang-content">Квадратичная (3 точки)</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 320 200" style="width:100%;max-width:320px">
+<path d="M 40 160 Q 160 20 280 160" stroke="#0ea5e9" stroke-width="3" fill="none"/>
+<line x1="40" y1="160" x2="160" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+<line x1="280" y1="160" x2="160" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+<circle cx="40" cy="160" r="6" fill="#0369a1"/>
+<circle cx="280" cy="160" r="6" fill="#0369a1"/>
+<circle cx="160" cy="20" r="6" fill="#ef4444"/>
+<text x="40" y="185" text-anchor="middle" font-size="11" fill="#334155">P₀ (старт)</text>
+<text x="280" y="185" text-anchor="middle" font-size="11" fill="#334155">P₂ (конец)</text>
+<text x="160" y="12" text-anchor="middle" font-size="11" fill="#b91c1c">P₁ (control)</text>
+</svg></div>
+<p class="text-slate-700 text-base mt-2">
+<span lang="kk" class="lang-content">Бастау (P₀), тіректі нүкте (P₁), соңы (P₂). P₁ орналасуы қисықтың <b>иілуін</b> анықтайды.</span>
+<span lang="en" class="lang-content">Start (P₀), control (P₁), end (P₂). The position of P₁ decides the curve's <b>bend</b>.</span>
+<span lang="ru" class="lang-content">Начало (P₀), опорная (P₁), конец (P₂). Положение P₁ задаёт <b>изгиб</b> кривой.</span></p>
+</div>
+
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-3">📍 <span lang="kk" class="lang-content">Кубтық (4 нүкте)</span><span lang="en" class="lang-content">Cubic (4 points)</span><span lang="ru" class="lang-content">Кубическая (4 точки)</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 320 200" style="width:100%;max-width:320px">
+<path d="M 40 160 C 80 20 240 20 280 160" stroke="#0ea5e9" stroke-width="3" fill="none"/>
+<line x1="40" y1="160" x2="80" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+<line x1="280" y1="160" x2="240" y2="20" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+<circle cx="40"  cy="160" r="6" fill="#0369a1"/>
+<circle cx="280" cy="160" r="6" fill="#0369a1"/>
+<circle cx="80"  cy="20"  r="6" fill="#ef4444"/>
+<circle cx="240" cy="20"  r="6" fill="#ef4444"/>
+<text x="40" y="185" text-anchor="middle" font-size="11" fill="#334155">P₀</text>
+<text x="280" y="185" text-anchor="middle" font-size="11" fill="#334155">P₃</text>
+<text x="80" y="12" text-anchor="middle" font-size="11" fill="#b91c1c">P₁</text>
+<text x="240" y="12" text-anchor="middle" font-size="11" fill="#b91c1c">P₂</text>
+</svg></div>
+<p class="text-slate-700 text-base mt-2">
+<span lang="kk" class="lang-content">Екі control нүктесі — қисықты күрделі, <b>S-тәрізді</b> жасауға мүмкіндік береді. Photoshop Pen Tool осылай жұмыс істейді.</span>
+<span lang="en" class="lang-content">Two control points let you make a complex <b>S-shaped</b> curve. Photoshop's Pen Tool works this way.</span>
+<span lang="ru" class="lang-content">Две опорные точки позволяют делать сложные <b>S-образные</b> кривые. Так и работает Pen Tool в Photoshop.</span></p>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔠 Неге әр шрифт Безьеде тұрады?</span>
+<span lang="en" class="lang-content">🔠 Why every font is Bezier</span>
+<span lang="ru" class="lang-content">🔠 Почему каждый шрифт — это Безье</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg">
+<span lang="kk" class="lang-content">Әріптің әр доғасы мен ирекпі — <b>Безье қисықтарынан</b> тұрады. Сондықтан шрифтті қанша ұлғайтсаң да, «<i>O</i>» дәл сондай <b>айқын</b> қалады. Бір әріптің файлы — бар-жоғы <b>бірнеше ондаған координата</b>. Бүкіл алфавит <b>50 Кб</b> — ол үлкен кітаптың, плакаттың, билбордтың сапасын қамтамасыз етеді!</span>
+<span lang="en" class="lang-content">Every arc and swirl of a letter is made of <b>Bezier curves</b>. That's why zooming in on an «<i>O</i>» keeps it <b>sharp</b>. A single letter uses just <b>a few dozen coordinates</b>, the whole alphabet is ~<b>50 KB</b> — and it scales to books, posters, billboards!</span>
+<span lang="ru" class="lang-content">Каждая дуга и завиток буквы собраны из <b>кривых Безье</b>. Поэтому букву «<i>О</i>» можно увеличить как угодно — она останется <b>чёткой</b>. Один символ весит <b>пару десятков координат</b>, весь алфавит — около <b>50 Кб</b>, а работает на любом размере: книга, плакат, билборд!</span></p>
+</div>
+<div class="card rounded-custom p-4 flex items-center justify-center">
+<svg viewBox="0 0 260 220" style="width:100%;max-width:260px">
+<path d="M 130 20 C 50 20 50 200 130 200 C 210 200 210 20 130 20 Z" stroke="#0ea5e9" stroke-width="2" fill="#e0f2fe"/>
+<circle cx="130" cy="20"  r="5" fill="#0369a1"/>
+<circle cx="130" cy="200" r="5" fill="#0369a1"/>
+<circle cx="50"  cy="20"  r="5" fill="#ef4444"/>
+<circle cx="50"  cy="200" r="5" fill="#ef4444"/>
+<circle cx="210" cy="20"  r="5" fill="#ef4444"/>
+<circle cx="210" cy="200" r="5" fill="#ef4444"/>
+<line x1="130" y1="20"  x2="50"  y2="20"  stroke="#94a3b8" stroke-dasharray="3"/>
+<line x1="130" y1="200" x2="50"  y2="200" stroke="#94a3b8" stroke-dasharray="3"/>
+<line x1="130" y1="20"  x2="210" y2="20"  stroke="#94a3b8" stroke-dasharray="3"/>
+<line x1="130" y1="200" x2="210" y2="200" stroke="#94a3b8" stroke-dasharray="3"/>
+<text x="130" y="115" text-anchor="middle" font-size="48" font-family="Georgia" fill="#0369a1">O</text>
+</svg></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚀 Қайда кездеседі?</span>
+<span lang="en" class="lang-content">🚀 Where you'll meet Bezier</span>
+<span lang="ru" class="lang-content">🚀 Где ты встречаешь Безье</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="tile"><div class="tile-emoji">🚗</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Автомобиль дизайны</span><span lang="en" class="lang-content">Car design</span><span lang="ru" class="lang-content">Дизайн авто</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Кузов тегіс иілімдері</span><span lang="en" class="lang-content">Smooth body lines</span><span lang="ru" class="lang-content">Плавные линии кузова</span></p></div>
+<div class="tile"><div class="tile-emoji">🎬</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Мультфильм</span><span lang="en" class="lang-content">Animation</span><span lang="ru" class="lang-content">Мультфильмы</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Pixar, Disney</span><span lang="en" class="lang-content">Pixar, Disney</span><span lang="ru" class="lang-content">Pixar, Disney</span></p></div>
+<div class="tile"><div class="tile-emoji">🖋️</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Шрифт</span><span lang="en" class="lang-content">Fonts</span><span lang="ru" class="lang-content">Шрифты</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">TrueType, OpenType</span><span lang="en" class="lang-content">TrueType, OpenType</span><span lang="ru" class="lang-content">TrueType, OpenType</span></p></div>
+<div class="tile"><div class="tile-emoji">🖱️</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Pen Tool</span><span lang="en" class="lang-content">Pen Tool</span><span lang="ru" class="lang-content">Pen Tool</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Photoshop, Illustrator</span><span lang="en" class="lang-content">Photoshop, Illustrator</span><span lang="ru" class="lang-content">Photoshop, Illustrator</span></p></div>
+<div class="tile"><div class="tile-emoji">🎞️</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">CSS-анимация</span><span lang="en" class="lang-content">CSS animation</span><span lang="ru" class="lang-content">CSS-анимация</span></p>
+<p class="text-slate-600 text-xs">cubic-bezier()</p></div>
+<div class="tile"><div class="tile-emoji">🤖</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Роботтың жолы</span><span lang="en" class="lang-content">Robot paths</span><span lang="ru" class="lang-content">Траектории робота</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Тегіс қозғалыс</span><span lang="en" class="lang-content">Smooth motion</span><span lang="ru" class="lang-content">Плавное движение</span></p></div>
+<div class="tile"><div class="tile-emoji">🎮</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Ойын графикасы</span><span lang="en" class="lang-content">Game graphics</span><span lang="ru" class="lang-content">Игровая графика</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Unity, Unreal</span><span lang="en" class="lang-content">Unity, Unreal</span><span lang="ru" class="lang-content">Unity, Unreal</span></p></div>
+<div class="tile"><div class="tile-emoji">🗺️</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Карта</span><span lang="en" class="lang-content">Maps</span><span lang="ru" class="lang-content">Карты</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Өзен, жол иілімдері</span><span lang="en" class="lang-content">Rivers, road curves</span><span lang="ru" class="lang-content">Реки, изгибы дорог</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✍️ Inkscape-та жаттығу</span>
+<span lang="en" class="lang-content">✍️ Practice in Inkscape</span>
+<span lang="ru" class="lang-content">✍️ Практика в Inkscape</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">1️⃣ <span lang="kk" class="lang-content">Pen (Bezier tool)</span><span lang="en" class="lang-content">Pen (Bezier tool)</span><span lang="ru" class="lang-content">Перо (Bezier)</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">B пернесі → нүктелерді қою, әр нүктеде mouse-ті <b>сүйре</b> — control шығады.</span><span lang="en" class="lang-content">Press B → click points; <b>drag</b> each click to pull control handles.</span><span lang="ru" class="lang-content">Нажми B → ставь точки; при клике <b>тяни мышь</b> — появятся усики-ручки.</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">2️⃣ <span lang="kk" class="lang-content">Node tool (N)</span><span lang="en" class="lang-content">Node tool (N)</span><span lang="ru" class="lang-content">Узлы (N)</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Control нүктелерін жылжытып қисықты <b>иіңкі</b> етіп жаса.</span><span lang="en" class="lang-content">Drag control points to <b>bend</b> the curve.</span><span lang="ru" class="lang-content">Перетаскивай ручки, чтобы <b>изогнуть</b> линию.</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">3️⃣ <span lang="kk" class="lang-content">Close & fill</span><span lang="en" class="lang-content">Close & fill</span><span lang="ru" class="lang-content">Замкнуть и залить</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Соңғы нүктені <b>алғашқыға</b> қос — форма жабылады, бояу қоса аласың.</span><span lang="en" class="lang-content">Join the last point to the <b>first</b> — shape closes, fill it with colour.</span><span lang="ru" class="lang-content">Соедини последнюю точку с <b>первой</b> — форма замкнётся, заливай цветом.</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌀</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Безье = тегіс қисық</span><span lang="en" class="lang-content">Bezier = smooth curve</span><span lang="ru" class="lang-content">Безье = гладкая кривая</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Бірнеше нүктемен анықталған</span><span lang="en" class="lang-content">Defined by a few points</span><span lang="ru" class="lang-content">Задана несколькими точками</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📍</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Control нүктелер</span><span lang="en" class="lang-content">Control points</span><span lang="ru" class="lang-content">Опорные точки</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Магниттей сызықты тартады</span><span lang="en" class="lang-content">Pull the line like magnets</span><span lang="ru" class="lang-content">Тянут линию как магниты</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚀</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Барлық жерде</span><span lang="en" class="lang-content">Everywhere</span><span lang="ru" class="lang-content">Повсюду</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Шрифт · анимация · дизайн</span><span lang="en" class="lang-content">Fonts · animation · design</span><span lang="ru" class="lang-content">Шрифты · анимация · дизайн</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

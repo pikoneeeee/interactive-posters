@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>continue — переход к следующей итерации</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 8 · Python</span>
+<span lang="ru" class="lang-content">8 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">continue — келесі итерацияға өту</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">continue — skip to next iteration</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">continue — переход к следующей итерации</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">continue не істейді?</span>
+<span lang="en" class="lang-content">What does continue do?</span>
+<span lang="ru" class="lang-content">Что делает continue?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">continue</b> — «өтіп кет, жалғастыр» дегенді білдіреді. Ол <b>break</b>-тің «ағасы», бірақ <b>цикл тоқтамайды</b>: тек <b>осы итерациядағы</b> қалған кодты <b>өткізіп жіберіп</b>, <b>келесі итерацияға</b> секіреді. Қолданылуы: «кейбір элементтерді <b>елемеу керек</b>» — мысалы, теріс сандарды жіберіп қосынды жасау, бос жолдарды өткізіп кету. break мен continue — циклдердің <b>«жеңіл атыс жүрегі»</b>. Екеуі де 1958 жылы FORTRAN-да ойлап табылған.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">continue</b> means «skip the rest and go on». It is <b>break's cousin</b> but the loop keeps running — only the <b>current iteration's remaining code</b> is skipped, execution jumps to the <b>next iteration</b>. Use it when you want to <b>ignore</b> some elements (skip negatives in a sum, skip blank lines). break &amp; continue are the loop's «steering wheel». Both invented in FORTRAN (1958).</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">continue</b> означает «пропусти и продолжай». Это <b>«брат» break</b>, но цикл не останавливается — пропускается только <b>оставшийся код этой итерации</b>, управление сразу идёт к <b>следующей итерации</b>. Применение: надо <b>пропустить</b> некоторые элементы — например, отрицательные при суммировании, пустые строки в файле. break и continue — «рулевое управление» цикла. Оба появились в FORTRAN в 1958 г.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ break vs continue</span>
+<span lang="en" class="lang-content">⚖️ break vs continue</span>
+<span lang="ru" class="lang-content">⚖️ break против continue</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-custom p-6">
+<div class="flex items-center gap-3 mb-2"><div class="text-5xl">🛑</div>
+<div><p class="heading-font text-xl text-sky-700">break</p>
+<p class="text-slate-500 text-sm"><span lang="kk" class="lang-content">цикл тоқтайды</span><span lang="en" class="lang-content">loop ends</span><span lang="ru" class="lang-content">цикл завершается</span></p></div></div>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Қалған итерациялардың <b>ешқайсысы</b> орындалмайды. Цикл «өледі».</span>
+<span lang="en" class="lang-content"><b>No</b> remaining iterations run — loop dies.</span>
+<span lang="ru" class="lang-content"><b>Ни одна</b> оставшаяся итерация не выполнится — цикл умирает.</span></p></div>
+
+<div class="card rounded-custom p-6">
+<div class="flex items-center gap-3 mb-2"><div class="text-5xl">⏭</div>
+<div><p class="heading-font text-xl text-sky-700">continue</p>
+<p class="text-slate-500 text-sm"><span lang="kk" class="lang-content">тек осы итерация өтеді</span><span lang="en" class="lang-content">only this iter skipped</span><span lang="ru" class="lang-content">пропускается только эта итерация</span></p></div></div>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Осы итерацияның қалған коды өткізіледі. Келесі итерация <b>жалғаса береді</b>.</span>
+<span lang="en" class="lang-content">Rest of this iteration skipped, next iteration <b>runs normally</b>.</span>
+<span lang="ru" class="lang-content">Остаток этой итерации пропускается, следующая <b>идёт как обычно</b>.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧭 Схемасы</span>
+<span lang="en" class="lang-content">🧭 Flow diagram</span>
+<span lang="ru" class="lang-content">🧭 Схема работы</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 720 200" style="width:100%;height:auto">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect x="10" y="80" width="90" height="30" rx="15" fill="#c7d2fe" stroke="#3730a3"/>
+<text x="55" y="100" text-anchor="middle" font-weight="700" fill="#3730a3" font-size="12">for x in …</text>
+<path d="M100,95 L145,95" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="145" y="80" width="100" height="30" fill="#bbf7d0" stroke="#166534"/>
+<text x="195" y="100" text-anchor="middle" fill="#166534" font-weight="700" font-size="12"><tspan class="lang-content" lang="kk">1-бөлім</tspan><tspan class="lang-content" lang="en">part 1</tspan><tspan class="lang-content" lang="ru">часть 1</tspan></text>
+<path d="M245,95 L290,95" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
+<polygon points="290,95 340,65 390,95 340,125" fill="#fde68a" stroke="#78350f" stroke-width="2"/>
+<text x="340" y="100" text-anchor="middle" font-weight="700" fill="#78350f" font-size="11">skip?</text>
+<path d="M340,125 L340,160 L55,160 L55,110" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)" fill="none"/>
+<text x="200" y="180" fill="#dc2626" font-weight="700" font-size="11">T → continue <tspan class="lang-content" lang="kk">(келесі итерация)</tspan><tspan class="lang-content" lang="en">(next iteration)</tspan><tspan class="lang-content" lang="ru">(следующая итерация)</tspan></text>
+<path d="M390,95 L435,95" stroke="#16a34a" stroke-width="2" marker-end="url(#ar)"/>
+<text x="410" y="88" fill="#16a34a" font-weight="700" font-size="11">F</text>
+<rect x="435" y="80" width="100" height="30" fill="#bbf7d0" stroke="#166534"/>
+<text x="485" y="100" text-anchor="middle" fill="#166534" font-weight="700" font-size="12"><tspan class="lang-content" lang="kk">2-бөлім</tspan><tspan class="lang-content" lang="en">part 2</tspan><tspan class="lang-content" lang="ru">часть 2</tspan></text>
+<path d="M535,95 L600,95 L600,55 L55,55 L55,80" stroke="#334155" stroke-width="1.5" fill="none" stroke-dasharray="3,2" marker-end="url(#ar)"/>
+<text x="310" y="48" fill="#334155" font-weight="700" font-size="11"><tspan class="lang-content" lang="kk">қалыпты келесі итерация</tspan><tspan class="lang-content" lang="en">normal next iter</tspan><tspan class="lang-content" lang="ru">обычная следующая итерация</tspan></text>
+</svg></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Мысалдар</span>
+<span lang="en" class="lang-content">🎯 Examples</span>
+<span lang="ru" class="lang-content">🎯 Примеры</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">① <span lang="kk" class="lang-content">Жұптарды ғана көрсет</span><span lang="en" class="lang-content">Print evens only</span><span lang="ru" class="lang-content">Только чётные</span></p>
+<div class="code-block">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">11</span>):
+    <span class="kw">if</span> i % <span class="num">2</span> != <span class="num">0</span>:
+        <span class="kw">continue</span>   <span class="com"># <span lang="kk" class="lang-content">тақ — өткізу</span>odd — skip<span lang="ru" class="lang-content">нечёт — пропуск</span></span>
+    <span class="fn">print</span>(i)
+<span class="com"># 2, 4, 6, 8, 10</span>
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">② <span lang="kk" class="lang-content">Теріс сандарсыз қосынды</span><span lang="en" class="lang-content">Sum of positives only</span><span lang="ru" class="lang-content">Сумма только положит.</span></p>
+<div class="code-block">
+s = <span class="num">0</span>
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x &lt; <span class="num">0</span>:
+        <span class="kw">continue</span>
+    s += x
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">③ <span lang="kk" class="lang-content">Файлдан бос жолдарды өткізу</span><span lang="en" class="lang-content">Skip blank lines</span><span lang="ru" class="lang-content">Пропуск пустых строк</span></p>
+<div class="code-block">
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>) <span class="kw">as</span> f:
+    <span class="kw">for</span> line <span class="kw">in</span> f:
+        line = line.<span class="fn">strip</span>()
+        <span class="kw">if</span> <span class="kw">not</span> line:
+            <span class="kw">continue</span>
+        <span class="fn">print</span>(line)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">④ <span lang="kk" class="lang-content">3-ке бөлінгендерді атту</span><span lang="en" class="lang-content">Skip multiples of 3</span><span lang="ru" class="lang-content">Пропуск кратных 3</span></p>
+<div class="code-block">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">16</span>):
+    <span class="kw">if</span> i % <span class="num">3</span> == <span class="num">0</span>:
+        <span class="kw">continue</span>
+    <span class="fn">print</span>(i, end=<span class="str">" "</span>)
+<span class="com"># 1 2 4 5 7 8 10 11 13 14</span>
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">⑤ <span lang="kk" class="lang-content">Дауысты дыбыстарды алу</span><span lang="en" class="lang-content">Keep only vowels</span><span lang="ru" class="lang-content">Только гласные</span></p>
+<div class="code-block">
+text = <span class="str">"Python"</span>
+vowels = <span class="str">"aeiouAEIOU"</span>
+<span class="kw">for</span> ch <span class="kw">in</span> text:
+    <span class="kw">if</span> ch <span class="kw">not</span> <span class="kw">in</span> vowels:
+        <span class="kw">continue</span>
+    <span class="fn">print</span>(ch, end=<span class="str">""</span>)
+<span class="com"># "o"</span>
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">⑥ <span lang="kk" class="lang-content">Валидация сандары</span><span lang="en" class="lang-content">Input validation</span><span lang="ru" class="lang-content">Валидация ввода</span></p>
+<div class="code-block">
+<span class="kw">while</span> <span class="num">True</span>:
+    s = <span class="fn">input</span>(<span class="str">"n: "</span>)
+    <span class="kw">if</span> <span class="kw">not</span> s.<span class="fn">isdigit</span>():
+        <span class="fn">print</span>(<span class="str">"⚠️ only digits"</span>)
+        <span class="kw">continue</span>
+    n = <span class="fn">int</span>(s)
+    <span class="kw">break</span>
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💡 Тәжірибелік кеңес</span>
+<span lang="en" class="lang-content">💡 Practical tip</span>
+<span lang="ru" class="lang-content">💡 Практический совет</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content"><b>«Күрделі if»</b> орнына <b>continue-мен early exit</b> код оқуды жеңілдетеді. Бас идея: «осы итерация маңызды <b>емес</b> бе? — ≥<b>continue</b>. Маңызды — жаса».</span>
+<span lang="en" class="lang-content">Early-continue cleans up nested if-statements — «Is this iter irrelevant? → continue. Otherwise do the work».</span>
+<span lang="ru" class="lang-content">Early-continue делает код чище, чем вложенные if — «Эта итерация не важна? → continue. Иначе работаем».</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-rose rounded-xl p-5">
+<p class="heading-font text-rose-700 mb-2">❌ <span lang="kk" class="lang-content">Терең ұяласу</span><span lang="en" class="lang-content">Deep nesting</span><span lang="ru" class="lang-content">Глубокая вложенность</span></p>
+<div class="code-block text-sm">
+<span class="kw">for</span> u <span class="kw">in</span> users:
+    <span class="kw">if</span> u.active:
+        <span class="kw">if</span> u.age &gt;= <span class="num">18</span>:
+            <span class="kw">if</span> u.email:
+                send(u)
+</div></div>
+
+<div class="card-emerald rounded-xl p-5">
+<p class="heading-font text-emerald-700 mb-2">✅ early-continue</p>
+<div class="code-block text-sm">
+<span class="kw">for</span> u <span class="kw">in</span> users:
+    <span class="kw">if</span> <span class="kw">not</span> u.active: <span class="kw">continue</span>
+    <span class="kw">if</span> u.age &lt; <span class="num">18</span>:   <span class="kw">continue</span>
+    <span class="kw">if</span> <span class="kw">not</span> u.email:  <span class="kw">continue</span>
+    send(u)
+</div></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ while + continue — сақ бол!</span>
+<span lang="en" class="lang-content">⚠️ while + continue — careful!</span>
+<span lang="ru" class="lang-content">⚠️ while + continue — осторожно!</span></h2>
+<div class="card-rose rounded-custom p-6">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Егер есептегішті <b>continue-ден кейін</b> өзгертетін болсаң — оны өткізіп кетесің → <b>шексіз цикл</b>!</span>
+<span lang="en" class="lang-content">If counter is updated <b>after continue</b>, it will be skipped → <b>infinite loop</b>!</span>
+<span lang="ru" class="lang-content">Если счётчик обновляется <b>после continue</b>, он будет пропущен → <b>бесконечный цикл</b>!</span></p>
+<div class="code-block">
+<span class="com"># ❌</span>
+i = <span class="num">0</span>
+<span class="kw">while</span> i &lt; <span class="num">10</span>:
+    <span class="kw">if</span> i == <span class="num">5</span>:
+        <span class="kw">continue</span>        <span class="com"># i += 1 <span lang="kk" class="lang-content">орындалмайды!</span>never runs!<span lang="ru" class="lang-content">не выполнится!</span></span>
+    <span class="fn">print</span>(i)
+    i += <span class="num">1</span>
+
+<span class="com"># ✅</span>
+i = <span class="num">0</span>
+<span class="kw">while</span> i &lt; <span class="num">10</span>:
+    i += <span class="num">1</span>               <span class="com"># <span lang="kk" class="lang-content">алдымен</span>first<span lang="ru" class="lang-content">сначала</span></span>
+    <span class="kw">if</span> i == <span class="num">5</span>:
+        <span class="kw">continue</span>
+    <span class="fn">print</span>(i)
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 FizzBuzz — break + continue жиыны</span>
+<span lang="en" class="lang-content">🧪 FizzBuzz example</span>
+<span lang="ru" class="lang-content">🧪 FizzBuzz — классика</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">21</span>):
+    <span class="kw">if</span> i % <span class="num">15</span> == <span class="num">0</span>:
+        <span class="fn">print</span>(<span class="str">"FizzBuzz"</span>); <span class="kw">continue</span>
+    <span class="kw">if</span> i % <span class="num">3</span> == <span class="num">0</span>:
+        <span class="fn">print</span>(<span class="str">"Fizz"</span>); <span class="kw">continue</span>
+    <span class="kw">if</span> i % <span class="num">5</span> == <span class="num">0</span>:
+        <span class="fn">print</span>(<span class="str">"Buzz"</span>); <span class="kw">continue</span>
+    <span class="fn">print</span>(i)
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💼 «FizzBuzz» — әлемде ең танымал собеседование тапсырмасы!</span><span lang="en" class="lang-content">💼 FizzBuzz is the world's most classic coding interview task.</span><span lang="ru" class="lang-content">💼 FizzBuzz — самая известная задача на собеседовании.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⏭</div>
+<p class="heading-font text-xl text-sky-700 mb-2">continue</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">келесі итерация</span><span lang="en" class="lang-content">next iteration</span><span lang="ru" class="lang-content">след. итерация</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧹</div>
+<p class="heading-font text-xl text-sky-700 mb-2">early-continue</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">таза код</span><span lang="en" class="lang-content">cleaner code</span><span lang="ru" class="lang-content">чище код</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚠️</div>
+<p class="heading-font text-xl text-sky-700 mb-2">while: i+=1 <span lang="kk" class="lang-content">алдын ала</span><span lang="en" class="lang-content">first!</span><span lang="ru" class="lang-content">сначала!</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

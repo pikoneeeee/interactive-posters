@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Работа со строками в Python</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 10 · Python</span>
+<span lang="ru" class="lang-content">10 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Жолдармен жұмыс</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Working with strings</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Работа со строками в Python</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📝 Жол — не?</span>
+<span lang="en" class="lang-content">📝 What is a string?</span>
+<span lang="ru" class="lang-content">📝 Что такое строка?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Жол (str)</b> — <b>Unicode таңбаларының</b> өзгермейтін (<i>immutable</i>) тізбегі. Тырнақшалармен жазылады: <code>'hi'</code>, <code>"hi"</code>, үш тырнақша <code>"""..."""</code> — көп жолды. Python-да жол — <b>тізбекті тип</b>: индекс, срез, <code>len()</code>, <code>in</code> қолданады.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">string (str)</b> is an <b>immutable sequence</b> of Unicode characters. Written with quotes: <code>'hi'</code>, <code>"hi"</code>; triple-quoted <code>"""..."""</code> for multi-line. In Python a string is a <b>sequence type</b>: supports indexing, slicing, <code>len()</code>, <code>in</code>.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Строка (str)</b> — <b>неизменяемая</b> последовательность Unicode-символов. Записывается в кавычках: <code>'hi'</code>, <code>"hi"</code>; тройные <code>"""..."""</code> — многострочные. В Python строка — <b>последовательный тип</b>: индексы, срезы, <code>len()</code>, <code>in</code>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Индекс және срез</span>
+<span lang="en" class="lang-content">📏 Index &amp; slice</span>
+<span lang="ru" class="lang-content">📏 Индексация и срезы</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap mb-4">
+<svg viewBox="0 0 620 150" style="width:100%;max-width:620px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="14">
+<g>
+<rect x="20" y="30" width="60" height="60" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="50" y="68" text-anchor="middle" font-weight="bold" fill="#0369a1">P</text>
+<rect x="80" y="30" width="60" height="60" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="110" y="68" text-anchor="middle" font-weight="bold" fill="#0369a1">y</text>
+<rect x="140" y="30" width="60" height="60" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="170" y="68" text-anchor="middle" font-weight="bold" fill="#0369a1">t</text>
+<rect x="200" y="30" width="60" height="60" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="230" y="68" text-anchor="middle" font-weight="bold" fill="#0369a1">h</text>
+<rect x="260" y="30" width="60" height="60" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="290" y="68" text-anchor="middle" font-weight="bold" fill="#0369a1">o</text>
+<rect x="320" y="30" width="60" height="60" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="350" y="68" text-anchor="middle" font-weight="bold" fill="#0369a1">n</text>
+</g>
+<text x="50" y="110" text-anchor="middle" fill="#0369a1" font-weight="bold">0</text>
+<text x="110" y="110" text-anchor="middle" fill="#0369a1" font-weight="bold">1</text>
+<text x="170" y="110" text-anchor="middle" fill="#0369a1" font-weight="bold">2</text>
+<text x="230" y="110" text-anchor="middle" fill="#0369a1" font-weight="bold">3</text>
+<text x="290" y="110" text-anchor="middle" fill="#0369a1" font-weight="bold">4</text>
+<text x="350" y="110" text-anchor="middle" fill="#0369a1" font-weight="bold">5</text>
+<text x="50" y="130" text-anchor="middle" fill="#b91c1c">-6</text>
+<text x="110" y="130" text-anchor="middle" fill="#b91c1c">-5</text>
+<text x="170" y="130" text-anchor="middle" fill="#b91c1c">-4</text>
+<text x="230" y="130" text-anchor="middle" fill="#b91c1c">-3</text>
+<text x="290" y="130" text-anchor="middle" fill="#b91c1c">-2</text>
+<text x="350" y="130" text-anchor="middle" fill="#b91c1c">-1</text>
+<text x="420" y="50" fill="#0369a1">s[0]  = 'P'</text>
+<text x="420" y="70" fill="#0369a1">s[-1] = 'n'</text>
+<text x="420" y="90" fill="#0369a1">s[1:4]= 'yth'</text>
+<text x="420" y="110" fill="#0369a1">s[::-1]='nohtyP'</text>
+</g></svg></div>
+<div class="code-block text-sm">
+s = <span class="str">"Python"</span>
+s[<span class="num">0</span>]         <span class="com"># 'P'</span>
+s[-<span class="num">1</span>]        <span class="com"># 'n'</span>
+s[<span class="num">1</span>:<span class="num">4</span>]       <span class="com"># 'yth'  (start:stop — stop не включён)</span>
+s[::<span class="num">2</span>]       <span class="com"># 'Pto'  (каждый 2-й)</span>
+s[::-<span class="num">1</span>]      <span class="com"># 'nohtyP' (развернуть)</span>
+<span class="fn">len</span>(s)       <span class="com"># 6</span>
+<span class="str">"th"</span> <span class="kw">in</span> s   <span class="com"># True</span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Негізгі әдістер</span>
+<span lang="en" class="lang-content">🛠 Key methods</span>
+<span lang="ru" class="lang-content">🛠 Ключевые методы</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Әдіс</span><span lang="en" class="lang-content">Method</span><span lang="ru" class="lang-content">Метод</span></th>
+<th><span lang="kk" class="lang-content">Не істейді</span><span lang="en" class="lang-content">What it does</span><span lang="ru" class="lang-content">Что делает</span></th>
+<th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th></tr></thead><tbody>
+<tr><td><code>.lower() / .upper()</code></td><td><span lang="kk" class="lang-content">регистр</span><span lang="en" class="lang-content">case</span><span lang="ru" class="lang-content">регистр</span></td><td><code>"Hi".lower() → 'hi'</code></td></tr>
+<tr><td><code>.strip()</code></td><td><span lang="kk" class="lang-content">бос орындарды алып тастау</span><span lang="en" class="lang-content">trim whitespace</span><span lang="ru" class="lang-content">убрать пробелы</span></td><td><code>"  hi  ".strip() → 'hi'</code></td></tr>
+<tr><td><code>.replace(a,b)</code></td><td><span lang="kk" class="lang-content">ауыстыру</span><span lang="en" class="lang-content">replace</span><span lang="ru" class="lang-content">заменить</span></td><td><code>"hello".replace('l','L') → 'heLLo'</code></td></tr>
+<tr><td><code>.split(sep)</code></td><td><span lang="kk" class="lang-content">тізімге бөлу</span><span lang="en" class="lang-content">split to list</span><span lang="ru" class="lang-content">разбить в список</span></td><td><code>"a,b,c".split(',') → ['a','b','c']</code></td></tr>
+<tr><td><code>sep.join(list)</code></td><td><span lang="kk" class="lang-content">тізімді біріктіру</span><span lang="en" class="lang-content">join list</span><span lang="ru" class="lang-content">склеить список</span></td><td><code>'-'.join(['1','2']) → '1-2'</code></td></tr>
+<tr><td><code>.find(x) / .index(x)</code></td><td><span lang="kk" class="lang-content">орнын табу</span><span lang="en" class="lang-content">find position</span><span lang="ru" class="lang-content">найти позицию</span></td><td><code>"abc".find('b') → 1</code></td></tr>
+<tr><td><code>.count(x)</code></td><td><span lang="kk" class="lang-content">санау</span><span lang="en" class="lang-content">count</span><span lang="ru" class="lang-content">посчитать</span></td><td><code>"banana".count('a') → 3</code></td></tr>
+<tr><td><code>.startswith / .endswith</code></td><td><span lang="kk" class="lang-content">басталу/аяқталу</span><span lang="en" class="lang-content">prefix/suffix</span><span lang="ru" class="lang-content">префикс/суффикс</span></td><td><code>"photo.png".endswith('.png') → True</code></td></tr>
+<tr><td><code>.isdigit() / .isalpha()</code></td><td><span lang="kk" class="lang-content">тексеру</span><span lang="en" class="lang-content">check</span><span lang="ru" class="lang-content">проверка</span></td><td><code>"123".isdigit() → True</code></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧵 Форматтау және f-жолдар</span>
+<span lang="en" class="lang-content">🧵 Formatting &amp; f-strings</span>
+<span lang="ru" class="lang-content">🧵 Форматирование и f-строки</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+name = <span class="str">"Aida"</span>
+age  = <span class="num">16</span>
+pi   = <span class="num">3.14159</span>
+
+<span class="com"># 1. f-string (Python 3.6+) — рекомендуется</span>
+<span class="fn">print</span>(<span class="str">f"{name} is {age}"</span>)        <span class="com"># Aida is 16</span>
+<span class="fn">print</span>(<span class="str">f"π ≈ {pi:.2f}"</span>)            <span class="com"># π ≈ 3.14</span>
+<span class="fn">print</span>(<span class="str">f"{age:03d}"</span>)               <span class="com"># 016 — с лидирующими нулями</span>
+<span class="fn">print</span>(<span class="str">f"{name:&gt;10}"</span>)              <span class="com"># '      Aida' — выравнивание</span>
+
+<span class="com"># 2. Старые способы</span>
+<span class="str">"{} is {}"</span>.<span class="fn">format</span>(name, age)   <span class="com"># 'Aida is 16'</span>
+<span class="str">"%s is %d"</span> % (name, age)         <span class="com"># 'Aida is 16' (ещё из C)</span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔐 Escape және raw жолдар</span>
+<span lang="en" class="lang-content">🔐 Escape &amp; raw strings</span>
+<span lang="ru" class="lang-content">🔐 Escape-последовательности и raw-строки</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">🎛 Escape</span><span lang="en" class="lang-content">🎛 Escape</span><span lang="ru" class="lang-content">🎛 Escape</span></p>
+<div class="code-block text-xs">
+<span class="str">"Line1\nLine2"</span>   <span class="com"># \n — перевод</span>
+<span class="str">"Tab\there"</span>      <span class="com"># \t — табуляция</span>
+<span class="str">"Say \"hi\""</span>     <span class="com"># \" — кавычка</span>
+<span class="str">"Back\\slash"</span>    <span class="com"># \\ — слэш</span>
+<span class="str">"\u00c4"</span>         <span class="com"># 'Ä' — Unicode</span>
+</div></div>
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">📎 Raw (r"...")</span><span lang="en" class="lang-content">📎 Raw (r"...")</span><span lang="ru" class="lang-content">📎 Raw (r"...")</span></p>
+<div class="code-block text-xs">
+path = <span class="str">r"C:\Users\Aida"</span>
+<span class="com"># \U, \n не интерпретируются!</span>
+regex = <span class="str">r"\d{3}-\d{2}"</span>
+<span class="com"># удобно для регулярок и путей</span>
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Классикалық есептер</span>
+<span lang="en" class="lang-content">🎯 Classic tasks</span>
+<span lang="ru" class="lang-content">🎯 Классические задачи</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com"># 1. Палиндром</span>
+<span class="kw">def</span> <span class="fn">is_palindrome</span>(s):
+    s = s.<span class="fn">lower</span>().<span class="fn">replace</span>(<span class="str">" "</span>, <span class="str">""</span>)
+    <span class="kw">return</span> s == s[::-<span class="num">1</span>]
+
+<span class="fn">is_palindrome</span>(<span class="str">"А роза упала на лапу Азора"</span>)   <span class="com"># True</span>
+
+<span class="com"># 2. Подсчёт гласных</span>
+text = <span class="str">"programming"</span>
+vowels = <span class="fn">sum</span>(<span class="num">1</span> <span class="kw">for</span> ch <span class="kw">in</span> text <span class="kw">if</span> ch <span class="kw">in</span> <span class="str">"aeiou"</span>)   <span class="com"># 3</span>
+
+<span class="com"># 3. Шифр Цезаря</span>
+<span class="kw">def</span> <span class="fn">caesar</span>(s, k):
+    <span class="kw">return</span> <span class="str">""</span>.<span class="fn">join</span>(<span class="fn">chr</span>((<span class="fn">ord</span>(c)-<span class="num">65</span>+k) % <span class="num">26</span> + <span class="num">65</span>) <span class="kw">for</span> c <span class="kw">in</span> s)
+
+<span class="fn">caesar</span>(<span class="str">"HELLO"</span>, <span class="num">3</span>)      <span class="com"># 'KHOOR'</span>
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔒</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Өзгермейді</span><span lang="en" class="lang-content">Immutable</span><span lang="ru" class="lang-content">Неизменяемы</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">әдістер жаңа жол қайтарады</span><span lang="en" class="lang-content">methods return new string</span><span lang="ru" class="lang-content">методы дают новую строку</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">✂</div>
+<p class="heading-font text-xl text-sky-700 mb-2">s[a:b:c]</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">срез — күшті құрал</span><span lang="en" class="lang-content">slicing is powerful</span><span lang="ru" class="lang-content">срез — мощный инструмент</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧵</div>
+<p class="heading-font text-xl text-sky-700 mb-2">f-string</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">заманауи форматтау</span><span lang="en" class="lang-content">modern formatting</span><span lang="ru" class="lang-content">современное форматирование</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

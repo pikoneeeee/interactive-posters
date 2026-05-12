@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шифрование и криптография</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · Криптография</span>
+<span lang="en" class="lang-content">Grade 11 · Cryptography</span>
+<span lang="ru" class="lang-content">11 класс · Криптография</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шифрлау: құпияның математикасы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Encryption: the math of secrets</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шифрование: математика тайны</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔐 Шифрлау — не?</span>
+<span lang="en" class="lang-content">🔐 What is encryption?</span>
+<span lang="ru" class="lang-content">🔐 Что такое шифрование?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Шифрлау</b> — ашық мәтінді (<b>plaintext</b>) <b>кілт</b> арқылы түсініксіз <b>шифртекстке</b> айналдыру, кейін сол кілтпен ғана қайта ашу. Тарих: <b>Цезарь шифры</b> (б.з.д. 50 ж., 3 әріпке ығыстыру), <b>Enigma</b> (1940) — бұзылды, <b>AES</b> (2001) — бүгінгі стандарт, <b>RSA</b> (1977) — ашық кілт революциясы. Бүгін <b>HTTPS, банк, WhatsApp, Bitcoin</b> — бәрі шифрлауға сүйенеді. Ереже: <b>«қауіпсіздік алгоритмнің құпия екенінен емес, кілтке сенімді болуынан»</b> (Керкгоффс принципі).</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Encryption</b> turns plaintext into unreadable <b>ciphertext</b> using a <b>key</b>; only the key can decrypt it back. History: <b>Caesar cipher</b> (50 BC, shift by 3), <b>Enigma</b> (1940) — cracked, <b>AES</b> (2001) — today's standard, <b>RSA</b> (1977) — public-key revolution. Today <b>HTTPS, banks, WhatsApp, Bitcoin</b> all rely on encryption. Rule: <b>«security must rely on the key, not on keeping the algorithm secret»</b> (Kerckhoffs' principle).</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Шифрование</b> превращает открытый текст (<b>plaintext</b>) в <b>шифртекст</b> с помощью <b>ключа</b>; расшифровать можно только этим же ключом. История: <b>шифр Цезаря</b> (50 до н. э., сдвиг на 3), <b>Enigma</b> (1940) — взломана, <b>AES</b> (2001) — современный стандарт, <b>RSA</b> (1977) — революция открытого ключа. Сегодня <b>HTTPS, банки, WhatsApp, Bitcoin</b> — всё на шифровании. Правило: <b>«стойкость — в ключе, не в тайне алгоритма»</b> (принцип Керкгоффса).</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📜 Цезарь шифры (мысал)</span>
+<span lang="en" class="lang-content">📜 Caesar cipher (example)</span>
+<span lang="ru" class="lang-content">📜 Шифр Цезаря (пример)</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 640 120" style="width:100%;max-width:640px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="16" text-anchor="middle">
+<rect x="20" y="20" width="140" height="50" fill="#bae6fd" stroke="#0369a1" rx="8"/>
+<text x="90" y="50" fill="#0369a1" font-weight="bold">HELLO</text>
+<text x="90" y="95" fill="#475569" font-size="11">plaintext</text>
+
+<text x="200" y="50" fill="#475569">→</text>
+<rect x="230" y="20" width="180" height="50" fill="#fde68a" stroke="#b45309" rx="8"/>
+<text x="320" y="45" fill="#b45309" font-weight="bold">shift +3 (key)</text>
+<text x="320" y="62" fill="#b45309" font-size="11">A→D, B→E, …</text>
+
+<text x="440" y="50" fill="#475569">→</text>
+<rect x="460" y="20" width="160" height="50" fill="#fecaca" stroke="#b91c1c" rx="8"/>
+<text x="540" y="50" fill="#b91c1c" font-weight="bold">KHOOR</text>
+<text x="540" y="95" fill="#475569" font-size="11">ciphertext</text>
+</g></svg></div>
+<div class="code-block text-xs">
+<span class="kw">def</span> <span class="fn">caesar</span>(text, key=<span class="num">3</span>):
+    out = <span class="str">""</span>
+    <span class="kw">for</span> ch <span class="kw">in</span> text.<span class="fn">upper</span>():
+        <span class="kw">if</span> ch.<span class="fn">isalpha</span>():
+            out += <span class="fn">chr</span>((<span class="fn">ord</span>(ch) - <span class="fn">ord</span>(<span class="str">'A'</span>) + key) % <span class="num">26</span> + <span class="fn">ord</span>(<span class="str">'A'</span>))
+        <span class="kw">else</span>:
+            out += ch
+    <span class="kw">return</span> out
+
+<span class="fn">print</span>(<span class="fn">caesar</span>(<span class="str">"HELLO"</span>, <span class="num">3</span>))     <span class="com"># KHOOR</span>
+<span class="fn">print</span>(<span class="fn">caesar</span>(<span class="str">"KHOOR"</span>, -<span class="num">3</span>))    <span class="com"># HELLO</span>
+</div>
+<p class="text-slate-500 text-sm mt-2">
+<span lang="kk" class="lang-content">⚠ Бар болғаны 26 кілт — компьютер секундта бұзады. Тек оқу үшін!</span>
+<span lang="en" class="lang-content">⚠ Only 26 keys — a computer cracks it in a second. Educational only!</span>
+<span lang="ru" class="lang-content">⚠ Всего 26 ключей — комп взломает за секунду. Только для учёбы!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🗝 Симметриялық шифр</span>
+<span lang="en" class="lang-content">🗝 Symmetric cipher</span>
+<span lang="ru" class="lang-content">🗝 Симметричное шифрование</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content">Бір ғана <b>ортақ кілт</b> — шифрлау да, ашу да. Жылдам, бірақ кілтті қалай <b>қауіпсіз жеткізу керек</b>?</span>
+<span lang="en" class="lang-content">One <b>shared key</b> for encrypt and decrypt. Fast, but how do we <b>share the key securely</b>?</span>
+<span lang="ru" class="lang-content">Один <b>общий ключ</b> — и для шифрования, и для расшифровки. Быстро, но как <b>безопасно передать ключ</b>?</span></p>
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 660 170" style="width:100%;max-width:660px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="12" text-anchor="middle">
+<text x="50" y="30" fill="#0369a1" font-weight="bold">👩 Alice</text>
+<rect x="10" y="45" width="110" height="40" fill="#bae6fd" stroke="#0369a1" rx="6"/>
+<text x="65" y="70" fill="#0369a1">«Привет»</text>
+
+<text x="180" y="30" fill="#b45309">🔒 encrypt</text>
+<text x="180" y="75" fill="#b45309" font-weight="bold">🗝 key</text>
+
+<rect x="260" y="45" width="130" height="40" fill="#fde68a" stroke="#b45309" rx="6"/>
+<text x="325" y="70" fill="#b45309">x7#pQz…</text>
+<text x="325" y="105" fill="#475569" font-size="11">интернет / канал</text>
+
+<text x="460" y="30" fill="#b45309">🔓 decrypt</text>
+<text x="460" y="75" fill="#b45309" font-weight="bold">🗝 key</text>
+
+<rect x="540" y="45" width="110" height="40" fill="#bbf7d0" stroke="#15803d" rx="6"/>
+<text x="595" y="70" fill="#15803d">«Привет»</text>
+<text x="595" y="30" fill="#15803d" font-weight="bold">🧔 Bob</text>
+
+<line x1="120" y1="65" x2="258" y2="65" stroke="#475569" stroke-width="1.5"/><polygon points="253,60 263,65 253,70" fill="#475569"/>
+<line x1="390" y1="65" x2="538" y2="65" stroke="#475569" stroke-width="1.5"/><polygon points="533,60 543,65 533,70" fill="#475569"/>
+</g></svg></div>
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Алгоритм</span><span lang="en" class="lang-content">Algorithm</span><span lang="ru" class="lang-content">Алгоритм</span></th>
+<th><span lang="kk" class="lang-content">Кілт</span><span lang="en" class="lang-content">Key</span><span lang="ru" class="lang-content">Ключ</span></th>
+<th><span lang="kk" class="lang-content">Мәртебе</span><span lang="en" class="lang-content">Status</span><span lang="ru" class="lang-content">Статус</span></th></tr></thead><tbody>
+<tr><td>DES (1977)</td><td>56 bit</td><td class="text-rose-600"><span lang="kk" class="lang-content">бұзылды</span><span lang="en" class="lang-content">broken</span><span lang="ru" class="lang-content">сломан</span></td></tr>
+<tr><td>3DES</td><td>168 bit</td><td class="text-amber-600"><span lang="kk" class="lang-content">ескірген</span><span lang="en" class="lang-content">legacy</span><span lang="ru" class="lang-content">устарел</span></td></tr>
+<tr><td><b>AES</b> (2001)</td><td>128/192/256</td><td class="text-emerald-600"><span lang="kk" class="lang-content">стандарт</span><span lang="en" class="lang-content">standard</span><span lang="ru" class="lang-content">стандарт</span></td></tr>
+<tr><td>ChaCha20</td><td>256</td><td class="text-emerald-600"><span lang="kk" class="lang-content">мобилкаға жылдам</span><span lang="en" class="lang-content">fast on mobile</span><span lang="ru" class="lang-content">быстр на мобилке</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔑🔑 Асимметриялық шифр</span>
+<span lang="en" class="lang-content">🔑🔑 Asymmetric cipher</span>
+<span lang="ru" class="lang-content">🔑🔑 Асимметричное шифрование</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content"><b>2 кілт</b>: <b class="text-sky-700">public</b> (бәріне таратуға болады) — шифрлайды, <b class="text-rose-700">private</b> (тек иесінде) — ашады. Ашық кілтті интернетте жариялауға болады — бұл революция!</span>
+<span lang="en" class="lang-content"><b>Two keys</b>: <b class="text-sky-700">public</b> (share freely) encrypts, <b class="text-rose-700">private</b> (kept secret) decrypts. You can post the public key anywhere — this was the revolution!</span>
+<span lang="ru" class="lang-content"><b>Два ключа</b>: <b class="text-sky-700">публичный</b> (можно раздавать всем) — шифрует, <b class="text-rose-700">приватный</b> (только у владельца) — расшифровывает. Открытый ключ можно публиковать — это и есть революция!</span></p>
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 660 170" style="width:100%;max-width:660px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="12" text-anchor="middle">
+<text x="50" y="30" fill="#0369a1" font-weight="bold">👩 Alice</text>
+<rect x="10" y="45" width="110" height="40" fill="#bae6fd" stroke="#0369a1" rx="6"/>
+<text x="65" y="70" fill="#0369a1">«Привет»</text>
+
+<text x="180" y="30" fill="#0369a1">🔒 encrypt</text>
+<text x="180" y="75" fill="#0369a1" font-weight="bold">🔓 pub-Bob</text>
+
+<rect x="260" y="45" width="130" height="40" fill="#fde68a" stroke="#b45309" rx="6"/>
+<text x="325" y="70" fill="#b45309">g5$zX…</text>
+
+<text x="460" y="30" fill="#b91c1c">🔓 decrypt</text>
+<text x="460" y="75" fill="#b91c1c" font-weight="bold">🗝 priv-Bob</text>
+
+<rect x="540" y="45" width="110" height="40" fill="#bbf7d0" stroke="#15803d" rx="6"/>
+<text x="595" y="70" fill="#15803d">«Привет»</text>
+<text x="595" y="30" fill="#15803d" font-weight="bold">🧔 Bob</text>
+
+<line x1="120" y1="65" x2="258" y2="65" stroke="#475569"/><polygon points="253,60 263,65 253,70" fill="#475569"/>
+<line x1="390" y1="65" x2="538" y2="65" stroke="#475569"/><polygon points="533,60 543,65 533,70" fill="#475569"/>
+<text x="325" y="115" fill="#475569" font-size="11">подсмотрел ❌ расшифровать не может: pub ≠ priv</text>
+</g></svg></div>
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Алгоритм</span><span lang="en" class="lang-content">Algorithm</span><span lang="ru" class="lang-content">Алгоритм</span></th>
+<th><span lang="kk" class="lang-content">Қиындық</span><span lang="en" class="lang-content">Hardness</span><span lang="ru" class="lang-content">Сложность</span></th>
+<th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th></tr></thead><tbody>
+<tr><td><b>RSA</b> (1977)</td><td><span lang="kk" class="lang-content">үлкен санды көбейткішке жіктеу</span><span lang="en" class="lang-content">factor large N</span><span lang="ru" class="lang-content">факторизация больших чисел</span></td><td>HTTPS, email</td></tr>
+<tr><td><b>ECC</b></td><td><span lang="kk" class="lang-content">эллипстік қисық</span><span lang="en" class="lang-content">elliptic curve</span><span lang="ru" class="lang-content">эллиптическая кривая</span></td><td>iPhone, Bitcoin</td></tr>
+<tr><td><b>Diffie-Hellman</b></td><td><span lang="kk" class="lang-content">дискрет логарифм</span><span lang="en" class="lang-content">discrete log</span><span lang="ru" class="lang-content">дискретный лог</span></td><td>TLS key exchange</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">#️⃣ Хеш + қолтаңба</span>
+<span lang="en" class="lang-content">#️⃣ Hash + signature</span>
+<span lang="ru" class="lang-content">#️⃣ Хеш + подпись</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content"><b>Хеш</b> — кез келген өлшемдегі деректен <b>бекітілген ұзындықтағы «саусақ ізін»</b> жасайтын біржақты функция. <b>Кері қайтарылмайды!</b> Сенімге, тұтастыққа қолданылады.</span>
+<span lang="en" class="lang-content">A <b>hash</b> maps any data to a <b>fixed-size fingerprint</b>, one-way (no reverse). Used for integrity &amp; signatures.</span>
+<span lang="ru" class="lang-content"><b>Хеш</b> превращает любые данные в <b>«отпечаток» фиксированной длины</b>. <b>Необратим!</b> Для целостности и подписей.</span></p>
+<div class="code-block text-xs">
+SHA-256(<span class="str">"HELLO"</span>) = <span class="num">185f8db3...bf6a327a</span>   <span class="com"># 64 hex-символа</span>
+SHA-256(<span class="str">"HELLo"</span>) = <span class="num">2c3bbf22...91e44c9d</span>   <span class="com"># 1 буква → всё меняется</span>
+SHA-256(<span class="str">"War &amp; Peace.txt"</span>) = <span class="num">f3a1…c92e</span>   <span class="com"># 1200 страниц → те же 64 симв</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
+<div class="tile"><div class="tile-emoji">🆔</div><p class="heading-font text-sky-700 text-sm">Integrity</p><p class="text-slate-600 text-xs">checksum</p></div>
+<div class="tile"><div class="tile-emoji">🔐</div><p class="heading-font text-sky-700 text-sm">Password</p><p class="text-slate-600 text-xs">bcrypt · argon2</p></div>
+<div class="tile"><div class="tile-emoji">✍</div><p class="heading-font text-sky-700 text-sm">Signature</p><p class="text-slate-600 text-xs">hash + priv-key</p></div>
+<div class="tile"><div class="tile-emoji">⛓</div><p class="heading-font text-sky-700 text-sm">Blockchain</p><p class="text-slate-600 text-xs">SHA-256</p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌐 HTTPS — бәрі бірге</span>
+<span lang="en" class="lang-content">🌐 HTTPS — all together</span>
+<span lang="ru" class="lang-content">🌐 HTTPS — всё вместе</span></h2>
+<div class="card rounded-custom p-6">
+<ol class="text-slate-700 space-y-2 text-sm">
+<li><b>1.</b> <span lang="kk" class="lang-content">Browser ↔ Server: сертификат тексеру (CA қолтаңбасы).</span><span lang="en" class="lang-content">Browser ↔ Server verify certificate (signed by CA).</span><span lang="ru" class="lang-content">Браузер ↔ сервер — проверка сертификата (подпись CA).</span></li>
+<li><b>2.</b> <span lang="kk" class="lang-content"><b>Асимметриямен</b> бір реттік <b>сеанс кілтін</b> алмасу (Diffie-Hellman).</span><span lang="en" class="lang-content"><b>Asymmetric</b> exchange of a one-time <b>session key</b> (Diffie-Hellman).</span><span lang="ru" class="lang-content">Через <b>асимметрию</b> обмениваются одноразовым <b>сеансовым ключом</b>.</span></li>
+<li><b>3.</b> <span lang="kk" class="lang-content">Қалған трафик <b>симметриялы</b> AES-пен жылдам шифрленеді.</span><span lang="en" class="lang-content">The rest of the traffic is encrypted with <b>symmetric</b> AES, fast.</span><span lang="ru" class="lang-content">Остальной трафик идёт через <b>симметричный</b> AES — быстро.</span></li>
+<li><b>4.</b> <span lang="kk" class="lang-content"><b>Хеш</b> әр пакетке — тұтастық тексеру (HMAC).</span><span lang="en" class="lang-content"><b>Hash</b> (HMAC) is attached to each packet for integrity.</span><span lang="ru" class="lang-content">К каждому пакету добавляется <b>хеш</b> (HMAC) для целостности.</span></li>
+</ol>
+<p class="text-slate-500 text-sm mt-3">🔒 <span lang="kk" class="lang-content">Браузердегі «құлып» — осы процесс біткенін білдіреді.</span><span lang="en" class="lang-content">The «padlock» in the browser means this handshake succeeded.</span><span lang="ru" class="lang-content">«Замочек» в браузере — это и есть успех этого handshake.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🗝</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Symmetric = AES</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">1 кілт, жылдам</span><span lang="en" class="lang-content">1 key, fast</span><span lang="ru" class="lang-content">1 ключ, быстро</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔑🔑</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Asymmetric = RSA/ECC</p>
+<p class="text-slate-600 text-sm">pub + priv</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">#️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Hash = SHA-256</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">тұтастық</span><span lang="en" class="lang-content">integrity</span><span lang="ru" class="lang-content">целостность</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

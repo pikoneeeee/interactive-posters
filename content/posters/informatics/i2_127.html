@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Файловый ввод-вывод в Python</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 10 · Python</span>
+<span lang="ru" class="lang-content">10 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Файлмен жұмыс</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">File I/O</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Файловый ввод-вывод в Python</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💾 Неге файл керек?</span>
+<span lang="en" class="lang-content">💾 Why files?</span>
+<span lang="ru" class="lang-content">💾 Зачем нужны файлы?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">Бағдарлама аяқталғанда <b>ЖЖҚ (RAM) ұмытылады</b>. Деректерді <b>диск</b>ке жазып, кейін қайта оқу үшін <b class="text-sky-700">файлдарды</b> қолданамыз: баптаулар, ойын прогресі, CSV есептер, JSON API жауаптары, логтар. Python-да файл ашу үшін <code>open()</code> қолданылады — ол <b>файл объектін</b> қайтарады.</span>
+<span lang="en" class="lang-content">When a program ends <b>RAM is wiped</b>. To persist data to <b>disk</b> we use <b class="text-sky-700">files</b>: settings, game saves, CSV reports, JSON API responses, logs. Python opens files with <code>open()</code> — it returns a <b>file object</b>.</span>
+<span lang="ru" class="lang-content">Когда программа завершается, <b>ОЗУ (RAM) стирается</b>. Чтобы сохранить данные на <b>диск</b> и потом прочитать, используем <b class="text-sky-700">файлы</b>: настройки, сохранения, CSV-отчёты, JSON-ответы API, логи. В Python файл открывают через <code>open()</code> — получают <b>файловый объект</b>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔓 open() · режимдер</span>
+<span lang="en" class="lang-content">🔓 open() · modes</span>
+<span lang="ru" class="lang-content">🔓 open() · режимы</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Режим</span><span lang="en" class="lang-content">Mode</span><span lang="ru" class="lang-content">Режим</span></th>
+<th><span lang="kk" class="lang-content">Мағына</span><span lang="en" class="lang-content">Meaning</span><span lang="ru" class="lang-content">Значение</span></th>
+<th><span lang="kk" class="lang-content">Файл жоқ болса</span><span lang="en" class="lang-content">If file missing</span><span lang="ru" class="lang-content">Если нет файла</span></th>
+<th><span lang="kk" class="lang-content">Бар болса</span><span lang="en" class="lang-content">If exists</span><span lang="ru" class="lang-content">Если есть</span></th></tr></thead><tbody>
+<tr><td><code>"r"</code></td><td><span lang="kk" class="lang-content">тек оқу</span><span lang="en" class="lang-content">read only</span><span lang="ru" class="lang-content">только чтение</span></td><td class="text-rose-600">FileNotFoundError</td><td><span lang="kk" class="lang-content">оқуға ашады</span><span lang="en" class="lang-content">opens for read</span><span lang="ru" class="lang-content">открывает</span></td></tr>
+<tr><td><code>"w"</code></td><td><span lang="kk" class="lang-content">жазу</span><span lang="en" class="lang-content">write</span><span lang="ru" class="lang-content">запись</span></td><td><span lang="kk" class="lang-content">жаңасын жасайды</span><span lang="en" class="lang-content">creates new</span><span lang="ru" class="lang-content">создаёт</span></td><td class="text-rose-600"><span lang="kk" class="lang-content">өшіреді!</span><span lang="en" class="lang-content">overwrites!</span><span lang="ru" class="lang-content">стирает!</span></td></tr>
+<tr><td><code>"a"</code></td><td><span lang="kk" class="lang-content">соңына қосу</span><span lang="en" class="lang-content">append</span><span lang="ru" class="lang-content">дозапись</span></td><td><span lang="kk" class="lang-content">жаңасын жасайды</span><span lang="en" class="lang-content">creates new</span><span lang="ru" class="lang-content">создаёт</span></td><td><span lang="kk" class="lang-content">соңына жазады</span><span lang="en" class="lang-content">appends</span><span lang="ru" class="lang-content">дописывает в конец</span></td></tr>
+<tr><td><code>"x"</code></td><td><span lang="kk" class="lang-content">эксклюзивті</span><span lang="en" class="lang-content">exclusive</span><span lang="ru" class="lang-content">эксклюзивный</span></td><td><span lang="kk" class="lang-content">жасайды</span><span lang="en" class="lang-content">creates</span><span lang="ru" class="lang-content">создаёт</span></td><td class="text-rose-600">FileExistsError</td></tr>
+<tr><td><code>"rb" / "wb"</code></td><td><span lang="kk" class="lang-content">бинарлы</span><span lang="en" class="lang-content">binary</span><span lang="ru" class="lang-content">бинарный</span></td><td>—</td><td><span lang="kk" class="lang-content">суреттер, zip</span><span lang="en" class="lang-content">images, zip</span><span lang="ru" class="lang-content">картинки, zip</span></td></tr>
+<tr><td><code>"r+"</code></td><td><span lang="kk" class="lang-content">оқу+жазу</span><span lang="en" class="lang-content">read+write</span><span lang="ru" class="lang-content">чтение+запись</span></td><td class="text-rose-600">Error</td><td><span lang="kk" class="lang-content">екеуін де</span><span lang="en" class="lang-content">both</span><span lang="ru" class="lang-content">и то, и то</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📖 Файлды оқу</span>
+<span lang="en" class="lang-content">📖 Reading files</span>
+<span lang="ru" class="lang-content">📖 Чтение файла</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com"># 1. Весь файл целиком</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>, encoding=<span class="str">"utf-8"</span>) <span class="kw">as</span> f:
+    text = f.<span class="fn">read</span>()       <span class="com"># str со всем содержимым</span>
+
+<span class="com"># 2. Построчно — экономно по памяти</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>, encoding=<span class="str">"utf-8"</span>) <span class="kw">as</span> f:
+    <span class="kw">for</span> line <span class="kw">in</span> f:
+        <span class="fn">print</span>(line.<span class="fn">rstrip</span>())   <span class="com"># убрать '\n' в конце</span>
+
+<span class="com"># 3. Список строк</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.txt"</span>) <span class="kw">as</span> f:
+    lines = f.<span class="fn">readlines</span>()    <span class="com"># ['line1\n', 'line2\n', ...]</span>
+</div>
+<p class="text-slate-500 text-sm mt-3">
+<span lang="kk" class="lang-content">✨ <b>with</b> конструкциясы — автоматты түрде файлды жабады, қате болса да!</span>
+<span lang="en" class="lang-content">✨ The <b>with</b> block auto-closes the file, even if an error occurs!</span>
+<span lang="ru" class="lang-content">✨ Конструкция <b>with</b> автоматически закрывает файл, даже при ошибке!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✏ Файлға жазу</span>
+<span lang="en" class="lang-content">✏ Writing files</span>
+<span lang="ru" class="lang-content">✏ Запись в файл</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com"># 1. Перезаписать</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"out.txt"</span>, <span class="str">"w"</span>, encoding=<span class="str">"utf-8"</span>) <span class="kw">as</span> f:
+    f.<span class="fn">write</span>(<span class="str">"Сәлем!\n"</span>)
+    f.<span class="fn">write</span>(<span class="str">"Line 2\n"</span>)
+
+<span class="com"># 2. Дописать в конец (лог)</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"log.txt"</span>, <span class="str">"a"</span>, encoding=<span class="str">"utf-8"</span>) <span class="kw">as</span> f:
+    f.<span class="fn">write</span>(<span class="str">f"[{datetime.now()}] user login\n"</span>)
+
+<span class="com"># 3. Список строк сразу</span>
+rows = [<span class="str">"a\n"</span>, <span class="str">"b\n"</span>, <span class="str">"c\n"</span>]
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"out.txt"</span>, <span class="str">"w"</span>) <span class="kw">as</span> f:
+    f.<span class="fn">writelines</span>(rows)    <span class="com"># \n сами не добавляются!</span>
+
+<span class="com"># 4. Через print — удобно</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"out.txt"</span>, <span class="str">"w"</span>) <span class="kw">as</span> f:
+    <span class="fn">print</span>(<span class="str">"Привет"</span>, file=f)
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 CSV және JSON</span>
+<span lang="en" class="lang-content">📊 CSV &amp; JSON</span>
+<span lang="ru" class="lang-content">📊 CSV и JSON</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2">📋 CSV</p>
+<div class="code-block text-xs">
+<span class="kw">import</span> csv
+
+<span class="com"># чтение</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.csv"</span>, encoding=<span class="str">"utf-8"</span>) <span class="kw">as</span> f:
+    reader = csv.<span class="fn">DictReader</span>(f)
+    <span class="kw">for</span> row <span class="kw">in</span> reader:
+        <span class="fn">print</span>(row[<span class="str">"name"</span>], row[<span class="str">"age"</span>])
+
+<span class="com"># запись</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"out.csv"</span>, <span class="str">"w"</span>, newline=<span class="str">""</span>) <span class="kw">as</span> f:
+    w = csv.<span class="fn">writer</span>(f)
+    w.<span class="fn">writerow</span>([<span class="str">"name"</span>,<span class="str">"age"</span>])
+    w.<span class="fn">writerow</span>([<span class="str">"Aida"</span>, <span class="num">16</span>])
+</div></div>
+<div class="card rounded-custom p-6"><p class="heading-font text-sky-700 mb-2">🔖 JSON</p>
+<div class="code-block text-xs">
+<span class="kw">import</span> json
+
+<span class="com"># dict → json → файл</span>
+data = {<span class="str">"name"</span>:<span class="str">"Aida"</span>, <span class="str">"age"</span>:<span class="num">16</span>}
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"save.json"</span>, <span class="str">"w"</span>) <span class="kw">as</span> f:
+    json.<span class="fn">dump</span>(data, f,
+              ensure_ascii=<span class="kw">False</span>,
+              indent=<span class="num">2</span>)
+
+<span class="com"># файл → json → dict</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"save.json"</span>) <span class="kw">as</span> f:
+    data = json.<span class="fn">load</span>(f)
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠ Жиі қателер</span>
+<span lang="en" class="lang-content">⚠ Common pitfalls</span>
+<span lang="ru" class="lang-content">⚠ Типичные ошибки</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card card-rose rounded-2xl p-6"><p class="heading-font text-rose-700 mb-2">❌ <code>open("w")</code> <span lang="kk" class="lang-content">бар файлды өшіреді</span><span lang="en" class="lang-content">deletes existing</span><span lang="ru" class="lang-content">удаляет содержимое</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Қажет болса «a» қолдан.</span><span lang="en" class="lang-content">Use "a" to keep old data.</span><span lang="ru" class="lang-content">Нужна история — бери "a".</span></p></div>
+<div class="card card-rose rounded-2xl p-6"><p class="heading-font text-rose-700 mb-2">❌ <span lang="kk" class="lang-content">encoding жоқ</span><span lang="en" class="lang-content">no encoding</span><span lang="ru" class="lang-content">нет encoding</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Windows-та UnicodeDecodeError. <code>encoding="utf-8"</code> жаз.</span><span lang="en" class="lang-content">UnicodeDecodeError on Windows. Add <code>encoding="utf-8"</code>.</span><span lang="ru" class="lang-content">На Windows — UnicodeDecodeError. Указывай <code>encoding="utf-8"</code>.</span></p></div>
+<div class="card card-warm rounded-2xl p-6"><p class="heading-font text-amber-700 mb-2">⚠ <code>f.close()</code> <span lang="kk" class="lang-content">ұмыту</span><span lang="en" class="lang-content">forgot</span><span lang="ru" class="lang-content">забыл</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Жазу сақталмайды! Әрқашан <b>with</b>.</span><span lang="en" class="lang-content">Data may not flush! Always use <b>with</b>.</span><span lang="ru" class="lang-content">Запись не сбрасывается! Используй <b>with</b>.</span></p></div>
+<div class="card card-emerald rounded-2xl p-6"><p class="heading-font text-emerald-700 mb-2">✅ <span lang="kk" class="lang-content">Ереже</span><span lang="en" class="lang-content">Rule</span><span lang="ru" class="lang-content">Правило</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Әрдайым <code>with open(…)</code>, encoding және try/except!</span><span lang="en" class="lang-content">Always <code>with open(…)</code>, set encoding, handle exceptions!</span><span lang="ru" class="lang-content">Всегда <code>with open(…)</code>, указывай encoding, лови исключения!</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔓</div>
+<p class="heading-font text-xl text-sky-700 mb-2">open(mode)</p>
+<p class="text-slate-600 text-sm">r / w / a / x / b / +</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🛡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">with</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">автожабу</span><span lang="en" class="lang-content">auto-close</span><span lang="ru" class="lang-content">автозакрытие</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌍</div>
+<p class="heading-font text-xl text-sky-700 mb-2">utf-8</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">әрқашан көрсет</span><span lang="en" class="lang-content">always specify</span><span lang="ru" class="lang-content">всегда указывай</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

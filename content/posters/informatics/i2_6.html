@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Растровая графика: пиксели и цвет</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">5 сынып · Компьютерлік графика</span>
+<span lang="en" class="lang-content">Grade 5 · Computer graphics</span>
+<span lang="ru" class="lang-content">5 класс · Компьютерная графика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Растрлық графика: пикселдер мен түс</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Raster graphics: pixels and colour</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Растровая графика: пиксели и цвет</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🟦 Пиксель дегеніміз не?</span>
+<span lang="en" class="lang-content">🟦 What is a pixel?</span>
+<span lang="ru" class="lang-content">🟦 Что такое пиксель?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Пиксель</b> (ағылш. «picture element» — «сурет бөлігі») — цифрлы суреттің <b>ең кіші кірпіші</b>. Экранға жақын-жақын қарасаң, кішкентай шаршы нүктелерді көресің — бұл пикселдер. Әр пиксельдің <b>біртегіс түсі</b> болады. Көп пиксель жиылып <b>сурет</b> құрайды — бұл <b>растрлық</b> (pixel-based) графика. Фотоаппарат, камера, сканер және көптеген редакторлар (Paint, Photoshop) осылай жұмыс істейді.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">pixel</b> (from "picture element") is the <b>smallest building block</b> of a digital image. Zoom into any photo and you'll see tiny coloured squares — those are pixels. Each pixel has a <b>single solid colour</b>. Millions of pixels together make a picture — this is <b>raster</b> (pixel-based) graphics. Cameras, scanners and editors like Paint or Photoshop all work this way.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Пиксель</b> (от англ. «picture element» — «элемент картинки») — <b>самый маленький кирпичик</b> цифровой картинки. Если сильно приблизить фото, увидишь крошечные квадратики — это пиксели. У каждого пикселя <b>один сплошной цвет</b>. Миллионы пикселей вместе и дают картинку — это <b>растровая</b> (пиксельная) графика. Так работают фотокамера, сканер, редакторы вроде Paint или Photoshop.</span></p>
+</div>
+<div class="card rounded-custom p-4 flex items-center justify-center">
+<svg viewBox="0 0 220 220" style="width:100%;max-width:220px">
+<g shape-rendering="crispEdges">
+<rect x="0"   y="0"   width="55" height="55" fill="#fbbf24"/>
+<rect x="55"  y="0"   width="55" height="55" fill="#fbbf24"/>
+<rect x="110" y="0"   width="55" height="55" fill="#fbbf24"/>
+<rect x="165" y="0"   width="55" height="55" fill="#fbbf24"/>
+<rect x="0"   y="55"  width="55" height="55" fill="#f87171"/>
+<rect x="55"  y="55"  width="55" height="55" fill="#f9a8d4"/>
+<rect x="110" y="55"  width="55" height="55" fill="#f9a8d4"/>
+<rect x="165" y="55"  width="55" height="55" fill="#f87171"/>
+<rect x="0"   y="110" width="55" height="55" fill="#f87171"/>
+<rect x="55"  y="110" width="55" height="55" fill="#f9a8d4"/>
+<rect x="110" y="110" width="55" height="55" fill="#fecaca"/>
+<rect x="165" y="110" width="55" height="55" fill="#f87171"/>
+<rect x="0"   y="165" width="55" height="55" fill="#f87171"/>
+<rect x="55"  y="165" width="55" height="55" fill="#f87171"/>
+<rect x="110" y="165" width="55" height="55" fill="#f87171"/>
+<rect x="165" y="165" width="55" height="55" fill="#f87171"/>
+<g stroke="#94a3b8" stroke-width="1" fill="none">
+<line x1="55"  y1="0" x2="55"  y2="220"/>
+<line x1="110" y1="0" x2="110" y2="220"/>
+<line x1="165" y1="0" x2="165" y2="220"/>
+<line x1="0" y1="55"  x2="220" y2="55"/>
+<line x1="0" y1="110" x2="220" y2="110"/>
+<line x1="0" y1="165" x2="220" y2="165"/>
+</g></g></svg>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎨 RGB түстер: қалай жасалады?</span>
+<span lang="en" class="lang-content">🎨 RGB colours: how they are made</span>
+<span lang="ru" class="lang-content">🎨 RGB-цвета: как они получаются</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4">
+<span lang="kk" class="lang-content">Экрандағы әр пиксель <b>үш жарық диодынан</b> тұрады: <b class="text-rose-600">қызыл (Red)</b>, <b class="text-green-600">жасыл (Green)</b>, <b class="text-sky-600">көк (Blue)</b>. Әр диодтың жарықтығы <b>0-ден 255-ке</b> дейін болады. Олардың араласуы <b>16 миллионнан астам</b> түс береді!</span>
+<span lang="en" class="lang-content">Every screen pixel has <b>three tiny lights</b>: <b class="text-rose-600">Red</b>, <b class="text-green-600">Green</b>, <b class="text-sky-600">Blue</b>. Each light has brightness <b>0 to 255</b>. Mixing them gives <b>over 16 million</b> different colours!</span>
+<span lang="ru" class="lang-content">Каждый пиксель экрана состоит из <b>трёх крошечных лампочек</b>: <b class="text-rose-600">красная (Red)</b>, <b class="text-green-600">зелёная (Green)</b>, <b class="text-sky-600">синяя (Blue)</b>. Яркость каждой — от <b>0 до 255</b>. При смешении получается <b>более 16 миллионов</b> разных цветов!</span></p>
+<div class="overflow-x-auto"><table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Түс</span><span lang="en" class="lang-content">Colour</span><span lang="ru" class="lang-content">Цвет</span></th>
+<th>R</th><th>G</th><th>B</th>
+<th><span lang="kk" class="lang-content">Не алынады</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Что получится</span></th>
+</tr></thead>
+<tbody>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#000;border-radius:4px;vertical-align:middle"></span></td><td>0</td><td>0</td><td>0</td><td><span lang="kk" class="lang-content">Қара (жарық жоқ)</span><span lang="en" class="lang-content">Black (no light)</span><span lang="ru" class="lang-content">Чёрный (света нет)</span></td></tr>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#fff;border:1px solid #cbd5e1;border-radius:4px;vertical-align:middle"></span></td><td>255</td><td>255</td><td>255</td><td><span lang="kk" class="lang-content">Ақ (толық жарық)</span><span lang="en" class="lang-content">White (full light)</span><span lang="ru" class="lang-content">Белый (все лампочки)</span></td></tr>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#ef4444;border-radius:4px;vertical-align:middle"></span></td><td>255</td><td>0</td><td>0</td><td><span lang="kk" class="lang-content">Қызыл</span><span lang="en" class="lang-content">Red</span><span lang="ru" class="lang-content">Красный</span></td></tr>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#22c55e;border-radius:4px;vertical-align:middle"></span></td><td>0</td><td>255</td><td>0</td><td><span lang="kk" class="lang-content">Жасыл</span><span lang="en" class="lang-content">Green</span><span lang="ru" class="lang-content">Зелёный</span></td></tr>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#3b82f6;border-radius:4px;vertical-align:middle"></span></td><td>0</td><td>0</td><td>255</td><td><span lang="kk" class="lang-content">Көк</span><span lang="en" class="lang-content">Blue</span><span lang="ru" class="lang-content">Синий</span></td></tr>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#eab308;border-radius:4px;vertical-align:middle"></span></td><td>255</td><td>255</td><td>0</td><td><span lang="kk" class="lang-content">Сары (R+G)</span><span lang="en" class="lang-content">Yellow (R+G)</span><span lang="ru" class="lang-content">Жёлтый (R+G)</span></td></tr>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#06b6d4;border-radius:4px;vertical-align:middle"></span></td><td>0</td><td>255</td><td>255</td><td><span lang="kk" class="lang-content">Көгілдір (G+B)</span><span lang="en" class="lang-content">Cyan (G+B)</span><span lang="ru" class="lang-content">Голубой (G+B)</span></td></tr>
+<tr><td><span style="display:inline-block;width:40px;height:24px;background:#ec4899;border-radius:4px;vertical-align:middle"></span></td><td>255</td><td>0</td><td>255</td><td><span lang="kk" class="lang-content">Күлгін (R+B)</span><span lang="en" class="lang-content">Magenta (R+B)</span><span lang="ru" class="lang-content">Пурпурный (R+B)</span></td></tr>
+</tbody></table></div>
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">💡 <b>Неге дәл үш түс?</b> Біздің көзімізде үш түрлі <b>рецептор</b> бар — қызыл, жасыл, көк жарыққа жауапты. Компьютер осы 3 түс арқылы миды «алдап» кез келген бояу жасай алады.</span>
+<span lang="en" class="lang-content">💡 <b>Why exactly three?</b> Our eyes have three kinds of <b>receptors</b> — for red, green and blue light. By mixing these 3 colours the computer «tricks» the brain into seeing any shade.</span>
+<span lang="ru" class="lang-content">💡 <b>Почему именно три?</b> В нашем глазу три вида <b>рецепторов</b> — на красный, зелёный и синий свет. Смешивая эти 3 цвета, компьютер «обманывает» мозг и рисует любой оттенок.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Рұқсат (Resolution) — неше пиксель?</span>
+<span lang="en" class="lang-content">📐 Resolution — how many pixels?</span>
+<span lang="ru" class="lang-content">📐 Разрешение — сколько пикселей?</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><b>Рұқсат</b> — көлденең × биіктік пикселдер саны. Неғұрлым пиксель көп болса, сурет соғұрлым <b>айқын</b>.</span>
+<span lang="en" class="lang-content"><b>Resolution</b> is the number of pixels width × height. More pixels = sharper image.</span>
+<span lang="ru" class="lang-content"><b>Разрешение</b> — это число пикселей в ширину × высоту. Чем больше пикселей — тем <b>чётче</b> картинка.</span></p>
+<ul class="text-slate-700 text-base list-disc pl-6 space-y-1">
+<li><b>16×16</b> — <span lang="kk" class="lang-content">белгіше, favicon</span><span lang="en" class="lang-content">icon, favicon</span><span lang="ru" class="lang-content">значок, favicon</span></li>
+<li><b>640×480</b> (VGA) — <span lang="kk" class="lang-content">ескі ойындар</span><span lang="en" class="lang-content">old games</span><span lang="ru" class="lang-content">старые игры</span></li>
+<li><b>1920×1080</b> (Full HD) — <span lang="kk" class="lang-content">ноутбук, ТВ</span><span lang="en" class="lang-content">laptop, TV</span><span lang="ru" class="lang-content">ноутбук, ТВ</span></li>
+<li><b>3840×2160</b> (4K) — <span lang="kk" class="lang-content">заманауи теледидар</span><span lang="en" class="lang-content">modern TV</span><span lang="ru" class="lang-content">современный телевизор</span></li>
+<li><b>12 Мп</b> (4000×3000) — <span lang="kk" class="lang-content">телефон камера</span><span lang="en" class="lang-content">phone camera</span><span lang="ru" class="lang-content">камера телефона</span></li>
+</ul></div>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-3 text-center">
+<span lang="kk" class="lang-content">Неге ұлғайтсаң бұзылады?</span>
+<span lang="en" class="lang-content">Why does zoom blur?</span>
+<span lang="ru" class="lang-content">Почему при увеличении «мылится»?</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 320 160" style="width:100%;max-width:320px">
+<g shape-rendering="crispEdges">
+<rect x="0"   y="20" width="10" height="10" fill="#0ea5e9"/>
+<rect x="10"  y="20" width="10" height="10" fill="#0ea5e9"/>
+<rect x="20"  y="20" width="10" height="10" fill="#0369a1"/>
+<rect x="0"   y="30" width="10" height="10" fill="#0ea5e9"/>
+<rect x="10"  y="30" width="10" height="10" fill="#0369a1"/>
+<rect x="20"  y="30" width="10" height="10" fill="#7dd3fc"/>
+<text x="15" y="60" text-anchor="middle" fill="#334155" font-size="8">оригинал</text>
+<rect x="100" y="0"  width="40" height="40" fill="#0ea5e9"/>
+<rect x="140" y="0"  width="40" height="40" fill="#0ea5e9"/>
+<rect x="180" y="0"  width="40" height="40" fill="#0369a1"/>
+<rect x="100" y="40" width="40" height="40" fill="#0ea5e9"/>
+<rect x="140" y="40" width="40" height="40" fill="#0369a1"/>
+<rect x="180" y="40" width="40" height="40" fill="#7dd3fc"/>
+<text x="160" y="100" text-anchor="middle" fill="#334155" font-size="10">увеличено x4 — видны квадраты</text>
+</g></svg></div>
+<p class="text-slate-600 text-sm mt-3">
+<span lang="kk" class="lang-content">🔍 Пиксельдер санын көбейту мүмкін емес — компьютер тек бар пикселдерді үлкейтеді.</span>
+<span lang="en" class="lang-content">🔍 You can't add new pixels — the computer just enlarges the existing ones.</span>
+<span lang="ru" class="lang-content">🔍 Новые пиксели взять неоткуда — компьютер лишь увеличивает существующие.</span></p>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💾 Форматтар</span>
+<span lang="en" class="lang-content">💾 File formats</span>
+<span lang="ru" class="lang-content">💾 Форматы файлов</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="tile"><div class="tile-emoji">🖼️</div><p class="heading-font text-sky-700"><b>.JPG</b></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Фото. Шағын файл, сапасы жоғалуы мүмкін.</span><span lang="en" class="lang-content">Photos. Small file, quality may drop.</span><span lang="ru" class="lang-content">Фото. Лёгкий, но качество чуть теряется.</span></p></div>
+<div class="tile"><div class="tile-emoji">🌐</div><p class="heading-font text-sky-700"><b>.PNG</b></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Мөлдір фон, сапа сақталады.</span><span lang="en" class="lang-content">Transparency, lossless.</span><span lang="ru" class="lang-content">Прозрачный фон, без потерь.</span></p></div>
+<div class="tile"><div class="tile-emoji">🎞️</div><p class="heading-font text-sky-700"><b>.GIF</b></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Қысқа анимация (256 түс).</span><span lang="en" class="lang-content">Short animation (256 colours).</span><span lang="ru" class="lang-content">Короткая анимация (256 цветов).</span></p></div>
+<div class="tile"><div class="tile-emoji">📦</div><p class="heading-font text-sky-700"><b>.BMP</b></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Шикі, үлкен файл (Paint).</span><span lang="en" class="lang-content">Raw, big file (Paint).</span><span lang="ru" class="lang-content">«Сырой», большой (Paint).</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🟦</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Сурет = пикселдер</span><span lang="en" class="lang-content">Image = pixels</span><span lang="ru" class="lang-content">Картинка = пиксели</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Кішкентай түсті шаршылар жиыны</span><span lang="en" class="lang-content">Grid of coloured squares</span><span lang="ru" class="lang-content">Сетка цветных квадратиков</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎨</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Түс = R + G + B</span><span lang="en" class="lang-content">Colour = R + G + B</span><span lang="ru" class="lang-content">Цвет = R + G + B</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Әрқайсысы 0–255 аралығы</span><span lang="en" class="lang-content">Each 0–255</span><span lang="ru" class="lang-content">Каждый 0–255</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Рұқсат</span><span lang="en" class="lang-content">Resolution</span><span lang="ru" class="lang-content">Разрешение</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Көп пиксель — айқын сурет</span><span lang="en" class="lang-content">More pixels — sharper</span><span lang="ru" class="lang-content">Больше пикселей — чётче</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

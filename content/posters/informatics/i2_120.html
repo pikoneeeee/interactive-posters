@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Перевод чисел между системами</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Сандар теориясы</span>
+<span lang="en" class="lang-content">Grade 10 · Number systems</span>
+<span lang="ru" class="lang-content">10 класс · Системы счисления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Жүйелер арасында ауыстыру</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Converting between systems</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Перевод между системами</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧭 4 бағыт</span>
+<span lang="en" class="lang-content">🧭 4 directions</span>
+<span lang="ru" class="lang-content">🧭 4 направления</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">Сандарды <b>4 бағытта</b> ауыстыру керек: <b>Dec → Bin / Oct / Hex</b> (<b>қайтарма бөлу</b> әдісі) және <b>Bin / Oct / Hex → Dec</b> (<b>позициялық қосу</b> әдісі). Binary — Oct/Hex арасындағы ауыстыру бәрінен жылдам: <b>3 бит → 1 октал</b> цифр, <b>4 бит → 1 hex</b> цифр. Сондықтан программистер көбіне <b>bin ↔ hex</b>-ті тікелей «қарап» ауыстырады.</span>
+<span lang="en" class="lang-content">There are <b>4 conversion paths</b>: <b>Dec → Bin/Oct/Hex</b> (<b>repeated division</b>) and <b>Bin/Oct/Hex → Dec</b> (<b>place-value sum</b>). Binary ↔ Oct/Hex is the quickest: <b>3 bits = 1 octal</b> digit, <b>4 bits = 1 hex</b> digit. Pros read <b>bin ↔ hex</b> at sight.</span>
+<span lang="ru" class="lang-content"><b>4 направления</b> перевода: <b>Dec → Bin/Oct/Hex</b> (<b>деление с остатком</b>) и <b>Bin/Oct/Hex → Dec</b> (<b>разложение по разрядам</b>). Самый быстрый — Bin ↔ Oct/Hex: <b>3 бита = 1 восьм. цифра</b>, <b>4 бита = 1 hex-цифра</b>. Программисты читают <b>bin ↔ hex</b> прямо с экрана.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">➗ Dec → Bin (<span lang="kk" class="lang-content">бөлу</span>)</span>
+<span lang="en" class="lang-content">➗ Dec → Bin (division)</span>
+<span lang="ru" class="lang-content">➗ Dec → Bin (деление)</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><b>Қадам</b>: 2-ге бөл, <b>қалдықты</b> жаз, бөліндіні қайта бөл. 0 шыққанша жалғастыр. <b>Төменнен жоғарыға</b> қалдықтарды жинасаң — жауап болады.</span>
+<span lang="en" class="lang-content"><b>Steps</b>: divide by 2, record the <b>remainder</b>, divide the quotient again. Stop at 0. Read remainders <b>bottom-up</b> — that's the binary number.</span>
+<span lang="ru" class="lang-content"><b>Шаги</b>: дели на 2, запиши <b>остаток</b>, дели дальше частное. Стоп на 0. Читай остатки <b>снизу вверх</b> — это ответ.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2">53 → ?₂</p>
+<table class="t" style="font-family:'JetBrains Mono',monospace"><thead><tr><th>÷2</th><th>=</th><th>rem</th></tr></thead><tbody>
+<tr><td>53</td><td>26</td><td><b>1</b> ↑</td></tr>
+<tr><td>26</td><td>13</td><td><b>0</b></td></tr>
+<tr><td>13</td><td>6</td><td><b>1</b></td></tr>
+<tr><td>6</td><td>3</td><td><b>0</b></td></tr>
+<tr><td>3</td><td>1</td><td><b>1</b></td></tr>
+<tr><td>1</td><td>0</td><td><b>1</b></td></tr>
+</tbody></table>
+<p class="mt-2 text-slate-700"><b>53 = 110101₂</b> ✅</p>
+</div>
+
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2">195 → ?₁₆</p>
+<table class="t" style="font-family:'JetBrains Mono',monospace"><thead><tr><th>÷16</th><th>=</th><th>rem</th></tr></thead><tbody>
+<tr><td>195</td><td>12</td><td><b>3</b> ↑</td></tr>
+<tr><td>12</td><td>0</td><td><b>C</b> (12)</td></tr>
+</tbody></table>
+<p class="mt-2 text-slate-700"><b>195 = C3₁₆</b> ✅</p>
+<p class="text-slate-500 text-xs mt-1"><span lang="kk" class="lang-content">12 = C, 13 = D, 14 = E, 15 = F</span><span lang="en" class="lang-content">12→C, 13→D, 14→E, 15→F</span><span lang="ru" class="lang-content">12→C, 13→D, 14→E, 15→F</span></p>
+</div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">➕ Bin → Dec (<span lang="kk" class="lang-content">қосу</span>)</span>
+<span lang="en" class="lang-content">➕ Bin → Dec (sum)</span>
+<span lang="ru" class="lang-content">➕ Bin → Dec (разложение)</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 600 140" style="width:100%;max-width:600px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="16">
+<rect x="30"  y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="60"  y="72" text-anchor="middle" font-weight="bold">1</text>
+<rect x="100" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="130" y="72" text-anchor="middle" font-weight="bold">1</text>
+<rect x="170" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="200" y="72" text-anchor="middle" font-weight="bold">0</text>
+<rect x="240" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="270" y="72" text-anchor="middle" font-weight="bold">1</text>
+<rect x="310" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="340" y="72" text-anchor="middle" font-weight="bold">0</text>
+<rect x="380" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="410" y="72" text-anchor="middle" font-weight="bold">1</text>
+
+<text x="60"  y="115" text-anchor="middle" fill="#b45309">2⁵=32</text>
+<text x="130" y="115" text-anchor="middle" fill="#b45309">2⁴=16</text>
+<text x="200" y="115" text-anchor="middle" fill="#64748b">2³=8</text>
+<text x="270" y="115" text-anchor="middle" fill="#b45309">2²=4</text>
+<text x="340" y="115" text-anchor="middle" fill="#64748b">2¹=2</text>
+<text x="410" y="115" text-anchor="middle" fill="#b45309">2⁰=1</text>
+
+<text x="480" y="72" fill="#0369a1" font-weight="bold">= 32+16+4+1 = 53</text>
+</g></svg></div>
+
+<div class="code-block">
+<span class="com"># 101101₂ → ?</span>
+1·2⁵ + 0·2⁴ + 1·2³ + 1·2² + 0·2¹ + 1·2⁰
+= 32 + 0 + 8 + 4 + 0 + 1
+= <b>45</b>
+
+<span class="com"># 2F₁₆ → ?</span>
+2·16¹ + 15·16⁰ = 32 + 15 = <b>47</b>
+
+<span class="com"># 755₈ → ?</span>
+7·8² + 5·8¹ + 5·8⁰ = 448 + 40 + 5 = <b>493</b>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Bin ↔ Oct / Hex — тікелей</span>
+<span lang="en" class="lang-content">⚡ Bin ↔ Oct / Hex — direct</span>
+<span lang="ru" class="lang-content">⚡ Bin ↔ Oct / Hex — напрямую</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content">8 = 2³, 16 = 2⁴ болғандықтан, екілік санды <b>3 немесе 4 битке</b> топтап жазсаң — октал/hex шығады.</span>
+<span lang="en" class="lang-content">Because 8 = 2³ and 16 = 2⁴, group bits by <b>3 or 4</b> and each group = one octal/hex digit.</span>
+<span lang="ru" class="lang-content">Так как 8 = 2³, 16 = 2⁴ — группируем биты <b>по 3 или по 4</b>, каждая группа = 1 цифра oct/hex.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2">Bin → Hex (<span lang="kk" class="lang-content">4-тен</span><span lang="en" class="lang-content">by 4</span><span lang="ru" class="lang-content">по 4</span>)</p>
+<div class="code-block text-sm">
+11011010 0111
+↓    ↓    ↓
+1101 1010 0111
+  D    A    7
+→ <b>1DA7₁₆</b>
+</div></div>
+
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2">Bin → Oct (<span lang="kk" class="lang-content">3-тен</span><span lang="en" class="lang-content">by 3</span><span lang="ru" class="lang-content">по 3</span>)</p>
+<div class="code-block text-sm">
+111 011 010
+ 7   3   2
+→ <b>732₈</b>
+
+Hex → Bin:
+A = 1010, B = 1011, …
+</div></div>
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 <b>Оңнан солға</b> топта! Керек болса — <b>0</b> қосасың: <code>11010₂</code> → <code>0001 1010</code> → <code>1A</code>.</span>
+<span lang="en" class="lang-content">💡 Group <b>right-to-left</b>! Pad with <b>0</b> if needed: <code>11010₂</code> → <code>0001 1010</code> → <code>1A</code>.</span>
+<span lang="ru" class="lang-content">💡 Группируй <b>справа налево</b>! Дополняй <b>0</b> при нехватке: <code>11010₂</code> → <code>0001 1010</code> → <code>1A</code>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔁 Универсал таблица</span>
+<span lang="en" class="lang-content">🔁 Universal cheat-sheet</span>
+<span lang="ru" class="lang-content">🔁 Универсальная таблица</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Қайдан → қайда</span><span lang="en" class="lang-content">From → to</span><span lang="ru" class="lang-content">Из → в</span></th>
+<th><span lang="kk" class="lang-content">Әдіс</span><span lang="en" class="lang-content">Method</span><span lang="ru" class="lang-content">Метод</span></th>
+</tr></thead><tbody>
+<tr><td>Dec → Bin / Oct / Hex</td><td><span lang="kk" class="lang-content">негізге қалдықпен бөлу, артқа оқу</span><span lang="en" class="lang-content">divide by base, read up</span><span lang="ru" class="lang-content">дели на основание, читай снизу</span></td></tr>
+<tr><td>Bin / Oct / Hex → Dec</td><td>Σ <span lang="kk" class="lang-content">цифр · негіз</span><span lang="en" class="lang-content">digit · base</span><span lang="ru" class="lang-content">цифра · основание</span>ⁿ</td></tr>
+<tr><td>Bin ↔ Oct</td><td>3 <span lang="kk" class="lang-content">битке топтау</span><span lang="en" class="lang-content">bit groups of 3</span><span lang="ru" class="lang-content">группы по 3 бита</span></td></tr>
+<tr><td>Bin ↔ Hex</td><td>4 <span lang="kk" class="lang-content">битке</span><span lang="en" class="lang-content">bit groups of 4</span><span lang="ru" class="lang-content">по 4 бита</span></td></tr>
+<tr><td>Oct ↔ Hex</td><td><span lang="kk" class="lang-content">Bin арқылы</span><span lang="en" class="lang-content">via Binary</span><span lang="ru" class="lang-content">через Bin</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐍 Python-да</span>
+<span lang="en" class="lang-content">🐍 In Python</span>
+<span lang="ru" class="lang-content">🐍 В Python</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="fn">int</span>(<span class="str">"101101"</span>, <span class="num">2</span>)    <span class="com"># 45 — <span lang="kk" class="lang-content">жолдан</span>from string<span lang="ru" class="lang-content">из строки</span></span>
+<span class="fn">int</span>(<span class="str">"2F"</span>, <span class="num">16</span>)        <span class="com"># 47</span>
+<span class="fn">int</span>(<span class="str">"755"</span>, <span class="num">8</span>)        <span class="com"># 493</span>
+
+<span class="fn">bin</span>(<span class="num">45</span>)               <span class="com"># '0b101101'</span>
+<span class="fn">oct</span>(<span class="num">45</span>)               <span class="com"># '0o55'</span>
+<span class="fn">hex</span>(<span class="num">45</span>)               <span class="com"># '0x2d'</span>
+
+<span class="fn">format</span>(<span class="num">45</span>, <span class="str">'08b'</span>)     <span class="com"># '00101101'  8-bit padded</span>
+<span class="fn">format</span>(<span class="num">255</span>, <span class="str">'02X'</span>)    <span class="com"># 'FF'</span>
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">➗</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Dec → base → <span lang="kk" class="lang-content">қалдық</span><span lang="en" class="lang-content">remainder</span><span lang="ru" class="lang-content">остаток</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">➕</div>
+<p class="heading-font text-xl text-sky-700 mb-2">base → Dec = Σ d·bⁿ</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">bin ↔ hex = 4 bit</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цикл for</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 8 · Python</span>
+<span lang="ru" class="lang-content">8 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">for циклі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">for loop</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Цикл for</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">for — «тізімнен өту»</span>
+<span lang="en" class="lang-content">for — «walk the list»</span>
+<span lang="ru" class="lang-content">for — «пройти по списку»</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">for</b> циклі — белгілі <b>тізімнің/аралықтың</b> әр элементіне бір рет қатесіз барады. Python-дағы <code>for</code> <b>C/Java-дан ерекше</b>: тек «<b>әр элемент үшін</b>» форматы бар — «<b>үшін</b>-тізбек» (for-each). Ол <b>есептегіш-айнымалыны</b> саған автоматты береді, қадамды қадамдауды ұмытпайсың. Қайта-қайта жиі қолданылатын конструкция болғандықтан, Python-да <code>for</code> бүкіл кодтың <b>~40%-ын</b> құрайды (GitHub статистикасы, 2023).</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">for</b> walks through every element of a known <b>sequence</b>. Python's <code>for</code> differs from C/Java — it is only a <b>for-each</b>: the counter is handed to you automatically. According to GitHub stats (2023), <code>for</code> accounts for ~40% of all Python loops.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">for</b> проходит по каждому элементу известной <b>последовательности</b>. В Python это только «<b>for-each</b>»: счётчик выдаётся автоматически — забыть обновить его невозможно. По статистике GitHub 2023 г. на <code>for</code> приходится ~40% всех Python-циклов.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐍 Синтаксис</span>
+<span lang="en" class="lang-content">🐍 Syntax</span>
+<span lang="ru" class="lang-content">🐍 Синтаксис</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">for</span> <span class="fn">айнымалы</span> <span class="kw">in</span> <span class="fn">тізбек</span>:
+    <span class="com"># <span lang="kk" class="lang-content">дене</span>body<span lang="ru" class="lang-content">тело</span></span>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2">range()</p>
+<div class="code-block text-sm">
+<span class="fn">range</span>(<span class="num">5</span>)           <span class="com"># 0,1,2,3,4</span>
+<span class="fn">range</span>(<span class="num">1</span>, <span class="num">6</span>)        <span class="com"># 1,2,3,4,5</span>
+<span class="fn">range</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">2</span>)    <span class="com"># 0,2,4,6,8</span>
+<span class="fn">range</span>(<span class="num">10</span>, <span class="num">0</span>, <span class="num">-1</span>)   <span class="com"># 10,9,...,1</span>
+</div></div>
+
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">Кез келген тізбек</span><span lang="en" class="lang-content">Any sequence</span><span lang="ru" class="lang-content">Любая последовательность</span></p>
+<div class="code-block text-sm">
+<span class="kw">for</span> x <span class="kw">in</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]:    <span class="com"># list</span>
+<span class="kw">for</span> c <span class="kw">in</span> <span class="str">"Python"</span>:   <span class="com"># string</span>
+<span class="kw">for</span> k <span class="kw">in</span> {<span class="str">"a"</span>: <span class="num">1</span>}:   <span class="com"># dict</span>
+<span class="kw">for</span> line <span class="kw">in</span> file:  <span class="com"># file</span>
+</div></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 9 пайдалы мысал</span>
+<span lang="en" class="lang-content">🎯 9 useful examples</span>
+<span lang="ru" class="lang-content">🎯 9 полезных примеров</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">① 5 × Hello</p>
+<div class="code-block text-xs">
+<span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):
+    <span class="fn">print</span>(<span class="str">"Hello"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">② <span lang="kk" class="lang-content">1+2+...+100</span><span lang="en" class="lang-content">Sum 1..100</span><span lang="ru" class="lang-content">Сумма 1..100</span></p>
+<div class="code-block text-xs">
+s = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>):
+    s += i
+<span class="fn">print</span>(s)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">③ <span lang="kk" class="lang-content">Жұптар қосындысы</span><span lang="en" class="lang-content">Sum of evens</span><span lang="ru" class="lang-content">Сумма чётных</span></p>
+<div class="code-block text-xs">
+s = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, <span class="num">21</span>, <span class="num">2</span>):
+    s += i
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">④ <span lang="kk" class="lang-content">Тізімнің макс.</span><span lang="en" class="lang-content">List max</span><span lang="ru" class="lang-content">Макс. списка</span></p>
+<div class="code-block text-xs">
+nums = [<span class="num">3</span>,<span class="num">1</span>,<span class="num">4</span>,<span class="num">1</span>,<span class="num">5</span>]
+m = nums[<span class="num">0</span>]
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x &gt; m: m = x
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">⑤ <span lang="kk" class="lang-content">Жол әріптерін сана</span><span lang="en" class="lang-content">Count letters</span><span lang="ru" class="lang-content">Счёт букв</span></p>
+<div class="code-block text-xs">
+word = <span class="str">"Mississippi"</span>
+count = <span class="num">0</span>
+<span class="kw">for</span> ch <span class="kw">in</span> word:
+    <span class="kw">if</span> ch == <span class="str">"s"</span>: count += <span class="num">1</span>
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">⑥ <span lang="kk" class="lang-content">Жаңа тізім — квадраттар</span><span lang="en" class="lang-content">Build list</span><span lang="ru" class="lang-content">Строим список</span></p>
+<div class="code-block text-xs">
+sq = []
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">6</span>):
+    sq.<span class="fn">append</span>(i * i)
+<span class="com"># [1, 4, 9, 16, 25]</span>
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">⑦ enumerate</p>
+<div class="code-block text-xs">
+<span class="kw">for</span> i, x <span class="kw">in</span> <span class="fn">enumerate</span>(lst, <span class="num">1</span>):
+    <span class="fn">print</span>(i, x)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">⑧ zip — <span lang="kk" class="lang-content">қосарланған</span><span lang="en" class="lang-content">pair up</span><span lang="ru" class="lang-content">пары</span></p>
+<div class="code-block text-xs">
+names = [<span class="str">"A"</span>,<span class="str">"B"</span>]
+ages  = [<span class="num">12</span>,<span class="num">13</span>]
+<span class="kw">for</span> n, a <span class="kw">in</span> <span class="fn">zip</span>(names, ages):
+    <span class="fn">print</span>(n, a)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 text-sm mb-1">⑨ <span lang="kk" class="lang-content">Кестеге оқу</span><span lang="en" class="lang-content">Read N lines</span><span lang="ru" class="lang-content">Прочесть N строк</span></p>
+<div class="code-block text-xs">
+n = <span class="fn">int</span>(<span class="fn">input</span>())
+<span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(n):
+    <span class="fn">print</span>(<span class="fn">input</span>())
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔁 Кірістірілген for (nested)</span>
+<span lang="en" class="lang-content">🔁 Nested for</span>
+<span lang="ru" class="lang-content">🔁 Вложенный for</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Бір for ішінде екінші for → <b>2D</b> есептеу. Көбейту кестесі, матрица, Пифагор.</span>
+<span lang="en" class="lang-content">for inside for → <b>2D</b> work: multiplication table, matrix.</span>
+<span lang="ru" class="lang-content">for внутри for → <b>2D</b>-обход: таблица умножения, матрица.</span></p>
+<div class="code-block">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">6</span>):
+    <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">6</span>):
+        <span class="fn">print</span>(i * j, end=<span class="str">"\t"</span>)
+    <span class="fn">print</span>()
+<span class="com"># 1  2  3  4  5
+# 2  4  6  8  10
+# ...</span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ for vs while</span>
+<span lang="en" class="lang-content">⚖️ for vs while</span>
+<span lang="ru" class="lang-content">⚖️ for против while</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th></th><th><b>for</b></th><th><b>while</b></th>
+</tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">Қайталау саны</span><span lang="en" class="lang-content">Count</span><span lang="ru" class="lang-content">Кол-во повторов</span></td><td>✅ <span lang="kk" class="lang-content">белгілі</span><span lang="en" class="lang-content">known</span><span lang="ru" class="lang-content">известно</span></td><td>❓ <span lang="kk" class="lang-content">белгісіз</span><span lang="en" class="lang-content">unknown</span><span lang="ru" class="lang-content">неизвестно</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Есептегіш</span><span lang="en" class="lang-content">Counter</span><span lang="ru" class="lang-content">Счётчик</span></td><td>🤖 <span lang="kk" class="lang-content">автоматты</span><span lang="en" class="lang-content">auto</span><span lang="ru" class="lang-content">автоматически</span></td><td>✋ <span lang="kk" class="lang-content">қолмен</span><span lang="en" class="lang-content">manual</span><span lang="ru" class="lang-content">вручную</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Қолдану</span><span lang="en" class="lang-content">Use for</span><span lang="ru" class="lang-content">Применение</span></td><td><span lang="kk" class="lang-content">тізбектер, диапазон</span><span lang="en" class="lang-content">sequences, range</span><span lang="ru" class="lang-content">последовательности, диапазон</span></td><td><span lang="kk" class="lang-content">шартқа байланысты</span><span lang="en" class="lang-content">condition-based</span><span lang="ru" class="lang-content">по условию</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Қате мүмкіндігі</span><span lang="en" class="lang-content">Bug risk</span><span lang="ru" class="lang-content">Риск бага</span></td><td><span lang="kk" class="lang-content">төмен</span><span lang="en" class="lang-content">low</span><span lang="ru" class="lang-content">низкий</span></td><td><span lang="kk" class="lang-content">жоғары (шексіздік)</span><span lang="en" class="lang-content">high (infinite)</span><span lang="ru" class="lang-content">высокий (бесконечность)</span></td></tr>
+</tbody></table></div>
+
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="text-slate-700"><b class="text-sky-700"><span lang="kk" class="lang-content">Ереже:</span><span lang="en" class="lang-content">Rule:</span><span lang="ru" class="lang-content">Правило:</span></b>
+<span lang="kk" class="lang-content">санды білсең — <b>for</b>, білмесең — <b>while</b>.</span>
+<span lang="en" class="lang-content">know the count → <b>for</b>; depends on condition → <b>while</b>.</span>
+<span lang="ru" class="lang-content">знаешь сколько раз — <b>for</b>; зависит от условия — <b>while</b>.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔁</div>
+<p class="heading-font text-xl text-sky-700 mb-2">for x in …</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔢</div>
+<p class="heading-font text-xl text-sky-700 mb-2">range(start, stop, step)</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚫</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">шексіз мүмкін емес</span><span lang="en" class="lang-content">no infinite risk</span><span lang="ru" class="lang-content">без бесконечности</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

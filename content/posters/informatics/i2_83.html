@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>else в циклах</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 8 · Python</span>
+<span lang="ru" class="lang-content">8 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Циклдегі else</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">else in loops</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">else в циклах</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Циклде else? Қалай?</span>
+<span lang="en" class="lang-content">else in a loop? What?</span>
+<span lang="ru" class="lang-content">else в цикле? Как?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Python-ның <b>ерекше мүмкіндігі</b>: <b class="text-sky-700">else</b> блогы <b>цикл ішінде</b> де болуы мүмкін. Бұл қарапайым <code>if/else</code> <b>емес</b>! Ережесі қарапайым: <b>else орындалады, егер цикл break-сіз аяқталса</b>. Яғни: «циклды толық айналдым ба?» → else. «break-пен шықтым» → else <b>өткізіледі</b>. Бұл идея тек Python-да және <b>Rust</b>-та бар — C, Java, JS-те жоқ. Монти Python-ның өзінше «әзілі»! Қолдану: іздеу циклдарынан кейін «табылмады» деген хабарды жазу.</span>
+<span lang="en" class="lang-content">Python has a <b>unique feature</b>: <b class="text-sky-700">else</b> can be attached to <b>a loop</b>. It is not the usual <code>if/else</code>! Rule: <b>else runs only if the loop finished without break</b>. «Looped all the way?» → else. «Left via break?» → else <b>skipped</b>. Only Python and Rust have this — not C, Java, JS. It's even been called «Python's odd gift». Typical use: after a search loop print «not found».</span>
+<span lang="ru" class="lang-content">У Python есть <b>уникальная фича</b>: <b class="text-sky-700">else</b> можно прицепить к <b>циклу</b>. Это не обычный <code>if/else</code>! Правило: <b>else выполняется только если цикл завершился БЕЗ break</b>. «Прошёл цикл до конца?» → else. «Вышел через break?» → else <b>пропускается</b>. Такого нет ни в C, ни в Java, ни в JS — только Python и Rust. Применение: после поискового цикла печатаем «не найдено».</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐍 Синтаксис</span>
+<span lang="en" class="lang-content">🐍 Syntax</span>
+<span lang="ru" class="lang-content">🐍 Синтаксис</span></h2>
+<div class="card rounded-custom p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div>
+<p class="heading-font text-sky-700 mb-2">for + else</p>
+<div class="code-block">
+<span class="kw">for</span> x <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):
+    <span class="fn">print</span>(x)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Done!"</span>)
+<span class="com"># 0 1 2 3 4 Done!</span>
+</div></div>
+
+<div>
+<p class="heading-font text-sky-700 mb-2">while + else</p>
+<div class="code-block">
+i = <span class="num">0</span>
+<span class="kw">while</span> i &lt; <span class="num">3</span>:
+    <span class="fn">print</span>(i)
+    i += <span class="num">1</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Ended"</span>)
+<span class="com"># 0 1 2 Ended</span>
+</div></div>
+</div>
+
+<div class="card-accent rounded-xl p-5 mt-5">
+<p class="heading-font text-sky-700 mb-2">🔁 else ↔ break <span lang="kk" class="lang-content">байланысы</span><span lang="en" class="lang-content">relation</span><span lang="ru" class="lang-content">связь</span></p>
+<table class="t text-sm"><thead><tr>
+<th><span lang="kk" class="lang-content">Цикл қалай аяқталды?</span><span lang="en" class="lang-content">How ended?</span><span lang="ru" class="lang-content">Как завершился?</span></th>
+<th><span lang="kk" class="lang-content">else орындала ма?</span><span lang="en" class="lang-content">else runs?</span><span lang="ru" class="lang-content">Выполнится else?</span></th>
+</tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">Толық</span><span lang="en" class="lang-content">Full cycle</span><span lang="ru" class="lang-content">Полный проход</span></td><td style="color:#16a34a">✅ <span lang="kk" class="lang-content">иә</span><span lang="en" class="lang-content">yes</span><span lang="ru" class="lang-content">да</span></td></tr>
+<tr><td>break</td><td style="color:#dc2626">❌ <span lang="kk" class="lang-content">жоқ</span><span lang="en" class="lang-content">no</span><span lang="ru" class="lang-content">нет</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Қате (exception)</span><span lang="en" class="lang-content">Exception</span><span lang="ru" class="lang-content">Исключение</span></td><td style="color:#dc2626">❌</td></tr>
+<tr><td><span lang="kk" class="lang-content">return / sys.exit</span><span lang="en" class="lang-content">return / sys.exit</span><span lang="ru" class="lang-content">return / sys.exit</span></td><td style="color:#dc2626">❌</td></tr>
+</tbody></table></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Пайдалы мысалдар</span>
+<span lang="en" class="lang-content">🎯 Useful examples</span>
+<span lang="ru" class="lang-content">🎯 Полезные примеры</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">① <span lang="kk" class="lang-content">Іздеу</span><span lang="en" class="lang-content">Search</span><span lang="ru" class="lang-content">Поиск</span></p>
+<div class="code-block">
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x == target:
+        <span class="fn">print</span>(<span class="str">"🎯 found"</span>)
+        <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"😕 not found"</span>)
+</div>
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">Классикалық «не табылса — else» үлгісі.</span><span lang="en" class="lang-content">Classic «no-break else» pattern.</span><span lang="ru" class="lang-content">Классический паттерн «не прерывали — else».</span></p></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">② <span lang="kk" class="lang-content">Жай сан</span><span lang="en" class="lang-content">Prime check</span><span lang="ru" class="lang-content">Простое число</span></p>
+<div class="code-block">
+n = <span class="fn">int</span>(<span class="fn">input</span>())
+<span class="kw">for</span> d <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, n):
+    <span class="kw">if</span> n % d == <span class="num">0</span>:
+        <span class="fn">print</span>(<span class="str">"composite"</span>)
+        <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"prime ✅"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">③ <span lang="kk" class="lang-content">Пароль 3 рет</span><span lang="en" class="lang-content">Password 3 tries</span><span lang="ru" class="lang-content">Пароль 3 попытки</span></p>
+<div class="code-block">
+<span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>):
+    <span class="kw">if</span> <span class="fn">input</span>() == <span class="str">"secret"</span>:
+        <span class="fn">print</span>(<span class="str">"🔓"</span>); <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"🚫 blocked"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">④ <span lang="kk" class="lang-content">Бүкіл тізім оң</span><span lang="en" class="lang-content">All positive?</span><span lang="ru" class="lang-content">Все положительные?</span></p>
+<div class="code-block">
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x &lt; <span class="num">0</span>:
+        <span class="fn">print</span>(<span class="str">"❌"</span>); <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"✅ all positive"</span>)
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔁 Альтернатива — «флаг»</span>
+<span lang="en" class="lang-content">🔁 Alternative — «flag»</span>
+<span lang="ru" class="lang-content">🔁 Альтернатива — «флаг»</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Басқа тілдерде else жоқ болғандықтан, <b>логикалық «флаг»</b> пайдаланады:</span>
+<span lang="en" class="lang-content">Without loop-else other languages use a <b>boolean flag</b>:</span>
+<span lang="ru" class="lang-content">В других языках вместо else — <b>булев флаг</b>:</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-rose rounded-xl p-5">
+<p class="heading-font text-rose-700 mb-2"><span lang="kk" class="lang-content">Флагпен</span><span lang="en" class="lang-content">With flag</span><span lang="ru" class="lang-content">С флагом</span></p>
+<div class="code-block text-sm">
+found = <span class="num">False</span>
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x == target:
+        found = <span class="num">True</span>
+        <span class="kw">break</span>
+<span class="kw">if</span> <span class="kw">not</span> found:
+    <span class="fn">print</span>(<span class="str">"not found"</span>)
+</div></div>
+
+<div class="card-emerald rounded-xl p-5">
+<p class="heading-font text-emerald-700 mb-2">else <span lang="kk" class="lang-content">— ықшам</span><span lang="en" class="lang-content">— compact</span><span lang="ru" class="lang-content">— компактно</span></p>
+<div class="code-block text-sm">
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x == target:
+        <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"not found"</span>)
+</div></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Шатаспа!</span>
+<span lang="en" class="lang-content">⚠️ Don't confuse!</span>
+<span lang="ru" class="lang-content">⚠️ Не путай!</span></h2>
+<div class="card-rose rounded-custom p-6">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content"><b>else</b> — <b>цикл ішінде орналасқан if-ке жатпайды</b>! Ол <b>циклге</b> жатады, сондықтан <b>бір шегініспен</b> жазылады.</span>
+<span lang="en" class="lang-content"><b>else</b> does <b>not</b> belong to any <code>if</code> inside — it belongs to the <b>loop</b>. It is at the <b>same indent</b> as <code>for/while</code>.</span>
+<span lang="ru" class="lang-content"><b>else</b> НЕ относится к внутреннему <code>if</code> — только к <b>самому циклу</b>. И пишется с <b>тем же отступом</b>, что и <code>for/while</code>.</span></p>
+
+<div class="code-block">
+<span class="kw">for</span> x <span class="kw">in</span> nums:
+    <span class="kw">if</span> x == target:
+        <span class="kw">break</span>
+<span class="kw">else</span>:                <span class="com"># ← <span lang="kk" class="lang-content">for-ға тиесілі!</span>belongs to for<span lang="ru" class="lang-content">относится к for</span></span>
+    ...
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Трассировка</span>
+<span lang="en" class="lang-content">🧪 Trace</span>
+<span lang="ru" class="lang-content">🧪 Трассировка</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">nums = [2, 4, 6]; target = 4</span><span lang="en" class="lang-content">nums = [2, 4, 6]; target = 4</span><span lang="ru" class="lang-content">nums = [2, 4, 6]; target = 4</span></p>
+<div class="code-block">
+<span class="kw">for</span> x <span class="kw">in</span> [<span class="num">2</span>, <span class="num">4</span>, <span class="num">6</span>]:
+    <span class="kw">if</span> x == <span class="num">4</span>:
+        <span class="fn">print</span>(<span class="str">"found"</span>)
+        <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"not found"</span>)
+</div>
+<table class="t text-sm mt-4"><thead><tr>
+<th>x</th><th>x == 4?</th><th><span lang="kk" class="lang-content">әрекет</span><span lang="en" class="lang-content">action</span><span lang="ru" class="lang-content">действие</span></th>
+</tr></thead><tbody>
+<tr><td>2</td><td>❌</td><td><span lang="kk" class="lang-content">келесі</span><span lang="en" class="lang-content">next</span><span lang="ru" class="lang-content">следующая</span></td></tr>
+<tr><td>4</td><td>✅</td><td>print("found") · break</td></tr>
+<tr style="background:rgba(244,63,94,.08)"><td colspan="3"><b>else — <span lang="kk" class="lang-content">өткізілді (break болды)</span><span lang="en" class="lang-content">skipped (break)</span><span lang="ru" class="lang-content">пропущен (был break)</span></b></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎓 Шын қолданыс — валидация</span>
+<span lang="en" class="lang-content">🎓 Real-world — validation</span>
+<span lang="ru" class="lang-content">🎓 На практике — валидация</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">«Барлық символдар цифр па?»</span>
+<span lang="en" class="lang-content">«Are all characters digits?»</span>
+<span lang="ru" class="lang-content">«Все ли символы — цифры?»</span></p>
+<div class="code-block">
+s = <span class="fn">input</span>()
+<span class="kw">for</span> ch <span class="kw">in</span> s:
+    <span class="kw">if</span> <span class="kw">not</span> ch.<span class="fn">isdigit</span>():
+        <span class="fn">print</span>(<span class="str">"❌ not all digits"</span>)
+        <span class="kw">break</span>
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"✅ ok, number ="</span>, <span class="fn">int</span>(s))
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔁</div>
+<p class="heading-font text-xl text-sky-700 mb-2">for/while + else</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">тек Python-да</span><span lang="en" class="lang-content">Python only</span><span lang="ru" class="lang-content">только в Python</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">✅</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">break жоқ</span><span lang="en" class="lang-content">no break</span><span lang="ru" class="lang-content">нет break</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">→ else орындалады</span><span lang="en" class="lang-content">→ else runs</span><span lang="ru" class="lang-content">→ else выполняется</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎯</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">«табылмады» үшін</span><span lang="en" class="lang-content">for «not found»</span><span lang="ru" class="lang-content">для «не найдено»</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цикл while</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 8 · Python</span>
+<span lang="ru" class="lang-content">8 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">while циклі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">while loop</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Цикл while</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Цикл не үшін керек?</span>
+<span lang="en" class="lang-content">Why loops?</span>
+<span lang="ru" class="lang-content">Зачем нужны циклы?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Цикл</b> — «орындау + қайталау + қайталау + ...». Бізге 1000 рет <code>print("Hello")</code> жазу керек пе? Жоқ! Циклмен — 3 жолда. <b>while</b> латын тілінде «пока», «әзірше». Орындалу реті: <b>шарт</b> тексеріледі → <b>True</b>-да тәне орындалады → <b>шартқа</b> қайта оралады. Шарт <b>False</b> болғанда цикл тоқтайды. Мектепке келген <b>бірінші</b> цикл 1950 жылы ALGOL-да пайда болды. Бүгінге дейін әр бағдарламашы күнде қолданады!</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">loop</b> is «execute + repeat + repeat…». Need <code>print("Hello")</code> 1 000 times? Not by hand — a loop does it in 3 lines. <b>while</b> means «as long as». Flow: check <b>condition</b> → if <b>True</b>, run body → back to check. Stops when condition is <b>False</b>. The first loop appeared in ALGOL in 1950 and is used daily by every programmer.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Цикл</b> — «выполни + повтори + повтори…». Нужно написать <code>print("Hello")</code> 1 000 раз? Не вручную — цикл сделает это в 3 строки. <b>while</b> = «пока». Порядок: проверка <b>условия</b> → если <b>True</b>, выполнить тело → вернуться к проверке. Останавливается при <b>False</b>. Первый цикл появился в ALGOL в 1950 году.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐍 Синтаксис</span>
+<span lang="en" class="lang-content">🐍 Syntax</span>
+<span lang="ru" class="lang-content">🐍 Синтаксис</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-custom p-6">
+<div class="code-block">
+<span class="kw">while</span> <span class="fn">шарт</span>:
+    <span class="com"># <span lang="kk" class="lang-content">дене — 4 бос орын</span>body — 4 spaces<span lang="ru" class="lang-content">тело — 4 пробела</span></span>
+    <span class="com"># <span lang="kk" class="lang-content">есептегішті өзгерту керек!</span>must change counter!<span lang="ru" class="lang-content">нужно менять счётчик!</span></span>
+</div>
+<p class="text-slate-700 text-sm mt-3"><b>3</b> <span lang="kk" class="lang-content">маңызды бөлім</span><span lang="en" class="lang-content">key parts</span><span lang="ru" class="lang-content">важные части</span>:</p>
+<ol class="text-slate-700 text-sm space-y-1">
+<li>1. <span lang="kk" class="lang-content">Бастапқы мән</span><span lang="en" class="lang-content">initial value</span><span lang="ru" class="lang-content">начальное значение</span>: i = 0</li>
+<li>2. <span lang="kk" class="lang-content">Шарт</span><span lang="en" class="lang-content">condition</span><span lang="ru" class="lang-content">условие</span>: while i &lt; 10</li>
+<li>3. <span lang="kk" class="lang-content">Өзгерту</span><span lang="en" class="lang-content">update</span><span lang="ru" class="lang-content">обновление</span>: i += 1</li>
+</ol></div>
+
+<div class="card rounded-custom p-6">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">Жұмыс жолы</span><span lang="en" class="lang-content">Flow</span><span lang="ru" class="lang-content">Как работает</span></p>
+<svg viewBox="0 0 280 200" style="width:100%">
+<rect x="100" y="10" width="80" height="25" rx="12" fill="#c7d2fe" stroke="#3730a3"/>
+<text x="140" y="27" text-anchor="middle" font-weight="700" fill="#3730a3" font-size="12">Start</text>
+<path d="M140,35 L140,50" stroke="#334155" stroke-width="2"/>
+<polygon points="140,50 200,90 140,130 80,90" fill="#fde68a" stroke="#78350f" stroke-width="2"/>
+<text x="140" y="93" text-anchor="middle" font-weight="700" fill="#78350f" font-size="11"><tspan class="lang-content" lang="kk">шарт?</tspan><tspan class="lang-content" lang="en">cond?</tspan><tspan class="lang-content" lang="ru">условие?</tspan></text>
+<path d="M200,90 L245,90 L245,160" stroke="#16a34a" stroke-width="2"/>
+<text x="215" y="82" fill="#16a34a" font-weight="700" font-size="11">T</text>
+<rect x="200" y="160" width="70" height="25" fill="#bbf7d0" stroke="#166534"/>
+<text x="235" y="177" text-anchor="middle" font-size="11" fill="#166534"><tspan class="lang-content" lang="kk">дене</tspan><tspan class="lang-content" lang="en">body</tspan><tspan class="lang-content" lang="ru">тело</tspan></text>
+<path d="M235,160 L235,100 L140,50" stroke="#334155" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+<path d="M80,90 L20,90 L20,180" stroke="#dc2626" stroke-width="2"/>
+<text x="45" y="82" fill="#dc2626" font-weight="700" font-size="11">F</text>
+<rect x="0" y="180" width="40" height="18" rx="9" fill="#fecaca"/>
+<text x="20" y="193" text-anchor="middle" font-size="11" fill="#7f1d1d">End</text>
+</svg></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Мысалдар</span>
+<span lang="en" class="lang-content">🎯 Examples</span>
+<span lang="ru" class="lang-content">🎯 Примеры</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">① <span lang="kk" class="lang-content">10-ға дейін санау</span><span lang="en" class="lang-content">Count to 10</span><span lang="ru" class="lang-content">Счёт до 10</span></p>
+<div class="code-block">
+i = <span class="num">1</span>
+<span class="kw">while</span> i &lt;= <span class="num">10</span>:
+    <span class="fn">print</span>(i)
+    i += <span class="num">1</span>
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">② <span lang="kk" class="lang-content">Қосынды 1+...+N</span><span lang="en" class="lang-content">Sum 1+…+N</span><span lang="ru" class="lang-content">Сумма 1+…+N</span></p>
+<div class="code-block">
+n = <span class="fn">int</span>(<span class="fn">input</span>())
+s, i = <span class="num">0</span>, <span class="num">1</span>
+<span class="kw">while</span> i &lt;= n:
+    s += i
+    i += <span class="num">1</span>
+<span class="fn">print</span>(s)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">③ <span lang="kk" class="lang-content">Факториал</span><span lang="en" class="lang-content">Factorial</span><span lang="ru" class="lang-content">Факториал</span></p>
+<div class="code-block">
+n = <span class="fn">int</span>(<span class="fn">input</span>())
+f, i = <span class="num">1</span>, <span class="num">1</span>
+<span class="kw">while</span> i &lt;= n:
+    f *= i
+    i += <span class="num">1</span>
+<span class="fn">print</span>(f)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">④ <span lang="kk" class="lang-content">Санның цифрлары</span><span lang="en" class="lang-content">Digits of a number</span><span lang="ru" class="lang-content">Цифры числа</span></p>
+<div class="code-block">
+n = <span class="fn">int</span>(<span class="fn">input</span>())
+count = <span class="num">0</span>
+<span class="kw">while</span> n &gt; <span class="num">0</span>:
+    n //= <span class="num">10</span>
+    count += <span class="num">1</span>
+<span class="fn">print</span>(count)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">⑤ <span lang="kk" class="lang-content">Сан табу ойыны</span><span lang="en" class="lang-content">Guess the number</span><span lang="ru" class="lang-content">Угадай число</span></p>
+<div class="code-block">
+<span class="kw">import</span> random
+x = random.<span class="fn">randint</span>(<span class="num">1</span>, <span class="num">100</span>)
+guess = -<span class="num">1</span>
+<span class="kw">while</span> guess != x:
+    guess = <span class="fn">int</span>(<span class="fn">input</span>())
+    <span class="kw">if</span> guess &lt; x: <span class="fn">print</span>(<span class="str">"&gt;"</span>)
+    <span class="kw">elif</span> guess &gt; x: <span class="fn">print</span>(<span class="str">"&lt;"</span>)
+<span class="fn">print</span>(<span class="str">"🎉"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">⑥ <span lang="kk" class="lang-content">Меню</span><span lang="en" class="lang-content">Menu loop</span><span lang="ru" class="lang-content">Меню</span></p>
+<div class="code-block">
+<span class="kw">while</span> <span class="num">True</span>:
+    c = <span class="fn">input</span>(<span class="str">"cmd: "</span>)
+    <span class="kw">if</span> c == <span class="str">"q"</span>:
+        <span class="kw">break</span>
+    <span class="fn">print</span>(<span class="str">"You said:"</span>, c)
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">♾ Шексіз цикл — қауіп!</span>
+<span lang="en" class="lang-content">♾ Infinite loop — danger!</span>
+<span lang="ru" class="lang-content">♾ Бесконечный цикл — опасность!</span></h2>
+<div class="card-rose rounded-custom p-6">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Шартты қойып, оны <b>ешқашан өзгертпесең</b> — цикл <b>мәңгі</b> орындалады. Программа жай болып, тоқтатуға <b>Ctrl+C</b> қажет.</span>
+<span lang="en" class="lang-content">If the condition <b>never changes</b>, the loop runs forever. Press <b>Ctrl+C</b> to stop.</span>
+<span lang="ru" class="lang-content">Если условие <b>никогда не меняется</b>, цикл работает вечно. Останови клавишами <b>Ctrl+C</b>.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="code-block">
+<span class="com"># ❌ <span lang="kk" class="lang-content">мәңгі жұмыс!</span>forever!<span lang="ru" class="lang-content">бесконечно!</span></span>
+i = <span class="num">1</span>
+<span class="kw">while</span> i &lt; <span class="num">10</span>:
+    <span class="fn">print</span>(i)
+    <span class="com"># i += 1 ұмытылды!</span>
+</div>
+
+<div class="code-block">
+<span class="com"># ✅ <span lang="kk" class="lang-content">дұрыс</span>correct<span lang="ru" class="lang-content">правильно</span></span>
+i = <span class="num">1</span>
+<span class="kw">while</span> i &lt; <span class="num">10</span>:
+    <span class="fn">print</span>(i)
+    i += <span class="num">1</span>   <span class="com"># ← <span lang="kk" class="lang-content">қадам</span>step<span lang="ru" class="lang-content">шаг</span></span>
+</div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎮 while True + break</span>
+<span lang="en" class="lang-content">🎮 while True + break</span>
+<span lang="ru" class="lang-content">🎮 while True + break</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Кейде алдын-ала қайталау санын білмейтін жағдайлар болады: пайдаланушы «q» енгізгенше. Мұндайда — <code>while True</code> + <code>break</code>:</span>
+<span lang="en" class="lang-content">Sometimes you don't know how many iterations are needed — loop until user types «q»:</span>
+<span lang="ru" class="lang-content">Иногда заранее не знаешь, сколько раз повторять — пока пользователь не введёт «q»:</span></p>
+<div class="code-block">
+<span class="kw">while</span> <span class="num">True</span>:                <span class="com"># <span lang="kk" class="lang-content">шексіз</span>infinite<span lang="ru" class="lang-content">бесконечно</span></span>
+    line = <span class="fn">input</span>()
+    <span class="kw">if</span> line == <span class="str">"q"</span>:
+        <span class="kw">break</span>              <span class="com"># <span lang="kk" class="lang-content">циклден шығу</span>exit loop<span lang="ru" class="lang-content">выход</span></span>
+    <span class="fn">print</span>(<span class="str">"echo:"</span>, line)
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Трассировка</span>
+<span lang="en" class="lang-content">🧪 Trace table</span>
+<span lang="ru" class="lang-content">🧪 Трассировка</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><code>i=1; while i&lt;=3: print(i); i+=1</code> — <span lang="kk" class="lang-content">қадам-қадаммен</span><span lang="en" class="lang-content">step by step</span><span lang="ru" class="lang-content">пошагово</span>:</p>
+<table class="t text-sm"><thead><tr>
+<th>#</th><th>i</th><th>i &lt;= 3</th><th>print</th>
+</tr></thead><tbody>
+<tr><td>1</td><td>1</td><td>✅ True</td><td>1</td></tr>
+<tr><td>2</td><td>2</td><td>✅ True</td><td>2</td></tr>
+<tr><td>3</td><td>3</td><td>✅ True</td><td>3</td></tr>
+<tr><td>4</td><td>4</td><td>❌ False</td><td>—</td></tr>
+</tbody></table>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📜 Есте сақта — 3 ереже</span>
+<span lang="en" class="lang-content">📜 3 rules</span>
+<span lang="ru" class="lang-content">📜 3 правила</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-accent rounded-xl p-5"><p class="heading-font text-sky-700">1. Init</p><p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">есептегіштің бастапқы мәні</span><span lang="en" class="lang-content">initial counter value</span><span lang="ru" class="lang-content">нач. значение счётчика</span></p></div>
+<div class="card-accent rounded-xl p-5"><p class="heading-font text-sky-700">2. Condition</p><p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">ұдайы True болмасын</span><span lang="en" class="lang-content">must become False eventually</span><span lang="ru" class="lang-content">должно когда-то стать False</span></p></div>
+<div class="card-accent rounded-xl p-5"><p class="heading-font text-sky-700">3. Update</p><p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">денеде есептегішті өзгерт</span><span lang="en" class="lang-content">update inside body</span><span lang="ru" class="lang-content">обнови в теле</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-sky-700 mb-2">while <span lang="kk" class="lang-content">шарт</span><span lang="en" class="lang-content">cond</span><span lang="ru" class="lang-content">условие</span>:</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚠️</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Есептегішті өзгерт!</span><span lang="en" class="lang-content">Update counter!</span><span lang="ru" class="lang-content">Меняй счётчик!</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🛑</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Ctrl+C</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">шексіз циклдан құтылу</span><span lang="en" class="lang-content">escape infinite</span><span lang="ru" class="lang-content">побег из бесконечного</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Создание окна игры</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Ойын жасау</span>
+<span lang="en" class="lang-content">Grade 9 · Game dev</span>
+<span lang="ru" class="lang-content">9 класс · Геймдев</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Ойын терезесін құру</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Creating the game window</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Создание окна игры</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🪟 Ең қысқа PyGame-код</span>
+<span lang="en" class="lang-content">🪟 Shortest PyGame code</span>
+<span lang="ru" class="lang-content">🪟 Минимальный PyGame-код</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content">Терезе — кез келген ойынның <b>бастапқы тасы</b>. 10 жолдан кем кодпен бос, түрлі-түсті, FPS-мен тұрақты жұмыс істейтін терезе алуға болады. Сенің кейіпкерлерің, артқы фондарың, ойын механикасы — бәрі <b>осы негіздің</b> үстіне құрылады.</span>
+<span lang="en" class="lang-content">The window is the <b>foundation</b> of any game. In under 10 lines you can open an empty, coloured, 60 FPS window. All characters, backgrounds and game logic will sit on <b>this base</b>.</span>
+<span lang="ru" class="lang-content">Окно — <b>фундамент</b> любой игры. В 10 строк кода уже есть пустое, цветное, стабильные 60 FPS окно. Все персонажи, фоны и механики строятся на <b>этой основе</b>.</span></p>
+
+<div class="code-block">
+<span class="kw">import</span> pygame, sys
+
+pygame.<span class="fn">init</span>()
+screen = pygame.display.<span class="fn">set_mode</span>((<span class="num">800</span>, <span class="num">600</span>))
+pygame.display.<span class="fn">set_caption</span>(<span class="str">"My Game"</span>)
+clock = pygame.time.<span class="fn">Clock</span>()
+
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="kw">for</span> e <span class="kw">in</span> pygame.event.<span class="fn">get</span>():
+        <span class="kw">if</span> e.type == pygame.QUIT:
+            pygame.<span class="fn">quit</span>(); sys.<span class="fn">exit</span>()
+
+    screen.<span class="fn">fill</span>((<span class="num">30</span>, <span class="num">41</span>, <span class="num">59</span>))   <span class="com"># dark</span>
+    pygame.display.<span class="fn">flip</span>()
+    clock.<span class="fn">tick</span>(<span class="num">60</span>)                 <span class="com"># 60 FPS</span>
+</div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔎 Жолды жол бойынша түсіну</span>
+<span lang="en" class="lang-content">🔎 Line-by-line</span>
+<span lang="ru" class="lang-content">🔎 Строка за строкой</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th>#</th><th><span lang="kk" class="lang-content">Жол</span><span lang="en" class="lang-content">Line</span><span lang="ru" class="lang-content">Строка</span></th>
+<th><span lang="kk" class="lang-content">Не істейді</span><span lang="en" class="lang-content">Purpose</span><span lang="ru" class="lang-content">Что делает</span></th>
+</tr></thead><tbody>
+<tr><td>1</td><td><code>import pygame, sys</code></td><td><span lang="kk" class="lang-content">кітапханаларды қосу</span><span lang="en" class="lang-content">import libs</span><span lang="ru" class="lang-content">подключение</span></td></tr>
+<tr><td>2</td><td><code>pygame.init()</code></td><td><span lang="kk" class="lang-content">барлық модульдерді оятады</span><span lang="en" class="lang-content">init all modules</span><span lang="ru" class="lang-content">инициализация</span></td></tr>
+<tr><td>3</td><td><code>set_mode((W, H))</code></td><td><span lang="kk" class="lang-content">терезе құру</span><span lang="en" class="lang-content">create window</span><span lang="ru" class="lang-content">создать окно</span></td></tr>
+<tr><td>4</td><td><code>set_caption(…)</code></td><td><span lang="kk" class="lang-content">тақырып жолы</span><span lang="en" class="lang-content">title bar</span><span lang="ru" class="lang-content">заголовок</span></td></tr>
+<tr><td>5</td><td><code>Clock()</code></td><td><span lang="kk" class="lang-content">FPS-ті басқару</span><span lang="en" class="lang-content">control FPS</span><span lang="ru" class="lang-content">контроль FPS</span></td></tr>
+<tr><td>6–8</td><td><code>for e in pygame.event.get():</code></td><td><span lang="kk" class="lang-content">оқиға кезегі</span><span lang="en" class="lang-content">event queue</span><span lang="ru" class="lang-content">очередь событий</span></td></tr>
+<tr><td>9</td><td><code>fill(color)</code></td><td><span lang="kk" class="lang-content">экранды тазалап бояу</span><span lang="en" class="lang-content">clear &amp; fill</span><span lang="ru" class="lang-content">очистка фоном</span></td></tr>
+<tr><td>10</td><td><code>display.flip()</code></td><td><span lang="kk" class="lang-content">буферді экранға шығару</span><span lang="en" class="lang-content">swap buffer</span><span lang="ru" class="lang-content">обновление экрана</span></td></tr>
+<tr><td>11</td><td><code>clock.tick(60)</code></td><td><span lang="kk" class="lang-content">секундта 60 кадр</span><span lang="en" class="lang-content">60 frames/s</span><span lang="ru" class="lang-content">60 кадров/с</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🖥 Режимдер</span>
+<span lang="en" class="lang-content">🖥 Window modes</span>
+<span lang="ru" class="lang-content">🖥 Режимы окна</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🪟 <span lang="kk" class="lang-content">Қарапайым</span><span lang="en" class="lang-content">Windowed</span><span lang="ru" class="lang-content">Оконный</span></p>
+<div class="code-block text-xs">
+set_mode((800, 600))
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">📐 <span lang="kk" class="lang-content">Өлшемі өзгереді</span><span lang="en" class="lang-content">Resizable</span><span lang="ru" class="lang-content">Растягиваемое</span></p>
+<div class="code-block text-xs">
+set_mode((800, 600),
+         pygame.RESIZABLE)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">📺 <span lang="kk" class="lang-content">Толық экран</span><span lang="en" class="lang-content">Full-screen</span><span lang="ru" class="lang-content">Полный экран</span></p>
+<div class="code-block text-xs">
+set_mode((0, 0),
+         pygame.FULLSCREEN)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🎭 <span lang="kk" class="lang-content">Жақтаусыз</span><span lang="en" class="lang-content">Borderless</span><span lang="ru" class="lang-content">Без рамки</span></p>
+<div class="code-block text-xs">
+set_mode((800, 600),
+         pygame.NOFRAME)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">⚡ <span lang="kk" class="lang-content">Екі буфер (flicker жоқ)</span><span lang="en" class="lang-content">Double-buffered</span><span lang="ru" class="lang-content">Двойная буф.</span></p>
+<div class="code-block text-xs">
+set_mode((800, 600),
+         pygame.DOUBLEBUF)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🖼 <span lang="kk" class="lang-content">Таңба (icon)</span><span lang="en" class="lang-content">Custom icon</span><span lang="ru" class="lang-content">Своя иконка</span></p>
+<div class="code-block text-xs">
+icon = image.load("icon.png")
+display.set_icon(icon)
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🖌 Суретті салу</span>
+<span lang="en" class="lang-content">🖌 Drawing shapes</span>
+<span lang="ru" class="lang-content">🖌 Рисование фигур</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="com"># <span lang="kk" class="lang-content">толтырылған төртбұрыш</span>filled rect<span lang="ru" class="lang-content">заливка прямоугольника</span></span>
+pygame.draw.<span class="fn">rect</span>(screen, (<span class="num">239</span>, <span class="num">68</span>, <span class="num">68</span>), (<span class="num">100</span>, <span class="num">100</span>, <span class="num">120</span>, <span class="num">80</span>))
+
+<span class="com"># <span lang="kk" class="lang-content">қоршауы бар</span>outline 3 px<span lang="ru" class="lang-content">контур 3 px</span></span>
+pygame.draw.<span class="fn">rect</span>(screen, (<span class="num">59</span>, <span class="num">130</span>, <span class="num">246</span>), (<span class="num">260</span>, <span class="num">100</span>, <span class="num">120</span>, <span class="num">80</span>), <span class="num">3</span>)
+
+<span class="com"># <span lang="kk" class="lang-content">дөңгелек</span>circle<span lang="ru" class="lang-content">круг</span></span>
+pygame.draw.<span class="fn">circle</span>(screen, (<span class="num">253</span>,<span class="num">224</span>,<span class="num">71</span>), (<span class="num">500</span>, <span class="num">150</span>), <span class="num">40</span>)
+
+<span class="com"># <span lang="kk" class="lang-content">сызық</span>line<span lang="ru" class="lang-content">линия</span></span>
+pygame.draw.<span class="fn">line</span>(screen, (<span class="num">255</span>,<span class="num">255</span>,<span class="num">255</span>), (<span class="num">50</span>,<span class="num">400</span>), (<span class="num">750</span>,<span class="num">400</span>), <span class="num">4</span>)
+
+<span class="com"># <span lang="kk" class="lang-content">көпбұрыш</span>polygon<span lang="ru" class="lang-content">многоугольник</span></span>
+pygame.draw.<span class="fn">polygon</span>(screen, (<span class="num">34</span>,<span class="num">197</span>,<span class="num">94</span>),
+    [(<span class="num">600</span>,<span class="num">500</span>), (<span class="num">700</span>,<span class="num">550</span>), (<span class="num">650</span>,<span class="num">450</span>)])
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔤 Мәтін</span>
+<span lang="en" class="lang-content">🔤 Rendering text</span>
+<span lang="ru" class="lang-content">🔤 Отрисовка текста</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+font = pygame.font.<span class="fn">SysFont</span>(<span class="str">"Arial"</span>, <span class="num">36</span>, bold=<span class="num">True</span>)
+img  = font.<span class="fn">render</span>(<span class="str">"Score: 42"</span>, <span class="num">True</span>, (<span class="num">255</span>,<span class="num">255</span>,<span class="num">255</span>))
+screen.<span class="fn">blit</span>(img, (<span class="num">20</span>, <span class="num">20</span>))
+</div>
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">💡 <code>render(text, antialias, color)</code> — мәтінді <b>Surface</b> қылады, <code>blit</code>-пен экранға қоямыз.</span>
+<span lang="en" class="lang-content">💡 <code>render</code> returns a <b>Surface</b>; <code>blit</code> places it on screen.</span>
+<span lang="ru" class="lang-content">💡 <code>render</code> возвращает <b>Surface</b>, а <code>blit</code> рисует её на экране.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Қателер каталогы</span>
+<span lang="en" class="lang-content">⚠️ Common pitfalls</span>
+<span lang="ru" class="lang-content">⚠️ Частые ошибки</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🚫</div><p class="heading-font text-red-700 text-sm">pygame.init() <span lang="kk" class="lang-content">ұмыту</span><span lang="en" class="lang-content">forgotten</span><span lang="ru" class="lang-content">забыта</span></p></div>
+<div class="tile"><div class="tile-emoji">🪟</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">flip жоқ</span><span lang="en" class="lang-content">no flip()</span><span lang="ru" class="lang-content">нет flip()</span></p><p class="text-slate-600 text-xs">— <span lang="kk" class="lang-content">қара экран</span><span lang="en" class="lang-content">— black screen</span><span lang="ru" class="lang-content">— чёрный экран</span></p></div>
+<div class="tile"><div class="tile-emoji">⏱</div><p class="heading-font text-red-700 text-sm">clock.tick <span lang="kk" class="lang-content">жоқ</span><span lang="en" class="lang-content">missing</span><span lang="ru" class="lang-content">нет</span></p><p class="text-slate-600 text-xs">CPU 100%</p></div>
+<div class="tile"><div class="tile-emoji">❌</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">QUIT жоқ</span><span lang="en" class="lang-content">no QUIT</span><span lang="ru" class="lang-content">нет QUIT</span></p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">жабылмайды</span><span lang="en" class="lang-content">can't close</span><span lang="ru" class="lang-content">нельзя закрыть</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🪟</div>
+<p class="heading-font text-xl text-sky-700 mb-2">init → set_mode</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔁</div>
+<p class="heading-font text-xl text-sky-700 mb-2">fill → draw → flip</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⏱</div>
+<p class="heading-font text-xl text-sky-700 mb-2">clock.tick(60) · FPS</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

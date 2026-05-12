@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор предмета</title>
     <style>
-        /* Системный шрифт для быстрой загрузки */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -21,27 +15,45 @@
             color: white;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1400px; margin: 0 auto; }
 
         header {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         header h1 {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 800;
-            margin-bottom: 10px;
             text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            flex: 1;
+            text-align: center;
         }
 
-        header p {
-            font-size: 18px;
-            opacity: 0.9;
+        .lang-selector {
+            display: flex;
+            gap: 6px;
+            align-items: center;
         }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover { background: rgba(255,255,255,0.2); }
+        .lang-btn.active { background: white; color: #333; }
 
         .subjects-grid {
             display: grid;
@@ -73,11 +85,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .subject-card h2 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+        .subject-card h2 { font-size: 22px; font-weight: 700; }
 
         .subject-card .icon {
             font-size: 48px;
@@ -86,6 +94,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .subject-card .icon.text-icon {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 14px;
+            width: 64px;
+            height: 64px;
         }
 
         footer {
@@ -99,16 +117,21 @@
 </head>
 <body>
     <div class="container">
-
-
         <header>
-            <h1>Интерактивные плакаты</h1>
-
+            <div class="lang-selector" style="visibility:hidden;">
+                <button class="lang-btn">RU</button>
+                <button class="lang-btn">KZ</button>
+                <button class="lang-btn">EN</button>
+            </div>
+            <h1 id="page-title">Интерактивные плакаты</h1>
+            <div class="lang-selector" id="lang-selector">
+                <button class="lang-btn" data-lang="ru" onclick="selectLang('ru')">RU</button>
+                <button class="lang-btn" data-lang="kz" onclick="selectLang('kz')">KZ</button>
+                <button class="lang-btn" data-lang="en" onclick="selectLang('en')">EN</button>
+            </div>
         </header>
 
-        <div class="subjects-grid" id="subjects-grid">
-            <!-- Содержимое будет загружено из Python -->
-        </div>
+        <div class="subjects-grid" id="subjects-grid"></div>
 
         <footer>
             <p>© 2024 Интерактивные электронные плакаты</p>
@@ -117,31 +140,56 @@
 
     <script>
         let bridge = null;
+        let bridgeReady = false;
 
-        // Иконки для предметов
         const subjectIcons = {
-            'kazakhlang': '🇰🇿',
-            'russianlang': '🇷🇺',
-            'englishlang': 'en',
-            'math': '🔢',
-            'mathematics': '🔢',
-            'physics': '⚛️',
-            'chemistry': '🧪',
-            'informatics': '💻',
-            'geography': '🗺️',
-            'biology': '🧬',
-            'historykaz': '📜',
-            'worldhistory': '🌍'
+            'kazakhlang':   {text: 'KZ', isText: true},
+            'russianlang':  {text: 'RU', isText: true},
+            'englishlang':  {text: 'EN', isText: true},
+            'mathematics':  {text: '📐'},
+            'physics':      {text: '⚛️'},
+            'chemistry':    {text: '🧪'},
+            'informatics':  {text: '🖥️'},
+            'geography':    {text: '🌍'},
+            'biology':      {text: '🧬'},
+            'historykaz':   {text: '📜'},
+            'worldhistory': {text: '🏛️'}
         };
 
-        function goBack() {
-            if (bridge) {
-                bridge.onBackClicked();
+        const titles = {
+            'ru': 'Интерактивные плакаты',
+            'kz': 'Интерактивті плакаттар',
+            'en': 'Interactive Posters'
+        };
+
+        function getSavedLang() {
+            try { return localStorage.getItem('poster_lang') || 'ru'; } catch(e) { return 'ru'; }
+        }
+        function saveLang(lang) {
+            try { localStorage.setItem('poster_lang', lang); } catch(e) {}
+        }
+
+        function selectLang(lang) {
+            saveLang(lang);
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            var btn = document.querySelector('.lang-btn[data-lang="' + lang + '"]');
+            if (btn) btn.classList.add('active');
+            document.getElementById('page-title').textContent = titles[lang] || titles['ru'];
+            if (bridgeReady && bridge) {
+                bridge.onLangChanged(lang);
             }
         }
 
+        function initLangButtons() {
+            var lang = getSavedLang();
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            var btn = document.querySelector('.lang-btn[data-lang="' + lang + '"]');
+            if (btn) btn.classList.add('active');
+            document.getElementById('page-title').textContent = titles[lang] || titles['ru'];
+        }
+
         function renderSubjects(subjects) {
-            console.log("📚 renderSubjects() вызвана с", subjects.length, "предметами");
+            console.log("renderSubjects()", subjects.length);
             const grid = document.getElementById('subjects-grid');
             grid.innerHTML = '';
 
@@ -149,36 +197,34 @@
                 const card = document.createElement('div');
                 card.className = 'subject-card';
                 card.onclick = () => {
-                    console.log("📖 Клик на предмет:", subject.id);
-                    if (bridge) {
-                        bridge.onSubjectSelected(subject.id);
-                    }
+                    if (bridgeReady && bridge) bridge.onSubjectSelected(subject.id);
                 };
 
-                const icon = subjectIcons[subject.id] || '📚';
-                card.innerHTML = `
-                    <div class="icon">${icon}</div>
-                    <h2>${subject.name}</h2>
-                `;
+                const iconData = subjectIcons[subject.id] || {text: '📚'};
+                const iconDiv = document.createElement('div');
+                iconDiv.className = 'icon' + (iconData.isText ? ' text-icon' : '');
+                iconDiv.textContent = iconData.text;
+
+                const h2 = document.createElement('h2');
+                h2.textContent = subject.name;
+
+                card.appendChild(iconDiv);
+                card.appendChild(h2);
                 grid.appendChild(card);
             });
         }
 
-        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("📱 DOMContentLoaded - инициализирую");
+            initLangButtons();
 
             if (typeof QWebChannel !== 'undefined') {
-                console.log("✅ QWebChannel найден");
-
                 new QWebChannel(qt.webChannelTransport, function(channel) {
                     bridge = channel.objects.bridge;
-                    console.log("✅ Bridge получен");
-                    console.log("   Вызываю onFrontEndReady()");
+                    bridgeReady = true;
+                    var savedLang = getSavedLang();
+                    bridge.onLangChanged(savedLang);
                     bridge.onFrontEndReady();
                 });
-            } else {
-                console.error("❌ QWebChannel не найден!");
             }
         });
     </script>

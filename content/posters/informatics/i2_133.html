@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL: SELECT, WHERE, JOIN</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · SQL</span>
+<span lang="en" class="lang-content">Grade 10 · SQL</span>
+<span lang="ru" class="lang-content">10 класс · SQL</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">SQL: SELECT, WHERE, JOIN</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">SQL: SELECT, WHERE, JOIN</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">SQL: SELECT, WHERE, JOIN</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔎 SELECT — ең маңызды команда</span>
+<span lang="en" class="lang-content">🔎 SELECT — the most-used command</span>
+<span lang="ru" class="lang-content">🔎 SELECT — главная команда</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">SELECT</b> — барлық SQL-нің <b>80%-ы</b>. Тіркелу, ақша аудару, Instagram тасқыны — барлығы <code>SELECT</code>. Бір команда 6 <b>логикалық адым</b>: <b>FROM</b> → <b>WHERE</b> → <b>GROUP BY</b> → <b>HAVING</b> → <b>SELECT</b> → <b>ORDER BY</b>. Ал <b>жазу реті</b> басқаша!</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">SELECT</b> is <b>80% of SQL</b>. Logins, money transfers, Instagram feed — all are <code>SELECT</code>. A query runs in 6 <b>logical steps</b>: <b>FROM</b> → <b>WHERE</b> → <b>GROUP BY</b> → <b>HAVING</b> → <b>SELECT</b> → <b>ORDER BY</b>. The <b>writing order</b> is different!</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">SELECT</b> — это <b>80% всего SQL</b>. Логин, перевод денег, лента Instagram — всё это <code>SELECT</code>. Команда выполняется в 6 <b>логических шагов</b>: <b>FROM</b> → <b>WHERE</b> → <b>GROUP BY</b> → <b>HAVING</b> → <b>SELECT</b> → <b>ORDER BY</b>. А <b>пишется</b> в другом порядке!</span></p>
+<div class="code-block text-sm mt-4">
+<span class="kw">SELECT</span>    name, grade        <span class="com">-- 5. что показать</span>
+<span class="kw">FROM</span>      students           <span class="com">-- 1. откуда брать</span>
+<span class="kw">WHERE</span>     grade = <span class="num">10</span>         <span class="com">-- 2. какие строки</span>
+<span class="kw">ORDER BY</span>  name <span class="kw">ASC</span>           <span class="com">-- 6. как сортировать</span>
+<span class="kw">LIMIT</span>     <span class="num">5</span>;                 <span class="com">-- сколько показать</span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 WHERE — сүзу</span>
+<span lang="en" class="lang-content">🎯 WHERE — filtering</span>
+<span lang="ru" class="lang-content">🎯 WHERE — фильтрация</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Оператор</span><span lang="en" class="lang-content">Operator</span><span lang="ru" class="lang-content">Оператор</span></th>
+<th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th>
+<th><span lang="kk" class="lang-content">Мағына</span><span lang="en" class="lang-content">Meaning</span><span lang="ru" class="lang-content">Значение</span></th></tr></thead><tbody>
+<tr><td><code>=  &lt;&gt;  &lt; &gt; &lt;= &gt;=</code></td><td><code>grade &gt;= 10</code></td><td><span lang="kk" class="lang-content">салыстыру</span><span lang="en" class="lang-content">compare</span><span lang="ru" class="lang-content">сравнение</span></td></tr>
+<tr><td><code>AND / OR / NOT</code></td><td><code>grade=10 AND city='Almaty'</code></td><td><span lang="kk" class="lang-content">логика</span><span lang="en" class="lang-content">logic</span><span lang="ru" class="lang-content">логика</span></td></tr>
+<tr><td><code>BETWEEN a AND b</code></td><td><code>mark BETWEEN 4 AND 5</code></td><td><span lang="kk" class="lang-content">диапазон</span><span lang="en" class="lang-content">range</span><span lang="ru" class="lang-content">диапазон</span></td></tr>
+<tr><td><code>IN (…)</code></td><td><code>city IN ('Almaty','Astana')</code></td><td><span lang="kk" class="lang-content">тізімде</span><span lang="en" class="lang-content">in list</span><span lang="ru" class="lang-content">в списке</span></td></tr>
+<tr><td><code>LIKE '..%'</code></td><td><code>name LIKE 'A%'</code></td><td><span lang="kk" class="lang-content">үлгіге сай (%, _)</span><span lang="en" class="lang-content">pattern (%, _)</span><span lang="ru" class="lang-content">шаблон (%, _)</span></td></tr>
+<tr><td><code>IS NULL / IS NOT NULL</code></td><td><code>email IS NULL</code></td><td><span lang="kk" class="lang-content">бос өріс</span><span lang="en" class="lang-content">empty value</span><span lang="ru" class="lang-content">пустое поле</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Агрегация — жалпылау</span>
+<span lang="en" class="lang-content">📊 Aggregation — summarising</span>
+<span lang="ru" class="lang-content">📊 Агрегация — обобщение</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content">5 негізгі функция: <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>. <code>GROUP BY</code> оларды <b>топтар бойынша</b> есептеуге мүмкіндік береді.</span>
+<span lang="en" class="lang-content">Five key functions: <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>. <code>GROUP BY</code> computes them <b>per group</b>.</span>
+<span lang="ru" class="lang-content">Пять ключевых функций: <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>. <code>GROUP BY</code> считает их <b>по группам</b>.</span></p>
+<div class="code-block text-sm">
+<span class="com">-- общая статистика</span>
+<span class="kw">SELECT</span> <span class="fn">COUNT</span>(*), <span class="fn">AVG</span>(mark), <span class="fn">MAX</span>(mark)
+<span class="kw">FROM</span>   marks;
+
+<span class="com">-- средняя оценка по каждому классу</span>
+<span class="kw">SELECT</span>    class_id, <span class="fn">AVG</span>(mark) <span class="kw">AS</span> avg_mark, <span class="fn">COUNT</span>(*) <span class="kw">AS</span> n
+<span class="kw">FROM</span>      marks
+<span class="kw">GROUP BY</span>  class_id
+<span class="kw">HAVING</span>    <span class="fn">AVG</span>(mark) &gt; <span class="num">4.0</span>       <span class="com">-- фильтр групп</span>
+<span class="kw">ORDER BY</span>  avg_mark <span class="kw">DESC</span>;
+</div>
+<p class="text-slate-500 text-sm mt-3">
+<span lang="kk" class="lang-content">💡 <b>WHERE</b> — жолдарды, <b>HAVING</b> — топтарды сүзеді!</span>
+<span lang="en" class="lang-content">💡 <b>WHERE</b> filters rows, <b>HAVING</b> filters groups!</span>
+<span lang="ru" class="lang-content">💡 <b>WHERE</b> фильтрует строки, <b>HAVING</b> — группы!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔗 JOIN — кестелерді біріктіру</span>
+<span lang="en" class="lang-content">🔗 JOIN — combining tables</span>
+<span lang="ru" class="lang-content">🔗 JOIN — соединение таблиц</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 mb-4">
+<span lang="kk" class="lang-content">JOIN — бірнеше кестенің мәліметтерін <b>бір жолға</b> біріктіреді. Байланыс PK/FK арқылы: <code>ON t1.fk = t2.pk</code>.</span>
+<span lang="en" class="lang-content">JOIN merges data from several tables into <b>one row</b>. Linked by PK/FK: <code>ON t1.fk = t2.pk</code>.</span>
+<span lang="ru" class="lang-content">JOIN склеивает данные из нескольких таблиц в <b>одну строку</b>. Связь по PK/FK: <code>ON t1.fk = t2.pk</code>.</span></p>
+
+<div class="svg-wrap mb-4">
+<svg viewBox="0 0 680 200" style="width:100%;max-width:680px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="12" text-anchor="middle">
+<g><text x="80" y="25" fill="#0369a1" font-weight="bold">INNER</text>
+<circle cx="55" cy="100" r="40" fill="#bae6fd" stroke="#0369a1" fill-opacity="0.6"/>
+<circle cx="105" cy="100" r="40" fill="#bae6fd" stroke="#0369a1" fill-opacity="0.6"/>
+<ellipse cx="80" cy="100" rx="18" ry="30" fill="#0369a1" fill-opacity="0.5"/>
+</g>
+<g><text x="230" y="25" fill="#0369a1" font-weight="bold">LEFT</text>
+<circle cx="205" cy="100" r="40" fill="#0369a1" fill-opacity="0.5" stroke="#0369a1"/>
+<circle cx="255" cy="100" r="40" fill="#bae6fd" stroke="#0369a1" fill-opacity="0.5"/>
+</g>
+<g><text x="380" y="25" fill="#0369a1" font-weight="bold">RIGHT</text>
+<circle cx="355" cy="100" r="40" fill="#bae6fd" stroke="#0369a1" fill-opacity="0.5"/>
+<circle cx="405" cy="100" r="40" fill="#0369a1" fill-opacity="0.5" stroke="#0369a1"/>
+</g>
+<g><text x="530" y="25" fill="#0369a1" font-weight="bold">FULL OUTER</text>
+<circle cx="505" cy="100" r="40" fill="#0369a1" fill-opacity="0.5" stroke="#0369a1"/>
+<circle cx="555" cy="100" r="40" fill="#0369a1" fill-opacity="0.5" stroke="#0369a1"/>
+</g>
+<text x="80" y="170" fill="#475569" font-size="10">пересечение</text>
+<text x="230" y="170" fill="#475569" font-size="10">все слева</text>
+<text x="380" y="170" fill="#475569" font-size="10">все справа</text>
+<text x="530" y="170" fill="#475569" font-size="10">обе целиком</text>
+</g></svg></div>
+
+<div class="code-block text-sm">
+<span class="com">-- INNER JOIN — только совпадения в обеих</span>
+<span class="kw">SELECT</span> s.name, c.name <span class="kw">AS</span> class
+<span class="kw">FROM</span>   students s
+<span class="kw">INNER JOIN</span> classes c <span class="kw">ON</span> s.class_id = c.id;
+
+<span class="com">-- LEFT JOIN — все студенты, даже без класса</span>
+<span class="kw">SELECT</span> s.name, c.name <span class="kw">AS</span> class
+<span class="kw">FROM</span>   students s
+<span class="kw">LEFT JOIN</span> classes c <span class="kw">ON</span> s.class_id = c.id;
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏗 3 кестелік күрделі сұраныс</span>
+<span lang="en" class="lang-content">🏗 3-table complex query</span>
+<span lang="ru" class="lang-content">🏗 Сложный запрос с 3 таблицами</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-600 text-sm mb-2 heading-font">
+<span lang="kk" class="lang-content">📚 Әр сыныптың «Математика» орташа бағасы (4.0-тан жоғары):</span>
+<span lang="en" class="lang-content">📚 Average «Maths» mark per class (above 4.0):</span>
+<span lang="ru" class="lang-content">📚 Средняя оценка по «Математике» по каждому классу (выше 4.0):</span></p>
+<div class="code-block text-xs">
+<span class="kw">SELECT</span>    c.name       <span class="kw">AS</span> class,
+          <span class="fn">ROUND</span>(<span class="fn">AVG</span>(m.mark), <span class="num">2</span>) <span class="kw">AS</span> avg_mark,
+          <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> s.id) <span class="kw">AS</span> students
+<span class="kw">FROM</span>      marks m
+<span class="kw">JOIN</span>      students s <span class="kw">ON</span> m.student_id = s.id
+<span class="kw">JOIN</span>      classes  c <span class="kw">ON</span> s.class_id  = c.id
+<span class="kw">JOIN</span>      subjects su <span class="kw">ON</span> m.subject_id = su.id
+<span class="kw">WHERE</span>     su.name = <span class="str">'Математика'</span>
+  <span class="kw">AND</span>     m.date &gt;= <span class="str">'2024-09-01'</span>
+<span class="kw">GROUP BY</span>  c.name
+<span class="kw">HAVING</span>    <span class="fn">AVG</span>(m.mark) &gt; <span class="num">4.0</span>
+<span class="kw">ORDER BY</span>  avg_mark <span class="kw">DESC</span>
+<span class="kw">LIMIT</span>     <span class="num">10</span>;
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✨ Пайдалы трюктер</span>
+<span lang="en" class="lang-content">✨ Handy tricks</span>
+<span lang="ru" class="lang-content">✨ Полезные трюки</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-1">🏷 <code>AS</code> — alias</p><div class="code-block text-xs">SELECT name <span class="kw">AS</span> student FROM students s;</div></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-1">🔄 <code>DISTINCT</code></p><div class="code-block text-xs">SELECT <span class="kw">DISTINCT</span> city FROM students;</div></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-1">⬆ <code>ORDER BY</code></p><div class="code-block text-xs">... <span class="kw">ORDER BY</span> mark DESC, name ASC;</div></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-1">📄 <code>LIMIT / OFFSET</code></p><div class="code-block text-xs">... <span class="kw">LIMIT</span> 10 <span class="kw">OFFSET</span> 20;  <span class="com">-- страница</span></div></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔎</div>
+<p class="heading-font text-xl text-sky-700 mb-2">SELECT</p>
+<p class="text-slate-600 text-sm">80% SQL</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎯</div>
+<p class="heading-font text-xl text-sky-700 mb-2">WHERE · GROUP</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">сүзу + топтау</span><span lang="en" class="lang-content">filter + group</span><span lang="ru" class="lang-content">фильтр + группировка</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔗</div>
+<p class="heading-font text-xl text-sky-700 mb-2">JOIN</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">кестелерді біріктіру</span><span lang="en" class="lang-content">combine tables</span><span lang="ru" class="lang-content">связка таблиц</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

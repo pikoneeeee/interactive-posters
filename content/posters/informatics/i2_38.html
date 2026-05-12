@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ввод и вывод (input / print)</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">6 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 6 · Python</span>
+<span lang="ru" class="lang-content">6 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Енгізу және шығару: input / print</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Input and output: input() &amp; print()</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Ввод и вывод: input() и print()</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">«Құлақ» және «ауыз»</span>
+<span lang="en" class="lang-content">«Ears» and «mouth»</span>
+<span lang="ru" class="lang-content">«Уши» и «рот» программы</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Интерактивті бағдарламаның <b>3 кезеңі</b> бар: (1) <b>енгізу</b> — пайдаланушыдан деректерді ала, (2) <b>өңдеу</b> — есептеу, (3) <b>шығару</b> — нәтижені көрсету. Python-да енгізу үшін <code class="text-sky-700">input()</code>, шығару үшін <code class="text-sky-700">print()</code> қолданылады. Осы екеуі <b>«пайдаланушы ↔ бағдарлама»</b> диалогын құрайды. Олардың арқасында бағдарлама статикалық «құжат» емес, <b>тірі</b> құрал болады.</span>
+<span lang="en" class="lang-content">Every interactive program has <b>3 stages</b>: (1) <b>input</b> — get data from the user, (2) <b>processing</b>, (3) <b>output</b> — show the result. Python uses <code class="text-sky-700">input()</code> for input and <code class="text-sky-700">print()</code> for output. Together they create the <b>«user ↔ program»</b> dialogue. Thanks to them a program is not a static document but a <b>live</b> tool.</span>
+<span lang="ru" class="lang-content">У любой интерактивной программы <b>3 этапа</b>: (1) <b>ввод</b> — получить данные от пользователя, (2) <b>обработка</b>, (3) <b>вывод</b> — показать результат. В Python для ввода — <code class="text-sky-700">input()</code>, для вывода — <code class="text-sky-700">print()</code>. Вместе они создают диалог <b>«пользователь ↔ программа»</b>. Благодаря им программа — не документ, а <b>живой</b> инструмент.</span></p>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 600 140" style="width:100%;height:auto">
+<rect x="20" y="40" width="140" height="70" rx="10" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/>
+<text x="90" y="75" text-anchor="middle" font-weight="700" fill="#0369a1">👂 input()</text>
+<text x="90" y="95" text-anchor="middle" font-size="11" fill="#475569"><span lang="kk" class="lang-content">енгізу</span>input<span lang="ru" class="lang-content">ввод</span></text>
+<path d="M160,75 L220,75" stroke="#0369a1" stroke-width="3" marker-end="url(#a1)"/>
+<defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0369a1"/></marker></defs>
+<rect x="220" y="40" width="160" height="70" rx="10" fill="#fde68a" stroke="#78350f" stroke-width="2"/>
+<text x="300" y="75" text-anchor="middle" font-weight="700" fill="#78350f">⚙️ <span lang="kk" class="lang-content">өңдеу</span>process<span lang="ru" class="lang-content">обработка</span></text>
+<text x="300" y="95" text-anchor="middle" font-size="11" fill="#475569">x + y, if, for…</text>
+<path d="M380,75 L440,75" stroke="#78350f" stroke-width="3" marker-end="url(#a2)"/>
+<defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#78350f"/></marker></defs>
+<rect x="440" y="40" width="140" height="70" rx="10" fill="#bbf7d0" stroke="#166534" stroke-width="2"/>
+<text x="510" y="75" text-anchor="middle" font-weight="700" fill="#166534">👄 print()</text>
+<text x="510" y="95" text-anchor="middle" font-size="11" fill="#475569"><span lang="kk" class="lang-content">шығару</span>output<span lang="ru" class="lang-content">вывод</span></text>
+</svg></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">👄 print() — экранға жазу</span>
+<span lang="en" class="lang-content">👄 print() — write to screen</span>
+<span lang="ru" class="lang-content">👄 print() — пишем на экран</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Жақшаға <b>қалаған нәрсеңді</b> қоясың: жол, сан, айнымалы, өрнек. Бірнеше мәнді үтірмен бөлсең — арасында автоматты <b>бос орын</b> қойылады.</span>
+<span lang="en" class="lang-content">Put <b>anything</b> into parentheses: text, numbers, variables, expressions. Several values separated by commas → auto <b>spaces</b> between.</span>
+<span lang="ru" class="lang-content">В скобки можно положить <b>что угодно</b>: строку, число, переменную, выражение. Несколько значений через запятую — между ними автоматически <b>пробел</b>.</span></p>
+
+<div class="code-block">
+<span class="fn">print</span>(<span class="str">"Hello, world!"</span>)          <span class="com"># Hello, world!</span>
+<span class="fn">print</span>(<span class="num">2</span> + <span class="num">3</span>)                   <span class="com"># 5</span>
+<span class="fn">print</span>(<span class="str">"x ="</span>, x, <span class="str">"y ="</span>, y)    <span class="com"># x = 5 y = 10</span>
+<span class="fn">print</span>()                          <span class="com"># <span lang="kk" class="lang-content">бос жол</span>empty line<span lang="ru" class="lang-content">пустая строка</span></span>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2"><code>sep</code> — <span lang="kk" class="lang-content">бөлгіш</span><span lang="en" class="lang-content">separator</span><span lang="ru" class="lang-content">разделитель</span></p>
+<div class="code-block">
+<span class="fn">print</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, sep=<span class="str">"-"</span>)
+<span class="com"># 1-2-3</span>
+<span class="fn">print</span>(<span class="str">"а"</span>, <span class="str">"б"</span>, sep=<span class="str">""</span>)
+<span class="com"># аб</span>
+</div></div>
+
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2"><code>end</code> — <span lang="kk" class="lang-content">соңы</span><span lang="en" class="lang-content">ending</span><span lang="ru" class="lang-content">конец строки</span></p>
+<div class="code-block">
+<span class="fn">print</span>(<span class="str">"А"</span>, end=<span class="str">""</span>)
+<span class="fn">print</span>(<span class="str">"Б"</span>)
+<span class="com"># АБ (<span lang="kk" class="lang-content">бір жолда</span>one line<span lang="ru" class="lang-content">на одной строке</span>)</span>
+</div></div>
+</div>
+
+<div class="card-accent rounded-xl p-5 mt-5">
+<p class="heading-font text-sky-700 mb-2">✨ f-string — <span lang="kk" class="lang-content">ең ыңғайлы пішімдеу</span><span lang="en" class="lang-content">the easiest formatting</span><span lang="ru" class="lang-content">самый удобный формат</span></p>
+<div class="code-block">
+name = <span class="str">"Aidar"</span>
+age = <span class="num">12</span>
+<span class="fn">print</span>(<span class="str">f"Меня зовут {name}, мне {age} лет."</span>)
+<span class="com"># <span lang="kk" class="lang-content">Python 3.6+ қолдайды</span>Python 3.6+<span lang="ru" class="lang-content">Python 3.6+</span></span>
+</div></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">👂 input() — пайдаланушыдан сұрау</span>
+<span lang="en" class="lang-content">👂 input() — ask the user</span>
+<span lang="ru" class="lang-content">👂 input() — спрашиваем у пользователя</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><code>input()</code> клавиатурадан жол күтеді. Пайдаланушы <span class="kbd">Enter</span> басқанда — жазылған нәрсе <b>str</b> ретінде қайтарылады. Жақшаға сұраудың мәтінін қоюға болады.</span>
+<span lang="en" class="lang-content"><code>input()</code> waits for a line. On <span class="kbd">Enter</span> the text returns as a <b>str</b>. You can pass a prompt inside parentheses.</span>
+<span lang="ru" class="lang-content"><code>input()</code> ждёт строку с клавиатуры. После <span class="kbd">Enter</span> введённый текст возвращается как <b>str</b>. В скобках можно указать подсказку.</span></p>
+
+<div class="code-block">
+name = <span class="fn">input</span>(<span class="str">"<span lang="kk" class="lang-content">Атыңды жаз: </span>Your name: <span lang="ru" class="lang-content">Как тебя зовут: </span>"</span>)
+<span class="fn">print</span>(<span class="str">"<span lang="kk" class="lang-content">Сәлем, </span>Hello, <span lang="ru" class="lang-content">Привет, </span>"</span> + name)
+</div>
+
+<div class="card-rose rounded-xl p-5 mt-5">
+<p class="heading-font text-rose-700 mb-2">⚠️ <span lang="kk" class="lang-content">Маңызды — әрдайым str!</span><span lang="en" class="lang-content">Always returns str!</span><span lang="ru" class="lang-content">Всегда возвращает str!</span></p>
+<p class="text-slate-700 mb-3"><span lang="kk" class="lang-content">Сан алғың келсе — <b>түрлендіруді ұмытпа</b>:</span><span lang="en" class="lang-content">For numbers you must <b>cast</b> the value:</span><span lang="ru" class="lang-content">Чтобы получить число — <b>преобразуй</b>:</span></p>
+<div class="code-block">
+age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"<span lang="kk" class="lang-content">жасың: </span>age: <span lang="ru" class="lang-content">возраст: </span>"</span>))     <span class="com"># int</span>
+h   = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"<span lang="kk" class="lang-content">бойың: </span>height: <span lang="ru" class="lang-content">рост: </span>"</span>))  <span class="com"># float</span>
+</div></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Кіріс + шығыс бірге</span>
+<span lang="en" class="lang-content">🎯 Input + output together</span>
+<span lang="ru" class="lang-content">🎯 Ввод и вывод вместе</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">🎂 <span lang="kk" class="lang-content">Жыл санау</span><span lang="en" class="lang-content">Age calculator</span><span lang="ru" class="lang-content">Калькулятор возраста</span></p>
+<div class="code-block">
+name = <span class="fn">input</span>(<span class="str">"<span lang="kk" class="lang-content">Атың: </span>Name: <span lang="ru" class="lang-content">Имя: </span>"</span>)
+age  = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"<span lang="kk" class="lang-content">Жасың: </span>Age: <span lang="ru" class="lang-content">Возраст: </span>"</span>))
+next_age = age + <span class="num">1</span>
+<span class="fn">print</span>(<span class="str">f"{name}, через год тебе будет {next_age}!"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">📏 <span lang="kk" class="lang-content">Тіктөртбұрыш</span><span lang="en" class="lang-content">Rectangle</span><span lang="ru" class="lang-content">Прямоугольник</span></p>
+<div class="code-block">
+a = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"a = "</span>))
+b = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"b = "</span>))
+<span class="fn">print</span>(<span class="str">"S ="</span>, a * b)
+<span class="fn">print</span>(<span class="str">"P ="</span>, <span class="num">2</span> * (a + b))
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">🌡 <span lang="kk" class="lang-content">°C → °F</span><span lang="en" class="lang-content">°C → °F</span><span lang="ru" class="lang-content">°C → °F</span></p>
+<div class="code-block">
+c = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"°C: "</span>))
+f = c * <span class="num">9</span>/<span class="num">5</span> + <span class="num">32</span>
+<span class="fn">print</span>(<span class="str">f"{c}°C = {f}°F"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">💰 <span lang="kk" class="lang-content">Теңге → $</span><span lang="en" class="lang-content">KZT → USD</span><span lang="ru" class="lang-content">Тенге → $</span></p>
+<div class="code-block">
+kzt = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"₸: "</span>))
+rate = <span class="num">450</span>
+usd = kzt / rate
+<span class="fn">print</span>(<span class="fn">round</span>(usd, <span class="num">2</span>), <span class="str">"$"</span>)
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧰 Бірнеше санды бір жолда</span>
+<span lang="en" class="lang-content">🧰 Several numbers on one line</span>
+<span lang="ru" class="lang-content">🧰 Несколько чисел в одной строке</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Пайдаланушы <b>«3 5»</b> деп енгізсе — <code>split()</code> оны бөледі:</span><span lang="en" class="lang-content">If the user types <b>«3 5»</b> — use <code>split()</code>:</span><span lang="ru" class="lang-content">Если пользователь вводит <b>«3 5»</b> — используем <code>split()</code>:</span></p>
+<div class="code-block">
+a, b = <span class="fn">input</span>(<span class="str">"2 num: "</span>).<span class="fn">split</span>()
+a = <span class="fn">int</span>(a)
+b = <span class="fn">int</span>(b)
+<span class="fn">print</span>(a + b)
+
+<span class="com"># <span lang="kk" class="lang-content">бір рет map-пен</span>one-liner<span lang="ru" class="lang-content">в одну строку</span>:</span>
+a, b = <span class="fn">map</span>(<span class="fn">int</span>, <span class="fn">input</span>().<span class="fn">split</span>())
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">👄</div>
+<p class="heading-font text-xl text-sky-700 mb-2">print()</p>
+<p class="text-slate-700 text-sm">sep, end, f-string</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">👂</div>
+<p class="heading-font text-xl text-sky-700 mb-2">input()</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">әрдайым</span><span lang="en" class="lang-content">always</span><span lang="ru" class="lang-content">всегда</span> → str</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-sky-700 mb-2">int() / float()</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">сан алу үшін</span><span lang="en" class="lang-content">to get numbers</span><span lang="ru" class="lang-content">чтобы получить число</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

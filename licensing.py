@@ -1,109 +1,345 @@
 # -*- coding: utf-8 -*-
-import platform
-import subprocess
+"""
+Система лицензирования — Интерактивные плакаты.
+
+Проверка HMAC-подписанных ключей, активация с привязкой к устройству,
+шифрованный license.dat, срок действия от момента активации,
+защита от перевода системных часов назад.
+"""
+
+import base64
 import hashlib
+import hmac
+import json
 import os
+import platform
+import struct
+import subprocess
 import sys
-from datetime import datetime
+import time
+from datetime import datetime, timedelta
 
-LICENSE_FILE = "license.dat"
+# ─── Обфусцированный секретный ключ ────────────────────────────
+# Генерируется командой: python keygen.py embed
+# Секрет = bytes(a ^ b for a, b in zip(_MASK, _KDATA))
+_MASK  = [0, 4, 51, 226, 213, 62, 45, 201, 14, 126, 242, 86, 239, 239, 194, 85, 33, 129, 246, 245, 37, 190, 237, 248, 147, 87, 202, 192, 203, 201, 17, 91]
+_KDATA = [89, 136, 108, 16, 86, 143, 66, 45, 110, 88, 175, 143, 29, 158, 55, 107, 170, 111, 116, 154, 64, 224, 210, 220, 4, 150, 168, 123, 166, 18, 231, 195]
+
+def _get_secret() -> bytes:
+    return bytes(a ^ b for a, b in zip(_MASK, _KDATA))
+
+# ─── Маппинг предметов ─────────────────────────────────────────
+SUBJECTS_REV = {
+    0: 'physics', 1: 'mathematics', 2: 'biology', 3: 'chemistry',
+    4: 'geography', 5: 'informatics', 6: 'historykaz', 7: 'worldhistory',
+    8: 'kazakhlang', 9: 'russianlang', 10: 'englishlang',
+}
+
+# ─── Пути ───────────────────────────────────────────────────────
+if getattr(sys, 'frozen', False):
+    _BASE_DIR = sys._MEIPASS
+else:
+    _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+LICENSE_FILE = os.path.join(_BASE_DIR, "license.dat")
+
+# Максимально допустимый откат часов (часы). Если часы откатили больше —
+# считаем попыткой обхода.
+_MAX_CLOCK_DRIFT_HOURS = 24
 
 
-def get_device_id():
-    """ Генерирует уникальный ID на основе характеристик компьютера. """
+# ─── Device ID ──────────────────────────────────────────────────
+
+def get_device_id() -> str:
+    """Уникальный ID устройства (16 hex-символов)."""
     system = platform.system()
-    if system == "Windows":
-        command = "wmic csproduct get uuid"
-    elif system == "Darwin":  # macOS
-        command = "ioreg -d2 -c IOPlatformExpertDevice | awk -F\\\" '/IOPlatformUUID/{print $(NF-1)}'"
-    else:  # Linux
-        command = "cat /var/lib/dbus/machine-id"
+    raw = ""
 
     try:
-        output = subprocess.check_output(command, shell=True, stderr=subprocess.DEVNULL).decode().strip()
-        # Извлекаем сам ID из вывода
         if system == "Windows":
-            output = output.split('\n')[1].strip()
+            output = subprocess.check_output(
+                "wmic csproduct get uuid", shell=True, stderr=subprocess.DEVNULL
+            ).decode().strip()
+            raw = output.split('\n')[1].strip()
+        elif system == "Darwin":
+            output = subprocess.check_output(
+                "ioreg -d2 -c IOPlatformExpertDevice | awk -F\\\" '/IOPlatformUUID/{print $(NF-1)}'",
+                shell=True, stderr=subprocess.DEVNULL
+            ).decode().strip()
+            raw = output
+        elif system == "Linux":
+            # Android тоже Linux — проверяем getprop
+            try:
+                raw = subprocess.check_output(
+                    "getprop ro.serialno", shell=True, stderr=subprocess.DEVNULL
+                ).decode().strip()
+            except Exception:
+                pass
+            if not raw:
+                try:
+                    raw = open("/var/lib/dbus/machine-id").read().strip()
+                except Exception:
+                    pass
     except Exception:
-        # Запасной вариант, если команда не сработала
-        output = "fallback_id_for_this_machine"
+        pass
 
-    # Хешируем для анонимности и консистентности
-    return hashlib.sha256(output.encode()).hexdigest()[:16].upper()
+    if not raw:
+        raw = f"fallback-{platform.node()}-{platform.machine()}"
+
+    return hashlib.sha256(raw.encode()).hexdigest()[:16].upper()
 
 
-def validate_key_format(key):
-    """ Проверяет, что ключ соответствует формату 'ПРЕДМЕТ-ТИП-ГОД-ЧАСТЬ1-ЧАСТЬ2'. """
-    parts = key.strip().upper().split('-')
-    if len(parts) != 5:
-        return False, "Неверный формат ключа (требуется 5 частей).", None
+# ─── Валидация ключа (HMAC) ────────────────────────────────────
 
-    subject, key_type, year_str, part1, part2 = parts
+def validate_key(key_str: str) -> tuple:
+    """
+    Проверяет HMAC-подпись ключа и декодирует payload.
+    Возвращает (True, data_dict) или (False, error_message).
+    """
+    clean = key_str.replace('-', '').replace(' ', '').upper()
+    if len(clean) != 20:
+        return False, "Неверный формат ключа"
+
+    padded = clean + '=' * ((8 - len(clean) % 8) % 8)
+    try:
+        raw = base64.b32decode(padded)
+    except Exception:
+        return False, "Неверные символы в ключе"
+
+    if len(raw) != 12:
+        return False, "Неверный формат ключа"
+
+    payload, sig = raw[:4], raw[4:]
+    secret = _get_secret()
+    expected = hmac.new(secret, payload, hashlib.sha256).digest()[:8]
+
+    if not hmac.compare_digest(sig, expected):
+        return False, "Неверный ключ активации"
+
+    val = struct.unpack('>I', payload)[0]
+    data = {
+        'subject_idx': (val >> 28) & 0xF,
+        'subject': SUBJECTS_REV.get((val >> 28) & 0xF, 'unknown'),
+        'client_id': (val >> 12) & 0xFFFF,
+        'duration_months': (val >> 4) & 0xFF,
+        'flags': val & 0xF,
+    }
+    return True, data
+
+
+# ─── Шифрование license.dat ────────────────────────────────────
+# Используем HMAC-based keystream XOR + integrity HMAC.
+# Ключ шифрования привязан к device_id → нельзя скопировать файл.
+
+_ENC_SALT = b"interactive-posters-license-v2"
+
+def _derive_enc_key(device_id: str) -> bytes:
+    """Ключ шифрования, привязанный к устройству."""
+    return hashlib.pbkdf2_hmac('sha256', device_id.encode(), _ENC_SALT, 100_000)
+
+
+def _encrypt_license(data: dict, device_id: str) -> bytes:
+    """Шифрует JSON-данные лицензии."""
+    key = _derive_enc_key(device_id)
+    plaintext = json.dumps(data, ensure_ascii=False).encode('utf-8')
+
+    # Генерируем keystream через HMAC-SHA256 в режиме CTR
+    ciphertext = bytearray(len(plaintext))
+    for i in range(0, len(plaintext), 32):
+        block_key = hmac.new(key, struct.pack('>I', i // 32), hashlib.sha256).digest()
+        chunk = plaintext[i:i+32]
+        for j, b in enumerate(chunk):
+            ciphertext[i + j] = b ^ block_key[j]
+
+    # Integrity tag
+    tag = hmac.new(key, bytes(ciphertext), hashlib.sha256).digest()[:16]
+
+    return tag + bytes(ciphertext)
+
+
+def _decrypt_license(raw: bytes, device_id: str) -> dict:
+    """Расшифровывает license.dat. Возвращает dict или None."""
+    if len(raw) < 17:
+        return None
+
+    key = _derive_enc_key(device_id)
+    tag, ciphertext = raw[:16], raw[16:]
+
+    # Проверяем integrity
+    expected_tag = hmac.new(key, ciphertext, hashlib.sha256).digest()[:16]
+    if not hmac.compare_digest(tag, expected_tag):
+        return None  # Файл повреждён или скопирован с другого устройства
+
+    # Расшифровываем
+    plaintext = bytearray(len(ciphertext))
+    for i in range(0, len(ciphertext), 32):
+        block_key = hmac.new(key, struct.pack('>I', i // 32), hashlib.sha256).digest()
+        chunk = ciphertext[i:i+32]
+        for j, b in enumerate(chunk):
+            plaintext[i + j] = b ^ block_key[j]
 
     try:
-        year = int(year_str)
-        if year < datetime.now().year:
-            return False, "Срок действия ключа истек.", None
-    except ValueError:
-        return False, "Неверный формат года в ключе.", None
-
-    return True, "Формат корректен.", (subject.lower(), year)
+        return json.loads(bytes(plaintext).decode('utf-8'))
+    except Exception:
+        return None
 
 
-def activate_key(key):
-    """ Проверяет и активирует ключ, сохраняя его в файл. """
-    is_valid, message, data = validate_key_format(key)
-    if not is_valid:
-        return False, message
+# ─── Активация ──────────────────────────────────────────────────
+
+def activate_key(key_str: str) -> tuple:
+    """
+    Активирует лицензионный ключ.
+    Срок действия начинается С МОМЕНТА АКТИВАЦИИ.
+    Возвращает (True, message) или (False, error_message).
+    """
+    valid, result = validate_key(key_str)
+    if not valid:
+        return False, result
 
     device_id = get_device_id()
-    subject, year = data
+    now = datetime.now()
+    duration = result['duration_months']
+    expires = now + timedelta(days=duration * 30)
+
+    license_data = {
+        'key_hash': hashlib.sha256(key_str.upper().encode()).hexdigest(),
+        'device_id': device_id,
+        'subject': result['subject'],
+        'subject_idx': result['subject_idx'],
+        'client_id': result['client_id'],
+        'duration_months': duration,
+        'activated_at': now.isoformat(timespec='seconds'),
+        'expires_at': expires.isoformat(timespec='seconds'),
+        'last_check': now.isoformat(timespec='seconds'),
+        'version': 2,
+    }
 
     try:
-        with open(LICENSE_FILE, 'w') as f:
-            # Сохраняем хеш ключа, ID устройства и код предмета
-            f.write(f"{hashlib.sha256(key.upper().encode()).hexdigest()}\n")
-            f.write(f"{device_id}\n")
-            f.write(f"{subject}\n")
-        return True, "Активация прошла успешно."
+        encrypted = _encrypt_license(license_data, device_id)
+        with open(LICENSE_FILE, 'wb') as f:
+            f.write(encrypted)
     except Exception as e:
-        return False, f"Не удалось сохранить файл лицензии: {e}"
+        return False, f"Ошибка сохранения лицензии: {e}"
+
+    months_word = _months_word(duration)
+    return True, f"Активация успешна! Лицензия действительна {duration} {months_word}."
 
 
-def is_activated():
-    """ Проверяет, активировано ли приложение на этом компьютере. """
+# ─── Проверка лицензии ──────────────────────────────────────────
+
+def is_activated() -> bool:
+    """Проверяет, активировано ли приложение и не истёк ли срок."""
+    status = get_license_status()
+    return status['valid']
+
+
+def get_license_status() -> dict:
+    """
+    Полная проверка лицензии. Возвращает словарь:
+    {
+        'valid': bool,
+        'reason': str,           # Причина если невалидна
+        'subject': str|None,
+        'expires_at': str|None,
+        'days_left': int|None,
+    }
+    """
+    result = {
+        'valid': False,
+        'reason': 'Лицензия не найдена',
+        'subject': None,
+        'expires_at': None,
+        'days_left': None,
+    }
+
     if not os.path.exists(LICENSE_FILE):
-        return False
+        return result
 
     try:
-        with open(LICENSE_FILE, 'r') as f:
-            lines = f.readlines()
-            if len(lines) < 3:
-                return False  # Файл поврежден
-
-            _key_hash = lines[0].strip()
-            stored_device_id = lines[1].strip()
-
-            current_device_id = get_device_id()
-
-            # Главная проверка: ID устройства в файле совпадает с текущим
-            if stored_device_id == current_device_id:
-                return True
-            else:
-                return False
+        with open(LICENSE_FILE, 'rb') as f:
+            raw = f.read()
     except Exception:
-        return False
+        result['reason'] = 'Ошибка чтения файла лицензии'
+        return result
 
+    device_id = get_device_id()
+    data = _decrypt_license(raw, device_id)
 
-def get_activated_subject():
-    """ Возвращает код предмета из файла лицензии. """
-    if not is_activated():
-        return None
+    if data is None:
+        result['reason'] = 'Лицензия повреждена или принадлежит другому устройству'
+        return result
 
+    # Проверяем версию формата
+    if data.get('version') != 2:
+        result['reason'] = 'Устаревший формат лицензии'
+        return result
+
+    # Проверяем device_id
+    if data.get('device_id') != device_id:
+        result['reason'] = 'Лицензия привязана к другому устройству'
+        return result
+
+    now = datetime.now()
+
+    # ─── Защита от перевода часов назад ───
     try:
-        with open(LICENSE_FILE, 'r') as f:
-            lines = f.readlines()
-            return lines[2].strip()
+        last_check = datetime.fromisoformat(data['last_check'])
+        drift = last_check - now
+        if drift.total_seconds() > _MAX_CLOCK_DRIFT_HOURS * 3600:
+            result['reason'] = 'Обнаружено изменение системных часов. Обратитесь в поддержку.'
+            return result
     except Exception:
-        return None
+        pass
 
+    # ─── Проверяем срок действия ───
+    try:
+        expires_at = datetime.fromisoformat(data['expires_at'])
+    except Exception:
+        result['reason'] = 'Повреждены данные лицензии'
+        return result
+
+    if now > expires_at:
+        result['reason'] = 'Срок действия лицензии истёк'
+        result['expires_at'] = data['expires_at']
+        return result
+
+    days_left = (expires_at - now).days
+
+    # ─── Обновляем last_check ───
+    try:
+        data['last_check'] = now.isoformat(timespec='seconds')
+        encrypted = _encrypt_license(data, device_id)
+        with open(LICENSE_FILE, 'wb') as f:
+            f.write(encrypted)
+    except Exception:
+        pass  # Не критично — работаем дальше
+
+    result['valid'] = True
+    result['reason'] = 'OK'
+    result['subject'] = data.get('subject')
+    result['expires_at'] = data['expires_at']
+    result['days_left'] = days_left
+
+    return result
+
+
+def get_activated_subject() -> str:
+    """Возвращает код активированного предмета или None."""
+    status = get_license_status()
+    if status['valid']:
+        return status['subject']
+    return None
+
+
+# ─── Утилиты ────────────────────────────────────────────────────
+
+def _months_word(n: int) -> str:
+    """Склонение слова 'месяц'."""
+    if 11 <= n % 100 <= 19:
+        return "месяцев"
+    r = n % 10
+    if r == 1:
+        return "месяц"
+    if 2 <= r <= 4:
+        return "месяца"
+    return "месяцев"

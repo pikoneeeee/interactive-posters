@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Поиск, сортировка, фильтрация в БД</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Деректер қоры</span>
+<span lang="en" class="lang-content">Grade 9 · Databases</span>
+<span lang="ru" class="lang-content">9 класс · Базы данных</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Іздеу, сұрыптау, сүзу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Search, sort, filter</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Поиск, сортировка, фильтрация</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">3 негізгі операция</span>
+<span lang="en" class="lang-content">3 core operations</span>
+<span lang="ru" class="lang-content">3 ключевые операции</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Іздеу, сұрыптау, сүзу</b> — БД-ның «жүрегі». Миллион жолдан керегіңді <b>секундта</b> табуға көмектеседі. Excel-де <b>Ctrl+F</b>, Google Sheets-те <b>Ctrl+Shift+F</b>, SQL-де <b>SELECT … WHERE</b>. Алгоритмдер: <b>сызықтық іздеу</b> O(n), <b>бинарлық</b> O(log n), <b>хэш</b> — О(1)! Дұрыс индекс қолданса — <b>миллиард</b> жолдан деректі 1 мс-та шығарады.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Search, sort, filter</b> are the heart of any database — they find your data in <b>milliseconds</b> among millions of rows. Excel: <b>Ctrl+F</b>, Google Sheets: <b>Ctrl+Shift+F</b>, SQL: <b>SELECT … WHERE</b>. Algorithms: <b>linear</b> O(n), <b>binary</b> O(log n), <b>hash</b> O(1). With a good index you can pull a row out of a billion in 1 ms!</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Поиск, сортировка, фильтрация</b> — сердце БД. Находят нужное среди миллионов строк за <b>миллисекунды</b>. В Excel: <b>Ctrl+F</b>, в Google Sheets: <b>Ctrl+Shift+F</b>, в SQL: <b>SELECT … WHERE</b>. Алгоритмы: <b>линейный</b> O(n), <b>бинарный</b> O(log n), <b>хэш</b> O(1). С индексом — 1 мс на миллиард строк!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔍 Іздеу</span>
+<span lang="en" class="lang-content">🔍 Search</span>
+<span lang="ru" class="lang-content">🔍 Поиск</span></h2>
+<div class="card rounded-custom p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2">📊 Excel / Sheets</p>
+<ul class="text-slate-700 text-sm space-y-1">
+<li><b>Ctrl+F</b> — <span lang="kk" class="lang-content">жылдам</span><span lang="en" class="lang-content">quick find</span><span lang="ru" class="lang-content">быстрый поиск</span></li>
+<li><b>Ctrl+H</b> — <span lang="kk" class="lang-content">табу + ауыстыру</span><span lang="en" class="lang-content">find + replace</span><span lang="ru" class="lang-content">найти + заменить</span></li>
+<li><b>VLOOKUP / XLOOKUP</b> — <span lang="kk" class="lang-content">формулалық</span><span lang="en" class="lang-content">formula-based</span><span lang="ru" class="lang-content">через формулу</span></li>
+<li><b>MATCH / INDEX</b> — <span lang="kk" class="lang-content">нөмір бойынша</span><span lang="en" class="lang-content">by position</span><span lang="ru" class="lang-content">по позиции</span></li>
+</ul></div>
+
+<div class="card-accent rounded-xl p-5">
+<p class="heading-font text-sky-700 mb-2">🗃 SQL</p>
+<div class="code-block text-sm">
+<span class="kw">SELECT</span> name
+<span class="kw">FROM</span>   students
+<span class="kw">WHERE</span>  city = <span class="str">'Almaty'</span>
+  <span class="kw">AND</span>  avg_mark &gt; <span class="num">4.5</span>;
+
+<span class="com">-- <span lang="kk" class="lang-content">жартылай сәйкес</span>partial match<span lang="ru" class="lang-content">частичное совпадение</span></span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> books
+<span class="kw">WHERE</span> title <span class="kw">LIKE</span> <span class="str">'%Python%'</span>;
+</div></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⬆️⬇️ Сұрыптау (Sort)</span>
+<span lang="en" class="lang-content">⬆️⬇️ Sorting</span>
+<span lang="ru" class="lang-content">⬆️⬇️ Сортировка</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4"><span lang="kk" class="lang-content">Сұрыптау — жолдарды <b>белгілі тәртіпте</b> қою. Excel: <b>Data → Sort</b>. SQL: <b>ORDER BY</b>.</span>
+<span lang="en" class="lang-content">Sorting arranges rows in a <b>specific order</b>. Excel: <b>Data → Sort</b>. SQL: <b>ORDER BY</b>.</span>
+<span lang="ru" class="lang-content">Сортировка упорядочивает строки в <b>нужном порядке</b>. Excel: <b>Data → Sort</b>. SQL: <b>ORDER BY</b>.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">Excel</p>
+<ul class="text-slate-700 text-sm">
+<li>1. <span lang="kk" class="lang-content">Кестені таңда</span><span lang="en" class="lang-content">Select the table</span><span lang="ru" class="lang-content">Выдели таблицу</span></li>
+<li>2. Data → Sort</li>
+<li>3. <span lang="kk" class="lang-content">Баған → A→Z немесе Z→A</span><span lang="en" class="lang-content">Column → A→Z / Z→A</span><span lang="ru" class="lang-content">Столбец → A→Z / Z→A</span></li>
+<li>4. <span lang="kk" class="lang-content">Add level — 2-ші критерий</span><span lang="en" class="lang-content">Add level for 2nd key</span><span lang="ru" class="lang-content">Add level — 2-й ключ</span></li>
+</ul></div>
+
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">SQL</p>
+<div class="code-block text-xs">
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> students
+<span class="kw">ORDER BY</span> avg_mark <span class="kw">DESC</span>,
+         name <span class="kw">ASC</span>;
+</div></div>
+</div>
+
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 <b>Stable sort</b> — тең элементтер реті сақталады. Excel Sort — stable.</span>
+<span lang="en" class="lang-content">💡 <b>Stable sort</b> keeps ties in original order. Excel Sort is stable.</span>
+<span lang="ru" class="lang-content">💡 <b>Стабильная</b> сортировка — равные элементы в исходном порядке. Excel — стабилен.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Сүзу (Filter)</span>
+<span lang="en" class="lang-content">🎯 Filtering</span>
+<span lang="ru" class="lang-content">🎯 Фильтрация</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4">
+<span lang="kk" class="lang-content"><b>Сүзу</b> — шартқа сай жолдарды ғана көрсету. Қалғандары <b>жасырылады</b> (өшпейді!).</span>
+<span lang="en" class="lang-content"><b>Filtering</b> hides rows that don't match — they are not deleted.</span>
+<span lang="ru" class="lang-content"><b>Фильтр</b> скрывает строки, не соответствующие условию (не удаляет!).</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">Excel · Auto-filter</p>
+<ul class="text-slate-700 text-sm">
+<li>1. <b>Ctrl+Shift+L</b> — <span lang="kk" class="lang-content">сүзгіні қос</span><span lang="en" class="lang-content">enable filter</span><span lang="ru" class="lang-content">вкл. фильтр</span></li>
+<li>2. <span lang="kk" class="lang-content">Баған тиынсызындағы ⬇️</span><span lang="en" class="lang-content">Click ⬇️ in header</span><span lang="ru" class="lang-content">⬇️ в заголовке</span></li>
+<li>3. <span lang="kk" class="lang-content">Таңда: мән, диапазон, мәтін</span><span lang="en" class="lang-content">Pick: values, range, text</span><span lang="ru" class="lang-content">Выбери: значения, диапазон, текст</span></li>
+<li>4. <b>Data → Advanced Filter</b> — <span lang="kk" class="lang-content">күрделі шарттар</span><span lang="en" class="lang-content">complex conditions</span><span lang="ru" class="lang-content">сложные условия</span></li>
+</ul></div>
+
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">SQL · WHERE</p>
+<div class="code-block text-xs">
+<span class="com">-- 9А, >= 4.5</span>
+<span class="kw">SELECT</span> name
+<span class="kw">FROM</span>   students
+<span class="kw">WHERE</span>  grade = <span class="str">'9A'</span>
+  <span class="kw">AND</span>  avg_mark &gt;= <span class="num">4.5</span>;
+
+<span class="com">-- <span lang="kk" class="lang-content">қала тізімі</span>city list<span lang="ru" class="lang-content">из списка городов</span></span>
+<span class="kw">WHERE</span> city <span class="kw">IN</span>(<span class="str">'Almaty'</span>, <span class="str">'Astana'</span>);
+</div></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Салыстыру операторлары</span>
+<span lang="en" class="lang-content">🧮 Comparison operators</span>
+<span lang="ru" class="lang-content">🧮 Операторы сравнения</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Оператор</span><span lang="en" class="lang-content">Operator</span><span lang="ru" class="lang-content">Оператор</span></th>
+<th>SQL</th><th>Excel</th>
+<th><span lang="kk" class="lang-content">Мағынасы</span><span lang="en" class="lang-content">Meaning</span><span lang="ru" class="lang-content">Смысл</span></th>
+</tr></thead><tbody>
+<tr><td>=</td><td>=</td><td>=</td><td><span lang="kk" class="lang-content">тең</span><span lang="en" class="lang-content">equal</span><span lang="ru" class="lang-content">равно</span></td></tr>
+<tr><td>≠</td><td>&lt;&gt; · !=</td><td>&lt;&gt;</td><td><span lang="kk" class="lang-content">тең емес</span><span lang="en" class="lang-content">not equal</span><span lang="ru" class="lang-content">не равно</span></td></tr>
+<tr><td>&lt;, &lt;=</td><td>&lt;, &lt;=</td><td>&lt;, &lt;=</td><td><span lang="kk" class="lang-content">кем</span><span lang="en" class="lang-content">less</span><span lang="ru" class="lang-content">меньше</span></td></tr>
+<tr><td>&gt;, &gt;=</td><td>&gt;, &gt;=</td><td>&gt;, &gt;=</td><td><span lang="kk" class="lang-content">артық</span><span lang="en" class="lang-content">greater</span><span lang="ru" class="lang-content">больше</span></td></tr>
+<tr><td>BETWEEN</td><td>BETWEEN a AND b</td><td>AND(…, …)</td><td><span lang="kk" class="lang-content">диапазон</span><span lang="en" class="lang-content">range</span><span lang="ru" class="lang-content">диапазон</span></td></tr>
+<tr><td>LIKE</td><td>'%text%'</td><td>COUNTIF «*text*»</td><td><span lang="kk" class="lang-content">құрайды</span><span lang="en" class="lang-content">contains</span><span lang="ru" class="lang-content">содержит</span></td></tr>
+<tr><td>IN</td><td>IN(a,b,c)</td><td>—</td><td><span lang="kk" class="lang-content">тізімде</span><span lang="en" class="lang-content">in list</span><span lang="ru" class="lang-content">в списке</span></td></tr>
+<tr><td>IS NULL</td><td>IS NULL</td><td>ISBLANK</td><td><span lang="kk" class="lang-content">бос</span><span lang="en" class="lang-content">empty</span><span lang="ru" class="lang-content">пусто</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Индекс және жылдамдық</span>
+<span lang="en" class="lang-content">⚡ Indexes &amp; speed</span>
+<span lang="ru" class="lang-content">⚡ Индексы и скорость</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content"><b class="text-sky-700">Индекс</b> — кітап соңындағы «алфавиттік көрсеткіш» сияқты. Дерекке <b>тез жол</b> ашады. 1 млн жолда: индекссіз — <b>500 мс</b>, индекспен — <b>0.5 мс</b>. Бірақ әр INSERT кезінде <b>индекс те жаңарады</b>.</span>
+<span lang="en" class="lang-content">An <b>index</b> is like the alphabetical index at the back of a book — it gives the DB a <b>fast lane</b>. For 1 M rows: no index <b>≈ 500 ms</b>, with index <b>≈ 0.5 ms</b>. But every INSERT updates the index too.</span>
+<span lang="ru" class="lang-content"><b>Индекс</b> — как алфавитный указатель в книге: даёт <b>быстрый путь</b> к данным. 1 млн строк: без индекса ≈ <b>500 мс</b>, с индексом ≈ <b>0.5 мс</b>. Но каждый INSERT тоже обновляет индекс.</span></p>
+
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Алгоритм</span><span lang="en" class="lang-content">Algorithm</span><span lang="ru" class="lang-content">Алгоритм</span></th>
+<th><span lang="kk" class="lang-content">Жылдамдық</span><span lang="en" class="lang-content">Speed</span><span lang="ru" class="lang-content">Скорость</span></th>
+<th>1 000</th><th>1 000 000</th>
+</tr></thead><tbody>
+<tr><td>🚶 <span lang="kk" class="lang-content">Сызықтық</span><span lang="en" class="lang-content">Linear</span><span lang="ru" class="lang-content">Линейный</span></td><td>O(n)</td><td>1 000 <span lang="kk" class="lang-content">қадам</span><span lang="en" class="lang-content">steps</span><span lang="ru" class="lang-content">шагов</span></td><td>1 000 000</td></tr>
+<tr><td>🏃 <span lang="kk" class="lang-content">Бинарлық</span><span lang="en" class="lang-content">Binary</span><span lang="ru" class="lang-content">Бинарный</span></td><td>O(log n)</td><td>10</td><td>20</td></tr>
+<tr><td>🚀 Hash / B-tree</td><td>O(1)</td><td>1</td><td>1</td></tr>
+</tbody></table></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔍</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Ctrl+F · WHERE · XLOOKUP</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⬆️⬇️</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Sort ≠ Filter</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Index → ×1000</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шифры и тайнопись (Цезарь, Морзе)</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">5 сынып · Ақпараттық қауіпсіздік</span>
+<span lang="en" class="lang-content">Grade 5 · Information security</span>
+<span lang="ru" class="lang-content">5 класс · Информационная безопасность</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шифрлар мен жасырын жазу (Цезарь, Морзе)</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Ciphers and secret writing (Caesar, Morse)</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шифры и тайнопись (Цезарь, Морзе)</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔐 Шифр дегеніміз не?</span>
+<span lang="en" class="lang-content">🔐 What is a cipher?</span>
+<span lang="ru" class="lang-content">🔐 Что такое шифр?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Шифр</b> — ақпаратты <b>жасыру тәсілі</b>: хабарды кездейсоқ жиынға ұқсас таңбаларға айналдырады. Хабарды тек <b>кілтті білетіндер</b> оқи алады. Ежелгі заманнан бері генералдар, патшалар, дипломаттар шифр арқылы <b>құпия</b> жазды. Бүгін де банк, мессенджер, онлайн сатып алу <b>шифрлаумен</b> жұмыс істейді: пароль, банк карта, WhatsApp хабары — бәрі <b>жасырын</b> түрде жүреді.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">cipher</b> is a way to <b>hide information</b>: a message is turned into a jumble of symbols, and only people who <b>know the key</b> can read it. Since ancient times generals, kings and diplomats used ciphers for <b>secret</b> messages. Today banks, messengers, online shops all use <b>encryption</b>: passwords, bank cards, WhatsApp messages — all travel <b>encrypted</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Шифр</b> — это способ <b>спрятать информацию</b>: сообщение превращается в набор странных знаков, а прочитать его могут только те, кто <b>знает ключ</b>. С древних времён генералы, короли и дипломаты писали <b>секретные</b> письма. Сегодня банки, мессенджеры, онлайн-покупки работают через <b>шифрование</b>: пароль, банковская карта, сообщение в WhatsApp — всё идёт в <b>зашифрованном</b> виде.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏛️ Цезарь шифры</span>
+<span lang="en" class="lang-content">🏛️ Caesar cipher</span>
+<span lang="ru" class="lang-content">🏛️ Шифр Цезаря</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4">
+<span lang="kk" class="lang-content">Ежелгі Рим қолбасшысы <b>Юлий Цезарь</b> (б.з.д. 50 ж. шамасы) жау қолына түссе де, хатын оқи алмасын деп әр әріпті әліпбиде <b>бірнеше орынға жылжытатын</b>. <b>Кілт</b> = жылжу саны. Мысалы, кілт = 3: A→D, B→E, C→F.</span>
+<span lang="en" class="lang-content">Roman general <b>Julius Caesar</b> (~50 BC) shifted each letter a fixed number of places in the alphabet so that even if the letter was captured, the enemy could not read it. The <b>key</b> is the shift value. Example: key = 3, then A→D, B→E, C→F.</span>
+<span lang="ru" class="lang-content">Римский полководец <b>Юлий Цезарь</b> (~50 г. до н. э.) сдвигал каждую букву в алфавите на одинаковое число шагов, чтобы даже перехваченное письмо враг не смог прочитать. <b>Ключ</b> — это число сдвига. Пример: ключ = 3, тогда А→Г, Б→Д, В→Е.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-sky-900 font-bold mb-2">🔑 <span lang="kk" class="lang-content">Мысал (кілт = 3):</span><span lang="en" class="lang-content">Example (key = 3):</span><span lang="ru" class="lang-content">Пример (ключ = 3):</span></p>
+<p class="text-slate-700 text-lg"><b>CAT</b> → C+3=F, A+3=D, T+3=W → <b class="text-sky-700">FDW</b></p>
+<p class="text-slate-700 text-lg mt-1"><b>HELLO</b> → <b class="text-sky-700">KHOOR</b></p>
+<p class="text-slate-700 text-lg mt-1"><b>ZEBRA</b> → <b class="text-sky-700">CHEUD</b> (Z «переходит» в A)</p>
+</div></div>
+
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-3 text-center">
+<span lang="kk" class="lang-content">Әріп жылжуы (кілт = 3)</span>
+<span lang="en" class="lang-content">Letter shift (key = 3)</span>
+<span lang="ru" class="lang-content">Сдвиг букв (ключ = 3)</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 420 160" style="width:100%;height:auto">
+<g font-family="Courier New" font-size="18" font-weight="700" text-anchor="middle">
+<text x="210" y="30" fill="#334155" font-size="13">Открытый текст:</text>
+<g fill="#0369a1">
+<text x="40" y="60">A</text><text x="80" y="60">B</text><text x="120" y="60">C</text><text x="160" y="60">D</text>
+<text x="200" y="60">E</text><text x="240" y="60">F</text><text x="280" y="60">G</text><text x="320" y="60">H</text>
+<text x="360" y="60">…</text>
+</g>
+<g stroke="#64748b" stroke-width="1.5">
+<path d="M40 65 L160 95" marker-end="url(#ar4)"/>
+<path d="M80 65 L200 95" marker-end="url(#ar4)"/>
+<path d="M120 65 L240 95" marker-end="url(#ar4)"/>
+<path d="M160 65 L280 95" marker-end="url(#ar4)"/>
+<path d="M200 65 L320 95" marker-end="url(#ar4)"/>
+</g>
+<g fill="#0ea5e9">
+<text x="40" y="120">—</text><text x="80" y="120">—</text><text x="120" y="120">—</text>
+<text x="160" y="120">D</text><text x="200" y="120">E</text><text x="240" y="120">F</text>
+<text x="280" y="120">G</text><text x="320" y="120">H</text><text x="360" y="120">I</text>
+</g>
+<text x="210" y="150" fill="#334155" font-size="13">Шифр (сдвинуто на +3)</text>
+<defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker></defs>
+</g></svg></div>
+</div></div>
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="text-slate-700 text-lg">
+<span lang="kk" class="lang-content">🔓 <b>Декодтау</b> — кілтті кері жылжыту: FDW → C, A, T = CAT. Кілт тек 26 мәнде болады, сондықтан компьютер шифрды <b>секундта</b> бұзады.</span>
+<span lang="en" class="lang-content">🔓 <b>Decoding</b> — shift back by the same number: FDW → C, A, T = CAT. There are only 26 possible keys, so a modern computer breaks this cipher in <b>a split second</b>.</span>
+<span lang="ru" class="lang-content">🔓 <b>Декодирование</b> — сдвиг обратно на ту же величину: FDW → C, A, T = CAT. Ключей всего 26, поэтому современный компьютер взламывает такой шифр за <b>доли секунды</b>.</span></p></div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📡 Морзе әліпбиі</span>
+<span lang="en" class="lang-content">📡 Morse code</span>
+<span lang="ru" class="lang-content">📡 Азбука Морзе</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-6">
+<span lang="kk" class="lang-content"><b>Сэмюэл Морзе</b> (1837 ж.) ойлап тапты: әр әріпті <b>нүкте (·)</b> пен <b>сызық (−)</b> тізбегі ретінде жазу. Оны <b>телеграф сымы, жарық, дыбыс немесе радио</b> арқылы жіберуге болады. 150 жыл бойы бұл теңізшілер мен аэропорттардың <b>негізгі байланысы</b> болды. Бүгін де авариялық дабыл <b>SOS</b> — Морзе.</span>
+<span lang="en" class="lang-content"><b>Samuel Morse</b> invented it in 1837: each letter is a sequence of <b>dots (·)</b> and <b>dashes (−)</b>. It can travel over <b>a telegraph wire, light, sound or radio</b>. For 150 years it was the main means of communication for sailors and airports. The emergency signal <b>SOS</b> is still Morse today.</span>
+<span lang="ru" class="lang-content"><b>Сэмюэл Морзе</b> придумал её в 1837 г.: каждая буква — последовательность <b>точек (·)</b> и <b>тире (−)</b>. Сигнал можно передать по <b>телеграфному проводу, светом, звуком или радио</b>. 150 лет это была главная связь у моряков и аэропортов. Аварийный сигнал <b>SOS</b> — всё ещё Морзе.</span></p>
+<div class="grid grid-cols-3 md:grid-cols-6 gap-3 font-mono">
+<div class="tile"><b class="text-sky-700 text-2xl">A</b><p class="text-lg mt-1">· −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">B</b><p class="text-lg mt-1">− · · ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">C</b><p class="text-lg mt-1">− · − ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">D</b><p class="text-lg mt-1">− · ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">E</b><p class="text-lg mt-1">·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">F</b><p class="text-lg mt-1">· · − ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">G</b><p class="text-lg mt-1">− − ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">H</b><p class="text-lg mt-1">· · · ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">I</b><p class="text-lg mt-1">· ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">J</b><p class="text-lg mt-1">· − − −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">K</b><p class="text-lg mt-1">− · −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">L</b><p class="text-lg mt-1">· − · ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">M</b><p class="text-lg mt-1">− −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">N</b><p class="text-lg mt-1">− ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">O</b><p class="text-lg mt-1">− − −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">P</b><p class="text-lg mt-1">· − − ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">R</b><p class="text-lg mt-1">· − ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">S</b><p class="text-lg mt-1">· · ·</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">T</b><p class="text-lg mt-1">−</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">U</b><p class="text-lg mt-1">· · −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">V</b><p class="text-lg mt-1">· · · −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">W</b><p class="text-lg mt-1">· − −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">Y</b><p class="text-lg mt-1">− · − −</p></div>
+<div class="tile"><b class="text-sky-700 text-2xl">Z</b><p class="text-lg mt-1">− − · ·</p></div>
+</div>
+<div class="card-rose rounded-2xl p-5 mt-6 text-center">
+<p class="text-slate-700 text-lg">
+<span lang="kk" class="lang-content">🆘 Ең танымал сигнал: <b class="text-rose-700 text-2xl">SOS</b> = · · · &nbsp;&nbsp; − − − &nbsp;&nbsp; · · · — қысқаша, есте қалатын, қате оқылмайды.</span>
+<span lang="en" class="lang-content">🆘 The most famous signal: <b class="text-rose-700 text-2xl">SOS</b> = · · · &nbsp;&nbsp; − − − &nbsp;&nbsp; · · · — short, memorable, impossible to confuse.</span>
+<span lang="ru" class="lang-content">🆘 Самый знаменитый сигнал: <b class="text-rose-700 text-2xl">SOS</b> = · · · &nbsp;&nbsp; − − − &nbsp;&nbsp; · · · — короткий, легко запомнить, нельзя спутать.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Тағы да шифрлар</span>
+<span lang="en" class="lang-content">🎯 More ciphers</span>
+<span lang="ru" class="lang-content">🎯 Ещё шифры</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card rounded-custom p-6"><p class="heading-font text-lg text-sky-700 mb-2">🪞 <span lang="kk" class="lang-content">Айна шифр</span><span lang="en" class="lang-content">Mirror cipher</span><span lang="ru" class="lang-content">Зеркальный</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Әріпті кері жазу: CAT → TAC. Оңай, бірақ қызық!</span><span lang="en" class="lang-content">Reverse the letters: CAT → TAC. Easy but fun.</span><span lang="ru" class="lang-content">Буквы задом наперёд: КОТ → ТОК. Просто, но прикольно.</span></p></div>
+<div class="card rounded-custom p-6"><p class="heading-font text-lg text-sky-700 mb-2">🔢 <span lang="kk" class="lang-content">Сан-шифр</span><span lang="en" class="lang-content">Number cipher</span><span lang="ru" class="lang-content">Номерной</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Әр әріпке әліпбидегі нөмір: CAT → 3 1 20</span><span lang="en" class="lang-content">Each letter = its position: CAT → 3 1 20</span><span lang="ru" class="lang-content">Каждая буква = её номер: КОТ → 12 16 20</span></p></div>
+<div class="card rounded-custom p-6"><p class="heading-font text-lg text-sky-700 mb-2">🔒 <span lang="kk" class="lang-content">Ақпарат дәуірі</span><span lang="en" class="lang-content">Modern era</span><span lang="ru" class="lang-content">Современные</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">AES, RSA — супер-күрделі, мыңдаған кілт бит.</span><span lang="en" class="lang-content">AES, RSA — super-complex, thousands-bit keys.</span><span lang="ru" class="lang-content">AES, RSA — суперсложные, ключ в тысячи бит.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Өзіңе тапсырма</span>
+<span lang="en" class="lang-content">🧪 Try it yourself</span>
+<span lang="ru" class="lang-content">🧪 Попробуй сам</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-3">🏛️ <span lang="kk" class="lang-content">Цезарь (кілт = 5)</span><span lang="en" class="lang-content">Caesar (key = 5)</span><span lang="ru" class="lang-content">Цезарь (ключ = 5)</span></p>
+<ul class="text-slate-700 text-lg list-disc pl-6 space-y-2">
+<li><b>HELLO</b> → <span class="text-sky-700">MJQQT</span></li>
+<li><b>SCHOOL</b> → <span class="text-sky-700">XHMTTQ</span></li>
+<li><b>CIPHER</b> → <span class="text-sky-700">HNUMJW</span></li>
+</ul></div>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-3">📡 <span lang="kk" class="lang-content">Морзе — декодта</span><span lang="en" class="lang-content">Morse — decode</span><span lang="ru" class="lang-content">Морзе — расшифруй</span></p>
+<ul class="text-slate-700 text-lg list-disc pl-6 space-y-2">
+<li><b>· − · ·  · · ·  · · ·  · − · ·  − · · −</b> → ?</li>
+<li><b>· − · · − · − − −</b> → <span class="text-sky-700">AN</span></li>
+<li><b>· · − · − · −</b> → <span class="text-sky-700">IDE</span></li>
+<li><b>· · · · · · · − − −</b> → <span class="text-sky-700">HI TM</span></li>
+</ul></div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Салыстыру</span>
+<span lang="en" class="lang-content">🎯 Compare</span>
+<span lang="ru" class="lang-content">🎯 Сравним</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card-accent rounded-2xl p-6"><p class="heading-font text-xl text-sky-700 mb-2">🏛️ <span lang="kk" class="lang-content">Цезарь</span><span lang="en" class="lang-content">Caesar</span><span lang="ru" class="lang-content">Цезарь</span></p>
+<ul class="text-slate-700 text-lg list-disc pl-6">
+<li><span lang="kk" class="lang-content"><b>Мақсаты:</b> жасыру (құпия)</span><span lang="en" class="lang-content"><b>Purpose:</b> hiding (secrecy)</span><span lang="ru" class="lang-content"><b>Цель:</b> скрыть (секретность)</span></li>
+<li><span lang="kk" class="lang-content"><b>Кілт:</b> жылжу саны (1–25)</span><span lang="en" class="lang-content"><b>Key:</b> shift value (1–25)</span><span lang="ru" class="lang-content"><b>Ключ:</b> число сдвига (1–25)</span></li>
+<li><span lang="kk" class="lang-content"><b>Тарих:</b> Ежелгі Рим, 50 BC</span><span lang="en" class="lang-content"><b>Era:</b> Ancient Rome, ~50 BC</span><span lang="ru" class="lang-content"><b>Эпоха:</b> Древний Рим, ~50 до н. э.</span></li>
+</ul></div>
+<div class="card-accent rounded-2xl p-6"><p class="heading-font text-xl text-sky-700 mb-2">📡 <span lang="kk" class="lang-content">Морзе</span><span lang="en" class="lang-content">Morse</span><span lang="ru" class="lang-content">Морзе</span></p>
+<ul class="text-slate-700 text-lg list-disc pl-6">
+<li><span lang="kk" class="lang-content"><b>Мақсаты:</b> беру (жедел)</span><span lang="en" class="lang-content"><b>Purpose:</b> transmission (speed)</span><span lang="ru" class="lang-content"><b>Цель:</b> передача (быстрота)</span></li>
+<li><span lang="kk" class="lang-content"><b>Элементтер:</b> нүкте + сызық</span><span lang="en" class="lang-content"><b>Elements:</b> dots + dashes</span><span lang="ru" class="lang-content"><b>Элементы:</b> точки + тире</span></li>
+<li><span lang="kk" class="lang-content"><b>Тарих:</b> 1837, телеграф</span><span lang="en" class="lang-content"><b>Era:</b> 1837, telegraph</span><span lang="ru" class="lang-content"><b>Эпоха:</b> 1837, телеграф</span></li>
+</ul></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

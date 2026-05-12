@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Отладка программы</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 8 · Algorithms</span>
+<span lang="ru" class="lang-content">8 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Бағдарламаны жөндеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Program debugging</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Отладка программы</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">«Debug» сөзі қайдан келді?</span>
+<span lang="en" class="lang-content">Where does «debug» come from?</span>
+<span lang="ru" class="lang-content">Откуда слово «debug»?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">1947 жылы Гарвардтың «Mark II» компьютерінде инженер <b class="text-sky-700">Грейс Хоппер</b> нақты <b>моль</b> (insect — bug) тапты — ол релені қысып қалған еді. Оны журналға жапсырып: «First actual case of bug being found» деп жазды. Содан бері барлық қате — <b>«bug»</b>, қатені жою — <b>«debug»</b>.</span>
+<span lang="en" class="lang-content">In 1947 engineer <b class="text-sky-700">Grace Hopper</b> found a real <b>moth</b> jammed in a relay of Harvard's «Mark II». She taped it into the log: «First actual case of bug being found». Since then every error is a <b>«bug»</b> and fixing it is <b>«debug»</b>.</span>
+<span lang="ru" class="lang-content">В 1947 году инженер <b class="text-sky-700">Грейс Хоппер</b> нашла в реле компьютера «Mark II» реального <b>мотылька</b> (bug). Приклеила его в журнал: «First actual case of bug being found». С тех пор ошибка — <b>«bug»</b>, а её поиск — <b>«debug»</b>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐛 3 қате түрі</span>
+<span lang="en" class="lang-content">🐛 3 kinds of bugs</span>
+<span lang="ru" class="lang-content">🐛 3 типа ошибок</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-custom p-5">
+<p class="heading-font text-xl text-sky-700 mb-2">📝 Syntax</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Тіл ережесін бұзу</span><span lang="en" class="lang-content">Language rule broken</span><span lang="ru" class="lang-content">Нарушено правило языка</span></p>
+<div class="code-block text-xs">
+<span class="kw">print</span>(<span class="str">"hi"</span>   <span class="com"># ← )</span> <span lang="kk" class="lang-content">жоқ</span><span lang="en" class="lang-content">missing</span><span lang="ru" class="lang-content">пропущена</span>
+</div>
+<p class="text-slate-500 text-xs mt-1">SyntaxError · <span lang="kk" class="lang-content">Python табады</span><span lang="en" class="lang-content">caught by Python</span><span lang="ru" class="lang-content">ловит Python</span></p>
+</div>
+
+<div class="card rounded-custom p-5">
+<p class="heading-font text-xl text-sky-700 mb-2">💥 Runtime</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Жұмыс кезіндегі қате</span><span lang="en" class="lang-content">Crashes while running</span><span lang="ru" class="lang-content">Падает во время запуска</span></p>
+<div class="code-block text-xs">
+x = <span class="num">10</span> / <span class="num">0</span>  <span class="com"># ZeroDivision!</span>
+</div>
+<p class="text-slate-500 text-xs mt-1">ValueError, IndexError…</p>
+</div>
+
+<div class="card rounded-custom p-5">
+<p class="heading-font text-xl text-sky-700 mb-2">🙈 Logic</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Код жұмыс жасайды, бірақ дұрыс емес</span><span lang="en" class="lang-content">Runs but wrong result</span><span lang="ru" class="lang-content">Работает, но не то</span></p>
+<div class="code-block text-xs">
+<span class="kw">return</span> a - b  <span class="com"># <span lang="kk" class="lang-content">+ болу керек</span>should be +<span lang="ru" class="lang-content">должно быть +</span></span>
+</div>
+<p class="text-slate-500 text-xs mt-1"><span lang="kk" class="lang-content">Ең қауіпті! Тек тест табады</span><span lang="en" class="lang-content">Most dangerous!</span><span lang="ru" class="lang-content">Самая опасная!</span></p>
+</div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔍 Жөндеудің 6 қадамы</span>
+<span lang="en" class="lang-content">🔍 6 steps of debugging</span>
+<span lang="ru" class="lang-content">🔍 6 шагов отладки</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-3 text-slate-700 text-lg">
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">1</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Қатені қайталау</span><span lang="en" class="lang-content">Reproduce</span><span lang="ru" class="lang-content">Воспроизвести</span></b> — <span lang="kk" class="lang-content">қайтадан шақыр</span><span lang="en" class="lang-content">reliably trigger it</span><span lang="ru" class="lang-content">стабильно повторить</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">2</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Стектрейсті оқу</span><span lang="en" class="lang-content">Read traceback</span><span lang="ru" class="lang-content">Прочитать трейсбэк</span></b> — <span lang="kk" class="lang-content">қай жолда?</span><span lang="en" class="lang-content">which line?</span><span lang="ru" class="lang-content">на какой строке?</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">3</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Бөлшектеу</span><span lang="en" class="lang-content">Bisect</span><span lang="ru" class="lang-content">Локализовать</span></b> — <span lang="kk" class="lang-content">ортасынан кесу (бинарлық іздеу!)</span><span lang="en" class="lang-content">binary-search the bug</span><span lang="ru" class="lang-content">бинарный поиск бага</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">4</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Болжам жасау</span><span lang="en" class="lang-content">Hypothesize</span><span lang="ru" class="lang-content">Предположить</span></b> — <span lang="kk" class="lang-content">«мүмкін … себебінен»</span><span lang="en" class="lang-content">«maybe because…»</span><span lang="ru" class="lang-content">«возможно, потому что…»</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">5</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Тексеру</span><span lang="en" class="lang-content">Verify</span><span lang="ru" class="lang-content">Проверить</span></b> — print / debugger-мен</li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">6</span> <b class="text-sky-700"><span lang="kk" class="lang-content">Түзету + регресс тест</span><span lang="en" class="lang-content">Fix + regression test</span><span lang="ru" class="lang-content">Исправить + regress-тест</span></b></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📜 Python-тың traceback оқуы</span>
+<span lang="en" class="lang-content">📜 Reading a Python traceback</span>
+<span lang="ru" class="lang-content">📜 Читаем traceback в Python</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block text-sm" style="background:#0f172a;color:#fda4af">
+Traceback (most recent call last):
+  File <span style="color:#93c5fd">"game.py"</span>, line <span style="color:#fde68a">14</span>, in &lt;module&gt;
+    play(level)
+  File <span style="color:#93c5fd">"game.py"</span>, line <span style="color:#fde68a">7</span>, in play
+    score = lives[<span style="color:#fde68a">10</span>]
+<span style="color:#f87171"><b>IndexError: list index out of range</b></span>
+</div>
+<ol class="text-slate-700 mt-4 space-y-1">
+<li>1. <span lang="kk" class="lang-content"><b>Соңғы жол</b> — қатенің түрі мен сипаты.</span><span lang="en" class="lang-content"><b>Last line</b> — error type &amp; message.</span><span lang="ru" class="lang-content"><b>Последняя строка</b> — тип и сообщение.</span></li>
+<li>2. <span lang="kk" class="lang-content">Жоғарыдан төменге — <b>шақыру тізбегі</b>.</span><span lang="en" class="lang-content">Top-to-bottom — <b>call chain</b>.</span><span lang="ru" class="lang-content">Сверху вниз — <b>цепочка вызовов</b>.</span></li>
+<li>3. <span lang="kk" class="lang-content">Ең ішкі — <b>қатенің нақты орны</b>.</span><span lang="en" class="lang-content">Deepest frame = <b>actual bug location</b>.</span><span lang="ru" class="lang-content">Глубже всех — <b>место бага</b>.</span></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Құралдар жиыны</span>
+<span lang="en" class="lang-content">🛠 Debugger toolkit</span>
+<span lang="ru" class="lang-content">🛠 Инструменты отладчика</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🖨</div><p class="heading-font text-sky-700 text-sm">print()</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">ең қарапайым</span><span lang="en" class="lang-content">simplest</span><span lang="ru" class="lang-content">проще всех</span></p></div>
+<div class="tile"><div class="tile-emoji">🪵</div><p class="heading-font text-sky-700 text-sm">logging</p><p class="text-slate-600 text-xs">DEBUG/INFO</p></div>
+<div class="tile"><div class="tile-emoji">🧪</div><p class="heading-font text-sky-700 text-sm">assert</p></div>
+<div class="tile"><div class="tile-emoji">🐞</div><p class="heading-font text-sky-700 text-sm">pdb / ipdb</p><p class="text-slate-600 text-xs">CLI-debug</p></div>
+<div class="tile"><div class="tile-emoji">💻</div><p class="heading-font text-sky-700 text-sm">VS Code</p><p class="text-slate-600 text-xs">breakpoints</p></div>
+<div class="tile"><div class="tile-emoji">🐧</div><p class="heading-font text-sky-700 text-sm">Thonny</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">балаға арналған</span><span lang="en" class="lang-content">for beginners</span><span lang="ru" class="lang-content">для новичков</span></p></div>
+<div class="tile"><div class="tile-emoji">🧩</div><p class="heading-font text-sky-700 text-sm">PyCharm</p><p class="text-slate-600 text-xs">IDE-pro</p></div>
+<div class="tile"><div class="tile-emoji">🔬</div><p class="heading-font text-sky-700 text-sm">Python Tutor</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">визуализация</span><span lang="en" class="lang-content">visualiser</span><span lang="ru" class="lang-content">визуализатор</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Мысал — санау қате шығарды</span>
+<span lang="en" class="lang-content">🎯 Example — buggy sum</span>
+<span lang="ru" class="lang-content">🎯 Пример — баг в сумме</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><b class="text-red-700">❌ <span lang="kk" class="lang-content">Қате код</span><span lang="en" class="lang-content">Buggy</span><span lang="ru" class="lang-content">С ошибкой</span>:</b></p>
+<div class="code-block text-sm">
+<span class="kw">def</span> <span class="fn">sum_even</span>(nums):
+    s = <span class="num">0</span>
+    <span class="kw">for</span> x <span class="kw">in</span> nums:
+        <span class="kw">if</span> x % <span class="num">2</span>:       <span class="com"># ← ??</span>
+            s += x
+    <span class="kw">return</span> s
+
+<span class="fn">print</span>(<span class="fn">sum_even</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>]))  <span class="com"># → 4, but expected 6</span>
+</div>
+
+<p class="text-slate-700 text-lg mt-4 mb-3"><b class="text-green-700">✅ <span lang="kk" class="lang-content">Түзетілді</span><span lang="en" class="lang-content">Fixed</span><span lang="ru" class="lang-content">Исправлено</span>:</b></p>
+<div class="code-block text-sm">
+<span class="kw">if</span> x % <span class="num">2</span> == <span class="num">0</span>:   <span class="com"># <span lang="kk" class="lang-content">жұп — қалдық 0</span>even = remainder 0<span lang="ru" class="lang-content">чётное — остаток 0</span></span>
+    s += x
+</div>
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">💡 «if x % 2» → x тақ болса ғана шын (Python-да 1 = True). Қатені табу үшін print(x, s) қоссаң болды.</span>
+<span lang="en" class="lang-content">💡 «if x % 2» is True for odd numbers (1 is truthy). Adding print(x,s) reveals it in 5 seconds.</span>
+<span lang="ru" class="lang-content">💡 «if x % 2» — истинно для нечётных (1 = True). print(x, s) показывает ошибку за 5 сек.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🦆 «Резеңке үйрек» әдісі</span>
+<span lang="en" class="lang-content">🦆 Rubber-duck debugging</span>
+<span lang="ru" class="lang-content">🦆 Метод «резиновой утки»</span></h2>
+<div class="card rounded-custom p-8 flex items-center gap-6">
+<div class="text-8xl">🦆</div>
+<p class="text-slate-700 text-lg">
+<span lang="kk" class="lang-content">Кодты <b>резеңке үйрекке</b> сөйлеп түсіндір — «міне осы жол a-ны … жасайды». 90% жағдайда қатені <b>өзің табасың</b>! Бұл әдіс 1999 жылы «Pragmatic Programmer» кітабында жарияланды. Үйрек жоқ болса — кез келген затпен (саусақ, мысық, жансыз фигура) сөйлес.</span>
+<span lang="en" class="lang-content">Explain your code <b>out loud to a rubber duck</b> — «this line takes a and …». In 90% of cases <b>you find the bug yourself</b>. Popularised by «The Pragmatic Programmer» (1999). No duck? Talk to your cat, pencil or the ceiling.</span>
+<span lang="ru" class="lang-content">Объясни код <b>резиновой утке</b> вслух: «вот эта строка берёт a и …». В 90% случаев баг <b>находишь сам</b>! Описано в книге «The Pragmatic Programmer» (1999). Нет утки — говори с котом, карандашом, потолком.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🐛</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Қате жау емес — мұғалім</span><span lang="en" class="lang-content">Bugs are teachers</span><span lang="ru" class="lang-content">Баг — учитель, не враг</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔍</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Қайталау → трейсбэк → болжам</span><span lang="en" class="lang-content">Reproduce → trace → hypothesise</span><span lang="ru" class="lang-content">Воспроизвести → трейс → гипотеза</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🦆</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Үйрекке айт</span><span lang="en" class="lang-content">Tell the duck</span><span lang="ru" class="lang-content">Расскажи утке</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

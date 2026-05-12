@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Перестановка элементов массива</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 9 · Algorithms</span>
+<span lang="ru" class="lang-content">9 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Элементтердің орнын ауыстыру</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Rearranging elements</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Перестановка элементов</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Ауыстыру — не?</span>
+<span lang="en" class="lang-content">What is swap?</span>
+<span lang="ru" class="lang-content">Что такое swap?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Ауыстыру (swap)</b> — массивтегі <b>екі элементтің орнын</b> алмастыру. Бұл — алгоритмдердің <b>кірпіші</b>: сұрыптау, керіге айналдыру, Ханой мұнарасы, ойын тақтасы — бәрі swap-қа сүйенеді. Python-да <b>бір қатарда</b> жазылады: <code>a, b = b, a</code>. С немесе Java тілдерінде — <b>үш қадам</b> және уақытша айнымалы қажет. Swap <b>O(1)</b> — жылдам!</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Swap</b> exchanges <b>two elements</b> in an array. It's the <b>building block</b> of algorithms: sorting, reversing, Tower of Hanoi, board games — all use swap. Python does it in <b>one line</b>: <code>a, b = b, a</code>. C or Java need <b>three steps</b> with a temp variable. Swap is <b>O(1)</b> — instant!</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Swap</b> — обмен <b>двух элементов</b> массива. Это «кирпичик» алгоритмов: сортировки, разворот, Ханойские башни, ходы в играх — всё держится на swap. В Python делается в <b>одну строку</b>: <code>a, b = b, a</code>. В C и Java — <b>три шага</b> с временной переменной. Swap = <b>O(1)</b> — мгновенно!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔄 Swap — үш тәсіл</span>
+<span lang="en" class="lang-content">🔄 Swap — three ways</span>
+<span lang="ru" class="lang-content">🔄 Swap — три способа</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🐍 Python</p>
+<div class="code-block text-sm">
+a[i], a[j] = a[j], a[i]
+</div>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Бір жол</span><span lang="en" class="lang-content">One line</span><span lang="ru" class="lang-content">Одна строка</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">📦 <span lang="kk" class="lang-content">Уақытша</span><span lang="en" class="lang-content">Temp</span><span lang="ru" class="lang-content">Времен.</span></p>
+<div class="code-block text-sm">
+tmp = a[i]
+a[i] = a[j]
+a[j] = tmp
+</div>
+<p class="text-slate-600 text-xs mt-1">C · Java · Pascal</p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">⚡ XOR (<span lang="kk" class="lang-content">қулық</span><span lang="en" class="lang-content">trick</span><span lang="ru" class="lang-content">трюк</span>)</p>
+<div class="code-block text-sm">
+a ^= b
+b ^= a
+a ^= b
+</div>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">тек бүтін үшін</span><span lang="en" class="lang-content">int only</span><span lang="ru" class="lang-content">только int</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🖼 Визуалды: swap қалай жұмыс жасайды</span>
+<span lang="en" class="lang-content">🖼 Visual: how swap works</span>
+<span lang="ru" class="lang-content">🖼 Визуально: как работает swap</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap">
+<svg viewBox="0 0 700 240" style="width:100%;max-width:700px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="18">
+<text x="30" y="25" fill="#0369a1" font-weight="bold"><span lang="kk" class="lang-content">1-қадам</span><tspan>Step 1</tspan></text>
+<rect x="30" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="90" y="40" width="60" height="50" fill="#fde68a" stroke="#b45309"/>
+<text x="60" y="72" text-anchor="middle" font-weight="bold">7</text>
+<text x="120" y="72" text-anchor="middle" font-weight="bold">3</text>
+<text x="170" y="72" fill="#475569">tmp = 7</text>
+
+<text x="30" y="115" fill="#0369a1" font-weight="bold"><span lang="kk" class="lang-content">2-қадам</span><tspan>Step 2</tspan></text>
+<rect x="30" y="130" width="60" height="50" fill="#fde68a" stroke="#b45309"/>
+<rect x="90" y="130" width="60" height="50" fill="#fde68a" stroke="#b45309"/>
+<text x="60" y="162" text-anchor="middle" font-weight="bold">3</text>
+<text x="120" y="162" text-anchor="middle" font-weight="bold">3</text>
+<text x="170" y="162" fill="#475569">a[i] = a[j]</text>
+
+<text x="380" y="25" fill="#0369a1" font-weight="bold"><span lang="kk" class="lang-content">3-қадам</span><tspan>Step 3</tspan></text>
+<rect x="380" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="440" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/>
+<text x="410" y="72" text-anchor="middle" font-weight="bold">3</text>
+<text x="470" y="72" text-anchor="middle" font-weight="bold">7</text>
+<text x="520" y="72" fill="#475569">a[j] = tmp ✅</text>
+
+<text x="30" y="210" fill="#0369a1" font-weight="bold">Python:</text>
+<text x="140" y="210" fill="#475569" font-size="15">a[i], a[j] = a[j], a[i]</text>
+</g></svg></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔁 Классикалық қолданыстар</span>
+<span lang="en" class="lang-content">🔁 Classic uses</span>
+<span lang="ru" class="lang-content">🔁 Классические применения</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">⬅️ Массивті керіге айналдыру</span><span lang="en" class="lang-content">⬅️ Reverse array</span><span lang="ru" class="lang-content">⬅️ Разворот массива</span></p>
+<div class="code-block text-sm">
+l, r = <span class="num">0</span>, <span class="fn">len</span>(a) - <span class="num">1</span>
+<span class="kw">while</span> l &lt; r:
+    a[l], a[r] = a[r], a[l]
+    l += <span class="num">1</span>
+    r -= <span class="num">1</span>
+</div>
+<p class="text-slate-500 text-xs mt-1">O(n/2) swap</p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">🔀 Араластыру (Fisher-Yates)</span><span lang="en" class="lang-content">🔀 Shuffle (Fisher-Yates)</span><span lang="ru" class="lang-content">🔀 Перемешать (Fisher-Yates)</span></p>
+<div class="code-block text-sm">
+<span class="kw">import</span> random
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(a) - <span class="num">1</span>, <span class="num">0</span>, -<span class="num">1</span>):
+    j = random.<span class="fn">randint</span>(<span class="num">0</span>, i)
+    a[i], a[j] = a[j], a[i]
+</div>
+<p class="text-slate-500 text-xs mt-1">O(n), <span lang="kk" class="lang-content">бірдей ықтималдылық</span><span lang="en" class="lang-content">uniform random</span><span lang="ru" class="lang-content">равновероятно</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">🫧 Көпіршікті сұрыптау</span><span lang="en" class="lang-content">🫧 Bubble sort</span><span lang="ru" class="lang-content">🫧 Пузырьковая</span></p>
+<div class="code-block text-sm">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n):
+    <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(n - <span class="num">1</span> - i):
+        <span class="kw">if</span> a[j] &gt; a[j + <span class="num">1</span>]:
+            a[j], a[j + <span class="num">1</span>] = a[j + <span class="num">1</span>], a[j]
+</div>
+<p class="text-slate-500 text-xs mt-1">O(n²)</p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">➡️ Циклды жылжыту</span><span lang="en" class="lang-content">➡️ Cyclic rotate</span><span lang="ru" class="lang-content">➡️ Циклический сдвиг</span></p>
+<div class="code-block text-sm">
+<span class="com"># <span lang="kk" class="lang-content">солға 1 жылжу</span>rotate left by 1<span lang="ru" class="lang-content">сдвиг влево</span></span>
+first = a[<span class="num">0</span>]
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(a) - <span class="num">1</span>):
+    a[i] = a[i + <span class="num">1</span>]
+a[-<span class="num">1</span>] = first
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Шағын тапсырмалар</span>
+<span lang="en" class="lang-content">🎯 Mini-tasks</span>
+<span lang="ru" class="lang-content">🎯 Мини-задачи</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-3 text-slate-700 text-lg">
+<li>1. <span lang="kk" class="lang-content"><b>Жұп индексті</b> және <b>тақ индексті</b> элементтерді swap жаса (a[0]↔a[1], a[2]↔a[3], …).</span><span lang="en" class="lang-content">Swap pairs: a[0]↔a[1], a[2]↔a[3], …</span><span lang="ru" class="lang-content">Поменять парами: a[0]↔a[1], a[2]↔a[3], …</span></li>
+<li>2. <span lang="kk" class="lang-content"><b>Ең үлкен</b> пен <b>ең кіші</b> элементтерді swap жаса.</span><span lang="en" class="lang-content">Swap max and min elements.</span><span lang="ru" class="lang-content">Поменять max и min.</span></li>
+<li>3. <span lang="kk" class="lang-content"><b>Теріс сандарды</b> массивтің <b>басына</b>, оң сандарды — <b>соңына</b> шығар (Dutch flag).</span><span lang="en" class="lang-content">Move negatives to front, positives to back (Dutch flag).</span><span lang="ru" class="lang-content">Отрицательные — в начало, положительные — в конец.</span></li>
+<li>4. <span lang="kk" class="lang-content">Массивті <b>k</b> рет оңға жылжыт — O(n).</span><span lang="en" class="lang-content">Rotate array right by <b>k</b> in O(n).</span><span lang="ru" class="lang-content">Циклический сдвиг вправо на <b>k</b> за O(n).</span></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Қателер</span>
+<span lang="en" class="lang-content">⚠️ Mistakes</span>
+<span lang="ru" class="lang-content">⚠️ Ошибки</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🙈</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">tmp ұмыту</span><span lang="en" class="lang-content">Forget tmp</span><span lang="ru" class="lang-content">Забыть tmp</span></p>
+<p class="text-slate-600 text-xs">a[i]=a[j]; a[j]=a[i] ❌</p></div>
+<div class="tile"><div class="tile-emoji">🔢</div><p class="heading-font text-red-700 text-sm">i == j</p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">өзімен</span><span lang="en" class="lang-content">with itself</span><span lang="ru" class="lang-content">сам с собой</span></p></div>
+<div class="tile"><div class="tile-emoji">📏</div><p class="heading-font text-red-700 text-sm">IndexError</p>
+<p class="text-slate-600 text-xs">j ≥ len(a)</p></div>
+<div class="tile"><div class="tile-emoji">🪞</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Көшірмесіз</span><span lang="en" class="lang-content">Modify in-place?</span><span lang="ru" class="lang-content">На месте?</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-sky-700 mb-2">a, b = b, a</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">O(1) <span lang="kk" class="lang-content">жылдам</span><span lang="en" class="lang-content">instant</span><span lang="ru" class="lang-content">мгновенно</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧱</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Барлық сұрыптаудың кірпіші</span><span lang="en" class="lang-content">Brick of all sorts</span><span lang="ru" class="lang-content">Кирпич сортировок</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

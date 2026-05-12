@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Классические задачи: факториал и Фибоначчи</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 8 · Algorithms</span>
+<span lang="ru" class="lang-content">8 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Классикалық есептер: факториал мен Фибоначчи</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Classic tasks: factorial &amp; Fibonacci</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Классика: факториал и Фибоначчи</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">❗ Факториал — n!</span>
+<span lang="en" class="lang-content">❗ Factorial — n!</span>
+<span lang="ru" class="lang-content">❗ Факториал — n!</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">n!</b> = 1·2·3·…·n — бірінші n натурал санның көбейтіндісі. «!» <b>леп</b> белгісі тегін емес: <b>Кристиан Крамп</b> (1808) енгізді — математиктерді таңдандыратын жылдам өсуін көрсету үшін. <b>10! = 3 628 800</b>, ал <b>20! ≈ 2.4·10¹⁸</b> — бүкіл Жердегі құмның саны! Келісім бойынша: <b>0! = 1</b>.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">n!</b> = 1·2·3·…·n — the product of the first n naturals. The «!» was introduced by <b>Christian Kramp</b> (1808) to show the astonishing growth. <b>10! = 3 628 800</b>, <b>20! ≈ 2.4·10¹⁸</b> — more than grains of sand on Earth! By convention <b>0! = 1</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">n!</b> = 1·2·3·…·n — произведение первых n натуральных. Знак «!» ввёл <b>Кристиан Крамп</b> (1808), чтобы подчеркнуть стремительный рост. <b>10! = 3 628 800</b>, <b>20! ≈ 2.4·10¹⁸</b> — больше песчинок на Земле! По соглашению <b>0! = 1</b>.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🔁 <span lang="kk" class="lang-content">Итеративті шешім</span><span lang="en" class="lang-content">Iterative</span><span lang="ru" class="lang-content">Итеративное</span></p>
+<div class="code-block text-sm">
+<span class="kw">def</span> <span class="fn">fact</span>(n):
+    f = <span class="num">1</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, n + <span class="num">1</span>):
+        f *= i
+    <span class="kw">return</span> f
+
+<span class="fn">print</span>(<span class="fn">fact</span>(<span class="num">6</span>))  <span class="com"># 720</span>
+</div></div>
+
+<div class="card-accent rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🌀 <span lang="kk" class="lang-content">Рекурсивті</span><span lang="en" class="lang-content">Recursive</span><span lang="ru" class="lang-content">Рекурсивное</span></p>
+<div class="code-block text-sm">
+<span class="kw">def</span> <span class="fn">fact</span>(n):
+    <span class="kw">if</span> n &lt;= <span class="num">1</span>:
+        <span class="kw">return</span> <span class="num">1</span>
+    <span class="kw">return</span> n * <span class="fn">fact</span>(n - <span class="num">1</span>)
+
+<span class="com"># fact(4) = 4·fact(3) = 4·3·2·1 = 24</span>
+</div></div>
+</div>
+
+<table class="t mt-5"><thead><tr><th>n</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>10</th><th>15</th></tr></thead>
+<tbody><tr><td>n!</td><td>1</td><td>1</td><td>2</td><td>6</td><td>24</td><td>120</td><td>720</td><td>5 040</td><td>3.6 M</td><td>1.3 T</td></tr></tbody></table>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌀 Фибоначчи сандары</span>
+<span lang="en" class="lang-content">🌀 Fibonacci numbers</span>
+<span lang="ru" class="lang-content">🌀 Числа Фибоначчи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Әр сан алдыңғы екеуінің қосындысы: <b>F(n) = F(n-1) + F(n-2)</b>, F(0) = 0, F(1) = 1. Итальяндық <b class="text-sky-700">Леонардо Пизан (Fibonacci)</b> 1202 жылы қояндардың көбеюіне мысал келтірді. Бұл сандар табиғатта барлық жерде: <b>күнбағыстың</b> дәндері, <b>қарағайдың</b> бұтақтары, <b>ұлулардың</b> спиралі, <b>алтын қатынас</b> φ ≈ 1.618.</span>
+<span lang="en" class="lang-content">Each number is sum of two before: <b>F(n) = F(n-1) + F(n-2)</b>, F(0)=0, F(1)=1. Italian <b class="text-sky-700">Leonardo of Pisa (Fibonacci)</b> introduced the sequence in 1202 via a rabbit-breeding puzzle. These numbers appear in <b>sunflower</b> seeds, <b>pine cone</b> spirals, <b>nautilus</b> shells, and the <b>golden ratio</b> φ ≈ 1.618.</span>
+<span lang="ru" class="lang-content">Каждое число — сумма двух предыдущих: <b>F(n) = F(n-1) + F(n-2)</b>, F(0)=0, F(1)=1. Итальянец <b class="text-sky-700">Леонардо Пизанский (Фибоначчи)</b> описал их в 1202 г. через размножение кроликов. Эти числа встречаются всюду: семена <b>подсолнуха</b>, шишки <b>сосны</b>, раковины <b>моллюсков</b>, <b>золотое сечение</b> φ ≈ 1.618.</span></p>
+
+<table class="t"><thead><tr><th>n</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>15</th><th>20</th></tr></thead>
+<tbody><tr><td>F(n)</td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>5</td><td>8</td><td>13</td><td>21</td><td>34</td><td>55</td><td>610</td><td>6 765</td></tr></tbody></table>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+<div class="card-accent rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🔁 O(n) — <span lang="kk" class="lang-content">жылдам</span><span lang="en" class="lang-content">fast</span><span lang="ru" class="lang-content">быстро</span></p>
+<div class="code-block text-sm">
+<span class="kw">def</span> <span class="fn">fib</span>(n):
+    a, b = <span class="num">0</span>, <span class="num">1</span>
+    <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(n):
+        a, b = b, a + b
+    <span class="kw">return</span> a
+
+<span class="fn">print</span>(<span class="fn">fib</span>(<span class="num">30</span>))  <span class="com"># 832040</span>
+</div></div>
+
+<div class="card-accent rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🌀 <span lang="kk" class="lang-content">Рекурсивті (баяу!)</span><span lang="en" class="lang-content">Recursive (slow!)</span><span lang="ru" class="lang-content">Рекурсивное (медленное!)</span></p>
+<div class="code-block text-sm">
+<span class="kw">def</span> <span class="fn">fib</span>(n):
+    <span class="kw">if</span> n &lt; <span class="num">2</span>: <span class="kw">return</span> n
+    <span class="kw">return</span> <span class="fn">fib</span>(n-<span class="num">1</span>) + <span class="fn">fib</span>(n-<span class="num">2</span>)
+
+<span class="com"># fib(40) ≈ 30 s!</span>
+</div></div>
+</div>
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">⚠️ Рекурсия «қайталайды» — экспоненциалды баяу. <code>@cache</code> немесе итерация қажет.</span>
+<span lang="en" class="lang-content">⚠️ Naïve recursion recomputes — exponential. Use <code>@cache</code> or iteration.</span>
+<span lang="ru" class="lang-content">⚠️ Рекурсия пересчитывает одно и то же — экспоненциальна. Применяй <code>@cache</code> или итерацию.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Алтын қатынас</span>
+<span lang="en" class="lang-content">📐 Golden ratio</span>
+<span lang="ru" class="lang-content">📐 Золотое сечение</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">F(n+1) / F(n) → <b>φ ≈ 1.6180339887…</b> (n → ∞). Бұл санды ежелгі грек сәулетшілері <b>Парфенон-ды</b> құрғанда пайдаланған. Фараон <b>Хеопс пирамидасында</b> да бар!</span>
+<span lang="en" class="lang-content">F(n+1)/F(n) → <b>φ ≈ 1.6180339887…</b>. The ancient Greeks designed the <b>Parthenon</b> with it; even the <b>Great Pyramid</b> follows φ!</span>
+<span lang="ru" class="lang-content">F(n+1)/F(n) → <b>φ ≈ 1.6180339887…</b>. Древние греки строили по нему <b>Парфенон</b>, а пирамида <b>Хеопса</b> подчиняется φ!</span></p>
+
+<table class="t"><thead><tr><th>n</th><th>F(n+1)/F(n)</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>1 / 1 = 1.000</td></tr>
+<tr><td>2</td><td>2 / 1 = 2.000</td></tr>
+<tr><td>3</td><td>3 / 2 = 1.500</td></tr>
+<tr><td>5</td><td>8 / 5 = 1.600</td></tr>
+<tr><td>8</td><td>34 / 21 = 1.619</td></tr>
+<tr><td>15</td><td>987 / 610 = 1.6180</td></tr>
+<tr style="background:rgba(14,165,233,.08)"><td>∞</td><td><b>φ = 1.6180339887…</b></td></tr>
+</tbody></table>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Басқа классикалық есептер</span>
+<span lang="en" class="lang-content">🎯 Other classic problems</span>
+<span lang="ru" class="lang-content">🎯 Другие классические задачи</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">➗ <span lang="kk" class="lang-content">Евклид ЕҮОБ</span><span lang="en" class="lang-content">Euclid's GCD</span><span lang="ru" class="lang-content">НОД Евклида</span></p>
+<div class="code-block text-xs">
+<span class="kw">while</span> b:
+    a, b = b, a % b
+<span class="kw">return</span> a
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🔢 <span lang="kk" class="lang-content">Жай сан</span><span lang="en" class="lang-content">Prime check</span><span lang="ru" class="lang-content">Простое число</span></p>
+<div class="code-block text-xs">
+<span class="kw">for</span> d <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, <span class="fn">int</span>(n**<span class="num">0.5</span>)+<span class="num">1</span>):
+    <span class="kw">if</span> n%d == <span class="num">0</span>: <span class="kw">return</span> <span class="num">False</span>
+<span class="kw">return</span> n &gt; <span class="num">1</span>
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🧮 <span lang="kk" class="lang-content">Цифрлардың қосындысы</span><span lang="en" class="lang-content">Digit sum</span><span lang="ru" class="lang-content">Сумма цифр</span></p>
+<div class="code-block text-xs">
+s = <span class="num">0</span>
+<span class="kw">while</span> n:
+    s += n % <span class="num">10</span>
+    n //= <span class="num">10</span>
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🔁 <span lang="kk" class="lang-content">Кері сан</span><span lang="en" class="lang-content">Reverse integer</span><span lang="ru" class="lang-content">Реверс числа</span></p>
+<div class="code-block text-xs">
+r = <span class="num">0</span>
+<span class="kw">while</span> n:
+    r = r*<span class="num">10</span> + n%<span class="num">10</span>
+    n //= <span class="num">10</span>
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🏰 <span lang="kk" class="lang-content">Ханой мұнарасы</span><span lang="en" class="lang-content">Tower of Hanoi</span><span lang="ru" class="lang-content">Ханойские башни</span></p>
+<p class="text-slate-700 text-xs"><span lang="kk" class="lang-content">2ⁿ−1 жылжыту — классикалық рекурсия</span><span lang="en" class="lang-content">2ⁿ−1 moves — classic recursion</span><span lang="ru" class="lang-content">2ⁿ−1 ходов — классика рекурсии</span></p>
+</div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🎰 <span lang="kk" class="lang-content">Монте-Карло (π)</span><span lang="en" class="lang-content">Monte-Carlo π</span><span lang="ru" class="lang-content">Монте-Карло (π)</span></p>
+<p class="text-slate-700 text-xs"><span lang="kk" class="lang-content">квадратқа нүкте тастап π табу</span><span lang="en" class="lang-content">random points → π</span><span lang="ru" class="lang-content">случайные точки → π</span></p>
+</div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧠 Неге «классика»?</span>
+<span lang="en" class="lang-content">🧠 Why «classics»?</span>
+<span lang="ru" class="lang-content">🧠 Почему «классика»?</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">📜</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Тарих</span><span lang="en" class="lang-content">History</span><span lang="ru" class="lang-content">История</span></p></div>
+<div class="tile"><div class="tile-emoji">🧩</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Әдіс-тәсіл</span><span lang="en" class="lang-content">Techniques</span><span lang="ru" class="lang-content">Приёмы</span></p></div>
+<div class="tile"><div class="tile-emoji">🎓</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Сұхбат</span><span lang="en" class="lang-content">Interviews</span><span lang="ru" class="lang-content">Собесы</span></p></div>
+<div class="tile"><div class="tile-emoji">🔁</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Қайталану</span><span lang="en" class="lang-content">Recursion</span><span lang="ru" class="lang-content">Рекурсия</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">❗</div>
+<p class="heading-font text-xl text-sky-700 mb-2">n! = 1·2·…·n, 0! = 1</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌀</div>
+<p class="heading-font text-xl text-sky-700 mb-2">F(n) = F(n-1) + F(n-2)</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-sky-700 mb-2">φ ≈ 1.618</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Поиск элемента в массиве</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 9 · Algorithms</span>
+<span lang="ru" class="lang-content">9 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Массивтен элемент іздеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Searching in an array</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Поиск элемента в массиве</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Іздеу есебі</span>
+<span lang="en" class="lang-content">The search problem</span>
+<span lang="ru" class="lang-content">Задача поиска</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Берілген</b>: n элементтен тұратын массив <b>a</b> және іздеу мәні <b>x</b>. <b>Табу керек</b>: <b>x-тің индексін</b> немесе оның жоқтығын көрсету. Мысал: оқушылардың бағасынан <b>«5.0»</b> бағаны табу, телефон кітабынан <b>есімді</b> табу. Іздеу — <b>ең жиі кездесетін</b> компьютерлік амалдардың бірі (Google, БД, чат, ойынды ойлан!). Екі классикалық алгоритм: <b>сызықтық</b> O(n) және <b>бинарлық</b> O(log n).</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Given</b>: array <b>a</b> of n elements and a target <b>x</b>. <b>Return</b> the index of x, or indicate it's missing. Examples: finding a mark of <b>«5.0»</b>, looking up a name in a contact list. Search is one of the <b>most common</b> computer operations (Google, DBs, chats, games). Two classic algorithms: <b>linear</b> O(n) and <b>binary</b> O(log n).</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Дано</b>: массив <b>a</b> из n элементов и искомое <b>x</b>. <b>Надо</b>: вернуть индекс <b>x</b> или сказать, что его нет. Примеры: найти оценку <b>«5.0»</b>, контакт в телефоне. Поиск — одно из <b>самых частых</b> действий в компьютере (Google, БД, чаты, игры). Два классики: <b>линейный</b> O(n) и <b>бинарный</b> O(log n).</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚶 Сызықтық іздеу — O(n)</span>
+<span lang="en" class="lang-content">🚶 Linear search — O(n)</span>
+<span lang="ru" class="lang-content">🚶 Линейный поиск — O(n)</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><b>Идея</b>: басынан бастап <b>әрбір</b> элементті x-пен салыстырамыз. Тапсақ — индексті қайтарамыз, соңына жеткенше таппасақ — −1.</span>
+<span lang="en" class="lang-content"><b>Idea</b>: compare <b>every</b> element with x from the start. Return the index when found; return −1 at the end if not.</span>
+<span lang="ru" class="lang-content"><b>Идея</b>: сравниваем <b>каждый</b> элемент с x подряд. Нашли — вернуть индекс; дошли до конца — −1.</span></p>
+
+<div class="code-block">
+<span class="kw">def</span> <span class="fn">linear_search</span>(a, x):
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(a)):
+        <span class="kw">if</span> a[i] == x:
+            <span class="kw">return</span> i
+    <span class="kw">return</span> -<span class="num">1</span>
+
+<span class="fn">print</span>(<span class="fn">linear_search</span>([<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>, <span class="num">9</span>, <span class="num">2</span>], <span class="num">5</span>))  <span class="com"># 4</span>
+</div>
+
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">✅ Кез келген массивке жарамды (реттелмесе де). ⚠️ Үлкен массивта баяу.</span>
+<span lang="en" class="lang-content">✅ Works on any array (unsorted too). ⚠️ Slow for large n.</span>
+<span lang="ru" class="lang-content">✅ Подходит любому массиву (даже несортированному). ⚠️ Медленный для больших n.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏃 Бинарлық іздеу — O(log n)</span>
+<span lang="en" class="lang-content">🏃 Binary search — O(log n)</span>
+<span lang="ru" class="lang-content">🏃 Бинарный поиск — O(log n)</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><b>Шарты</b>: массив <b>реттелген</b> болуы керек! <b>Идея</b>: ортасын қара. x кіші болса — сол жағы, үлкен болса — оң жағы. Әр қадамда массив <b>2 есе қысқарады</b>: 1 млн → 20 қадам!</span>
+<span lang="en" class="lang-content"><b>Pre-req</b>: array must be <b>sorted</b>! <b>Idea</b>: compare with middle. If x &lt; mid → go left; else → right. Each step <b>halves</b> the range: 1 M → 20 steps!</span>
+<span lang="ru" class="lang-content"><b>Условие</b>: массив <b>отсортирован</b>! <b>Идея</b>: смотрим середину. x меньше — влево, больше — вправо. Каждый шаг диапазон <b>делится пополам</b>: 1 млн → 20 шагов!</span></p>
+
+<div class="code-block">
+<span class="kw">def</span> <span class="fn">binary_search</span>(a, x):
+    lo, hi = <span class="num">0</span>, <span class="fn">len</span>(a) - <span class="num">1</span>
+    <span class="kw">while</span> lo &lt;= hi:
+        mid = (lo + hi) // <span class="num">2</span>
+        <span class="kw">if</span> a[mid] == x:
+            <span class="kw">return</span> mid
+        <span class="kw">elif</span> a[mid] &lt; x:
+            lo = mid + <span class="num">1</span>
+        <span class="kw">else</span>:
+            hi = mid - <span class="num">1</span>
+    <span class="kw">return</span> -<span class="num">1</span>
+
+<span class="com"># <span lang="kk" class="lang-content">реттелген массив</span>sorted array<span lang="ru" class="lang-content">отсортированный</span></span>
+a = [<span class="num">1</span>, <span class="num">3</span>, <span class="num">5</span>, <span class="num">7</span>, <span class="num">9</span>, <span class="num">11</span>, <span class="num">13</span>, <span class="num">15</span>]
+<span class="fn">print</span>(<span class="fn">binary_search</span>(a, <span class="num">9</span>))  <span class="com"># 4</span>
+</div>
+
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">💡 Python-да ол <code>bisect</code> модулінде бар.</span>
+<span lang="en" class="lang-content">💡 Python provides <code>bisect</code> in stdlib.</span>
+<span lang="ru" class="lang-content">💡 В Python он есть в модуле <code>bisect</code>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Жылдамдықты салыстыру</span>
+<span lang="en" class="lang-content">📊 Speed comparison</span>
+<span lang="ru" class="lang-content">📊 Сравнение скорости</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th>n</th>
+<th>🚶 <span lang="kk" class="lang-content">Сызықтық</span><span lang="en" class="lang-content">Linear</span><span lang="ru" class="lang-content">Линейный</span></th>
+<th>🏃 <span lang="kk" class="lang-content">Бинарлық</span><span lang="en" class="lang-content">Binary</span><span lang="ru" class="lang-content">Бинарный</span></th>
+<th>🚀 hash (dict)</th>
+</tr></thead><tbody>
+<tr><td>10</td><td>10</td><td>4</td><td>1</td></tr>
+<tr><td>100</td><td>100</td><td>7</td><td>1</td></tr>
+<tr><td>1 000</td><td>1 000</td><td>10</td><td>1</td></tr>
+<tr><td>1 000 000</td><td>1 000 000</td><td>20</td><td>1</td></tr>
+<tr><td>1 000 000 000</td><td>~17 мин</td><td>30</td><td>1</td></tr>
+</tbody></table>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">Python: <code>x in list</code> = O(n), <code>x in set / dict</code> = O(1).</span>
+<span lang="en" class="lang-content">Python: <code>x in list</code> is O(n); <code>x in set / dict</code> is O(1).</span>
+<span lang="ru" class="lang-content">В Python <code>x in list</code> = O(n), <code>x in set / dict</code> = O(1).</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Іздеудің жанры</span>
+<span lang="en" class="lang-content">🎯 Search flavours</span>
+<span lang="ru" class="lang-content">🎯 Варианты поиска</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🔢 <span lang="kk" class="lang-content">Барлық кездесуді санау</span><span lang="en" class="lang-content">Count all matches</span><span lang="ru" class="lang-content">Счёт всех вхождений</span></p>
+<div class="code-block text-xs">a.count(x)</div></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">📍 <span lang="kk" class="lang-content">Бар-жоғы</span><span lang="en" class="lang-content">Is present?</span><span lang="ru" class="lang-content">Есть ли?</span></p>
+<div class="code-block text-xs">x in a  → True/False</div></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🥇 <span lang="kk" class="lang-content">Бірінші индекс</span><span lang="en" class="lang-content">First index</span><span lang="ru" class="lang-content">Первое вхождение</span></p>
+<div class="code-block text-xs">a.index(x)  <span class="com"># ValueError</span></div></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🔝 <span lang="kk" class="lang-content">Максимум</span><span lang="en" class="lang-content">Max value</span><span lang="ru" class="lang-content">Максимум</span></p>
+<div class="code-block text-xs">max(a), a.index(max(a))</div></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🔍 <span lang="kk" class="lang-content">Шартпен</span><span lang="en" class="lang-content">By condition</span><span lang="ru" class="lang-content">По условию</span></p>
+<div class="code-block text-xs">[x for x in a if x>5]</div></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🗂 <span lang="kk" class="lang-content">Қатарлас — бинарлық</span><span lang="en" class="lang-content">Sorted → binary</span><span lang="ru" class="lang-content">Сортиров. → бинарный</span></p>
+<div class="code-block text-xs">from bisect import bisect_left</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎲 Ойын: «сан тап»</span>
+<span lang="en" class="lang-content">🎲 Guess-the-number game</span>
+<span lang="ru" class="lang-content">🎲 Игра «угадай число»</span></h2>
+<div class="card rounded-custom p-8 flex items-center gap-6">
+<div class="text-8xl">🎯</div>
+<p class="text-slate-700 text-lg">
+<span lang="kk" class="lang-content">Дос 1 мен 1 000 арасынан сан ойлайды. Сен <b>бинарлық іздеу</b> қолдансаң — <b>10 рет</b> сұрау жеткілікті! «көп пе? аз ба?» → әр жауап дер диапазонды 2 есе қысқартады. Логарифм жұмыс істейді — log₂(1000) ≈ 10.</span>
+<span lang="en" class="lang-content">A friend picks a number 1–1 000. Using <b>binary search</b> you need only <b>10 guesses</b>! Ask «higher?» → each answer halves the range. log₂(1000) ≈ 10.</span>
+<span lang="ru" class="lang-content">Друг загадал число 1–1 000. С <b>бинарным поиском</b> хватит <b>10 вопросов</b>! «больше?» → диапазон уменьшается вдвое. log₂(1000) ≈ 10.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚶</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Linear = O(n)</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🏃</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Binary = O(log n) + sorted</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚀</div>
+<p class="heading-font text-xl text-sky-700 mb-2">set / dict = O(1)</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Абсолютные и относительные ссылки</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Excel</span>
+<span lang="en" class="lang-content">Grade 8 · Excel</span>
+<span lang="ru" class="lang-content">8 класс · Excel</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Абсолюттік және салыстырмалы сілтемелер</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Absolute &amp; relative references</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Абсолютные и относительные ссылки</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Неге «$» керек?</span>
+<span lang="en" class="lang-content">Why «$»?</span>
+<span lang="ru" class="lang-content">Зачем «$»?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Excel-де формуланы ұяшықтан <b>төмен немесе оңға тарту</b> — Fill Handle — бұл ең жиі жасалатын әрекет. Бірақ сол кезде сілтемелер <b>автоматты өзгереді</b>: <code>=A1+B1</code> бір жол төмен — <code>=A2+B2</code> болады. Кейде бұл дұрыс (баға × саны), ал кейде қате (салық мөлшерін <b>әрдайым</b> C1 ұяшығынан алу керек). <b class="text-sky-700">$ белгісі</b> сілтеменің белгілі бөлігін <b>«қатып қалдырады»</b>. 1979 жылы VisiCalc-та пайда болды, бүгін де өзгерген жоқ!</span>
+<span lang="en" class="lang-content">Dragging a formula with the Fill Handle is the most common Excel action. When you do, references <b>auto-shift</b>: <code>=A1+B1</code> becomes <code>=A2+B2</code> one row down. Sometimes that's right (price × qty), sometimes wrong (tax rate must <b>always</b> come from C1). The <b class="text-sky-700">$</b> sign <b>locks</b> part of a reference. It appeared in VisiCalc (1979) and is still unchanged!</span>
+<span lang="ru" class="lang-content">В Excel частое действие — растянуть формулу маркером заполнения. Ссылки при этом <b>автоматически сдвигаются</b>: <code>=A1+B1</code> на строку ниже станет <code>=A2+B2</code>. Иногда это правильно (цена × количество), а иногда нет (ставка налога должна <b>всегда</b> браться из C1). Знак <b class="text-sky-700">$</b> «замораживает» часть ссылки. Появился в VisiCalc (1979), работает до сих пор!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📋 4 түрлі сілтеме</span>
+<span lang="en" class="lang-content">📋 4 reference types</span>
+<span lang="ru" class="lang-content">📋 4 типа ссылок</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+<div class="card rounded-custom p-6 text-center">
+<p class="heading-font text-2xl text-sky-700 mb-2">A1</p>
+<p class="text-slate-700 text-sm mb-2"><b><span lang="kk" class="lang-content">Салыстырмалы</span><span lang="en" class="lang-content">Relative</span><span lang="ru" class="lang-content">Относительная</span></b></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Тарту кезінде екеуі де өзгереді: баған да, жол да.</span><span lang="en" class="lang-content">Both column and row shift.</span><span lang="ru" class="lang-content">Меняются и столбец, и строка.</span></p>
+<p class="text-slate-500 text-xs mt-2"><b>→</b> A1 · A2 · B2 · C3</p></div>
+
+<div class="card rounded-custom p-6 text-center" style="border-color:#0ea5e9;border-width:2px">
+<p class="heading-font text-2xl text-sky-700 mb-2">$A$1</p>
+<p class="text-slate-700 text-sm mb-2"><b><span lang="kk" class="lang-content">Абсолюттік</span><span lang="en" class="lang-content">Absolute</span><span lang="ru" class="lang-content">Абсолютная</span></b></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Ештеңе өзгермейді — тұрақты.</span><span lang="en" class="lang-content">Nothing shifts — fixed.</span><span lang="ru" class="lang-content">Ничего не меняется — фикс.</span></p>
+<p class="text-slate-500 text-xs mt-2"><b>→</b> $A$1 · $A$1 · $A$1</p></div>
+
+<div class="card rounded-custom p-6 text-center">
+<p class="heading-font text-2xl text-sky-700 mb-2">$A1</p>
+<p class="text-slate-700 text-sm mb-2"><b><span lang="kk" class="lang-content">Баған бекітілген</span><span lang="en" class="lang-content">Column locked</span><span lang="ru" class="lang-content">Столбец закреплён</span></b></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Баған — A қалады, жол өзгереді.</span><span lang="en" class="lang-content">Column A fixed, row shifts.</span><span lang="ru" class="lang-content">Столбец A — фикс, строка меняется.</span></p>
+<p class="text-slate-500 text-xs mt-2"><b>→</b> $A1 · $A2 · $A3</p></div>
+
+<div class="card rounded-custom p-6 text-center">
+<p class="heading-font text-2xl text-sky-700 mb-2">A$1</p>
+<p class="text-slate-700 text-sm mb-2"><b><span lang="kk" class="lang-content">Жол бекітілген</span><span lang="en" class="lang-content">Row locked</span><span lang="ru" class="lang-content">Строка закреплена</span></b></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Жол — 1 қалады, баған өзгереді.</span><span lang="en" class="lang-content">Row 1 fixed, column shifts.</span><span lang="ru" class="lang-content">Строка 1 — фикс, столбец меняется.</span></p>
+<p class="text-slate-500 text-xs mt-2"><b>→</b> A$1 · B$1 · C$1</p></div>
+</div>
+
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="heading-font text-sky-700 mb-1">⌨️ F4 — <span lang="kk" class="lang-content">сиқырлы перне</span><span lang="en" class="lang-content">magic key</span><span lang="ru" class="lang-content">магическая клавиша</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Формула ішінде сілтемеде тұрғанда F4 басса — 4 нұсқа арасында ауысады: A1 → $A$1 → A$1 → $A1 → A1…</span>
+<span lang="en" class="lang-content">Inside a formula, press F4 to cycle: A1 → $A$1 → A$1 → $A1 → A1…</span>
+<span lang="ru" class="lang-content">В формуле жми F4, чтобы переключать: A1 → $A$1 → A$1 → $A1 → A1…</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Классикалық мысал — ҚҚС</span>
+<span lang="en" class="lang-content">🎯 Classic example — VAT</span>
+<span lang="ru" class="lang-content">🎯 Классика — НДС</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">100 тауардың бағасы. Барлығына <b>бір ҚҚС мөлшерін</b> (B1) қолдану керек.</span>
+<span lang="en" class="lang-content">100 products. Apply a <b>single VAT rate</b> from cell B1 to all.</span>
+<span lang="ru" class="lang-content">100 товаров. К каждой цене нужно применить <b>одну ставку НДС</b> из B1.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-rose rounded-xl p-5">
+<p class="heading-font text-rose-700 mb-2">❌ <span lang="kk" class="lang-content">Қате</span><span lang="en" class="lang-content">Wrong</span><span lang="ru" class="lang-content">Неверно</span></p>
+<div class="code-block text-sm">
+B1 = 12%     <span class="com"># ҚҚС</span>
+A3 = 1000
+<b>B3 = A3 * B1</b>   ← <span lang="kk" class="lang-content">= 120, оңай тарту</span>= 120<span lang="ru" class="lang-content">= 120</span>
+B4 = A4 * <b>B2</b>  ❌ <span lang="kk" class="lang-content">бос ұяшық!</span>empty cell!<span lang="ru" class="lang-content">пустая ячейка!</span>
+B5 = A5 * <b>B3</b>  ❌ <span lang="kk" class="lang-content">қате</span>wrong<span lang="ru" class="lang-content">ошибка</span>
+</div></div>
+
+<div class="card-emerald rounded-xl p-5">
+<p class="heading-font text-emerald-700 mb-2">✅ <span lang="kk" class="lang-content">Дұрыс</span><span lang="en" class="lang-content">Correct</span><span lang="ru" class="lang-content">Верно</span></p>
+<div class="code-block text-sm">
+B1 = 12%     <span class="com"># ҚҚС</span>
+A3 = 1000
+<b>B3 = A3 * $B$1</b>  ← $ <span lang="kk" class="lang-content">бекітеді</span>lock<span lang="ru" class="lang-content">закрепляем</span>
+B4 = A4 * <b>$B$1</b>  ✅
+B5 = A5 * <b>$B$1</b>  ✅
+...
+B102 = A102 * <b>$B$1</b> ✅
+</div></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 2 өлшемді мысал — көбейту кестесі</span>
+<span lang="en" class="lang-content">📐 2D example — multiplication table</span>
+<span lang="ru" class="lang-content">📐 2D-пример — таблица умножения</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Пифагор кестесін (1×1 ... 10×10) жасау. Бір формуламен!</span>
+<span lang="en" class="lang-content">Build Pythagoras table 1×1…10×10 with a single formula!</span>
+<span lang="ru" class="lang-content">Построй таблицу умножения 1×1…10×10 одной формулой!</span></p>
+
+<div class="card rounded-xl p-4 overflow-x-auto">
+<table class="t text-sm"><thead><tr>
+<th></th><th>1</th><th>2</th><th>3</th><th>…</th><th>10</th>
+</tr></thead><tbody>
+<tr><td>1</td><td>1</td><td>2</td><td>3</td><td>…</td><td>10</td></tr>
+<tr><td>2</td><td>2</td><td>4</td><td>6</td><td>…</td><td>20</td></tr>
+<tr><td>3</td><td>3</td><td>6</td><td>9</td><td>…</td><td>30</td></tr>
+<tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+<tr><td>10</td><td>10</td><td>20</td><td>30</td><td>…</td><td>100</td></tr>
+</tbody></table></div>
+
+<div class="code-block mt-5">
+<span class="com"># A1:K1 — <span lang="kk" class="lang-content">жоғарғы жол: 1, 2, … 10</span>top row: 1 … 10<span lang="ru" class="lang-content">верх: 1 … 10</span></span>
+<span class="com"># A1:A11 — <span lang="kk" class="lang-content">сол баған: 1, 2, … 10</span>left col: 1 … 10<span lang="ru" class="lang-content">лев. столбец: 1 … 10</span></span>
+
+B2 = <b>$A2 * B$1</b>
+<span class="com"># $A → <span lang="kk" class="lang-content">баған бекітілген (әрдайым A)</span>column A fixed<span lang="ru" class="lang-content">столбец A зафиксирован</span></span>
+<span class="com"># $1 → <span lang="kk" class="lang-content">жол бекітілген (әрдайым 1)</span>row 1 fixed<span lang="ru" class="lang-content">строка 1 зафиксирована</span></span>
+
+<span class="com"># <span lang="kk" class="lang-content">Осы 1 формуланы тарт → 100 ұяшық толтырылады!</span>Drag — fills all 100 cells!<span lang="ru" class="lang-content">Протяни — заполнит 100 ячеек!</span></span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧭 Сілтеменің тағы түрлері</span>
+<span lang="en" class="lang-content">🧭 Other references</span>
+<span lang="ru" class="lang-content">🧭 Другие виды ссылок</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-lg text-sky-700 mb-2">📄 <span lang="kk" class="lang-content">Басқа параққа</span><span lang="en" class="lang-content">Other sheet</span><span lang="ru" class="lang-content">Другой лист</span></p>
+<div class="code-block text-sm">
+=Sheet2!A1
+=<span class="str">'2024 Sales'</span>!$B$3
+</div>
+<p class="text-slate-500 text-xs mt-1"><span lang="kk" class="lang-content">Бос орын болса — тырнақша</span><span lang="en" class="lang-content">Use quotes for spaces</span><span lang="ru" class="lang-content">С пробелом — в кавычках</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-lg text-sky-700 mb-2">📁 <span lang="kk" class="lang-content">Басқа файлға</span><span lang="en" class="lang-content">Other file</span><span lang="ru" class="lang-content">Другой файл</span></p>
+<div class="code-block text-sm">
+=<span class="str">'[Report.xlsx]Data'</span>!$A$1
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-lg text-sky-700 mb-2">🌐 <span lang="kk" class="lang-content">Бүкіл баған/жол</span><span lang="en" class="lang-content">Whole col/row</span><span lang="ru" class="lang-content">Весь столбец/строка</span></p>
+<div class="code-block text-sm">
+=SUM(A:A)        <span class="com"># <span lang="kk" class="lang-content">A-ның бәрі</span>all of A<span lang="ru" class="lang-content">весь A</span></span>
+=AVERAGE(3:3)    <span class="com"># 3 <span lang="kk" class="lang-content">жолының бәрі</span>whole row 3<span lang="ru" class="lang-content">вся строка 3</span></span>
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-lg text-sky-700 mb-2">🏷 <span lang="kk" class="lang-content">Атаулы диапазон</span><span lang="en" class="lang-content">Named range</span><span lang="ru" class="lang-content">Именованный диапазон</span></p>
+<div class="code-block text-sm">
+<span class="com"># Name Manager: VAT = $B$1</span>
+=A2 * VAT        <span class="com"># <span lang="kk" class="lang-content">оқуға оңай</span>readable<span lang="ru" class="lang-content">читаемо</span></span>
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Тапсырма — тексер өзіңді</span>
+<span lang="en" class="lang-content">🧪 Self-test</span>
+<span lang="ru" class="lang-content">🧪 Самопроверка</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">C2-де <b>=$A2*B$1</b> формуласы тұр. Оны <b>D5</b>-ке көшірсек — не шығады?</span>
+<span lang="en" class="lang-content">C2 contains <b>=$A2*B$1</b>. After copying to <b>D5</b> — what is it?</span>
+<span lang="ru" class="lang-content">В C2 формула <b>=$A2*B$1</b>. Копируем в <b>D5</b> — что получится?</span></p>
+
+<div class="card-accent rounded-xl p-5">
+<p class="text-slate-700 text-sm mb-2">📏 <span lang="kk" class="lang-content">C2 → D5: баған +1, жол +3</span><span lang="en" class="lang-content">C2 → D5: col +1, row +3</span><span lang="ru" class="lang-content">C2 → D5: столбец +1, строка +3</span></p>
+<ul class="space-y-1 text-slate-700 text-sm">
+<li>$A2 → $A5 ($ <span lang="kk" class="lang-content">бағанды ұстайды, жол +3</span><span lang="en" class="lang-content">col locked, row +3</span><span lang="ru" class="lang-content">столбец заморожен, строка +3</span>)</li>
+<li>B$1 → C$1 ($ <span lang="kk" class="lang-content">жолды ұстайды, баған +1</span><span lang="en" class="lang-content">row locked, col +1</span><span lang="ru" class="lang-content">строка заморожена, столбец +1</span>)</li>
+</ul>
+<p class="mt-3 text-lg text-slate-900"><b>D5 = $A5 * C$1</b> ✅</p>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Қай кезде қай сілтеме?</span>
+<span lang="en" class="lang-content">🎯 Which reference when?</span>
+<span lang="ru" class="lang-content">🎯 Какая ссылка — когда?</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Жағдай</span><span lang="en" class="lang-content">Situation</span><span lang="ru" class="lang-content">Ситуация</span></th>
+<th><span lang="kk" class="lang-content">Сілтеме</span><span lang="en" class="lang-content">Reference</span><span lang="ru" class="lang-content">Ссылка</span></th>
+</tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">Баға × саны (жол-жол)</span><span lang="en" class="lang-content">Price × qty (row by row)</span><span lang="ru" class="lang-content">Цена × кол-во</span></td><td>A2 · B2 (<span lang="kk" class="lang-content">салыстырмалы</span><span lang="en" class="lang-content">relative</span><span lang="ru" class="lang-content">относительная</span>)</td></tr>
+<tr><td><span lang="kk" class="lang-content">Барлығына ҚҚС</span><span lang="en" class="lang-content">VAT to all rows</span><span lang="ru" class="lang-content">НДС на все строки</span></td><td>$B$1 (<span lang="kk" class="lang-content">абсолюттік</span><span lang="en" class="lang-content">absolute</span><span lang="ru" class="lang-content">абсолютная</span>)</td></tr>
+<tr><td><span lang="kk" class="lang-content">Көбейту кестесінде</span><span lang="en" class="lang-content">Multiplication table</span><span lang="ru" class="lang-content">Таблица умножения</span></td><td>$A2 · B$1 (<span lang="kk" class="lang-content">аралас</span><span lang="en" class="lang-content">mixed</span><span lang="ru" class="lang-content">смешанная</span>)</td></tr>
+<tr><td><span lang="kk" class="lang-content">Валюта бағамы</span><span lang="en" class="lang-content">Exchange rate</span><span lang="ru" class="lang-content">Курс валют</span></td><td>$C$2 (<span lang="kk" class="lang-content">абс.</span><span lang="en" class="lang-content">abs</span><span lang="ru" class="lang-content">абс.</span>)</td></tr>
+<tr><td><span lang="kk" class="lang-content">Әр жолда сол баған арқылы</span><span lang="en" class="lang-content">Always same column</span><span lang="ru" class="lang-content">Всегда тот же столбец</span></td><td>$A2 (<span lang="kk" class="lang-content">баған бекітілген</span><span lang="en" class="lang-content">col locked</span><span lang="ru" class="lang-content">столбец закреплён</span>)</td></tr>
+<tr><td><span lang="kk" class="lang-content">Әр бағанда сол жол</span><span lang="en" class="lang-content">Always same row</span><span lang="ru" class="lang-content">Всегда та же строка</span></td><td>A$1 (<span lang="kk" class="lang-content">жол бекітілген</span><span lang="en" class="lang-content">row locked</span><span lang="ru" class="lang-content">строка закреплена</span>)</td></tr>
+</tbody></table></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">$</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">«Қатып қалу» белгісі</span><span lang="en" class="lang-content">Lock sign</span><span lang="ru" class="lang-content">Знак «заморозить»</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">F4</div>
+<p class="heading-font text-xl text-sky-700 mb-2">A1 → $A$1 → A$1 → $A1</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧠</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Тартудан бұрын — ойлан</span><span lang="en" class="lang-content">Think before dragging</span><span lang="ru" class="lang-content">Сначала подумай — потом тяни</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

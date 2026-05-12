@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Обработка растровых изображений</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">5 сынып · Компьютерлік графика</span>
+<span lang="en" class="lang-content">Grade 5 · Computer graphics</span>
+<span lang="ru" class="lang-content">5 класс · Компьютерная графика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Растрлық суреттерді өңдеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Processing raster images</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Обработка растровых изображений</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✨ Сурет өңдеу дегеніміз не?</span>
+<span lang="en" class="lang-content">✨ What is image processing?</span>
+<span lang="ru" class="lang-content">✨ Что такое обработка изображений?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Сурет өңдеу</b> — <b>дайын</b> суретті жақсарту немесе өзгерту: қию, бұру, өлшемін өзгерту, түсін реттеу, сүзгі қолдану. Өңдеу арқылы <b>сапасыз</b> фотоны жарқын етіп, <b>қате</b> элементтерді жасырып, <b>жасанды</b> әсерлер қоса аласың. Фото редакторы: <b>Photoshop</b>, <b>GIMP</b> (тегін), <b>Paint</b> (қарапайым), <b>Canva</b>, <b>Photopea</b> (браузерде). Телефонда: <b>Snapseed</b>, <b>Lightroom</b>, <b>VSCO</b>. Әлеуметтік желіге пост дайындау — өңдеу!</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Image processing</b> is improving or transforming an existing picture: crop, rotate, resize, adjust colour, apply filters. Processing turns a <b>dull</b> photo into a bright one, hides <b>mistakes</b> and adds <b>creative</b> effects. Desktop editors: <b>Photoshop</b>, <b>GIMP</b> (free), <b>Paint</b> (basic), <b>Canva</b>, <b>Photopea</b> (in browser). Mobile: <b>Snapseed</b>, <b>Lightroom</b>, <b>VSCO</b>. Every social-media post is a piece of image processing!</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Обработка изображений</b> — улучшение или изменение <b>готовой</b> картинки: обрезать, повернуть, изменить размер, подправить цвета, применить фильтр. Обработка превращает <b>тусклое</b> фото в яркое, скрывает <b>ошибки</b>, добавляет <b>художественные</b> эффекты. Редакторы: <b>Photoshop</b>, <b>GIMP</b> (бесплатный), <b>Paint</b> (простой), <b>Canva</b>, <b>Photopea</b> (в браузере). На телефоне: <b>Snapseed</b>, <b>Lightroom</b>, <b>VSCO</b>. Любой пост в соцсеть — это уже обработка!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧰 Негізгі операциялар</span>
+<span lang="en" class="lang-content">🧰 Basic operations</span>
+<span lang="ru" class="lang-content">🧰 Основные операции</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="tile"><div class="tile-emoji">✂️</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Қию (Crop)</span><span lang="en" class="lang-content">Crop</span><span lang="ru" class="lang-content">Обрезка</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Артық жиекті алып тастау</span><span lang="en" class="lang-content">Remove extra borders</span><span lang="ru" class="lang-content">Убрать лишние края</span></p></div>
+<div class="tile"><div class="tile-emoji">📏</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Өлшем (Resize)</span><span lang="en" class="lang-content">Resize</span><span lang="ru" class="lang-content">Размер</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Пиксель санын өзгерту</span><span lang="en" class="lang-content">Change pixel count</span><span lang="ru" class="lang-content">Поменять число пикселей</span></p></div>
+<div class="tile"><div class="tile-emoji">🔄</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Бұру / Айналдыру</span><span lang="en" class="lang-content">Rotate / Flip</span><span lang="ru" class="lang-content">Поворот / Отражение</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">90°, 180°, айналы</span><span lang="en" class="lang-content">90°, 180°, mirror</span><span lang="ru" class="lang-content">90°, 180°, зеркало</span></p></div>
+<div class="tile"><div class="tile-emoji">☀️</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Жарықтық</span><span lang="en" class="lang-content">Brightness</span><span lang="ru" class="lang-content">Яркость</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Қарайту / ағарту</span><span lang="en" class="lang-content">Darker / brighter</span><span lang="ru" class="lang-content">Темнее / светлее</span></p></div>
+<div class="tile"><div class="tile-emoji">🎚️</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Контраст</span><span lang="en" class="lang-content">Contrast</span><span lang="ru" class="lang-content">Контраст</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Қара/ақ айырмашылығы</span><span lang="en" class="lang-content">Darks vs lights</span><span lang="ru" class="lang-content">Разница тёмного и светлого</span></p></div>
+<div class="tile"><div class="tile-emoji">🌈</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Қанықтық</span><span lang="en" class="lang-content">Saturation</span><span lang="ru" class="lang-content">Насыщенность</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Түстердің қанықтығы</span><span lang="en" class="lang-content">Colour intensity</span><span lang="ru" class="lang-content">Сочность цветов</span></p></div>
+<div class="tile"><div class="tile-emoji">🖼️</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Фильтрлар</span><span lang="en" class="lang-content">Filters</span><span lang="ru" class="lang-content">Фильтры</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Қара-ақ, винтаж, блюр</span><span lang="en" class="lang-content">B&W, vintage, blur</span><span lang="ru" class="lang-content">Ч/Б, винтаж, блюр</span></p></div>
+<div class="tile"><div class="tile-emoji">🩹</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Ретуш</span><span lang="en" class="lang-content">Retouch</span><span lang="ru" class="lang-content">Ретушь</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Дақ, сызатты жасыру</span><span lang="en" class="lang-content">Remove spots</span><span lang="ru" class="lang-content">Убрать пятна</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎨 Фильтрлар қалай жұмыс істейді?</span>
+<span lang="en" class="lang-content">🎨 How do filters work?</span>
+<span lang="ru" class="lang-content">🎨 Как работают фильтры?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4">
+<span lang="kk" class="lang-content">Фильтр — бұл <b>әр пикселдің R, G, B мәндерін өзгертетін ереже</b>. Компьютер суретті пиксель-пиксельмен оқиды және ережені қолданады.</span>
+<span lang="en" class="lang-content">A filter is a <b>rule that changes R, G, B of every pixel</b>. The computer reads the image pixel by pixel and applies the rule.</span>
+<span lang="ru" class="lang-content">Фильтр — это <b>правило, которое меняет R, G, B каждого пикселя</b>. Компьютер проходит картинку пиксель за пикселем и применяет правило.</span></p>
+<div class="overflow-x-auto"><table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Фильтр</span><span lang="en" class="lang-content">Filter</span><span lang="ru" class="lang-content">Фильтр</span></th>
+<th><span lang="kk" class="lang-content">Ереже</span><span lang="en" class="lang-content">Rule</span><span lang="ru" class="lang-content">Правило</span></th>
+<th><span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Что выходит</span></th>
+</tr></thead>
+<tbody>
+<tr><td class="font-bold">⚫ <span lang="kk" class="lang-content">Қара-ақ</span><span lang="en" class="lang-content">Black & White</span><span lang="ru" class="lang-content">Ч/Б</span></td>
+<td><span lang="kk" class="lang-content">gray = (R + G + B) / 3</span><span lang="en" class="lang-content">gray = (R + G + B) / 3</span><span lang="ru" class="lang-content">серое = (R + G + B) / 3</span></td>
+<td><span lang="kk" class="lang-content">Түссіз, «ретро» әсер</span><span lang="en" class="lang-content">No colour, retro feel</span><span lang="ru" class="lang-content">Без цвета, «ретро»</span></td></tr>
+<tr><td class="font-bold">🔄 <span lang="kk" class="lang-content">Негатив</span><span lang="en" class="lang-content">Negative</span><span lang="ru" class="lang-content">Негатив</span></td>
+<td class="font-mono">R'=255-R, G'=255-G, B'=255-B</td>
+<td><span lang="kk" class="lang-content">Ескі фото-плёнка</span><span lang="en" class="lang-content">Old film negative</span><span lang="ru" class="lang-content">Как старая плёнка</span></td></tr>
+<tr><td class="font-bold">🌫️ <span lang="kk" class="lang-content">Блюр</span><span lang="en" class="lang-content">Blur</span><span lang="ru" class="lang-content">Размытие</span></td>
+<td><span lang="kk" class="lang-content">9 көрші пиксельдің орташасы</span><span lang="en" class="lang-content">average of 9 neighbours</span><span lang="ru" class="lang-content">среднее 9 соседей</span></td>
+<td><span lang="kk" class="lang-content">Жұмсақ, анық емес</span><span lang="en" class="lang-content">Soft, out-of-focus</span><span lang="ru" class="lang-content">Мягкая, не резкая</span></td></tr>
+<tr><td class="font-bold">✨ <span lang="kk" class="lang-content">Жарықтық +50</span><span lang="en" class="lang-content">Bright +50</span><span lang="ru" class="lang-content">Ярче +50</span></td>
+<td class="font-mono">R'=R+50, G'=G+50, B'=B+50</td>
+<td><span lang="kk" class="lang-content">Сурет ашық болады</span><span lang="en" class="lang-content">Brighter image</span><span lang="ru" class="lang-content">Картинка светлеет</span></td></tr>
+<tr><td class="font-bold">🟤 <span lang="kk" class="lang-content">Сепия</span><span lang="en" class="lang-content">Sepia</span><span lang="ru" class="lang-content">Сепия</span></td>
+<td><span lang="kk" class="lang-content">R жоғары, B төмен</span><span lang="en" class="lang-content">R high, B low</span><span lang="ru" class="lang-content">R больше, B меньше</span></td>
+<td><span lang="kk" class="lang-content">Көне-сары фото</span><span lang="en" class="lang-content">Old-yellow photo</span><span lang="ru" class="lang-content">Тёплое «старое» фото</span></td></tr>
+</tbody></table></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Өлшем мен сапа</span>
+<span lang="en" class="lang-content">📏 Size vs quality</span>
+<span lang="ru" class="lang-content">📏 Размер и качество</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">⬆️ <span lang="kk" class="lang-content">Үлкейтсең — бұзылады</span><span lang="en" class="lang-content">Enlarge → blur</span><span lang="ru" class="lang-content">Увеличение — «мылит»</span></p>
+<p class="text-slate-700">
+<span lang="kk" class="lang-content">Жаңа пикселдер жоқ. Компьютер бары бар пиксельдерді көшіреді немесе «болжайды» (интерполяция). Сапа <b>төмендейді</b>.</span>
+<span lang="en" class="lang-content">There are no new pixels. The computer copies existing ones or «guesses» (interpolation). Quality <b>drops</b>.</span>
+<span lang="ru" class="lang-content">Новых пикселей неоткуда взять. Компьютер копирует или «додумывает» (интерполяция). Качество <b>падает</b>.</span></p></div>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">⬇️ <span lang="kk" class="lang-content">Кішірейтсең — ақпарат жоғалады</span><span lang="en" class="lang-content">Shrink → info lost</span><span lang="ru" class="lang-content">Уменьшение — потеря деталей</span></p>
+<p class="text-slate-700">
+<span lang="kk" class="lang-content">Бірнеше пиксель <b>біреуге</b> айналады. Кейін үлкейте алмайсың — сақталған ақпарат кетті.</span>
+<span lang="en" class="lang-content">Several pixels merge into <b>one</b>. You can't enlarge back — lost info is lost.</span>
+<span lang="ru" class="lang-content">Несколько пикселей объединяются в <b>один</b>. Обратно уже не увеличить — потерянное не вернуть.</span></p></div>
+</div>
+<div class="card-accent rounded-2xl p-5 mt-5 border-l-4 border-sky-400">
+<p class="text-slate-700 text-lg">
+<span lang="kk" class="lang-content">💡 <b>Ереже:</b> түпнұсқа файлды әрқашан <b>сақтап қой</b>. Өңдеуді <b>көшірме</b> арқылы істе.</span>
+<span lang="en" class="lang-content">💡 <b>Rule:</b> always <b>keep the original</b> file. Edit a <b>copy</b>.</span>
+<span lang="ru" class="lang-content">💡 <b>Правило:</b> всегда <b>сохраняй оригинал</b>. Правь <b>копию</b>.</span></p></div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📋 Қадамдар: Paint-та фотоны өңдеу</span>
+<span lang="en" class="lang-content">📋 Steps: edit a photo in Paint</span>
+<span lang="ru" class="lang-content">📋 Шаги: как обработать фото в Paint</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">1️⃣ <span lang="kk" class="lang-content">Файл ашу</span><span lang="en" class="lang-content">Open the file</span><span lang="ru" class="lang-content">Открой файл</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">File → Open → фото таңдау.</span><span lang="en" class="lang-content">File → Open → choose photo.</span><span lang="ru" class="lang-content">File → Open → выбери фото.</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">2️⃣ <span lang="kk" class="lang-content">Қию</span><span lang="en" class="lang-content">Crop</span><span lang="ru" class="lang-content">Обрежь</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Select → Crop — артықты алып тастау.</span><span lang="en" class="lang-content">Select → Crop — cut extras.</span><span lang="ru" class="lang-content">Select → Crop — убери лишнее.</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">3️⃣ <span lang="kk" class="lang-content">Өлшемін өзгерту</span><span lang="en" class="lang-content">Resize</span><span lang="ru" class="lang-content">Измени размер</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Home → Resize → 50% / 1000 px.</span><span lang="en" class="lang-content">Home → Resize → 50% / 1000 px.</span><span lang="ru" class="lang-content">Home → Resize → 50% / 1000 px.</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">4️⃣ <span lang="kk" class="lang-content">Бұру</span><span lang="en" class="lang-content">Rotate</span><span lang="ru" class="lang-content">Поверни</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Rotate → 90° немесе айналы.</span><span lang="en" class="lang-content">Rotate → 90° or mirror.</span><span lang="ru" class="lang-content">Rotate → 90° или отразить.</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">5️⃣ <span lang="kk" class="lang-content">Мәтін қосу</span><span lang="en" class="lang-content">Add text</span><span lang="ru" class="lang-content">Добавь текст</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">«A» → жазуын теріп қоюға болады.</span><span lang="en" class="lang-content">«A» → type caption on photo.</span><span lang="ru" class="lang-content">«A» → впиши подпись на фото.</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">6️⃣ <span lang="kk" class="lang-content">Сақта</span><span lang="en" class="lang-content">Save</span><span lang="ru" class="lang-content">Сохрани</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">File → Save As → .JPG (шағын) / .PNG (мөлдір).</span><span lang="en" class="lang-content">File → Save As → .JPG (small) / .PNG (transparent).</span><span lang="ru" class="lang-content">File → Save As → .JPG (лёгкий) / .PNG (с прозрачностью).</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">✨</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Өңдеу ≠ салу</span><span lang="en" class="lang-content">Edit ≠ draw</span><span lang="ru" class="lang-content">Обработка ≠ рисование</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Дайын фотоны өзгерту</span><span lang="en" class="lang-content">Changing a ready photo</span><span lang="ru" class="lang-content">Меняем уже готовое фото</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎨</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Фильтр = RGB ережесі</span><span lang="en" class="lang-content">Filter = RGB rule</span><span lang="ru" class="lang-content">Фильтр = правило RGB</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Пиксельдердің түсін санау</span><span lang="en" class="lang-content">Compute pixel colours</span><span lang="ru" class="lang-content">Считает цвет пикселей</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💾</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Оригиналды сақта</span><span lang="en" class="lang-content">Keep the original</span><span lang="ru" class="lang-content">Сохраняй оригинал</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Көшірмеде өңде — қауіпсіз</span><span lang="en" class="lang-content">Edit a copy — safe</span><span lang="ru" class="lang-content">Правь копию — безопасно</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

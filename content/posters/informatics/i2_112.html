@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подсчёт очков и игровой цикл</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Ойын жасау</span>
+<span lang="en" class="lang-content">Grade 9 · Game dev</span>
+<span lang="ru" class="lang-content">9 класс · Геймдев</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Ұпай санау мен ойын циклі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Scoring &amp; game loop</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Подсчёт очков и игровой цикл</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔁 Ойын циклі — жүрек</span>
+<span lang="en" class="lang-content">🔁 Game loop — the heart</span>
+<span lang="ru" class="lang-content">🔁 Игровой цикл — сердце</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">Әр ойын — <b>үнемі қайталанатын</b> 3 қадамнан тұрады: <b>оқиғаларды оқу</b> → <b>күйді жаңарту</b> → <b>сурет салу</b>. Бұл цикл секундына <b>60 рет</b> айналады, ешқашан тоқтамайды. Ұпай (score) — ойыншының <b>жетістігі</b>. Ол — <b>айнымалы</b>, collision немесе таймерде өседі, ал <b>ең жоғары ұпай</b> (high-score) файлға сақталады.</span>
+<span lang="en" class="lang-content">Every game is a loop that repeats <b>3 steps</b>: <b>read events</b> → <b>update state</b> → <b>render</b>. It runs <b>60 times per second</b> forever. The score is the player's <b>progress</b> — just a variable that grows on collision or timer. The <b>high-score</b> is persisted to a file.</span>
+<span lang="ru" class="lang-content">Любая игра — это цикл из <b>3 шагов</b>: <b>чтение событий</b> → <b>обновление</b> → <b>отрисовка</b>. Он крутится <b>60 раз в секунду</b> непрерывно. Очки — <b>прогресс</b> игрока, обычная переменная, растёт на столкновении или по таймеру. <b>Рекорд</b> сохраняется в файл.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎬 Ойын күйлері (scene manager)</span>
+<span lang="en" class="lang-content">🎬 Game states (scene manager)</span>
+<span lang="ru" class="lang-content">🎬 Состояния игры</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 700 180" style="width:100%;max-width:700px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="13">
+<rect x="30"  y="60" width="120" height="60" rx="10" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/>
+<text x="90" y="85" text-anchor="middle" font-weight="bold" fill="#0369a1">MENU</text>
+<text x="90" y="105" text-anchor="middle" font-size="11" fill="#64748b">start / quit</text>
+
+<rect x="200" y="60" width="120" height="60" rx="10" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+<text x="260" y="85" text-anchor="middle" font-weight="bold" fill="#b45309">PLAY</text>
+<text x="260" y="105" text-anchor="middle" font-size="11" fill="#64748b">update · draw</text>
+
+<rect x="370" y="60" width="120" height="60" rx="10" fill="#fecaca" stroke="#991b1b" stroke-width="2"/>
+<text x="430" y="85" text-anchor="middle" font-weight="bold" fill="#991b1b">PAUSE</text>
+<text x="430" y="105" text-anchor="middle" font-size="11" fill="#64748b">freeze</text>
+
+<rect x="540" y="60" width="140" height="60" rx="10" fill="#86efac" stroke="#15803d" stroke-width="2"/>
+<text x="610" y="85" text-anchor="middle" font-weight="bold" fill="#15803d">GAME OVER</text>
+<text x="610" y="105" text-anchor="middle" font-size="11" fill="#64748b">retry / menu</text>
+
+<path d="M 150 90 L 200 90" stroke="#0369a1" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 320 85 L 370 85" stroke="#b45309" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 370 100 L 320 100" stroke="#991b1b" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M 320 110 Q 420 150 540 110" stroke="#991b1b" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+<path d="M 540 85 Q 350 25 150 85" stroke="#15803d" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs>
+</g></svg></div>
+
+<div class="code-block">
+state = <span class="str">"menu"</span>          <span class="com"># <span lang="kk" class="lang-content">қазіргі күй</span>current state<span lang="ru" class="lang-content">текущее</span></span>
+
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="kw">if</span> state == <span class="str">"menu"</span>:
+        state = <span class="fn">run_menu</span>(screen)
+    <span class="kw">elif</span> state == <span class="str">"play"</span>:
+        state = <span class="fn">run_game</span>(screen)
+    <span class="kw">elif</span> state == <span class="str">"pause"</span>:
+        state = <span class="fn">run_pause</span>(screen)
+    <span class="kw">elif</span> state == <span class="str">"over"</span>:
+        state = <span class="fn">run_gameover</span>(screen, score)
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏆 Ұпай санау</span>
+<span lang="en" class="lang-content">🏆 Scoring</span>
+<span lang="ru" class="lang-content">🏆 Подсчёт очков</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+score = <span class="num">0</span>
+font  = pygame.font.<span class="fn">SysFont</span>(<span class="str">"Arial"</span>, <span class="num">32</span>, bold=<span class="num">True</span>)
+
+<span class="com"># 🪙 <span lang="kk" class="lang-content">монетамен</span>on coin pickup<span lang="ru" class="lang-content">за монетку</span></span>
+hit = player.<span class="fn">collidelist</span>(coins)
+<span class="kw">if</span> hit != -<span class="num">1</span>:
+    coins.<span class="fn">pop</span>(hit)
+    score += <span class="num">10</span>
+
+<span class="com"># ⏱ <span lang="kk" class="lang-content">уақыт бойынша</span>over time<span lang="ru" class="lang-content">за время</span></span>
+elapsed = pygame.time.<span class="fn">get_ticks</span>() // <span class="num">1000</span>   <span class="com"># s</span>
+time_score = elapsed * <span class="num">1</span>
+
+<span class="com"># 🎯 <span lang="kk" class="lang-content">комбо</span>combo<span lang="ru" class="lang-content">комбо</span></span>
+<span class="kw">if</span> chain &gt; <span class="num">1</span>:
+    score += <span class="num">5</span> * chain
+
+<span class="com"># 🖼 <span lang="kk" class="lang-content">сурет</span>draw<span lang="ru" class="lang-content">отрисовка</span></span>
+img = font.<span class="fn">render</span>(<span class="str">f"Score: {score}"</span>, <span class="num">True</span>, (<span class="num">255</span>,<span class="num">255</span>,<span class="num">255</span>))
+screen.<span class="fn">blit</span>(img, (<span class="num">20</span>, <span class="num">20</span>))
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💾 High-score сақтау</span>
+<span lang="en" class="lang-content">💾 Saving high-score</span>
+<span lang="ru" class="lang-content">💾 Сохранение рекорда</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">import</span> json, pathlib
+
+PATH = pathlib.<span class="fn">Path</span>(<span class="str">"highscore.json"</span>)
+
+<span class="kw">def</span> <span class="fn">load_hs</span>():
+    <span class="kw">if</span> PATH.<span class="fn">exists</span>():
+        <span class="kw">return</span> json.<span class="fn">loads</span>(PATH.<span class="fn">read_text</span>())[<span class="str">"best"</span>]
+    <span class="kw">return</span> <span class="num">0</span>
+
+<span class="kw">def</span> <span class="fn">save_hs</span>(best):
+    PATH.<span class="fn">write_text</span>(json.<span class="fn">dumps</span>({<span class="str">"best"</span>: best}))
+
+best = <span class="fn">load_hs</span>()
+<span class="kw">if</span> score &gt; best:
+    best = score
+    <span class="fn">save_hs</span>(best)
+    <span class="fn">show_message</span>(<span class="str">"🏆 NEW HIGH-SCORE!"</span>)
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 JSON — адам оқи алатын; <code>pickle</code> — жылдам, бірақ қауіпсіз емес.</span>
+<span lang="en" class="lang-content">💡 JSON is human-readable; <code>pickle</code> is faster but unsafe.</span>
+<span lang="ru" class="lang-content">💡 JSON читается человеком; <code>pickle</code> быстрее, но небезопасен.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⏱ Қиындықты өсіру</span>
+<span lang="en" class="lang-content">⏱ Difficulty ramp-up</span>
+<span lang="ru" class="lang-content">⏱ Рост сложности</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="com"># 30 <span lang="kk" class="lang-content">сек сайын тездету</span>speed up every 30 s<span lang="ru" class="lang-content">каждые 30 с — ускорение</span></span>
+level  = elapsed // <span class="num">30</span> + <span class="num">1</span>
+SPEED  = <span class="num">3</span> + level
+SPAWN  = <span class="fn">max</span>(<span class="num">300</span>, <span class="num">1500</span> - level * <span class="num">100</span>)  <span class="com"># ms</span>
+
+<span class="com"># <span lang="kk" class="lang-content">жаңа жау шығару</span>spawn enemy<span lang="ru" class="lang-content">спаун врага</span></span>
+<span class="kw">if</span> pygame.time.<span class="fn">get_ticks</span>() - last_spawn &gt; SPAWN:
+    enemies.<span class="fn">append</span>(<span class="fn">make_enemy</span>())
+    last_spawn = pygame.time.<span class="fn">get_ticks</span>()
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧩 Толық қаңқа</span>
+<span lang="en" class="lang-content">🧩 Full skeleton</span>
+<span lang="ru" class="lang-content">🧩 Полный скелет</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">import</span> pygame, sys, random
+pygame.<span class="fn">init</span>()
+screen = pygame.display.<span class="fn">set_mode</span>((<span class="num">800</span>, <span class="num">600</span>))
+clock  = pygame.time.<span class="fn">Clock</span>()
+font   = pygame.font.<span class="fn">SysFont</span>(<span class="str">"Arial"</span>, <span class="num">28</span>, bold=<span class="num">True</span>)
+
+player = pygame.<span class="fn">Rect</span>(<span class="num">380</span>, <span class="num">280</span>, <span class="num">40</span>, <span class="num">40</span>)
+coins  = [pygame.<span class="fn">Rect</span>(random.<span class="fn">randint</span>(<span class="num">0</span>,<span class="num">760</span>),
+                       random.<span class="fn">randint</span>(<span class="num">0</span>,<span class="num">560</span>), <span class="num">24</span>, <span class="num">24</span>)
+          <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">8</span>)]
+score, running = <span class="num">0</span>, <span class="num">True</span>
+
+<span class="kw">while</span> running:
+    <span class="kw">for</span> e <span class="kw">in</span> pygame.event.<span class="fn">get</span>():
+        <span class="kw">if</span> e.type == pygame.QUIT: running = <span class="num">False</span>
+
+    k = pygame.key.<span class="fn">get_pressed</span>()
+    player.x += (k[pygame.K_RIGHT] - k[pygame.K_LEFT]) * <span class="num">5</span>
+    player.y += (k[pygame.K_DOWN]  - k[pygame.K_UP])   * <span class="num">5</span>
+    player.<span class="fn">clamp_ip</span>(screen.<span class="fn">get_rect</span>())
+
+    hit = player.<span class="fn">collidelist</span>(coins)
+    <span class="kw">if</span> hit != -<span class="num">1</span>:
+        coins.<span class="fn">pop</span>(hit);   score += <span class="num">10</span>
+        <span class="kw">if</span> <span class="kw">not</span> coins: running = <span class="num">False</span>
+
+    screen.<span class="fn">fill</span>((<span class="num">15</span>,<span class="num">23</span>,<span class="num">42</span>))
+    <span class="kw">for</span> c <span class="kw">in</span> coins: pygame.draw.<span class="fn">ellipse</span>(screen,(<span class="num">253</span>,<span class="num">224</span>,<span class="num">71</span>),c)
+    pygame.draw.<span class="fn">rect</span>(screen,(<span class="num">14</span>,<span class="num">165</span>,<span class="num">233</span>),player,border_radius=<span class="num">6</span>)
+    screen.<span class="fn">blit</span>(font.<span class="fn">render</span>(<span class="str">f"Score: {score}"</span>,<span class="num">1</span>,(<span class="num">255</span>,)*<span class="num">3</span>),(<span class="num">20</span>,<span class="num">20</span>))
+
+    pygame.display.<span class="fn">flip</span>()
+    clock.<span class="fn">tick</span>(<span class="num">60</span>)
+
+pygame.<span class="fn">quit</span>(); sys.<span class="fn">exit</span>()
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">🎯 ~40 жол — монета жинайтын нағыз ойын. Анимация, саундтрек, меню қосып, <b>бірінші жоба</b> жасауға болады!</span>
+<span lang="en" class="lang-content">🎯 ~40 lines → a real coin-collector. Add animation, SFX, menu and you have a <b>first project</b>.</span>
+<span lang="ru" class="lang-content">🎯 ~40 строк — готовая игра про монетки. Добавь анимацию, звук, меню — и это <b>первый проект</b>!</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔁</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Event → Update → Draw</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🏆</div>
+<p class="heading-font text-xl text-sky-700 mb-2">score += 10</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💾</div>
+<p class="heading-font text-xl text-sky-700 mb-2">high-score → JSON</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

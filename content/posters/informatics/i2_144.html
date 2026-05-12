@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D-моделирование</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · 3D</span>
+<span lang="en" class="lang-content">Grade 11 · 3D</span>
+<span lang="ru" class="lang-content">11 класс · 3D</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">3D модельдеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">3D modeling</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">3D-моделирование</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 3D модель — не?</span>
+<span lang="en" class="lang-content">📐 What is a 3D model?</span>
+<span lang="ru" class="lang-content">📐 Что такое 3D-модель?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">3D модель</b> — нысанның кеңістіктегі <b>математикалық сипаттамасы</b>: төбелер (vertex), қырлар (edge), жақтар (face). Компьютер оларды <b>рендерингпен</b> суретке айналдырады. Тарих: <b>1963 ж. Sutherland «Sketchpad»</b> — алғашқы интерактивті сызба; <b>1995 ж. «Toy Story»</b> — алғашқы толығымен 3D фильм; <b>2020+ Unreal Engine 5 + Blender</b> — кинематографиялық сапа үйде. 3D барлық жерде: ойын, мультфильм, медицина, архитектура, 3D-басып шығару.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">3D model</b> is a <b>mathematical description</b> of an object in space: vertices, edges, faces. A computer turns it into a picture through <b>rendering</b>. History: <b>1963 Sutherland «Sketchpad»</b> — first interactive CAD; <b>1995 «Toy Story»</b> — first fully 3D movie; <b>2020+ Unreal Engine 5 + Blender</b> bring cinema quality home. 3D is everywhere: games, animation, medicine, architecture, 3D printing.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">3D-модель</b> — <b>математическое описание</b> объекта в пространстве: вершины (vertex), рёбра (edge), грани (face). Компьютер превращает её в картинку через <b>рендеринг</b>. История: <b>1963 Сазерленд «Sketchpad»</b> — первый интерактивный CAD; <b>1995 «Toy Story»</b> — первый полностью 3D-фильм; <b>2020+ Unreal Engine 5 + Blender</b> — кино-качество дома. 3D везде: игры, мультфильмы, медицина, архитектура, 3D-печать.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔺 Негізгі ұғымдар</span>
+<span lang="en" class="lang-content">🔺 Key concepts</span>
+<span lang="ru" class="lang-content">🔺 Основные понятия</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 620 220" style="width:100%;max-width:620px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="13" text-anchor="middle">
+<polygon points="60,160 160,160 110,60" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/>
+<circle cx="60" cy="160" r="6" fill="#b91c1c"/><circle cx="160" cy="160" r="6" fill="#b91c1c"/><circle cx="110" cy="60" r="6" fill="#b91c1c"/>
+<text x="30" y="175" fill="#b91c1c">V₁</text><text x="180" y="175" fill="#b91c1c">V₂</text><text x="110" y="50" fill="#b91c1c">V₃</text>
+<text x="110" y="200" fill="#0369a1" font-weight="bold">Triangle (face)</text>
+
+<g transform="translate(220,0)">
+<polygon points="60,140 140,140 160,80 80,80" fill="#fde68a" stroke="#b45309" stroke-width="2" fill-opacity="0.7"/>
+<polygon points="140,140 180,120 200,60 160,80" fill="#fde68a" stroke="#b45309" stroke-width="2" fill-opacity="0.5"/>
+<polygon points="80,80 160,80 200,60 120,60" fill="#fde68a" stroke="#b45309" stroke-width="2" fill-opacity="0.9"/>
+<text x="130" y="200" fill="#b45309" font-weight="bold">Cube = 12 triangles</text>
+</g>
+
+<g transform="translate(450,0)">
+<circle cx="70" cy="110" r="55" fill="url(#sphGrad)" stroke="#15803d" stroke-width="1"/>
+<defs><radialGradient id="sphGrad"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#bbf7d0"/></radialGradient></defs>
+<g stroke="#15803d" stroke-width="0.3" fill="none">
+<ellipse cx="70" cy="110" rx="55" ry="15"/><ellipse cx="70" cy="110" rx="55" ry="30"/><ellipse cx="70" cy="110" rx="55" ry="45"/>
+<ellipse cx="70" cy="110" rx="15" ry="55"/><ellipse cx="70" cy="110" rx="30" ry="55"/><ellipse cx="70" cy="110" rx="45" ry="55"/>
+</g>
+<text x="70" y="200" fill="#15803d" font-weight="bold">Mesh · wireframe</text>
+</g>
+</g></svg></div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🔴</div><p class="heading-font text-sky-700 text-sm">Vertex</p><p class="text-slate-600 text-xs">(x, y, z)</p></div>
+<div class="tile"><div class="tile-emoji">➖</div><p class="heading-font text-sky-700 text-sm">Edge</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">2 төбе арасы</span><span lang="en" class="lang-content">2 vertices</span><span lang="ru" class="lang-content">2 вершины</span></p></div>
+<div class="tile"><div class="tile-emoji">🔺</div><p class="heading-font text-sky-700 text-sm">Face</p><p class="text-slate-600 text-xs">tri/quad</p></div>
+<div class="tile"><div class="tile-emoji">🕸</div><p class="heading-font text-sky-700 text-sm">Mesh</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">тор</span><span lang="en" class="lang-content">net</span><span lang="ru" class="lang-content">сетка</span></p></div>
+<div class="tile"><div class="tile-emoji">🎨</div><p class="heading-font text-sky-700 text-sm">Texture / UV</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">сурет жабу</span><span lang="en" class="lang-content">image wrap</span><span lang="ru" class="lang-content">натяжка картинки</span></p></div>
+<div class="tile"><div class="tile-emoji">✨</div><p class="heading-font text-sky-700 text-sm">Material</p><p class="text-slate-600 text-xs">PBR, shader</p></div>
+<div class="tile"><div class="tile-emoji">💡</div><p class="heading-font text-sky-700 text-sm">Light</p><p class="text-slate-600 text-xs">point · sun · area</p></div>
+<div class="tile"><div class="tile-emoji">🎥</div><p class="heading-font text-sky-700 text-sm">Camera + Render</p><p class="text-slate-600 text-xs">raster · ray-trace</p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧰 Модельдеу түрлері</span>
+<span lang="en" class="lang-content">🧰 Types of modeling</span>
+<span lang="ru" class="lang-content">🧰 Виды моделирования</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Түрі</span><span lang="en" class="lang-content">Type</span><span lang="ru" class="lang-content">Тип</span></th>
+<th><span lang="kk" class="lang-content">Идея</span><span lang="en" class="lang-content">Idea</span><span lang="ru" class="lang-content">Идея</span></th>
+<th><span lang="kk" class="lang-content">Қолдану</span><span lang="en" class="lang-content">Use</span><span lang="ru" class="lang-content">Применение</span></th></tr></thead><tbody>
+<tr><td><b>Polygonal</b></td><td><span lang="kk" class="lang-content">көпбұрыштар тобы</span><span lang="en" class="lang-content">mesh of polygons</span><span lang="ru" class="lang-content">сетка полигонов</span></td><td><span lang="kk" class="lang-content">ойындар, кино</span><span lang="en" class="lang-content">games, films</span><span lang="ru" class="lang-content">игры, кино</span></td></tr>
+<tr><td><b>NURBS</b></td><td><span lang="kk" class="lang-content">математикалық қисықтар</span><span lang="en" class="lang-content">smooth math curves</span><span lang="ru" class="lang-content">гладкие мат. кривые</span></td><td><span lang="kk" class="lang-content">өнеркәсіп, авто</span><span lang="en" class="lang-content">industry, cars</span><span lang="ru" class="lang-content">промдизайн, авто</span></td></tr>
+<tr><td><b>Sculpting</b></td><td><span lang="kk" class="lang-content">саздан лақтырғандай</span><span lang="en" class="lang-content">clay-like sculpting</span><span lang="ru" class="lang-content">как из глины</span></td><td><span lang="kk" class="lang-content">кейіпкерлер, монстрлар</span><span lang="en" class="lang-content">creatures, heroes</span><span lang="ru" class="lang-content">персонажи, монстры</span></td></tr>
+<tr><td><b>CAD (parametric)</b></td><td><span lang="kk" class="lang-content">өлшем + параметр</span><span lang="en" class="lang-content">dimensions + params</span><span lang="ru" class="lang-content">размеры + параметры</span></td><td><span lang="kk" class="lang-content">құрылыс, машина</span><span lang="en" class="lang-content">buildings, machines</span><span lang="ru" class="lang-content">здания, механизмы</span></td></tr>
+<tr><td><b>Procedural</b></td><td><span lang="kk" class="lang-content">код бойынша</span><span lang="en" class="lang-content">generated by code</span><span lang="ru" class="lang-content">по коду</span></td><td>Houdini, terrain</td></tr>
+<tr><td><b>Voxel</b></td><td><span lang="kk" class="lang-content">3D пиксель</span><span lang="en" class="lang-content">3D pixels</span><span lang="ru" class="lang-content">3D-пиксели</span></td><td>Minecraft, MRI</td></tr>
+<tr><td><b>Photogrammetry</b></td><td><span lang="kk" class="lang-content">көп фотодан модель</span><span lang="en" class="lang-content">model from photos</span><span lang="ru" class="lang-content">модель из фото</span></td><td><span lang="kk" class="lang-content">мұрағат сканерлеу</span><span lang="en" class="lang-content">heritage scanning</span><span lang="ru" class="lang-content">сканирование артефактов</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🪜 Жұмыс пайплайны</span>
+<span lang="en" class="lang-content">🪜 Production pipeline</span>
+<span lang="ru" class="lang-content">🪜 Пайплайн работы</span></h2>
+<div class="card rounded-custom p-6">
+<div class="grid grid-cols-2 md:grid-cols-6 gap-2">
+<div class="card card-accent rounded-2xl p-3 text-center"><div class="text-3xl mb-1">🧱</div><p class="heading-font text-sky-700 text-sm">1. Modeling</p></div>
+<div class="card card-accent rounded-2xl p-3 text-center"><div class="text-3xl mb-1">🗺</div><p class="heading-font text-sky-700 text-sm">2. UV</p></div>
+<div class="card card-accent rounded-2xl p-3 text-center"><div class="text-3xl mb-1">🎨</div><p class="heading-font text-sky-700 text-sm">3. Texturing</p></div>
+<div class="card card-accent rounded-2xl p-3 text-center"><div class="text-3xl mb-1">🦴</div><p class="heading-font text-sky-700 text-sm">4. Rigging</p></div>
+<div class="card card-accent rounded-2xl p-3 text-center"><div class="text-3xl mb-1">🏃</div><p class="heading-font text-sky-700 text-sm">5. Animation</p></div>
+<div class="card card-accent rounded-2xl p-3 text-center"><div class="text-3xl mb-1">🎬</div><p class="heading-font text-sky-700 text-sm">6. Render</p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Танымал бағдарламалар</span>
+<span lang="en" class="lang-content">🛠 Popular software</span>
+<span lang="ru" class="lang-content">🛠 Популярное ПО</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🟠</div><p class="heading-font text-sky-700 text-sm">Blender</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">тегін, барлығын істейді</span><span lang="en" class="lang-content">free, all-round</span><span lang="ru" class="lang-content">бесплатный, всё-в-одном</span></p></div>
+<div class="tile"><div class="tile-emoji">🏗</div><p class="heading-font text-sky-700 text-sm">Tinkercad</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">оқушыға оңай</span><span lang="en" class="lang-content">easy for students</span><span lang="ru" class="lang-content">для школьников</span></p></div>
+<div class="tile"><div class="tile-emoji">🎬</div><p class="heading-font text-sky-700 text-sm">Maya / 3ds Max</p><p class="text-slate-600 text-xs">Autodesk pro</p></div>
+<div class="tile"><div class="tile-emoji">🏛</div><p class="heading-font text-sky-700 text-sm">SketchUp</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">сәулет</span><span lang="en" class="lang-content">architecture</span><span lang="ru" class="lang-content">архитектура</span></p></div>
+<div class="tile"><div class="tile-emoji">⚙</div><p class="heading-font text-sky-700 text-sm">Fusion 360</p><p class="text-slate-600 text-xs">CAD / 3D-print</p></div>
+<div class="tile"><div class="tile-emoji">🗿</div><p class="heading-font text-sky-700 text-sm">ZBrush</p><p class="text-slate-600 text-xs">sculpting</p></div>
+<div class="tile"><div class="tile-emoji">🎮</div><p class="heading-font text-sky-700 text-sm">Unity / Unreal</p><p class="text-slate-600 text-xs">real-time engine</p></div>
+<div class="tile"><div class="tile-emoji">🌐</div><p class="heading-font text-sky-700 text-sm">Three.js</p><p class="text-slate-600 text-xs">WebGL</p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💻 Three.js-те «Hello, Cube!»</span>
+<span lang="en" class="lang-content">💻 «Hello, Cube!» in Three.js</span>
+<span lang="ru" class="lang-content">💻 «Hello, Cube!» на Three.js</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-xs">
+<span class="kw">import</span> * <span class="kw">as</span> THREE <span class="kw">from</span> <span class="str">'three'</span>;
+
+<span class="kw">const</span> scene    = <span class="kw">new</span> THREE.<span class="fn">Scene</span>();
+<span class="kw">const</span> camera   = <span class="kw">new</span> THREE.<span class="fn">PerspectiveCamera</span>(<span class="num">75</span>, <span class="num">16</span>/<span class="num">9</span>, <span class="num">0.1</span>, <span class="num">1000</span>);
+<span class="kw">const</span> renderer = <span class="kw">new</span> THREE.<span class="fn">WebGLRenderer</span>();
+renderer.<span class="fn">setSize</span>(<span class="fn">innerWidth</span>, <span class="fn">innerHeight</span>);
+document.body.<span class="fn">appendChild</span>(renderer.domElement);
+
+<span class="kw">const</span> geom = <span class="kw">new</span> THREE.<span class="fn">BoxGeometry</span>(<span class="num">1</span>, <span class="num">1</span>, <span class="num">1</span>);
+<span class="kw">const</span> mat  = <span class="kw">new</span> THREE.<span class="fn">MeshStandardMaterial</span>({ color: <span class="num">0x0ea5e9</span> });
+<span class="kw">const</span> cube = <span class="kw">new</span> THREE.<span class="fn">Mesh</span>(geom, mat);
+scene.<span class="fn">add</span>(cube);
+
+scene.<span class="fn">add</span>(<span class="kw">new</span> THREE.<span class="fn">AmbientLight</span>(<span class="num">0xffffff</span>, <span class="num">0.6</span>));
+camera.position.z = <span class="num">3</span>;
+
+<span class="kw">function</span> <span class="fn">animate</span>() {
+  <span class="fn">requestAnimationFrame</span>(animate);
+  cube.rotation.x += <span class="num">0.01</span>;
+  cube.rotation.y += <span class="num">0.01</span>;
+  renderer.<span class="fn">render</span>(scene, camera);
+}
+<span class="fn">animate</span>();
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔺</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Vertex + Edge + Face</p>
+<p class="text-slate-600 text-sm">= mesh</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎨</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Model → Texture → Light</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">→ рендер</span><span lang="en" class="lang-content">→ render</span><span lang="ru" class="lang-content">→ рендер</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🟠</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Blender</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">тегін + қуатты</span><span lang="en" class="lang-content">free &amp; powerful</span><span lang="ru" class="lang-content">бесплатный и мощный</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анимация персонажей</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Ойын жасау</span>
+<span lang="en" class="lang-content">Grade 9 · Game dev</span>
+<span lang="ru" class="lang-content">9 класс · Геймдев</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Кейіпкер анимациясы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Animating characters</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Анимация персонажей</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎞 Анимация қалай жұмыс істейді?</span>
+<span lang="en" class="lang-content">🎞 How animation works</span>
+<span lang="ru" class="lang-content">🎞 Как работает анимация</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">Анимация — <b>жылдам ауысатын</b> сурет жиыны. Біздің көз секундына 12-16 кадрдан бастап қозғалыс ретінде қабылдайды. <b>Дисней</b> стандарты — 24 FPS, <b>киноөнері</b> — 24, <b>ТВ</b> — 30, <b>ойындар</b> — 60-240! PyGame-да анимацияны <b>3 жолмен</b> жасайсың: <b>позицияны өзгерту</b> (жүру), <b>кадр ауыстыру</b> (спрайт-анимация) және <b>физика</b> (гравитация, серпілу).</span>
+<span lang="en" class="lang-content">Animation is a rapid <b>slideshow of frames</b>. Your eye sees motion from ~12-16 FPS. Disney films run at <b>24 FPS</b>, TV at 30, games at <b>60-240</b>! In PyGame there are <b>3 animation tools</b>: <b>changing position</b> (movement), <b>switching frames</b> (sprite animation) and <b>physics</b> (gravity, bounce).</span>
+<span lang="ru" class="lang-content">Анимация — это <b>быстрая смена кадров</b>. Глаз начинает видеть движение с ~12-16 FPS. Disney — <b>24 FPS</b>, ТВ — 30, игры — <b>60-240</b>! В PyGame — <b>3 вида</b> анимации: <b>смена позиции</b> (движение), <b>смена кадра</b> (спрайт-анимация) и <b>физика</b> (гравитация, отскок).</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚶 1. Позицияны өзгерту</span>
+<span lang="en" class="lang-content">🚶 1. Changing position</span>
+<span lang="ru" class="lang-content">🚶 1. Смена позиции</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+hero_rect = hero.<span class="fn">get_rect</span>(midbottom=(<span class="num">100</span>, <span class="num">500</span>))
+speed_x = <span class="num">4</span>
+
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="com"># ... events ...</span>
+
+    hero_rect.x += speed_x       <span class="com"># <span lang="kk" class="lang-content">оңға жылжу</span>move right<span lang="ru" class="lang-content">движение вправо</span></span>
+    <span class="kw">if</span> hero_rect.right &gt; <span class="num">800</span> <span class="kw">or</span> hero_rect.left &lt; <span class="num">0</span>:
+        speed_x = -speed_x       <span class="com"># <span lang="kk" class="lang-content">қабырғадан серпіледі</span>bounce<span lang="ru" class="lang-content">отскок</span></span>
+
+    screen.<span class="fn">blit</span>(bg, (<span class="num">0</span>, <span class="num">0</span>))
+    screen.<span class="fn">blit</span>(hero, hero_rect)
+    pygame.display.<span class="fn">flip</span>()
+    clock.<span class="fn">tick</span>(<span class="num">60</span>)
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 60 FPS × 4 px = <b>секундына 240 px</b>. FPS-ке тәуелсіз қозғалыс үшін <code>dt = clock.tick(60) / 1000</code> қолдан.</span>
+<span lang="en" class="lang-content">💡 60 FPS × 4 px = <b>240 px/s</b>. For frame-rate-independent motion use <code>dt = clock.tick(60) / 1000</code>.</span>
+<span lang="ru" class="lang-content">💡 60 FPS × 4 px = <b>240 px/с</b>. Для движения, не зависящего от FPS, бери <code>dt = clock.tick(60)/1000</code>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎨 2. Кадрларды ауыстыру (sprite)</span>
+<span lang="en" class="lang-content">🎨 2. Swapping frames (sprite)</span>
+<span lang="ru" class="lang-content">🎨 2. Смена кадров (sprite)</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 520 120" style="width:100%;max-width:520px">
+<g font-family="'JetBrains Mono',monospace" font-size="14">
+<rect x="20"  y="20" width="80" height="80" fill="#fde68a" stroke="#b45309" stroke-width="2"/><text x="60"  y="65" text-anchor="middle" font-size="26">🏃</text><text x="60"  y="115" text-anchor="middle" fill="#64748b">run_1</text>
+<rect x="130" y="20" width="80" height="80" fill="#fde68a" stroke="#b45309" stroke-width="2"/><text x="170" y="65" text-anchor="middle" font-size="26">🏃‍♂️</text><text x="170" y="115" text-anchor="middle" fill="#64748b">run_2</text>
+<rect x="240" y="20" width="80" height="80" fill="#fde68a" stroke="#b45309" stroke-width="2"/><text x="280" y="65" text-anchor="middle" font-size="26">🤸</text><text x="280" y="115" text-anchor="middle" fill="#64748b">run_3</text>
+<rect x="350" y="20" width="80" height="80" fill="#fde68a" stroke="#b45309" stroke-width="2"/><text x="390" y="65" text-anchor="middle" font-size="26">🏃‍♂️</text><text x="390" y="115" text-anchor="middle" fill="#64748b">run_4</text>
+<path d="M 450 60 L 500 60 L 495 55 M 500 60 L 495 65" stroke="#0369a1" stroke-width="2" fill="none"/>
+<text x="455" y="50" fill="#0369a1" font-weight="bold">loop</text>
+</g></svg></div>
+
+<div class="code-block">
+<span class="com"># <span lang="kk" class="lang-content">кадрларды жүктеу</span>load frames<span lang="ru" class="lang-content">загрузка кадров</span></span>
+run_frames = [
+    pygame.image.<span class="fn">load</span>(<span class="str">f"hero_run_{i}.png"</span>).<span class="fn">convert_alpha</span>()
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">5</span>)
+]
+frame_idx = <span class="num">0</span>         <span class="com"># <span lang="kk" class="lang-content">нақты кадр</span>current frame<span lang="ru" class="lang-content">текущий кадр</span></span>
+ANIM_SPEED = <span class="num">0.15</span>     <span class="com"># <span lang="kk" class="lang-content">бір frame-ге 0.15 қадам</span>fractional step<span lang="ru" class="lang-content">дробный шаг</span></span>
+
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="com"># ... events, physics ...</span>
+
+    frame_idx += ANIM_SPEED
+    <span class="kw">if</span> frame_idx &gt;= <span class="fn">len</span>(run_frames):
+        frame_idx = <span class="num">0</span>
+
+    hero_img = run_frames[<span class="fn">int</span>(frame_idx)]
+    screen.<span class="fn">blit</span>(hero_img, hero_rect)
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 ANIM_SPEED = 0.15 → ~6.6 кадр/сек. Ойыншы <b>тұрса</b> — idle frames, <b>жүгірсе</b> — run frames.</span>
+<span lang="en" class="lang-content">💡 0.15 → ~6.6 frames/s. <b>Idle</b> when standing, <b>run</b> when moving.</span>
+<span lang="ru" class="lang-content">💡 0.15 → ~6.6 кадра/с. <b>Idle</b> когда стоит, <b>run</b> когда бежит.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 3. Физика — гравитация мен секіру</span>
+<span lang="en" class="lang-content">🌍 3. Physics — gravity &amp; jump</span>
+<span lang="ru" class="lang-content">🌍 3. Физика — гравитация и прыжок</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+GROUND = <span class="num">500</span>
+hero_rect = hero.<span class="fn">get_rect</span>(midbottom=(<span class="num">100</span>, GROUND))
+vel_y = <span class="num">0</span>              <span class="com"># <span lang="kk" class="lang-content">тік жылдамдық</span>vertical speed<span lang="ru" class="lang-content">верт. скорость</span></span>
+GRAVITY = <span class="num">0.8</span>         <span class="com"># <span lang="kk" class="lang-content">тартылыс</span>pull<span lang="ru" class="lang-content">притяжение</span></span>
+JUMP = -<span class="num">15</span>             <span class="com"># <span lang="kk" class="lang-content">секіру күші</span>jump force<span lang="ru" class="lang-content">сила прыжка</span></span>
+
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="kw">for</span> e <span class="kw">in</span> pygame.event.<span class="fn">get</span>():
+        <span class="kw">if</span> e.type == pygame.KEYDOWN <span class="kw">and</span> e.key == pygame.K_SPACE:
+            <span class="kw">if</span> hero_rect.bottom == GROUND:   <span class="com"># <span lang="kk" class="lang-content">жерде</span>on ground<span lang="ru" class="lang-content">на земле</span></span>
+                vel_y = JUMP
+
+    vel_y += GRAVITY
+    hero_rect.y += vel_y
+    <span class="kw">if</span> hero_rect.bottom &gt;= GROUND:
+        hero_rect.bottom = GROUND
+        vel_y = <span class="num">0</span>
+</div>
+
+<p class="text-slate-700 text-lg mt-4"><span lang="kk" class="lang-content">📐 <b>Түсіну</b>: қадам сайын vel_y өседі (ауырлық) → кейіпкер тездей төмен түседі. Секіргенде <b>теріс</b> мән беріп, жоғары лақтырамыз.</span>
+<span lang="en" class="lang-content">📐 <b>Intuition</b>: each frame gravity adds to vel_y → falls faster &amp; faster. A jump sets <b>negative</b> vel_y to launch up.</span>
+<span lang="ru" class="lang-content">📐 <b>Идея</b>: каждый кадр gravity увеличивает vel_y → падает всё быстрее. Прыжок даёт <b>отрицательный</b> vel_y — «подбрасывает».</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎬 Анимация күйлері (states)</span>
+<span lang="en" class="lang-content">🎬 Animation states</span>
+<span lang="ru" class="lang-content">🎬 Состояния анимации</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Күй</span><span lang="en" class="lang-content">State</span><span lang="ru" class="lang-content">Состояние</span></th>
+<th><span lang="kk" class="lang-content">Қашан</span><span lang="en" class="lang-content">When</span><span lang="ru" class="lang-content">Когда</span></th>
+<th>frames</th>
+</tr></thead><tbody>
+<tr><td>😐 idle</td><td>vx == 0, on_ground</td><td>2–4</td></tr>
+<tr><td>🏃 run</td><td>vx ≠ 0, on_ground</td><td>4–8</td></tr>
+<tr><td>🦘 jump</td><td>vy &lt; 0</td><td>1–2</td></tr>
+<tr><td>🪂 fall</td><td>vy &gt; 0</td><td>1–2</td></tr>
+<tr><td>💥 hurt</td><td>hit == True</td><td>2</td></tr>
+<tr><td>⚰️ die</td><td>hp ≤ 0</td><td>4–6</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Анимациядағы қателер</span>
+<span lang="en" class="lang-content">⚠️ Animation gotchas</span>
+<span lang="ru" class="lang-content">⚠️ Ошибки анимации</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">⚡</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">тым жылдам</span><span lang="en" class="lang-content">too fast</span><span lang="ru" class="lang-content">слишком быстро</span></p><p class="text-slate-600 text-xs">ANIM_SPEED ↓</p></div>
+<div class="tile"><div class="tile-emoji">🐢</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Load цикл ішінде</span><span lang="en" class="lang-content">load in loop</span><span lang="ru" class="lang-content">load внутри loop</span></p><p class="text-slate-600 text-xs">FPS ↓</p></div>
+<div class="tile"><div class="tile-emoji">🔄</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Кадр таусылды</span><span lang="en" class="lang-content">index out</span><span lang="ru" class="lang-content">выход за индекс</span></p><p class="text-slate-600 text-xs">% len</p></div>
+<div class="tile"><div class="tile-emoji">↔️</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Бағыт ұмыту</span><span lang="en" class="lang-content">no flip</span><span lang="ru" class="lang-content">без flip</span></p><p class="text-slate-600 text-xs">pygame.transform.flip</p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚶</div>
+<p class="heading-font text-xl text-sky-700 mb-2">rect.x += vx</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎨</div>
+<p class="heading-font text-xl text-sky-700 mb-2">frames[int(idx)]</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌍</div>
+<p class="heading-font text-xl text-sky-700 mb-2">vy += g · jump = −15</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

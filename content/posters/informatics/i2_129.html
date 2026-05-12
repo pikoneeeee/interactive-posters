@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Алгоритмы на графах (BFS, DFS)</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Графтар</span>
+<span lang="en" class="lang-content">Grade 10 · Graphs</span>
+<span lang="ru" class="lang-content">10 класс · Графы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Граф алгоритмдері: BFS, DFS</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Graph algorithms: BFS, DFS</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Алгоритмы на графах: BFS, DFS</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🕸 Граф — не?</span>
+<span lang="en" class="lang-content">🕸 What is a graph?</span>
+<span lang="ru" class="lang-content">🕸 Что такое граф?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Граф</b> — <b>төбелер (vertex)</b> мен <b>қабырғалар (edge)</b> жиыны. Қалалар + жолдар, әлеуметтік желі достар, веб-беттер + гиперсілтемелер — барлығы графтар. <b>Leonhard Euler</b> 1736 жылы Кёнигсберг көпірлері есебінен <b>граф теориясын</b> бастады. Бағыттаулы (1→2) және бағытталмаған (1↔2), салмақты (көліктік шығын) графтар бар.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">graph</b> is a set of <b>vertices</b> connected by <b>edges</b>. Cities + roads, social friends, web + hyperlinks — all graphs. <b>Leonhard Euler</b> founded graph theory in 1736 (Königsberg bridges). Graphs can be directed (1→2) or undirected (1↔2), weighted (distance, cost) or unweighted.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Граф</b> — набор <b>вершин</b>, связанных <b>рёбрами</b>. Города и дороги, друзья в соцсети, веб и ссылки — всё графы. Теория графов основана <b>Леонардом Эйлером</b> в 1736 г. (кёнигсбергские мосты). Бывают ориентированные (1→2) и неориентированные (1↔2), взвешенные (стоимость, расстояние) и нет.</span></p>
+
+<div class="svg-wrap mt-4">
+<svg viewBox="0 0 640 220" style="width:100%;max-width:640px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="13" text-anchor="middle">
+<line x1="70" y1="60" x2="170" y2="40" stroke="#0369a1" stroke-width="2"/>
+<line x1="170" y1="40" x2="270" y2="80" stroke="#0369a1" stroke-width="2"/>
+<line x1="70" y1="60" x2="140" y2="150" stroke="#0369a1" stroke-width="2"/>
+<line x1="170" y1="40" x2="140" y2="150" stroke="#0369a1" stroke-width="2"/>
+<line x1="270" y1="80" x2="210" y2="170" stroke="#0369a1" stroke-width="2"/>
+<line x1="140" y1="150" x2="210" y2="170" stroke="#0369a1" stroke-width="2"/>
+<circle cx="70" cy="60" r="22" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="70" y="65" fill="#0369a1" font-weight="bold">A</text>
+<circle cx="170" cy="40" r="22" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="170" y="45" fill="#0369a1" font-weight="bold">B</text>
+<circle cx="270" cy="80" r="22" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="270" y="85" fill="#0369a1" font-weight="bold">C</text>
+<circle cx="140" cy="150" r="22" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="140" y="155" fill="#0369a1" font-weight="bold">D</text>
+<circle cx="210" cy="170" r="22" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/><text x="210" y="175" fill="#0369a1" font-weight="bold">E</text>
+
+<text x="450" y="30" fill="#0369a1" text-anchor="start" font-weight="bold">Список смежности:</text>
+<text x="450" y="55" fill="#475569" text-anchor="start">A: [B, D]</text>
+<text x="450" y="75" fill="#475569" text-anchor="start">B: [A, C, D]</text>
+<text x="450" y="95" fill="#475569" text-anchor="start">C: [B, E]</text>
+<text x="450" y="115" fill="#475569" text-anchor="start">D: [A, B, E]</text>
+<text x="450" y="135" fill="#475569" text-anchor="start">E: [C, D]</text>
+</g></svg></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌊 BFS — кең бойынша іздеу</span>
+<span lang="en" class="lang-content">🌊 BFS — Breadth-First Search</span>
+<span lang="ru" class="lang-content">🌊 BFS — поиск в ширину</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content">Бастапқы төбеден <b>«қабат-қабат»</b> таралады: алдымен <b>көршілер</b>, сосын <b>көршілердің көршілері</b>. <b>Кезек (queue, FIFO)</b> қолданады. Ең <b>қысқа жолды</b> қадам саны бойынша табады.</span>
+<span lang="en" class="lang-content">Spreads <b>layer by layer</b> from the start: first direct neighbours, then neighbours of neighbours. Uses a <b>queue (FIFO)</b>. Finds the <b>shortest path</b> in terms of edges.</span>
+<span lang="ru" class="lang-content">Распространяется от старта <b>«по слоям»</b>: сначала соседи, потом соседи соседей. Использует <b>очередь (FIFO)</b>. Находит <b>кратчайший путь</b> по числу рёбер.</span></p>
+<div class="code-block text-sm">
+<span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="kw">def</span> <span class="fn">bfs</span>(graph, start):
+    visited = {start}
+    q = <span class="fn">deque</span>([start])
+    <span class="kw">while</span> q:
+        v = q.<span class="fn">popleft</span>()     <span class="com"># вынимаем из начала</span>
+        <span class="fn">print</span>(v, end=<span class="str">" "</span>)
+        <span class="kw">for</span> u <span class="kw">in</span> graph[v]:
+            <span class="kw">if</span> u <span class="kw">not</span> <span class="kw">in</span> visited:
+                visited.<span class="fn">add</span>(u)
+                q.<span class="fn">append</span>(u)    <span class="com"># кладём в конец</span>
+
+G = {<span class="str">"A"</span>:[<span class="str">"B"</span>,<span class="str">"D"</span>], <span class="str">"B"</span>:[<span class="str">"A"</span>,<span class="str">"C"</span>,<span class="str">"D"</span>], <span class="str">"C"</span>:[<span class="str">"B"</span>,<span class="str">"E"</span>],
+     <span class="str">"D"</span>:[<span class="str">"A"</span>,<span class="str">"B"</span>,<span class="str">"E"</span>], <span class="str">"E"</span>:[<span class="str">"C"</span>,<span class="str">"D"</span>]}
+<span class="fn">bfs</span>(G, <span class="str">"A"</span>)     <span class="com"># A B D C E</span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏞 DFS — тереңдікке іздеу</span>
+<span lang="en" class="lang-content">🏞 DFS — Depth-First Search</span>
+<span lang="ru" class="lang-content">🏞 DFS — поиск в глубину</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content">Бір жолмен <b>мүмкіндігінше тереңге</b> кетеді, тұйыққа келсе — артқа оралып (<b>backtrack</b>) басқа тармаққа. <b>Стек (LIFO)</b> немесе <b>рекурсия</b> қолданады. Лабиринттерді, циклдерді, топологиялық сұрыптауды табады.</span>
+<span lang="en" class="lang-content">Goes <b>as deep as possible</b> along one branch, then <b>backtracks</b>. Uses a <b>stack (LIFO)</b> or recursion. Great for mazes, cycle detection, topological sort.</span>
+<span lang="ru" class="lang-content">Идёт <b>как можно глубже</b> по одной ветви, потом «откатывается» (<b>backtrack</b>). Использует <b>стек (LIFO)</b> или рекурсию. Подходит для лабиринтов, поиска циклов, топосортировки.</span></p>
+<div class="code-block text-sm">
+<span class="kw">def</span> <span class="fn">dfs</span>(graph, v, visited=<span class="kw">None</span>):
+    <span class="kw">if</span> visited <span class="kw">is</span> <span class="kw">None</span>:
+        visited = <span class="fn">set</span>()
+    visited.<span class="fn">add</span>(v)
+    <span class="fn">print</span>(v, end=<span class="str">" "</span>)
+    <span class="kw">for</span> u <span class="kw">in</span> graph[v]:
+        <span class="kw">if</span> u <span class="kw">not</span> <span class="kw">in</span> visited:
+            <span class="fn">dfs</span>(graph, u, visited)
+
+<span class="fn">dfs</span>(G, <span class="str">"A"</span>)    <span class="com"># A B C E D</span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖ BFS vs DFS</span>
+<span lang="en" class="lang-content">⚖ BFS vs DFS</span>
+<span lang="ru" class="lang-content">⚖ BFS vs DFS</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Қасиет</span><span lang="en" class="lang-content">Property</span><span lang="ru" class="lang-content">Свойство</span></th>
+<th>BFS 🌊</th><th>DFS 🏞</th></tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">Құрылым</span><span lang="en" class="lang-content">Data struct</span><span lang="ru" class="lang-content">Структура</span></td><td>queue (FIFO)</td><td>stack / recursion</td></tr>
+<tr><td><span lang="kk" class="lang-content">Жады</span><span lang="en" class="lang-content">Memory</span><span lang="ru" class="lang-content">Память</span></td><td>O(V)</td><td>O(<span lang="kk" class="lang-content">тереңдік</span><span lang="en" class="lang-content">depth</span><span lang="ru" class="lang-content">глубина</span>)</td></tr>
+<tr><td><span lang="kk" class="lang-content">Қысқа жол</span><span lang="en" class="lang-content">Shortest path</span><span lang="ru" class="lang-content">Кратчайший путь</span></td><td>✅</td><td>❌</td></tr>
+<tr><td><span lang="kk" class="lang-content">Қолданылуы</span><span lang="en" class="lang-content">Use cases</span><span lang="ru" class="lang-content">Применение</span></td><td>
+<span lang="kk" class="lang-content">навигация, әлеуметтік желі, кэш жаңарту</span>
+<span lang="en" class="lang-content">GPS, social graph, cache invalidation</span>
+<span lang="ru" class="lang-content">навигация, соцсети, инвалидация кэша</span></td>
+<td><span lang="kk" class="lang-content">лабиринт, циклды табу, topo-sort</span><span lang="en" class="lang-content">maze, cycle detection, topo-sort</span><span lang="ru" class="lang-content">лабиринт, поиск циклов, topo-sort</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌐 Нақты қолданыстар</span>
+<span lang="en" class="lang-content">🌐 Real-world uses</span>
+<span lang="ru" class="lang-content">🌐 Реальные применения</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🗺</div><p class="heading-font text-sky-700 text-sm">GPS · Yandex</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">қысқа жол (Dijkstra = BFS+)</span><span lang="en" class="lang-content">shortest route (Dijkstra)</span><span lang="ru" class="lang-content">кратчайший путь (Dijkstra)</span></p></div>
+<div class="tile"><div class="tile-emoji">👥</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Досың досы</span><span lang="en" class="lang-content">Friend-of-friend</span><span lang="ru" class="lang-content">Друзья друзей</span></p><p class="text-slate-600 text-xs">VK, Facebook</p></div>
+<div class="tile"><div class="tile-emoji">🌐</div><p class="heading-font text-sky-700 text-sm">Web crawler</p><p class="text-slate-600 text-xs">Google bot</p></div>
+<div class="tile"><div class="tile-emoji">🧩</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Судоку, шахмат</span><span lang="en" class="lang-content">Sudoku, chess</span><span lang="ru" class="lang-content">Судоку, шахматы</span></p><p class="text-slate-600 text-xs">DFS + backtrack</p></div>
+<div class="tile"><div class="tile-emoji">🧪</div><p class="heading-font text-sky-700 text-sm">Git</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">коммиттер графы</span><span lang="en" class="lang-content">commit graph</span><span lang="ru" class="lang-content">граф коммитов</span></p></div>
+<div class="tile"><div class="tile-emoji">💻</div><p class="heading-font text-sky-700 text-sm">OS scheduler</p><p class="text-slate-600 text-xs">topo-sort</p></div>
+<div class="tile"><div class="tile-emoji">🦠</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Эпидемия моделі</span><span lang="en" class="lang-content">Epidemic model</span><span lang="ru" class="lang-content">Эпидемия</span></p><p class="text-slate-600 text-xs">BFS</p></div>
+<div class="tile"><div class="tile-emoji">🎮</div><p class="heading-font text-sky-700 text-sm">Pathfinding AI</p><p class="text-slate-600 text-xs">A* &lt;- BFS</p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌊</div>
+<p class="heading-font text-xl text-sky-700 mb-2">BFS · queue</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">қысқа жол ✓</span><span lang="en" class="lang-content">shortest path ✓</span><span lang="ru" class="lang-content">кратчайший путь ✓</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🏞</div>
+<p class="heading-font text-xl text-sky-700 mb-2">DFS · stack</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">тереңде іздеу ✓</span><span lang="en" class="lang-content">goes deep ✓</span><span lang="ru" class="lang-content">идёт вглубь ✓</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⏱</div>
+<p class="heading-font text-xl text-sky-700 mb-2">O(V + E)</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">екеуінің күрделілігі</span><span lang="en" class="lang-content">both are linear</span><span lang="ru" class="lang-content">сложность обеих</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

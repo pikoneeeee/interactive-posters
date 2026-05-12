@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Первичный и внешний ключ</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Дерекқор</span>
+<span lang="en" class="lang-content">Grade 10 · Databases</span>
+<span lang="ru" class="lang-content">10 класс · Базы данных</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Бастапқы және сыртқы кілт</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Primary and foreign key</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Первичный и внешний ключ</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔑 Кілт — не үшін?</span>
+<span lang="en" class="lang-content">🔑 Why keys?</span>
+<span lang="ru" class="lang-content">🔑 Зачем ключи?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">Бір кестеде <b>10 «Айгүл» болуы мүмкін</b> — қайсысы туралы айтып тұрмыз? Кілттер — <b>жолды бір мәнде табатын</b> өріс(тер). <b class="text-sky-700">Primary Key (PK)</b> — осы кестенің «паспорты». <b class="text-sky-700">Foreign Key (FK)</b> — басқа кестемен <b>байланыс</b>: «менің сыныбымның идентификаторы — 25-ші жол». Кілттер <b>тұтастықты</b> (integrity) қамтамасыз етеді: «жоқ оқушыға бағаны қоюға болмайды».</span>
+<span lang="en" class="lang-content">One table may have <b>10 «Aigul»</b> — which one do we mean? Keys uniquely <b>identify a row</b>. A <b class="text-sky-700">Primary Key (PK)</b> is the table's «passport». A <b class="text-sky-700">Foreign Key (FK)</b> is a <b>link</b> to another table: «my class_id is row 25». Keys enforce <b>data integrity</b>: you can't grade a student who doesn't exist.</span>
+<span lang="ru" class="lang-content">В таблице может быть <b>10 «Айгуль»</b> — о какой речь? Ключи <b>однозначно идентифицируют строку</b>. <b class="text-sky-700">Первичный ключ (PK)</b> — «паспорт» этой таблицы. <b class="text-sky-700">Внешний ключ (FK)</b> — <b>связь</b> с другой таблицей: «мой class_id ссылается на 25-ю строку». Ключи обеспечивают <b>целостность</b>: нельзя поставить оценку несуществующему ученику.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🪪 Primary Key (PK)</span>
+<span lang="en" class="lang-content">🪪 Primary Key (PK)</span>
+<span lang="ru" class="lang-content">🪪 Первичный ключ (PK)</span></h2>
+<div class="card rounded-custom p-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1">1. <span lang="kk" class="lang-content">Бірегей</span><span lang="en" class="lang-content">Unique</span><span lang="ru" class="lang-content">Уникален</span></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">екі жолда бірдей PK жоқ</span><span lang="en" class="lang-content">no two rows share PK</span><span lang="ru" class="lang-content">никакие 2 строки не повторяют PK</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1">2. <span lang="kk" class="lang-content">NOT NULL</span><span lang="en" class="lang-content">NOT NULL</span><span lang="ru" class="lang-content">NOT NULL</span></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">бос бола алмайды</span><span lang="en" class="lang-content">cannot be empty</span><span lang="ru" class="lang-content">не может быть пустым</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1">3. <span lang="kk" class="lang-content">Өзгермейді</span><span lang="en" class="lang-content">Immutable</span><span lang="ru" class="lang-content">Неизменяем</span></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">іс жүзінде өзгертпейміз</span><span lang="en" class="lang-content">rarely changed</span><span lang="ru" class="lang-content">на практике не меняем</span></p></div>
+</div>
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content"><b>Табиғи</b> кілт: ИИН, ISBN, e-mail. <b>Синтетикалық</b>: <code>id INTEGER AUTOINCREMENT</code> — қарапайым, сенімді.</span>
+<span lang="en" class="lang-content"><b>Natural</b> key: SSN, ISBN, email. <b>Surrogate</b>: <code>id INTEGER AUTOINCREMENT</code> — simple and reliable.</span>
+<span lang="ru" class="lang-content"><b>Естественный</b> ключ: ИИН, ISBN, e-mail. <b>Суррогатный</b>: <code>id INTEGER AUTOINCREMENT</code> — просто и надёжно.</span></p>
+<div class="code-block text-sm">
+<span class="kw">CREATE TABLE</span> students (
+    id       <span class="kw">INTEGER PRIMARY KEY</span> AUTOINCREMENT,
+    name     <span class="kw">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,
+    iin      <span class="kw">CHAR</span>(<span class="num">12</span>)      <span class="kw">UNIQUE</span>,
+    class_id <span class="kw">INTEGER</span>
+);
+
+<span class="com">-- составной PK (два столбца образуют уникальность)</span>
+<span class="kw">CREATE TABLE</span> marks (
+    student_id <span class="kw">INTEGER</span>,
+    subject_id <span class="kw">INTEGER</span>,
+    mark       <span class="kw">INTEGER</span>,
+    <span class="kw">PRIMARY KEY</span> (student_id, subject_id)
+);
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔗 Foreign Key (FK)</span>
+<span lang="en" class="lang-content">🔗 Foreign Key (FK)</span>
+<span lang="ru" class="lang-content">🔗 Внешний ключ (FK)</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content"><b>FK</b> — басқа кестенің PK-сына сілтейді. «Студент 25-сыныпта» — <code>students.class_id</code> → <code>classes.id</code>.</span>
+<span lang="en" class="lang-content"><b>FK</b> points to the PK of another table. «Student in class 25» — <code>students.class_id</code> → <code>classes.id</code>.</span>
+<span lang="ru" class="lang-content"><b>FK</b> ссылается на PK другой таблицы. «Ученик в классе 25» — <code>students.class_id</code> → <code>classes.id</code>.</span></p>
+
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 680 260" style="width:100%;max-width:680px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="12">
+<rect x="20" y="20" width="260" height="200" fill="#bae6fd" stroke="#0369a1" stroke-width="2" rx="10"/>
+<text x="150" y="42" text-anchor="middle" font-weight="bold" fill="#0369a1" font-size="14">students</text>
+<line x1="30" y1="52" x2="270" y2="52" stroke="#0369a1"/>
+<text x="35" y="72" fill="#b45309" font-weight="bold">🔑 id        INTEGER PK</text>
+<text x="35" y="92" fill="#475569">   name      VARCHAR</text>
+<text x="35" y="112" fill="#475569">   iin       CHAR(12) UNIQUE</text>
+<text x="35" y="132" fill="#15803d" font-weight="bold">🔗 class_id  INTEGER FK</text>
+
+<rect x="400" y="20" width="260" height="200" fill="#fde68a" stroke="#b45309" stroke-width="2" rx="10"/>
+<text x="530" y="42" text-anchor="middle" font-weight="bold" fill="#b45309" font-size="14">classes</text>
+<line x1="410" y1="52" x2="650" y2="52" stroke="#b45309"/>
+<text x="415" y="72" fill="#b45309" font-weight="bold">🔑 id      INTEGER PK</text>
+<text x="415" y="92" fill="#475569">   name    VARCHAR  '10А'</text>
+<text x="415" y="112" fill="#475569">   teacher VARCHAR</text>
+
+<path d="M 280 135 C 340 135 340 75 400 75" stroke="#15803d" stroke-width="2.5" fill="none" stroke-dasharray="6 3"/>
+<polygon points="395,70 405,75 395,80" fill="#15803d"/>
+<text x="340" y="125" fill="#15803d" font-weight="bold">FK</text>
+</g></svg></div>
+
+<div class="code-block text-sm">
+<span class="kw">CREATE TABLE</span> classes (
+    id    <span class="kw">INTEGER PRIMARY KEY</span>,
+    name  <span class="kw">VARCHAR</span>(<span class="num">10</span>)
+);
+
+<span class="kw">CREATE TABLE</span> students (
+    id       <span class="kw">INTEGER PRIMARY KEY</span>,
+    name     <span class="kw">VARCHAR</span>(<span class="num">100</span>),
+    class_id <span class="kw">INTEGER</span>,
+    <span class="kw">FOREIGN KEY</span> (class_id) <span class="kw">REFERENCES</span> classes(id)
+);
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛡 Референциалды тұтастық</span>
+<span lang="en" class="lang-content">🛡 Referential integrity</span>
+<span lang="ru" class="lang-content">🛡 Ссылочная целостность</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<p class="text-slate-700 mb-3">
+<span lang="kk" class="lang-content">Егер «classes» кестесінен 10А сыныбын <b>жойсақ</b> — онда оған сілтейтін оқушылармен не болады? Жауабын <code>ON DELETE</code> және <code>ON UPDATE</code> айқындайды:</span>
+<span lang="en" class="lang-content">If we <b>delete</b> class 10A from «classes», what happens to students pointing to it? Controlled by <code>ON DELETE</code> and <code>ON UPDATE</code>:</span>
+<span lang="ru" class="lang-content">Если <b>удалить</b> класс 10А из «classes», что станет с учениками, ссылающимися на него? Определяется <code>ON DELETE</code> и <code>ON UPDATE</code>:</span></p>
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Әрекет</span><span lang="en" class="lang-content">Action</span><span lang="ru" class="lang-content">Действие</span></th>
+<th><span lang="kk" class="lang-content">Не болады</span><span lang="en" class="lang-content">What happens</span><span lang="ru" class="lang-content">Что происходит</span></th></tr></thead><tbody>
+<tr><td><code>RESTRICT</code> / NO ACTION</td><td><span lang="kk" class="lang-content">❌ жоюға тыйым (бала бар!)</span><span lang="en" class="lang-content">❌ delete forbidden while referenced</span><span lang="ru" class="lang-content">❌ нельзя удалять, пока есть ссылки</span></td></tr>
+<tr><td><code>CASCADE</code></td><td><span lang="kk" class="lang-content">💥 бала жолдарды да жояды</span><span lang="en" class="lang-content">💥 deletes child rows too</span><span lang="ru" class="lang-content">💥 удалит и дочерние строки</span></td></tr>
+<tr><td><code>SET NULL</code></td><td><span lang="kk" class="lang-content">FK-ны NULL қояды</span><span lang="en" class="lang-content">sets FK to NULL</span><span lang="ru" class="lang-content">ставит FK = NULL</span></td></tr>
+<tr><td><code>SET DEFAULT</code></td><td><span lang="kk" class="lang-content">әдепкі мәнге қояды</span><span lang="en" class="lang-content">sets to DEFAULT</span><span lang="ru" class="lang-content">ставит значение по умолчанию</span></td></tr>
+</tbody></table>
+<div class="code-block text-xs mt-3">
+<span class="kw">FOREIGN KEY</span> (class_id) <span class="kw">REFERENCES</span> classes(id)
+    <span class="kw">ON DELETE</span> RESTRICT
+    <span class="kw">ON UPDATE</span> CASCADE
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔀 Байланыс түрлері</span>
+<span lang="en" class="lang-content">🔀 Relationship types</span>
+<span lang="ru" class="lang-content">🔀 Типы связей</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">1 : 1</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Адам ↔ паспорт</span><span lang="en" class="lang-content">Person ↔ passport</span><span lang="ru" class="lang-content">Человек ↔ паспорт</span></p>
+<p class="text-slate-500 text-xs mt-1">UNIQUE FK</p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">1 : N</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Сынып → оқушылар</span><span lang="en" class="lang-content">Class → students</span><span lang="ru" class="lang-content">Класс → ученики</span></p>
+<p class="text-slate-500 text-xs mt-1"><span lang="kk" class="lang-content">ең жиі</span><span lang="en" class="lang-content">most common</span><span lang="ru" class="lang-content">самый частый</span></p></div>
+<div class="card rounded-custom p-5"><p class="heading-font text-sky-700 mb-2">N : M</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Оқушы ↔ пән</span><span lang="en" class="lang-content">Student ↔ subject</span><span lang="ru" class="lang-content">Ученик ↔ предмет</span></p>
+<p class="text-slate-500 text-xs mt-1"><span lang="kk" class="lang-content">«тігіс» кесте арқылы</span><span lang="en" class="lang-content">via «link» table</span><span lang="ru" class="lang-content">через «связную» таблицу</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🪪</div>
+<p class="heading-font text-xl text-sky-700 mb-2">PK</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">бірегей, бос емес</span><span lang="en" class="lang-content">unique, not null</span><span lang="ru" class="lang-content">уникален, не NULL</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔗</div>
+<p class="heading-font text-xl text-sky-700 mb-2">FK</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">PK-ға сілтеме</span><span lang="en" class="lang-content">reference to PK</span><span lang="ru" class="lang-content">ссылка на PK</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🛡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Integrity</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">тұтастық сақталады</span><span lang="en" class="lang-content">data stays consistent</span><span lang="ru" class="lang-content">данные не «ломаются»</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

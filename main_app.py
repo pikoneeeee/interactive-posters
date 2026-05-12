@@ -5,9 +5,9 @@ import json
 import logging
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWebEngineCore import QWebEngineSettings, QWebEngineProfile
+from PySide6.QtWebEngineCore import QWebEngineSettings, QWebEngineProfile, QWebEngineScript
 from PySide6.QtWebChannel import QWebChannel
-from PySide6.QtCore import QObject, Slot, QUrl, Qt
+from PySide6.QtCore import QObject, Slot, QUrl, Qt, QTimer
 from PySide6.QtGui import QIcon
 
 import licensing
@@ -20,6 +20,32 @@ else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 CONTENT_ROOT = os.path.join(BASE_DIR, 'content')
+
+
+def _load_app_config():
+    """Читает content/app_config.json. Позволяет билд-скрипту настроить поведение:
+    {
+      "skip_activation": true,      # сразу пропустить окно активации
+      "start_subject":  "informatics",  # стартовый предмет (сразу показать его плакаты)
+      "window_title":   "..."            # заголовок окна
+    }
+    """
+    default = {"skip_activation": False, "start_subject": None, "window_title": None}
+    path = os.path.join(CONTENT_ROOT, 'app_config.json')
+    if not os.path.exists(path):
+        return default
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        for k in default:
+            if k in data:
+                default[k] = data[k]
+    except Exception as e:
+        logging.warning(f"Не удалось прочитать app_config.json: {e}")
+    return default
+
+
+APP_CONFIG = _load_app_config()
 
 
 class Bridge(QObject):
@@ -72,13 +98,16 @@ class ActivationBridge(QObject):
         """Активировать по ключу"""
         print(f"DEBUG: Активирую ключ: {key}")
         result, message = licensing.activate_key(key)
+        msg_escaped = message.replace("'", "\\'").replace('"', '\\"')
         if result:
             self.window.web_view.page().runJavaScript(
-                "alert('Активация успешна! Приложение перезагружается.');",
-                lambda: self.window.navigate_after_activation()
+                f"if(typeof onActivationSuccess==='function')onActivationSuccess('{msg_escaped}');"
             )
+            QTimer.singleShot(1500, self.window.navigate_after_activation)
         else:
-            self.window.web_view.page().runJavaScript(f"alert('Ошибка активации: {message}');")
+            self.window.web_view.page().runJavaScript(
+                f"if(typeof onActivationError==='function')onActivationError('{msg_escaped}');"
+            )
 
 
 class MainWindow(QMainWindow):
@@ -86,16 +115,18 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Интерактивные плакаты")
+        self.setWindowTitle(APP_CONFIG.get("window_title") or "Интерактивные плакаты")
         self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'icon.svg')))
 
         # Переменные состояния
         self.current_lang = 'ru'
+        self.ui_lang = 'ru'
         self.current_subject = None
         self.current_topic_id = None
         self.current_screen = 'activation'  # activation, subjects, topics, poster
         self.translations = {}
         self.subjects_structure = {}
+        self._in_language_subject = False
 
         self.current_topic = None
         # Построение UI
@@ -115,7 +146,8 @@ class MainWindow(QMainWindow):
         # ========================================
 
         # === 1. СОЗДАЕМ КНОПКУ "НАЗАД" ===
-        self.btn_back_overlay = QPushButton("← Артқа", self.central_widget)
+        self._back_btn_labels = {'ru': '← Назад', 'kz': '← Артқа', 'en': '← Back'}
+        self.btn_back_overlay = QPushButton(self._back_btn_labels.get('ru', '← Назад'), self.central_widget)
         self.btn_back_overlay.setCursor(Qt.CursorShape.PointingHandCursor)
         # Стиль кнопки: полупрозрачная, при наведении становится яркой
         # === Стиль кнопки (яркий, заметный) ===
@@ -197,6 +229,43 @@ class MainWindow(QMainWindow):
 
         # === ФИКС РЕНДЕРИНГА: подключаем сигнал loadFinished ===
         self.web_view.loadFinished.connect(self._on_page_loaded)
+
+        # === Инъекция скрипта: мгновенная установка языка при создании документа ===
+        # Предотвращает мерцание неправильного языка (FOUC)
+        lang_script = QWebEngineScript()
+        lang_script.setName("instant-lang-switch")
+        lang_script.setInjectionPoint(QWebEngineScript.InjectionPoint.DocumentCreation)
+        lang_script.setWorldId(QWebEngineScript.ScriptWorldId.MainWorld)
+        lang_script.setRunsOnSubFrames(False)
+        lang_script.setSourceCode("""
+            (function() {
+                var params = new URLSearchParams(window.location.search);
+                var lang = params.get('lang');
+                if (!lang) return;
+                // Маппинг: kz -> kk для CSS-классов плакатов
+                var cssLang = (lang === 'kz') ? 'kk' : lang;
+                // Ждём DOM
+                function applyLang() {
+                    var container = document.getElementById('poster-container');
+                    if (container) {
+                        container.className = container.className.replace(/lang-\w+/g, '');
+                        container.classList.add('lang-' + cssLang);
+                    }
+                    // Скрываем body до полной готовности (Python _on_page_loaded покажет)
+                    if (document.body) document.body.style.visibility = 'hidden';
+                    // Страховка: показать через 300мс если Python не успеет
+                    setTimeout(function() {
+                        if (document.body) document.body.style.visibility = 'visible';
+                    }, 300);
+                }
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', applyLang);
+                } else {
+                    applyLang();
+                }
+            })();
+        """)
+        self.web_view.page().scripts().insert(lang_script)
         # =======================================================
 
         # Загрузка данных и навигация
@@ -207,25 +276,68 @@ class MainWindow(QMainWindow):
         """Вызывается после полной загрузки страницы"""
         if not ok:
             return
-        
-        # Принудительная перерисовка ПОСЛЕ загрузки страницы
+
         if self.current_screen == 'poster':
             # Устанавливаем правильный язык для обоих типов плакатов
-            # switchLang использует 'kk', setLang использует 'kz'
             lang_kk = 'kk' if self.current_lang == 'kz' else self.current_lang
             lang_js = f"""
                 (function() {{
                     var lang = '{self.current_lang}';
                     var langKK = '{lang_kk}';
-                    if (typeof switchLang === 'function') {{
-                        switchLang(langKK);
-                    }}
-                    if (typeof setLang === 'function') {{
-                        setLang(lang);
-                    }}
+                    // Скрываем body до переключения языка (антимерцание)
+                    if (document.body) document.body.style.visibility = 'hidden';
+                    try {{
+                        if (typeof switchLang === 'function') switchLang(langKK);
+                    }} catch(e) {{}}
+                    try {{
+                        if (typeof setLang === 'function') setLang(lang);
+                    }} catch(e) {{}}
+                    // Показываем после переключения
+                    requestAnimationFrame(function() {{
+                        requestAnimationFrame(function() {{
+                            if (document.body) document.body.style.visibility = 'visible';
+                        }});
+                    }});
+                    // Страховка: если rAF не сработает
+                    setTimeout(function() {{
+                        if (document.body) document.body.style.visibility = 'visible';
+                    }}, 50);
                 }})();
             """
             self.web_view.page().runJavaScript(lang_js)
+
+        # Запускаем серию принудительных перерисовок
+        self._start_repaint_cycle()
+
+    def _start_repaint_cycle(self):
+        """Запускает цикл принудительных перерисовок на 600мс после загрузки.
+        Решает баг Windows QWebEngineView где compositor не пушит кадры в Qt."""
+        self._repaint_ticks = 0
+        if not hasattr(self, '_repaint_timer'):
+            self._repaint_timer = QTimer(self)
+            self._repaint_timer.timeout.connect(self._tick_repaint)
+        self._repaint_timer.start(33)  # ~30fps, каждые 33мс
+
+    def _tick_repaint(self):
+        """Один тик принудительной перерисовки."""
+        self._repaint_ticks += 1
+        if self._repaint_ticks > 18:  # 18 * 33ms ≈ 600ms
+            self._repaint_timer.stop()
+            return
+
+        # Получаем виджет рендеринга Chromium
+        render_widget = self.web_view.focusProxy()
+        if render_widget is not None:
+            render_widget.update()
+            render_widget.repaint()
+
+        # Поднять overlay-кнопки
+        if hasattr(self, 'nav_left') and self.nav_left.isVisible():
+            self.nav_left.raise_()
+        if hasattr(self, 'nav_right') and self.nav_right.isVisible():
+            self.nav_right.raise_()
+        if hasattr(self, 'btn_back_overlay') and self.btn_back_overlay.isVisible():
+            self.btn_back_overlay.raise_()
 
     def resizeEvent(self, event):
         """Обновляем позиции кнопок при изменении размера окна"""
@@ -237,37 +349,25 @@ class MainWindow(QMainWindow):
         # 1. Браузер на весь экран
         self.web_view.setGeometry(0, 0, w, h)
 
-        # 2. Позиционируем кнопки внутри навигационных контейнеров по центру
-        # (Так как мы удалили _place_nav, нужно центрировать кнопки здесь)
-        if hasattr(self, 'btn_prev'):
-            self.btn_prev.move(16, h // 2 - 24)
-        if hasattr(self, 'btn_next'):
-            self.btn_next.move(16, h // 2 - 24)  # внутри контейнера 80px
-
-        # 3. Кнопка "НАЗАД" (Левый верхний угол)
-            # 3. Кнопка "НАЗАД"
-        if hasattr(self, 'btn_back_overlay'):
-            # Было: setGeometry(20, 20, 120, 45)
-            # Стало:
-            # x = 60  (сдвинули правее, чтобы не липла к краю)
-            # y = 20  (высота та же)
-            # w = 100 (ширина меньше)
-            # h = 35  (высота меньше)
-            self.btn_back_overlay.setGeometry(20, 20, 100, 35)
-            self.btn_back_overlay.raise_()
-
-        # 4. Стрелка ВЛЕВО (nav_left)
-        # ВАЖНО: Начинается с y=80, чтобы не закрывать кнопку "Назад"
+        # 2. Стрелки навигации
+        btn_y = h // 2 - 24
         if hasattr(self, 'nav_left'):
-            self.nav_left.setGeometry(0, 80, 80, h - 80)
-            self.nav_left.raise_()  # Поднимаем над браузером, но она ниже кнопки (т.к. y=80)
-
-        # 5. Стрелка ВПРАВО (nav_right)
+            self.nav_left.setGeometry(0, 0, 80, h)
+            self.nav_left.raise_()
         if hasattr(self, 'nav_right'):
             self.nav_right.setGeometry(w - 80, 0, 80, h)
             self.nav_right.raise_()
+        if hasattr(self, 'btn_prev'):
+            self.btn_prev.move(16, btn_y)
+        if hasattr(self, 'btn_next'):
+            self.btn_next.move(16, btn_y)
 
-    def load_all_data(self):
+        # 3. Кнопка «НАЗАД» — ВСЕГДА поверх всего (последний raise)
+        if hasattr(self, 'btn_back_overlay'):
+            self.btn_back_overlay.setGeometry(12, 12, 120, 40)
+            self.btn_back_overlay.raise_()
+
+    def load_all_data(self) -> None:
         """Загружаем структуру предметов и переводы"""
         try:
             # Логирование путей
@@ -331,23 +431,39 @@ class MainWindow(QMainWindow):
             print(f"{'=' * 80}\n")
             logging.critical(f"Ошибка при загрузке данных: {e}", exc_info=True)
 
-    def navigate(self):
-        """Главная навигация после запуска"""
-        print(f"\n🔄 navigate(): Проверяю лицензию...")
-        is_activated = licensing.is_activated()
-        print(f"   Лицензия активирована: {is_activated}")
 
-        if is_activated:
-            print(f"   ➜ Показываю экран выбора предметов")
-            self.show_subjects_screen()
+    def navigate(self):
+        """Главная навигация: skip_activation / start_subject из APP_CONFIG."""
+        print("\n🔄 navigate()")
+        skip_act = bool(APP_CONFIG.get("skip_activation"))
+        start_subj = APP_CONFIG.get("start_subject")
+        if skip_act:
+            print("   ⏭ skip_activation=true — пропускаю активацию")
+            is_activated = True
         else:
-            print(f"   ➜ Показываю экран активации")
+            status = licensing.get_license_status()
+            is_activated = status['valid']
+            print(f"   Лицензия: valid={is_activated}, reason={status['reason']}")
+            if is_activated and status.get('days_left') is not None:
+                print(f"   Осталось дней: {status['days_left']}")
+        if not is_activated:
             self.show_activation_screen()
+            return
+        if start_subj and start_subj in self.subjects_structure:
+            print(f"   ➜ start_subject={start_subj!r} — сразу к списку плакатов")
+            self.current_subject = start_subj
+            subj = self.subjects_structure[start_subj]
+            if subj.get("is_language_subject", False):
+                lang_map = {"kazakhlang": "kz", "russianlang": "ru", "englishlang": "en"}
+                self.current_lang = lang_map.get(start_subj, self.current_lang)
+            self.show_topics_screen()
+        else:
+            self.show_subjects_screen()
 
     def navigate_after_activation(self):
-        """После успешной активации показываем список предметов"""
-        print(f"\n✅ navigate_after_activation()")
+        """Вызывается после успешной активации — обычный поток навигации."""
         self.navigate()
+
 
     def show_activation_screen(self):
         """Показываем экран активации"""
@@ -443,10 +559,13 @@ class MainWindow(QMainWindow):
             # Определяем язык для языковых предметов
             if subject.get('is_language_subject', False):
                 lang_map = {'kazakhlang': 'kz', 'russianlang': 'ru', 'englishlang': 'en'}
+                self._in_language_subject = True
                 self.current_lang = lang_map.get(subject_id, 'kz')
-                print(f"   🌐 Языковой предмет, язык: {self.current_lang}")
+                print(f"   🌐 Языковой предмет, язык: {self.current_lang} (ui_lang сохранён: {self.ui_lang})")
                 logging.info(
                     f"Выбран языковой предмет: {subject_id}, язык: {self.current_lang}")
+            else:
+                self._in_language_subject = False
 
             self.show_topics_screen()
         else:
@@ -629,6 +748,7 @@ class MainWindow(QMainWindow):
 
                 # === 3. ПОКАЗЫВАЕМ КНОПКУ ===
                 if hasattr(self, 'btn_back_overlay'):
+                    self.btn_back_overlay.setText(self._back_btn_labels.get(self.current_lang, '← Назад'))
                     self.btn_back_overlay.show()
                     self.btn_back_overlay.raise_()
                 # ============================
@@ -637,11 +757,6 @@ class MainWindow(QMainWindow):
                 if hasattr(self, 'nav_left'): self.nav_left.show()
                 if hasattr(self, 'nav_right'): self.nav_right.show()
 
-                # ✅ показать стрелки
-                if hasattr(self, 'nav_left'):
-                    self.nav_left.show()
-                if hasattr(self, 'nav_right'):
-                    self.nav_right.show()
 
                 logging.info(
                     f"Открыт плакат: {self.current_subject}/{topic_id} на языке {self.current_lang}"
@@ -674,16 +789,26 @@ class MainWindow(QMainWindow):
             if hasattr(self, 'nav_right'):
                 self.nav_right.hide()
 
-                # === 4. СКРЫВАЕМ КНОПКУ ===
-                if hasattr(self, 'btn_back_overlay'):
-                    self.btn_back_overlay.hide()
-                # ==========================
+            # === СКРЫВАЕМ КНОПКУ «Назад» ===
+            if hasattr(self, 'btn_back_overlay'):
+                self.btn_back_overlay.hide()
 
             self.current_screen = 'topics'
             self.show_topics_screen()
 
         elif self.current_screen == 'topics':
+            # Если приложение запущено в режиме одного предмета (start_subject),
+            # экрана выбора предметов нет — ничего не делаем.
+            if APP_CONFIG.get("start_subject"):
+                print("   ⏹ start_subject задан — остаюсь на экране тем")
+                return
             print("   ➜ Возвращаюсь на экран предметов")
+
+            # Восстанавливаем язык интерфейса после языкового предмета
+            if self._in_language_subject:
+                self.current_lang = self.ui_lang
+                self._in_language_subject = False
+                print(f"   🌐 Восстановлен ui_lang: {self.ui_lang}")
 
             self.current_topic = None
             self.current_topic_id = None
@@ -695,8 +820,13 @@ class MainWindow(QMainWindow):
         print(f"\n🌐 change_language({lang_code})")
         if lang_code in self.translations:
             self.current_lang = lang_code
+            self.ui_lang = lang_code
             print(f"   ✅ Язык изменен на: {lang_code}")
             logging.info(f"Язык изменен на: {lang_code}")
+            if hasattr(self, 'btn_back_overlay') and hasattr(self, '_back_btn_labels'):
+                self.btn_back_overlay.setText(self._back_btn_labels.get(lang_code, '← Назад'))
+            if self.current_screen == 'subjects':
+                self.update_subjects_screen()
         else:
             print(f"   ❌ Язык {lang_code} не доступен")
             logging.warning(f"Язык {lang_code} не доступен")
@@ -719,6 +849,11 @@ if __name__ == '__main__':
     print("\n" + "=" * 80)
     print("🚀 ЗАПУСК ПРИЛОЖЕНИЯ 'Интерактивные плакаты'")
     print("=" * 80 + "\n")
+
+    # === Атрибуты QtWebEngine: обязательны ДО QApplication ===
+    # AA_ShareOpenGLContexts — нужен для корректной работы QWebEngineView
+    # с оверлейными виджетами (стрелки, кнопка «Назад»).
+    QApplication.setAttribute(Qt.AA_ShareOpenGLContexts, True)
 
     app = QApplication(sys.argv)
     main_window = MainWindow()

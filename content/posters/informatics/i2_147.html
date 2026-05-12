@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контейнеры и Docker</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · DevOps</span>
+<span lang="en" class="lang-content">Grade 11 · DevOps</span>
+<span lang="ru" class="lang-content">11 класс · DevOps</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Контейнерлер және Docker</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Containers and Docker</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Контейнеры и Docker</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📦 Контейнер — не?</span>
+<span lang="en" class="lang-content">📦 What is a container?</span>
+<span lang="ru" class="lang-content">📦 Что такое контейнер?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Контейнер</b> — қосымша мен оның <b>барлық тәуелділіктерін</b> (кітапханалар, конфиги, орта айнымалылары) <b>бір «қорапқа»</b> орайтын тәсіл. Әдетте әзірлеуші машинасында «менде жұмыс істейді!» — ал серверде іске қосылмайды. Контейнер бұл мәселені шешеді: <b>бір рет жинайсың — бәрі жерде бірдей жұмыс істейді</b>. Тарих: Linux <b>cgroups + namespaces</b> (2008) → <b>Docker 2013</b> (Solomon Hykes) → <b>Kubernetes 2014</b> (Google). Бүгін кез келген ірі сайт контейнерлерде жұмыс істейді.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">container</b> packages an app with <b>all its dependencies</b> (libraries, configs, env-vars) into <b>one box</b>. The classic «works on my machine» problem disappears: <b>build once, run anywhere</b>. History: Linux <b>cgroups + namespaces</b> (2008) → <b>Docker 2013</b> (Solomon Hykes) → <b>Kubernetes 2014</b> (Google). Today virtually every major service runs in containers.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Контейнер</b> — способ упаковать приложение вместе со <b>всеми зависимостями</b> (библиотеки, конфиги, переменные среды) в <b>одну «коробку»</b>. Классическая проблема «у меня работает!» исчезает: <b>собрал один раз — работает везде</b>. История: Linux <b>cgroups + namespaces</b> (2008) → <b>Docker 2013</b> (Соломон Хайкс) → <b>Kubernetes 2014</b> (Google). Сегодня почти любой большой сервис работает в контейнерах.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖ VM vs Контейнер</span>
+<span lang="en" class="lang-content">⚖ VM vs Container</span>
+<span lang="ru" class="lang-content">⚖ ВМ vs Контейнер</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 680 260" style="width:100%;max-width:680px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="12" text-anchor="middle">
+<text x="170" y="20" fill="#b45309" font-weight="bold">🖥 VM — тяжёлая</text>
+<rect x="40" y="215" width="260" height="35" fill="#475569"/><text x="170" y="237" fill="#fff">Hardware</text>
+<rect x="40" y="180" width="260" height="35" fill="#fde68a" stroke="#b45309"/><text x="170" y="202" fill="#b45309">Hypervisor</text>
+<rect x="45" y="40" width="80" height="135" fill="#fecaca" stroke="#b91c1c"/><text x="85" y="75" fill="#b91c1c">Guest OS</text><text x="85" y="100" fill="#b91c1c">libs</text><text x="85" y="125" fill="#b91c1c">bin</text><text x="85" y="160" fill="#b91c1c" font-weight="bold">App A</text>
+<rect x="135" y="40" width="80" height="135" fill="#fecaca" stroke="#b91c1c"/><text x="175" y="75" fill="#b91c1c">Guest OS</text><text x="175" y="100" fill="#b91c1c">libs</text><text x="175" y="160" fill="#b91c1c" font-weight="bold">App B</text>
+<rect x="225" y="40" width="80" height="135" fill="#fecaca" stroke="#b91c1c"/><text x="265" y="75" fill="#b91c1c">Guest OS</text><text x="265" y="100" fill="#b91c1c">libs</text><text x="265" y="160" fill="#b91c1c" font-weight="bold">App C</text>
+<text x="170" y="255" fill="#b91c1c" font-size="10">3 × ОС = ~3 GB, запуск 30 сек</text>
+
+<text x="510" y="20" fill="#0369a1" font-weight="bold">📦 Container — лёгкий</text>
+<rect x="380" y="215" width="260" height="35" fill="#475569"/><text x="510" y="237" fill="#fff">Hardware</text>
+<rect x="380" y="180" width="260" height="35" fill="#bbf7d0" stroke="#15803d"/><text x="510" y="202" fill="#15803d">Host OS kernel</text>
+<rect x="380" y="140" width="260" height="40" fill="#fde68a" stroke="#b45309"/><text x="510" y="164" fill="#b45309">Docker Engine</text>
+<rect x="385" y="60" width="80" height="80" fill="#bae6fd" stroke="#0369a1"/><text x="425" y="85" fill="#0369a1">libs</text><text x="425" y="120" fill="#0369a1" font-weight="bold">App A</text>
+<rect x="475" y="60" width="80" height="80" fill="#bae6fd" stroke="#0369a1"/><text x="515" y="85" fill="#0369a1">libs</text><text x="515" y="120" fill="#0369a1" font-weight="bold">App B</text>
+<rect x="565" y="60" width="80" height="80" fill="#bae6fd" stroke="#0369a1"/><text x="605" y="85" fill="#0369a1">libs</text><text x="605" y="120" fill="#0369a1" font-weight="bold">App C</text>
+<text x="510" y="255" fill="#0369a1" font-size="10">1 ОС на всех = ~50 MB, запуск 1 сек</text>
+</g></svg></div>
+<table class="t"><thead><tr>
+<th></th><th>🖥 VM</th><th>📦 Container</th></tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">Көлем</span><span lang="en" class="lang-content">Size</span><span lang="ru" class="lang-content">Размер</span></td><td>GB</td><td>MB</td></tr>
+<tr><td><span lang="kk" class="lang-content">Іске қосу</span><span lang="en" class="lang-content">Boot</span><span lang="ru" class="lang-content">Запуск</span></td><td>30–60 c</td><td>&lt; 1 c</td></tr>
+<tr><td><span lang="kk" class="lang-content">Оқшаулану</span><span lang="en" class="lang-content">Isolation</span><span lang="ru" class="lang-content">Изоляция</span></td><td><span lang="kk" class="lang-content">толық ОЖ</span><span lang="en" class="lang-content">full OS</span><span lang="ru" class="lang-content">полная ОС</span></td><td>process-level</td></tr>
+<tr><td><span lang="kk" class="lang-content">Бір темірде саны</span><span lang="en" class="lang-content">Per host</span><span lang="ru" class="lang-content">Штук на хост</span></td><td>10-тап</td><td>100–1000</td></tr>
+<tr><td><span lang="kk" class="lang-content">Қолдану</span><span lang="en" class="lang-content">Best for</span><span lang="ru" class="lang-content">Лучше для</span></td><td><span lang="kk" class="lang-content">түрлі ОЖ</span><span lang="en" class="lang-content">different OS</span><span lang="ru" class="lang-content">разные ОС</span></td><td>microservices</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐳 Docker-тің 3 негізі</span>
+<span lang="en" class="lang-content">🐳 Docker's 3 building blocks</span>
+<span lang="ru" class="lang-content">🐳 3 кита Docker</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📄</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Dockerfile</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">«рецепт» — образды қалай жинау</span><span lang="en" class="lang-content">«recipe» — how to build image</span><span lang="ru" class="lang-content">«рецепт» — как собрать образ</span></p></div>
+<div class="card card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💿</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Image</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">дайын «cнимок» — қосымша + орта</span><span lang="en" class="lang-content">ready snapshot — app + env</span><span lang="ru" class="lang-content">готовый снимок — прога + окружение</span></p></div>
+<div class="card card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📦</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Container</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">жұмыс істеп тұрған образ данасы</span><span lang="en" class="lang-content">running instance of image</span><span lang="ru" class="lang-content">запущенный экземпляр образа</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📝 Қарапайым Dockerfile</span>
+<span lang="en" class="lang-content">📝 A simple Dockerfile</span>
+<span lang="ru" class="lang-content">📝 Простой Dockerfile</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com"># 1. базовый образ — мини-Linux + Python 3.12</span>
+<span class="kw">FROM</span> python:<span class="num">3.12</span>-slim
+
+<span class="com"># 2. рабочая папка внутри контейнера</span>
+<span class="kw">WORKDIR</span> /app
+
+<span class="com"># 3. скопировать зависимости и установить их</span>
+<span class="kw">COPY</span> requirements.txt .
+<span class="kw">RUN</span>  pip install --no-cache-dir -r requirements.txt
+
+<span class="com"># 4. скопировать весь код проекта</span>
+<span class="kw">COPY</span> . .
+
+<span class="com"># 5. открыть порт 8000 наружу</span>
+<span class="kw">EXPOSE</span> <span class="num">8000</span>
+
+<span class="com"># 6. команда, которая запустится при старте контейнера</span>
+<span class="kw">CMD</span> [<span class="str">"uvicorn"</span>, <span class="str">"main:app"</span>, <span class="str">"--host"</span>, <span class="str">"0.0.0.0"</span>]
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Ең керек команда­лар</span>
+<span lang="en" class="lang-content">⚡ Must-know commands</span>
+<span lang="ru" class="lang-content">⚡ Самые нужные команды</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-xs">
+<span class="com"># собрать образ из Dockerfile, название = myapp</span>
+docker build -t myapp .
+
+<span class="com"># запустить контейнер: -d фон, -p порт хост→контейнер</span>
+docker run -d -p <span class="num">8000</span>:<span class="num">8000</span> --name web myapp
+
+<span class="com"># посмотреть запущенные</span>
+docker ps                             <span class="com"># -a с остановленными</span>
+
+<span class="com"># логи и заход внутрь</span>
+docker logs web
+docker exec -it web bash
+
+<span class="com"># остановить и удалить</span>
+docker stop web && docker rm web
+
+<span class="com"># скачать готовый образ из Docker Hub</span>
+docker pull nginx:alpine
+docker run -d -p <span class="num">80</span>:<span class="num">80</span> nginx:alpine
+
+<span class="com"># несколько контейнеров одной командой (docker-compose.yml)</span>
+docker compose up -d
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎼 Kubernetes — оркестр</span>
+<span lang="en" class="lang-content">🎼 Kubernetes — orchestration</span>
+<span lang="ru" class="lang-content">🎼 Kubernetes — оркестрация</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-sm mb-3">
+<span lang="kk" class="lang-content">Бір контейнер — оңай. Ал <b>1000 контейнерді</b> басқару қиын: қайсысы қай серверде, қайсысы құлады, трафик қалай бөлу. Бұл мәселені <b>Kubernetes (K8s)</b> шешеді — «контейнерлердің дирижёры». Google 2014 ж. ашты.</span>
+<span lang="en" class="lang-content">One container is easy. Managing <b>1000 containers</b> — not so much: which runs where, which crashed, how to load-balance. <b>Kubernetes (K8s)</b> solves this — «container conductor», open-sourced by Google in 2014.</span>
+<span lang="ru" class="lang-content">Один контейнер — легко. Управлять <b>1000 контейнерами</b> — ад: какой где, какой упал, как балансировать трафик. Эту задачу решает <b>Kubernetes (K8s)</b> — «дирижёр контейнеров», открыт Google в 2014 г.</span></p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">📦</div><p class="heading-font text-sky-700 text-sm">Pod</p><p class="text-slate-600 text-xs">1+ <span lang="kk" class="lang-content">контейнер</span><span lang="en" class="lang-content">container(s)</span><span lang="ru" class="lang-content">контейнер(ы)</span></p></div>
+<div class="tile"><div class="tile-emoji">🔁</div><p class="heading-font text-sky-700 text-sm">Deployment</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">копиялар</span><span lang="en" class="lang-content">replicas</span><span lang="ru" class="lang-content">реплики</span></p></div>
+<div class="tile"><div class="tile-emoji">🌐</div><p class="heading-font text-sky-700 text-sm">Service</p><p class="text-slate-600 text-xs">load-balancer</p></div>
+<div class="tile"><div class="tile-emoji">📈</div><p class="heading-font text-sky-700 text-sm">Autoscale</p><p class="text-slate-600 text-xs">HPA · CA</p></div>
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📦</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Бір рет жина — барлық жерде іске қос</span><span lang="en" class="lang-content">Build once — run anywhere</span><span lang="ru" class="lang-content">Собрал раз — запустил везде</span></p>
+<p class="text-slate-600 text-sm">no more «works on my machine»</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🐳</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Dockerfile → Image → Container</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">3 ұғым жеткілікті</span><span lang="en" class="lang-content">3 concepts are enough</span><span lang="ru" class="lang-content">3 понятия — достаточно</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎼</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Kubernetes</p>
+<p class="text-slate-600 text-sm">1000 <span lang="kk" class="lang-content">контейнер деңгейінде</span><span lang="en" class="lang-content">containers at scale</span><span lang="ru" class="lang-content">контейнеров в масштабе</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

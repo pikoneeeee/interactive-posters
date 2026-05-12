@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шифрование и резервное копирование</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Қауіпсіздік</span>
+<span lang="en" class="lang-content">Grade 10 · Security</span>
+<span lang="ru" class="lang-content">10 класс · Безопасность</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шифрлеу және резервтік көшіру</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Encryption &amp; backups</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шифрование и резервные копии</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔐 Шифрлеу — не?</span>
+<span lang="en" class="lang-content">🔐 What is encryption?</span>
+<span lang="ru" class="lang-content">🔐 Что такое шифрование?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Шифрлеу</b> — деректі <b>кілтпен</b> түсініксіз сандарға айналдыру. Нәтижесінде оны <b>тек кілтті білетін</b> адам кері оқи алады. Ең ежелгі шифр — <b>Цезарь шифры</b> (б.з.д. 50 ж.), бүгінгі стандарт — <b>AES-256</b>. Интернет арқылы <b>HTTPS</b> жібергенде әр байт шифрланады. <b>Резервтік көшірме (backup)</b> — деректің <b>2-ші көшірмесі</b>, дискі істен шығып қалса немесе <b>ransomware</b> шабуыл болса — құтқарады. Екеуі бірге — сенің <b>маңызды</b> файлдарыңды сақтайды.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Encryption</b> turns data into unreadable bytes using a <b>key</b>. Only someone with the key can reverse it. The oldest cipher is <b>Caesar's</b> (50 BC); today's standard is <b>AES-256</b>. Every <b>HTTPS</b> byte online is encrypted. A <b>backup</b> is a <b>second copy</b> — saves you when a disk dies or <b>ransomware</b> strikes. Together they protect your <b>important</b> files.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Шифрование</b> превращает данные в нечитаемые байты с помощью <b>ключа</b>. Только знающий ключ может их прочитать. Самый древний шифр — <b>Цезаря</b> (50 г. до н.э.); сегодня стандарт — <b>AES-256</b>. Каждый байт <b>HTTPS</b> шифруется. <b>Резервная копия (backup)</b> — <b>второй экземпляр</b> данных, спасает при сбое диска или <b>ransomware</b>. Вместе они защищают твои <b>важные</b> файлы.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🗝 Шифрлердің 2 тобы</span>
+<span lang="en" class="lang-content">🗝 Two families of encryption</span>
+<span lang="ru" class="lang-content">🗝 2 семьи шифров</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-xl text-sky-700 mb-2">🔑 <span lang="kk" class="lang-content">Симметриялық</span><span lang="en" class="lang-content">Symmetric</span><span lang="ru" class="lang-content">Симметричное</span></p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content"><b>1 кілт</b> — шифрлау да, кері оқу да.</span><span lang="en" class="lang-content"><b>1 key</b> both encrypts &amp; decrypts.</span><span lang="ru" class="lang-content"><b>1 ключ</b> — и зашифровать, и расшифровать.</span></p>
+<p class="text-slate-500 text-xs mb-2">AES-128/256 · ChaCha20 · DES (<span lang="kk" class="lang-content">ескі</span><span lang="en" class="lang-content">old</span><span lang="ru" class="lang-content">устар.</span>)</p>
+<div class="code-block text-xs">
+plain + <span class="str">"key42"</span> → 7f:3a:b2:…
+7f:3a:b2:… + <span class="str">"key42"</span> → plain
+</div>
+<p class="text-slate-600 text-xs mt-2">✅ <span lang="kk" class="lang-content">жылдам (ГБ/с)</span><span lang="en" class="lang-content">very fast (GB/s)</span><span lang="ru" class="lang-content">быстро (ГБ/с)</span><br>⚠️ <span lang="kk" class="lang-content">кілтті қалай беру?</span><span lang="en" class="lang-content">how to share the key?</span><span lang="ru" class="lang-content">как передать ключ?</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-xl text-sky-700 mb-2">🔐 <span lang="kk" class="lang-content">Асимметриялық</span><span lang="en" class="lang-content">Asymmetric</span><span lang="ru" class="lang-content">Асимметричное</span></p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content"><b>2 кілт</b>: public (ашық) + private (құпия).</span><span lang="en" class="lang-content"><b>2 keys</b>: public + private.</span><span lang="ru" class="lang-content"><b>2 ключа</b>: публичный + приватный.</span></p>
+<p class="text-slate-500 text-xs mb-2">RSA · ECC · Diffie-Hellman</p>
+<div class="code-block text-xs">
+plain + pub_key  → 🔒
+🔒    + priv_key → plain
+</div>
+<p class="text-slate-600 text-xs mt-2">✅ <span lang="kk" class="lang-content">кілтті алмасу қауіпсіз</span><span lang="en" class="lang-content">safe key exchange</span><span lang="ru" class="lang-content">безопасный обмен ключом</span><br>⚠️ <span lang="kk" class="lang-content">баяу (×1000)</span><span lang="en" class="lang-content">slow (~1000×)</span><span lang="ru" class="lang-content">медленно (~1000×)</span></p></div>
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 HTTPS <b>екеуін</b> де қолданады: RSA-мен AES-кілтін алмасады, одан кейін <b>AES</b>-пен трафикті шифрлайды.</span>
+<span lang="en" class="lang-content">💡 HTTPS uses <b>both</b>: RSA to share an AES key, then AES for bulk traffic.</span>
+<span lang="ru" class="lang-content">💡 HTTPS использует <b>оба</b>: RSA обменивается AES-ключом, затем AES шифрует трафик.</span></p>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏺 Тарихи шифрлер</span>
+<span lang="en" class="lang-content">🏺 Historical ciphers</span>
+<span lang="ru" class="lang-content">🏺 Исторические шифры</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Шифр</span><span lang="en" class="lang-content">Cipher</span><span lang="ru" class="lang-content">Шифр</span></th>
+<th><span lang="kk" class="lang-content">Жыл</span><span lang="en" class="lang-content">Year</span><span lang="ru" class="lang-content">Год</span></th>
+<th><span lang="kk" class="lang-content">Принцип</span><span lang="en" class="lang-content">Principle</span><span lang="ru" class="lang-content">Принцип</span></th>
+<th><span lang="kk" class="lang-content">Сынды ма?</span><span lang="en" class="lang-content">Broken?</span><span lang="ru" class="lang-content">Взломан?</span></th>
+</tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">Цезарь</span><span lang="en" class="lang-content">Caesar</span><span lang="ru" class="lang-content">Цезаря</span></td><td>−50</td><td>A→D, B→E, …</td><td>✅ 1 <span lang="kk" class="lang-content">секунд</span><span lang="en" class="lang-content">second</span><span lang="ru" class="lang-content">секунда</span></td></tr>
+<tr><td>Vigenère</td><td>1553</td><td><span lang="kk" class="lang-content">сөз-кілт</span><span lang="en" class="lang-content">word-key</span><span lang="ru" class="lang-content">слово-ключ</span></td><td>✅ XIX <span lang="kk" class="lang-content">ғ.</span><span lang="en" class="lang-content">c.</span><span lang="ru" class="lang-content">в.</span></td></tr>
+<tr><td>Enigma</td><td>1918</td><td><span lang="kk" class="lang-content">роторлар</span><span lang="en" class="lang-content">rotors</span><span lang="ru" class="lang-content">роторы</span></td><td>✅ Turing 1941</td></tr>
+<tr><td>DES</td><td>1977</td><td>56-bit</td><td>✅ 1999</td></tr>
+<tr><td><b>AES-256</b></td><td>2001</td><td>256-bit</td><td>❌ <span lang="kk" class="lang-content">жыл млрд</span><span lang="en" class="lang-content">B of years</span><span lang="ru" class="lang-content">млрд лет</span></td></tr>
+<tr><td>RSA-2048</td><td>1977</td><td>prime factor</td><td>❌ <span lang="kk" class="lang-content">классикалық</span><span lang="en" class="lang-content">classical</span><span lang="ru" class="lang-content">классически</span></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">#️⃣ Хеш — «қолтаңба»</span>
+<span lang="en" class="lang-content">#️⃣ Hash — a fingerprint</span>
+<span lang="ru" class="lang-content">#️⃣ Хеш — «отпечаток»</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3">
+<span lang="kk" class="lang-content"><b>Хеш-функция</b> — кез келген деректі <b>тұрақты ұзындықтағы</b> қысқа жолға айналдырады. <b>Бір бит</b> өзгерсе — хеш <b>толық өзгеріп</b> кетеді. Бұл <b>шифрлеу емес</b>: хештен түпнұсқаны қалпына келтіру <b>мүмкін емес</b>.</span>
+<span lang="en" class="lang-content">A <b>hash function</b> turns any data into a <b>fixed-length</b> short string. Change <b>one bit</b> — the hash changes completely. This is <b>not encryption</b>: you cannot recover the original from a hash.</span>
+<span lang="ru" class="lang-content"><b>Хеш-функция</b> превращает любые данные в короткую строку <b>фиксированной длины</b>. Меняется <b>1 бит</b> — хеш меняется целиком. Это <b>не шифрование</b>: восстановить исходник из хеша нельзя.</span></p>
+
+<div class="code-block">
+SHA-256(<span class="str">"hello"</span>) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+
+SHA-256(<span class="str">"hellO"</span>) = 8876a7fab8e7f2a4b94a6e82b8f42a3e15d8b7d16a99d8f3f7b4fa3f5c1e8e7b
+<span class="com">        ↑ <span lang="kk" class="lang-content">тек O бас әріп — хеш басқа!</span>just one capital O — totally different!<span lang="ru" class="lang-content">одна буква — совсем другой хеш!</span></span>
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">🎯 Қолданылуы: <b>пароль сақтау</b>, <b>файл тұтастығы</b>, <b>блокчейн</b>, Git commit hash.</span>
+<span lang="en" class="lang-content">🎯 Uses: <b>password storage</b>, <b>file integrity</b>, <b>blockchain</b>, Git commit IDs.</span>
+<span lang="ru" class="lang-content">🎯 Применения: <b>хранение паролей</b>, <b>целостность файлов</b>, <b>блокчейн</b>, Git-коммиты.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💾 Backup — 3-2-1 ережесі</span>
+<span lang="en" class="lang-content">💾 3-2-1 backup rule</span>
+<span lang="ru" class="lang-content">💾 Правило 3-2-1</span></h2>
+<div class="card rounded-custom p-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
+<div class="card-accent rounded-2xl p-5 text-center"><div class="text-5xl mb-2">3️⃣</div>
+<p class="heading-font text-sky-700 text-lg"><span lang="kk" class="lang-content">3 көшірме</span><span lang="en" class="lang-content">3 copies</span><span lang="ru" class="lang-content">3 копии</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">түпнұсқа + 2 резерв</span><span lang="en" class="lang-content">original + 2 backups</span><span lang="ru" class="lang-content">оригинал + 2 резерва</span></p></div>
+
+<div class="card-accent rounded-2xl p-5 text-center"><div class="text-5xl mb-2">2️⃣</div>
+<p class="heading-font text-sky-700 text-lg"><span lang="kk" class="lang-content">2 тасымалдаушы</span><span lang="en" class="lang-content">2 media</span><span lang="ru" class="lang-content">2 носителя</span></p>
+<p class="text-slate-600 text-sm">SSD + HDD · flash + cloud</p></div>
+
+<div class="card-accent rounded-2xl p-5 text-center"><div class="text-5xl mb-2">1️⃣</div>
+<p class="heading-font text-sky-700 text-lg"><span lang="kk" class="lang-content">1 — сыртта</span><span lang="en" class="lang-content">1 off-site</span><span lang="ru" class="lang-content">1 — вне дома</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">бұлт / басқа бина</span><span lang="en" class="lang-content">cloud / another location</span><span lang="ru" class="lang-content">облако / др. здание</span></p></div>
+</div>
+<p class="text-slate-500 text-sm"><span lang="kk" class="lang-content">💡 Өрт / ұрлық / ransomware болса — сыртта жатқан көшірме құтқарады.</span>
+<span lang="en" class="lang-content">💡 Off-site copy saves you from fire, theft, ransomware.</span>
+<span lang="ru" class="lang-content">💡 Внешняя копия спасает от пожара, кражи, ransomware.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧰 Тәжірибелік құралдар</span>
+<span lang="en" class="lang-content">🧰 Practical tools</span>
+<span lang="ru" class="lang-content">🧰 Практические инструменты</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">📦</div><p class="heading-font text-sky-700 text-sm">7-Zip + password</p><p class="text-slate-600 text-xs">AES-256 archive</p></div>
+<div class="tile"><div class="tile-emoji">💽</div><p class="heading-font text-sky-700 text-sm">VeraCrypt</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">бүтін диск</span><span lang="en" class="lang-content">full disk</span><span lang="ru" class="lang-content">весь диск</span></p></div>
+<div class="tile"><div class="tile-emoji">🪟</div><p class="heading-font text-sky-700 text-sm">BitLocker</p><p class="text-slate-600 text-xs">Windows Pro</p></div>
+<div class="tile"><div class="tile-emoji">🍎</div><p class="heading-font text-sky-700 text-sm">FileVault</p><p class="text-slate-600 text-xs">macOS</p></div>
+<div class="tile"><div class="tile-emoji">🔑</div><p class="heading-font text-sky-700 text-sm">GnuPG</p><p class="text-slate-600 text-xs">e-mail / file</p></div>
+<div class="tile"><div class="tile-emoji">☁️</div><p class="heading-font text-sky-700 text-sm">Cloud backup</p><p class="text-slate-600 text-xs">Drive · Y. Disk</p></div>
+<div class="tile"><div class="tile-emoji">🔐</div><p class="heading-font text-sky-700 text-sm">KeePass / Bitwarden</p><p class="text-slate-600 text-xs">pwd vault</p></div>
+<div class="tile"><div class="tile-emoji">⏪</div><p class="heading-font text-sky-700 text-sm">Time Machine</p><p class="text-slate-600 text-xs">incremental</p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔐</div>
+<p class="heading-font text-xl text-sky-700 mb-2">AES-256 · RSA-2048</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">#️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-2">SHA-256 ≠ <span lang="kk" class="lang-content">шифр</span><span lang="en" class="lang-content">encryption</span><span lang="ru" class="lang-content">шифр</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💾</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Backup 3-2-1</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

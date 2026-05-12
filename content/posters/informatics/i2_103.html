@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Двумерный массив (матрица)</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 9 · Algorithms</span>
+<span lang="ru" class="lang-content">9 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Екі өлшемді массив (матрица)</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Two-dimensional array (matrix)</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Двумерный массив (матрица)</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Матрица — не?</span>
+<span lang="en" class="lang-content">What is a matrix?</span>
+<span lang="ru" class="lang-content">Что такое матрица?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Екі өлшемді массив (матрица)</b> — <b>жол мен баған</b>дан тұратын кесте. Әр элемент <b>екі индекспен</b> анықталады: <code>a[i][j]</code>, мұнда <b>i</b> — жол, <b>j</b> — баған. Матрицаны <b>Артур Кэли</b> 1858 жылы математикаға енгізді. Бүгін ол барлық жерде: <b>сурет</b> (H×W×3 пиксель), <b>шахмат тақтасы</b> (8×8), <b>Excel кестесі</b>, <b>нейрон желілерінің салмақтары</b>, <b>ойын картасы</b>. Python-да — <b>тізім ішіндегі тізім</b>.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">2-D array (matrix)</b> is a table of <b>rows and columns</b>. Each element has <b>two indices</b>: <code>a[i][j]</code>, where <b>i</b> is the row, <b>j</b> is the column. Matrices were introduced by <b>Arthur Cayley</b> in 1858. They are everywhere: <b>images</b> (H×W×3 pixels), <b>chess board</b> (8×8), <b>spreadsheets</b>, <b>neural-net weights</b>, <b>game maps</b>. In Python it's a <b>list of lists</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Двумерный массив (матрица)</b> — таблица из <b>строк и столбцов</b>. Каждый элемент задаётся <b>двумя индексами</b>: <code>a[i][j]</code>, где <b>i</b> — строка, <b>j</b> — столбец. Матрицы в математику ввёл <b>Артур Кэли</b> в 1858 г. Сегодня они везде: <b>изображения</b> (H×W×3 пикс), <b>шахматная доска</b> (8×8), <b>Excel</b>, <b>веса нейросетей</b>, <b>игровая карта</b>. В Python — это <b>список списков</b>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🗂 Құрылым</span>
+<span lang="en" class="lang-content">🗂 Structure</span>
+<span lang="ru" class="lang-content">🗂 Структура</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap">
+<svg viewBox="0 0 640 260" style="width:100%;max-width:640px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="15">
+<text x="20" y="30" fill="#0369a1" font-weight="bold">j →</text>
+<text x="90" y="30" text-anchor="middle" fill="#64748b">0</text>
+<text x="170" y="30" text-anchor="middle" fill="#64748b">1</text>
+<text x="250" y="30" text-anchor="middle" fill="#64748b">2</text>
+<text x="330" y="30" text-anchor="middle" fill="#64748b">3</text>
+
+<text x="20" y="75" fill="#64748b">i=0</text>
+<rect x="60" y="50" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="90" y="75" text-anchor="middle" font-weight="bold">5</text>
+<rect x="140" y="50" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="170" y="75" text-anchor="middle" font-weight="bold">3</text>
+<rect x="220" y="50" width="60" height="40" fill="#fde68a" stroke="#b45309"/><text x="250" y="75" text-anchor="middle" font-weight="bold">7</text>
+<rect x="300" y="50" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="330" y="75" text-anchor="middle" font-weight="bold">2</text>
+
+<text x="20" y="125" fill="#64748b">i=1</text>
+<rect x="60" y="100" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="90" y="125" text-anchor="middle" font-weight="bold">8</text>
+<rect x="140" y="100" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="170" y="125" text-anchor="middle" font-weight="bold">1</text>
+<rect x="220" y="100" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="250" y="125" text-anchor="middle" font-weight="bold">9</text>
+<rect x="300" y="100" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="330" y="125" text-anchor="middle" font-weight="bold">4</text>
+
+<text x="20" y="175" fill="#64748b">i=2</text>
+<rect x="60" y="150" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="90" y="175" text-anchor="middle" font-weight="bold">6</text>
+<rect x="140" y="150" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="170" y="175" text-anchor="middle" font-weight="bold">0</text>
+<rect x="220" y="150" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="250" y="175" text-anchor="middle" font-weight="bold">2</text>
+<rect x="300" y="150" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/><text x="330" y="175" text-anchor="middle" font-weight="bold">5</text>
+
+<text x="410" y="75" fill="#b45309" font-weight="bold">a[0][2] = 7</text>
+<text x="410" y="130" fill="#0369a1"><span lang="kk" class="lang-content">3 жол × 4 баған</span><tspan>3 × 4 matrix</tspan></text>
+<text x="410" y="175" fill="#0369a1">rows=3, cols=4</text>
+
+<text x="20" y="230" fill="#0369a1">↓ i</text>
+</g></svg></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐍 Python — тізім ішіндегі тізім</span>
+<span lang="en" class="lang-content">🐍 Python — list of lists</span>
+<span lang="ru" class="lang-content">🐍 Python — список списков</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="com"># <span lang="kk" class="lang-content">қолмен құру</span>manual<span lang="ru" class="lang-content">вручную</span></span>
+m = [
+    [<span class="num">5</span>, <span class="num">3</span>, <span class="num">7</span>, <span class="num">2</span>],
+    [<span class="num">8</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">4</span>],
+    [<span class="num">6</span>, <span class="num">0</span>, <span class="num">2</span>, <span class="num">5</span>],
+]
+
+<span class="com"># <span lang="kk" class="lang-content">өлшем</span>dimensions<span lang="ru" class="lang-content">размеры</span></span>
+rows = <span class="fn">len</span>(m)       <span class="com"># 3</span>
+cols = <span class="fn">len</span>(m[<span class="num">0</span>])    <span class="com"># 4</span>
+
+<span class="com"># <span lang="kk" class="lang-content">элемент</span>element<span lang="ru" class="lang-content">элемент</span></span>
+<span class="fn">print</span>(m[<span class="num">1</span>][<span class="num">2</span>])     <span class="com"># 9</span>
+m[<span class="num">0</span>][<span class="num">0</span>] = <span class="num">99</span>
+
+<span class="com"># <span lang="kk" class="lang-content">нөлдермен толтыру</span>zeros<span lang="ru" class="lang-content">нулями</span> 5×5</span>
+zeros = [[<span class="num">0</span>] * <span class="num">5</span> <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>)]
+
+<span class="com"># <span lang="kk" class="lang-content">пернетақтадан оқу</span>read from input<span lang="ru" class="lang-content">чтение с клавиатуры</span></span>
+n, k = <span class="fn">map</span>(<span class="fn">int</span>, <span class="fn">input</span>().<span class="fn">split</span>())
+m = [<span class="fn">list</span>(<span class="fn">map</span>(<span class="fn">int</span>, <span class="fn">input</span>().<span class="fn">split</span>()))
+     <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(n)]
+</div>
+
+<p class="text-slate-500 text-sm mt-2"><span lang="kk" class="lang-content">⚠️ <code>[[0]*5]*5</code> — <b>қате</b>! Барлық жолдар <b>бір сілтеме</b>. Тек <code>for _ in range</code> арқылы.</span>
+<span lang="en" class="lang-content">⚠️ <code>[[0]*5]*5</code> is <b>wrong</b> — all rows share the <b>same reference</b>. Use <code>for _ in range</code>.</span>
+<span lang="ru" class="lang-content">⚠️ <code>[[0]*5]*5</code> — <b>ошибка</b>! Все строки — <b>одна ссылка</b>. Нужен <code>for _ in range</code>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔁 Матрицаны аралау</span>
+<span lang="en" class="lang-content">🔁 Traversing a matrix</span>
+<span lang="ru" class="lang-content">🔁 Обход матрицы</span></h2>
+<div class="card rounded-custom p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">Екі кірістірілген цикл</span><span lang="en" class="lang-content">Two nested loops</span><span lang="ru" class="lang-content">Два вложенных цикла</span></p>
+<div class="code-block text-sm">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(rows):
+    <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(cols):
+        <span class="fn">print</span>(m[i][j], end=<span class="str">' '</span>)
+    <span class="fn">print</span>()
+</div></div>
+
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">Жолдар бойынша</span><span lang="en" class="lang-content">Row by row</span><span lang="ru" class="lang-content">По строкам</span></p>
+<div class="code-block text-sm">
+<span class="kw">for</span> row <span class="kw">in</span> m:
+    <span class="kw">for</span> x <span class="kw">in</span> row:
+        <span class="fn">print</span>(x, end=<span class="str">' '</span>)
+    <span class="fn">print</span>()
+</div></div>
+</div>
+
+<p class="text-slate-700 text-lg mt-4 mb-2"><b><span lang="kk" class="lang-content">Орташа баға кестесі:</span><span lang="en" class="lang-content">Grade book example:</span><span lang="ru" class="lang-content">Таблица оценок:</span></b></p>
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Аты \ Пән</span><span lang="en" class="lang-content">Name \ Subject</span><span lang="ru" class="lang-content">Имя \ Предмет</span></th>
+<th><span lang="kk" class="lang-content">Мат.</span><span lang="en" class="lang-content">Math</span><span lang="ru" class="lang-content">Мат.</span></th>
+<th><span lang="kk" class="lang-content">Физ.</span><span lang="en" class="lang-content">Phys.</span><span lang="ru" class="lang-content">Физ.</span></th>
+<th>CS</th>
+<th><span lang="kk" class="lang-content">Тіл</span><span lang="en" class="lang-content">Lang.</span><span lang="ru" class="lang-content">Язык</span></th>
+</tr></thead><tbody>
+<tr><td>Aidar</td><td>5</td><td>4</td><td>5</td><td>4</td></tr>
+<tr><td>Aigerim</td><td>4</td><td>5</td><td>4</td><td>5</td></tr>
+<tr><td>Dias</td><td>3</td><td>4</td><td>5</td><td>4</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Типтік есептер</span>
+<span lang="en" class="lang-content">🧮 Typical tasks</span>
+<span lang="ru" class="lang-content">🧮 Типовые задачи</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">➕ <span lang="kk" class="lang-content">Барлық элементтер қосындысы</span><span lang="en" class="lang-content">Sum of all</span><span lang="ru" class="lang-content">Сумма всех</span></p>
+<div class="code-block text-sm">
+s = <span class="num">0</span>
+<span class="kw">for</span> row <span class="kw">in</span> m:
+    s += <span class="fn">sum</span>(row)
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">↘️ <span lang="kk" class="lang-content">Басты диагональ</span><span lang="en" class="lang-content">Main diagonal</span><span lang="ru" class="lang-content">Главная диагональ</span></p>
+<div class="code-block text-sm">
+d = [m[i][i] <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n)]
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🔄 <span lang="kk" class="lang-content">Транспонирлеу</span><span lang="en" class="lang-content">Transpose</span><span lang="ru" class="lang-content">Транспонирование</span></p>
+<div class="code-block text-sm">
+t = [[m[i][j] <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(r)]
+     <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(c)]
+<span class="com"># <span lang="kk" class="lang-content">немесе</span>or<span lang="ru" class="lang-content">или</span>: list(zip(*m))</span>
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🔝 <span lang="kk" class="lang-content">Әр жолдың максимумы</span><span lang="en" class="lang-content">Max of each row</span><span lang="ru" class="lang-content">Max в строке</span></p>
+<div class="code-block text-sm">
+maxes = [<span class="fn">max</span>(row) <span class="kw">for</span> row <span class="kw">in</span> m]
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">📊 <span lang="kk" class="lang-content">Бағанның қосындысы</span><span lang="en" class="lang-content">Column sum</span><span lang="ru" class="lang-content">Сумма столбца</span></p>
+<div class="code-block text-sm">
+col_j = <span class="fn">sum</span>(m[i][j] <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(r))
+</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">🔀 <span lang="kk" class="lang-content">90° бұру</span><span lang="en" class="lang-content">Rotate 90°</span><span lang="ru" class="lang-content">Поворот 90°</span></p>
+<div class="code-block text-sm">
+rotated = [<span class="fn">list</span>(row)
+           <span class="kw">for</span> row <span class="kw">in</span> <span class="fn">zip</span>(*m[::-<span class="num">1</span>])]
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 Қолданыстары</span>
+<span lang="en" class="lang-content">🌍 Where matrices live</span>
+<span lang="ru" class="lang-content">🌍 Где живут матрицы</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🖼</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Сурет H×W×3</span><span lang="en" class="lang-content">Image H×W×3</span><span lang="ru" class="lang-content">Изобр. H×W×3</span></p></div>
+<div class="tile"><div class="tile-emoji">♟</div><p class="heading-font text-sky-700 text-sm">8×8 chess</p></div>
+<div class="tile"><div class="tile-emoji">🎮</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Ойын картасы</span><span lang="en" class="lang-content">Tile-map</span><span lang="ru" class="lang-content">Карта тайлов</span></p></div>
+<div class="tile"><div class="tile-emoji">📊</div><p class="heading-font text-sky-700 text-sm">Excel</p></div>
+<div class="tile"><div class="tile-emoji">🧠</div><p class="heading-font text-sky-700 text-sm">NN weights</p></div>
+<div class="tile"><div class="tile-emoji">🗺</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">GPS карта</span><span lang="en" class="lang-content">GPS grid</span><span lang="ru" class="lang-content">GPS-сетка</span></p></div>
+<div class="tile"><div class="tile-emoji">🎲</div><p class="heading-font text-sky-700 text-sm">Sudoku 9×9</p></div>
+<div class="tile"><div class="tile-emoji">🔢</div><p class="heading-font text-sky-700 text-sm">numpy.ndarray</p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🗂</div>
+<p class="heading-font text-xl text-sky-700 mb-2">m[i][j] — <span lang="kk" class="lang-content">жол·баған</span><span lang="en" class="lang-content">row·col</span><span lang="ru" class="lang-content">строка·столбец</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔁</div>
+<p class="heading-font text-xl text-sky-700 mb-2">for i → for j</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚠️</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">[[0]*n]*n — қате!</span><span lang="en" class="lang-content">[[0]*n]*n — wrong!</span><span lang="ru" class="lang-content">[[0]*n]*n — ошибка!</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

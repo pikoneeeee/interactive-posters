@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>elif — множественный выбор</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Python</span>
+<span lang="en" class="lang-content">Grade 7 · Python</span>
+<span lang="ru" class="lang-content">7 класс · Python</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">elif — бірнеше таңдау</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">elif — multiple choice</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">elif — множественный выбор</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">elif не үшін керек?</span>
+<span lang="en" class="lang-content">Why elif?</span>
+<span lang="ru" class="lang-content">Зачем нужен elif?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">«<b>if / else</b>» тек <b>2 жол</b> таңдайды. Ал өмірде — 3, 4, 5 ... жол болуы мүмкін. Мысал: бағалар «өте жақсы / жақсы / жаман», бағдаршам «жасыл / сары / қызыл», пальто өлшемі «S / M / L / XL». Осындай жағдайда <b class="text-sky-700">elif</b> («else if» қысқартылған сөз) қолданылады. Ол қаншасы болса да болады: 2, 3, 10 — Python шектеу қоймайды. Ережесі: <b>жоғарыдан төменге</b> шарттар тексеріледі, <b>біреуі орындалса</b> — қалғаны өтіп жіберіледі.</span>
+<span lang="en" class="lang-content"><b>if / else</b> picks between <b>2 paths</b>. Life often needs more — 3, 4, 5+. Example: grades «excellent / good / poor», traffic light «green / yellow / red», coat size «S / M / L / XL». For that we use <b class="text-sky-700">elif</b> (short for «else if»). You can chain as many as you want — Python sets no limit. Rule: conditions are checked <b>top to bottom</b>, and as soon as <b>one matches</b> the rest are skipped.</span>
+<span lang="ru" class="lang-content"><b>if / else</b> выбирает из <b>2 путей</b>. В жизни часто нужно больше — 3, 4, 5+. Пример: оценки «отлично / хорошо / плохо», светофор «зелёный / жёлтый / красный», размер куртки «S / M / L / XL». Для этого — <b class="text-sky-700">elif</b> (сокращение от «else if»). Их можно нанизать сколько угодно — Python не ограничивает. Правило: условия проверяются <b>сверху вниз</b>, и как только <b>сработало</b> одно — остальные пропускаются.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐍 Синтаксис</span>
+<span lang="en" class="lang-content">🐍 Syntax</span>
+<span lang="ru" class="lang-content">🐍 Синтаксис</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">if</span>   <span class="fn">шарт_1</span>:
+    <span class="com"># <span lang="kk" class="lang-content">1-блок</span>block 1<span lang="ru" class="lang-content">блок 1</span></span>
+<span class="kw">elif</span> <span class="fn">шарт_2</span>:
+    <span class="com"># <span lang="kk" class="lang-content">2-блок</span>block 2<span lang="ru" class="lang-content">блок 2</span></span>
+<span class="kw">elif</span> <span class="fn">шарт_3</span>:
+    <span class="com"># <span lang="kk" class="lang-content">3-блок</span>block 3<span lang="ru" class="lang-content">блок 3</span></span>
+<span class="kw">else</span>:
+    <span class="com"># <span lang="kk" class="lang-content">қалғандары</span>anything else<span lang="ru" class="lang-content">все остальные случаи</span></span>
+</div>
+<p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content"><b>elif</b> саны <b>шектеусіз</b>. <b>else</b> — <b>1-еуі немесе жоқ</b> (міндетті емес), бірақ әрдайым соңында тұрады.</span>
+<span lang="en" class="lang-content"><b>elif</b> can repeat <b>any number</b> of times. <b>else</b> is <b>optional</b>, always last.</span>
+<span lang="ru" class="lang-content"><b>elif</b> можно повторять <b>сколько угодно</b> раз. <b>else</b> — <b>необязателен</b>, всегда в конце.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Классикалық мысалдар</span>
+<span lang="en" class="lang-content">🎯 Classic examples</span>
+<span lang="ru" class="lang-content">🎯 Классические примеры</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">📝 <span lang="kk" class="lang-content">Баға → әріп</span><span lang="en" class="lang-content">Grade → letter</span><span lang="ru" class="lang-content">Оценка → буква</span></p>
+<div class="code-block">
+s = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"score: "</span>))
+<span class="kw">if</span>   s &gt;= <span class="num">90</span>: g = <span class="str">"A"</span>
+<span class="kw">elif</span> s &gt;= <span class="num">80</span>: g = <span class="str">"B"</span>
+<span class="kw">elif</span> s &gt;= <span class="num">70</span>: g = <span class="str">"C"</span>
+<span class="kw">elif</span> s &gt;= <span class="num">60</span>: g = <span class="str">"D"</span>
+<span class="kw">else</span>:         g = <span class="str">"F"</span>
+<span class="fn">print</span>(g)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">🚦 <span lang="kk" class="lang-content">Бағдаршам</span><span lang="en" class="lang-content">Traffic light</span><span lang="ru" class="lang-content">Светофор</span></p>
+<div class="code-block">
+c = <span class="fn">input</span>(<span class="str">"light: "</span>).<span class="fn">lower</span>()
+<span class="kw">if</span> c == <span class="str">"green"</span>:
+    <span class="fn">print</span>(<span class="str">"🟢 go"</span>)
+<span class="kw">elif</span> c == <span class="str">"yellow"</span>:
+    <span class="fn">print</span>(<span class="str">"🟡 wait"</span>)
+<span class="kw">elif</span> c == <span class="str">"red"</span>:
+    <span class="fn">print</span>(<span class="str">"🔴 stop"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"❓ unknown"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">🌡 <span lang="kk" class="lang-content">Ауа-райы</span><span lang="en" class="lang-content">Weather</span><span lang="ru" class="lang-content">Погода</span></p>
+<div class="code-block">
+t = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"t°C: "</span>))
+<span class="kw">if</span>   t &gt;= <span class="num">30</span>: <span class="fn">print</span>(<span class="str">"🔥 hot"</span>)
+<span class="kw">elif</span> t &gt;= <span class="num">20</span>: <span class="fn">print</span>(<span class="str">"☀️ warm"</span>)
+<span class="kw">elif</span> t &gt;= <span class="num">10</span>: <span class="fn">print</span>(<span class="str">"🧥 cool"</span>)
+<span class="kw">elif</span> t &gt;=  <span class="num">0</span>: <span class="fn">print</span>(<span class="str">"❄️ cold"</span>)
+<span class="kw">else</span>:           <span class="fn">print</span>(<span class="str">"🥶 freezing"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">🪙 <span lang="kk" class="lang-content">Сан белгісі</span><span lang="en" class="lang-content">Sign of number</span><span lang="ru" class="lang-content">Знак числа</span></p>
+<div class="code-block">
+x = <span class="fn">int</span>(<span class="fn">input</span>())
+<span class="kw">if</span>   x &gt; <span class="num">0</span>:
+    <span class="fn">print</span>(<span class="str">"+"</span>)
+<span class="kw">elif</span> x &lt; <span class="num">0</span>:
+    <span class="fn">print</span>(<span class="str">"−"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"0"</span>)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">📅 <span lang="kk" class="lang-content">Апта күні</span><span lang="en" class="lang-content">Weekday</span><span lang="ru" class="lang-content">День недели</span></p>
+<div class="code-block">
+d = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"1-7: "</span>))
+<span class="kw">if</span>   d == <span class="num">1</span>: n = <span class="str">"Mon"</span>
+<span class="kw">elif</span> d == <span class="num">2</span>: n = <span class="str">"Tue"</span>
+<span class="kw">elif</span> d == <span class="num">3</span>: n = <span class="str">"Wed"</span>
+<span class="kw">elif</span> d == <span class="num">4</span>: n = <span class="str">"Thu"</span>
+<span class="kw">elif</span> d == <span class="num">5</span>: n = <span class="str">"Fri"</span>
+<span class="kw">elif</span> d == <span class="num">6</span>: n = <span class="str">"Sat"</span>
+<span class="kw">elif</span> d == <span class="num">7</span>: n = <span class="str">"Sun"</span>
+<span class="kw">else</span>:        n = <span class="str">"?"</span>
+<span class="fn">print</span>(n)
+</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">👕 <span lang="kk" class="lang-content">Өлшем</span><span lang="en" class="lang-content">Size</span><span lang="ru" class="lang-content">Размер</span></p>
+<div class="code-block">
+chest = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"chest(cm): "</span>))
+<span class="kw">if</span>   chest &lt; <span class="num">90</span>:  s = <span class="str">"S"</span>
+<span class="kw">elif</span> chest &lt; <span class="num">100</span>: s = <span class="str">"M"</span>
+<span class="kw">elif</span> chest &lt; <span class="num">110</span>: s = <span class="str">"L"</span>
+<span class="kw">else</span>:            s = <span class="str">"XL"</span>
+<span class="fn">print</span>(<span class="str">"Size:"</span>, s)
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Реті маңызды!</span>
+<span lang="en" class="lang-content">⚠️ Order matters!</span>
+<span lang="ru" class="lang-content">⚠️ Порядок важен!</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Python <b>жоғарыдан төменге</b> тексереді. Алғашқы <b>сәйкес келген</b> шарт — орындалады, қалғаны <b>өткізіліп кетеді</b>. Қате рет — қате нәтиже береді!</span>
+<span lang="en" class="lang-content">Python checks <b>top to bottom</b>. The first <b>matching</b> condition runs, the rest is <b>skipped</b>. Wrong order = wrong result!</span>
+<span lang="ru" class="lang-content">Python проверяет <b>сверху вниз</b>. Срабатывает первое <b>подходящее</b> условие, остальные <b>пропускаются</b>. Неверный порядок = неверный ответ!</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-rose rounded-xl p-5">
+<p class="heading-font text-rose-700 mb-2">❌ <span lang="kk" class="lang-content">Қате</span><span lang="en" class="lang-content">Wrong</span><span lang="ru" class="lang-content">Неправильно</span></p>
+<div class="code-block">
+<span class="kw">if</span>   s &gt; <span class="num">50</span>: g = <span class="str">"C"</span>   <span class="com"># 85 <span lang="kk" class="lang-content">де осыған түседі!</span>also matches!<span lang="ru" class="lang-content">тоже сюда!</span></span>
+<span class="kw">elif</span> s &gt; <span class="num">80</span>: g = <span class="str">"B"</span>   <span class="com"># <span lang="kk" class="lang-content">ешқашан</span>never<span lang="ru" class="lang-content">никогда</span></span>
+<span class="kw">elif</span> s &gt; <span class="num">90</span>: g = <span class="str">"A"</span>   <span class="com"># <span lang="kk" class="lang-content">ешқашан</span>never<span lang="ru" class="lang-content">никогда</span></span>
+</div></div>
+
+<div class="card-emerald rounded-xl p-5">
+<p class="heading-font text-emerald-700 mb-2">✅ <span lang="kk" class="lang-content">Дұрыс</span><span lang="en" class="lang-content">Correct</span><span lang="ru" class="lang-content">Правильно</span></p>
+<div class="code-block">
+<span class="kw">if</span>   s &gt; <span class="num">90</span>: g = <span class="str">"A"</span>   <span class="com"># <span lang="kk" class="lang-content">қатаң → жеңіл</span>strict → loose<span lang="ru" class="lang-content">от строгого</span></span>
+<span class="kw">elif</span> s &gt; <span class="num">80</span>: g = <span class="str">"B"</span>
+<span class="kw">elif</span> s &gt; <span class="num">50</span>: g = <span class="str">"C"</span>   <span class="com"># <span lang="kk" class="lang-content">соңғы жеңіл</span>loosest last<span lang="ru" class="lang-content">самое мягкое</span></span>
+</div></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧠 match-case — Python 3.10+ жаңалығы</span>
+<span lang="en" class="lang-content">🧠 match-case — new in Python 3.10+</span>
+<span lang="ru" class="lang-content">🧠 match-case — новинка Python 3.10+</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Көп <code>elif</code> үшін Python 3.10-да жаңа <b>match-case</b> конструкциясы пайда болды:</span>
+<span lang="en" class="lang-content">Python 3.10 added <b>match-case</b> as a cleaner replacement for long elif chains:</span>
+<span lang="ru" class="lang-content">В Python 3.10 появилась конструкция <b>match-case</b> — аналог множественного выбора:</span></p>
+<div class="code-block">
+<span class="kw">match</span> day:
+    <span class="kw">case</span> <span class="num">1</span>:
+        <span class="fn">print</span>(<span class="str">"Mon"</span>)
+    <span class="kw">case</span> <span class="num">6</span> | <span class="num">7</span>:            <span class="com"># <span lang="kk" class="lang-content">сб немесе жс</span>sat or sun<span lang="ru" class="lang-content">сб или вс</span></span>
+        <span class="fn">print</span>(<span class="str">"🏖 weekend"</span>)
+    <span class="kw">case</span> _:                 <span class="com"># <span lang="kk" class="lang-content">әдепкі</span>default<span lang="ru" class="lang-content">по умолчанию</span></span>
+        <span class="fn">print</span>(<span class="str">"workday"</span>)
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Тренажёр: BMI</span>
+<span lang="en" class="lang-content">🎯 Mini project: BMI</span>
+<span lang="ru" class="lang-content">🎯 Мини-проект: индекс массы тела</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="com"># BMI = <span lang="kk" class="lang-content">салмақ / (бойы²)</span>weight / (height²)<span lang="ru" class="lang-content">вес / (рост²)</span></span>
+w = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"kg: "</span>))
+h = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"m:  "</span>))
+bmi = w / h**<span class="num">2</span>
+
+<span class="kw">if</span>   bmi &lt; <span class="num">18.5</span>: cat = <span class="str">"underweight"</span>
+<span class="kw">elif</span> bmi &lt; <span class="num">25</span>:   cat = <span class="str">"normal"</span>
+<span class="kw">elif</span> bmi &lt; <span class="num">30</span>:   cat = <span class="str">"overweight"</span>
+<span class="kw">else</span>:             cat = <span class="str">"obesity"</span>
+
+<span class="fn">print</span>(<span class="str">f"BMI = {bmi:.1f} → {cat}"</span>)
+</div>
+
+<div class="card-accent rounded-xl p-5 mt-5">
+<p class="text-slate-700 text-sm">📊 <b class="text-sky-700">ДСҰ классификациясы</b> · <b>WHO classification</b> · <b>Классификация ВОЗ</b>:<br>
+&lt; 18,5 — <span lang="kk" class="lang-content">төмен салмақ</span><span lang="en" class="lang-content">underweight</span><span lang="ru" class="lang-content">недобор</span> · 18,5–24,9 — <span lang="kk" class="lang-content">қалыпты</span><span lang="en" class="lang-content">normal</span><span lang="ru" class="lang-content">норма</span> · 25–29,9 — <span lang="kk" class="lang-content">артық салмақ</span><span lang="en" class="lang-content">overweight</span><span lang="ru" class="lang-content">избыток</span> · ≥30 — <span lang="kk" class="lang-content">семіздік</span><span lang="en" class="lang-content">obesity</span><span lang="ru" class="lang-content">ожирение</span></p>
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">3️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-2">if → elif → else</p>
+<p class="text-slate-700 text-sm">2 — <span lang="kk" class="lang-content">мыңға дейін</span><span lang="en" class="lang-content">up to many</span><span lang="ru" class="lang-content">сколько нужно</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⬇️</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Алдымен қатаң шарт</span><span lang="en" class="lang-content">Strictest first</span><span lang="ru" class="lang-content">Сначала строгое</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">✨</div>
+<p class="heading-font text-xl text-sky-700 mb-2">match-case</p>
+<p class="text-slate-700 text-sm">Python 3.10+</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

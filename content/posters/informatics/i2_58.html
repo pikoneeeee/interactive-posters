@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Формулы и вычисления в Excel</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Excel</span>
+<span lang="en" class="lang-content">Grade 7 · Excel</span>
+<span lang="ru" class="lang-content">7 класс · Excel</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Excel-дегі формулалар мен есептеулер</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Formulas and calculations in Excel</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Формулы и вычисления в Excel</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Формула не үшін керек?</span>
+<span lang="en" class="lang-content">Why formulas?</span>
+<span lang="ru" class="lang-content">Зачем нужны формулы?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Формула</b> — Excel-ді «ақылды калькуляторға» айналдыратын құрал. Ол ұяшықтардың <b>мәніне</b> сілтеме жасап, <b>автоматты</b> түрде есептейді. Бір мән өзгерсе — формула өзі қайта есептейді. 100 жол бюджет жасадың ба? Жалақы өзгерсе — бір ғана ұяшықты түзет, <b>қалғанын Excel өзі</b> жаңартады. Осы принципке сүйеніп, банктер, зауыттар, ғарыш агенттіктері — барлығы Excel-мен жұмыс істейді. Microsoft Excel — <b>1985</b> жылы пайда болды және әлемдегі 750+ миллион адам оны күн сайын қолданады.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">formula</b> turns Excel into a «smart calculator». It references other cells and <b>auto-calculates</b>. Change one value — Excel recalculates everything. Made a 100-row budget? Salary changed? Fix one cell — <b>Excel updates the rest</b>. That's why banks, factories, and space agencies live in Excel. MS Excel was launched in <b>1985</b> and is used daily by 750+ million people.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Формула</b> превращает Excel в «умный калькулятор». Она ссылается на другие ячейки и <b>автоматически пересчитывает</b>. Поменял одну цифру — пересчиталось всё. Сделал бюджет на 100 строк? Зарплата изменилась — правишь одну ячейку, остальные <b>Excel пересчитает сам</b>. Поэтому банки, заводы, космические агентства — все живут в Excel. MS Excel вышел в <b>1985 году</b>, им ежедневно пользуются 750+ млн человек.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✍️ Формуланың ережелері</span>
+<span lang="en" class="lang-content">✍️ Formula rules</span>
+<span lang="ru" class="lang-content">✍️ Правила формулы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">1. <span lang="kk" class="lang-content">«=» белгісінен басталады</span><span lang="en" class="lang-content">Starts with «=»</span><span lang="ru" class="lang-content">Начинается с «=»</span></p>
+<div class="code-block">=2+3          → 5
+=A1*B1        → <span lang="kk" class="lang-content">нәтижесі</span>result<span lang="ru" class="lang-content">результат</span>
+=SUM(A1:A10)</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">2. <span lang="kk" class="lang-content">Ұяшыққа сілтеме</span><span lang="en" class="lang-content">Cell reference</span><span lang="ru" class="lang-content">Ссылка на ячейку</span></p>
+<p class="text-slate-700 text-sm">A1 — <span lang="kk" class="lang-content">баған A, жол 1</span><span lang="en" class="lang-content">col A, row 1</span><span lang="ru" class="lang-content">столбец A, строка 1</span> · A1:A10 — <span lang="kk" class="lang-content">диапазон</span><span lang="en" class="lang-content">range</span><span lang="ru" class="lang-content">диапазон</span> · Sheet2!A1 — <span lang="kk" class="lang-content">басқа парақ</span><span lang="en" class="lang-content">other sheet</span><span lang="ru" class="lang-content">другой лист</span></p></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">3. <span lang="kk" class="lang-content">Операторлар</span><span lang="en" class="lang-content">Operators</span><span lang="ru" class="lang-content">Операторы</span></p>
+<p class="text-slate-700 text-sm">+ − * / ^ (<span lang="kk" class="lang-content">дәреже</span><span lang="en" class="lang-content">power</span><span lang="ru" class="lang-content">степень</span>) % &amp; (<span lang="kk" class="lang-content">мәтін біріктіру</span><span lang="en" class="lang-content">concat</span><span lang="ru" class="lang-content">конкатенация</span>)</p>
+<p class="text-slate-700 text-sm mt-1"><span lang="kk" class="lang-content">Салыстыру</span><span lang="en" class="lang-content">Compare</span><span lang="ru" class="lang-content">Сравнение</span>: = &lt;&gt; &lt; &gt; &lt;= &gt;=</p></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">4. <span lang="kk" class="lang-content">Жақшалар</span><span lang="en" class="lang-content">Parentheses</span><span lang="ru" class="lang-content">Скобки</span></p>
+<div class="code-block">=2+3*4        → 14
+=(2+3)*4      → 20
+=A1*(B1+C1)/D1</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">5. <span lang="kk" class="lang-content">Функциялар</span><span lang="en" class="lang-content">Functions</span><span lang="ru" class="lang-content">Функции</span></p>
+<div class="code-block">=SUM(A1:A10)
+=AVERAGE(B:B)
+=IF(C1&gt;50,"pass","fail")</div></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-lg text-sky-700 mb-2">6. <span lang="kk" class="lang-content">Авто-толтыру (Fill Handle)</span><span lang="en" class="lang-content">Fill handle</span><span lang="ru" class="lang-content">Автозаполнение</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Ұяшықтың оң төменгі шетіндегі <b>«+»</b> нүктесін тарт — формула төменге көшіріледі.</span><span lang="en" class="lang-content">Drag the <b>«+»</b> at bottom-right — formula copies down.</span><span lang="ru" class="lang-content">Тяни за <b>«+»</b> в углу — формула копируется.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔢 ТОП-10 функция</span>
+<span lang="en" class="lang-content">🔢 Top-10 functions</span>
+<span lang="ru" class="lang-content">🔢 ТОП-10 функций</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Функция</span><span lang="en" class="lang-content">Function</span><span lang="ru" class="lang-content">Функция</span></th>
+<th><span lang="kk" class="lang-content">Не істейді</span><span lang="en" class="lang-content">What it does</span><span lang="ru" class="lang-content">Что делает</span></th>
+<th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th>
+</tr></thead><tbody>
+<tr><td><b>SUM</b></td><td><span lang="kk" class="lang-content">Қосынды</span><span lang="en" class="lang-content">Sum</span><span lang="ru" class="lang-content">Сумма</span></td><td>=SUM(A1:A10)</td></tr>
+<tr><td><b>AVERAGE</b></td><td><span lang="kk" class="lang-content">Орташа</span><span lang="en" class="lang-content">Average</span><span lang="ru" class="lang-content">Среднее</span></td><td>=AVERAGE(B:B)</td></tr>
+<tr><td><b>COUNT</b></td><td><span lang="kk" class="lang-content">Саны (сан)</span><span lang="en" class="lang-content">Count numbers</span><span lang="ru" class="lang-content">Счёт чисел</span></td><td>=COUNT(C1:C100)</td></tr>
+<tr><td><b>COUNTA</b></td><td><span lang="kk" class="lang-content">Бос емес</span><span lang="en" class="lang-content">Count non-empty</span><span lang="ru" class="lang-content">Непустые</span></td><td>=COUNTA(D1:D100)</td></tr>
+<tr><td><b>MIN / MAX</b></td><td><span lang="kk" class="lang-content">Ең кіші / үлкен</span><span lang="en" class="lang-content">Min / Max</span><span lang="ru" class="lang-content">Мин / Макс</span></td><td>=MAX(E1:E50)</td></tr>
+<tr><td><b>IF</b></td><td><span lang="kk" class="lang-content">Шарт</span><span lang="en" class="lang-content">Condition</span><span lang="ru" class="lang-content">Условие</span></td><td>=IF(A1&gt;=60,"pass","fail")</td></tr>
+<tr><td><b>SUMIF</b></td><td><span lang="kk" class="lang-content">Шартты қосынды</span><span lang="en" class="lang-content">Sum if</span><span lang="ru" class="lang-content">Сумма по условию</span></td><td>=SUMIF(B:B,"&gt;100",C:C)</td></tr>
+<tr><td><b>COUNTIF</b></td><td><span lang="kk" class="lang-content">Шартты сан</span><span lang="en" class="lang-content">Count if</span><span lang="ru" class="lang-content">Счёт по условию</span></td><td>=COUNTIF(D:D,"Pass")</td></tr>
+<tr><td><b>ROUND</b></td><td><span lang="kk" class="lang-content">Дөңгелектеу</span><span lang="en" class="lang-content">Round</span><span lang="ru" class="lang-content">Округление</span></td><td>=ROUND(E1,2)</td></tr>
+<tr><td><b>CONCAT</b></td><td><span lang="kk" class="lang-content">Жолдарды біріктіру</span><span lang="en" class="lang-content">Join strings</span><span lang="ru" class="lang-content">Объединить строки</span></td><td>=CONCAT(A1," ",B1)</td></tr>
+</tbody></table></div>
+
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="heading-font text-sky-700 mb-1">📚 <span lang="kk" class="lang-content">Excel-де барлығы 500+ функция бар!</span><span lang="en" class="lang-content">500+ functions exist!</span><span lang="ru" class="lang-content">Всего в Excel 500+ функций!</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Формулалар тобы: Math, Statistical, Logical, Text, Date, Lookup, Financial, Engineering.</span><span lang="en" class="lang-content">Categories: Math, Statistical, Logical, Text, Date, Lookup, Financial, Engineering.</span><span lang="ru" class="lang-content">Категории: Math, Statistical, Logical, Text, Date, Lookup, Financial, Engineering.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔍 Сілтеме түрлері — A1, $A$1, $A1, A$1</span>
+<span lang="en" class="lang-content">🔍 References — A1, $A$1, $A1, A$1</span>
+<span lang="ru" class="lang-content">🔍 Типы ссылок — A1, $A$1, $A1, A$1</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Формуланы төмен тартқанда — сілтеме қалай өзгереді? Басқару үшін <b>$</b> белгісін пайдаланамыз:</span>
+<span lang="en" class="lang-content">When you drag a formula, how should the reference change? We use <b>$</b> to lock it:</span>
+<span lang="ru" class="lang-content">Если формулу тянешь вниз — как менять ссылку? Управляем символом <b>$</b>:</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="card-accent rounded-xl p-4 text-center"><p class="heading-font text-sky-700 mb-1">A1</p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Салыстырмалы — бәрі өзгереді</span><span lang="en" class="lang-content">Relative — both change</span><span lang="ru" class="lang-content">Относительная — всё меняется</span></p></div>
+<div class="card-accent rounded-xl p-4 text-center"><p class="heading-font text-sky-700 mb-1">$A$1</p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Абсолютті — ештеңе өзгермейді</span><span lang="en" class="lang-content">Absolute — nothing changes</span><span lang="ru" class="lang-content">Абсолютная — ничего</span></p></div>
+<div class="card-accent rounded-xl p-4 text-center"><p class="heading-font text-sky-700 mb-1">$A1</p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Баған бекітілген</span><span lang="en" class="lang-content">Column locked</span><span lang="ru" class="lang-content">Столбец закреплён</span></p></div>
+<div class="card-accent rounded-xl p-4 text-center"><p class="heading-font text-sky-700 mb-1">A$1</p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Жол бекітілген</span><span lang="en" class="lang-content">Row locked</span><span lang="ru" class="lang-content">Строка закреплена</span></p></div>
+</div>
+
+<p class="text-slate-500 text-sm mt-4">💡 <span lang="kk" class="lang-content">Формулада ұяшыққа тұрғанда <b>F4</b> — $ таңбасын автоматты қосады/алады.</span><span lang="en" class="lang-content">Press <b>F4</b> inside a formula to cycle $ placements.</span><span lang="ru" class="lang-content">В формуле нажми <b>F4</b> — циклично добавляет $ вариант.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Тәжірибе: сынып есебі</span>
+<span lang="en" class="lang-content">🎯 Practice: class report</span>
+<span lang="ru" class="lang-content">🎯 Практика: отчёт по классу</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th>#</th>
+<th><span lang="kk" class="lang-content">Оқушы</span><span lang="en" class="lang-content">Student</span><span lang="ru" class="lang-content">Ученик</span></th>
+<th>Math</th><th>Phys</th><th>Info</th>
+<th><b>Sum</b></th>
+<th><b>Avg</b></th>
+<th><b><span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Результат</span></b></th>
+</tr></thead><tbody>
+<tr><td>1</td><td>Aidar</td><td>5</td><td>4</td><td>5</td><td>14</td><td>4,67</td><td style="color:#16a34a">✅ pass</td></tr>
+<tr><td>2</td><td>Dana</td><td>5</td><td>5</td><td>5</td><td>15</td><td>5,00</td><td style="color:#16a34a">🏆 top</td></tr>
+<tr><td>3</td><td>Bolat</td><td>3</td><td>2</td><td>3</td><td>8</td><td>2,67</td><td style="color:#dc2626">❌ fail</td></tr>
+<tr><td>4</td><td>Aru</td><td>4</td><td>5</td><td>4</td><td>13</td><td>4,33</td><td style="color:#16a34a">✅ pass</td></tr>
+<tr style="background:rgba(14,165,233,.08)"><td colspan="2"><b>MIN / MAX / AVG</b></td><td colspan="3">=MIN(C2:E5), =MAX(...), =AVERAGE(...)</td><td colspan="3"></td></tr>
+</tbody></table></div>
+
+<div class="code-block mt-5">
+<span class="com"># <span lang="kk" class="lang-content">формулалар</span>formulas<span lang="ru" class="lang-content">формулы</span>:</span>
+F2 = =SUM(C2:E2)                     <span class="com"># Sum</span>
+G2 = =AVERAGE(C2:E2)                 <span class="com"># Avg</span>
+H2 = =IF(G2&gt;=4.5,"🏆 top",IF(G2&gt;=3,"✅ pass","❌ fail"))
+                                      <span class="com"># 3 <span lang="kk" class="lang-content">деңгей</span>levels<span lang="ru" class="lang-content">уровня</span></span>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Жылдам кеңестер</span>
+<span lang="en" class="lang-content">⚡ Quick tips</span>
+<span lang="ru" class="lang-content">⚡ Быстрые советы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">Σ AutoSum (Alt+=)</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Баған астына — SUM автоматты.</span><span lang="en" class="lang-content">Inserts SUM of column.</span><span lang="ru" class="lang-content">Вставляет SUM колонки.</span></p></div>
+
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">F2 — <span lang="kk" class="lang-content">өңдеу</span><span lang="en" class="lang-content">edit</span><span lang="ru" class="lang-content">редактировать</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Ұяшық мәнін өңдеу режиміне кіру.</span><span lang="en" class="lang-content">Edit cell content.</span><span lang="ru" class="lang-content">Редактировать ячейку.</span></p></div>
+
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">Ctrl+~ (Ctrl+`)</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Барлық формулаларды көрсету.</span><span lang="en" class="lang-content">Show all formulas.</span><span lang="ru" class="lang-content">Показать все формулы.</span></p></div>
+
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">Ctrl+D / Ctrl+R</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Формуланы төменге / оңға көшіру.</span><span lang="en" class="lang-content">Fill down / right.</span><span lang="ru" class="lang-content">Копировать формулу вниз / вправо.</span></p></div>
+
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">F9</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Бөлек формуланы есептеп көрсету.</span><span lang="en" class="lang-content">Evaluate highlighted part.</span><span lang="ru" class="lang-content">Вычислить выделенную часть.</span></p></div>
+
+<div class="card-accent rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-1">Name Manager</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Ұяшыққа ат қою: «rate» → =price*rate.</span><span lang="en" class="lang-content">Name a cell: «rate» → =price*rate.</span><span lang="ru" class="lang-content">Назови ячейку: «rate» → =price*rate.</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">=</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Формула «=» -ден</span><span lang="en" class="lang-content">Formula starts with =</span><span lang="ru" class="lang-content">Формула — через «=»</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">$</div>
+<p class="heading-font text-xl text-sky-700 mb-2">F4 → $A$1</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">абсолют сілтеме</span><span lang="en" class="lang-content">absolute ref</span><span lang="ru" class="lang-content">абсолютная ссылка</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔟</div>
+<p class="heading-font text-xl text-sky-700 mb-2">TOP-10</p>
+<p class="text-slate-700 text-sm">SUM · AVG · IF · COUNT · MAX</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

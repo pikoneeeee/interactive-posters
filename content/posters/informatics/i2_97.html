@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Создание БД в электронных таблицах</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Деректер қоры</span>
+<span lang="en" class="lang-content">Grade 9 · Databases</span>
+<span lang="ru" class="lang-content">9 класс · Базы данных</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Excel-де БД жасау</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Building a DB in spreadsheets</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Создание БД в электронных таблицах</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Неге Excel ≠ кәсіби БД?</span>
+<span lang="en" class="lang-content">Why Excel isn't a real DB?</span>
+<span lang="ru" class="lang-content">Чем Excel ≠ настоящая БД?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">Excel/Google Sheets — <b>қарапайым БД</b> жасауға жеткілікті: <b>50 мыңға дейін</b> жазба, іздеу, сұрыптау, сүзу, диаграмма, формула. <b>Бірақ</b> миллиондар жазба, бір уақытта <b>мың қолданушы</b>, транзакциялар — кәсіби <b>DBMS</b> (MySQL, PostgreSQL) керек. Мектеп жобасы (кітап, студент, дүкен) үшін — Excel <b>өте тамаша</b> таңдау!</span>
+<span lang="en" class="lang-content">Excel/Google Sheets are <b>fine for a small DB</b>: up to <b>50 k rows</b>, search, sort, filter, charts, formulas. But for <b>millions of rows</b>, <b>thousands of users</b> or transactions you need a proper <b>DBMS</b> (MySQL, PostgreSQL). For school projects (library, students, shop) Excel is a <b>perfect fit</b>!</span>
+<span lang="ru" class="lang-content">Excel/Google Sheets подойдут для <b>простой БД</b>: до <b>50 000</b> записей, поиск, сортировка, фильтры, диаграммы, формулы. Но для <b>миллионов</b> строк, <b>тысяч</b> пользователей и транзакций нужна настоящая <b>СУБД</b> (MySQL, PostgreSQL). Для школьного проекта (библиотека, ученики, магазин) Excel — <b>отличный выбор</b>!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏗 7 қадам: БД құру</span>
+<span lang="en" class="lang-content">🏗 7 steps to build a DB</span>
+<span lang="ru" class="lang-content">🏗 7 шагов построения БД</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-3 text-slate-700 text-lg">
+<li>1. <b class="text-sky-700"><span lang="kk" class="lang-content">Тақырып анықта</span><span lang="en" class="lang-content">Pick a topic</span><span lang="ru" class="lang-content">Выбери тему</span></b> — <span lang="kk" class="lang-content">кітапхана? оқушылар? кедергі?</span><span lang="en" class="lang-content">library? students? shop?</span><span lang="ru" class="lang-content">библиотека? ученики? магазин?</span></li>
+<li>2. <b class="text-sky-700"><span lang="kk" class="lang-content">Өрістерді тізімде</span><span lang="en" class="lang-content">List fields</span><span lang="ru" class="lang-content">Перечисли поля</span></b> — id, name, grade, …</li>
+<li>3. <b class="text-sky-700"><span lang="kk" class="lang-content">Деректер түрін анықта</span><span lang="en" class="lang-content">Pick data types</span><span lang="ru" class="lang-content">Определи типы</span></b> — Number / Text / Date</li>
+<li>4. <b class="text-sky-700"><span lang="kk" class="lang-content">Бірінші жолды — тақырып</span><span lang="en" class="lang-content">Header row</span><span lang="ru" class="lang-content">Первая строка — заголовки</span></b> (bold, freeze)</li>
+<li>5. <b class="text-sky-700"><span lang="kk" class="lang-content">Дерек енгіз</span><span lang="en" class="lang-content">Enter data</span><span lang="ru" class="lang-content">Вводи данные</span></b> — <span lang="kk" class="lang-content">бос жол қалдырма!</span><span lang="en" class="lang-content">no blank rows!</span><span lang="ru" class="lang-content">без пустых строк!</span></li>
+<li>6. <b class="text-sky-700">Format as Table</b> (Ctrl+T) — <span lang="kk" class="lang-content">стиль, сүзгі, сұрыптау</span><span lang="en" class="lang-content">style, filter, sort</span><span lang="ru" class="lang-content">стиль, фильтр, сортировка</span></li>
+<li>7. <b class="text-sky-700"><span lang="kk" class="lang-content">Жұмыс істе</span><span lang="en" class="lang-content">Work with it</span><span lang="ru" class="lang-content">Работа с БД</span></b> — <span lang="kk" class="lang-content">формула, pivot, диаграмма</span><span lang="en" class="lang-content">formulas, pivots, charts</span><span lang="ru" class="lang-content">формулы, pivot, графики</span></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📚 Мысал — кітапхана БД</span>
+<span lang="en" class="lang-content">📚 Example — library DB</span>
+<span lang="ru" class="lang-content">📚 Пример — БД библиотеки</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th>book_id 🔑</th><th>title</th><th>author</th><th>year</th><th>genre</th><th>stock</th><th>price, ₸</th>
+</tr></thead><tbody>
+<tr><td>1</td><td>Abay Joly</td><td>M. Auezov</td><td>1960</td><td>novel</td><td>12</td><td>3 500</td></tr>
+<tr><td>2</td><td>Harry Potter</td><td>J. Rowling</td><td>1997</td><td>fantasy</td><td>8</td><td>5 900</td></tr>
+<tr><td>3</td><td>1984</td><td>G. Orwell</td><td>1949</td><td>dystopia</td><td>5</td><td>4 200</td></tr>
+<tr><td>4</td><td>Python CS</td><td>A. Downey</td><td>2015</td><td>textbook</td><td>3</td><td>6 800</td></tr>
+<tr><td>5</td><td>Ulpan</td><td>G. Musrepov</td><td>1974</td><td>novel</td><td>10</td><td>3 100</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✨ Пайдалы мүмкіндіктер</span>
+<span lang="en" class="lang-content">✨ Useful features</span>
+<span lang="ru" class="lang-content">✨ Полезные фишки</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🧊 Freeze panes</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">View → Freeze. Тақырып әр уақытта көрінеді.</span><span lang="en" class="lang-content">View → Freeze keeps the header visible.</span><span lang="ru" class="lang-content">View → Freeze — заголовок всегда виден.</span></p></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🎛 Data Validation</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Тек таңдау: «novel / fantasy / poetry».</span><span lang="en" class="lang-content">Dropdown limit: «novel / fantasy / poetry».</span><span lang="ru" class="lang-content">Dropdown: «novel / fantasy / poetry».</span></p></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🔄 Remove Duplicates</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Data → Remove duplicates.</span><span lang="en" class="lang-content">Data → Remove duplicates.</span><span lang="ru" class="lang-content">Data → Remove duplicates.</span></p></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">📈 Pivot Table</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Жанр бойынша санау / сомасы.</span><span lang="en" class="lang-content">Count/sum per genre.</span><span lang="ru" class="lang-content">Счёт/сумма по жанру.</span></p></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🔎 VLOOKUP / XLOOKUP</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">book_id-мен атауды тап.</span><span lang="en" class="lang-content">Find title by id.</span><span lang="ru" class="lang-content">Найти название по id.</span></p></div>
+
+<div class="card rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🚨 Conditional format</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">stock &lt; 3 — қызыл.</span><span lang="en" class="lang-content">stock &lt; 3 → red.</span><span lang="ru" class="lang-content">stock &lt; 3 — красный.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Формулалар</span>
+<span lang="en" class="lang-content">🧮 Key formulas</span>
+<span lang="ru" class="lang-content">🧮 Полезные формулы</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="com">-- <span lang="kk" class="lang-content">жалпы кітап саны</span>total stock<span lang="ru" class="lang-content">всего книг</span></span>
+=SUM(F2:F6)
+
+<span class="com">-- «novel» <span lang="kk" class="lang-content">саны</span>count<span lang="ru" class="lang-content">количество</span></span>
+=COUNTIF(E2:E6, "novel")
+
+<span class="com">-- <span lang="kk" class="lang-content">орта бағасы</span>average price<span lang="ru" class="lang-content">средняя цена</span></span>
+=AVERAGE(G2:G6)
+
+<span class="com">-- id=3 <span lang="kk" class="lang-content">кітаптың атауы</span>book title<span lang="ru" class="lang-content">название книги</span></span>
+=XLOOKUP(3, A2:A6, B2:B6)
+
+<span class="com">-- <span lang="kk" class="lang-content">аз қор (≤5)</span>low stock (≤5)<span lang="ru" class="lang-content">мало (≤5)</span></span>
+=IF(F2&lt;=5, "⚠️ order", "ok")
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚫 Жиі қателер</span>
+<span lang="en" class="lang-content">🚫 Typical pitfalls</span>
+<span lang="ru" class="lang-content">🚫 Частые ошибки</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🙈</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Тақырыпсыз баған</span><span lang="en" class="lang-content">No headers</span><span lang="ru" class="lang-content">Без заголовков</span></p></div>
+<div class="tile"><div class="tile-emoji">🔀</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Аралас түрлер</span><span lang="en" class="lang-content">Mixed types</span><span lang="ru" class="lang-content">Смешанные типы</span></p></div>
+<div class="tile"><div class="tile-emoji">🧱</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Біріктірілген ұяшықтар</span><span lang="en" class="lang-content">Merged cells</span><span lang="ru" class="lang-content">Объединённые ячейки</span></p></div>
+<div class="tile"><div class="tile-emoji">📭</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Бос жолдар</span><span lang="en" class="lang-content">Empty rows</span><span lang="ru" class="lang-content">Пустые строки</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📊</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Excel = 50 000 ok</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧊</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Freeze + Format as Table</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧮</div>
+<p class="heading-font text-xl text-sky-700 mb-2">XLOOKUP · Pivot</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

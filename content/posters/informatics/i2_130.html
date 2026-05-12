@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Реляционные БД: поля, записи, индексы</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Дерекқор</span>
+<span lang="en" class="lang-content">Grade 10 · Databases</span>
+<span lang="ru" class="lang-content">10 класс · Базы данных</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Реляциялық дерекқор</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Relational databases</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Реляционные БД: поля, записи, индексы</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🗃 Реляциялық — не?</span>
+<span lang="en" class="lang-content">🗃 What is «relational»?</span>
+<span lang="ru" class="lang-content">🗃 Что такое «реляционная»?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Реляциялық дерекқор (РБД)</b> — деректерді <b>кестелерде</b> (relations) сақтайтын жүйе. Идеяны <b>1970 ж. Edgar Codd</b> IBM-да ұсынды. Кесте — жолдардан (<b>жазба</b>, record) және бағандардан (<b>өріс</b>, field) тұрады. Кестелер бір-бірімен <b>кілттер</b> арқылы байланысады. Ең танымалы: <b>MySQL, PostgreSQL, SQLite, Oracle, SQL Server</b>. Барлық <b>банктер, билеттер, мектеп журналы</b> — осында.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">relational database (RDB)</b> stores data in <b>tables</b> (relations). The idea was introduced by <b>Edgar Codd (IBM, 1970)</b>. A table has <b>rows</b> (records) and <b>columns</b> (fields). Tables connect via <b>keys</b>. Popular engines: <b>MySQL, PostgreSQL, SQLite, Oracle, SQL Server</b>. Banks, ticket systems, school registers — all relational.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Реляционная БД (РБД)</b> хранит данные в <b>таблицах</b> (отношениях). Идею предложил <b>Эдгар Кодд (IBM, 1970)</b>. Таблица состоит из <b>строк</b> (записей) и <b>столбцов</b> (полей). Таблицы связаны через <b>ключи</b>. Популярные: <b>MySQL, PostgreSQL, SQLite, Oracle, SQL Server</b>. Банки, билеты, школьный журнал — всё здесь.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📋 Кестенің анатомиясы</span>
+<span lang="en" class="lang-content">📋 Anatomy of a table</span>
+<span lang="ru" class="lang-content">📋 Анатомия таблицы</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-600 text-sm mb-3 heading-font">
+<span lang="kk" class="lang-content">Кесте <code>students</code>:</span>
+<span lang="en" class="lang-content">Table <code>students</code>:</span>
+<span lang="ru" class="lang-content">Таблица <code>students</code>:</span></p>
+<div class="overflow-x-auto">
+<table class="t"><thead><tr>
+<th>id <span class="badge badge-amber">PK</span></th>
+<th>name</th>
+<th>grade</th>
+<th>city</th>
+<th>avg_mark</th>
+<th>birthdate</th>
+</tr></thead><tbody>
+<tr><td>1</td><td>Aida</td><td>10</td><td>Almaty</td><td>4.8</td><td>2009-03-14</td></tr>
+<tr style="background:rgba(14,165,233,.06)"><td>2</td><td>Nurlan</td><td>10</td><td>Astana</td><td>4.5</td><td>2009-07-22</td></tr>
+<tr><td>3</td><td>Dilnaz</td><td>9</td><td>Shymkent</td><td>5.0</td><td>2010-01-05</td></tr>
+<tr style="background:rgba(14,165,233,.06)"><td>4</td><td>Arman</td><td>10</td><td>Almaty</td><td>4.2</td><td>2009-11-30</td></tr>
+</tbody></table></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1">📐 <span lang="kk" class="lang-content">Өріс (field)</span><span lang="en" class="lang-content">Field</span><span lang="ru" class="lang-content">Поле</span></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">баған — бір атрибут (аты, қаласы)</span><span lang="en" class="lang-content">column — one attribute (name, city)</span><span lang="ru" class="lang-content">столбец — один атрибут (имя, город)</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1">📝 <span lang="kk" class="lang-content">Жазба (record)</span><span lang="en" class="lang-content">Record</span><span lang="ru" class="lang-content">Запись</span></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">жол — бір объект (1 оқушы)</span><span lang="en" class="lang-content">row — one object (1 student)</span><span lang="ru" class="lang-content">строка — один объект (1 ученик)</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1">🗂 <span lang="kk" class="lang-content">Кесте (table)</span><span lang="en" class="lang-content">Table</span><span lang="ru" class="lang-content">Таблица</span></p><p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">бір түрлі объектілер жинағы</span><span lang="en" class="lang-content">set of similar objects</span><span lang="ru" class="lang-content">множество однотипных объектов</span></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏷 Өріс типтері</span>
+<span lang="en" class="lang-content">🏷 Field data types</span>
+<span lang="ru" class="lang-content">🏷 Типы полей</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th>SQL type</th>
+<th><span lang="kk" class="lang-content">Мағына</span><span lang="en" class="lang-content">Meaning</span><span lang="ru" class="lang-content">Значение</span></th>
+<th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th>
+<th><span lang="kk" class="lang-content">Жады</span><span lang="en" class="lang-content">Bytes</span><span lang="ru" class="lang-content">Память</span></th></tr></thead><tbody>
+<tr><td><code>INTEGER</code></td><td><span lang="kk" class="lang-content">бүтін сан</span><span lang="en" class="lang-content">integer</span><span lang="ru" class="lang-content">целое</span></td><td>42, -7</td><td>4 B</td></tr>
+<tr><td><code>REAL / FLOAT</code></td><td><span lang="kk" class="lang-content">бөлшек</span><span lang="en" class="lang-content">decimal</span><span lang="ru" class="lang-content">вещественное</span></td><td>4.8, 3.14</td><td>8 B</td></tr>
+<tr><td><code>VARCHAR(n)</code></td><td><span lang="kk" class="lang-content">жол ≤ n</span><span lang="en" class="lang-content">string ≤ n</span><span lang="ru" class="lang-content">строка ≤ n</span></td><td>'Aida'</td><td>≤ n B</td></tr>
+<tr><td><code>TEXT</code></td><td><span lang="kk" class="lang-content">ұзын мәтін</span><span lang="en" class="lang-content">long text</span><span lang="ru" class="lang-content">длинный текст</span></td><td>'абзац...'</td><td>~</td></tr>
+<tr><td><code>DATE / DATETIME</code></td><td><span lang="kk" class="lang-content">уақыт</span><span lang="en" class="lang-content">time</span><span lang="ru" class="lang-content">время</span></td><td>2024-09-01</td><td>8 B</td></tr>
+<tr><td><code>BOOLEAN</code></td><td>0/1</td><td>TRUE / FALSE</td><td>1 B</td></tr>
+<tr><td><code>BLOB</code></td><td><span lang="kk" class="lang-content">бинарлы (сурет)</span><span lang="en" class="lang-content">binary (image)</span><span lang="ru" class="lang-content">бинарные (картинка)</span></td><td>0x89504E…</td><td>~MB</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Индекс — бас дерек</span>
+<span lang="en" class="lang-content">⚡ Index — secret weapon</span>
+<span lang="ru" class="lang-content">⚡ Индекс — секретное оружие</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Индекс</b> — кітаптың алфавиттік тізімі сияқты: «<b>қай жолда қандай мән жатыр</b>». Ол жоқ болса — сервер <b>барлық 1 млн жолды</b> қарап шығады (<b>full scan</b>). Индекс бар болса — <b>B-tree</b> арқылы 20 адымда табады. <b>Жеделдік 50 000×-ке дейін</b> өседі!</span>
+<span lang="en" class="lang-content">An <b class="text-sky-700">index</b> is like a book's alphabetical guide: «<b>which row has which value</b>». Without it the server scans all <b>1 M rows</b> (<b>full scan</b>). With a <b>B-tree</b> index only ~20 steps are needed. <b>Up to 50 000× faster</b>!</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Индекс</b> — как алфавитный указатель в книге: «<b>на какой строке какое значение</b>». Без него сервер просматривает все <b>1 млн строк</b> (<b>full scan</b>). С индексом (<b>B-tree</b>) — всего ~20 шагов. <b>Ускорение до 50 000×</b>!</span></p>
+
+<div class="code-block text-sm">
+<span class="com">-- создать индекс</span>
+<span class="kw">CREATE INDEX</span> idx_city <span class="kw">ON</span> students(city);
+
+<span class="com">-- теперь этот запрос летает:</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> students <span class="kw">WHERE</span> city = <span class="str">'Almaty'</span>;
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+<div class="card card-emerald rounded-2xl p-5"><p class="heading-font text-emerald-700 mb-1">✅ <span lang="kk" class="lang-content">Қашан қоямыз</span><span lang="en" class="lang-content">When to add</span><span lang="ru" class="lang-content">Когда ставить</span></p>
+<ul class="text-slate-600 text-sm mt-1 space-y-1">
+<li>• WHERE <span lang="kk" class="lang-content">жиі қолданылатын</span><span lang="en" class="lang-content">frequently filtered</span><span lang="ru" class="lang-content">часто используются в WHERE</span></li>
+<li>• JOIN <span lang="kk" class="lang-content">кілттері</span><span lang="en" class="lang-content">keys</span><span lang="ru" class="lang-content">ключи</span></li>
+<li>• ORDER BY <span lang="kk" class="lang-content">бағандары</span><span lang="en" class="lang-content">columns</span><span lang="ru" class="lang-content">столбцы</span></li>
+</ul></div>
+<div class="card card-rose rounded-2xl p-5"><p class="heading-font text-rose-700 mb-1">❌ <span lang="kk" class="lang-content">Қашан артық</span><span lang="en" class="lang-content">When NOT to</span><span lang="ru" class="lang-content">Когда не надо</span></p>
+<ul class="text-slate-600 text-sm mt-1 space-y-1">
+<li>• <span lang="kk" class="lang-content">кіші кесте (&lt;1 000 жол)</span><span lang="en" class="lang-content">small table (&lt;1 K rows)</span><span lang="ru" class="lang-content">маленькая таблица</span></li>
+<li>• <span lang="kk" class="lang-content">жиі жазу/жаңарту</span><span lang="en" class="lang-content">write-heavy</span><span lang="ru" class="lang-content">частые INSERT/UPDATE</span></li>
+<li>• <span lang="kk" class="lang-content">қайталанатын мәндер (BOOLEAN)</span><span lang="en" class="lang-content">low-cardinality (BOOLEAN)</span><span lang="ru" class="lang-content">мало разных значений</span></li>
+</ul></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✨ РБД артықшылықтары</span>
+<span lang="en" class="lang-content">✨ Why relational?</span>
+<span lang="ru" class="lang-content">✨ Почему реляционные?</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🧩</div><p class="heading-font text-sky-700 text-sm">SQL</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">стандартты тіл</span><span lang="en" class="lang-content">standard language</span><span lang="ru" class="lang-content">стандарт языка</span></p></div>
+<div class="tile"><div class="tile-emoji">🔗</div><p class="heading-font text-sky-700 text-sm">JOIN</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">кестелерді біріктіру</span><span lang="en" class="lang-content">link tables</span><span lang="ru" class="lang-content">связать таблицы</span></p></div>
+<div class="tile"><div class="tile-emoji">🛡</div><p class="heading-font text-sky-700 text-sm">ACID</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">транзакциялар</span><span lang="en" class="lang-content">transactions</span><span lang="ru" class="lang-content">транзакции</span></p></div>
+<div class="tile"><div class="tile-emoji">♻</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Нормалдау</span><span lang="en" class="lang-content">Normalization</span><span lang="ru" class="lang-content">Нормализация</span></p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">қайталауды жою</span><span lang="en" class="lang-content">no duplicates</span><span lang="ru" class="lang-content">без дублей</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📋</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Кесте</span><span lang="en" class="lang-content">Table</span><span lang="ru" class="lang-content">Таблица</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">жол (record) + баған (field)</span><span lang="en" class="lang-content">row + column</span><span lang="ru" class="lang-content">строка + столбец</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🏷</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Тип</span><span lang="en" class="lang-content">Type</span><span lang="ru" class="lang-content">Тип</span></p>
+<p class="text-slate-600 text-sm">INT, VARCHAR, DATE…</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Индекс</span><span lang="en" class="lang-content">Index</span><span lang="ru" class="lang-content">Индекс</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">сұраныстарды жылдамдатады</span><span lang="en" class="lang-content">speeds up queries</span><span lang="ru" class="lang-content">ускоряет запросы</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

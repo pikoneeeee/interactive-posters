@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вставка и удаление элементов</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 9 · Algorithms</span>
+<span lang="ru" class="lang-content">9 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Элементтерді кірістіру мен өшіру</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Inserting and deleting elements</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Вставка и удаление элементов</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Неге бөлек тақырып?</span>
+<span lang="en" class="lang-content">Why a separate topic?</span>
+<span lang="ru" class="lang-content">Почему это отдельная тема?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">Массивте <b>ортаға</b> элемент қосу немесе <b>ішінен</b> өшіру — қиын операциялар, себебі қалған элементтерді <b>жылжыту</b> керек. Python-да <code>list.insert()</code> мен <code>list.pop()</code> дайын тұр, бірақ <b>ішкі жұмысы</b> O(n). Сондықтан чат, лента, ойын объектері үшін кейде <b>deque</b>, <b>set</b> немесе <b>байланысты тізімдер</b> қолданылады. Бұл плакатта: <b>кірістіру</b>, <b>өшіру</b>, <b>«тесік-толтыру» қулығы</b> және жылдамдық.</span>
+<span lang="en" class="lang-content">Inserting in the <b>middle</b> or deleting from the <b>middle</b> of an array is costly — everything after has to <b>shift</b>. Python offers <code>list.insert()</code> / <code>list.pop()</code>, but internally they are O(n). That's why chats, feeds and game entities sometimes use <b>deque</b>, <b>set</b> or <b>linked lists</b>. This poster: <b>insert</b>, <b>delete</b>, the <b>swap-with-last</b> trick and speed.</span>
+<span lang="ru" class="lang-content">Вставка в <b>середину</b> и удаление из <b>середины</b> массива — «дорогие» операции: всё, что справа, нужно <b>сдвигать</b>. В Python есть <code>list.insert()</code> и <code>list.pop()</code>, но внутри — O(n). Поэтому для чатов, лент и игровых объектов часто берут <b>deque</b>, <b>set</b> или <b>связный список</b>. В этом плакате: <b>вставка</b>, <b>удаление</b>, трюк «swap-last» и скорость.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📥 Кірістіру</span>
+<span lang="en" class="lang-content">📥 Insertion</span>
+<span lang="ru" class="lang-content">📥 Вставка</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap">
+<svg viewBox="0 0 720 200" style="width:100%;max-width:720px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="16">
+<text x="10" y="30" fill="#0369a1" font-weight="bold"><span lang="kk" class="lang-content">Бастапқы</span><tspan>Before</tspan></text>
+<rect x="10" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="40" y="72" text-anchor="middle" font-weight="bold">1</text>
+<rect x="70" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="100" y="72" text-anchor="middle" font-weight="bold">3</text>
+<rect x="130" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="160" y="72" text-anchor="middle" font-weight="bold">5</text>
+<rect x="190" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="220" y="72" text-anchor="middle" font-weight="bold">7</text>
+<rect x="250" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="280" y="72" text-anchor="middle" font-weight="bold">9</text>
+
+<text x="400" y="30" fill="#16a34a" font-weight="bold">a.insert(2, 4)</text>
+<rect x="400" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="430" y="72" text-anchor="middle" font-weight="bold">1</text>
+<rect x="460" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="490" y="72" text-anchor="middle" font-weight="bold">3</text>
+<rect x="520" y="40" width="60" height="50" fill="#fde68a" stroke="#b45309"/><text x="550" y="72" text-anchor="middle" font-weight="bold">4</text>
+<rect x="580" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="610" y="72" text-anchor="middle" font-weight="bold">5</text>
+<rect x="640" y="40" width="60" height="50" fill="#bae6fd" stroke="#0369a1"/><text x="670" y="72" text-anchor="middle" font-weight="bold">7</text>
+
+<path d="M 190 130 L 220 160 L 210 155 M 220 160 L 215 150" stroke="#b45309" stroke-width="2" fill="none"/>
+<text x="10" y="140" fill="#b45309">5 → 7 → 9 <span lang="kk" class="lang-content">оңға жылжиды</span><tspan>shift right</tspan></text>
+<text x="10" y="165" fill="#64748b" font-size="13">O(n)</text>
+</g></svg></div>
+
+<div class="code-block mt-4">
+a = [<span class="num">1</span>, <span class="num">3</span>, <span class="num">5</span>, <span class="num">7</span>, <span class="num">9</span>]
+a.<span class="fn">insert</span>(<span class="num">2</span>, <span class="num">4</span>)        <span class="com"># [1, 3, 4, 5, 7, 9]</span>
+a.<span class="fn">append</span>(<span class="num">11</span>)          <span class="com"># O(1) — <span lang="kk" class="lang-content">соңына</span>end<span lang="ru" class="lang-content">в конец</span></span>
+a = [<span class="num">0</span>] + a           <span class="com"># O(n) — <span lang="kk" class="lang-content">басына</span>to front<span lang="ru" class="lang-content">в начало</span></span>
+
+<span class="com"># <span lang="kk" class="lang-content">Қолмен — ұғымды түсіну үшін</span>Manual — for understanding<span lang="ru" class="lang-content">Вручную — для понимания</span></span>
+<span class="kw">def</span> <span class="fn">insert_at</span>(a, pos, x):
+    a.<span class="fn">append</span>(<span class="num">0</span>)             <span class="com"># <span lang="kk" class="lang-content">орын кеңейту</span>reserve slot<span lang="ru" class="lang-content">резерв</span></span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(a) - <span class="num">1</span>, pos, -<span class="num">1</span>):
+        a[i] = a[i - <span class="num">1</span>]       <span class="com"># <span lang="kk" class="lang-content">оңға жылжу</span>shift right<span lang="ru" class="lang-content">сдвиг вправо</span></span>
+    a[pos] = x
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🗑 Өшіру</span>
+<span lang="en" class="lang-content">🗑 Deletion</span>
+<span lang="ru" class="lang-content">🗑 Удаление</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+a = [<span class="num">1</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">7</span>, <span class="num">9</span>]
+
+a.<span class="fn">pop</span>()                 <span class="com"># <span lang="kk" class="lang-content">соңын — 9</span>last — 9<span lang="ru" class="lang-content">последний — 9</span> · O(1)</span>
+a.<span class="fn">pop</span>(<span class="num">0</span>)                <span class="com"># <span lang="kk" class="lang-content">алғашқыны — 1</span>first — 1<span lang="ru" class="lang-content">первый — 1</span> · O(n)</span>
+<span class="kw">del</span> a[<span class="num">2</span>]                <span class="com"># <span lang="kk" class="lang-content">индекспен</span>by index<span lang="ru" class="lang-content">по индексу</span></span>
+a.<span class="fn">remove</span>(<span class="num">5</span>)              <span class="com"># <span lang="kk" class="lang-content">мәнмен, алғашқысын</span>first match<span lang="ru" class="lang-content">первое вхождение</span></span>
+
+<span class="com"># <span lang="kk" class="lang-content">Қолмен</span>Manual<span lang="ru" class="lang-content">Вручную</span></span>
+<span class="kw">def</span> <span class="fn">delete_at</span>(a, pos):
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(pos, <span class="fn">len</span>(a) - <span class="num">1</span>):
+        a[i] = a[i + <span class="num">1</span>]       <span class="com"># <span lang="kk" class="lang-content">солға жылжу</span>shift left<span lang="ru" class="lang-content">сдвиг влево</span></span>
+    a.<span class="fn">pop</span>()                 <span class="com"># <span lang="kk" class="lang-content">соңғы көшірмесін жой</span>drop duplicate<span lang="ru" class="lang-content">удали хвост</span></span>
+
+<span class="com"># ⚡ «Swap-last» <span lang="kk" class="lang-content">қулығы — O(1), бірақ ретті бұзады</span>trick — O(1) but unordered<span lang="ru" class="lang-content">трюк — O(1), но ломает порядок</span></span>
+<span class="kw">def</span> <span class="fn">fast_delete</span>(a, pos):
+    a[pos] = a[-<span class="num">1</span>]
+    a.<span class="fn">pop</span>()
+</div>
+
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 «Swap-last» — ойындарда <b>шармен/снарядпен</b> жұмыс істегенде тамаша: реті маңызды емес.</span>
+<span lang="en" class="lang-content">💡 «Swap-last» is perfect in games for bullets/particles — order doesn't matter.</span>
+<span lang="ru" class="lang-content">💡 «Swap-last» идеален для пуль/частиц в играх — порядок не важен.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Күрделілік кестесі</span>
+<span lang="en" class="lang-content">📊 Complexity table</span>
+<span lang="ru" class="lang-content">📊 Таблица сложности</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Операция</span><span lang="en" class="lang-content">Operation</span><span lang="ru" class="lang-content">Операция</span></th>
+<th><span lang="kk" class="lang-content">Соңы</span><span lang="en" class="lang-content">End</span><span lang="ru" class="lang-content">Конец</span></th>
+<th><span lang="kk" class="lang-content">Орта</span><span lang="en" class="lang-content">Middle</span><span lang="ru" class="lang-content">Середина</span></th>
+<th><span lang="kk" class="lang-content">Басы</span><span lang="en" class="lang-content">Start</span><span lang="ru" class="lang-content">Начало</span></th>
+</tr></thead><tbody>
+<tr><td>➕ Insert</td><td>O(1) · <code>append</code></td><td>O(n) · <code>insert</code></td><td>O(n)</td></tr>
+<tr><td>🗑 Delete</td><td>O(1) · <code>pop()</code></td><td>O(n) · <code>pop(i)</code></td><td>O(n) · <code>pop(0)</code></td></tr>
+<tr><td>🔎 Access</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>🔎 Search</td><td colspan="3">O(n) · <code>in</code>, <code>index</code></td></tr>
+</tbody></table>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 Екі жақтан тез керек болса → <code>collections.deque</code> (appendleft/popleft <b>O(1)</b>).</span>
+<span lang="en" class="lang-content">💡 Need fast both ends? → <code>collections.deque</code> (appendleft/popleft <b>O(1)</b>).</span>
+<span lang="ru" class="lang-content">💡 Нужны оба конца? → <code>collections.deque</code> (appendleft/popleft <b>O(1)</b>).</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Цикл ішінде өшіру — тұзақ!</span>
+<span lang="en" class="lang-content">⚠️ Deleting in a loop — trap!</span>
+<span lang="ru" class="lang-content">⚠️ Удаление в цикле — ловушка!</span></h2>
+<div class="card rounded-custom p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-xl p-4"><p class="heading-font text-red-700 mb-2">❌ <span lang="kk" class="lang-content">Қате</span><span lang="en" class="lang-content">Wrong</span><span lang="ru" class="lang-content">Неправильно</span></p>
+<div class="code-block text-sm">
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(a)):
+    <span class="kw">if</span> a[i] % <span class="num">2</span> == <span class="num">0</span>:
+        <span class="kw">del</span> a[i]   <span class="com"># IndexError!</span>
+</div></div>
+
+<div class="card-accent rounded-xl p-4"><p class="heading-font text-green-700 mb-2">✅ <span lang="kk" class="lang-content">Дұрыс</span><span lang="en" class="lang-content">Right</span><span lang="ru" class="lang-content">Правильно</span></p>
+<div class="code-block text-sm">
+a = [x <span class="kw">for</span> x <span class="kw">in</span> a <span class="kw">if</span> x % <span class="num">2</span>]
+<span class="com"># <span lang="kk" class="lang-content">немесе</span>or<span lang="ru" class="lang-content">или</span></span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(a)-<span class="num">1</span>,-<span class="num">1</span>,-<span class="num">1</span>):
+    <span class="kw">if</span> a[i] % <span class="num">2</span> == <span class="num">0</span>:
+        <span class="kw">del</span> a[i]
+</div></div>
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 Тізімді өшіру кезінде <b>артқа</b> (end→start) жүру қауіпсіз немесе <b>жаңа тізім</b> құру.</span>
+<span lang="en" class="lang-content">💡 Safe rules: iterate <b>backwards</b> when deleting, or build a <b>new list</b>.</span>
+<span lang="ru" class="lang-content">💡 Безопасно: идти <b>с конца</b>, либо строить <b>новый список</b>.</span></p>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📥</div>
+<p class="heading-font text-xl text-sky-700 mb-2">append = O(1)<br>insert = O(n)</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🗑</div>
+<p class="heading-font text-xl text-sky-700 mb-2">pop() = O(1)<br>pop(i) = O(n)</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">deque / set — <span lang="kk" class="lang-content">жылдам</span><span lang="en" class="lang-content">faster</span><span lang="ru" class="lang-content">быстрее</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

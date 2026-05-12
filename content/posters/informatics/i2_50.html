@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Архивация данных (zip, rar, 7z)</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Файлдар</span>
+<span lang="en" class="lang-content">Grade 7 · Files</span>
+<span lang="ru" class="lang-content">7 класс · Файлы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Деректерді архивтеу: zip, rar, 7z</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Data archiving: zip, rar, 7z</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Архивация данных: zip, rar, 7z</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Архив дегеніміз не?</span>
+<span lang="en" class="lang-content">What is an archive?</span>
+<span lang="ru" class="lang-content">Что такое архив?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Архив</b> — бір немесе бірнеше файлды <b>бір «қапқа» жинап</b>, оны <b>қысу алгоритмімен</b> сығымдау. Кітап шкафын тыққыштап қораптағандай: кітаптар саны өзгермейді, бірақ орны үнемделеді. Қысу 2 идеяға сүйенеді: (1) <b>қайталанатын</b> деректерді қысқа кодпен алмастыру (<i>«ааа-ааа-ааа»</i> → <i>«3×ааа»</i>), (2) <b>жиі кездесетіндерге</b> қысқа код беру (Huffman). Осы қатал математика соңғы 40 жылда файлдардың 50–80%-ын азайтуға мүмкіндік берді.</span>
+<span lang="en" class="lang-content">An <b class="text-sky-700">archive</b> is one or more files packed into a single «container» and <b>compressed</b>. Like stuffing a wardrobe into a vacuum bag: the number of books doesn't change, but space shrinks. Compression uses 2 ideas: (1) replace <b>repeated</b> data with a short code (<i>«aaa-aaa-aaa»</i> → <i>«3×aaa»</i>), (2) give <b>frequent</b> patterns shorter codes (Huffman). This math has shrunk files by 50–80% for 40+ years.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Архив</b> — это один или несколько файлов, упакованных в <b>«контейнер»</b> и <b>сжатых</b> алгоритмом. Как вакуумный пакет для одежды: вещей столько же, но места меньше. Сжатие — это 2 идеи: (1) заменить <b>повторы</b> короткими кодами (<i>«ааа-ааа-ааа»</i> → <i>«3×ааа»</i>), (2) дать <b>частым</b> образцам коротке коды (Хаффман). Эта математика 40+ лет сжимает файлы на 50–80%.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-accent rounded-xl p-5 text-center"><div class="text-4xl mb-2">📦</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Біріктіру</span><span lang="en" class="lang-content">Bundle</span><span lang="ru" class="lang-content">Объединение</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Көп файл → 1 файл</span><span lang="en" class="lang-content">Many → 1 file</span><span lang="ru" class="lang-content">Много файлов → 1</span></p></div>
+
+<div class="card-accent rounded-xl p-5 text-center"><div class="text-4xl mb-2">🗜</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Қысу</span><span lang="en" class="lang-content">Compression</span><span lang="ru" class="lang-content">Сжатие</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">30–80% азаяды</span><span lang="en" class="lang-content">30–80% smaller</span><span lang="ru" class="lang-content">Уменьшение на 30–80%</span></p></div>
+
+<div class="card-accent rounded-xl p-5 text-center"><div class="text-4xl mb-2">🔐</div>
+<p class="heading-font text-sky-700"><span lang="kk" class="lang-content">Қорғау</span><span lang="en" class="lang-content">Protect</span><span lang="ru" class="lang-content">Защита</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Пароль, шифрлеу</span><span lang="en" class="lang-content">Password, encryption</span><span lang="ru" class="lang-content">Пароль, шифрование</span></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🗂 3 танымал формат</span>
+<span lang="en" class="lang-content">🗂 3 popular formats</span>
+<span lang="ru" class="lang-content">🗂 3 популярных формата</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-custom p-6">
+<div class="flex items-center gap-3 mb-3"><div class="text-5xl">📦</div>
+<div><p class="heading-font text-2xl text-sky-700">.zip</p>
+<p class="text-slate-500 text-sm">PKWARE, 1989</p></div></div>
+<ul class="text-slate-700 space-y-1 text-sm">
+<li>✅ <span lang="kk" class="lang-content">Әлемдік стандарт</span><span lang="en" class="lang-content">World standard</span><span lang="ru" class="lang-content">Мировой стандарт</span></li>
+<li>✅ Windows/Mac/Linux <span lang="kk" class="lang-content">бәрінде кіріктірілген</span><span lang="en" class="lang-content">built-in everywhere</span><span lang="ru" class="lang-content">встроен везде</span></li>
+<li>✅ <span lang="kk" class="lang-content">Жылдам қысу/ашу</span><span lang="en" class="lang-content">Fast</span><span lang="ru" class="lang-content">Быстро</span></li>
+<li>⚠️ <span lang="kk" class="lang-content">Орташа қысымдылық</span><span lang="en" class="lang-content">Average ratio</span><span lang="ru" class="lang-content">Средняя степень</span></li>
+<li>🔐 AES-256 <span lang="kk" class="lang-content">пароль</span><span lang="en" class="lang-content">password</span><span lang="ru" class="lang-content">пароль</span></li>
+</ul>
+<p class="text-slate-500 text-xs mt-3"><b><span lang="kk" class="lang-content">Қысу:</span><span lang="en" class="lang-content">Ratio:</span><span lang="ru" class="lang-content">Степень:</span></b> ~ 40–60%</p></div>
+
+<div class="card rounded-custom p-6">
+<div class="flex items-center gap-3 mb-3"><div class="text-5xl">📚</div>
+<div><p class="heading-font text-2xl text-sky-700">.rar</p>
+<p class="text-slate-500 text-sm">Roshal, 1993</p></div></div>
+<ul class="text-slate-700 space-y-1 text-sm">
+<li>✅ <span lang="kk" class="lang-content">Жақсырақ қысу</span><span lang="en" class="lang-content">Better ratio</span><span lang="ru" class="lang-content">Лучшее сжатие</span></li>
+<li>✅ <span lang="kk" class="lang-content">Көп томдық (.part01.rar…)</span><span lang="en" class="lang-content">Multi-volume split</span><span lang="ru" class="lang-content">Многотомный</span></li>
+<li>✅ <span lang="kk" class="lang-content">Қате қалпына келтіру</span><span lang="en" class="lang-content">Recovery record</span><span lang="ru" class="lang-content">Восстановление при ошибке</span></li>
+<li>⚠️ <span lang="kk" class="lang-content">Жасау — тек WinRAR-да (ақылы)</span><span lang="en" class="lang-content">Create — WinRAR (paid)</span><span lang="ru" class="lang-content">Создать — только WinRAR (платно)</span></li>
+<li>🔐 AES-128 / 256</li>
+</ul>
+<p class="text-slate-500 text-xs mt-3"><b><span lang="kk" class="lang-content">Қысу:</span><span lang="en" class="lang-content">Ratio:</span><span lang="ru" class="lang-content">Степень:</span></b> ~ 45–70%</p></div>
+
+<div class="card rounded-custom p-6">
+<div class="flex items-center gap-3 mb-3"><div class="text-5xl">🗜</div>
+<div><p class="heading-font text-2xl text-sky-700">.7z</p>
+<p class="text-slate-500 text-sm">Pavlov, 1999</p></div></div>
+<ul class="text-slate-700 space-y-1 text-sm">
+<li>✅ <span lang="kk" class="lang-content">Ең жоғары қысу (LZMA)</span><span lang="en" class="lang-content">Best compression (LZMA)</span><span lang="ru" class="lang-content">Лучшее сжатие (LZMA)</span></li>
+<li>✅ <span lang="kk" class="lang-content">Ашық код, тегін</span><span lang="en" class="lang-content">Open source, free</span><span lang="ru" class="lang-content">Open-source, бесплатно</span></li>
+<li>✅ 7-Zip <span lang="kk" class="lang-content">бағдарламасы</span><span lang="en" class="lang-content">program</span><span lang="ru" class="lang-content">программа</span></li>
+<li>⚠️ <span lang="kk" class="lang-content">Қысу баяу</span><span lang="en" class="lang-content">Slower</span><span lang="ru" class="lang-content">Медленнее</span></li>
+<li>🔐 AES-256</li>
+</ul>
+<p class="text-slate-500 text-xs mt-3"><b><span lang="kk" class="lang-content">Қысу:</span><span lang="en" class="lang-content">Ratio:</span><span lang="ru" class="lang-content">Степень:</span></b> ~ 50–80%</p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Нақты тексеру: қайсысы жақсы қысады?</span>
+<span lang="en" class="lang-content">📊 Benchmark: who compresses best?</span>
+<span lang="ru" class="lang-content">📊 Тест: кто сжимает лучше?</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Файл</span><span lang="en" class="lang-content">File</span><span lang="ru" class="lang-content">Файл</span></th>
+<th><span lang="kk" class="lang-content">Бастапқы</span><span lang="en" class="lang-content">Original</span><span lang="ru" class="lang-content">Исходный</span></th>
+<th>ZIP</th><th>RAR</th><th>7Z</th>
+<th><span lang="kk" class="lang-content">Ең жақсы</span><span lang="en" class="lang-content">Winner</span><span lang="ru" class="lang-content">Победитель</span></th>
+</tr></thead><tbody>
+<tr><td><span lang="kk" class="lang-content">100 бет мәтін .txt</span><span lang="en" class="lang-content">100-page .txt</span><span lang="ru" class="lang-content">100 стр .txt</span></td><td>300 KB</td><td>90 KB</td><td>75 KB</td><td><b>55 KB</b></td><td>🥇 7z</td></tr>
+<tr><td>Word .docx</td><td>2 MB</td><td>1,8 MB</td><td>1,7 MB</td><td><b>1,6 MB</b></td><td>🥇 7z</td></tr>
+<tr><td>BMP <span lang="kk" class="lang-content">сурет</span><span lang="en" class="lang-content">image</span><span lang="ru" class="lang-content">картинка</span></td><td>10 MB</td><td>6 MB</td><td>4,5 MB</td><td><b>4 MB</b></td><td>🥇 7z</td></tr>
+<tr><td>JPG <span lang="kk" class="lang-content">фото</span><span lang="en" class="lang-content">photo</span><span lang="ru" class="lang-content">фото</span></td><td>3 MB</td><td>3 MB</td><td>2,95 MB</td><td>2,95 MB</td><td>😐 ≈</td></tr>
+<tr><td>MP3 / MP4 / ZIP</td><td>—</td><td>≈ <span lang="kk" class="lang-content">сондай</span><span lang="en" class="lang-content">same</span><span lang="ru" class="lang-content">так же</span></td><td>≈</td><td>≈</td><td>😐 <span lang="kk" class="lang-content">қысылмайды</span><span lang="en" class="lang-content">no effect</span><span lang="ru" class="lang-content">не сжимается</span></td></tr>
+<tr><td>Python <span lang="kk" class="lang-content">код жобасы</span><span lang="en" class="lang-content">code project</span><span lang="ru" class="lang-content">проект кода</span></td><td>50 MB</td><td>15 MB</td><td>12 MB</td><td><b>9 MB</b></td><td>🥇 7z</td></tr>
+</tbody></table></div>
+
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="heading-font text-sky-700 mb-1">💡 <span lang="kk" class="lang-content">Маңызды факт</span><span lang="en" class="lang-content">Key fact</span><span lang="ru" class="lang-content">Важный факт</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content"><b>JPG, MP3, MP4, PDF</b> — <b>ішкі қысуы бар</b>. Оларды ZIP/RAR-ға салса — өлшемі өзгермейді! Архив қою — тек біріктіру үшін.</span>
+<span lang="en" class="lang-content"><b>JPG, MP3, MP4, PDF</b> are <b>already compressed</b>. Putting them in ZIP/RAR won't shrink them — archiving is only for bundling.</span>
+<span lang="ru" class="lang-content"><b>JPG, MP3, MP4, PDF</b> уже <b>сжаты внутри</b>. ZIP/RAR не уменьшат их — архив нужен только для объединения.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Қалай жасау керек?</span>
+<span lang="en" class="lang-content">🛠 How to create one?</span>
+<span lang="ru" class="lang-content">🛠 Как создать архив?</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-xl text-sky-700 mb-2">🪟 Windows (<span lang="kk" class="lang-content">кіріктірілген</span><span lang="en" class="lang-content">built-in</span><span lang="ru" class="lang-content">встроенный</span>)</p>
+<ol class="space-y-1 text-slate-700 text-sm pl-1">
+<li>1. <span lang="kk" class="lang-content">Файлдарды таңда</span><span lang="en" class="lang-content">Select files</span><span lang="ru" class="lang-content">Выдели файлы</span></li>
+<li>2. <span lang="kk" class="lang-content">Оң басу → «Send to» → «Compressed (zipped) folder»</span><span lang="en" class="lang-content">Right-click → «Send to» → «Compressed (zipped) folder»</span><span lang="ru" class="lang-content">ПКМ → «Отправить» → «Сжатая ZIP-папка»</span></li>
+<li>3. <span lang="kk" class="lang-content">.zip файлы пайда болады</span><span lang="en" class="lang-content">.zip file appears</span><span lang="ru" class="lang-content">Появляется .zip</span></li>
+</ol></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-xl text-sky-700 mb-2">🗜 7-Zip (<span lang="kk" class="lang-content">ұсынамыз</span><span lang="en" class="lang-content">recommended</span><span lang="ru" class="lang-content">рекомендуем</span>)</p>
+<ol class="space-y-1 text-slate-700 text-sm pl-1">
+<li>1. <span lang="kk" class="lang-content">7-zip.org сайтынан алу (тегін)</span><span lang="en" class="lang-content">Download from 7-zip.org (free)</span><span lang="ru" class="lang-content">Скачай с 7-zip.org (бесплатно)</span></li>
+<li>2. <span lang="kk" class="lang-content">Файлдарды таңда → оң басу</span><span lang="en" class="lang-content">Select files → right-click</span><span lang="ru" class="lang-content">Выдели → ПКМ</span></li>
+<li>3. «7-Zip → Add to archive»</li>
+<li>4. <span lang="kk" class="lang-content">Түрін таңда: zip / 7z; қысу деңгейі; пароль</span><span lang="en" class="lang-content">Choose format, level, password</span><span lang="ru" class="lang-content">Выбери формат, уровень, пароль</span></li>
+</ol></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-xl text-sky-700 mb-2">🍏 macOS</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Finder → оң басу → «Compress» → .zip дайын.</span><span lang="en" class="lang-content">Finder → right-click → «Compress» → .zip ready.</span><span lang="ru" class="lang-content">Finder → ПКМ → «Сжать» → готов .zip.</span></p></div>
+
+<div class="card rounded-2xl p-6">
+<p class="heading-font text-xl text-sky-700 mb-2">🐧 Linux / Terminal</p>
+<div class="code-block">
+zip project.zip file1 file2
+tar -czf project.tar.gz <span lang="kk" class="lang-content">қалта/</span>folder/<span lang="ru" class="lang-content">папка/</span>
+7z a project.7z file1 file2
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔓 Архивті ашу (extract)</span>
+<span lang="en" class="lang-content">🔓 Extracting an archive</span>
+<span lang="ru" class="lang-content">🔓 Распаковка архива</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-2 text-slate-700 text-lg">
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">1</span> <span lang="kk" class="lang-content">Архивке 2 рет басу — ішіндегісін көру</span><span lang="en" class="lang-content">Double-click the archive — view contents</span><span lang="ru" class="lang-content">Двойной клик на архив — смотришь содержимое</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">2</span> <span lang="kk" class="lang-content">Extract All / Unzip</span><span lang="en" class="lang-content">Extract All / Unzip</span><span lang="ru" class="lang-content">Extract All / Распаковать</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">3</span> <span lang="kk" class="lang-content">Орнын таңда → OK</span><span lang="en" class="lang-content">Choose location → OK</span><span lang="ru" class="lang-content">Выбери папку → OK</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">4</span> <span lang="kk" class="lang-content">Пароль болса — енгіз</span><span lang="en" class="lang-content">If password — enter it</span><span lang="ru" class="lang-content">Если есть пароль — введи</span></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔐 Парольді архив — қорғаныс</span>
+<span lang="en" class="lang-content">🔐 Password-protected archives</span>
+<span lang="ru" class="lang-content">🔐 Архив с паролем — защита</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4"><span lang="kk" class="lang-content">Архивке <b>AES-256</b> шифрлеуімен <b>пароль</b> қоюға болады. Паролді білмеу → файлдарды ашу <b>мүмкін емес</b> (заманауи суперкомпьютерге де миллиардтаған жыл керек).</span>
+<span lang="en" class="lang-content">You can lock an archive with a password using <b>AES-256</b>. Without the password the files are <b>unbreakable</b> (even a supercomputer needs billions of years).</span>
+<span lang="ru" class="lang-content">Архив можно закрыть <b>паролем</b> с шифрованием <b>AES-256</b>. Без пароля файлы <b>не открыть</b> — суперкомпьютеру потребуются миллиарды лет.</span></p>
+
+<div class="card-rose rounded-xl p-5">
+<p class="heading-font text-rose-700 mb-2">⚠️ <span lang="kk" class="lang-content">Маңызды ережелер</span><span lang="en" class="lang-content">Important rules</span><span lang="ru" class="lang-content">Важные правила</span></p>
+<ul class="text-slate-700 text-sm space-y-1">
+<li>🚫 <span lang="kk" class="lang-content">Парольді қалпына келтіру <b>мүмкін емес</b> — жоғалтсаң, файлдар да жоғалды</span><span lang="en" class="lang-content">No password recovery — lose it, lose your files</span><span lang="ru" class="lang-content">Пароль восстановить <b>нельзя</b> — потерял его, потерял файлы</span></li>
+<li>✅ <span lang="kk" class="lang-content">Күшті пароль: 12+ таңба, әріп+сан+белгі</span><span lang="en" class="lang-content">Strong pwd: 12+ chars, letter+digit+symbol</span><span lang="ru" class="lang-content">Сильный пароль: 12+ знаков, буквы+цифры+символы</span></li>
+<li>✅ <span lang="kk" class="lang-content">«Encrypt filenames» — файл атауларын да жасыру</span><span lang="en" class="lang-content">«Encrypt filenames» — hide names too</span><span lang="ru" class="lang-content">«Encrypt filenames» — скрой даже имена</span></li>
+<li>🚫 <span lang="kk" class="lang-content">Парольді сол архив поштасымен жіберме!</span><span lang="en" class="lang-content">Never send password in the same email</span><span lang="ru" class="lang-content">Не шли пароль в том же письме с архивом!</span></li>
+</ul></div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📦</div>
+<p class="heading-font text-xl text-sky-700 mb-2">ZIP = <span lang="kk" class="lang-content">стандарт</span><span lang="en" class="lang-content">standard</span><span lang="ru" class="lang-content">стандарт</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🗜</div>
+<p class="heading-font text-xl text-sky-700 mb-2">7Z = <span lang="kk" class="lang-content">ең үнемді</span><span lang="en" class="lang-content">most efficient</span><span lang="ru" class="lang-content">самое экономное</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚫</div>
+<p class="heading-font text-xl text-sky-700 mb-2">JPG/MP3/MP4 — <span lang="kk" class="lang-content">қысылмайды</span><span lang="en" class="lang-content">won't shrink</span><span lang="ru" class="lang-content">не сожмутся</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL: CREATE, INSERT</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · SQL</span>
+<span lang="en" class="lang-content">Grade 10 · SQL</span>
+<span lang="ru" class="lang-content">10 класс · SQL</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">SQL: CREATE, INSERT</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">SQL: CREATE, INSERT</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">SQL: CREATE, INSERT</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📜 SQL — не?</span>
+<span lang="en" class="lang-content">📜 What is SQL?</span>
+<span lang="ru" class="lang-content">📜 Что такое SQL?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">SQL</b> (Structured Query Language) — <b>декларативті</b> дерекқор тілі. <b>1974 ж. IBM</b> (Donald Chamberlin, Raymond Boyce) ойлап тапты. Сен айтасың <b>«не керек»</b>, ал <b>қалай табу</b> — дерекқордың өз жұмысы! SQL 4 үлкен бөлімнен тұрады: <b>DDL</b> (CREATE, DROP), <b>DML</b> (INSERT, UPDATE, DELETE), <b>DQL</b> (SELECT), <b>DCL</b> (GRANT). Барлық қатынас жасау тілдеріндегі (Python, Java, PHP) БД-мен сөйлесу — SQL арқылы.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">SQL</b> (Structured Query Language) is a <b>declarative</b> database language, invented at <b>IBM in 1974</b> by Donald Chamberlin &amp; Raymond Boyce. You say <b>WHAT you want</b>, the DB figures out <b>HOW</b>. SQL has 4 main parts: <b>DDL</b> (CREATE, DROP), <b>DML</b> (INSERT, UPDATE, DELETE), <b>DQL</b> (SELECT), <b>DCL</b> (GRANT). Every app language (Python, Java, PHP) talks to DBs via SQL.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">SQL</b> (Structured Query Language) — <b>декларативный</b> язык для работы с БД. Придуман в <b>IBM в 1974 г.</b> Дональдом Чемберлином и Рэймондом Бойсом. Ты пишешь <b>«что нужно»</b>, а БД сама решает <b>«как найти»</b>! SQL делится на 4 группы: <b>DDL</b> (CREATE, DROP), <b>DML</b> (INSERT, UPDATE, DELETE), <b>DQL</b> (SELECT), <b>DCL</b> (GRANT). Любой язык (Python, Java, PHP) общается с БД через SQL.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏗 CREATE TABLE — кесте құру</span>
+<span lang="en" class="lang-content">🏗 CREATE TABLE — building a table</span>
+<span lang="ru" class="lang-content">🏗 CREATE TABLE — создание таблицы</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="kw">CREATE TABLE</span> students (
+    id        <span class="kw">INTEGER</span>      <span class="kw">PRIMARY KEY</span> AUTOINCREMENT,
+    name      <span class="kw">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,
+    grade     <span class="kw">INTEGER</span>      <span class="kw">CHECK</span> (grade <span class="kw">BETWEEN</span> <span class="num">1</span> <span class="kw">AND</span> <span class="num">11</span>),
+    email     <span class="kw">VARCHAR</span>(<span class="num">80</span>)  <span class="kw">UNIQUE</span>,
+    birthdate <span class="kw">DATE</span>,
+    active    <span class="kw">BOOLEAN</span>      <span class="kw">DEFAULT</span> <span class="num">1</span>,
+    class_id  <span class="kw">INTEGER</span>,
+    <span class="kw">FOREIGN KEY</span> (class_id) <span class="kw">REFERENCES</span> classes(id)
+);
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1 text-sm">PRIMARY KEY</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">жолдың бірегей идентификаторы</span><span lang="en" class="lang-content">unique row ID</span><span lang="ru" class="lang-content">уникальный ID строки</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1 text-sm">NOT NULL</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">міндетті өріс</span><span lang="en" class="lang-content">required field</span><span lang="ru" class="lang-content">обязательное поле</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1 text-sm">UNIQUE</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">қайталанбайтын мән</span><span lang="en" class="lang-content">no duplicates</span><span lang="ru" class="lang-content">без повторений</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1 text-sm">CHECK(expr)</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">мән шарттары</span><span lang="en" class="lang-content">value constraint</span><span lang="ru" class="lang-content">проверка условия</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1 text-sm">DEFAULT val</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">үнсіз мән</span><span lang="en" class="lang-content">default value</span><span lang="ru" class="lang-content">значение по умолчанию</span></p></div>
+<div class="card card-accent rounded-2xl p-4"><p class="heading-font text-sky-700 mb-1 text-sm">FOREIGN KEY</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">басқа кестеге сілтеме</span><span lang="en" class="lang-content">link to another table</span><span lang="ru" class="lang-content">ссылка на другую таблицу</span></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📥 INSERT — деректерді қосу</span>
+<span lang="en" class="lang-content">📥 INSERT — adding rows</span>
+<span lang="ru" class="lang-content">📥 INSERT — добавление данных</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com">-- 1. Явно указать столбцы (рекомендуется!)</span>
+<span class="kw">INSERT INTO</span> students (name, grade, email)
+<span class="kw">VALUES</span> (<span class="str">'Aida'</span>, <span class="num">10</span>, <span class="str">'aida@school.kz'</span>);
+
+<span class="com">-- 2. Все столбцы по порядку</span>
+<span class="kw">INSERT INTO</span> students
+<span class="kw">VALUES</span> (<span class="num">2</span>, <span class="str">'Nurlan'</span>, <span class="num">10</span>, <span class="str">'nur@school.kz'</span>,
+        <span class="str">'2009-07-22'</span>, <span class="num">1</span>, <span class="num">25</span>);
+
+<span class="com">-- 3. Несколько строк разом (batch)</span>
+<span class="kw">INSERT INTO</span> students (name, grade) <span class="kw">VALUES</span>
+    (<span class="str">'Dilnaz'</span>,  <span class="num">9</span>),
+    (<span class="str">'Arman'</span>,   <span class="num">10</span>),
+    (<span class="str">'Bota'</span>,    <span class="num">11</span>);
+
+<span class="com">-- 4. Вставить из другой таблицы</span>
+<span class="kw">INSERT INTO</span> archive (name, grade)
+<span class="kw">SELECT</span> name, grade <span class="kw">FROM</span> students <span class="kw">WHERE</span> grade = <span class="num">11</span>;
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✏ UPDATE &amp; DELETE</span>
+<span lang="en" class="lang-content">✏ UPDATE &amp; DELETE</span>
+<span lang="ru" class="lang-content">✏ UPDATE и DELETE</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com">-- UPDATE — изменить значения</span>
+<span class="kw">UPDATE</span> students
+<span class="kw">SET</span>    grade = <span class="num">11</span>,
+       email = <span class="str">'aida11@school.kz'</span>
+<span class="kw">WHERE</span>  id = <span class="num">1</span>;    <span class="com">-- ОБЯЗАТЕЛЬНО WHERE! иначе поменяется ВСЁ</span>
+
+<span class="com">-- DELETE — удалить строки</span>
+<span class="kw">DELETE FROM</span> students
+<span class="kw">WHERE</span> active = <span class="num">0</span>;
+
+<span class="com">-- очистить всю таблицу, оставив структуру</span>
+<span class="kw">TRUNCATE TABLE</span> students;
+
+<span class="com">-- удалить таблицу целиком</span>
+<span class="kw">DROP TABLE</span> students;
+</div>
+<p class="text-slate-500 text-sm mt-3">
+<span lang="kk" class="lang-content">⚠ <b>WHERE</b> ұмытсаң — бүкіл кесте өзгереді/жойылады! Әрқашан алдымен <code>SELECT</code>-пен тексер!</span>
+<span lang="en" class="lang-content">⚠ Forget <b>WHERE</b> and the whole table changes/dies! Always run <code>SELECT</code> first to verify!</span>
+<span lang="ru" class="lang-content">⚠ Забыл <b>WHERE</b> — изменится/удалится ВСЯ таблица! Всегда проверяй сначала <code>SELECT</code>-ом!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔧 ALTER TABLE</span>
+<span lang="en" class="lang-content">🔧 ALTER TABLE</span>
+<span lang="ru" class="lang-content">🔧 ALTER TABLE</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com">-- добавить столбец</span>
+<span class="kw">ALTER TABLE</span> students <span class="kw">ADD COLUMN</span> phone <span class="kw">VARCHAR</span>(<span class="num">20</span>);
+
+<span class="com">-- переименовать столбец</span>
+<span class="kw">ALTER TABLE</span> students <span class="kw">RENAME COLUMN</span> grade <span class="kw">TO</span> class_num;
+
+<span class="com">-- удалить столбец (осторожно!)</span>
+<span class="kw">ALTER TABLE</span> students <span class="kw">DROP COLUMN</span> phone;
+
+<span class="com">-- переименовать таблицу</span>
+<span class="kw">ALTER TABLE</span> students <span class="kw">RENAME TO</span> pupils;
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Толық мысал: мектеп дерекқоры</span>
+<span lang="en" class="lang-content">🎯 Full example: school DB</span>
+<span lang="ru" class="lang-content">🎯 Полный пример: школьная БД</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-xs">
+<span class="kw">CREATE TABLE</span> classes (
+    id      <span class="kw">INTEGER PRIMARY KEY</span>,
+    name    <span class="kw">VARCHAR</span>(<span class="num">10</span>) <span class="kw">UNIQUE</span> <span class="kw">NOT NULL</span>,
+    teacher <span class="kw">VARCHAR</span>(<span class="num">100</span>)
+);
+
+<span class="kw">CREATE TABLE</span> students (
+    id       <span class="kw">INTEGER PRIMARY KEY</span> AUTOINCREMENT,
+    name     <span class="kw">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,
+    class_id <span class="kw">INTEGER</span>,
+    <span class="kw">FOREIGN KEY</span> (class_id) <span class="kw">REFERENCES</span> classes(id) <span class="kw">ON DELETE</span> SET NULL
+);
+
+<span class="kw">INSERT INTO</span> classes (id, name, teacher) <span class="kw">VALUES</span>
+    (<span class="num">1</span>, <span class="str">'10А'</span>, <span class="str">'Г. Н. Иванова'</span>),
+    (<span class="num">2</span>, <span class="str">'10Б'</span>, <span class="str">'Е. С. Сагиева'</span>);
+
+<span class="kw">INSERT INTO</span> students (name, class_id) <span class="kw">VALUES</span>
+    (<span class="str">'Aida'</span>,   <span class="num">1</span>),
+    (<span class="str">'Nurlan'</span>, <span class="num">1</span>),
+    (<span class="str">'Dilnaz'</span>, <span class="num">2</span>),
+    (<span class="str">'Arman'</span>,  <span class="num">1</span>);
+
+<span class="kw">UPDATE</span> students <span class="kw">SET</span> class_id = <span class="num">2</span> <span class="kw">WHERE</span> name = <span class="str">'Arman'</span>;
+<span class="kw">DELETE FROM</span> students <span class="kw">WHERE</span> name = <span class="str">'Nurlan'</span>;
+</div></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🏗</div>
+<p class="heading-font text-xl text-sky-700 mb-2">CREATE</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">кесте құрылымын анықтау</span><span lang="en" class="lang-content">define table schema</span><span lang="ru" class="lang-content">схема таблицы</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📥</div>
+<p class="heading-font text-xl text-sky-700 mb-2">INSERT</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">жол қосу</span><span lang="en" class="lang-content">add rows</span><span lang="ru" class="lang-content">добавить строки</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚠</div>
+<p class="heading-font text-xl text-sky-700 mb-2">WHERE!</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">UPDATE/DELETE-да ұмытпа</span><span lang="en" class="lang-content">don't forget it in UPDATE/DELETE</span><span lang="ru" class="lang-content">не забудь в UPDATE/DELETE</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

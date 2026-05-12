@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Устройство компьютера: взаимодействие частей</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">6 сынып · Компьютер құрылымы</span>
+<span lang="en" class="lang-content">Grade 6 · Computer architecture</span>
+<span lang="ru" class="lang-content">6 класс · Устройство ПК</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Компьютердің құрылысы: бөліктердің өзара әрекеті</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">How a computer works: parts and interaction</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Устройство компьютера: как части работают вместе</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Фон Нейман архитектурасы</span>
+<span lang="en" class="lang-content">Von Neumann architecture</span>
+<span lang="ru" class="lang-content">Архитектура фон Неймана</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">1945 жылы американдық математик <b class="text-sky-700">Джон фон Нейман</b> кез келген компьютерде болуы керек <b>4 негізгі блокты</b> сипаттап берді. Осы схема бойынша <b>бүгінгі ноутбук, телефон, сервер</b> — барлығы жасалады. Блоктар бір-бірімен <b>шиналар</b> (ағылшынша <i>bus</i>) арқылы — деректерді тасымалдайтын «жолдармен» — байланысады.</span>
+<span lang="en" class="lang-content">In 1945 American mathematician <b class="text-sky-700">John von Neumann</b> described the <b>4 basic blocks</b> every computer needs. Today's <b>laptops, phones, servers</b> — all are built on this scheme. Blocks talk to each other through <b>buses</b> — "highways" for data.</span>
+<span lang="ru" class="lang-content">В 1945 г. американский математик <b class="text-sky-700">Джон фон Нейман</b> описал <b>4 основных блока</b>, которые должны быть в любом компьютере. По этой схеме сделаны <b>сегодняшние ноутбуки, телефоны, серверы</b>. Блоки общаются через <b>шины</b> (англ. <i>bus</i>) — «магистрали» для данных.</span></p>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 600 280" style="width:100%;height:auto" id="arch-svg">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0369a1"/></marker></defs>
+
+<rect x="20" y="40" width="130" height="60" rx="8" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+<text x="85" y="62" text-anchor="middle" font-weight="700" fill="#0369a1" class="svg-input-title"></text>
+<text x="85" y="82" text-anchor="middle" font-size="11" fill="#475569" class="svg-input-sub"></text>
+
+<rect x="240" y="20" width="130" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+<text x="305" y="42" text-anchor="middle" font-weight="700" fill="#92400e" class="svg-cpu-title"></text>
+<text x="305" y="60" text-anchor="middle" font-size="11" fill="#475569">ALU + CU</text>
+
+<rect x="240" y="90" width="130" height="50" rx="8" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+<text x="305" y="112" text-anchor="middle" font-weight="700" fill="#9d174d" class="svg-mem-title"></text>
+<text x="305" y="130" text-anchor="middle" font-size="11" fill="#475569">RAM · ROM</text>
+
+<rect x="240" y="160" width="130" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+<text x="305" y="182" text-anchor="middle" font-weight="700" fill="#166534" class="svg-stor-title"></text>
+<text x="305" y="200" text-anchor="middle" font-size="11" fill="#475569">HDD · SSD</text>
+
+<rect x="460" y="40" width="130" height="60" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<text x="525" y="62" text-anchor="middle" font-weight="700" fill="#5b21b6" class="svg-out-title"></text>
+<text x="525" y="82" text-anchor="middle" font-size="11" fill="#475569" class="svg-out-sub"></text>
+
+<line x1="150" y1="70" x2="240" y2="45" stroke="#0369a1" stroke-width="3" marker-end="url(#ar)"/>
+<line x1="370" y1="45" x2="460" y2="70" stroke="#0369a1" stroke-width="3" marker-end="url(#ar)"/>
+<line x1="305" y1="70" x2="305" y2="90" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+<line x1="305" y1="140" x2="305" y2="160" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+<line x1="305" y1="90" x2="305" y2="70" stroke="#64748b" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#ar)"/>
+<line x1="305" y1="160" x2="305" y2="140" stroke="#64748b" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#ar)"/>
+
+<text x="300" y="260" text-anchor="middle" font-size="12" fill="#475569" font-style="italic" class="svg-bus-label"></text>
+</svg>
+<script>
+(function(){
+  var t={
+    kk:{input:'⌨️ Енгізу',inputSub:'клавиатура, тінтуір',cpu:'🧠 Процессор',mem:'💾 Жад',stor:'📦 Қойма',out:'🖥️ Шығару',outSub:'монитор, принтер',bus:'→ шиналар арқылы деректер жүреді ←'},
+    en:{input:'⌨️ Input',inputSub:'keyboard, mouse',cpu:'🧠 CPU',mem:'💾 Memory',stor:'📦 Storage',out:'🖥️ Output',outSub:'monitor, printer',bus:'← data flows through buses →'},
+    ru:{input:'⌨️ Ввод',inputSub:'клавиатура, мышь',cpu:'🧠 Процессор',mem:'💾 Память',stor:'📦 Хранилище',out:'🖥️ Вывод',outSub:'монитор, принтер',bus:'← данные идут по шинам →'}
+  };
+  var orig=window.switchLang;
+  window.switchLang=function(lang){
+    if(orig)orig(lang);
+    var l=lang==='kz'?'kk':lang; var d=t[l]||t.ru;
+    var s=document.getElementById('arch-svg'); if(!s)return;
+    s.querySelector('.svg-input-title').textContent=d.input;
+    s.querySelector('.svg-input-sub').textContent=d.inputSub;
+    s.querySelector('.svg-cpu-title').textContent=d.cpu;
+    s.querySelector('.svg-mem-title').textContent=d.mem;
+    s.querySelector('.svg-stor-title').textContent=d.stor;
+    s.querySelector('.svg-out-title').textContent=d.out;
+    s.querySelector('.svg-out-sub').textContent=d.outSub;
+    s.querySelector('.svg-bus-label').textContent=d.bus;
+  };
+})();
+</script>
+</div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧩 Компьютердің 6 басты бөлігі</span>
+<span lang="en" class="lang-content">🧩 6 main parts of a PC</span>
+<span lang="ru" class="lang-content">🧩 6 главных частей ПК</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+<div class="card rounded-2xl p-6"><div class="text-5xl mb-2">🧠</div>
+<p class="heading-font text-xl text-sky-700 mb-1">CPU · <span lang="kk" class="lang-content">процессор</span><span lang="en" class="lang-content">processor</span><span lang="ru" class="lang-content">процессор</span></p>
+<p class="text-slate-700 mb-2"><span lang="kk" class="lang-content">Компьютердің «миы». <b>Барлық есептерді</b> орындайды. 2 блоктан тұрады:</span><span lang="en" class="lang-content">The computer's "brain". Does <b>all calculations</b>. Has 2 units:</span><span lang="ru" class="lang-content">«Мозг» компьютера. Выполняет <b>все вычисления</b>. Из 2 блоков:</span></p>
+<ul class="text-slate-600 text-sm list-disc pl-5">
+<li><b>ALU</b> — <span lang="kk" class="lang-content">арифметика</span><span lang="en" class="lang-content">arithmetic</span><span lang="ru" class="lang-content">арифметика</span></li>
+<li><b>CU</b> — <span lang="kk" class="lang-content">басқару</span><span lang="en" class="lang-content">control</span><span lang="ru" class="lang-content">управление</span></li>
+</ul>
+<p class="text-slate-500 text-xs mt-2"><span lang="kk" class="lang-content">Мысал: Intel Core i5, Apple M2, Snapdragon 8.</span><span lang="en" class="lang-content">E.g. Intel Core i5, Apple M2, Snapdragon 8.</span><span lang="ru" class="lang-content">Пример: Intel Core i5, Apple M2, Snapdragon 8.</span></p></div>
+
+<div class="card rounded-2xl p-6"><div class="text-5xl mb-2">🧾</div>
+<p class="heading-font text-xl text-sky-700 mb-1">RAM · <span lang="kk" class="lang-content">ЖЖҚ</span><span lang="en" class="lang-content">working memory</span><span lang="ru" class="lang-content">ОЗУ</span></p>
+<p class="text-slate-700 mb-2"><span lang="kk" class="lang-content">«Жұмыс үстелі»: процессор <b>қазір</b> ашылған бағдарламаны осыдан алады.</span><span lang="en" class="lang-content">The "desk": the CPU grabs <b>currently open</b> programs from here.</span><span lang="ru" class="lang-content">«Рабочий стол»: процессор берёт отсюда <b>открытые сейчас</b> программы.</span></p>
+<p class="text-slate-500 text-xs"><span lang="kk" class="lang-content">Жылдам, бірақ <b>өшкенде — жоғалады</b>. Көлемі: 4–32 ГБ.</span><span lang="en" class="lang-content">Fast, but <b>forgets</b> on power-off. Size: 4–32 GB.</span><span lang="ru" class="lang-content">Быстрая, но <b>теряется</b> при выключении. Объём 4–32 ГБ.</span></p></div>
+
+<div class="card rounded-2xl p-6"><div class="text-5xl mb-2">💾</div>
+<p class="heading-font text-xl text-sky-700 mb-1">SSD / HDD</p>
+<p class="text-slate-700 mb-2"><span lang="kk" class="lang-content">«Кітапхана»: файлдар мен операциялық жүйе осында <b>ұзақ мерзімге</b> сақталады.</span><span lang="en" class="lang-content">The "library": files and OS stay here <b>long-term</b>.</span><span lang="ru" class="lang-content">«Библиотека»: файлы и ОС хранятся здесь <b>надолго</b>.</span></p>
+<p class="text-slate-500 text-xs"><span lang="kk" class="lang-content">Көлемі: 256 ГБ – 4 ТБ. Өшіргенде ақпарат қалады.</span><span lang="en" class="lang-content">256 GB – 4 TB. Keeps data when powered off.</span><span lang="ru" class="lang-content">256 ГБ – 4 ТБ. Данные сохраняются.</span></p></div>
+
+<div class="card rounded-2xl p-6"><div class="text-5xl mb-2">📼</div>
+<p class="heading-font text-xl text-sky-700 mb-1">GPU · <span lang="kk" class="lang-content">видеокарта</span><span lang="en" class="lang-content">graphics card</span><span lang="ru" class="lang-content">видеокарта</span></p>
+<p class="text-slate-700 mb-2"><span lang="kk" class="lang-content"><b>Суреттерді</b> есептейді: ойын, видео, 3D, ЖИ. Мыңдаған «мини-процессоры» бар.</span><span lang="en" class="lang-content">Calculates <b>pictures</b>: games, video, 3D, AI. Has thousands of mini-cores.</span><span lang="ru" class="lang-content">Считает <b>картинки</b>: игры, видео, 3D, ИИ. Тысячи мини-ядер.</span></p>
+<p class="text-slate-500 text-xs">NVIDIA RTX, AMD Radeon, Apple GPU</p></div>
+
+<div class="card rounded-2xl p-6"><div class="text-5xl mb-2">🧱</div>
+<p class="heading-font text-xl text-sky-700 mb-1"><span lang="kk" class="lang-content">Аналық тақта</span><span lang="en" class="lang-content">Motherboard</span><span lang="ru" class="lang-content">Материнская плата</span></p>
+<p class="text-slate-700 mb-2"><span lang="kk" class="lang-content">Барлық бөлшектер орнатылатын үлкен тақта. «Қала» ретінде барлық жолдар жиналады.</span><span lang="en" class="lang-content">Big board where everything plugs in. Like a city with all roads.</span><span lang="ru" class="lang-content">Большая плата, куда всё подключается. Как «город» со всеми дорогами.</span></p>
+<p class="text-slate-500 text-xs"><span lang="kk" class="lang-content">Чипсет + слоттар + порттар.</span><span lang="en" class="lang-content">Chipset + slots + ports.</span><span lang="ru" class="lang-content">Чипсет + слоты + порты.</span></p></div>
+
+<div class="card rounded-2xl p-6"><div class="text-5xl mb-2">🔋</div>
+<p class="heading-font text-xl text-sky-700 mb-1">PSU · <span lang="kk" class="lang-content">қуат блогы</span><span lang="en" class="lang-content">power supply</span><span lang="ru" class="lang-content">блок питания</span></p>
+<p class="text-slate-700 mb-2"><span lang="kk" class="lang-content">Розеткадан 220 В алады, <b>5 / 12 В</b>-қа түрлендіреді.</span><span lang="en" class="lang-content">Takes 220 V from wall, converts to <b>5 / 12 V</b>.</span><span lang="ru" class="lang-content">Берёт 220 В из розетки, превращает в <b>5 / 12 В</b>.</span></p>
+<p class="text-slate-500 text-xs"><span lang="kk" class="lang-content">Ноутбукта — батарея.</span><span lang="en" class="lang-content">In laptops — a battery.</span><span lang="ru" class="lang-content">В ноутбуках — батарея.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔄 Процестің қадамдары (1 амал)</span>
+<span lang="en" class="lang-content">🔄 Steps of one operation</span>
+<span lang="ru" class="lang-content">🔄 Шаги одной операции</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4"><span lang="kk" class="lang-content">CPU <b>секундына миллиардтаған</b> рет осы циклді қайталайды. Оны <b>Fetch–Decode–Execute–Store</b> (FDES) циклі деп атайды.</span><span lang="en" class="lang-content">The CPU repeats this cycle <b>billions of times per second</b>. It is called the <b>Fetch–Decode–Execute–Store</b> (FDES) cycle.</span><span lang="ru" class="lang-content">Процессор повторяет этот цикл <b>миллиарды раз в секунду</b>. Он называется <b>Fetch–Decode–Execute–Store</b> (FDES).</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+<div class="card-accent rounded-xl p-5"><p class="heading-font text-lg text-sky-700">1. Fetch</p>
+<p class="font-bold text-slate-700"><span lang="kk" class="lang-content">Алу</span><span lang="en" class="lang-content">Grab</span><span lang="ru" class="lang-content">Взять</span></p>
+<p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">ОЗУ-дан келесі команданы алу</span><span lang="en" class="lang-content">Get next instruction from RAM</span><span lang="ru" class="lang-content">Взять команду из ОЗУ</span></p></div>
+
+<div class="card-accent rounded-xl p-5"><p class="heading-font text-lg text-sky-700">2. Decode</p>
+<p class="font-bold text-slate-700"><span lang="kk" class="lang-content">Түсіну</span><span lang="en" class="lang-content">Understand</span><span lang="ru" class="lang-content">Расшифровать</span></p>
+<p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Команданы CU оқиды</span><span lang="en" class="lang-content">CU reads the command</span><span lang="ru" class="lang-content">CU читает команду</span></p></div>
+
+<div class="card-accent rounded-xl p-5"><p class="heading-font text-lg text-sky-700">3. Execute</p>
+<p class="font-bold text-slate-700"><span lang="kk" class="lang-content">Орындау</span><span lang="en" class="lang-content">Do</span><span lang="ru" class="lang-content">Выполнить</span></p>
+<p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">ALU есептейді (қосу, т.б.)</span><span lang="en" class="lang-content">ALU computes (add, etc.)</span><span lang="ru" class="lang-content">ALU выполняет (сложить и т.п.)</span></p></div>
+
+<div class="card-accent rounded-xl p-5"><p class="heading-font text-lg text-sky-700">4. Store</p>
+<p class="font-bold text-slate-700"><span lang="kk" class="lang-content">Сақтау</span><span lang="en" class="lang-content">Write</span><span lang="ru" class="lang-content">Записать</span></p>
+<p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Нәтиже ЖЖҚ/регистрге</span><span lang="en" class="lang-content">Result → RAM/register</span><span lang="ru" class="lang-content">Результат → ОЗУ/регистр</span></p></div>
+</div>
+
+<div class="code-block mt-5 text-sm">
+<span class="com"># <span lang="kk" class="lang-content">Бір команданың мысалы:</span><span lang="en" class="lang-content">Example of one command:</span><span lang="ru" class="lang-content">Пример одной команды:</span></span>
+ADD R1, R2, R3     <span class="com"># R1 = R2 + R3</span>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔌 Ішкі / сыртқы құрылғылар</span>
+<span lang="en" class="lang-content">🔌 Internal vs external devices</span>
+<span lang="ru" class="lang-content">🔌 Внутренние / внешние устройства</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-xl text-sky-700 mb-3">📦 <span lang="kk" class="lang-content">Ішкі (жүйелік блокта)</span><span lang="en" class="lang-content">Internal (inside case)</span><span lang="ru" class="lang-content">Внутренние (в корпусе)</span></p>
+<ul class="space-y-2 text-slate-700">
+<li>🧠 <b>CPU</b> · <span lang="kk" class="lang-content">процессор</span><span lang="en" class="lang-content">processor</span><span lang="ru" class="lang-content">процессор</span></li>
+<li>🧱 <span lang="kk" class="lang-content">Аналық тақта</span><span lang="en" class="lang-content">Motherboard</span><span lang="ru" class="lang-content">Материнская плата</span></li>
+<li>🧾 <b>RAM</b> · <span lang="kk" class="lang-content">ОЗУ</span><span lang="en" class="lang-content">RAM</span><span lang="ru" class="lang-content">ОЗУ</span></li>
+<li>💾 <b>SSD / HDD</b> · <span lang="kk" class="lang-content">қойма</span><span lang="en" class="lang-content">storage</span><span lang="ru" class="lang-content">накопитель</span></li>
+<li>📼 <b>GPU</b> · <span lang="kk" class="lang-content">видеокарта</span><span lang="en" class="lang-content">graphics card</span><span lang="ru" class="lang-content">видеокарта</span></li>
+<li>🔋 <b>PSU</b> · <span lang="kk" class="lang-content">қуат блогы</span><span lang="en" class="lang-content">power supply</span><span lang="ru" class="lang-content">блок питания</span></li>
+<li>🌀 <span lang="kk" class="lang-content">Кулерлер</span><span lang="en" class="lang-content">Coolers/fans</span><span lang="ru" class="lang-content">Кулеры (вентиляторы)</span></li>
+</ul></div>
+
+<div class="card-warm rounded-custom p-6">
+<p class="heading-font text-xl text-orange-700 mb-3">🔌 <span lang="kk" class="lang-content">Сыртқы (перифериялық)</span><span lang="en" class="lang-content">External (peripherals)</span><span lang="ru" class="lang-content">Внешние (периферия)</span></p>
+<div class="grid grid-cols-2 gap-2">
+<ul class="space-y-2 text-slate-700">
+<li class="font-bold text-orange-700"><span lang="kk" class="lang-content">Енгізу</span><span lang="en" class="lang-content">Input</span><span lang="ru" class="lang-content">Ввод</span>:</li>
+<li>⌨️ <span lang="kk" class="lang-content">Клавиатура</span><span lang="en" class="lang-content">Keyboard</span><span lang="ru" class="lang-content">Клавиатура</span></li>
+<li>🖱️ <span lang="kk" class="lang-content">Тінтуір</span><span lang="en" class="lang-content">Mouse</span><span lang="ru" class="lang-content">Мышь</span></li>
+<li>🎤 <span lang="kk" class="lang-content">Микрофон</span><span lang="en" class="lang-content">Microphone</span><span lang="ru" class="lang-content">Микрофон</span></li>
+<li>📷 <span lang="kk" class="lang-content">Веб-камера</span><span lang="en" class="lang-content">Webcam</span><span lang="ru" class="lang-content">Веб-камера</span></li>
+<li>🖼️ <span lang="kk" class="lang-content">Сканер</span><span lang="en" class="lang-content">Scanner</span><span lang="ru" class="lang-content">Сканер</span></li>
+</ul>
+<ul class="space-y-2 text-slate-700">
+<li class="font-bold text-orange-700"><span lang="kk" class="lang-content">Шығару</span><span lang="en" class="lang-content">Output</span><span lang="ru" class="lang-content">Вывод</span>:</li>
+<li>🖥️ <span lang="kk" class="lang-content">Монитор</span><span lang="en" class="lang-content">Monitor</span><span lang="ru" class="lang-content">Монитор</span></li>
+<li>🔊 <span lang="kk" class="lang-content">Үндеткіштер</span><span lang="en" class="lang-content">Speakers</span><span lang="ru" class="lang-content">Колонки</span></li>
+<li>🎧 <span lang="kk" class="lang-content">Құлаққап</span><span lang="en" class="lang-content">Headphones</span><span lang="ru" class="lang-content">Наушники</span></li>
+<li>🖨️ <span lang="kk" class="lang-content">Принтер</span><span lang="en" class="lang-content">Printer</span><span lang="ru" class="lang-content">Принтер</span></li>
+<li>📽️ <span lang="kk" class="lang-content">Проектор</span><span lang="en" class="lang-content">Projector</span><span lang="ru" class="lang-content">Проектор</span></li>
+</ul></div></div></div>
+</section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Басты ойлар</span><span lang="en" class="lang-content">🎯 Key ideas</span><span lang="ru" class="lang-content">🎯 Главное</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧠</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">CPU — ми, RAM — үстел, SSD — кітапхана</span><span lang="en" class="lang-content">CPU = brain, RAM = desk, SSD = library</span><span lang="ru" class="lang-content">CPU — мозг, RAM — стол, SSD — библиотека</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-sky-700 mb-2">FDES</p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">4 қадамды миллиардтаған рет/с</span><span lang="en" class="lang-content">4 steps, billions per sec</span><span lang="ru" class="lang-content">4 шага, миллиарды раз/сек</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🛣</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Шина</span><span lang="en" class="lang-content">Bus</span><span lang="ru" class="lang-content">Шина</span></p>
+<p class="text-slate-700"><span lang="kk" class="lang-content">Блоктар арасындағы жол</span><span lang="en" class="lang-content">Highway between blocks</span><span lang="ru" class="lang-content">Магистраль между блоками</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

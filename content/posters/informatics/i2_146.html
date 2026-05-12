@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Виртуальные машины</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · VM</span>
+<span lang="en" class="lang-content">Grade 11 · VM</span>
+<span lang="ru" class="lang-content">11 класс · ВМ</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Виртуалды машиналар</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Virtual machines</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Виртуальные машины</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💻 VM — не?</span>
+<span lang="en" class="lang-content">💻 What is a VM?</span>
+<span lang="ru" class="lang-content">💻 Что такое ВМ?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Виртуалды машина (VM)</b> — <b>нағыз компьютер ішінде</b> бағдарламалық түрде жасалған <b>тағы бір компьютер</b>. Оның өз CPU, жады, диск, желі картасы, тіпті өз ОЖ-і бар. Нақты «темір» болса <b>hypervisor</b> оны көп бөлікке бөледі — әр бөлік бөлек VM. Алғашқы тұжырым: <b>1960-шы жылдары IBM CP-40</b>. Бүгін VM-сіз интернет жоқ: <b>AWS, Azure, Google Cloud</b> — миллиардтаған VM іске қосады. Үйде VM: VirtualBox, VMware Workstation, UTM (Mac).</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">virtual machine (VM)</b> is another computer <b>inside your computer</b>, created by software. It has its own CPU, RAM, disk, NIC and even OS. A <b>hypervisor</b> slices the real hardware so each slice becomes a separate VM. Concept: <b>IBM CP-40 in the 1960s</b>. Today the internet runs on VMs: <b>AWS, Azure, GCP</b> spin up billions. At home: VirtualBox, VMware, UTM.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Виртуальная машина (ВМ)</b> — программно созданный <b>компьютер внутри компьютера</b>. У неё свой CPU, RAM, диск, сетевая карта и даже своя ОС. Настоящее «железо» нарезает <b>гипервизор</b>, каждый кусок — отдельная ВМ. Идея: <b>IBM CP-40 в 1960-х</b>. Сегодня весь интернет на ВМ: <b>AWS, Azure, GCP</b> поднимают миллиарды. Дома: VirtualBox, VMware, UTM.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏛 Архитектура: Type 1 vs Type 2</span>
+<span lang="en" class="lang-content">🏛 Architecture: Type 1 vs Type 2</span>
+<span lang="ru" class="lang-content">🏛 Архитектура: Type 1 vs Type 2</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 680 280" style="width:100%;max-width:680px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="12" text-anchor="middle">
+<text x="170" y="20" fill="#0369a1" font-weight="bold">Type 1 — bare-metal</text>
+<rect x="40" y="220" width="260" height="40" fill="#475569" stroke="#1e293b" rx="4"/><text x="170" y="245" fill="#fff">Hardware</text>
+<rect x="40" y="175" width="260" height="40" fill="#fde68a" stroke="#b45309" rx="4"/><text x="170" y="200" fill="#b45309" font-weight="bold">Hypervisor (ESXi, Xen, Hyper-V)</text>
+<rect x="45" y="45" width="80" height="125" fill="#bae6fd" stroke="#0369a1" rx="4"/><text x="85" y="90" fill="#0369a1">VM 1</text><text x="85" y="110" fill="#0369a1" font-size="10">OS + App</text>
+<rect x="135" y="45" width="80" height="125" fill="#bae6fd" stroke="#0369a1" rx="4"/><text x="175" y="90" fill="#0369a1">VM 2</text><text x="175" y="110" fill="#0369a1" font-size="10">OS + App</text>
+<rect x="225" y="45" width="80" height="125" fill="#bae6fd" stroke="#0369a1" rx="4"/><text x="265" y="90" fill="#0369a1">VM 3</text><text x="265" y="110" fill="#0369a1" font-size="10">OS + App</text>
+
+<text x="510" y="20" fill="#0369a1" font-weight="bold">Type 2 — hosted</text>
+<rect x="380" y="220" width="260" height="40" fill="#475569" stroke="#1e293b" rx="4"/><text x="510" y="245" fill="#fff">Hardware</text>
+<rect x="380" y="180" width="260" height="40" fill="#bbf7d0" stroke="#15803d" rx="4"/><text x="510" y="205" fill="#15803d" font-weight="bold">Host OS (Windows, macOS)</text>
+<rect x="380" y="140" width="260" height="40" fill="#fde68a" stroke="#b45309" rx="4"/><text x="510" y="165" fill="#b45309" font-weight="bold">Hypervisor (VirtualBox, VMware)</text>
+<rect x="400" y="45" width="100" height="90" fill="#bae6fd" stroke="#0369a1" rx="4"/><text x="450" y="85" fill="#0369a1">VM 1</text><text x="450" y="105" fill="#0369a1" font-size="10">guest OS</text>
+<rect x="520" y="45" width="100" height="90" fill="#bae6fd" stroke="#0369a1" rx="4"/><text x="570" y="85" fill="#0369a1">VM 2</text><text x="570" y="105" fill="#0369a1" font-size="10">guest OS</text>
+</g></svg></div>
+<p class="text-slate-600 text-sm mt-3">
+<span lang="kk" class="lang-content">🖥 <b>Type 1</b> (бұлт, дата-орталық) — гипервизор <b>тікелей темірде</b>, жылдамырақ. <b>Type 2</b> (үйде) — әдеттегі ОЖ-дің үстінде, оңай орнату.</span>
+<span lang="en" class="lang-content">🖥 <b>Type 1</b> (cloud, data-centre) runs <b>directly on hardware</b> — faster. <b>Type 2</b> (home) sits on a host OS — easy to install.</span>
+<span lang="ru" class="lang-content">🖥 <b>Type 1</b> (облака, ЦОД) — гипервизор <b>прямо на железе</b>, быстрее. <b>Type 2</b> (дома) — поверх обычной ОС, прост в установке.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧰 Танымал гипервизорлар</span>
+<span lang="en" class="lang-content">🧰 Popular hypervisors</span>
+<span lang="ru" class="lang-content">🧰 Популярные гипервизоры</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🧭</div><p class="heading-font text-sky-700 text-sm">VirtualBox</p><p class="text-slate-600 text-xs">Oracle, free</p></div>
+<div class="tile"><div class="tile-emoji">💠</div><p class="heading-font text-sky-700 text-sm">VMware</p><p class="text-slate-600 text-xs">Workstation · ESXi</p></div>
+<div class="tile"><div class="tile-emoji">🪟</div><p class="heading-font text-sky-700 text-sm">Hyper-V</p><p class="text-slate-600 text-xs">Windows</p></div>
+<div class="tile"><div class="tile-emoji">🐧</div><p class="heading-font text-sky-700 text-sm">KVM/QEMU</p><p class="text-slate-600 text-xs">Linux built-in</p></div>
+<div class="tile"><div class="tile-emoji">🦓</div><p class="heading-font text-sky-700 text-sm">Xen</p><p class="text-slate-600 text-xs">AWS EC2</p></div>
+<div class="tile"><div class="tile-emoji">🍎</div><p class="heading-font text-sky-700 text-sm">UTM · Parallels</p><p class="text-slate-600 text-xs">macOS</p></div>
+<div class="tile"><div class="tile-emoji">🧪</div><p class="heading-font text-sky-700 text-sm">Proxmox</p><p class="text-slate-600 text-xs">home-lab</p></div>
+<div class="tile"><div class="tile-emoji">☁</div><p class="heading-font text-sky-700 text-sm">AWS / Azure / GCP</p><p class="text-slate-600 text-xs">cloud VMs</p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Не үшін керек?</span>
+<span lang="en" class="lang-content">🎯 Why use VMs?</span>
+<span lang="ru" class="lang-content">🎯 Зачем нужны ВМ?</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card card-accent rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🧪 <span lang="kk" class="lang-content">Тест / эксперимент</span><span lang="en" class="lang-content">Test / sandbox</span><span lang="ru" class="lang-content">Тесты / песочница</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">вирусты, жаңа ОЖ-ды, тәуекелсіз</span><span lang="en" class="lang-content">try viruses, new OS, risk-free</span><span lang="ru" class="lang-content">вирусы, новые ОС — без риска</span></p></div>
+<div class="card card-accent rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🐧 <span lang="kk" class="lang-content">Бірнеше ОЖ қатар</span><span lang="en" class="lang-content">Multiple OS at once</span><span lang="ru" class="lang-content">Несколько ОС одновременно</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Windows + Linux + BSD бір ноутбукта</span><span lang="en" class="lang-content">Windows + Linux + BSD on one laptop</span><span lang="ru" class="lang-content">Windows + Linux + BSD на одном ноуте</span></p></div>
+<div class="card card-accent rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">☁ Cloud / hosting</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">сервер жалдау, масштабтау</span><span lang="en" class="lang-content">rent servers, auto-scale</span><span lang="ru" class="lang-content">аренда серверов, масштабирование</span></p></div>
+<div class="card card-accent rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">🛡 Security / isolation</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">компромат бір VM-де ғана қалады</span><span lang="en" class="lang-content">breach stays inside one VM</span><span lang="ru" class="lang-content">взлом останется в одной ВМ</span></p></div>
+<div class="card card-accent rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">💾 Snapshot / rollback</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">бір секундта ескіге қайтару</span><span lang="en" class="lang-content">restore in 1 sec</span><span lang="ru" class="lang-content">откат за секунду</span></p></div>
+<div class="card card-accent rounded-2xl p-5"><p class="heading-font text-sky-700 mb-1">💰 <span lang="kk" class="lang-content">Серверлерді үнемдеу</span><span lang="en" class="lang-content">Server consolidation</span><span lang="ru" class="lang-content">Экономия серверов</span></p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">1 темір = 20 сервер</span><span lang="en" class="lang-content">1 box = 20 servers</span><span lang="ru" class="lang-content">1 железка = 20 серверов</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚙ VM параметрлері</span>
+<span lang="en" class="lang-content">⚙ VM settings</span>
+<span lang="ru" class="lang-content">⚙ Параметры ВМ</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Ресурс</span><span lang="en" class="lang-content">Resource</span><span lang="ru" class="lang-content">Ресурс</span></th>
+<th><span lang="kk" class="lang-content">Минимум</span><span lang="en" class="lang-content">Minimum</span><span lang="ru" class="lang-content">Минимум</span></th>
+<th><span lang="kk" class="lang-content">Ыңғайлы</span><span lang="en" class="lang-content">Comfort</span><span lang="ru" class="lang-content">Комфорт</span></th>
+<th><span lang="kk" class="lang-content">Кеңес</span><span lang="en" class="lang-content">Tip</span><span lang="ru" class="lang-content">Совет</span></th></tr></thead><tbody>
+<tr><td>vCPU</td><td>1</td><td>2–4</td><td><span lang="kk" class="lang-content">хосттың жартысынан аспасын</span><span lang="en" class="lang-content">≤ ½ host cores</span><span lang="ru" class="lang-content">≤ ½ ядер хоста</span></td></tr>
+<tr><td>RAM</td><td>1 GB</td><td>4–8 GB</td><td><span lang="kk" class="lang-content">хостқа 4 GB қалдыр</span><span lang="en" class="lang-content">leave 4 GB to host</span><span lang="ru" class="lang-content">оставь хосту 4 GB</span></td></tr>
+<tr><td>Disk</td><td>20 GB</td><td>60 GB</td><td><span lang="kk" class="lang-content">dynamic, SSD</span><span lang="en" class="lang-content">dynamic, SSD</span><span lang="ru" class="lang-content">динамический, SSD</span></td></tr>
+<tr><td>Network</td><td>NAT</td><td>bridge</td><td>Wi-Fi — NAT <span lang="kk" class="lang-content">қауіпсіз</span><span lang="en" class="lang-content">is safer</span><span lang="ru" class="lang-content">безопаснее</span></td></tr>
+<tr><td>Virtualisation</td><td colspan="2">VT-x / AMD-V <span lang="kk" class="lang-content">BIOS-та қосылған болуы керек</span><span lang="en" class="lang-content">must be enabled in BIOS</span><span lang="ru" class="lang-content">включить в BIOS</span></td><td></td></tr>
+</tbody></table></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💻</div>
+<p class="heading-font text-xl text-sky-700 mb-2">VM = <span lang="kk" class="lang-content">компьютер ішіндегі компьютер</span><span lang="en" class="lang-content">computer in a computer</span><span lang="ru" class="lang-content">компьютер в компьютере</span></p>
+<p class="text-slate-600 text-sm">+ own OS</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🏛</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Hypervisor</p>
+<p class="text-slate-600 text-sm">Type 1 · Type 2</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💾</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Snapshot</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">уақыт машинасы</span><span lang="en" class="lang-content">time machine</span><span lang="ru" class="lang-content">машина времени</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Трассировка алгоритма</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Алгоритмдер</span>
+<span lang="en" class="lang-content">Grade 8 · Algorithms</span>
+<span lang="ru" class="lang-content">8 класс · Алгоритмы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Алгоритмді трассалау</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Algorithm tracing</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Трассировка алгоритма</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Трассалау дегеніміз не?</span>
+<span lang="en" class="lang-content">What is tracing?</span>
+<span lang="ru" class="lang-content">Что такое трассировка?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Трассалау</b> — алгоритмді (немесе бағдарламаны) <b>қадам-қадам</b>, <b>қолмен</b> орындау. Әр қадамда айнымалылардың мәні қалай өзгеретіні арнайы <b>кестеге</b> жазылады. Бұл процесс <b>қатені іздеу</b>, кодты <b>түсіну</b> және <b>үйрену</b> үшін ең қуатты әдіс. Бағдарламашылар трассалауды қағаз бетіне немесе <b>debugger</b> көмегімен жасайды. 1950 жылдары компьютер <b>қымбат</b> және <b>баяу</b> болған кезде — инженерлер программаны жазбай тұрып трассамен тексергенін көптеген программалық қателерді азайтқан.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Tracing</b> means executing an algorithm or program <b>step by step, by hand</b>. At every step we record in a <b>trace table</b> how each variable changes. It is the most powerful way to <b>find bugs</b>, <b>understand</b> code and <b>learn</b>. Pros do it on paper or with a <b>debugger</b>. In the 1950s, when computers were <b>costly and slow</b>, engineers traced code before even typing it — which prevented countless bugs.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Трассировка</b> — выполнение алгоритма или программы <b>шаг за шагом, вручную</b>. На каждом шаге в специальной <b>таблице</b> фиксируется, как меняется значение каждой переменной. Это самый мощный способ <b>находить ошибки</b>, <b>понимать</b> код и <b>учиться</b>. Программисты делают трассировку на бумаге или через <b>debugger</b>. В 1950-х, когда компьютеры были <b>дорогими и медленными</b>, инженеры трассировали код до его написания — это спасало от массы багов.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📋 Трасса кестесі</span>
+<span lang="en" class="lang-content">📋 Trace table</span>
+<span lang="ru" class="lang-content">📋 Таблица трассировки</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+a = <span class="num">5</span>
+b = <span class="num">3</span>
+a = a + b
+b = a - b
+a = a - b
+<span class="fn">print</span>(a, b)
+</div>
+
+<table class="t mt-5"><thead><tr>
+<th>#</th><th><span lang="kk" class="lang-content">Жол</span><span lang="en" class="lang-content">Line</span><span lang="ru" class="lang-content">Строка</span></th>
+<th>a</th><th>b</th><th>output</th>
+</tr></thead><tbody>
+<tr><td>1</td><td>a = 5</td><td><b>5</b></td><td>—</td><td></td></tr>
+<tr><td>2</td><td>b = 3</td><td>5</td><td><b>3</b></td><td></td></tr>
+<tr><td>3</td><td>a = a + b</td><td><b>8</b></td><td>3</td><td></td></tr>
+<tr><td>4</td><td>b = a - b</td><td>8</td><td><b>5</b></td><td></td></tr>
+<tr><td>5</td><td>a = a - b</td><td><b>3</b></td><td>5</td><td></td></tr>
+<tr style="background:rgba(14,165,233,.08)"><td>6</td><td>print(a, b)</td><td>3</td><td>5</td><td><b>3 5</b></td></tr>
+</tbody></table>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 Нәтиже: a мен b орындары ауысты! 3-жалғыз айнымалысыз swap.</span><span lang="en" class="lang-content">💡 Result: a and b swapped! Classic no-temp swap.</span><span lang="ru" class="lang-content">💡 Итог: a и b поменялись местами без третьей переменной!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔁 Циклды трассалау</span>
+<span lang="en" class="lang-content">🔁 Tracing a loop</span>
+<span lang="ru" class="lang-content">🔁 Трассировка цикла</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+s = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">5</span>):
+    s += i
+<span class="fn">print</span>(s)
+</div>
+<table class="t mt-5"><thead><tr>
+<th>#</th><th>i</th><th>s <span lang="kk" class="lang-content">дейін</span><span lang="en" class="lang-content">before</span><span lang="ru" class="lang-content">до</span></th><th>s <span lang="kk" class="lang-content">кейін</span><span lang="en" class="lang-content">after</span><span lang="ru" class="lang-content">после</span></th>
+</tr></thead><tbody>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>2</td><td>2</td><td>1</td><td>3</td></tr>
+<tr><td>3</td><td>3</td><td>3</td><td>6</td></tr>
+<tr><td>4</td><td>4</td><td>6</td><td><b>10</b></td></tr>
+<tr style="background:rgba(14,165,233,.08)"><td>—</td><td>—</td><td colspan="2">print → <b>10</b></td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧠 Күрделі мысал — if + while</span>
+<span lang="en" class="lang-content">🧠 Harder — if + while</span>
+<span lang="ru" class="lang-content">🧠 Сложнее — if + while</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+n = <span class="num">14</span>
+count = <span class="num">0</span>
+<span class="kw">while</span> n &gt; <span class="num">1</span>:
+    <span class="kw">if</span> n % <span class="num">2</span> == <span class="num">0</span>:
+        n //= <span class="num">2</span>
+    <span class="kw">else</span>:
+        n = <span class="num">3</span> * n + <span class="num">1</span>
+    count += <span class="num">1</span>
+<span class="fn">print</span>(count)
+</div>
+
+<p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">Бұл — әйгілі <b>Коллатц гипотезасы</b>! Жұп болса — бөлеміз 2-ге, тақ — 3·n+1. Әрдайым 1-ге түседі деп болжанады (бірақ дәлелденбеген!).</span>
+<span lang="en" class="lang-content">This is the famous <b>Collatz conjecture</b>. Even → /2, odd → 3n+1. Conjectured to always reach 1 (still unproven!).</span>
+<span lang="ru" class="lang-content">Это знаменитая <b>гипотеза Коллатца</b>. Чётное — /2, нечётное — 3n+1. Предположительно всегда приходит к 1 (но не доказано!).</span></p>
+
+<table class="t mt-5 text-sm"><thead><tr>
+<th>#</th><th>n</th><th>% 2</th><th><span lang="kk" class="lang-content">әрекет</span><span lang="en" class="lang-content">action</span><span lang="ru" class="lang-content">действие</span></th><th>count</th>
+</tr></thead><tbody>
+<tr><td>1</td><td>14</td><td>0</td><td>n //= 2 → 7</td><td>1</td></tr>
+<tr><td>2</td><td>7</td><td>1</td><td>n = 3·7+1 → 22</td><td>2</td></tr>
+<tr><td>3</td><td>22</td><td>0</td><td>→ 11</td><td>3</td></tr>
+<tr><td>4</td><td>11</td><td>1</td><td>→ 34</td><td>4</td></tr>
+<tr><td>5</td><td>34</td><td>0</td><td>→ 17</td><td>5</td></tr>
+<tr><td>6</td><td>17</td><td>1</td><td>→ 52</td><td>6</td></tr>
+<tr><td>7</td><td>52</td><td>0</td><td>→ 26</td><td>7</td></tr>
+<tr><td>8</td><td>26</td><td>0</td><td>→ 13</td><td>8</td></tr>
+<tr><td>9</td><td>13</td><td>1</td><td>→ 40</td><td>9</td></tr>
+<tr><td>10–17</td><td>…</td><td>…</td><td>→ 1</td><td><b>17</b></td></tr>
+<tr style="background:rgba(14,165,233,.08)"><td colspan="4">print →</td><td><b>17</b></td></tr>
+</tbody></table>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Трассалау әдістері</span>
+<span lang="en" class="lang-content">🛠 Tracing methods</span>
+<span lang="ru" class="lang-content">🛠 Способы трассировки</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-2xl p-5"><div class="text-4xl mb-2">📝</div>
+<p class="heading-font text-sky-700 mb-1"><span lang="kk" class="lang-content">Қағаз</span><span lang="en" class="lang-content">Paper</span><span lang="ru" class="lang-content">Бумага</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Қол, қарындаш, кесте. Ең қорытылған әдіс.</span><span lang="en" class="lang-content">Pencil + table. Most deep learning.</span><span lang="ru" class="lang-content">Карандаш + таблица. Самое глубокое обучение.</span></p></div>
+
+<div class="card rounded-2xl p-5"><div class="text-4xl mb-2">🖨</div>
+<p class="heading-font text-sky-700 mb-1">print()</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Кодқа «print(x)» қой — консольде көресің.</span><span lang="en" class="lang-content">Add print(x) — see in console.</span><span lang="ru" class="lang-content">Вставь print(x) — увидишь в консоли.</span></p></div>
+
+<div class="card rounded-2xl p-5"><div class="text-4xl mb-2">🐞</div>
+<p class="heading-font text-sky-700 mb-1">Debugger</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Thonny/VS Code-та: F5→step, F6→step into.</span><span lang="en" class="lang-content">Thonny/VS Code step-through.</span><span lang="ru" class="lang-content">Thonny/VS Code — пошаговое выполнение.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💡 Неге трассалау пайдалы?</span>
+<span lang="en" class="lang-content">💡 Why tracing helps</span>
+<span lang="ru" class="lang-content">💡 Чем полезна трассировка</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🐛</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Қатені табу</span><span lang="en" class="lang-content">Find bugs</span><span lang="ru" class="lang-content">Найти баг</span></p></div>
+<div class="tile"><div class="tile-emoji">🧠</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Түсіну</span><span lang="en" class="lang-content">Understand</span><span lang="ru" class="lang-content">Понять</span></p></div>
+<div class="tile"><div class="tile-emoji">📚</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Үйрену</span><span lang="en" class="lang-content">Learn</span><span lang="ru" class="lang-content">Выучить</span></p></div>
+<div class="tile"><div class="tile-emoji">🎯</div><p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Есепті шешу</span><span lang="en" class="lang-content">Solve tasks</span><span lang="ru" class="lang-content">Решить задачу</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📋</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Кесте жаса</span><span lang="en" class="lang-content">Make a table</span><span lang="ru" class="lang-content">Рисуй таблицу</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚶</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Жол-жолдап</span><span lang="en" class="lang-content">Line by line</span><span lang="ru" class="lang-content">Строка за строкой</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧠</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Код «жан тарта»</span><span lang="en" class="lang-content">Code comes alive</span><span lang="ru" class="lang-content">Код «оживает»</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

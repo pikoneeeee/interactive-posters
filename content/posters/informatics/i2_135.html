@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS: стилизация и вёрстка</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Веб</span>
+<span lang="en" class="lang-content">Grade 10 · Web</span>
+<span lang="ru" class="lang-content">10 класс · Веб</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">CSS: стильдеу және вёрстка</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">CSS: styling &amp; layout</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">CSS: стилизация и вёрстка</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎨 CSS — не?</span>
+<span lang="en" class="lang-content">🎨 What is CSS?</span>
+<span lang="ru" class="lang-content">🎨 Что такое CSS?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">CSS</b> (Cascading Style Sheets) — HTML элементтерінің <b>көрінісін</b> басқаратын тіл. 1996 жылы <b>Håkon Wium Lie</b> ұсынды. <b>«Не»</b> — HTML, <b>«қалай көрінеді»</b> — CSS. CSS <b>каскад</b> принципімен жұмыс істейді: бір элементке бірнеше ереже әсер етуі мүмкін, ең <b>нақтысы жеңеді</b>. CSS3-те: анимация, градиент, grid/flexbox, адаптив дизайн.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">CSS</b> (Cascading Style Sheets) controls how HTML elements <b>look</b>. Invented by <b>Håkon Wium Lie</b> in 1996. HTML says <b>«what»</b>, CSS says <b>«how it looks»</b>. CSS cascades: several rules may apply, the <b>most specific wins</b>. CSS3 brings animations, gradients, grid/flexbox, responsive design.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">CSS</b> (Cascading Style Sheets) — язык, описывающий <b>внешний вид</b> HTML-элементов. Придуман <b>Хоконом Виум Ли</b> в 1996 г. HTML — <b>«что»</b>, CSS — <b>«как выглядит»</b>. Работает по принципу <b>каскада</b>: несколько правил могут применяться, побеждает <b>самое специфичное</b>. В CSS3: анимации, градиенты, grid/flexbox, адаптивная вёрстка.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📝 Синтаксис және селекторлар</span>
+<span lang="en" class="lang-content">📝 Syntax &amp; selectors</span>
+<span lang="ru" class="lang-content">📝 Синтаксис и селекторы</span></h2>
+<div class="card rounded-custom p-6">
+<div class="code-block text-sm">
+<span class="com">/* селектор { свойство: значение; ... } */</span>
+h1 {
+  color: <span class="str">#0ea5e9</span>;
+  font-size: <span class="num">32px</span>;
+  text-align: center;
+}
+
+.card   { background: <span class="str">white</span>; border-radius: <span class="num">12px</span>; }  <span class="com">/* class */</span>
+#header { padding: <span class="num">20px</span>; }                              <span class="com">/* id */</span>
+a:hover { color: red; }                                  <span class="com">/* псевдокласс */</span>
+ul li   { list-style: square; }                          <span class="com">/* потомок */</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
+<div class="tile"><div class="tile-emoji">🏷</div><p class="heading-font text-sky-700 text-sm">tag</p><p class="text-slate-600 text-xs">h1, p</p></div>
+<div class="tile"><div class="tile-emoji">🎨</div><p class="heading-font text-sky-700 text-sm">.class</p><p class="text-slate-600 text-xs">.btn</p></div>
+<div class="tile"><div class="tile-emoji">🆔</div><p class="heading-font text-sky-700 text-sm">#id</p><p class="text-slate-600 text-xs">#nav</p></div>
+<div class="tile"><div class="tile-emoji">✨</div><p class="heading-font text-sky-700 text-sm">:hover :focus</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">псевдо-класс</span><span lang="en" class="lang-content">pseudo-class</span><span lang="ru" class="lang-content">псевдокласс</span></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📦 Box Model</span>
+<span lang="en" class="lang-content">📦 Box model</span>
+<span lang="ru" class="lang-content">📦 Блочная модель</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-600 mb-3">
+<span lang="kk" class="lang-content">Әр HTML элементі — <b>«тартпа» (box)</b>: мазмұн + padding + border + margin. Бет — осы тартпалардан жиналады.</span>
+<span lang="en" class="lang-content">Every HTML element is a <b>box</b>: content + padding + border + margin. A page is a stack of boxes.</span>
+<span lang="ru" class="lang-content">Каждый HTML-элемент — это <b>«коробка»</b>: content + padding + border + margin. Страница собирается из них.</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 560 280" style="width:100%;max-width:560px;margin:auto">
+<g font-family="'JetBrains Mono',monospace" font-size="13" text-anchor="middle">
+<rect x="20" y="20" width="520" height="240" fill="#fecaca" stroke="#b91c1c" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="50" y="40" text-anchor="start" fill="#b91c1c">margin</text>
+
+<rect x="70" y="60" width="420" height="170" fill="#fde68a" stroke="#b45309" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="100" y="80" text-anchor="start" fill="#b45309">border</text>
+
+<rect x="110" y="95" width="340" height="105" fill="#bbf7d0" stroke="#15803d" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="140" y="115" text-anchor="start" fill="#15803d">padding</text>
+
+<rect x="160" y="130" width="240" height="50" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/>
+<text x="280" y="160" fill="#0369a1" font-weight="bold">content</text>
+</g></svg></div>
+<div class="code-block text-xs mt-3">
+.box {
+  width: <span class="num">300px</span>;
+  padding: <span class="num">20px</span>;
+  border: <span class="num">2px</span> solid <span class="str">#0ea5e9</span>;
+  margin: <span class="num">16px</span>;
+  box-sizing: border-box;    <span class="com">/* width включает padding+border */</span>
+}
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Flexbox &amp; Grid</span>
+<span lang="en" class="lang-content">📐 Flexbox &amp; Grid</span>
+<span lang="ru" class="lang-content">📐 Flexbox и Grid</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-custom p-5">
+<p class="heading-font text-sky-700 mb-2">🎈 Flexbox — 1 <span lang="kk" class="lang-content">өлшем</span><span lang="en" class="lang-content">dimension</span><span lang="ru" class="lang-content">измерение</span></p>
+<div class="svg-wrap mb-2"><svg viewBox="0 0 300 80"><g font-family="'JetBrains Mono',monospace" font-size="12">
+<rect x="5" y="5" width="290" height="70" fill="none" stroke="#0369a1" stroke-dasharray="3 3"/>
+<rect x="15" y="20" width="50" height="40" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="75" y="20" width="70" height="40" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="155" y="20" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="225" y="20" width="60" height="40" fill="#bae6fd" stroke="#0369a1"/>
+</g></svg></div>
+<div class="code-block text-xs">
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: <span class="num">1rem</span>;
+}
+</div></div>
+<div class="card rounded-custom p-5">
+<p class="heading-font text-sky-700 mb-2">🗺 Grid — 2 <span lang="kk" class="lang-content">өлшем</span><span lang="en" class="lang-content">dimensions</span><span lang="ru" class="lang-content">измерения</span></p>
+<div class="svg-wrap mb-2"><svg viewBox="0 0 300 80"><g font-family="'JetBrains Mono',monospace" font-size="12">
+<rect x="5" y="5" width="290" height="70" fill="none" stroke="#0369a1" stroke-dasharray="3 3"/>
+<rect x="15" y="10" width="80" height="25" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="105" y="10" width="80" height="25" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="195" y="10" width="80" height="25" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="15" y="45" width="80" height="25" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="105" y="45" width="80" height="25" fill="#bae6fd" stroke="#0369a1"/>
+<rect x="195" y="45" width="80" height="25" fill="#bae6fd" stroke="#0369a1"/>
+</g></svg></div>
+<div class="code-block text-xs">
+.grid {
+  display: grid;
+  grid-template-columns: repeat(<span class="num">3</span>, <span class="num">1fr</span>);
+  gap: <span class="num">16px</span>;
+}
+</div></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📱 Responsive / адаптив дизайн</span>
+<span lang="en" class="lang-content">📱 Responsive design</span>
+<span lang="ru" class="lang-content">📱 Адаптивная вёрстка</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-600 text-sm mb-3">
+<span lang="kk" class="lang-content"><b>Media queries</b> — экран еніне қарай стильді өзгерту. <b>Mobile-first</b> тәсіл: алдымен ұсақ экран, одан үлкенге жетілдіру.</span>
+<span lang="en" class="lang-content"><b>Media queries</b> change styles based on viewport width. <b>Mobile-first</b> approach: design for small first, enhance for larger.</span>
+<span lang="ru" class="lang-content"><b>Media queries</b> меняют стили в зависимости от ширины экрана. Подход <b>mobile-first</b>: сначала маленький экран, потом расширяем.</span></p>
+<div class="code-block text-sm">
+<span class="com">/* base — мобилка */</span>
+.grid { grid-template-columns: <span class="num">1fr</span>; }
+
+<span class="com">/* планшет */</span>
+<span class="kw">@media</span> (min-width: <span class="num">640px</span>) {
+  .grid { grid-template-columns: repeat(<span class="num">2</span>, <span class="num">1fr</span>); }
+}
+
+<span class="com">/* десктоп */</span>
+<span class="kw">@media</span> (min-width: <span class="num">1024px</span>) {
+  .grid { grid-template-columns: repeat(<span class="num">4</span>, <span class="num">1fr</span>); }
+}
+</div>
+<table class="t mt-4"><thead><tr>
+<th><span lang="kk" class="lang-content">Бірлік</span><span lang="en" class="lang-content">Unit</span><span lang="ru" class="lang-content">Единица</span></th>
+<th><span lang="kk" class="lang-content">Мағына</span><span lang="en" class="lang-content">Meaning</span><span lang="ru" class="lang-content">Значение</span></th>
+<th><span lang="kk" class="lang-content">Қолдану</span><span lang="en" class="lang-content">Use</span><span lang="ru" class="lang-content">Применение</span></th></tr></thead><tbody>
+<tr><td><code>px</code></td><td><span lang="kk" class="lang-content">пиксель</span><span lang="en" class="lang-content">pixel</span><span lang="ru" class="lang-content">пиксель</span></td><td>border, icon</td></tr>
+<tr><td><code>%</code></td><td><span lang="kk" class="lang-content">ата-аналық элементтің %</span><span lang="en" class="lang-content">% of parent</span><span lang="ru" class="lang-content">% от родителя</span></td><td>width: 50%</td></tr>
+<tr><td><code>em / rem</code></td><td><span lang="kk" class="lang-content">шрифт өлшемі</span><span lang="en" class="lang-content">font size</span><span lang="ru" class="lang-content">размер шрифта</span></td><td><span lang="kk" class="lang-content">адаптив өлшем</span><span lang="en" class="lang-content">scalable sizing</span><span lang="ru" class="lang-content">адаптивный размер</span></td></tr>
+<tr><td><code>vw / vh</code></td><td><span lang="kk" class="lang-content">экран %-ы</span><span lang="en" class="lang-content">viewport %</span><span lang="ru" class="lang-content">% экрана</span></td><td>hero: 100vh</td></tr>
+<tr><td><code>fr</code></td><td><span lang="kk" class="lang-content">grid үлесі</span><span lang="en" class="lang-content">grid fraction</span><span lang="ru" class="lang-content">доля в grid</span></td><td>1fr 2fr</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✨ Қосымша мүмкіндіктер</span>
+<span lang="en" class="lang-content">✨ Extras</span>
+<span lang="ru" class="lang-content">✨ Дополнительные возможности</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🎨</div><p class="heading-font text-sky-700 text-sm">color</p><p class="text-slate-600 text-xs">#0ea5e9, rgb, hsl</p></div>
+<div class="tile"><div class="tile-emoji">🌈</div><p class="heading-font text-sky-700 text-sm">gradient</p><p class="text-slate-600 text-xs">linear-gradient()</p></div>
+<div class="tile"><div class="tile-emoji">🎬</div><p class="heading-font text-sky-700 text-sm">transition</p><p class="text-slate-600 text-xs">.3s ease</p></div>
+<div class="tile"><div class="tile-emoji">🌀</div><p class="heading-font text-sky-700 text-sm">animation</p><p class="text-slate-600 text-xs">@keyframes</p></div>
+<div class="tile"><div class="tile-emoji">🔲</div><p class="heading-font text-sky-700 text-sm">border-radius</p><p class="text-slate-600 text-xs">12px · 50%</p></div>
+<div class="tile"><div class="tile-emoji">☁</div><p class="heading-font text-sky-700 text-sm">box-shadow</p><p class="text-slate-600 text-xs">0 4px 20px</p></div>
+<div class="tile"><div class="tile-emoji">🔤</div><p class="heading-font text-sky-700 text-sm">@font-face</p><p class="text-slate-600 text-xs">Google Fonts</p></div>
+<div class="tile"><div class="tile-emoji">🧮</div><p class="heading-font text-sky-700 text-sm">var(--c)</p><p class="text-slate-600 text-xs">CSS-<span lang="kk" class="lang-content">айнымалылар</span><span lang="en" class="lang-content">variables</span><span lang="ru" class="lang-content">переменные</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎨</div>
+<p class="heading-font text-xl text-sky-700 mb-2">CSS = <span lang="kk" class="lang-content">көрініс</span><span lang="en" class="lang-content">look</span><span lang="ru" class="lang-content">вид</span></p>
+<p class="text-slate-600 text-sm">selector { prop: val }</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📦</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Box model</p>
+<p class="text-slate-600 text-sm">content · padding · border · margin</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📱</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Flex + Grid</p>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">заманауи вёрстка</span><span lang="en" class="lang-content">modern layout</span><span lang="ru" class="lang-content">современная вёрстка</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Условное форматирование в Excel</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Excel</span>
+<span lang="en" class="lang-content">Grade 7 · Excel</span>
+<span lang="ru" class="lang-content">7 класс · Excel</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Excel-дегі шартты пішімдеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Conditional formatting</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Условное форматирование в Excel</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Шартты пішімдеу дегеніміз не?</span>
+<span lang="en" class="lang-content">What is conditional formatting?</span>
+<span lang="ru" class="lang-content">Что такое условное форматирование?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Шартты пішімдеу</b> — ұяшықтың <b>мәніне байланысты</b> түсін, қаріпін немесе белгішесін автоматты өзгертетін «ақылды» пішімдеу. Мысалы: «3-тен төмен бағалар <b>қызыл</b>, 5 — <b>жасыл</b> түспен болсын». 1000 жол деректегі ең <b>маңыздысын</b> бір көзқараспен көруге көмектеседі. Жаттығу есептемеді — санағыш керек жоқ, көзбен көресің. Сондықтан Excel-дегі ең <b>танымал</b> мүмкіндіктердің бірі — шартты пішімдеу.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Conditional formatting</b> auto-changes a cell's color, font or icon based on its <b>value</b>. Example: «grades below 3 = <b>red</b>, 5 = <b>green</b>». In 1000 rows you instantly spot what matters — no need to count, you see it. It is one of the <b>most-used</b> features in Excel.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Условное форматирование</b> автоматически меняет цвет, шрифт или значок ячейки <b>в зависимости от её значения</b>. Например: «оценки ниже 3 — <b>красные</b>, 5 — <b>зелёные</b>». В 1000 строках сразу видно главное — считать не нужно, видно глазом. Поэтому это одна из <b>самых популярных</b> фич Excel.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎨 5 ережелер тобы</span>
+<span lang="en" class="lang-content">🎨 5 rule categories</span>
+<span lang="ru" class="lang-content">🎨 5 групп правил</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+<div class="card rounded-custom p-6">
+<div class="text-4xl mb-2">1️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Highlight Cells</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Нақты мәнге сәйкес ұяшықты бояйды.</span><span lang="en" class="lang-content">Highlights by exact value.</span><span lang="ru" class="lang-content">Заливает ячейку по значению.</span></p>
+<ul class="text-slate-600 text-sm space-y-0.5">
+<li>Greater / Less Than</li>
+<li>Between / Equal To</li>
+<li>Text Contains</li>
+<li>Date Occurring</li>
+<li>Duplicate Values</li>
+</ul></div>
+
+<div class="card rounded-custom p-6">
+<div class="text-4xl mb-2">2️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Top / Bottom</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Ең жоғары/төмен N орындарды табады.</span><span lang="en" class="lang-content">Finds top / bottom N.</span><span lang="ru" class="lang-content">Ищет топ / низ N.</span></p>
+<ul class="text-slate-600 text-sm space-y-0.5">
+<li>Top 10 items / %</li>
+<li>Bottom 10 items / %</li>
+<li>Above / Below Average</li>
+</ul></div>
+
+<div class="card rounded-custom p-6">
+<div class="text-4xl mb-2">3️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Data Bars</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Ұяшықта <b>жолақ</b> — сан неғұрлым үлкен болса, соғұрлым ұзын.</span><span lang="en" class="lang-content">A <b>bar</b> in the cell — bigger number = longer bar.</span><span lang="ru" class="lang-content"><b>Полоска</b> в ячейке — больше число, длиннее полоса.</span></p>
+<div class="mt-2 space-y-1">
+<div class="flex items-center gap-2"><div style="background:linear-gradient(90deg,#60a5fa 20%,transparent 20%);width:100%;height:18px"></div><span class="text-xs">20</span></div>
+<div class="flex items-center gap-2"><div style="background:linear-gradient(90deg,#60a5fa 65%,transparent 65%);width:100%;height:18px"></div><span class="text-xs">65</span></div>
+<div class="flex items-center gap-2"><div style="background:linear-gradient(90deg,#60a5fa 95%,transparent 95%);width:100%;height:18px"></div><span class="text-xs">95</span></div>
+</div></div>
+
+<div class="card rounded-custom p-6">
+<div class="text-4xl mb-2">4️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Color Scales</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Кіші мән — бір түс, үлкен — басқа түс, арасы — градиент.</span><span lang="en" class="lang-content">Small = one color, big = another, smooth gradient.</span><span lang="ru" class="lang-content">Малые — один цвет, большие — другой, плавный градиент.</span></p>
+<div class="mt-2 flex gap-0.5 h-6">
+<div style="background:#f87171;flex:1"></div>
+<div style="background:#fbbf24;flex:1"></div>
+<div style="background:#fde68a;flex:1"></div>
+<div style="background:#86efac;flex:1"></div>
+<div style="background:#22c55e;flex:1"></div>
+</div>
+<p class="text-slate-500 text-xs mt-1">🌡 <span lang="kk" class="lang-content">температура картасы</span><span lang="en" class="lang-content">heat map</span><span lang="ru" class="lang-content">тепловая карта</span></p></div>
+
+<div class="card rounded-custom p-6">
+<div class="text-4xl mb-2">5️⃣</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Icon Sets</p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">Сан ауқымына көз, жебе, шеңбер белгілері.</span><span lang="en" class="lang-content">Icons like arrows, traffic lights.</span><span lang="ru" class="lang-content">Стрелки, светофоры, кружки по диапазону.</span></p>
+<div class="mt-2 space-y-1 text-sm">
+<div>🔴 low</div>
+<div>🟡 medium</div>
+<div>🟢 high</div>
+</div></div>
+
+<div class="card rounded-custom p-6">
+<div class="text-4xl mb-2">⚙️</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Custom Formula</p>
+<p class="text-slate-700 text-sm">New Rule → Use a formula → <code>=A2&gt;AVERAGE($A$2:$A$100)</code></p>
+<p class="text-slate-500 text-xs mt-1"><span lang="kk" class="lang-content">Ең күшті әдіс</span><span lang="en" class="lang-content">Most powerful option</span><span lang="ru" class="lang-content">Самый мощный вариант</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Қалай қолдану? — 5 қадам</span>
+<span lang="en" class="lang-content">🛠 How to apply — 5 steps</span>
+<span lang="ru" class="lang-content">🛠 Как применить — 5 шагов</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-3 text-slate-700 text-lg">
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">1</span> <span lang="kk" class="lang-content">Пішімделетін <b>диапазонды таңда</b> (A2:A100)</span><span lang="en" class="lang-content">Select the <b>range</b> (A2:A100)</span><span lang="ru" class="lang-content">Выдели <b>диапазон</b> (A2:A100)</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">2</span> <b>Home → Conditional Formatting</b></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">3</span> <span lang="kk" class="lang-content">Ереженің түрін таңда</span><span lang="en" class="lang-content">Choose rule type</span><span lang="ru" class="lang-content">Выбери тип правила</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">4</span> <span lang="kk" class="lang-content">Шарт пен форматты баптап OK</span><span lang="en" class="lang-content">Set condition + format, click OK</span><span lang="ru" class="lang-content">Настрой условие и формат, OK</span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">5</span> <span lang="kk" class="lang-content">Басқару: <b>Manage Rules</b> → редакциялау, өшіру</span><span lang="en" class="lang-content">Manage: <b>Manage Rules</b> → edit, remove</span><span lang="ru" class="lang-content">Управление: <b>Manage Rules</b> → редактировать, убрать</span></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Мысал — бағалар</span>
+<span lang="en" class="lang-content">🎯 Example — grades</span>
+<span lang="ru" class="lang-content">🎯 Пример — оценки</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Оқушы</span><span lang="en" class="lang-content">Student</span><span lang="ru" class="lang-content">Ученик</span></th>
+<th>Math</th>
+<th><span lang="kk" class="lang-content">Түсі</span><span lang="en" class="lang-content">Color</span><span lang="ru" class="lang-content">Цвет</span></th>
+</tr></thead><tbody>
+<tr><td>Aidar</td><td style="background:#bbf7d0">5</td><td style="color:#16a34a">🟢 <span lang="kk" class="lang-content">жасыл (&gt;=4)</span><span lang="en" class="lang-content">green (&gt;=4)</span><span lang="ru" class="lang-content">зелёный (&gt;=4)</span></td></tr>
+<tr><td>Dana</td><td style="background:#bbf7d0">5</td><td style="color:#16a34a">🟢</td></tr>
+<tr><td>Bolat</td><td style="background:#fecaca">2</td><td style="color:#dc2626">🔴 <span lang="kk" class="lang-content">қызыл (&lt;3)</span><span lang="en" class="lang-content">red (&lt;3)</span><span lang="ru" class="lang-content">красный (&lt;3)</span></td></tr>
+<tr><td>Aru</td><td style="background:#fef3c7">3</td><td style="color:#ca8a04">🟡 <span lang="kk" class="lang-content">сары (=3)</span><span lang="en" class="lang-content">yellow (=3)</span><span lang="ru" class="lang-content">жёлтый (=3)</span></td></tr>
+<tr><td>Yerlan</td><td style="background:#bbf7d0">4</td><td style="color:#16a34a">🟢</td></tr>
+</tbody></table></div>
+
+<div class="code-block mt-5">
+<span class="com"># <span lang="kk" class="lang-content">3 ереже қою керек</span>Create 3 rules<span lang="ru" class="lang-content">Создаём 3 правила</span>:</span>
+1) Cell Value &lt; 3           → <span lang="kk" class="lang-content">қызыл фон</span>red fill<span lang="ru" class="lang-content">красная заливка</span>
+2) Cell Value = 3           → <span lang="kk" class="lang-content">сары фон</span>yellow fill<span lang="ru" class="lang-content">жёлтая</span>
+3) Cell Value &gt;= 4          → <span lang="kk" class="lang-content">жасыл фон</span>green fill<span lang="ru" class="lang-content">зелёная</span>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔥 Танымал «Heat Map»</span>
+<span lang="en" class="lang-content">🔥 Classic «Heat Map»</span>
+<span lang="ru" class="lang-content">🔥 Классика — тепловая карта</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4"><span lang="kk" class="lang-content"><b>Color Scales</b> → «Red-Yellow-Green» — миллиондаған жазба ішінде <b>максимумдар мен минимумдарды</b> бір секундта көресің. Бухгалтер жылдың ең қызыл айын, зерттеуші — ең жылы елді табады.</span>
+<span lang="en" class="lang-content"><b>Color Scales → Red-Yellow-Green</b> instantly reveals extremes in millions of rows. Accountants spot the worst month, scientists see the hottest country.</span>
+<span lang="ru" class="lang-content"><b>Color Scales → Red-Yellow-Green</b> мгновенно подсвечивает максимумы и минимумы в миллионах строк. Бухгалтер видит худший месяц, учёный — самую жаркую страну.</span></p>
+
+<div class="card-accent rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-2">📊 <span lang="kk" class="lang-content">Не үшін керек?</span><span lang="en" class="lang-content">Why?</span><span lang="ru" class="lang-content">Зачем нужно?</span></p>
+<ul class="text-slate-700 text-sm space-y-1">
+<li>🗺 <span lang="kk" class="lang-content">Ел бойынша сату көлемі</span><span lang="en" class="lang-content">Sales by country</span><span lang="ru" class="lang-content">Продажи по странам</span></li>
+<li>🌡 <span lang="kk" class="lang-content">Ауа-райы мәліметі</span><span lang="en" class="lang-content">Weather data</span><span lang="ru" class="lang-content">Погодные данные</span></li>
+<li>🎓 <span lang="kk" class="lang-content">Сынып бойынша оқу үлгерімі</span><span lang="en" class="lang-content">Class performance</span><span lang="ru" class="lang-content">Успеваемость классов</span></li>
+<li>📈 <span lang="kk" class="lang-content">Қор биржасындағы пайда/шығын</span><span lang="en" class="lang-content">Stocks P&amp;L</span><span lang="ru" class="lang-content">Прибыль/убыток акций</span></li>
+</ul></div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Формуламен пішімдеу</span>
+<span lang="en" class="lang-content">🧪 Formula-based</span>
+<span lang="ru" class="lang-content">🧪 Форматирование по формуле</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-3"><span lang="kk" class="lang-content">Ең күшті тәсіл — өз формулаңды жазу. Нәтижесі TRUE болса — формат қолданылады.</span>
+<span lang="en" class="lang-content">The most powerful option — write your own formula. If it returns TRUE, format applies.</span>
+<span lang="ru" class="lang-content">Самый мощный вариант — своя формула. Если TRUE — форматирование применяется.</span></p>
+
+<div class="code-block">
+<span class="com"># 1. <span lang="kk" class="lang-content">Жоғары орташа жолдар</span>Rows above average<span lang="ru" class="lang-content">Строки выше среднего</span></span>
+=$C2&gt;AVERAGE($C$2:$C$100)
+
+<span class="com"># 2. <span lang="kk" class="lang-content">Демалыс күндері (сб/вс)</span>Weekends (Sat/Sun)<span lang="ru" class="lang-content">Выходные (сб/вс)</span></span>
+=WEEKDAY($A2,2)&gt;5
+
+<span class="com"># 3. <span lang="kk" class="lang-content">Қайталанатын жазбалар</span>Duplicates<span lang="ru" class="lang-content">Дубликаты</span></span>
+=COUNTIF($A$2:$A$100,A2)&gt;1
+
+<span class="com"># 4. <span lang="kk" class="lang-content">Бос емес ұяшықты ерекшелеу</span>Non-empty cells<span lang="ru" class="lang-content">Непустые ячейки</span></span>
+=A2&lt;&gt;""
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Кеңестер</span>
+<span lang="en" class="lang-content">⚠️ Tips</span>
+<span lang="ru" class="lang-content">⚠️ Советы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-xl text-emerald-700 mb-2">✅ <span lang="kk" class="lang-content">Жасау керек</span><span lang="en" class="lang-content">Do</span><span lang="ru" class="lang-content">Нужно</span></p>
+<ul class="space-y-1 text-slate-700 text-sm">
+<li>🎯 <span lang="kk" class="lang-content">1–3 ереже ғана — артықшылық көп шатастырады</span><span lang="en" class="lang-content">1–3 rules max — more confuses</span><span lang="ru" class="lang-content">1–3 правила, больше — сумбур</span></li>
+<li>🌈 <span lang="kk" class="lang-content">Дальтон үшін: түс + белгішені қос</span><span lang="en" class="lang-content">For colorblind: color + icon</span><span lang="ru" class="lang-content">Для дальтоников: цвет + иконка</span></li>
+<li>🧪 <span lang="kk" class="lang-content">Үлкен диапазонда шектеу (миллион жол → баяу)</span><span lang="en" class="lang-content">Limit huge ranges — it slows down</span><span lang="ru" class="lang-content">Не применяй на 1 млн строк сразу</span></li>
+</ul></div>
+
+<div class="card-rose rounded-custom p-6">
+<p class="heading-font text-xl text-rose-700 mb-2">❌ <span lang="kk" class="lang-content">Қатерлер</span><span lang="en" class="lang-content">Don'ts</span><span lang="ru" class="lang-content">Нельзя</span></p>
+<ul class="space-y-1 text-slate-700 text-sm">
+<li>🚫 <span lang="kk" class="lang-content">7 түрлі түс қосу — көз тозады</span><span lang="en" class="lang-content">7 colors — eyes tired</span><span lang="ru" class="lang-content">7 разных цветов — глаза устанут</span></li>
+<li>🚫 <span lang="kk" class="lang-content">Ережелер қайшы болса — реті маңызды (Manage Rules)</span><span lang="en" class="lang-content">Conflicting rules — order matters</span><span lang="ru" class="lang-content">Конфликт правил — важен порядок</span></li>
+<li>🚫 <span lang="kk" class="lang-content">Фильтрлеу орнына шартты пішімдеу — керемет емес</span><span lang="en" class="lang-content">Don't replace filtering</span><span lang="ru" class="lang-content">Не заменяй фильтрацию</span></li>
+</ul></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎨</div>
+<p class="heading-font text-xl text-sky-700 mb-2">5 <span lang="kk" class="lang-content">топ ереже</span><span lang="en" class="lang-content">rule types</span><span lang="ru" class="lang-content">групп правил</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">👁</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Көзбен көру</span><span lang="en" class="lang-content">See at a glance</span><span lang="ru" class="lang-content">Видно глазом</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚙️</div>
+<p class="heading-font text-xl text-sky-700 mb-2">Custom formula</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">ең күшті нұсқа</span><span lang="en" class="lang-content">most powerful</span><span lang="ru" class="lang-content">самое мощное</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

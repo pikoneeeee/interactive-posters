@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Управление с клавиатуры</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Ойын жасау</span>
+<span lang="en" class="lang-content">Grade 9 · Game dev</span>
+<span lang="ru" class="lang-content">9 класс · Геймдев</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Пернетақтамен басқару</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Keyboard control</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Управление с клавиатуры</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⌨️ 2 басқару стилі</span>
+<span lang="en" class="lang-content">⌨️ Two input styles</span>
+<span lang="ru" class="lang-content">⌨️ 2 стиля управления</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content">PyGame-де пернеге <b>2 тәсілмен</b> жауап береміз: <b>«оқиғалар» (events)</b> — перне <b>бір рет</b> басылғанда (секіру, оқ ату, мәзір), және <b>«күйі» (state)</b> — перне <b>ұсталып тұрғанда</b> (жүру, ұшу). Дұрыс стильді таңдау — <b>ойынның сезімін</b> анықтайды. Marioдегі секіру — event, жүру — state!</span>
+<span lang="en" class="lang-content">PyGame offers <b>two</b> ways to read keys: <b>events</b> (a key is <b>just pressed</b> — for jump, shoot, menu) and <b>state</b> (<b>currently held down</b> — for walking, flying). Picking the right style defines how the game <b>feels</b>. In Mario, jump = event, running = state!</span>
+<span lang="ru" class="lang-content">В PyGame клавиши читаются <b>двумя</b> способами: <b>события</b> (клавиша <b>только что нажата</b> — прыжок, выстрел, меню) и <b>состояние</b> (клавиша <b>удерживается</b> — ходьба, полёт). Выбор стиля определяет <b>ощущения</b> игры. У Марио: прыжок = event, бег = state!</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Стиль 1 — Event (KEYDOWN)</span>
+<span lang="en" class="lang-content">⚡ Style 1 — Event (KEYDOWN)</span>
+<span lang="ru" class="lang-content">⚡ Стиль 1 — Event (KEYDOWN)</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">for</span> e <span class="kw">in</span> pygame.event.<span class="fn">get</span>():
+    <span class="kw">if</span> e.type == pygame.QUIT:
+        pygame.<span class="fn">quit</span>(); sys.<span class="fn">exit</span>()
+
+    <span class="kw">if</span> e.type == pygame.KEYDOWN:
+        <span class="kw">if</span> e.key == pygame.K_SPACE:
+            <span class="fn">jump</span>()            <span class="com"># <span lang="kk" class="lang-content">1 рет секіру</span>jump once<span lang="ru" class="lang-content">1 прыжок</span></span>
+        <span class="kw">elif</span> e.key == pygame.K_ESCAPE:
+            <span class="fn">open_menu</span>()
+        <span class="kw">elif</span> e.key == pygame.K_r:
+            <span class="fn">reload</span>()          <span class="com"># <span lang="kk" class="lang-content">оқ салу</span>reload<span lang="ru" class="lang-content">перезарядка</span></span>
+
+    <span class="kw">if</span> e.type == pygame.KEYUP:
+        <span class="kw">if</span> e.key == pygame.K_SPACE:
+            <span class="fn">stop_charging</span>()   <span class="com"># <span lang="kk" class="lang-content">жіберілді</span>released<span lang="ru" class="lang-content">отпустили</span></span>
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 KEYDOWN = <b>«жаңа ғана»</b> басты; KEYUP = <b>«жіберді»</b>. Бір басу — бір оқиға.</span>
+<span lang="en" class="lang-content">💡 KEYDOWN = <b>just pressed</b>; KEYUP = <b>released</b>. One press = one event.</span>
+<span lang="ru" class="lang-content">💡 KEYDOWN = <b>только что нажата</b>; KEYUP = <b>отпустили</b>. Одно нажатие — одно событие.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏃 Стиль 2 — State (get_pressed)</span>
+<span lang="en" class="lang-content">🏃 Style 2 — State (get_pressed)</span>
+<span lang="ru" class="lang-content">🏃 Стиль 2 — State (get_pressed)</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="com"># ... event loop ...</span>
+
+    keys = pygame.key.<span class="fn">get_pressed</span>()   <span class="com"># <span lang="kk" class="lang-content">бүкіл пернетақта күйі</span>full keyboard state<span lang="ru" class="lang-content">состояние всех клавиш</span></span>
+
+    <span class="kw">if</span> keys[pygame.K_LEFT]:
+        hero_rect.x -= SPEED
+    <span class="kw">if</span> keys[pygame.K_RIGHT]:
+        hero_rect.x += SPEED
+    <span class="kw">if</span> keys[pygame.K_UP]:
+        hero_rect.y -= SPEED
+    <span class="kw">if</span> keys[pygame.K_DOWN]:
+        hero_rect.y += SPEED
+
+    <span class="com"># <span lang="kk" class="lang-content">Shift басылса — жүгіру</span>Shift = run<span lang="ru" class="lang-content">Shift — бег</span></span>
+    speed = SPEED * (<span class="num">2</span> <span class="kw">if</span> keys[pygame.K_LSHIFT] <span class="kw">else</span> <span class="num">1</span>)
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 <b>Ұсталып тұруды</b> тексереді — перне әр кадрда кодты шақырады.</span>
+<span lang="en" class="lang-content">💡 Checks <b>whether a key is held</b> — fires every frame while held.</span>
+<span lang="ru" class="lang-content">💡 Проверяет <b>удержание</b> — срабатывает каждый кадр, пока нажата.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎹 Негізгі перне атаулары</span>
+<span lang="en" class="lang-content">🎹 Key constants cheat-sheet</span>
+<span lang="ru" class="lang-content">🎹 Имена клавиш</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t"><thead><tr>
+<th><span lang="kk" class="lang-content">Перне</span><span lang="en" class="lang-content">Key</span><span lang="ru" class="lang-content">Клавиша</span></th>
+<th>PyGame</th>
+<th><span lang="kk" class="lang-content">Перне</span><span lang="en" class="lang-content">Key</span><span lang="ru" class="lang-content">Клавиша</span></th>
+<th>PyGame</th>
+</tr></thead><tbody>
+<tr><td>←</td><td>K_LEFT</td><td>Space</td><td>K_SPACE</td></tr>
+<tr><td>→</td><td>K_RIGHT</td><td>Enter</td><td>K_RETURN</td></tr>
+<tr><td>↑</td><td>K_UP</td><td>Esc</td><td>K_ESCAPE</td></tr>
+<tr><td>↓</td><td>K_DOWN</td><td>Tab</td><td>K_TAB</td></tr>
+<tr><td>A · D · W · S</td><td>K_a · K_d · K_w · K_s</td><td>Shift</td><td>K_LSHIFT</td></tr>
+<tr><td>1 … 9</td><td>K_1 … K_9</td><td>Ctrl</td><td>K_LCTRL</td></tr>
+<tr><td>F1 … F12</td><td>K_F1 … K_F12</td><td>Backspace</td><td>K_BACKSPACE</td></tr>
+</tbody></table></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎮 Танымал сызбалар</span>
+<span lang="en" class="lang-content">🎮 Popular layouts</span>
+<span lang="ru" class="lang-content">🎮 Популярные схемы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-2xl p-5 text-center">
+<p class="heading-font text-sky-700 mb-2">🎯 WASD</p>
+<div class="text-3xl mb-2">🔼<br>◀️▼▶️</div>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">CS, Minecraft</span><span lang="en" class="lang-content">CS, Minecraft</span><span lang="ru" class="lang-content">CS, Minecraft</span></p></div>
+
+<div class="card rounded-2xl p-5 text-center">
+<p class="heading-font text-sky-700 mb-2">⬆️ Arrows</p>
+<div class="text-3xl mb-2">⬆️<br>⬅️⬇️➡️</div>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Tetris, Mario</span><span lang="en" class="lang-content">Tetris, Mario</span><span lang="ru" class="lang-content">Tetris, Mario</span></p></div>
+
+<div class="card rounded-2xl p-5 text-center">
+<p class="heading-font text-sky-700 mb-2">♟ IJKL</p>
+<div class="text-3xl mb-2">I<br>J K L</div>
+<p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">2-ойыншыға ыңғайлы</span><span lang="en" class="lang-content">P2 in split-screen</span><span lang="ru" class="lang-content">для 2-го игрока</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧩 Толық мини-мысал</span>
+<span lang="en" class="lang-content">🧩 Complete mini-example</span>
+<span lang="ru" class="lang-content">🧩 Полный мини-пример</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+<span class="kw">import</span> pygame, sys
+pygame.<span class="fn">init</span>()
+screen = pygame.display.<span class="fn">set_mode</span>((<span class="num">800</span>, <span class="num">600</span>))
+clock  = pygame.time.<span class="fn">Clock</span>()
+
+player = pygame.<span class="fn">Rect</span>(<span class="num">380</span>, <span class="num">280</span>, <span class="num">40</span>, <span class="num">40</span>)
+SPEED  = <span class="num">5</span>
+
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="kw">for</span> e <span class="kw">in</span> pygame.event.<span class="fn">get</span>():
+        <span class="kw">if</span> e.type == pygame.QUIT: sys.<span class="fn">exit</span>()
+
+    k = pygame.key.<span class="fn">get_pressed</span>()
+    <span class="kw">if</span> k[pygame.K_LEFT]  <span class="kw">or</span> k[pygame.K_a]: player.x -= SPEED
+    <span class="kw">if</span> k[pygame.K_RIGHT] <span class="kw">or</span> k[pygame.K_d]: player.x += SPEED
+    <span class="kw">if</span> k[pygame.K_UP]    <span class="kw">or</span> k[pygame.K_w]: player.y -= SPEED
+    <span class="kw">if</span> k[pygame.K_DOWN]  <span class="kw">or</span> k[pygame.K_s]: player.y += SPEED
+
+    player.<span class="fn">clamp_ip</span>(screen.<span class="fn">get_rect</span>())
+
+    screen.<span class="fn">fill</span>((<span class="num">15</span>, <span class="num">23</span>, <span class="num">42</span>))
+    pygame.draw.<span class="fn">rect</span>(screen, (<span class="num">14</span>, <span class="num">165</span>, <span class="num">233</span>), player, border_radius=<span class="num">8</span>)
+    pygame.display.<span class="fn">flip</span>()
+    clock.<span class="fn">tick</span>(<span class="num">60</span>)
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 <code>clamp_ip</code> — ойыншыны экран шегінде ұстап тұрады. «or K_a» — WASD + arrows бірге жұмыс істеуі.</span>
+<span lang="en" class="lang-content">💡 <code>clamp_ip</code> keeps player inside the screen. «or K_a» lets WASD + arrows both work.</span>
+<span lang="ru" class="lang-content">💡 <code>clamp_ip</code> удерживает игрока в пределах экрана. «or K_a» — работают и WASD, и стрелки.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Жиі қателер</span>
+<span lang="en" class="lang-content">⚠️ Common mistakes</span>
+<span lang="ru" class="lang-content">⚠️ Частые ошибки</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🔁</div><p class="heading-font text-red-700 text-sm">KEYDOWN <span lang="kk" class="lang-content">қозғалысқа</span><span lang="en" class="lang-content">for movement</span><span lang="ru" class="lang-content">для движения</span></p><p class="text-slate-600 text-xs">→ <span lang="kk" class="lang-content">тайғақтау</span><span lang="en" class="lang-content">→ jittery</span><span lang="ru" class="lang-content">→ дёргается</span></p></div>
+<div class="tile"><div class="tile-emoji">⚡</div><p class="heading-font text-red-700 text-sm">state <span lang="kk" class="lang-content">секіруге</span><span lang="en" class="lang-content">for jump</span><span lang="ru" class="lang-content">для прыжка</span></p><p class="text-slate-600 text-xs">→ <span lang="kk" class="lang-content">ұшып кетеді</span><span lang="en" class="lang-content">→ fly-away</span><span lang="ru" class="lang-content">→ улетает</span></p></div>
+<div class="tile"><div class="tile-emoji">🚫</div><p class="heading-font text-red-700 text-sm">pygame.event.get()</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">шақырмаса — қатады</span><span lang="en" class="lang-content">→ freezes</span><span lang="ru" class="lang-content">→ зависает</span></p></div>
+<div class="tile"><div class="tile-emoji">🇷🇺</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">K_а · кириллица</span><span lang="en" class="lang-content">Cyrillic keys</span><span lang="ru" class="lang-content">Кириллическая раскл.</span></p><p class="text-slate-600 text-xs">→ <span lang="kk" class="lang-content">ESC кейін</span><span lang="en" class="lang-content">use K_a (lat.)</span><span lang="ru" class="lang-content">латинские коды</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">KEYDOWN = <span lang="kk" class="lang-content">1 рет</span><span lang="en" class="lang-content">once</span><span lang="ru" class="lang-content">разово</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🏃</div>
+<p class="heading-font text-xl text-sky-700 mb-2">get_pressed = <span lang="kk" class="lang-content">ұсталып</span><span lang="en" class="lang-content">held</span><span lang="ru" class="lang-content">удерж.</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎮</div>
+<p class="heading-font text-xl text-sky-700 mb-2">WASD + arrows</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

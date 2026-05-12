@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Условия и столкновения</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Ойын жасау</span>
+<span lang="en" class="lang-content">Grade 9 · Game dev</span>
+<span lang="ru" class="lang-content">9 класс · Геймдев</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шарттар мен соқтығысулар</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Conditions &amp; collisions</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Условия и столкновения</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💥 Соқтығысу — не үшін?</span>
+<span lang="en" class="lang-content">💥 Why collisions?</span>
+<span lang="ru" class="lang-content">💥 Зачем нужны столкновения?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Соқтығысу (collision)</b> — екі объекттің <b>түйісуін</b> тану. Онсыз ойын мүмкін емес: Mario жерге түсу, Pac-Man жегу, Counter-Strike оққа тию — бәрі collision-ға сүйенеді. Негізгі сұрақ: «<b>осы 2 Rect қиылысады ма?</b>». PyGame-де <code>rect.colliderect()</code>, <code>colliderect</code>, <code>spritecollide()</code> дайын тұр. Күрделі пішіндер үшін <b>маска</b> (пиксель-дәл) немесе <b>SAT</b> алгоритмі қолданылады.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Collision detection</b> means noticing two objects <b>touching</b>. It's the glue of every game: Mario landing on a brick, Pac-Man eating a dot, Counter-Strike bullet hits — all collisions. The core question: «<b>do these 2 rects overlap?</b>». PyGame offers <code>colliderect()</code>, <code>spritecollide()</code>. For complex shapes use <b>pixel masks</b> or <b>SAT</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Обнаружение столкновений</b> — определить, <b>коснулись</b> ли два объекта. Это «клей» любой игры: приземление Марио, поедание точек Pac-Man, попадание пули в CS — везде столкновения. Главный вопрос: «<b>пересекаются ли эти 2 Rect?</b>». В PyGame есть <code>colliderect()</code>, <code>spritecollide()</code>. Для сложных форм — <b>пиксельные маски</b> или <b>SAT</b>.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📦 AABB — ең қарапайым тексеру</span>
+<span lang="en" class="lang-content">📦 AABB — simplest test</span>
+<span lang="ru" class="lang-content">📦 AABB — простейшая проверка</span></h2>
+<div class="card rounded-custom p-8">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 560 220" style="width:100%;max-width:560px">
+<g font-family="'JetBrains Mono',monospace" font-size="13">
+<rect x="40"  y="50" width="160" height="110" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/>
+<rect x="150" y="100" width="140" height="90" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+<rect x="150" y="100" width="50" height="60" fill="#fb923c" stroke="#9a3412" stroke-width="2" opacity="0.7"/>
+<text x="65" y="45" fill="#0369a1" font-weight="bold">A</text>
+<text x="280" y="95" fill="#b45309" font-weight="bold">B</text>
+<text x="155" y="150" font-weight="bold" fill="#9a3412">overlap</text>
+
+<text x="340" y="35" fill="#0369a1" font-weight="bold">A.right  &gt; B.left</text>
+<text x="340" y="60" fill="#0369a1" font-weight="bold">A.left   &lt; B.right</text>
+<text x="340" y="85" fill="#0369a1" font-weight="bold">A.bottom &gt; B.top</text>
+<text x="340" y="110" fill="#0369a1" font-weight="bold">A.top    &lt; B.bottom</text>
+<text x="340" y="145" fill="#9a3412" font-weight="bold">→ collision ✔️</text>
+
+<text x="340" y="180" fill="#64748b" font-size="11">AABB = Axis-Aligned Bounding Box</text>
+</g></svg></div>
+
+<div class="code-block">
+<span class="com"># <span lang="kk" class="lang-content">қолмен</span>manual<span lang="ru" class="lang-content">вручную</span></span>
+<span class="kw">def</span> <span class="fn">overlap</span>(a, b):
+    <span class="kw">return</span> (a.right &gt; b.left <span class="kw">and</span> a.left &lt; b.right
+        <span class="kw">and</span> a.bottom &gt; b.top <span class="kw">and</span> a.top &lt; b.bottom)
+
+<span class="com"># <span lang="kk" class="lang-content">PyGame-да дайын</span>PyGame built-in<span lang="ru" class="lang-content">встроено в PyGame</span></span>
+<span class="kw">if</span> hero_rect.<span class="fn">colliderect</span>(enemy_rect):
+    <span class="fn">game_over</span>()
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Collision — 6 түрі</span>
+<span lang="en" class="lang-content">🛠 6 collision types</span>
+<span lang="ru" class="lang-content">🛠 6 видов столкновений</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">📦 rect ↔ rect</p>
+<div class="code-block text-xs">a.colliderect(b)</div>
+<p class="text-slate-600 text-xs mt-1">AABB, O(1)</p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">📌 <span lang="kk" class="lang-content">нүкте ↔ rect</span><span lang="en" class="lang-content">point ↔ rect</span><span lang="ru" class="lang-content">точка ↔ rect</span></p>
+<div class="code-block text-xs">rect.collidepoint(x, y)</div>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">тышқанды шертуге</span><span lang="en" class="lang-content">mouse click</span><span lang="ru" class="lang-content">клик мыши</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">🔵 <span lang="kk" class="lang-content">шеңбер ↔ шеңбер</span><span lang="en" class="lang-content">circle ↔ circle</span><span lang="ru" class="lang-content">круг ↔ круг</span></p>
+<div class="code-block text-xs">dist(c1, c2) &lt; r1 + r2</div></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">📋 <span lang="kk" class="lang-content">тізіммен</span><span lang="en" class="lang-content">rect ↔ list</span><span lang="ru" class="lang-content">rect ↔ список</span></p>
+<div class="code-block text-xs">rect.collidelist(rects)</div>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">индекс немесе -1</span><span lang="en" class="lang-content">index or -1</span><span lang="ru" class="lang-content">индекс или -1</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">👥 sprite ↔ group</p>
+<div class="code-block text-xs">spritecollide(s, group, True)</div>
+<p class="text-slate-600 text-xs mt-1">True → <span lang="kk" class="lang-content">өлтіру</span><span lang="en" class="lang-content">kill</span><span lang="ru" class="lang-content">удалить</span></p></div>
+
+<div class="card rounded-2xl p-5">
+<p class="heading-font text-sky-700 mb-1">🎭 <span lang="kk" class="lang-content">пиксель-маска</span><span lang="en" class="lang-content">pixel mask</span><span lang="ru" class="lang-content">пиксельная маска</span></p>
+<div class="code-block text-xs">mask.overlap(other, offset)</div>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">дәл, баяу</span><span lang="en" class="lang-content">precise, slow</span><span lang="ru" class="lang-content">точно, но медленно</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎮 Толық мысал — монеталар</span>
+<span lang="en" class="lang-content">🎮 Full example — coins</span>
+<span lang="ru" class="lang-content">🎮 Полный пример — монетки</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+coins = [pygame.<span class="fn">Rect</span>(random.<span class="fn">randint</span>(<span class="num">0</span>, <span class="num">760</span>),
+                      random.<span class="fn">randint</span>(<span class="num">0</span>, <span class="num">560</span>), <span class="num">30</span>, <span class="num">30</span>)
+         <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">10</span>)]
+score = <span class="num">0</span>
+
+<span class="kw">while</span> <span class="num">True</span>:
+    <span class="com"># ... event + input loop ...</span>
+
+    <span class="com"># 🪙 <span lang="kk" class="lang-content">монетамен соқтығысу</span>coin collision<span lang="ru" class="lang-content">столкновение с монеткой</span></span>
+    hit = player.<span class="fn">collidelist</span>(coins)
+    <span class="kw">if</span> hit != -<span class="num">1</span>:
+        coins.<span class="fn">pop</span>(hit)         <span class="com"># <span lang="kk" class="lang-content">жинау</span>collect<span lang="ru" class="lang-content">собираем</span></span>
+        score += <span class="num">10</span>
+
+    <span class="com"># 👹 <span lang="kk" class="lang-content">жаумен соқтығысу</span>enemy hit<span lang="ru" class="lang-content">касание врага</span></span>
+    <span class="kw">if</span> player.<span class="fn">colliderect</span>(enemy):
+        <span class="fn">game_over</span>()
+
+    <span class="com"># 🗺 <span lang="kk" class="lang-content">экран шегі</span>screen bounds<span lang="ru" class="lang-content">границы экрана</span></span>
+    player.<span class="fn">clamp_ip</span>(screen.<span class="fn">get_rect</span>())
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏞 Жерге түсу (platformer)</span>
+<span lang="en" class="lang-content">🏞 Landing (platformer)</span>
+<span lang="ru" class="lang-content">🏞 Приземление (платформер)</span></h2>
+<div class="card rounded-custom p-8">
+<div class="code-block">
+vel_y += GRAVITY
+player.y += vel_y
+
+on_ground = <span class="num">False</span>
+<span class="kw">for</span> platform <span class="kw">in</span> platforms:
+    <span class="kw">if</span> player.<span class="fn">colliderect</span>(platform) <span class="kw">and</span> vel_y &gt; <span class="num">0</span>:
+        player.bottom = platform.top    <span class="com"># <span lang="kk" class="lang-content">тура үстіне орнат</span>snap on top<span lang="ru" class="lang-content">встаёт ровно</span></span>
+        vel_y = <span class="num">0</span>
+        on_ground = <span class="num">True</span>
+</div>
+<p class="text-slate-500 text-sm mt-3"><span lang="kk" class="lang-content">💡 <b>Разделить осі</b>: X-ті, сосын Y-ті жеке тексер → қабырғада тұрып қалмайсың.</span>
+<span lang="en" class="lang-content">💡 Resolve <b>X then Y separately</b> — avoids getting stuck on walls.</span>
+<span lang="ru" class="lang-content">💡 Сначала X, потом Y — чтобы не залипать в стенах.</span></p>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Соқтығысудағы тұзақтар</span>
+<span lang="en" class="lang-content">⚠️ Collision traps</span>
+<span lang="ru" class="lang-content">⚠️ Ловушки столкновений</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🌪</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Тезтік ≥ өлшем</span><span lang="en" class="lang-content">Tunneling</span><span lang="ru" class="lang-content">Туннелирование</span></p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">оқ өтеді!</span><span lang="en" class="lang-content">bullet passes!</span><span lang="ru" class="lang-content">пуля пролетает!</span></p></div>
+<div class="tile"><div class="tile-emoji">🔳</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Үлкен Rect</span><span lang="en" class="lang-content">Rect too big</span><span lang="ru" class="lang-content">Большой Rect</span></p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">hitbox кішірей</span><span lang="en" class="lang-content">shrink hitbox</span><span lang="ru" class="lang-content">уменьши хитбокс</span></p></div>
+<div class="tile"><div class="tile-emoji">🔁</div><p class="heading-font text-red-700 text-sm"><span lang="kk" class="lang-content">Цикл ішінде өшіру</span><span lang="en" class="lang-content">Delete in loop</span><span lang="ru" class="lang-content">Удаление в цикле</span></p></div>
+<div class="tile"><div class="tile-emoji">⚡</div><p class="heading-font text-red-700 text-sm">O(n²)</p><p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">100+ объект → lag</span><span lang="en" class="lang-content">100+ objects lag</span><span lang="ru" class="lang-content">100+ — лаг</span></p></div>
+</div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📦</div>
+<p class="heading-font text-xl text-sky-700 mb-2">a.colliderect(b)</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📋</div>
+<p class="heading-font text-xl text-sky-700 mb-2">rect.collidelist</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧭</div>
+<p class="heading-font text-xl text-sky-700 mb-2">X<span lang="kk" class="lang-content">, сосын</span><span lang="en" class="lang-content">, then</span><span lang="ru" class="lang-content">, потом</span> Y</p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>

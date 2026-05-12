@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Моделирование процессов в Excel</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_i2_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Excel</span>
+<span lang="en" class="lang-content">Grade 7 · Excel</span>
+<span lang="ru" class="lang-content">7 класс · Excel</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Excel-де процестерді модельдеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Process modelling in Excel</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Моделирование процессов в Excel</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">Модель — не?</span>
+<span lang="en" class="lang-content">What is a model?</span>
+<span lang="ru" class="lang-content">Что такое модель?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Модель</b> — шынайы құбылыстың «жеңілдетілген көшірмесі». Нағыз үйдің орнына — сурет-сызба, нағыз ауа-райының орнына — болжау формуласы. Excel-де модель = <b>формулалар жиынтығы</b>, ол «<b>не болады, егер...?</b>» деген сұрауға секундта жауап береді. Мысалы: «Жалақымды 15% өсірсем — жыл соңында қанша жинаймын?». Инженер жаңа көпірдің жүктемесін, экономист ел экономикасын, мектеп оқушысы зейнеткерлік қорын — бәрі Excel-мен модельдейді.</span>
+<span lang="en" class="lang-content">A <b class="text-sky-700">model</b> is a «simplified copy» of reality. Instead of a real house — a blueprint; instead of real weather — a forecasting formula. In Excel, a model is a set of <b>formulas</b> that answer «<b>what if…?</b>» in seconds. «If salary grows 15% — how much do I save by December?». Engineers model bridge loads, economists model the national economy, students model pocket-money savings — all in Excel.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Модель</b> — упрощённая копия реальности. Вместо настоящего дома — чертёж, вместо настоящей погоды — формула прогноза. В Excel модель = набор <b>формул</b>, отвечающий за секунды на вопрос «<b>что будет, если…?</b>». «Если зарплата вырастет на 15%, сколько накоплю к декабрю?». Инженер моделирует нагрузку моста, экономист — экономику страны, школьник — копилку. Всё это — Excel.</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+<div class="card-accent rounded-xl p-4 text-center"><div class="text-3xl">🎯</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Мақсаты</span><span lang="en" class="lang-content">Goal</span><span lang="ru" class="lang-content">Цель</span></p></div>
+<div class="card-accent rounded-xl p-4 text-center"><div class="text-3xl">📥</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Кіріс</span><span lang="en" class="lang-content">Input</span><span lang="ru" class="lang-content">Вход</span></p></div>
+<div class="card-accent rounded-xl p-4 text-center"><div class="text-3xl">⚙️</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Формулалар</span><span lang="en" class="lang-content">Formulas</span><span lang="ru" class="lang-content">Формулы</span></p></div>
+<div class="card-accent rounded-xl p-4 text-center"><div class="text-3xl">📤</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Шығыс</span><span lang="en" class="lang-content">Output</span><span lang="ru" class="lang-content">Выход</span></p></div>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Модель жасау 6 қадамы</span>
+<span lang="en" class="lang-content">📐 Building a model — 6 steps</span>
+<span lang="ru" class="lang-content">📐 Построение модели — 6 шагов</span></h2>
+<div class="card rounded-custom p-8">
+<ol class="space-y-3 text-slate-700 text-lg">
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">1</span>
+<span><b class="text-sky-700"><span lang="kk" class="lang-content">Мақсат</span><span lang="en" class="lang-content">Goal</span><span lang="ru" class="lang-content">Цель</span></b> — <span lang="kk" class="lang-content">«Не есептеп шығару керек?»</span><span lang="en" class="lang-content">«What am I calculating?»</span><span lang="ru" class="lang-content">«Что нужно посчитать?»</span></span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">2</span>
+<span><b class="text-sky-700"><span lang="kk" class="lang-content">Параметрлер</span><span lang="en" class="lang-content">Parameters</span><span lang="ru" class="lang-content">Параметры</span></b> — <span lang="kk" class="lang-content">өзгертуге болатын сандар (жалақы, %)</span><span lang="en" class="lang-content">inputs you can change (salary, %)</span><span lang="ru" class="lang-content">числа, которые можно менять</span></span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">3</span>
+<span><b class="text-sky-700"><span lang="kk" class="lang-content">Тұрақтылар</span><span lang="en" class="lang-content">Constants</span><span lang="ru" class="lang-content">Константы</span></b> — π, <span lang="kk" class="lang-content">салық мөлшері</span><span lang="en" class="lang-content">tax rate</span><span lang="ru" class="lang-content">ставка налога</span></span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">4</span>
+<span><b class="text-sky-700"><span lang="kk" class="lang-content">Формулалар</span><span lang="en" class="lang-content">Formulas</span><span lang="ru" class="lang-content">Формулы</span></b> — <span lang="kk" class="lang-content">математикалық қатынас</span><span lang="en" class="lang-content">math relations</span><span lang="ru" class="lang-content">связи между ячейками</span></span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">5</span>
+<span><b class="text-sky-700"><span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Результат</span></b> — <span lang="kk" class="lang-content">бір көзге көрінетін ұяшық</span><span lang="en" class="lang-content">one highlighted cell</span><span lang="ru" class="lang-content">одна выделенная ячейка</span></span></li>
+<li class="flex gap-3"><span class="badge" style="min-width:32px;text-align:center">6</span>
+<span><b class="text-sky-700"><span lang="kk" class="lang-content">Талдау (What-If)</span><span lang="en" class="lang-content">Analysis (What-If)</span><span lang="ru" class="lang-content">Анализ (What-If)</span></b> — <span lang="kk" class="lang-content">параметрлерді өзгертіп, нәтижені бақылау</span><span lang="en" class="lang-content">change inputs, watch result</span><span lang="ru" class="lang-content">меняй входы, смотри результат</span></span></li>
+</ol></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💰 Мысал 1 — жинақтау моделі</span>
+<span lang="en" class="lang-content">💰 Example 1 — savings model</span>
+<span lang="ru" class="lang-content">💰 Пример 1 — модель накоплений</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4"><span lang="kk" class="lang-content">Әр ай <b>x ₸</b> салсам, <b>y% жылдық</b> пайызбен, <b>N ай</b>-да қанша жинаймын?</span>
+<span lang="en" class="lang-content">Depositing <b>x ₸</b> per month at <b>y% annual</b> rate — how much after <b>N months</b>?</span>
+<span lang="ru" class="lang-content">Вкладываем <b>x ₸</b> в месяц под <b>y% годовых</b> — сколько будет через <b>N месяцев</b>?</span></p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">Параметрлер</span><span lang="en" class="lang-content">Parameters</span><span lang="ru" class="lang-content">Параметры</span></p>
+<table class="t text-sm"><tbody>
+<tr><td>B1</td><td><span lang="kk" class="lang-content">Ай сайын (₸)</span><span lang="en" class="lang-content">Monthly (₸)</span><span lang="ru" class="lang-content">В месяц (₸)</span></td><td>20 000</td></tr>
+<tr><td>B2</td><td><span lang="kk" class="lang-content">Жылдық %</span><span lang="en" class="lang-content">Annual %</span><span lang="ru" class="lang-content">% годовых</span></td><td>12%</td></tr>
+<tr><td>B3</td><td><span lang="kk" class="lang-content">Ай саны</span><span lang="en" class="lang-content">Months</span><span lang="ru" class="lang-content">Месяцев</span></td><td>12</td></tr>
+</tbody></table></div>
+
+<div class="card rounded-xl p-4">
+<p class="heading-font text-sky-700 mb-2"><span lang="kk" class="lang-content">Формулалар</span><span lang="en" class="lang-content">Formulas</span><span lang="ru" class="lang-content">Формулы</span></p>
+<div class="code-block text-sm">
+<span class="com"># <span lang="kk" class="lang-content">ай сайынғы пайыз</span>monthly rate<span lang="ru" class="lang-content">мес. ставка</span></span>
+C1 = B2 / <span class="num">12</span>
+<span class="com"># <span lang="kk" class="lang-content">болашақ сома</span>future value<span lang="ru" class="lang-content">итог</span></span>
+C2 = B1 * ((<span class="num">1</span>+C1)^B3 - <span class="num">1</span>) / C1
+</div></div></div>
+
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="heading-font text-sky-700 mb-1">📊 <span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Итог</span>:</p>
+<p class="text-slate-700 text-sm">12 <span lang="kk" class="lang-content">айдан кейін</span><span lang="en" class="lang-content">after 12 months</span><span lang="ru" class="lang-content">через 12 мес</span>: <b>~256 500 ₸</b> · <span lang="kk" class="lang-content">пайызсыз</span><span lang="en" class="lang-content">without interest</span><span lang="ru" class="lang-content">без %</span>: 240 000 ₸ → <b>+16 500 ₸</b> пайда.</p>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚗 Мысал 2 — көлік жолы</span>
+<span lang="en" class="lang-content">🚗 Example 2 — trip planner</span>
+<span lang="ru" class="lang-content">🚗 Пример 2 — планировщик поездки</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg mb-4"><span lang="kk" class="lang-content">Алматыдан Астанаға <b>1200 км</b>. Жанармай <b>8 л/100 км</b>, бензин <b>280 ₸/л</b>. Қанша уақыт пен ақша керек?</span>
+<span lang="en" class="lang-content">Almaty → Astana is <b>1200 km</b>. Fuel rate <b>8 l/100 km</b>, price <b>280 ₸/l</b>. How long &amp; how much?</span>
+<span lang="ru" class="lang-content">Алматы → Астана <b>1200 км</b>. Расход <b>8 л/100 км</b>, цена <b>280 ₸/л</b>. Сколько времени и денег?</span></p>
+
+<div class="code-block">
+<span class="com"># <span lang="kk" class="lang-content">Кіріс</span>Input<span lang="ru" class="lang-content">Вход</span>:</span>
+B1 = <span class="num">1200</span>  <span class="com"># <span lang="kk" class="lang-content">жол (км)</span>distance (km)<span lang="ru" class="lang-content">расстояние (км)</span></span>
+B2 = <span class="num">90</span>    <span class="com"># <span lang="kk" class="lang-content">орташа жылдамдық (км/сағ)</span>avg speed (km/h)<span lang="ru" class="lang-content">скорость (км/ч)</span></span>
+B3 = <span class="num">8</span>     <span class="com"># <span lang="kk" class="lang-content">жанармай л/100 км</span>fuel rate<span lang="ru" class="lang-content">расход</span></span>
+B4 = <span class="num">280</span>   <span class="com"># <span lang="kk" class="lang-content">бензин ₸/л</span>price ₸/l<span lang="ru" class="lang-content">цена ₸/л</span></span>
+
+<span class="com"># <span lang="kk" class="lang-content">Есептеулер</span>Computations<span lang="ru" class="lang-content">Вычисления</span>:</span>
+C1 = B1 / B2                   <span class="com"># <span lang="kk" class="lang-content">уақыт (сағ)</span>time<span lang="ru" class="lang-content">время</span>     → 13,3</span>
+C2 = B1 / <span class="num">100</span> * B3              <span class="com"># <span lang="kk" class="lang-content">жанармай (л)</span>fuel<span lang="ru" class="lang-content">топливо</span>   → 96</span>
+C3 = C2 * B4                   <span class="com"># <span lang="kk" class="lang-content">ақша (₸)</span>cost<span lang="ru" class="lang-content">стоимость</span>  → 26 880</span>
+</div>
+
+<div class="card-accent rounded-xl p-5 mt-5">
+<p class="text-slate-700 text-sm">💡 <b>What-If:</b> <span lang="kk" class="lang-content">B2-ні 110-ға өзгерт → уақыт 10,9 сағ. B4-ті 320-ға өзгерт → 30 720 ₸. Секундта тексересің.</span><span lang="en" class="lang-content">Change B2 to 110 → time 10.9 h. Change B4 to 320 → 30 720 ₸. Instant analysis.</span><span lang="ru" class="lang-content">B2 = 110 → время 10,9 ч. B4 = 320 → 30 720 ₸. Мгновенно.</span></p>
+</div></div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔍 What-If Analysis құралдары</span>
+<span lang="en" class="lang-content">🔍 What-If Analysis tools</span>
+<span lang="ru" class="lang-content">🔍 Инструменты What-If Analysis</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-custom p-6">
+<div class="text-5xl mb-2">🎯</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Goal Seek</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Excel кері есептейді: «нәтиже X болу үшін, кіріс қандай болу керек?»</span>
+<span lang="en" class="lang-content">Reverse: «what input gives result X?»</span>
+<span lang="ru" class="lang-content">Обратное: «какой вход даст результат X?»</span></p>
+<p class="text-slate-500 text-xs mt-2">Data → What-If → Goal Seek</p></div>
+
+<div class="card rounded-custom p-6">
+<div class="text-5xl mb-2">📋</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Data Table</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Бір/екі параметрді өзгертіп, барлық нәтижені <b>бір кестеге</b>.</span>
+<span lang="en" class="lang-content">Vary 1–2 inputs, see all outputs in one table.</span>
+<span lang="ru" class="lang-content">Варьирует 1–2 параметра, все результаты в одной таблице.</span></p></div>
+
+<div class="card rounded-custom p-6">
+<div class="text-5xl mb-2">📚</div>
+<p class="heading-font text-xl text-sky-700 mb-1">Scenario Manager</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Бірнеше «жағдай» (сценарий) сақтап, арасында ауыстыру.</span>
+<span lang="en" class="lang-content">Save multiple «scenarios» and switch.</span>
+<span lang="ru" class="lang-content">Сохраняет «сценарии» и переключает.</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Модель түрлері</span>
+<span lang="en" class="lang-content">📐 Types of models</span>
+<span lang="ru" class="lang-content">📐 Виды моделей</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">📈</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Математикалық</span><span lang="en" class="lang-content">Mathematical</span><span lang="ru" class="lang-content">Математическая</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">формулалар</span><span lang="en" class="lang-content">formulas</span><span lang="ru" class="lang-content">формулы</span></p></div>
+<div class="tile"><div class="tile-emoji">💰</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Қаржылық</span><span lang="en" class="lang-content">Financial</span><span lang="ru" class="lang-content">Финансовая</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">бюджет, несие</span><span lang="en" class="lang-content">budget, loan</span><span lang="ru" class="lang-content">бюджет, кредит</span></p></div>
+<div class="tile"><div class="tile-emoji">🌡</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Физикалық</span><span lang="en" class="lang-content">Physical</span><span lang="ru" class="lang-content">Физическая</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">қозғалыс, жылу</span><span lang="en" class="lang-content">motion, heat</span><span lang="ru" class="lang-content">движение, тепло</span></p></div>
+<div class="tile"><div class="tile-emoji">🧬</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Биологиялық</span><span lang="en" class="lang-content">Biological</span><span lang="ru" class="lang-content">Биологическая</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">популяция өсуі</span><span lang="en" class="lang-content">population growth</span><span lang="ru" class="lang-content">рост популяции</span></p></div>
+<div class="tile"><div class="tile-emoji">🎲</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Ықтималдық</span><span lang="en" class="lang-content">Probability</span><span lang="ru" class="lang-content">Вероятностная</span></p>
+<p class="text-slate-600 text-xs">Monte Carlo, RAND()</p></div>
+<div class="tile"><div class="tile-emoji">🏭</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Өндірістік</span><span lang="en" class="lang-content">Production</span><span lang="ru" class="lang-content">Производственная</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">өнім саны, шикізат</span><span lang="en" class="lang-content">output, materials</span><span lang="ru" class="lang-content">выпуск, сырьё</span></p></div>
+<div class="tile"><div class="tile-emoji">🗺</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Логистикалық</span><span lang="en" class="lang-content">Logistics</span><span lang="ru" class="lang-content">Логистическая</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">жол, уақыт</span><span lang="en" class="lang-content">route, time</span><span lang="ru" class="lang-content">маршрут, время</span></p></div>
+<div class="tile"><div class="tile-emoji">🌦</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Ауа-райы</span><span lang="en" class="lang-content">Weather</span><span lang="ru" class="lang-content">Погодная</span></p>
+<p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">болжау</span><span lang="en" class="lang-content">forecast</span><span lang="ru" class="lang-content">прогноз</span></p></div>
+</div></section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏆 Шынайы мысалдар</span>
+<span lang="en" class="lang-content">🏆 Real-world examples</span>
+<span lang="ru" class="lang-content">🏆 Реальные примеры</span></h2>
+<div class="card rounded-custom p-8">
+<ul class="space-y-2 text-slate-700">
+<li>🚀 <span lang="kk" class="lang-content">NASA ғарыш кемесінің жанармайын Excel-де есептейді (SpaceX стартың жүктемесі)</span><span lang="en" class="lang-content">NASA calculates launch fuel in Excel (SpaceX payload)</span><span lang="ru" class="lang-content">NASA рассчитывает топливо ракеты в Excel (груз SpaceX)</span></li>
+<li>🏦 <span lang="kk" class="lang-content">Банктер несие кестесін, депозит пайыздарын модельдейді</span><span lang="en" class="lang-content">Banks model loan &amp; deposit tables</span><span lang="ru" class="lang-content">Банки моделируют графики кредитов и депозитов</span></li>
+<li>🏥 <span lang="kk" class="lang-content">Ауруханалар пациенттер ағыны мен медикаменттерді</span><span lang="en" class="lang-content">Hospitals model patient flow and medication</span><span lang="ru" class="lang-content">Больницы моделируют поток пациентов и лекарств</span></li>
+<li>🌍 <span lang="kk" class="lang-content">БҰҰ жаһандық температура өзгерісін 50 жылға болжайды</span><span lang="en" class="lang-content">UN models climate change 50 years ahead</span><span lang="ru" class="lang-content">ООН моделирует изменение климата на 50 лет</span></li>
+<li>⚽ <span lang="kk" class="lang-content">Футбол клубтары тасымал нарқын</span><span lang="en" class="lang-content">Football clubs model transfer values</span><span lang="ru" class="lang-content">Футбольные клубы моделируют стоимость трансферов</span></li>
+</ul></div></section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span><span lang="en" class="lang-content">🎯 Remember</span><span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Модель — жеңілдетілген шындық</span><span lang="en" class="lang-content">Model = simplified reality</span><span lang="ru" class="lang-content">Модель — упрощённая реальность</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">❓</div>
+<p class="heading-font text-xl text-sky-700 mb-2">What-If?</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">кіріс → нәтиже</span><span lang="en" class="lang-content">input → output</span><span lang="ru" class="lang-content">вход → результат</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2"><span lang="kk" class="lang-content">Секундта қайта есептеу</span><span lang="en" class="lang-content">Instant recalc</span><span lang="ru" class="lang-content">Пересчёт мгновенно</span></p></div>
+</div></footer>
+
+</div>
+<script src="_i2_script.js"></script>
+</body></html>
