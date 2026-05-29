@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ток в полупроводниках. p-n переход</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · Жартылай өткізгіш</span>
+<span lang="en" class="lang-content">Grade 11 · Semiconductors</span>
+<span lang="ru" class="lang-content">11 класс · Полупроводники</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Жартылай өткізгіштердегі ток. p-n өту</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Current in semiconductors. p-n junction</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Ток в полупроводниках. p-n переход</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚛️ Жартылай өткізгіш — өткізгіш пен изолятор арасында</span>
+<span lang="en" class="lang-content">⚛️ Semiconductor — between conductor and insulator</span>
+<span lang="ru" class="lang-content">⚛️ Полупроводник — между проводником и изолятором</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Жартылай өткізгіштер</b> — салқын күйде кедергісі үлкен (изолятор сияқты), бірақ <b>қыздырғанда</b> немесе <b>қоспа қосқанда</b> жақсы өткізгішке айналатын материалдар. Маңызды өкілдері — <b>Si</b> (кремний) және <b>Ge</b> (германий). Олар <b>барлық заманауи электрониканың</b> негізі: транзистор, чип, күн батареясы, диод, светодиод!</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Semiconductors</b> have high resistance when cold but become good conductors when <b>heated</b> or <b>doped</b>. Key examples: <b>Si</b> (silicon) and <b>Ge</b> (germanium). They underpin <b>all modern electronics</b>: transistors, chips, solar cells, LEDs, diodes!</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Полупроводники</b> в холодном состоянии — почти изоляторы, но при <b>нагревании</b> или <b>примесях</b> становятся проводниками. Ключевые: <b>Si</b> (кремний) и <b>Ge</b> (германий) — основа <b>всей современной электроники</b>: транзисторы, чипы, солнечные батареи, светодиоды!</span></p>
+
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">⭐ <span lang="kk" class="lang-content">Металдан айырмашылығы:</span><span lang="en" class="lang-content">Different from metals:</span><span lang="ru" class="lang-content">Отличия от металла:</span></p>
+<ul class="text-slate-700 text-base list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content"><b>T ↑ → R ↓</b> (металдарда керісінше!)</span><span lang="en" class="lang-content"><b>T ↑ → R ↓</b> (opposite to metals!)</span><span lang="ru" class="lang-content"><b>T ↑ → R ↓</b> (в отличие от металлов!)</span></li>
+<li><span lang="kk" class="lang-content">Жарық <b>R</b>-ді кемітеді (фотоөткізгіштік)</span><span lang="en" class="lang-content">Light reduces R (photoconductivity)</span><span lang="ru" class="lang-content">Свет уменьшает R (фотопроводимость)</span></li>
+<li><span lang="kk" class="lang-content">Қоспа концентрациясы R-ді 10⁶ есе өзгертеді!</span><span lang="en" class="lang-content">Doping changes R by 10⁶ times!</span><span lang="ru" class="lang-content">Примеси меняют R в 10⁶ раз!</span></li>
+</ul>
+</div>
+</div>
+
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">💎</div>
+<p class="heading-font text-base text-indigo-700 text-center mb-2"><span lang="kk" class="lang-content">Si — 4 валенттік</span><span lang="en" class="lang-content">Si — 4 valence e⁻</span><span lang="ru" class="lang-content">Si — 4 валентных e⁻</span></p>
+<p class="text-center text-slate-600 text-sm">
+<span lang="kk" class="lang-content">Әр атом 4 көршісімен <b>ковалентті байланыс</b> жасайды.</span>
+<span lang="en" class="lang-content">Each atom forms <b>covalent bonds</b> with 4 neighbours.</span>
+<span lang="ru" class="lang-content">Каждый атом образует 4 <b>ковалентные связи</b>.</span></p>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Меншікті өткізгіштік: электрондар + «тесіктер»</span>
+<span lang="en" class="lang-content">⚡ Intrinsic conductivity: electrons + holes</span>
+<span lang="ru" class="lang-content">⚡ Собственная проводимость: электроны + «дырки»</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Қыздырғанда (немесе жарықтандырғанда) <b>ковалентті байланыс үзіледі</b> — электрон <b>еркін</b> болады, ал орнында <b>«тесік»</b> — оң заряд тасушы — пайда болады. Тесік <b>көрші байланыстан</b> электрон тартып, өзі көршіге <b>«секіреді»</b>. Сонымен <b>2 түрлі тасушы</b>: терісі (электрондар) және оңы (тесіктер)!</span>
+<span lang="en" class="lang-content">On heating (or illumination), <b>a covalent bond breaks</b>: an electron becomes free and leaves behind a <b>«hole»</b> — a positively-charged carrier. The hole hops to a neighbour as another electron jumps in. So there are <b>two carriers</b>: electrons (−) and holes (+)!</span>
+<span lang="ru" class="lang-content">При нагреве/освещении <b>рвётся ковалентная связь</b>: электрон уходит, а на его месте — <b>«дырка»</b> — положительный носитель. Соседний электрон может прыгнуть в дырку, и дырка «движется». Итог: <b>2 типа носителей</b> — электроны и дырки!</span></p>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧪 Қоспалы өткізгіштік: n- және p-түрі</span>
+<span lang="en" class="lang-content">🧪 Doped conductivity: n-type and p-type</span>
+<span lang="ru" class="lang-content">🧪 Примесная проводимость: n- и p-тип</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-indigo-700 mb-2 text-lg">➖ <span lang="kk" class="lang-content">n-түрі (донор)</span><span lang="en" class="lang-content">n-type (donor)</span><span lang="ru" class="lang-content">n-тип (донор)</span></p>
+<p class="text-slate-700 text-sm mb-3">
+<span lang="kk" class="lang-content">Si-ге <b>P, As</b> (5 валенттік) қосады. 5-ші электрон <b>еркін</b> қалады → <b>электрон</b> басым тасушы.</span>
+<span lang="en" class="lang-content">Si is doped with <b>P, As</b> (5 valence e⁻). Extra electron is free → <b>electrons are majority</b> carriers.</span>
+<span lang="ru" class="lang-content">В Si добавляют <b>P, As</b> (5 валентных e⁻). 5-й электрон свободен → <b>электроны — основные</b> носители.</span></p>
+<div class="badge badge-emerald"><span lang="kk" class="lang-content">Тасушы: e⁻</span><span lang="en" class="lang-content">Carriers: e⁻</span><span lang="ru" class="lang-content">Носители: e⁻</span></div>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-indigo-700 mb-2 text-lg">➕ <span lang="kk" class="lang-content">p-түрі (акцептор)</span><span lang="en" class="lang-content">p-type (acceptor)</span><span lang="ru" class="lang-content">p-тип (акцептор)</span></p>
+<p class="text-slate-700 text-sm mb-3">
+<span lang="kk" class="lang-content">Si-ге <b>B, Al</b> (3 валенттік) қосады. Бір <b>тесік</b> пайда болады → <b>тесіктер</b> басым.</span>
+<span lang="en" class="lang-content">Si is doped with <b>B, Al</b> (3 valence e⁻). A hole appears → <b>holes are majority</b> carriers.</span>
+<span lang="ru" class="lang-content">В Si добавляют <b>B, Al</b> (3 валентных e⁻). Появляется дырка → <b>дырки — основные</b> носители.</span></p>
+<div class="badge badge-rose"><span lang="kk" class="lang-content">Тасушы: тесіктер</span><span lang="en" class="lang-content">Carriers: holes</span><span lang="ru" class="lang-content">Носители: дырки</span></div>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔌 p-n өту — диодтың жүрегі</span>
+<span lang="en" class="lang-content">🔌 p-n junction — the heart of a diode</span>
+<span lang="ru" class="lang-content">🔌 p-n переход — сердце диода</span></h2>
+<div class="card rounded-custom p-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 360 160" style="width:100%">
+<rect x="20" y="40" width="160" height="80" fill="#bae6fd" stroke="#0284c7" stroke-width="2"/>
+<text x="100" y="85" text-anchor="middle" font-size="22" font-weight="700" fill="#0284c7">p</text>
+<text x="100" y="135" text-anchor="middle" font-size="11" fill="#0284c7"><tspan class="lang-content" lang="kk">тесіктер</tspan><tspan class="lang-content" lang="en">holes</tspan><tspan class="lang-content" lang="ru">дырки</tspan></text>
+<rect x="180" y="40" width="160" height="80" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+<text x="260" y="85" text-anchor="middle" font-size="22" font-weight="700" fill="#b45309">n</text>
+<text x="260" y="135" text-anchor="middle" font-size="11" fill="#b45309"><tspan class="lang-content" lang="kk">электрондар</tspan><tspan class="lang-content" lang="en">electrons</tspan><tspan class="lang-content" lang="ru">электроны</tspan></text>
+<rect x="170" y="40" width="20" height="80" fill="rgba(99,102,241,.25)" stroke="#4f46e5" stroke-width="2" stroke-dasharray="3,3"/>
+<text x="180" y="35" text-anchor="middle" font-size="11" fill="#4338ca"><tspan class="lang-content" lang="kk">кедергі</tspan><tspan class="lang-content" lang="en">barrier</tspan><tspan class="lang-content" lang="ru">барьер</tspan></text>
+</svg>
+</div>
+<div>
+<p class="text-slate-700 text-sm leading-relaxed mb-3">
+<span lang="kk" class="lang-content">p-түрі мен n-түрін <b>қосқанда</b>, шекарада <b>диффузия</b> жүреді: электрондар n→p, тесіктер p→n. Шекарада <b>қалдық зарядтар</b> «потенциалдық кедергі» жасайды. Бұл — <b>p-n өту</b>!</span>
+<span lang="en" class="lang-content">When p- and n-types are joined, <b>diffusion</b> occurs at the boundary: e⁻ from n→p, holes from p→n. The fixed ions left behind create a <b>potential barrier</b> — this is the <b>p-n junction</b>!</span>
+<span lang="ru" class="lang-content">При соединении p- и n-областей на границе идёт <b>диффузия</b>: электроны n→p, дырки p→n. Оставшиеся фиксированные ионы образуют <b>потенциальный барьер</b> — это и есть <b>p-n переход</b>!</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li>➡️ <span lang="kk" class="lang-content"><b>Тура (+ p-да):</b> кедергі төмендейді, <b>ток өтеді</b></span><span lang="en" class="lang-content"><b>Forward (+ on p):</b> barrier drops, <b>current flows</b></span><span lang="ru" class="lang-content"><b>Прямое (+ на p):</b> барьер уменьшается, <b>ток идёт</b></span></li>
+<li>⬅️ <span lang="kk" class="lang-content"><b>Кері (+ n-де):</b> кедергі өседі, <b>ток жоқ</b></span><span lang="en" class="lang-content"><b>Reverse (+ on n):</b> barrier grows, <b>no current</b></span><span lang="ru" class="lang-content"><b>Обратное (+ на n):</b> барьер растёт, <b>тока нет</b></span></li>
+<li>🌟 <span lang="kk" class="lang-content">Сондықтан диод — <b>«бір жақты»</b> өткізгіш!</span><span lang="en" class="lang-content">Hence a diode conducts <b>one way only</b>!</span><span lang="ru" class="lang-content">Поэтому диод проводит ток <b>только в одну сторону</b>!</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 Қолдану — заманауи цифрлық әлем</span>
+<span lang="en" class="lang-content">🌍 Applications — modern digital world</span>
+<span lang="ru" class="lang-content">🌍 Применения — цифровой мир</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="tile"><div class="tile-emoji">💻</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Транзистор</span><span lang="en" class="lang-content">Transistor</span><span lang="ru" class="lang-content">Транзистор</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">CPU — 100+ млрд транз.</span><span lang="en" class="lang-content">CPU — 100+ B transistors</span><span lang="ru" class="lang-content">CPU — 100+ млрд</span></p></div>
+<div class="tile"><div class="tile-emoji">💡</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Светодиод (LED)</span><span lang="en" class="lang-content">LED</span><span lang="ru" class="lang-content">Светодиод</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Энергияны 10× үнемдейді</span><span lang="en" class="lang-content">10× more efficient</span><span lang="ru" class="lang-content">В 10× экономнее лампы</span></p></div>
+<div class="tile"><div class="tile-emoji">☀️</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Күн батареясы</span><span lang="en" class="lang-content">Solar cell</span><span lang="ru" class="lang-content">Солнечная панель</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Жарық → ток</span><span lang="en" class="lang-content">Light → current</span><span lang="ru" class="lang-content">Свет → ток</span></p></div>
+<div class="tile"><div class="tile-emoji">📸</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">CCD/CMOS</span><span lang="en" class="lang-content">CCD/CMOS</span><span lang="ru" class="lang-content">CCD/CMOS</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Камераның сенсоры</span><span lang="en" class="lang-content">Camera sensor</span><span lang="ru" class="lang-content">Матрица фотокамеры</span></p></div>
+</div>
+</section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚛️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">2 тасушы</span><span lang="en" class="lang-content">2 carriers</span><span lang="ru" class="lang-content">2 носителя</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">e⁻ + тесіктер</span><span lang="en" class="lang-content">e⁻ + holes</span><span lang="ru" class="lang-content">e⁻ + дырки</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧪</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">n & p</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қоспа түрлері</span><span lang="en" class="lang-content">Doping types</span><span lang="ru" class="lang-content">Типы примесей</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔌</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">p-n</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Бір жақты өткізеді</span><span lang="en" class="lang-content">One-way valve</span><span lang="ru" class="lang-content">Односторонний</span></p></div>
+</div></footer>
+
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

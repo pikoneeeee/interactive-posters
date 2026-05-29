@@ -1,374 +1,388 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат 4: Заттың агрегаттық күйлері</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            overflow-x: hidden;
-            color: #1a202c;
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы */
-        .header-card {
-            background-color: #0891b2; /* Циан-700 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(8, 145, 178, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #155e75; /* Циан-800 */
-            border-bottom: 3px solid #67e8f9; /* Циан-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #ecfeff; /* Өте ашық циан */
-            border-left: 4px solid #22d3ee; /* Циан-400 */
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #f1f5f9; /* Ашық сұр */
-            border-radius: 1rem;
-            border-top: 4px solid #64748b; /* Сұр */
-        }
-        .feature-list li {
-            margin-bottom: 8px;
-            list-style: none;
-            padding-left: 20px;
-            position: relative;
-        }
-        .feature-list li::before {
-            content: '🧊'; /* Эмодзи */
-            position: absolute;
-            left: 0;
-            color: #0891b2; /* Циан */
-        }
-         .term {
-            font-weight: bold;
-            color: #155e75; /* cyan-800 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #0891b2;
-            background-color: #ffffff;
-            color: #0891b2;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #ecfeff;
-        }
-        .lang-btn.active {
-            background-color: #0891b2;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 120px;
-            margin: 10px 0;
-            border: 1px solid #a5f3fc;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
-    // Функция переключения языков (Автоматически добавлено скриптом)
-    function switchLang(lang) {
-        var container = document.getElementById('poster-container');
-        if (container) {
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-        }
-        var buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-</script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Агрегатные состояния вещества</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-gray-100">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Зат құрылысы</span>
+<span lang="en" class="lang-content">Grade 7 · Structure of matter</span>
+<span lang="ru" class="lang-content">7 класс · Строение вещества</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Заттың агрегаттық күйлері</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Aggregate states of matter</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Агрегатные состояния вещества</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💎 Бір зат — әртүрлі күй</span>
+<span lang="en" class="lang-content">💎 One substance — many states</span>
+<span lang="ru" class="lang-content">💎 Одно вещество — разные состояния</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Қарап тұрсақ, мұз, су және су буы — мүлдем әртүрлі заттар сияқты. Мұз — қатты, оны қолыңмен ұстауға болады. Су — ағады, ыдыс пішінін алады. Бу — көрінбейді, кеңейіп, бөлмені толтырады. Бірақ <b class="text-indigo-700">үшеуі де — бір зат, H₂O</b>! Айырмашылық тек заттың құрамы емес, <b>молекулалардың орналасуы мен қозғалысында</b>.</span>
+<span lang="en" class="lang-content">At first glance, ice, water and water vapour seem like completely different substances. Ice is solid and can be held in your hand. Water flows and takes the shape of its container. Vapour is invisible and expands to fill a room. Yet <b class="text-indigo-700">all three are the same substance — H₂O</b>! The difference lies not in what they are made of, but in <b>how the molecules are arranged and how they move</b>.</span>
+<span lang="ru" class="lang-content">На первый взгляд лёд, вода и водяной пар — совершенно разные вещества. Лёд — твёрдый, его можно взять в руку. Вода — течёт, принимает форму сосуда. Пар — невидим, расширяется, заполняя комнату. Но <b class="text-indigo-700">все три — одно и то же вещество, H₂O</b>! Различие — не в составе, а в том, <b>как расположены и движутся молекулы</b>.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 4: ЗАТТЫҢ АГРЕГАТТЫҚ КҮЙЛЕРІ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">PHYSICS 4: AGGREGATE STATES OF MATTER</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 4: АГРЕГАТНЫЕ СОСТОЯНИЯ ВЕЩЕСТВА</h1>
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Кез келген зат <b>температура мен қысымға</b> байланысты үш күйде болуы мүмкін: <b>қатты</b>, <b>сұйық</b>, <b>газ тәрізді</b>. Бұл — <b>агрегаттық күйлер</b> (лат. «aggregare» — «жинау, біріктіру»). Молекулалардың өздері өзгермейді — өзгеретін олардың тәртібі мен жылдамдығы.</span>
+<span lang="en" class="lang-content">Any substance, depending on <b>temperature and pressure</b>, can exist in three states: <b>solid</b>, <b>liquid</b>, <b>gas</b>. These are called <b>aggregate states</b> (Latin «aggregare» — «to gather»). The molecules themselves do not change — only their arrangement and speed change.</span>
+<span lang="ru" class="lang-content">Любое вещество в зависимости от <b>температуры и давления</b> может находиться в трёх состояниях: <b>твёрдом</b>, <b>жидком</b>, <b>газообразном</b>. Это и есть <b>агрегатные состояния</b> (от лат. «aggregare» — «собирать»). Сами молекулы не меняются — меняются их порядок и скорость.</span></p>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-gray-100">Қатты дене, Сұйықтық және Газ.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-gray-100">Solid, Liquid, and Gas.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-gray-100">Твердое, Жидкое и Газообразное.</p>
-        </header>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">🔑 Негізгі ой:</span>
+<span lang="en" class="lang-content">🔑 Key idea:</span>
+<span lang="ru" class="lang-content">🔑 Главная мысль:</span></p>
+<p class="text-slate-700 italic">
+<span lang="kk" class="lang-content">«Агрегаттық күй — заттың құрамы емес, молекулалардың ішкі тәртібі»</span>
+<span lang="en" class="lang-content">«Aggregate state is not about what — it's about how the molecules are organised inside»</span>
+<span lang="ru" class="lang-content">«Агрегатное состояние — не "из чего", а "как устроены" молекулы внутри»</span></p>
+</div></div>
 
-        <!-- 1. АНЫҚТАМА -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Агрегаттық күй дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is a State of Matter?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое Агрегатное состояние?</h2>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">🧊💧💨</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-3">H₂O</p>
+<p class="text-center text-slate-700 text-base">
+<span lang="kk" class="lang-content"><b>Мұз</b> (қатты)<br/><b>Су</b> (сұйық)<br/><b>Бу</b> (газ)<br/>— үшеуі бір!</span>
+<span lang="en" class="lang-content"><b>Ice</b> (solid)<br/><b>Water</b> (liquid)<br/><b>Vapour</b> (gas)<br/>— all the same!</span>
+<span lang="ru" class="lang-content"><b>Лёд</b> (твёрдое)<br/><b>Вода</b> (жидкое)<br/><b>Пар</b> (газ)<br/>— всё одно!</span></p>
+</div></div></section>
 
-            <div class="rule-card border-t-cyan-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Агрегаттық күй</span> – бұл заттың бірдей сыртқы жағдайларда (температура, қысым) ие болатын физикалық күйі. Ол зат бөлшектерінің (молекулаларының) <strong>орналасуына</strong>, <strong>қозғалысына</strong> және <strong>өзара әрекеттесуіне</strong> байланысты болады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    An <span class="term" lang="en">Aggregate State</span> is the physical state of a substance under specific external conditions (temperature, pressure). It depends on the <strong>arrangement</strong>, <strong>movement</strong>, and <strong>interaction</strong> of the substance's particles (molecules).
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Агрегатное состояние</span> – это физическое состояние вещества, зависящее от внешних условий (температура, давление). Оно определяется <strong>расположением</strong>, <strong>движением</strong> и <strong>взаимодействием</strong> частиц (молекул) вещества.
-                </p>
-            </div>
-        </section>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔬 Үш күй — молекулалық деңгейде</span>
+<span lang="en" class="lang-content">🔬 Three states — at the molecular level</span>
+<span lang="ru" class="lang-content">🔬 Три состояния — на молекулярном уровне</span></h2>
 
-        <!-- 2. ЗАТТЫҢ ҮШ КҮЙІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Заттың 3 негізгі күйі (Иллюстрация)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. The 3 Main States of Matter (Illustrated)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. 3 Основных состояния вещества (Иллюстрация)</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- ТВЁРДОЕ -->
+<div class="card-accent rounded-custom p-6">
+<div class="text-center mb-3">
+<div class="text-6xl">🧊</div>
+<p class="heading-font text-xl text-indigo-700 mt-2"><span lang="kk" class="lang-content">Қатты дене</span><span lang="en" class="lang-content">Solid</span><span lang="ru" class="lang-content">Твёрдое тело</span></p>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 200 120" style="width:100%">
+<rect x="5" y="5" width="190" height="110" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+<g fill="#4f46e5">
+<circle cx="30" cy="30" r="10"/><circle cx="60" cy="30" r="10"/><circle cx="90" cy="30" r="10"/><circle cx="120" cy="30" r="10"/><circle cx="150" cy="30" r="10"/><circle cx="180" cy="30" r="10"/>
+<circle cx="30" cy="60" r="10"/><circle cx="60" cy="60" r="10"/><circle cx="90" cy="60" r="10"/><circle cx="120" cy="60" r="10"/><circle cx="150" cy="60" r="10"/><circle cx="180" cy="60" r="10"/>
+<circle cx="30" cy="90" r="10"/><circle cx="60" cy="90" r="10"/><circle cx="90" cy="90" r="10"/><circle cx="120" cy="90" r="10"/><circle cx="150" cy="90" r="10"/><circle cx="180" cy="90" r="10"/>
+</g>
+<!-- стрелочки колебаний -->
+<g stroke="#4338ca" stroke-width="1.5" fill="none">
+<path d="M30,16 L30,20 M30,40 L30,44" stroke-linecap="round"/>
+</g>
+</svg>
+</div>
+<p class="text-slate-700 text-sm mt-3 leading-relaxed">
+<span lang="kk" class="lang-content">Молекулалар <b>қатаң тәртіпте</b> орналасқан (кристалл торы). Бір-біріне тығыз жақын, тек орнында <b>тербеледі</b>. Тарту күші өте күшті.</span>
+<span lang="en" class="lang-content">Molecules are arranged in a <b>strict order</b> (crystal lattice). They are packed very tightly and only <b>vibrate</b> in place. Attraction is very strong.</span>
+<span lang="ru" class="lang-content">Молекулы расположены в <b>строгом порядке</b> (кристаллическая решётка). Они плотно прижаты и только <b>колеблются</b> на месте. Притяжение очень сильное.</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-5 mt-3 space-y-1">
+<li><span lang="kk" class="lang-content">Тұрақты <b>пішін</b> және <b>көлем</b></span><span lang="en" class="lang-content">Fixed <b>shape</b> and <b>volume</b></span><span lang="ru" class="lang-content">Постоянная <b>форма</b> и <b>объём</b></span></li>
+<li><span lang="kk" class="lang-content">Сығылмайды</span><span lang="en" class="lang-content">Cannot be compressed</span><span lang="ru" class="lang-content">Не сжимается</span></li>
+<li><span lang="kk" class="lang-content">Мысалдар: мұз, темір, тас, тұз</span><span lang="en" class="lang-content">Examples: ice, iron, stone, salt</span><span lang="ru" class="lang-content">Примеры: лёд, железо, камень, соль</span></li>
+</ul>
+</div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- ЖИДКОЕ -->
+<div class="card-warm rounded-custom p-6">
+<div class="text-center mb-3">
+<div class="text-6xl">💧</div>
+<p class="heading-font text-xl text-orange-700 mt-2"><span lang="kk" class="lang-content">Сұйық</span><span lang="en" class="lang-content">Liquid</span><span lang="ru" class="lang-content">Жидкость</span></p>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 200 120" style="width:100%">
+<rect x="5" y="5" width="190" height="110" fill="#ffedd5" stroke="#b45309" stroke-width="2"/>
+<g fill="#ea580c">
+<circle cx="25" cy="30" r="9"/><circle cx="55" cy="25" r="9"/><circle cx="80" cy="40" r="9"/><circle cx="115" cy="30" r="9"/><circle cx="145" cy="40" r="9"/><circle cx="175" cy="25" r="9"/>
+<circle cx="20" cy="60" r="9"/><circle cx="50" cy="55" r="9"/><circle cx="85" cy="65" r="9"/><circle cx="120" cy="60" r="9"/><circle cx="155" cy="65" r="9"/><circle cx="185" cy="55" r="9"/>
+<circle cx="40" cy="90" r="9"/><circle cx="70" cy="95" r="9"/><circle cx="100" cy="90" r="9"/><circle cx="135" cy="95" r="9"/><circle cx="170" cy="90" r="9"/>
+</g>
+</svg>
+</div>
+<p class="text-slate-700 text-sm mt-3 leading-relaxed">
+<span lang="kk" class="lang-content">Молекулалар жақын орналасқан, бірақ <b>қатаң тәртіп жоқ</b>. Олар <b>жылжып</b>, орнын ауыстыра алады. Тарту бар, бірақ қатты денедегідей күшті емес.</span>
+<span lang="en" class="lang-content">Molecules are close to each other but <b>not in strict order</b>. They <b>slide past</b> each other and swap places. Attraction exists but is weaker than in solids.</span>
+<span lang="ru" class="lang-content">Молекулы близко друг к другу, но <b>без строгого порядка</b>. Они <b>скользят</b>, меняясь местами. Притяжение есть, но слабее, чем в твёрдом теле.</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-5 mt-3 space-y-1">
+<li><span lang="kk" class="lang-content">Көлемі тұрақты, пішіні — ыдыстың</span><span lang="en" class="lang-content">Fixed volume, takes shape of vessel</span><span lang="ru" class="lang-content">Объём постоянный, форма — сосуда</span></li>
+<li><span lang="kk" class="lang-content">Сығылмайды (іс жүзінде)</span><span lang="en" class="lang-content">Practically incompressible</span><span lang="ru" class="lang-content">Практически не сжимается</span></li>
+<li><span lang="kk" class="lang-content">Мысалдар: су, сүт, мұнай, спирт</span><span lang="en" class="lang-content">Examples: water, milk, oil, alcohol</span><span lang="ru" class="lang-content">Примеры: вода, молоко, нефть, спирт</span></li>
+</ul>
+</div>
 
-                <!-- Қатты -->
-                <div class="rule-card border-t-blue-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Қатты дене</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Solid</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Твердое тело</h3>
+<!-- ГАЗООБРАЗНОЕ -->
+<div class="card-rose rounded-custom p-6">
+<div class="text-center mb-3">
+<div class="text-6xl">💨</div>
+<p class="heading-font text-xl text-rose-700 mt-2"><span lang="kk" class="lang-content">Газ</span><span lang="en" class="lang-content">Gas</span><span lang="ru" class="lang-content">Газ</span></p>
+</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 200 120" style="width:100%">
+<rect x="5" y="5" width="190" height="110" fill="#ffe4e6" stroke="#9f1239" stroke-width="2"/>
+<g fill="#e11d48">
+<circle cx="20" cy="20" r="6"/><circle cx="60" cy="40" r="6"/><circle cx="110" cy="15" r="6"/><circle cx="150" cy="50" r="6"/><circle cx="180" cy="25" r="6"/>
+<circle cx="35" cy="75" r="6"/><circle cx="85" cy="80" r="6"/><circle cx="125" cy="65" r="6"/><circle cx="170" cy="85" r="6"/>
+<circle cx="50" cy="100" r="6"/><circle cx="100" cy="105" r="6"/><circle cx="155" cy="105" r="6"/>
+</g>
+<!-- стрелки направлений -->
+<g stroke="#be123c" stroke-width="1.2" fill="none">
+<line x1="60" y1="40" x2="80" y2="20" marker-end="url(#arrG)"/>
+<line x1="125" y1="65" x2="140" y2="80" marker-end="url(#arrG)"/>
+<line x1="35" y1="75" x2="50" y2="60" marker-end="url(#arrG)"/>
+</g>
+<defs><marker id="arrG" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#be123c"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm mt-3 leading-relaxed">
+<span lang="kk" class="lang-content">Молекулалар <b>өте алыс</b> орналасқан (өздерінен жүздеген есе). Олар үлкен жылдамдықпен <b>еркін ұшады</b>, тек соқтығысқанда бағытын өзгертеді. Тарту іс жүзінде жоқ.</span>
+<span lang="en" class="lang-content">Molecules are <b>very far apart</b> (hundreds of times their own size). They <b>fly freely</b> at high speed and change direction only when colliding. Attraction is negligible.</span>
+<span lang="ru" class="lang-content">Молекулы расположены <b>очень далеко</b> друг от друга (в сотни раз больше своего размера). Они <b>свободно летают</b> с большой скоростью и меняют направление только при столкновении. Притяжения практически нет.</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-5 mt-3 space-y-1">
+<li><span lang="kk" class="lang-content">Пішін мен көлем — ыдыс бойынша</span><span lang="en" class="lang-content">Both shape and volume — of vessel</span><span lang="ru" class="lang-content">И форма, и объём — сосуда</span></li>
+<li><span lang="kk" class="lang-content">Жеңіл сығылады</span><span lang="en" class="lang-content">Easily compressed</span><span lang="ru" class="lang-content">Легко сжимается</span></li>
+<li><span lang="kk" class="lang-content">Мысалдар: ауа, оттегі, бу, гелий</span><span lang="en" class="lang-content">Examples: air, oxygen, vapour, helium</span><span lang="ru" class="lang-content">Примеры: воздух, кислород, пар, гелий</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="10" y="10" width="80" height="80" fill="none" stroke="#60a5fa"/>
-                        <circle cx="25" cy="25" r="8" fill="#1d4ed8"/> <circle cx="45" cy="25" r="8" fill="#1d4ed8"/> <circle cx="65" cy="25" r="8" fill="#1d4ed8"/> <circle cx="85" cy="25" r="8" fill="#1d4ed8"/>
-                        <circle cx="25" cy="45" r="8" fill="#1d4ed8"/> <circle cx="45" cy="45" r="8" fill="#1d4ed8"/> <circle cx="65" cy="45" r="8" fill="#1d4ed8"/> <circle cx="85" cy="45" r="8" fill="#1d4ed8"/>
-                        <circle cx="25" cy="65" r="8" fill="#1d4ed8"/> <circle cx="45" cy="65" r="8" fill="#1d4ed8"/> <circle cx="65" cy="65" r="8" fill="#1d4ed8"/> <circle cx="85" cy="65" r="8" fill="#1d4ed8"/>
-                    </svg>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Толық салыстыру кестесі</span>
+<span lang="en" class="lang-content">📊 Full comparison table</span>
+<span lang="ru" class="lang-content">📊 Полная сравнительная таблица</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Қасиет</span><span lang="en" class="lang-content">Property</span><span lang="ru" class="lang-content">Свойство</span></th>
+<th class="text-indigo-700"><span lang="kk" class="lang-content">🧊 Қатты</span><span lang="en" class="lang-content">🧊 Solid</span><span lang="ru" class="lang-content">🧊 Твёрдое</span></th>
+<th class="text-orange-700"><span lang="kk" class="lang-content">💧 Сұйық</span><span lang="en" class="lang-content">💧 Liquid</span><span lang="ru" class="lang-content">💧 Жидкое</span></th>
+<th class="text-rose-700"><span lang="kk" class="lang-content">💨 Газ</span><span lang="en" class="lang-content">💨 Gas</span><span lang="ru" class="lang-content">💨 Газ</span></th>
+</tr></thead>
+<tbody>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Пішін</span><span lang="en" class="lang-content">Shape</span><span lang="ru" class="lang-content">Форма</span></td>
+<td><span lang="kk" class="lang-content">тұрақты</span><span lang="en" class="lang-content">fixed</span><span lang="ru" class="lang-content">постоянная</span></td>
+<td><span lang="kk" class="lang-content">ыдыстың</span><span lang="en" class="lang-content">of vessel</span><span lang="ru" class="lang-content">сосуда</span></td>
+<td><span lang="kk" class="lang-content">ыдыстың</span><span lang="en" class="lang-content">of vessel</span><span lang="ru" class="lang-content">сосуда</span></td></tr>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Көлем</span><span lang="en" class="lang-content">Volume</span><span lang="ru" class="lang-content">Объём</span></td>
+<td><span lang="kk" class="lang-content">тұрақты</span><span lang="en" class="lang-content">fixed</span><span lang="ru" class="lang-content">постоянный</span></td>
+<td><span lang="kk" class="lang-content">тұрақты</span><span lang="en" class="lang-content">fixed</span><span lang="ru" class="lang-content">постоянный</span></td>
+<td><span lang="kk" class="lang-content">ыдыстың</span><span lang="en" class="lang-content">of vessel</span><span lang="ru" class="lang-content">сосуда</span></td></tr>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Сығылғыштық</span><span lang="en" class="lang-content">Compressibility</span><span lang="ru" class="lang-content">Сжимаемость</span></td>
+<td>❌</td><td>❌</td><td>✅</td></tr>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Тығыздық</span><span lang="en" class="lang-content">Density</span><span lang="ru" class="lang-content">Плотность</span></td>
+<td><span lang="kk" class="lang-content">үлкен</span><span lang="en" class="lang-content">high</span><span lang="ru" class="lang-content">большая</span></td>
+<td><span lang="kk" class="lang-content">орташа</span><span lang="en" class="lang-content">medium</span><span lang="ru" class="lang-content">средняя</span></td>
+<td><span lang="kk" class="lang-content">аз (×1000)</span><span lang="en" class="lang-content">low (×1000)</span><span lang="ru" class="lang-content">малая (×1000)</span></td></tr>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Молекула аралығы</span><span lang="en" class="lang-content">Distance between molecules</span><span lang="ru" class="lang-content">Расстояние между молекулами</span></td>
+<td><span lang="kk" class="lang-content">≈ өлшеміндей</span><span lang="en" class="lang-content">≈ molecule size</span><span lang="ru" class="lang-content">≈ размер молекулы</span></td>
+<td><span lang="kk" class="lang-content">≈ өлшеміндей</span><span lang="en" class="lang-content">≈ molecule size</span><span lang="ru" class="lang-content">≈ размер молекулы</span></td>
+<td><span lang="kk" class="lang-content">≫ өлшемі</span><span lang="en" class="lang-content">≫ molecule size</span><span lang="ru" class="lang-content">≫ размера молекулы</span></td></tr>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Молекула қозғалысы</span><span lang="en" class="lang-content">Molecular motion</span><span lang="ru" class="lang-content">Движение молекул</span></td>
+<td><span lang="kk" class="lang-content">тек тербеліс</span><span lang="en" class="lang-content">only vibration</span><span lang="ru" class="lang-content">только колебания</span></td>
+<td><span lang="kk" class="lang-content">тербеліс + жылжу</span><span lang="en" class="lang-content">vibration + sliding</span><span lang="ru" class="lang-content">колебания + скольжение</span></td>
+<td><span lang="kk" class="lang-content">еркін ұшу</span><span lang="en" class="lang-content">free flight</span><span lang="ru" class="lang-content">свободный полёт</span></td></tr>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Тарту күші</span><span lang="en" class="lang-content">Attraction</span><span lang="ru" class="lang-content">Притяжение</span></td>
+<td><span lang="kk" class="lang-content">өте күшті</span><span lang="en" class="lang-content">very strong</span><span lang="ru" class="lang-content">очень сильное</span></td>
+<td><span lang="kk" class="lang-content">орташа</span><span lang="en" class="lang-content">medium</span><span lang="ru" class="lang-content">среднее</span></td>
+<td><span lang="kk" class="lang-content">өте әлсіз</span><span lang="en" class="lang-content">very weak</span><span lang="ru" class="lang-content">очень слабое</span></td></tr>
+<tr><td class="font-bold"><span lang="kk" class="lang-content">Диффузия жылдамдығы</span><span lang="en" class="lang-content">Diffusion speed</span><span lang="ru" class="lang-content">Скорость диффузии</span></td>
+<td><span lang="kk" class="lang-content">жылдар</span><span lang="en" class="lang-content">years</span><span lang="ru" class="lang-content">годы</span></td>
+<td><span lang="kk" class="lang-content">минуттар</span><span lang="en" class="lang-content">minutes</span><span lang="ru" class="lang-content">минуты</span></td>
+<td><span lang="kk" class="lang-content">секундтар</span><span lang="en" class="lang-content">seconds</span><span lang="ru" class="lang-content">секунды</span></td></tr>
+</tbody></table></div>
+</section>
 
-                    <p lang="kk" class="lang-content">Бөлшектер <strong>тығыз, ретпен</strong> орналасқан, өз орнында <strong>тербеледі</strong>. Пішіні мен көлемі сақталады.</p>
-                    <p lang="en" class="lang-content">Particles are <strong>tightly packed</strong> in a <strong>fixed pattern</strong>, <strong>vibrating</strong> in place. Definite shape and volume.</p>
-                    <p lang="ru" class="lang-content">Частицы <strong>плотно упакованы</strong>, <strong>упорядочены</strong>, <strong>колеблются</strong> на месте. Сохраняет форму и объем.</p>
-                </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔄 Күйлердің өзара өтуі</span>
+<span lang="en" class="lang-content">🔄 Transitions between states</span>
+<span lang="ru" class="lang-content">🔄 Переходы между состояниями</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 800 360" style="width:100%;max-width:800px;margin:auto" font-family="'Inter',sans-serif">
+<!-- Три состояния как круги -->
+<!-- Solid -->
+<circle cx="130" cy="180" r="80" fill="#e0e7ff" stroke="#4338ca" stroke-width="3"/>
+<text x="130" y="175" text-anchor="middle" font-size="42">🧊</text>
+<text x="130" y="215" text-anchor="middle" fill="#4338ca" font-weight="700" font-size="16">
+<tspan class="lang-content" lang="kk">Қатты</tspan>
+<tspan class="lang-content" lang="en">Solid</tspan>
+<tspan class="lang-content" lang="ru">Твёрдое</tspan>
+</text>
+<!-- Liquid -->
+<circle cx="400" cy="180" r="80" fill="#ffedd5" stroke="#b45309" stroke-width="3"/>
+<text x="400" y="175" text-anchor="middle" font-size="42">💧</text>
+<text x="400" y="215" text-anchor="middle" fill="#b45309" font-weight="700" font-size="16">
+<tspan class="lang-content" lang="kk">Сұйық</tspan>
+<tspan class="lang-content" lang="en">Liquid</tspan>
+<tspan class="lang-content" lang="ru">Жидкое</tspan>
+</text>
+<!-- Gas -->
+<circle cx="670" cy="180" r="80" fill="#ffe4e6" stroke="#9f1239" stroke-width="3"/>
+<text x="670" y="175" text-anchor="middle" font-size="42">💨</text>
+<text x="670" y="215" text-anchor="middle" fill="#9f1239" font-weight="700" font-size="16">
+<tspan class="lang-content" lang="kk">Газ</tspan>
+<tspan class="lang-content" lang="en">Gas</tspan>
+<tspan class="lang-content" lang="ru">Газ</tspan>
+</text>
 
-                <!-- Сұйық -->
-                <div class="rule-card border-t-cyan-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-cyan-700 mb-3">2. Сұйықтық</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-cyan-700 mb-3">2. Liquid</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-cyan-700 mb-3">2. Жидкость</h3>
+<!-- Стрелки между состояниями -->
+<defs>
+<marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e40af"/></marker>
+</defs>
 
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 10 10 L 10 90 L 90 90 L 90 10" fill="none" stroke="#60a5fa"/>
-                        <circle cx="30" cy="50" r="8" fill="#0891b2"/> <circle cx="50" cy="60" r="8" fill="#0891b2"/> <circle cx="75" cy="55" r="8" fill="#0891b2"/>
-                        <circle cx="20" cy="75" r="8" fill="#0891b2"/> <circle cx="45" cy="85" r="8" fill="#0891b2"/> <circle cx="70" cy="75" r="8" fill="#0891b2"/>
-                        <circle cx="40" cy="70" r="8" fill="#0891b2"/> <circle cx="60" cy="40" r="8" fill="#0891b2"/>
-                    </svg>
+<!-- Плавление -->
+<path d="M210,140 Q270,100 320,140" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#arrR)"/>
+<text x="265" y="95" text-anchor="middle" fill="#dc2626" font-weight="700" font-size="13">
+<tspan class="lang-content" lang="kk">балқу 🔥</tspan>
+<tspan class="lang-content" lang="en">melting 🔥</tspan>
+<tspan class="lang-content" lang="ru">плавление 🔥</tspan>
+</text>
 
-                    <p lang="kk" class="lang-content">Бөлшектер <strong>жақын, бірақ ретсіз</strong> орналасқан. Орын <strong>ауыстыра алады</strong>. Көлемі сақталады, пішінін сақтамайды.</p>
-                    <p lang="en" class="lang-content">Particles are <strong>close but random</strong>. Can <strong>move and slide</strong> past each other. Definite volume, no definite shape.</p>
-                    <p lang="ru" class="lang-content">Частицы <strong>близко, но беспорядочно</strong>. Могут <strong>перемещаться</strong>. Сохраняет объем, но не форму.</p>
-                </div>
+<!-- Кристаллизация -->
+<path d="M320,220 Q270,260 210,220" fill="none" stroke="#1e40af" stroke-width="3" marker-end="url(#arrB)"/>
+<text x="265" y="290" text-anchor="middle" fill="#1e40af" font-weight="700" font-size="13">
+<tspan class="lang-content" lang="kk">қатаю ❄️</tspan>
+<tspan class="lang-content" lang="en">freezing ❄️</tspan>
+<tspan class="lang-content" lang="ru">кристаллизация ❄️</tspan>
+</text>
 
-                <!-- Газ -->
-                <div class="rule-card border-t-purple-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-purple-700 mb-3">3. Газ</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-purple-700 mb-3">3. Gas</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-purple-700 mb-3">3. Газ</h3>
+<!-- Испарение -->
+<path d="M480,140 Q540,100 590,140" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#arrR)"/>
+<text x="535" y="95" text-anchor="middle" fill="#dc2626" font-weight="700" font-size="13">
+<tspan class="lang-content" lang="kk">булану 🔥</tspan>
+<tspan class="lang-content" lang="en">evaporation 🔥</tspan>
+<tspan class="lang-content" lang="ru">испарение 🔥</tspan>
+</text>
 
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                         <rect x="10" y="10" width="80" height="80" fill="none" stroke="#a78bfa"/>
-                        <circle cx="20" cy="20" r="8" fill="#6d28d9"/>
-                        <circle cx="80" cy="30" r="8" fill="#6d28d9"/>
-                        <circle cx="50" cy="50" r="8" fill="#6d28d9"/>
-                        <circle cx="25" cy="75" r="8" fill="#6d28d9"/>
-                        <circle cx="70" cy="80" r="8" fill="#6d28d9"/>
-                    </svg>
+<!-- Конденсация -->
+<path d="M590,220 Q540,260 480,220" fill="none" stroke="#1e40af" stroke-width="3" marker-end="url(#arrB)"/>
+<text x="535" y="290" text-anchor="middle" fill="#1e40af" font-weight="700" font-size="13">
+<tspan class="lang-content" lang="kk">конденсация ❄️</tspan>
+<tspan class="lang-content" lang="en">condensation ❄️</tspan>
+<tspan class="lang-content" lang="ru">конденсация ❄️</tspan>
+</text>
 
-                    <p lang="kk" class="lang-content">Бөлшектер <strong>алыс</strong> орналасқан, <strong>еркін және жылдам қозғалады</strong>. Пішінін де, көлемін де сақтамайды.</p>
-                    <p lang="en" class="lang-content">Particles are <strong>far apart</strong>, move <strong>freely and quickly</strong>. No definite shape or volume (fills container).</p>
-                    <p lang="ru" class="lang-content">Частицы <strong>далеко</strong> друг от друга, движутся <strong>свободно и быстро</strong>. Не имеет ни формы, ни объема (занимает весь объем).</p>
-                </div>
-            </div>
-        </section>
+<!-- Сублимация (солид → газ через верх) -->
+<path d="M150,100 Q400,20 650,100" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrR)"/>
+<text x="400" y="35" text-anchor="middle" fill="#dc2626" font-weight="700" font-size="12">
+<tspan class="lang-content" lang="kk">сублимация</tspan>
+<tspan class="lang-content" lang="en">sublimation</tspan>
+<tspan class="lang-content" lang="ru">сублимация (возгонка)</tspan>
+</text>
 
-        <!-- 3. ФАЗАЛЫҚ АУЫСУЛАР -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Зат күйінің өзгеруі (Фазалық ауысулар)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Changes of State (Phase Transitions)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Изменения состояния (Фазовые переходы)</h2>
+<!-- Десублимация (газ → солид через низ) -->
+<path d="M650,260 Q400,340 150,260" fill="none" stroke="#1e40af" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrB)"/>
+<text x="400" y="350" text-anchor="middle" fill="#1e40af" font-weight="700" font-size="12">
+<tspan class="lang-content" lang="kk">десублимация</tspan>
+<tspan class="lang-content" lang="en">deposition</tspan>
+<tspan class="lang-content" lang="ru">десублимация</tspan>
+</text>
+</svg>
+</div>
+<p class="text-slate-600 text-sm mt-4">
+<span lang="kk" class="lang-content">🔥 <b>Жылыту</b> (қызыл стрелкалар) — молекулалар үдей түседі, тарту әлсірейді → күй жоғары қарай ауысады. ❄️ <b>Суыту</b> (көк стрелкалар) — керісінше.</span>
+<span lang="en" class="lang-content">🔥 <b>Heating</b> (red arrows) speeds up molecules, weakens attraction → state moves «up». ❄️ <b>Cooling</b> (blue arrows) — the reverse.</span>
+<span lang="ru" class="lang-content">🔥 <b>Нагревание</b> (красные стрелки) — молекулы ускоряются, притяжение слабеет → состояние смещается «вверх». ❄️ <b>Охлаждение</b> (синие стрелки) — наоборот.</span></p>
+</div></section>
 
-            <div class="rule-card border-t-gray-500">
-                 <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                   Заттар <strong>энергияны алғанда</strong> (қыздырғанда) немесе <strong>бергенде</strong> (суытқанда) бір күйден екінші күйге ауыса алады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                   Substances can change from one state to another when they <strong>gain energy</strong> (heating) or <strong>lose energy</strong> (cooling).
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                   Вещества могут переходить из одного состояния в другое, когда они <strong>получают энергию</strong> (нагревание) или <strong>отдают энергию</strong> (охлаждение).
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 Күнделікті өмірден мысалдар</span>
+<span lang="en" class="lang-content">🌍 Examples from daily life</span>
+<span lang="ru" class="lang-content">🌍 Примеры из жизни</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">☕</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Шай буы</span><span lang="en" class="lang-content">Steam</span><span lang="ru" class="lang-content">Пар над чаем</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Сұйық → газ (булану)</span><span lang="en" class="lang-content">Liquid → gas (evaporation)</span><span lang="ru" class="lang-content">Жидкое → газ (испарение)</span></p></div>
+<div class="tile"><div class="tile-emoji">🧊</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Мұз балқиды</span><span lang="en" class="lang-content">Melting ice</span><span lang="ru" class="lang-content">Лёд тает</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Қатты → сұйық</span><span lang="en" class="lang-content">Solid → liquid</span><span lang="ru" class="lang-content">Твёрдое → жидкое</span></p></div>
+<div class="tile"><div class="tile-emoji">❄️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Терезедегі қырау</span><span lang="en" class="lang-content">Frost on window</span><span lang="ru" class="lang-content">Иней на окне</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Газ → қатты (десублимация)</span><span lang="en" class="lang-content">Gas → solid (deposition)</span><span lang="ru" class="lang-content">Газ → твёрдое (десублимация)</span></p></div>
+<div class="tile"><div class="tile-emoji">💨</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Тұман</span><span lang="en" class="lang-content">Fog</span><span lang="ru" class="lang-content">Туман</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Газ → сұйық (конденсация)</span><span lang="en" class="lang-content">Gas → liquid (condensation)</span><span lang="ru" class="lang-content">Газ → жидкое (конденсация)</span></p></div>
+<div class="tile"><div class="tile-emoji">🕯️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Балауыз</span><span lang="en" class="lang-content">Candle wax</span><span lang="ru" class="lang-content">Воск свечи</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Қатты → сұйық → газ</span><span lang="en" class="lang-content">Solid → liquid → gas</span><span lang="ru" class="lang-content">Твёрдое → жидкое → газ</span></p></div>
+<div class="tile"><div class="tile-emoji">🌧️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Жаңбыр</span><span lang="en" class="lang-content">Rain</span><span lang="ru" class="lang-content">Дождь</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Бұлттарда конденсация</span><span lang="en" class="lang-content">Condensation in clouds</span><span lang="ru" class="lang-content">Конденсация в облаках</span></p></div>
+<div class="tile"><div class="tile-emoji">🥶</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">«Құрғақ мұз»</span><span lang="en" class="lang-content">«Dry ice»</span><span lang="ru" class="lang-content">«Сухой лёд»</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Қатты CO₂ → газ (сублимация)</span><span lang="en" class="lang-content">Solid CO₂ → gas (sublimation)</span><span lang="ru" class="lang-content">Твёрдый CO₂ → газ (сублимация)</span></p></div>
+<div class="tile"><div class="tile-emoji">🔨</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Темір балқыту</span><span lang="en" class="lang-content">Melting iron</span><span lang="ru" class="lang-content">Плавка железа</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">1538°C — қатты → сұйық</span><span lang="en" class="lang-content">1538°C — solid → liquid</span><span lang="ru" class="lang-content">1538°C — твёрдое → жидкое</span></p></div>
+</div>
+</section>
 
-                <!-- Иллюстрация фазовых переходов -->
-                <div class="example-block border-l-gray-400 bg-white p-4">
-                    <svg class="w-full" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
-                        <text x="50" y="60" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
-                            <tspan lang="kk" class="lang-content">ҚАТТЫ</tspan>
-                            <tspan lang="en" class="lang-content">SOLID</tspan>
-                            <tspan lang="ru" class="lang-content">ТВЕРДОЕ</tspan>
-                        </text>
-                        <text x="250" y="60" font-size="16" font-weight="bold" fill="#0891b2" text-anchor="middle">
-                            <tspan lang="kk" class="lang-content">СҰЙЫҚ</tspan>
-                            <tspan lang="en" class="lang-content">LIQUID</tspan>
-                            <tspan lang="ru" class="lang-content">ЖИДКОЕ</tspan>
-                        </text>
-                        <text x="450" y="60" font-size="16" font-weight="bold" fill="#6d28d9" text-anchor="middle">
-                            <tspan lang="kk" class="lang-content">ГАЗ</tspan>
-                            <tspan lang="en" class="lang-content">GAS</tspan>
-                            <tspan lang="ru" class="lang-content">ГАЗ</tspan>
-                        </text>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Төртінші күй — плазма</span>
+<span lang="en" class="lang-content">⚡ A fourth state — plasma</span>
+<span lang="ru" class="lang-content">⚡ Четвёртое состояние — плазма</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-rose rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Газды өте жоғары температураға дейін (мың градустан жоғары) қыздырсақ, молекулалар бөлініп, атомдардан электрондар үзіліп шығады. Зат <b class="text-rose-700">плазмаға</b> айналады — иондар мен электрондардан тұратын ыстық, электр өткізгіш «бұршақ көже».</span>
+<span lang="en" class="lang-content">If gas is heated to extremely high temperatures (thousands of degrees), molecules split apart and atoms lose electrons. The substance becomes <b class="text-rose-700">plasma</b> — a hot, electrically conducting «soup» of ions and electrons.</span>
+<span lang="ru" class="lang-content">Если газ нагреть до очень высокой температуры (тысячи градусов), молекулы распадаются, а атомы теряют электроны. Вещество превращается в <b class="text-rose-700">плазму</b> — горячий электропроводящий «суп» из ионов и электронов.</span></p>
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b>Ғаламдағы заттың 99%-ы</b> — плазма! Күн, жұлдыздар, найзағай, неон шамдары — бәрі плазма.</span>
+<span lang="en" class="lang-content"><b>99% of all matter in the Universe</b> is plasma! The Sun, stars, lightning, neon lamps — all plasma.</span>
+<span lang="ru" class="lang-content"><b>99% всего вещества во Вселенной</b> — плазма! Солнце, звёзды, молнии, неоновые лампы — это всё плазма.</span></p>
+</div>
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">☀️⚡</div>
+<p class="heading-font text-lg text-indigo-700 text-center mb-3">
+<span lang="kk" class="lang-content">Плазма көздері</span>
+<span lang="en" class="lang-content">Plasma sources</span>
+<span lang="ru" class="lang-content">Источники плазмы</span></p>
+<ul class="text-slate-700 text-sm space-y-1 list-disc pl-5">
+<li><span lang="kk" class="lang-content">Күн (~5500 °C)</span><span lang="en" class="lang-content">The Sun (~5500 °C)</span><span lang="ru" class="lang-content">Солнце (~5500 °C)</span></li>
+<li><span lang="kk" class="lang-content">Найзағай арнасы (~30 000 °C)</span><span lang="en" class="lang-content">Lightning channel (~30 000 °C)</span><span lang="ru" class="lang-content">Канал молнии (~30 000 °C)</span></li>
+<li><span lang="kk" class="lang-content">Неон шамдары, плазма телевизорлары</span><span lang="en" class="lang-content">Neon lamps, plasma TVs</span><span lang="ru" class="lang-content">Неоновые лампы, плазменные ТВ</span></li>
+<li><span lang="kk" class="lang-content">Солтүстік шұғыласы (полярлы сәуле)</span><span lang="en" class="lang-content">Northern lights (aurora)</span><span lang="ru" class="lang-content">Полярное сияние</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                        <!-- Стрелки (нагревание) -->
-                        <line x1="100" y1="50" x2="200" y2="50" stroke="#dc2626" stroke-width="2"/>
-                        <polyline points="200 50, 190 45, 190 55, 200 50" fill="#dc2626"/>
-                        <text x="150" y="45" font-size="10" fill="#dc2626" text-anchor="middle">
-                            <tspan lang="kk" class="lang-content">Балқу (қыздыру)</tspan>
-                            <tspan lang="en" class="lang-content">Melting (heating)</tspan>
-                            <tspan lang="ru" class="lang-content">Плавление (нагрев)</tspan>
-                        </text>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧊💧💨</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">3 негізгі күй</span><span lang="en" class="lang-content">3 main states</span><span lang="ru" class="lang-content">3 главных состояния</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қатты · Сұйық · Газ</span><span lang="en" class="lang-content">Solid · Liquid · Gas</span><span lang="ru" class="lang-content">Твёрдое · Жидкое · Газ</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚛️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Молекулалар — бір</span><span lang="en" class="lang-content">Same molecules</span><span lang="ru" class="lang-content">Молекулы — те же</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Айырмашылық — тәртіп пен қозғалыста</span><span lang="en" class="lang-content">Difference is in arrangement & motion</span><span lang="ru" class="lang-content">Разница — в порядке и движении</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌡️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">T ↑ → ↑</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жылыту → жоғарырақ күйге</span><span lang="en" class="lang-content">Heating → «higher» state</span><span lang="ru" class="lang-content">Нагрев → «выше» состояние</span></p></div>
+</div></footer>
 
-                        <line x1="300" y1="50" x2="400" y2="50" stroke="#dc2626" stroke-width="2"/>
-                        <polyline points="400 50, 390 45, 390 55, 400 50" fill="#dc2626"/>
-                        <text x="350" y="45" font-size="10" fill="#dc2626" text-anchor="middle">
-                            <tspan lang="kk" class="lang-content">Булану (қыздыру)</tspan>
-                            <tspan lang="en" class="lang-content">Evaporation (heating)</tspan>
-                            <tspan lang="ru" class="lang-content">Испарение (нагрев)</tspan>
-                        </text>
-
-                        <!-- Стрелки (охлаждение) -->
-                        <line x1="200" y1="70" x2="100" y2="70" stroke="#3b82f6" stroke-width="2"/>
-                        <polyline points="100 70, 110 65, 110 75, 100 70" fill="#3b82f6"/>
-                        <text x="150" y="85" font-size="10" fill="#3b82f6" text-anchor="middle">
-                            <tspan lang="kk" class="lang-content">Қатаю (суыту)</tspan>
-                            <tspan lang="en" class="lang-content">Freezing (cooling)</tspan>
-                            <tspan lang="ru" class="lang-content">Отвердевание (охл.)</tspan>
-                        </text>
-
-                        <line x1="400" y1="70" x2="300" y2="70" stroke="#3b82f6" stroke-width="2"/>
-                        <polyline points="300 70, 310 65, 310 75, 300 70" fill="#3b82f6"/>
-                        <text x="350" y="85" font-size="10" fill="#3b82f6" text-anchor="middle">
-                            <tspan lang="kk" class="lang-content">Конденсация (суыту)</tspan>
-                            <tspan lang="en" class="lang-content">Condensation (cooling)</tspan>
-                            <tspan lang="ru" class="lang-content">Конденсация (охл.)</tspan>
-                        </text>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-gray-800">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-gray-800">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-gray-800">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Заттың күйі оның бөлшектерінің <span class="term" lang="kk">қозғалыс жылдамдығына</span> (температура) және <span class="term" lang="kk">арақашықтығына</span> байланысты. <span class="term" lang="kk">Қыздыру</span> бөлшектерді жылдамдатады (қатты➔сұйық➔газ), <span class="term" lang="kk">суыту</span> баяулатады (газ➔сұйық➔қатты).
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                The state of matter depends on the <span class="term" lang="en">speed</span> (temperature) and <span class="term" lang="en">spacing</span> of its particles. <span class="term" lang="en">Heating</span> speeds particles up (solid➔liquid➔gas), <span class="term" lang="en">cooling</span> slows them down (gas➔liquid➔solid).
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Состояние вещества зависит от <span class="term" lang="ru">скорости</span> (температуры) и <span class="term" lang="ru">расстояния</span> между частицами. <span class="term" lang="ru">Нагревание</span> ускоряет частицы (твердое➔жидкое➔газ), <span class="term" lang="ru">охлаждение</span> замедляет их (газ➔жидкое➔твердое).
-            </p>
-        </footer>
-
-    </div>
-
-    
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

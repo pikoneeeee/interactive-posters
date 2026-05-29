@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Переменный ток. Генератор</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · Айнымалы ток</span>
+<span lang="en" class="lang-content">Grade 11 · AC current</span>
+<span lang="ru" class="lang-content">11 класс · Переменный ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Айнымалы ток. Генератор</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Alternating current. Generator</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Переменный ток. Генератор</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔄 Айнымалы ток деген не?</span>
+<span lang="en" class="lang-content">🔄 What is AC?</span>
+<span lang="ru" class="lang-content">🔄 Что такое переменный ток?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Айнымалы ток (AC)</b> — уақыт бойынша <b>периодты түрде</b> бағыты мен шамасы өзгеретін ток. Заманауи розеткалардағы ток — <b>синусоидалы</b>: i(t) = I<sub>0</sub>·sin(ωt). Қазақстанда және Ресейде <b>U = 220 В, ν = 50 Гц</b>; АҚШ-та <b>110 В, 60 Гц</b>. AC <b>трансформатормен</b> оңай түрленеді — сондықтан энергия жоғары U-да <b>аз шығынмен</b> тасылады.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Alternating current (AC)</b> changes direction and magnitude <b>periodically</b>. Wall-socket current is <b>sinusoidal</b>: i(t) = I<sub>0</sub>·sin(ωt). In Russia/Kazakhstan: <b>U = 220 V, ν = 50 Hz</b>; in the USA: <b>110 V, 60 Hz</b>. AC can easily be transformed → power transmits efficiently at high U.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Переменный ток (AC)</b> — ток, периодически меняющий направление и величину. В розетках — <b>синусоидальный</b>: i(t) = I<sub>0</sub>·sin(ωt). В России/Казахстане: <b>U = 220 В, ν = 50 Гц</b>; в США: <b>110 В, 60 Гц</b>. AC легко трансформируется — поэтому энергия передаётся при высоком U с малыми потерями.</span></p>
+
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Әсерлік мәндер:</span><span lang="en" class="lang-content">RMS values:</span><span lang="ru" class="lang-content">Действующие значения:</span></p>
+<div class="formula text-center" style="font-size:1.3rem">
+I<sub>д</sub> = I<sub>0</sub>/√2 ≈ 0,707·I<sub>0</sub>
+</div>
+<div class="formula text-center mt-2" style="font-size:1.2rem">
+U<sub>д</sub> = U<sub>0</sub>/√2
+</div>
+<p class="text-sm text-slate-700 mt-2"><span lang="kk" class="lang-content">⭐ <b>220 В</b> — әсерлік (rms); амплитуда — 311 В!</span><span lang="en" class="lang-content">⭐ «220 V» is RMS; peak ~311 V!</span><span lang="ru" class="lang-content">⭐ «220 В» — действующее; амплитуда ~311 В!</span></p>
+</div>
+</div>
+
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<svg viewBox="0 0 240 160" style="width:100%">
+<line x1="20" y1="80" x2="230" y2="80" stroke="#1e293b" stroke-width="1.5"/>
+<line x1="30" y1="20" x2="30" y2="140" stroke="#1e293b" stroke-width="1.5"/>
+<path d="M30 80 Q 60 10 90 80 T 150 80 T 210 80" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+<text x="220" y="95" font-size="11" fill="#475569">t</text>
+<text x="20" y="15" font-size="11" fill="#475569">i</text>
+<text x="135" y="155" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="700"><tspan class="lang-content" lang="kk">синусоида</tspan><tspan class="lang-content" lang="en">sinusoid</tspan><tspan class="lang-content" lang="ru">синусоида</tspan></text>
+</svg>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚙️ Айнымалы ток генераторы</span>
+<span lang="en" class="lang-content">⚙️ AC generator</span>
+<span lang="ru" class="lang-content">⚙️ Генератор переменного тока</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base mb-3">
+<span lang="kk" class="lang-content"><b>Жұмыс принципі:</b> магнит өрісінде <b>айналатын</b> орам (рамка) — Φ үнемі өзгереді → <b>Фарадей заңы</b> → синусоидалы ЭҚК.</span>
+<span lang="en" class="lang-content"><b>Principle:</b> a coil <b>rotates</b> in a magnetic field; Φ continually changes → <b>Faraday's law</b> → sinusoidal EMF.</span>
+<span lang="ru" class="lang-content"><b>Принцип:</b> рамка <b>вращается</b> в магнитном поле; Φ непрерывно меняется → <b>закон Фарадея</b> → синусоидальная ЭДС.</span></p>
+<div class="formula text-center" style="font-size:1.3rem">
+ε(t) = ε<sub>0</sub>·sin(ωt) = B·S·N·ω·sin(ωt)
+</div>
+<p class="text-sm text-slate-700 mt-3">
+<span lang="kk" class="lang-content">ε<sub>0</sub> — амплитудалық ЭҚК. Қазақстанда генераторлар <b>ω = 314 рад/с</b> (50 Гц) айналады.</span>
+<span lang="en" class="lang-content">ε<sub>0</sub> — peak EMF. In RU/KZ generators rotate at <b>ω = 314 rad/s</b> (50 Hz).</span>
+<span lang="ru" class="lang-content">ε<sub>0</sub> — амплитудная ЭДС. В РФ/КЗ генераторы вращаются с <b>ω = 314 рад/с</b> (50 Гц).</span></p>
+</div>
+
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-indigo-700 mb-3">🏭 <span lang="kk" class="lang-content">Электр станциялары:</span><span lang="en" class="lang-content">Power plants:</span><span lang="ru" class="lang-content">Электростанции:</span></p>
+<table class="t text-sm">
+<tbody>
+<tr><td>🔥 <span lang="kk" class="lang-content">ЖЭС (көмір, газ)</span><span lang="en" class="lang-content">Thermal (coal/gas)</span><span lang="ru" class="lang-content">ТЭС</span></td><td>~60% <span lang="kk" class="lang-content">әлемде</span><span lang="en" class="lang-content">world</span><span lang="ru" class="lang-content">в мире</span></td></tr>
+<tr><td>💧 <span lang="kk" class="lang-content">ГЭС</span><span lang="en" class="lang-content">Hydro</span><span lang="ru" class="lang-content">ГЭС</span></td><td>~15%</td></tr>
+<tr><td>☢️ <span lang="kk" class="lang-content">АЭС</span><span lang="en" class="lang-content">Nuclear</span><span lang="ru" class="lang-content">АЭС</span></td><td>~10%</td></tr>
+<tr><td>💨 <span lang="kk" class="lang-content">Жел</span><span lang="en" class="lang-content">Wind</span><span lang="ru" class="lang-content">Ветер</span></td><td>~7%</td></tr>
+<tr><td>☀️ <span lang="kk" class="lang-content">Күн</span><span lang="en" class="lang-content">Solar</span><span lang="ru" class="lang-content">Солнце</span></td><td>~5%</td></tr>
+</tbody></table>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">⭐ Бәрі генераторды <b>айналдыруға</b> негізделген (Күн PV-ден басқа)</span><span lang="en" class="lang-content">⭐ All but solar PV rotate a generator</span><span lang="ru" class="lang-content">⭐ Все, кроме солнечных PV — вращают генератор</span></p>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔌 R, L, C — айнымалы тізбекте</span>
+<span lang="en" class="lang-content">🔌 R, L, C in AC circuit</span>
+<span lang="ru" class="lang-content">🔌 R, L, C в цепи AC</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-indigo-700 mb-2 text-base">⚪ <span lang="kk" class="lang-content">Кедергі R:</span><span lang="en" class="lang-content">Resistor R:</span><span lang="ru" class="lang-content">Резистор R:</span></p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">U мен i <b>фазалас</b>. Қызу шығады.</span><span lang="en" class="lang-content">U and i <b>in phase</b>. Generates heat.</span><span lang="ru" class="lang-content">U и i <b>в фазе</b>. Греется.</span></p>
+<div class="formula text-center" style="font-size:1.1rem">P = UI = I²R</div>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-indigo-700 mb-2 text-base">🌀 <span lang="kk" class="lang-content">Катушка L:</span><span lang="en" class="lang-content">Inductor L:</span><span lang="ru" class="lang-content">Катушка L:</span></p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">i <b>U-дан 90° кешік</b>. Қызбайды!</span><span lang="en" class="lang-content">i <b>lags U by 90°</b>. No heating!</span><span lang="ru" class="lang-content">i <b>отстаёт от U на 90°</b>. Не греется!</span></p>
+<div class="formula text-center" style="font-size:1.1rem">X<sub>L</sub> = ωL</div>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-indigo-700 mb-2 text-base">🔋 <span lang="kk" class="lang-content">Конденсатор C:</span><span lang="en" class="lang-content">Capacitor C:</span><span lang="ru" class="lang-content">Конденсатор C:</span></p>
+<p class="text-slate-700 text-sm mb-2"><span lang="kk" class="lang-content">i U-дан 90° <b>озады</b>. DC өткізбейді.</span><span lang="en" class="lang-content">i <b>leads U by 90°</b>. Blocks DC.</span><span lang="ru" class="lang-content">i <b>опережает U на 90°</b>. DC блокирует.</span></p>
+<div class="formula text-center" style="font-size:1.1rem">X<sub>C</sub> = 1/(ωC)</div>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Айнымалы ток қуаты</span>
+<span lang="en" class="lang-content">⚡ AC power</span>
+<span lang="ru" class="lang-content">⚡ Мощность переменного тока</span></h2>
+<div class="card-warm rounded-custom p-6">
+<div class="formula text-center" style="font-size:1.4rem">
+P = U<sub>д</sub> · I<sub>д</sub> · cos φ
+</div>
+<p class="text-slate-700 text-base mt-3">
+<span lang="kk" class="lang-content"><b>cos φ — қуат коэффициенті</b>. R-да cos φ = 1 (бар қуат жылуға); таза L немесе C-де cos φ = 0 (қуат тұтынылмайды!). Өндірісте <b>cos φ-ді 1-ге жақын</b> ұстау маңызды — әйтпесе кабельдер артық қыза береді.</span>
+<span lang="en" class="lang-content"><b>cos φ — power factor</b>. For R: cos φ = 1 (all power to heat); for pure L or C: cos φ = 0 (no real power consumed). Industry strives for cos φ near 1 — otherwise cables overheat.</span>
+<span lang="ru" class="lang-content"><b>cos φ — коэффициент мощности</b>. Для R: cos φ = 1 (вся мощность греет); для чистой L или C: cos φ = 0 (мощность не потребляется!). На производстве важно держать cos φ близко к 1 — иначе кабели греются зря.</span></p>
+</div>
+</section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">i = I<sub>0</sub>·sin(ωt)</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Айнымалы ток</span><span lang="en" class="lang-content">AC current</span><span lang="ru" class="lang-content">Перемен. ток</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">I<sub>д</sub>=I<sub>0</sub>/√2</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Әсерлік мәні</span><span lang="en" class="lang-content">RMS value</span><span lang="ru" class="lang-content">Действ. знач.</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚙️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">220 В, 50 Гц</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тұрғын стандарт</span><span lang="en" class="lang-content">Mains standard</span><span lang="ru" class="lang-content">Бытовой стандарт</span></p></div>
+</div></footer>
+
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

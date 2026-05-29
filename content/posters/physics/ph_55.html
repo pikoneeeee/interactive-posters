@@ -1,231 +1,179 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тепловое движение. Температура</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #cffafe 0%, #e0f2fe 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #0284c7 0%, #0c4a6e 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #0c4a6e; border-bottom: 3px solid #bae6fd; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #0284c7; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #0284c7; background: white; color: #0284c7; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #0284c7; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #0284c7; color: white; }
-        .illustration { background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%); padding: 25px; border-radius: 1rem; margin: 15px 0; text-align: center; }
-        svg { max-width: 100%; height: auto; }
-        .info-box { background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #0284c7; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .example-card { background: #f0f9ff; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #0284c7; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электрическая цепь и её составные части</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-sky-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр тогы</span>
+<span lang="en" class="lang-content">Grade 9 · Electric current</span>
+<span lang="ru" class="lang-content">9 класс · Электрический ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электр тізбегі және оның бөліктері</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Electric circuit and its components</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электрическая цепь и её составные части</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Тепловое Движение. Температура</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Thermal Motion. Temperature</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Тепловое движение. Температура</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-blue-100">Барлық заттардың молекулалары қозғалып тұрады. Температура - қозғалыстың құпирсы. Абсолют нөл = -273°C. МОЛЕКУЛЯЛЫҚ ТЕОРИЯ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-blue-100">All molecules of matter are moving. Temperature is measure of motion. Absolute zero = -273°C. MOLECULAR KINETIC THEORY!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-blue-100">Все молекулы вещества движутся. Температура - мера движения. Абсолютный ноль = -273°C. МОЛЕКУЛЯРНО-КИНЕТИЧЕСКАЯ ТЕОРИЯ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Электр тізбегі дегеніміз не?</span>
+<span lang="en" class="lang-content">⚡ What is an electric circuit?</span>
+<span lang="ru" class="lang-content">⚡ Что такое электрическая цепь?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электр тізбегі</b> — ток көзі, тұтынғыштар, сымдар мен ажыратқыштан тұратын <b>жабық жүйе</b>. Тоқ <b>тек жабық тізбекте</b> жүре алады! Тізбекті <b>ашсаңыз</b> (ажыратқышты бассаңыз) — тоқ тоқтайды. Әр элементтің <b>өз шартты белгісі</b> (символы) бар, ал бүкіл сызбаны — <b class="text-indigo-700">электр сұлбасы</b> деп атайды.</span>
+<span lang="en" class="lang-content">An <b class="text-indigo-700">electric circuit</b> is a <b>closed system</b> of source, consumers, wires and a switch. Current flows <b>only in a closed</b> circuit! Open the switch — current stops. Each element has its <b>own symbol</b>, and the whole drawing is called a <b class="text-indigo-700">circuit diagram</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Электрическая цепь</b> — <b>замкнутая система</b> из источника, потребителей, проводов и ключа. Ток течёт <b>только в замкнутой</b> цепи! Разомкнули ключ — ток прекращается. Каждый элемент имеет <b>свой символ</b>, а весь чертёж называется <b class="text-indigo-700">электрической схемой</b>.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ТЕПЛОВОЕ ДВИЖЕНИЕ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. THERMAL MOTION</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Тепловое движение</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">🧩 <span lang="kk" class="lang-content">4 негізгі компонент:</span><span lang="en" class="lang-content">4 main components:</span><span lang="ru" class="lang-content">4 главных компонента:</span></p>
+<ol class="text-slate-700 text-sm list-decimal pl-6 space-y-1">
+<li><span lang="kk" class="lang-content"><b>Ток көзі</b> — батарейка, аккумулятор</span><span lang="en" class="lang-content"><b>Source</b> — battery, accumulator</span><span lang="ru" class="lang-content"><b>Источник</b> — батарейка, аккумулятор</span></li>
+<li><span lang="kk" class="lang-content"><b>Тұтынушылар</b> — лампа, мотор, тоңазыт.</span><span lang="en" class="lang-content"><b>Consumers</b> — lamp, motor, fridge</span><span lang="ru" class="lang-content"><b>Потребители</b> — лампа, мотор, плита</span></li>
+<li><span lang="kk" class="lang-content"><b>Сымдар</b> — өткізгіш (мыс) + изоляция</span><span lang="en" class="lang-content"><b>Wires</b> — copper + insulation</span><span lang="ru" class="lang-content"><b>Провода</b> — медь + изоляция</span></li>
+<li><span lang="kk" class="lang-content"><b>Ажыратқыш</b> — тоқты қосады/үзеді</span><span lang="en" class="lang-content"><b>Switch</b> — turns current on/off</span><span lang="ru" class="lang-content"><b>Ключ</b> — включает/выключает</span></li>
+</ol>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>🔬 АНЫҚТАМАСЫ:</strong> Барлық заттардың молекулалары және атомдары беспорядочно (жүйегінсіз) қозғалып тұрады. Бұл қозғалыс ешқашан тоқтамайды, тек жылдамдығы өзгеді.</p>
-                <p lang="kk" class="lang-content text-sm"><strong>⚛️ АТОМДАР:</strong> Барлықтың құрамасы атомдардан төнеді. H (сутегі) → He (гелий) → ... → Fe (темір) → ... → U (уран)</p>
-                <p lang="kk" class="lang-content text-sm"><strong>💨 МОЛЕКУЛАЛАР:</strong> Атомдардың орнина құрамасы. Су = H₂O (2 сутегі + 1 оттегі). О₂ (оттегі молекула) т.б.</p>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 200" style="width:220px">
+<!-- Цепь прямоугольник -->
+<rect x="20" y="40" width="200" height="120" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+<!-- Батарейка -->
+<line x1="80" y1="40" x2="80" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="120" y1="40" x2="120" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="70" y1="20" x2="90" y2="20" stroke="#1e293b" stroke-width="4"/>
+<line x1="110" y1="15" x2="130" y2="15" stroke="#1e293b" stroke-width="2"/>
+<text x="68" y="14" font-size="11" font-weight="700" fill="#1e293b">+</text>
+<text x="130" y="14" font-size="11" font-weight="700" fill="#1e293b">−</text>
+<!-- Лампа -->
+<circle cx="220" cy="100" r="14" fill="#fef3c7" stroke="#1e293b" stroke-width="2"/>
+<line x1="210" y1="90" x2="230" y2="110" stroke="#1e293b" stroke-width="2"/>
+<line x1="210" y1="110" x2="230" y2="90" stroke="#1e293b" stroke-width="2"/>
+<!-- Ключ -->
+<circle cx="40" cy="100" r="4" fill="#1e293b"/>
+<line x1="40" y1="100" x2="60" y2="80" stroke="#1e293b" stroke-width="2"/>
+<circle cx="60" cy="80" r="4" fill="#1e293b"/>
+<!-- Стрелки тока -->
+<text x="120" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">→ I →</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Қарапайым тізбек</span>
+<span lang="en" class="lang-content">Simple circuit</span>
+<span lang="ru" class="lang-content">Простая цепь</span></p>
+</div></div></section>
 
-                <p lang="en" class="lang-content text-sm"><strong>🔬 DEFINITION:</strong> All molecules and atoms of matter move chaotically (disorderly). This motion never stops, only speed changes.</p>
-                <p lang="en" class="lang-content text-sm"><strong>⚛️ ATOMS:</strong> All matter consists of atoms. H (hydrogen) → He (helium) → ... → Fe (iron) → ... → U (uranium)</p>
-                <p lang="en" class="lang-content text-sm"><strong>💨 MOLECULES:</strong> Combination of atoms. Water = H₂O (2 hydrogen + 1 oxygen). O₂ (oxygen molecule) etc.</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎨 Шартты белгілер (символдар)</span>
+<span lang="en" class="lang-content">🎨 Symbols on circuit diagrams</span>
+<span lang="ru" class="lang-content">🎨 Условные обозначения</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Элемент</span><span lang="en" class="lang-content">Element</span><span lang="ru" class="lang-content">Элемент</span></th>
+<th><span lang="kk" class="lang-content">Белгісі</span><span lang="en" class="lang-content">Symbol</span><span lang="ru" class="lang-content">Обозначение</span></th>
+<th><span lang="kk" class="lang-content">Атқаратын қызметі</span><span lang="en" class="lang-content">Function</span><span lang="ru" class="lang-content">Функция</span></th>
+</tr></thead>
+<tbody>
+<tr><td><span lang="kk" class="lang-content">Гальваникалық элемент</span><span lang="en" class="lang-content">Galvanic cell</span><span lang="ru" class="lang-content">Гальв. элемент</span></td>
+<td class="text-2xl">⊟</td>
+<td><span lang="kk" class="lang-content">Тоқ көзі (1 батарейка)</span><span lang="en" class="lang-content">Current source (1 cell)</span><span lang="ru" class="lang-content">Источник тока</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Батарея</span><span lang="en" class="lang-content">Battery</span><span lang="ru" class="lang-content">Батарея</span></td>
+<td class="text-2xl">⊟⊟⊟</td>
+<td><span lang="kk" class="lang-content">Бірнеше элемент</span><span lang="en" class="lang-content">Multiple cells</span><span lang="ru" class="lang-content">Несколько элементов</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Сым</span><span lang="en" class="lang-content">Wire</span><span lang="ru" class="lang-content">Провод</span></td>
+<td>━━━</td>
+<td><span lang="kk" class="lang-content">Зарядты өткізеді</span><span lang="en" class="lang-content">Conducts charge</span><span lang="ru" class="lang-content">Проводит заряд</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Қиылыс</span><span lang="en" class="lang-content">Junction</span><span lang="ru" class="lang-content">Соединение</span></td>
+<td class="text-2xl">●</td>
+<td><span lang="kk" class="lang-content">Сымдар жалғанған</span><span lang="en" class="lang-content">Wires connected</span><span lang="ru" class="lang-content">Провода соединены</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Ажыратқыш</span><span lang="en" class="lang-content">Switch</span><span lang="ru" class="lang-content">Ключ</span></td>
+<td class="text-2xl">⊸/⊸</td>
+<td><span lang="kk" class="lang-content">Қосу/үзу</span><span lang="en" class="lang-content">On/off</span><span lang="ru" class="lang-content">Вкл./выкл.</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Шам (лампа)</span><span lang="en" class="lang-content">Lamp</span><span lang="ru" class="lang-content">Лампа</span></td>
+<td class="text-2xl">⊗</td>
+<td><span lang="kk" class="lang-content">Жарық береді</span><span lang="en" class="lang-content">Provides light</span><span lang="ru" class="lang-content">Излучает свет</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Резистор</span><span lang="en" class="lang-content">Resistor</span><span lang="ru" class="lang-content">Резистор</span></td>
+<td class="text-2xl">▭</td>
+<td><span lang="kk" class="lang-content">Тоқты шектейді</span><span lang="en" class="lang-content">Limits current</span><span lang="ru" class="lang-content">Ограничивает ток</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Амперметр</span><span lang="en" class="lang-content">Ammeter</span><span lang="ru" class="lang-content">Амперметр</span></td>
+<td class="text-2xl">Ⓐ</td>
+<td><span lang="kk" class="lang-content">Тоқ күшін өлшейді</span><span lang="en" class="lang-content">Measures current</span><span lang="ru" class="lang-content">Измеряет ток</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Вольтметр</span><span lang="en" class="lang-content">Voltmeter</span><span lang="ru" class="lang-content">Вольтметр</span></td>
+<td class="text-2xl">Ⓥ</td>
+<td><span lang="kk" class="lang-content">Кернеуді өлшейді</span><span lang="en" class="lang-content">Measures voltage</span><span lang="ru" class="lang-content">Измеряет напряжение</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
 
-                <p lang="ru" class="lang-content text-sm"><strong>🔬 ОПРЕДЕЛЕНИЕ:</strong> Все молекулы и атомы вещества движутся хаотично (беспорядочно). Это движение никогда не прекращается, только скорость меняется.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>⚛️ АТОМЫ:</strong> Вся материя состоит из атомов. H (водород) → He (гелий) → ... → Fe (железо) → ... → U (уран)</p>
-                <p lang="ru" class="lang-content text-sm"><strong>💨 МОЛЕКУЛЫ:</strong> Комбинация атомов. Вода = H₂O (2 водорода + 1 кислород). O₂ (молекула кислорода) и т.д.</p>
-            </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔌 Жабық / ашық тізбек</span>
+<span lang="en" class="lang-content">🔌 Closed / open circuit</span>
+<span lang="ru" class="lang-content">🔌 Замкнутая / разомкнутая цепь</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-xl text-emerald-700 mb-3">✅ <span lang="kk" class="lang-content">Жабық тізбек</span><span lang="en" class="lang-content">Closed circuit</span><span lang="ru" class="lang-content">Замкнутая цепь</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Барлық қосылыстар жалғанған, ажыратқыш <b>қосулы</b>. <b>Тоқ ағады</b>, шам жанады.</span>
+<span lang="en" class="lang-content">All connections joined, switch <b>on</b>. <b>Current flows</b>, lamp lights up.</span>
+<span lang="ru" class="lang-content">Все соединения замкнуты, ключ <b>включён</b>. <b>Ток идёт</b>, лампа горит.</span></p>
+</div>
+<div class="card-rose rounded-custom p-6">
+<p class="heading-font text-xl text-rose-700 mb-3">❌ <span lang="kk" class="lang-content">Ашық тізбек</span><span lang="en" class="lang-content">Open circuit</span><span lang="ru" class="lang-content">Разомкнутая цепь</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Бір жерде үзіліс бар (ажыратқыш ашық, сым үзілген). <b>Тоқ жоқ</b>, шам жанбайды.</span>
+<span lang="en" class="lang-content">There is a break (switch open or wire cut). <b>No current</b>, lamp is off.</span>
+<span lang="ru" class="lang-content">Где-то разрыв (ключ открыт или провод перебит). <b>Тока нет</b>, лампа не горит.</span></p>
+</div>
+</div>
+</section>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>🌡️ БРОУНДЫҢ ДВИЖЕНИЙ:</strong> Төмен молекулалардың хаотикалық қозғалыстан балта ыстық жыл қазақта байқалады. Мысал: Пыл бөлшектерінің сүлбеп жүргені суында (микроскоп арқылы).</p>
-                <p lang="en" class="lang-content text-sm"><strong>🌡️ BROWNIAN MOTION:</strong> Random movement of small particles due to collisions with molecules. Example: Dust particles moving in water (under microscope).</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🌡️ БРОУНОВСКОЕ ДВИЖЕНИЕ:</strong> Случайное движение мелких частиц из-за столкновений с молекулами. Пример: Пыль движется в воде (под микроскопом).</p>
-            </div>
-        </section>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Электр қауіпсіздігі</span>
+<span lang="en" class="lang-content">⚠️ Electric safety</span>
+<span lang="ru" class="lang-content">⚠️ Электробезопасность</span></h2>
+<div class="card-warm rounded-custom p-6">
+<ul class="text-slate-700 text-base list-disc pl-6 space-y-2">
+<li><span lang="kk" class="lang-content"><b>Сулы қолмен</b> розеткаға, сымға, тұрмыс құрылғыларына <b>тиюге болмайды</b>!</span><span lang="en" class="lang-content"><b>Never</b> touch sockets or appliances with <b>wet hands</b>!</span><span lang="ru" class="lang-content"><b>Никогда</b> не трогай розетки и приборы <b>мокрыми руками</b>!</span></li>
+<li><span lang="kk" class="lang-content">Зақымдалған сымды <b>дереу</b> қолданудан тоқтатыңыз.</span><span lang="en" class="lang-content">Stop using <b>damaged</b> wires immediately.</span><span lang="ru" class="lang-content">Сразу прекращай пользоваться <b>повреждёнными</b> проводами.</span></li>
+<li><span lang="kk" class="lang-content">Сым ұшында <b>тікелей</b> жабысқан адамды <b>қолмен</b> тарту — <b>қауіпті</b>! Алдымен тоқты үзіңіз.</span><span lang="en" class="lang-content">Don't grab a person stuck to a wire <b>by hand</b> — turn off power first!</span><span lang="ru" class="lang-content">Не хватай человека, прилипшего к проводу — сначала <b>отключи</b> питание.</span></li>
+<li><span lang="kk" class="lang-content">Гроза кезінде — <b>биіктікке</b> шықпаңыз, темір астыңа сақтаныңыз.</span><span lang="en" class="lang-content">In thunderstorm — avoid high places, metal shelter is unsafe.</span><span lang="ru" class="lang-content">Во время грозы — не лезь наверх, под металлической крышей.</span></li>
+</ul>
+</div>
+</section>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТЕМПЕРАТУРА</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. TEMPERATURE</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Температура</h2>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧩</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">4</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Көз + тұтынғыш + сым + ажыратқыш</span><span lang="en" class="lang-content">Source + load + wire + switch</span><span lang="ru" class="lang-content">Источник + потребитель + провод + ключ</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Тек жабықта</span><span lang="en" class="lang-content">Only closed</span><span lang="ru" class="lang-content">Только в замкнутой</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тоқ ағады</span><span lang="en" class="lang-content">Current flows</span><span lang="ru" class="lang-content">Идёт ток</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚠️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Қауіпсіздік!</span><span lang="en" class="lang-content">Safety!</span><span lang="ru" class="lang-content">Безопасность!</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Сулы қолмен — болмайды</span><span lang="en" class="lang-content">Never with wet hands</span><span lang="ru" class="lang-content">Не трогать мокрыми руками</span></p></div>
+</div></footer>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ТҮРІ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">СИМВОЛЫ</th>
-                            <th lang="kk" class="lang-content">ҚАТЫНАСЫ</th>
-
-                            <th lang="en" class="lang-content">TYPE</th>
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">SYMBOL</th>
-                            <th lang="en" class="lang-content">RELATION</th>
-
-                            <th lang="ru" class="lang-content">ТИП</th>
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">СИМВОЛ</th>
-                            <th lang="ru" class="lang-content">СВЯЗЬ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Цельсий</strong></td>
-                            <td lang="kk" class="lang-content">Сернеге шкалалы температура</td>
-                            <td lang="kk" class="lang-content">°C</td>
-                            <td lang="kk" class="lang-content">0°C = суындағы бұзу нүктесі | 100°C = суындағы қайнау нүктесі</td>
-
-                            <td lang="en" class="lang-content"><strong>Celsius</strong></td>
-                            <td lang="en" class="lang-content">Common temperature scale</td>
-                            <td lang="en" class="lang-content">°C</td>
-                            <td lang="en" class="lang-content">0°C = water freezing point | 100°C = water boiling point</td>
-
-                            <td lang="ru" class="lang-content"><strong>Цельсий</strong></td>
-                            <td lang="ru" class="lang-content">Общепринятая шкала температуры</td>
-                            <td lang="ru" class="lang-content">°C</td>
-                            <td lang="ru" class="lang-content">0°C = точка замёрзывания | 100°C = точка кипения</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Абсолют (Келвин)</strong></td>
-                            <td lang="kk" class="lang-content">Физикалық қозғалысу нөлінен</td>
-                            <td lang="kk" class="lang-content">К (Kelvin)</td>
-                            <td lang="kk" class="lang-content">T(K) = t(°C) + 273. Абсолют нөл = 0 К = -273°C</td>
-
-                            <td lang="en" class="lang-content"><strong>Absolute (Kelvin)</strong></td>
-                            <td lang="en" class="lang-content">Physical zero of motion</td>
-                            <td lang="en" class="lang-content">K (Kelvin)</td>
-                            <td lang="en" class="lang-content">T(K) = t(°C) + 273. Absolute zero = 0 K = -273°C</td>
-
-                            <td lang="ru" class="lang-content"><strong>Абсолютная (Кельвин)</strong></td>
-                            <td lang="ru" class="lang-content">Физический ноль движения</td>
-                            <td lang="ru" class="lang-content">К (Кельвин)</td>
-                            <td lang="ru" class="lang-content">T(K) = t(°C) + 273. Абсолютный нуль = 0 К = -273°C</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📌 ТҮРЛЕНДІРУ:</strong></p>
-                        <p lang="kk" class="lang-content">• Цельсий → Келвин: T(K) = t(°C) + 273</p>
-                        <p lang="kk" class="lang-content">• Мысал: 25°C = 25 + 273 = 298 К</p>
-                        <p lang="kk" class="lang-content">• Мысал: 0°C = 0 + 273 = 273 К</p>
-                        <p lang="kk" class="lang-content">• Мысал: -273°C = -273 + 273 = 0 К (абсолют нөл)</p>
-
-                        <p lang="en" class="lang-content"><strong>📌 CONVERSION:</strong></p>
-                        <p lang="en" class="lang-content">• Celsius → Kelvin: T(K) = t(°C) + 273</p>
-                        <p lang="en" class="lang-content">• Example: 25°C = 25 + 273 = 298 K</p>
-                        <p lang="en" class="lang-content">• Example: 0°C = 0 + 273 = 273 K</p>
-                        <p lang="en" class="lang-content">• Example: -273°C = -273 + 273 = 0 K (absolute zero)</p>
-
-                        <p lang="ru" class="lang-content"><strong>📌 ПРЕОБРАЗОВАНИЕ:</strong></p>
-                        <p lang="ru" class="lang-content">• Цельсий → Кельвин: T(K) = t(°C) + 273</p>
-                        <p lang="ru" class="lang-content">• Пример: 25°C = 25 + 273 = 298 К</p>
-                        <p lang="ru" class="lang-content">• Пример: 0°C = 0 + 273 = 273 К</p>
-                        <p lang="ru" class="lang-content">• Пример: -273°C = -273 + 273 = 0 К (абсолютный нуль)</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>🌡️ ТЕМПЕРАТУРА МЫСАЛДАРЫ:</strong></p>
-                        <p lang="kk" class="lang-content">• Абсолют нөл: -273°C (молекулалар тоқтап қалады)</p>
-                        <p lang="kk" class="lang-content">• Қыста: -40°C (өте суық)</p>
-                        <p lang="kk" class="lang-content">• Бөлме: 20°C (қалыпты температура)</p>
-                        <p lang="kk" class="lang-content">• Адамдың дене: 36.6°C (сауын)</p>
-                        <p lang="kk" class="lang-content">• Қайнап су: 100°C (қайнау)</p>
-
-                        <p lang="en" class="lang-content"><strong>🌡️ TEMPERATURE EXAMPLES:</strong></p>
-                        <p lang="en" class="lang-content">• Absolute zero: -273°C (molecules stop)</p>
-                        <p lang="en" class="lang-content">• Winter: -40°C (very cold)</p>
-                        <p lang="en" class="lang-content">• Room: 20°C (normal temperature)</p>
-                        <p lang="en" class="lang-content">• Human body: 36.6°C (healthy)</p>
-                        <p lang="en" class="lang-content">• Boiling water: 100°C (boiling)</p>
-
-                        <p lang="ru" class="lang-content"><strong>🌡️ ПРИМЕРЫ ТЕМПЕРАТУР:</strong></p>
-                        <p lang="ru" class="lang-content">• Абсолютный нуль: -273°C (молекулы останавливаются)</p>
-                        <p lang="ru" class="lang-content">• Зимой: -40°C (очень холодно)</p>
-                        <p lang="ru" class="lang-content">• В комнате: 20°C (нормальная температура)</p>
-                        <p lang="ru" class="lang-content">• Человеческое тело: 36.6°C (здоровье)</p>
-                        <p lang="ru" class="lang-content">• Кипящая вода: 100°C (кипение)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. МОЛЕКУЛЯРЛЫҚ ТЕОРИЯ ПУНКТТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. KINETIC MOLECULAR THEORY POSTULATES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Основные положения МКТ</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>1️⃣ МОЛЕКУЛАЛАР ҚОЗҒАЛЫС:</strong> Барлық заттардың молекулалары беспорядочно қозғалып тұрады. Бұл қозғалыс жүргістің болып өндіктігінің температурасынан байланысты.</p>
-                <p lang="kk" class="lang-content text-sm"><strong>2️⃣ МОЛЕКУЛАЛАР АРАЛЫҒЫНДАҒЫ ТЕҢСІЗДІК:</strong> Молекулалар арасында бос орындар бар (өндіктігінің дене = молекулалар көлемі + бос орындар).</p>
-                <p lang="kk" class="lang-content text-sm"><strong>3️⃣ МОЛЕКУЛАЛАР ӨНДІКТІГІНІҢ:</strong> Молекулалар бір-біріне өндіктігінің (құтты). Берсемге және өндіктігінің.</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>1️⃣ MOLECULAR MOTION:</strong> All molecules of matter move chaotically. This motion causes pressure and depends on temperature.</p>
-                <p lang="en" class="lang-content text-sm"><strong>2️⃣ INTERMOLECULAR SPACE:</strong> There are empty spaces between molecules (body volume = molecule volume + empty space).</p>
-                <p lang="en" class="lang-content text-sm"><strong>3️⃣ MOLECULAR INTERACTION:</strong> Molecules attract each other. More in solids and liquids, less in gases.</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>1️⃣ ДВИЖЕНИЕ МОЛЕКУЛ:</strong> Все молекулы вещества движутся хаотично. Это движение создаёт давление и зависит от температуры.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>2️⃣ ПРОМЕЖУТКИ МЕЖДУ МОЛЕКУЛАМИ:</strong> Между молекулами есть пустоты (объём тела = объём молекул + пустоты).</p>
-                <p lang="ru" class="lang-content text-sm"><strong>3️⃣ ВЗАИМОДЕЙСТВИЕ МОЛЕКУЛ:</strong> Молекулы притягиваются друг к другу. Больше в твёрдых телах и жидкостях, меньше в газах.</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #bae6fd; border-radius: 1rem; border-top: 4px solid #0284c7;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-blue-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-blue-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-blue-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Тепловое движение - барлық заттардың молекулаларының беспорядочны қозғалыстағы. Температура - осы қозғалыстың құпирсысы. Абсолют нөл -273°C бұл молекулалар тоқтап қалатын нүктесі. Келвин шкалалы - физикалық температура! Молекулярлық теория - табиғаттың тереңі түсіну!</p>
-            <p lang="en" class="lang-content text-sm">Thermal motion is random chaotic movement of molecules of all matter. Temperature is measure of this motion. Absolute zero -273°C is the point where molecules stop. Kelvin scale is physical temperature! Molecular kinetic theory helps understand nature deeply!</p>
-            <p lang="ru" class="lang-content text-sm">Тепловое движение - это хаотичное движение молекул всех веществ. Температура - мера этого движения. Абсолютный нуль -273°C это точка где молекулы останавливаются. Шкала Кельвина - физическая температура! Молекулярная теория - глубокое понимание природы!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

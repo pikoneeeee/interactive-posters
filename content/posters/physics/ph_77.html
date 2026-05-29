@@ -1,158 +1,132 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Энергияның сақталуы және трансформациясы</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fef3c7 0%, #fed7aa 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #d97706 0%, #92400e 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #92400e; border-bottom: 3px solid #fed7aa; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #d97706; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #d97706; background: white; color: #d97706; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #d97706; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        .info-box { background: linear-gradient(135deg, #fed7aa 0%, #fef3c7 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #d97706; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .example-card { background: #fffbeb; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #d97706; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Равноускоренное движение. Ускорение</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-amber-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Кинематика</span>
+<span lang="en" class="lang-content">Grade 10 · Kinematics</span>
+<span lang="ru" class="lang-content">10 класс · Кинематика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Бірқалыпты үдемелі қозғалыс. Үдеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Uniformly accelerated motion. Acceleration</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Равноускоренное движение. Ускорение</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Энергия: Сақталуы және Трансформациясы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Energy: Conservation and Transformation</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Энергия: сохранение и преобразование</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-amber-100">E = const (сақталады) және өзгеріс (трансформируется). Фундаменталды физика заңы!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-amber-100">E = const (conserved) and transforms. Fundamental physics law!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-amber-100">E = const (сохраняется) и преобразуется. Фундаментальный закон физики!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚀 Үдеу — a</span>
+<span lang="en" class="lang-content">🚀 Acceleration — a</span>
+<span lang="ru" class="lang-content">🚀 Ускорение — a</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Үдеу</b> — жылдамдықтың <b>1 секундта қаншаға өзгеретінін</b> көрсетеді. <b>Векторлық</b> шама. Егер жылдамдық уақытпен <b>тұрақты</b> өзгерсе — <b>бірқалыпты үдемелі қозғалыс</b>. Үдеуі <b>оң</b> болса — дене <b>тездейді</b>; <b>теріс</b> болса — <b>баяулайды</b>.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Acceleration</b> shows how much velocity <b>changes per second</b>. It is a <b>vector</b>. If velocity changes <b>uniformly</b> with time — motion is <b>uniformly accelerated</b>. Positive a → speeds up; negative a → slows down.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Ускорение</b> — насколько <b>меняется скорость за 1 с</b>. <b>Векторная</b> величина. Если скорость меняется <b>равномерно</b> — это <b>равноускоренное движение</b>. a > 0 → разгон; a < 0 → торможение.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-sky-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Үдеу формуласы:</span><span lang="en" class="lang-content">Acceleration formula:</span><span lang="ru" class="lang-content">Формула ускорения:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+a = (v − v₀) / t
+</div>
+<p class="text-sm text-slate-700 text-center mt-2"><span lang="kk" class="lang-content">[a] = м/с² (метр секунд квадратына)</span><span lang="en" class="lang-content">[a] = m/s² (metre per second squared)</span><span lang="ru" class="lang-content">[a] = м/с² (метр на секунду в квадрате)</span></p>
+</div>
+</div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ЭНЕРГИЯ ТРААНСФОРМАЦИЯЛАУ ПРИМЕРЛЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. ENERGY TRANSFORMATION EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Примеры преобразования энергии</h2>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-sky-700 mb-3">📊 <span lang="kk" class="lang-content">Мысалдар:</span><span lang="en" class="lang-content">Examples:</span><span lang="ru" class="lang-content">Примеры:</span></p>
+<table class="t text-sm">
+<tbody>
+<tr><td>🚶 <span lang="kk" class="lang-content">Адам жүгіруді бастаған</span><span lang="en" class="lang-content">Person starts running</span><span lang="ru" class="lang-content">Человек начинает бег</span></td><td>~1 м/с²</td></tr>
+<tr><td>🚗 <span lang="kk" class="lang-content">Автомобиль</span><span lang="en" class="lang-content">Car</span><span lang="ru" class="lang-content">Автомобиль</span></td><td>2–4 м/с²</td></tr>
+<tr><td>🏎️ <span lang="kk" class="lang-content">F1 болиді</span><span lang="en" class="lang-content">F1 car</span><span lang="ru" class="lang-content">F1 болид</span></td><td>15 м/с²</td></tr>
+<tr><td>🌍 <span lang="kk" class="lang-content">Еркін түсу</span><span lang="en" class="lang-content">Free fall</span><span lang="ru" class="lang-content">Свободное падение</span></td><td><b>g ≈ 9,8 м/с²</b></td></tr>
+<tr class="bg-rose-50"><td>🚀 <span lang="kk" class="lang-content">Зымыран ұшырылуы</span><span lang="en" class="lang-content">Rocket launch</span><span lang="ru" class="lang-content">Старт ракеты</span></td><td>30–50 м/с²</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>☀️ СОЛНЦЕ → ЖЕР</strong></p>
-                        <p lang="kk" class="lang-content">Сәулелену энергия → Жылу → Құрамасындағы→ Биологиялық</p>
-                        <p lang="kk" class="lang-content">☀️ → 🌍 (T +25°C) → 💚 (өндіктігінең) → 🌾 (өсімдік өндіктігінің)</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Кинематика теңдеулері</span>
+<span lang="en" class="lang-content">📐 Kinematic equations</span>
+<span lang="ru" class="lang-content">📐 Уравнения кинематики</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-sky-700 text-base mb-2"><span lang="kk" class="lang-content">Жылдамдық</span><span lang="en" class="lang-content">Velocity</span><span lang="ru" class="lang-content">Скорость</span></p>
+<div class="formula" style="font-size:1.4rem">v = v₀ + a·t</div>
+</div>
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-sky-700 text-base mb-2"><span lang="kk" class="lang-content">Жол</span><span lang="en" class="lang-content">Displacement</span><span lang="ru" class="lang-content">Перемещение</span></p>
+<div class="formula" style="font-size:1.3rem">s = v₀t + at²/2</div>
+</div>
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-sky-700 text-base mb-2"><span lang="kk" class="lang-content">Уақытсыз</span><span lang="en" class="lang-content">No-time</span><span lang="ru" class="lang-content">Без времени</span></p>
+<div class="formula" style="font-size:1.3rem">v² = v₀² + 2·a·s</div>
+</div>
+</div>
 
-                        <p lang="en" class="lang-content"><strong>☀️ SUN → EARTH</strong></p>
-                        <p lang="en" class="lang-content">Radiation → Heat → Movement → Biological</p>
-                        <p lang="en" class="lang-content">☀️ → 🌍 (T +25°C) → 💚 (grows) → 🌾 (plants)</p>
+<div class="card-warm rounded-custom p-5 mt-4">
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">⭐ <b>Координата</b>: x = x₀ + v₀ₓ·t + aₓt²/2. Үдеу <b>теріс</b> болса — мысалы, тежеуде — a-ны <b>«−»</b> белгісімен жазамыз.</span>
+<span lang="en" class="lang-content">⭐ <b>Position:</b> x = x₀ + v₀ₓ·t + aₓt²/2. If braking, write <b>negative</b> a.</span>
+<span lang="ru" class="lang-content">⭐ <b>Координата:</b> x = x₀ + v₀ₓ·t + aₓt²/2. При торможении пишем <b>отрицательное</b> a.</span></p>
+</div>
+</section>
 
-                        <p lang="ru" class="lang-content"><strong>☀️ СОЛНЦЕ → ЗЕМЛЯ</strong></p>
-                        <p lang="ru" class="lang-content">Излучение → Тепло → Движение → Биологическое</p>
-                        <p lang="ru" class="lang-content">☀️ → 🌍 (T +25°C) → 💚 (растёт) → 🌾 (растения)</p>
-                    </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-sky-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Автомобиль тыныштықтан 10 с-та 25 м/с-қа жетті. Үдеу мен жүрген жолын табыңыз.</span>
+<span lang="en" class="lang-content">A car starts from rest and reaches 25 m/s in 10 s. Find acceleration and distance.</span>
+<span lang="ru" class="lang-content">Машина из покоя разогналась до 25 м/с за 10 с. Найти ускорение и пройденный путь.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>v₀ = 0</li><li>v = 25 м/с</li><li>t = 10 с</li><li>a — ?  s — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+a = (25 − 0)/10 = <span class="num">2,5</span> м/с²
+<br/>s = 0 + 2,5·100/2 = <span class="num">125</span> м
+</div>
+<div class="badge badge-emerald mt-3">✅ a = 2,5 м/с², s = 125 м</div>
+</div></div></div>
+</section>
 
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>⛽ ТОПЛИВО → МОТОР</strong></p>
-                        <p lang="kk" class="lang-content">Химиялық энергия → Жылу → Механикалық → Электр</p>
-                        <p lang="kk" class="lang-content">⛽ (сгорание) → 🔥 (T 1000°C) → ⚙️ (қозғалмасы) → 💡 (жарыру)</p>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">a = Δv/Δt</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Үдеу</span><span lang="en" class="lang-content">Acceleration</span><span lang="ru" class="lang-content">Ускорение</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📈</div>
+<p class="heading-font text-xl text-sky-700 mb-2">v = v₀ + at</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жылдамдық</span><span lang="en" class="lang-content">Velocity</span><span lang="ru" class="lang-content">Скорость</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-sky-700 mb-2">s = v₀t + at²/2</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жол</span><span lang="en" class="lang-content">Displacement</span><span lang="ru" class="lang-content">Перемещение</span></p></div>
+</div></footer>
 
-                        <p lang="en" class="lang-content"><strong>⛽ FUEL → ENGINE</strong></p>
-                        <p lang="en" class="lang-content">Chemical → Heat → Mechanical → Electrical</p>
-                        <p lang="en" class="lang-content">⛽ (burn) → 🔥 (T 1000°C) → ⚙️ (motion) → 💡 (light)</p>
-
-                        <p lang="ru" class="lang-content"><strong>⛽ ТОПЛИВО → МОТОР</strong></p>
-                        <p lang="ru" class="lang-content">Химическая → Тепло → Механическая → Электрическая</p>
-                        <p lang="ru" class="lang-content">⛽ (сгорание) → 🔥 (T 1000°C) → ⚙️ (движение) → 💡 (свет)</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>⚡ ЭЛЕКТР → ЖЫЛУ</strong></p>
-                        <p lang="kk" class="lang-content">Электрлік энергия → Жылу → Жарыру → Механикалық</p>
-                        <p lang="kk" class="lang-content">⚡ (220V) → 🔥 (T 2000°C) → 💡 (жарқырау) → 💨 (ауа ағындағы)</p>
-
-                        <p lang="en" class="lang-content"><strong>⚡ ELECTRIC → HEAT</strong></p>
-                        <p lang="en" class="lang-content">Electrical → Heat → Light → Movement</p>
-                        <p lang="en" class="lang-content">⚡ (220V) → 🔥 (T 2000°C) → 💡 (bright) → 💨 (air motion)</p>
-
-                        <p lang="ru" class="lang-content"><strong>⚡ ЭЛЕКТРИЧ → ТЕПЛО</strong></p>
-                        <p lang="ru" class="lang-content">Электрическая → Тепло → Свет → Движение</p>
-                        <p lang="ru" class="lang-content">⚡ (220V) → 🔥 (T 2000°C) → 💡 (яркий) → 💨 (движение)</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>🌊 ӘУ → ЭЛЕКТР</strong></p>
-                        <p lang="kk" class="lang-content">Механикалық энергия → Электрлік → Жылу → Жарыру</p>
-                        <p lang="kk" class="lang-content">🌊 (құлсың) → ⚙️ (турбина) → ⚡ (генератор) → 💡 (лампа)</p>
-
-                        <p lang="en" class="lang-content"><strong>🌊 WATER → ELECTRIC</strong></p>
-                        <p lang="en" class="lang-content">Mechanical → Electrical → Heat → Light</p>
-                        <p lang="en" class="lang-content">🌊 (flowing) → ⚙️ (turbine) → ⚡ (generator) → 💡 (lamp)</p>
-
-                        <p lang="ru" class="lang-content"><strong>🌊 ВОДА → ЭЛЕКТР</strong></p>
-                        <p lang="ru" class="lang-content">Механическая → Электрическая → Тепло → Свет</p>
-                        <p lang="ru" class="lang-content">🌊 (течёт) → ⚙️ (турбина) → ⚡ (генератор) → 💡 (лампа)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ЭНЕРГИЯ БАЛАНСЫ ДӘЛЕЛІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. ENERGY BALANCE PROOF</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Доказательство баланса энергии</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>⚖️ САҚТАЛУ ПРИНЦИПІ:</strong> Өндіктігінің құрамасындағы барлық энергиялар = const. Түрлері өзгеріс, бірақ сақталды.</p>
-                <p lang="en" class="lang-content text-sm"><strong>⚖️ CONSERVATION PRINCIPLE:</strong> Total energy in isolated system = const. Forms change, but total conserved.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>⚖️ ПРИНЦИП СОХРАНЕНИЯ:</strong> Полная энергия в изолированной системе = const. Формы меняются, но итог сохраняется.</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>📐 МАТЕМАТИКАЛЫҚ:</strong> E_начальный = E_конечный | E_мех + E_терм + E_электр + ... = const</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>📐 MATHEMATICAL:</strong> E_initial = E_final | E_mech + E_therm + E_electric + ... = const</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>📐 МАТЕМАТИКА:</strong> E_начальная = E_конечная | E_мех + E_тепл + E_электр + ... = const</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>💡 ПРИМЕРЫ:</strong> Батарея сгорает → теплу выпускается (q). Ұйық құлсың → механическая энергия артады. Электр лампа → жылу + жарыру.</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>💡 EXAMPLES:</strong> Battery burns → heat released (q). Ball falls → mechanical increases. Electric lamp → heat + light.</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>💡 ПРИМЕРЫ:</strong> Батарея горит → тепло (q). Мяч падает → механика растёт. Электролампа → тепло + свет.</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fed7aa; border-radius: 1rem; border-top: 4px solid #d97706;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-amber-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Энергия сақталады және өзгереді. Сәулелену → жылу → механикалық → электр → жарыру. Барлығы байланысты, барлығы трансформируется, барлығы = const. Фундаменталды заң физика!</p>
-            <p lang="en" class="lang-content text-sm">Energy conserved and transforms. Radiation → heat → mechanical → electric → light. All connected, all transforms, all = const. Fundamental law of physics!</p>
-            <p lang="ru" class="lang-content text-sm">Энергия сохраняется и трансформируется. Излучение → тепло → механическая → электрическая → свет. Всё связано, всё преобразуется, всё = const. Фундаментальный закон физики!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

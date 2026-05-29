@@ -1,394 +1,196 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Конвекция</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f9ff; /* sky-50 */
-            overflow-x: hidden;
-            color: #0c4a6e; /* sky-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Sky Theme */
-        .header-card {
-            background-color: #0ea5e9; /* sky-500 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #0369a1; /* sky-700 */
-            border-bottom: 3px solid #7dd3fc; /* sky-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #e0f2fe; /* sky-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #0284c7; /* sky-600 */
-        }
-         .term {
-            font-weight: bold;
-            color: #0ea5e9; /* sky-500 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #0ea5e9;
-            background-color: #ffffff;
-            color: #0ea5e9;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #f0f9ff;
-        }
-        .lang-btn.active {
-            background-color: #0ea5e9;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #bae6fd;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #0369a1;
-            text-anchor: middle;
-        }
-        .svg-hot {
-            fill: #fca5a5;
-            stroke: #ef4444;
-        }
-        .svg-cold {
-            fill: #bae6fd;
-            stroke: #3b82f6;
-        }
-        .svg-arrow-convection {
-            fill: none;
-            stroke-width: 3;
-            marker-end: url(#arrowhead);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Испарение и конденсация</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-sky-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жылу құбылыстары</span>
+<span lang="en" class="lang-content">Grade 8 · Thermal phenomena</span>
+<span lang="ru" class="lang-content">8 класс · Тепловые явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Булану және конденсация</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Evaporation and condensation</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Испарение и конденсация</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💨 Булану — сұйықтан буға</span>
+<span lang="en" class="lang-content">💨 Evaporation — liquid to gas</span>
+<span lang="ru" class="lang-content">💨 Испарение — переход в пар</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Булану</b> — сұйық бетіндегі ең жылдам молекулалардың <b>сұйықтан ұшып шығуы</b>. Сұйық молекулалары әртүрлі жылдамдықпен қозғалады; ең «жігерлілері» молекулааралық тартылысты жеңіп, газ күйіне өтеді. Булану <b>кез келген температурада</b> жүреді — бөлме температурасында да, мұздан да! Дене суиды, өйткені <b>ең жоғары энергиялы</b> молекулалар кетеді.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Evaporation</b> — the fastest molecules on the surface of a liquid <b>escape into the air</b>. Liquid molecules move with different speeds; the most «energetic» overcome attraction and become gas. Evaporation occurs at <b>any temperature</b> — even from ice! The remaining liquid <b>cools down</b>, because the <b>most energetic</b> molecules leave.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Испарение</b> — самые быстрые молекулы на поверхности жидкости <b>вылетают в воздух</b>. У молекул разные скорости; самые «энергичные» преодолевают притяжение и переходят в газ. Испарение идёт при <b>любой температуре</b> — даже со льда! Жидкость <b>остывает</b>, ведь её покидают <b>самые быстрые</b> молекулы.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">КОНВЕКЦИЯ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">CONVECTION</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">КОНВЕКЦИЯ</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">⚡ <span lang="kk" class="lang-content">Булану жылдамдығы тәуелді:</span><span lang="en" class="lang-content">Evaporation rate depends on:</span><span lang="ru" class="lang-content">Скорость испарения зависит от:</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-6 space-y-1">
+<li>🌡️ <span lang="kk" class="lang-content"><b>Температура</b> — жоғары → жылдамырақ</span><span lang="en" class="lang-content"><b>Temperature</b> — higher → faster</span><span lang="ru" class="lang-content"><b>Температуры</b> — выше → быстрее</span></li>
+<li>📐 <span lang="kk" class="lang-content"><b>Бет ауданы</b> — үлкен → жылдамырақ</span><span lang="en" class="lang-content"><b>Surface area</b> — bigger → faster</span><span lang="ru" class="lang-content"><b>Площади поверхности</b> — больше → быстрее</span></li>
+<li>💨 <span lang="kk" class="lang-content"><b>Жел</b> — буды әкетеді, булану жылдамдайды</span><span lang="en" class="lang-content"><b>Wind</b> — removes vapour, speeds it up</span><span lang="ru" class="lang-content"><b>Ветра</b> — уносит пар, ускоряет</span></li>
+<li>🧪 <span lang="kk" class="lang-content"><b>Заттың түрі</b> — спирт суға қарағанда жылдам буланады</span><span lang="en" class="lang-content"><b>Liquid type</b> — alcohol evaporates faster than water</span><span lang="ru" class="lang-content"><b>Вида жидкости</b> — спирт быстрее, чем вода</span></li>
+</ul>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-sky-100">Сұйықтар мен газдардағы жылу алмасу.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-sky-100">Heat transfer in fluids and gases.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-sky-100">Теплообмен в жидкостях и газах.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 220 220" style="width:200px">
+<rect x="20" y="80" width="180" height="120" fill="#93c5fd" stroke="#1e293b" stroke-width="2"/>
+<line x1="20" y1="80" x2="200" y2="80" stroke="#1e40af" stroke-width="2"/>
+<!-- Молекулы пара (улетают) -->
+<g fill="#94a3b8">
+<circle cx="60" cy="50" r="4"/><circle cx="100" cy="30" r="4"/><circle cx="140" cy="40" r="4"/><circle cx="170" cy="20" r="4"/>
+</g>
+<g stroke="#94a3b8" stroke-width="1.5" fill="none">
+<line x1="60" y1="75" x2="60" y2="55" marker-end="url(#arr44)"/>
+<line x1="100" y1="75" x2="100" y2="35" marker-end="url(#arr44)"/>
+<line x1="140" y1="75" x2="140" y2="45" marker-end="url(#arr44)"/>
+</g>
+<!-- Молекулы воды -->
+<g fill="#1e40af"><circle cx="50" cy="120" r="4"/><circle cx="80" cy="140" r="4"/><circle cx="120" cy="120" r="4"/><circle cx="150" cy="150" r="4"/><circle cx="180" cy="130" r="4"/><circle cx="60" cy="170" r="4"/><circle cx="120" cy="180" r="4"/><circle cx="160" cy="170" r="4"/></g>
+<defs><marker id="arr44" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Жылдам молекулалар ұшып шығады</span>
+<span lang="en" class="lang-content">Fast molecules escape</span>
+<span lang="ru" class="lang-content">Быстрые молекулы вылетают</span></p>
+</div></div></section>
 
-        <!-- 1. АНЫҚТАМАСЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Конвекция дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Convection?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое конвекция?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💧 Конденсация — будан сұйыққа</span>
+<span lang="en" class="lang-content">💧 Condensation — vapour to liquid</span>
+<span lang="ru" class="lang-content">💧 Конденсация — обратный процесс</span></h2>
+<div class="card-warm rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Конденсация</b> — будың <b>сұйыққа айналуы</b>. Бу салқын бетке тигенде, газ молекулалары энергия жоғалтып, бір-біріне жабысады. Бұл — будың <b>кері</b> процесі. Конденсация кезінде <b>жылу шығарылады</b> (булану үшін қажет жылуға тең)! Айналадағы мысалдар: <b>шық тамшылары, тұман, бұлттар, әйнектегі тер</b>.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Condensation</b> — vapour becomes <b>liquid</b>. When vapour hits a cold surface, gas molecules lose energy and stick together. This is the <b>reverse</b> of evaporation. Condensation <b>releases</b> heat (equal to that needed for evaporation)! Examples: <b>dew, fog, clouds, fogged windows</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Конденсация</b> — пар становится <b>жидкостью</b>. При контакте с холодной поверхностью молекулы пара теряют энергию и слипаются. Это <b>обратный</b> процесс. При конденсации <b>выделяется</b> тепло (равное затраченному на испарение)! Примеры: <b>роса, туман, облака, запотевшие окна</b>.</span></p>
+</div>
+</section>
 
-            <div class="rule-card border-t-sky-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Конвекция</span> – сұйықтың немесе газдың ағысы арқылы энергияның тасымалдануы. Қатты денелерде конвекция болмайды.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Convection</span> is the transfer of energy by the flow of a fluid or gas. Convection does not occur in solids.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Конвекция</span> – это перенос энергии струями жидкости или газа. В твердых телах конвекции не бывает.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌬️ Неге үрленгенде шай тез суйды?</span>
+<span lang="en" class="lang-content">🌬️ Why does blowing cool tea faster?</span>
+<span lang="ru" class="lang-content">🌬️ Почему чай быстрее остывает, если на него дуть?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Үрлеу кезінде сіз шай үстіндегі <b>қаныққан буды</b> жоясыз. Қаныққан бу жоқ кезде <b>булану жылдамдайды</b>. Жылдам молекулалар кетіп жатады → шай тез суиды!</span>
+<span lang="en" class="lang-content">Blowing removes the layer of <b>saturated vapour</b> above the tea. Without it, <b>evaporation accelerates</b>. Fast molecules leave faster → tea cools faster!</span>
+<span lang="ru" class="lang-content">Дуя на чай, вы сдуваете <b>насыщенный пар</b> сверху. Без него <b>испарение ускоряется</b>. Уходят быстрые молекулы → чай быстрее остывает!</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-base text-indigo-700 mb-3">💦 <span lang="kk" class="lang-content">Қазақстандағы дала желі</span><span lang="en" class="lang-content">💦 Kazakhstan steppe wind</span><span lang="ru" class="lang-content">💦 Степной ветер в Казахстане</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Қазақ даласында жаз — өте ыстық. Ыстық желде булану жылдамдайды, тер тез ұшып, дене <b>салқындатылады</b>. Сондықтан <b>кең</b>, <b>ашық</b> киім кию пайдалы.</span>
+<span lang="en" class="lang-content">Kazakh steppe summers are scorching. In hot wind sweat evaporates fast, cooling the body. That's why <b>loose, breathable</b> clothes are best.</span>
+<span lang="ru" class="lang-content">В казахской степи лето знойное. Горячий ветер ускоряет испарение пота — тело <b>охлаждается</b>. Поэтому полезна <b>свободная, дышащая</b> одежда.</span></p>
+</div>
+</div>
+</section>
 
-                <!-- Illustration 1: Pot Boiling -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrow-up-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                            <polygon points="0 0, 8 3, 0 6" fill="#ef4444" />
-                        </marker>
-                        <marker id="arrow-down-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                            <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 Табиғаттағы су айналымы</span>
+<span lang="en" class="lang-content">🌍 Water cycle in nature</span>
+<span lang="ru" class="lang-content">🌍 Круговорот воды в природе</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 520 240" style="width:100%;max-width:520px;margin:auto">
+<!-- Океан -->
+<rect x="0" y="180" width="520" height="60" fill="#93c5fd"/>
+<line x1="0" y1="180" x2="520" y2="180" stroke="#1e40af" stroke-width="2"/>
+<text x="100" y="220" text-anchor="middle" font-size="13" font-weight="700">
+<tspan class="lang-content" lang="kk">мұхит</tspan><tspan class="lang-content" lang="en">ocean</tspan><tspan class="lang-content" lang="ru">океан</tspan>
+</text>
+<!-- Солнце -->
+<circle cx="60" cy="40" r="20" fill="#fbbf24"/>
+<text x="60" y="45" text-anchor="middle" font-size="14" font-weight="700">☀️</text>
+<!-- Стрелки испарения -->
+<g stroke="#dc2626" stroke-width="2" fill="none">
+<path d="M120,180 Q140,140 160,100" marker-end="url(#arr44b)"/>
+<path d="M180,180 Q200,140 220,100" marker-end="url(#arr44b)"/>
+</g>
+<text x="195" y="155" font-size="11" fill="#dc2626" font-weight="700">
+<tspan class="lang-content" lang="kk">булану</tspan><tspan class="lang-content" lang="en">evaporation</tspan><tspan class="lang-content" lang="ru">испарение</tspan>
+</text>
+<!-- Облако -->
+<ellipse cx="280" cy="80" rx="60" ry="25" fill="#cbd5e1" stroke="#1e293b" stroke-width="2"/>
+<text x="280" y="85" text-anchor="middle" font-size="13" font-weight="700">
+<tspan class="lang-content" lang="kk">бұлт</tspan><tspan class="lang-content" lang="en">cloud</tspan><tspan class="lang-content" lang="ru">облако</tspan>
+</text>
+<!-- Дождь -->
+<g stroke="#1e40af" stroke-width="2" fill="none">
+<line x1="380" y1="100" x2="380" y2="170" marker-end="url(#arr44c)"/>
+<line x1="420" y1="100" x2="420" y2="170" marker-end="url(#arr44c)"/>
+<line x1="460" y1="100" x2="460" y2="170" marker-end="url(#arr44c)"/>
+</g>
+<text x="420" y="140" font-size="11" fill="#1e40af" font-weight="700">
+<tspan class="lang-content" lang="kk">жаңбыр</tspan><tspan class="lang-content" lang="en">rain</tspan><tspan class="lang-content" lang="ru">дождь</tspan>
+</text>
+<defs>
+<marker id="arr44b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="arr44c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e40af"/></marker>
+</defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm mt-3 text-center"><span lang="kk" class="lang-content">Күн → мұхит булануы → бұлт → жаңбыр → мұхитқа қайта оралу</span><span lang="en" class="lang-content">Sun → evaporation → cloud → rain → back to ocean</span><span lang="ru" class="lang-content">Солнце → испарение → облако → дождь → возврат в океан</span></p>
+</div>
+</section>
 
-                    <!-- Pot -->
-                    <rect x="120" y="50" width="160" height="100" fill="#e0f2fe" stroke="#475569" stroke-width="3" rx="5"/>
-                    <rect x="120" y="50" width="160" height="10" fill="#e0f2fe" stroke="none"/> <!-- Water surface -->
-                    <line x1="120" y1="60" x2="280" y2="60" stroke="#bae6fd" stroke-width="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Тіршіліктегі мысалдар</span>
+<span lang="en" class="lang-content">🌟 Everyday examples</span>
+<span lang="ru" class="lang-content">🌟 Примеры в быту</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">😅</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Тер</span><span lang="en" class="lang-content">Sweat</span><span lang="ru" class="lang-content">Пот</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Денені салқындатады</span><span lang="en" class="lang-content">Cools the body</span><span lang="ru" class="lang-content">Охлаждает тело</span></p></div>
+<div class="tile"><div class="tile-emoji">🌅</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Шық</span><span lang="en" class="lang-content">Dew</span><span lang="ru" class="lang-content">Роса</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Түнгі конденсация</span><span lang="en" class="lang-content">Night condensation</span><span lang="ru" class="lang-content">Ночная конденсация</span></p></div>
+<div class="tile"><div class="tile-emoji">🪟</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Әйнектегі тер</span><span lang="en" class="lang-content">Foggy window</span><span lang="ru" class="lang-content">Запотевшее окно</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Жылы дем суық әйнекте</span><span lang="en" class="lang-content">Breath on cold glass</span><span lang="ru" class="lang-content">Дыхание на стекле</span></p></div>
+<div class="tile"><div class="tile-emoji">☁️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Бұлттар</span><span lang="en" class="lang-content">Clouds</span><span lang="ru" class="lang-content">Облака</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Биіктегі конденсация</span><span lang="en" class="lang-content">High-altitude cond.</span><span lang="ru" class="lang-content">Конденсация в небе</span></p></div>
+</div>
+</section>
 
-                    <!-- Fire -->
-                    <g transform="translate(180, 160)">
-                        <path d="M 0 0 Q 20 -40, 40 0 Q 30 20, 20 10 Q 10 20, 0 0" fill="#ef4444"/>
-                        <path d="M 10 0 Q 20 -25, 30 0" fill="#facc15"/>
-                    </g>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💨</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Кез келген T-да</span><span lang="en" class="lang-content">At any T</span><span lang="ru" class="lang-content">При любой T</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Булану бет арқылы өтеді</span><span lang="en" class="lang-content">Surface evaporation</span><span lang="ru" class="lang-content">С поверхности</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">❄️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Сұйық суиды</span><span lang="en" class="lang-content">Liquid cools</span><span lang="ru" class="lang-content">Жидкость остывает</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Энергияны бу алып кетеді</span><span lang="en" class="lang-content">Energy carried away</span><span lang="ru" class="lang-content">Уходит с молекулами</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💧</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Конденсация — жылу береді</span><span lang="en" class="lang-content">Condensation releases heat</span><span lang="ru" class="lang-content">Конденсация — тепло</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Бу → сұйық</span><span lang="en" class="lang-content">Vapour → liquid</span><span lang="ru" class="lang-content">Пар → жидкость</span></p></div>
+</div></footer>
 
-                    <!-- Convection Currents -->
-                    <!-- Hot rising (Center) -->
-                    <path d="M 180 140 Q 200 100, 220 140" fill="none" stroke="none"/>
-                    <line x1="190" y1="140" x2="190" y2="80" stroke="#ef4444" stroke-width="3" stroke-dasharray="4" marker-end="url(#arrow-up-red)"/>
-                    <line x1="210" y1="140" x2="210" y2="80" stroke="#ef4444" stroke-width="3" stroke-dasharray="4" marker-end="url(#arrow-up-red)"/>
-
-                    <!-- Cold sinking (Sides) -->
-                    <path d="M 190 70 Q 140 70, 140 120" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-down-blue)"/>
-                    <path d="M 210 70 Q 260 70, 260 120" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-down-blue)"/>
-
-                    <text x="330" y="100" font-size="12" fill="#0369a1" font-weight="bold">Hot goes UP</text>
-                    <text x="330" y="120" font-size="12" fill="#0369a1" font-weight="bold">Cold goes DOWN</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. МЕХАНИЗМІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Қалай жүзеге асады?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Mechanism</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Механизм</h2>
-
-            <div class="rule-card border-t-cyan-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    1. Зат қызғанда <strong>ұлғаяды</strong> → тығыздығы азаяды → Архимед күшімен жоғары көтеріледі.<br>
-                    2. Суық заттың тығыздығы көп → ол төмен түседі.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    1. When heated, substance <strong>expands</strong> → density decreases → rises due to buoyant force.<br>
-                    2. Cold substance is denser → it sinks.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    1. При нагревании вещество <strong>расширяется</strong> → плотность уменьшается → поднимается вверх под действием силы Архимеда.<br>
-                    2. Холодное вещество плотнее → оно опускается вниз.
-                </p>
-
-                <!-- Illustration 2: Radiator in Room -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Room -->
-                    <rect x="50" y="20" width="300" height="160" fill="none" stroke="#475569" stroke-width="2"/>
-
-                    <!-- Radiator (Left) -->
-                    <rect x="60" y="140" width="40" height="40" fill="#fca5a5" stroke="#dc2626" stroke-width="2"/>
-                    <line x1="70" y1="140" x2="70" y2="180" stroke="#dc2626"/>
-                    <line x1="80" y1="140" x2="80" y2="180" stroke="#dc2626"/>
-                    <line x1="90" y1="140" x2="90" y2="180" stroke="#dc2626"/>
-
-                    <!-- Window (Right) -->
-                    <rect x="290" y="40" width="60" height="60" fill="#e0f2fe" stroke="#3b82f6" stroke-width="2"/>
-                    <line x1="320" y1="40" x2="320" y2="100" stroke="#3b82f6"/>
-                    <line x1="290" y1="70" x2="350" y2="70" stroke="#3b82f6"/>
-                    <text x="320" y="120" font-size="10" fill="#3b82f6" text-anchor="middle">Cold Window</text>
-
-                    <!-- Air Flow -->
-                    <!-- Hot air rising from radiator -->
-                    <path d="M 80 130 Q 80 50, 150 40" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-up-red)"/>
-
-                    <!-- Warm air moving across ceiling -->
-                    <path d="M 160 40 L 280 40" fill="none" stroke="#fb923c" stroke-width="2" stroke-dasharray="4"/>
-
-                    <!-- Cold air sinking from window -->
-                    <path d="M 280 50 Q 300 100, 250 160" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-down-blue)"/>
-
-                    <!-- Cool air moving across floor -->
-                    <path d="M 240 170 L 110 170" fill="none" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-down-blue)"/>
-
-                    <text x="200" y="100" font-size="14" fill="#475569" font-weight="bold" text-anchor="middle">AIR CIRCULATION</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ТҮРЛЕРІ ЖӘНЕ МЫСАЛДАР -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Түрлері және мысалдар</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Types and Examples</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Виды и примеры</h2>
-
-            <div class="rule-card border-t-blue-500">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-200">
-                        <h4 class="font-bold text-sky-900 mb-2">Естественная (Еркін)</h4>
-                        <p class="text-sm">Табиғаттағы жел, теңіз бризі.</p>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                        <h4 class="font-bold text-blue-900 mb-2">Вынужденная (Еріксіз)</h4>
-                        <p class="text-sm">Желдеткіш (вентилятор), насос, қасықпен араластыру.</p>
-                    </div>
-                </div>
-
-                <!-- Illustration 3: Sea Breeze -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="margin-top: 15px;">
-                    <!-- Land (Left) -->
-                    <path d="M 0 150 L 150 150 L 180 200 L 0 200 Z" fill="#fcd34d"/>
-                    <text x="60" y="190" font-weight="bold" fill="#b45309">LAND (Day/Hot)</text>
-
-                    <!-- Sea (Right) -->
-                    <rect x="150" y="160" width="250" height="40" fill="#3b82f6"/>
-                    <text x="300" y="190" font-weight="bold" fill="#fff">SEA (Cool)</text>
-
-                    <!-- Sun -->
-                    <circle cx="50" cy="40" r="20" fill="#facc15" stroke="#fbbf24"/>
-                    <line x1="50" y1="15" x2="50" y2="5" stroke="#fbbf24" stroke-width="2"/>
-                    <line x1="50" y1="65" x2="50" y2="75" stroke="#fbbf24" stroke-width="2"/>
-                    <line x1="25" y1="40" x2="15" y2="40" stroke="#fbbf24" stroke-width="2"/>
-                    <line x1="75" y1="40" x2="85" y2="40" stroke="#fbbf24" stroke-width="2"/>
-
-                    <!-- Air Cycle -->
-                    <!-- Hot air rising from land -->
-                    <path d="M 80 140 Q 80 80, 150 70" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-up-red)"/>
-
-                    <!-- Cool air blowing from sea (Breeze) -->
-                    <path d="M 300 140 Q 200 140, 120 140" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-down-blue)"/>
-
-                    <!-- Cycle top -->
-                    <path d="M 160 70 L 300 100" fill="none" stroke="#bae6fd" stroke-width="2" stroke-dasharray="4"/>
-                    <path d="M 300 100 L 300 130" fill="none" stroke="#bae6fd" stroke-width="2" stroke-dasharray="4"/>
-
-                    <text x="200" y="130" font-size="12" fill="#1e3a8a" font-weight="bold">BREEZE</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-sky-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-sky-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-sky-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-sky-800">
-                Конвекция тек сұйықтар мен газдарда болады. Жылы қабаттар жоғары көтеріледі, салқын қабаттар төмен түседі.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-sky-800">
-                Convection occurs only in fluids and gases. Warm layers rise, cool layers sink.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-sky-800">
-                Конвекция происходит только в жидкостях и газах. Теплые слои поднимаются вверх, холодные опускаются вниз.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

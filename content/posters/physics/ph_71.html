@@ -1,189 +1,176 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Цифровая лаборатория - Удельная теплоёмкость</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #e0e7ff 0%, #dbeafe 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #3730a3; border-bottom: 3px solid #dbeafe; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #4f46e5; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #4f46e5; background: white; color: #4f46e5; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #4f46e5; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #4f46e5; color: white; text-align: center; }
-        .info-box { background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #4f46e5; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .tech-card { background: #f0f4ff; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #4f46e5; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Источники света. Распространение света</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-indigo-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-amber-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Геометриялық оптика</span>
+<span lang="en" class="lang-content">Grade 9 · Geometric optics</span>
+<span lang="ru" class="lang-content">9 класс · Геометрическая оптика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Жарық көздері. Жарықтың таралуы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Sources of light. Propagation of light</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Источники света. Распространение света</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Цифрлық Лаборатория</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Digital Laboratory</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Цифровая лаборатория</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-indigo-100">Ұяң сенсорлар, компьютер өндіктігінің. Өндіктігінің өлшеу автоматты. ЦИФРЛЫҚ БОЛУ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-indigo-100">Modern sensors, computer processing. Automatic heat measurement. DIGITAL FUTURE!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-indigo-100">Современные датчики, компьютерная обработка. Автоматическое измерение тепла. ЦИФРОВОЙ БУДУЩЕЕ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">☀️ Жарық деген не?</span>
+<span lang="en" class="lang-content">☀️ What is light?</span>
+<span lang="ru" class="lang-content">☀️ Что такое свет?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-amber-700">Жарық</b> — көзбен <b>көрінетін</b> электрмагниттік толқын (λ ≈ 380–760 нм). Ол вакуумде ең жоғары жылдамдықпен таралады: <b>c = 300 000 км/с</b>! Бұл — ғаламдағы <b>ең жоғары жылдамдық</b>. Жарық бізге <b>ақпарат</b> жеткізеді: түсі, формасы, қашықтығы туралы.</span>
+<span lang="en" class="lang-content"><b class="text-amber-700">Light</b> is a <b>visible</b> electromagnetic wave (λ ≈ 380–760 nm). It travels in vacuum at <b>c = 300 000 km/s</b> — the <b>fastest speed in the Universe</b>! Light brings us <b>information</b> about colour, shape and distance.</span>
+<span lang="ru" class="lang-content"><b class="text-amber-700">Свет</b> — <b>видимая</b> электромагнитная волна (λ ≈ 380–760 нм). В вакууме мчится со скоростью <b>c = 300 000 км/с</b> — <b>максимальной во Вселенной</b>! Свет несёт <b>информацию</b>: цвет, форма, расстояние.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-amber-900 font-bold mb-2">🌈 <span lang="kk" class="lang-content">Көрінетін спектр:</span><span lang="en" class="lang-content">Visible spectrum:</span><span lang="ru" class="lang-content">Видимый спектр:</span></p>
+<div class="flex h-8 rounded overflow-hidden text-white text-xs items-center justify-around">
+<div style="background:#a855f7;flex:1;text-align:center">380</div>
+<div style="background:#3b82f6;flex:1;text-align:center"></div>
+<div style="background:#06b6d4;flex:1;text-align:center"></div>
+<div style="background:#22c55e;flex:1;text-align:center">550</div>
+<div style="background:#eab308;flex:1;text-align:center"></div>
+<div style="background:#f97316;flex:1;text-align:center"></div>
+<div style="background:#dc2626;flex:1;text-align:center">760</div>
+</div>
+<p class="text-xs text-slate-600 text-center mt-1"><span lang="kk" class="lang-content">нм</span><span lang="en" class="lang-content">nm</span><span lang="ru" class="lang-content">нм</span></p>
+</div>
+</div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ЦИФРЛЫҚ ЛАБОРАТОРИЯЛЫ ҚҰРАМАСЫНДАҒЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. DIGITAL LABORATORY EQUIPMENT</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Оборудование цифровой лаборатории</h2>
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">⚡</div>
+<p class="heading-font text-2xl text-amber-700 text-center mb-2">c = 3·10⁸ м/с</p>
+<p class="text-slate-700 text-sm text-center">
+<span lang="kk" class="lang-content">⭐ Күннен Жерге — <b>8 мин 20 с</b><br/>⭐ Айдан — <b>1,3 с</b></span>
+<span lang="en" class="lang-content">⭐ Sun → Earth: <b>8 min 20 s</b><br/>⭐ Moon → Earth: <b>1.3 s</b></span>
+<span lang="ru" class="lang-content">⭐ Солнце → Земля: <b>8 мин 20 с</b><br/>⭐ Луна → Земля: <b>1,3 с</b></span></p>
+</div>
+</div>
+</section>
 
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="tech-card">
-                        <p lang="kk" class="lang-content"><strong>🔬 Сенсорлар</strong></p>
-                        <p lang="kk" class="lang-content">• Температура сенсоры (±0.1°C)</p>
-                        <p lang="kk" class="lang-content">• Төмен қатыны сенсоры</p>
-                        <p lang="kk" class="lang-content">• Жылу қолдану сенсоры</p>
-                        <p lang="kk" class="lang-content">• Ақырын өндіктігінең сенсоры</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💡 Жарық көздері</span>
+<span lang="en" class="lang-content">💡 Sources of light</span>
+<span lang="ru" class="lang-content">💡 Источники света</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-3">🌟 <span lang="kk" class="lang-content">Табиғи көздер:</span><span lang="en" class="lang-content">Natural sources:</span><span lang="ru" class="lang-content">Естественные:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><span lang="kk" class="lang-content">☀️ <b>Күн</b> және басқа жұлдыздар</span><span lang="en" class="lang-content">☀️ <b>Sun</b> and other stars</span><span lang="ru" class="lang-content">☀️ <b>Солнце</b> и звёзды</span></li>
+<li><span lang="kk" class="lang-content">⚡ <b>Найзағай</b> разрядтары</span><span lang="en" class="lang-content">⚡ <b>Lightning</b> discharges</span><span lang="ru" class="lang-content">⚡ <b>Молния</b></span></li>
+<li><span lang="kk" class="lang-content">🌋 <b>Магма, лава</b></span><span lang="en" class="lang-content">🌋 <b>Magma, lava</b></span><span lang="ru" class="lang-content">🌋 <b>Магма, лава</b></span></li>
+<li><span lang="kk" class="lang-content">🐚 <b>Биолюминесценция</b>: жұт құрттар, теңіз ағзалары</span><span lang="en" class="lang-content">🐚 <b>Bioluminescence</b>: fireflies, deep-sea creatures</span><span lang="ru" class="lang-content">🐚 <b>Биолюминесценция</b>: светлячки, глубоководные</span></li>
+<li><span lang="kk" class="lang-content">🌌 Полярлық шуағы</span><span lang="en" class="lang-content">🌌 Auroras</span><span lang="ru" class="lang-content">🌌 Полярные сияния</span></li>
+</ul>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-3">🔧 <span lang="kk" class="lang-content">Жасанды көздер:</span><span lang="en" class="lang-content">Artificial sources:</span><span lang="ru" class="lang-content">Искусственные:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><span lang="kk" class="lang-content">🕯️ <b>Шам, факел</b> (от)</span><span lang="en" class="lang-content">🕯️ <b>Candles, fire</b></span><span lang="ru" class="lang-content">🕯️ <b>Свеча, костёр</b></span></li>
+<li><span lang="kk" class="lang-content">💡 <b>Қыздыру шамы</b> (вольфрам ~2500 °C)</span><span lang="en" class="lang-content">💡 <b>Incandescent bulb</b> (W ~2500 °C)</span><span lang="ru" class="lang-content">💡 <b>Лампа накаливания</b> (W ~2500 °C)</span></li>
+<li><span lang="kk" class="lang-content">🟢 <b>LED</b> жарық диодтары — қазіргі стандарт</span><span lang="en" class="lang-content">🟢 <b>LED</b> — modern standard</span><span lang="ru" class="lang-content">🟢 <b>LED</b>-светодиоды — современный стандарт</span></li>
+<li><span lang="kk" class="lang-content">🔵 <b>Люминесцентті</b> (энергия үнем.)</span><span lang="en" class="lang-content">🔵 <b>Fluorescent</b> (energy-saving)</span><span lang="ru" class="lang-content">🔵 <b>Люминесцентные</b> (энергосбер.)</span></li>
+<li><span lang="kk" class="lang-content">🔴 <b>Лазер</b>, экрандар, дисплейлер</span><span lang="en" class="lang-content">🔴 <b>Lasers</b>, screens, displays</span><span lang="ru" class="lang-content">🔴 <b>Лазеры</b>, экраны, дисплеи</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>🔬 Sensors</strong></p>
-                        <p lang="en" class="lang-content">• Temperature sensors (±0.1°C)</p>
-                        <p lang="en" class="lang-content">• Pressure sensors</p>
-                        <p lang="en" class="lang-content">• Heat flow sensors</p>
-                        <p lang="en" class="lang-content">• Energy level sensors</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Жарық түзу сызықпен таралады</span>
+<span lang="en" class="lang-content">📏 Light travels in straight lines</span>
+<span lang="ru" class="lang-content">📏 Свет распространяется прямолинейно</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b>Біркелкі ортада жарық түзу сызықпен таралады.</b> Жарық сәулесі — жарық таралатын <b>сызықтың математикалық моделі</b>. Бұл заң <b>көлеңкенің пайда болуын</b>, <b>күн және ай тұтылуын</b> түсіндіреді!</span>
+<span lang="en" class="lang-content"><b>In a uniform medium, light travels in straight lines.</b> A light ray is a <b>mathematical line</b> showing the path of light. This explains <b>shadows</b>, <b>solar/lunar eclipses</b>!</span>
+<span lang="ru" class="lang-content"><b>В однородной среде свет распространяется прямолинейно.</b> Луч света — <b>математическая модель</b> пути света. Закон объясняет <b>тени</b>, <b>солнечные и лунные затмения</b>!</span></p>
 
-                        <p lang="ru" class="lang-content"><strong>🔬 Датчики</strong></p>
-                        <p lang="ru" class="lang-content">• Датчики температуры (±0.1°C)</p>
-                        <p lang="ru" class="lang-content">• Датчики давления</p>
-                        <p lang="ru" class="lang-content">• Датчики теплового потока</p>
-                        <p lang="ru" class="lang-content">• Датчики энергии</p>
-                    </div>
+<div class="card-warm rounded-2xl p-4">
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">⭐ <b>Көлеңке</b> — нүктелік көзден; <b>көлеңке мен жартылай көлеңке</b> — кең көзден (Күн).</span>
+<span lang="en" class="lang-content">⭐ <b>Shadow</b> — from point source; <b>umbra + penumbra</b> — from extended source (Sun).</span>
+<span lang="ru" class="lang-content">⭐ <b>Тень</b> — от точечного источника; <b>тень + полутень</b> — от протяжённого (Солнце).</span></p>
+</div>
+</div>
 
-                    <div class="tech-card">
-                        <p lang="kk" class="lang-content"><strong>💻 Компьютер</strong></p>
-                        <p lang="kk" class="lang-content">• Деректер сақтау</p>
-                        <p lang="kk" class="lang-content">• Есептеу (c, Q, ΔT)</p>
-                        <p lang="kk" class="lang-content">• Графика құрамасындағы</p>
-                        <p lang="kk" class="lang-content">• Деректер анализдеу</p>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center">
+<svg width="320" height="200" viewBox="0 0 320 200">
+<circle cx="40" cy="100" r="20" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+<rect x="120" y="60" width="20" height="80" fill="#475569"/>
+<g stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,2">
+<line x1="60" y1="100" x2="120" y2="60"/>
+<line x1="60" y1="100" x2="120" y2="140"/>
+<line x1="60" y1="100" x2="280" y2="100"/>
+</g>
+<g stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,2">
+<line x1="120" y1="60" x2="280" y2="40"/>
+<line x1="120" y1="140" x2="280" y2="160"/>
+</g>
+<rect x="240" y="40" width="40" height="120" fill="#1e293b" opacity="0.6"/>
+<text x="260" y="180" font-size="11" text-anchor="middle" fill="#1e293b" font-weight="bold">shadow</text>
+<text x="20" y="140" font-size="10" fill="#d97706">source</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2"><span lang="kk" class="lang-content">Жарық сәулелері және көлеңкенің пайда болуы</span><span lang="en" class="lang-content">Light rays form shadows</span><span lang="ru" class="lang-content">Лучи света и образование тени</span></p>
+</div>
+</div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>💻 Computer</strong></p>
-                        <p lang="en" class="lang-content">• Data collection</p>
-                        <p lang="en" class="lang-content">• Real-time calculation</p>
-                        <p lang="en" class="lang-content">• Graph generation</p>
-                        <p lang="en" class="lang-content">• Data analysis</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌒 Тұтылулар</span>
+<span lang="en" class="lang-content">🌒 Eclipses</span>
+<span lang="ru" class="lang-content">🌒 Затмения</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-3">☀️ <span lang="kk" class="lang-content">Күн тұтылуы:</span><span lang="en" class="lang-content">Solar eclipse:</span><span lang="ru" class="lang-content">Солнечное затмение:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content"><b>Ай → Жер</b> арасына түседі. Айдың көлеңкесі Жердің кейбір жерлеріне түседі — сол жерден <b>Күн жасырын</b>! Әр Айда болмайды (орбита еңіс).</span>
+<span lang="en" class="lang-content"><b>Moon</b> moves between Earth and Sun. Moon's shadow falls on Earth — Sun is <b>hidden</b>! Doesn't happen every month (orbit tilt).</span>
+<span lang="ru" class="lang-content"><b>Луна</b> между Землёй и Солнцем. Тень Луны падает на Землю — Солнце <b>заслонено</b>! Не каждый месяц (наклон орбиты).</span></p>
+</div>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-3">🌑 <span lang="kk" class="lang-content">Ай тұтылуы:</span><span lang="en" class="lang-content">Lunar eclipse:</span><span lang="ru" class="lang-content">Лунное затмение:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content"><b>Жер → Күн мен Ай</b> арасында. Жердің көлеңкесі Айға түседі. Ай <b>қызарып</b> көрінеді — атмосфера арқылы өткен қызыл сәулелер!</span>
+<span lang="en" class="lang-content"><b>Earth</b> between Sun and Moon. Earth's shadow falls on Moon. Moon turns <b>red</b> — red rays through atmosphere!</span>
+<span lang="ru" class="lang-content"><b>Земля</b> между Солнцем и Луной. Тень Земли падает на Луну. Луна <b>краснеет</b> — красные лучи проходят через атмосферу!</span></p>
+</div>
+</div>
+</section>
 
-                        <p lang="ru" class="lang-content"><strong>💻 Компьютер</strong></p>
-                        <p lang="ru" class="lang-content">• Сбор данных</p>
-                        <p lang="ru" class="lang-content">• Расчёты в реальном времени</p>
-                        <p lang="ru" class="lang-content">• Построение графиков</p>
-                        <p lang="ru" class="lang-content">• Анализ данных</p>
-                    </div>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-amber-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-amber-700 mb-2">c = 3·10⁸ м/с</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жарық жылдамдығы</span><span lang="en" class="lang-content">Speed of light</span><span lang="ru" class="lang-content">Скорость света</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">Түзу сызық</span><span lang="en" class="lang-content">Straight line</span><span lang="ru" class="lang-content">Прямая линия</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Біркелкі ортада</span><span lang="en" class="lang-content">In uniform medium</span><span lang="ru" class="lang-content">В однородной среде</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌈</div>
+<p class="heading-font text-xl text-amber-700 mb-2">380–760 нм</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Көрінетін спектр</span><span lang="en" class="lang-content">Visible spectrum</span><span lang="ru" class="lang-content">Видимый спектр</span></p></div>
+</div></footer>
 
-                    <div class="tech-card">
-                        <p lang="kk" class="lang-content"><strong>🖥️ Бағдарлама</strong></p>
-                        <p lang="kk" class="lang-content">• Logger Pro, Science Studio</p>
-                        <p lang="kk" class="lang-content">• Automatic calculation</p>
-                        <p lang="kk" class="lang-content">• Mistake (-5%, +5%) თვლა</p>
-                        <p lang="kk" class="lang-content">• Export PDF, Excel-ге</p>
-
-                        <p lang="en" class="lang-content"><strong>🖥️ Software</strong></p>
-                        <p lang="en" class="lang-content">• Logger Pro, Science Studio</p>
-                        <p lang="en" class="lang-content">• Automatic calculation</p>
-                        <p lang="en" class="lang-content">• Error analysis (-5%, +5%)</p>
-                        <p lang="en" class="lang-content">• Export to PDF, Excel</p>
-
-                        <p lang="ru" class="lang-content"><strong>🖥️ Программное обеспечение</strong></p>
-                        <p lang="ru" class="lang-content">• Logger Pro, Science Studio</p>
-                        <p lang="ru" class="lang-content">• Автоматический расчёт</p>
-                        <p lang="ru" class="lang-content">• Анализ ошибок (-5%, +5%)</p>
-                        <p lang="ru" class="lang-content">• Экспорт в PDF, Excel</p>
-                    </div>
-
-                    <div class="tech-card">
-                        <p lang="kk" class="lang-content"><strong>⚡ Шығындарды</strong></p>
-                        <p lang="kk" class="lang-content">• USB сәндіктігі</p>
-                        <p lang="kk" class="lang-content">• Wireless (Bluetooth)</p>
-                        <p lang="kk" class="lang-content">• Төмен қүндік батареясы</p>
-                        <p lang="kk" class="lang-content">• LAN сағалығы</p>
-
-                        <p lang="en" class="lang-content"><strong>⚡ Interface</strong></p>
-                        <p lang="en" class="lang-content">• USB connection</p>
-                        <p lang="en" class="lang-content">• Wireless (Bluetooth)</p>
-                        <p lang="en" class="lang-content">• Long battery life</p>
-                        <p lang="en" class="lang-content">• Network connection</p>
-
-                        <p lang="ru" class="lang-content"><strong>⚡ Интерфейс</strong></p>
-                        <p lang="ru" class="lang-content">• USB подключение</p>
-                        <p lang="ru" class="lang-content">• Беспроводное (Bluetooth)</p>
-                        <p lang="ru" class="lang-content">• Долгая батарея</p>
-                        <p lang="ru" class="lang-content">• Сетевое соединение</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ӨНДІКТІГІНІҢ ӨЛШЕУ ПРОЦЕСІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. MEASUREMENT PROCESS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Процесс измерения</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>1️⃣ ДАЙЫНДАУ:</strong> Сенсорлар құрамасындағы. Компьютер қосу. Бағдарлама ашу. Файл құру.</p>
-                <p lang="en" class="lang-content text-sm"><strong>1️⃣ SETUP:</strong> Connect sensors. Turn on computer. Open software. Create file.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>1️⃣ ПОДГОТОВКА:</strong> Подключить датчики. Включить компьютер. Открыть программу. Создать файл.</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>2️⃣ ӨНДІКТІГІНЕҢ:</strong> Сенсорлар су ағынына құйады. Нагревание/охлаждение қуат қосу. Компьютер өндіктігінең өндіктігінең.</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>2️⃣ HEATING:</strong> Insert sensors. Apply heat. Computer records data continuously.</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>2️⃣ НАГРЕВАНИЕ:</strong> Вставить датчики. Применить тепло. Компьютер записывает данные непрерывно.</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>3️⃣ ӨНДІКТІГІНЕҢ:</strong> 30-60 секунд. Деректер сақталды (100+ нәтиже/сек). Точность ±0.1°C. Время каждые 0.1 сек.</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>3️⃣ DURATION:</strong> 30-60 seconds. Data stored (100+ readings/sec). Accuracy ±0.1°C. Time interval 0.1 sec.</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>3️⃣ ПРОДОЛЖИТЕЛЬНОСТЬ:</strong> 30-60 секунд. Данные сохранены (100+ измерений/сек). Точность ±0.1°C. Интервал 0.1 сек.</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>4️⃣ ЕСЕПТЕУ:</strong> Бағдарлама автоматты есептеу c, Q, ΔT. График құрамасындағы. Қателеу анализі.</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>4️⃣ CALCULATION:</strong> Software auto-calculates c, Q, ΔT. Generates graphs. Error analysis.</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>4️⃣ РАСЧЁТ:</strong> ПО автоматически вычисляет c, Q, ΔT. Генерирует графики. Анализ ошибок.</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #dbeafe; border-radius: 1rem; border-top: 4px solid #4f46e5;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Цифрлық лаборатория - ұяң сенсорлар және компьютер. Өндіктігінің өлшеу дәл және жылдам. Автоматты есептеу - қателеу аз. Деректер сақталды - анализ оңай. Физика образование - цифрлық болу!</p>
-            <p lang="en" class="lang-content text-sm">Digital lab uses modern sensors and computer. Heat measurement accurate and fast. Auto-calculation reduces error. Data saved for analysis. Physics education goes digital!</p>
-            <p lang="ru" class="lang-content text-sm">Цифровая лаборатория использует современные датчики и компьютер. Измерение тепла точное и быстрое. Автоматический расчёт уменьшает ошибку. Данные сохранены для анализа. Физика переходит в цифру!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

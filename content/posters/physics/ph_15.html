@@ -1,406 +1,201 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Сила упругости</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fffbeb; /* amber-50 */
-            overflow-x: hidden;
-            color: #78350f; /* amber-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Amber Theme */
-        .header-card {
-            background-color: #d97706; /* amber-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #92400e; /* amber-800 */
-            border-bottom: 3px solid #fcd34d; /* amber-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #fef3c7; /* amber-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #b45309; /* amber-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #d97706; /* amber-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #d97706;
-            background-color: #ffffff;
-            color: #d97706;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #fffbeb;
-        }
-        .lang-btn.active {
-            background-color: #d97706;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 220px;
-            margin: 15px 0;
-            border: 1px solid #fde68a;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #b45309;
-            text-anchor: middle;
-        }
-        .svg-force-arrow {
-            stroke: #dc2626; /* Red for Elastic Force */
-            stroke-width: 4;
-            marker-end: url(#arrowhead-red);
-        }
-        .svg-deform-arrow {
-            stroke: #2563eb; /* Blue for Deformation Action */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-blue);
-        }
-        .svg-math {
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вес тела. Невесомость</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-orange-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Күштер</span>
+<span lang="en" class="lang-content">Grade 7 · Forces</span>
+<span lang="ru" class="lang-content">7 класс · Силы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Дене салмағы. Салмақсыздық</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Weight of a body. Weightlessness</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Вес тела. Невесомость</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Салмақ деген не?</span>
+<span lang="en" class="lang-content">⚖️ What is weight?</span>
+<span lang="ru" class="lang-content">⚖️ Что такое вес?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Дене салмағы</b> (P) — дене <b>тіреуге</b> немесе <b>ілгіш жіпке</b> Жердің тартылуынан туындаған әсерімен <b>қандай күшпен басатынын</b> көрсететін шама. Маңызды: бұл <b>дене</b> басқа денеге жасайтын күш, ал <b>ауырлық күші</b> — Жер денеге әсер ететін күш. Олардың модулі көбіне бірдей, бірақ <b>табиғаты әртүрлі</b>!</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Weight of a body</b> (P) is the force with which a body, due to Earth's pull, <b>presses on its support</b> or <b>pulls on the string</b> it hangs from. Important: this force is exerted <b>by the body</b> on something else, while <b>gravity</b> is the force Earth exerts on the body. Their magnitudes are usually equal, but their <b>natures are different</b>!</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Вес тела</b> (P) — сила, с которой тело, из-за притяжения Земли, <b>давит на опору</b> или <b>растягивает подвес</b>. Важно: это сила, действующая <b>от тела на что-то другое</b>, а <b>сила тяжести</b> — со стороны Земли на тело. Их модули обычно равны, но <b>природа разная</b>!</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">⚠️ Маңызды айырмашылық</span>
+<span lang="en" class="lang-content">⚠️ Important distinction</span>
+<span lang="ru" class="lang-content">⚠️ Важное различие</span></p>
+<table class="t text-sm">
+<tr><td><b>F<sub>т</sub></b></td><td><span lang="kk" class="lang-content">Жер → дене</span><span lang="en" class="lang-content">Earth → body</span><span lang="ru" class="lang-content">Земля → тело</span></td><td><span lang="kk" class="lang-content">тартылыс</span><span lang="en" class="lang-content">gravity</span><span lang="ru" class="lang-content">гравитация</span></td></tr>
+<tr><td><b>P</b></td><td><span lang="kk" class="lang-content">дене → тіреу/жіп</span><span lang="en" class="lang-content">body → support/string</span><span lang="ru" class="lang-content">тело → опора/подвес</span></td><td><span lang="kk" class="lang-content">серпімділік</span><span lang="en" class="lang-content">elasticity</span><span lang="ru" class="lang-content">упругость</span></td></tr>
+</table>
+</div>
+</div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 200 240" style="width:160px">
+<!-- Стол -->
+<rect x="20" y="180" width="160" height="10" fill="#78350f"/>
+<line x1="35" y1="190" x2="35" y2="230" stroke="#78350f" stroke-width="6"/>
+<line x1="165" y1="190" x2="165" y2="230" stroke="#78350f" stroke-width="6"/>
+<!-- Тело -->
+<rect x="70" y="120" width="60" height="60" fill="#94a3b8" stroke="#1e293b" stroke-width="2"/>
+<!-- Сила тяжести -->
+<line x1="100" y1="150" x2="100" y2="100" stroke="#dc2626" stroke-width="3" marker-end="url(#arrW15a)"/>
+<text x="105" y="105" fill="#dc2626" font-weight="700" font-size="12">F⃗<tspan baseline-shift="sub" font-size="9">т</tspan></text>
+<!-- Вес -->
+<line x1="140" y1="170" x2="140" y2="210" stroke="#4338ca" stroke-width="3" marker-end="url(#arrW15b)"/>
+<text x="145" y="200" fill="#4338ca" font-weight="700" font-size="12">P⃗</text>
+<defs>
+<marker id="arrW15a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="arrW15b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4338ca"/></marker>
+</defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content"><b>F</b><sub>т</sub> — денеге, <b>P</b> — тіреуге</span>
+<span lang="en" class="lang-content"><b>F</b><sub>g</sub> on body, <b>P</b> on support</span>
+<span lang="ru" class="lang-content"><b>F</b><sub>т</sub> на тело, <b>P</b> на опору</span></p>
+</div></div></section>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">СЕРПІМДІЛІК КҮШІ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ELASTIC FORCE</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">СИЛА УПРУГОСТИ</h1>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Салмақтың формуласы</span>
+<span lang="en" class="lang-content">📐 Weight formula</span>
+<span lang="ru" class="lang-content">📐 Формула веса</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Дене <b>тыныш күйде</b> (мысалы, үстелде) немесе <b>бірқалыпты және түзу қозғалыста</b> болса, оның салмағы ауырлық күшіне тең:</span>
+<span lang="en" class="lang-content">If a body is <b>at rest</b> (e.g. on a table) or moves <b>uniformly in a straight line</b>, its weight equals the gravitational force:</span>
+<span lang="ru" class="lang-content">Если тело <b>покоится</b> (например, на столе) или движется <b>равномерно и прямолинейно</b>, то его вес равен силе тяжести:</span></p>
+<div class="formula text-center" style="font-size:1.8rem">
+<span class="var">P</span> = <span class="var">m</span> · <span class="var">g</span>
+</div>
+<p class="text-slate-700 text-base mt-3 text-center">
+<span lang="kk" class="lang-content">Бұл — қарапайым жағдай. Бірақ <b>үдемелі</b> қозғалыста (көтерілгіш, шапшаң түсу) — салмақ <b>өзгереді!</b></span>
+<span lang="en" class="lang-content">This is the simple case. But under <b>acceleration</b> (lift, fall) — weight <b>changes!</b></span>
+<span lang="ru" class="lang-content">Это простой случай. Но при <b>ускоренном</b> движении (лифт, падение) вес <b>меняется!</b></span></p>
+</div>
+</section>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-amber-100">Деформация кезінде пайда болатын күш және Гук заңы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-amber-100">Force arising during deformation and Hooke's Law.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-amber-100">Сила, возникающая при деформации, и закон Гука.</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚀 Көтерілгіштегі салмақ</span>
+<span lang="en" class="lang-content">🚀 Weight in a lift</span>
+<span lang="ru" class="lang-content">🚀 Вес в лифте</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-emerald rounded-custom p-5">
+<div class="text-center mb-2"><div class="text-5xl">🛗</div>
+<p class="heading-font text-base text-emerald-700 mt-2"><span lang="kk" class="lang-content">Тыныш / бірқалыпты</span><span lang="en" class="lang-content">Rest / uniform</span><span lang="ru" class="lang-content">Покой / равномерно</span></p></div>
+<div class="formula text-center" style="font-size:1.2rem"><span class="var">P</span> = <span class="var">mg</span></div>
+<p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">Қалыпты салмақ — таразы дұрыс көрсетеді</span><span lang="en" class="lang-content">Normal weight — scale shows correctly</span><span lang="ru" class="lang-content">Нормальный вес — весы показывают точно</span></p>
+</div>
 
-        <!-- 1. ДЕФОРМАЦИЯ ТҮРЛЕРІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Созылу және Сығылу</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Stretching and Compression</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Растяжение и Сжатие</h2>
+<div class="card-warm rounded-custom p-5">
+<div class="text-center mb-2"><div class="text-5xl">⬆️</div>
+<p class="heading-font text-base text-orange-700 mt-2"><span lang="kk" class="lang-content">Жоғары жеделдеу</span><span lang="en" class="lang-content">Accelerating up</span><span lang="ru" class="lang-content">Ускорение вверх</span></p></div>
+<div class="formula text-center" style="font-size:1.1rem"><span class="var">P</span> = <span class="var">m</span>(<span class="var">g</span>+<span class="var">a</span>)</div>
+<p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content"><b>Перегрузка</b> — салмақ артады, аяқтар «ауыр»</span><span lang="en" class="lang-content"><b>Overload</b> — heavier, legs feel «heavy»</span><span lang="ru" class="lang-content"><b>Перегрузка</b> — вес больше, ноги «тяжелее»</span></p>
+</div>
 
-            <div class="rule-card border-t-amber-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Серпімділік күші</span> дененің пішіні өзгергенде (деформация) пайда болады және оны бастапқы қалпына келтіруге тырысады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Elastic force</span> arises when a body changes shape (deformation) and tries to restore it to its original state.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Сила упругости</span> возникает при изменении формы тела (деформации) и стремится вернуть его в исходное состояние.
-                </p>
+<div class="card-rose rounded-custom p-5">
+<div class="text-center mb-2"><div class="text-5xl">⬇️</div>
+<p class="heading-font text-base text-rose-700 mt-2"><span lang="kk" class="lang-content">Төмен жеделдеу</span><span lang="en" class="lang-content">Accelerating down</span><span lang="ru" class="lang-content">Ускорение вниз</span></p></div>
+<div class="formula text-center" style="font-size:1.1rem"><span class="var">P</span> = <span class="var">m</span>(<span class="var">g</span>−<span class="var">a</span>)</div>
+<p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">Салмақ азаяды. a = g болса — <b>салмақсыздық</b>!</span><span lang="en" class="lang-content">Weight decreases. If a = g — <b>weightlessness</b>!</span><span lang="ru" class="lang-content">Вес уменьшается. При a = g — <b>невесомость</b>!</span></p>
+</div>
+</div></section>
 
-                <!-- Illustration 1: Springs -->
-                <svg class="illustration-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                         <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌌 Салмақсыздық</span>
+<span lang="en" class="lang-content">🌌 Weightlessness</span>
+<span lang="ru" class="lang-content">🌌 Невесомость</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Салмақсыздық</b> — дененің <b>салмағы нөл</b> болатын күй. Бұл — ауырлық күші жоқ деген сөз емес! Жер бәрібір тартып тұр. Бірақ дене <b>еркін түсуде</b> (тіреуге де, ілгішке де басылмайды) — сондықтан <b>P = 0</b>.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Weightlessness</b> is a state where <b>weight is zero</b>. This doesn't mean there's no gravity! Earth still pulls. But the body is in <b>free fall</b> — not pressing on any support — so <b>P = 0</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Невесомость</b> — состояние, при котором <b>вес тела равен нулю</b>. Это не значит, что нет тяготения! Земля всё ещё притягивает. Но тело <b>свободно падает</b> — не давит на опору — поэтому <b>P = 0</b>.</span></p>
+<div class="card-warm rounded-2xl p-4">
+<p class="font-bold text-orange-700 mb-2"><span lang="kk" class="lang-content">📋 Қашан салмақсыздық болады?</span><span lang="en" class="lang-content">📋 When does weightlessness occur?</span><span lang="ru" class="lang-content">📋 Когда возникает невесомость?</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-5 space-y-1">
+<li><span lang="kk" class="lang-content">Парашютсіз еркін түсуде</span><span lang="en" class="lang-content">In free fall without parachute</span><span lang="ru" class="lang-content">При свободном падении без парашюта</span></li>
+<li><span lang="kk" class="lang-content">Орбитадағы ХҒС-тағы ғарышкерлер</span><span lang="en" class="lang-content">Astronauts on the ISS</span><span lang="ru" class="lang-content">У космонавтов на МКС</span></li>
+<li><span lang="kk" class="lang-content">Лифт жыпылықтап түсіп жатса</span><span lang="en" class="lang-content">In a freely falling lift</span><span lang="ru" class="lang-content">В свободно падающем лифте</span></li>
+<li><span lang="kk" class="lang-content">Жоғары секіргенде (қысқа сәт)</span><span lang="en" class="lang-content">During a high jump (briefly)</span><span lang="ru" class="lang-content">При прыжке вверх (кратко)</span></li>
+</ul>
+</div>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-lg text-indigo-700 mb-3">
+<span lang="kk" class="lang-content">🚀 ХҒС-тағы салмақсыздық</span>
+<span lang="en" class="lang-content">🚀 Weightlessness on the ISS</span>
+<span lang="ru" class="lang-content">🚀 Невесомость на МКС</span></p>
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content">ХҒС Жерден 400 км биіктікте, ауырлық күші Жер бетіндегіден тек 10%-ға аз. Бірақ станса <b>үздіксіз Жерге құлап</b> жатыр, тек көлденең жылдамдығы (7,7 км/с) арқасында оған тимейді. Ішіндегі бәрі — ғарышкерлер де, су тамшылары да — бірге құлап жүреді → салмақсыздық.</span>
+<span lang="en" class="lang-content">The ISS is 400 km up, where gravity is only 10% weaker. But the station <b>constantly falls toward Earth</b>, missing it because of its horizontal speed (7.7 km/s). Everything inside — astronauts and water droplets alike — falls together → weightlessness.</span>
+<span lang="ru" class="lang-content">МКС на высоте 400 км, где тяготение слабее всего на 10%. Но станция <b>постоянно падает на Землю</b> — её горизонтальная скорость (7,7 км/с) не даёт упасть. Всё внутри — космонавты, капли воды — падает вместе → невесомость.</span></p>
+<div class="text-center text-5xl">🚀🧑‍🚀</div>
+</div>
+</div>
+</section>
 
-                    <!-- Wall -->
-                    <rect x="10" y="20" width="20" height="160" fill="#9ca3af" rx="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏋️ Перегрузка</span>
+<span lang="en" class="lang-content">🏋️ Overload (g-force)</span>
+<span lang="ru" class="lang-content">🏋️ Перегрузка</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b>Перегрузка</b> — салмақ қалыптыдан <b>көп</b> болатын күй. <b>Перегрузка коэффициенті n = P / mg</b>. Күнделікті өмірде кейде кездеседі, ал ғарышкер мен ұшқыштар үшін — кәсіби тәуекел.</span>
+<span lang="en" class="lang-content"><b>Overload</b> is when weight is <b>greater</b> than normal. The <b>overload factor n = P / mg</b>. Common in some situations; a professional risk for astronauts and pilots.</span>
+<span lang="ru" class="lang-content"><b>Перегрузка</b> — состояние, при котором вес <b>больше</b> обычного. Коэффициент перегрузки <b>n = P / mg</b>. Встречается в жизни; для космонавтов и лётчиков — профессиональный риск.</span></p>
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Жағдай</span><span lang="en" class="lang-content">Situation</span><span lang="ru" class="lang-content">Ситуация</span></th>
+<th>n</th>
+<th><span lang="kk" class="lang-content">Сезім</span><span lang="en" class="lang-content">Feeling</span><span lang="ru" class="lang-content">Ощущение</span></th>
+</tr></thead>
+<tbody>
+<tr><td><span lang="kk" class="lang-content">Қарапайым жүріс</span><span lang="en" class="lang-content">Normal life</span><span lang="ru" class="lang-content">Обычная жизнь</span></td><td>1</td><td><span lang="kk" class="lang-content">қалыпты</span><span lang="en" class="lang-content">normal</span><span lang="ru" class="lang-content">норма</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Лифт жоғары шапшаң қозғалса</span><span lang="en" class="lang-content">Lift speeds up</span><span lang="ru" class="lang-content">Лифт разгоняется вверх</span></td><td>1,2–1,5</td><td><span lang="kk" class="lang-content">аяқтар «ауыр»</span><span lang="en" class="lang-content">legs feel «heavy»</span><span lang="ru" class="lang-content">«тяжелее»</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Аттракцион (циклон)</span><span lang="en" class="lang-content">Rollercoaster</span><span lang="ru" class="lang-content">Аттракцион</span></td><td>3–4</td><td><span lang="kk" class="lang-content">басылған</span><span lang="en" class="lang-content">pressed in seat</span><span lang="ru" class="lang-content">вжимает в сиденье</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Әскери ұшқыш бұрылыста</span><span lang="en" class="lang-content">Fighter jet turn</span><span lang="ru" class="lang-content">Истребитель в вираже</span></td><td>9</td><td><span lang="kk" class="lang-content">шектік</span><span lang="en" class="lang-content">extreme limit</span><span lang="ru" class="lang-content">на пределе</span></td></tr>
+<tr><td><span lang="kk" class="lang-content">Зымыран ұшырылғанда</span><span lang="en" class="lang-content">Rocket launch</span><span lang="ru" class="lang-content">Старт ракеты</span></td><td>3–6</td><td><span lang="kk" class="lang-content">ауыр, ұзын</span><span lang="en" class="lang-content">heavy, long</span><span lang="ru" class="lang-content">тяжело, долго</span></td></tr>
+</tbody></table>
+</div>
+</section>
 
-                    <!-- 1. Relaxed Spring (Top) -->
-                    <text x="150" y="30" class="svg-label" font-size="12">1. Қалыпты / Relaxed</text>
-                    <path d="M 30 50 Q 40 30, 50 50 T 70 50 T 90 50 T 110 50 T 130 50 T 150 50" fill="none" stroke="#57534e" stroke-width="4"/>
-                    <circle cx="150" cy="50" r="5" fill="#57534e"/>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">P = mg</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тыныш күйде: салмақ = ауырлық</span><span lang="en" class="lang-content">At rest: weight = gravity</span><span lang="ru" class="lang-content">В покое: вес = тяжесть</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌌</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">P = 0</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Еркін түсу → салмақсыздық</span><span lang="en" class="lang-content">Free fall → weightlessness</span><span lang="ru" class="lang-content">Свободное падение → невесомость</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚀</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">F<sub>т</sub> ≠ P</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Әртүрлі денелерге қолданылады</span><span lang="en" class="lang-content">They act on different bodies</span><span lang="ru" class="lang-content">Действуют на разные тела</span></p></div>
+</div></footer>
 
-                    <!-- 2. Stretched Spring (Middle) -->
-                    <g transform="translate(0, 60)">
-                        <text x="200" y="30" class="svg-label" font-size="12">2. Созылу / Stretch</text>
-                        <!-- Spring is longer -->
-                        <path d="M 30 50 Q 50 30, 70 50 T 110 50 T 150 50 T 190 50 T 230 50" fill="none" stroke="#d97706" stroke-width="4"/>
-                        <circle cx="230" cy="50" r="5" fill="#d97706"/>
-
-                        <!-- Deformation Arrow (Blue - Pull) -->
-                        <line x1="230" y1="50" x2="280" y2="50" class="svg-deform-arrow" />
-                        <text x="255" y="40" font-size="12" fill="#2563eb">F_ext</text>
-
-                        <!-- Elastic Force (Red - Opposing) -->
-                        <line x1="230" y1="70" x2="180" y2="70" class="svg-force-arrow" />
-                        <text x="205" y="90" font-size="14" font-weight="bold" fill="#dc2626">F_elast</text>
-                    </g>
-
-                    <!-- 3. Compressed Spring (Bottom) -->
-                    <g transform="translate(0, 120)">
-                         <text x="100" y="30" class="svg-label" font-size="12">3. Сығылу / Compress</text>
-                         <!-- Spring is shorter -->
-                        <path d="M 30 50 Q 35 30, 40 50 T 50 50 T 60 50 T 70 50 T 80 50 T 90 50" fill="none" stroke="#d97706" stroke-width="4"/>
-                        <circle cx="90" cy="50" r="5" fill="#d97706"/>
-
-                         <!-- Deformation Arrow (Blue - Push) -->
-                        <line x1="90" y1="50" x2="50" y2="50" class="svg-deform-arrow" />
-                        <text x="70" y="40" font-size="12" fill="#2563eb">F_ext</text>
-
-                        <!-- Elastic Force (Red - Opposing) -->
-                        <line x1="90" y1="70" x2="130" y2="70" class="svg-force-arrow" />
-                        <text x="110" y="90" font-size="14" font-weight="bold" fill="#dc2626">F_elast</text>
-                    </g>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ГУК ЗАҢЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Гук заңы және График</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Hooke's Law and Graph</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Закон Гука и График</h2>
-
-            <div class="rule-card border-t-blue-500">
-                <div class="flex flex-col md:flex-row gap-6 items-center">
-                    <div class="flex-1">
-                         <div class="example-block border-l-blue-400 bg-blue-50 text-center p-6">
-                            <p class="text-3xl font-bold text-blue-900 mb-2">F = -k · x</p>
-                            <p lang="kk" class="lang-content text-sm text-blue-800">
-                                <strong>k</strong> – қатаңдық (N/m)<br>
-                                <strong>x</strong> – ұзару (m)
-                            </p>
-                            <p lang="en" class="lang-content text-sm text-blue-800">
-                                <strong>k</strong> – stiffness (N/m)<br>
-                                <strong>x</strong> – extension (m)
-                            </p>
-                            <p lang="ru" class="lang-content text-sm text-blue-800">
-                                <strong>k</strong> – жесткость (Н/м)<br>
-                                <strong>x</strong> – удлинение (м)
-                            </p>
-                        </div>
-                        <p lang="kk" class="lang-content mt-4 text-sm text-gray-600">Графикте сызық неғұрлым тік болса, серіппе соғұрлым қатаң болады.</p>
-                        <p lang="en" class="lang-content mt-4 text-sm text-gray-600">The steeper the line on the graph, the stiffer the spring.</p>
-                        <p lang="ru" class="lang-content mt-4 text-sm text-gray-600">Чем круче линия на графике, тем жестче пружина.</p>
-                    </div>
-
-                    <!-- Illustration 2: Graph -->
-                    <div class="w-full md:w-1/2">
-                        <svg class="illustration-svg" style="height: 250px; border-color: #93c5fd;" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Axes -->
-                            <line x1="40" y1="190" x2="280" y2="190" stroke="#1e293b" stroke-width="2"/> <!-- X axis -->
-                            <line x1="40" y1="190" x2="40" y2="20" stroke="#1e293b" stroke-width="2"/> <!-- Y axis -->
-
-                            <text x="270" y="210" font-weight="bold" fill="#1e293b">x (m)</text>
-                            <text x="20" y="30" font-weight="bold" fill="#1e293b">F (N)</text>
-
-                            <!-- Grid -->
-                            <line x1="40" y1="150" x2="280" y2="150" stroke="#e2e8f0" stroke-dasharray="4"/>
-                            <line x1="40" y1="110" x2="280" y2="110" stroke="#e2e8f0" stroke-dasharray="4"/>
-                            <line x1="40" y1="70" x2="280" y2="70" stroke="#e2e8f0" stroke-dasharray="4"/>
-
-                            <!-- Line 1: High Stiffness (Steep) -->
-                            <line x1="40" y1="190" x2="160" y2="30" stroke="#dc2626" stroke-width="3"/>
-                            <text x="100" y="80" font-size="12" fill="#dc2626" font-weight="bold" transform="rotate(-53 100 80)">k₁ (Қатаң/Stiff)</text>
-
-                             <!-- Line 2: Low Stiffness (Gentle) -->
-                            <line x1="40" y1="190" x2="260" y2="130" stroke="#2563eb" stroke-width="3"/>
-                            <text x="180" y="145" font-size="12" fill="#2563eb" font-weight="bold" transform="rotate(-15 180 145)">k₂ (Жұмсақ/Soft)</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. ҚОЛДАНЫЛУЫ (Садақ) -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Мысал: Садақ ату</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Example: Archery</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Пример: Стрельба из лука</h2>
-
-            <div class="rule-card border-t-green-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Садақтың жібін тартқанда, садақ иіледі (деформация). Серпімділік күші жебені үлкен жылдамдықпен алға итереді.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    When you pull the bowstring, the bow bends (deformation). The elastic force pushes the arrow forward with high speed.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Когда вы натягиваете тетиву, лук изгибается (деформация). Сила упругости толкает стрелу вперед с большой скоростью.
-                </p>
-
-                <!-- Illustration 3: Bow and Arrow -->
-                <svg class="illustration-svg" style="height: 180px; border-color: #86efac;" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Bow Body (Bent) -->
-                    <path d="M 100 20 Q 180 75, 100 130" fill="none" stroke="#854d0e" stroke-width="6" stroke-linecap="round"/>
-
-                    <!-- String (Pulled back to 50,75) -->
-                    <polyline points="100 20, 50 75, 100 130" fill="none" stroke="#1f2937" stroke-width="2"/>
-
-                    <!-- Arrow -->
-                    <line x1="50" y1="75" x2="160" y2="75" stroke="#4b5563" stroke-width="3"/>
-                    <polygon points="160 75, 150 70, 150 80" fill="#4b5563"/> <!-- Arrowhead -->
-                    <polygon points="50 75, 40 70, 40 80" fill="#dc2626"/> <!-- Fletching -->
-
-                    <!-- Hand Pulling (Force ext) -->
-                    <circle cx="40" cy="75" r="10" fill="#fca5a5" opacity="0.7"/>
-                    <line x1="40" y1="75" x2="10" y2="75" class="svg-deform-arrow" />
-                    <text x="25" y="65" font-size="12" fill="#2563eb">Action</text>
-
-                    <!-- Elastic Force (Restoring) -->
-                    <line x1="100" y1="75" x2="180" y2="75" class="svg-force-arrow" />
-                    <text x="140" y="60" font-size="16" font-weight="bold" fill="#dc2626">F_elast</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-amber-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-amber-800">
-                Серпімділік күші әрқашан деформацияға <strong>қарсы</strong> бағытталады. "Минус" таңбасы осыны білдіреді.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-amber-800">
-                Elastic force is always directed <strong>opposite</strong> to the deformation. The "minus" sign indicates this.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-amber-800">
-                Сила упругости всегда направлена <strong>противоположно</strong> деформации. Знак "минус" указывает на это.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

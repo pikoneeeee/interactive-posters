@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЭДС. Закон Ома для полной цепи</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · Тұрақты ток</span>
+<span lang="en" class="lang-content">Grade 11 · DC current</span>
+<span lang="ru" class="lang-content">11 класс · Постоянный ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">ЭҚК. Толық тізбекке арналған Ом заңы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">EMF. Ohm's law for a complete circuit</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">ЭДС. Закон Ома для полной цепи</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ ЭҚК — токты қозғаушы күш</span>
+<span lang="en" class="lang-content">⚡ EMF — what keeps current flowing</span>
+<span lang="ru" class="lang-content">⚡ ЭДС — что поддерживает ток</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электр қозғаушы күш (ЭҚК) ℰ</b> — ток көзіндегі <b>сыртқы (бөгде) күштердің</b> зарядты тасуы кезінде орындайтын <b>жұмысы</b>, осы зарядқа қатысты. Сыртқы күштер (химиялық, механикалық, жарық...) электрлік емес табиғатта және <b>зарядты «жоғары» итереді</b> — теріс полюстен оңға қарай. Дәл осы әсер тұрақты тізбекте токты қолдайды.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Electromotive force (EMF) ℰ</b> — work done by <b>non-electrostatic forces</b> in a source to transfer a charge, per unit charge. These external forces (chemical, mechanical, light, ...) push charges «uphill» — from − to + inside the source, sustaining steady current.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Электродвижущая сила (ЭДС) ℰ</b> — работа <b>сторонних (неэлектростатических) сил</b> в источнике по переносу заряда, отнесённая к этому заряду. Сторонние силы (химические, механические, световые ...) перемещают заряд «в гору» — от − к + внутри источника, поддерживая ток.</span></p>
+
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Анықтама:</span><span lang="en" class="lang-content">Definition:</span><span lang="ru" class="lang-content">Определение:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+ℰ = A<sub>стор</sub> / q
+</div>
+<p class="text-sm text-slate-700 text-center mt-2">
+<span lang="kk" class="lang-content">[ℰ] = <b>В</b> = Дж/Кл. Кернеу сияқты өлшенеді, бірақ <b>физикасы басқа</b>!</span>
+<span lang="en" class="lang-content">[ℰ] = <b>V</b> = J/C. Same units as voltage but <b>different physics</b>!</span>
+<span lang="ru" class="lang-content">[ℰ] = <b>В</b> = Дж/Кл. Та же единица, что и у U, но <b>другая физика</b>!</span></p>
+</div>
+</div>
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">🔋</div>
+<p class="heading-font text-base text-indigo-700 text-center mb-2">
+<span lang="kk" class="lang-content">Ток көзінің моделі</span>
+<span lang="en" class="lang-content">Source model</span>
+<span lang="ru" class="lang-content">Модель источника</span></p>
+<svg viewBox="0 0 240 90" style="width:100%">
+<line x1="20" y1="45" x2="60" y2="45" stroke="#1e293b" stroke-width="2"/>
+<line x1="60" y1="20" x2="60" y2="70" stroke="#1e293b" stroke-width="4"/>
+<line x1="70" y1="30" x2="70" y2="60" stroke="#1e293b" stroke-width="2"/>
+<text x="55" y="15" font-size="13" font-weight="700" fill="#b45309">−</text>
+<text x="68" y="15" font-size="13" font-weight="700" fill="#be123c">+</text>
+<text x="100" y="50" font-size="14" font-weight="700" fill="#4338ca">ℰ, r</text>
+<rect x="140" y="35" width="40" height="20" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+<text x="160" y="80" text-anchor="middle" font-size="12" fill="#4338ca">R</text>
+<line x1="70" y1="45" x2="140" y2="45" stroke="#1e293b" stroke-width="2"/>
+<line x1="180" y1="45" x2="220" y2="45" stroke="#1e293b" stroke-width="2"/>
+<line x1="220" y1="45" x2="220" y2="80" stroke="#1e293b" stroke-width="2"/>
+<line x1="220" y1="80" x2="20" y2="80" stroke="#1e293b" stroke-width="2"/>
+<line x1="20" y1="80" x2="20" y2="45" stroke="#1e293b" stroke-width="2"/>
+</svg>
+<p class="text-xs text-slate-600 mt-1 text-center"><span lang="kk" class="lang-content">Ішкі: r, сыртқы: R</span><span lang="en" class="lang-content">Internal r, external R</span><span lang="ru" class="lang-content">Внутр. r, внешн. R</span></p>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Толық тізбекке арналған Ом заңы</span>
+<span lang="en" class="lang-content">📐 Ohm's law for a complete circuit</span>
+<span lang="ru" class="lang-content">📐 Закон Ома для полной цепи</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-base mb-3">
+<span lang="kk" class="lang-content">Тұйық тізбекте ток күші ЭҚК-ке тура, ал <b>барлық кедергілердің</b> қосындысына кері пропорционал:</span>
+<span lang="en" class="lang-content">Current in a closed loop is directly proportional to ℰ and inversely to <b>total resistance</b>:</span>
+<span lang="ru" class="lang-content">Сила тока в замкнутой цепи прямо пропорциональна ЭДС и обратно — <b>сумме всех сопротивлений</b>:</span></p>
+
+<div class="formula text-center" style="font-size:1.6rem">
+I = ℰ / (R + r)
+</div>
+<div class="formula text-center mt-3" style="font-size:1.2rem">
+ℰ = I·R + I·r = U + I·r
+</div>
+
+<p class="text-sm text-slate-700 mt-3">
+<span lang="kk" class="lang-content"><b>R</b> — сыртқы кедергі, <b>r</b> — ішкі кедергі. <b>U = ℰ − Ir</b> — клемалардағы кернеу. <b>Ашық тізбекте</b> (I = 0): U = ℰ.</span>
+<span lang="en" class="lang-content"><b>R</b> — external resistance; <b>r</b> — internal. <b>U = ℰ − Ir</b> is the terminal voltage. With <b>open circuit</b> (I = 0): U = ℰ.</span>
+<span lang="ru" class="lang-content"><b>R</b> — внешнее сопр., <b>r</b> — внутреннее. <b>U = ℰ − Ir</b> — напряжение на клеммах. При <b>разомкнутой цепи</b> (I=0): U = ℰ.</span></p>
+</div>
+
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-indigo-700 mb-3">⚡ <span lang="kk" class="lang-content">Қысқа тұйықталу:</span><span lang="en" class="lang-content">Short circuit:</span><span lang="ru" class="lang-content">Короткое замыкание:</span></p>
+<div class="formula text-center" style="font-size:1.3rem">
+I<sub>кз</sub> = ℰ / r
+</div>
+<p class="text-slate-700 text-sm mt-3">
+<span lang="kk" class="lang-content">R = 0 болғанда токты тек <b>ішкі кедергі</b> шектейді. Үлкен ℰ + кіші r → <b>қауіпті токтар</b>!</span>
+<span lang="en" class="lang-content">When R = 0 only the <b>internal r</b> limits the current. Big ℰ + small r → dangerous currents!</span>
+<span lang="ru" class="lang-content">При R = 0 ток ограничивается только <b>внутренним r</b>. Большая ℰ + малое r → опасный ток!</span></p>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">⭐ Автокөлік аккумулятор: ℰ = 12 В, r ≈ 0,01 Ом → I<sub>кз</sub> ≈ 1200 А!</span><span lang="en" class="lang-content">⭐ Car battery: ℰ = 12 V, r ≈ 0.01 Ω → I<sub>sc</sub> ≈ 1200 A!</span><span lang="ru" class="lang-content">⭐ Авто аккум.: ℰ = 12 В, r ≈ 0,01 Ом → I<sub>кз</sub> ≈ 1200 А!</span></p>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔋 Ток көздерінің түрлері</span>
+<span lang="en" class="lang-content">🔋 Types of EMF sources</span>
+<span lang="ru" class="lang-content">🔋 Типы источников ЭДС</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="tile"><div class="tile-emoji">🧪</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Химиялық</span><span lang="en" class="lang-content">Chemical</span><span lang="ru" class="lang-content">Химический</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Батарея, аккум-ор (1,5–12 В)</span><span lang="en" class="lang-content">Battery, accumulator (1.5–12 V)</span><span lang="ru" class="lang-content">Батарейка, аккумулятор (1,5–12 В)</span></p></div>
+<div class="tile"><div class="tile-emoji">🌞</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Фотоэлемент</span><span lang="en" class="lang-content">Solar cell</span><span lang="ru" class="lang-content">Фотоэлемент</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Жарық → ток</span><span lang="en" class="lang-content">Light → current</span><span lang="ru" class="lang-content">Свет → ток</span></p></div>
+<div class="tile"><div class="tile-emoji">⚙️</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Генератор</span><span lang="en" class="lang-content">Generator</span><span lang="ru" class="lang-content">Генератор</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Механ. → электр</span><span lang="en" class="lang-content">Mech → electric</span><span lang="ru" class="lang-content">Механ → ток</span></p></div>
+<div class="tile"><div class="tile-emoji">🌡️</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Термопара</span><span lang="en" class="lang-content">Thermocouple</span><span lang="ru" class="lang-content">Термопара</span></p>
+<p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">ΔT → ЭҚК</span><span lang="en" class="lang-content">ΔT → EMF</span><span lang="ru" class="lang-content">ΔT → ЭДС</span></p></div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔌 Ток көздерінің қосылуы</span>
+<span lang="en" class="lang-content">🔌 Combinations of sources</span>
+<span lang="ru" class="lang-content">🔌 Соединения источников</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-indigo-700 mb-2">📏 <span lang="kk" class="lang-content">Тізбекті қосылу:</span><span lang="en" class="lang-content">Series:</span><span lang="ru" class="lang-content">Последовательно:</span></p>
+<div class="formula text-center" style="font-size:1.2rem">
+ℰ<sub>Σ</sub> = ℰ₁ + ℰ₂ + …<br/>r<sub>Σ</sub> = r₁ + r₂ + …
+</div>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">⭐ ℰ-лер қосылады, бірақ r-лер де өседі.</span><span lang="en" class="lang-content">⭐ EMFs add; but internal resistance grows too.</span><span lang="ru" class="lang-content">⭐ ЭДС складываются, но и r тоже.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-indigo-700 mb-2">🟰 <span lang="kk" class="lang-content">Параллель қосылу:</span><span lang="en" class="lang-content">Parallel (identical):</span><span lang="ru" class="lang-content">Параллельно (одинаковые):</span></p>
+<div class="formula text-center" style="font-size:1.2rem">
+ℰ<sub>Σ</sub> = ℰ<br/>r<sub>Σ</sub> = r/N
+</div>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">⭐ ℰ өзгермейді, бірақ r <b>кемиді</b> → көп ток.</span><span lang="en" class="lang-content">⭐ Same ℰ, smaller r → more current available.</span><span lang="ru" class="lang-content">⭐ ℰ та же, r меньше → больший ток.</span></p>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Worked problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">ℰ = 12 В, r = 0,5 Ом. Сыртқы R = 5,5 Ом. I мен U-ны табыңыз.</span>
+<span lang="en" class="lang-content">ℰ = 12 V, r = 0.5 Ω, external R = 5.5 Ω. Find I and U.</span>
+<span lang="ru" class="lang-content">ℰ = 12 В, r = 0,5 Ом. Внешнее R = 5,5 Ом. Найти I и U.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-base space-y-1">
+<li>ℰ = 12 В</li><li>r = 0,5 Ом</li><li>R = 5,5 Ом</li><li class="text-indigo-700 font-bold">I, U — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+I = ℰ/(R+r) = 12/6 = <span class="num">2</span> А
+<br/>U = IR = 2 · 5,5 = <span class="num">11</span> В
+<br/>U = ℰ − Ir = 12 − 1 = <span class="num">11</span> В ✓
+</div>
+<div class="badge badge-emerald mt-3">✅ I = 2 А; U = 11 В</div>
+</div></div></div>
+</section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔋</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">ℰ = A<sub>ст</sub>/q</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">ЭҚК анықтамасы</span><span lang="en" class="lang-content">EMF definition</span><span lang="ru" class="lang-content">Определение ЭДС</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔌</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">I = ℰ/(R+r)</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Толық тізбекке Ом</span><span lang="en" class="lang-content">Ohm — full circuit</span><span lang="ru" class="lang-content">Ом для полной цепи</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">U = ℰ − Ir</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Клеммалардағы U</span><span lang="en" class="lang-content">Terminal voltage</span><span lang="ru" class="lang-content">Напряжение на клеммах</span></p></div>
+</div></footer>
+
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

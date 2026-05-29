@@ -1,317 +1,172 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ішкі Энергия / Внутренняя Энергия - Interactive Poster</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <link rel="stylesheet" href="../../libs/fonts.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .lang-content { display: none; }
-        body.lang-kk .content-kk, body.lang-en .content-en, body.lang-ru .content-ru {
-            display: block; animation: fadeIn 0.4s ease-out;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white; color: black; }
-            .card { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; }
-        }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сила тока. Амперметр</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 lang-kk" id="main-body">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<nav class="fixed top-0 w-full bg-white/95 backdrop-blur shadow-sm z-50 border-b border-slate-200 no-print">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold">U</div>
-                <span class="font-bold text-xl text-slate-800">Thermo<span class="text-red-600">Dynamics</span></span>
-            </div>
-            <div class="flex gap-1 bg-slate-100 p-1 rounded-lg">
-                <button onclick="setLang('kk')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-kk">Қаз</button>
-                <button onclick="setLang('ru')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-ru">Рус</button>
-                <button onclick="setLang('en')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-en">Eng</button>
-            </div>
-        </div>
-    </nav>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр тогы</span>
+<span lang="en" class="lang-content">Grade 9 · Electric current</span>
+<span lang="ru" class="lang-content">9 класс · Электрический ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Ток күші. Амперметр</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Electric current strength. Ammeter</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Сила тока. Амперметр</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-    <main class="max-w-7xl mx-auto px-4 pt-24 pb-12 space-y-8">
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Ток күші — I</span>
+<span lang="en" class="lang-content">⚡ Current strength — I</span>
+<span lang="ru" class="lang-content">⚡ Сила тока — I</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Ток күші</b> — өткізгіштің көлденең қимасынан <b>1 секунд ішінде</b> өтетін заряд мөлшері. Қарапайым тілмен айтсақ, ол көрсетеді: тоқ <b>қаншалықты «күшті»</b>. Тоқ көп болса — қозғалатын электрондар саны көп. Бірлігі — <b>ампер (А)</b>, ұлы француз физигі <b>Андре-Мари Ампердің</b> құрметіне.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Current</b> (I) is the amount of charge passing through the wire's cross-section <b>per second</b>. In simple terms — how «strong» the current is. More current → more electrons flowing. Unit — <b>ampere (A)</b>, named after the great French physicist <b>André-Marie Ampère</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Сила тока</b> (I) — это заряд, проходящий через поперечное сечение проводника <b>за 1 секунду</b>. Проще говоря — насколько «сильный» ток. Больше тока → больше электронов движется. Единица — <b>ампер (А)</b>, в честь великого физика <b>Андре-Мари Ампера</b>.</span></p>
 
-        <header class="bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl p-8 shadow-xl text-white relative overflow-hidden">
-            <div class="relative z-10">
-                <div class="content-kk">
-                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Ішкі Энергия (U)</h1>
-                    <p class="text-red-100 text-xl max-w-3xl">Термодинамиканың негізі: бөлшектердің қозғалысы мен өзара әрекеттесу энергиясы.</p>
-                </div>
-                <div class="content-ru">
-                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Внутренняя Энергия (U)</h1>
-                    <p class="text-red-100 text-xl max-w-3xl">Основа термодинамики: энергия движения и взаимодействия частиц тела.</p>
-                </div>
-                <div class="content-en">
-                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Internal Energy (U)</h1>
-                    <p class="text-red-100 text-xl max-w-3xl">The foundation of thermodynamics: energy of particle motion and interaction.</p>
-                </div>
-            </div>
-            <svg class="absolute right-0 top-0 h-full w-1/3 opacity-20" viewBox="0 0 200 200">
-                <circle cx="50" cy="50" r="10" fill="white"><animate attributeName="cy" values="50;60;50" dur="2s" repeatCount="indefinite"/></circle>
-                <circle cx="150" cy="80" r="15" fill="white"><animate attributeName="cx" values="150;140;150" dur="3s" repeatCount="indefinite"/></circle>
-                <circle cx="100" cy="150" r="8" fill="white"><animate attributeName="cy" values="150;140;150" dur="1.5s" repeatCount="indefinite"/></circle>
-            </svg>
-        </header>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Формула:</span><span lang="en" class="lang-content">Formula:</span><span lang="ru" class="lang-content">Формула:</span></p>
+<div class="formula text-center" style="font-size:1.6rem">
+<span class="var">I</span> = <span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1.2rem"><span class="var" style="display:block;border-bottom:2px solid #fde68a">q</span><span class="var" style="display:block">t</span></span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">I</b> — ток күші, <span class="unit-pill">А (ампер)</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">I</b> — current, <span class="unit-pill">A</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">I</b> — сила тока, <span class="unit-pill">А</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">q</b> — өткен заряд, <span class="unit-pill">Кл (кулон)</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">q</b> — charge, <span class="unit-pill">C (coulomb)</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">q</b> — заряд, <span class="unit-pill">Кл (кулон)</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">t</b> — уақыт, <span class="unit-pill">с</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">t</b> — time, <span class="unit-pill">s</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">t</b> — время, <span class="unit-pill">с</span></span></p>
+</div>
+</div>
+</div>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="w-10 h-10 rounded-full bg-red-100 text-red-600 font-bold text-xl flex items-center justify-center">1</span>
-                    <h2 class="text-2xl font-bold">
-                        <span class="content-kk">Анықтама және Құрылым</span>
-                        <span class="content-ru">Определение и Структура</span>
-                        <span class="content-en">Definition & Structure</span>
-                    </h2>
-                </div>
-                <div class="space-y-6">
-                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-red-500">
-                        <p class="text-lg italic text-slate-700">
-                            <span class="content-kk">U = E<sub>кинетикалық</sub> + E<sub>потенциалдық</sub></span>
-                            <span class="content-ru">U = E<sub>кинетическая</sub> + E<sub>потенциальная</sub></span>
-                            <span class="content-en">U = E<sub>kinetic</sub> + E<sub>potential</sub></span>
-                        </p>
-                    </div>
-                    <ul class="space-y-3 text-slate-600">
-                        <li class="flex gap-2 items-start"><span class="text-red-500 font-bold">●</span>
-                            <span class="content-kk"><b>Кинетикалық (E_k):</b> Молекулалардың жылулық қозғалысы (Температураға тәуелді).</span>
-                            <span class="content-ru"><b>Кинетическая (E_k):</b> Тепловое движение молекул (Зависит от температуры).</span>
-                            <span class="content-en"><b>Kinetic (E_k):</b> Thermal motion of molecules (Depends on Temperature).</span>
-                        </li>
-                        <li class="flex gap-2 items-start"><span class="text-blue-500 font-bold">●</span>
-                            <span class="content-kk"><b>Потенциалдық (E_p):</b> Молекулалардың өзара тартылысы мен тебілуі (Көлемге тәуелді).</span>
-                            <span class="content-ru"><b>Потенциальная (E_p):</b> Взаимодействие молекул (Зависит от объема/расстояния).</span>
-                            <span class="content-en"><b>Potential (E_p):</b> Molecular interaction (Depends on volume/distance).</span>
-                        </li>
-                    </ul>
-                    <div class="p-4 bg-orange-50 rounded-xl">
-                        <p class="font-bold text-orange-800 mb-2 text-center">
-                            <span class="content-kk">Идеал газ үшін (бір атомды):</span>
-                            <span class="content-ru">Для идеального газа (одноатомного):</span>
-                            <span class="content-en">For Ideal Gas (monoatomic):</span>
-                        </p>
-                        <p class="text-3xl font-black text-center text-red-600 font-mono">U = ³/₂ · νRT</p>
-                    </div>
-                </div>
-            </div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">⚡</div>
+<p class="heading-font text-2xl text-indigo-700 text-center mb-2">1 А = 1 Кл/с</p>
+<p class="text-slate-700 text-sm text-center">
+<span lang="kk" class="lang-content">1 секундта 6,25·10¹⁸ электрон!</span>
+<span lang="en" class="lang-content">6.25·10¹⁸ electrons per second!</span>
+<span lang="ru" class="lang-content">6,25·10¹⁸ электронов в секунду!</span></p>
+</div></div></section>
 
-            <div class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100 flex flex-col justify-center items-center">
-                <h3 class="font-bold text-slate-500 mb-4 uppercase text-sm tracking-wide text-center">
-                    <span class="content-kk">Микроскопиялық көрініс</span>
-                    <span class="content-ru">Микроскопический взгляд</span>
-                    <span class="content-en">Microscopic View</span>
-                </h3>
-                <svg viewBox="0 0 300 200" class="w-full max-w-md">
-                    <rect x="20" y="20" width="260" height="160" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Бірліктер</span>
+<span lang="en" class="lang-content">📏 Units</span>
+<span lang="ru" class="lang-content">📏 Единицы</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr><th><span lang="kk" class="lang-content">Бірлік</span><span lang="en" class="lang-content">Unit</span><span lang="ru" class="lang-content">Единица</span></th><th><span lang="kk" class="lang-content">Мән</span><span lang="en" class="lang-content">Value</span><span lang="ru" class="lang-content">Значение</span></th><th><span lang="kk" class="lang-content">Мысал</span><span lang="en" class="lang-content">Example</span><span lang="ru" class="lang-content">Пример</span></th></tr></thead>
+<tbody>
+<tr><td>1 мкА (микроампер)</td><td>10⁻⁶ А</td><td><span lang="kk" class="lang-content">жүрек, нерв импульсі</span><span lang="en" class="lang-content">heart, nerve pulse</span><span lang="ru" class="lang-content">сердце, нервный импульс</span></td></tr>
+<tr><td>1 мА (миллиампер)</td><td>10⁻³ А</td><td><span lang="kk" class="lang-content">калькулятор, наушник</span><span lang="en" class="lang-content">calculator, earphones</span><span lang="ru" class="lang-content">калькулятор, наушники</span></td></tr>
+<tr><td>1 А</td><td>1 А</td><td><span lang="kk" class="lang-content">лампа (100 Вт)</span><span lang="en" class="lang-content">light bulb (100 W)</span><span lang="ru" class="lang-content">лампа 100 Вт</span></td></tr>
+<tr><td>10 А</td><td>10 А</td><td><span lang="kk" class="lang-content">шай қайнатқыш, үтік</span><span lang="en" class="lang-content">kettle, iron</span><span lang="ru" class="lang-content">чайник, утюг</span></td></tr>
+<tr class="bg-rose-50"><td>1000 А</td><td>10³ А</td><td class="text-rose-700"><span lang="kk" class="lang-content"><b>Найзағай</b> ~30 000 А!</span><span lang="en" class="lang-content"><b>Lightning</b> ~30 000 A!</span><span lang="ru" class="lang-content"><b>Молния</b> ~30 000 А!</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
 
-                    <g id="cold-particles">
-                        <circle cx="60" cy="60" r="6" fill="#3b82f6" opacity="0.8"/>
-                        <circle cx="80" cy="100" r="6" fill="#3b82f6" opacity="0.8"/>
-                        <circle cx="50" cy="140" r="6" fill="#3b82f6" opacity="0.8"/>
-                        <text x="65" y="170" fill="#3b82f6" font-size="12" font-weight="bold" text-anchor="middle">COLD (T↓ U↓)</text>
-                        <line x1="60" y1="60" x2="65" y2="65" stroke="#3b82f6" stroke-width="2"/>
-                    </g>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔬 Амперметр — тоқты өлшеу</span>
+<span lang="en" class="lang-content">🔬 Ammeter — measuring current</span>
+<span lang="ru" class="lang-content">🔬 Амперметр — измерение тока</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-base text-indigo-700 mb-2">✅ <span lang="kk" class="lang-content">3 ереже:</span><span lang="en" class="lang-content">3 rules:</span><span lang="ru" class="lang-content">3 правила:</span></p>
+<ol class="text-slate-700 text-sm list-decimal pl-6 space-y-2">
+<li><span lang="kk" class="lang-content"><b>Тізбекке тізбектей</b> (последовательно) қосылады — тоқ амперметрден <b>өтуі тиіс</b>.</span><span lang="en" class="lang-content"><b>Connect in series</b> — current must <b>flow through</b> the meter.</span><span lang="ru" class="lang-content"><b>Подключают последовательно</b> — ток должен <b>идти через</b> прибор.</span></li>
+<li><span lang="kk" class="lang-content"><b>Полярлықты</b> сақтау: <b>«+»</b> клеммасы көздің <b>«+»</b>-не, <b>«−»</b> — <b>«−»</b>-не.</span><span lang="en" class="lang-content">Respect <b>polarity</b>: «+» of meter to «+» of source.</span><span lang="ru" class="lang-content">Соблюдай <b>полярность</b>: «+» прибора — к «+» источника.</span></li>
+<li><span lang="kk" class="lang-content"><b>Шегі</b> күтілетін тоқтан көп болуы керек! 1 А күтсең — 1 А шегі бар амперметр алыңыз.</span><span lang="en" class="lang-content"><b>Range</b> must exceed expected current!</span><span lang="ru" class="lang-content"><b>Предел</b> измерения должен превышать ожидаемый ток!</span></li>
+</ol>
+<div class="card-rose rounded-xl p-3 mt-3">
+<p class="text-rose-700 text-sm font-bold">⚠️ <span lang="kk" class="lang-content">Амперметрді <b>тікелей көзге</b> қоспа — қысқа тұйықталу!</span><span lang="en" class="lang-content">Never connect ammeter <b>directly to source</b> — short circuit!</span><span lang="ru" class="lang-content">Никогда не подключай амперметр <b>прямо к источнику</b> — короткое замыкание!</span></p>
+</div>
+</div>
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 200" style="width:220px">
+<rect x="20" y="40" width="200" height="120" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+<!-- Батарея -->
+<line x1="80" y1="40" x2="80" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="120" y1="40" x2="120" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="70" y1="20" x2="90" y2="20" stroke="#1e293b" stroke-width="4"/>
+<line x1="110" y1="15" x2="130" y2="15" stroke="#1e293b" stroke-width="2"/>
+<!-- Амперметр -->
+<circle cx="220" cy="100" r="16" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+<text x="220" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309">A</text>
+<!-- Лампа -->
+<circle cx="120" cy="160" r="14" fill="#fef3c7" stroke="#1e293b" stroke-width="2"/>
+<line x1="110" y1="150" x2="130" y2="170" stroke="#1e293b" stroke-width="2"/>
+<line x1="110" y1="170" x2="130" y2="150" stroke="#1e293b" stroke-width="2"/>
+<text x="100" y="190" text-anchor="middle" font-size="11" fill="#4338ca">→ I →</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Амперметр тізбекке тізбектей қосылған</span>
+<span lang="en" class="lang-content">Ammeter in series</span>
+<span lang="ru" class="lang-content">Амперметр — последовательно</span></p>
+</div>
+</div>
+</section>
 
-                    <line x1="150" y1="20" x2="150" y2="180" stroke="#cbd5e1" stroke-dasharray="4"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп шығару мысалы</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Шамдағы амперметр 0,5 А көрсетіп тұр. 2 минутта қанша заряд өтеді?</span>
+<span lang="en" class="lang-content">📘 Problem: Ammeter shows 0.5 A. How much charge passes in 2 minutes?</span>
+<span lang="ru" class="lang-content">📘 Задача: Амперметр показывает 0,5 А. Сколько заряда пройдёт за 2 минуты?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>I = 0,5 А</li>
+<li>t = 2 мин = 120 с</li>
+<li>q — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+I = q/t → q = It
+<br/>q = 0,5·120
+<br/>q = <span class="num">60</span> <span class="unit">Кл</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ q = 60 Кл</span><span lang="en" class="lang-content">✅ q = 60 C</span><span lang="ru" class="lang-content">✅ q = 60 Кл</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <g id="hot-particles">
-                        <circle cx="200" cy="50" r="6" fill="#ef4444" opacity="0.9">
-                            <animate attributeName="cx" values="200;210;190;200" dur="0.5s" repeatCount="indefinite"/>
-                            <animate attributeName="cy" values="50;60;40;50" dur="0.5s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="240" cy="120" r="6" fill="#ef4444" opacity="0.9">
-                            <animate attributeName="cx" values="240;230;250;240" dur="0.6s" repeatCount="indefinite"/>
-                            <animate attributeName="cy" values="120;130;110;120" dur="0.6s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="180" cy="150" r="6" fill="#ef4444" opacity="0.9">
-                            <animate attributeName="cx" values="180;190;170;180" dur="0.4s" repeatCount="indefinite"/>
-                        </circle>
-                        <text x="215" y="170" fill="#ef4444" font-size="12" font-weight="bold" text-anchor="middle">HOT (T↑ U↑)</text>
-                        <line x1="200" y1="50" x2="220" y2="30" stroke="#ef4444" stroke-width="2"/>
-                        <line x1="240" y1="120" x2="260" y2="140" stroke="#ef4444" stroke-width="2"/>
-                    </g>
-                </svg>
-                <p class="text-xs text-slate-400 mt-2 text-center max-w-xs">
-                    <span class="content-kk">Температура жоғарылаған сайын кинетикалық энергия өседі.</span>
-                    <span class="content-ru">С ростом температуры растет кинетическая энергия.</span>
-                    <span class="content-en">As temperature rises, kinetic energy increases.</span>
-                </p>
-            </div>
-        </section>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">I = q/t</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Ток күші</span><span lang="en" class="lang-content">Current strength</span><span lang="ru" class="lang-content">Сила тока</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔬</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">Ⓐ</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Амперметр — тізбектей</span><span lang="en" class="lang-content">Ammeter — in series</span><span lang="ru" class="lang-content">Амперметр — последовательно</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">[I] = А</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Ампер бірлігі</span><span lang="en" class="lang-content">Ampere unit</span><span lang="ru" class="lang-content">Ампер</span></p></div>
+</div></footer>
 
-        <section class="card bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
-            <div class="p-6 bg-slate-50 border-b border-slate-200">
-                <h3 class="font-bold text-slate-700 text-lg">
-                    <span class="content-kk">Агрегаттық күйлер және Ішкі энергия</span>
-                    <span class="content-ru">Агрегатные состояния и Внутренняя энергия</span>
-                    <span class="content-en">States of Matter & Internal Energy</span>
-                </h3>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
-                    <thead>
-                        <tr class="bg-slate-100 text-slate-500 uppercase tracking-wider">
-                            <th class="p-4"><span class="content-kk">Күй</span><span class="content-ru">Состояние</span><span class="content-en">State</span></th>
-                            <th class="p-4"><span class="content-kk">Бөлшектер</span><span class="content-ru">Частицы</span><span class="content-en">Particles</span></th>
-                            <th class="p-4"><span class="content-kk">Энергия құрамы</span><span class="content-ru">Состав энергии</span><span class="content-en">Energy Composition</span></th>
-                            <th class="p-4"><span class="content-kk">Мысал</span><span class="content-ru">Пример</span><span class="content-en">Example</span></th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <tr class="hover:bg-red-50 transition-colors">
-                            <td class="p-4 font-bold text-blue-600">
-                                <span class="content-kk">Қатты</span><span class="content-ru">Твердое</span><span class="content-en">Solid</span>
-                            </td>
-                            <td class="p-4">
-                                <span class="content-kk">Тор түйіндерінде тербеледі</span><span class="content-ru">Колеблются в узлах решетки</span><span class="content-en">Vibrate in lattice</span>
-                            </td>
-                            <td class="p-4">
-                                <span class="content-kk">E<sub>p</sub> > E<sub>k</sub> (Байланыс күшті)</span><span class="content-ru">E<sub>p</sub> > E<sub>k</sub> (Связи сильные)</span><span class="content-en">E<sub>p</sub> > E<sub>k</sub> (Strong bonds)</span>
-                            </td>
-                            <td class="p-4">🧊 Ice, Metal</td>
-                        </tr>
-                        <tr class="hover:bg-red-50 transition-colors">
-                            <td class="p-4 font-bold text-blue-600">
-                                <span class="content-kk">Сұйық</span><span class="content-ru">Жидкое</span><span class="content-en">Liquid</span>
-                            </td>
-                            <td class="p-4">
-                                <span class="content-kk">Тығыз, бірақ орын ауыстырады</span><span class="content-ru">Плотные, но меняют места</span><span class="content-en">Dense but mobile</span>
-                            </td>
-                            <td class="p-4">
-                                <span class="content-kk">E<sub>p</sub> ≈ E<sub>k</sub></span><span class="content-ru">E<sub>p</sub> ≈ E<sub>k</sub></span><span class="content-en">E<sub>p</sub> ≈ E<sub>k</sub></span>
-                            </td>
-                            <td class="p-4">💧 Water, Oil</td>
-                        </tr>
-                        <tr class="hover:bg-red-50 transition-colors">
-                            <td class="p-4 font-bold text-blue-600">
-                                <span class="content-kk">Газ</span><span class="content-ru">Газообразное</span><span class="content-en">Gas</span>
-                            </td>
-                            <td class="p-4">
-                                <span class="content-kk">Еркін, хаосты қозғалыс</span><span class="content-ru">Свободное хаотичное движение</span><span class="content-en">Free random motion</span>
-                            </td>
-                            <td class="p-4">
-                                <span class="content-kk">E<sub>k</sub> >> E<sub>p</sub> (Өзара әсер аз)</span><span class="content-ru">E<sub>k</sub> >> E<sub>p</sub> (Почти нет связей)</span><span class="content-en">E<sub>k</sub> >> E<sub>p</sub> (Negligible bonds)</span>
-                            </td>
-                            <td class="p-4">💨 Steam, Air</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-            <h2 class="text-2xl font-bold mb-8 text-center text-slate-800">
-                <span class="content-kk">Өмірдегі мысалдар (U өзгерісі)</span>
-                <span class="content-ru">Примеры из жизни (Изменение U)</span>
-                <span class="content-en">Real Life Examples (Change in U)</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
-                <div class="bg-orange-50 p-5 rounded-xl">
-                    <h4 class="font-bold text-orange-700 mb-3 border-b border-orange-200 pb-2">🔥 <span class="content-kk">Жылыту (U артады)</span><span class="content-ru">Нагревание (U растет)</span><span class="content-en">Heating (U increases)</span></h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>1. <span class="content-ru">Кипячение воды в чайнике.</span><span class="content-kk">Шайнекте су қайнату.</span><span class="content-en">Boiling water in a kettle.</span></li>
-                        <li>2. <span class="content-ru">Нагрев асфальта солнцем.</span><span class="content-kk">Күннің асфальтты қыздыруы.</span><span class="content-en">Sun heating asphalt.</span></li>
-                        <li>3. <span class="content-ru">Трение ладоней друг о друга.</span><span class="content-kk">Алақанды ысқылау.</span><span class="content-en">Rubbing hands together.</span></li>
-                        <li>4. <span class="content-ru">Сгорание топлива в двигателе.</span><span class="content-kk">Қозғалтқышта отын жану.</span><span class="content-en">Fuel burning in engine.</span></li>
-                        <li>5. <span class="content-ru">Зарядка смартфона (нагрев).</span><span class="content-kk">Смартфонды қуаттау (қызу).</span><span class="content-en">Phone heating while charging.</span></li>
-                        <li>6. <span class="content-ru">Сгибание проволоки (деформация).</span><span class="content-kk">Сымды бүгу.</span><span class="content-en">Bending a wire.</span></li>
-                        <li>7. <span class="content-ru">Торможение шин (трение).</span><span class="content-kk">Дөңгелектің тежелуі.</span><span class="content-en">Tires braking friction.</span></li>
-                        <li>8. <span class="content-ru">Ковка металла молотом.</span><span class="content-kk">Металды балғамен соғу.</span><span class="content-en">Forging metal with hammer.</span></li>
-                        <li>9. <span class="content-ru">Вход метеорита в атмосферу.</span><span class="content-kk">Метеориттің атмосфераға енуі.</span><span class="content-en">Meteor entering atmosphere.</span></li>
-                        <li>10. <span class="content-ru">Сжатие газа поршнем.</span><span class="content-kk">Газды поршеньмен сығу.</span><span class="content-en">Compressing gas with piston.</span></li>
-                    </ul>
-                </div>
-
-                <div class="bg-blue-50 p-5 rounded-xl">
-                    <h4 class="font-bold text-blue-700 mb-3 border-b border-blue-200 pb-2">❄️ <span class="content-kk">Суыту (U кемиді)</span><span class="content-ru">Охлаждение (U падает)</span><span class="content-en">Cooling (U decreases)</span></h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>11. <span class="content-ru">Остывание чая.</span><span class="content-kk">Шайдың сууы.</span><span class="content-en">Tea cooling down.</span></li>
-                        <li>12. <span class="content-ru">Таяние мороженого.</span><span class="content-kk">Балмұздақтың еруі.</span><span class="content-en">Ice cream melting.</span></li>
-                        <li>13. <span class="content-ru">Выход газа из дезодоранта.</span><span class="content-kk">Дезодоранттан газ шығуы.</span><span class="content-en">Spray can releasing gas.</span></li>
-                        <li>14. <span class="content-ru">Испарение пота (охлаждение тела).</span><span class="content-kk">Тердің булануы.</span><span class="content-en">Sweat evaporation.</span></li>
-                        <li>15. <span class="content-ru">Замерзание воды в лед.</span><span class="content-kk">Судың мұзға айналуы.</span><span class="content-en">Water freezing to ice.</span></li>
-                        <li>16. <span class="content-ru">Расширение газа в холодильнике.</span><span class="content-kk">Тоңазытқыштағы газдың кеңеюі.</span><span class="content-en">Gas expansion in fridge.</span></li>
-                        <li>17. <span class="content-ru">Дыхание на морозе.</span><span class="content-kk">Аязда тыныс алу.</span><span class="content-en">Breathing in frost.</span></li>
-                        <li>18. <span class="content-ru">Остывание двигателя после поездки.</span><span class="content-kk">Мотордың сууы.</span><span class="content-en">Engine cooling after drive.</span></li>
-                        <li>19. <span class="content-ru">Конденсация росы.</span><span class="content-kk">Шықтың пайда болуы.</span><span class="content-en">Dew condensation.</span></li>
-                        <li>20. <span class="content-ru">Жидкий азот.</span><span class="content-kk">Сұйық азот.</span><span class="content-en">Liquid nitrogen.</span></li>
-                    </ul>
-                </div>
-
-                <div class="bg-purple-50 p-5 rounded-xl">
-                    <h4 class="font-bold text-purple-700 mb-3 border-b border-purple-200 pb-2">⚙️ <span class="content-kk">Процесстер</span><span class="content-ru">Процессы</span><span class="content-en">Processes</span></h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>21. <span class="content-ru">Плавление стали.</span><span class="content-kk">Болатты балқыту.</span><span class="content-en">Melting steel.</span></li>
-                        <li>22. <span class="content-ru">Сверление (нагрев сверла).</span><span class="content-kk">Бұрғылау.</span><span class="content-en">Drilling (bit heating).</span></li>
-                        <li>23. <span class="content-ru">Спуск по канату (жжение рук).</span><span class="content-kk">Арқанмен түсу.</span><span class="content-en">Sliding down rope.</span></li>
-                        <li>24. <span class="content-ru">Взрыв динамита (хим -> внутр).</span><span class="content-kk">Динамит жарылысы.</span><span class="content-en">Dynamite explosion.</span></li>
-                        <li>25. <span class="content-ru">Работа микроволновки.</span><span class="content-kk">Қысқа толқынды пеш.</span><span class="content-en">Microwave heating.</span></li>
-                        <li>26. <span class="content-ru">Фотосинтез (поглощение U).</span><span class="content-kk">Фотосинтез.</span><span class="content-en">Photosynthesis.</span></li>
-                        <li>27. <span class="content-ru">Вулканическая лава.</span><span class="content-kk">Вулкан лавасы.</span><span class="content-en">Volcanic lava.</span></li>
-                        <li>28. <span class="content-ru">Накачка шины насосом.</span><span class="content-kk">Дөңгелекті үрлеу.</span><span class="content-en">Pumping a tire.</span></li>
-                        <li>29. <span class="content-ru">Спичка (трение -> огонь).</span><span class="content-kk">Сіріңке жағу.</span><span class="content-en">Lighting a match.</span></li>
-                        <li>30. <span class="content-ru">Ядерная реакция.</span><span class="content-kk">Ядролық реакция.</span><span class="content-en">Nuclear reaction.</span></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center text-slate-400 py-8">
-            <p class="content-kk">© 2025 Интерактивті білім беру плакаты. Барлық құқықтар қорғалған.</p>
-            <p class="content-ru">© 2025 Интерактивный образовательный плакат. Все права защищены.</p>
-            <p class="content-en">© 2025 Interactive Educational Poster. All rights reserved.</p>
-        </footer>
-
-    </main>
-
-    <script>
-        function setLang(lang) {
-            document.getElementById('main-body').className = `bg-slate-50 text-slate-800 lang-${lang}`;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if(btn.id === `btn-${lang}`) {
-                    btn.classList.add('bg-red-600', 'text-white');
-                    btn.classList.remove('text-slate-600', 'hover:bg-slate-200');
-                } else {
-                    btn.classList.remove('bg-red-600', 'text-white');
-                    btn.classList.add('text-slate-600', 'hover:bg-slate-200');
-                }
-            });
-        }
-        // Initialize
-        setLang('kk');
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js">
-    // Функция переключения языков (Автоматически добавлено скриптом)
-    function switchLang(lang) {
-        var container = document.getElementById('poster-container');
-        if (container) {
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-        }
-        var buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-</script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

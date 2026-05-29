@@ -1,250 +1,167 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ауа Балау Құрылғысы</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #cffafe 0%, #a5f3fc 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #06b6d4 0%, #164e63 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #164e63; border-bottom: 3px solid #a5f3fc; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #06b6d4; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #06b6d4; background: white; color: #06b6d4; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #06b6d4; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #06b6d4; color: white; }
-        .info-box { background: linear-gradient(135deg, #a5f3fc 0%, #cffafe 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #06b6d4; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .example-card { background: #ecf9fd; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #06b6d4; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Короткое замыкание. Предохранители</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-cyan-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-rose-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр қауіпсіздігі</span>
+<span lang="en" class="lang-content">Grade 9 · Electrical safety</span>
+<span lang="ru" class="lang-content">9 класс · Электробезопасность</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-rose-700">Қысқа тұйықталу. Сақтандырғыштар</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-rose-700">Short circuit. Fuses</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-rose-700">Короткое замыкание. Предохранители</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Ауа Балау Құрылғысы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Air Conditioners</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Кондиционеры воздуха</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-cyan-100">Жылуды пайдасыз орындарға өндіктігінің арқылы ығына. Компрессор, конденсатор, испаритель. ТОЛЫҚ ЖҮЙЕСІ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-cyan-100">Removes heat from rooms by transferring to outside. Compressor, condenser, evaporator. COMPLETE SYSTEM!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-cyan-100">Удаляет тепло из комнат путём передачи наружу. Компрессор, конденсатор, испаритель. ПОЛНАЯ СИСТЕМА!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Қысқа тұйықталу деген не?</span>
+<span lang="en" class="lang-content">⚠️ What is a short circuit?</span>
+<span lang="ru" class="lang-content">⚠️ Что такое короткое замыкание?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-rose-700">Қысқа тұйықталу (ҚТ)</b> — тоқ көзінің <b>екі полюсі</b> өте кіші кедергімен (мысалы, оқшаулағышы зақымдалған сым) тікелей жалғануы. Ом заңы бойынша: <b>R → 0</b> болғанда <b>I = U/R → ∞</b>. Сым <b>қызарып</b>, <b>балқып</b>, <b>от шығаруы</b> мүмкін!</span>
+<span lang="en" class="lang-content"><b class="text-rose-700">Short circuit</b> — direct connection of two terminals of a source with almost zero resistance (e.g., damaged insulation). By Ohm's law, <b>R → 0</b> means <b>I = U/R → ∞</b>. Wires heat up, melt and may cause <b>fire</b>!</span>
+<span lang="ru" class="lang-content"><b class="text-rose-700">Короткое замыкание (КЗ)</b> — прямое соединение двух полюсов источника через очень малое сопротивление (например, повреждённую изоляцию). По закону Ома: при <b>R → 0</b> ток <b>I = U/R → ∞</b>. Провода раскаляются, плавятся, начинается <b>пожар</b>!</span></p>
+<div class="card-warm rounded-2xl p-4">
+<p class="text-rose-900 font-bold text-sm">
+<span lang="kk" class="lang-content">🚨 220 В × 1000 А = 220 кВт жылу секундта!</span>
+<span lang="en" class="lang-content">🚨 220 V × 1000 A = 220 kW of heat per second!</span>
+<span lang="ru" class="lang-content">🚨 220 В × 1000 А = 220 кВт тепла за секунду!</span></p>
+</div>
+</div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. АҚ БАЛАУ ЖҮЙЕСІНІҢ АНЫҚТАМАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. AIR CONDITIONING SYSTEM</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Система кондиционирования воздуха</h2>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center mb-3">
+<svg width="320" height="200" viewBox="0 0 320 200">
+<rect x="20" y="80" width="40" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="4"/>
+<text x="40" y="115" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc2626">U</text>
+<line x1="60" y1="95" x2="280" y2="95" stroke="#1e293b" stroke-width="3"/>
+<line x1="60" y1="125" x2="120" y2="125" stroke="#1e293b" stroke-width="3"/>
+<line x1="200" y1="125" x2="280" y2="125" stroke="#1e293b" stroke-width="3"/>
+<line x1="280" y1="95" x2="280" y2="125" stroke="#1e293b" stroke-width="3"/>
+<line x1="120" y1="125" x2="200" y2="125" stroke="#dc2626" stroke-width="5" stroke-dasharray="4,2"/>
+<text x="160" y="145" font-size="11" text-anchor="middle" fill="#dc2626" font-weight="bold">SHORT!</text>
+<g transform="translate(160,110)"><polygon points="-15,-8 -3,-8 -8,0 5,0 -7,15 0,-2 -10,-2" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/></g>
+<text x="160" y="180" font-size="12" text-anchor="middle" fill="#475569">R ≈ 0 → I → ∞</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center"><span lang="kk" class="lang-content">Жүктемесіз тікелей жалғану</span><span lang="en" class="lang-content">Direct connection without load</span><span lang="ru" class="lang-content">Прямое соединение без нагрузки</span></p>
+</div>
+</div>
+</section>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>❄️ АНЫҚТАМАСЫ:</strong> Ауа балау - бөлме ауасынан ыстықты табылды орындарға өндіктігінің арқылы ығына. Қыста ысыту, жайда суытту.</p>
-                <p lang="en" class="lang-content text-sm"><strong>❄️ DEFINITION:</strong> Air conditioning removes heat from room air and transfers it outside. Winter heating, summer cooling.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>❄️ ОПРЕДЕЛЕНИЕ:</strong> Кондиционер удаляет тепло из воздуха комнаты и передаёт его наружу. Зимой отопление, летом охлаждение.</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛡️ Сақтандырғыштар — өрттен қорғаушы</span>
+<span lang="en" class="lang-content">🛡️ Fuses — fire guardians</span>
+<span lang="ru" class="lang-content">🛡️ Предохранители — защитники от пожара</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+<div class="card-accent rounded-custom p-5">
+<p class="heading-font text-rose-700 text-base mb-2">🧵 <span lang="kk" class="lang-content">Балқитын сақт.</span><span lang="en" class="lang-content">Fuse wire</span><span lang="ru" class="lang-content">Плавкий</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Қорғасын-қалайы қорытпасының жұқа сымы. Тоқ <b>номиналдан</b> жоғары болса — <b>балқиды</b> және тізбек ажырайды. <b>Бір рет</b> қолданылады.</span>
+<span lang="en" class="lang-content">Thin lead–tin wire. If current exceeds rating, it <b>melts</b>, breaking the circuit. <b>Single-use</b>.</span>
+<span lang="ru" class="lang-content">Тонкая проволочка из свинца-олова. При превышении номинала <b>плавится</b>, размыкая цепь. <b>Одноразовый</b>.</span></p>
+</div>
+<div class="card-accent rounded-custom p-5">
+<p class="heading-font text-rose-700 text-base mb-2">⚡ <span lang="kk" class="lang-content">Автомат</span><span lang="en" class="lang-content">Circuit breaker</span><span lang="ru" class="lang-content">Автомат</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Электрмагнит және биметалл серіппе тізбекті <b>автоматты ажыратады</b>. Қайта <b>қосуға болады</b>. Қазіргі үй желілерінде стандартты!</span>
+<span lang="en" class="lang-content">Electromagnet + bimetallic strip <b>auto-disconnects</b>. <b>Resettable</b>. Standard in modern homes!</span>
+<span lang="ru" class="lang-content">Электромагнит и биметалл <b>автоматически отключают</b> цепь. Можно <b>включить заново</b>. Стандарт в современных домах!</span></p>
+</div>
+<div class="card-accent rounded-custom p-5">
+<p class="heading-font text-rose-700 text-base mb-2">🛀 <span lang="kk" class="lang-content">УЗО / RCD</span><span lang="en" class="lang-content">RCD</span><span lang="ru" class="lang-content">УЗО</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Кіретін және шығатын тоқтарды <b>салыстырады</b>. Адам арқылы тоқ ағса (ағысу) — 30 мА-да <b>0,03 с</b>-та ажыратады. <b>Өмірді сақтайды!</b></span>
+<span lang="en" class="lang-content">Compares in/out currents. If a person is shocked (leakage), trips in <b>0.03 s</b> at 30 mA. <b>Saves lives!</b></span>
+<span lang="ru" class="lang-content">Сравнивает входящий и выходящий ток. При утечке (через человека) срабатывает за <b>0,03 с</b> при 30 мА. <b>Спасает жизнь!</b></span></p>
+</div>
+</div>
+</section>
 
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔄 СӘТТІ ЦИКЛ:</strong> Тұйықталған цикл сұйық фреонының ағынын. Компрессор + конденсатор + испаритель + төмендегі. Едіктігінің жылдамдығы = 1-3 тонна/сағат.</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔄 REFRIGERATION CYCLE:</strong> Closed-loop cycle of liquid refrigerant flow. Compressor + condenser + evaporator + expansion. Cooling capacity = 1-3 tons/hour.</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔄 ХОЛОДИЛЬНЫЙ ЦИКЛ:</strong> Замкнутый цикл потока жидкого хладагента. Компрессор + конденсатор + испаритель + расширитель. Мощность охлаждения = 1-3 тонны/час.</p>
-            </div>
-        </section>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚨 ҚТ себептері және алдын алу</span>
+<span lang="en" class="lang-content">🚨 Causes & prevention</span>
+<span lang="ru" class="lang-content">🚨 Причины КЗ и профилактика</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="heading-font text-rose-700 mb-3">❌ <span lang="kk" class="lang-content">Себептер:</span><span lang="en" class="lang-content">Causes:</span><span lang="ru" class="lang-content">Причины:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><span lang="kk" class="lang-content">🔌 Оқшаулағыштың зақымдалуы (ескі сым)</span><span lang="en" class="lang-content">🔌 Damaged insulation (old wires)</span><span lang="ru" class="lang-content">🔌 Повреждение изоляции (старая проводка)</span></li>
+<li><span lang="kk" class="lang-content">💧 Розеткаға су тиюі</span><span lang="en" class="lang-content">💧 Water on a socket</span><span lang="ru" class="lang-content">💧 Попадание воды в розетку</span></li>
+<li><span lang="kk" class="lang-content">🔌 Бір розеткаға көп құрылғы (тройник)</span><span lang="en" class="lang-content">🔌 Overloaded socket (multi-plug)</span><span lang="ru" class="lang-content">🔌 Перегрузка розетки (тройник)</span></li>
+<li><span lang="kk" class="lang-content">🔧 Дұрыс емес жалғау, оқуа</span><span lang="en" class="lang-content">🔧 Wrong wiring, exposed contacts</span><span lang="ru" class="lang-content">🔧 Неправильное соединение, оголение контактов</span></li>
+<li><span lang="kk" class="lang-content">🐭 Тышқан/жұт сымды кеміруі</span><span lang="en" class="lang-content">🐭 Rodents gnawing wires</span><span lang="ru" class="lang-content">🐭 Грызуны повредили провода</span></li>
+</ul>
+</div>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-emerald-700 mb-3">✅ <span lang="kk" class="lang-content">Қауіпсіздік ережелері:</span><span lang="en" class="lang-content">Safety rules:</span><span lang="ru" class="lang-content">Правила безопасности:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><span lang="kk" class="lang-content">✅ Дұрыс <b>номиналды</b> сақтандырғыш қой</span><span lang="en" class="lang-content">✅ Use fuses of correct <b>rating</b></span><span lang="ru" class="lang-content">✅ Используй предохранители правильного <b>номинала</b></span></li>
+<li><span lang="kk" class="lang-content">✅ Дымқыл қолмен <b>розеткаға тиме</b></span><span lang="en" class="lang-content">✅ Don't touch sockets with <b>wet hands</b></span><span lang="ru" class="lang-content">✅ Не трогай розетки <b>мокрыми руками</b></span></li>
+<li><span lang="kk" class="lang-content">✅ Бір розеткаға <b>көп құрылғы қоспа</b></span><span lang="en" class="lang-content">✅ Don't overload a single socket</span><span lang="ru" class="lang-content">✅ Не перегружай одну розетку</span></li>
+<li><span lang="kk" class="lang-content">❌ Сақтандырғышты <b>«жучок»</b>-пен <b>ауыстырма</b>!</span><span lang="en" class="lang-content">❌ Never replace a fuse with a <b>«bug» (jumper wire)</b>!</span><span lang="ru" class="lang-content">❌ Не заменяй предохранитель <b>«жучком»</b>!</span></li>
+<li><span lang="kk" class="lang-content">✅ Өрт болса — <b>щитті</b> өшір, кейін су құй</span><span lang="en" class="lang-content">✅ Fire? <b>Cut power</b> first, then water</span><span lang="ru" class="lang-content">✅ Пожар? Сначала <b>обесточь</b>, потом туши</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. АУАНЫҢ БАЛАУ ЖҮЙЕСІНІҢ КОМПОНЕНТТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. AC SYSTEM COMPONENTS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Компоненты кондиционера</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп: ҚТ кезінде тоқ қандай?</span>
+<span lang="en" class="lang-content">🧮 Problem: current in a short circuit</span>
+<span lang="ru" class="lang-content">🧮 Задача: ток при КЗ</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-rose-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Үй желісі U = 220 В, сым кедергісі R = 0,2 Ом. ҚТ кезіндегі тоқты табыңыз. Сақтандырғыш 10 А-да ажыратады. Жұмыс істей ме?</span>
+<span lang="en" class="lang-content">Home line U = 220 V, wire R = 0.2 Ω. Find short-circuit current. Fuse trips at 10 A — will it act?</span>
+<span lang="ru" class="lang-content">Домашняя сеть U = 220 В, сопротивление провода R = 0,2 Ом. Найти ток КЗ. Предохранитель срабатывает при 10 А — сработает ли?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-rose-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>U = 220 В</li><li>R = 0,2 Ом</li><li>I_сақт = 10 А</li><li>I — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-rose-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.05rem">
+I = U/R = 220/0,2 = <span class="num">1100</span> А
+</div>
+<p class="text-slate-700 text-sm mt-2"><span lang="kk" class="lang-content">1100 А ≫ 10 А → сақтандырғыш дереу <b>балқиды</b></span><span lang="en" class="lang-content">1100 A ≫ 10 A → fuse <b>melts</b> instantly</span><span lang="ru" class="lang-content">1100 А ≫ 10 А → предохранитель <b>мгновенно сработает</b></span></p>
+<div class="badge badge-emerald mt-2">✅ Жұмыс істейді / Works</div>
+</div></div></div>
+</section>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">КОМПОНЕНТ</th>
-                            <th lang="kk" class="lang-content">ФУНКЦИЯСЫ</th>
-                            <th lang="kk" class="lang-content">ОРЫНЫ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-rose-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚠️</div>
+<p class="heading-font text-xl text-rose-700 mb-2">R → 0</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">ҚТ — өте кіші R</span><span lang="en" class="lang-content">SC — near-zero R</span><span lang="ru" class="lang-content">КЗ — почти нулевое R</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🛡️</div>
+<p class="heading-font text-xl text-rose-700 mb-2">I_сақт</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Сақтандырғыш номиналы</span><span lang="en" class="lang-content">Fuse rating</span><span lang="ru" class="lang-content">Номинал предохранителя</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚫</div>
+<p class="heading-font text-xl text-rose-700 mb-2">«Жучок» ❌</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Ешқашан жасама!</span><span lang="en" class="lang-content">Never use jumpers!</span><span lang="ru" class="lang-content">Никогда не ставь «жучки»!</span></p></div>
+</div></footer>
 
-                            <th lang="en" class="lang-content">COMPONENT</th>
-                            <th lang="en" class="lang-content">FUNCTION</th>
-                            <th lang="en" class="lang-content">LOCATION</th>
-                            <th lang="en" class="lang-content">DESCRIPTION</th>
-
-                            <th lang="ru" class="lang-content">КОМПОНЕНТ</th>
-                            <th lang="ru" class="lang-content">ФУНКЦИЯ</th>
-                            <th lang="ru" class="lang-content">МЕСТО</th>
-                            <th lang="ru" class="lang-content">ОПИСАНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Компрессор</strong></td>
-                            <td lang="kk" class="lang-content">Фреон ығына сығыстыру</td>
-                            <td lang="kk" class="lang-content">Сыртында</td>
-                            <td lang="kk" class="lang-content">Низкокбар-ыт фреонын жағынадан барлығына сығыстыру</td>
-
-                            <td lang="en" class="lang-content"><strong>Compressor</strong></td>
-                            <td lang="en" class="lang-content">Pump refrigerant gas</td>
-                            <td lang="en" class="lang-content">Outside unit</td>
-                            <td lang="en" class="lang-content">Increases pressure and temperature of refrigerant</td>
-
-                            <td lang="ru" class="lang-content"><strong>Компрессор</strong></td>
-                            <td lang="ru" class="lang-content">Сжимает холодильный газ</td>
-                            <td lang="ru" class="lang-content">Наружный блок</td>
-                            <td lang="ru" class="lang-content">Увеличивает давление и температуру хладагента</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Конденсатор</strong></td>
-                            <td lang="kk" class="lang-content">Жылуды сыртына өндіктігінің</td>
-                            <td lang="kk" class="lang-content">Сыртында</td>
-                            <td lang="kk" class="lang-content">Газ→сұйық айналдыру, жылуын ығына өндіктігінең</td>
-
-                            <td lang="en" class="lang-content"><strong>Condenser</strong></td>
-                            <td lang="en" class="lang-content">Release heat to outside</td>
-                            <td lang="en" class="lang-content">Outside unit</td>
-                            <td lang="en" class="lang-content">Gas→liquid conversion, heat removed to air</td>
-
-                            <td lang="ru" class="lang-content"><strong>Конденсатор</strong></td>
-                            <td lang="ru" class="lang-content">Отдаёт тепло наружу</td>
-                            <td lang="ru" class="lang-content">Наружный блок</td>
-                            <td lang="ru" class="lang-content">Газ→жидкость, тепло удаляется в воздух</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Испаритель</strong></td>
-                            <td lang="kk" class="lang-content">Бөлме ауасынан жылуды өндіктігінең</td>
-                            <td lang="kk" class="lang-content">Ішінде</td>
-                            <td lang="kk" class="lang-content">Сұйық→газ айналдыру, ауасынан жылуын сіңіру</td>
-
-                            <td lang="en" class="lang-content"><strong>Evaporator</strong></td>
-                            <td lang="en" class="lang-content">Remove heat from room</td>
-                            <td lang="en" class="lang-content">Inside unit</td>
-                            <td lang="en" class="lang-content">Liquid→gas conversion, absorbs heat from air</td>
-
-                            <td lang="ru" class="lang-content"><strong>Испаритель</strong></td>
-                            <td lang="ru" class="lang-content">Удаляет тепло из комнаты</td>
-                            <td lang="ru" class="lang-content">Внутренний блок</td>
-                            <td lang="ru" class="lang-content">Жидкость→газ, поглощает тепло из воздуха</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Өндіктігінің Сағалыш</strong></td>
-                            <td lang="kk" class="lang-content">Фреон ағынын қалыпталдыру</td>
-                            <td lang="kk" class="lang-content">Ауырықындағы</td>
-                            <td lang="kk" class="lang-content">Сығыстан Басалыша төмендетеді, сұйық каплар</td>
-
-                            <td lang="en" class="lang-content"><strong>Expansion Valve</strong></td>
-                            <td lang="en" class="lang-content">Regulate refrigerant flow</td>
-                            <td lang="en" class="lang-content">Between units</td>
-                            <td lang="en" class="lang-content">Reduces pressure and temperature, creates drops</td>
-
-                            <td lang="ru" class="lang-content"><strong>Расширительный клапан</strong></td>
-                            <td lang="ru" class="lang-content">Регулирует поток хладагента</td>
-                            <td lang="ru" class="lang-content">Между блоками</td>
-                            <td lang="ru" class="lang-content">Снижает давление, создаёт капли жидкости</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ЖҰМЫСТЫҚ ЦИКЛ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. OPERATING CYCLE</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Цикл работы</h2>
-
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>1️⃣ СЫҒЫНДЫРУ ЭТАПЫ</strong></p>
-                        <p lang="kk" class="lang-content">Компрессор газ сығыстырады (басалығы өрте, ыстықты өрте)</p>
-                        <p lang="kk" class="lang-content">P ↑ | T ↑</p>
-
-                        <p lang="en" class="lang-content"><strong>1️⃣ COMPRESSION STAGE</strong></p>
-                        <p lang="en" class="lang-content">Compressor squeezes gas (pressure high, temperature high)</p>
-                        <p lang="en" class="lang-content">P ↑ | T ↑</p>
-
-                        <p lang="ru" class="lang-content"><strong>1️⃣ ЭТАП СЖАТИЯ</strong></p>
-                        <p lang="ru" class="lang-content">Компрессор сжимает газ (давление высокое, температура высокая)</p>
-                        <p lang="ru" class="lang-content">P ↑ | T ↑</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>2️⃣ КОНДЕНС ЭТАПЫ</strong></p>
-                        <p lang="kk" class="lang-content">Конденсатордағы газ→сұйық айналдыру (жылуын сыртына өндіктігінең)</p>
-                        <p lang="kk" class="lang-content">T ↓ | Жылу сыртына</p>
-
-                        <p lang="en" class="lang-content"><strong>2️⃣ CONDENSATION STAGE</strong></p>
-                        <p lang="en" class="lang-content">Gas→liquid in condenser (heat released to air)</p>
-                        <p lang="en" class="lang-content">T ↓ | Heat to outside</p>
-
-                        <p lang="ru" class="lang-content"><strong>2️⃣ ЭТАП КОНДЕНСАЦИИ</strong></p>
-                        <p lang="ru" class="lang-content">Газ→жидкость в конденсаторе (тепло выходит наружу)</p>
-                        <p lang="ru" class="lang-content">T ↓ | Тепло наружу</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>3️⃣ ӨНДІКТІГІНЕҢ ЭТАПЫ</strong></p>
-                        <p lang="kk" class="lang-content">Сығындағы фреон басалығынан төмендеген (T төмен)</p>
-                        <p lang="kk" class="lang-content">P ↓ | T ↓↓</p>
-
-                        <p lang="en" class="lang-content"><strong>3️⃣ EXPANSION STAGE</strong></p>
-                        <p lang="en" class="lang-content">Liquid refrigerant pressure drops (T very low)</p>
-                        <p lang="en" class="lang-content">P ↓ | T ↓↓</p>
-
-                        <p lang="ru" class="lang-content"><strong>3️⃣ ЭТАП РАСШИРЕНИЯ</strong></p>
-                        <p lang="ru" class="lang-content">Давление жидкого хладагента снижается (T очень низкая)</p>
-                        <p lang="ru" class="lang-content">P ↓ | T ↓↓</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>4️⃣ ИСПАРИТ ЭТАПЫ</strong></p>
-                        <p lang="kk" class="lang-content">Сұйық→газ испаритель (бөлме ауасынан жылуын сіңіру)</p>
-                        <p lang="kk" class="lang-content">T ↑ | Ауасы суық</p>
-
-                        <p lang="en" class="lang-content"><strong>4️⃣ EVAPORATION STAGE</strong></p>
-                        <p lang="en" class="lang-content">Liquid→gas in evaporator (absorbs room heat)</p>
-                        <p lang="en" class="lang-content">T ↑ | Room air cools</p>
-
-                        <p lang="ru" class="lang-content"><strong>4️⃣ ЭТАП ИСПАРЕНИЯ</strong></p>
-                        <p lang="ru" class="lang-content">Жидкость→газ в испарителе (поглощает тепло комнаты)</p>
-                        <p lang="ru" class="lang-content">T ↑ | Воздух охлаждается</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #a5f3fc; border-radius: 1rem; border-top: 4px solid #06b6d4;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Ауа балау - фреон сағалыстамын сәтті цикл. Компрессор, конденсатор, испаритель, өндіктігінең. Жайда суытту, қыста ысыту. Өндіктігінің + конвекция - жүйесінің негізі!</p>
-            <p lang="en" class="lang-content text-sm">Air conditioning is a refrigeration cycle of refrigerant circulation. Compressor, condenser, evaporator, expansion valve. Summer cooling, winter heating. Heat transfer + convection = system basis!</p>
-            <p lang="ru" class="lang-content text-sm">Кондиционер - замкнутый цикл циркуляции хладагента. Компрессор, конденсатор, испаритель, расширитель. Летнее охлаждение, зимнее отопление. Теплопередача + конвекция = основа системы!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

@@ -1,250 +1,173 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нақ жылусыйлығы - Удельная теплоёмкость</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #f0fdf4 0%, #dcfce7 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #16a34a 0%, #166534 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #166534; border-bottom: 3px solid #dcfce7; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #16a34a; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #16a34a; background: white; color: #16a34a; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #16a34a; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #16a34a; color: white; }
-        .info-box { background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #16a34a; margin: 10px 0; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .example-card { background: #f7fee7; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #16a34a; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Постоянные магниты. Магнитное поле Земли</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-green-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-purple-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Магниттік құбылыстар</span>
+<span lang="en" class="lang-content">Grade 9 · Magnetic phenomena</span>
+<span lang="ru" class="lang-content">9 класс · Магнитные явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Тұрақты магниттер. Жердің магнит өрісі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Permanent magnets. Earth's magnetic field</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Постоянные магниты. Магнитное поле Земли</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Нақ Жылусыйлығы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Specific Heat Capacity</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Удельная теплоёмкость</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-green-100">c = Q / (m × ΔT) - әрбір материалдың өзге сипаты. Су = 4200 Дж/(кг·°C). МАТЕРИАЛДЫ БАЙЛАНЫСТЫ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-green-100">c = Q / (m × ΔT) - each material's unique property. Water = 4200 J/(kg·°C). MATERIAL DEPENDENT!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-green-100">c = Q / (m × ΔT) - уникальное свойство каждого материала. Вода = 4200 Дж/(кг·°C). ЗАВИСИТ ОТ МАТЕРИАЛА!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧲 Тұрақты магниттер</span>
+<span lang="en" class="lang-content">🧲 Permanent magnets</span>
+<span lang="ru" class="lang-content">🧲 Постоянные магниты</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-purple-700">Тұрақты магнит</b> — ұзақ уақыт өзінің <b>магнит қасиетін</b> сақтайтын дене. Магниттік қасиеттерді көрсететін заттарды <b>ферромагнетиктер</b> деп атайды: <b>темір (Fe), никель (Ni), кобальт (Co)</b> және олардың қорытпалары (мысалы, неодим Nd-Fe-B).</span>
+<span lang="en" class="lang-content"><b class="text-purple-700">Permanent magnet</b> — a body that keeps its <b>magnetic property</b> for a long time. Magnetic materials are called <b>ferromagnetic</b>: <b>iron (Fe), nickel (Ni), cobalt (Co)</b> and alloys (e.g., neodymium Nd-Fe-B).</span>
+<span lang="ru" class="lang-content"><b class="text-purple-700">Постоянный магнит</b> — тело, долго сохраняющее <b>магнитные свойства</b>. Магнитные материалы — <b>ферромагнетики</b>: <b>железо (Fe), никель (Ni), кобальт (Co)</b> и сплавы (например, неодим Nd-Fe-B).</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. АНЫҚТАМАСЫ ЖӘНЕ ФОРМУЛАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. DEFINITION AND FORMULA</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение и формула</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-purple-900 font-bold mb-2">🌐 <span lang="kk" class="lang-content">Магниттік домендер:</span><span lang="en" class="lang-content">Magnetic domains:</span><span lang="ru" class="lang-content">Магнитные домены:</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Темірдің ішінде <b>микро-магниттер (домендер)</b> бар. Магниттелмеген күйде олар <b>әртүрлі бағытта</b> — өрістер <b>жойылады</b>. Магниттегенде барлық домендер <b>бір бағытқа</b> түзіледі → күшті магнит!</span>
+<span lang="en" class="lang-content">Inside iron there are <b>micro-magnets (domains)</b>. Unmagnetized — domains point <b>randomly</b>, fields cancel. Magnetized — all domains <b>align</b> → strong magnet!</span>
+<span lang="ru" class="lang-content">В железе есть <b>микромагнитики (домены)</b>. В размагниченном состоянии — <b>хаотично</b>, поля гасятся. При намагничивании — все <b>выстраиваются</b> вдоль одной оси → сильный магнит!</span></p>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>📖 АНЫҚТАМАСЫ:</strong> Нақ жылусыйлығы (c) - 1 кг материалдың температурасын 1°C-қа өзгерту үшін қажетті жылу мөлшері.</p>
-                <p lang="en" class="lang-content text-sm"><strong>📖 DEFINITION:</strong> Specific heat capacity (c) - heat needed to change 1 kg material by 1°C.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>📖 ОПРЕДЕЛЕНИЕ:</strong> Удельная теплоёмкость (c) - тепло, необходимое для изменения температуры 1 кг материала на 1°C.</p>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center mb-3">
+<svg width="320" height="220" viewBox="0 0 320 220">
+<rect x="120" y="80" width="40" height="60" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="140" y="115" font-size="14" text-anchor="middle" fill="#1d4ed8" font-weight="bold">N</text>
+<rect x="160" y="80" width="40" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+<text x="180" y="115" font-size="14" text-anchor="middle" fill="#dc2626" font-weight="bold">S</text>
+<g stroke="#9333ea" stroke-width="1.5" fill="none">
+<path d="M120,100 Q60,40 80,110 Q100,180 160,140"/>
+<path d="M120,120 Q40,80 50,140 Q70,200 160,160"/>
+<path d="M200,100 Q260,40 240,110 Q220,180 160,140"/>
+<path d="M200,120 Q280,80 270,140 Q250,200 160,160"/>
+</g>
+<polygon points="80,100 75,108 85,108" fill="#9333ea"/>
+<polygon points="240,100 245,108 235,108" fill="#9333ea"/>
+<text x="160" y="200" font-size="12" text-anchor="middle" fill="#475569"><tspan>N → S (outside)</tspan></text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center"><span lang="kk" class="lang-content">Жолақ магниттің өріс сызықтары</span><span lang="en" class="lang-content">Field lines of a bar magnet</span><span lang="ru" class="lang-content">Линии поля полосового магнита</span></p>
+</div>
+</div>
+</section>
 
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔴 ФОРМУЛАСЫ:</strong></p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔴 FORMULA:</strong></p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔴 ФОРМУЛА:</strong></p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Магнит қасиеттері</span>
+<span lang="en" class="lang-content">⚡ Properties of magnets</span>
+<span lang="ru" class="lang-content">⚡ Свойства магнитов</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-purple-700 mb-3">🟣 <span lang="kk" class="lang-content">2 полюс әрқашан:</span><span lang="en" class="lang-content">Two poles always:</span><span lang="ru" class="lang-content">Всегда 2 полюса:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Магнитті <b>қанша бөлсек те</b>, әрбір бөліктің <b>N және S полюсі</b> болады! Бір ғана полюсі бар «<b>магниттік монополь</b>» табиғатта табылмаған!</span>
+<span lang="en" class="lang-content">Cut a magnet into pieces — each still has <b>N and S poles</b>! A "<b>magnetic monopole</b>" has never been observed.</span>
+<span lang="ru" class="lang-content">Сколько магнит ни режь — у каждого куска по <b>N и S полюсу</b>! <b>«Магнитный монополь»</b> не найден в природе!</span></p>
+</div>
 
-                <p style="text-align: center; font-weight: bold; color: #166534; font-size: 18px; margin: 10px 0;">
-                    c = Q / (m × ΔT)  немесе  Q = m × c × ΔT
-                </p>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-purple-700 mb-3">🟣 <span lang="kk" class="lang-content">Полюстер арасындағы күштер:</span><span lang="en" class="lang-content">Force between poles:</span><span lang="ru" class="lang-content">Сила между полюсами:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content"><b>Әртектес полюстер</b> (N–S) — <b>тартылады</b>. <b>Біртектес полюстер</b> (N–N немесе S–S) — <b>тебіледі</b>. Электр зарядтары секілді: «+» «–»-пен тартылады.</span>
+<span lang="en" class="lang-content"><b>Unlike poles</b> (N–S) <b>attract</b>; <b>like poles</b> (N–N or S–S) <b>repel</b>. Like electric charges: + and – attract.</span>
+<span lang="ru" class="lang-content"><b>Разные полюсы</b> (N–S) <b>притягиваются</b>, <b>одноимённые</b> (N–N, S–S) — <b>отталкиваются</b>. Аналогия с зарядами.</span></p>
+</div>
 
-                <div class="overflow-x-auto" style="margin-top: 15px;">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">БЕЛГІ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">ӨЛШЕМ БІРЛІГІ</th>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-purple-700 mb-3">🟣 <span lang="kk" class="lang-content">Кюри температурасы:</span><span lang="en" class="lang-content">Curie temperature:</span><span lang="ru" class="lang-content">Температура Кюри:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Магнит <b>қыздырылса</b>, домендер <b>ретсіз</b> қозғалады және зат магнит қасиетін <b>жоғалтады</b>! Темір үшін <b>770 °C</b>, неодим үшін <b>310 °C</b>.</span>
+<span lang="en" class="lang-content">If heated, domains randomize and the material <b>loses</b> magnetism. Iron: <b>770 °C</b>; neodymium: <b>310 °C</b>.</span>
+<span lang="ru" class="lang-content">При нагреве домены хаотизируются — магнетизм <b>теряется</b>. Железо — <b>770 °C</b>, неодим — <b>310 °C</b>.</span></p>
+</div>
 
-                            <th lang="en" class="lang-content">SYMBOL</th>
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">UNIT</th>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-purple-700 mb-3">🟣 <span lang="kk" class="lang-content">Магниттелу:</span><span lang="en" class="lang-content">Magnetization:</span><span lang="ru" class="lang-content">Намагничивание:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Темір <b>магнит жанында</b> өзі де <b>магнит болады</b>. Қатты магнит <b>ұзақ</b> қалпын сақтайды (Nd-Fe-B), жұмсақ магнит (трансформатор болаты) — <b>лезде</b> деманитизацияланады.</span>
+<span lang="en" class="lang-content">Iron near a magnet becomes magnetized itself. Hard magnets (Nd-Fe-B) <b>keep</b> their magnetism, soft (transformer steel) <b>quickly lose</b> it.</span>
+<span lang="ru" class="lang-content">Железо рядом с магнитом само <b>намагничивается</b>. Твёрдые магниты (Nd-Fe-B) долго хранят свойства, мягкие (трансформаторная сталь) — мгновенно теряют.</span></p>
+</div>
+</div>
+</section>
 
-                            <th lang="ru" class="lang-content">СИМВОЛ</th>
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ЕДИНИЦА</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>c</strong></td>
-                            <td lang="kk" class="lang-content">Нақ жылусыйлығы</td>
-                            <td lang="kk" class="lang-content">Дж/(кг·°C)</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 Жердің магнит өрісі</span>
+<span lang="en" class="lang-content">🌍 Earth's magnetic field</span>
+<span lang="ru" class="lang-content">🌍 Магнитное поле Земли</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b>Жер — алып магнит!</b> Жер ядросындағы <b>сұйық темір-никель</b> айналып, <b>токтар</b> жасайды → магнит өрісі (динамо-эффект). Магниттік полюстер географиялық полюстермен <b>сәйкес келмейді</b>: солтүстіктегі магнит полюсі — <b>«S»</b> (компастың N тармағы оған тартылады).</span>
+<span lang="en" class="lang-content"><b>Earth is a giant magnet!</b> Liquid iron-nickel in the core circulates, generating currents → magnetic field (dynamo effect). Magnetic poles <b>do not coincide</b> with geographic ones: the north magnetic pole is actually <b>«S»</b> (compass N points to it).</span>
+<span lang="ru" class="lang-content"><b>Земля — гигантский магнит!</b> Жидкий железо-никель в ядре движется и создаёт <b>токи</b> → поле (динамо-эффект). Магнитные полюсы <b>не совпадают</b> с географическими: на севере — фактически <b>«S»</b> (компасная стрелка N тянется к нему).</span></p>
 
-                            <td lang="en" class="lang-content"><strong>c</strong></td>
-                            <td lang="en" class="lang-content">Specific heat capacity</td>
-                            <td lang="en" class="lang-content">J/(kg·°C)</td>
+<div class="card-warm rounded-2xl p-4">
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">⭐ Жер өрісінің күші B ≈ <b>5·10⁻⁵ Тл</b> — әлсіз, бірақ <b>планетаны қорғаушы!</b></span>
+<span lang="en" class="lang-content">⭐ B ≈ <b>5·10⁻⁵ T</b> — weak, but <b>protects the planet!</b></span>
+<span lang="ru" class="lang-content">⭐ B ≈ <b>5·10⁻⁵ Тл</b> — слабое, но <b>защищает планету!</b></span></p>
+</div>
+</div>
 
-                            <td lang="ru" class="lang-content"><strong>c</strong></td>
-                            <td lang="ru" class="lang-content">Удельная теплоёмкость</td>
-                            <td lang="ru" class="lang-content">Дж/(кг·°C)</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Q</strong></td>
-                            <td lang="kk" class="lang-content">Жылу мөлшері</td>
-                            <td lang="kk" class="lang-content">Дж (Joule)</td>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-purple-700 mb-3">🛡️ <span lang="kk" class="lang-content">Магнитосфера:</span><span lang="en" class="lang-content">Magnetosphere:</span><span lang="ru" class="lang-content">Магнитосфера:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><span lang="kk" class="lang-content">🛡️ Күн желінен (<b>заряд</b> бөлшектерден) қорғайды</span><span lang="en" class="lang-content">🛡️ Shields from solar wind (charged particles)</span><span lang="ru" class="lang-content">🛡️ Защищает от солнечного ветра (заряженных частиц)</span></li>
+<li><span lang="kk" class="lang-content">🌌 <b>Полярлық шуағы</b> — заряд бөлшектердің атмосферамен соқтығысуы</span><span lang="en" class="lang-content">🌌 <b>Auroras</b> — particles colliding with atmosphere</span><span lang="ru" class="lang-content">🌌 <b>Полярные сияния</b> — частицы сталкиваются с атмосферой</span></li>
+<li><span lang="kk" class="lang-content">🧭 <b>Компас</b> — N тілі Жердің S-не қарай</span><span lang="en" class="lang-content">🧭 <b>Compass</b> — needle's N points to Earth's S</span><span lang="ru" class="lang-content">🧭 <b>Компас</b> — стрелка N к магнитному S Земли</span></li>
+<li><span lang="kk" class="lang-content">🐦 <b>Құстар</b> және <b>акулалар</b> магнит өрісі бойынша бағдарланады</span><span lang="en" class="lang-content">🐦 <b>Birds and sharks</b> navigate by Earth's field</span><span lang="ru" class="lang-content">🐦 <b>Птицы и акулы</b> ориентируются по полю Земли</span></li>
+<li><span lang="kk" class="lang-content">⚡ <b>Магниттік дауыл</b> — күн белсенділігі күшейгенде</span><span lang="en" class="lang-content">⚡ <b>Magnetic storms</b> from solar activity</span><span lang="ru" class="lang-content">⚡ <b>Магнитные бури</b> при солнечной активности</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content"><strong>Q</strong></td>
-                            <td lang="en" class="lang-content">Heat quantity</td>
-                            <td lang="en" class="lang-content">J (Joule)</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧭 Компас тарихы</span>
+<span lang="en" class="lang-content">🧭 History of the compass</span>
+<span lang="ru" class="lang-content">🧭 История компаса</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b>~200 жыл б.э.д.</b> Қытайда <b>магнетит</b> (Fe₃O₄) тасынан жасалған «оңтүстікке көрсеткіш» қолданылды. <b>XI ғ.</b> теңіздегі компастар пайда болды — олар Ұлы географиялық ашуларға (Колумб, Магеллан) <b>жол ашты</b>! Бүгінгі смартфондарда да <b>магнитометр</b> (компас) бар, тек электрондық!</span>
+<span lang="en" class="lang-content"><b>~200 BC</b> — China used <b>magnetite</b> (Fe₃O₄) «south-pointers». <b>11th c.</b> — sea compasses enabled the Age of Exploration (Columbus, Magellan)! Modern smartphones still have a magnetometer — an electronic compass!</span>
+<span lang="ru" class="lang-content"><b>~200 г. до н.э.</b> — китайцы делали «указатели юга» из <b>магнетита</b> (Fe₃O₄). <b>XI в.</b> — морской компас открыл эпоху Великих географических открытий (Колумб, Магеллан)! В смартфонах тоже есть магнитометр — электронный компас!</span></p>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content"><strong>Q</strong></td>
-                            <td lang="ru" class="lang-content">Количество теплоты</td>
-                            <td lang="ru" class="lang-content">Дж (Джоуль)</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>m</strong></td>
-                            <td lang="kk" class="lang-content">Материалдың массасы</td>
-                            <td lang="kk" class="lang-content">кг (kilogram)</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-purple-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧲</div>
+<p class="heading-font text-xl text-purple-700 mb-2">N + S</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">2 полюс әрқашан</span><span lang="en" class="lang-content">Always 2 poles</span><span lang="ru" class="lang-content">Всегда 2 полюса</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌍</div>
+<p class="heading-font text-xl text-purple-700 mb-2">5·10⁻⁵ Тл</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жер магнетизмі</span><span lang="en" class="lang-content">Earth's field</span><span lang="ru" class="lang-content">Поле Земли</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧭</div>
+<p class="heading-font text-xl text-purple-700 mb-2">N → S</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Компас оңға бағытталады</span><span lang="en" class="lang-content">Compass points to Earth's S</span><span lang="ru" class="lang-content">Компас на магнитный S Земли</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content"><strong>m</strong></td>
-                            <td lang="en" class="lang-content">Material mass</td>
-                            <td lang="en" class="lang-content">kg (kilogram)</td>
-
-                            <td lang="ru" class="lang-content"><strong>m</strong></td>
-                            <td lang="ru" class="lang-content">Масса материала</td>
-                            <td lang="ru" class="lang-content">кг (килограмм)</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ΔT</strong></td>
-                            <td lang="kk" class="lang-content">Температура өзгерісі</td>
-                            <td lang="kk" class="lang-content">°C (градус)</td>
-
-                            <td lang="en" class="lang-content"><strong>ΔT</strong></td>
-                            <td lang="en" class="lang-content">Temperature change</td>
-                            <td lang="en" class="lang-content">°C (degree)</td>
-
-                            <td lang="ru" class="lang-content"><strong>ΔT</strong></td>
-                            <td lang="ru" class="lang-content">Изменение температуры</td>
-                            <td lang="ru" class="lang-content">°C (градус)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>⚠️ МАҢЫЗДЫ:</strong> Нақ жылусыйлығы материалға өзге. Су = 4200 (үлкен), төмен = 130 (кіші). Материал өндіктігінең өндіктігінең байланысты!</p>
-                <p lang="en" class="lang-content text-sm"><strong>⚠️ IMPORTANT:</strong> Specific heat varies by material. Water = 4200 (large), lead = 130 (small). Material properties matter!</p>
-                <p lang="ru" class="lang-content text-sm"><strong>⚠️ ВАЖНО:</strong> Удельная теплоёмкость зависит от материала. Вода = 4200 (большая), свинец = 130 (малая). Свойства материала важны!</p>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ЕСЕПТЕУ МЫСАЛДАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. CALCULATION EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Примеры расчётов</h2>
-
-            <div class="rule-card">
-                <div class="grid-3">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 1:</strong></p>
-                        <p lang="kk" class="lang-content"><strong>Су нагревание:</strong></p>
-                        <p lang="kk" class="lang-content">m = 1 кг, ΔT = 10°C, c = 4200</p>
-                        <p lang="kk" class="lang-content">Q = m × c × ΔT</p>
-                        <p lang="kk" class="lang-content">Q = 1 × 4200 × 10</p>
-                        <p lang="kk" class="lang-content"><strong>Q = 42000 Дж = 42 кДж</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 1:</strong></p>
-                        <p lang="en" class="lang-content"><strong>Water heating:</strong></p>
-                        <p lang="en" class="lang-content">m = 1 kg, ΔT = 10°C, c = 4200</p>
-                        <p lang="en" class="lang-content">Q = m × c × ΔT</p>
-                        <p lang="en" class="lang-content">Q = 1 × 4200 × 10</p>
-                        <p lang="en" class="lang-content"><strong>Q = 42000 J = 42 kJ</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 1:</strong></p>
-                        <p lang="ru" class="lang-content"><strong>Нагревание воды:</strong></p>
-                        <p lang="ru" class="lang-content">m = 1 кг, ΔT = 10°C, c = 4200</p>
-                        <p lang="ru" class="lang-content">Q = m × c × ΔT</p>
-                        <p lang="ru" class="lang-content">Q = 1 × 4200 × 10</p>
-                        <p lang="ru" class="lang-content"><strong>Q = 42000 Дж = 42 кДж</strong></p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 2:</strong></p>
-                        <p lang="kk" class="lang-content"><strong>Темір охлаждение:</strong></p>
-                        <p lang="kk" class="lang-content">m = 2 кг, ΔT = 20°C, c = 460</p>
-                        <p lang="kk" class="lang-content">Q = m × c × ΔT</p>
-                        <p lang="kk" class="lang-content">Q = 2 × 460 × 20</p>
-                        <p lang="kk" class="lang-content"><strong>Q = 18400 Дж = 18.4 кДж</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 2:</strong></p>
-                        <p lang="en" class="lang-content"><strong>Iron cooling:</strong></p>
-                        <p lang="en" class="lang-content">m = 2 kg, ΔT = 20°C, c = 460</p>
-                        <p lang="en" class="lang-content">Q = m × c × ΔT</p>
-                        <p lang="en" class="lang-content">Q = 2 × 460 × 20</p>
-                        <p lang="en" class="lang-content"><strong>Q = 18400 J = 18.4 kJ</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 2:</strong></p>
-                        <p lang="ru" class="lang-content"><strong>Охлаждение железа:</strong></p>
-                        <p lang="ru" class="lang-content">m = 2 кг, ΔT = 20°C, c = 460</p>
-                        <p lang="ru" class="lang-content">Q = m × c × ΔT</p>
-                        <p lang="ru" class="lang-content">Q = 2 × 460 × 20</p>
-                        <p lang="ru" class="lang-content"><strong>Q = 18400 Дж = 18.4 кДж</strong></p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 3:</strong></p>
-                        <p lang="kk" class="lang-content"><strong>Мыс нагревание:</strong></p>
-                        <p lang="kk" class="lang-content">Q = 1000 Дж, m = 0.5 кг</p>
-                        <p lang="kk" class="lang-content">c = ?, c = 400 Дж/(кг·°C)</p>
-                        <p lang="kk" class="lang-content">ΔT = Q / (m × c)</p>
-                        <p lang="kk" class="lang-content"><strong>ΔT = 1000/(0.5×400) = 5°C</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 3:</strong></p>
-                        <p lang="en" class="lang-content"><strong>Copper heating:</strong></p>
-                        <p lang="en" class="lang-content">Q = 1000 J, m = 0.5 kg</p>
-                        <p lang="en" class="lang-content">c = 400 J/(kg·°C)</p>
-                        <p lang="en" class="lang-content">ΔT = Q / (m × c)</p>
-                        <p lang="en" class="lang-content"><strong>ΔT = 1000/(0.5×400) = 5°C</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 3:</strong></p>
-                        <p lang="ru" class="lang-content"><strong>Нагревание меди:</strong></p>
-                        <p lang="ru" class="lang-content">Q = 1000 Дж, m = 0.5 кг</p>
-                        <p lang="ru" class="lang-content">c = 400 Дж/(кг·°C)</p>
-                        <p lang="ru" class="lang-content">ΔT = Q / (m × c)</p>
-                        <p lang="ru" class="lang-content"><strong>ΔT = 1000/(0.5×400) = 5°C</strong></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #dcfce7; border-radius: 1rem; border-top: 4px solid #16a34a;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-green-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-green-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-green-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Нақ жылусыйлығы (c) - материалдың ерекше сипаты. c = Q/(m×ΔT) формуласы. Су = 4200 (үлкен), төмен = 130 (кіші). Материалға өзге құрамасындағы. Есептеу үшін массасы, өзгерісі, нақ жылусыйлығы қажет!</p>
-            <p lang="en" class="lang-content text-sm">Specific heat capacity (c) is material's unique property. Formula: c = Q/(m×ΔT). Water = 4200 (large), lead = 130 (small). Differs by material composition. Need: mass, temperature change, specific heat for calculation!</p>
-            <p lang="ru" class="lang-content text-sm">Удельная теплоёмкость (c) - уникальное свойство материала. Формула: c = Q/(m×ΔT). Вода = 4200 (большая), свинец = 130 (малая). Зависит от состава. Для расчёта нужны: масса, изменение температуры, удельная теплоёмкость!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

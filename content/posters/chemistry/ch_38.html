@@ -1,272 +1,301 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ертіндіде заттың массалық үлесін есептеу</title>
+    <title>Массовая доля вещества в растворе</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top left, #0c1445, #1e1b4b, #0f172a); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #134e4a, #0f766e, #042f2e);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #818cf8; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #a5b4fc; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #a5b4fc; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #a5b4fc; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #2dd4bf; color: #042f2e; border-color: transparent; font-weight: 800; }
+        .formula-style { font-family: 'Courier New', monospace; }
+        input[type="range"] { accent-color: #2dd4bf; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Массалық Үлес Есептеу!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Mass Fraction Calculations!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Расчёт массовой доли!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">w% = (m заттың / m ертінді) × 100%. NaCl 10 г + су 90 г = 10% ертінді. Есептемелер жеңіл!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">w% = (m substance / m solution) × 100%. NaCl 10g + water 90g = 10% solution. Easy calculations!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">w% = (m вещества / m раствора) × 100%. NaCl 10г + вода 90г = 10% раствор. Простые расчёты!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-teal-300"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. МАССАЛЫҚ ҮЛЕС ФОРМУЛАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. MASS FRACTION FORMULA</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Формула массовой доли</h2>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-7 glass rounded-custom p-8">
+            <h2 id="formula-heading" class="heading-font text-xl mb-6 opacity-80 uppercase tracking-wider"></h2>
 
-            <div class="illustration">
-                <svg viewBox="0 0 500 150" width="100%" height="150">
-                    <!-- Formula box -->
-                    <rect x="50" y="20" width="400" height="80" fill="#fbcfe8" stroke="#ec4899" stroke-width="2" rx="10"/>
-                    <text x="250" y="50" text-anchor="middle" font-size="18" font-weight="bold">w = m(заттың) ÷ m(ертінді) × 100%</text>
-                    <text x="250" y="85" text-anchor="middle" font-size="14">немесе</text>
-                    <text x="250" y="110" text-anchor="middle" font-size="18" font-weight="bold">w(%) = (m(s) / m(solution)) × 100</text>
-                </svg>
+            <div class="bg-black/30 rounded-2xl p-8 mb-6 border border-teal-500/20 text-center">
+                <div id="formula-name" class="text-teal-300 text-sm uppercase tracking-widest mb-3"></div>
+                <div class="flex items-center justify-center gap-3 text-3xl md:text-4xl formula-style">
+                    <div class="text-white/60">ω =</div>
+                    <div class="flex flex-col items-center text-teal-300">
+                        <div class="text-xl border-b border-teal-300 pb-1 px-3" id="formula-num"></div>
+                        <div class="text-xl pt-1 px-3" id="formula-den"></div>
+                    </div>
+                    <div class="text-white/60">× 100%</div>
+                </div>
+                <div id="formula-legend" class="text-sm text-white/60 mt-4"></div>
             </div>
 
-            <div class="rule-card">
-                <div class="space-y-3">
-                    <div class="calc-box">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 1: 20 г NaCl + 80 г су = ?</strong></p>
-                        <p lang="kk" class="lang-content">m(заттың) = 20 г</p>
-                        <p lang="kk" class="lang-content">m(су) = 80 г</p>
-                        <p lang="kk" class="lang-content">m(ертінді) = 20 + 80 = 100 г</p>
-                        <p lang="kk" class="lang-content">w = 20 / 100 × 100% = 20% ✓</p>
+            <h3 id="calc-heading" class="heading-font text-lg mb-4 text-teal-300"></h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="flex justify-between text-sm text-white/70">
+                        <span id="slider1-label"></span>
+                        <span id="slider1-value" class="font-bold text-teal-300">20 г</span>
+                    </label>
+                    <input type="range" id="slider1" min="0" max="100" value="20" oninput="recalc()" class="w-full mt-2">
+                </div>
+                <div>
+                    <label class="flex justify-between text-sm text-white/70">
+                        <span id="slider2-label"></span>
+                        <span id="slider2-value" class="font-bold text-teal-300">180 г</span>
+                    </label>
+                    <input type="range" id="slider2" min="10" max="500" value="180" oninput="recalc()" class="w-full mt-2">
+                </div>
 
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 1: 20g NaCl + 80g water = ?</strong></p>
-                        <p lang="en" class="lang-content">m(substance) = 20 g</p>
-                        <p lang="en" class="lang-content">m(water) = 80 g</p>
-                        <p lang="en" class="lang-content">m(solution) = 20 + 80 = 100 g</p>
-                        <p lang="en" class="lang-content">w = 20 / 100 × 100% = 20% ✓</p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 1: 20г NaCl + 80г воды = ?</strong></p>
-                        <p lang="ru" class="lang-content">m(вещества) = 20 г</p>
-                        <p lang="ru" class="lang-content">m(воды) = 80 г</p>
-                        <p lang="ru" class="lang-content">m(раствора) = 20 + 80 = 100 г</p>
-                        <p lang="ru" class="lang-content">w = 20 / 100 × 100% = 20% ✓</p>
-                    </div>
-
-                    <div class="calc-box">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 2: 50 г H₂SO₄ + 450 г су = ?</strong></p>
-                        <p lang="kk" class="lang-content">m(ертінді) = 50 + 450 = 500 г</p>
-                        <p lang="kk" class="lang-content">w = 50 / 500 × 100% = 10% ✓</p>
-
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 2: 50g H₂SO₄ + 450g water = ?</strong></p>
-                        <p lang="en" class="lang-content">m(solution) = 50 + 450 = 500 g</p>
-                        <p lang="en" class="lang-content">w = 50 / 500 × 100% = 10% ✓</p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 2: 50г H₂SO₄ + 450г воды = ?</strong></p>
-                        <p lang="ru" class="lang-content">m(раствора) = 50 + 450 = 500 г</p>
-                        <p lang="ru" class="lang-content">w = 50 / 500 × 100% = 10% ✓</p>
-                    </div>
+                <div class="bg-teal-500/10 rounded-2xl p-5 border border-teal-500/30 mt-4">
+                    <div id="result-label" class="text-xs text-teal-300 uppercase tracking-widest mb-2"></div>
+                    <div id="result-value" class="text-3xl font-bold formula-style"></div>
+                    <div id="result-explain" class="text-sm text-white/70 mt-2"></div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТАБЛИЦАЛЫҚ МЫСАЛДАР</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. TABLE EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Табличные примеры</h2>
+        <div class="lg:col-span-5 glass rounded-custom p-8 border-l-4 border-teal-400">
+            <div class="text-5xl mb-4">⚗️</div>
+            <h3 id="example-title" class="heading-font text-2xl mb-4 text-teal-300"></h3>
+            <p id="example-text" class="text-white/80 leading-relaxed mb-6"></p>
 
-            <div class="illustration">
-                <svg viewBox="0 0 500 200" width="100%" height="200">
-                    <!-- Bar chart of mass fractions -->
-                    <rect x="50" y="40" width="35" height="100" fill="#ff6b6b" stroke="#000" stroke-width="1"/>
-                    <text x="67.5" y="155" text-anchor="middle" font-size="11">20%</text>
-                    <text x="67.5" y="175" text-anchor="middle" font-size="10">20г/80г су</text>
-
-                    <rect x="110" y="60" width="35" height="80" fill="#4ecdc4" stroke="#000" stroke-width="1"/>
-                    <text x="127.5" y="155" text-anchor="middle" font-size="11">16%</text>
-                    <text x="127.5" y="175" text-anchor="middle" font-size="10">16г/84г су</text>
-
-                    <rect x="170" y="80" width="35" height="60" fill="#ffd93d" stroke="#000" stroke-width="1"/>
-                    <text x="187.5" y="155" text-anchor="middle" font-size="11">12%</text>
-                    <text x="187.5" y="175" text-anchor="middle" font-size="10">12г/88г су</text>
-
-                    <rect x="230" y="100" width="35" height="40" fill="#95e1d3" stroke="#000" stroke-width="1"/>
-                    <text x="247.5" y="155" text-anchor="middle" font-size="11">8%</text>
-                    <text x="247.5" y="175" text-anchor="middle" font-size="10">8г/92г су</text>
-
-                    <rect x="290" y="120" width="35" height="20" fill="#a8e6cf" stroke="#000" stroke-width="1"/>
-                    <text x="307.5" y="155" text-anchor="middle" font-size="11">4%</text>
-                    <text x="307.5" y="175" text-anchor="middle" font-size="10">4г/96г су</text>
-
-                    <!-- Y-axis line -->
-                    <line x1="40" y1="140" x2="360" y2="140" stroke="#000" stroke-width="2"/>
-                    <line x1="40" y1="140" x2="40" y2="20" stroke="#000" stroke-width="2"/>
-                </svg>
+            <div class="space-y-3">
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div id="ex-step1-label" class="text-xs text-teal-300 uppercase tracking-widest mb-1"></div>
+                    <div id="ex-step1-text" class="text-white/90 formula-style"></div>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div id="ex-step2-label" class="text-xs text-teal-300 uppercase tracking-widest mb-1"></div>
+                    <div id="ex-step2-text" class="text-white/90 formula-style"></div>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div id="ex-step3-label" class="text-xs text-teal-300 uppercase tracking-widest mb-1"></div>
+                    <div id="ex-step3-text" class="text-white/90 formula-style font-bold text-teal-200"></div>
+                </div>
             </div>
-        </section>
+        </div>
+    </main>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Массалық үлес w(%) = (m заттың / m ертінді) × 100%. Есептемелер жеңіл: 20 г NaCl + 80 г су = 20% ертінді. 50 г H₂SO₄ + 450 г су = 10% ертінді. Қосындысы әрқашан 100%!</p>
-            <p lang="en" class="lang-content text-sm">Mass fraction w(%) = (m substance / m solution) × 100%. Easy calculations: 20g NaCl + 80g water = 20% solution. 50g H₂SO₄ + 450g water = 10% solution. Always adds to 100%!</p>
-            <p lang="ru" class="lang-content text-sm">Массовая доля w(%) = (m вещества / m раствора) × 100%. Простые расчёты: 20г NaCl + 80г воды = 20% раствор. 50г H₂SO₄ + 450г воды = 10% раствор. Всегда сумма 100%!</p>
-        </footer>
-    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-teal-500/10 transition-colors">
+            <div class="w-14 h-14 bg-teal-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">⚖️</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-teal-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-teal-500/10 transition-colors">
+            <div class="w-14 h-14 bg-teal-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🏥</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-teal-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-teal-500/10 transition-colors">
+            <div class="w-14 h-14 bg-teal-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">📊</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-teal-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-teal-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Массовая доля в растворе",
+                subtitle: "Насколько концентрированный получился раствор",
+                formulaHeading: "Главная формула",
+                formulaName: "Массовая доля растворённого вещества",
+                formulaNum: "m (растворённого вещества)",
+                formulaDen: "m (раствора)",
+                formulaLegend: "m(раствора) = m(вещества) + m(растворителя)",
+                calcHeading: "Интерактивный калькулятор",
+                slider1: "Масса вещества (г)",
+                slider2: "Масса растворителя (г)",
+                resultLabel: "Массовая доля ω",
+                exampleTitle: "Задача-пример",
+                exampleText: "В 180 г воды растворили 20 г поваренной соли. Найдите массовую долю соли в растворе.",
+                exStep1Label: "Шаг 1: масса раствора",
+                exStep1Text: "m(р-ра) = 20 + 180 = 200 г",
+                exStep2Label: "Шаг 2: расчёт по формуле",
+                exStep2Text: "ω = 20 / 200 · 100%",
+                exStep3Label: "Ответ",
+                exStep3Text: "ω = 10%",
+                cards: [
+                    { title: "Когда применяется", desc: "На этикетках лекарств, моющих средств, удобрений всегда указана массовая доля действующего вещества — это и есть ω." },
+                    { title: "Медицина", desc: "Физраствор содержит ω(NaCl) = 0,9%. Перекись водорода в аптеке — 3%. Концентрация рассчитывается именно по этой формуле." },
+                    { title: "Связь с другими величинами", desc: "Через ω легко перейти к молярной концентрации, если известна плотность раствора. Это базовая величина в количественной химии." }
+                ],
+                quote: "«Без точной концентрации нет точной химии — и нет точной медицины»",
+                author: "Принцип фармакологии"
+            },
+            kz: {
+                title: "Ерітіндідегі массалық үлес",
+                subtitle: "Ерітінді қаншалықты концентрлі болды",
+                formulaHeading: "Негізгі формула",
+                formulaName: "Еріген заттың массалық үлесі",
+                formulaNum: "m (еріген зат)",
+                formulaDen: "m (ерітінді)",
+                formulaLegend: "m(ерітінді) = m(зат) + m(еріткіш)",
+                calcHeading: "Интерактивті калькулятор",
+                slider1: "Зат массасы (г)",
+                slider2: "Еріткіш массасы (г)",
+                resultLabel: "Массалық үлес ω",
+                exampleTitle: "Үлгі есеп",
+                exampleText: "180 г суда 20 г ас тұзы ерітілді. Тұздың ерітіндідегі массалық үлесін табыңыз.",
+                exStep1Label: "1-қадам: ерітінді массасы",
+                exStep1Text: "m(ер.) = 20 + 180 = 200 г",
+                exStep2Label: "2-қадам: формула бойынша",
+                exStep2Text: "ω = 20 / 200 · 100%",
+                exStep3Label: "Жауап",
+                exStep3Text: "ω = 10%",
+                cards: [
+                    { title: "Қайда қолданылады", desc: "Дәрі-дәрмек, тазалағыш құрал, тыңайтқыш заттарының жапсырмаларында әсер етуші заттың массалық үлесі әрқашан көрсетіледі — бұл ω." },
+                    { title: "Медицина", desc: "Физраствордағы ω(NaCl) = 0,9%. Дәріханалық сутегі пероксиді — 3%. Концентрация дәл осы формула бойынша есептеледі." },
+                    { title: "Басқа шамалармен байланысы", desc: "ω арқылы ерітіндінің тығыздығын біле отырып, молярлық концентрацияға өту оңай. Бұл — сандық химияның базалық шамасы." }
+                ],
+                quote: "«Дәл концентрациясыз дәл химия да, дәл медицина да жоқ»",
+                author: "Фармакология қағидасы"
+            },
+            en: {
+                title: "Mass fraction in solution",
+                subtitle: "How concentrated is the solution you made",
+                formulaHeading: "Key formula",
+                formulaName: "Mass fraction of solute",
+                formulaNum: "m (solute)",
+                formulaDen: "m (solution)",
+                formulaLegend: "m(solution) = m(solute) + m(solvent)",
+                calcHeading: "Interactive calculator",
+                slider1: "Mass of solute (g)",
+                slider2: "Mass of solvent (g)",
+                resultLabel: "Mass fraction ω",
+                exampleTitle: "Sample problem",
+                exampleText: "20 g of table salt was dissolved in 180 g of water. Find the mass fraction of salt in the solution.",
+                exStep1Label: "Step 1: mass of the solution",
+                exStep1Text: "m(sol.) = 20 + 180 = 200 g",
+                exStep2Label: "Step 2: apply the formula",
+                exStep2Text: "ω = 20 / 200 · 100%",
+                exStep3Label: "Answer",
+                exStep3Text: "ω = 10%",
+                cards: [
+                    { title: "Where it is used", desc: "Labels of medicines, detergents and fertilisers always state the mass fraction of the active substance — that's exactly ω." },
+                    { title: "Medicine", desc: "Saline contains ω(NaCl) = 0.9%. Pharmacy hydrogen peroxide is 3%. The concentration is calculated by this very formula." },
+                    { title: "Link to other quantities", desc: "From ω plus solution density you can switch to molar concentration. It is a foundational quantity of quantitative chemistry." }
+                ],
+                quote: "«Without an exact concentration there is no exact chemistry — and no exact medicine»",
+                author: "Pharmacology principle"
+            }
+        };
+
+        let currentLang = 'ru';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function recalc() {
+            const mSub = parseFloat(document.getElementById('slider1').value);
+            const mSol = parseFloat(document.getElementById('slider2').value);
+            const total = mSub + mSol;
+            const omega = total > 0 ? (mSub / total * 100) : 0;
+            const u = currentLang === 'ru' ? 'г' : currentLang === 'kz' ? 'г' : 'g';
+            document.getElementById('slider1-value').textContent = mSub + ' ' + u;
+            document.getElementById('slider2-value').textContent = mSol + ' ' + u;
+            document.getElementById('result-value').textContent = 'ω = ' + omega.toFixed(2) + '%';
+            const expl = currentLang === 'ru' ? `${mSub} / ${total} · 100%` :
+                         currentLang === 'kz' ? `${mSub} / ${total} · 100%` :
+                         `${mSub} / ${total} · 100%`;
+            document.getElementById('result-explain').textContent = expl;
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('formula-heading').textContent = t.formulaHeading;
+            document.getElementById('formula-name').textContent = t.formulaName;
+            document.getElementById('formula-num').textContent = t.formulaNum;
+            document.getElementById('formula-den').textContent = t.formulaDen;
+            document.getElementById('formula-legend').textContent = t.formulaLegend;
+            document.getElementById('calc-heading').textContent = t.calcHeading;
+            document.getElementById('slider1-label').textContent = t.slider1;
+            document.getElementById('slider2-label').textContent = t.slider2;
+            document.getElementById('result-label').textContent = t.resultLabel;
+            document.getElementById('example-title').textContent = t.exampleTitle;
+            document.getElementById('example-text').textContent = t.exampleText;
+            document.getElementById('ex-step1-label').textContent = t.exStep1Label;
+            document.getElementById('ex-step1-text').textContent = t.exStep1Text;
+            document.getElementById('ex-step2-label').textContent = t.exStep2Label;
+            document.getElementById('ex-step2-text').textContent = t.exStep2Text;
+            document.getElementById('ex-step3-label').textContent = t.exStep3Label;
+            document.getElementById('ex-step3-text').textContent = t.exStep3Text;
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+            recalc();
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -275,128 +304,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

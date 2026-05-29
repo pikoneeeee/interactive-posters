@@ -54,6 +54,7 @@ if not ADMIN_IDS:
 # ─── Состояния FSM ────────────────────────────────────────────
 class GenKey(StatesGroup):
     subject = State()
+    device_id = State()
     client_id = State()
     months = State()
     note = State()
@@ -61,6 +62,7 @@ class GenKey(StatesGroup):
 
 class VerifyKey(StatesGroup):
     key = State()
+    device_id = State()
 
 
 class RevokeKey(StatesGroup):
@@ -148,14 +150,34 @@ async def gen_subject_chosen(callback: CallbackQuery, state: FSMContext):
     await state.update_data(subject=subject)
     await callback.message.edit_text(
         f"📚 Предмет: *{subject}*\n\n"
-        "👤 *Шаг 2/4:* Введите ID клиента (число 0–65535):",
+        "� *Шаг 2/5:* Введите Device ID устройства (16 символов):\n"
+        "Пользователь видит его на экране активации.",
         parse_mode="Markdown"
     )
-    await state.set_state(GenKey.client_id)
+    await state.set_state(GenKey.device_id)
     await callback.answer()
 
 
-# ─── Шаг 2: client_id ─────────────────────────────────────────
+# ─── Шаг 2: device_id ─────────────────────────────────────
+@router.message(GenKey.device_id)
+async def gen_device_id(message: Message, state: FSMContext):
+    if not is_admin(message.from_user.id):
+        return
+    did = message.text.strip().upper()
+    if len(did) != 16:
+        await message.answer("❌ Device ID должен быть ровно 16 символов. Попробуйте ещё:")
+        return
+
+    await state.update_data(device_id=did)
+    await message.answer(
+        f"💻 Устройство: `{did}`\n\n"
+        "👤 *Шаг 3/5:* Введите ID клиента (число 0–65535):",
+        parse_mode="Markdown"
+    )
+    await state.set_state(GenKey.client_id)
+
+
+# ─── Шаг 3: client_id ─────────────────────────────────────
 @router.message(GenKey.client_id)
 async def gen_client_id(message: Message, state: FSMContext):
     if not is_admin(message.from_user.id):
@@ -186,20 +208,20 @@ async def gen_client_id(message: Message, state: FSMContext):
     kb = InlineKeyboardMarkup(inline_keyboard=buttons)
     await message.answer(
         f"👤 Клиент: *#{cid}*\n\n"
-        "📅 *Шаг 3/4:* Выберите срок действия:",
+        "📅 *Шаг 4/5:* Выберите срок действия:",
         reply_markup=kb, parse_mode="Markdown"
     )
     await state.set_state(GenKey.months)
 
 
-# ─── Шаг 3: duration ──────────────────────────────────────────
+# ─── Шаг 4: duration ──────────────────────────────────────────
 @router.callback_query(F.data.startswith("dur_"), GenKey.months)
 async def gen_months_chosen(callback: CallbackQuery, state: FSMContext):
     months = int(callback.data.replace("dur_", ""))
     await state.update_data(months=months)
     await callback.message.edit_text(
         f"📅 Срок: *{months} мес.*\n\n"
-        "📝 *Шаг 4/4:* Введите заметку (название школы/клиента)\n"
+        "📝 *Шаг 5/5:* Введите заметку (название школы/клиента)\n"
         "или отправьте `-` чтобы пропустить:",
         parse_mode="Markdown"
     )
@@ -222,24 +244,27 @@ async def gen_note_and_create(message: Message, state: FSMContext):
 
     # Генерация ключа
     subject = data['subject']
+    device_id = data['device_id']
     client_id = data['client_id']
     months = data['months']
 
     try:
         secret = keygen.load_secret()
-        key_str = keygen.encode_key(keygen.SUBJECTS[subject], client_id, months, 0, secret)
+        key_str = keygen.encode_key(keygen.SUBJECTS[subject], client_id, months, 0, secret, device_id)
 
         # Сохранение в БД
         conn = keygen._init_db()
-        keygen._save_key(conn, key_str, subject, client_id, months, 0, note)
+        keygen._save_key(conn, key_str, subject, client_id, months, 0, device_id, note)
         conn.close()
 
         result = (
             "✅ *Ключ сгенерирован!*\n\n"
             f"```\n{key_str}\n```\n\n"
             f"📚 Предмет: `{subject}`\n"
+            f"💻 Устройство: `{device_id}`\n"
             f"👤 Клиент: `#{client_id}`\n"
             f"📅 Срок: `{months} мес.` (с момента активации)\n"
+            f"⚠️ Привязан к устройству — не работает на других ПК\n"
         )
         if note:
             result += f"📝 Заметка: _{note}_\n"
@@ -265,15 +290,35 @@ async def cmd_verify_start(message: Message, state: FSMContext):
 
 
 @router.message(VerifyKey.key)
-async def verify_process(message: Message, state: FSMContext):
+async def verify_key_received(message: Message, state: FSMContext):
     if not is_admin(message.from_user.id):
         return
     key_str = message.text.strip().upper()
+    await state.update_data(key=key_str)
+    await message.answer(
+        "💻 Введите Device ID устройства (16 символов)\n"
+        "для проверки привязки ключа:",
+        parse_mode="Markdown"
+    )
+    await state.set_state(VerifyKey.device_id)
+
+
+@router.message(VerifyKey.device_id)
+async def verify_process(message: Message, state: FSMContext):
+    if not is_admin(message.from_user.id):
+        return
+    device_id = message.text.strip().upper()
+    if len(device_id) != 16:
+        await message.answer("❌ Device ID должен быть 16 символов:")
+        return
+
+    data_state = await state.get_data()
+    key_str = data_state['key']
     await state.clear()
 
     try:
         secret = keygen.load_secret()
-        data, err = keygen.decode_key(key_str, secret)
+        data, err = keygen.decode_key(key_str, secret, device_id)
 
         if err:
             await message.answer(f"❌ *Невалидный ключ*\n\n{err}", parse_mode="Markdown")
@@ -289,6 +334,7 @@ async def verify_process(message: Message, state: FSMContext):
         result = (
             "✅ *Ключ валидный*\n\n"
             f"📚 Предмет: `{data['subject']}`\n"
+            f"💻 Устройство: `{device_id}`\n"
             f"👤 Клиент: `#{data['client_id']}`\n"
             f"📅 Срок: `{data['duration_months']} мес.`\n"
         )

@@ -1,324 +1,142 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат 3: Молекулалардың өзара әрекеттесуі</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            overflow-x: hidden;
-            color: #1a202c;
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы */
-        .header-card {
-            background-color: #059669; /* Жасмық-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #047857; /* Жасмық-700 */
-            border-bottom: 3px solid #6ee7b7; /* Жасмық-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #f0fdfa; /* Өте ашық жасыл */
-            border-left: 4px solid #34d399; /* Жасмық-400 */
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #f1f5f9; /* Ашық сұр */
-            border-radius: 1rem;
-            border-top: 4px solid #64748b; /* Сұр */
-        }
-        .feature-list li {
-            margin-bottom: 8px;
-            list-style: none;
-            padding-left: 20px;
-            position: relative;
-        }
-        .feature-list li::before {
-            content: '🧬'; /* Эмодзи */
-            position: absolute;
-            left: 0;
-            color: #059669; /* Жасмық */
-        }
-         .term {
-            font-weight: bold;
-            color: #047857; /* green-800 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #059669;
-            background-color: #ffffff;
-            color: #059669;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #f0fdfa;
-        }
-        .lang-btn.active {
-            background-color: #059669;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 120px;
-            margin: 10px 0;
-            border: 1px solid #a7f3d0;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
-    // Функция переключения языков (Автоматически добавлено скриптом)
-    function switchLang(lang) {
-        var container = document.getElementById('poster-container');
-        if (container) {
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-        }
-        var buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-</script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Взаимодействие молекул</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-gray-100">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Зат құрылысы</span>
+<span lang="en" class="lang-content">Grade 7 · Structure of matter</span>
+<span lang="ru" class="lang-content">7 класс · Строение вещества</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Молекулалардың әсерлесуі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Interaction of molecules</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Взаимодействие молекул</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧲 Тарту мен тебіліс</span>
+<span lang="en" class="lang-content">🧲 Attraction and repulsion</span>
+<span lang="ru" class="lang-content">🧲 Притяжение и отталкивание</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Молекулалар бір-біріне <b class="text-indigo-700">тартылады және тебіледі</b> — екеуі бір уақытта. Қашықтыққа байланысты не тарту, не тебіліс күші басым болады. Егер тек тарту болса — газ ешқашан кеңейе алмас еді; тек тебіліс болса — су бөліктері бірікпес еді.</span>
+<span lang="en" class="lang-content">Molecules <b class="text-indigo-700">attract and repel</b> each other — both at the same time. Depending on the distance, one wins over the other. Without repulsion gas could not expand; without attraction water drops would not stick together.</span>
+<span lang="ru" class="lang-content">Молекулы одновременно <b class="text-indigo-700">притягиваются и отталкиваются</b>. В зависимости от расстояния одна сила преобладает над другой. Не было бы отталкивания — газ не расширялся бы; не было бы притяжения — вода не была бы жидкой.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">🔍 Дәлелдер:</span>
+<span lang="en" class="lang-content">🔍 Evidence:</span>
+<span lang="ru" class="lang-content">🔍 Доказательства:</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content"><b>Тарту:</b> жуылған шыны екі шынымен жабыссақ — ажырата алмайсың.</span><span lang="en" class="lang-content"><b>Attraction:</b> two wet glass plates can't be pulled apart easily.</span><span lang="ru" class="lang-content"><b>Притяжение:</b> два мокрых стекла слипаются, их трудно разнять.</span></li>
+<li><span lang="kk" class="lang-content"><b>Тебіліс:</b> қатты денені сығу қиын — молекулалар бір-біріне жақын келе алмайды.</span><span lang="en" class="lang-content"><b>Repulsion:</b> solids resist being compressed.</span><span lang="ru" class="lang-content"><b>Отталкивание:</b> твёрдое тело трудно сжать.</span></li>
+</ul></div></div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">🧲</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-3"><span lang="kk" class="lang-content">Әсер ету ара қашықтығы</span><span lang="en" class="lang-content">Range of interaction</span><span lang="ru" class="lang-content">Расстояние действия</span></p>
+<p class="text-center text-slate-700">≈ <b class="text-indigo-700">10⁻⁹ м</b><br/>
+<span class="text-sm text-slate-500">
+<span lang="kk" class="lang-content">молекуланың өлшеміндей</span>
+<span lang="en" class="lang-content">about a molecule's size</span>
+<span lang="ru" class="lang-content">размером с молекулу</span></span></p>
+</div></div></section>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 3: МОЛЕКУЛАЛАРДЫҢ ӨЗАРА ӘРЕКЕТТЕСУІ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">PHYSICS 3: INTERACTION OF MOLECULES</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 3: ВЗАИМОДЕЙСТВИЕ МОЛЕКУЛ</h1>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Күштің ара қашықтыққа тәуелділігі</span>
+<span lang="en" class="lang-content">📊 Force vs distance</span>
+<span lang="ru" class="lang-content">📊 Зависимость силы от расстояния</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 720 280" style="width:100%;max-width:720px;margin:auto" font-family="'Inter',sans-serif">
+<!-- оси -->
+<line x1="60" y1="140" x2="680" y2="140" stroke="#1e293b" stroke-width="2"/>
+<line x1="100" y1="20" x2="100" y2="260" stroke="#1e293b" stroke-width="2"/>
+<text x="685" y="155" font-size="13" fill="#1e293b" font-weight="700">r</text>
+<text x="80" y="20" font-size="13" fill="#1e293b" font-weight="700">F</text>
+<text x="80" y="155" font-size="11" fill="#64748b">0</text>
+<!-- зона отталкивания -->
+<rect x="100" y="20" width="60" height="120" fill="#fee2e2" opacity="0.6"/>
+<text x="130" y="40" text-anchor="middle" fill="#b91c1c" font-size="11" font-weight="700">
+<tspan class="lang-content" lang="kk">тебіліс</tspan>
+<tspan class="lang-content" lang="en">repulsion</tspan>
+<tspan class="lang-content" lang="ru">отталкивание</tspan>
+</text>
+<!-- зона притяжения -->
+<rect x="160" y="140" width="200" height="120" fill="#d1fae5" opacity="0.5"/>
+<text x="260" y="245" text-anchor="middle" fill="#047857" font-size="11" font-weight="700">
+<tspan class="lang-content" lang="kk">тарту</tspan>
+<tspan class="lang-content" lang="en">attraction</tspan>
+<tspan class="lang-content" lang="ru">притяжение</tspan>
+</text>
+<!-- кривая F(r) -->
+<path d="M105,30 Q130,40 160,140 Q220,260 280,200 Q420,170 600,145" fill="none" stroke="#4f46e5" stroke-width="3"/>
+<!-- r0 -->
+<line x1="160" y1="140" x2="160" y2="155" stroke="#1e293b" stroke-width="2"/>
+<text x="160" y="170" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="700">r₀</text>
+<text x="160" y="280" text-anchor="middle" fill="#64748b" font-size="11">
+<tspan class="lang-content" lang="kk">тепе-теңдік</tspan>
+<tspan class="lang-content" lang="en">equilibrium</tspan>
+<tspan class="lang-content" lang="ru">равновесие</tspan>
+</text>
+<!-- стрелки -->
+<text x="500" y="135" font-size="11" fill="#64748b">
+<tspan class="lang-content" lang="kk">алыс — әсер жоқ</tspan>
+<tspan class="lang-content" lang="en">far — no force</tspan>
+<tspan class="lang-content" lang="ru">далеко — нет силы</tspan>
+</text>
+</svg>
+</div>
+<p class="text-slate-600 text-sm mt-3">
+<span lang="kk" class="lang-content">📈 r &lt; r₀: тебіліс күші тарту күшінен үлкен. r = r₀: тепе-теңдік. r &gt; r₀: тарту басым. r ≫ r₀: әсер жоқ.</span>
+<span lang="en" class="lang-content">📈 r &lt; r₀: repulsion wins. r = r₀: balance. r &gt; r₀: attraction wins. r ≫ r₀: no force.</span>
+<span lang="ru" class="lang-content">📈 r &lt; r₀: отталкивание сильнее. r = r₀: равновесие. r &gt; r₀: притяжение сильнее. r ≫ r₀: силы нет.</span></p>
+</div></section>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-gray-100">Тартылыс және тебіліс күштері.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-gray-100">Forces of attraction and repulsion.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-gray-100">Силы притяжения и отталкивания.</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Күнделікті мысалдар</span>
+<span lang="en" class="lang-content">🌟 Everyday examples</span>
+<span lang="ru" class="lang-content">🌟 Примеры из жизни</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="tile"><div class="tile-emoji">💧</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Су тамшысы</span><span lang="en" class="lang-content">Water drop</span><span lang="ru" class="lang-content">Капля воды</span></p>
+<p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Тарту күші суға дөңгелек пішін береді</span><span lang="en" class="lang-content">Attraction gives water its round shape</span><span lang="ru" class="lang-content">Притяжение придаёт воде округлую форму</span></p></div>
+<div class="tile"><div class="tile-emoji">🪞</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Жалаулу шыны</span><span lang="en" class="lang-content">Wet glass</span><span lang="ru" class="lang-content">Мокрые стёкла</span></p>
+<p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Жабысады — су арқылы күшті тартылыс</span><span lang="en" class="lang-content">Stick together — strong attraction via water</span><span lang="ru" class="lang-content">Слипаются — сильное притяжение через воду</span></p></div>
+<div class="tile"><div class="tile-emoji">🧱</div>
+<p class="heading-font text-base text-indigo-700 mt-2"><span lang="kk" class="lang-content">Темір сым</span><span lang="en" class="lang-content">Iron wire</span><span lang="ru" class="lang-content">Железная проволока</span></p>
+<p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Үзу үшін зор күш керек — молекулалық тарту</span><span lang="en" class="lang-content">Hard to tear — molecular attraction</span><span lang="ru" class="lang-content">Трудно разорвать — молекулярное притяжение</span></p></div>
+</div></section>
 
-        <!-- 1. НЕГІЗГІ ҚАҒИДА -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Өзара әрекеттесу дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Interaction?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое взаимодействие?</h2>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧲</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Тарту + Тебіліс</span><span lang="en" class="lang-content">Attraction + Repulsion</span><span lang="ru" class="lang-content">Притяжение + Отталкивание</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Екеуі бір уақытта әсер етеді</span><span lang="en" class="lang-content">Both act simultaneously</span><span lang="ru" class="lang-content">Действуют одновременно</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">r ≈ 10⁻⁹ м</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қысқа қашықтықта ғана</span><span lang="en" class="lang-content">Only at short distances</span><span lang="ru" class="lang-content">Только на малых расстояниях</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">r = r₀</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тепе-теңдік ара қашықтығы</span><span lang="en" class="lang-content">Equilibrium distance</span><span lang="ru" class="lang-content">Равновесное расстояние</span></p></div>
+</div></footer>
 
-            <div class="rule-card border-t-emerald-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Молекулалардың (немесе атомдардың) өзара әрекеттесуі</span> – бұл бөлшектердің арасында бір уақытта әрекет ететін <strong>тартылыс</strong> және <strong>тебіліс</strong> күштері.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Interaction of molecules</span> (or atoms) refers to the forces of <strong>attraction</strong> and <strong>repulsion</strong> that act between particles simultaneously.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Взаимодействие молекул</span> (или атомов) – это силы <strong>притяжения</strong> и <strong>отталкивания</strong>, которые действуют между частицами одновременно.
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Тартылыс -->
-                    <div class="example-block border-l-green-400">
-                        <h3 lang="kk" class="lang-content text-xl font-bold text-green-700 mb-2">Тартылыс (Притяжение)</h3>
-                        <h3 lang="en" class="lang-content text-xl font-bold text-green-700 mb-2">Attraction</h3>
-                        <h3 lang="ru" class="lang-content text-xl font-bold text-green-700 mb-2">Притяжение</h3>
-                        <p lang="kk" class="lang-content">Бөлшектерді біріктіріп, затты <span class="term" lang="kk">тұтас</span> ұстап тұруға тырысады.</p>
-                        <p lang="en" class="lang-content">Tries to pull particles together and hold the substance <span class="term" lang="en">together</span>.</p>
-                        <p lang="ru" class="lang-content">Старается удержать частицы вместе, сохраняя <span class="term" lang="ru">целостность</span> вещества.</p>
-                    </div>
-                    <!-- Тебіліс -->
-                    <div class="example-block border-l-red-400">
-                        <h3 lang="kk" class="lang-content text-xl font-bold text-red-700 mb-2">Тебіліс (Отталкивание)</h3>
-                        <h3 lang="en" class="lang-content text-xl font-bold text-red-700 mb-2">Repulsion</h3>
-                        <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 mb-2">Отталкивание</h3>
-                        <p lang="kk" class="lang-content">Бөлшектердің бір-біріне тым жақындап, <span class="term" lang="kk">сығылуына</span> жол бермейді.</p>
-                        <p lang="en" class="lang-content">Prevents particles from getting too close and <span class="term" lang="en">collapsing</span> or being compressed.</p>
-                        <p lang="ru" class="lang-content">Не позволяет частицам "слипнуться" или <span class="term" lang="ru">сжаться</span> до предела.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. АРАҚАШЫҚТЫҚҚА ТӘУЕЛДІЛІК -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Күштердің арақашықтыққа тәуелділігі</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Dependence on Distance</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Зависимость сил от расстояния</h2>
-
-            <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">Тартылыс пен тебіліс күштерінің қайсысы басым болатыны бөлшектердің арасындағы <strong>арақашықтыққа</strong> байланысты.</p>
-            <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">Which force (attraction or repulsion) dominates depends on the <strong>distance</strong> between the particles.</p>
-            <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">Какая сила — притяжение или отталкивание — доминирует, зависит от <strong>расстояния</strong> между частицами.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                <!-- Алыс -->
-                <div class="rule-card border-t-blue-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Бөлшектер Алыс</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Particles are Far</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Частицы Далеко</h3>
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="25" cy="50" r="10" fill="#3b82f6"/>
-                        <circle cx="75" cy="50" r="10" fill="#3b82f6"/>
-                        <!-- Тартылыс бағыттауыштары -->
-                        <line x1="35" y1="50" x2="65" y2="50" stroke="#166534" stroke-width="2" stroke-dasharray="4"/>
-                        <polyline points="45 50, 40 45, 40 55, 45 50" fill="#166534"/>
-                        <polyline points="55 50, 60 45, 60 55, 55 50" fill="#166534"/>
-                    </svg>
-                    <p lang="kk" class="lang-content"><strong>Тартылыс күші</strong> тебіліс күшінен басым болады. (Мысалы, газдарда).</p>
-                    <p lang="en" class="lang-content"><strong>Attraction</strong> is stronger than repulsion. (e.g., in gases).</p>
-                    <p lang="ru" class="lang-content"><strong>Притяжение</strong> сильнее отталкивания. (напр., в газах).</p>
-                </div>
-
-                <!-- Тепе-теңдік -->
-                <div class="rule-card border-t-gray-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-gray-700 mb-3">2. Тепе-теңдік</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-gray-700 mb-3">2. Equilibrium</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-gray-700 mb-3">2. Равновесие</h3>
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="40" cy="50" r="10" fill="#6b7280"/>
-                        <circle cx="60" cy="50" r="10" fill="#6b7280"/>
-                        <!-- Тең күштер -->
-                        <line x1="50" y1="50" x2="30" y2="50" stroke="#b91c1c" stroke-width="1.5"/>
-                        <polyline points="30 50, 35 45, 35 55, 30 50" fill="#b91c1c"/>
-                        <line x1="50" y1="50" x2="70" y2="50" stroke="#166534" stroke-width="1.5"/>
-                        <polyline points="70 50, 65 45, 65 55, 70 50" fill="#166534"/>
-                    </svg>
-                    <p lang="kk" class="lang-content">Тартылыс пен тебіліс <strong>теңеседі</strong>. (Қатты денелер мен сұйықтардағы қалыпты жағдай).</p>
-                    <p lang="en" class="lang-content">Attraction and repulsion are <strong>balanced</strong>. (Normal state in solids and liquids).</p>
-                    <p lang="ru" class="lang-content">Притяжение и отталкивание <strong>равны</strong>. (Нормальное состояние в тв. телах и жидкостях).</p>
-                </div>
-
-                <!-- Жақын (сығылған) -->
-                <div class="rule-card border-t-red-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-red-700 mb-3">3. Тым жақын (Сығылған)</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-red-700 mb-3">3. Too Close (Compressed)</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 mb-3">3. Слишком Близко (Сжатие)</h3>
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="45" cy="50" r="10" fill="#ef4444"/>
-                        <circle cx="55" cy="50" r="10" fill="#ef4444"/>
-                        <!-- Тебіліс бағыттауыштары -->
-                        <line x1="45" y1="50" x2="15" y2="50" stroke="#b91c1c" stroke-width="2"/>
-                        <polyline points="15 50, 25 45, 25 55, 15 50" fill="#b91c1c"/>
-                        <line x1="55" y1="50" x2="85" y2="50" stroke="#b91c1c" stroke-width="2"/>
-                        <polyline points="85 50, 75 45, 75 55, 85 50" fill="#b91c1c"/>
-                    </svg>
-                    <p lang="kk" class="lang-content"><strong>Тебіліс күші</strong> тартылыс күшінен күрт басым болады.</p>
-                    <p lang="en" class="lang-content"><strong>Repulsion</strong> becomes much stronger than attraction.</p>
-                    <p lang="ru" class="lang-content"><strong>Отталкивание</strong> резко становится сильнее притяжения.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-gray-800">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-gray-800">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-gray-800">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Молекулалар бір-бірін <strong>тартады</strong> (егер олар алыс болса) және бір-бірінен <strong>тебіледі</strong> (егер оларды тым жақындатса). Бұл күштер заттардың қатты, сұйық немесе газ болуын анықтайды.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Molecules <strong>attract</strong> each other (when far apart) and <strong>repel</strong> each other (when forced too close). This balance of forces determines if a substance is solid, liquid, or gas.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Молекулы <strong>притягиваются</strong> (когда они далеко) и <strong>отталкиваются</strong> (когда их сжимают). Этот баланс сил определяет, будет ли вещество твердым, жидким или газообразным.
-            </p>
-        </footer>
-
-    </div>
-
-    
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

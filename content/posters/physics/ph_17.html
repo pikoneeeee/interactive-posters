@@ -1,367 +1,203 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Сложение сил</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #eff6ff; /* blue-50 */
-            overflow-x: hidden;
-            color: #1e3a8a; /* blue-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Blue Theme */
-        .header-card {
-            background-color: #2563eb; /* blue-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #1e40af; /* blue-800 */
-            border-bottom: 3px solid #60a5fa; /* blue-400 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #dbeafe; /* blue-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #1d4ed8; /* blue-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #2563eb; /* blue-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #2563eb;
-            background-color: #ffffff;
-            color: #2563eb;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #eff6ff;
-        }
-        .lang-btn.active {
-            background-color: #2563eb;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 200px;
-            margin: 15px 0;
-            border: 1px solid #bfdbfe;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #1e40af;
-            text-anchor: middle;
-        }
-        .svg-force-arrow {
-            stroke-width: 4;
-            marker-end: url(#arrowhead);
-        }
-        .svg-resultant-arrow {
-            stroke-width: 6;
-            marker-end: url(#arrowhead-result);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сложение сил. Равнодействующая</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-blue-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Күштер</span>
+<span lang="en" class="lang-content">Grade 7 · Forces</span>
+<span lang="ru" class="lang-content">7 класс · Силы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Күштерді қосу. Тең әсерлі күш</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Addition of forces. Resultant force</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Сложение сил. Равнодействующая</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">➕ Тең әсерлі күш деген не?</span>
+<span lang="en" class="lang-content">➕ What is the resultant force?</span>
+<span lang="ru" class="lang-content">➕ Что такое равнодействующая?</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Күнделікті өмірде денеге <b>бір ғана күш сирек</b> әсер етеді. Үстелде жатқан кітапқа: ауырлық күші төмен, тіреудің күші жоғары; жүгірушіге: бұлшық еттер алға, ауаның кедергісі — артқа. <b class="text-indigo-700">Тең әсерлі күш F⃗</b> — барлық күштерді <b>бір күшпен</b> алмастыратын күш. Дене өзін солай ұстайды, осы тең әсерлі күш әсер еткендей.</span>
+<span lang="en" class="lang-content">In real life a body is rarely acted on by <b>just one force</b>. A book on a table: gravity pulls down, the table pushes up. A runner: muscles push forward, air resistance pulls back. The <b class="text-indigo-700">resultant force F⃗</b> is a <b>single force</b> that produces the same effect as all the forces together.</span>
+<span lang="ru" class="lang-content">В реальной жизни на тело редко действует <b>лишь одна сила</b>. На книгу на столе: тяжесть вниз, реакция стола вверх. На бегуна: мышцы вперёд, сопротивление воздуха назад. <b class="text-indigo-700">Равнодействующая сила F⃗</b> — это <b>одна сила</b>, заменяющая действие всех остальных. Тело ведёт себя так, как будто действует только она.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">КҮШТЕРДІ ҚОСУ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ADDITION OF FORCES</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">СЛОЖЕНИЕ СИЛ</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">📐 Жалпы формула:</span>
+<span lang="en" class="lang-content">📐 General formula:</span>
+<span lang="ru" class="lang-content">📐 Общая формула:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+<span class="var">F⃗</span> = <span class="var">F⃗</span>₁ + <span class="var">F⃗</span>₂ + ... + <span class="var">F⃗</span><sub>n</sub>
+</div>
+<p class="text-slate-700 text-sm mt-3 text-center">
+<span lang="kk" class="lang-content">⚠️ Күштер — векторлар, оларды <b>сандар сияқты қосуға болмайды!</b></span>
+<span lang="en" class="lang-content">⚠️ Forces are vectors — <b>don't just add numbers</b>; consider direction!</span>
+<span lang="ru" class="lang-content">⚠️ Силы — векторы, нельзя <b>просто складывать числа</b>, нужно учитывать направление!</span></p>
+</div>
+</div>
+</section>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-blue-100">Теңәрекетті күшті табу.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-blue-100">Finding the Resultant Force.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-blue-100">Нахождение равнодействующей силы.</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">3️⃣ Күштерді қосудың 3 жағдайы</span>
+<span lang="en" class="lang-content">3️⃣ Three cases of force addition</span>
+<span lang="ru" class="lang-content">3️⃣ Три случая сложения</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Случай 1: сонаправленные -->
+<div class="card-emerald rounded-custom p-5">
+<p class="heading-font text-base text-emerald-700 mb-3 text-center"><span lang="kk" class="lang-content">1. Бір бағытта</span><span lang="en" class="lang-content">1. Same direction</span><span lang="ru" class="lang-content">1. Одинаковое направление</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 200 100" style="width:100%">
+<line x1="20" y1="40" x2="80" y2="40" stroke="#4338ca" stroke-width="3" marker-end="url(#arr17a)"/>
+<text x="40" y="30" fill="#4338ca" font-size="12" font-weight="700">F₁=3Н</text>
+<line x1="20" y1="65" x2="100" y2="65" stroke="#16a34a" stroke-width="3" marker-end="url(#arr17a)"/>
+<text x="50" y="85" fill="#16a34a" font-size="12" font-weight="700">F₂=5Н</text>
+<line x1="100" y1="40" x2="100" y2="40" stroke="#dc2626"/>
+<defs><marker id="arr17a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+</svg>
+</div>
+<div class="formula text-center mt-2" style="font-size:1.1rem">
+<span class="var">F</span> = <span class="var">F</span>₁ + <span class="var">F</span>₂
+</div>
+<p class="text-slate-700 text-sm text-center mt-2"><span lang="kk" class="lang-content">F = 3 + 5 = <b>8 Н</b></span><span lang="en" class="lang-content">F = 3 + 5 = <b>8 N</b></span><span lang="ru" class="lang-content">F = 3 + 5 = <b>8 Н</b></span></p>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">Шамалары қосылады, бағыты сол қалпы.</span><span lang="en" class="lang-content">Magnitudes add up, direction the same.</span><span lang="ru" class="lang-content">Модули складываются, направление прежнее.</span></p>
+</div>
 
-        <!-- 1. ТЕҢӘРЕКЕТТІ КҮШ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Теңәрекетті күш (R)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Resultant Force (R)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Равнодействующая сила (R)</h2>
+<!-- Случай 2: противоположные -->
+<div class="card-rose rounded-custom p-5">
+<p class="heading-font text-base text-rose-700 mb-3 text-center"><span lang="kk" class="lang-content">2. Қарама-қарсы</span><span lang="en" class="lang-content">2. Opposite directions</span><span lang="ru" class="lang-content">2. Противоположные</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 200 100" style="width:100%">
+<line x1="40" y1="40" x2="100" y2="40" stroke="#4338ca" stroke-width="3" marker-end="url(#arr17b)"/>
+<text x="60" y="30" fill="#4338ca" font-size="12" font-weight="700">F₁=3Н</text>
+<line x1="170" y1="65" x2="90" y2="65" stroke="#16a34a" stroke-width="3" marker-end="url(#arr17b)"/>
+<text x="120" y="85" fill="#16a34a" font-size="12" font-weight="700">F₂=5Н</text>
+<defs><marker id="arr17b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+</svg>
+</div>
+<div class="formula text-center mt-2" style="font-size:1.1rem">
+<span class="var">F</span> = |<span class="var">F</span>₁ − <span class="var">F</span>₂|
+</div>
+<p class="text-slate-700 text-sm text-center mt-2"><span lang="kk" class="lang-content">F = |5 − 3| = <b>2 Н</b></span><span lang="en" class="lang-content">F = |5 − 3| = <b>2 N</b></span><span lang="ru" class="lang-content">F = |5 − 3| = <b>2 Н</b></span></p>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">Айырым; бағыты үлкенімен бағытталған.</span><span lang="en" class="lang-content">Difference; direction of the larger force.</span><span lang="ru" class="lang-content">Разность; в сторону большей силы.</span></p>
+</div>
 
-            <div class="rule-card border-t-blue-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Денеге бір мезгілде бірнеше күш әсер етсе, оларды бір <span class="term" lang="kk">теңәрекетті күшпен</span> алмастыруға болады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    If several forces act on a body simultaneously, they can be replaced by a single <span class="term" lang="en">resultant force</span>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Если на тело одновременно действуют несколько сил, их можно заменить одной <span class="term" lang="ru">равнодействующей силой</span>.
-                </p>
+<!-- Случай 3: компенсация -->
+<div class="card-warm rounded-custom p-5">
+<p class="heading-font text-base text-orange-700 mb-3 text-center"><span lang="kk" class="lang-content">3. Тең қарама-қарсы</span><span lang="en" class="lang-content">3. Equal & opposite</span><span lang="ru" class="lang-content">3. Равные противоположно</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 200 100" style="width:100%">
+<line x1="40" y1="50" x2="90" y2="50" stroke="#4338ca" stroke-width="3" marker-end="url(#arr17c)"/>
+<text x="50" y="40" fill="#4338ca" font-size="12" font-weight="700">F₁=5Н</text>
+<line x1="160" y1="65" x2="110" y2="65" stroke="#16a34a" stroke-width="3" marker-end="url(#arr17c)"/>
+<text x="115" y="85" fill="#16a34a" font-size="12" font-weight="700">F₂=5Н</text>
+<defs><marker id="arr17c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+</svg>
+</div>
+<div class="formula text-center mt-2" style="font-size:1.1rem">
+<span class="var">F</span> = <span class="num">0</span>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2"><span lang="kk" class="lang-content">Күштер <b>теңгеріледі</b>!</span><span lang="en" class="lang-content">Forces are <b>balanced</b>!</span><span lang="ru" class="lang-content">Силы <b>скомпенсированы</b>!</span></p>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">Дене тыныш не бірқалыпты қозғалады.</span><span lang="en" class="lang-content">Body stays at rest or moves uniformly.</span><span lang="ru" class="lang-content">Тело покоится или движется равномерно.</span></p>
+</div>
+</div>
+</section>
 
-                <!-- Illustration 1: Concept -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
-                        </marker>
-                         <marker id="arrowhead-result" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Күштер теңгерілуінің салдары</span>
+<span lang="en" class="lang-content">🎯 What balanced forces mean</span>
+<span lang="ru" class="lang-content">🎯 Что значит уравновешенные силы</span></h2>
+<div class="card-accent rounded-custom p-6">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Егер денеге әсер ететін <b>барлық күштердің теңәсерлісі нөл</b> болса (F = 0), онда дене:</span>
+<span lang="en" class="lang-content">If the <b>resultant of all forces equals zero</b> (F = 0), the body:</span>
+<span lang="ru" class="lang-content">Если <b>равнодействующая всех сил равна нулю</b> (F = 0), то тело:</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card rounded-2xl p-5">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">📦 Тыныш күй</span><span lang="en" class="lang-content">📦 At rest</span><span lang="ru" class="lang-content">📦 Покой</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Үстелдегі кітап: F<sub>т</sub> = N (тіреудің күші) → F = 0 → тыныш.</span>
+<span lang="en" class="lang-content">A book on a table: F<sub>g</sub> = N (normal force) → F = 0 → at rest.</span>
+<span lang="ru" class="lang-content">Книга на столе: F<sub>тяж</sub> = N (реакция опоры) → F = 0 → покой.</span></p>
+</div>
+<div class="card rounded-2xl p-5">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">🚗 Бірқалыпты қозғалыс</span><span lang="en" class="lang-content">🚗 Uniform motion</span><span lang="ru" class="lang-content">🚗 Равномерное движение</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Жолмен тұрақты жылдамдықпен жүретін машина: қозғалтқыштың тарту күші = үйкеліс күші → F = 0 → v = const.</span>
+<span lang="en" class="lang-content">Car at steady speed: engine pull = friction → F = 0 → v = const.</span>
+<span lang="ru" class="lang-content">Машина с постоянной скоростью: тяга двигателя = трение → F = 0 → v = const.</span></p>
+</div>
+</div>
+<p class="text-slate-700 text-base mt-4 text-center font-bold">
+<span lang="kk" class="lang-content">Бұл — <b>Ньютонның 1-ші заңы</b> (инерция заңы) практикада!</span>
+<span lang="en" class="lang-content">This is <b>Newton's 1st law</b> (the law of inertia) in practice!</span>
+<span lang="ru" class="lang-content">Это <b>1-й закон Ньютона</b> (закон инерции) в действии!</span></p>
+</div>
+</section>
 
-                    <!-- Object -->
-                    <rect x="50" y="50" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-                    <text x="80" y="85" font-weight="bold" fill="#1e40af" text-anchor="middle">Body</text>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Шанаға екі бала тартып барады: бірінші 20 Н күшпен оңға, екіншісі 12 Н күшпен солға. Тең әсерлі күшті табыңыз.</span>
+<span lang="en" class="lang-content">📘 Problem: Two children pull a sledge: one with 20 N to the right, the other with 12 N to the left. Find the resultant force.</span>
+<span lang="ru" class="lang-content">📘 Задача: Двое детей тянут санки: один с силой 20 Н вправо, другой 12 Н влево. Найти равнодействующую.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>F₁ = 20 <span class="unit-pill">Н</span> →</li>
+<li>F₂ = 12 <span class="unit-pill">Н</span> ←</li>
+<li>F — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<p class="text-slate-700 text-sm mb-2">
+<span lang="kk" class="lang-content">Күштер қарама-қарсы → айырым:</span>
+<span lang="en" class="lang-content">Opposite directions → take the difference:</span>
+<span lang="ru" class="lang-content">Силы противоположны → разность:</span></p>
+<div class="formula text-left" style="font-size:1.1rem">
+<span class="var">F</span> = <span class="var">F</span>₁ − <span class="var">F</span>₂ = <span class="num">20</span> − <span class="num">12</span> = <span class="num">8</span> <span class="unit">Н</span> →
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ 8 Н оңға қарай</span><span lang="en" class="lang-content">✅ 8 N to the right</span><span lang="ru" class="lang-content">✅ 8 Н вправо</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <!-- Many small forces -->
-                    <line x1="110" y1="60" x2="160" y2="60" class="svg-force-arrow" stroke="#3b82f6"/>
-                    <line x1="110" y1="80" x2="140" y2="80" class="svg-force-arrow" stroke="#3b82f6"/>
-                    <line x1="110" y1="100" x2="150" y2="100" class="svg-force-arrow" stroke="#3b82f6"/>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">➕</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Бір бағытта: қосу</span><span lang="en" class="lang-content">Same direction: add</span><span lang="ru" class="lang-content">Одно направление: сумма</span></p>
+<p class="text-slate-700 text-base">F = F₁ + F₂</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">➖</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Қарама-қарсы: айырым</span><span lang="en" class="lang-content">Opposite: difference</span><span lang="ru" class="lang-content">Противоположно: разность</span></p>
+<p class="text-slate-700 text-base">F = |F₁ − F₂|</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">F = 0 → v = const</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Күштер теңгерілсе — Ньютонның 1-ші заңы</span><span lang="en" class="lang-content">If balanced — Newton's 1st law</span><span lang="ru" class="lang-content">Если уравновешены — 1 з. Ньютона</span></p></div>
+</div></footer>
 
-                    <!-- Equals Sign -->
-                    <text x="200" y="90" font-size="40" font-weight="bold" fill="#1e3a8a">=</text>
-
-                     <!-- Resultant Force -->
-                    <rect x="250" y="50" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-                    <text x="280" y="85" font-weight="bold" fill="#1e40af" text-anchor="middle">Body</text>
-                    <line x1="310" y1="80" x2="380" y2="80" class="svg-resultant-arrow" stroke="#dc2626"/>
-                    <text x="350" y="70" font-weight="bold" fill="#dc2626" text-anchor="middle">R</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. БАҒЫТТАС КҮШТЕР -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Күштер бір жаққа бағытталған</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Forces in the Same Direction</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Силы направлены в одну сторону</h2>
-
-            <div class="rule-card border-t-green-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Егер екі күш бір бағытта әсер етсе, олар <strong>қосылады</strong>. Теңәрекетті күш сол жаққа бағытталады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    If two forces act in the same direction, they are <strong>added</strong> together. The resultant force is in the same direction.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Если две силы направлены в одну сторону, они <strong>складываются</strong>. Равнодействующая сила направлена в ту же сторону.
-                </p>
-
-                <div class="example-block border-l-green-400 bg-green-50 text-center text-2xl font-bold text-green-800 p-4">
-                    R = F₁ + F₂
-                </div>
-
-                <!-- Illustration 2: Helping push -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Floor -->
-                    <line x1="0" y1="120" x2="400" y2="120" stroke="#94a3b8" stroke-width="2"/>
-
-                    <!-- Box -->
-                    <rect x="150" y="60" width="80" height="60" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
-
-                    <!-- Force 1 -->
-                    <line x1="100" y1="80" x2="150" y2="80" class="svg-force-arrow" stroke="#059669"/>
-                    <text x="125" y="75" font-size="12" fill="#059669">F₁ = 30N</text>
-
-                    <!-- Force 2 -->
-                    <line x1="80" y1="100" x2="150" y2="100" class="svg-force-arrow" stroke="#059669"/>
-                    <text x="115" y="115" font-size="12" fill="#059669">F₂ = 20N</text>
-
-                    <!-- Resultant visual representation (Ghost arrow) -->
-                    <line x1="230" y1="90" x2="310" y2="90" class="svg-resultant-arrow" stroke="#dc2626" opacity="0.8"/>
-                    <text x="270" y="80" font-weight="bold" fill="#dc2626">R = 50N</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ҚАРАМА-ҚАРСЫ КҮШТЕР -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Күштер қарама-қарсы бағытталған</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Forces in Opposite Directions</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Силы направлены противоположно</h2>
-
-            <div class="rule-card border-t-red-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Егер күштер қарама-қарсы бағытталса, олар <strong>азайтылады</strong>. Теңәрекетті күш үлкен күш жағына бағытталады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    If forces act in opposite directions, they are <strong>subtracted</strong>. The resultant force is directed towards the larger force.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Если силы направлены противоположно, они <strong>вычитаются</strong>. Равнодействующая сила направлена в сторону большей силы.
-                </p>
-
-                <div class="example-block border-l-red-400 bg-red-50 text-center text-2xl font-bold text-red-800 p-4">
-                    R = F₁ - F₂
-                </div>
-
-                <!-- Illustration 3: Tug of War -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Floor -->
-                    <line x1="0" y1="120" x2="400" y2="120" stroke="#94a3b8" stroke-width="2"/>
-
-                    <!-- Box -->
-                    <rect x="160" y="60" width="80" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
-
-                    <!-- Force 1 (Big, Right) -->
-                    <line x1="240" y1="80" x2="320" y2="80" class="svg-force-arrow" stroke="#dc2626"/>
-                    <text x="280" y="70" font-size="12" fill="#dc2626" font-weight="bold">F₁ = 50N</text>
-
-                    <!-- Force 2 (Small, Left) -->
-                    <line x1="160" y1="100" x2="120" y2="100" class="svg-force-arrow" stroke="#3b82f6"/>
-                    <text x="125" y="115" font-size="12" fill="#3b82f6" font-weight="bold">F₂ = 20N</text>
-
-                    <!-- Resultant Math -->
-                    <text x="200" y="140" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">R = 50 - 20 = 30N (Right)</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-blue-900">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-blue-900">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-blue-900">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-blue-800">
-                Бағыттас күштер достар сияқты – олар бірігіп (қосылып) күшейеді.<br>
-                Қарама-қарсы күштер бәсекелестер сияқты – олар бір-бірін әлсіретеді (азайтылады).
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-blue-800">
-                Forces in the same direction are like friends – they combine (add up) to get stronger.<br>
-                Opposing forces are like rivals – they weaken (subtract) each other.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-blue-800">
-                Силы в одном направлении как друзья – они объединяются (складываются) и становятся сильнее.<br>
-                Противоположные силы как соперники – они ослабляют (вычитают) друг друга.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

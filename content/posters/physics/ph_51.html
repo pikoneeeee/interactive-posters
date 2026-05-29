@@ -1,285 +1,187 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Жылу мөлшерінің есептелуі</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background-color: #fef2f2; }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #991b1b; border-bottom: 3px solid #fecaca; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #dc2626; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #dc2626; background: white; color: #dc2626; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #dc2626; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #dc2626; color: white; }
-        .illustration { background: linear-gradient(135deg, #fecaca 0%, #fef2f2 100%); padding: 25px; border-radius: 1rem; margin: 15px 0; text-align: center; }
-        svg { max-width: 100%; height: auto; }
-        .info-box { background: linear-gradient(135deg, #fecaca 0%, #fef2f2 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #dc2626; margin: 10px 0; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .example-card { background: #fee2e2; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #dc2626; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электризация тел. Два рода зарядов</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-red-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр құбылыстары</span>
+<span lang="en" class="lang-content">Grade 9 · Electric phenomena</span>
+<span lang="ru" class="lang-content">9 класс · Электрические явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Денелердің электрленуі. Зарядтың екі түрі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Electrification. Two kinds of charges</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электризация тел. Два рода зарядов</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Жылу мөлшерінің есептелуі</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Heat Calculation</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Расчёт количества теплоты</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-red-100">Q = mc∆T болмақ та. Материалдың массасы, нақ жылусыйлығы және температура айырмасының көбейтіндісі. ТОЛЫҚ ЕСЕПТЕЛУ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-red-100">Q = mc∆T formula. Product of mass, specific heat capacity and temperature difference. COMPLETE CALCULATION!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-red-100">Q = mc∆T формула. Произведение массы, удельной теплоёмкости и изменения температуры. ПОЛНЫЙ РАСЧЁТ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Электрлену дегеніміз не?</span>
+<span lang="en" class="lang-content">⚡ What is electrification?</span>
+<span lang="ru" class="lang-content">⚡ Что такое электризация?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электрлену</b> — денеге <b>электр зарядын беру</b>. Қарапайым тәжірибе: пластмасса тарақты жүн мата немесе шашқа үйкеңіз — ол ұсақ қағаз бөліктерін тарта бастайды. Бұл тарақ электрленді деген сөз. Электр құбылыстарын ежелгі гректер <b>2500 жыл бұрын</b> байқаған: <b>«электрон»</b> грек тілінде <b>«янтарь»</b> деген сөз. Янтарьды үйкегенде ол қылшықтар мен тоғаны тартатын.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Electrification</b> — giving a body an <b>electric charge</b>. Simple experiment: rub a plastic comb on wool or hair — it starts attracting small paper bits. That means the comb is electrified. Ancient Greeks noticed this <b>2500 years ago</b>: <b>«electron»</b> is Greek for <b>«amber»</b>. Rubbed amber attracts fluff and threads.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Электризация</b> — это <b>сообщение телу электрического заряда</b>. Простой опыт: потри пластиковую расчёску о шерсть или волосы — она начинает притягивать мелкие бумажки. Значит, расчёска <b>электризовалась</b>. Это явление древние греки заметили <b>2500 лет назад</b>: <b>«электрон»</b> по-гречески — <b>«янтарь»</b>. Натёртый янтарь притягивает пушинки.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ЖЫЛУ МӨЛШЕРІ ФОРМУЛАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. HEAT QUANTITY FORMULA</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Формула количества теплоты</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">🔬 <span lang="kk" class="lang-content">3 электрлену әдісі:</span><span lang="en" class="lang-content">3 ways to electrify:</span><span lang="ru" class="lang-content">3 способа электризации:</span></p>
+<ol class="text-slate-700 text-sm list-decimal pl-6 space-y-1">
+<li><span lang="kk" class="lang-content"><b>Үйкелумен</b> — тарақ + шаш, шар + жүн мата</span><span lang="en" class="lang-content"><b>By friction</b> — comb + hair, balloon + wool</span><span lang="ru" class="lang-content"><b>Трением</b> — расчёска + волосы, шарик + шерсть</span></li>
+<li><span lang="kk" class="lang-content"><b>Жанасумен</b> — зарядталған дене бейтарап денеге тиеді</span><span lang="en" class="lang-content"><b>By contact</b> — charged body touches a neutral one</span><span lang="ru" class="lang-content"><b>Через касание</b> — заряженное тело касается нейтрального</span></li>
+<li><span lang="kk" class="lang-content"><b>Индукциямен</b> — жанаспай-ақ, зарядтың әсерімен</span><span lang="en" class="lang-content"><b>By induction</b> — without contact, through the field</span><span lang="ru" class="lang-content"><b>Через индукцию</b> — без касания, через поле</span></li>
+</ol>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-lg font-bold mb-4" style="color: #991b1b; text-align: center;">Q = m × c × ∆T</p>
-                <p lang="en" class="lang-content text-lg font-bold mb-4" style="color: #991b1b; text-align: center;">Q = m × c × ∆T</p>
-                <p lang="ru" class="lang-content text-lg font-bold mb-4" style="color: #991b1b; text-align: center;">Q = m × c × ∆T</p>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 200 200" style="width:180px">
+<!-- Расчёска -->
+<rect x="20" y="40" width="80" height="20" rx="3" fill="#8b5cf6"/>
+<g stroke="#8b5cf6" stroke-width="2">
+<line x1="30" y1="60" x2="30" y2="80"/><line x1="40" y1="60" x2="40" y2="80"/>
+<line x1="50" y1="60" x2="50" y2="80"/><line x1="60" y1="60" x2="60" y2="80"/>
+<line x1="70" y1="60" x2="70" y2="80"/><line x1="80" y1="60" x2="80" y2="80"/>
+<line x1="90" y1="60" x2="90" y2="80"/>
+</g>
+<text x="60" y="105" text-anchor="middle" font-size="12" fill="#8b5cf6">⊖</text>
+<!-- Бумажки -->
+<g fill="#fef3c7" stroke="#b45309" stroke-width="1">
+<rect x="40" y="140" width="14" height="10"/><rect x="70" y="150" width="14" height="10"/><rect x="110" y="140" width="14" height="10"/><rect x="140" y="155" width="14" height="10"/>
+</g>
+<!-- Стрелки притяжения -->
+<g stroke="#dc2626" stroke-width="2" fill="none">
+<line x1="50" y1="130" x2="50" y2="100" marker-end="url(#arr51)"/>
+<line x1="80" y1="140" x2="80" y2="100" marker-end="url(#arr51)"/>
+</g>
+<defs><marker id="arr51" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Зарядталған тарақ қағазды тартады</span>
+<span lang="en" class="lang-content">Charged comb attracts paper</span>
+<span lang="ru" class="lang-content">Заряженная расчёска притягивает</span></p>
+</div></div></section>
 
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">БЕЛГІ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">ӨЛШЕМ БІРЛІГІ</th>
-                            <th lang="kk" class="lang-content">ТҮСІНДІРУ</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⊕⊖ Зарядтың 2 түрі</span>
+<span lang="en" class="lang-content">⊕⊖ Two kinds of charge</span>
+<span lang="ru" class="lang-content">⊕⊖ Два рода зарядов</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-warm rounded-custom p-6">
+<p class="heading-font text-2xl text-orange-700 mb-3">⊕ <span lang="kk" class="lang-content">Оң заряд (+)</span><span lang="en" class="lang-content">Positive (+)</span><span lang="ru" class="lang-content">Положительный (+)</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Шыны таяқшаны <b>жібекпен</b> үйкегенде шыны <b>оң</b> зарядталады. Атомда — <b>протондарға</b> сай.</span>
+<span lang="en" class="lang-content">When a glass rod is rubbed with <b>silk</b>, glass becomes <b>positive</b>. In atoms — carried by <b>protons</b>.</span>
+<span lang="ru" class="lang-content">Если стеклянную палочку потереть о <b>шёлк</b>, она становится <b>положительной</b>. В атоме — это <b>протоны</b>.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-2xl text-indigo-700 mb-3">⊖ <span lang="kk" class="lang-content">Теріс заряд (−)</span><span lang="en" class="lang-content">Negative (−)</span><span lang="ru" class="lang-content">Отрицательный (−)</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Эбонит таяқшаны <b>жүн матамен</b> үйкегенде эбонит <b>теріс</b> зарядталады. Атомда — <b>электрондар</b>.</span>
+<span lang="en" class="lang-content">When an ebonite rod is rubbed with <b>wool</b>, ebonite becomes <b>negative</b>. In atoms — <b>electrons</b>.</span>
+<span lang="ru" class="lang-content">Если эбонитовую палочку потереть о <b>шерсть</b>, она становится <b>отрицательной</b>. В атоме — это <b>электроны</b>.</span></p>
+</div>
+</div>
 
-                            <th lang="en" class="lang-content">SYMBOL</th>
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">UNIT</th>
-                            <th lang="en" class="lang-content">EXPLANATION</th>
+<div class="card rounded-custom p-6 mt-4">
+<p class="heading-font text-base text-indigo-700 mb-3">⚖️ <span lang="kk" class="lang-content">Зарядтардың өзара әсері:</span><span lang="en" class="lang-content">Interaction of charges:</span><span lang="ru" class="lang-content">Взаимодействие зарядов:</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-emerald rounded-2xl p-4 text-center">
+<p class="text-3xl mb-2">+ + &nbsp; / &nbsp; − −</p>
+<p class="font-bold text-emerald-700">→ ←</p>
+<p class="text-slate-700 text-sm mt-2"><span lang="kk" class="lang-content"><b>Тебіседі</b> (бірдей)</span><span lang="en" class="lang-content"><b>Repel</b> (same)</span><span lang="ru" class="lang-content"><b>Отталкиваются</b> (одинаковые)</span></p>
+</div>
+<div class="card-rose rounded-2xl p-4 text-center">
+<p class="text-3xl mb-2">+ −</p>
+<p class="font-bold text-rose-700">← →</p>
+<p class="text-slate-700 text-sm mt-2"><span lang="kk" class="lang-content"><b>Тартысады</b> (қарама-қарсы)</span><span lang="en" class="lang-content"><b>Attract</b> (opposite)</span><span lang="ru" class="lang-content"><b>Притягиваются</b> (разные)</span></p>
+</div>
+</div>
+</div>
+</section>
 
-                            <th lang="ru" class="lang-content">СИМВОЛ</th>
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ЕДИНИЦА</th>
-                            <th lang="ru" class="lang-content">ОБЪЯСНЕНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Q</strong></td>
-                            <td lang="kk" class="lang-content">Жылу мөлшері</td>
-                            <td lang="kk" class="lang-content">Дж (Joule)</td>
-                            <td lang="kk" class="lang-content">Энергия ауыстырылады</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Электроскоп — зарядты табу</span>
+<span lang="en" class="lang-content">📊 Electroscope — detecting charge</span>
+<span lang="ru" class="lang-content">📊 Электроскоп — обнаружение заряда</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электроскоп</b> — зарядтың бар-жоғын анықтайтын аспап. Зарядталған дене таяқшаға тиеді — заряд жеңіл <b>жапырақтарға</b> тарайды. Олар бірдей зарядталғандықтан <b>тебіседі</b> және ажырайды. Жапырақтардың ажырау бұрышы зарядтың <b>шамасын</b> көрсетеді.</span>
+<span lang="en" class="lang-content">An <b class="text-indigo-700">electroscope</b> detects charge. A charged body touches the rod — charge spreads to the light <b>leaves</b>. Same-sign leaves <b>repel</b> and separate. The angle of separation shows the <b>magnitude</b> of charge.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Электроскоп</b> — прибор для обнаружения заряда. Заряженное тело касается стержня — заряд распределяется на лёгкие <b>лепестки</b>. Они одинаково заряжены и <b>отталкиваются</b>. Угол расхождения показывает <b>величину</b> заряда.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6 flex flex-col items-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 200 240" style="width:180px">
+<!-- Стержень -->
+<line x1="100" y1="30" x2="100" y2="130" stroke="#1e293b" stroke-width="3"/>
+<circle cx="100" cy="25" r="10" fill="#fbbf24" stroke="#b45309" stroke-width="2"/>
+<!-- Лепестки -->
+<line x1="100" y1="130" x2="70" y2="200" stroke="#94a3b8" stroke-width="3"/>
+<line x1="100" y1="130" x2="130" y2="200" stroke="#94a3b8" stroke-width="3"/>
+<!-- Корпус -->
+<rect x="40" y="120" width="120" height="100" fill="none" stroke="#1e293b" stroke-width="2" rx="5"/>
+<!-- Знаки заряда -->
+<text x="100" y="20" text-anchor="middle" font-size="14" font-weight="700" fill="#dc2626">⊖</text>
+<text x="60" y="195" font-size="12" fill="#dc2626" font-weight="700">⊖</text>
+<text x="135" y="195" font-size="12" fill="#dc2626" font-weight="700">⊖</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Жапырақтар тебіседі → заряд бар</span>
+<span lang="en" class="lang-content">Leaves repel → charge present</span>
+<span lang="ru" class="lang-content">Лепестки отталкиваются → есть заряд</span></p>
+</div>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content"><strong>Q</strong></td>
-                            <td lang="en" class="lang-content">Heat quantity</td>
-                            <td lang="en" class="lang-content">J (Joule)</td>
-                            <td lang="en" class="lang-content">Energy transferred</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Зарядтың сақталу заңы</span>
+<span lang="en" class="lang-content">🌟 Conservation of charge</span>
+<span lang="ru" class="lang-content">🌟 Закон сохранения заряда</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электр зарядтарының сақталу заңы</b>: тұйық жүйеде барлық зарядтардың <b>алгебралық</b> қосындысы <b>тұрақты</b>. Зарядтар <b>пайда болмайды және жоғалмайды</b> — олар тек <b>бір денеден екіншісіне</b> ауысады. Шыны таяқша + үйкеу кезінде шыны электрон <b>береді</b> жібекке, екеуі бірге — <b>нөлдік</b> заряд.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Conservation of charge</b>: in a closed system the <b>algebraic sum</b> of charges is <b>constant</b>. Charges are <b>neither created nor destroyed</b> — they only <b>move between bodies</b>. When glass is rubbed with silk, glass <b>gives</b> electrons to silk; their total charge is still <b>zero</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Закон сохранения заряда</b>: в замкнутой системе <b>алгебраическая сумма</b> зарядов <b>постоянна</b>. Заряды <b>не создаются и не исчезают</b> — они лишь <b>переходят</b> с одного тела на другое. При трении стекла о шёлк стекло <b>отдаёт</b> электроны шёлку, общий заряд <b>равен нулю</b>.</span></p>
+<div class="formula text-center" style="font-size:1.4rem">
+<span class="var">q</span><sub>1</sub> + <span class="var">q</span><sub>2</sub> + ... = const
+</div>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content"><strong>Q</strong></td>
-                            <td lang="ru" class="lang-content">Количество теплоты</td>
-                            <td lang="ru" class="lang-content">Дж (Джоуль)</td>
-                            <td lang="ru" class="lang-content">Передаваемая энергия</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>m</strong></td>
-                            <td lang="kk" class="lang-content">Дене массасы</td>
-                            <td lang="kk" class="lang-content">кг (kilogram)</td>
-                            <td lang="kk" class="lang-content">Материал мөлшері</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⊕⊖</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">2 түрі</span><span lang="en" class="lang-content">2 kinds</span><span lang="ru" class="lang-content">2 рода</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Оң (+) және теріс (−)</span><span lang="en" class="lang-content">Positive and negative</span><span lang="ru" class="lang-content">Положит. и отрицат.</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">+ + → ←&nbsp;&nbsp;+ − ← →</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Бірдей — тебіседі, қарсы — тартысады</span><span lang="en" class="lang-content">Same repel, opposite attract</span><span lang="ru" class="lang-content">Одинаковые — отталкиваются, разные — притягиваются</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">Σq = const</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Зарядтың сақталуы</span><span lang="en" class="lang-content">Charge conservation</span><span lang="ru" class="lang-content">Сохранение заряда</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content"><strong>m</strong></td>
-                            <td lang="en" class="lang-content">Body mass</td>
-                            <td lang="en" class="lang-content">kg (kilogram)</td>
-                            <td lang="en" class="lang-content">Amount of material</td>
-
-                            <td lang="ru" class="lang-content"><strong>m</strong></td>
-                            <td lang="ru" class="lang-content">Масса тела</td>
-                            <td lang="ru" class="lang-content">кг (килограмм)</td>
-                            <td lang="ru" class="lang-content">Количество материала</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>c</strong></td>
-                            <td lang="kk" class="lang-content">Нақ жылусыйлығы</td>
-                            <td lang="kk" class="lang-content">Дж/(кг·°C)</td>
-                            <td lang="kk" class="lang-content">Материалдың орынгалық сипаты</td>
-
-                            <td lang="en" class="lang-content"><strong>c</strong></td>
-                            <td lang="en" class="lang-content">Specific heat capacity</td>
-                            <td lang="en" class="lang-content">J/(kg·°C)</td>
-                            <td lang="en" class="lang-content">Material property</td>
-
-                            <td lang="ru" class="lang-content"><strong>c</strong></td>
-                            <td lang="ru" class="lang-content">Удельная теплоёмкость</td>
-                            <td lang="ru" class="lang-content">Дж/(кг·°C)</td>
-                            <td lang="ru" class="lang-content">Свойство материала</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>∆T</strong></td>
-                            <td lang="kk" class="lang-content">Температура айырмасы</td>
-                            <td lang="kk" class="lang-content">°C (градус)</td>
-                            <td lang="kk" class="lang-content">T₂ - T₁ айырмасы</td>
-
-                            <td lang="en" class="lang-content"><strong>∆T</strong></td>
-                            <td lang="en" class="lang-content">Temperature difference</td>
-                            <td lang="en" class="lang-content">°C (degree)</td>
-                            <td lang="en" class="lang-content">T₂ - T₁ difference</td>
-
-                            <td lang="ru" class="lang-content"><strong>∆T</strong></td>
-                            <td lang="ru" class="lang-content">Изменение температуры</td>
-                            <td lang="ru" class="lang-content">°C (градус)</td>
-                            <td lang="ru" class="lang-content">Разность T₂ - T₁</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>📌 ҚҰНДЫЛЫҚТАР (Нақ жылусыйлығы):</strong> Су = 4200 Дж/(кг·°C) | Мыс = 400 Дж/(кг·°C) | Төмен = 130 Дж/(кг·°C) | Темір = 460 Дж/(кг·°C) | Айны = 800 Дж/(кг·°C)</p>
-                <p lang="en" class="lang-content text-sm"><strong>📌 VALUES (Specific Heat Capacity):</strong> Water = 4200 J/(kg·°C) | Copper = 400 J/(kg·°C) | Lead = 130 J/(kg·°C) | Iron = 460 J/(kg·°C) | Glass = 800 J/(kg·°C)</p>
-                <p lang="ru" class="lang-content text-sm"><strong>📌 ЗНАЧЕНИЯ (Удельная теплоёмкость):</strong> Вода = 4200 Дж/(кг·°C) | Медь = 400 Дж/(кг·°C) | Свинец = 130 Дж/(кг·°C) | Железо = 460 Дж/(кг·°C) | Стекло = 800 Дж/(кг·°C)</p>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТОЛЫҚ ЕСЕПТЕУ МЫСАЛДАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. COMPLETE CALCULATION EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Полные примеры расчётов</h2>
-
-            <div class="rule-card">
-                <div class="grid-3">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 1:</strong> Су нагревание</p>
-                        <p lang="kk" class="lang-content">m = 2 кг су</p>
-                        <p lang="kk" class="lang-content">T₁ = 20°C, T₂ = 80°C</p>
-                        <p lang="kk" class="lang-content">c = 4200 Дж/(кг·°C)</p>
-                        <p lang="kk" class="lang-content"><strong>∆T = 80-20 = 60°C</strong></p>
-                        <p lang="kk" class="lang-content"><strong>Q = 2×4200×60 = 504000 Дж = 504 кДж</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 1:</strong> Water heating</p>
-                        <p lang="en" class="lang-content">m = 2 kg water</p>
-                        <p lang="en" class="lang-content">T₁ = 20°C, T₂ = 80°C</p>
-                        <p lang="en" class="lang-content">c = 4200 J/(kg·°C)</p>
-                        <p lang="en" class="lang-content"><strong>∆T = 80-20 = 60°C</strong></p>
-                        <p lang="en" class="lang-content"><strong>Q = 2×4200×60 = 504000 J = 504 kJ</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 1:</strong> Нагревание воды</p>
-                        <p lang="ru" class="lang-content">m = 2 кг воды</p>
-                        <p lang="ru" class="lang-content">T₁ = 20°C, T₂ = 80°C</p>
-                        <p lang="ru" class="lang-content">c = 4200 Дж/(кг·°C)</p>
-                        <p lang="ru" class="lang-content"><strong>∆T = 80-20 = 60°C</strong></p>
-                        <p lang="ru" class="lang-content"><strong>Q = 2×4200×60 = 504000 Дж = 504 кДж</strong></p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 2:</strong> Мыс охлаждение</p>
-                        <p lang="kk" class="lang-content">m = 0.5 кг мыс</p>
-                        <p lang="kk" class="lang-content">T₁ = 100°C, T₂ = 20°C</p>
-                        <p lang="kk" class="lang-content">c = 400 Дж/(кг·°C)</p>
-                        <p lang="kk" class="lang-content"><strong>∆T = 100-20 = 80°C</strong></p>
-                        <p lang="kk" class="lang-content"><strong>Q = 0.5×400×80 = 16000 Дж = 16 кДж</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 2:</strong> Copper cooling</p>
-                        <p lang="en" class="lang-content">m = 0.5 kg copper</p>
-                        <p lang="en" class="lang-content">T₁ = 100°C, T₂ = 20°C</p>
-                        <p lang="en" class="lang-content">c = 400 J/(kg·°C)</p>
-                        <p lang="en" class="lang-content"><strong>∆T = 100-20 = 80°C</strong></p>
-                        <p lang="en" class="lang-content"><strong>Q = 0.5×400×80 = 16000 J = 16 kJ</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 2:</strong> Охлаждение меди</p>
-                        <p lang="ru" class="lang-content">m = 0.5 кг медь</p>
-                        <p lang="ru" class="lang-content">T₁ = 100°C, T₂ = 20°C</p>
-                        <p lang="ru" class="lang-content">c = 400 Дж/(кг·°C)</p>
-                        <p lang="ru" class="lang-content"><strong>∆T = 100-20 = 80°C</strong></p>
-                        <p lang="ru" class="lang-content"><strong>Q = 0.5×400×80 = 16000 Дж = 16 кДж</strong></p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📝 МЫСАЛ 3:</strong> Темір нагревание</p>
-                        <p lang="kk" class="lang-content">m = 3 кг темір</p>
-                        <p lang="kk" class="lang-content">T₁ = 25°C, T₂ = 525°C</p>
-                        <p lang="kk" class="lang-content">c = 460 Дж/(кг·°C)</p>
-                        <p lang="kk" class="lang-content"><strong>∆T = 525-25 = 500°C</strong></p>
-                        <p lang="kk" class="lang-content"><strong>Q = 3×460×500 = 690000 Дж = 690 кДж</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>📝 EXAMPLE 3:</strong> Iron heating</p>
-                        <p lang="en" class="lang-content">m = 3 kg iron</p>
-                        <p lang="en" class="lang-content">T₁ = 25°C, T₂ = 525°C</p>
-                        <p lang="en" class="lang-content">c = 460 J/(kg·°C)</p>
-                        <p lang="en" class="lang-content"><strong>∆T = 525-25 = 500°C</strong></p>
-                        <p lang="en" class="lang-content"><strong>Q = 3×460×500 = 690000 J = 690 kJ</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>📝 ПРИМЕР 3:</strong> Нагревание железа</p>
-                        <p lang="ru" class="lang-content">m = 3 кг железо</p>
-                        <p lang="ru" class="lang-content">T₁ = 25°C, T₂ = 525°C</p>
-                        <p lang="ru" class="lang-content">c = 460 Дж/(кг·°C)</p>
-                        <p lang="ru" class="lang-content"><strong>∆T = 525-25 = 500°C</strong></p>
-                        <p lang="ru" class="lang-content"><strong>Q = 3×460×500 = 690000 Дж = 690 кДж</strong></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ПРАКТИКАЛЫҚ ҚОЛДАНУ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. PRACTICAL APPLICATIONS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Практическое применение</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>☕ Су қыздыру:</strong> Шай, қаймақ, банялық су. Су көп энергия қажет (c = 4200).</p>
-                <p lang="kk" class="lang-content text-sm"><strong>🍳 Ыстық ішек:</strong> Фрай, бәле, металл ыстықтау. Тез қыздырғанда жылу қажет.</p>
-                <p lang="kk" class="lang-content text-sm"><strong>🏭 Өндіктігінің:</strong> Металл өндіктігінің, сахаристі өндіктігінің, керамика.</p>
-                <p lang="kk" class="lang-content text-sm"><strong>❄️ Суытқышы:</strong> Холодильник, ондоу балау. Жылу құрсағындағы ылығын әкелі.</p>
-                <p lang="kk" class="lang-content text-sm"><strong>⚡ Электр ысыту:</strong> Электр төбелесі, электр су қыздыру, өндіктігінің.</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>☕ Water heating:</strong> Tea, coffee, bath water. Water requires lots of energy (c = 4200).</p>
-                <p lang="en" class="lang-content text-sm"><strong>🍳 Cookware:</strong> Frying, boiling, metal heating. Heating needed for fast cooking.</p>
-                <p lang="en" class="lang-content text-sm"><strong>🏭 Industry:</strong> Metal production, sugar production, ceramics.</p>
-                <p lang="en" class="lang-content text-sm"><strong>❄️ Cooling systems:</strong> Refrigerator, air conditioning. Remove heat from space.</p>
-                <p lang="en" class="lang-content text-sm"><strong>⚡ Electric heating:</strong> Electric stove, water heater, industrial heating.</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>☕ Нагревание воды:</strong> Чай, кофе, ванная вода. Вода требует много энергии (c = 4200).</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🍳 Посуда для готовки:</strong> Жарка, кипячение, нагревание металла. Нужно тепло для быстрого приготовления.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🏭 Промышленность:</strong> Производство металла, производство сахара, керамика.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>❄️ Системы охлаждения:</strong> Холодильник, кондиционер. Отводит тепло из помещения.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>⚡ Электрическое отопление:</strong> Электроплита, водонагреватель, промышленное отопление.</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fecaca; border-radius: 1rem; border-top: 4px solid #dc2626;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-red-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-red-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-red-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Жылу мөлшері (Q = mc∆T) дене нагревание немесе охлаждение кезінде өндіктігінің болсын. Материалдың орынгалық сипаты (нақ жылусыйлығы), массасы және температура айырмасы маңызды. Су максимум энергия қажет (4200 Дж/(кг·°C))!</p>
-            <p lang="en" class="lang-content text-sm">Heat quantity (Q = mc∆T) is needed when heating or cooling a body. Material property (specific heat capacity), mass and temperature difference are important. Water requires maximum energy (4200 J/(kg·°C))!</p>
-            <p lang="ru" class="lang-content text-sm">Количество теплоты (Q = mc∆T) нужно при нагревании или охлаждении тела. Важны свойство материала (удельная теплоёмкость), масса и изменение температуры. Вода требует максимум энергии (4200 Дж/(кг·°C))!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

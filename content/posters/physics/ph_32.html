@@ -1,399 +1,242 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Работа, мощность, энергия</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7fee7; /* lime-50 */
-            overflow-x: hidden;
-            color: #365314; /* lime-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Lime Theme */
-        .header-card {
-            background-color: #65a30d; /* lime-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(101, 163, 13, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #3f6212; /* lime-800 */
-            border-bottom: 3px solid #bef264; /* lime-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #ecfccb; /* lime-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #4d7c0f; /* lime-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #65a30d; /* lime-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #65a30d;
-            background-color: #ffffff;
-            color: #65a30d;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #f7fee7;
-        }
-        .lang-btn.active {
-            background-color: #65a30d;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 220px;
-            margin: 15px 0;
-            border: 1px solid #d9f99d;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #3f6212;
-            text-anchor: middle;
-        }
-        .svg-arrow {
-            stroke: #dc2626; /* Red for Force */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-red);
-        }
-        .svg-dist-arrow {
-            stroke: #2563eb; /* Blue for Distance */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-blue);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Энергия. Кинетическая и потенциальная</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-lime-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жұмыс және энергия</span>
+<span lang="en" class="lang-content">Grade 8 · Work and energy</span>
+<span lang="ru" class="lang-content">8 класс · Работа и энергия</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Энергия. Кинетикалық және потенциалдық</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Energy. Kinetic and potential</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Энергия. Кинетическая и потенциальная</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Энергия дегеніміз не?</span>
+<span lang="en" class="lang-content">⚡ What is energy?</span>
+<span lang="ru" class="lang-content">⚡ Что такое энергия?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Энергия</b> (грекше <i>energeia</i> — «әрекет») — дененің <b>жұмыс істеу қабілеті</b>. Егер дене жұмыс жасай алатын болса — оның энергиясы бар. Энергия <b>скаляр шама</b>. Бірлігі — <b>джоуль (Дж)</b>, жұмыс пен энергияның өлшем бірлігі бірдей. Физикада энергияның бірнеше түрі бар: <b>механикалық, жылу, электр, химиялық, ядролық, жарық</b> және т.б. Бұл сабақта механикалық энергияны қарастырамыз — ол <b>кинетикалық</b> және <b>потенциалдық</b> деп бөлінеді.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Energy</b> (Greek <i>energeia</i> — «activity») is a body's <b>ability to do work</b>. If a body can do work, it has energy. Energy is a <b>scalar quantity</b>, measured in <b>joules (J)</b> — the same as work. There are many forms of energy: <b>mechanical, thermal, electric, chemical, nuclear, light</b>, etc. This poster covers mechanical energy, which splits into <b>kinetic</b> and <b>potential</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Энергия</b> (от греч. <i>energeia</i> — «деятельность») — это <b>способность тела совершать работу</b>. Если тело способно совершить работу — у него есть энергия. Энергия — <b>скалярная величина</b>, единица — <b>джоуль (Дж)</b> (та же, что у работы). Различают <b>механическую, тепловую, электрическую, химическую, ядерную, световую</b> и др. энергию. Здесь рассмотрим механическую, которая делится на <b>кинетическую</b> и <b>потенциальную</b>.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2"><span lang="kk" class="lang-content">⚖️ Жұмыс пен энергия байланысы</span><span lang="en" class="lang-content">⚖️ Work–energy relation</span><span lang="ru" class="lang-content">⚖️ Связь работы и энергии</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+<span class="var">A</span> = Δ<span class="var">E</span>
+</div>
+<p class="text-slate-700 text-sm mt-3 text-center">
+<span lang="kk" class="lang-content">Жасалған жұмыс — дененің энергиясының <b>өзгеруіне</b> тең</span>
+<span lang="en" class="lang-content">Work done equals the <b>change in energy</b> of a body</span>
+<span lang="ru" class="lang-content">Работа равна <b>изменению энергии</b> тела</span></p>
+</div>
+</div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-3">
+<span lang="kk" class="lang-content">[E] = Дж</span>
+<span lang="en" class="lang-content">[E] = J</span>
+<span lang="ru" class="lang-content">[E] = Дж</span></p>
+<p class="text-slate-700 text-sm text-center">
+<span lang="kk" class="lang-content">Энергия — жұмыс жасау <b>қабілеті</b></span>
+<span lang="en" class="lang-content">Energy — <b>capacity</b> to do work</span>
+<span lang="ru" class="lang-content">Энергия — <b>способность</b> совершить работу</span></p>
+</div></div></section>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ЖҰМЫС. ҚУАТ. ЭНЕРГИЯ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">WORK. POWER. ENERGY</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">РАБОТА. МОЩНОСТЬ. ЭНЕРГИЯ</h1>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏃 Кинетикалық энергия — қозғалыс энергиясы</span>
+<span lang="en" class="lang-content">🏃 Kinetic energy — the energy of motion</span>
+<span lang="ru" class="lang-content">🏃 Кинетическая энергия — энергия движения</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Қозғалатын кез келген денеде <b class="text-indigo-700">кинетикалық энергия</b> (E<sub>к</sub>) бар. Жылдамдық неғұрлым жоғары болса — энергия да соншама үлкен. Мысалы, ұшқан мылтық оғы — кішкентай, бірақ оның кинетикалық энергиясы үлкен; жүк машинасы — ауыр, бірақ баяу жүрсе, энергиясы аз болуы мүмкін.</span>
+<span lang="en" class="lang-content">Any moving body has <b class="text-indigo-700">kinetic energy</b> (E<sub>k</sub>). The faster — the more energy. A bullet is tiny but has huge kinetic energy; a truck is heavy but moving slowly may have less.</span>
+<span lang="ru" class="lang-content">Любое движущееся тело обладает <b class="text-indigo-700">кинетической энергией</b> (E<sub>к</sub>). Чем выше скорость — тем больше энергия. Пуля — маленькая, но летит быстро — энергия огромна. Грузовик — тяжёлый, но медленный — энергии может быть меньше.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<div class="formula text-center" style="font-size:1.7rem">
+<span class="var">E</span><sub>к</sub> =
+<span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1.3rem"><span class="var" style="display:block;border-bottom:2px solid #fde68a">mv²</span><span class="var" style="display:block">2</span></span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">E<sub>к</sub></b> — кинет. энергия, <span class="unit-pill">Дж</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">E<sub>k</sub></b> — kinetic energy, <span class="unit-pill">J</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">E<sub>к</sub></b> — кин. энергия, <span class="unit-pill">Дж</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">m</b> — mass, <span class="unit-pill">kg</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">v</b> — жылдамдық, <span class="unit-pill">м/с</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">v</b> — velocity, <span class="unit-pill">m/s</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">v</b> — скорость, <span class="unit-pill">м/с</span></span></p>
+</div>
+<p class="text-xs text-rose-700 mt-3 text-center"><b>⚠️ v² — жылдамдық 2 есе өссе, E<sub>к</sub> 4 есе өседі!</b></p>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-lime-100">Механиканың негізгі шамалары.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-lime-100">Fundamental quantities of mechanics.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-lime-100">Основные величины механики.</p>
-        </header>
+<div class="card-accent rounded-custom p-6 flex flex-col items-center justify-center">
+<p class="heading-font text-lg text-indigo-700 text-center mb-3">
+<span lang="kk" class="lang-content">📊 Жылдамдыққа тәуелділік</span>
+<span lang="en" class="lang-content">📊 Speed dependence</span>
+<span lang="ru" class="lang-content">📊 Зависимость от скорости</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 320 220" style="width:100%;max-width:320px;margin:auto">
+<line x1="40" y1="180" x2="300" y2="180" stroke="#1e293b" stroke-width="2"/>
+<line x1="40" y1="180" x2="40" y2="20" stroke="#1e293b" stroke-width="2"/>
+<text x="290" y="200" font-size="11" fill="#1e293b">v</text>
+<text x="20" y="30" font-size="11" fill="#1e293b">E<tspan baseline-shift="sub" font-size="8">к</tspan></text>
+<!-- Парабола y = x² -->
+<path d="M40,180 Q140,180 280,20" fill="none" stroke="#4338ca" stroke-width="3"/>
+<!-- Точки -->
+<circle cx="100" cy="160" r="4" fill="#dc2626"/><text x="110" y="160" font-size="10">1</text>
+<circle cx="160" cy="100" r="4" fill="#dc2626"/><text x="170" y="105" font-size="10">4</text>
+<circle cx="220" cy="55" r="4" fill="#dc2626"/><text x="230" y="60" font-size="10">9</text>
+</svg>
+</div>
+<p class="text-slate-700 text-xs mt-2 text-center"><span lang="kk" class="lang-content">v×1 → E<sub>к</sub>×1, v×2 → ×4, v×3 → ×9</span><span lang="en" class="lang-content">v×1 → E<sub>k</sub>×1, v×2 → ×4, v×3 → ×9</span><span lang="ru" class="lang-content">v×1 → E<sub>к</sub>×1, v×2 → ×4, v×3 → ×9</span></p>
+</div>
+</div>
+</section>
 
-        <!-- 1. МЕХАНИКАЛЫҚ ЖҰМЫС -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Механикалық жұмыс (A)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Mechanical Work (A)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Механическая работа (A)</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⬆️ Потенциалдық энергия — орналасу энергиясы</span>
+<span lang="en" class="lang-content">⬆️ Potential energy — energy of position</span>
+<span lang="ru" class="lang-content">⬆️ Потенциальная энергия — энергия положения</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Потенциалдық энергия</b> (E<sub>п</sub>) — дене мен басқа денелердің <b>өзара әсерлесуінің</b> энергиясы. 2 түрі:</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Potential energy</b> (E<sub>p</sub>) is the energy of <b>interaction</b> between bodies. Two main types:</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Потенциальная энергия</b> (E<sub>п</sub>) — энергия <b>взаимодействия</b> тел. Два основных вида:</span></p>
 
-            <div class="rule-card border-t-lime-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Жұмыс</span> – күштің әсерінен дененің орын ауыстыруы. Егер қозғалыс болмаса, жұмыс жасалмайды!
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Work</span> is done when a force moves an object. No motion means no work is done!
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Работа</span> совершается, когда сила перемещает тело. Если движения нет, работа не совершается!
-                </p>
+<div class="card-accent rounded-2xl p-5 mb-3">
+<p class="font-bold text-indigo-900 mb-2">1️⃣ <span lang="kk" class="lang-content">Биіктікке көтерілген дененің энергиясы</span><span lang="en" class="lang-content">Gravitational potential energy</span><span lang="ru" class="lang-content">Энергия поднятого тела</span></p>
+<div class="formula text-center" style="font-size:1.4rem">
+<span class="var">E</span><sub>п</sub> = <span class="var">mgh</span>
+</div>
+<p class="text-slate-700 text-xs mt-2 text-center">
+<span lang="kk" class="lang-content">m — масса, g — ауырлық, h — биіктік</span>
+<span lang="en" class="lang-content">m — mass, g — gravity, h — height</span>
+<span lang="ru" class="lang-content">m — масса, g — ускорение, h — высота</span></p>
+</div>
 
-                <div class="example-block border-l-lime-400 bg-lime-50 text-center mb-4">
-                    <p class="text-3xl font-bold text-lime-900 mb-2">A = F · s</p>
-                    <p class="text-sm text-lime-800">Unit: Joule (J) / Джоуль (Дж)</p>
-                </div>
+<div class="card-warm rounded-2xl p-5">
+<p class="font-bold text-orange-900 mb-2">2️⃣ <span lang="kk" class="lang-content">Деформацияланған серіппенің энергиясы</span><span lang="en" class="lang-content">Elastic potential energy</span><span lang="ru" class="lang-content">Энергия деформированной пружины</span></p>
+<div class="formula text-center" style="font-size:1.3rem">
+<span class="var">E</span><sub>п</sub> =
+<span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1rem"><span class="var" style="display:block;border-bottom:2px solid #fed7aa">kx²</span><span class="var" style="display:block">2</span></span>
+</div>
+<p class="text-slate-700 text-xs mt-2 text-center">
+<span lang="kk" class="lang-content">k — қаттылық, x — деформация</span>
+<span lang="en" class="lang-content">k — stiffness, x — deformation</span>
+<span lang="ru" class="lang-content">k — жёсткость, x — деформация</span></p>
+</div>
+</div>
 
-                <!-- Illustration 1: Pushing Box -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                        <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb" />
-                        </marker>
-                    </defs>
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 280" style="width:200px">
+<!-- Земля -->
+<line x1="0" y1="260" x2="240" y2="260" stroke="#1e293b" stroke-width="3"/>
+<!-- Дом -->
+<rect x="40" y="200" width="60" height="60" fill="#94a3b8" stroke="#1e293b" stroke-width="2"/>
+<!-- Тело на высоте -->
+<rect x="160" y="40" width="50" height="50" fill="#fbbf24" stroke="#1e293b" stroke-width="2"/>
+<!-- Высота -->
+<line x1="240" y1="65" x2="240" y2="260" stroke="#4338ca" stroke-width="2" stroke-dasharray="4 2"/>
+<text x="245" y="160" fill="#4338ca" font-weight="700" font-size="13">h</text>
+<!-- Стрелка вниз - сила -->
+<line x1="185" y1="90" x2="185" y2="130" stroke="#dc2626" stroke-width="3" marker-end="url(#arr32a)"/>
+<text x="195" y="115" fill="#dc2626" font-weight="700" font-size="13">mg</text>
+<defs><marker id="arr32a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Биіктіктен құлап — жұмыс істейді</span>
+<span lang="en" class="lang-content">Falling does work</span>
+<span lang="ru" class="lang-content">Падая, совершает работу</span></p>
+</div>
+</div>
+</section>
 
-                    <!-- Floor -->
-                    <line x1="0" y1="120" x2="400" y2="120" stroke="#9ca3af" stroke-width="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 Айналадағы энергия мысалдары</span>
+<span lang="en" class="lang-content">🌍 Energy examples around us</span>
+<span lang="ru" class="lang-content">🌍 Примеры энергии вокруг нас</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🚗</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Қозғалған авто</span><span lang="en" class="lang-content">Moving car</span><span lang="ru" class="lang-content">Едущий авто</span></p>
+<p class="text-xs text-slate-600 mt-1">E<sub>к</sub></p></div>
+<div class="tile"><div class="tile-emoji">🏞️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Тау басындағы тас</span><span lang="en" class="lang-content">Rock on a peak</span><span lang="ru" class="lang-content">Камень на горе</span></p>
+<p class="text-xs text-slate-600 mt-1">E<sub>п</sub> = mgh</p></div>
+<div class="tile"><div class="tile-emoji">🏹</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Тартылған садақ</span><span lang="en" class="lang-content">Drawn bow</span><span lang="ru" class="lang-content">Натянутый лук</span></p>
+<p class="text-xs text-slate-600 mt-1">E<sub>п</sub> = kx²/2</p></div>
+<div class="tile"><div class="tile-emoji">💧</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Бөгеттегі су</span><span lang="en" class="lang-content">Dam water</span><span lang="ru" class="lang-content">Вода в плотине</span></p>
+<p class="text-xs text-slate-600 mt-1">E<sub>п</sub></p></div>
+</div>
+</section>
 
-                    <!-- Start Position (Ghost) -->
-                    <rect x="50" y="70" width="50" height="50" fill="none" stroke="#9ca3af" stroke-dasharray="4"/>
-                    <text x="75" y="65" font-size="10" fill="#9ca3af" text-anchor="middle">Start</text>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: 1000 кг массалы көлік 72 км/сағ жылдамдықпен жүреді. Оның кинетикалық энергиясын табыңыз.</span>
+<span lang="en" class="lang-content">📘 Problem: A 1000 kg car moves at 72 km/h. Find its kinetic energy.</span>
+<span lang="ru" class="lang-content">📘 Задача: Автомобиль массой 1000 кг движется со скоростью 72 км/ч. Найдите кинетическую энергию.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m = 1000 <span class="unit-pill">кг</span></li>
+<li>v = 72 <span class="unit-pill">км/ч</span> = 20 <span class="unit-pill">м/с</span></li>
+<li>E<sub>к</sub> — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+E<sub>к</sub> = mv²/2
+<br/>E<sub>к</sub> = 1000·20²/2
+<br/>E<sub>к</sub> = 1000·400/2
+<br/>E<sub>к</sub> = <span class="num">200 000</span> <span class="unit">Дж</span> = <span class="num">200</span> <span class="unit">кДж</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ 200 кДж</span><span lang="en" class="lang-content">✅ 200 kJ</span><span lang="ru" class="lang-content">✅ 200 кДж</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <!-- End Position (Solid) -->
-                    <rect x="250" y="70" width="50" height="50" fill="#bef264" stroke="#65a30d" stroke-width="2"/>
-                    <text x="275" y="100" font-weight="bold" fill="#3f6212" text-anchor="middle">m</text>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">E<sub>к</sub> = mv²/2</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қозғалыс энергиясы</span><span lang="en" class="lang-content">Energy of motion</span><span lang="ru" class="lang-content">Энергия движения</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⬆️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">E<sub>п</sub> = mgh</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Биіктіктегі энергия</span><span lang="en" class="lang-content">Height-based energy</span><span lang="ru" class="lang-content">Энергия высоты</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔗</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">A = ΔE</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жұмыс = энергия өзгерісі</span><span lang="en" class="lang-content">Work = energy change</span><span lang="ru" class="lang-content">Работа = изменение энергии</span></p></div>
+</div></footer>
 
-                    <!-- Force Arrow -->
-                    <line x1="250" y1="95" x2="190" y2="95" stroke="#dc2626" stroke-width="3"/> <!-- Pushing hand/rod -->
-                    <circle cx="190" cy="95" r="5" fill="#dc2626"/> <!-- Hand -->
-                    <text x="220" y="85" font-size="14" fill="#dc2626" font-weight="bold">F</text>
-
-                    <!-- Distance Arrow -->
-                    <line x1="75" y1="135" x2="275" y2="135" class="svg-dist-arrow" />
-                    <line x1="75" y1="130" x2="75" y2="140" stroke="#2563eb"/>
-                    <line x1="275" y1="130" x2="275" y2="140" stroke="#2563eb"/>
-                    <text x="175" y="145" font-size="14" fill="#2563eb" font-weight="bold">s (distance)</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ҚУАТ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Қуат (N)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Power (N or P)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Мощность (N)</h2>
-
-            <div class="rule-card border-t-yellow-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Қуат</span> – жұмыстың орындалу тездігін көрсететін шама. Бірдей жұмысты кім тез жасаса, соның қуаты көп.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Power</span> is the rate at which work is done. The faster you do the work, the greater the power.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Мощность</span> – это величина, показывающая скорость выполнения работы. Кто быстрее сделает работу, у того мощность больше.
-                </p>
-
-                <div class="example-block border-l-yellow-400 bg-yellow-50 text-center mb-4">
-                    <p class="text-3xl font-bold text-yellow-900 mb-2">N = A / t</p>
-                    <p class="text-sm text-yellow-800">Unit: Watt (W) / Ватт (Вт)</p>
-                </div>
-
-                <!-- Illustration 2: Crane Lifting -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ground -->
-                    <line x1="0" y1="180" x2="400" y2="180" stroke="#9ca3af"/>
-
-                    <!-- Crane 1 (Fast/Strong) -->
-                    <g transform="translate(50, 20)">
-                        <rect x="10" y="100" width="20" height="80" fill="#facc15" stroke="#a16207"/>
-                        <line x1="20" y1="100" x2="80" y2="40" stroke="#a16207" stroke-width="3"/> <!-- Boom -->
-                        <line x1="80" y1="40" x2="80" y2="80" stroke="#000" stroke-width="1"/> <!-- Cable -->
-                        <rect x="70" y="80" width="20" height="20" fill="#ef4444"/> <!-- Load -->
-                        <text x="20" y="195" font-size="12" fill="#a16207" font-weight="bold">Fast (t = 2s)</text>
-                        <text x="20" y="20" font-size="14" fill="#a16207" font-weight="bold">High Power</text>
-                    </g>
-
-                    <!-- Crane 2 (Slow/Weak) -->
-                    <g transform="translate(250, 20)">
-                        <rect x="10" y="100" width="20" height="80" fill="#fef08a" stroke="#ca8a04"/>
-                        <line x1="20" y1="100" x2="80" y2="40" stroke="#ca8a04" stroke-width="3"/> <!-- Boom -->
-                        <line x1="80" y1="40" x2="80" y2="120" stroke="#000" stroke-width="1"/> <!-- Cable Long (still lifting) -->
-                        <rect x="70" y="120" width="20" height="20" fill="#ef4444"/> <!-- Load -->
-
-                        <!-- Sweat drops -->
-                        <path d="M 15 110 Q 10 115, 15 120" fill="none" stroke="#3b82f6"/>
-
-                        <text x="20" y="195" font-size="12" fill="#ca8a04" font-weight="bold">Slow (t = 10s)</text>
-                        <text x="20" y="20" font-size="14" fill="#ca8a04" font-weight="bold">Low Power</text>
-                    </g>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ЭНЕРГИЯ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Энергия (E)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Energy (E)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Энергия (E)</h2>
-
-            <div class="rule-card border-t-blue-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Энергия</span> – дененің жұмыс істей алу қабілеті. Екі түрі бар:
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Energy</span> is the ability to do work. There are two types:
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Энергия</span> – способность тела совершать работу. Два вида:
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Kinetic -->
-                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                        <h4 class="font-bold text-blue-900 mb-2 text-center" lang="kk">Кинетикалық (Қозғалыс)</h4>
-                        <h4 class="font-bold text-blue-900 mb-2 text-center" lang="en">Kinetic (Motion)</h4>
-                        <h4 class="font-bold text-blue-900 mb-2 text-center" lang="ru">Кинетическая (Движение)</h4>
-                        <p class="text-center font-bold text-xl text-blue-700 mb-2">E_k = mv²/2</p>
-
-                        <svg viewBox="0 0 150 80" class="w-full h-24">
-                            <circle cx="30" cy="60" r="10" fill="#3b82f6"/>
-                            <line x1="30" y1="60" x2="80" y2="60" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
-                            <text x="50" y="50" font-size="12" fill="#3b82f6" font-weight="bold">v</text>
-                            <text x="100" y="70" font-size="10" fill="#1e3a8a">Moving Car</text>
-                        </svg>
-                    </div>
-
-                    <!-- Potential -->
-                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
-                        <h4 class="font-bold text-green-900 mb-2 text-center" lang="kk">Потенциалдық (Биіктік)</h4>
-                        <h4 class="font-bold text-green-900 mb-2 text-center" lang="en">Potential (Height)</h4>
-                        <h4 class="font-bold text-green-900 mb-2 text-center" lang="ru">Потенциальная (Высота)</h4>
-                        <p class="text-center font-bold text-xl text-green-700 mb-2">E_p = mgh</p>
-
-                        <svg viewBox="0 0 150 80" class="w-full h-24">
-                            <rect x="0" y="75" width="150" height="5" fill="#16a34a"/> <!-- Ground -->
-                            <circle cx="75" cy="20" r="10" fill="#16a34a"/> <!-- Ball high up -->
-                            <line x1="90" y1="20" x2="90" y2="75" stroke="#15803d" stroke-dasharray="2" marker-start="url(#tick-green)" marker-end="url(#tick-green)"/>
-                            <text x="100" y="50" font-size="12" fill="#15803d" font-weight="bold">h</text>
-                        </svg>
-                    </div>
-                </div>
-
-                <defs>
-                    <marker id="tick-green" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-                        <line x1="0" y1="5" x2="10" y2="5" stroke="#15803d" stroke-width="2"/>
-                    </marker>
-                </defs>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-lime-900">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-lime-900">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-lime-900">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-lime-800">
-                Жұмыс (J) — күш пен жолдың көбейтіндісі. Қуат (W) — жұмыс істеу жылдамдығы. Энергия (J) — жұмыс істеу мүмкіндігі.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-lime-800">
-                Work (J) is Force × Distance. Power (W) is how fast work is done. Energy (J) is the capacity to do work.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-lime-800">
-                Работа (Дж) — это Сила × Путь. Мощность (Вт) — это скорость выполнения работы. Энергия (Дж) — это способность совершать работу.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

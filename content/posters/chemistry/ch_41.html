@@ -1,433 +1,300 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заттардың классификациясы (РАСШИРЕННАЯ)</title>
+    <title>Классификация веществ</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at bottom right, #1e1b4b, #312e81, #0f172a); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #881337, #be123c, #1f2937);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #a78bfa; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #c4b5fd; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #c4b5fd; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #c4b5fd; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #fb7185; color: #1f2937; border-color: transparent; font-weight: 800; }
+        .tree-node { transition: all 0.3s; cursor: pointer; }
+        .tree-node:hover { background: rgba(251, 113, 133, 0.15); }
+        .tree-node.active { background: rgba(251, 113, 133, 0.22); border-color: #fb7185; }
+        .formula-style { font-family: 'Courier New', monospace; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Заттардың Классификациясы! (ТОЛЫҚ)</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Classification of Substances! (COMPLETE)</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Классификация веществ! (ПОЛНАЯ)</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">БАРЛЫҚ ЗАТТАР = ҚАРАПАЙЫМ (1 элемент) + ҚҰРАМДАС (2+ элемент). Құрамдас = Органикалық (C-негіздегі) + ОРГАНИКАСЫЗ (металл+металл емес). ТОЛЫҚ СХЕМА!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">ALL SUBSTANCES = SIMPLE (1 element) + COMPOUND (2+ elements). Compounds = Organic (C-based) + INORGANIC (metal+nonmetal). COMPLETE SCHEME!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">ВСЕ ВЕЩЕСТВА = ПРОСТЫЕ (1 элемент) + СЛОЖНЫЕ (2+ элемента). Сложные = Органические (на углероде) + НЕОРГАНИЧЕСКИЕ (металл+неметалл). ПОЛНАЯ СХЕМА!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-rose-400"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ҚҰРЫЛЫМДЫҚ ЖАЛПЫ СХЕМА</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. STRUCTURAL GENERAL SCHEME</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Структурная общая схема</h2>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-7 glass rounded-custom p-8">
+            <h2 id="tree-heading" class="heading-font text-xl mb-6 opacity-80 uppercase tracking-wider"></h2>
 
-            <div class="illustration">
-                <svg viewBox="0 0 800 400" width="100%" height="400">
-                    <!-- Main box -->
-                    <rect x="250" y="10" width="300" height="50" fill="#9333ea" stroke="#000" stroke-width="2" rx="10"/>
-                    <text x="400" y="40" text-anchor="middle" font-size="16" font-weight="bold" fill="white">БАРЛЫҚ ЗАТТАР</text>
+            <div class="flex flex-col items-center">
+                <div onclick="selectNode('all')" id="node-all" class="tree-node bg-rose-500/20 border-2 border-rose-400 rounded-2xl p-4 mb-4 w-full max-w-xs text-center">
+                    <div id="node-all-title" class="font-bold text-lg"></div>
+                </div>
 
-                    <!-- Two main branches -->
-                    <rect x="50" y="100" width="150" height="70" fill="#e9d5ff" stroke="#9333ea" stroke-width="2" rx="5"/>
-                    <text x="125" y="130" text-anchor="middle" font-size="13" font-weight="bold">ҚАРАПАЙЫМ</text>
-                    <text x="125" y="150" text-anchor="middle" font-size="10">(1 элемент)</text>
+                <div class="flex gap-4 mb-4 flex-wrap justify-center">
+                    <div onclick="selectNode('simple')" id="node-simple" class="tree-node bg-white/5 border border-white/15 rounded-2xl p-4 w-44 text-center">
+                        <div id="node-simple-title" class="font-bold text-rose-300"></div>
+                        <div id="node-simple-sub" class="text-xs text-white/60 mt-1"></div>
+                    </div>
+                    <div onclick="selectNode('complex')" id="node-complex" class="tree-node bg-white/5 border border-white/15 rounded-2xl p-4 w-44 text-center">
+                        <div id="node-complex-title" class="font-bold text-rose-300"></div>
+                        <div id="node-complex-sub" class="text-xs text-white/60 mt-1"></div>
+                    </div>
+                </div>
 
-                    <rect x="600" y="100" width="150" height="70" fill="#e9d5ff" stroke="#9333ea" stroke-width="2" rx="5"/>
-                    <text x="675" y="130" text-anchor="middle" font-size="13" font-weight="bold">ҚҰРАМДАС</text>
-                    <text x="675" y="150" text-anchor="middle" font-size="10">(2+ элемент)</text>
-
-                    <line x1="350" y1="60" x2="125" y2="100" stroke="#9333ea" stroke-width="2"/>
-                    <line x1="450" y1="60" x2="675" y2="100" stroke="#9333ea" stroke-width="2"/>
-
-                    <!-- Simple types -->
-                    <rect x="20" y="220" width="90" height="60" fill="#c4b5fd" stroke="#7e22ce" stroke-width="1" rx="5"/>
-                    <text x="65" y="240" text-anchor="middle" font-size="11" font-weight="bold">Металл</text>
-                    <text x="65" y="260" text-anchor="middle" font-size="9">Fe, Cu, Al</text>
-
-                    <rect x="130" y="220" width="90" height="60" fill="#c4b5fd" stroke="#7e22ce" stroke-width="1" rx="5"/>
-                    <text x="175" y="240" text-anchor="middle" font-size="11" font-weight="bold">Неметалл</text>
-                    <text x="175" y="260" text-anchor="middle" font-size="9">O₂, N₂, C</text>
-
-                    <!-- Compound types -->
-                    <rect x="570" y="220" width="90" height="60" fill="#c4b5fd" stroke="#7e22ce" stroke-width="1" rx="5"/>
-                    <text x="615" y="240" text-anchor="middle" font-size="11" font-weight="bold">Органикалық</text>
-                    <text x="615" y="260" text-anchor="middle" font-size="9">C-негіз</text>
-
-                    <rect x="680" y="220" width="90" height="60" fill="#c4b5fd" stroke="#7e22ce" stroke-width="1" rx="5"/>
-                    <text x="725" y="240" text-anchor="middle" font-size="11" font-weight="bold">Органикасыз</text>
-                    <text x="725" y="260" text-anchor="middle" font-size="9">NaCl, H₂O</text>
-
-                    <line x1="125" y1="170" x2="65" y2="220" stroke="#9333ea" stroke-width="1"/>
-                    <line x1="125" y1="170" x2="175" y2="220" stroke="#9333ea" stroke-width="1"/>
-                    <line x1="675" y1="170" x2="615" y2="220" stroke="#9333ea" stroke-width="1"/>
-                    <line x1="675" y1="170" x2="725" y2="220" stroke="#9333ea" stroke-width="1"/>
-
-                    <!-- Inorganic subtypes -->
-                    <rect x="550" y="320" width="60" height="40" fill="#a78bfa" stroke="#7e22ce" stroke-width="1" rx="3"/>
-                    <text x="580" y="345" text-anchor="middle" font-size="10" font-weight="bold">Оксидтер</text>
-
-                    <rect x="620" y="320" width="60" height="40" fill="#a78bfa" stroke="#7e22ce" stroke-width="1" rx="3"/>
-                    <text x="650" y="345" text-anchor="middle" font-size="10" font-weight="bold">Негіздер</text>
-
-                    <rect x="690" y="320" width="60" height="40" fill="#a78bfa" stroke="#7e22ce" stroke-width="1" rx="3"/>
-                    <text x="720" y="345" text-anchor="middle" font-size="10" font-weight="bold">Қышқылдар</text>
-
-                    <rect x="760" y="320" width="60" height="40" fill="#a78bfa" stroke="#7e22ce" stroke-width="1" rx="3"/>
-                    <text x="790" y="345" text-anchor="middle" font-size="10" font-weight="bold">Тұздар</text>
-
-                    <line x1="725" y1="280" x2="580" y2="320" stroke="#9333ea" stroke-width="1"/>
-                    <line x1="725" y1="280" x2="650" y2="320" stroke="#9333ea" stroke-width="1"/>
-                    <line x1="725" y1="280" x2="720" y2="320" stroke="#9333ea" stroke-width="1"/>
-                    <line x1="725" y1="280" x2="790" y2="320" stroke="#9333ea" stroke-width="1"/>
-                </svg>
-            </div>
-
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content" style="width: 15%;">ТҮРІ</th>
-                            <th lang="kk" class="lang-content" style="width: 20%;">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content" style="width: 15%;">ҚҰРАМАСЫ</th>
-                            <th lang="kk" class="lang-content" style="width: 50%;">ТОЛЫҚ МЫСАЛДАРЫ</th>
-
-                            <th lang="en" class="lang-content" style="width: 15%;">TYPE</th>
-                            <th lang="en" class="lang-content" style="width: 20%;">DEFINITION</th>
-                            <th lang="en" class="lang-content" style="width: 15%;">COMPOSITION</th>
-                            <th lang="en" class="lang-content" style="width: 50%;">COMPLETE EXAMPLES</th>
-
-                            <th lang="ru" class="lang-content" style="width: 15%;">ТИП</th>
-                            <th lang="ru" class="lang-content" style="width: 20%;">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content" style="width: 15%;">СОСТАВ</th>
-                            <th lang="ru" class="lang-content" style="width: 50%;">ПОЛНЫЕ ПРИМЕРЫ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ҚАРАПАЙЫМ МЕТАЛЛ</strong></td>
-                            <td lang="kk" class="lang-content">1 металл элемент</td>
-                            <td lang="kk" class="lang-content">M</td>
-                            <td lang="kk" class="lang-content">Fe, Cu, Al, Au, Ag, Zn, Pb, Hg, Ni, Sn</td>
-
-                            <td lang="en" class="lang-content"><strong>SIMPLE METAL</strong></td>
-                            <td lang="en" class="lang-content">1 metal element</td>
-                            <td lang="en" class="lang-content">M</td>
-                            <td lang="en" class="lang-content">Fe, Cu, Al, Au, Ag, Zn, Pb, Hg, Ni, Sn</td>
-
-                            <td lang="ru" class="lang-content"><strong>ПРОСТОЙ МЕТАЛЛ</strong></td>
-                            <td lang="ru" class="lang-content">1 элемент металла</td>
-                            <td lang="ru" class="lang-content">M</td>
-                            <td lang="ru" class="lang-content">Fe, Cu, Al, Au, Ag, Zn, Pb, Hg, Ni, Sn</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ҚАРАПАЙЫМ НЕМЕТАЛЛ</strong></td>
-                            <td lang="kk" class="lang-content">1 неметалл элемент</td>
-                            <td lang="kk" class="lang-content">X или X₂</td>
-                            <td lang="kk" class="lang-content">O₂, N₂, H₂, F₂, Cl₂, Br₂, I₂, C, S, P</td>
-
-                            <td lang="en" class="lang-content"><strong>SIMPLE NONMETAL</strong></td>
-                            <td lang="en" class="lang-content">1 nonmetal element</td>
-                            <td lang="en" class="lang-content">X or X₂</td>
-                            <td lang="en" class="lang-content">O₂, N₂, H₂, F₂, Cl₂, Br₂, I₂, C, S, P</td>
-
-                            <td lang="ru" class="lang-content"><strong>ПРОСТОЙ НЕМЕТАЛЛ</strong></td>
-                            <td lang="ru" class="lang-content">1 элемент неметалла</td>
-                            <td lang="ru" class="lang-content">X или X₂</td>
-                            <td lang="ru" class="lang-content">O₂, N₂, H₂, F₂, Cl₂, Br₂, I₂, C, S, P</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ОРГАНИКАЛЫҚ</strong></td>
-                            <td lang="kk" class="lang-content">C-негіздегі құрамдас</td>
-                            <td lang="kk" class="lang-content">CₓHᵧOᵤ...</td>
-                            <td lang="kk" class="lang-content">C₆H₁₂O₆ (глюкоза), CH₄ (метан), C₂H₅OH (этанол), C₁₂H₂₂O₁₁ (сахар)</td>
-
-                            <td lang="en" class="lang-content"><strong>ORGANIC</strong></td>
-                            <td lang="en" class="lang-content">C-based compound</td>
-                            <td lang="en" class="lang-content">CₓHᵧOᵤ...</td>
-                            <td lang="en" class="lang-content">C₆H₁₂O₆ (glucose), CH₄ (methane), C₂H₅OH (ethanol), C₁₂H₂₂O₁₁ (sugar)</td>
-
-                            <td lang="ru" class="lang-content"><strong>ОРГАНИЧЕСКОЕ</strong></td>
-                            <td lang="ru" class="lang-content">Соединение на углероде</td>
-                            <td lang="ru" class="lang-content">CₓHᵧOᵤ...</td>
-                            <td lang="ru" class="lang-content">C₆H₁₂O₆ (глюкоза), CH₄ (метан), C₂H₅OH (этанол), C₁₂H₂₂O₁₁ (сахар)</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ОРГАНИКАСЫЗ</strong></td>
-                            <td lang="kk" class="lang-content">Металл+неметалл құрамдас</td>
-                            <td lang="kk" class="lang-content">MₓXᵧ</td>
-                            <td lang="kk" class="lang-content">NaCl (тұз), H₂O (су), CaCO₃ (ПГ), H₂SO₄ (қышқыл), NaOH (негіз)</td>
-
-                            <td lang="en" class="lang-content"><strong>INORGANIC</strong></td>
-                            <td lang="en" class="lang-content">Metal+nonmetal compound</td>
-                            <td lang="en" class="lang-content">MₓXᵧ</td>
-                            <td lang="en" class="lang-content">NaCl (salt), H₂O (water), CaCO₃ (limestone), H₂SO₄ (acid), NaOH (base)</td>
-
-                            <td lang="ru" class="lang-content"><strong>НЕОРГАНИЧЕСКОЕ</strong></td>
-                            <td lang="ru" class="lang-content">Соединение металл+неметалл</td>
-                            <td lang="ru" class="lang-content">MₓXᵧ</td>
-                            <td lang="ru" class="lang-content">NaCl (соль), H₂O (вода), CaCO₃ (известняк), H₂SO₄ (кислота), NaOH (основание)</td>
-                        </tr>
-                    </table>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
+                    <div onclick="selectNode('metals')" id="node-metals" class="tree-node bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                        <div id="node-metals-title" class="text-sm font-bold"></div>
+                        <div class="text-xs text-rose-300 formula-style mt-1">Na, Fe, Cu</div>
+                    </div>
+                    <div onclick="selectNode('nonmetals')" id="node-nonmetals" class="tree-node bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                        <div id="node-nonmetals-title" class="text-sm font-bold"></div>
+                        <div class="text-xs text-rose-300 formula-style mt-1">O₂, N₂, S</div>
+                    </div>
+                    <div onclick="selectNode('organic')" id="node-organic" class="tree-node bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                        <div id="node-organic-title" class="text-sm font-bold"></div>
+                        <div class="text-xs text-rose-300 formula-style mt-1">CH₄, C₆H₆</div>
+                    </div>
+                    <div onclick="selectNode('inorganic')" id="node-inorganic" class="tree-node bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                        <div id="node-inorganic-title" class="text-sm font-bold"></div>
+                        <div class="text-xs text-rose-300 formula-style mt-1">H₂O, NaCl</div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ОРГАНИКАЛЫҚ ЕРЕКШЕЛІКТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. FEATURES OF ORGANIC COMPOUNDS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Особенности органических соединений</h2>
+        <div class="lg:col-span-5 glass rounded-custom p-8 border-l-4 border-rose-400">
+            <div id="info-icon" class="text-5xl mb-4">🌐</div>
+            <h3 id="info-title" class="heading-font text-3xl mb-4 text-rose-300"></h3>
+            <p id="info-text" class="text-lg leading-relaxed text-white/85 mb-5"></p>
 
-            <div class="grid-2">
-                <div class="example-card">
-                    <p lang="kk" class="lang-content"><strong>✓ Көміртегі орталығы:</strong> Барлық органикалық заттарында C орналасқан</p>
-                    <p lang="kk" class="lang-content"><strong>✓ Жоғары разнообразие:</strong> Миллиондай органикалық құрамдас</p>
-                    <p lang="kk" class="lang-content"><strong>✓ Сәлсі реакциялары:</strong> Ыстық, қысым, катализатор қажет</p>
-                    <p lang="kk" class="lang-content"><strong>✓ Ерік жану:</strong> Өндіктігінің жану реакциялары</p>
+            <h4 id="examples-label" class="text-rose-300 text-sm uppercase tracking-widest mb-2"></h4>
+            <div id="examples-box" class="bg-white/5 rounded-2xl p-4 border border-white/10 leading-relaxed text-white/85 formula-style"></div>
 
-                    <p lang="en" class="lang-content"><strong>✓ Carbon center:</strong> All organic contain C</p>
-                    <p lang="en" class="lang-content"><strong>✓ High diversity:</strong> Millions of organics</p>
-                    <p lang="en" class="lang-content"><strong>✓ Weak reactions:</strong> Need heat, pressure</p>
-                    <p lang="en" class="lang-content"><strong>✓ Easy burning:</strong> Combustion reactions</p>
+            <h4 id="features-label" class="text-rose-300 text-sm uppercase tracking-widest mt-5 mb-2"></h4>
+            <div id="features-box" class="bg-black/30 rounded-2xl p-4 border border-rose-400/20 text-white/80 leading-relaxed"></div>
+        </div>
+    </main>
 
-                    <p lang="ru" class="lang-content"><strong>✓ Углеродный центр:</strong> Все содержат углерод</p>
-                    <p lang="ru" class="lang-content"><strong>✓ Высокое разнообразие:</strong> Миллионы соединений</p>
-                    <p lang="ru" class="lang-content"><strong>✓ Слабые реакции:</strong> Нужны тепло, давление</p>
-                    <p lang="ru" class="lang-content"><strong>✓ Легко горят:</strong> Реакции горения</p>
-                </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-rose-500/10 transition-colors">
+            <div class="w-14 h-14 bg-rose-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">⚛️</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-rose-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-rose-500/10 transition-colors">
+            <div class="w-14 h-14 bg-rose-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🧬</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-rose-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-rose-500/10 transition-colors">
+            <div class="w-14 h-14 bg-rose-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🔍</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-rose-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
 
-                <div class="example-card">
-                    <p lang="kk" class="lang-content"><strong>📍 ОРГАНИКАЛЫҚ МЫСАЛДАРЫ:</strong></p>
-                    <p lang="kk" class="lang-content">• Қант: C₆H₁₂O₆ (энергия)</p>
-                    <p lang="kk" class="lang-content">• Жағ: C₃H₈O₃ (энергия сақтау)</p>
-                    <p lang="kk" class="lang-content">• Белок: CₓHᵧNᵤOᵥ (жүйелік жұмыс)</p>
-                    <p lang="kk" class="lang-content">• Целлюлоза: (C₆H₁₀O₅)ₙ (құрылыс материал)</p>
-                    <p lang="kk" class="lang-content">• Бензол: C₆H₆ (промышленный)</p>
-
-                    <p lang="en" class="lang-content"><strong>📍 ORGANIC EXAMPLES:</strong></p>
-                    <p lang="en" class="lang-content">• Sugar: C₆H₁₂O₆ (energy)</p>
-                    <p lang="en" class="lang-content">• Fat: C₃H₈O₃ (energy storage)</p>
-                    <p lang="en" class="lang-content">• Protein: CₓHᵧNᵤOᵥ (body functions)</p>
-                    <p lang="en" class="lang-content">• Cellulose: (C₆H₁₀O₅)ₙ (building material)</p>
-                    <p lang="en" class="lang-content">• Benzene: C₆H₆ (industrial)</p>
-
-                    <p lang="ru" class="lang-content"><strong>📍 ПРИМЕРЫ ОРГАНИЧЕСКИХ:</strong></p>
-                    <p lang="ru" class="lang-content">• Сахар: C₆H₁₂O₆ (энергия)</p>
-                    <p lang="ru" class="lang-content">• Жир: C₃H₈O₃ (запас энергии)</p>
-                    <p lang="ru" class="lang-content">• Белок: CₓHᵧNᵤOᵥ (функции тела)</p>
-                    <p lang="ru" class="lang-content">• Целлюлоза: (C₆H₁₀O₅)ₙ (строительный материал)</p>
-                    <p lang="ru" class="lang-content">• Бензол: C₆H₆ (промышленный)</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Бейорганикалық қосылыстардың ерекшеліктері</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. FEATURES OF INORGANIC COMPOUNDS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Особенности неорганических соединений</h2>
-
-            <div class="grid-2">
-                <div class="example-card">
-                    <p lang="kk" class="lang-content"><strong>✓ Құрамасы:</strong> Металл + металл емес</p>
-                    <p lang="kk" class="lang-content"><strong>✓ Төмен разнообразие:</strong> 100000 дана болып табылады</p>
-                    <p lang="kk" class="lang-content"><strong>✓ Күшті реакциялары:</strong> Салағанда, суға еріген</p>
-                    <p lang="kk" class="lang-content"><strong>✓ Күшті құрылымы:</strong> Ионды байланыс</p>
-
-                    <p lang="en" class="lang-content"><strong>✓ Composition:</strong> Metal + nonmetal</p>
-                    <p lang="en" class="lang-content"><strong>✓ Low diversity:</strong> About 100,000 exist</p>
-                    <p lang="en" class="lang-content"><strong>✓ Strong reactions:</strong> Fast, soluble</p>
-                    <p lang="en" class="lang-content"><strong>✓ Strong structure:</strong> Ionic bonds</p>
-
-                    <p lang="ru" class="lang-content"><strong>✓ Состав:</strong> Металл + неметалл</p>
-                    <p lang="ru" class="lang-content"><strong>✓ Низкое разнообразие:</strong> Около 100000</p>
-                    <p lang="ru" class="lang-content"><strong>✓ Сильные реакции:</strong> Быстрые, растворимые</p>
-                    <p lang="ru" class="lang-content"><strong>✓ Прочная структура:</strong> Ионные связи</p>
-                </div>
-
-                <div class="example-card">
-                    <p lang="kk" class="lang-content"><strong>📍 ОРГАНИКАСЫЗ МЫСАЛДАРЫ:</strong></p>
-                    <p lang="kk" class="lang-content">• NaCl (тұз - сыйай)</p>
-                    <p lang="kk" class="lang-content">• H₂O (су - сыйай)</p>
-                    <p lang="kk" class="lang-content">• CaCO₃ (ПГ - құрылыс)</p>
-                    <p lang="kk" class="lang-content">• H₂SO₄ (сірке қышқыл)</p>
-                    <p lang="kk" class="lang-content">• NaOH (натрий негіз)</p>
-
-                    <p lang="en" class="lang-content"><strong>📍 INORGANIC EXAMPLES:</strong></p>
-                    <p lang="en" class="lang-content">• NaCl (salt - food)</p>
-                    <p lang="en" class="lang-content">• H₂O (water - life)</p>
-                    <p lang="en" class="lang-content">• CaCO₃ (limestone - building)</p>
-                    <p lang="en" class="lang-content">• H₂SO₄ (battery acid)</p>
-                    <p lang="en" class="lang-content">• NaOH (sodium base)</p>
-
-                    <p lang="ru" class="lang-content"><strong>📍 ПРИМЕРЫ НЕОРГАНИЧЕСКИХ:</strong></p>
-                    <p lang="ru" class="lang-content">• NaCl (соль - еда)</p>
-                    <p lang="ru" class="lang-content">• H₂O (вода - жизнь)</p>
-                    <p lang="ru" class="lang-content">• CaCO₃ (известняк - строительство)</p>
-                    <p lang="ru" class="lang-content">• H₂SO₄ (аккумуляторная кислота)</p>
-                    <p lang="ru" class="lang-content">• NaOH (едкий натр)</p>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">БАРЛЫҚ ЗАТТАР = ҚАРАПАЙЫМ (1 элемент) + ҚҰРАМДАС (2+ элемент). Құрамдас = Органикалық (C-негіздегі, миллион) + ОРГАНИКАСЫЗ (металл+металл емес, 100000). Органикалық - есте ісінің негіздері, органикасыз - табиғаттың негіздері!</p>
-            <p lang="en" class="lang-content text-sm">ALL SUBSTANCES = SIMPLE (1 element) + COMPOUND (2+ elements). Compounds = Organic (C-based, millions) + INORGANIC (metal+nonmetal, 100000). Organic - life foundation, inorganic - nature foundation!</p>
-            <p lang="ru" class="lang-content text-sm">ВСЕ ВЕЩЕСТВА = ПРОСТЫЕ (1 элемент) + СЛОЖНЫЕ (2+ элемента). Сложные = Органические (углерод-основные, миллионы) + НЕОРГАНИЧЕСКИЕ (металл+неметалл, 100000). Органические - основа жизни, неорганические - основа природы!</p>
-        </footer>
-    </div>
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-rose-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Классификация веществ",
+                subtitle: "Карта всего, из чего состоит материальный мир",
+                treeHeading: "Дерево классификации",
+                nodes: {
+                    all:       { title: "Все вещества", sub: "" },
+                    simple:    { title: "Простые", sub: "Из одного элемента" },
+                    complex:   { title: "Сложные", sub: "Из 2 и более элементов" },
+                    metals:    { title: "Металлы", sub: "" },
+                    nonmetals: { title: "Неметаллы", sub: "" },
+                    organic:   { title: "Органические", sub: "" },
+                    inorganic: { title: "Неорганические", sub: "" }
+                },
+                examplesLabel: "Примеры",
+                featuresLabel: "Характерные признаки",
+                content: {
+                    all:       { icon: "🌐", title: "Вещества — основа всего", text: "Любая материя в природе — это вещества. Они классифицируются по составу, строению и свойствам, чтобы было удобно изучать и предсказывать их поведение.", examples: "Воздух, вода, металл, стекло, кровь — всё это вещества или их смеси.", features: "Имеют постоянный состав, определённые физические и химические свойства." },
+                    simple:    { icon: "⚛️", title: "Простые вещества", text: "Состоят из атомов одного и того же химического элемента. Делятся на металлы и неметаллы. Некоторые элементы образуют несколько простых веществ — аллотропию.", examples: "O₂, O₃, S, P, Fe, Cu, алмаз, графит — всё это простые вещества.", features: "Не разлагаются химическим путём на более простые вещества." },
+                    complex:   { icon: "🧪", title: "Сложные вещества", text: "Состоят из атомов двух и более разных элементов. Делятся на органические (углеродные) и неорганические. Их в природе подавляющее большинство.", examples: "H₂O, NaCl, CO₂, CaCO₃, C₆H₁₂O₆ — все они сложные.", features: "Можно разложить на простые вещества химическими реакциями." },
+                    metals:    { icon: "🔩", title: "Металлы", text: "Простые вещества с металлическим блеском, тепло- и электропроводностью. Образуют большую часть таблицы Менделеева (слева и в центре).", examples: "Na, Fe, Cu, Al, Au, Ag, Zn, Pb", features: "Ковкие, пластичные, тяжелее воды (кроме Li). Отдают электроны в реакциях." },
+                    nonmetals: { icon: "💎", title: "Неметаллы", text: "Простые вещества без металлического блеска. Чаще газы или твёрдые хрупкие вещества. Не проводят электрический ток (кроме графита).", examples: "O₂, N₂, S, P, Cl₂, C (алмаз, графит)", features: "Хрупкие в твёрдом состоянии, плохо проводят тепло и электричество. Принимают электроны." },
+                    organic:   { icon: "🌱", title: "Органические вещества", text: "Соединения углерода (кроме CO, CO₂, карбонатов). Основа всего живого. Включают углеводороды, спирты, кислоты, белки, жиры, углеводы.", examples: "CH₄ (метан), C₂H₅OH (этанол), C₆H₁₂O₆ (глюкоза), белки", features: "Содержат C–C, C–H связи. Горят с образованием CO₂ и H₂O." },
+                    inorganic: { icon: "🧂", title: "Неорганические вещества", text: "Все вещества, кроме органических. Включают оксиды, кислоты, основания, соли. Изучает их неорганическая химия.", examples: "H₂O, NaCl, H₂SO₄, NaOH, CaCO₃, Fe₂O₃", features: "Большинство нелетучи, многие растворимы в воде, имеют ионные или ковалентно-полярные связи." }
+                },
+                cards: [
+                    { title: "Зачем классифицировать", desc: "Огромное число веществ невозможно изучать по отдельности. Классификация позволяет находить общие закономерности и предсказывать свойства." },
+                    { title: "Органика и неорганика", desc: "До XIX века считалось, что органические вещества создаёт только живое. Сейчас их синтезируют в лаборатории — но граница между классами осталась." },
+                    { title: "Чистые и смеси", desc: "Чистое вещество имеет постоянный состав. Смеси (воздух, морская вода) состоят из разных веществ и могут быть разделены физическими методами." }
+                ],
+                quote: "«Природа любит порядок — поэтому и химия делит свой бесконечный мир на классы»",
+                author: "Лайнус Полинг"
+            },
+            kz: {
+                title: "Заттар классификациясы",
+                subtitle: "Заттай дүниенің құрылыс картасы",
+                treeHeading: "Жіктеу ағашы",
+                nodes: {
+                    all:       { title: "Барлық заттар", sub: "" },
+                    simple:    { title: "Жай заттар", sub: "Бір элементтен" },
+                    complex:   { title: "Күрделі заттар", sub: "2 және одан көп элементтен" },
+                    metals:    { title: "Металдар", sub: "" },
+                    nonmetals: { title: "Бейметалдар", sub: "" },
+                    organic:   { title: "Органикалық", sub: "" },
+                    inorganic: { title: "Бейорганикалық", sub: "" }
+                },
+                examplesLabel: "Мысалдар",
+                featuresLabel: "Тән белгілер",
+                content: {
+                    all:       { icon: "🌐", title: "Заттар — бәрінің негізі", text: "Табиғаттағы кез келген материя — заттар. Олар құрамы, құрылысы, қасиеттері бойынша жіктеледі, осылайша зерттеу мен болжау оңайлайды.", examples: "Ауа, су, металл, әйнек, қан — бұның бәрі заттар немесе олардың қоспалары.", features: "Тұрақты құрамы, белгілі бір физикалық, химиялық қасиеттері бар." },
+                    simple:    { icon: "⚛️", title: "Жай заттар", text: "Бірдей элемент атомдарынан тұрады. Металдар мен бейметалдарға бөлінеді. Кейбір элементтер бірнеше жай зат түзеді — аллотропия.", examples: "O₂, O₃, S, P, Fe, Cu, алмаз, графит — бұл жай заттар.", features: "Химиялық жолмен қарапайымдау заттарға айналмайды." },
+                    complex:   { icon: "🧪", title: "Күрделі заттар", text: "Екі және одан көп элемент атомдарынан тұрады. Органикалық (көміртекті) және бейорганикалықтарға бөлінеді. Табиғатта басым көпшілігі осындай.", examples: "H₂O, NaCl, CO₂, CaCO₃, C₆H₁₂O₆ — бәрі күрделі.", features: "Химиялық реакциялармен жай заттарға айналдыруға болады." },
+                    metals:    { icon: "🔩", title: "Металдар", text: "Метал жылтыры, жылу-электр өткізгіштігі бар жай заттар. Менделеев кестесінің сол жағын алып жатыр.", examples: "Na, Fe, Cu, Al, Au, Ag, Zn, Pb", features: "Соғымтал, иілгіш, судан ауыр (Li-ден басқа). Реакцияларда электрон береді." },
+                    nonmetals: { icon: "💎", title: "Бейметалдар", text: "Метал жылтыры жоқ жай заттар. Көбіне газ немесе морт қатты. Электр өткізбейді (графиттен басқа).", examples: "O₂, N₂, S, P, Cl₂, C (алмаз, графит)", features: "Қаттыларда морт, жылу мен электрді нашар өткізеді. Электрон қабылдайды." },
+                    organic:   { icon: "🌱", title: "Органикалық заттар", text: "Көміртек қосылыстары (CO, CO₂, карбонаттардан басқа). Тіршіліктің негізі. Көмірсутектер, спирттер, қышқылдар, белоктар, майлар, көмірсулар.", examples: "CH₄ (метан), C₂H₅OH (этанол), C₆H₁₂O₆ (глюкоза), белоктар", features: "C–C, C–H байланыстары бар. Жанғанда CO₂ мен H₂O түзіледі." },
+                    inorganic: { icon: "🧂", title: "Бейорганикалық заттар", text: "Органикалықтардан басқа барлық заттар. Оксидтер, қышқылдар, негіздер, тұздар кіреді. Бейорганикалық химия зерттейді.", examples: "H₂O, NaCl, H₂SO₄, NaOH, CaCO₃, Fe₂O₃", features: "Көпшілігі ұшқыш емес, көбі суда ериді, ион немесе полюсті ковалент байланыстары бар." }
+                },
+                cards: [
+                    { title: "Не үшін жіктейміз", desc: "Заттардың саны өте көп болғандықтан, оларды жеке зерттеу мүмкін емес. Классификация ортақ заңдылықтарды табуға және қасиеттерді болжауға мүмкіндік береді." },
+                    { title: "Органика мен бейорганика", desc: "XIX ғасырға дейін органикалық заттар тек тіршілікте пайда болады деп саналған. Қазір зертханада синтезделеді — бірақ кластар арасындағы шекара қалды." },
+                    { title: "Таза заттар мен қоспалар", desc: "Таза заттың құрамы тұрақты. Қоспалар (ауа, теңіз суы) әртүрлі заттардан тұрады және физикалық әдістермен бөлінеді." }
+                ],
+                quote: "«Табиғат тәртіпті ұнатады — сондықтан химия да өзінің шексіз әлемін кластарға бөледі»",
+                author: "Лайнус Полинг"
+            },
+            en: {
+                title: "Classification of substances",
+                subtitle: "A map of everything the material world is made of",
+                treeHeading: "Classification tree",
+                nodes: {
+                    all:       { title: "All substances", sub: "" },
+                    simple:    { title: "Simple", sub: "Single element" },
+                    complex:   { title: "Compound", sub: "Two or more elements" },
+                    metals:    { title: "Metals", sub: "" },
+                    nonmetals: { title: "Non-metals", sub: "" },
+                    organic:   { title: "Organic", sub: "" },
+                    inorganic: { title: "Inorganic", sub: "" }
+                },
+                examplesLabel: "Examples",
+                featuresLabel: "Key features",
+                content: {
+                    all:       { icon: "🌐", title: "Substances — the basis of everything", text: "Every kind of matter in nature is a substance. We classify them by composition, structure and properties to make them easier to study and predict.", examples: "Air, water, metal, glass, blood — all of these are substances or their mixtures.", features: "They have a fixed composition and definite physical and chemical properties." },
+                    simple:    { icon: "⚛️", title: "Simple substances", text: "Made from atoms of one element. Split into metals and non-metals. Some elements form several simple substances — allotropy.", examples: "O₂, O₃, S, P, Fe, Cu, diamond, graphite are all simple substances.", features: "Cannot be broken down chemically into simpler substances." },
+                    complex:   { icon: "🧪", title: "Compound substances", text: "Made from atoms of two or more different elements. Split into organic (carbon-based) and inorganic. The vast majority of substances are compounds.", examples: "H₂O, NaCl, CO₂, CaCO₃, C₆H₁₂O₆ are all compounds.", features: "Can be decomposed into simpler substances by chemical reactions." },
+                    metals:    { icon: "🔩", title: "Metals", text: "Simple substances with metallic lustre, heat- and electrical conductivity. They occupy most of the periodic table (left and middle).", examples: "Na, Fe, Cu, Al, Au, Ag, Zn, Pb", features: "Malleable, ductile, denser than water (except Li). They donate electrons in reactions." },
+                    nonmetals: { icon: "💎", title: "Non-metals", text: "Simple substances without metallic lustre. Often gases or brittle solids. Do not conduct electricity (except graphite).", examples: "O₂, N₂, S, P, Cl₂, C (diamond, graphite)", features: "Brittle as solids, poor conductors of heat and electricity. They accept electrons." },
+                    organic:   { icon: "🌱", title: "Organic substances", text: "Compounds of carbon (apart from CO, CO₂ and carbonates). The basis of all life. Includes hydrocarbons, alcohols, acids, proteins, fats and carbohydrates.", examples: "CH₄ (methane), C₂H₅OH (ethanol), C₆H₁₂O₆ (glucose), proteins", features: "Contain C–C, C–H bonds. Burn to CO₂ and H₂O." },
+                    inorganic: { icon: "🧂", title: "Inorganic substances", text: "All substances except organic ones. Includes oxides, acids, bases and salts. Studied by inorganic chemistry.", examples: "H₂O, NaCl, H₂SO₄, NaOH, CaCO₃, Fe₂O₃", features: "Mostly non-volatile, many are water-soluble, with ionic or polar covalent bonds." }
+                },
+                cards: [
+                    { title: "Why classify", desc: "There are too many substances to study individually. Classification reveals shared patterns and lets us predict properties." },
+                    { title: "Organic vs inorganic", desc: "Until the 19th century people thought only living things could create organic compounds. Now we synthesise them in the lab — but the divide remains useful." },
+                    { title: "Pure substances vs mixtures", desc: "A pure substance has a fixed composition. Mixtures (air, seawater) contain several substances and can be separated by physical methods." }
+                ],
+                quote: "«Nature loves order — so chemistry divides its endless world into classes»",
+                author: "Linus Pauling"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentNode = 'all';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function selectNode(n) {
+            currentNode = n;
+            document.querySelectorAll('.tree-node').forEach(c => c.classList.remove('active'));
+            document.getElementById('node-' + n).classList.add('active');
+            renderInfo();
+        }
+
+        function renderInfo() {
+            const t = translations[currentLang];
+            const c = t.content[currentNode];
+            document.getElementById('info-icon').textContent = c.icon;
+            document.getElementById('info-title').textContent = c.title;
+            document.getElementById('info-text').textContent = c.text;
+            document.getElementById('examples-box').textContent = c.examples;
+            document.getElementById('features-box').textContent = c.features;
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('tree-heading').textContent = t.treeHeading;
+            ['all','simple','complex','metals','nonmetals','organic','inorganic'].forEach(n => {
+                document.getElementById('node-' + n + '-title').textContent = t.nodes[n].title;
+                const sub = document.getElementById('node-' + n + '-sub');
+                if (sub) sub.textContent = t.nodes[n].sub;
+            });
+            document.getElementById('examples-label').textContent = t.examplesLabel;
+            document.getElementById('features-label').textContent = t.featuresLabel;
+            renderInfo();
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            selectNode('all');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -436,128 +303,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

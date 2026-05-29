@@ -1,393 +1,140 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: КПД (ПӘК)</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ecfdf5; /* emerald-50 */
-            overflow-x: hidden;
-            color: #064e3b; /* emerald-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Emerald Theme */
-        .header-card {
-            background-color: #10b981; /* emerald-500 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #065f46; /* emerald-800 */
-            border-bottom: 3px solid #6ee7b7; /* emerald-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #d1fae5; /* emerald-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #059669; /* emerald-600 */
-        }
-         .term {
-            font-weight: bold;
-            color: #10b981; /* emerald-500 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #10b981;
-            background-color: #ffffff;
-            color: #10b981;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #ecfdf5;
-        }
-        .lang-btn.active {
-            background-color: #10b981;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #6ee7b7;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #064e3b;
-            text-anchor: middle;
-        }
-        .svg-arrow-force {
-            stroke: #dc2626; /* Red */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-red);
-        }
-        .svg-arrow-motion {
-            stroke: #2563eb; /* Blue */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-blue);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Количество теплоты. Удельная теплоёмкость</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-emerald-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жылу құбылыстары</span>
+<span lang="en" class="lang-content">Grade 8 · Thermal phenomena</span>
+<span lang="ru" class="lang-content">8 класс · Тепловые явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Жылу мөлшері. Меншікті жылу сыйымдылығы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Heat. Specific heat capacity</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Количество теплоты. Удельная теплоёмкость</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔥 Жылу мөлшері — Q</span>
+<span lang="en" class="lang-content">🔥 Quantity of heat — Q</span>
+<span lang="ru" class="lang-content">🔥 Количество теплоты — Q</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Жылу мөлшері</b> (Q) — жылу беру кезінде денеге <b>берілген</b> немесе одан <b>алынған</b> энергия. Бірлігі — <b>джоуль (Дж)</b>, бұрын <b>калория (кал)</b> қолданылған. Q <b>жылудың әсерін</b> сандық түрде өлшейді: дене неше градусқа қызды, қанша мұз ерітілді т.б.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Quantity of heat</b> (Q) is the energy <b>given to</b> or <b>removed from</b> a body during heat transfer. Measured in <b>joules (J)</b>, historically — <b>calories (cal)</b>. Q tells us <b>how much</b> heat was exchanged: how much a body warmed up, how much ice melted etc.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Количество теплоты</b> (Q) — энергия, которую тело <b>получило</b> или <b>отдало</b> при теплообмене. Единица — <b>джоуль (Дж)</b>, исторически — <b>калория (кал)</b>. Q количественно описывает <b>результат</b> теплопередачи: на сколько нагрелось тело, сколько растаяло льда и т.д.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ПАЙДАЛЫ ӘРЕКЕТ КОЭФФИЦИЕНТІ (ПӘК)</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">EFFICIENCY (η)</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">КОЭФФИЦИЕНТ ПОЛЕЗНОГО ДЕЙСТВИЯ (КПД)</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Қыздыру/суыту үшін:</span><span lang="en" class="lang-content">For heating/cooling:</span><span lang="ru" class="lang-content">Для нагревания/охлаждения:</span></p>
+<div class="formula text-center" style="font-size:1.6rem">
+<span class="var">Q</span> = <span class="var">c</span> · <span class="var">m</span> · Δ<span class="var">t</span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">Q</b> — жылу мөлшері, <span class="unit-pill">Дж</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">Q</b> — heat, <span class="unit-pill">J</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">Q</b> — кол-во теплоты, <span class="unit-pill">Дж</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">c</b> — меншікті жылу сыйым., <span class="unit-pill">Дж/(кг·°C)</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">c</b> — specific heat capacity, <span class="unit-pill">J/(kg·°C)</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">c</b> — уд. теплоёмкость, <span class="unit-pill">Дж/(кг·°C)</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">m</b> — mass, <span class="unit-pill">kg</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">Δt</b> = t₂ − t₁ — температура өзгерісі, <span class="unit-pill">°C</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">Δt</b> = t₂ − t₁ — temperature change, <span class="unit-pill">°C</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">Δt</b> = t₂ − t₁ — изменение температуры, <span class="unit-pill">°C</span></span></p>
+</div>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-emerald-100">Пайдалы жұмыстың толық жұмысқа қатынасы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-emerald-100">Ratio of useful work to total work.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-emerald-100">Отношение полезной работы к полной работе.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">🔥</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-2">Q = cmΔt</p>
+<p class="text-slate-700 text-sm text-center">
+<span lang="kk" class="lang-content">Q &gt; 0 — қызу<br/>Q &lt; 0 — суыту</span>
+<span lang="en" class="lang-content">Q &gt; 0 — heating<br/>Q &lt; 0 — cooling</span>
+<span lang="ru" class="lang-content">Q &gt; 0 — нагрев<br/>Q &lt; 0 — охлаждение</span></p>
+</div></div></section>
 
-        <!-- 1. АНЫҚТАМА ЖӘНЕ ФОРМУЛА -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Формула</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Formula</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Формула</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Меншікті жылу сыйымдылығы (c)</span>
+<span lang="en" class="lang-content">⚖️ Specific heat capacity (c)</span>
+<span lang="ru" class="lang-content">⚖️ Удельная теплоёмкость (c)</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Меншікті жылу сыйымдылығы</b> (c) — <b>1 кг</b> зат температурасын <b>1°C-қа</b> қыздыру үшін қажет энергия. Бұл — заттың <b>«жылу мінезі»</b>: бір зат тез қызады, екіншісі — баяу.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Specific heat capacity</b> (c) — energy needed to raise the temperature of <b>1 kg</b> of substance by <b>1°C</b>. It's the substance's <b>«thermal personality»</b>: one heats up fast, another — slowly.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Удельная теплоёмкость</b> (c) — энергия, нужная, чтобы нагреть <b>1 кг</b> вещества на <b>1°C</b>. Это «<b>тепловой характер</b>» материала: одно греется быстро, другое — медленно.</span></p>
+<div class="card rounded-2xl p-5 bg-amber-50">
+<p class="text-amber-900 font-bold mb-2">💡 <span lang="kk" class="lang-content">Су — ерекше зат!</span><span lang="en" class="lang-content">Water — special substance!</span><span lang="ru" class="lang-content">Вода — уникальное вещество!</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Судың <b>c = 4200 Дж/(кг·°C)</b> — табиғаттағы ең үлкендердің бірі. Сондықтан су <b>көп жылу сіңіреді</b>, <b>баяу қызады</b> және <b>баяу суиды</b>. Жер бетіндегі мұхиттар — климатты <b>тұрақтандырушы</b>! Жазда олар жылуды сіңіреді, қыста — қайта береді.</span>
+<span lang="en" class="lang-content">Water has <b>c = 4200 J/(kg·°C)</b> — one of the highest in nature. So water <b>absorbs a lot of heat</b>, heats up <b>slowly</b> and cools <b>slowly</b>. Oceans are Earth's <b>climate stabilisers</b>! They absorb heat in summer and release it in winter.</span>
+<span lang="ru" class="lang-content">У воды <b>c = 4200 Дж/(кг·°C)</b> — одна из самых высоких в природе. Поэтому вода <b>поглощает много тепла</b>, <b>медленно нагревается</b> и <b>медленно остывает</b>. Океаны — <b>стабилизатор</b> климата Земли! Летом они забирают тепло, зимой — отдают.</span></p>
+</div>
+</div>
+</section>
 
-            <div class="rule-card border-t-emerald-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">ПӘК (η - "эта")</span> механизмнің қаншалықты тиімді жұмыс істейтінін көрсетеді. Ол пайызбен өлшенеді.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Efficiency (η - "eta")</span> shows how effectively a machine works. It is measured in percent.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">КПД (η - "эта")</span> показывает, насколько эффективно работает механизм. Измеряется в процентах.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Жиі қолданылатын c мәндері</span>
+<span lang="en" class="lang-content">📊 Specific heat values</span>
+<span lang="ru" class="lang-content">📊 Значения удельной теплоёмкости</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Зат</span><span lang="en" class="lang-content">Substance</span><span lang="ru" class="lang-content">Вещество</span></th>
+<th>c, Дж/(кг·°C)</th>
+<th><span lang="kk" class="lang-content">Ескерту</span><span lang="en" class="lang-content">Note</span><span lang="ru" class="lang-content">Примечание</span></th>
+</tr></thead>
+<tbody>
+<tr class="bg-blue-50"><td>💧 <span lang="kk" class="lang-content">Су</span><span lang="en" class="lang-content">Water</span><span lang="ru" class="lang-content">Вода</span></td><td class="text-blue-700"><b>4200</b></td><td><span lang="kk" class="lang-content">эталон, ең үлкен</span><span lang="en" class="lang-content">reference, highest</span><span lang="ru" class="lang-content">эталон, наибольшее</span></td></tr>
+<tr><td>🧊 <span lang="kk" class="lang-content">Мұз</span><span lang="en" class="lang-content">Ice</span><span lang="ru" class="lang-content">Лёд</span></td><td>2100</td><td><span lang="kk" class="lang-content">судан 2 есе аз</span><span lang="en" class="lang-content">2× less than water</span><span lang="ru" class="lang-content">в 2 раза меньше воды</span></td></tr>
+<tr><td>🦴 <span lang="kk" class="lang-content">Спирт</span><span lang="en" class="lang-content">Alcohol</span><span lang="ru" class="lang-content">Спирт</span></td><td>2500</td><td>—</td></tr>
+<tr><td>🌬 <span lang="kk" class="lang-content">Ауа</span><span lang="en" class="lang-content">Air</span><span lang="ru" class="lang-content">Воздух</span></td><td>1000</td><td>—</td></tr>
+<tr><td>🌲 <span lang="kk" class="lang-content">Ағаш</span><span lang="en" class="lang-content">Wood</span><span lang="ru" class="lang-content">Древесина</span></td><td>2400</td><td>—</td></tr>
+<tr><td>🧱 <span lang="kk" class="lang-content">Кірпіш</span><span lang="en" class="lang-content">Brick</span><span lang="ru" class="lang-content">Кирпич</span></td><td>880</td><td>—</td></tr>
+<tr><td>⚙️ <span lang="kk" class="lang-content">Алюминий</span><span lang="en" class="lang-content">Aluminum</span><span lang="ru" class="lang-content">Алюминий</span></td><td>900</td><td>—</td></tr>
+<tr><td>⚒ <span lang="kk" class="lang-content">Темір/болат</span><span lang="en" class="lang-content">Iron/steel</span><span lang="ru" class="lang-content">Железо/сталь</span></td><td>460</td><td>—</td></tr>
+<tr><td>🥉 <span lang="kk" class="lang-content">Мыс</span><span lang="en" class="lang-content">Copper</span><span lang="ru" class="lang-content">Медь</span></td><td>380</td><td>—</td></tr>
+<tr><td>🥇 <span lang="kk" class="lang-content">Алтын</span><span lang="en" class="lang-content">Gold</span><span lang="ru" class="lang-content">Золото</span></td><td>130</td><td><span lang="kk" class="lang-content">өте тез қызады!</span><span lang="en" class="lang-content">heats up fast!</span><span lang="ru" class="lang-content">очень быстро греется!</span></td></tr>
+<tr><td>🧪 <span lang="kk" class="lang-content">Сынап</span><span lang="en" class="lang-content">Mercury</span><span lang="ru" class="lang-content">Ртуть</span></td><td>140</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+</section>
 
-                <div class="example-block border-l-emerald-400 bg-emerald-50 text-center mb-4">
-                    <p class="text-3xl font-bold text-emerald-900 mb-2">η = (A_p / A_t) · 100%</p>
-                    <p class="text-sm text-emerald-800 mt-2">
-                        A_p (A_useful) — Пайдалы жұмыс / Полезная работа<br>
-                        A_t (A_full) — Толық жұмыс / Полная работа
-                    </p>
-                </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌊 Неге теңіз жағасында жайлы?</span>
+<span lang="en" class="lang-content">🌊 Why is the seaside comfortable?</span>
+<span lang="ru" class="lang-content">🌊 Почему у моря мягкий климат?</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b>Жаз күндері</b>: күн судың да, құмның да бетіне бірдей жылу береді. Бірақ судың c = 4200, ал құмныкі c ≈ 800 — су 5 есе <b>баяуырақ</b> қызады. <b>Күндіз</b> жағалаудан теңізге қарай — <b>теңіз желі</b> (құм қызған, ауа жоғары, теңіздің суық ауасы орнын алады). <b>Түнде</b> керісінше: жағалау суынды, теңіз әлі жылы — <b>жағалау желі</b>. Сондықтан теңіз жағасында: <b>жазда салқын, қыста жылы</b>. Бұл — табиғи кондиционер!</span>
+<span lang="en" class="lang-content"><b>In summer</b>: the Sun heats both water and sand equally. But water has c=4200, sand c≈800 — water heats 5× <b>slower</b>. <b>During the day</b> wind blows from sea to land (sea breeze). <b>At night</b> the reverse — land cools faster — land breeze. So seaside is <b>cool in summer, warm in winter</b>. A natural air conditioner!</span>
+<span lang="ru" class="lang-content"><b>Летом днём</b> Солнце греет и воду, и песок одинаково. Но у воды c=4200, у песка c≈800 — вода греется в 5 раз <b>медленнее</b>. <b>Днём</b> воздух над сушей теплее, поднимается, его место занимает прохладный с моря — <b>морской бриз</b>. <b>Ночью</b> наоборот — суша остыла, море тёплое — <b>береговой бриз</b>. Поэтому у моря: <b>летом прохладно, зимой тепло</b>. Природный кондиционер!</span></p>
+</div>
+</section>
 
-                <!-- Illustration 1: Energy Pie Chart -->
-                <svg class="illustration-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
-                        </marker>
-                    </defs>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔥</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">Q = cmΔt</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жылу мөлшері</span><span lang="en" class="lang-content">Quantity of heat</span><span lang="ru" class="lang-content">Кол-во теплоты</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💧</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">c<sub>су</sub> = 4200</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Дж/(кг·°C)</span><span lang="en" class="lang-content">J/(kg·°C)</span><span lang="ru" class="lang-content">Дж/(кг·°C)</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">[Q] = Дж</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Энергия бірлігі</span><span lang="en" class="lang-content">Energy unit</span><span lang="ru" class="lang-content">Единица энергии</span></p></div>
+</div></footer>
 
-                    <!-- Total Work Bar -->
-                    <rect x="50" y="50" width="300" height="40" fill="#e5e7eb" stroke="#9ca3af"/>
-                    <text x="200" y="40" font-weight="bold" fill="#4b5563" text-anchor="middle">A_full (Толық жұмыс)</text>
-
-                    <!-- Useful Work Part -->
-                    <rect x="50" y="50" width="240" height="40" fill="#34d399" stroke="#059669"/>
-                    <text x="170" y="75" font-weight="bold" fill="#fff" text-anchor="middle">A_useful (Пайдалы)</text>
-
-                    <!-- Lost Work Part -->
-                    <rect x="290" y="50" width="60" height="40" fill="#fca5a5" stroke="#dc2626"/>
-                    <text x="320" y="75" font-size="12" fill="#7f1d1d" text-anchor="middle">Loss (Шығын)</text>
-
-                    <!-- Breakdown arrows -->
-                    <line x1="320" y1="90" x2="320" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead-gray)"/>
-                    <text x="320" y="135" font-size="10" fill="#64748b" text-anchor="middle">Friction (Үйкеліс)</text>
-                    <text x="320" y="147" font-size="10" fill="#64748b" text-anchor="middle">Weight of parts</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. МЫСАЛ: КӨЛБЕУ ЖАЗЫҚТЫҚ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Мысал: Көлбеу жазықтық</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Example: Inclined Plane</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Пример: Наклонная плоскость</h2>
-
-            <div class="rule-card border-t-green-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Жүкті көлбеу жазықтықпен сүйрегенде, біз тек жүкті көтеріп қана қоймай (пайдалы), үйкелісті жеңуге де күш жұмсаймыз (шығын).
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    When dragging a load up a ramp, we not only lift it (useful) but also work against friction (loss).
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    При втаскивании груза по наклонной плоскости мы не только поднимаем его (полезная), но и тратим силы на преодоление трения (потери).
-                </p>
-
-                <!-- Illustration 2: Inclined Plane Analysis -->
-                <svg class="illustration-svg" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                        <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb" />
-                        </marker>
-                    </defs>
-
-                    <!-- Ramp -->
-                    <path d="M 50 180 L 350 80 L 350 180 Z" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
-                    <line x1="20" y1="180" x2="380" y2="180" stroke="#9ca3af"/> <!-- Ground -->
-
-                    <!-- Box on Ramp -->
-                    <g transform="translate(180, 136) rotate(-18)">
-                        <rect x="0" y="-30" width="50" height="30" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
-                        <text x="25" y="-10" font-size="12" fill="#064e3b" text-anchor="middle" font-weight="bold">m</text>
-
-                        <!-- Applied Force F -->
-                        <line x1="50" y1="-15" x2="100" y2="-15" stroke="#dc2626" stroke-width="3" marker-end="url(#arrowhead-red)"/>
-                        <text x="110" y="-10" font-size="14" fill="#dc2626" font-weight="bold">F</text>
-
-                        <!-- Friction f -->
-                        <line x1="0" y1="-5" x2="-30" y2="-5" stroke="#64748b" stroke-width="2" stroke-dasharray="2" marker-end="url(#arrowhead-gray)"/>
-                        <text x="-40" y="-5" font-size="10" fill="#64748b">f_fr</text>
-                    </g>
-
-                    <!-- Dimensions -->
-                    <line x1="365" y1="80" x2="365" y2="180" stroke="#2563eb" marker-start="url(#tick)" marker-end="url(#tick)"/>
-                    <text x="375" y="130" font-size="14" fill="#2563eb" font-weight="bold">h</text>
-
-                    <path d="M 50 170 L 340 70" fill="none" stroke="#2563eb" stroke-dasharray="4"/>
-                    <text x="150" y="110" font-size="14" fill="#2563eb" font-weight="bold">l (length)</text>
-
-                    <!-- Formulas -->
-                    <text x="50" y="40" font-size="14" fill="#059669" font-weight="bold">A_p = m · g · h</text>
-                    <text x="250" y="40" font-size="14" fill="#dc2626" font-weight="bold">A_t = F · l</text>
-
-                    <defs>
-                        <marker id="tick" markerWidth="5" markerHeight="10" refX="2" refY="5" orient="auto">
-                            <line x1="0" y1="5" x2="10" y2="5" stroke="#2563eb" stroke-width="2"/>
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. НЕГЕ 100% ЕМЕС? -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Неге ПӘК < 100%?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Why is Efficiency < 100%?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Почему КПД < 100%?</h2>
-
-            <div class="rule-card border-t-red-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Шынайы өмірде <strong>үйкеліс</strong> және тетіктердің <strong>салмағы</strong> бар. Сондықтан толық жұмыс әрқашан пайдалы жұмыстан көп болады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    In real life, there is <strong>friction</strong> and the <strong>weight</strong> of machine parts. So, total work is always greater than useful work.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    В реальной жизни существуют <strong>трение</strong> и <strong>вес</strong> деталей механизма. Поэтому полная работа всегда больше полезной.
-                </p>
-
-                <!-- Illustration 3: Comparison -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Balance Scale (Imbalanced) -->
-                    <line x1="100" y1="120" x2="300" y2="80" stroke="#4b5563" stroke-width="4"/> <!-- Tilted Beam -->
-                    <polygon points="200,100 190,130 210,130" fill="#4b5563"/> <!-- Fulcrum -->
-
-                    <!-- Left Pan (Full Work - Heavy) -->
-                    <rect x="80" y="120" width="40" height="40" fill="#fca5a5" stroke="#dc2626"/>
-                    <text x="100" y="145" font-weight="bold" fill="#7f1d1d" text-anchor="middle">A_full</text>
-
-                    <!-- Right Pan (Useful Work - Light) -->
-                    <rect x="280" y="60" width="30" height="30" fill="#6ee7b7" stroke="#059669"/>
-                    <text x="295" y="80" font-size="12" font-weight="bold" fill="#064e3b" text-anchor="middle">A_useful</text>
-
-                    <!-- Text -->
-                    <text x="200" y="40" font-size="20" font-weight="bold" fill="#059669" text-anchor="middle">η < 100%</text>
-                    <text x="200" y="140" font-size="14" fill="#64748b" text-anchor="middle">(Always / Әрқашан / Всегда)</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-emerald-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-emerald-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-emerald-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-emerald-800">
-                Пайдалы жұмыс – бізге керегі (жүкті көтеру).<br>
-                Толық жұмыс – жұмсалған барлық күш (үйкеліспен бірге).<br>
-                ПӘК ешқашан 100%-дан артық болмайды.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-emerald-800">
-                Useful work – what we need (lifting the load).<br>
-                Total work – all effort spent (including friction).<br>
-                Efficiency is never more than 100%.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-emerald-800">
-                Полезная работа – то, что нам нужно (поднятие груза).<br>
-                Полная работа – все затраченные усилия (включая трение).<br>
-                КПД никогда не бывает больше 100%.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

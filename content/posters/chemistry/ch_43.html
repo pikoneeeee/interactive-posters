@@ -1,308 +1,352 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Негіздер: классификация, қасиеттері, алдыңғысы</title>
+    <title>Основания: классификация, свойства, получение</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at bottom left, #172554, #1e3a5f, #0f172a); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #14532d, #166534, #052e16);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #38bdf8; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #7dd3fc; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #7dd3fc; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #7dd3fc; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #4ade80; color: #052e16; border-color: transparent; font-weight: 800; }
+        .tab-btn { transition: all 0.2s; cursor: pointer; }
+        .tab-btn.active { background: rgba(74, 222, 128, 0.2); border-color: #4ade80; }
+        .formula-style { font-family: 'Courier New', monospace; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Негіздер: Классификация, Қасиеттері!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Bases: Classification, Properties!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Основания: Классификация, свойства!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">Негіздер - OH⁻ иондарын беридіңіз (M(OH)ₙ немесе MOH). 2 түрі: сәлсі (NaOH - толық) және слабі (NH₃ - ішінді). pH > 7, құсамдалы, индикаторды түстері. БАРЛЫҚ НЕГІЗДЕР!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">Bases donate OH⁻ ions (M(OH)ₙ or MOH). 2 types: strong (NaOH - complete) and weak (NH₃ - partial). pH > 7, slippery, change indicators. ALL BASES!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">Основания отдают OH⁻ ионы (M(OH)ₙ или MOH). 2 типа: сильные (NaOH - полные) и слабые (NH₃ - частичные). pH > 7, скользкие, меняют индикаторы. ВСЕ ОСНОВАНИЯ!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-green-400"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. НЕГІЗДЕРДІҢ КЛАССИФИКАЦИЯСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. CLASSIFICATION OF BASES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Классификация оснований</h2>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-5 glass rounded-custom p-8">
+            <h2 id="general-heading" class="heading-font text-xl mb-4 opacity-80 uppercase tracking-wider"></h2>
 
-            <div class="illustration">
-                <svg viewBox="0 0 600 300" width="100%" height="300">
-                    <!-- Main -->
-                    <rect x="150" y="10" width="300" height="50" fill="#ec4899" stroke="#000" stroke-width="2" rx="10"/>
-                    <text x="300" y="40" text-anchor="middle" font-size="14" font-weight="bold" fill="white">НЕГІЗДЕР (M(OH)ₙ)</text>
-
-                    <!-- Two types -->
-                    <rect x="50" y="100" width="140" height="80" fill="#fbcfe8" stroke="#ec4899" stroke-width="2" rx="5"/>
-                    <text x="120" y="130" text-anchor="middle" font-size="13" font-weight="bold">КҮШТІ</text>
-                    <text x="120" y="150" text-anchor="middle" font-size="11">(Strong)</text>
-                    <text x="120" y="165" text-anchor="middle" font-size="10">NaOH, KOH, Ca(OH)₂</text>
-
-                    <rect x="410" y="100" width="140" height="80" fill="#fbcfe8" stroke="#ec4899" stroke-width="2" rx="5"/>
-                    <text x="480" y="130" text-anchor="middle" font-size="13" font-weight="bold">СӘЛСІ</text>
-                    <text x="480" y="150" text-anchor="middle" font-size="11">(Weak)</text>
-                    <text x="480" y="165" text-anchor="middle" font-size="10">NH₃, Cu(OH)₂, Zn(OH)₂</text>
-
-                    <!-- Arrows -->
-                    <line x1="300" y1="60" x2="120" y2="100" stroke="#ec4899" stroke-width="2"/>
-                    <line x1="300" y1="60" x2="480" y2="100" stroke="#ec4899" stroke-width="2"/>
-
-                    <!-- Properties -->
-                    <rect x="20" y="220" width="160" height="65" fill="#fbcfe8" stroke="#db2777" stroke-width="1" rx="5"/>
-                    <text x="100" y="240" text-anchor="middle" font-size="11" font-weight="bold">ТОЛЫҚ ЫДЫРАУ</text>
-                    <text x="100" y="258" text-anchor="middle" font-size="9">NaOH → Na⁺ + OH⁻</text>
-                    <text x="100" y="273" text-anchor="middle" font-size="9">pH 13-14</text>
-
-                    <rect x="420" y="220" width="160" height="65" fill="#fbcfe8" stroke="#db2777" stroke-width="1" rx="5"/>
-                    <text x="500" y="240" text-anchor="middle" font-size="11" font-weight="bold">ІШІНДІ ЫДЫРАУ</text>
-                    <text x="500" y="258" text-anchor="middle" font-size="9">NH₃ + H₂O ⇌ NH₄⁺+OH⁻</text>
-                    <text x="500" y="273" text-anchor="middle" font-size="9">pH 8-11</text>
-
-                    <!-- Lines -->
-                    <line x1="120" y1="180" x2="100" y2="220" stroke="#ec4899" stroke-width="1"/>
-                    <line x1="480" y1="180" x2="500" y2="220" stroke="#ec4899" stroke-width="1"/>
-                </svg>
+            <div class="bg-black/30 rounded-2xl p-6 mb-5 border border-green-500/20 text-center">
+                <div id="general-formula-label" class="text-xs text-green-300 uppercase tracking-widest mb-2"></div>
+                <div class="text-4xl formula-style text-green-300 font-bold">M(OH)ₙ</div>
+                <div id="general-legend" class="text-xs text-white/60 mt-3"></div>
             </div>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ТҮРІ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">МЫСАЛДАРЫ</th>
-                            <th lang="kk" class="lang-content">ҚАСИЕТТЕРІ</th>
-
-                            <th lang="en" class="lang-content">TYPE</th>
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">EXAMPLES</th>
-                            <th lang="en" class="lang-content">PROPERTIES</th>
-
-                            <th lang="ru" class="lang-content">ТИП</th>
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ПРИМЕРЫ</th>
-                            <th lang="ru" class="lang-content">СВОЙСТВА</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>КҮШТІ</strong></td>
-                            <td lang="kk" class="lang-content">Толық ыдырау</td>
-                            <td lang="kk" class="lang-content">NaOH, KOH, Ca(OH)₂</td>
-                            <td lang="kk" class="lang-content">pH 13-14, өндіктігінің</td>
-
-                            <td lang="en" class="lang-content"><strong>STRONG</strong></td>
-                            <td lang="en" class="lang-content">Complete dissociation</td>
-                            <td lang="en" class="lang-content">NaOH, KOH, Ca(OH)₂</td>
-                            <td lang="en" class="lang-content">pH 13-14, common</td>
-
-                            <td lang="ru" class="lang-content"><strong>СИЛЬНЫЕ</strong></td>
-                            <td lang="ru" class="lang-content">Полная диссоциация</td>
-                            <td lang="ru" class="lang-content">NaOH, KOH, Ca(OH)₂</td>
-                            <td lang="ru" class="lang-content">pH 13-14, частые</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>СӘЛСІ</strong></td>
-                            <td lang="kk" class="lang-content">Ішінді ыдырау</td>
-                            <td lang="kk" class="lang-content">NH₃, Cu(OH)₂, Zn(OH)₂</td>
-                            <td lang="kk" class="lang-content">pH 8-11, сәнді</td>
-
-                            <td lang="en" class="lang-content"><strong>WEAK</strong></td>
-                            <td lang="en" class="lang-content">Partial dissociation</td>
-                            <td lang="en" class="lang-content">NH₃, Cu(OH)₂, Zn(OH)₂</td>
-                            <td lang="en" class="lang-content">pH 8-11, slightly</td>
-
-                            <td lang="ru" class="lang-content"><strong>СЛАБЫЕ</strong></td>
-                            <td lang="ru" class="lang-content">Частичная диссоциация</td>
-                            <td lang="ru" class="lang-content">NH₃, Cu(OH)₂, Zn(OH)₂</td>
-                            <td lang="ru" class="lang-content">pH 8-11, слегка</td>
-                        </tr>
-                    </table>
+            <h3 id="classify-heading" class="heading-font text-lg mb-3 text-green-300"></h3>
+            <div class="space-y-2">
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="flex justify-between items-center">
+                        <div id="cls1-title" class="font-bold text-green-300"></div>
+                        <div class="formula-style text-sm text-white/80">NaOH, KOH</div>
+                    </div>
+                    <p id="cls1-desc" class="text-white/70 text-sm mt-1"></p>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="flex justify-between items-center">
+                        <div id="cls2-title" class="font-bold text-green-300"></div>
+                        <div class="formula-style text-sm text-white/80">Cu(OH)₂</div>
+                    </div>
+                    <p id="cls2-desc" class="text-white/70 text-sm mt-1"></p>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="flex justify-between items-center">
+                        <div id="cls3-title" class="font-bold text-green-300"></div>
+                        <div class="formula-style text-sm text-white/80">Al(OH)₃, Zn(OH)₂</div>
+                    </div>
+                    <p id="cls3-desc" class="text-white/70 text-sm mt-1"></p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Негіздерді алу</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. OBTAINING BASES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Получение оснований</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>📍 ӘДІСТЕРІ:</strong></p>
-                <p lang="kk" class="lang-content text-sm">1) 2Na + 2H₂O → 2NaOH + H₂↑ (металл + су)</p>
-                <p lang="kk" class="lang-content text-sm">2) CaO + H₂O → Ca(OH)₂ (оксид + су)</p>
-                <p lang="kk" class="lang-content text-sm">3) NH₃ + H₂O ⇌ NH₃·H₂O (газ + су)</p>
-                <p lang="kk" class="lang-content text-sm">4) Cu²⁺ + 2OH⁻ → Cu(OH)₂↓ (сыйай + өндіктік)</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>📍 METHODS:</strong></p>
-                <p lang="en" class="lang-content text-sm">1) 2Na + 2H₂O → 2NaOH + H₂↑ (metal + water)</p>
-                <p lang="en" class="lang-content text-sm">2) CaO + H₂O → Ca(OH)₂ (oxide + water)</p>
-                <p lang="en" class="lang-content text-sm">3) NH₃ + H₂O ⇌ NH₃·H₂O (gas + water)</p>
-                <p lang="en" class="lang-content text-sm">4) Cu²⁺ + 2OH⁻ → Cu(OH)₂↓ (salt + base)</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>📍 МЕТОДЫ:</strong></p>
-                <p lang="ru" class="lang-content text-sm">1) 2Na + 2H₂O → 2NaOH + H₂↑ (металл + вода)</p>
-                <p lang="ru" class="lang-content text-sm">2) CaO + H₂O → Ca(OH)₂ (оксид + вода)</p>
-                <p lang="ru" class="lang-content text-sm">3) NH₃ + H₂O ⇌ NH₃·H₂O (газ + вода)</p>
-                <p lang="ru" class="lang-content text-sm">4) Cu²⁺ + 2OH⁻ → Cu(OH)₂↓ (соль + основание)</p>
+        <div class="lg:col-span-7 glass rounded-custom p-8 border-l-4 border-green-400">
+            <div class="flex flex-wrap gap-2 mb-5">
+                <button onclick="setTab('props')" id="tab-props" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold"></button>
+                <button onclick="setTab('prep')" id="tab-prep" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold"></button>
+                <button onclick="setTab('uses')" id="tab-uses" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold"></button>
             </div>
-        </section>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Негіздер - OH⁻ иондарын беридіңіз құрамдас (M(OH)ₙ). 2 түрі: күшті (NaOH, толық) және сәлсі (NH₃, ішінді). Күшті pH 13-14, сәлсі pH 8-11. Алдыңғысы: металл + су, оксид + су, газ + су. Органикасыз химиясының негіздері!</p>
-            <p lang="en" class="lang-content text-sm">Bases donate OH⁻ ions (M(OH)ₙ). 2 types: strong (NaOH, complete) and weak (NH₃, partial). Strong pH 13-14, weak pH 8-11. Obtaining: metal + water, oxide + water, gas + water. Foundation of inorganic chemistry!</p>
-            <p lang="ru" class="lang-content text-sm">Основания отдают OH⁻ ионы (M(OH)ₙ). 2 типа: сильные (NaOH, полные) и слабые (NH₃, частичные). Сильные pH 13-14, слабые pH 8-11. Получение: металл + вода, оксид + вода, газ + вода. Основа неорганической химии!</p>
-        </footer>
-    </div>
+            <h3 id="tab-title" class="heading-font text-2xl mb-4 text-green-300"></h3>
+            <div id="tab-body" class="space-y-3"></div>
+        </div>
+    </main>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-green-500/10 transition-colors">
+            <div class="w-14 h-14 bg-green-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🧼</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-green-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-green-500/10 transition-colors">
+            <div class="w-14 h-14 bg-green-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🔬</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-green-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-green-500/10 transition-colors">
+            <div class="w-14 h-14 bg-green-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">⚠️</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-green-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-green-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Основания",
+                subtitle: "Гидроксиды металлов: щёлочи и не только",
+                generalHeading: "Общая формула",
+                generalFormulaLabel: "Основание",
+                generalLegend: "M — атом металла, n — его валентность",
+                classifyHeading: "Классификация",
+                classes: [
+                    { title: "Щёлочи (растворимые)", desc: "Гидроксиды щелочных и щёлочно-земельных металлов." },
+                    { title: "Нерастворимые", desc: "Не диссоциируют в воде. Большинство гидроксидов." },
+                    { title: "Амфотерные", desc: "Реагируют и с кислотами, и со щелочами." }
+                ],
+                tabs: { props: "Свойства", prep: "Получение", uses: "Применение" },
+                content: {
+                    props: {
+                        title: "Химические свойства",
+                        items: [
+                            { eq: "NaOH + HCl → NaCl + H₂O", desc: "Реакция нейтрализации со всеми кислотами с образованием соли и воды." },
+                            { eq: "2 NaOH + CO₂ → Na₂CO₃ + H₂O", desc: "Реакция щелочей с кислотными оксидами." },
+                            { eq: "2 NaOH + CuSO₄ → Cu(OH)₂↓ + Na₂SO₄", desc: "Реакция со многими солями — выпадает осадок." },
+                            { eq: "Cu(OH)₂ → CuO + H₂O", desc: "Нерастворимые основания разлагаются при нагревании." }
+                        ]
+                    },
+                    prep: {
+                        title: "Способы получения",
+                        items: [
+                            { eq: "2 Na + 2 H₂O → 2 NaOH + H₂↑", desc: "Активный металл (щелочные, щ-зем) + вода → щёлочь + водород." },
+                            { eq: "CaO + H₂O → Ca(OH)₂", desc: "Гашение извести: основной оксид + вода → щёлочь." },
+                            { eq: "FeCl₃ + 3 NaOH → Fe(OH)₃↓ + 3 NaCl", desc: "Соль + щёлочь → нерастворимое основание (осадок)." },
+                            { eq: "2 NaCl + 2 H₂O → 2 NaOH + Cl₂↑ + H₂↑", desc: "Промышленный способ — электролиз раствора NaCl." }
+                        ]
+                    },
+                    uses: {
+                        title: "Применение",
+                        items: [
+                            { eq: "🧼 NaOH", desc: "Производство мыла, бумаги, искусственных волокон, чистящих средств." },
+                            { eq: "🏗️ Ca(OH)₂", desc: "Гашёная известь — побелка стен, кладочный раствор, нейтрализация кислых почв в сельском хозяйстве." },
+                            { eq: "🏥 Mg(OH)₂", desc: "Антацид: нейтрализует избыток соляной кислоты в желудке при изжоге." },
+                            { eq: "💧 NH₄OH", desc: "Нашатырный спирт — в медицине при обмороках, в быту для чистки." }
+                        ]
+                    }
+                },
+                cards: [
+                    { title: "Распознавание", desc: "Фенолфталеин в щёлочи становится малиновым, лакмус — синим, метилоранж — жёлтым. Это качественные реакции на ОН⁻." },
+                    { title: "Нейтрализация", desc: "Реакция кислоты со щёлочью идёт быстро и до конца, выделяется тепло. На ней основано действие средств от изжоги." },
+                    { title: "Безопасность", desc: "Щёлочи едкие: разъедают кожу, ткани, бумагу. При попадании на кожу — обильно промыть водой и слабым раствором уксуса." }
+                ],
+                quote: "«Щёлочь — это кислота наоборот: то, чего так не хватает кислоте, у щёлочи есть в избытке»",
+                author: "Принцип кислотно-щелочного равновесия"
+            },
+            kz: {
+                title: "Негіздер",
+                subtitle: "Металдар гидроксидтері: сілтілер және басқалар",
+                generalHeading: "Жалпы формула",
+                generalFormulaLabel: "Негіз",
+                generalLegend: "M — метал атомы, n — оның валенттілігі",
+                classifyHeading: "Жіктелуі",
+                classes: [
+                    { title: "Сілтілер (еритін)", desc: "Сілтілік және сілтілік-жер металдарының гидроксидтері." },
+                    { title: "Ерімейтін", desc: "Суда диссоциацияланбайды. Гидроксидтердің көпшілігі." },
+                    { title: "Амфотерлік", desc: "Қышқылдармен де, сілтілермен де әрекеттеседі." }
+                ],
+                tabs: { props: "Қасиеттері", prep: "Алу", uses: "Қолданылуы" },
+                content: {
+                    props: {
+                        title: "Химиялық қасиеттері",
+                        items: [
+                            { eq: "NaOH + HCl → NaCl + H₂O", desc: "Барлық қышқылдармен бейтараптау реакциясы: тұз және су түзіледі." },
+                            { eq: "2 NaOH + CO₂ → Na₂CO₃ + H₂O", desc: "Сілтілердің қышқылдық оксидтермен әрекеттесуі." },
+                            { eq: "2 NaOH + CuSO₄ → Cu(OH)₂↓ + Na₂SO₄", desc: "Көп тұздармен әрекеттеседі — тұнба түседі." },
+                            { eq: "Cu(OH)₂ → CuO + H₂O", desc: "Ерімейтін негіздер қыздырғанда ыдырайды." }
+                        ]
+                    },
+                    prep: {
+                        title: "Алу тәсілдері",
+                        items: [
+                            { eq: "2 Na + 2 H₂O → 2 NaOH + H₂↑", desc: "Белсенді метал (сілтілік, сілтілік-жер) + су → сілті + сутегі." },
+                            { eq: "CaO + H₂O → Ca(OH)₂", desc: "Әкті сөндіру: негіздік оксид + су → сілті." },
+                            { eq: "FeCl₃ + 3 NaOH → Fe(OH)₃↓ + 3 NaCl", desc: "Тұз + сілті → ерімейтін негіз (тұнба)." },
+                            { eq: "2 NaCl + 2 H₂O → 2 NaOH + Cl₂↑ + H₂↑", desc: "Өнеркәсіптік әдіс — NaCl ерітіндісінің электролизі." }
+                        ]
+                    },
+                    uses: {
+                        title: "Қолданылуы",
+                        items: [
+                            { eq: "🧼 NaOH", desc: "Сабын, қағаз, жасанды талшық, тазалағыш құрал өндірісі." },
+                            { eq: "🏗️ Ca(OH)₂", desc: "Сөнген әк — қабырғаны әктеу, қалау ерітіндісі, ауыл шаруашылығында қышқыл топырақты бейтараптау." },
+                            { eq: "🏥 Mg(OH)₂", desc: "Антацид: асқазандағы артық тұз қышқылын бейтараптайды." },
+                            { eq: "💧 NH₄OH", desc: "Нашатыр спирті — медицинада есеңгіреген кезде, тұрмыста тазалау үшін." }
+                        ]
+                    }
+                },
+                cards: [
+                    { title: "Тану", desc: "Фенолфталеин сілтіде таңқурайдай түс береді, лакмус — көк, метилоранж — сары. Бұл OH⁻-ге сапалық реакциялар." },
+                    { title: "Бейтараптау", desc: "Қышқыл + сілті реакциясы тез әрі толық жүреді, жылу бөлінеді. Асқазан ауыруына қарсы дәрі осыған негізделген." },
+                    { title: "Қауіпсіздік", desc: "Сілтілер күйдіргіш: теріні, мата, қағазды зақымдайды. Теріге тигенде — мол сумен және әлсіз сірке ерітіндісімен жуу керек." }
+                ],
+                quote: "«Сілті — кері қышқыл: қышқылда жетпейтін нәрсе сілтіде көп»",
+                author: "Қышқыл-сілті тепе-теңдік қағидасы"
+            },
+            en: {
+                title: "Bases",
+                subtitle: "Metal hydroxides: alkalis and beyond",
+                generalHeading: "General formula",
+                generalFormulaLabel: "Base",
+                generalLegend: "M — metal atom, n — its valency",
+                classifyHeading: "Classification",
+                classes: [
+                    { title: "Alkalis (soluble)", desc: "Hydroxides of alkali and alkaline-earth metals." },
+                    { title: "Insoluble", desc: "Do not dissociate in water. Most hydroxides." },
+                    { title: "Amphoteric", desc: "React with both acids and alkalis." }
+                ],
+                tabs: { props: "Properties", prep: "Preparation", uses: "Applications" },
+                content: {
+                    props: {
+                        title: "Chemical properties",
+                        items: [
+                            { eq: "NaOH + HCl → NaCl + H₂O", desc: "Neutralisation with any acid: salt and water are formed." },
+                            { eq: "2 NaOH + CO₂ → Na₂CO₃ + H₂O", desc: "Reaction of alkalis with acidic oxides." },
+                            { eq: "2 NaOH + CuSO₄ → Cu(OH)₂↓ + Na₂SO₄", desc: "Reaction with many salts — a precipitate forms." },
+                            { eq: "Cu(OH)₂ → CuO + H₂O", desc: "Insoluble bases decompose on heating." }
+                        ]
+                    },
+                    prep: {
+                        title: "Methods of preparation",
+                        items: [
+                            { eq: "2 Na + 2 H₂O → 2 NaOH + H₂↑", desc: "Active metal (alkali, alkaline-earth) + water → alkali + hydrogen." },
+                            { eq: "CaO + H₂O → Ca(OH)₂", desc: "Slaking lime: basic oxide + water → alkali." },
+                            { eq: "FeCl₃ + 3 NaOH → Fe(OH)₃↓ + 3 NaCl", desc: "Salt + alkali → insoluble base (precipitate)." },
+                            { eq: "2 NaCl + 2 H₂O → 2 NaOH + Cl₂↑ + H₂↑", desc: "Industrial route — electrolysis of NaCl brine." }
+                        ]
+                    },
+                    uses: {
+                        title: "Applications",
+                        items: [
+                            { eq: "🧼 NaOH", desc: "Soap, paper, synthetic fibres and cleaning agents." },
+                            { eq: "🏗️ Ca(OH)₂", desc: "Slaked lime — wall whitewashing, mortar, neutralising acid farmland soils." },
+                            { eq: "🏥 Mg(OH)₂", desc: "Antacid: neutralises excess stomach acid in heartburn." },
+                            { eq: "💧 NH₄OH", desc: "Ammonia water — medical smelling salt and household cleaner." }
+                        ]
+                    }
+                },
+                cards: [
+                    { title: "Identification", desc: "Phenolphthalein turns crimson in alkali, litmus turns blue, methyl orange turns yellow — qualitative tests for OH⁻." },
+                    { title: "Neutralisation", desc: "Acid + alkali is fast, complete and exothermic. This is exactly how heartburn medicines work." },
+                    { title: "Safety", desc: "Alkalis are caustic — they damage skin, fabric, paper. If splashed on skin, rinse with plenty of water and a weak vinegar solution." }
+                ],
+                quote: "«An alkali is an acid in reverse — what an acid lacks, an alkali has in excess»",
+                author: "Acid–base balance principle"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentTab = 'props';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function setTab(t) {
+            currentTab = t;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + t).classList.add('active');
+            renderTab();
+        }
+
+        function renderTab() {
+            const t = translations[currentLang];
+            const c = t.content[currentTab];
+            document.getElementById('tab-title').textContent = c.title;
+            document.getElementById('tab-body').innerHTML = c.items.map(it => `
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="formula-style text-green-300 font-bold mb-1">${it.eq}</div>
+                    <div class="text-white/70 text-sm leading-relaxed">${it.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('general-heading').textContent = t.generalHeading;
+            document.getElementById('general-formula-label').textContent = t.generalFormulaLabel;
+            document.getElementById('general-legend').textContent = t.generalLegend;
+            document.getElementById('classify-heading').textContent = t.classifyHeading;
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('cls' + (i+1) + '-title').textContent = t.classes[i].title;
+                document.getElementById('cls' + (i+1) + '-desc').textContent = t.classes[i].desc;
+            }
+            document.getElementById('tab-props').textContent = t.tabs.props;
+            document.getElementById('tab-prep').textContent = t.tabs.prep;
+            document.getElementById('tab-uses').textContent = t.tabs.uses;
+            renderTab();
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            setTab('props');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -311,128 +355,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

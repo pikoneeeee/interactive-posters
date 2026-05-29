@@ -1,154 +1,143 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Есептеу - Нагревание және плавления</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fef08a 0%, #fef3c7 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #ca8a04 0%, #78350f 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #78350f; border-bottom: 3px solid #fef3c7; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #ca8a04; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #ca8a04; background: white; color: #ca8a04; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #ca8a04; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        .info-box { background: linear-gradient(135deg, #fef3c7 0%, #fef08a 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #ca8a04; margin: 10px 0; }
-        .problem-card { background: #fffbeb; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #ca8a04; font-size: 11px; margin-bottom: 12px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Второй закон Ньютона</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-yellow-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-emerald-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Динамика</span>
+<span lang="en" class="lang-content">Grade 10 · Dynamics</span>
+<span lang="ru" class="lang-content">10 класс · Динамика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Ньютонның екінші заңы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Newton's second law</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Второй закон Ньютона</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Есептеу Шешу</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Problem Solving</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Решение задач</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-yellow-100">Нагревание және плавления. Толық ағындалған шешімдер. БЕРІЛГЕН ЕСЕПТЕРДІҢ АЖЫРАМАСЫ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-yellow-100">Heating and melting problems. Complete detailed solutions. STEP-BY-STEP ANALYSIS!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-yellow-100">Проблемы нагревания и плавления. Полные подробные решения. ПОШАГОВЫЙ АНАЛИЗ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Күш — үдеу — масса</span>
+<span lang="en" class="lang-content">⚡ Force — acceleration — mass</span>
+<span lang="ru" class="lang-content">⚡ Сила — ускорение — масса</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-emerald-700">Ньютонның 2-заңы:</b> денеге әсер ететін күштердің <b>қорытқысы</b> оның <b>массасы мен үдеуінің көбейтіндісіне</b> тең. Үдеу күшпен <b>бір бағытта</b>! Бұл <b>динамиканың негізгі</b> заңы — қозғалысты <b>есептеуге</b> мүмкіндік береді.</span>
+<span lang="en" class="lang-content"><b class="text-emerald-700">Newton's 2nd law:</b> the <b>net force</b> on a body equals its <b>mass × acceleration</b>. The acceleration is in the <b>same direction</b> as the net force. The <b>cornerstone</b> equation of dynamics — lets us <b>calculate</b> motion.</span>
+<span lang="ru" class="lang-content"><b class="text-emerald-700">Второй закон Ньютона:</b> <b>равнодействующая</b> сил, действующих на тело, равна произведению его <b>массы на ускорение</b>. Ускорение направлено <b>так же</b>, как сила! Это <b>основа динамики</b> — позволяет <b>рассчитывать</b> движение.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ЕСЕП #1: ТОЛЫҚ НАГРЕВАНИЕ ЖӘНЕ ПЛАВЛЕНИЯ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. PROBLEM #1: COMPLETE HEATING AND MELTING</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Задача #1: полное нагревание и плавление</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-emerald-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Формула:</span><span lang="en" class="lang-content">Equation:</span><span lang="ru" class="lang-content">Формула:</span></p>
+<div class="formula text-center" style="font-size:1.6rem">
+F⃗ = m·a⃗   ⇒   a⃗ = F⃗/m
+</div>
+<p class="text-sm text-slate-700 text-center mt-2"><span lang="kk" class="lang-content">[F] = Н (Ньютон); 1 Н = 1 кг·м/с²</span><span lang="en" class="lang-content">[F] = N (newton); 1 N = 1 kg·m/s²</span><span lang="ru" class="lang-content">[F] = Н (Ньютон); 1 Н = 1 кг·м/с²</span></p>
+</div>
+</div>
 
-            <div class="rule-card">
-                <div class="problem-card">
-                    <p lang="kk" class="lang-content"><strong>БЕРІЛГЕН:</strong></p>
-                    <p lang="kk" class="lang-content">• m = 2 кг мұз</p>
-                    <p lang="kk" class="lang-content">• t₁ = -10°C (бастапқы)</p>
-                    <p lang="kk" class="lang-content">• t₂ = 0°C (плавления)</p>
-                    <p lang="kk" class="lang-content">• c_мұз = 2100 Дж/(кг·°C)</p>
-                    <p lang="kk" class="lang-content">• λ = 334 кДж/кг</p>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-emerald-700 mb-3">💡 <span lang="kk" class="lang-content">Маңызды салдар:</span><span lang="en" class="lang-content">Key consequences:</span><span lang="ru" class="lang-content">Важные следствия:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li>⭐ <span lang="kk" class="lang-content"><b>Күш үлкен → үдеу үлкен</b> (m тұрақты)</span><span lang="en" class="lang-content"><b>Larger F → larger a</b> (same m)</span><span lang="ru" class="lang-content"><b>Больше F → больше a</b> (m фикс.)</span></li>
+<li>⭐ <span lang="kk" class="lang-content"><b>Масса үлкен → үдеу кіші</b> (F тұрақты)</span><span lang="en" class="lang-content"><b>Larger m → smaller a</b> (same F)</span><span lang="ru" class="lang-content"><b>Больше m → меньше a</b> (F фикс.)</span></li>
+<li>⭐ <span lang="kk" class="lang-content">a⃗ <b>әрқашан</b> F⃗-мен <b>бір бағытта</b></span><span lang="en" class="lang-content">a⃗ <b>always</b> parallel to F⃗</span><span lang="ru" class="lang-content">a⃗ <b>всегда</b> сонаправлено с F⃗</span></li>
+<li>⭐ <span lang="kk" class="lang-content"><b>F = 0 → a = 0</b> (бұл — 1-заң!)</span><span lang="en" class="lang-content"><b>F = 0 → a = 0</b> (this is 1st law!)</span><span lang="ru" class="lang-content"><b>F = 0 → a = 0</b> (это 1-й закон!)</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                    <p lang="en" class="lang-content"><strong>GIVEN:</strong></p>
-                    <p lang="en" class="lang-content">• m = 2 kg ice</p>
-                    <p lang="en" class="lang-content">• t₁ = -10°C (initial)</p>
-                    <p lang="en" class="lang-content">• t₂ = 0°C (melting)</p>
-                    <p lang="en" class="lang-content">• c_ice = 2100 J/(kg·°C)</p>
-                    <p lang="en" class="lang-content">• λ = 334 kJ/kg</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Күштерді қосу</span>
+<span lang="en" class="lang-content">🎯 Adding forces</span>
+<span lang="ru" class="lang-content">🎯 Сложение сил</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card-accent rounded-custom p-5 text-center">
+<div class="text-3xl mb-2">➡️➡️</div>
+<p class="heading-font text-emerald-700 text-sm mb-2"><span lang="kk" class="lang-content">Бір бағытта</span><span lang="en" class="lang-content">Same direction</span><span lang="ru" class="lang-content">Одно направление</span></p>
+<div class="formula" style="font-size:1.2rem">F = F₁ + F₂</div>
+</div>
+<div class="card-accent rounded-custom p-5 text-center">
+<div class="text-3xl mb-2">➡️⬅️</div>
+<p class="heading-font text-emerald-700 text-sm mb-2"><span lang="kk" class="lang-content">Қарама-қарсы</span><span lang="en" class="lang-content">Opposite</span><span lang="ru" class="lang-content">Противоположно</span></p>
+<div class="formula" style="font-size:1.2rem">F = |F₁ − F₂|</div>
+</div>
+<div class="card-accent rounded-custom p-5 text-center">
+<div class="text-3xl mb-2">➡️⬆️</div>
+<p class="heading-font text-emerald-700 text-sm mb-2"><span lang="kk" class="lang-content">90°</span><span lang="en" class="lang-content">90°</span><span lang="ru" class="lang-content">90°</span></p>
+<div class="formula" style="font-size:1.2rem">F = √(F₁² + F₂²)</div>
+</div>
+</div>
 
-                    <p lang="ru" class="lang-content"><strong>ДАНО:</strong></p>
-                    <p lang="ru" class="lang-content">• m = 2 кг лёда</p>
-                    <p lang="ru" class="lang-content">• t₁ = -10°C (начальная)</p>
-                    <p lang="ru" class="lang-content">• t₂ = 0°C (плавления)</p>
-                    <p lang="ru" class="lang-content">• c_льда = 2100 Дж/(кг·°C)</p>
-                    <p lang="ru" class="lang-content">• λ = 334 кДж/кг</p>
+<div class="card-warm rounded-custom p-5 mt-4">
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">⭐ <b>Алгоритм:</b> ① денеге әсер ететін күштерді сал; ② координат осі таңда (a⃗ бойымен); ③ проекцияларды жаз: <b>ma = ΣFₓ</b>; ④ шеш.</span>
+<span lang="en" class="lang-content">⭐ <b>Algorithm:</b> ① draw all forces; ② choose axis along a⃗; ③ write <b>ma = ΣFₓ</b>; ④ solve.</span>
+<span lang="ru" class="lang-content">⭐ <b>Алгоритм:</b> ① нарисуй все силы; ② выбери ось вдоль a⃗; ③ запиши <b>ma = ΣFₓ</b>; ④ реши.</span></p>
+</div>
+</section>
 
-                    <p lang="kk" class="lang-content" style="margin-top: 10px;"><strong>ТАБУ КЕРЕК:</strong> Толық жылу (Q_толық)</p>
-                    <p lang="en" class="lang-content" style="margin-top: 10px;"><strong>FIND:</strong> Total heat (Q_total)</p>
-                    <p lang="ru" class="lang-content" style="margin-top: 10px;"><strong>НАЙТИ:</strong> Полное тепло (Q_полное)</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есептер</span>
+<span lang="en" class="lang-content">🧮 Examples</span>
+<span lang="ru" class="lang-content">🧮 Задачи</span></h2>
 
-                    <p lang="kk" class="lang-content" style="margin-top: 10px;"><strong>ШЕШІМІ:</strong></p>
-                    <p lang="kk" class="lang-content">1. Нагревание: Q₁ = c × m × ΔT = 2100 × 2 × 10 = 42000 Дж</p>
-                    <p lang="kk" class="lang-content">2. Плавления: Q₂ = λ × m = 334 × 2 = 668 кДж = 668000 Дж</p>
-                    <p lang="kk" class="lang-content">3. Толық: Q = Q₁ + Q₂ = 42000 + 668000 = <strong>710000 Дж = 710 кДж</strong></p>
+<div class="card rounded-custom p-8 mb-4">
+<p class="text-emerald-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп 1: m = 2 кг денеге F = 8 Н күш әсер етеді. a-ны табыңыз.</span>
+<span lang="en" class="lang-content">📘 Problem 1: m = 2 kg, F = 8 N. Find a.</span>
+<span lang="ru" class="lang-content">📘 Задача 1: m = 2 кг, F = 8 Н. Найти a.</span></p>
+<div class="formula text-center" style="font-size:1.2rem">a = F/m = 8/2 = <span class="num">4</span> м/с²</div>
+<div class="badge badge-emerald mt-3">✅ a = 4 м/с²</div>
+</div>
 
-                    <p lang="en" class="lang-content" style="margin-top: 10px;"><strong>SOLUTION:</strong></p>
-                    <p lang="en" class="lang-content">1. Heating: Q₁ = c × m × ΔT = 2100 × 2 × 10 = 42000 J</p>
-                    <p lang="en" class="lang-content">2. Melting: Q₂ = λ × m = 334 × 2 = 668 kJ = 668000 J</p>
-                    <p lang="en" class="lang-content">3. Total: Q = Q₁ + Q₂ = 42000 + 668000 = <strong>710000 J = 710 kJ</strong></p>
+<div class="card rounded-custom p-8">
+<p class="text-emerald-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📕 Есеп 2: m = 1000 кг машина F₁ = 4000 Н тарту күші мен F<sub>тр</sub> = 1000 Н үйкеліс күшімен жүреді. Үдеуді табыңыз.</span>
+<span lang="en" class="lang-content">📕 Problem 2: A car m = 1000 kg, engine F₁ = 4000 N, friction F₂ = 1000 N. Find a.</span>
+<span lang="ru" class="lang-content">📕 Задача 2: Автомобиль m = 1000 кг, F₁ = 4000 Н (тяга), F<sub>тр</sub> = 1000 Н. Найти a.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-emerald-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m = 1000 кг</li><li>F₁ = 4000 Н</li><li>F₂ = 1000 Н</li><li>a — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-emerald-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+F = F₁ − F₂ = 3000 Н
+<br/>a = F/m = 3000/1000 = <span class="num">3</span> м/с²
+</div>
+<div class="badge badge-emerald mt-3">✅ a = 3 м/с²</div>
+</div></div></div>
+</section>
 
-                    <p lang="ru" class="lang-content" style="margin-top: 10px;"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="ru" class="lang-content">1. Нагревание: Q₁ = c × m × ΔT = 2100 × 2 × 10 = 42000 Дж</p>
-                    <p lang="ru" class="lang-content">2. Плавление: Q₂ = λ × m = 334 × 2 = 668 кДж = 668000 Дж</p>
-                    <p lang="ru" class="lang-content">3. Полное: Q = Q₁ + Q₂ = 42000 + 668000 = <strong>710000 Дж = 710 кДж</strong></p>
-                </div>
-            </div>
-        </section>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-emerald-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📜</div>
+<p class="heading-font text-2xl text-emerald-700 mb-2">F⃗ = m·a⃗</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">2-заң</span><span lang="en" class="lang-content">2nd law</span><span lang="ru" class="lang-content">2-й закон</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">1 Н = 1 кг·м/с²</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Күш бірлігі</span><span lang="en" class="lang-content">Force unit</span><span lang="ru" class="lang-content">Единица силы</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">↗️</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">a⃗ ∥ F⃗</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Бір бағытта</span><span lang="en" class="lang-content">Same direction</span><span lang="ru" class="lang-content">Сонаправлены</span></p></div>
+</div></footer>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ЕСЕП #2: МЕТАЛЛ ПЛАВИЛА</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. PROBLEM #2: MELTING METAL</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Задача #2: плавление металла</h2>
-
-            <div class="rule-card">
-                <div class="problem-card">
-                    <p lang="kk" class="lang-content"><strong>БЕРІЛГЕН:</strong> m = 5 кг мыс, t₁ = 20°C, c = 400 Дж/(кг·°C), λ = 209 кДж/кг</p>
-                    <p lang="en" class="lang-content"><strong>GIVEN:</strong> m = 5 kg copper, t₁ = 20°C, c = 400 J/(kg·°C), λ = 209 kJ/kg</p>
-                    <p lang="ru" class="lang-content"><strong>ДАНО:</strong> m = 5 кг медь, t₁ = 20°C, c = 400 Дж/(кг·°C), λ = 209 кДж/кг</p>
-
-                    <p lang="kk" class="lang-content" style="margin-top: 10px;"><strong>ТАБУ:</strong> Q_толық (20°C дан 1083°C дейін плавимай)</p>
-                    <p lang="en" class="lang-content" style="margin-top: 10px;"><strong>FIND:</strong> Q_total (20°C to melting at 1083°C)</p>
-                    <p lang="ru" class="lang-content" style="margin-top: 10px;"><strong>НАЙТИ:</strong> Q_полное (от 20°C до плавления при 1083°C)</p>
-
-                    <p lang="kk" class="lang-content" style="margin-top: 10px;"><strong>ШЕШІМІ:</strong></p>
-                    <p lang="kk" class="lang-content">Q₁ = 400 × 5 × (1083-20) = 400 × 5 × 1063 = 2,126,000 Дж = 2126 кДж</p>
-                    <p lang="kk" class="lang-content">Q₂ = 209 × 5 = 1045 кДж = 1,045,000 Дж</p>
-                    <p lang="kk" class="lang-content">Q = 2126000 + 1045000 = <strong>3,171,000 Дж = 3171 кДж</strong></p>
-
-                    <p lang="en" class="lang-content" style="margin-top: 10px;"><strong>SOLUTION:</strong></p>
-                    <p lang="en" class="lang-content">Q₁ = 400 × 5 × (1083-20) = 2,126,000 J = 2126 kJ</p>
-                    <p lang="en" class="lang-content">Q₂ = 209 × 5 = 1,045,000 J = 1045 kJ</p>
-                    <p lang="en" class="lang-content">Q = 2126 + 1045 = <strong>3171 kJ</strong></p>
-
-                    <p lang="ru" class="lang-content" style="margin-top: 10px;"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="ru" class="lang-content">Q₁ = 400 × 5 × (1083-20) = 2,126,000 Дж = 2126 кДж</p>
-                    <p lang="ru" class="lang-content">Q₂ = 209 × 5 = 1,045,000 Дж = 1045 кДж</p>
-                    <p lang="ru" class="lang-content">Q = 2126 + 1045 = <strong>3171 кДж</strong></p>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fef3c7; border-radius: 1rem; border-top: 4px solid #ca8a04;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">ЫҚТИФИКАСЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">KEY FORMULA</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">КЛЮЧЕВАЯ ФОРМУЛА</h3>
-            <p lang="kk" class="lang-content text-sm">Q_толық = Q_нагреву + Q_плавила = c·m·ΔT + λ·m. Екі рәсімге энергия қажет. Практикалық!</p>
-            <p lang="en" class="lang-content text-sm">Q_total = Q_heating + Q_melting = c·m·ΔT + λ·m. Two processes need energy. Practical!</p>
-            <p lang="ru" class="lang-content text-sm">Q_полное = Q_нагрев + Q_плавл = c·m·ΔT + λ·m. Оба процесса требуют энергию. Практично!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

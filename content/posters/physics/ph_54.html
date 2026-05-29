@@ -1,206 +1,155 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Энергияны сақтау заңына қоса есептеу</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #ede9fe 0%, #f3e8ff 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #6b21a8; border-bottom: 3px solid #e9d5ff; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #9333ea; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #9333ea; background: white; color: #9333ea; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #9333ea; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #9333ea; color: white; text-align: center; }
-        .illustration { background: linear-gradient(135deg, #e9d5ff 0%, #f3e8ff 100%); padding: 25px; border-radius: 1rem; margin: 15px 0; text-align: center; }
-        svg { max-width: 100%; height: auto; }
-        .info-box { background: linear-gradient(135deg, #e9d5ff 0%, #f3e8ff 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #9333ea; margin: 10px 0; }
-        .example-card { background: #faf5ff; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #9333ea; font-size: 11px; margin-bottom: 10px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электрический ток. Источники тока</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-purple-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр тогы</span>
+<span lang="en" class="lang-content">Grade 9 · Electric current</span>
+<span lang="ru" class="lang-content">9 класс · Электрический ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электр тогы. Ток көздері</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Electric current. Sources of current</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электрический ток. Источники тока</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Энергияны Сақтау Заңына Есептеу</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Energy Conservation Problems</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Задачи на закон сохранения энергии</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-purple-100">Толық пошаговалы шешімі. Бағыттау (ДАНО), іздеу (НАЙТИ), шешімі (РЕШЕНИЕ). Энергияны сақтау заңын қолданып толық жауап! ТОЛЫҚ ЕСЕПТЕЛУ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-purple-100">Complete step-by-step solutions. Given (ДАНО), find (НАЙТИ), solution (РЕШЕНИЕ). Using energy conservation law for complete answer! FULL CALCULATION!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-purple-100">Полные пошаговые решения. Дано (ДАНО), найти (НАЙТИ), решение (РЕШЕНИЕ). Используя закон сохранения энергии для полного ответа! ПОЛНЫЙ РАСЧЁТ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Электр тогы дегеніміз не?</span>
+<span lang="en" class="lang-content">⚡ What is electric current?</span>
+<span lang="ru" class="lang-content">⚡ Что такое электрический ток?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электр тогы</b> — еркін зарядталған бөлшектердің <b>реттелген қозғалысы</b>. Металдарда — бұл <b>еркін электрондар</b>, тұзды суда — <b>иондар</b>, газдарда — <b>иондар + электрондар</b>. Үйкегеннен пайда болған заряд тұрақты тоқ бере алмайды — оған <b>үздіксіз қозғаушы күш</b> керек. Бұл — <b>ток көзі</b>.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Electric current</b> is the <b>ordered motion</b> of free charged particles. In metals — <b>free electrons</b>, in salt water — <b>ions</b>, in gases — <b>ions + electrons</b>. A rubbed body cannot deliver a steady current — you need a <b>continuous driver</b>: a <b>current source</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Электрический ток</b> — <b>направленное движение</b> свободных заряженных частиц. В металлах — это <b>свободные электроны</b>, в солёной воде — <b>ионы</b>, в газах — <b>ионы и электроны</b>. Тело, заряженное трением, не даст устойчивого тока — нужен <b>постоянный «двигатель»</b>: <b>источник тока</b>.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ТОЛЫҚ ЕСЕПТЕЛУ МЫСАЛДАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. COMPLETE SOLUTION EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Полные примеры решений</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">✅ <span lang="kk" class="lang-content">Тоқтың пайда болу шарттары:</span><span lang="en" class="lang-content">Conditions for current:</span><span lang="ru" class="lang-content">Условия существования тока:</span></p>
+<ol class="text-slate-700 text-sm list-decimal pl-6 space-y-1">
+<li><span lang="kk" class="lang-content">Заттың ішінде <b>еркін зарядтар</b> болуы керек</span><span lang="en" class="lang-content">Material must have <b>free charges</b></span><span lang="ru" class="lang-content">В веществе должны быть <b>свободные заряды</b></span></li>
+<li><span lang="kk" class="lang-content">Жабық <b>тізбек</b> болуы керек</span><span lang="en" class="lang-content">Closed <b>circuit</b> needed</span><span lang="ru" class="lang-content">Замкнутая <b>цепь</b></span></li>
+<li><span lang="kk" class="lang-content"><b>Электр өрісі</b> (ток көзі) болуы керек</span><span lang="en" class="lang-content"><b>Electric field</b> (source)</span><span lang="ru" class="lang-content"><b>Электрическое поле</b> (источник)</span></li>
+</ol>
+</div>
+</div>
 
-            <div class="rule-card">
-                <div class="example-card">
-                    <p lang="kk" class="lang-content"><strong>📌 ЕСЕПТЕУ 1: Төбеден құлатын дене</strong></p>
-                    <p lang="kk" class="lang-content"><strong>ДАНО:</strong> h = 20 м, m = 2 кг, g = 10 м/с²</p>
-                    <p lang="kk" class="lang-content"><strong>НАЙТИ:</strong> v - дененің жер жанасуындағы жылдамдығы</p>
-                    <p lang="kk" class="lang-content"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="kk" class="lang-content">1) Бастапқы энергия (төбеде): E₁ = E_пот = m·g·h = 2·10·20 = 400 Дж</p>
-                    <p lang="kk" class="lang-content">2) Соңғы энергия (жер): E₂ = E_кин = (m·v²)/2</p>
-                    <p lang="kk" class="lang-content">3) Энергияны сақтау: E₁ = E₂</p>
-                    <p lang="kk" class="lang-content">4) m·g·h = (m·v²)/2</p>
-                    <p lang="kk" class="lang-content">5) g·h = v²/2</p>
-                    <p lang="kk" class="lang-content">6) v² = 2·g·h = 2·10·20 = 400</p>
-                    <p lang="kk" class="lang-content"><strong>✅ ЖАУАП: v = 20 м/с</strong></p>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 180" style="width:200px">
+<rect x="20" y="60" width="200" height="60" fill="#cbd5e1" stroke="#1e293b" stroke-width="2"/>
+<g fill="#1e40af">
+<circle cx="40" cy="90" r="6"/><circle cx="80" cy="90" r="6"/><circle cx="120" cy="90" r="6"/><circle cx="160" cy="90" r="6"/><circle cx="200" cy="90" r="6"/>
+</g>
+<g stroke="#1e40af" stroke-width="2" fill="none">
+<line x1="40" y1="90" x2="75" y2="90" marker-end="url(#arr54)"/>
+<line x1="80" y1="90" x2="115" y2="90" marker-end="url(#arr54)"/>
+<line x1="120" y1="90" x2="155" y2="90" marker-end="url(#arr54)"/>
+<line x1="160" y1="90" x2="195" y2="90" marker-end="url(#arr54)"/>
+</g>
+<text x="120" y="40" text-anchor="middle" font-weight="700" font-size="14" fill="#4338ca">→ I →</text>
+<text x="40" y="105" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">e⁻</text>
+<defs><marker id="arr54" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e40af"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Электрондар бір бағытта қозғалады</span>
+<span lang="en" class="lang-content">Electrons move in one direction</span>
+<span lang="ru" class="lang-content">Электроны движутся в одну сторону</span></p>
+</div></div></section>
 
-                    <p lang="en" class="lang-content"><strong>📌 PROBLEM 1: Body falling from height</strong></p>
-                    <p lang="en" class="lang-content"><strong>GIVEN:</strong> h = 20 m, m = 2 kg, g = 10 m/s²</p>
-                    <p lang="en" class="lang-content"><strong>FIND:</strong> v - velocity when body reaches ground</p>
-                    <p lang="en" class="lang-content"><strong>SOLUTION:</strong></p>
-                    <p lang="en" class="lang-content">1) Initial energy (at top): E₁ = E_pot = m·g·h = 2·10·20 = 400 J</p>
-                    <p lang="en" class="lang-content">2) Final energy (ground): E₂ = E_kin = (m·v²)/2</p>
-                    <p lang="en" class="lang-content">3) Energy conservation: E₁ = E₂</p>
-                    <p lang="en" class="lang-content">4) m·g·h = (m·v²)/2</p>
-                    <p lang="en" class="lang-content">5) g·h = v²/2</p>
-                    <p lang="en" class="lang-content">6) v² = 2·g·h = 2·10·20 = 400</p>
-                    <p lang="en" class="lang-content"><strong>✅ ANSWER: v = 20 m/s</strong></p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">↔️ Тоқтың бағыты</span>
+<span lang="en" class="lang-content">↔️ Direction of current</span>
+<span lang="ru" class="lang-content">↔️ Направление тока</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b>Шартты түрде</b>: тоқтың бағыты — <b>оң зарядтардың</b> қозғалу бағыты, яғни <b>«+» полюстен «−» полюске</b> бағытталған (сыртқы тізбекте). Бірақ <b>шындығында</b> металдарда қозғалатын — <b>электрондар (теріс)</b>, олар <b>керісінше</b>: <b>«−» дан «+» -ке</b> жылжиды. Бұл тарихи шартты қабылдау — XIX ғасырда ғалымдар электронды әлі білмеген кезде енгізген.</span>
+<span lang="en" class="lang-content"><b>Conventionally</b>: current direction = direction of <b>positive charges</b>, i.e. from <b>«+» to «−»</b> in the external circuit. But <b>physically</b>, electrons (negative) flow <b>oppositely</b>: from <b>«−» to «+»</b>. The convention was set in the 19th century before electrons were known.</span>
+<span lang="ru" class="lang-content"><b>По договорённости</b>: направление тока = направление движения <b>положительных зарядов</b>, то есть от <b>«+» к «−»</b> по внешней цепи. Но <b>физически</b> в металлах движутся <b>электроны (отрицательные)</b> в <b>обратную</b> сторону: от <b>«−» к «+»</b>. Эта условность принята в XIX веке, до открытия электрона.</span></p>
+</div>
+</section>
 
-                    <p lang="ru" class="lang-content"><strong>📌 ЗАДАЧА 1: Тело падает с высоты</strong></p>
-                    <p lang="ru" class="lang-content"><strong>ДАНО:</strong> h = 20 м, m = 2 кг, g = 10 м/с²</p>
-                    <p lang="ru" class="lang-content"><strong>НАЙТИ:</strong> v - скорость при падении на землю</p>
-                    <p lang="ru" class="lang-content"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="ru" class="lang-content">1) Начальная энергия (на высоте): E₁ = E_пот = m·g·h = 2·10·20 = 400 Дж</p>
-                    <p lang="ru" class="lang-content">2) Конечная энергия (земля): E₂ = E_кин = (m·v²)/2</p>
-                    <p lang="ru" class="lang-content">3) Сохранение энергии: E₁ = E₂</p>
-                    <p lang="ru" class="lang-content">4) m·g·h = (m·v²)/2</p>
-                    <p lang="ru" class="lang-content">5) g·h = v²/2</p>
-                    <p lang="ru" class="lang-content">6) v² = 2·g·h = 2·10·20 = 400</p>
-                    <p lang="ru" class="lang-content"><strong>✅ ОТВЕТ: v = 20 м/с</strong></p>
-                </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔋 Ток көздерінің түрлері</span>
+<span lang="en" class="lang-content">🔋 Types of current sources</span>
+<span lang="ru" class="lang-content">🔋 Виды источников тока</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">🔋</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Гальваникалық элемент</span><span lang="en" class="lang-content">Galvanic cell</span><span lang="ru" class="lang-content">Гальванический элемент</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Химиялық энергия. <b>Батарейкалар</b>, телефондар.</span><span lang="en" class="lang-content">Chemical energy. <b>Batteries</b>, phones.</span><span lang="ru" class="lang-content">Химическая энергия. <b>Батарейки</b>, телефоны.</span></p></div>
 
-                <div class="example-card">
-                    <p lang="kk" class="lang-content"><strong>📌 ЕСЕПТЕУ 2: Жанама орны қозғалтқышы</strong></p>
-                    <p lang="kk" class="lang-content"><strong>ДАНО:</strong> v₁ = 10 м/с (бастапқы), v₂ = ? (соңғы), h = 5 м (жынсақ), m = 1 кг</p>
-                    <p lang="kk" class="lang-content"><strong>НАЙТИ:</strong> v₂ - жынсақтан шығысындағы жылдамдығы</p>
-                    <p lang="kk" class="lang-content"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="kk" class="lang-content">1) Бастапқы энергия: E₁ = (m·v₁²)/2 + m·g·h = (1·10²)/2 + 1·10·5 = 50 + 50 = 100 Дж</p>
-                    <p lang="kk" class="lang-content">2) Соңғы энергия: E₂ = (m·v₂²)/2 + 0 (жер деңгейінде)</p>
-                    <p lang="kk" class="lang-content">3) E₁ = E₂: 100 = (1·v₂²)/2</p>
-                    <p lang="kk" class="lang-content">4) v₂² = 200</p>
-                    <p lang="kk" class="lang-content"><strong>✅ ЖАУАП: v₂ = 14.1 м/с</strong></p>
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">🔌</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Аккумулятор</span><span lang="en" class="lang-content">Accumulator</span><span lang="ru" class="lang-content">Аккумулятор</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Қайта зарядталады. Машина, Tesla.</span><span lang="en" class="lang-content">Rechargeable. Cars, Tesla.</span><span lang="ru" class="lang-content">Можно зарядить. Авто, Tesla.</span></p></div>
 
-                    <p lang="en" class="lang-content"><strong>📌 PROBLEM 2: Ball rolling down hill</strong></p>
-                    <p lang="en" class="lang-content"><strong>GIVEN:</strong> v₁ = 10 m/s (initial), v₂ = ? (final), h = 5 m (height), m = 1 kg</p>
-                    <p lang="en" class="lang-content"><strong>FIND:</strong> v₂ - velocity at bottom of hill</p>
-                    <p lang="en" class="lang-content"><strong>SOLUTION:</strong></p>
-                    <p lang="en" class="lang-content">1) Initial energy: E₁ = (m·v₁²)/2 + m·g·h = (1·10²)/2 + 1·10·5 = 50 + 50 = 100 J</p>
-                    <p lang="en" class="lang-content">2) Final energy: E₂ = (m·v₂²)/2 + 0 (ground level)</p>
-                    <p lang="en" class="lang-content">3) E₁ = E₂: 100 = (1·v₂²)/2</p>
-                    <p lang="en" class="lang-content">4) v₂² = 200</p>
-                    <p lang="en" class="lang-content"><strong>✅ ANSWER: v₂ = 14.1 m/s</strong></p>
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">⚡</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Генератор</span><span lang="en" class="lang-content">Generator</span><span lang="ru" class="lang-content">Электрогенератор</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Механикалық энергия. ЖЭС, ГЭС, АЭС.</span><span lang="en" class="lang-content">Mechanical energy. Power plants.</span><span lang="ru" class="lang-content">Механическая энергия. ТЭС, ГЭС, АЭС.</span></p></div>
 
-                    <p lang="ru" class="lang-content"><strong>📌 ЗАДАЧА 2: Мяч скатывается с горы</strong></p>
-                    <p lang="ru" class="lang-content"><strong>ДАНО:</strong> v₁ = 10 м/с (начальная), v₂ = ? (конечная), h = 5 м (высота), m = 1 кг</p>
-                    <p lang="ru" class="lang-content"><strong>НАЙТИ:</strong> v₂ - скорость у подножия горы</p>
-                    <p lang="ru" class="lang-content"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="ru" class="lang-content">1) Начальная энергия: E₁ = (m·v₁²)/2 + m·g·h = (1·10²)/2 + 1·10·5 = 50 + 50 = 100 Дж</p>
-                    <p lang="ru" class="lang-content">2) Конечная энергия: E₂ = (m·v₂²)/2 + 0 (уровень земли)</p>
-                    <p lang="ru" class="lang-content">3) E₁ = E₂: 100 = (1·v₂²)/2</p>
-                    <p lang="ru" class="lang-content">4) v₂² = 200</p>
-                    <p lang="ru" class="lang-content"><strong>✅ ОТВЕТ: v₂ = 14.1 м/с</strong></p>
-                </div>
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">☀️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Күн батареясы</span><span lang="en" class="lang-content">Solar cell</span><span lang="ru" class="lang-content">Солнечная батарея</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Жарық энергиясы. Ұялы, спутник.</span><span lang="en" class="lang-content">Light energy. Phones, satellites.</span><span lang="ru" class="lang-content">Свет. Телефоны, спутники.</span></p></div>
 
-                <div class="example-card">
-                    <p lang="kk" class="lang-content"><strong>📌 ЕСЕПТЕУ 3: Жүргіндіктің энергиясы</strong></p>
-                    <p lang="kk" class="lang-content"><strong>ДАНО:</strong> m = 50 кг, v = 5 м/с</p>
-                    <p lang="kk" class="lang-content"><strong>НАЙТИ:</strong> E_кин - адамдың кинетикалық энергиясы</p>
-                    <p lang="kk" class="lang-content"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="kk" class="lang-content">1) E_кин = (m·v²)/2</p>
-                    <p lang="kk" class="lang-content">2) E_кин = (50·5²)/2 = (50·25)/2 = 1250/2 = 625 Дж</p>
-                    <p lang="kk" class="lang-content"><strong>✅ ЖАУАП: E = 625 Дж</strong></p>
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">🌡</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Термоэлемент</span><span lang="en" class="lang-content">Thermocouple</span><span lang="ru" class="lang-content">Термоэлемент</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Жылулық айырмашылық → тоқ</span><span lang="en" class="lang-content">Heat difference → current</span><span lang="ru" class="lang-content">Разность T → ток</span></p></div>
 
-                    <p lang="en" class="lang-content"><strong>📌 PROBLEM 3: Person's kinetic energy</strong></p>
-                    <p lang="en" class="lang-content"><strong>GIVEN:</strong> m = 50 kg, v = 5 m/s</p>
-                    <p lang="en" class="lang-content"><strong>FIND:</strong> E_kin - kinetic energy of person</strong></p>
-                    <p lang="en" class="lang-content"><strong>SOLUTION:</strong></p>
-                    <p lang="en" class="lang-content">1) E_kin = (m·v²)/2</p>
-                    <p lang="en" class="lang-content">2) E_kin = (50·5²)/2 = (50·25)/2 = 1250/2 = 625 J</p>
-                    <p lang="en" class="lang-content"><strong>✅ ANSWER: E = 625 J</strong></p>
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">💡</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Фотоэлемент</span><span lang="en" class="lang-content">Photocell</span><span lang="ru" class="lang-content">Фотоэлемент</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Жарық → ток (Эйнштейн!)</span><span lang="en" class="lang-content">Light → current</span><span lang="ru" class="lang-content">Свет → ток</span></p></div>
 
-                    <p lang="ru" class="lang-content"><strong>📌 ЗАДАЧА 3: Кинетическая энергия человека</strong></p>
-                    <p lang="ru" class="lang-content"><strong>ДАНО:</strong> m = 50 кг, v = 5 м/с</p>
-                    <p lang="ru" class="lang-content"><strong>НАЙТИ:</strong> E_кин - кинетическая энергия человека</p>
-                    <p lang="ru" class="lang-content"><strong>РЕШЕНИЕ:</strong></p>
-                    <p lang="ru" class="lang-content">1) E_кин = (m·v²)/2</p>
-                    <p lang="ru" class="lang-content">2) E_кин = (50·5²)/2 = (50·25)/2 = 1250/2 = 625 Дж</p>
-                    <p lang="ru" class="lang-content"><strong>✅ ОТВЕТ: E = 625 Дж</strong></p>
-                </div>
-            </div>
-        </section>
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">🎸</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Пьезоэлемент</span><span lang="en" class="lang-content">Piezo</span><span lang="ru" class="lang-content">Пьезоэлемент</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Қысым → тоқ. Зажигалка!</span><span lang="en" class="lang-content">Pressure → current. Lighter!</span><span lang="ru" class="lang-content">Давление → ток. Зажигалка!</span></p></div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ШЕШІМІНІҢ ҚАДАМЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. STEPS FOR SOLVING</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Этапы решения</h2>
+<div class="card rounded-2xl p-4 text-center"><div class="text-5xl mb-2">⛽</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Отын элементі</span><span lang="en" class="lang-content">Fuel cell</span><span lang="ru" class="lang-content">Топливный элемент</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">H₂ + O₂ → электр</span><span lang="en" class="lang-content">H₂ + O₂ → electricity</span><span lang="ru" class="lang-content">H₂ + O₂ → ток</span></p></div>
+</div>
+</section>
 
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>1️⃣ ДАНО:</strong> Барлық берілген мәндерді жазу (масса, биіктігі, жылдамдығы, g)</p>
-                <p lang="kk" class="lang-content text-sm"><strong>2️⃣ НАЙТИ:</strong> Іздейтін мәнді (қандай энергия? қандай жылдамдығы?)</p>
-                <p lang="kk" class="lang-content text-sm"><strong>3️⃣ ФОРМУЛАЛАР:</strong> E_кин = (m·v²)/2 | E_пот = m·g·h | E_сағ = E_кин + E_пот</p>
-                <p lang="kk" class="lang-content text-sm"><strong>4️⃣ ЕСЕПТЕУ:</strong> Қадам-қадам есептеуін жасау (сандарын ауыстыру)</p>
-                <p lang="kk" class="lang-content text-sm"><strong>5️⃣ ЖАУАП:</strong> Соңғы мәнді және өлшем бірлігін жазу</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔋 Гальваникалық элементтің құрылысы</span>
+<span lang="en" class="lang-content">🔋 Galvanic cell — how it works</span>
+<span lang="ru" class="lang-content">🔋 Устройство гальванического элемента</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b>1799 жылы Алессандро Вольта</b> алғашқы тұрақты ток көзін — <b>Вольта бағанасын</b> ойлап тапты: мыс пен мырыш дискілерін кезек-кезек қойды, арасына тұзды суға малынған матаны салды. Қазіргі батарейка — Вольта элементінің ұрпағы. Ішінде <b>2 электрод</b> (анод және катод) пен <b>электролит</b> бар. Химиялық реакция кезінде анодта электрондар жинақталып, тізбек арқылы катодқа ағады. Қазіргі ұялы телефондарда — <b>литий-иондық</b> аккумуляторлар.</span>
+<span lang="en" class="lang-content">In <b>1799 Alessandro Volta</b> invented the first steady-current source — the <b>Volta pile</b>: alternating copper and zinc disks separated by salt-water cloth. The modern battery is a Volta descendant. Inside — <b>two electrodes</b> (anode and cathode) and an <b>electrolyte</b>. A chemical reaction builds electrons on the anode, which flow through the circuit to the cathode. Today's phones use <b>lithium-ion</b> cells.</span>
+<span lang="ru" class="lang-content">В <b>1799 г. Алессандро Вольта</b> создал первый источник постоянного тока — <b>Вольтов столб</b>: чередующиеся медные и цинковые диски с тканью в солёной воде между ними. Современная батарейка — потомок столба Вольта. Внутри — <b>два электрода</b> (анод и катод) и <b>электролит</b>. Химическая реакция собирает электроны на аноде, они идут по цепи к катоду. В современных телефонах — <b>литий-ионные</b> аккумуляторы.</span></p>
+</div>
+</section>
 
-                <p lang="en" class="lang-content text-sm"><strong>1️⃣ GIVEN:</strong> Write all given values (mass, height, velocity, g)</p>
-                <p lang="en" class="lang-content text-sm"><strong>2️⃣ FIND:</strong> Write what to find (what energy? what velocity?)</p>
-                <p lang="en" class="lang-content text-sm"><strong>3️⃣ FORMULAS:</strong> E_kin = (m·v²)/2 | E_pot = m·g·h | E_total = E_kin + E_pot</p>
-                <p lang="en" class="lang-content text-sm"><strong>4️⃣ CALCULATION:</strong> Do step-by-step calculation (substitute numbers)</p>
-                <p lang="en" class="lang-content text-sm"><strong>5️⃣ ANSWER:</strong> Write final value and unit of measurement</p>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Реттелген қозғалыс</span><span lang="en" class="lang-content">Ordered motion</span><span lang="ru" class="lang-content">Направленное движение</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Еркін зарядтардың</span><span lang="en" class="lang-content">Of free charges</span><span lang="ru" class="lang-content">Свободных зарядов</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">↔️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">+ → −</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Шартты тоқ бағыты</span><span lang="en" class="lang-content">Conventional direction</span><span lang="ru" class="lang-content">Условное направление</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔋</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Ток көзі</span><span lang="en" class="lang-content">Source</span><span lang="ru" class="lang-content">Источник</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Энергия береді</span><span lang="en" class="lang-content">Provides energy</span><span lang="ru" class="lang-content">Даёт энергию</span></p></div>
+</div></footer>
 
-                <p lang="ru" class="lang-content text-sm"><strong>1️⃣ ДАНО:</strong> Написать все данные значения (масса, высота, скорость, g)</p>
-                <p lang="ru" class="lang-content text-sm"><strong>2️⃣ НАЙТИ:</strong> Написать что найти (какая энергия? какая скорость?)</p>
-                <p lang="ru" class="lang-content text-sm"><strong>3️⃣ ФОРМУЛЫ:</strong> E_кин = (m·v²)/2 | E_пот = m·g·h | E_общ = E_кин + E_пот</p>
-                <p lang="ru" class="lang-content text-sm"><strong>4️⃣ РАСЧЁТ:</strong> Делать пошаговый расчёт (подставлять числа)</p>
-                <p lang="ru" class="lang-content text-sm"><strong>5️⃣ ОТВЕТ:</strong> Написать конечное значение и единицу измерения</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #e9d5ff; border-radius: 1rem; border-top: 4px solid #9333ea;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-purple-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Энергияны сақтау заңын қолданып есептеуді орындау. Дайым бастапқы және соңғы энергияны салыстыру (E₁ = E₂). Толық шешімін жаза беріңіз! Физика - логикалық ойлау!</p>
-            <p lang="en" class="lang-content text-sm">Solve problems using energy conservation law. Always compare initial and final energy (E₁ = E₂). Write complete solution! Physics is logical thinking!</p>
-            <p lang="ru" class="lang-content text-sm">Решайте задачи используя закон сохранения энергии. Всегда сравнивайте начальную и конечную энергию (E₁ = E₂). Пишите полное решение! Физика - логическое мышление!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

@@ -1,171 +1,173 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галилео Эксперимент - Теплоёмкость</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fce7f3 0%, #fbcfe8 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #db2777 0%, #831843 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #831843; border-bottom: 3px solid #fbcfe8; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #db2777; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #db2777; background: white; color: #db2777; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #db2777; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        .info-box { background: linear-gradient(135deg, #fbcfe8 0%, #fce7f3 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #db2777; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .exp-card { background: #fdf2f8; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #db2777; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Отражение света. Законы отражения. Зеркала</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-pink-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-amber-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Геометриялық оптика</span>
+<span lang="en" class="lang-content">Grade 9 · Geometric optics</span>
+<span lang="ru" class="lang-content">9 класс · Геометрическая оптика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Жарықтың шағылуы. Шағылу заңдары. Айналар</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Reflection of light. Laws of reflection. Mirrors</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Отражение света. Законы отражения. Зеркала</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Галилео Эксперименті</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Galileo's Experiment</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Эксперимент Галилео</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-pink-100">Классикалық физика эксперименті. Таза құрамасындағы. Теплоёмкость анықтамасы. ТАРИХИЛЫҚ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-pink-100">Classic physics experiment. Simple apparatus. Heat capacity discovery. HISTORICAL!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-pink-100">Классический физический эксперимент. Простое оборудование. Открытие теплоёмкости. ИСТОРИЧЕСКОЕ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🪞 Шағылу заңдары</span>
+<span lang="en" class="lang-content">🪞 Laws of reflection</span>
+<span lang="ru" class="lang-content">🪞 Законы отражения</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Жарық сәулесі тегіс бетке түскенде <b>шағылады</b> — бағытын <b>өзгертіп</b>, сол ортаға қайта оралады. Тегіс бетке (айна) — <b>айналық шағылу</b>. Кедір-бұдыр бетке — <b>диффузиялық</b> (шашыранды) шағылу. Заттарды біз шашыраған жарық арқасында <b>көреміз!</b></span>
+<span lang="en" class="lang-content">When light hits a surface, it <b>reflects</b> — changes direction and returns to the same medium. From a smooth surface — <b>specular</b>; from a rough one — <b>diffuse</b>. We see most objects thanks to <b>diffuse reflection</b>!</span>
+<span lang="ru" class="lang-content">Свет, падая на поверхность, <b>отражается</b> — меняет направление и остаётся в той же среде. От гладкой — <b>зеркальное</b>, от шероховатой — <b>диффузное</b> отражение. Большинство предметов мы видим именно благодаря <b>диффузному</b>!</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ГАЛИЛЕО БИОГРАФИЯ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. GALILEO BIOGRAPHY</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Биография Галилео</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-amber-900 font-bold mb-2">📜 <span lang="kk" class="lang-content">Заңдар:</span><span lang="en" class="lang-content">Laws:</span><span lang="ru" class="lang-content">Законы:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><b>1.</b> <span lang="kk" class="lang-content">Түскен сәуле, шағылған сәуле және <b>нормаль</b> бір <b>жазықтықта</b> жатады.</span><span lang="en" class="lang-content">Incident ray, reflected ray and <b>normal</b> lie in one <b>plane</b>.</span><span lang="ru" class="lang-content">Падающий и отражённый лучи и <b>нормаль</b> лежат в одной <b>плоскости</b>.</span></li>
+<li><b>2.</b> <span lang="kk" class="lang-content"><b>Түсу бұрышы = шағылу бұрышы</b>: ∠α = ∠β</span><span lang="en" class="lang-content"><b>Angle of incidence = angle of reflection</b>: ∠α = ∠β</span><span lang="ru" class="lang-content"><b>Угол падения = углу отражения</b>: ∠α = ∠β</span></li>
+</ul>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>🇮🇹 ГАЛИЛЕО ГАЛИЛЕЙ (1564-1642)</strong></p>
-                <p lang="kk" class="lang-content text-sm">Италиялық физик, астроном. Телескоп ойлап табты. Физика революциясы құрамасындағы. Тиеу қысымы ойлап таба.</p>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center">
+<svg width="320" height="220" viewBox="0 0 320 220">
+<line x1="20" y1="180" x2="300" y2="180" stroke="#1e293b" stroke-width="3"/>
+<g stroke="#475569" stroke-width="1">
+<line x1="30" y1="180" x2="20" y2="195"/>
+<line x1="60" y1="180" x2="50" y2="195"/>
+<line x1="90" y1="180" x2="80" y2="195"/>
+<line x1="120" y1="180" x2="110" y2="195"/>
+<line x1="160" y1="180" x2="150" y2="195"/>
+<line x1="200" y1="180" x2="190" y2="195"/>
+<line x1="240" y1="180" x2="230" y2="195"/>
+<line x1="280" y1="180" x2="270" y2="195"/>
+</g>
+<line x1="160" y1="180" x2="160" y2="40" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="60" y1="60" x2="160" y2="180" stroke="#dc2626" stroke-width="2.5"/>
+<polygon points="160,180 152,168 144,176" fill="#dc2626"/>
+<line x1="160" y1="180" x2="260" y2="60" stroke="#16a34a" stroke-width="2.5"/>
+<polygon points="260,60 250,72 246,60" fill="#16a34a"/>
+<path d="M 160,140 A 40,40 0 0 1 132,167" stroke="#dc2626" stroke-width="1.5" fill="none"/>
+<text x="140" y="160" font-size="14" fill="#dc2626" font-weight="bold">α</text>
+<path d="M 160,140 A 40,40 0 0 0 188,167" stroke="#16a34a" stroke-width="1.5" fill="none"/>
+<text x="172" y="160" font-size="14" fill="#16a34a" font-weight="bold">β</text>
+<text x="55" y="55" font-size="12" fill="#dc2626" font-weight="bold">incident</text>
+<text x="220" y="50" font-size="12" fill="#16a34a" font-weight="bold">reflected</text>
+<text x="170" y="50" font-size="11" fill="#475569">normal</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-1"><span lang="kk" class="lang-content">α = β</span><span lang="en" class="lang-content">α = β</span><span lang="ru" class="lang-content">α = β</span></p>
+</div>
+</div>
+</section>
 
-                <p lang="en" class="lang-content text-sm"><strong>🇮🇹 GALILEO GALILEI (1564-1642)</strong></p>
-                <p lang="en" class="lang-content text-sm">Italian physicist, astronomer. Invented telescope. Started physics revolution. Discovered motion principles.</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🪞 Тегіс айна</span>
+<span lang="en" class="lang-content">🪞 Plane mirror</span>
+<span lang="ru" class="lang-content">🪞 Плоское зеркало</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-3">🔍 <span lang="kk" class="lang-content">Бейненің қасиеттері:</span><span lang="en" class="lang-content">Image properties:</span><span lang="ru" class="lang-content">Свойства изображения:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li>✨ <span lang="kk" class="lang-content"><b>Жалған</b> (мнимое) — сәулелер қиылыспайды</span><span lang="en" class="lang-content"><b>Virtual</b> — rays don't actually meet</span><span lang="ru" class="lang-content"><b>Мнимое</b> — лучи фактически не пересекаются</span></li>
+<li>📏 <span lang="kk" class="lang-content"><b>Тіке</b> (тура), затпен бірдей өлшемде</span><span lang="en" class="lang-content"><b>Upright</b>, same size as object</span><span lang="ru" class="lang-content"><b>Прямое</b>, в натуральную величину</span></li>
+<li>🪞 <span lang="kk" class="lang-content">Айнадан зат қашықтығы = бейне қашықтығы</span><span lang="en" class="lang-content">Distance to mirror = distance behind it</span><span lang="ru" class="lang-content">Расстояние до зеркала = расстояние за ним</span></li>
+<li>🔄 <span lang="kk" class="lang-content"><b>Сол-оң ауысады</b>: жазу шегеру бейнеленеді!</span><span lang="en" class="lang-content"><b>Left–right reversed</b>: writing appears mirrored!</span><span lang="ru" class="lang-content"><b>Левое и правое меняются</b>: надпись зеркальна!</span></li>
+</ul>
+</div>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-2">🚑 <span lang="kk" class="lang-content">Неге AMBULANCE кері жазылған?</span><span lang="en" class="lang-content">Why "AMBULANCE" looks mirrored?</span><span lang="ru" class="lang-content">Почему "AMBULANCE" пишут зеркально?</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Жүргізуші <b>артқы көзәйнектен</b> қарап, оны <b>тура</b> оқуы үшін капотта <b>«ƎƆИAJUᙠMA»</b> деп жазады! Айналық бейне сол-оңды ауыстырады.</span>
+<span lang="en" class="lang-content">So drivers read it <b>correctly</b> in their <b>rear-view mirror</b>! Mirror reverses left and right.</span>
+<span lang="ru" class="lang-content">Чтобы водители <b>правильно</b> прочитали в <b>зеркале заднего вида</b>! Зеркало переворачивает право и лево.</span></p>
+</div>
+</div>
+</section>
 
-                <p lang="ru" class="lang-content text-sm"><strong>🇮🇹 ГАЛИЛЕО ГАЛИЛЕЙ (1564-1642)</strong></p>
-                <p lang="ru" class="lang-content text-sm">Итальянский физик, астроном. Изобрёл телескоп. Начал революцию в физике. Открыл принципы движения.</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌀 Сфералық айналар</span>
+<span lang="en" class="lang-content">🌀 Curved mirrors</span>
+<span lang="ru" class="lang-content">🌀 Сферические зеркала</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-2">🔵 <span lang="kk" class="lang-content">Ойыс (жинаушы)</span><span lang="en" class="lang-content">Concave (converging)</span><span lang="ru" class="lang-content">Вогнутое (собирающее)</span></p>
+<p class="text-slate-700 text-sm mb-2">
+<span lang="kk" class="lang-content">Сәулелерді <b>жинайды</b> — фокусқа бағыттайды. Қашықтыққа байланысты бейне <b>үлкен</b> немесе <b>кіші, ауысқан</b> болуы мүмкін.</span>
+<span lang="en" class="lang-content"><b>Converges</b> rays to a focus. Image can be enlarged or smaller, inverted, depending on distance.</span>
+<span lang="ru" class="lang-content"><b>Собирает</b> лучи в фокус. Изображение может быть <b>увеличенным</b> или уменьшенным, перевёрнутым.</span></p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Қолдану: косметикалық айна, прожектор, теңіз шамшырақтары, телескоптар.</span><span lang="en" class="lang-content">Used in shaving mirrors, headlights, lighthouses, telescopes.</span><span lang="ru" class="lang-content">Применение: косметические зеркала, фары, маяки, телескопы.</span></p>
+</div>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-2">🔴 <span lang="kk" class="lang-content">Дөңес (шашыратушы)</span><span lang="en" class="lang-content">Convex (diverging)</span><span lang="ru" class="lang-content">Выпуклое (рассеивающее)</span></p>
+<p class="text-slate-700 text-sm mb-2">
+<span lang="kk" class="lang-content">Сәулелерді <b>шашыратады</b>. Бейне әрқашан <b>жалған, тіке, кіші</b> — кең шолу мүмкіндігі.</span>
+<span lang="en" class="lang-content"><b>Diverges</b> rays. Image always <b>virtual, upright, smaller</b> — wide field of view.</span>
+<span lang="ru" class="lang-content"><b>Рассеивает</b> лучи. Изображение всегда <b>мнимое, прямое, уменьшенное</b> — широкий обзор.</span></p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Қолдану: автокөліктің бүйір айналары, дүкендердегі қауіпсіздік айналары, жол бұрылыстары.</span><span lang="en" class="lang-content">Used as car side mirrors, store security mirrors, road bend mirrors.</span><span lang="ru" class="lang-content">Применение: боковые зеркала авто, охранные зеркала в магазинах, на поворотах дорог.</span></p>
+</div>
+</div>
+</section>
 
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>⭐ ҚҰРЫЛЫҚТЫ:</strong> Наклонная плоскость (закон движения), Маятник (период), Температура (первый градусник)</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>⭐ ACHIEVEMENTS:</strong> Inclined plane (motion law), Pendulum (period), Temperature (first thermometer)</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>⭐ ДОСТИЖЕНИЯ:</strong> Наклонная плоскость (закон движения), Маятник (период), Температура (первый градусник)</p>
-            </div>
-        </section>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-amber-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Жарық сәулесі айнаға 30° бұрышпен (нормальдан) түсті. Сәулелер арасындағы бұрышты табыңыз.</span>
+<span lang="en" class="lang-content">A ray hits a mirror at 30° (from normal). Find the angle between incident and reflected rays.</span>
+<span lang="ru" class="lang-content">Луч падает на зеркало под углом 30° к нормали. Найти угол между падающим и отражённым лучами.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-amber-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>α = 30°</li><li>γ — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-amber-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.1rem">
+β = α = 30°
+<br/>γ = α + β = <span class="num">60°</span>
+</div>
+<div class="badge badge-emerald mt-3">✅ γ = 60°</div>
+</div></div></div>
+</section>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. КЛАССИКАЛЫҚ ЭКСПЕРИМЕНТ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. CLASSIC EXPERIMENT</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Классический эксперимент</h2>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-amber-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📜</div>
+<p class="heading-font text-xl text-amber-700 mb-2">α = β</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Шағылу заңы</span><span lang="en" class="lang-content">Law of reflection</span><span lang="ru" class="lang-content">Закон отражения</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🪞</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">Тегіс айна</span><span lang="en" class="lang-content">Plane mirror</span><span lang="ru" class="lang-content">Плоское зеркало</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жалған, тура, тең</span><span lang="en" class="lang-content">Virtual, upright, equal</span><span lang="ru" class="lang-content">Мнимое, прямое, равное</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌀</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">Сфералық</span><span lang="en" class="lang-content">Spherical</span><span lang="ru" class="lang-content">Сферические</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Ойыс / Дөңес</span><span lang="en" class="lang-content">Concave / Convex</span><span lang="ru" class="lang-content">Вогн. / Выпукл.</span></p></div>
+</div></footer>
 
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="exp-card">
-                        <p lang="kk" class="lang-content"><strong>🔬 ҚҰРАМАСЫНДАҒЫ</strong></p>
-                        <p lang="kk" class="lang-content">• Су (500мл)</p>
-                        <p lang="kk" class="lang-content">• Темір (100г)</p>
-                        <p lang="kk" class="lang-content">• Термометр (ескі)</p>
-                        <p lang="kk" class="lang-content">• Ыстық плита немесе рогалка</p>
-
-                        <p lang="en" class="lang-content"><strong>🔬 APPARATUS</strong></p>
-                        <p lang="en" class="lang-content">• Water (500ml)</p>
-                        <p lang="en" class="lang-content">• Iron (100g)</p>
-                        <p lang="en" class="lang-content">• Thermometer (old)</p>
-                        <p lang="en" class="lang-content">• Hot stove or flame</p>
-
-                        <p lang="ru" class="lang-content"><strong>🔬 ОБОРУДОВАНИЕ</strong></p>
-                        <p lang="ru" class="lang-content">• Вода (500мл)</p>
-                        <p lang="ru" class="lang-content">• Железо (100г)</p>
-                        <p lang="ru" class="lang-content">• Термометр (старый)</p>
-                        <p lang="ru" class="lang-content">• Горячая плита</p>
-                    </div>
-
-                    <div class="exp-card">
-                        <p lang="kk" class="lang-content"><strong>📋 ЖҮРГІТУ</strong></p>
-                        <p lang="kk" class="lang-content">1. Су температурасы (t₁ = 20°C)</p>
-                        <p lang="kk" class="lang-content">2. Темір плитада қыздыру (90-100°C)</p>
-                        <p lang="kk" class="lang-content">3. Ыстық темір сұйға құю</p>
-                        <p lang="kk" class="lang-content">4. Соңғы температурасы (t₃ = 25°C)</p>
-
-                        <p lang="en" class="lang-content"><strong>📋 PROCEDURE</strong></p>
-                        <p lang="en" class="lang-content">1. Initial water temp (t₁ = 20°C)</p>
-                        <p lang="en" class="lang-content">2. Heat iron (90-100°C)</p>
-                        <p lang="en" class="lang-content">3. Drop iron in water</p>
-                        <p lang="en" class="lang-content">4. Final temp (t₃ = 25°C)</p>
-
-                        <p lang="ru" class="lang-content"><strong>📋 ХОД РАБОТЫ</strong></p>
-                        <p lang="ru" class="lang-content">1. Начальная температура воды (t₁ = 20°C)</p>
-                        <p lang="ru" class="lang-content">2. Нагреть железо (90-100°C)</p>
-                        <p lang="ru" class="lang-content">3. Опустить железо в воду</p>
-                        <p lang="ru" class="lang-content">4. Финальная температура (t₃ = 25°C)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ЕСЕПТЕУ МЫСАЛЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. CALCULATION EXAMPLE</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Пример расчёта</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>ӨЛШЕНГЕН:</strong> m_су = 0.5 кг | m_темір = 0.1 кг | t₁ = 20°C | t₂ = 100°C | t₃ = 25°C | c_су = 4200</p>
-                <p lang="en" class="lang-content text-sm"><strong>MEASURED:</strong> m_water = 0.5 kg | m_iron = 0.1 kg | t₁ = 20°C | t₂ = 100°C | t₃ = 25°C | c_water = 4200</p>
-                <p lang="ru" class="lang-content text-sm"><strong>ИЗМЕРЕННЫЕ:</strong> m_воды = 0.5 кг | m_железа = 0.1 кг | t₁ = 20°C | t₂ = 100°C | t₃ = 25°C | c_воды = 4200</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>ЕСЕПТЕУ:</strong></p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>CALCULATION:</strong></p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>РАСЧЁТ:</strong></p>
-
-                <p lang="kk" class="lang-content text-sm">Q_су = 0.5 × 4200 × (25-20) = 10500 Дж</p>
-                <p lang="en" class="lang-content text-sm">Q_water = 0.5 × 4200 × (25-20) = 10500 J</p>
-                <p lang="ru" class="lang-content text-sm">Q_воды = 0.5 × 4200 × (25-20) = 10500 Дж</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 8px;">c_темір = Q_су / (m_темір × (t₂-t₃)) = 10500 / (0.1 × 75) = 1400 Дж/(кг·°C)</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 8px;">c_iron = Q_water / (m_iron × (t₂-t₃)) = 10500 / (0.1 × 75) = 1400 J/(kg·°C)</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 8px;">c_железо = Q_воды / (m_железа × (t₂-t₃)) = 10500 / (0.1 × 75) = 1400 Дж/(кг·°C)</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>✅ НӘТИЖЕСІ:</strong> c_темір ≈ 460 Дж/(кг·°C) - эксперименті точна! (±3% қателігі)</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>✅ RESULT:</strong> c_iron ≈ 460 J/(kg·°C) - experiment accurate! (±3% error)</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>✅ РЕЗУЛЬТАТ:</strong> c_железо ≈ 460 Дж/(кг·°C) - эксперимент точен! (±3% ошибки)</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fbcfe8; border-radius: 1rem; border-top: 4px solid #db2777;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-pink-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-pink-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-pink-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Галилео классикалық экспериментінде - таза құрамасындағы, дәл өлшеу. Теңдік принципі: Q_су = Q_темір. Қарапайым оборудование - дәл нәтиже. Тарихилық эксперимент = қазіргі физика!</p>
-            <p lang="en" class="lang-content text-sm">Galileo's classic experiment - simple setup, accurate measurement. Balance principle: Q_water = Q_iron. Simple apparatus - precise result. Historical experiment = modern physics!</p>
-            <p lang="ru" class="lang-content text-sm">Классический эксперимент Галилео - простая установка, точные измерения. Принцип баланса: Q_воды = Q_железа. Простое оборудование - точный результат. Исторический эксперимент = современная физика!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

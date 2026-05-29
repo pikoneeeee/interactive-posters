@@ -1,366 +1,170 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бөлмені жылыту жүйесі / Отопление - Interactive Poster</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <link rel="stylesheet" href="../../libs/fonts.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .lang-content { display: none; }
-        body.lang-kk .content-kk, body.lang-en .content-en, body.lang-ru .content-ru {
-            display: block; animation: fadeIn 0.4s ease-out;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Flow animation for pipes */
-        @keyframes flow {
-            from { stroke-dashoffset: 20; }
-            to { stroke-dashoffset: 0; }
-        }
-        .flow-anim {
-            stroke-dasharray: 5;
-            animation: flow 1s linear infinite;
-        }
-
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white; color: black; }
-            .bg-orange-600 { background: white !important; color: black !important; border: 2px solid black; }
-            .text-white { color: black !important; }
-            .card { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; }
-        }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Последовательное соединение проводников</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 lang-kk" id="main-body">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<nav class="fixed top-0 w-full bg-white/95 backdrop-blur shadow-sm z-50 border-b border-slate-200 no-print">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold">H</div>
-                <span class="font-bold text-xl text-slate-800">Home<span class="text-orange-600">Heat</span></span>
-            </div>
-            <div class="flex gap-1 bg-slate-100 p-1 rounded-lg">
-                <button onclick="setLang('kk')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-kk">Қаз</button>
-                <button onclick="setLang('ru')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-ru">Рус</button>
-                <button onclick="setLang('en')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-en">Eng</button>
-            </div>
-        </div>
-    </nav>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр тогы</span>
+<span lang="en" class="lang-content">Grade 9 · Electric current</span>
+<span lang="ru" class="lang-content">9 класс · Электрический ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Өткізгіштердің тізбектей қосылуы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Series connection of conductors</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Последовательное соединение проводников</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-    <main class="max-w-7xl mx-auto px-4 pt-24 pb-12 space-y-8">
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔗 Тізбектей қосылу дегеніміз не?</span>
+<span lang="en" class="lang-content">🔗 What is series connection?</span>
+<span lang="ru" class="lang-content">🔗 Что такое последовательное соединение?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Тізбектей қосылу</b> — өткізгіштер бір-бірінен <b>кейін</b>, бір тізбекте жалғанады. Барлық элементтер <b>«бір жолды» құрады</b>: тоқ бірінен шығып, екіншісіне кіреді, сосын үшіншісіне... Электрондар <b>үздіксіз бір жолмен</b> жүреді. Жаңа жыл шамшырақтары (гирлянда), бір шамды біріктірген қарапайым тізбек — типтік мысалдар.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Series connection</b> means conductors are joined <b>one after another</b> in a single loop. All elements form <b>one path</b>: current leaves one and enters the next. Electrons travel a <b>continuous single route</b>. Old-style Christmas lights and a single-bulb circuit are typical examples.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Последовательное соединение</b> — проводники включены <b>один за другим</b> в одну цепь. Все элементы образуют <b>«единый путь»</b>: ток выходит из одного и входит в следующий. Электроны идут по <b>одной непрерывной дороге</b>. Новогодняя гирлянда «ёлочка» — классический пример.</span></p>
 
-        <header class="bg-gradient-to-r from-orange-600 to-red-700 rounded-3xl p-8 shadow-xl text-white relative overflow-hidden card">
-            <div class="relative z-10">
-                <div class="content-kk">
-                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Бөлмені жылыту принципі</h1>
-                    <p class="text-orange-100 text-xl max-w-3xl">Конвекция, өткізгіштік және сәулеленудің физикасы үйдегі жайлылық үшін.</p>
-                </div>
-                <div class="content-ru">
-                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Принцип действия отопления</h1>
-                    <p class="text-orange-100 text-xl max-w-3xl">Физика конвекции, проводимости и излучения для домашнего комфорта.</p>
-                </div>
-                <div class="content-en">
-                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Principle of Room Heating</h1>
-                    <p class="text-orange-100 text-xl max-w-3xl">The physics of convection, conduction, and radiation for home comfort.</p>
-                </div>
-            </div>
-            <svg class="absolute right-10 bottom-0 h-48 opacity-20" viewBox="0 0 200 150">
-                <path d="M10 150 L 10 60 L 100 10 L 190 60 L 190 150 Z" fill="white"/>
-                <rect x="80" y="90" width="40" height="60" fill="#cc4400" opacity="0.5"/>
-                <rect x="30" y="80" width="30" height="30" fill="#cc4400" opacity="0.5"/>
-                <rect x="140" y="80" width="30" height="30" fill="#cc4400" opacity="0.5"/>
-            </svg>
-        </header>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">🔑 <span lang="kk" class="lang-content">Тізбектейдің 3 заңы:</span><span lang="en" class="lang-content">3 series laws:</span><span lang="ru" class="lang-content">3 закона последовательного:</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
+<div class="bg-blue-50 rounded-xl p-3"><p class="font-bold text-blue-700">I</p><p class="text-base font-bold">I = I₁ = I₂</p><p class="text-xs"><span lang="kk" class="lang-content">барлық жерде бірдей</span><span lang="en" class="lang-content">same everywhere</span><span lang="ru" class="lang-content">везде одинаков</span></p></div>
+<div class="bg-amber-50 rounded-xl p-3"><p class="font-bold text-amber-700">U</p><p class="text-base font-bold">U = U₁ + U₂</p><p class="text-xs"><span lang="kk" class="lang-content">бөлінеді</span><span lang="en" class="lang-content">divides up</span><span lang="ru" class="lang-content">делится</span></p></div>
+<div class="bg-rose-50 rounded-xl p-3"><p class="font-bold text-rose-700">R</p><p class="text-base font-bold">R = R₁ + R₂</p><p class="text-xs"><span lang="kk" class="lang-content">қосылады</span><span lang="en" class="lang-content">add up</span><span lang="ru" class="lang-content">складывается</span></p></div>
+</div>
+</div>
+</div>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100 flex flex-col justify-center">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 font-bold text-xl flex items-center justify-center">1</span>
-                    <h2 class="text-2xl font-bold">
-                        <span class="content-kk">Жалпы схема</span>
-                        <span class="content-ru">Общая схема циркуляции</span>
-                        <span class="content-en">Circulation Diagram</span>
-                    </h2>
-                </div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 280 160" style="width:240px">
+<rect x="20" y="40" width="240" height="80" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+<!-- Батарея -->
+<line x1="130" y1="40" x2="130" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="155" y1="40" x2="155" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="120" y1="20" x2="140" y2="20" stroke="#1e293b" stroke-width="4"/>
+<line x1="145" y1="15" x2="165" y2="15" stroke="#1e293b" stroke-width="2"/>
+<!-- R1 R2 R3 в ряд -->
+<rect x="40" y="92" width="30" height="16" fill="#fef3c7" stroke="#1e293b" stroke-width="2"/>
+<text x="55" y="105" text-anchor="middle" font-size="10" font-weight="700">R₁</text>
+<rect x="100" y="92" width="30" height="16" fill="#fef3c7" stroke="#1e293b" stroke-width="2"/>
+<text x="115" y="105" text-anchor="middle" font-size="10" font-weight="700">R₂</text>
+<rect x="160" y="92" width="30" height="16" fill="#fef3c7" stroke="#1e293b" stroke-width="2"/>
+<text x="175" y="105" text-anchor="middle" font-size="10" font-weight="700">R₃</text>
+<text x="140" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">→ I →</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">3 резистор тізбектей</span>
+<span lang="en" class="lang-content">3 resistors in series</span>
+<span lang="ru" class="lang-content">3 резистора последовательно</span></p>
+</div></div></section>
 
-                <div class="space-y-4 text-slate-600">
-                    <p class="content-kk">Қазіргі заманғы жүйелердің көбі сұйықтық (су немесе антифриз) циркуляциясына негізделген.</p>
-                    <p class="content-ru">Большинство современных систем основано на циркуляции жидкости (воды или антифриза).</p>
-                    <p class="content-en">Most modern systems are based on liquid circulation (water or antifreeze).</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Тоқ күші бірдей — неге?</span>
+<span lang="en" class="lang-content">⚡ Why same current?</span>
+<span lang="ru" class="lang-content">⚡ Почему ток одинаков?</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Тізбектей қосылған резисторларда <b>бір ғана жол</b> бар — электрондар тек бір бағытта жүреді. <b>Жоғалмайды да, көбеймейді де</b>. Сондықтан <b>1 секундта</b> R₁ арқылы өтетін заряд = R₂ арқылы өтетіні. Демек, <b>I₁ = I₂ = I₃ = I</b>. Бұл — табиғаттың <b>сақталу заңы</b>!</span>
+<span lang="en" class="lang-content">In a series circuit there is <b>only one path</b> — electrons travel one route. They <b>neither vanish nor multiply</b>. So the charge through R₁ in 1 s equals the charge through R₂. Hence <b>I₁ = I₂ = I₃ = I</b>. It's a <b>conservation law</b>.</span>
+<span lang="ru" class="lang-content">В последовательной цепи <b>один путь</b> — электроны идут по нему. Они <b>не исчезают и не множатся</b>. Значит, за 1 с через R₁ проходит тот же заряд, что и через R₂. Поэтому <b>I₁ = I₂ = I₃ = I</b>. Это <b>закон сохранения</b>!</span></p>
+</div>
+</section>
 
-                    <ol class="list-decimal pl-5 space-y-2 mt-2">
-                        <li>
-                            <b class="text-red-600">Boiler:</b> <span class="content-ru">Нагревает воду (Газ/Электро/Уголь).</span><span class="content-kk">Суды қыздырады.</span>
-                        </li>
-                        <li>
-                            <b class="text-orange-600">Pump:</b> <span class="content-ru">Создает давление для движения.</span><span class="content-kk">Қысым жасайды.</span>
-                        </li>
-                        <li>
-                            <b class="text-slate-600">Pipes:</b> <span class="content-ru">Доставляют горячую воду.</span><span class="content-kk">Ыстық суды жеткізеді.</span>
-                        </li>
-                        <li>
-                            <b class="text-blue-600">Radiator:</b> <span class="content-ru">Отдает тепло комнате.</span><span class="content-kk">Бөлмеге жылу береді.</span>
-                        </li>
-                    </ol>
-                </div>
-            </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Ом заңымен есептеу</span>
+<span lang="en" class="lang-content">📊 With Ohm's law</span>
+<span lang="ru" class="lang-content">📊 Расчёт через закон Ома</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-base mb-3">
+<span lang="kk" class="lang-content">Әр резисторда — өзінің кернеуі: <b>U₁ = IR₁</b>, <b>U₂ = IR₂</b>. Жалпы кернеу:</span>
+<span lang="en" class="lang-content">Each resistor has its own voltage: <b>U₁ = IR₁</b>, <b>U₂ = IR₂</b>. Total voltage:</span>
+<span lang="ru" class="lang-content">У каждого резистора своё напряжение: <b>U₁ = IR₁</b>, <b>U₂ = IR₂</b>. Полное:</span></p>
+<div class="formula text-center" style="font-size:1.4rem">
+U = U₁ + U₂ + U₃ &nbsp;&nbsp;|&nbsp;&nbsp; R = R₁ + R₂ + R₃
+</div>
+<p class="text-slate-700 text-sm mt-3">
+<span lang="kk" class="lang-content">📌 Жалпы кедергі <b>бөліктердің қосындысынан үлкен</b>. Қанша резистор қосса — соншама R артады.</span>
+<span lang="en" class="lang-content">📌 Total R is the <b>sum</b>: each added resistor increases R.</span>
+<span lang="ru" class="lang-content">📌 Общее R равно <b>сумме</b>: каждый новый резистор увеличивает R.</span></p>
+</div>
+</section>
 
-            <div class="card bg-slate-900 p-6 rounded-3xl shadow-lg border border-slate-700 flex flex-col items-center">
-                <svg viewBox="0 0 400 250" class="w-full h-auto">
-                    <path d="M50 240 L 50 100 L 200 20 L 350 100 L 350 240 Z" fill="none" stroke="#475569" stroke-width="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп шығару</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 R₁ = 4 Ом, R₂ = 6 Ом тізбектей қосылған. U = 20 В. I, U₁, U₂ табу.</span>
+<span lang="en" class="lang-content">📘 R₁ = 4 Ω, R₂ = 6 Ω in series. U = 20 V. Find I, U₁, U₂.</span>
+<span lang="ru" class="lang-content">📘 R₁ = 4 Ом, R₂ = 6 Ом — последовательно. U = 20 В. Найти I, U₁, U₂.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>R₁ = 4 Ом, R₂ = 6 Ом</li>
+<li>U = 20 В</li>
+<li>I, U₁, U₂ — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.95rem">
+R = R₁ + R₂ = 4 + 6 = 10 Ом
+<br/>I = U/R = 20/10 = <span class="num">2</span> А
+<br/>U₁ = IR₁ = 2·4 = <span class="num">8</span> В
+<br/>U₂ = IR₂ = 2·6 = <span class="num">12</span> В
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ I=2 А, U₁=8 В, U₂=12 В</span><span lang="en" class="lang-content">✅ I=2 A, U₁=8 V, U₂=12 V</span><span lang="ru" class="lang-content">✅ I=2 А, U₁=8 В, U₂=12 В</span></div>
+</div>
+</div>
+<p class="text-slate-600 text-sm mt-3"><span lang="kk" class="lang-content">📌 U₁ + U₂ = 8 + 12 = 20 = U ✓ (тексеру)</span><span lang="en" class="lang-content">📌 Check: U₁ + U₂ = 20 V ✓</span><span lang="ru" class="lang-content">📌 Проверка: U₁ + U₂ = 20 В ✓</span></p>
+</div>
+</section>
 
-                    <rect x="60" y="180" width="60" height="50" fill="#334155" stroke="#94a3b8" rx="4"/>
-                    <text x="90" y="210" fill="white" font-size="10" text-anchor="middle">BOILER</text>
-                    <circle cx="90" cy="215" r="5" fill="#ef4444">
-                        <animate attributeName="opacity" values="1;0.5;1" dur="0.5s" repeatCount="indefinite"/>
-                    </circle>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎄 Гирлянданың кемшілігі</span>
+<span lang="en" class="lang-content">🎄 Christmas lights problem</span>
+<span lang="ru" class="lang-content">🎄 Минус гирлянды</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Ескі гирляндалар тізбектей жалғанған: <b>егер бір шам жанып кетсе</b> — <b>барлық тізбек үзіледі</b>, <b>барлық шам сөнеді</b>! Себебі: тізбекте бір жол ғана бар. Шамды табу үшін әр шамды <b>бір-бірлеп тексеру керек</b>. Қазіргі заманауи гирляндаларда <b>параллель + шунт</b> схемасы қолданылады — бір шам үзілсе де басқалар жанатын болады.</span>
+<span lang="en" class="lang-content">Old Christmas lights are series-wired: <b>if one bulb burns out — the whole string goes dark</b>! Because there's only one path. You have to test bulb by bulb. Modern strings use <b>parallel + shunt</b> so others stay lit.</span>
+<span lang="ru" class="lang-content">Старые гирлянды соединены последовательно: <b>сгорает одна лампа — гаснет вся гирлянда</b>! Из-за единственного пути. Приходится проверять лампы поштучно. Современные гирлянды — <b>параллельно + шунт</b>, одна сгорела — остальные горят.</span></p>
+</div>
+</section>
 
-                    <rect x="250" y="120" width="60" height="30" fill="#cbd5e1" stroke="#94a3b8"/>
-                    <line x1="260" y1="120" x2="260" y2="150" stroke="#94a3b8"/>
-                    <line x1="270" y1="120" x2="270" y2="150" stroke="#94a3b8"/>
-                    <line x1="280" y1="120" x2="280" y2="150" stroke="#94a3b8"/>
-                    <line x1="290" y1="120" x2="290" y2="150" stroke="#94a3b8"/>
-                    <line x1="300" y1="120" x2="300" y2="150" stroke="#94a3b8"/>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">I = const</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Барлық жерде бірдей</span><span lang="en" class="lang-content">Same everywhere</span><span lang="ru" class="lang-content">Везде одинаков</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">➕</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">U = ΣU<sub>i</sub></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">U қосылады</span><span lang="en" class="lang-content">U adds up</span><span lang="ru" class="lang-content">U складывается</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚧</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">R = ΣR<sub>i</sub></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">R қосылады</span><span lang="en" class="lang-content">R adds up</span><span lang="ru" class="lang-content">R складывается</span></p></div>
+</div></footer>
 
-                    <path d="M90 180 L 90 135 L 250 135" stroke="#ef4444" stroke-width="3" fill="none" class="flow-anim"/>
-
-                    <path d="M310 135 L 330 135 L 330 220 L 120 220 L 120 210" stroke="#3b82f6" stroke-width="3" fill="none" class="flow-anim"/>
-
-                    <circle cx="200" cy="220" r="10" fill="#0ea5e9" stroke="white"/>
-                    <text x="200" y="240" fill="#0ea5e9" font-size="8" text-anchor="middle">PUMP</text>
-
-                    <path d="M260 110 Q 265 100 260 90" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0">
-                        <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
-                        <animate attributeName="d" values="M260 110 Q 265 100 260 90; M260 100 Q 255 90 260 80" dur="2s" repeatCount="indefinite"/>
-                    </path>
-                    <path d="M290 110 Q 295 100 290 90" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0">
-                        <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" begin="1s"/>
-                        <animate attributeName="d" values="M290 110 Q 295 100 290 90; M290 100 Q 285 90 290 80" dur="2s" repeatCount="indefinite"/>
-                    </path>
-                </svg>
-            </div>
-        </section>
-
-        <section class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-            <h2 class="text-2xl font-bold mb-8 text-center text-slate-800">
-                <span class="content-kk">Бөлмедегі ауа айналымы</span>
-                <span class="content-ru">Циркуляция воздуха в комнате</span>
-                <span class="content-en">Room Air Circulation</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="order-2 md:order-1">
-                    <div class="bg-orange-50 p-4 rounded-xl border-l-4 border-orange-500 mb-4">
-                        <h3 class="font-bold text-orange-800">Конвекция (Convection)</h3>
-                        <p class="text-sm text-slate-700 mt-1">
-                            <span class="content-kk">Батарея ауаны қыздырады -> Ауа жеңілдеп жоғары көтеріледі -> Төбеге жетіп суиды -> Төмен түседі.</span>
-                            <span class="content-ru">Радиатор греет воздух -> Он легчает и поднимается -> Остывает у потолка/окна -> Опускается вниз.</span>
-                            <span class="content-en">Radiator heats air -> Air gets lighter and rises -> Cools at ceiling/window -> Sinks down.</span>
-                        </p>
-                    </div>
-                    <div class="bg-yellow-50 p-4 rounded-xl border-l-4 border-yellow-500">
-                        <h3 class="font-bold text-yellow-800">Сәулелену (Radiation)</h3>
-                        <p class="text-sm text-slate-700 mt-1">
-                            <span class="content-kk">Инфрақызыл сәулелер жиһаз бен адамдарды тікелей қыздырады.</span>
-                            <span class="content-ru">Инфракрасные лучи напрямую греют мебель и людей.</span>
-                            <span class="content-en">Infrared rays directly heat furniture and people.</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="order-1 md:order-2 flex justify-center">
-                    <svg viewBox="0 0 300 200" class="w-full max-w-sm border border-slate-200 bg-slate-50 rounded-lg">
-                        <rect x="0" y="0" width="300" height="200" fill="none"/>
-                        <rect x="20" y="40" width="10" height="80" fill="#bfdbfe" stroke="#60a5fa"/>
-                        <rect x="25" y="130" width="30" height="40" fill="#ef4444" stroke="#b91c1c"/>
-
-                        <path d="M40 130 Q 60 80 100 40" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red)"/>
-                        <path d="M100 40 L 200 40" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,5"/>
-
-                        <path d="M200 40 Q 260 60 260 120" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                        <path d="M260 120 L 260 180" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
-
-                        <path d="M260 180 L 60 180 Q 40 180 40 170" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,5"/>
-
-                        <defs>
-                            <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#ef4444" />
-                            </marker>
-                            <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6" />
-                            </marker>
-                        </defs>
-
-                        <text x="150" y="20" text-anchor="middle" font-size="10" fill="#94a3b8">CEILING / ПОТОЛОК</text>
-                        <text x="150" y="195" text-anchor="middle" font-size="10" fill="#94a3b8">FLOOR / ПОЛ</text>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <section class="card bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
-             <div class="p-6 bg-slate-50 border-b border-slate-200">
-                <h3 class="font-bold text-slate-700 text-lg text-center uppercase tracking-wide">
-                    <span class="content-kk">Жылыту жүйелерін салыстыру</span>
-                    <span class="content-ru">Сравнение систем отопления</span>
-                    <span class="content-en">Comparison of Heating Systems</span>
-                </h3>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
-                    <thead>
-                        <tr class="bg-slate-100 text-slate-500">
-                            <th class="p-4 w-1/4">Тип / Type</th>
-                            <th class="p-4 w-1/4">Принцип / Principle</th>
-                            <th class="p-4 w-1/4">Плюс / Pros (+)</th>
-                            <th class="p-4 w-1/4">Минус / Cons (-)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <tr class="hover:bg-orange-50">
-                            <td class="p-4 font-bold text-orange-600">
-                                <span class="content-ru">Радиаторы</span><span class="content-en">Radiators</span>
-                            </td>
-                            <td class="p-4">Convection (80%) + Radiation (20%)</td>
-                            <td class="p-4"><span class="content-ru">Быстрый нагрев, дешево</span></td>
-                            <td class="p-4"><span class="content-ru">Холодный пол, пыль</span></td>
-                        </tr>
-                        <tr class="hover:bg-orange-50">
-                            <td class="p-4 font-bold text-orange-600">
-                                <span class="content-ru">Теплый пол</span><span class="content-en">Underfloor</span>
-                            </td>
-                            <td class="p-4">Radiation (50%) + Convection (50%)</td>
-                            <td class="p-4"><span class="content-ru">Комфорт ногам, равномерно</span></td>
-                            <td class="p-4"><span class="content-ru">Медленный нагрев, дорого</span></td>
-                        </tr>
-                        <tr class="hover:bg-orange-50">
-                            <td class="p-4 font-bold text-orange-600">
-                                <span class="content-ru">Конвекторы</span><span class="content-en">Convectors</span>
-                            </td>
-                            <td class="p-4">Convection (95%)</td>
-                            <td class="p-4"><span class="content-ru">Скрытый монтаж, безопасность</span></td>
-                            <td class="p-4"><span class="content-ru">Сушит воздух, неравномерно</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-            <h2 class="text-2xl font-bold mb-8 text-center text-slate-800">
-                <span class="content-kk">Пайдалы ақпарат және мысалдар</span>
-                <span class="content-ru">Полезная информация и примеры</span>
-                <span class="content-en">Useful Info & Examples</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                <div class="bg-red-50 p-5 rounded-xl border border-red-100">
-                    <h4 class="font-bold text-red-800 mb-3 border-b border-red-200 pb-2 flex items-center gap-2">
-                        🔥 <span class="content-kk">Отын түрлері</span><span class="content-ru">Источники тепла</span>
-                    </h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>1. <span class="content-ru">Природный газ (метан).</span><span class="content-kk">Табиғи газ.</span></li>
-                        <li>2. <span class="content-ru">Уголь (антрацит).</span><span class="content-kk">Көмір.</span></li>
-                        <li>3. <span class="content-ru">Электричество (ТЭН).</span><span class="content-kk">Электр энергиясы.</span></li>
-                        <li>4. <span class="content-ru">Дрова/Пеллеты.</span><span class="content-kk">Отын ағаш.</span></li>
-                        <li>5. <span class="content-ru">Солнечные коллекторы.</span><span class="content-kk">Күн коллекторы.</span></li>
-                        <li>6. <span class="content-ru">Геотермальный насос.</span><span class="content-kk">Жер жылуы.</span></li>
-                        <li>7. <span class="content-ru">Мазут/Дизель.</span><span class="content-kk">Сұйық отын.</span></li>
-                        <li>8. <span class="content-ru">Центральная ТЭЦ.</span><span class="content-kk">ЖЭО (ТЭЦ).</span></li>
-                        <li>9. <span class="content-ru">Инфракрасные обогреватели.</span><span class="content-kk">ИК жылытқыш.</span></li>
-                        <li>10. <span class="content-ru">Биогаз.</span><span class="content-kk">Биогаз.</span></li>
-                    </ul>
-                </div>
-
-                <div class="bg-blue-50 p-5 rounded-xl border border-blue-100">
-                    <h4 class="font-bold text-blue-800 mb-3 border-b border-blue-200 pb-2 flex items-center gap-2">
-                        🔧 <span class="content-kk">Жүйе элементтері</span><span class="content-ru">Элементы системы</span>
-                    </h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>11. <span class="content-ru">Термостат (контроль t°).</span><span class="content-kk">Термостат.</span></li>
-                        <li>12. <span class="content-ru">Расширительный бак.</span><span class="content-kk">Кеңейту багы.</span></li>
-                        <li>13. <span class="content-ru">Манометр (давление).</span><span class="content-kk">Манометр.</span></li>
-                        <li>14. <span class="content-ru">Воздухоотводчик (Кран Маевского).</span><span class="content-kk">Ауа шығарғыш.</span></li>
-                        <li>15. <span class="content-ru">Байпас (обходная труба).</span><span class="content-kk">Байпас.</span></li>
-                        <li>16. <span class="content-ru">Теплообменник.</span><span class="content-kk">Жылу алмастырғыш.</span></li>
-                        <li>17. <span class="content-ru">Фильтр грубой очистки.</span><span class="content-kk">Сүзгі.</span></li>
-                        <li>18. <span class="content-ru">Коллектор (гребенка).</span><span class="content-kk">Коллектор.</span></li>
-                        <li>19. <span class="content-ru">Дымоход.</span><span class="content-kk">Мұржа.</span></li>
-                        <li>20. <span class="content-ru">Умный дом (датчики).</span><span class="content-kk">Ақылды үй.</span></li>
-                    </ul>
-                </div>
-
-                <div class="bg-green-50 p-5 rounded-xl border border-green-100">
-                    <h4 class="font-bold text-green-800 mb-3 border-b border-green-200 pb-2 flex items-center gap-2">
-                        💡 <span class="content-kk">Тиімділік кеңестері</span><span class="content-ru">Советы по эффективности</span>
-                    </h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>21. <span class="content-ru">Не закрывать радиаторы шторами.</span><span class="content-kk">Пердемен жаппау.</span></li>
-                        <li>22. <span class="content-ru">Установить теплоотражающий экран.</span><span class="content-kk">Экран қою.</span></li>
-                        <li>23. <span class="content-ru">Утепление стен и окон.</span><span class="content-kk">Үйді жылылау.</span></li>
-                        <li>24. <span class="content-ru">Регулярно спускать воздух.</span><span class="content-kk">Ауасын шығару.</span></li>
-                        <li>25. <span class="content-ru">Промывка системы раз в год.</span><span class="content-kk">Жүйені жуу.</span></li>
-                        <li>26. <span class="content-ru">Термоголовки на радиаторы.</span><span class="content-kk">Термобасшықтар.</span></li>
-                        <li>27. <span class="content-ru">Снижать t° ночью (экономия).</span><span class="content-kk">Түнде азайту.</span></li>
-                        <li>28. <span class="content-ru">Двойные стеклопакеты.</span><span class="content-kk">Қос қабатты терезе.</span></li>
-                        <li>29. <span class="content-ru">Изоляция труб в подвале.</span><span class="content-kk">Құбырды орау.</span></li>
-                        <li>30. <span class="content-ru">Правильный расчет мощности котла.</span><span class="content-kk">Қуатты дұрыс есептеу.</span></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center text-slate-400 py-8">
-            <p class="content-kk">© 2025 Интерактивті білім беру плакаты. Барлық құқықтар қорғалған.</p>
-            <p class="content-ru">© 2025 Интерактивный образовательный плакат. Все права защищены.</p>
-            <p class="content-en">© 2025 Interactive Educational Poster. All rights reserved.</p>
-        </footer>
-
-    </main>
-
-    <script>
-        function setLang(lang) {
-            document.getElementById('main-body').className = `bg-slate-50 text-slate-800 lang-${lang}`;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if(btn.id === `btn-${lang}`) {
-                    btn.classList.add('bg-orange-600', 'text-white');
-                    btn.classList.remove('text-slate-600', 'hover:bg-slate-200');
-                } else {
-                    btn.classList.remove('bg-orange-600', 'text-white');
-                    btn.classList.add('text-slate-600', 'hover:bg-slate-200');
-                }
-            });
-        }
-        // Initialize
-        setLang('kk');
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js">
-    // Функция переключения языков (Автоматически добавлено скриптом)
-    function switchLang(lang) {
-        var container = document.getElementById('poster-container');
-        if (container) {
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-        }
-        var buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-</script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

@@ -1,313 +1,173 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нақ жылусыйлығы - Таблица</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #e0f2fe 0%, #cffafe 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #0284c7 0%, #0c4a6e 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #0c4a6e; border-bottom: 3px solid #cffafe; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #0284c7; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #0284c7; background: white; color: #0284c7; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #0284c7; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #0284c7; color: white; }
-        .info-box { background: linear-gradient(135deg, #cffafe 0%, #e0f2fe 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #0284c7; margin: 10px 0; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Действие магнитного поля на проводник с током</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-sky-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-purple-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Ампер күші</span>
+<span lang="en" class="lang-content">Grade 9 · Ampère force</span>
+<span lang="ru" class="lang-content">9 класс · Сила Ампера</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Магнит өрісінің тоғы бар өткізгішке әсері</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Force of a magnetic field on a current-carrying wire</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Действие магнитного поля на проводник с током</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Нақ Жылусыйлығы Таблицасы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Specific Heat Capacity Table</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Таблица удельных теплоёмкостей</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-blue-100">Барлық материалдарының нақ жылусыйлығы. Су = максимум, газ = минимум. ТОЛЫҚ МАТЕРИАЛЫ САҒАЛЫШ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-blue-100">Specific heat of all materials. Water = maximum, gas = minimum. COMPLETE MATERIAL REFERENCE!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-blue-100">Удельная теплоёмкость всех материалов. Вода = максимум, газ = минимум. ПОЛНЫЙ СПРАВОЧНИК!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Ампер күші</span>
+<span lang="en" class="lang-content">⚡ The Ampère force</span>
+<span lang="ru" class="lang-content">⚡ Сила Ампера</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Магнит өрісіне <b>тоғы бар өткізгіш</b> орналастырсақ, оған <b>күш әсер етеді</b>. Себебі: магнит өрісі әрбір <b>қозғалыстағы зарядқа</b> әсер етеді, ал тоқ — қозғалыстағы зарядтар жиынтығы. Бұл күшті <b class="text-purple-700">Ампер күші</b> деп атайды (1820 ж.).</span>
+<span lang="en" class="lang-content">A <b>current-carrying conductor</b> in a magnetic field experiences a <b>force</b>. Reason: the field acts on every <b>moving charge</b>, and current is just moving charges. This force is called the <b class="text-purple-700">Ampère force</b> (1820).</span>
+<span lang="ru" class="lang-content">На <b>проводник с током</b> в магнитном поле действует <b>сила</b>. Причина: поле действует на каждый <b>движущийся заряд</b>, а ток — это движение зарядов. Эту силу называют <b class="text-purple-700">силой Ампера</b> (1820 г.).</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ӨНДІКТІГІНІҢ ДЕНЕНІҢ НҚ ЖЫЛУСЫЙЛЫҒЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. SPECIFIC HEAT OF SOLIDS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Удельная теплоёмкость твёрдых тел</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-purple-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Ампер күшінің формуласы:</span><span lang="en" class="lang-content">Ampère force formula:</span><span lang="ru" class="lang-content">Формула силы Ампера:</span></p>
+<div class="formula text-center" style="font-size:1.6rem">
+F = B · I · L · sin α
+</div>
+<div class="text-sm text-slate-700 text-center mt-2 space-y-1">
+<p><span lang="kk" class="lang-content"><b style="color:#9333ea">F</b> — күш, Н; <b style="color:#9333ea">B</b> — индукция, Тл</span><span lang="en" class="lang-content"><b style="color:#9333ea">F</b> — force, N; <b style="color:#9333ea">B</b> — induction, T</span><span lang="ru" class="lang-content"><b style="color:#9333ea">F</b> — сила, Н; <b style="color:#9333ea">B</b> — индукция, Тл</span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#9333ea">I</b> — тоқ, А; <b style="color:#9333ea">L</b> — өткізгіш ұзындығы, м</span><span lang="en" class="lang-content"><b style="color:#9333ea">I</b> — current, A; <b style="color:#9333ea">L</b> — wire length, m</span><span lang="ru" class="lang-content"><b style="color:#9333ea">I</b> — ток, А; <b style="color:#9333ea">L</b> — длина проводника, м</span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#9333ea">α</b> — I мен B арасындағы бұрыш</span><span lang="en" class="lang-content"><b style="color:#9333ea">α</b> — angle between I and B</span><span lang="ru" class="lang-content"><b style="color:#9333ea">α</b> — угол между I и B</span></p>
+</div>
+</div>
+<p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">⚡ <b>α = 90°</b> → күш ең үлкен; <b>α = 0°</b> → күш нөл!</span><span lang="en" class="lang-content">⚡ <b>α = 90°</b> → max force; <b>α = 0°</b> → zero force!</span><span lang="ru" class="lang-content">⚡ <b>α = 90°</b> → сила максимальна; <b>α = 0°</b> → сила равна нулю!</span></p>
+</div>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">МАТЕРИАЛ</th>
-                            <th lang="kk" class="lang-content">c (Дж/(кг·°C))</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center mb-3">
+<svg width="320" height="220" viewBox="0 0 320 220">
+<rect x="20" y="40" width="40" height="140" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="40" y="115" font-size="14" text-anchor="middle" font-weight="bold" fill="#1d4ed8">N</text>
+<rect x="260" y="40" width="40" height="140" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+<text x="280" y="115" font-size="14" text-anchor="middle" font-weight="bold" fill="#dc2626">S</text>
+<g stroke="#94a3b8" stroke-width="1.5">
+<line x1="60" y1="60" x2="260" y2="60"/>
+<line x1="60" y1="90" x2="260" y2="90"/>
+<line x1="60" y1="120" x2="260" y2="120"/>
+<line x1="60" y1="150" x2="260" y2="150"/>
+<line x1="60" y1="180" x2="260" y2="180"/>
+</g>
+<polygon points="260,60 250,55 250,65" fill="#94a3b8"/>
+<polygon points="260,90 250,85 250,95" fill="#94a3b8"/>
+<polygon points="260,120 250,115 250,125" fill="#94a3b8"/>
+<rect x="155" y="40" width="10" height="140" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+<text x="170" y="35" font-size="12" fill="#d97706" font-weight="bold">I</text>
+<polygon points="160,40 154,55 166,55" fill="#d97706"/>
+<line x1="165" y1="110" x2="220" y2="110" stroke="#16a34a" stroke-width="3"/>
+<polygon points="225,110 215,104 215,116" fill="#16a34a"/>
+<text x="225" y="130" font-size="13" fill="#16a34a" font-weight="bold">F</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center"><span lang="kk" class="lang-content">Тоқ ↑, B →, F — оңға ығыстыру</span><span lang="en" class="lang-content">I up, B right → F pushes right</span><span lang="ru" class="lang-content">I вверх, B вправо, F — толкает в сторону</span></p>
+</div>
+</div>
+</section>
 
-                            <th lang="en" class="lang-content">MATERIAL</th>
-                            <th lang="en" class="lang-content">c (J/(kg·°C))</th>
-                            <th lang="en" class="lang-content">DESCRIPTION</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">✋ Сол қол ережесі</span>
+<span lang="en" class="lang-content">✋ Left-hand rule</span>
+<span lang="ru" class="lang-content">✋ Правило левой руки</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b>Сол қолды</b> өткізгішке параллель қойыңыз:</span>
+<span lang="en" class="lang-content">Place your <b>left hand</b> parallel to the wire:</span>
+<span lang="ru" class="lang-content">Расположите <b>левую руку</b> вдоль проводника:</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-accent rounded-2xl p-5 text-center">
+<p class="text-3xl mb-2">🌐</p>
+<p class="heading-font text-purple-700 text-sm mb-1"><span lang="kk" class="lang-content">4 саусақ</span><span lang="en" class="lang-content">4 fingers</span><span lang="ru" class="lang-content">4 пальца</span></p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Тоқ бағыты (I) бойынша</span><span lang="en" class="lang-content">In direction of current I</span><span lang="ru" class="lang-content">По направлению тока I</span></p>
+</div>
+<div class="card-accent rounded-2xl p-5 text-center">
+<p class="text-3xl mb-2">🤚</p>
+<p class="heading-font text-purple-700 text-sm mb-1"><span lang="kk" class="lang-content">Алақан</span><span lang="en" class="lang-content">Palm</span><span lang="ru" class="lang-content">Ладонь</span></p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">B сызықтары <b>алақанға</b> кіреді</span><span lang="en" class="lang-content">B lines enter <b>palm</b></span><span lang="ru" class="lang-content">Линии B входят в <b>ладонь</b></span></p>
+</div>
+<div class="card-accent rounded-2xl p-5 text-center">
+<p class="text-3xl mb-2">👍</p>
+<p class="heading-font text-purple-700 text-sm mb-1"><span lang="kk" class="lang-content">Бас бармақ</span><span lang="en" class="lang-content">Thumb</span><span lang="ru" class="lang-content">Большой палец</span></p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">90° → Ампер күші F бағыты</span><span lang="en" class="lang-content">90° → direction of force F</span><span lang="ru" class="lang-content">90° → направление силы F</span></p>
+</div>
+</div>
+</div>
+</section>
 
-                            <th lang="ru" class="lang-content">МАТЕРИАЛ</th>
-                            <th lang="ru" class="lang-content">c (Дж/(кг·°C))</th>
-                            <th lang="ru" class="lang-content">ОПИСАНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Мыс</td>
-                            <td lang="kk" class="lang-content">400</td>
-                            <td lang="kk" class="lang-content">Жүлінген метал</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-purple-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Магнит өрісінде (B = 0,5 Тл, α = 90°) ұзындығы L = 20 см, тоғы I = 4 А өткізгіш орналасқан. F-ті табыңыз.</span>
+<span lang="en" class="lang-content">In a magnetic field B = 0.5 T (α = 90°) sits a wire L = 20 cm with I = 4 A. Find F.</span>
+<span lang="ru" class="lang-content">В магнитном поле B = 0,5 Тл (α = 90°) находится проводник L = 20 см с током I = 4 А. Найдите F.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-purple-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>B = 0,5 Тл</li><li>I = 4 А</li><li>L = 0,2 м</li><li>α = 90° → sin α = 1</li><li>F — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-purple-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.1rem">
+F = BIL sin α
+<br/>F = 0,5 · 4 · 0,2 · 1
+<br/>F = <span class="num">0,4</span> Н
+</div>
+<div class="badge badge-emerald mt-3">✅ F = 0,4 Н</div>
+</div></div></div>
+</section>
 
-                            <td lang="en" class="lang-content">Copper</td>
-                            <td lang="en" class="lang-content">400</td>
-                            <td lang="en" class="lang-content">Good conductor metal</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠️ Қолдану</span>
+<span lang="en" class="lang-content">🛠️ Applications</span>
+<span lang="ru" class="lang-content">🛠️ Применения</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">⚙️</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Электр мотор</span><span lang="en" class="lang-content">Electric motor</span><span lang="ru" class="lang-content">Электромотор</span></p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🎤</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Динамик</span><span lang="en" class="lang-content">Loudspeaker</span><span lang="ru" class="lang-content">Динамик</span></p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">📊</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Гальванометр</span><span lang="en" class="lang-content">Galvanometer</span><span lang="ru" class="lang-content">Гальванометр</span></p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🚄</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Maglev пойыз</span><span lang="en" class="lang-content">Maglev train</span><span lang="ru" class="lang-content">Maglev поезд</span></p></div>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content">Медь</td>
-                            <td lang="ru" class="lang-content">400</td>
-                            <td lang="ru" class="lang-content">Хороший проводник</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Төмен</td>
-                            <td lang="kk" class="lang-content">130</td>
-                            <td lang="kk" class="lang-content">Төмен жылусыйлығы</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-purple-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-purple-700 mb-2">F = BIL sinα</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Ампер күші</span><span lang="en" class="lang-content">Ampère force</span><span lang="ru" class="lang-content">Сила Ампера</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">✋</div>
+<p class="heading-font text-xl text-purple-700 mb-2"><span lang="kk" class="lang-content">Сол қол</span><span lang="en" class="lang-content">Left hand</span><span lang="ru" class="lang-content">Левая рука</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">F бағытын анықтау</span><span lang="en" class="lang-content">Find F direction</span><span lang="ru" class="lang-content">Направление F</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚙️</div>
+<p class="heading-font text-xl text-purple-700 mb-2"><span lang="kk" class="lang-content">Мотор</span><span lang="en" class="lang-content">Motor</span><span lang="ru" class="lang-content">Мотор</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Негізгі қолдану</span><span lang="en" class="lang-content">Main application</span><span lang="ru" class="lang-content">Основное применение</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content">Lead</td>
-                            <td lang="en" class="lang-content">130</td>
-                            <td lang="en" class="lang-content">Low heat capacity</td>
-
-                            <td lang="ru" class="lang-content">Свинец</td>
-                            <td lang="ru" class="lang-content">130</td>
-                            <td lang="ru" class="lang-content">Низкая теплоёмкость</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Темір</td>
-                            <td lang="kk" class="lang-content">460</td>
-                            <td lang="kk" class="lang-content">Ағындық метал</td>
-
-                            <td lang="en" class="lang-content">Iron</td>
-                            <td lang="en" class="lang-content">460</td>
-                            <td lang="en" class="lang-content">Common metal</td>
-
-                            <td lang="ru" class="lang-content">Железо</td>
-                            <td lang="ru" class="lang-content">460</td>
-                            <td lang="ru" class="lang-content">Распространённый метал</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Айны</td>
-                            <td lang="kk" class="lang-content">800</td>
-                            <td lang="kk" class="lang-content">Аморфты материал</td>
-
-                            <td lang="en" class="lang-content">Glass</td>
-                            <td lang="en" class="lang-content">800</td>
-                            <td lang="en" class="lang-content">Amorphous material</td>
-
-                            <td lang="ru" class="lang-content">Стекло</td>
-                            <td lang="ru" class="lang-content">800</td>
-                            <td lang="ru" class="lang-content">Аморфный материал</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Асфальт</td>
-                            <td lang="kk" class="lang-content">900</td>
-                            <td lang="kk" class="lang-content">Органикалық материал</td>
-
-                            <td lang="en" class="lang-content">Asphalt</td>
-                            <td lang="en" class="lang-content">900</td>
-                            <td lang="en" class="lang-content">Organic material</td>
-
-                            <td lang="ru" class="lang-content">Асфальт</td>
-                            <td lang="ru" class="lang-content">900</td>
-                            <td lang="ru" class="lang-content">Органический материал</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. СҰЙЫҚТАРЫНЫҢ НҚ ЖЫЛУСЫЙЛЫҒЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. SPECIFIC HEAT OF LIQUIDS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Удельная теплоёмкость жидкостей</h2>
-
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">СҰЙЫҚ</th>
-                            <th lang="kk" class="lang-content">c (Дж/(кг·°C))</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-
-                            <th lang="en" class="lang-content">LIQUID</th>
-                            <th lang="en" class="lang-content">c (J/(kg·°C))</th>
-                            <th lang="en" class="lang-content">DESCRIPTION</th>
-
-                            <th lang="ru" class="lang-content">ЖИДКОСТЬ</th>
-                            <th lang="ru" class="lang-content">c (Дж/(кг·°C))</th>
-                            <th lang="ru" class="lang-content">ОПИСАНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Су</td>
-                            <td lang="kk" class="lang-content">4200</td>
-                            <td lang="kk" class="lang-content"><strong>МАКСИМУМ!</strong> Универсалды растворитель</td>
-
-                            <td lang="en" class="lang-content">Water</td>
-                            <td lang="en" class="lang-content">4200</td>
-                            <td lang="en" class="lang-content"><strong>MAXIMUM!</strong> Universal solvent</td>
-
-                            <td lang="ru" class="lang-content">Вода</td>
-                            <td lang="ru" class="lang-content">4200</td>
-                            <td lang="ru" class="lang-content"><strong>МАКСИМУМ!</strong> Универсальный растворитель</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Керосин</td>
-                            <td lang="kk" class="lang-content">2100</td>
-                            <td lang="kk" class="lang-content">Түтінді ағын жанар сыйы</td>
-
-                            <td lang="en" class="lang-content">Kerosene</td>
-                            <td lang="en" class="lang-content">2100</td>
-                            <td lang="en" class="lang-content">Fuel oil</td>
-
-                            <td lang="ru" class="lang-content">Керосин</td>
-                            <td lang="ru" class="lang-content">2100</td>
-                            <td lang="ru" class="lang-content">Топливо</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Сливочное масло</td>
-                            <td lang="kk" class="lang-content">2300</td>
-                            <td lang="kk" class="lang-content">Пищесіндегі жақын</td>
-
-                            <td lang="en" class="lang-content">Butter</td>
-                            <td lang="en" class="lang-content">2300</td>
-                            <td lang="en" class="lang-content">Food fat</td>
-
-                            <td lang="ru" class="lang-content">Сливочное масло</td>
-                            <td lang="ru" class="lang-content">2300</td>
-                            <td lang="ru" class="lang-content">Пищевой жир</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Спирт</td>
-                            <td lang="kk" class="lang-content">2400</td>
-                            <td lang="kk" class="lang-content">Органикалық құрамасы</td>
-
-                            <td lang="en" class="lang-content">Alcohol</td>
-                            <td lang="en" class="lang-content">2400</td>
-                            <td lang="en" class="lang-content">Organic compound</td>
-
-                            <td lang="ru" class="lang-content">Спирт</td>
-                            <td lang="ru" class="lang-content">2400</td>
-                            <td lang="ru" class="lang-content">Органическое соединение</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ГАЗДАРЫНЫҢ НҚ ЖЫЛУСЫЙЛЫҒЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. SPECIFIC HEAT OF GASES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Удельная теплоёмкость газов</h2>
-
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ГАЗ</th>
-                            <th lang="kk" class="lang-content">c (Дж/(кг·°C))</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-
-                            <th lang="en" class="lang-content">GAS</th>
-                            <th lang="en" class="lang-content">c (J/(kg·°C))</th>
-                            <th lang="en" class="lang-content">DESCRIPTION</th>
-
-                            <th lang="ru" class="lang-content">ГАЗ</th>
-                            <th lang="ru" class="lang-content">c (Дж/(кг·°C))</th>
-                            <th lang="ru" class="lang-content">ОПИСАНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Ауа</td>
-                            <td lang="kk" class="lang-content">1000</td>
-                            <td lang="kk" class="lang-content">Атмосфера құрамасы</td>
-
-                            <td lang="en" class="lang-content">Air</td>
-                            <td lang="en" class="lang-content">1000</td>
-                            <td lang="en" class="lang-content">Atmospheric composition</td>
-
-                            <td lang="ru" class="lang-content">Воздух</td>
-                            <td lang="ru" class="lang-content">1000</td>
-                            <td lang="ru" class="lang-content">Атмосферный состав</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Бөлік газ (N₂)</td>
-                            <td lang="kk" class="lang-content">1040</td>
-                            <td lang="kk" class="lang-content">Атмосфераның 78%</td>
-
-                            <td lang="en" class="lang-content">Nitrogen (N₂)</td>
-                            <td lang="en" class="lang-content">1040</td>
-                            <td lang="en" class="lang-content">78% of atmosphere</td>
-
-                            <td lang="ru" class="lang-content">Азот (N₂)</td>
-                            <td lang="ru" class="lang-content">1040</td>
-                            <td lang="ru" class="lang-content">78% атмосферы</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Оттегі газ (O₂)</td>
-                            <td lang="kk" class="lang-content">918</td>
-                            <td lang="kk" class="lang-content">Атмосфераның 21%</td>
-
-                            <td lang="en" class="lang-content">Oxygen (O₂)</td>
-                            <td lang="en" class="lang-content">918</td>
-                            <td lang="en" class="lang-content">21% of atmosphere</td>
-
-                            <td lang="ru" class="lang-content">Кислород (O₂)</td>
-                            <td lang="ru" class="lang-content">918</td>
-                            <td lang="ru" class="lang-content">21% атмосферы</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>📊 САЛЫСТЫРМАЛЫ:</strong> Су (4200) >> Сұйық (2100-2400) >> Ауа (1000) >> Төмен (130). Су = максимум! Газ = минимум! Өндіктігінең материалдың молекулалық құрамасынан!</p>
-                <p lang="en" class="lang-content text-sm"><strong>📊 COMPARISON:</strong> Water (4200) >> Liquids (2100-2400) >> Air (1000) >> Lead (130). Water = max! Gas = min! Depends on molecular structure!</p>
-                <p lang="ru" class="lang-content text-sm"><strong>📊 СРАВНЕНИЕ:</strong> Вода (4200) >> Жидкости (2100-2400) >> Воздух (1000) >> Свинец (130). Вода = макс! Газ = мин! Зависит от молекулярной структуры!</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #cffafe; border-radius: 1rem; border-top: 4px solid #0284c7;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-blue-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-blue-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-blue-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Барлық материалдарының нақ жылусыйлығы өзге. Су = 4200 (максимум) - үлкен жылу байланысты. Төмен = 130 (минимум) - төмен жылу байланысты. Газ = 1000 (төмен) - молекулалар аралығы. Материалын өндіктігінің сипаты маңызды!</p>
-            <p lang="en" class="lang-content text-sm">All materials have different specific heat capacity. Water = 4200 (maximum) - absorbs lots of heat. Lead = 130 (minimum) - absorbs little heat. Gas = 1000 (low) - molecules far apart. Material properties matter!</p>
-            <p lang="ru" class="lang-content text-sm">Все материалы имеют разную удельную теплоёмкость. Вода = 4200 (максимум) - поглощает много тепла. Свинец = 130 (минимум) - поглощает мало. Газ = 1000 (низкая) - молекулы далеко. Свойства материала важны!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

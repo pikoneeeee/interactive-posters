@@ -1,381 +1,174 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Плавание тел</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ecfeff; /* cyan-50 */
-            overflow-x: hidden;
-            color: #164e63; /* cyan-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Cyan Theme */
-        .header-card {
-            background-color: #06b6d4; /* cyan-500 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #155e75; /* cyan-800 */
-            border-bottom: 3px solid #67e8f9; /* cyan-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #cffafe; /* cyan-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #0891b2; /* cyan-600 */
-        }
-         .term {
-            font-weight: bold;
-            color: #0891b2; /* cyan-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #06b6d4;
-            background-color: #ffffff;
-            color: #06b6d4;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #ecfeff;
-        }
-        .lang-btn.active {
-            background-color: #06b6d4;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #a5f3fc;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #155e75;
-            text-anchor: middle;
-        }
-        .svg-water {
-            fill: #a5f3fc;
-            opacity: 0.6;
-        }
-        .svg-arrow-force {
-            stroke-width: 3;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Момент силы. Условие равновесия рычага</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-cyan-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жұмыс және энергия</span>
+<span lang="en" class="lang-content">Grade 8 · Work and energy</span>
+<span lang="ru" class="lang-content">8 класс · Работа и энергия</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Күш моменті. Рычагтың тепе-теңдік шарты</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Torque. Equilibrium of a lever</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Момент силы. Условие равновесия рычага</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔄 Күш моменті дегеніміз не?</span>
+<span lang="en" class="lang-content">🔄 What is torque?</span>
+<span lang="ru" class="lang-content">🔄 Что такое момент силы?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Есікті ашқанда — оны <b>шетінен</b> итересің, <b>топсаға жақын</b> емес. Себебі: айналу <b>күштің шамасына</b> ғана емес, оның <b>қашықтығына</b> да тәуелді. <b class="text-indigo-700">Күш моменті</b> (M) — дененің <b>айналу әсерін</b> сипаттайтын шама.</span>
+<span lang="en" class="lang-content">When opening a door, you push at the <b>handle</b>, not near the <b>hinge</b>. The rotational effect depends not only on force, but also on <b>distance to the axis</b>. <b class="text-indigo-700">Torque</b> (M) describes the <b>rotational effect</b> of a force.</span>
+<span lang="ru" class="lang-content">Открывая дверь, толкаешь её <b>за ручку</b>, а не возле <b>петель</b>. Поворот зависит не только от силы, но и от <b>расстояния до оси</b>. <b class="text-indigo-700">Момент силы</b> (M) — величина, описывающая <b>вращательное действие</b> силы.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<div class="formula text-center" style="font-size:1.7rem">
+<span class="var">M</span> = <span class="var">F</span> · <span class="var">L</span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">M</b> — күш моменті, <span class="unit-pill">Н·м</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">M</b> — torque, <span class="unit-pill">N·m</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">M</b> — момент силы, <span class="unit-pill">Н·м</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">F</b> — күш, <span class="unit-pill">Н</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">F</b> — force, <span class="unit-pill">N</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">F</b> — сила, <span class="unit-pill">Н</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">L</b> — күштің иығы, <span class="unit-pill">м</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">L</b> — lever arm, <span class="unit-pill">m</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">L</b> — плечо силы, <span class="unit-pill">м</span></span>
+</p>
+</div>
+</div>
+</div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 200 200" style="width:180px">
+<!-- Дверь -->
+<rect x="40" y="20" width="140" height="160" fill="#cbd5e1" stroke="#1e293b" stroke-width="2"/>
+<!-- Петли -->
+<circle cx="40" cy="40" r="4" fill="#1e293b"/>
+<circle cx="40" cy="160" r="4" fill="#1e293b"/>
+<!-- Стрелка силы -->
+<line x1="180" y1="100" x2="220" y2="100" stroke="#dc2626" stroke-width="4" marker-end="url(#arr29)"/>
+<text x="195" y="90" fill="#dc2626" font-weight="700" font-size="13">F</text>
+<!-- L -->
+<line x1="40" y1="115" x2="180" y2="115" stroke="#4338ca" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="100" y="130" text-anchor="middle" fill="#4338ca" font-size="13" font-weight="700">L</text>
+<defs><marker id="arr29" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Иық L неғұрлым үлкен болса — момент үлкен</span>
+<span lang="en" class="lang-content">Bigger arm L — bigger torque</span>
+<span lang="ru" class="lang-content">Больше плечо L — больше момент</span></p>
+</div></div></section>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ДЕНЕЛЕРДІҢ ЖҮЗУІ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">FLOATING OF BODIES</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ПЛАВАНИЕ ТЕЛ</h1>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Моменттер ережесі</span>
+<span lang="en" class="lang-content">⚖️ Torque rule</span>
+<span lang="ru" class="lang-content">⚖️ Правило моментов</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Қатты дене айналу осіне қатысты <b>тепе-теңдікте болады</b>, егер оған әсер ететін күштердің <b>сағат тіліндегі</b> моменттерінің қосындысы <b>сағат тіліне қарсы</b> моменттердің қосындысына тең болса:</span>
+<span lang="en" class="lang-content">A rigid body is in <b>rotational equilibrium</b> around an axis if the sum of <b>clockwise</b> torques equals the sum of <b>counter-clockwise</b> torques:</span>
+<span lang="ru" class="lang-content">Тело находится в <b>равновесии</b> относительно оси вращения, если сумма моментов сил, поворачивающих <b>по часовой стрелке</b>, равна сумме моментов <b>против часовой стрелки</b>:</span></p>
+<div class="formula text-center" style="font-size:1.6rem">
+<span class="var">M</span><sub>↻</sub> = <span class="var">M</span><sub>↺</sub>
+</div>
+<p class="text-slate-700 text-base mt-4 text-center">
+<span lang="kk" class="lang-content">Рычаг үшін: <b>F₁·L₁ = F₂·L₂</b> — бұл сол ереженің жеке жағдайы.</span>
+<span lang="en" class="lang-content">For a lever: <b>F₁·L₁ = F₂·L₂</b> — a special case of this rule.</span>
+<span lang="ru" class="lang-content">Для рычага: <b>F₁·L₁ = F₂·L₂</b> — частный случай этого правила.</span></p>
+</div>
+</section>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-cyan-100">Неге темір шеге батады, ал кеме жүзеді?</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-cyan-100">Why does an iron nail sink, but a ship floats?</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-cyan-100">Почему железный гвоздь тонет, а корабль плывет?</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Күш моментінің қолданысы</span>
+<span lang="en" class="lang-content">🛠 Torque in action</span>
+<span lang="ru" class="lang-content">🛠 Момент силы в действии</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🔧</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Гайка кілті</span><span lang="en" class="lang-content">Spanner</span><span lang="ru" class="lang-content">Гаечный ключ</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Ұзынырақ — оңайырақ</span><span lang="en" class="lang-content">Longer = easier</span><span lang="ru" class="lang-content">Длиннее — легче</span></p></div>
+<div class="tile"><div class="tile-emoji">🪛</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Бұрауыш</span><span lang="en" class="lang-content">Screwdriver</span><span lang="ru" class="lang-content">Отвёртка</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Үлкен сап — үлкен момент</span><span lang="en" class="lang-content">Bigger handle = more torque</span><span lang="ru" class="lang-content">Большая ручка — больше момент</span></p></div>
+<div class="tile"><div class="tile-emoji">🚪</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Есік</span><span lang="en" class="lang-content">Door</span><span lang="ru" class="lang-content">Дверь</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Тұтқа топсадан алыс</span><span lang="en" class="lang-content">Handle far from hinges</span><span lang="ru" class="lang-content">Ручка дальше от петель</span></p></div>
+<div class="tile"><div class="tile-emoji">🚲</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Велосипед педалі</span><span lang="en" class="lang-content">Bike pedals</span><span lang="ru" class="lang-content">Педали велосипеда</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Ұзын шатун — оңай айналдыру</span><span lang="en" class="lang-content">Long crank — easier turn</span><span lang="ru" class="lang-content">Длинный шатун — легче крутить</span></p></div>
+</div>
+</section>
 
-        <!-- 1. ҮШ ЖАҒДАЙ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Жүзу шарттары (Күштер)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Floating Conditions (Forces)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Условия плавания (Силы)</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Рычагтың бір ұшында 60 Н жүк 30 см қашықтықта тұр. Тепе-теңдік үшін екінші ұшта 90 см қашықтықта қандай күш қажет?</span>
+<span lang="en" class="lang-content">📘 Problem: A 60 N load is 30 cm from the pivot on one side. What force is needed at 90 cm on the other side for balance?</span>
+<span lang="ru" class="lang-content">📘 Задача: На одном плече рычага груз 60 Н на расстоянии 30 см. Какая сила нужна на другом плече при расстоянии 90 см для равновесия?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>F₁ = 60 <span class="unit-pill">Н</span></li>
+<li>L₁ = 0,3 <span class="unit-pill">м</span></li>
+<li>L₂ = 0,9 <span class="unit-pill">м</span></li>
+<li>F₂ — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+F₁·L₁ = F₂·L₂
+<br/>F₂ = F₁·L₁/L₂
+<br/>F₂ = 60·0,3/0,9 = <span class="num">20</span> <span class="unit">Н</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ 20 Н — 3 есе аз</span><span lang="en" class="lang-content">✅ 20 N — 3× less</span><span lang="ru" class="lang-content">✅ 20 Н — в 3 раза меньше</span></div>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="rule-card border-t-cyan-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Дененің судағы әрекеті екі күшке байланысты: төмен тартатын <span class="term" lang="kk">ауырлық күші (mg)</span> және жоғары итеретін <span class="term" lang="kk">Архимед күші (F_A)</span>.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Behavior in water depends on two forces: <span class="term" lang="en">Gravity (mg)</span> pulling down and <span class="term" lang="en">Buoyancy (F_A)</span> pushing up.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Поведение тела в воде зависит от двух сил: <span class="term" lang="ru">Силы тяжести (mg)</span>, тянущей вниз, и <span class="term" lang="ru">Архимедовой силы (F_A)</span>, толкающей вверх.
-                </p>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">M = F·L</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Күш моменті — айналу әсері</span><span lang="en" class="lang-content">Torque — rotational effect</span><span lang="ru" class="lang-content">Момент — вращательное действие</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">[M] = Н·м</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Ньютон-метр</span><span lang="en" class="lang-content">Newton-metre</span><span lang="ru" class="lang-content">Ньютон-метр</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">M<sub>↻</sub> = M<sub>↺</sub></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Моменттер ережесі</span><span lang="en" class="lang-content">Torque equilibrium rule</span><span lang="ru" class="lang-content">Правило моментов</span></p></div>
+</div></footer>
 
-                <!-- Illustration 1: The 3 Cases -->
-                <svg class="illustration-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                        <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a" />
-                        </marker>
-                    </defs>
-
-                    <!-- Containers -->
-                    <rect x="20" y="50" width="120" height="130" fill="none" stroke="#0891b2" stroke-width="2"/>
-                    <rect x="22" y="70" width="116" height="108" class="svg-water"/>
-
-                    <rect x="190" y="50" width="120" height="130" fill="none" stroke="#0891b2" stroke-width="2"/>
-                    <rect x="192" y="70" width="116" height="108" class="svg-water"/>
-
-                    <rect x="360" y="50" width="120" height="130" fill="none" stroke="#0891b2" stroke-width="2"/>
-                    <rect x="362" y="70" width="116" height="108" class="svg-water"/>
-
-                    <!-- Case 1: Sinking (Stone) -->
-                    <circle cx="80" cy="160" r="15" fill="#475569"/> <!-- Stone at bottom -->
-                    <line x1="80" y1="160" x2="80" y2="190" class="svg-arrow-force" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/> <!-- mg big -->
-                    <line x1="80" y1="160" x2="80" y2="145" class="svg-arrow-force" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green)"/> <!-- FA small -->
-                    <text x="80" y="40" text-anchor="middle" font-weight="bold" fill="#dc2626">mg > F_A</text>
-                    <text x="80" y="200" text-anchor="middle" font-size="12">Батады / Sinks</text>
-
-                    <!-- Case 2: Neutral (Fish) -->
-                    <path d="M 235 120 Q 250 110, 265 120 Q 250 130, 235 120" fill="#facc15" stroke="#ca8a04"/> <!-- Fish -->
-                    <line x1="250" y1="120" x2="250" y2="140" class="svg-arrow-force" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/> <!-- mg equal -->
-                    <line x1="250" y1="120" x2="250" y2="100" class="svg-arrow-force" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green)"/> <!-- FA equal -->
-                    <text x="250" y="40" text-anchor="middle" font-weight="bold" fill="#ca8a04">mg = F_A</text>
-                    <text x="250" y="200" text-anchor="middle" font-size="12">Жүзеді / Swims</text>
-
-                    <!-- Case 3: Floating (Wood/Ball) -->
-                    <circle cx="420" cy="70" r="15" fill="#f87171"/> <!-- Ball half submerged -->
-                    <line x1="420" y1="70" x2="420" y2="90" class="svg-arrow-force" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/> <!-- mg small -->
-                    <line x1="420" y1="70" x2="420" y2="40" class="svg-arrow-force" stroke="#16a34a" stroke-width="3" marker-end="url(#arrow-green)"/> <!-- FA big (initially) -->
-                    <text x="420" y="40" text-anchor="middle" font-weight="bold" fill="#16a34a">mg < F_A</text>
-                    <text x="420" y="200" text-anchor="middle" font-size="12">Қалқиды / Floats</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ТЫҒЫЗДЫҚТЫ САЛЫСТЫРУ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Тығыздық маңызды ма?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Does Density Matter?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Важна ли плотность?</h2>
-
-            <div class="rule-card border-t-purple-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Иә! Егер дененің тығыздығы сұйықтың тығыздығынан <strong>аз</strong> болса, дене қалқып шығады. Егер <strong>көп</strong> болса — батады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Yes! If the body's density is <strong>less</strong> than the liquid's, it floats. If <strong>more</strong>, it sinks.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Да! Если плотность тела <strong>меньше</strong> плотности жидкости, оно всплывает. Если <strong>больше</strong> — тонет.
-                </p>
-
-                <!-- Illustration 2: Density Column -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Glass Cylinder -->
-                    <rect x="150" y="20" width="100" height="160" fill="none" stroke="#475569" stroke-width="3"/>
-
-                    <!-- Layer 1: Honey (Dense) -->
-                    <rect x="152" y="130" width="96" height="48" fill="#d97706" opacity="0.8"/>
-                    <circle cx="200" cy="155" r="10" fill="#475569" stroke="#fff"/> <!-- Bolt -->
-                    <text x="300" y="155" font-size="12" fill="#d97706">ρ_honey ≈ 1400</text>
-
-                    <!-- Layer 2: Water (Medium) -->
-                    <rect x="152" y="80" width="96" height="50" fill="#3b82f6" opacity="0.5"/>
-                    <rect x="190" y="100" width="20" height="20" fill="#84cc16" stroke="#fff"/> <!-- Grape/Plastic -->
-                    <text x="300" y="105" font-size="12" fill="#3b82f6">ρ_water = 1000</text>
-
-                    <!-- Layer 3: Oil (Light) -->
-                    <rect x="152" y="30" width="96" height="50" fill="#fcd34d" opacity="0.7"/>
-                    <rect x="180" y="40" width="40" height="15" fill="#f87171" stroke="#fff"/> <!-- Wood/Foam -->
-                    <text x="300" y="55" font-size="12" fill="#eab308">ρ_oil ≈ 900</text>
-
-                    <!-- Arrow Legend -->
-                    <line x1="120" y1="30" x2="120" y2="170" stroke="#475569" marker-end="url(#arrow-down)"/>
-                    <text x="110" y="100" class="svg-label" style="writing-mode: vertical-rl;">Density (ρ)</text>
-
-                    <defs>
-                        <marker id="arrow-down" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. МЫСАЛ: АЙСБЕРГ ЖӘНЕ КЕМЕ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Айсберг және Кеме</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Iceberg and Ship</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Айсберг и Корабль</h2>
-
-            <div class="rule-card border-t-blue-500">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Iceberg -->
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="kk">Айсберг</h3>
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="en">Iceberg</h3>
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="ru">Айсберг</h3>
-                        <svg viewBox="0 0 150 100" class="w-full h-32">
-                            <rect x="0" y="40" width="150" height="60" fill="#a5f3fc" opacity="0.6"/> <!-- Sea -->
-                            <!-- Iceberg -->
-                            <path d="M 50 20 L 80 10 L 100 30 L 110 40 L 90 90 L 60 80 L 40 40 Z" fill="#e0f2fe" stroke="#bae6fd"/>
-                            <line x1="0" y1="40" x2="150" y2="40" stroke="#0ea5e9" stroke-dasharray="2"/>
-                            <text x="120" y="30" font-size="10" fill="#0ea5e9">10%</text>
-                            <text x="120" y="70" font-size="10" fill="#0369a1">90%</text>
-                        </svg>
-                        <p class="text-xs text-center mt-2 text-gray-600">Мұз судан сәл жеңіл (900 < 1000), сондықтан оның көп бөлігі су астында.</p>
-                    </div>
-
-                    <!-- Ship -->
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="kk">Темір Кеме</h3>
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="en">Steel Ship</h3>
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="ru">Стальной Корабль</h3>
-                        <svg viewBox="0 0 150 100" class="w-full h-32">
-                            <rect x="0" y="50" width="150" height="50" fill="#a5f3fc" opacity="0.6"/> <!-- Sea -->
-                            <!-- Ship Hull -->
-                            <path d="M 30 50 L 40 80 L 110 80 L 120 50 Z" fill="#9ca3af" stroke="#4b5563" stroke-width="2"/>
-                            <rect x="30" y="50" width="90" height="5" fill="#fff"/> <!-- Deck (Air inside) -->
-                            <text x="75" y="70" font-size="10" text-anchor="middle" fill="#fff">AIR (Ауа)</text>
-                        </svg>
-                        <p class="text-xs text-center mt-2 text-gray-600">Темір ауыр, бірақ кеменің іші ауаға толы. <br><strong>Орташа тығыздық < Судың тығыздығы</strong>.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-cyan-800">
-                Дене жүзуі үшін оның тығыздығы сұйықтың тығыздығынан аз болуы керек. Кемелер ішіндегі ауаның есебінен суда жүзеді.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-cyan-800">
-                For an object to float, its density must be less than the fluid's. Ships float because of the air trapped inside them.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-cyan-800">
-                Чтобы тело плавало, его плотность должна быть меньше плотности жидкости. Корабли плавают за счет воздуха внутри них.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

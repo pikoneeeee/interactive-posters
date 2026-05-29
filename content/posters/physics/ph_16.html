@@ -1,399 +1,216 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Единицы силы. Динамометр</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ecfdf5; /* emerald-50 */
-            overflow-x: hidden;
-            color: #064e3b; /* emerald-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Emerald Theme */
-        .header-card {
-            background-color: #059669; /* emerald-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #065f46; /* emerald-800 */
-            border-bottom: 3px solid #6ee7b7; /* emerald-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #d1fae5; /* emerald-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #047857; /* emerald-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #059669; /* emerald-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #059669;
-            background-color: #ffffff;
-            color: #059669;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #ecfdf5;
-        }
-        .lang-btn.active {
-            background-color: #059669;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 220px;
-            margin: 15px 0;
-            border: 1px solid #6ee7b7;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #065f46;
-            text-anchor: middle;
-        }
-        .svg-math {
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сила трения</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-green-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Күштер</span>
+<span lang="en" class="lang-content">Grade 7 · Forces</span>
+<span lang="ru" class="lang-content">7 класс · Силы</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Үйкеліс күші</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Friction force</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Сила трения</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛑 Үйкеліс деген не?</span>
+<span lang="en" class="lang-content">🛑 What is friction?</span>
+<span lang="ru" class="lang-content">🛑 Что такое трение?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Үйкеліс күші</b> (F<sub>үй</sub>) — бір дене екінші денеге қатысты <b>қозғалғанда немесе қозғалуға тырысқанда</b> пайда болатын <b>қозғалысқа қарсы</b> бағытталған күш. Дөңгелек тас жолмен домалап барған кезде, конькимен мұз бойымен сырғанаған кезде, тіпті үстелде жатқан кітап орнында тұрған кезде — үйкеліс әсер етіп тұр.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Friction force</b> (F<sub>fr</sub>) is the force that arises when one body <b>moves or tries to move</b> against another, and is always directed <b>against the motion</b>. It acts when a wheel rolls on a road, when skates glide on ice, even when a book lies still on a desk.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Сила трения</b> (F<sub>тр</sub>) — сила, возникающая при <b>движении или попытке движения</b> одного тела относительно другого, и направленная <b>против движения</b>. Действует, когда колесо катится по дороге, коньки скользят по льду, и даже когда книга просто лежит на столе.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">КҮШ БІРЛІКТЕРІ. ДИНАМОМЕТР</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">UNITS OF FORCE. DYNAMOMETER</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ЕДИНИЦЫ СИЛЫ. ДИНАМОМЕТР</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">🔍 Үйкелістің себептері:</span>
+<span lang="en" class="lang-content">🔍 Causes of friction:</span>
+<span lang="ru" class="lang-content">🔍 Причины трения:</span></p>
+<ol class="text-slate-700 list-decimal pl-6 space-y-1 text-sm">
+<li><span lang="kk" class="lang-content"><b>Беттің кедір-бұдырлары</b> — микроскопиялық деңгейде кез келген бет тегіс емес. Бұдырлар бір-біріне ілінеді.</span><span lang="en" class="lang-content"><b>Surface roughness</b> — at the microscopic level every surface has bumps that catch on each other.</span><span lang="ru" class="lang-content"><b>Шероховатости</b> — на микроуровне любая поверхность не гладкая, выступы цепляются.</span></li>
+<li><span lang="kk" class="lang-content"><b>Молекулалық тарту</b> — жанасатын беттер арасында молекулалардың электр әсерлесуі.</span><span lang="en" class="lang-content"><b>Molecular attraction</b> — electric interaction between contact surfaces.</span><span lang="ru" class="lang-content"><b>Молекулярное притяжение</b> — электрическое взаимодействие в зоне контакта.</span></li>
+</ol>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-emerald-100">1 Ньютон деген не? Күшті қалай өлшейміз?</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-emerald-100">What is 1 Newton? How do we measure force?</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-emerald-100">Что такое 1 Ньютон? Как измерить силу?</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 220 180" style="width:180px">
+<!-- Поверхность -->
+<line x1="10" y1="130" x2="210" y2="130" stroke="#1e293b" stroke-width="2"/>
+<g stroke="#1e293b" stroke-width="1">
+<line x1="10" y1="130" x2="20" y2="140"/><line x1="30" y1="130" x2="40" y2="140"/>
+<line x1="50" y1="130" x2="60" y2="140"/><line x1="70" y1="130" x2="80" y2="140"/>
+<line x1="90" y1="130" x2="100" y2="140"/><line x1="110" y1="130" x2="120" y2="140"/>
+<line x1="130" y1="130" x2="140" y2="140"/><line x1="150" y1="130" x2="160" y2="140"/>
+<line x1="170" y1="130" x2="180" y2="140"/><line x1="190" y1="130" x2="200" y2="140"/>
+</g>
+<!-- Тело -->
+<rect x="70" y="80" width="80" height="50" fill="#94a3b8" stroke="#1e293b" stroke-width="2"/>
+<!-- Сила движения -->
+<line x1="150" y1="105" x2="200" y2="105" stroke="#dc2626" stroke-width="3" marker-end="url(#arrFr1)"/>
+<text x="180" y="95" fill="#dc2626" font-weight="700" font-size="13">F⃗</text>
+<!-- Сила трения -->
+<line x1="70" y1="125" x2="30" y2="125" stroke="#16a34a" stroke-width="3" marker-end="url(#arrFr2)"/>
+<text x="20" y="160" fill="#16a34a" font-weight="700" font-size="13">F⃗<tspan baseline-shift="sub" font-size="9">үй</tspan></text>
+<defs>
+<marker id="arrFr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="arrFr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+</defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-3">
+<span lang="kk" class="lang-content">F<sub>үй</sub> әрқашан қозғалысқа қарсы</span>
+<span lang="en" class="lang-content">F<sub>fr</sub> always opposes motion</span>
+<span lang="ru" class="lang-content">F<sub>тр</sub> всегда против движения</span></p>
+</div></div></section>
 
-        <!-- 1. НЬЮТОН (N) -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Күш бірлігі – Ньютон (Н)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Unit of Force – Newton (N)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Единица силы – Ньютон (Н)</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">3️⃣ Үйкелістің 3 түрі</span>
+<span lang="en" class="lang-content">3️⃣ Three kinds of friction</span>
+<span lang="ru" class="lang-content">3️⃣ Три вида трения</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-rose rounded-custom p-6">
+<div class="text-center mb-3"><div class="text-5xl">🛑</div>
+<p class="heading-font text-lg text-rose-700 mt-2"><span lang="kk" class="lang-content">1. Тыныштық үйкелісі</span><span lang="en" class="lang-content">1. Static friction</span><span lang="ru" class="lang-content">1. Трение покоя</span></p></div>
+<p class="text-slate-700 text-sm leading-relaxed">
+<span lang="kk" class="lang-content">Дене <b>әлі қозғалмаған</b>, бірақ оны қозғалтуға тырысыңыз. Үйкеліс күші сізбен бірге өседі, белгілі бір <b>максимумға</b> жеткенше. Шкафты итергенде, бастапқыда оны жылжыту қиын — бұл тыныштық үйкелісі. Қозғалу басталғанда, үйкеліс <b>әлсірейді</b>.</span>
+<span lang="en" class="lang-content">The body is <b>not yet moving</b>, but you try to push it. Friction increases with your push, up to a <b>maximum</b>. When pushing a wardrobe — it's hard at first; that's static friction. Once it moves, friction <b>drops</b>.</span>
+<span lang="ru" class="lang-content">Тело ещё <b>не движется</b>, но вы пытаетесь его сдвинуть. Сила трения растёт вместе с вашим усилием, до <b>максимума</b>. Сдвинуть шкаф трудно — это трение покоя. Как только начал двигаться — трение <b>падает</b>.</span></p>
+</div>
+<div class="card-warm rounded-custom p-6">
+<div class="text-center mb-3"><div class="text-5xl">↔️</div>
+<p class="heading-font text-lg text-orange-700 mt-2"><span lang="kk" class="lang-content">2. Сырғанау үйкелісі</span><span lang="en" class="lang-content">2. Sliding friction</span><span lang="ru" class="lang-content">2. Трение скольжения</span></p></div>
+<p class="text-slate-700 text-sm leading-relaxed">
+<span lang="kk" class="lang-content">Дене бет бойымен <b>сырғанап</b> бара жатыр. Шанамен қарда жүру, коньки. Күші: <b>F<sub>үй</sub> = μ · N</b>, мұнда μ — үйкеліс коэффициенті, N — қалыпты қысым күші.</span>
+<span lang="en" class="lang-content">The body is <b>sliding</b> on a surface. A sled on snow, skates on ice. Formula: <b>F<sub>fr</sub> = μ · N</b>, where μ — friction coefficient, N — normal force.</span>
+<span lang="ru" class="lang-content">Тело <b>скользит</b> по поверхности. Санки по снегу, коньки по льду. Формула: <b>F<sub>тр</sub> = μ · N</b>, где μ — коэффициент трения, N — сила нормальной реакции опоры.</span></p>
+</div>
+<div class="card-emerald rounded-custom p-6">
+<div class="text-center mb-3"><div class="text-5xl">⚙️</div>
+<p class="heading-font text-lg text-emerald-700 mt-2"><span lang="kk" class="lang-content">3. Домалау үйкелісі</span><span lang="en" class="lang-content">3. Rolling friction</span><span lang="ru" class="lang-content">3. Трение качения</span></p></div>
+<p class="text-slate-700 text-sm leading-relaxed">
+<span lang="kk" class="lang-content">Дөңгелек дене <b>домалайды</b>. Бұл — ең әлсіз үйкеліс! Сондықтан адамдар <b>дөңгелек ойлап тапты</b> — жылжытуға қарағанда домалатуы <b>10–100 есе оңай</b>. Автомобиль, поезд — бәрі дөңгелекте.</span>
+<span lang="en" class="lang-content">A round body <b>rolls</b>. This is the <b>weakest</b> kind of friction! That's why we invented <b>the wheel</b> — rolling is <b>10–100× easier</b> than sliding. Cars, trains — all on wheels.</span>
+<span lang="ru" class="lang-content">Тело <b>катится</b>. Самое слабое трение! Поэтому изобрели <b>колесо</b> — катить <b>в 10–100 раз легче</b>, чем тащить. Машины, поезда — всё на колёсах.</span></p>
+</div>
+</div>
+</section>
 
-            <div class="rule-card border-t-emerald-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Халықаралық жүйеде (ХБЖ) күш бірлігі ретінде <strong>Ньютон (Н)</strong> алынған.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    In the International System of Units (SI), the unit of force is the <strong>Newton (N)</strong>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    В Международной системе единиц (СИ) за единицу силы принят <strong>Ньютон (Н)</strong>.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Сырғанау үйкелісінің формуласы</span>
+<span lang="en" class="lang-content">📐 Sliding friction formula</span>
+<span lang="ru" class="lang-content">📐 Формула трения скольжения</span></h2>
+<div class="card-accent rounded-custom p-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+<div>
+<div class="formula text-center" style="font-size:1.8rem">
+<span class="var">F</span><sub>үй</sub> = <span class="var">μ</span> · <span class="var">N</span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">F</b><sub>үй</sub> — үйкеліс күші, <span class="unit-pill">Н</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">F</b><sub>fr</sub> — friction force, <span class="unit-pill">N</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">F</b><sub>тр</sub> — сила трения, <span class="unit-pill">Н</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">μ</b> (мю) — үйкеліс коэффициенті (өлшемсіз)</span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">μ</b> (mu) — friction coefficient (dimensionless)</span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">μ</b> (мю) — коэффициент трения (безразмерный)</span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">N</b> — қалыпты қысым күші, <span class="unit-pill">Н</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">N</b> — normal force, <span class="unit-pill">N</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">N</b> — сила нормальной реакции, <span class="unit-pill">Н</span></span>
+</p>
+</div>
+</div>
+<div>
+<p class="heading-font text-base text-indigo-700 mb-2"><span lang="kk" class="lang-content">μ — материал жұбының коэффициенті</span><span lang="en" class="lang-content">μ — coefficient for pair of materials</span><span lang="ru" class="lang-content">μ — коэффициент для пары материалов</span></p>
+<table class="t text-sm">
+<thead><tr><th><span lang="kk" class="lang-content">Беттер</span><span lang="en" class="lang-content">Surfaces</span><span lang="ru" class="lang-content">Поверхности</span></th><th>μ</th></tr></thead>
+<tbody>
+<tr><td><span lang="kk" class="lang-content">Болат — болат</span><span lang="en" class="lang-content">Steel — steel</span><span lang="ru" class="lang-content">Сталь — сталь</span></td><td>0,15</td></tr>
+<tr><td><span lang="kk" class="lang-content">Резеңке — асфальт</span><span lang="en" class="lang-content">Rubber — asphalt</span><span lang="ru" class="lang-content">Резина — асфальт</span></td><td>0,7</td></tr>
+<tr><td><span lang="kk" class="lang-content">Ағаш — ағаш</span><span lang="en" class="lang-content">Wood — wood</span><span lang="ru" class="lang-content">Дерево — дерево</span></td><td>0,3</td></tr>
+<tr><td><span lang="kk" class="lang-content">Болат — мұз</span><span lang="en" class="lang-content">Steel — ice</span><span lang="ru" class="lang-content">Сталь — лёд</span></td><td>0,02</td></tr>
+<tr><td><span lang="kk" class="lang-content">Тефлон — болат</span><span lang="en" class="lang-content">Teflon — steel</span><span lang="ru" class="lang-content">Тефлон — сталь</span></td><td>0,04</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="example-block border-l-emerald-400 bg-emerald-50">
-                    <p lang="kk" class="lang-content text-center"><strong>1 Н</strong> – бұл тыныштық күйіндегі массасы <strong>102 г</strong> денеге әсер ететін ауырлық күшіне шамамен тең.</p>
-                    <p lang="en" class="lang-content text-center"><strong>1 N</strong> is approximately equal to the gravitational force acting on a stationary object with a mass of <strong>102 g</strong>.</p>
-                    <p lang="ru" class="lang-content text-center"><strong>1 Н</strong> – это сила тяжести, которая действует на покоящееся тело массой примерно <strong>102 г</strong> (например, среднее яблоко).</p>
-                </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Үйкеліс: пайда ма, зиян ба?</span>
+<span lang="en" class="lang-content">⚖️ Friction: useful or harmful?</span>
+<span lang="ru" class="lang-content">⚖️ Трение: польза или вред?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-lg text-emerald-700 mb-3">
+<span lang="kk" class="lang-content">✅ Пайдалы үйкеліс</span>
+<span lang="en" class="lang-content">✅ Useful friction</span>
+<span lang="ru" class="lang-content">✅ Полезное трение</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>Жүру:</b> үйкеліс болмаса, аяқ жерден сырғанап, біз қозғала алмас едік</span><span lang="en" class="lang-content"><b>Walking:</b> without friction, feet slip — we couldn't walk</span><span lang="ru" class="lang-content"><b>Ходьба:</b> без трения нога скользит — мы не могли бы идти</span></li>
+<li><span lang="kk" class="lang-content"><b>Тежеу:</b> автокөліктің тежегіш жүйесі үйкелісте</span><span lang="en" class="lang-content"><b>Brakes:</b> car brakes work via friction</span><span lang="ru" class="lang-content"><b>Тормоза:</b> тормозная система — это трение</span></li>
+<li><span lang="kk" class="lang-content"><b>От жағу:</b> сіріңке үйкеліспен от шығарады</span><span lang="en" class="lang-content"><b>Lighting fire:</b> match-strike is friction</span><span lang="ru" class="lang-content"><b>Спички:</b> зажигаются от трения</span></li>
+<li><span lang="kk" class="lang-content"><b>Шегелерді ұстау:</b> үйкеліс шегені ағашта ұстайды</span><span lang="en" class="lang-content"><b>Nails hold:</b> friction keeps them in wood</span><span lang="ru" class="lang-content"><b>Гвозди держатся:</b> благодаря трению</span></li>
+<li><span lang="kk" class="lang-content"><b>Қаламсаппен жазу:</b> графит қағазда үйкеліседі</span><span lang="en" class="lang-content"><b>Writing:</b> pencil graphite rubs on paper</span><span lang="ru" class="lang-content"><b>Письмо:</b> графит трётся о бумагу</span></li>
+</ul>
+</div>
+<div class="card-rose rounded-custom p-6">
+<p class="heading-font text-lg text-rose-700 mb-3">
+<span lang="kk" class="lang-content">❌ Зиянды үйкеліс</span>
+<span lang="en" class="lang-content">❌ Harmful friction</span>
+<span lang="ru" class="lang-content">❌ Вредное трение</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>Бөлшектердің тозуы:</b> қозғалтқыш бөлшектері тозады</span><span lang="en" class="lang-content"><b>Wear:</b> engine parts wear out</span><span lang="ru" class="lang-content"><b>Износ:</b> детали двигателя стираются</span></li>
+<li><span lang="kk" class="lang-content"><b>Қыздыру:</b> энергия пайдасыз жылуға айналады</span><span lang="en" class="lang-content"><b>Heating:</b> energy is wasted as heat</span><span lang="ru" class="lang-content"><b>Нагрев:</b> энергия зря уходит в тепло</span></li>
+<li><span lang="kk" class="lang-content"><b>Қуат шығыны:</b> механизм КПД-ын төмендетеді</span><span lang="en" class="lang-content"><b>Energy loss:</b> lowers efficiency</span><span lang="ru" class="lang-content"><b>Потери:</b> снижает КПД механизмов</span></li>
+</ul>
+<p class="font-bold text-rose-700 mt-3 mb-2"><span lang="kk" class="lang-content">🛠 Қалай азайтуға болады?</span><span lang="en" class="lang-content">🛠 How to reduce friction?</span><span lang="ru" class="lang-content">🛠 Как уменьшить?</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-1 text-sm">
+<li><span lang="kk" class="lang-content"><b>Майлау</b> (масло, мазь)</span><span lang="en" class="lang-content"><b>Lubricate</b> (oil, grease)</span><span lang="ru" class="lang-content"><b>Смазка</b> (масло, смазка)</span></li>
+<li><span lang="kk" class="lang-content"><b>Сырғанауды домалауға</b> ауыстыру (мойынтірек)</span><span lang="en" class="lang-content">Replace sliding with <b>rolling</b> (bearings)</span><span lang="ru" class="lang-content">Заменить скольжение <b>качением</b> (подшипники)</span></li>
+<li><span lang="kk" class="lang-content"><b>Тегістеу</b>, полировка</span><span lang="en" class="lang-content"><b>Polishing</b> the surfaces</span><span lang="ru" class="lang-content"><b>Полировка</b> поверхностей</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                <!-- Illustration 1: 1N visual -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Apple -->
-                    <g transform="translate(150, 40)">
-                         <path d="M 50 20 Q 80 5, 100 20 Q 110 50, 90 70 Q 75 80, 50 75 Q 25 80, 10 70 Q -10 50, 0 20 Q 20 5, 50 20 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
-                         <path d="M 50 20 Q 50 5, 60 -10" stroke="#4a2c0f" stroke-width="3" fill="none"/>
-                         <path d="M 60 5 Q 75 0, 70 15" fill="#65a30d"/>
-                         <text x="50" y="55" fill="#fecaca" text-anchor="middle" font-size="14" font-weight="bold">~100 g</text>
-                    </g>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🛑</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Қозғалысқа қарсы</span><span lang="en" class="lang-content">Opposes motion</span><span lang="ru" class="lang-content">Против движения</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Әрқашан жылдамдыққа қарама-қарсы</span><span lang="en" class="lang-content">Always opposite to velocity</span><span lang="ru" class="lang-content">Всегда против скорости</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">F<sub>тр</sub> = μN</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Сырғанау формуласы</span><span lang="en" class="lang-content">Sliding formula</span><span lang="ru" class="lang-content">Формула скольжения</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚙️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">3 түрі</span><span lang="en" class="lang-content">3 types</span><span lang="ru" class="lang-content">3 вида</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тыныштық · сырғанау · домалау</span><span lang="en" class="lang-content">Static · sliding · rolling</span><span lang="ru" class="lang-content">Покоя · скольжения · качения</span></p></div>
+</div></footer>
 
-                    <!-- Text Label -->
-                    <text x="280" y="80" class="svg-label" font-size="24">≈ 1 N</text>
-
-                    <!-- Arrow down -->
-                    <line x1="200" y1="90" x2="200" y2="130" stroke="#059669" stroke-width="3" marker-end="url(#arrowhead-green)"/>
-                    <text x="215" y="120" font-size="14" fill="#059669" font-weight="bold">F = mg</text>
-
-                    <defs>
-                        <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#059669" />
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ДИНАМОМЕТР ҚҰРЫЛЫСЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Динамометр</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Dynamometer</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Динамометр</h2>
-
-            <div class="rule-card border-t-blue-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Динамометр</span> (грекше "dinamis" - күш, "metreo" - өлшеймін) — күшті өлшеуге арналған құрал. Оның негізгі бөлігі — серіппе.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    A <span class="term" lang="en">Dynamometer</span> is an instrument for measuring force. Its main part is a spring.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Динамометр</span> (от греч. "dinamis" - сила, "metreo" - измеряю) — прибор для измерения силы. Его главная часть — пружина.
-                </p>
-
-                <!-- Illustration 2: Dynamometer Structure -->
-                <svg class="illustration-svg" style="height: 250px;" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
-                     <!-- Casing -->
-                    <rect x="150" y="20" width="60" height="180" fill="#f3f4f6" stroke="#4b5563" stroke-width="2" rx="5"/>
-                    <circle cx="180" cy="20" r="10" fill="none" stroke="#4b5563" stroke-width="2"/> <!-- Top Ring -->
-
-                    <!-- Spring -->
-                    <path d="M 180 30 Q 190 35, 170 40 T 180 50 T 170 60 T 180 70 T 170 80 T 180 90 T 170 100" fill="none" stroke="#059669" stroke-width="3"/>
-
-                    <!-- Indicator/Pointer -->
-                    <line x1="170" y1="100" x2="180" y2="100" stroke="#dc2626" stroke-width="4"/>
-                    <rect x="160" y="98" width="40" height="4" fill="#dc2626"/>
-
-                    <!-- Hook Rod -->
-                    <line x1="180" y1="100" x2="180" y2="200" stroke="#6b7280" stroke-width="2"/>
-                    <!-- Hook -->
-                    <path d="M 180 200 Q 180 220, 165 220" fill="none" stroke="#4b5563" stroke-width="3"/>
-
-                    <!-- Scale Marks -->
-                    <g stroke="#1f2937" stroke-width="1">
-                         <line x1="150" y1="50" x2="160" y2="50"/> <text x="140" y="55" font-size="10">0</text>
-                         <line x1="150" y1="75" x2="160" y2="75"/> <text x="140" y="80" font-size="10">1</text>
-                         <line x1="150" y1="100" x2="165" y2="100" stroke-width="2"/> <text x="135" y="105" font-size="12" font-weight="bold">2 N</text>
-                         <line x1="150" y1="125" x2="160" y2="125"/> <text x="140" y="130" font-size="10">3</text>
-                         <line x1="150" y1="150" x2="160" y2="150"/> <text x="140" y="155" font-size="10">4</text>
-                         <line x1="150" y1="175" x2="160" y2="175"/> <text x="140" y="180" font-size="10">5</text>
-                    </g>
-
-                    <!-- Labels with lines -->
-                    <!-- Spring Label -->
-                    <line x1="250" y1="60" x2="190" y2="60" stroke="#059669" stroke-dasharray="2"/>
-                    <text x="255" y="65" font-size="14" fill="#059669" class="lang-content" lang="kk">Серіппе</text>
-                    <text x="255" y="65" font-size="14" fill="#059669" class="lang-content" lang="en">Spring</text>
-                    <text x="255" y="65" font-size="14" fill="#059669" class="lang-content" lang="ru">Пружина</text>
-
-                    <!-- Scale Label -->
-                    <line x1="90" y1="120" x2="150" y2="120" stroke="#1f2937" stroke-dasharray="2"/>
-                    <text x="30" y="125" font-size="14" fill="#1f2937" class="lang-content" lang="kk">Шкала</text>
-                    <text x="30" y="125" font-size="14" fill="#1f2937" class="lang-content" lang="en">Scale</text>
-                    <text x="30" y="125" font-size="14" fill="#1f2937" class="lang-content" lang="ru">Шкала</text>
-
-                     <!-- Hook Label -->
-                    <line x1="250" y1="210" x2="180" y2="210" stroke="#4b5563" stroke-dasharray="2"/>
-                    <text x="255" y="215" font-size="14" fill="#4b5563" class="lang-content" lang="kk">Ілгек</text>
-                    <text x="255" y="215" font-size="14" fill="#4b5563" class="lang-content" lang="en">Hook</text>
-                    <text x="255" y="215" font-size="14" fill="#4b5563" class="lang-content" lang="ru">Крючок</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. КҮШТІ ӨЛШЕУ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Күшті қалай өлшейміз?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Measuring Force</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Как измерить силу?</h2>
-
-            <div class="rule-card border-t-amber-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Серіппенің ұзаруы түсірілген күшке тура пропорционал (Гук заңы). Динамометр шкаласы осы заңға негізделген.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    The extension of the spring is directly proportional to the applied force (Hooke's Law). The dynamometer scale is based on this law.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Удлинение пружины прямо пропорционально приложенной силе (Закон Гука). Шкала динамометра основана на этом законе.
-                </p>
-
-                <!-- Illustration 3: Measuring a Block -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Wall/Ceiling -->
-                    <rect x="180" y="0" width="40" height="10" fill="#9ca3af"/>
-
-                    <!-- Dynamometer (Simplified) -->
-                    <rect x="190" y="10" width="20" height="60" fill="#fff" stroke="#000"/>
-                    <line x1="200" y1="10" x2="200" y2="70" stroke="#059669"/> <!-- Spring line -->
-
-                    <!-- Heavy Block -->
-                    <rect x="180" y="80" width="40" height="40" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
-                    <text x="200" y="105" font-size="12" text-anchor="middle" fill="#78350f" font-weight="bold">m</text>
-
-                    <!-- Force Vector P = mg -->
-                    <line x1="200" y1="120" x2="200" y2="145" stroke="#dc2626" stroke-width="3" marker-end="url(#arrowhead-red-2)"/>
-                    <text x="210" y="140" font-size="14" fill="#dc2626" font-weight="bold">P = F</text>
-
-                    <!-- Zoomed Scale Bubble -->
-                    <circle cx="280" cy="50" r="45" fill="#fff" stroke="#059669" stroke-width="2"/>
-                    <line x1="210" y1="50" x2="235" y2="50" stroke="#9ca3af" stroke-dasharray="2"/>
-
-                    <!-- Inside Zoom -->
-                    <g transform="translate(260, 20) scale(1.5)">
-                         <line x1="0" y1="0" x2="0" y2="40" stroke="#000"/>
-                         <line x1="0" y1="10" x2="10" y2="10" stroke="#000"/> <text x="12" y="13" font-size="8">3</text>
-                         <line x1="0" y1="20" x2="10" y2="20" stroke="#dc2626" stroke-width="2"/> <text x="12" y="23" font-size="8" fill="#dc2626" font-weight="bold">3.5 N</text>
-                         <line x1="0" y1="30" x2="10" y2="30" stroke="#000"/> <text x="12" y="33" font-size="8">4</text>
-                         <!-- Red Pointer -->
-                         <polygon points="-5,20 0,20 0,22 -5,22" fill="#dc2626"/>
-                    </g>
-
-                    <defs>
-                        <marker id="arrowhead-red-2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-emerald-900">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-emerald-900">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-emerald-900">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-emerald-800">
-                Күшті өлшейтін құрал — <strong>динамометр</strong>. Ол Ньютонмен (Н) өлшейді. Жұмыс істеу принципі Гук заңына негізделген.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-emerald-800">
-                The instrument for measuring force is a <strong>dynamometer</strong>. It measures in Newtons (N). The principle of operation is based on Hooke's Law.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-emerald-800">
-                Прибор для измерения силы — <strong>динамометр</strong>. Он измеряет силу в Ньютонах (Н). Принцип работы основан на законе Гука.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

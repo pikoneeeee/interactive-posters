@@ -1,342 +1,178 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат 1: Заттың құрылысы</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            overflow-x: hidden;
-            color: #1a202c;
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы */
-        .header-card {
-            background-color: #1d4ed8; /* Көк-700 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(29, 78, 216, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #1e3a8a; /* Көк-800 */
-            border-bottom: 3px solid #93c5fd; /* Көк-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #eff6ff; /* Өте ашық көк */
-            border-left: 4px solid #60a5fa; /* Көк-400 */
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #f1f5f9; /* Ашық сұр */
-            border-radius: 1rem;
-            border-top: 4px solid #64748b; /* Сұр */
-        }
-        .feature-list li {
-            margin-bottom: 8px;
-            list-style: none;
-            padding-left: 20px;
-            position: relative;
-        }
-        .feature-list li::before {
-            content: '🔬'; /* Эмодзи */
-            position: absolute;
-            left: 0;
-            color: #1d4ed8; /* Көк */
-        }
-         .term {
-            font-weight: bold;
-            color: #1e3a8a; /* blue-800 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #1d4ed8;
-            background-color: #ffffff;
-            color: #1d4ed8;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #eff6ff;
-        }
-        .lang-btn.active {
-            background-color: #1d4ed8;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 120px;
-            margin: 10px 0;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
-    // Функция переключения языков (Автоматически добавлено скриптом)
-    function switchLang(lang) {
-        var container = document.getElementById('poster-container');
-        if (container) {
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-        }
-        var buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-</script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Физические величины и их измерение</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-gray-100">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Кіріспе</span>
+<span lang="en" class="lang-content">Grade 7 · Introduction</span>
+<span lang="ru" class="lang-content">7 класс · Введение</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Физикалық шамалар және оларды өлшеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Physical quantities and measurement</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Физические величины и их измерение</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Физикалық шама деген не?</span>
+<span lang="en" class="lang-content">📏 What is a physical quantity?</span>
+<span lang="ru" class="lang-content">📏 Что такое физическая величина?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Физикалық шама</b> — дененің немесе құбылыстың <b>санмен өлшенетін</b> қасиеті. «Үстел ұзын» — бұл шама емес, ал «үстелдің ұзындығы 1,5 м» — шама. Әрбір шаманың <b>аты</b>, <b>белгісі</b>, <b>сандық мәні</b> және <b>өлшем бірлігі</b> болады.</span>
+<span lang="en" class="lang-content">A <b class="text-indigo-700">physical quantity</b> is a property of a body or phenomenon that can be <b>measured by a number</b>. «The table is long» is not a quantity, but «the table is 1.5 m long» is. Every quantity has a <b>name</b>, a <b>symbol</b>, a <b>numeric value</b> and a <b>unit of measurement</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Физическая величина</b> — это свойство тела или явления, которое можно <b>измерить числом</b>. «Стол длинный» — не величина, а «длина стола 1,5 м» — величина. Каждая величина имеет <b>название</b>, <b>обозначение</b>, <b>числовое значение</b> и <b>единицу измерения</b>.</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">📝 Жазу формасы:</span>
+<span lang="en" class="lang-content">📝 How we write it:</span>
+<span lang="ru" class="lang-content">📝 Как записываем:</span></p>
+<div class="formula text-center" style="font-size:1.4rem">
+<span class="var">l</span> = <span class="num">1,5</span> <span class="unit">м</span>
+</div>
+<p class="text-sm text-slate-600 mt-3">
+<span lang="kk" class="lang-content"><b>l</b> — белгісі (ұзындық), <b>1,5</b> — сандық мәні, <b>м</b> — өлшем бірлігі.</span>
+<span lang="en" class="lang-content"><b>l</b> — symbol (length), <b>1.5</b> — numeric value, <b>m</b> — unit.</span>
+<span lang="ru" class="lang-content"><b>l</b> — обозначение (длина), <b>1,5</b> — числовое значение, <b>м</b> — единица.</span></p>
+</div></div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">📐</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-3">
+<span lang="kk" class="lang-content">Өлшеу деген не?</span>
+<span lang="en" class="lang-content">What is measuring?</span>
+<span lang="ru" class="lang-content">Что такое измерение?</span></p>
+<p class="text-center text-slate-700">
+<span lang="kk" class="lang-content">Шаманы <b>эталонмен</b> салыстыру</span>
+<span lang="en" class="lang-content">Comparing a quantity with a <b>standard</b></span>
+<span lang="ru" class="lang-content">Сравнение величины с <b>эталоном</b></span></p>
+</div></div></section>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 1: ЗАТТЫҢ ҚҰРЫЛЫСЫ ТУРАЛЫ АЛҒАШҚЫ МӘЛІМЕТТЕР</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">PHYSICS 1: BASIC INFORMATION ON THE STRUCTURE OF MATTER</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 1: ПЕРВОНАЧАЛЬНЫЕ СВЕДЕНИЯ О СТРОЕНИИ ВЕЩЕСТВА</h1>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌐 СИ жүйесі — әлемдік стандарт</span>
+<span lang="en" class="lang-content">🌐 SI system — world standard</span>
+<span lang="ru" class="lang-content">🌐 Система СИ — мировой стандарт</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Шама</span><span lang="en" class="lang-content">Quantity</span><span lang="ru" class="lang-content">Величина</span></th>
+<th><span lang="kk" class="lang-content">Белгісі</span><span lang="en" class="lang-content">Symbol</span><span lang="ru" class="lang-content">Обозначение</span></th>
+<th><span lang="kk" class="lang-content">Бірлігі (СИ)</span><span lang="en" class="lang-content">Unit (SI)</span><span lang="ru" class="lang-content">Единица (СИ)</span></th>
+<th><span lang="kk" class="lang-content">Қысқа белгі</span><span lang="en" class="lang-content">Short symbol</span><span lang="ru" class="lang-content">Краткое</span></th>
+</tr></thead>
+<tbody>
+<tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Ұзындық</span><span lang="en" class="lang-content">Length</span><span lang="ru" class="lang-content">Длина</span></td>
+<td><b>l</b></td><td><span lang="kk" class="lang-content">метр</span><span lang="en" class="lang-content">metre</span><span lang="ru" class="lang-content">метр</span></td><td><span class="unit-pill">м / m</span></td></tr>
+<tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Уақыт</span><span lang="en" class="lang-content">Time</span><span lang="ru" class="lang-content">Время</span></td>
+<td><b>t</b></td><td><span lang="kk" class="lang-content">секунд</span><span lang="en" class="lang-content">second</span><span lang="ru" class="lang-content">секунда</span></td><td><span class="unit-pill">с / s</span></td></tr>
+<tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Масса</span><span lang="en" class="lang-content">Mass</span><span lang="ru" class="lang-content">Масса</span></td>
+<td><b>m</b></td><td><span lang="kk" class="lang-content">килограмм</span><span lang="en" class="lang-content">kilogram</span><span lang="ru" class="lang-content">килограмм</span></td><td><span class="unit-pill">кг / kg</span></td></tr>
+<tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Температура</span><span lang="en" class="lang-content">Temperature</span><span lang="ru" class="lang-content">Температура</span></td>
+<td><b>T</b></td><td><span lang="kk" class="lang-content">кельвин</span><span lang="en" class="lang-content">kelvin</span><span lang="ru" class="lang-content">кельвин</span></td><td><span class="unit-pill">К / K</span></td></tr>
+<tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Ток күші</span><span lang="en" class="lang-content">Current</span><span lang="ru" class="lang-content">Сила тока</span></td>
+<td><b>I</b></td><td><span lang="kk" class="lang-content">ампер</span><span lang="en" class="lang-content">ampere</span><span lang="ru" class="lang-content">ампер</span></td><td><span class="unit-pill">А / A</span></td></tr>
+<tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Зат мөлшері</span><span lang="en" class="lang-content">Amount of substance</span><span lang="ru" class="lang-content">Количество вещества</span></td>
+<td><b>n</b></td><td><span lang="kk" class="lang-content">моль</span><span lang="en" class="lang-content">mole</span><span lang="ru" class="lang-content">моль</span></td><td><span class="unit-pill">моль / mol</span></td></tr>
+<tr><td class="font-bold text-indigo-700"><span lang="kk" class="lang-content">Жарық күші</span><span lang="en" class="lang-content">Luminous intensity</span><span lang="ru" class="lang-content">Сила света</span></td>
+<td><b>J</b></td><td><span lang="kk" class="lang-content">кандела</span><span lang="en" class="lang-content">candela</span><span lang="ru" class="lang-content">кандела</span></td><td><span class="unit-pill">кд / cd</span></td></tr>
+</tbody></table></div>
+<p class="text-slate-600 text-sm mt-3">
+<span lang="kk" class="lang-content"><b>СИ</b> (Système International) — 1960 ж. қабылданған. <b>7 негізгі шама</b>, қалғандары осы 7-нен туындайды (жылдамдық = ұзындық/уақыт = м/с).</span>
+<span lang="en" class="lang-content"><b>SI</b> (Système International) was adopted in 1960. There are <b>7 base quantities</b>, all others are derived from them (velocity = length/time = m/s).</span>
+<span lang="ru" class="lang-content"><b>СИ</b> (Système International) принята в 1960 г. <b>7 основных величин</b>, все остальные выводятся из них (скорость = длина/время = м/с).</span></p>
+</section>
 
-        <!-- 1. НЕГІЗГІ ҚАҒИДА -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Барлық зат неден тұрады?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Everything Made of?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Из чего состоит всё?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔢 Еселік және үлестік бірліктер</span>
+<span lang="en" class="lang-content">🔢 Multiples and sub-multiples</span>
+<span lang="ru" class="lang-content">🔢 Кратные и дольные единицы</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><p class="heading-font text-base text-indigo-700">кило (к)</p><p class="text-xs text-slate-600">× 1 000</p><p class="text-xs text-slate-500">1 км = 1 000 м</p></div>
+<div class="tile"><p class="heading-font text-base text-indigo-700">мега (М)</p><p class="text-xs text-slate-600">× 1 000 000</p><p class="text-xs text-slate-500">1 МВт = 10⁶ Вт</p></div>
+<div class="tile"><p class="heading-font text-base text-indigo-700">гига (Г)</p><p class="text-xs text-slate-600">× 10⁹</p><p class="text-xs text-slate-500">1 ГГц = 10⁹ Гц</p></div>
+<div class="tile"><p class="heading-font text-base text-indigo-700">тера (Т)</p><p class="text-xs text-slate-600">× 10¹²</p><p class="text-xs text-slate-500">1 ТБ = 10¹² Б</p></div>
+<div class="tile"><p class="heading-font text-base text-orange-700">санти (с)</p><p class="text-xs text-slate-600">× 0,01</p><p class="text-xs text-slate-500">1 см = 0,01 м</p></div>
+<div class="tile"><p class="heading-font text-base text-orange-700">милли (м)</p><p class="text-xs text-slate-600">× 0,001</p><p class="text-xs text-slate-500">1 мм = 0,001 м</p></div>
+<div class="tile"><p class="heading-font text-base text-orange-700">микро (мк)</p><p class="text-xs text-slate-600">× 10⁻⁶</p><p class="text-xs text-slate-500">1 мкм = 10⁻⁶ м</p></div>
+<div class="tile"><p class="heading-font text-base text-orange-700">нано (н)</p><p class="text-xs text-slate-600">× 10⁻⁹</p><p class="text-xs text-slate-500">1 нм = 10⁻⁹ м</p></div>
+</div>
+</section>
 
-            <div class="rule-card border-t-blue-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Барлық заттар (қатты, сұйық, газ) көзбен көру мүмкін емес ең кішкентай, жеке <strong>бөлшектерден</strong> тұрады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    All substances (solid, liquid, gas) are made of tiny, separate <strong>particles</strong> that are impossible to see with the naked eye.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Все вещества (твердые, жидкие, газообразные) состоят из мельчайших, отдельных <strong>частиц</strong>, которые невозможно увидеть глазом.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Өлшеу: цена деления и точность</span>
+<span lang="en" class="lang-content">📐 Measurement: scale value and accuracy</span>
+<span lang="ru" class="lang-content">📐 Измерение: цена деления и точность</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 500 120" style="width:100%;max-width:500px;margin:auto">
+<rect x="20" y="40" width="460" height="40" fill="#fef3c7" stroke="#92400e" stroke-width="2"/>
+<g stroke="#1e293b" stroke-width="1.5">
+<line x1="40" y1="40" x2="40" y2="80"/><line x1="80" y1="50" x2="80" y2="80"/>
+<line x1="120" y1="50" x2="120" y2="80"/><line x1="160" y1="50" x2="160" y2="80"/>
+<line x1="200" y1="50" x2="200" y2="80"/><line x1="240" y1="40" x2="240" y2="80"/>
+<line x1="280" y1="50" x2="280" y2="80"/><line x1="320" y1="50" x2="320" y2="80"/>
+<line x1="360" y1="50" x2="360" y2="80"/><line x1="400" y1="50" x2="400" y2="80"/>
+<line x1="440" y1="40" x2="440" y2="80"/>
+</g>
+<text x="40" y="30" text-anchor="middle" font-size="14" font-weight="700">0</text>
+<text x="240" y="30" text-anchor="middle" font-size="14" font-weight="700">5</text>
+<text x="440" y="30" text-anchor="middle" font-size="14" font-weight="700">10</text>
+<text x="250" y="110" text-anchor="middle" font-size="13" fill="#4338ca" font-weight="700">см</text>
+<polygon points="320,75 314,90 326,90" fill="#dc2626"/>
+<text x="320" y="105" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="700">7 см</text>
+</svg>
+</div>
+<p class="text-slate-700 text-base mt-3">
+<span lang="kk" class="lang-content"><b>Бөлу бағасы</b> — екі көрші штрихтың арасы. Жоғарыдағы сызғышта: ірі штрих сайын <b>1 см</b>, кіші — <b>1 мм</b>.</span>
+<span lang="en" class="lang-content"><b>Scale value</b> = the gap between two neighboring marks. Above: big mark = <b>1 cm</b>, small = <b>1 mm</b>.</span>
+<span lang="ru" class="lang-content"><b>Цена деления</b> — расстояние между соседними штрихами. Выше: крупный штрих = <b>1 см</b>, мелкий = <b>1 мм</b>.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-lg text-indigo-700 mb-3">
+<span lang="kk" class="lang-content">🎯 Бөлу бағасын қалай табу?</span>
+<span lang="en" class="lang-content">🎯 How to find scale value?</span>
+<span lang="ru" class="lang-content">🎯 Как найти цену деления?</span></p>
+<ol class="text-slate-700 list-decimal pl-5 space-y-2 text-base">
+<li><span lang="kk" class="lang-content">Жақын екі санды табыңыз: <b>а</b> және <b>b</b>.</span><span lang="en" class="lang-content">Find two neighboring numbers: <b>a</b> and <b>b</b>.</span><span lang="ru" class="lang-content">Найдите два соседних числа: <b>a</b> и <b>b</b>.</span></li>
+<li><span lang="kk" class="lang-content">Олардың арасындағы <b>штрих санын</b> санаңыз: <b>n</b>.</span><span lang="en" class="lang-content">Count the <b>marks</b> between them: <b>n</b>.</span><span lang="ru" class="lang-content">Посчитайте <b>штрихи</b> между ними: <b>n</b>.</span></li>
+<li><span lang="kk" class="lang-content">Бөлу бағасы = (b − a) / n.</span><span lang="en" class="lang-content">Scale value = (b − a) / n.</span><span lang="ru" class="lang-content">Цена деления = (b − a) / n.</span></li>
+</ol>
+<div class="formula text-center mt-4" style="font-size:1.2rem">
+<span class="var">C</span> = (<span class="var">b</span> − <span class="var">a</span>) / <span class="var">n</span>
+</div>
+</div>
+</div></section>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Молекула -->
-                    <div class="example-block border-l-blue-400">
-                        <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-2">Молекула</h3>
-                        <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-2">Molecule</h3>
-                        <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-2">Молекула</h3>
-                        <p lang="kk" class="lang-content">Заттың химиялық қасиеттерін сақтайтын ең кіші бөлшегі.</p>
-                        <p lang="en" class="lang-content">The smallest particle of a substance that retains its chemical properties.</p>
-                        <p lang="ru" class="lang-content">Мельчайшая частица вещества, сохраняющая его химические свойства.</p>
-                        <!-- H2O молекуласының сызбасы -->
-                        <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="25" fill="#ef4444"/> <!-- O (Оттегі) -->
-                            <circle cx="30" cy="80" r="15" fill="#e5e7eb"/> <!-- H (Сутегі) -->
-                            <circle cx="70" cy="80" r="15" fill="#e5e7eb"/> <!-- H (Сутегі) -->
-                            <line x1="50" y1="50" x2="30" y2="80" stroke="#9ca3af" stroke-width="3"/>
-                            <line x1="50" y1="50" x2="70" y2="80" stroke="#9ca3af" stroke-width="3"/>
-                        </svg>
-                        <p lang="kk" class="lang-content text-center font-semibold">Су молекуласы (H₂O)</p>
-                        <p lang="en" class="lang-content text-center font-semibold">Water Molecule (H₂O)</p>
-                        <p lang="ru" class="lang-content text-center font-semibold">Молекула воды (H₂O)</p>
-                    </div>
-                    <!-- Атом -->
-                    <div class="example-block border-l-blue-400">
-                        <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-2">Атом</h3>
-                        <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-2">Atom</h3>
-                        <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-2">Атом</h3>
-                        <p lang="kk" class="lang-content">Молекулалар құралатын "құрылыс материалы".</p>
-                        <p lang="en" class="lang-content">The "building blocks" that make up molecules.</p>
-                        <p lang="ru" class="lang-content">"Строительные блоки", из которых состоят молекулы.</p>
-                        <!-- Атом сызбасы -->
-                        <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="10" fill="#3b82f6"/> <!-- Ядро -->
-                            <circle cx="50" cy="50" r="30" stroke="#93c5fd" stroke-width="2" fill="none"/>
-                            <circle cx="50" cy="20" r="5" fill="#1e3a8a"/> <!-- Электрон -->
-                        </svg>
-                        <p lang="kk" class="lang-content text-center font-semibold">Атомның қарапайым моделі</p>
-                        <p lang="en" class="lang-content text-center font-semibold">Simple model of an Atom</p>
-                        <p lang="ru" class="lang-content text-center font-semibold">Простая модель Атома</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шама = сан + бірлік</span><span lang="en" class="lang-content">Quantity = number + unit</span><span lang="ru" class="lang-content">Величина = число + единица</span></p>
+<p class="text-slate-700 text-base">l = 1,5 м</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌐</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">7 СИ</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">м · с · кг · К · А · моль · кд</span><span lang="en" class="lang-content">m · s · kg · K · A · mol · cd</span><span lang="ru" class="lang-content">м · с · кг · К · А · моль · кд</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎯</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">C = (b−a)/n</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Бөлу бағасының формуласы</span><span lang="en" class="lang-content">Scale value formula</span><span lang="ru" class="lang-content">Формула цены деления</span></p></div>
+</div></footer>
 
-        <!-- 2. ЗАТТЫҢ КҮЙЛЕРІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Заттың үш күйі (Иллюстрация)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. The Three States of Matter (Illustrated)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Три состояния вещества (Иллюстрация)</h2>
-
-            <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">Заттың күйі (қатты, сұйық, газ) бөлшектердің <strong>қозғалысы</strong> мен <strong>орналасуына</strong> байланысты болады.</p>
-            <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">The state of matter (solid, liquid, gas) depends on the <strong>movement</strong> and <strong>spacing</strong> of its particles.</p>
-            <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">Состояние вещества (твердое, жидкое, газ) зависит от <strong>движения</strong> и <strong>расположения</strong> частиц.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                <!-- Қатты -->
-                <div class="rule-card border-t-blue-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Қатты дене</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Solid</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Твердое тело</h3>
-
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="20" cy="20" r="8" fill="#1d4ed8"/> <circle cx="40" cy="20" r="8" fill="#1d4ed8"/> <circle cx="60" cy="20" r="8" fill="#1d4ed8"/> <circle cx="80" cy="20" r="8" fill="#1d4ed8"/>
-                        <circle cx="20" cy="40" r="8" fill="#1d4ed8"/> <circle cx="40" cy="40" r="8" fill="#1d4ed8"/> <circle cx="60" cy="40" r="8" fill="#1d4ed8"/> <circle cx="80" cy="40" r="8" fill="#1d4ed8"/>
-                        <circle cx="20" cy="60" r="8" fill="#1d4ed8"/> <circle cx="40" cy="60" r="8" fill="#1d4ed8"/> <circle cx="60" cy="60" r="8" fill="#1d4ed8"/> <circle cx="80" cy="60" r="8" fill="#1d4ed8"/>
-                        <circle cx="20" cy="80" r="8" fill="#1d4ed8"/> <circle cx="40" cy="80" r="8" fill="#1d4ed8"/> <circle cx="60" cy="80" r="8" fill="#1d4ed8"/> <circle cx="80" cy="80" r="8" fill="#1d4ed8"/>
-                    </svg>
-
-                    <p lang="kk" class="lang-content">Бөлшектер <strong>тығыз орналасқан</strong> және өз орнында <strong>тербеледі</strong>.</p>
-                    <p lang="en" class="lang-content">Particles are <strong>tightly packed</strong> and <strong>vibrate</strong> in place.</p>
-                    <p lang="ru" class="lang-content">Частицы <strong>плотно упакованы</strong> и <strong>колеблются</strong> на месте.</p>
-                </div>
-
-                <!-- Сұйық -->
-                <div class="rule-card border-t-cyan-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-cyan-700 mb-3">2. Сұйықтық</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-cyan-700 mb-3">2. Liquid</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-cyan-700 mb-3">2. Жидкость</h3>
-
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="30" cy="20" r="8" fill="#0891b2"/> <circle cx="50" cy="30" r="8" fill="#0891b2"/> <circle cx="75" cy="25" r="8" fill="#0891b2"/>
-                        <circle cx="20" cy="45" r="8" fill="#0891b2"/> <circle cx="45" cy="55" r="8" fill="#0891b2"/> <circle cx="70" cy="45" r="8" fill="#0891b2"/>
-                        <circle cx="30" cy="75" r="8" fill="#0891b2"/> <circle cx="55" cy="80" r="8" fill="#0891b2"/> <circle cx="80" cy="70" r="8" fill="#0891b2"/>
-                        <circle cx="15" cy="70" r="8" fill="#0891b2"/> <circle cx="40" cy="35" r="8" fill="#0891b2"/> <circle cx="60" cy="65" r="8" fill="#0891b2"/>
-                    </svg>
-
-                    <p lang="kk" class="lang-content">Бөлшектер <strong>жақын орналасқан</strong>, бірақ орындарын <strong>ауыстыра алады</strong>.</p>
-                    <p lang="en" class="lang-content">Particles are <strong>close together</strong> but can <strong>move and slide</strong> past one another.</p>
-                    <p lang="ru" class="lang-content">Частицы <strong>близко</strong> друг к другу, но могут <strong>перемещаться</strong> и "перескакивать".</p>
-                </div>
-
-                <!-- Газ -->
-                <div class="rule-card border-t-purple-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-purple-700 mb-3">3. Газ</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-purple-700 mb-3">3. Gas</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-purple-700 mb-3">3. Газ</h3>
-
-                    <svg class="illustration-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="20" cy="20" r="8" fill="#6d28d9"/>
-                        <circle cx="80" cy="30" r="8" fill="#6d28d9"/>
-                        <circle cx="50" cy="50" r="8" fill="#6d28d9"/>
-                        <circle cx="25" cy="75" r="8" fill="#6d28d9"/>
-                        <circle cx="70" cy="80" r="8" fill="#6d28d9"/>
-                    </svg>
-
-                    <p lang="kk" class="lang-content">Бөлшектер бір-бірінен <strong>алыс</strong> орналасқан және <strong>еркін, жылдам қозғалады</strong>.</p>
-                    <p lang="en" class="lang-content">Particles are <strong>far apart</strong> and <strong>move freely and quickly</strong>.</p>
-                    <p lang="ru" class="lang-content">Частицы находятся <strong>далеко</strong> друг от друга и <strong>движутся свободно и быстро</strong>.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-gray-800">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-gray-800">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-gray-800">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Барлық заттар <strong>молекулалар мен атомдардан</strong> тұрады.<br>
-                Бұл бөлшектер <strong>әрқашан қозғалыста</strong> болады.<br>
-                Бөлшектердің арасында <strong>бос орын</strong> бар.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                All matter is made of <strong>molecules and atoms</strong>.<br>
-                These particles are <strong>always in motion</strong>.<br>
-                There are <strong>gaps</strong> between these particles.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Все вещества состоят из <strong>молекул и атомов</strong>.<br>
-                Эти частицы <strong>всегда находятся в движении</strong>.<br>
-                Между частицами есть <strong>промежутки</strong>.
-            </p>
-        </footer>
-
-    </div>
-
-    
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

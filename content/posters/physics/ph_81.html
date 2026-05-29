@@ -1,230 +1,112 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плавылудың ұзақ жылусы - Удельная теплота плавления</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #e0f2fe 0%, #bae6fd 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #0284c7 0%, #0c4a6e 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #0c4a6e; border-bottom: 3px solid #bae6fd; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #0284c7; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #0284c7; background: white; color: #0284c7; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #0284c7; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #0284c7; color: white; }
-        .info-box { background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #0284c7; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: #f0f9ff; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #0284c7; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Первый закон Ньютона</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-sky-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-emerald-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Динамика</span>
+<span lang="en" class="lang-content">Grade 10 · Dynamics</span>
+<span lang="ru" class="lang-content">10 класс · Динамика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Ньютонның бірінші заңы. Инерциялық санақ жүйесі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Newton's first law. Inertial frame of reference</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Первый закон Ньютона. Инерциальная система отсчёта</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Балқудың ерекше жылуы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Specific Heat of Melting</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Удельная теплота плавления</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-sky-100">λ = Q / m формуласы. 1 кг қатты затты ериту үшін қажет жылу. ФАЗАЛЫҚ ӨЗГЕРУ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-sky-100">λ = Q / m formula. Heat needed to melt 1 kg solid. PHASE TRANSITION!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-sky-100">λ = Q / m формула. Тепло для плавления 1 кг. ФАЗОВЫЙ ПЕРЕХОД!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Инерция заңы</span>
+<span lang="en" class="lang-content">🌟 Law of inertia</span>
+<span lang="ru" class="lang-content">🌟 Закон инерции</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-emerald-700">Ньютонның 1-заңы (1687):</b> кез келген дене сыртқы күштер әсер етпегенде немесе күштер <b>теңгерілгенде</b> өзінің <b>тыныштық немесе бірқалыпты түзу сызықты қозғалыс</b> күйін сақтайды.</span>
+<span lang="en" class="lang-content"><b class="text-emerald-700">Newton's 1st law (1687):</b> A body remains <b>at rest or in uniform straight-line motion</b> unless an unbalanced external force acts on it.</span>
+<span lang="ru" class="lang-content"><b class="text-emerald-700">Первый закон Ньютона (1687):</b> тело сохраняет состояние <b>покоя или равномерного прямолинейного движения</b>, если на него не действуют другие тела или их действия <b>скомпенсированы</b>.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. АНЫҚТАМАСЫ ЖӘНЕ ФОРМУЛАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. DEFINITION AND FORMULA</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение и формула</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-emerald-900 font-bold mb-2">💡 <span lang="kk" class="lang-content">Бұл революциялық идея!</span><span lang="en" class="lang-content">A revolutionary idea!</span><span lang="ru" class="lang-content">Это была революция!</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Аристотель: «Қозғалу үшін <b>күш керек</b>». Галилей мен Ньютон: «Қозғалу үшін күш керек <b>емес</b>! Күш — <b>жылдамдықты өзгерту</b> үшін!»</span>
+<span lang="en" class="lang-content">Aristotle: «motion needs a force». Galileo & Newton: «no force needed to <b>keep</b> moving; force <b>changes</b> velocity!»</span>
+<span lang="ru" class="lang-content">Аристотель: «для движения нужна сила». Галилей и Ньютон: «для движения сила <b>не нужна</b>; сила <b>меняет</b> скорость!»</span></p>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>🔥 Балқудың  ҰЗАҚ ЖЫЛУЫ (λ):</strong> Тұрақты температурада 1 кг қатты затты толығымен сұйық күйге ауыстыру үшін қажет болатын жылу мөлшері.</p>
-                <p lang="en" class="lang-content text-sm"><strong>🔥 SPECIFIC HEAT OF MELTING (λ):</strong> Heat required to completely melt 1 kg of solid at constant temperature.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🔥 УДЕЛЬНАЯ ТЕПЛОТА ПЛАВЛЕНИЯ (λ):</strong> Количество теплоты, необходимое для полного плавления 1 кг вещества при постоянной температуре.</p>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-emerald-700 mb-3">🚗 <span lang="kk" class="lang-content">Күнделікті өмірден:</span><span lang="en" class="lang-content">Everyday examples:</span><span lang="ru" class="lang-content">Из жизни:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li>🚍 <span lang="kk" class="lang-content">Автобус кенет тоқтайды → жолаушылар <b>алға</b> ұшады.</span><span lang="en" class="lang-content">Bus stops suddenly → passengers tilt <b>forward</b>.</span><span lang="ru" class="lang-content">Автобус резко тормозит — пассажиры летят <b>вперёд</b>.</span></li>
+<li>🚍 <span lang="kk" class="lang-content">Автобус кенет жүреді → жолаушылар <b>артқа</b> жүгінеді.</span><span lang="en" class="lang-content">Bus starts → passengers lean <b>back</b>.</span><span lang="ru" class="lang-content">Автобус трогается — пассажиры <b>назад</b>.</span></li>
+<li>🥋 <span lang="kk" class="lang-content">Дастарханды лезде тарту → ыдыстар орнында тұрады.</span><span lang="en" class="lang-content">Tablecloth trick — dishes stay.</span><span lang="ru" class="lang-content">Фокус со скатертью — посуда остаётся.</span></li>
+<li>🪙 <span lang="kk" class="lang-content">Қағазды лезде сыпыру → монета <b>стақанға</b> түседі.</span><span lang="en" class="lang-content">Snatch paper → coin falls into glass.</span><span lang="ru" class="lang-content">Сдёрнули бумагу — монета падает в стакан.</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                <p style="text-align: center; font-weight: bold; color: #0c4a6e; font-size: 18px; margin: 15px 0;">
-                    λ = Q / m  немесе  Q = λ × m
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧭 Инерциялық санақ жүйесі (ИСЖ)</span>
+<span lang="en" class="lang-content">🧭 Inertial reference frame (IRF)</span>
+<span lang="ru" class="lang-content">🧭 Инерциальная система отсчёта (ИСО)</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-emerald-700 mb-2">✅ <span lang="kk" class="lang-content">ИСЖ — нені айтады?</span><span lang="en" class="lang-content">What is an IRF?</span><span lang="ru" class="lang-content">Что такое ИСО?</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Бұл — Ньютонның 1-заңы <b>орындалатын</b> санақ жүйесі. ИСЖ-да күшсіз дене <b>тыныштықта немесе бірқалыпты түзу</b> қозғалады. <b>Мысалдар:</b> жұлдыздарға қатысты тыныштықтағы жүйе; шамамен <b>Жер</b> (тәуліктің кіші бөліктерінде).</span>
+<span lang="en" class="lang-content">A frame where Newton's 1st law <b>holds</b>: a body with no net force stays at rest or moves uniformly. <b>Examples:</b> a frame at rest relative to distant stars; <b>Earth</b> approximately (for short times).</span>
+<span lang="ru" class="lang-content">Это СО, в которой выполняется 1-й закон: тело без силы — в покое или равномерно. <b>Примеры:</b> СО, покоящаяся относительно «неподвижных» звёзд; приближённо — <b>Земля</b>.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-rose-700 mb-2">❌ <span lang="kk" class="lang-content">Неинерциялық СЖ:</span><span lang="en" class="lang-content">Non-inertial frames:</span><span lang="ru" class="lang-content">Неинерциальные СО:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Үдеумен қозғалатын жүйелер. Ньютон заңдары <b>тікелей жұмыс істемейді</b>! Күшсіз дене «жоғалу» сияқты болады. Мысалы: тоқтайтын автобус, айналмалы карусель.</span>
+<span lang="en" class="lang-content">Accelerating frames. Newton's laws don't hold directly! Bodies appear to «accelerate without force». Examples: braking bus, spinning carousel.</span>
+<span lang="ru" class="lang-content">Системы с ускорением. Законы Ньютона <b>не работают напрямую</b>! Тело без силы «вдруг ускоряется». Примеры: тормозящий автобус, карусель.</span></p>
+</div>
+</div>
+</section>
 
-                <div class="overflow-x-auto" style="margin-top: 15px;">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ПАРАМЕТР</th>
-                            <th lang="kk" class="lang-content">ӨЛШЕМ</th>
-                            <th lang="kk" class="lang-content">СИПАТТАМАСЫ</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Инерттілік және масса</span>
+<span lang="en" class="lang-content">⚖️ Inertia and mass</span>
+<span lang="ru" class="lang-content">⚖️ Инертность и масса</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b>Инерттілік</b> — дененің жылдамдығын өзгертуге <b>қарсылық</b> көрсету қасиеті. <b>Масса (m)</b> — инерттіліктің сандық өлшемі. Масса үлкен болса → жылдамдықты өзгерту <b>қиынырақ</b>. 1 тонналық машина 1 кг доптан <b>1000 есе</b> инертті! Сондықтан жүк машинасы тез <b>тоқтай алмайды</b>.</span>
+<span lang="en" class="lang-content"><b>Inertia</b> — a body's resistance to <b>changing its velocity</b>. <b>Mass (m)</b> measures inertia. Larger m → harder to accelerate or stop. A 1 t car is 1000× more inert than a 1 kg ball — that's why trucks can't stop quickly!</span>
+<span lang="ru" class="lang-content"><b>Инертность</b> — свойство тела <b>сопротивляться изменению</b> скорости. <b>Масса (m)</b> — мера инертности. Чем больше m, тем труднее разогнать или остановить тело. Грузовик в 1000 раз инертнее мяча 1 кг — отсюда длинный тормозной путь!</span></p>
+</div>
+</section>
 
-                            <th lang="en" class="lang-content">PARAMETER</th>
-                            <th lang="en" class="lang-content">UNIT</th>
-                            <th lang="en" class="lang-content">DESCRIPTION</th>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-emerald-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📜</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">F = 0 → v = const</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Ньютонның 1-заңы</span><span lang="en" class="lang-content">Newton's 1st</span><span lang="ru" class="lang-content">1-й закон Ньютона</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧭</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">ИСЖ / IRF</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">a = 0 жүйелер</span><span lang="en" class="lang-content">No-accel frames</span><span lang="ru" class="lang-content">СО без ускорения</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">m → <span lang="kk" class="lang-content">инерт.</span><span lang="en" class="lang-content">inertia</span><span lang="ru" class="lang-content">инертн.</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Масса — өлшем</span><span lang="en" class="lang-content">Mass measures it</span><span lang="ru" class="lang-content">Масса — мера</span></p></div>
+</div></footer>
 
-                            <th lang="ru" class="lang-content">ПАРАМЕТР</th>
-                            <th lang="ru" class="lang-content">ЕДИНИЦА</th>
-                            <th lang="ru" class="lang-content">ОПИСАНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">λ (Лямбда)</td>
-                            <td lang="kk" class="lang-content">кДж/кг</td>
-                            <td lang="kk" class="lang-content">Ұзақ жылусы</td>
-
-                            <td lang="en" class="lang-content">λ (Lambda)</td>
-                            <td lang="en" class="lang-content">kJ/kg</td>
-                            <td lang="en" class="lang-content">Specific heat</td>
-
-                            <td lang="ru" class="lang-content">λ (Лямбда)</td>
-                            <td lang="ru" class="lang-content">кДж/кг</td>
-                            <td lang="ru" class="lang-content">Удельная теплота</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Q</td>
-                            <td lang="kk" class="lang-content">Дж (Джоуль)</td>
-                            <td lang="kk" class="lang-content">Жылу мөлшері</td>
-
-                            <td lang="en" class="lang-content">Q</td>
-                            <td lang="en" class="lang-content">J (Joule)</td>
-                            <td lang="en" class="lang-content">Heat quantity</td>
-
-                            <td lang="ru" class="lang-content">Q</td>
-                            <td lang="ru" class="lang-content">Дж (Джоуль)</td>
-                            <td lang="ru" class="lang-content">Количество тепла</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">m</td>
-                            <td lang="kk" class="lang-content">кг</td>
-                            <td lang="kk" class="lang-content">Затты масса</td>
-
-                            <td lang="en" class="lang-content">m</td>
-                            <td lang="en" class="lang-content">kg</td>
-                            <td lang="en" class="lang-content">Mass of substance</td>
-
-                            <td lang="ru" class="lang-content">m</td>
-                            <td lang="ru" class="lang-content">кг</td>
-                            <td lang="ru" class="lang-content">Масса вещества</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТҮРЛІ МАТЕРИАЛДАРДЫҢ ҰЗАҚ ЖЫЛУСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. SPECIFIC HEAT OF VARIOUS MATERIALS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Удельная теплота различных материалов</h2>
-
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="card">
-                        <p lang="kk" class="lang-content"><strong>❄️ МҰЗДЫҢ ҰЗАҚ ЖЫЛУСЫ</strong></p>
-                        <p lang="kk" class="lang-content">λ = 334 кДж/кг</p>
-                        <p lang="kk" class="lang-content">T_плав = 0°C</p>
-                        <p lang="kk" class="lang-content">Ең жоғары ұзақ жылусы</p>
-                        <p lang="kk" class="lang-content">Ең көп энергия қажет</p>
-
-                        <p lang="en" class="lang-content"><strong>❄️ ICE SPECIFIC HEAT</strong></p>
-                        <p lang="en" class="lang-content">λ = 334 kJ/kg</p>
-                        <p lang="en" class="lang-content">T_melt = 0°C</p>
-                        <p lang="en" class="lang-content">Highest specific heat</p>
-                        <p lang="en" class="lang-content">Most energy needed</p>
-
-                        <p lang="ru" class="lang-content"><strong>❄️ УДЕЛЬНАЯ ТЕПЛОТА ЛЬДА</strong></p>
-                        <p lang="ru" class="lang-content">λ = 334 кДж/кг</p>
-                        <p lang="ru" class="lang-content">T_плав = 0°C</p>
-                        <p lang="ru" class="lang-content">Самая высокая</p>
-                        <p lang="ru" class="lang-content">Больше всего энергии</p>
-                    </div>
-
-                    <div class="card">
-                        <p lang="kk" class="lang-content"><strong>🔥 МЕТАЛЛДАРДЫҢ ҰЗАҚ ЖЫЛУСЫ</strong></p>
-                        <p lang="kk" class="lang-content">• Мыс: 209 кДж/кг (1083°C)</p>
-                        <p lang="kk" class="lang-content">• Темір: 260 кДж/кг (1537°C)</p>
-                        <p lang="kk" class="lang-content">• Қалайы: 59 кДж/кг (231°C)</p>
-                        <p lang="kk" class="lang-content">• Төмен ұзақ жылусы</p>
-
-                        <p lang="en" class="lang-content"><strong>🔥 METALS SPECIFIC HEAT</strong></p>
-                        <p lang="en" class="lang-content">• Copper: 209 kJ/kg (1083°C)</p>
-                        <p lang="en" class="lang-content">• Iron: 260 kJ/kg (1537°C)</p>
-                        <p lang="en" class="lang-content">• Tin: 59 kJ/kg (231°C)</p>
-                        <p lang="en" class="lang-content">• Lower specific heat</p>
-
-                        <p lang="ru" class="lang-content"><strong>🔥 УДЕЛЬНАЯ ТЕПЛОТА МЕТАЛЛОВ</strong></p>
-                        <p lang="ru" class="lang-content">• Медь: 209 кДж/кг (1083°C)</p>
-                        <p lang="ru" class="lang-content">• Железо: 260 кДж/кг (1537°C)</p>
-                        <p lang="ru" class="lang-content">• Олово: 59 кДж/кг (231°C)</p>
-                        <p lang="ru" class="lang-content">• Нижняя удельная теплота</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ЕСЕПТЕУ МЫСАЛДАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. CALCULATION EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Примеры расчётов</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>МЫСАЛ 1: Мұз еритіңіз</strong></p>
-                <p lang="kk" class="lang-content text-sm">m = 2 кг, λ = 334 кДж/кг</p>
-                <p lang="kk" class="lang-content text-sm">Q = λ × m = 334 × 2 = <strong>668 кДж</strong></p>
-
-                <p lang="en" class="lang-content text-sm"><strong>EXAMPLE 1: Melt ice</strong></p>
-                <p lang="en" class="lang-content text-sm">m = 2 kg, λ = 334 kJ/kg</p>
-                <p lang="en" class="lang-content text-sm">Q = λ × m = 334 × 2 = <strong>668 kJ</strong></p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>ПРИМЕР 1: Растопить лёд</strong></p>
-                <p lang="ru" class="lang-content text-sm">m = 2 кг, λ = 334 кДж/кг</p>
-                <p lang="ru" class="lang-content text-sm">Q = λ × m = 334 × 2 = <strong>668 кДж</strong></p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>МЫСАЛ 2: Металлдың массасын табыңыз</strong></p>
-                <p lang="kk" class="lang-content text-sm">Q = 1045 кДж, λ = 209 кДж/кг (мыс)</p>
-                <p lang="kk" class="lang-content text-sm">m = Q / λ = 1045 / 209 = <strong>5 кг</strong></p>
-
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>EXAMPLE 2: Find metal mass</strong></p>
-                <p lang="en" class="lang-content text-sm">Q = 1045 kJ, λ = 209 kJ/kg (copper)</p>
-                <p lang="en" class="lang-content text-sm">m = Q / λ = 1045 / 209 = <strong>5 kg</strong></p>
-
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>ПРИМЕР 2: Найти массу металла</strong></p>
-                <p lang="ru" class="lang-content text-sm">Q = 1045 кДж, λ = 209 кДж/кг (медь)</p>
-                <p lang="ru" class="lang-content text-sm">m = Q / λ = 1045 / 209 = <strong>5 кг</strong></p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #bae6fd; border-radius: 1rem; border-top: 4px solid #0284c7;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-sky-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-sky-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-sky-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Балқудың ерекше жылуы (λ) - фазалық өзгеру үшін қажет энергия. Q = λ × m формуласы. Мұз 334 кДж/кг, металлдар төмен (59-260 кДж/кг). Плавление = энергия сақтау!</p>
-            <p lang="en" class="lang-content text-sm">Specific heat of melting (λ) = energy for phase transition. Q = λ × m formula. Ice 334 kJ/kg, metals lower (59-260 kJ/kg). Melting = energy conservation!</p>
-            <p lang="ru" class="lang-content text-sm">Удельная теплота плавления (λ) = энергия для фазового перехода. Q = λ × m формула. Лёд 334 кДж/кг, металлы ниже (59-260 кДж/кг). Плавление = сохранение энергии!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

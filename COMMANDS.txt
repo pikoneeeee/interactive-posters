@@ -1,0 +1,157 @@
+================================================================================
+  КОМАНДЫ ПРОЕКТА — Interactive Posters
+================================================================================
+
+# Перейти в папку android
+cd android
+
+# Один предмет
+python build_apks.py physics
+
+# Несколько
+python build_apks.py chem math bio
+
+# Все 11 отдельных APK
+python build_apks.py all
+
+# Один APK со всеми предметами
+python build_apks.py allsubjects
+
+# Debug-сборка
+python build_apks.py --debug physics
+
+# Список предметов
+python build_apks.py --list
+
+# ID предметов:
+# physics, mathematics, biology, chemistry, geography,
+# informatics, historykaz, worldhistory,
+# kazakhlang, russianlang, englishlang
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. ЗАПУСК TELEGRAM БОТА  (используется чаще всего)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    python keygen_bot/bot.py
+
+  Команды внутри бота:
+    /gen     — выдать ключ заказчику (предмет → Device ID → клиент → срок)
+    /verify  — проверить ключ + Device ID
+    /list    — список всех выданных ключей
+    /revoke  — отозвать ключ
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  2. УЗНАТЬ DEVICE ID  (нужен перед генерацией ключа)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  На ПК заказчика (Windows):
+    python -c "import licensing; print(licensing.get_device_id())"
+
+  На Android/интерактивной доске:
+    Device ID виден прямо на экране активации приложения.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  3. ГЕНЕРАЦИЯ КЛЮЧА ВРУЧНУЮ (CLI, без бота)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    python keygen.py gen <предмет> <client_id> --device <DEVICE_ID> --months <N>
+
+  Пример:
+    python keygen.py gen physics 1 --device 7E2BB8609433091A --months 12
+
+  Проверить ключ:
+    python keygen.py verify XXXX-XXXX-XXXX-XXXX-XXXX --device <DEVICE_ID>
+
+  Список ключей в БД:
+    python keygen.py list
+
+  Предметы (ID → название):
+    physics        — Физика
+    mathematics    — Математика
+    biology        — Биология
+    chemistry      — Химия
+    geography      — География
+    informatics    — Информатика
+    historykaz     — История Казахстана
+    worldhistory   — Всемирная история
+    kazakhlang     — Қазақ тілі
+    russianlang    — Русский язык
+    englishlang    — Английский язык
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  4. СБОРКА — WINDOWS (EXE + установщик)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Один предмет:
+    python build_windows.py physics
+
+  Несколько предметов:
+    python build_windows.py physics math bio
+
+  Все предметы:
+    python build_windows.py all
+
+  Без установщика (только папка):
+    python build_windows.py physics --no-installer
+
+  Список предметов:
+    python build_windows.py --list
+
+  ID предметов:
+    physics, mathematics, biology, chemistry, geography,
+    informatics, historykaz, worldhistory,
+    kazakhlang, russianlang, englishlang
+
+  Результат:
+    dist\InteractivePosters-<Предмет>\          — папка, можно скопировать на флешку
+    dist\InteractivePosters-<Предмет>-Setup.exe — установщик
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  5. СБОРКА — ANDROID (APK)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Все команды запускаются из папки android\
+
+  Один предмет:
+    python build_apks.py physics
+
+  Несколько предметов:
+    python build_apks.py physics math bio chem
+
+  Все 11 отдельных APK:
+    python build_apks.py all
+
+  Один APK со всеми предметами:
+    python build_apks.py allsubjects
+
+  Debug-сборка:
+    python build_apks.py --debug physics
+
+  Список предметов:
+    python build_apks.py --list
+
+  ID предметов:
+    physics, mathematics, biology, chemistry, geography,
+    informatics, historykaz, worldhistory,
+    kazakhlang, russianlang, englishlang
+
+  APK будет в:
+    android\app\build\outputs\apk\<предмет>\release\
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  6. ЗАПУСК ПРИЛОЖЕНИЯ БЕЗ СБОРКИ (для разработки)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    python main_app.py
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ПРОЦЕСС АКТИВАЦИИ У ЗАКАЗЧИКА
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. Установить приложение (EXE или APK)
+  2. Открыть — на экране активации виден Device ID
+  3. В Telegram боте /gen → предмет → ввести Device ID → срок → получить ключ
+  4. Ввести ключ в приложение
+  5. Ключ работает ТОЛЬКО на этом устройстве
+
+================================================================================

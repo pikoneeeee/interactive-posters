@@ -1,380 +1,216 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Плотность (Тығыздық)</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f9ff; /* sky-50 */
-            overflow-x: hidden;
-            color: #1e293b; /* slate-800 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Indigo Theme */
-        .header-card {
-            background-color: #4338ca; /* indigo-700 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(67, 56, 202, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #3730a3; /* indigo-800 */
-            border-bottom: 3px solid #818cf8; /* indigo-400 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #e0f2fe; /* sky-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #0369a1; /* sky-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #4338ca; /* indigo-700 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #4338ca;
-            background-color: #ffffff;
-            color: #4338ca;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #eef2ff;
-        }
-        .lang-btn.active {
-            background-color: #4338ca;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 200px;
-            margin: 15px 0;
-            border: 1px solid #c7d2fe;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #4338ca;
-            text-anchor: middle;
-        }
-        .svg-math {
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-            font-size: 18px;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Плотность вещества</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-slate-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Денелердің әсерлесуі</span>
+<span lang="en" class="lang-content">Grade 7 · Interaction of bodies</span>
+<span lang="ru" class="lang-content">7 класс · Взаимодействие тел</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Заттың тығыздығы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Density of matter</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Плотность вещества</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💎 Тығыздық деген не?</span>
+<span lang="en" class="lang-content">💎 What is density?</span>
+<span lang="ru" class="lang-content">💎 Что такое плотность?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Бір килограмм мақта және бір килограмм темір — массалары бірдей. Бірақ <b>көлемдері</b> мүлдем әртүрлі: мақта үлкен мөлшерлі, темір — кішкене кесек. Неге? Себебі мақта мен темір <b>әртүрлі тығыздықта</b>. <b class="text-indigo-700">Тығыздық</b> — заттың <b>бір көлем бірлігінде қанша массасы бар</b>-екенін көрсетеді.</span>
+<span lang="en" class="lang-content">One kilogram of cotton and one kilogram of iron have equal mass. But their <b>volumes</b> are completely different: cotton fills a huge bag, iron — a tiny lump. Why? Because cotton and iron have <b>different densities</b>. <b class="text-indigo-700">Density</b> shows <b>how much mass</b> is packed into <b>a unit of volume</b>.</span>
+<span lang="ru" class="lang-content">Один килограмм ваты и один килограмм железа — массы равны. Но <b>объёмы</b> совершенно разные: вата занимает большой мешок, железо — маленький кусочек. Почему? Потому что у ваты и железа <b>разная плотность</b>. <b class="text-indigo-700">Плотность</b> показывает, <b>сколько массы</b> заключено <b>в единице объёма</b>.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ТЫҒЫЗДЫҚ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">DENSITY</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ПЛОТНОСТЬ</h1>
+<div class="card-accent rounded-2xl p-5 mb-3">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">📐 Тығыздық формуласы:</span>
+<span lang="en" class="lang-content">📐 Density formula:</span>
+<span lang="ru" class="lang-content">📐 Формула плотности:</span></p>
+<div class="formula text-center" style="font-size:1.7rem">
+<span class="var">ρ</span> = <span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1.3rem"><span class="var" style="display:block;border-bottom:2px solid #fde68a">m</span><span class="var" style="display:block">V</span></span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">ρ</b> (ро) — тығыздық, <span class="unit-pill">кг/м³</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">ρ</b> (rho) — density, <span class="unit-pill">kg/m³</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">ρ</b> (ро) — плотность, <span class="unit-pill">кг/м³</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">m</b> — mass, <span class="unit-pill">kg</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">V</b> — көлем, <span class="unit-pill">м³</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">V</b> — volume, <span class="unit-pill">m³</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">V</b> — объём, <span class="unit-pill">м³</span></span>
+</p>
+</div>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-indigo-100">Заттың бірлік көлемдегі массасы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-indigo-100">Mass per unit volume of a substance.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-indigo-100">Масса вещества в единице объема.</p>
-        </header>
+<div class="card-warm rounded-custom p-6 flex flex-col items-center justify-center">
+<svg viewBox="0 0 200 180" style="width:160px">
+<polygon points="100,20 180,160 20,160" fill="#fef3c7" stroke="#b45309" stroke-width="3"/>
+<text x="100" y="70" text-anchor="middle" fill="#b45309" font-weight="900" font-size="42" font-family="serif">m</text>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#b45309" stroke-width="2"/>
+<text x="60" y="140" text-anchor="middle" fill="#b45309" font-weight="900" font-size="32" font-family="serif">ρ</text>
+<text x="140" y="140" text-anchor="middle" fill="#b45309" font-weight="900" font-size="32" font-family="serif">V</text>
+</svg>
+<p class="text-slate-700 text-sm text-center mt-3"><b>m = ρ·V</b> · <b>V = m/ρ</b> · <b>ρ = m/V</b></p>
+</div></div></section>
 
-        <!-- 1. АНЫҚТАМА ЖӘНЕ ФОРМУЛА -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Тығыздық дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Density?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое плотность?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Әртүрлі заттардың тығыздығы</span>
+<span lang="en" class="lang-content">📊 Density of various substances</span>
+<span lang="ru" class="lang-content">📊 Плотности разных веществ</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th colspan="3" class="text-rose-700"><span lang="kk" class="lang-content">🧱 Қатты денелер</span><span lang="en" class="lang-content">🧱 Solids</span><span lang="ru" class="lang-content">🧱 Твёрдые тела</span></th>
+<th colspan="3" class="text-indigo-700"><span lang="kk" class="lang-content">💧 Сұйықтар</span><span lang="en" class="lang-content">💧 Liquids</span><span lang="ru" class="lang-content">💧 Жидкости</span></th>
+<th colspan="3" class="text-emerald-700"><span lang="kk" class="lang-content">💨 Газдар (0°C)</span><span lang="en" class="lang-content">💨 Gases (0°C)</span><span lang="ru" class="lang-content">💨 Газы (0°C)</span></th>
+</tr></thead>
+<tbody>
+<tr><td><span lang="kk" class="lang-content">Осмий</span><span lang="en" class="lang-content">Osmium</span><span lang="ru" class="lang-content">Осмий</span></td><td colspan="2">22 600</td>
+<td><span lang="kk" class="lang-content">Сынап</span><span lang="en" class="lang-content">Mercury</span><span lang="ru" class="lang-content">Ртуть</span></td><td colspan="2">13 600</td>
+<td><span lang="kk" class="lang-content">Хлор</span><span lang="en" class="lang-content">Chlorine</span><span lang="ru" class="lang-content">Хлор</span></td><td colspan="2">3,21</td></tr>
+<tr><td><span lang="kk" class="lang-content">Алтын</span><span lang="en" class="lang-content">Gold</span><span lang="ru" class="lang-content">Золото</span></td><td colspan="2">19 300</td>
+<td><span lang="kk" class="lang-content">Глицерин</span><span lang="en" class="lang-content">Glycerin</span><span lang="ru" class="lang-content">Глицерин</span></td><td colspan="2">1 260</td>
+<td><span lang="kk" class="lang-content">Көмірқышқыл</span><span lang="en" class="lang-content">CO₂</span><span lang="ru" class="lang-content">Углекислый</span></td><td colspan="2">1,98</td></tr>
+<tr><td><span lang="kk" class="lang-content">Қорғасын</span><span lang="en" class="lang-content">Lead</span><span lang="ru" class="lang-content">Свинец</span></td><td colspan="2">11 300</td>
+<td><span lang="kk" class="lang-content">Теңіз суы</span><span lang="en" class="lang-content">Sea water</span><span lang="ru" class="lang-content">Морская вода</span></td><td colspan="2">1 030</td>
+<td><span lang="kk" class="lang-content">Оттегі</span><span lang="en" class="lang-content">Oxygen</span><span lang="ru" class="lang-content">Кислород</span></td><td colspan="2">1,43</td></tr>
+<tr class="bg-amber-50"><td><span lang="kk" class="lang-content">Темір</span><span lang="en" class="lang-content">Iron</span><span lang="ru" class="lang-content">Железо</span></td><td colspan="2"><b>7 800</b></td>
+<td class="bg-blue-50"><span lang="kk" class="lang-content"><b>Су (4°C)</b></span><span lang="en" class="lang-content"><b>Water (4°C)</b></span><span lang="ru" class="lang-content"><b>Вода (4°C)</b></span></td><td colspan="2" class="bg-blue-50"><b>1 000</b></td>
+<td><span lang="kk" class="lang-content"><b>Ауа</b></span><span lang="en" class="lang-content"><b>Air</b></span><span lang="ru" class="lang-content"><b>Воздух</b></span></td><td colspan="2"><b>1,29</b></td></tr>
+<tr><td><span lang="kk" class="lang-content">Алюминий</span><span lang="en" class="lang-content">Aluminium</span><span lang="ru" class="lang-content">Алюминий</span></td><td colspan="2">2 700</td>
+<td><span lang="kk" class="lang-content">Сүт</span><span lang="en" class="lang-content">Milk</span><span lang="ru" class="lang-content">Молоко</span></td><td colspan="2">1 030</td>
+<td><span lang="kk" class="lang-content">Азот</span><span lang="en" class="lang-content">Nitrogen</span><span lang="ru" class="lang-content">Азот</span></td><td colspan="2">1,25</td></tr>
+<tr><td><span lang="kk" class="lang-content">Шыны</span><span lang="en" class="lang-content">Glass</span><span lang="ru" class="lang-content">Стекло</span></td><td colspan="2">2 500</td>
+<td><span lang="kk" class="lang-content">Мұнай</span><span lang="en" class="lang-content">Oil (petroleum)</span><span lang="ru" class="lang-content">Нефть</span></td><td colspan="2">800</td>
+<td><span lang="kk" class="lang-content">Гелий</span><span lang="en" class="lang-content">Helium</span><span lang="ru" class="lang-content">Гелий</span></td><td colspan="2">0,18</td></tr>
+<tr><td><span lang="kk" class="lang-content">Мұз (0°C)</span><span lang="en" class="lang-content">Ice (0°C)</span><span lang="ru" class="lang-content">Лёд (0°C)</span></td><td colspan="2">900</td>
+<td><span lang="kk" class="lang-content">Спирт</span><span lang="en" class="lang-content">Alcohol</span><span lang="ru" class="lang-content">Спирт</span></td><td colspan="2">800</td>
+<td><span lang="kk" class="lang-content">Сутегі</span><span lang="en" class="lang-content">Hydrogen</span><span lang="ru" class="lang-content">Водород</span></td><td colspan="2">0,09</td></tr>
+<tr><td><span lang="kk" class="lang-content">Ағаш (емен)</span><span lang="en" class="lang-content">Oak wood</span><span lang="ru" class="lang-content">Дуб</span></td><td colspan="2">700</td>
+<td><span lang="kk" class="lang-content">Бензин</span><span lang="en" class="lang-content">Gasoline</span><span lang="ru" class="lang-content">Бензин</span></td><td colspan="2">710</td>
+<td colspan="3"></td></tr>
+</tbody>
+</table></div>
+<p class="text-slate-600 text-sm mt-3">
+<span lang="kk" class="lang-content">📌 Көріп тұрсыз: <b>қатты денелер</b> ~1000× <b>газдардан</b> тығызырақ — себебі молекулалардың арасы аз.</span>
+<span lang="en" class="lang-content">📌 As you can see: <b>solids</b> are ~1000× denser than <b>gases</b> — molecules are packed tightly.</span>
+<span lang="ru" class="lang-content">📌 Видно: <b>твёрдые тела</b> в ~1000 раз плотнее <b>газов</b> — молекулы плотно упакованы.</span></p>
+</section>
 
-            <div class="rule-card border-t-indigo-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Тығыздық (ρ)</span> – бұл дененің массасының оның көлеміне қатынасына тең физикалық шама. Ол заттың молекулаларының қаншалықты тығыз орналасқанын көрсетеді.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Density (ρ)</span> is a physical quantity equal to the ratio of a body's mass to its volume. It shows how tightly matter is packed together.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Плотность (ρ)</span> – это физическая величина, равная отношению массы тела к его объему. Она показывает, насколько плотно упакованы частицы вещества.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌊 Не үшін мұз жүзеді?</span>
+<span lang="en" class="lang-content">🌊 Why does ice float?</span>
+<span lang="ru" class="lang-content">🌊 Почему лёд плавает?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Көп заттарда қатты күй сұйық күйден <b>тығызырақ</b>. Бірақ <b>су</b> — табиғаттың сирек ерекшелігі: <b>мұздың тығыздығы</b> (900 кг/м³) <b>судан кіші</b> (1000 кг/м³). Сондықтан мұз суда <b>жүзеді</b>.</span>
+<span lang="en" class="lang-content">For most substances, the solid state is <b>denser</b> than the liquid. But <b>water</b> is a rare exception: <b>ice's density</b> (900 kg/m³) is <b>less than water's</b> (1000 kg/m³). That's why ice <b>floats</b>.</span>
+<span lang="ru" class="lang-content">У большинства веществ твёрдое состояние <b>плотнее</b> жидкого. Но <b>вода</b> — редкое исключение: <b>плотность льда</b> (900 кг/м³) <b>меньше</b> плотности воды (1000 кг/м³). Поэтому лёд <b>плавает</b>.</span></p>
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Бұл — <b>тіршілік үшін маңызды!</b> Қыста өзеннің бетіне мұз пайда болады, бірақ астында су жылы 4°C қалады, балықтар мен өсімдіктер аман. Егер мұз батып кетсе — өзендер мен көлдер түбіне дейін мұзға айналар еді.</span>
+<span lang="en" class="lang-content">This is <b>vital for life!</b> In winter, ice forms on the surface but water below stays around 4°C, keeping fish and plants alive. If ice sank, lakes and rivers would freeze to the bottom.</span>
+<span lang="ru" class="lang-content">Это <b>жизненно важно!</b> Зимой лёд образуется на поверхности, а вода под ним сохраняет ~4°C — рыбы и растения выживают. Если бы лёд тонул — реки и озёра промерзали бы до дна.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 320 240" style="width:100%;max-width:320px;margin:auto">
+<!-- Контейнер -->
+<rect x="20" y="40" width="280" height="180" fill="none" stroke="#1e293b" stroke-width="3"/>
+<!-- Вода -->
+<rect x="20" y="100" width="280" height="120" fill="#93c5fd" opacity="0.7"/>
+<!-- Айсберг -->
+<polygon points="120,40 200,40 220,90 100,90" fill="#f0f9ff" stroke="#0c4a6e" stroke-width="2"/>
+<polygon points="100,90 220,90 240,200 80,200" fill="#bae6fd" stroke="#0c4a6e" stroke-width="2"/>
+<!-- Линия воды -->
+<line x1="20" y1="100" x2="300" y2="100" stroke="#1e40af" stroke-width="2" stroke-dasharray="5 3"/>
+<!-- Подписи -->
+<text x="160" y="65" text-anchor="middle" fill="#0c4a6e" font-weight="700" font-size="12">10% ↑</text>
+<text x="160" y="150" text-anchor="middle" fill="#0c4a6e" font-weight="700" font-size="12">90% ↓</text>
+<text x="160" y="235" text-anchor="middle" fill="#64748b" font-size="11">
+<tspan class="lang-content" lang="kk">ρ(мұз) &lt; ρ(су)</tspan>
+<tspan class="lang-content" lang="en">ρ(ice) &lt; ρ(water)</tspan>
+<tspan class="lang-content" lang="ru">ρ(лёд) &lt; ρ(вода)</tspan>
+</text>
+</svg>
+</div>
+<p class="text-slate-700 text-xs text-center mt-2">
+<span lang="kk" class="lang-content">Айсбергтің ~10% ғана су бетінде, ~90% астында</span>
+<span lang="en" class="lang-content">Only ~10% of iceberg is above water, ~90% below</span>
+<span lang="ru" class="lang-content">Над водой ~10% айсберга, ~90% под водой</span></p>
+</div>
+</div>
+</section>
 
-                <!-- Иллюстрация 1: Упаковка молекул (ИСПРАВЛЕННАЯ) -->
-                <svg class="illustration-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Box 1: Low Density -->
-                    <g transform="translate(60, 20)">
-                         <!-- Box -->
-                         <rect x="0" y="0" width="100" height="100" fill="#f8fafc" stroke="#6366f1" stroke-width="2"/>
-                         <!-- Particles (Sparse) -->
-                         <circle cx="20" cy="25" r="5" fill="#6366f1"/>
-                         <circle cx="70" cy="30" r="5" fill="#6366f1"/>
-                         <circle cx="45" cy="55" r="5" fill="#6366f1"/>
-                         <circle cx="25" cy="80" r="5" fill="#6366f1"/>
-                         <circle cx="80" cy="75" r="5" fill="#6366f1"/>
-                         <!-- Label -->
-                         <text x="50" y="130" class="svg-label lang-content" lang="kk">Аз тығыздық</text>
-                         <text x="50" y="130" class="svg-label lang-content" lang="en">Low Density</text>
-                         <text x="50" y="130" class="svg-label lang-content" lang="ru">Низкая плотность</text>
-                    </g>
-                
-                    <!-- Box 2: High Density -->
-                    <g transform="translate(240, 20)">
-                         <!-- Box -->
-                         <rect x="0" y="0" width="100" height="100" fill="#eef2ff" stroke="#4338ca" stroke-width="3"/>
-                         <!-- Particles (Dense) - 4x4 grid -->
-                         <circle cx="15" cy="15" r="5" fill="#4338ca"/> <circle cx="38" cy="15" r="5" fill="#4338ca"/> <circle cx="61" cy="15" r="5" fill="#4338ca"/> <circle cx="85" cy="15" r="5" fill="#4338ca"/>
-                         <circle cx="15" cy="38" r="5" fill="#4338ca"/> <circle cx="38" cy="38" r="5" fill="#4338ca"/> <circle cx="61" cy="38" r="5" fill="#4338ca"/> <circle cx="85" cy="38" r="5" fill="#4338ca"/>
-                         <circle cx="15" cy="61" r="5" fill="#4338ca"/> <circle cx="38" cy="61" r="5" fill="#4338ca"/> <circle cx="61" cy="61" r="5" fill="#4338ca"/> <circle cx="85" cy="61" r="5" fill="#4338ca"/>
-                         <circle cx="15" cy="85" r="5" fill="#4338ca"/> <circle cx="38" cy="85" r="5" fill="#4338ca"/> <circle cx="61" cy="85" r="5" fill="#4338ca"/> <circle cx="85" cy="85" r="5" fill="#4338ca"/>
-                         <!-- Label -->
-                         <text x="50" y="130" class="svg-label lang-content" lang="kk">Көп тығыздық</text>
-                         <text x="50" y="130" class="svg-label lang-content" lang="en">High Density</text>
-                         <text x="50" y="130" class="svg-label lang-content" lang="ru">Высокая плотность</text>
-                    </g>
-                </svg>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Алюминий кесегінің массасы 2,7 кг, көлемі 1 дм³. Тығыздығын табыңыз.</span>
+<span lang="en" class="lang-content">📘 Problem: An aluminium block has a mass of 2.7 kg and a volume of 1 dm³. Find its density.</span>
+<span lang="ru" class="lang-content">📘 Задача: Брусок алюминия массой 2,7 кг занимает 1 дм³. Найти плотность.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген (СИ):</span><span lang="en" class="lang-content">Given (SI):</span><span lang="ru" class="lang-content">Дано (в СИ):</span></p>
+<ul class="text-slate-700 list-none space-y-1 text-sm">
+<li>m = 2,7 <span class="unit-pill">кг</span></li>
+<li>V = 1 дм³ = <b>0,001 м³</b></li>
+<li>ρ — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.1rem">
+<span class="var">ρ</span> = <span class="var">m</span>/<span class="var">V</span>
+<br/><span class="var">ρ</span> = <span class="num">2,7</span>/<span class="num">0,001</span> = <span class="num">2700</span> <span class="unit">кг/м³</span>
+</div>
+<div class="badge badge-emerald mt-3 text-base"><span lang="kk" class="lang-content">✅ Жауабы: 2700 кг/м³</span><span lang="en" class="lang-content">✅ Answer: 2700 kg/m³</span><span lang="ru" class="lang-content">✅ Ответ: 2700 кг/м³</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="example-block border-l-indigo-400 bg-indigo-50">
-                    <p class="text-center text-xl font-bold text-indigo-900 mb-2">ФОРМУЛА</p>
-                    <div class="flex justify-center items-center gap-6 text-2xl">
-                        <div class="p-3 bg-white rounded-lg shadow-sm border border-indigo-100">
-                            ρ = <span class="italic">m</span> / <span class="italic">V</span>
-                        </div>
-                    </div>
-                    <ul class="mt-3 text-sm text-center text-gray-600">
-                        <li><strong>ρ</strong> (ро) — Плотность (kg/m³)</li>
-                        <li><strong>m</strong> — Масса (kg)</li>
-                        <li><strong>V</strong> — Объем (m³)</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💎</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">ρ = m / V</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тығыздық — массаның көлемге қатынасы</span><span lang="en" class="lang-content">Density — mass per volume</span><span lang="ru" class="lang-content">Плотность — масса в единице объёма</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">кг/м³</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">1 г/см³ = 1000 кг/м³</span><span lang="en" class="lang-content">1 g/cm³ = 1000 kg/m³</span><span lang="ru" class="lang-content">1 г/см³ = 1000 кг/м³</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🧊</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">ρ(лёд) &lt; ρ(вода)</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Сондықтан мұз жүзеді</span><span lang="en" class="lang-content">That's why ice floats</span><span lang="ru" class="lang-content">Поэтому лёд плавает</span></p></div>
+</div></footer>
 
-        <!-- 2. ФИЗИКАЛЫҚ МАҒЫНАСЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Бірдей көлем, әртүрлі масса</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Same Volume, Different Mass</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Одинаковый объем, разная масса</h2>
-
-            <div class="rule-card border-t-cyan-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Егер біз көлемдері бірдей (<span class="italic">V</span>), бірақ әртүрлі материалдан жасалған екі текшені (кубик) алсақ, олардың массалары (<span class="italic">m</span>) әртүрлі болады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    If we take two cubes of the same volume (<span class="italic">V</span>) but made of different materials, their masses (<span class="italic">m</span>) will be different.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Если взять два кубика одинакового объема (<span class="italic">V</span>), но из разного материала, их массы (<span class="italic">m</span>) будут разными.
-                </p>
-
-                <!-- Иллюстрация 2: Весы с деревом и железом -->
-                <svg class="illustration-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Base of Scales -->
-                    <path d="M 150 150 L 250 150 L 200 100 Z" fill="#cbd5e1"/>
-                    <rect x="195" y="100" width="10" height="50" fill="#94a3b8"/>
-                    
-                    <!-- Beam (Tilted) -->
-                    <line x1="50" y1="80" x2="350" y2="120" stroke="#64748b" stroke-width="4"/>
-                    <circle cx="200" cy="100" r="5" fill="#475569"/>
-
-                    <!-- Left Pan (Higher - Light) -->
-                    <line x1="50" y1="80" x2="50" y2="110" stroke="#94a3b8" stroke-width="2"/>
-                    <path d="M 20 110 L 80 110 Q 50 130, 20 110 Z" fill="#e2e8f0" stroke="#94a3b8"/>
-                    
-                    <!-- Cube 1 (Wood/Light) -->
-                    <rect x="35" y="80" width="30" height="30" fill="#fcd34d" stroke="#d97706" stroke-width="1"/>
-                    <text x="50" y="100" font-size="10" text-anchor="middle" fill="#92400e">WOOD</text>
-
-                    <!-- Right Pan (Lower - Heavy) -->
-                    <line x1="350" y1="120" x2="350" y2="150" stroke="#94a3b8" stroke-width="2"/>
-                    <path d="M 320 150 L 380 150 Q 350 170, 320 150 Z" fill="#e2e8f0" stroke="#94a3b8"/>
-
-                    <!-- Cube 2 (Iron/Heavy) - SAME SIZE -->
-                    <rect x="335" y="120" width="30" height="30" fill="#475569" stroke="#1e293b" stroke-width="1"/>
-                    <text x="350" y="140" font-size="10" text-anchor="middle" fill="#fff">IRON</text>
-
-                    <!-- Labels -->
-                    <text x="200" y="40" class="svg-label" font-size="16">
-                         V₁ = V₂
-                    </text>
-                    <text x="200" y="65" class="svg-label" font-size="16" fill="#dc2626">
-                         m₁ < m₂
-                    </text>
-                </svg>
-
-                <div class="example-block border-l-cyan-400 bg-cyan-50">
-                    <p lang="kk" class="lang-content"><strong>Түсіндірме:</strong> Темір ағаштан тығыз. Сондықтан, көлемдері бірдей болса да, темір текше ағаш текшеден ауыр.</p>
-                    <p lang="en" class="lang-content"><strong>Explanation:</strong> Iron is denser than wood. Therefore, even if the volumes are equal, the iron cube is heavier than the wooden one.</p>
-                    <p lang="ru" class="lang-content"><strong>Объяснение:</strong> Железо плотнее дерева. Поэтому, даже при одинаковом объеме, железный кубик тяжелее деревянного.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. ӨЛШЕМ БІРЛІКТЕРІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Өлшем бірліктері</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Units of Measurement</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Единицы измерения</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- SI Unit -->
-                <div class="rule-card border-t-green-500 bg-green-50">
-                    <h3 class="text-xl font-bold text-green-800 mb-2 text-center">SI (ХБЖ)</h3>
-                    <p class="text-3xl font-extrabold text-center text-green-600">kg/m³</p>
-                    <p lang="kk" class="lang-content text-center text-sm mt-2 text-green-700">килограмм бөлінген метр куб</p>
-                    <p lang="en" class="lang-content text-center text-sm mt-2 text-green-700">kilogram per cubic meter</p>
-                    <p lang="ru" class="lang-content text-center text-sm mt-2 text-green-700">килограмм на кубический метр</p>
-                </div>
-
-                <!-- CGS Unit -->
-                <div class="rule-card border-t-purple-500 bg-purple-50">
-                    <h3 class="text-xl font-bold text-purple-800 mb-2 text-center">Басқа / Other</h3>
-                    <p class="text-3xl font-extrabold text-center text-purple-600">g/cm³</p>
-                    <p class="text-center text-sm mt-2 font-bold text-purple-700">1 g/cm³ = 1000 kg/m³</p>
-                    <p lang="kk" class="lang-content text-center text-xs mt-1 text-purple-600">Судың тығыздығы = 1000 kg/m³</p>
-                    <p lang="en" class="lang-content text-center text-xs mt-1 text-purple-600">Density of Water = 1000 kg/m³</p>
-                    <p lang="ru" class="lang-content text-center text-xs mt-1 text-purple-600">Плотность воды = 1000 кг/м³</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-gray-800">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-gray-800">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-gray-800">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Тығыздық заттың түрін анықтауға көмектеседі. Жеңіл заттардың (ағаш, тығын) тығыздығы аз, ал ауыр заттардың (темір, қорғасын) тығыздығы көп.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Density helps identify substances. Light substances (wood, cork) have low density, while heavy substances (iron, lead) have high density.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                Плотность помогает определить вид вещества. Легкие вещества (дерево, пробка) имеют низкую плотность, а тяжелые (железо, свинец) — высокую.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

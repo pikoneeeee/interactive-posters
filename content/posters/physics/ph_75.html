@@ -1,186 +1,166 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Энергияның сақталуы - Закон сохранения энергии</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #e9d5ff 0%, #f3e8ff 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #6b21a8; border-bottom: 3px solid #f3e8ff; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #a855f7; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #a855f7; background: white; color: #a855f7; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #a855f7; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #a855f7; color: white; text-align: center; }
-        .info-box { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #a855f7; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .law-card { background: #faf5ff; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #a855f7; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оптические приборы. Глаз</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-purple-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-amber-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Оптика қорытындысы</span>
+<span lang="en" class="lang-content">Grade 9 · Optics summary</span>
+<span lang="ru" class="lang-content">9 класс · Завершение оптики</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Оптикалық құрылғылар. Көз — оптикалық жүйе</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Optical instruments. The eye</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Оптические приборы. Глаз как оптическая система</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Энергияның Сақталуы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Law of Energy Conservation</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Закон сохранения энергии</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-purple-100">Энергия барлық біліктерінде өзгереді. E = E_механика + E_жылу = const. ФУНДАМЕНТАЛДЫ ЗАҢ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-purple-100">Energy transforms in all forms. E = E_mechanical + E_thermal = const. FUNDAMENTAL LAW!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-purple-100">Энергия трансформируется во всех формах. E = E_механ + E_тепл = const. ФУНДАМЕНТАЛЬНЫЙ ЗАКОН!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">👁️ Көз — табиғи оптикалық жүйе</span>
+<span lang="en" class="lang-content">👁️ The eye — natural optical system</span>
+<span lang="ru" class="lang-content">👁️ Глаз — природная оптическая система</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-amber-700">Көз</b> — табиғаттың ең таңқаларлық жасанды линзасы! Жарық <b>қасаң қабық → қарашық → линза (хрусталик) → шыны тәрізді дене</b> арқылы өтіп, <b>тор қабыққа</b> бейне түсіреді. Линза бұлшықеттердің көмегімен <b>фокус арасын реттейді</b> — бұл құбылыс <b>аккомодация</b> деп аталады.</span>
+<span lang="en" class="lang-content"><b class="text-amber-700">The eye</b> is the most amazing natural lens system! Light passes <b>cornea → pupil → lens → vitreous body</b> and forms an image on the <b>retina</b>. The lens adjusts focal length via muscles — this is <b>accommodation</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-amber-700">Глаз</b> — самая удивительная природная оптическая система! Свет проходит <b>роговицу → зрачок → хрусталик → стекловидное тело</b> и формирует изображение на <b>сетчатке</b>. Мышцы меняют фокусное расстояние хрусталика — это <b>аккомодация</b>.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. АНЫҚТАМАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. DEFINITION</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-amber-900 font-bold mb-2">🌟 <span lang="kk" class="lang-content">Қызықты деректер:</span><span lang="en" class="lang-content">Fun facts:</span><span lang="ru" class="lang-content">Интересные факты:</span></p>
+<ul class="text-slate-700 text-sm space-y-1">
+<li><span lang="kk" class="lang-content">⭐ Тор қабықтағы бейне — <b>төңкерілген</b>! Ми оны «дұрыс» етіп көрсетеді.</span><span lang="en" class="lang-content">⭐ Image on retina is <b>inverted</b>! Brain flips it back.</span><span lang="ru" class="lang-content">⭐ Изображение на сетчатке — <b>перевёрнутое</b>! Мозг «переворачивает».</span></li>
+<li><span lang="kk" class="lang-content">⭐ Айқын көру қашықтығы: <b>25 см</b></span><span lang="en" class="lang-content">⭐ Near point of clear vision: <b>25 cm</b></span><span lang="ru" class="lang-content">⭐ Расстояние ясного зрения: <b>25 см</b></span></li>
+<li><span lang="kk" class="lang-content">⭐ Колбочкалар (түс) — 6 млн, таяқшалар (қараңғы) — 120 млн!</span><span lang="en" class="lang-content">⭐ 6M cones (colour) + 120M rods (dim light)!</span><span lang="ru" class="lang-content">⭐ Колбочки — 6 млн, палочки — 120 млн!</span></li>
+</ul>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>⚖️ ЭНЕРГИЯНЫҢ САҚТАЛУ ЗАҢЫ:</strong> Өзінің системасы өндіктігінің eksterne ауыстырмаса, барлық энергиялар өндіктігінің = const. Механикалық, жылу, электр, сәулелену - барлығы трансформируется, бірақ сақталады.</p>
-                <p lang="en" class="lang-content text-sm"><strong>⚖️ LAW OF ENERGY CONSERVATION:</strong> If isolated system has no external influence, total energy = constant. Mechanical, thermal, electrical, radiation - all transform but conserved.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>⚖️ ЗАКОН СОХРАНЕНИЯ ЭНЕРГИИ:</strong> Если изолированная система не подвергается внешним воздействиям, полная энергия = const. Механическая, тепловая, электрическая, лучистая - всё трансформируется, но сохраняется.</p>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center">
+<svg width="320" height="220" viewBox="0 0 320 220">
+<ellipse cx="170" cy="110" rx="120" ry="90" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+<path d="M 50,110 Q 50,40 110,40 Q 60,80 60,110 Q 60,140 110,180 Q 50,180 50,110" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="1.5"/>
+<ellipse cx="100" cy="110" rx="18" ry="35" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+<text x="100" y="115" font-size="10" text-anchor="middle" fill="#0284c7" font-weight="bold">L</text>
+<line x1="285" y1="40" x2="285" y2="180" stroke="#dc2626" stroke-width="3"/>
+<text x="295" y="115" font-size="11" fill="#dc2626" font-weight="bold">retina</text>
+<line x1="20" y1="80" x2="100" y2="105" stroke="#fbbf24" stroke-width="1.5"/>
+<line x1="20" y1="140" x2="100" y2="115" stroke="#fbbf24" stroke-width="1.5"/>
+<line x1="100" y1="105" x2="285" y2="140" stroke="#fbbf24" stroke-width="1.5"/>
+<line x1="100" y1="115" x2="285" y2="80" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="40" y="40" font-size="11" fill="#475569">cornea</text>
+<text x="115" y="60" font-size="11" fill="#0284c7">lens</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2"><span lang="kk" class="lang-content">Көз — табиғи фотоаппарат</span><span lang="en" class="lang-content">The eye = natural camera</span><span lang="ru" class="lang-content">Глаз = природная фотокамера</span></p>
+</div>
+</div>
+</section>
 
-                <p style="text-align: center; font-weight: bold; color: #6b21a8; font-size: 18px; margin: 10px 0;">
-                    E_полная = E_механ + E_тепл = const
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">👓 Көру кемшіліктері және түзеу</span>
+<span lang="en" class="lang-content">👓 Vision defects and correction</span>
+<span lang="ru" class="lang-content">👓 Дефекты зрения и их коррекция</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-2">🔍 <span lang="kk" class="lang-content">Жақыннан көру (миопия):</span><span lang="en" class="lang-content">Nearsightedness (myopia):</span><span lang="ru" class="lang-content">Близорукость:</span></p>
+<p class="text-slate-700 text-sm mb-2">
+<span lang="kk" class="lang-content">Бейне тор қабыққа <b>жетпей</b> құрылады. Алыс заттар <b>бұлдыр</b>. Себеп: көздің ұзындығы үлкен немесе линза тым күшті.</span>
+<span lang="en" class="lang-content">Image forms <b>before</b> the retina. Distant objects look <b>blurry</b>. Eye too long or lens too strong.</span>
+<span lang="ru" class="lang-content">Изображение формируется <b>перед</b> сетчаткой. Далёкое <b>размыто</b>. Глаз вытянут / хрусталик слишком сильный.</span></p>
+<p class="text-xs text-emerald-700"><b>✅ <span lang="kk" class="lang-content">Түзету:</span><span lang="en" class="lang-content">Correction:</span><span lang="ru" class="lang-content">Коррекция:</span></b> <span lang="kk" class="lang-content">шашыратушы линза (D < 0)</span><span lang="en" class="lang-content">diverging lens (D < 0)</span><span lang="ru" class="lang-content">рассеивающая линза (D < 0)</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-2">🔭 <span lang="kk" class="lang-content">Алыстан көру (гиперметропия):</span><span lang="en" class="lang-content">Farsightedness (hyperopia):</span><span lang="ru" class="lang-content">Дальнозоркость:</span></p>
+<p class="text-slate-700 text-sm mb-2">
+<span lang="kk" class="lang-content">Бейне тор қабықтың <b>артында</b>. Жақын заттар <b>бұлдыр</b>. Көздің ұзындығы кіші немесе линза әлсіз.</span>
+<span lang="en" class="lang-content">Image forms <b>behind</b> retina. Close objects blurry. Eye too short / lens too weak.</span>
+<span lang="ru" class="lang-content">Изображение <b>за</b> сетчаткой. Близкое размыто. Глаз короче нормы / хрусталик слабый.</span></p>
+<p class="text-xs text-emerald-700"><b>✅ <span lang="kk" class="lang-content">Түзету:</span><span lang="en" class="lang-content">Correction:</span><span lang="ru" class="lang-content">Коррекция:</span></b> <span lang="kk" class="lang-content">жинаушы линза (D > 0)</span><span lang="en" class="lang-content">converging lens (D > 0)</span><span lang="ru" class="lang-content">собирающая линза (D > 0)</span></p>
+</div>
+</div>
+</section>
 
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>📐 МЕХАНИКАЛЫҚ:</strong> E = E_kinetic + E_potential = (m·v²/2) + m·g·h</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>📐 MECHANICAL:</strong> E = E_kinetic + E_potential = (m·v²/2) + m·g·h</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>📐 МЕХАНИЧЕСКАЯ:</strong> E = E_кинет + E_потец = (m·v²/2) + m·g·h</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔬 Оптикалық құрылғылар</span>
+<span lang="en" class="lang-content">🔬 Optical instruments</span>
+<span lang="ru" class="lang-content">🔬 Оптические приборы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">🔍</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Лупа</span><span lang="en" class="lang-content">Magnifier</span><span lang="ru" class="lang-content">Лупа</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">1 жинаушы линза. Зат F-тен жақын → жалған, тіке, үлкейтілген бейне. Үлкейту 2–10×.</span><span lang="en" class="lang-content">Single converging lens. Object inside F → virtual, upright, enlarged. 2–10×.</span><span lang="ru" class="lang-content">Одна собирающая линза. Предмет ближе F → мнимое, прямое, увеличенное. Увеличение 2–10×.</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">🔬</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Микроскоп</span><span lang="en" class="lang-content">Microscope</span><span lang="ru" class="lang-content">Микроскоп</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">Объектив + окуляр. <b>1500×</b>-ке дейін! Жасушаларды, бактерияларды көреді.</span><span lang="en" class="lang-content">Objective + eyepiece. Up to <b>1500×</b>. Cells, bacteria.</span><span lang="ru" class="lang-content">Объектив + окуляр. До <b>1500×</b>. Клетки, бактерии.</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">🔭</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Телескоп</span><span lang="en" class="lang-content">Telescope</span><span lang="ru" class="lang-content">Телескоп</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">Алыс жұлдыздар үшін. Линзалы (рефрактор) және айналы (рефлектор). Hubble — ғарышта!</span><span lang="en" class="lang-content">For distant stars. Refractor / reflector. Hubble — in orbit!</span><span lang="ru" class="lang-content">Для звёзд. Линзовый и зеркальный. Hubble — в космосе!</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">📷</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Фотокамера</span><span lang="en" class="lang-content">Camera</span><span lang="ru" class="lang-content">Фотоаппарат</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">Объектив бейнені <b>матрицаға</b> түсіреді: нақты, төңкерілген, кіші. Көзге өте ұқсас!</span><span lang="en" class="lang-content">Lens → image on sensor: real, inverted, smaller. Just like the eye!</span><span lang="ru" class="lang-content">Объектив → <b>матрица</b>: действ., перевёрн., меньше. Очень похоже на глаз!</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">🎬</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Проектор</span><span lang="en" class="lang-content">Projector</span><span lang="ru" class="lang-content">Проектор</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">F < d < 2F: <b>үлкейтілген</b> нақты бейне экранда.</span><span lang="en" class="lang-content">F < d < 2F: <b>enlarged real</b> image on screen.</span><span lang="ru" class="lang-content">F < d < 2F: <b>увеличенное</b> действ. изобр. на экране.</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">🧭</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Перископ</span><span lang="en" class="lang-content">Periscope</span><span lang="ru" class="lang-content">Перископ</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">Екі айна 45° бұрышпен. Сүңгуір қайықтарда, окоптарда!</span><span lang="en" class="lang-content">Two 45° mirrors. Submarines, trenches.</span><span lang="ru" class="lang-content">Два зеркала под 45°. Подводные лодки, окопы.</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">👓</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Көзәйнек</span><span lang="en" class="lang-content">Glasses</span><span lang="ru" class="lang-content">Очки</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">Көру кемшіліктерін түзейді. D-ні дәрігер тағайындайды.</span><span lang="en" class="lang-content">Correct vision defects. D set by optometrist.</span><span lang="ru" class="lang-content">Корректируют зрение. D подбирает офтальмолог.</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-5xl text-center mb-2">🌐</div>
+<p class="heading-font text-amber-700 text-base text-center mb-2"><span lang="kk" class="lang-content">Оптоталшықтар</span><span lang="en" class="lang-content">Optical fibres</span><span lang="ru" class="lang-content">Оптоволокно</span></p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content">Толық ішкі шағылу. Интернет, медицина (эндоскоп)!</span><span lang="en" class="lang-content">Total internal reflection. Internet, endoscopy!</span><span lang="ru" class="lang-content">Полное отражение. Интернет, эндоскопы!</span></p>
+</div>
+</div>
+</section>
 
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 8px;"><strong>🔥 ЖЫЛУ:</strong> Q = m·c·ΔT (өндіктігінең) немесе Q = q·m (сгорание)</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 8px;"><strong>🔥 THERMAL:</strong> Q = m·c·ΔT (heating) or Q = q·m (combustion)</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 8px;"><strong>🔥 ТЕПЛОВАЯ:</strong> Q = m·c·ΔT (нагревание) или Q = q·m (сгорание)</p>
-            </div>
-        </section>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎓 9 сынып аяқталды!</span>
+<span lang="en" class="lang-content">🎓 Grade 9 complete!</span>
+<span lang="ru" class="lang-content">🎓 9 класс пройден!</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed text-center">
+<span lang="kk" class="lang-content">Сен <b>электр заряды</b>, <b>тоқ</b>, <b>магнетизм</b>, <b>электрмагниттік индукция</b> және <b>оптика</b> туралы білдің! Бұл бөлімдер бүкіл <b>қазіргі техниканың</b> негізі: компьютерлер, лазерлер, спутниктер, медицина және байланыс. <b>10 сыныпта</b> механика мен молекулалық физика тереңірек оқылады! 🚀</span>
+<span lang="en" class="lang-content">You've learnt <b>electric charge</b>, <b>current</b>, <b>magnetism</b>, <b>electromagnetic induction</b> and <b>optics</b>! These topics power <b>modern technology</b>: computers, lasers, satellites, medicine, communications. <b>Grade 10</b> brings deeper mechanics and molecular physics! 🚀</span>
+<span lang="ru" class="lang-content">Вы изучили <b>электрический заряд</b>, <b>ток</b>, <b>магнетизм</b>, <b>электромагнитную индукцию</b> и <b>оптику</b>! Эти темы — основа <b>современной техники</b>: компьютеры, лазеры, спутники, медицина, связь. В <b>10 классе</b> — углублённая механика и молекулярная физика! 🚀</span></p>
+</div>
+</section>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. МЫСАЛДАР ПРАКТИКАДА</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. REAL-WORLD EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Примеры в практике</h2>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-amber-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">👁️</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">Көз</span><span lang="en" class="lang-content">Eye</span><span lang="ru" class="lang-content">Глаз</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Аккомодация + торық</span><span lang="en" class="lang-content">Accommodation + retina</span><span lang="ru" class="lang-content">Аккомодация + сетчатка</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">👓</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">D > 0 / D < 0</span><span lang="en" class="lang-content">D > 0 / D < 0</span><span lang="ru" class="lang-content">D > 0 / D < 0</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Алыс / жақыннан</span><span lang="en" class="lang-content">Far / near sight</span><span lang="ru" class="lang-content">Дально / близо-</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔬</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">Микро / Теле</span><span lang="en" class="lang-content">Micro / Tele</span><span lang="ru" class="lang-content">Микро / Теле</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Көздің кеңейтуі</span><span lang="en" class="lang-content">Extensions of the eye</span><span lang="ru" class="lang-content">Расширения глаза</span></p></div>
+</div></footer>
 
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="law-card">
-                        <p lang="kk" class="lang-content"><strong>🏔️ МЫСАЛ 1: Құлсыз</strong></p>
-                        <p lang="kk" class="lang-content">Орындарындағы энергия:</p>
-                        <p lang="kk" class="lang-content">E_potential = m·g·h (h жоғары)</p>
-                        <p lang="kk" class="lang-content">Құлсыз ішінде:</p>
-                        <p lang="kk" class="lang-content">E_kinetic = (m·v²/2) (v жылдамдық)</p>
-                        <p lang="kk" class="lang-content">Дробим: E_потец → E_кинет</p>
-
-                        <p lang="en" class="lang-content"><strong>🏔️ EXAMPLE 1: Falling</strong></p>
-                        <p lang="en" class="lang-content">At top: E_potential = m·g·h</p>
-                        <p lang="en" class="lang-content">During fall:</p>
-                        <p lang="en" class="lang-content">E_kinetic = (m·v²/2) increases</p>
-                        <p lang="en" class="lang-content">Transform: E_pot → E_kin</p>
-
-                        <p lang="ru" class="lang-content"><strong>🏔️ ПРИМЕР 1: Падение</strong></p>
-                        <p lang="ru" class="lang-content">Сверху: E_потец = m·g·h</p>
-                        <p lang="ru" class="lang-content">При падении:</p>
-                        <p lang="ru" class="lang-content">E_кинет = (m·v²/2) растёт</p>
-                        <p lang="ru" class="lang-content">Преобразование: E_пот → E_кин</p>
-                    </div>
-
-                    <div class="law-card">
-                        <p lang="kk" class="lang-content"><strong>🔥 МЫСАЛ 2: Топливо сгорание</strong></p>
-                        <p lang="kk" class="lang-content">Химялық энергия:</p>
-                        <p lang="kk" class="lang-content">Q = q·m (топливоның)</p>
-                        <p lang="kk" class="lang-content">Сгорание кезінде:</p>
-                        <p lang="kk" class="lang-content">Жылу + Механикалық (мотор)</p>
-                        <p lang="kk" class="lang-content">Трансформ: Химия → Жылу → Механикалық</p>
-
-                        <p lang="en" class="lang-content"><strong>🔥 EXAMPLE 2: Fuel combustion</strong></p>
-                        <p lang="en" class="lang-content">Chemical energy: Q = q·m</p>
-                        <p lang="en" class="lang-content">During burning:</p>
-                        <p lang="en" class="lang-content">Heat + Mechanical (engine)</p>
-                        <p lang="en" class="lang-content">Transform: Chem → Heat → Mech</p>
-
-                        <p lang="ru" class="lang-content"><strong>🔥 ПРИМЕР 2: Сгорание топлива</strong></p>
-                        <p lang="ru" class="lang-content">Химическая энергия: Q = q·m</p>
-                        <p lang="ru" class="lang-content">При сгорании:</p>
-                        <p lang="ru" class="lang-content">Тепло + Механическая (мотор)</p>
-                        <p lang="ru" class="lang-content">Преобразование: Хим → Тепло → Мех</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ЭНЕРГИЯ ПРЕОБРАЗОВАНИЯ ЦЕПЬ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. ENERGY TRANSFORMATION CHAIN</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Цепь преобразования энергии</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>☀️ СӘУЛЕЛЕНЕҢ ЭНЕРГИЯ</strong></p>
-                <p lang="kk" class="lang-content text-sm">☀️ → 🌍 (Жер ыстықталады) → 💨 (ауаны) → 🌊 (су циклы) → ⚡ (электр) → 💡 (жарыру)</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>☀️ SOLAR ENERGY</strong></p>
-                <p lang="en" class="lang-content text-sm">☀️ → 🌍 (Earth heats) → 💨 (air) → 🌊 (water cycle) → ⚡ (electricity) → 💡 (light)</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>☀️ СОЛНЕЧНАЯ ЭНЕРГИЯ</strong></p>
-                <p lang="ru" class="lang-content text-sm">☀️ → 🌍 (Земля нагревается) → 💨 (воздух) → 🌊 (водный цикл) → ⚡ (электричество) → 💡 (свет)</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>⛽ ТОПЛИВО ЭНЕРГИЯ</strong></p>
-                <p lang="kk" class="lang-content text-sm">⛽ → 🔥 (сгорание) → 🔥 (жылу) → ⚙️ (мотор) → 🚗 (қозғалмасы) → 💨 (аба жаңғыру)</p>
-
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>⛽ FUEL ENERGY</strong></p>
-                <p lang="en" class="lang-content text-sm">⛽ → 🔥 (burn) → 🔥 (heat) → ⚙️ (engine) → 🚗 (motion) → 💨 (air heat)</p>
-
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>⛽ ЭНЕРГИЯ ТОПЛИВА</strong></p>
-                <p lang="ru" class="lang-content text-sm">⛽ → 🔥 (сгорание) → 🔥 (тепло) → ⚙️ (мотор) → 🚗 (движение) → 💨 (нагрев воздуха)</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>⚡ ЭЛЕКТР ЭНЕРГИЯ</strong></p>
-                <p lang="kk" class="lang-content text-sm">⚡ → 💡 (жарыру) → 🔥 (жылу) → 🔊 (дыбыс) → 🌐 (интернет) → 📱 (мобайл)</p>
-
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>⚡ ELECTRICAL ENERGY</strong></p>
-                <p lang="en" class="lang-content text-sm">⚡ → 💡 (light) → 🔥 (heat) → 🔊 (sound) → 🌐 (internet) → 📱 (mobile)</p>
-
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>⚡ ЭЛЕКТРИЧЕСКАЯ ЭНЕРГИЯ</strong></p>
-                <p lang="ru" class="lang-content text-sm">⚡ → 💡 (свет) → 🔥 (тепло) → 🔊 (звук) → 🌐 (интернет) → 📱 (мобиль)</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #f3e8ff; border-radius: 1rem; border-top: 4px solid #a855f7;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-purple-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Энергияның сақталу заңы - барлық әлемінің негіз. E_полная = const. Энергия өзгеріс, бірақ құрылықсыз болмайды. Механикалық → жылу, сәулеленең → электр, топливо → қозғалмасы. БАРЛЫҒЫ ТРАНСФОРМИРУЕТСЯ, ЕШЕҢЕ ЖОҒАЛТЫЛМАЙДЫ!</p>
-            <p lang="en" class="lang-content text-sm">Law of energy conservation is world's foundation. E_total = const. Energy transforms, but never disappears. Mechanical → thermal, radiation → electric, fuel → motion. EVERYTHING TRANSFORMS, NOTHING LOST!</p>
-            <p lang="ru" class="lang-content text-sm">Закон сохранения энергии - основание мира. E_полная = const. Энергия трансформируется, но не исчезает. Механическая → тепловая, излучение → электрическая, топливо → движение. ВСЁ ТРАНСФОРМИРУЕТСЯ, НИЧТО НЕ ТЕРЯЕТСЯ!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

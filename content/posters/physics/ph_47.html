@@ -1,401 +1,156 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Роль теплопередачи</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0fdfa; /* teal-50 */
-            overflow-x: hidden;
-            color: #134e4a; /* teal-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Teal Theme */
-        .header-card {
-            background-color: #0d9488; /* teal-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #115e59; /* teal-800 */
-            border-bottom: 3px solid #5eead4; /* teal-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #ccfbf1; /* teal-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #0f766e; /* teal-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #0d9488; /* teal-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #0d9488;
-            background-color: #ffffff;
-            color: #0d9488;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #f0fdfa;
-        }
-        .lang-btn.active {
-            background-color: #0d9488;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #99f6e4;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #115e59;
-            text-anchor: middle;
-        }
-        .svg-arrow-heat {
-            stroke: #dc2626;
-            stroke-width: 2;
-            marker-end: url(#arrowhead-red);
-        }
-        .svg-arrow-cool {
-            stroke: #2563eb;
-            stroke-width: 2;
-            marker-end: url(#arrowhead-blue);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тепловые двигатели. ДВС</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-teal-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жылу құбылыстары</span>
+<span lang="en" class="lang-content">Grade 8 · Thermal phenomena</span>
+<span lang="ru" class="lang-content">8 класс · Тепловые явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Жылу машиналары. ІЖҚ</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Heat engines. ICE</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Тепловые двигатели. ДВС</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚙️ Жылудан жұмысқа</span>
+<span lang="en" class="lang-content">⚙️ From heat to work</span>
+<span lang="ru" class="lang-content">⚙️ От тепла к работе</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Жылу машинасы</b> — отынның химиялық энергиясын <b>механикалық жұмысқа</b> айналдыратын құрылғы. Жылу машиналары адамзаттың өмірін өзгертті: <b>паровоз</b>, <b>пароход</b>, <b>автомобиль</b>, <b>ұшақ</b>, <b>зымыран</b>. Жалпы принципі: отын жанғанда жұмысшы дене (бу, газ) <b>қызады</b>, <b>кеңейеді</b> және <b>поршеньге</b> немесе <b>турбинаға</b> жұмыс жасайды.</span>
+<span lang="en" class="lang-content">A <b class="text-indigo-700">heat engine</b> converts <b>chemical energy</b> of fuel into <b>mechanical work</b>. Heat engines have transformed humanity: <b>steam locomotive, steamship, car, airplane, rocket</b>. Principle: when fuel burns, working substance (steam, gas) <b>heats up</b>, <b>expands</b>, and does work on a <b>piston</b> or <b>turbine</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Тепловой двигатель</b> — устройство, превращающее <b>химическую энергию топлива</b> в <b>механическую работу</b>. Тепловые двигатели изменили жизнь человечества: <b>паровозы, пароходы, автомобили, самолёты, ракеты</b>. Принцип: при сжигании топлива рабочее тело (пар, газ) <b>нагревается</b>, <b>расширяется</b> и совершает работу над <b>поршнем</b> или <b>турбиной</b>.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ЖЫЛУ БЕРІЛУДІҢ РӨЛІ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ROLE OF HEAT TRANSFER</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">РОЛЬ ТЕПЛОПЕРЕДАЧИ</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">🔧 <span lang="kk" class="lang-content">Жалпы құрылымы:</span><span lang="en" class="lang-content">Common parts:</span><span lang="ru" class="lang-content">Общая схема:</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content"><b>Жылуғы (Q₁)</b> — отыннан жылу алу көзі</span><span lang="en" class="lang-content"><b>Heater (Q₁)</b> — fuel-burning source of heat</span><span lang="ru" class="lang-content"><b>Нагреватель (Q₁)</b> — источник тепла</span></li>
+<li><span lang="kk" class="lang-content"><b>Жұмысшы дене</b> — газ/бу, кеңейіп жұмыс жасайды</span><span lang="en" class="lang-content"><b>Working body</b> — gas/steam that expands and does work</span><span lang="ru" class="lang-content"><b>Рабочее тело</b> — газ/пар, расширяется и совершает работу</span></li>
+<li><span lang="kk" class="lang-content"><b>Суытқыш (Q₂)</b> — пайдаланылған жылу шығатын жер</span><span lang="en" class="lang-content"><b>Cooler (Q₂)</b> — sink for waste heat</span><span lang="ru" class="lang-content"><b>Холодильник (Q₂)</b> — приёмник отработанного тепла</span></li>
+</ul>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-teal-100">Табиғаттағы құбылыстар және техникадағы қолданыс.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-teal-100">Phenomena in nature and applications in technology.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-teal-100">Явления в природе и применение в технике.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 240" style="width:200px">
+<!-- Нагреватель -->
+<rect x="60" y="10" width="120" height="40" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+<text x="120" y="35" text-anchor="middle" font-weight="700" font-size="13" fill="#b91c1c">🔥 T₁</text>
+<!-- Двигатель -->
+<rect x="60" y="100" width="120" height="60" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+<text x="120" y="135" text-anchor="middle" font-weight="700" font-size="13" fill="#b45309">⚙️ A</text>
+<!-- Холодильник -->
+<rect x="60" y="200" width="120" height="30" fill="#dbeafe" stroke="#1e40af" stroke-width="2"/>
+<text x="120" y="220" text-anchor="middle" font-weight="700" font-size="13" fill="#1e40af">❄️ T₂</text>
+<!-- Стрелки -->
+<line x1="120" y1="50" x2="120" y2="100" stroke="#dc2626" stroke-width="3" marker-end="url(#arr47a)"/>
+<text x="100" y="80" text-anchor="end" font-weight="700" font-size="11" fill="#dc2626">Q₁</text>
+<line x1="120" y1="160" x2="120" y2="200" stroke="#1e40af" stroke-width="3" marker-end="url(#arr47b)"/>
+<text x="100" y="185" text-anchor="end" font-weight="700" font-size="11" fill="#1e40af">Q₂</text>
+<line x1="180" y1="130" x2="220" y2="130" stroke="#047857" stroke-width="3" marker-end="url(#arr47c)"/>
+<text x="195" y="120" font-weight="700" font-size="11" fill="#047857">A</text>
+<defs>
+<marker id="arr47a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="arr47b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e40af"/></marker>
+<marker id="arr47c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#047857"/></marker>
+</defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Жылу машинасы сұлбасы</span>
+<span lang="en" class="lang-content">Heat engine scheme</span>
+<span lang="ru" class="lang-content">Схема теплового двигателя</span></p>
+</div></div></section>
 
-        <!-- 1. ТАБИҒАТТА (Желдер) -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Табиғатта: Желдердің пайда болуы</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. In Nature: Formation of Winds</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. В природе: Образование ветров</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚗 Іштен жану қозғалтқышы (ІЖҚ)</span>
+<span lang="en" class="lang-content">🚗 Internal Combustion Engine (ICE)</span>
+<span lang="ru" class="lang-content">🚗 Двигатель внутреннего сгорания</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">ІЖҚ</b> — отын <b>қозғалтқыштың ішінде</b> жанады. Цилиндр ішінде поршень қозғалады. Қазіргі автомобильдердің 90%-ы <b>4-тактты</b> ІЖҚ қолданады, оны <b>Николаус Отто</b> 1876 жылы ойлап тапқан.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">ICE</b> — fuel burns <b>inside the engine</b>. A piston moves inside a cylinder. About 90% of modern cars use the <b>4-stroke</b> ICE invented by <b>Nikolaus Otto</b> in 1876.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">ДВС</b> — топливо горит <b>внутри двигателя</b>. В цилиндре движется поршень. ~90% автомобилей используют <b>4-тактный</b> ДВС, изобретённый <b>Николаусом Отто</b> в 1876 г.</span></p>
 
-            <div class="rule-card border-t-teal-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Күн Жерді біркелкі қыздырмайды. <span class="term" lang="kk">Конвекция</span> әсерінен жылы ауа жоғары көтеріліп, оның орнына суық ауа келеді – осылайша жел пайда болады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    The Sun heats the Earth unevenly. Due to <span class="term" lang="en">convection</span>, warm air rises and is replaced by cool air – creating wind.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Солнце нагревает Землю неравномерно. Из-за <span class="term" lang="ru">конвекции</span> теплый воздух поднимается вверх, а на его место приходит холодный – так возникает ветер.
-                </p>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2">1️⃣ <span lang="kk" class="lang-content">Кіріс</span><span lang="en" class="lang-content">Intake</span><span lang="ru" class="lang-content">Впуск</span></p>
+<p class="text-slate-700 text-xs"><span lang="kk" class="lang-content">Поршень төмен, цилиндрге ауа+бензин қоспасы кіреді.</span><span lang="en" class="lang-content">Piston down — air+fuel enters.</span><span lang="ru" class="lang-content">Поршень опускается — смесь топлива и воздуха входит.</span></p>
+</div>
+<div class="card-warm rounded-2xl p-4">
+<p class="font-bold text-orange-700 mb-2">2️⃣ <span lang="kk" class="lang-content">Сығу</span><span lang="en" class="lang-content">Compression</span><span lang="ru" class="lang-content">Сжатие</span></p>
+<p class="text-slate-700 text-xs"><span lang="kk" class="lang-content">Поршень жоғары — қоспа 10-12 есе сығылады, қызады.</span><span lang="en" class="lang-content">Piston up — mixture compresses 10-12×, heats up.</span><span lang="ru" class="lang-content">Поршень поднимается — смесь сжимается, нагревается.</span></p>
+</div>
+<div class="card-rose rounded-2xl p-4">
+<p class="font-bold text-rose-700 mb-2">3️⃣ <span lang="kk" class="lang-content">Жұмыс (от)</span><span lang="en" class="lang-content">Power</span><span lang="ru" class="lang-content">Рабочий (вспышка)</span></p>
+<p class="text-slate-700 text-xs"><span lang="kk" class="lang-content">Свеча от тастайды → жарылыс → ыстық газ поршеньді итереді.</span><span lang="en" class="lang-content">Spark — explosion — hot gas pushes piston down.</span><span lang="ru" class="lang-content">Свеча — искра — взрыв — газ толкает поршень вниз.</span></p>
+</div>
+<div class="card-emerald rounded-2xl p-4">
+<p class="font-bold text-emerald-700 mb-2">4️⃣ <span lang="kk" class="lang-content">Шығыс</span><span lang="en" class="lang-content">Exhaust</span><span lang="ru" class="lang-content">Выпуск</span></p>
+<p class="text-slate-700 text-xs"><span lang="kk" class="lang-content">Поршень жоғары — пайдаланылған газдар шығарылады.</span><span lang="en" class="lang-content">Piston up — exhaust gases removed.</span><span lang="ru" class="lang-content">Поршень вверх — выхлоп выводится.</span></p>
+</div>
+</div>
+</div>
+</section>
 
-                <!-- Illustration 1: Global Winds / Convection -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                        <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📜 Жылу машиналарының тарихы</span>
+<span lang="en" class="lang-content">📜 History of heat engines</span>
+<span lang="ru" class="lang-content">📜 История тепловых машин</span></h2>
+<div class="card rounded-custom p-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+<div class="card-warm rounded-2xl p-4">
+<p class="font-bold text-orange-700">1698</p>
+<p class="text-slate-700 text-xs mt-1"><span lang="kk" class="lang-content">Севери — алғашқы бу машинасы (су айдау)</span><span lang="en" class="lang-content">Savery — first steam pump</span><span lang="ru" class="lang-content">Севери — первая паровая машина (откачка воды)</span></p>
+</div>
+<div class="card-warm rounded-2xl p-4">
+<p class="font-bold text-orange-700">1769</p>
+<p class="text-slate-700 text-xs mt-1"><span lang="kk" class="lang-content">Дж. Уатт — тиімді бу машинасы</span><span lang="en" class="lang-content">J. Watt — efficient steam engine</span><span lang="ru" class="lang-content">Дж. Уатт — эффективная паровая машина</span></p>
+</div>
+<div class="card-warm rounded-2xl p-4">
+<p class="font-bold text-orange-700">1876</p>
+<p class="text-slate-700 text-xs mt-1"><span lang="kk" class="lang-content">Н. Отто — 4-тактты бензинмен жүретін ІЖҚ</span><span lang="en" class="lang-content">N. Otto — 4-stroke petrol ICE</span><span lang="ru" class="lang-content">Н. Отто — 4-тактный бензиновый ДВС</span></p>
+</div>
+<div class="card-warm rounded-2xl p-4">
+<p class="font-bold text-orange-700">1893</p>
+<p class="text-slate-700 text-xs mt-1"><span lang="kk" class="lang-content">Р. Дизель — дизель қозғалтқышы</span><span lang="en" class="lang-content">R. Diesel — diesel engine</span><span lang="ru" class="lang-content">Р. Дизель — дизельный двигатель</span></p>
+</div>
+</div>
+</div>
+</section>
 
-                    <!-- Earth Surface -->
-                    <path d="M 0 180 Q 200 160, 400 180 L 400 200 L 0 200 Z" fill="#16a34a"/>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚙️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">Q₁ → A + Q₂</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жылу машинасының жұмыс принципі</span><span lang="en" class="lang-content">Heat engine principle</span><span lang="ru" class="lang-content">Принцип теплового двигателя</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔥</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">4 такт</span><span lang="en" class="lang-content">4 strokes</span><span lang="ru" class="lang-content">4 такта</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Кіріс-сығу-жұмыс-шығыс</span><span lang="en" class="lang-content">Intake-compress-power-exhaust</span><span lang="ru" class="lang-content">Впуск-сжатие-работа-выпуск</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚗</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">ICE</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қазіргі көліктердің 90%</span><span lang="en" class="lang-content">90% of modern cars</span><span lang="ru" class="lang-content">90% современных авто</span></p></div>
+</div></footer>
 
-                    <!-- Sun -->
-                    <circle cx="50" cy="40" r="25" fill="#facc15" stroke="#eab308"/>
-                    <line x1="50" y1="10" x2="50" y2="0" stroke="#eab308" stroke-width="2"/>
-                    <line x1="80" y1="40" x2="90" y2="40" stroke="#eab308" stroke-width="2"/>
-                    <line x1="75" y1="65" x2="85" y2="75" stroke="#eab308" stroke-width="2"/>
-
-                    <!-- Hot Spot -->
-                    <ellipse cx="150" cy="180" rx="60" ry="10" fill="#fca5a5" opacity="0.6"/>
-                    <text x="150" y="195" font-size="12" fill="#991b1b" text-anchor="middle">Hot Surface</text>
-
-                    <!-- Cold Spot -->
-                    <ellipse cx="300" cy="180" rx="60" ry="10" fill="#bfdbfe" opacity="0.6"/>
-                    <text x="300" y="195" font-size="12" fill="#1e40af" text-anchor="middle">Cool Surface</text>
-
-                    <!-- Convection Cycle -->
-                    <!-- Hot Rising -->
-                    <path d="M 150 170 Q 150 100, 200 80" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#arrowhead-red)"/>
-                    <!-- Moving across -->
-                    <path d="M 210 80 L 280 80" fill="none" stroke="#a8a29e" stroke-width="2" stroke-dasharray="4"/>
-                    <!-- Cold Sinking -->
-                    <path d="M 300 80 Q 300 120, 280 160" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowhead-blue)"/>
-                    <!-- Wind blowing -->
-                    <path d="M 260 170 Q 200 170, 180 170" fill="none" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrowhead-blue)"/>
-                    <text x="220" y="165" font-size="14" fill="#1d4ed8" font-weight="bold">WIND (Жел)</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ТЕХНИКАДА (Қозғалтқыш) -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Техникада: Қозғалтқышты суыту</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. In Tech: Engine Cooling</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. В технике: Охлаждение двигателя</h2>
-
-            <div class="rule-card border-t-indigo-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Көліктердің қозғалытқышы қатты қызады. Оны суыту үшін сұйықтықтың <strong>айналымы</strong> (мәжбүрлі конвекция) және радиатор арқылы <strong>жылу беру</strong> қолданылады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Car engines get very hot. To cool them, fluid <strong>circulation</strong> (forced convection) and <strong>heat transfer</strong> through a radiator are used.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Двигатели машин сильно нагреваются. Для их охлаждения используется <strong>циркуляция</strong> жидкости (вынужденная конвекция) и <strong>теплоотдача</strong> через радиатор.
-                </p>
-
-                <!-- Illustration 2: Radiator System -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Engine Block -->
-                    <rect x="250" y="60" width="100" height="80" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
-                    <text x="300" y="105" font-weight="bold" fill="#475569" text-anchor="middle">ENGINE</text>
-
-                    <!-- Radiator -->
-                    <g transform="translate(50, 50)">
-                        <rect x="0" y="0" width="40" height="100" fill="#e2e8f0" stroke="#475569"/>
-                        <!-- Fins -->
-                        <line x1="0" y1="10" x2="40" y2="10" stroke="#94a3b8"/>
-                        <line x1="0" y1="20" x2="40" y2="20" stroke="#94a3b8"/>
-                        <line x1="0" y1="30" x2="40" y2="30" stroke="#94a3b8"/>
-                        <line x1="0" y1="40" x2="40" y2="40" stroke="#94a3b8"/>
-                        <line x1="0" y1="50" x2="40" y2="50" stroke="#94a3b8"/>
-                        <line x1="0" y1="60" x2="40" y2="60" stroke="#94a3b8"/>
-                        <line x1="0" y1="70" x2="40" y2="70" stroke="#94a3b8"/>
-                        <line x1="0" y1="80" x2="40" y2="80" stroke="#94a3b8"/>
-                        <line x1="0" y1="90" x2="40" y2="90" stroke="#94a3b8"/>
-                        <text x="20" y="120" font-size="10" text-anchor="middle">Radiator</text>
-                    </g>
-
-                    <!-- Pipes -->
-                    <!-- Hot fluid from engine to radiator (Top) -->
-                    <path d="M 250 70 L 90 70" fill="none" stroke="#ef4444" stroke-width="4"/>
-                    <line x1="170" y1="70" x2="150" y2="70" stroke="#fff" stroke-width="2" marker-end="url(#arrowhead-red)"/>
-                    <text x="170" y="60" font-size="10" fill="#ef4444">Hot</text>
-
-                    <!-- Cool fluid from radiator to engine (Bottom) -->
-                    <path d="M 90 130 L 250 130" fill="none" stroke="#3b82f6" stroke-width="4"/>
-                    <line x1="150" y1="130" x2="170" y2="130" stroke="#fff" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
-                    <text x="170" y="150" font-size="10" fill="#3b82f6">Cool</text>
-
-                    <!-- Fan Airflow -->
-                    <g transform="translate(10, 80)">
-                        <line x1="0" y1="0" x2="30" y2="0" stroke="#94a3b8" stroke-width="2" stroke-dasharray="2"/>
-                        <line x1="0" y1="20" x2="30" y2="20" stroke="#94a3b8" stroke-width="2" stroke-dasharray="2"/>
-                        <line x1="0" y1="40" x2="30" y2="40" stroke="#94a3b8" stroke-width="2" stroke-dasharray="2"/>
-                        <text x="15" y="60" font-size="8" fill="#64748b">Airflow</text>
-                    </g>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. КОНДИЦИОНЕР -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Кондиционер (Ауа реттегіш)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Air Conditioner</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Кондиционер</h2>
-
-            <div class="rule-card border-t-yellow-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Кондиционер бөлмедегі ауаны <strong>конвекция</strong> арқылы суытады. Салқын ауа ауыр болғандықтан төмен түседі, ал жылы ауа жоғары көтеріліп, сорылады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    An air conditioner cools the room using <strong>convection</strong>. Cold air sinks because it is heavy, while warm air rises and is sucked in.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Кондиционер охлаждает воздух в комнате с помощью <strong>конвекции</strong>. Холодный воздух тяжелее и опускается вниз, а теплый поднимается и всасывается прибором.
-                </p>
-
-                <!-- Illustration 3: Air Conditioner -->
-                <svg class="illustration-svg" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Room -->
-                    <rect x="50" y="20" width="300" height="180" fill="#fcfbf8" stroke="#64748b" stroke-width="2"/>
-
-                    <!-- AC Unit -->
-                    <rect x="250" y="30" width="80" height="30" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
-                    <rect x="310" y="35" width="10" height="20" fill="#9ca3af" opacity="0.3"/> <!-- Vent -->
-                    <text x="290" y="50" font-size="10" fill="#475569" font-weight="bold">AC</text>
-
-                    <!-- Cold Air Flow (Down) -->
-                    <path d="M 280 60 Q 260 100, 150 150" fill="none" stroke="#3b82f6" stroke-width="4" marker-end="url(#arrowhead-blue)"/>
-                    <text x="230" y="100" font-size="12" fill="#2563eb" font-weight="bold">Cold (Суық)</text>
-
-                    <!-- Hot Air Flow (Up) -->
-                    <path d="M 100 150 Q 150 100, 250 50" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="4" marker-end="url(#arrowhead-red)"/>
-                    <text x="130" y="120" font-size="12" fill="#dc2626">Hot (Жылы)</text>
-
-                    <!-- Person -->
-                    <circle cx="100" cy="160" r="10" fill="#fcd34d"/>
-                    <line x1="100" y1="170" x2="100" y2="190" stroke="#000" stroke-width="2"/>
-                    <line x1="100" y1="190" x2="90" y2="200" stroke="#000" stroke-width="2"/>
-                    <line x1="100" y1="190" x2="110" y2="200" stroke="#000" stroke-width="2"/>
-                    <line x1="100" y1="175" x2="90" y2="185" stroke="#000" stroke-width="2"/>
-                    <line x1="100" y1="175" x2="110" y2="185" stroke="#000" stroke-width="2"/>
-                    <text x="100" y="145" font-size="10" text-anchor="middle">Happy</text>
-
-                    <!-- Heat Rejection (Outside) -->
-                    <line x1="330" y1="45" x2="360" y2="45" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowhead-red)"/>
-                    <text x="345" y="40" font-size="8" fill="#ef4444">Heat Out</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-teal-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-teal-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-teal-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-teal-800">
-                Табиғатта желдер конвекция арқылы пайда болады. Техникада (қозғалытқыш, кондиционер) жылуды басқару үшін сұйық пен газ ағыны қолданылады.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-teal-800">
-                In nature, winds are created by convection. In technology (engines, AC), fluid and gas flows are used to manage heat.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-teal-800">
-                В природе ветры возникают благодаря конвекции. В технике (двигатели, кондиционеры) потоки жидкости и газа используются для управления теплом.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

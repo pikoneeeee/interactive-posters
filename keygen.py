@@ -6,13 +6,12 @@
 Используется ТОЛЬКО разработчиком для генерации ключей.
 
 Использование:
-    python keygen.py init                            # Создать секретный ключ (один раз!)
-    python keygen.py gen informatics 42              # Ключ: информатика, клиент 42, 12 мес.
-    python keygen.py gen physics 7 --months 24       # Физика, клиент 7, 24 месяца
-    python keygen.py gen biology 15 --months 6       # Биология, клиент 15, 6 месяцев
-    python keygen.py verify XXXX-XXXX-XXXX-XXXX-XXXX  # Проверить ключ
-    python keygen.py list                            # Показать все выданные ключи
-    python keygen.py embed                           # Вывести код для встраивания секрета
+    python keygen.py init                                         # Создать секретный ключ (один раз!)
+    python keygen.py gen informatics 42 --device A3F2B1C8E4D71029 # Ключ привязан к устройству
+    python keygen.py gen physics 7 --months 24 --device DEADBEEF12345678
+    python keygen.py verify XXXX-XXXX-XXXX-XXXX-XXXX --device A3F2B1C8E4D71029
+    python keygen.py list                                         # Показать все выданные ключи
+    python keygen.py embed                                        # Вывести код для встраивания секрета
 """
 
 import argparse
@@ -86,9 +85,9 @@ def cmd_init(_args):
 # ─── Генерация / валидация ключей ──────────────────────────────
 
 def encode_key(subject_idx: int, client_id: int, duration_months: int,
-               flags: int, secret: bytes) -> str:
+               flags: int, secret: bytes, device_id: str = '') -> str:
     """
-    Создаёт подписанный лицензионный ключ.
+    Создаёт подписанный лицензионный ключ, привязанный к device_id.
 
     Формат payload (4 байта, big-endian uint32):
         биты 31–28 : subject_idx      (4 бита,  0–15)
@@ -96,24 +95,29 @@ def encode_key(subject_idx: int, client_id: int, duration_months: int,
         биты 11–4  : duration_months   (8 бит,  1–255)
         биты 3–0   : flags            (4 бита,  зарезервировано)
 
-    Формат ключа: payload(4 байт) + HMAC-SHA256(payload)[:8] = 12 байт
+    Формат ключа: payload(4 байт) + HMAC-SHA256(payload + device_id)[:8] = 12 байт
     Base32 → 20 символов → XXXX-XXXX-XXXX-XXXX-XXXX
+
+    device_id включается в HMAC — ключ валиден ТОЛЬКО на конкретном устройстве.
     """
     val = ((subject_idx & 0xF) << 28) | \
           ((client_id & 0xFFFF) << 12) | \
           ((duration_months & 0xFF) << 4) | \
           (flags & 0xF)
     payload = struct.pack('>I', val)
-    sig = hmac.new(secret, payload, hashlib.sha256).digest()[:8]
+    # HMAC подписывает payload + device_id → ключ привязан к машине
+    hmac_data = payload + device_id.upper().encode()
+    sig = hmac.new(secret, hmac_data, hashlib.sha256).digest()[:8]
     raw = payload + sig  # 12 байт
     encoded = base64.b32encode(raw).decode().rstrip('=')
     # Форматируем: XXXX-XXXX-XXXX-XXXX-XXXX
     return '-'.join(encoded[i:i+4] for i in range(0, 20, 4))
 
 
-def decode_key(key_str: str, secret: bytes) -> tuple:
+def decode_key(key_str: str, secret: bytes, device_id: str = '') -> tuple:
     """
     Проверяет и декодирует лицензионный ключ.
+    device_id используется для проверки HMAC-привязки к устройству.
     Возвращает (data_dict, error_string). При ошибке data_dict = None.
     """
     clean = key_str.replace('-', '').replace(' ', '').upper()
@@ -132,10 +136,11 @@ def decode_key(key_str: str, secret: bytes) -> tuple:
 
     payload, sig = raw[:4], raw[4:]
 
-    # Проверяем подпись
-    expected = hmac.new(secret, payload, hashlib.sha256).digest()[:8]
+    # Проверяем подпись (включая device_id)
+    hmac_data = payload + device_id.upper().encode()
+    expected = hmac.new(secret, hmac_data, hashlib.sha256).digest()[:8]
     if not hmac.compare_digest(sig, expected):
-        return None, "Подпись не совпадает — ключ поддельный или повреждён"
+        return None, "Ключ не подходит для этого устройства"
 
     # Декодируем payload
     val = struct.unpack('>I', payload)[0]
@@ -161,20 +166,28 @@ def _init_db():
             client_id INTEGER NOT NULL,
             duration_months INTEGER NOT NULL,
             flags INTEGER DEFAULT 0,
+            device_id TEXT DEFAULT '',
             note TEXT DEFAULT '',
             created_at TEXT NOT NULL
         )
     """)
+    # Добавляем колонку device_id если её нет (миграция старых БД)
+    try:
+        conn.execute("ALTER TABLE keys ADD COLUMN device_id TEXT DEFAULT ''")
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass  # колонка уже есть
     conn.commit()
     return conn
 
 
-def _save_key(conn, key_str, subject, client_id, duration_months, flags, note=''):
+def _save_key(conn, key_str, subject, client_id, duration_months, flags,
+              device_id='', note=''):
     """Сохраняет ключ в БД."""
     conn.execute(
-        "INSERT INTO keys (key_str, subject, client_id, duration_months, flags, note, created_at) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?)",
-        (key_str, subject, client_id, duration_months, flags, note,
+        "INSERT INTO keys (key_str, subject, client_id, duration_months, flags, device_id, note, created_at) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        (key_str, subject, client_id, duration_months, flags, device_id, note,
          datetime.now().isoformat(timespec='seconds'))
     )
     conn.commit()
@@ -200,40 +213,56 @@ def cmd_gen(args):
         print(f"❌ months должен быть 1–255")
         sys.exit(1)
 
+    device_id = (args.device or '').strip().upper()
+    if not device_id:
+        print(f"❌ Не указан --device (Device ID целевого устройства)")
+        print(f"   Пользователь видит свой Device ID на экране активации.")
+        sys.exit(1)
+    if len(device_id) != 16:
+        print(f"❌ Device ID должен быть 16 hex-символов (получено {len(device_id)}: '{device_id}')")
+        sys.exit(1)
+
     secret = load_secret()
-    key_str = encode_key(SUBJECTS[subject], client_id, months, 0, secret)
+    key_str = encode_key(SUBJECTS[subject], client_id, months, 0, secret, device_id)
 
     # Сохраняем в БД
     conn = _init_db()
     note = args.note or ''
-    _save_key(conn, key_str, subject, client_id, months, 0, note)
+    _save_key(conn, key_str, subject, client_id, months, 0, device_id, note)
     conn.close()
 
     print(f"")
     print(f"  🔑  {key_str}")
     print(f"")
-    print(f"  Предмет:   {subject}")
-    print(f"  Клиент:    #{client_id}")
-    print(f"  Срок:      {months} мес. (с момента активации)")
+    print(f"  Предмет:     {subject}")
+    print(f"  Клиент:      #{client_id}")
+    print(f"  Устройство:  {device_id}")
+    print(f"  Срок:        {months} мес. (с момента активации)")
     if note:
-        print(f"  Заметка:   {note}")
-    print(f"  Создан:    {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+        print(f"  Заметка:     {note}")
+    print(f"  Создан:      {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print(f"")
 
 
 def cmd_verify(args):
     """Проверить ключ."""
+    device_id = (args.device or '').strip().upper()
+    if not device_id:
+        print(f"❌ Не указан --device (Device ID для проверки привязки)")
+        sys.exit(1)
+
     secret = load_secret()
-    data, err = decode_key(args.key, secret)
+    data, err = decode_key(args.key, secret, device_id)
     if err:
         print(f"  ❌ {err}")
         sys.exit(1)
-    print(f"  ✅ Ключ валидный")
+    print(f"  ✅ Ключ валидный для устройства {device_id}")
     print(f"")
-    print(f"  Предмет:   {data['subject']}")
-    print(f"  Клиент:    #{data['client_id']}")
-    print(f"  Срок:      {data['duration_months']} мес.")
-    print(f"  Флаги:     {data['flags']}")
+    print(f"  Предмет:     {data['subject']}")
+    print(f"  Клиент:      #{data['client_id']}")
+    print(f"  Срок:        {data['duration_months']} мес.")
+    print(f"  Устройство:  {device_id}")
+    print(f"  Флаги:       {data['flags']}")
 
 
 def cmd_list(_args):
@@ -295,11 +324,13 @@ def main():
     p_gen = sub.add_parser('gen', help='Сгенерировать ключ')
     p_gen.add_argument('subject', help='Предмет (informatics, physics, ...)')
     p_gen.add_argument('client_id', type=int, help='ID клиента (0–65535)')
+    p_gen.add_argument('--device', type=str, required=True, help='Device ID целевого устройства (16 hex)')
     p_gen.add_argument('--months', type=int, default=12, help='Срок в месяцах (по умолчанию 12)')
     p_gen.add_argument('--note', type=str, default='', help='Заметка (название школы и т.д.)')
 
     p_ver = sub.add_parser('verify', help='Проверить ключ')
     p_ver.add_argument('key', help='Ключ в формате XXXX-XXXX-XXXX-XXXX-XXXX')
+    p_ver.add_argument('--device', type=str, required=True, help='Device ID для проверки привязки')
 
     sub.add_parser('list', help='Показать все выданные ключи')
     sub.add_parser('embed', help='Вывести код для встраивания секрета в licensing.py')

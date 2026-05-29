@@ -1,197 +1,182 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Топливо және орам сипаттамасы</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fecdd3 0%, #fed2d8 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #991b1b; border-bottom: 3px solid #fed2d8; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #ef4444; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #ef4444; background: white; color: #ef4444; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #ef4444; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 9px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        th { background-color: #ef4444; color: white; }
-        .info-box { background: linear-gradient(135deg, #fed2d8 0%, #fecdd3 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #ef4444; margin: 10px 0; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Линзы. Построение изображений</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-red-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-amber-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Геометриялық оптика</span>
+<span lang="en" class="lang-content">Grade 9 · Geometric optics</span>
+<span lang="ru" class="lang-content">9 класс · Геометрическая оптика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Линзалар. Бейне құру</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Lenses. Image construction</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Линзы. Построение изображений</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">ЖАНАРМАЙ және Сипаттамасы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Fuel and Characteristics</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Топливо и его характеристики</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-red-100">Барлық ЖАНАРМАЙ өзге сипаттамасы. Қоршеген, ысыту, сипаттамасы. ТОЛЫҚ САЛЫСТЫРМАЛЫ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-red-100">Every fuel has unique properties. Environment, heating, characteristics. COMPLETE COMPARISON!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-red-100">Каждое топливо имеет уникальные свойства. Окружающая среда, отопление, характеристики. ПОЛНОЕ СРАВНЕНИЕ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔍 Линза деген не?</span>
+<span lang="en" class="lang-content">🔍 What is a lens?</span>
+<span lang="ru" class="lang-content">🔍 Что такое линза?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-amber-700">Линза</b> — екі сфералық беттермен (немесе бір сфера + жазық беттен) шектелген <b>мөлдір дене</b> (әдетте шыны). Жарық линзаны өткенде <b>екі рет сынады</b> — кіргенде және шыққанда. Нәтижесінде линза сәулелерді <b>жинай</b> немесе <b>шашырата</b> алады.</span>
+<span lang="en" class="lang-content"><b class="text-amber-700">Lens</b> — a <b>transparent body</b> bounded by two spherical surfaces (or one sphere + flat), usually glass. Light refracts <b>twice</b> in a lens — on entry and exit. As a result a lens <b>converges</b> or <b>diverges</b> rays.</span>
+<span lang="ru" class="lang-content"><b class="text-amber-700">Линза</b> — <b>прозрачное тело</b>, ограниченное двумя сферическими поверхностями (или одной сферой + плоскостью), обычно стекло. Свет в линзе преломляется <b>дважды</b> — на входе и выходе. Линза <b>собирает</b> или <b>рассеивает</b> лучи.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ТОПЛИВДАРЫНЫҢ ТҮРЛЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. TYPES OF FUELS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Виды топлива</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-amber-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Линза формуласы:</span><span lang="en" class="lang-content">Thin lens equation:</span><span lang="ru" class="lang-content">Формула тонкой линзы:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+1/F = 1/d + 1/f
+</div>
+<p class="text-sm text-slate-700 text-center mt-2">
+<span lang="kk" class="lang-content">F — фокус ара; d — заттан линзаға; f — линзадан бейнеге</span>
+<span lang="en" class="lang-content">F — focal length; d — object distance; f — image distance</span>
+<span lang="ru" class="lang-content">F — фокусное; d — от предмета до линзы; f — от линзы до изображения</span></p>
+</div>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ТОПЛИВЫ</th>
-                            <th lang="kk" class="lang-content">ПАЙДА</th>
-                            <th lang="kk" class="lang-content">КЕРЕМЕТІ</th>
-                            <th lang="kk" class="lang-content">ЭКОЛОГИЯ</th>
-                            <th lang="kk" class="lang-content">ҚҰНДЫҒЫ</th>
+<div class="formula text-center mt-3" style="font-size:1.2rem">
+D = 1/F  [<span lang="kk" class="lang-content">дптр</span><span lang="en" class="lang-content">D</span><span lang="ru" class="lang-content">дптр</span>]
+</div>
+<p class="text-xs text-slate-600 text-center mt-1"><span lang="kk" class="lang-content"><b>D</b> — оптикалық күш (диоптрия). 1 дптр = 1 м⁻¹</span><span lang="en" class="lang-content"><b>D</b> — optical power. 1 D = 1 m⁻¹</span><span lang="ru" class="lang-content"><b>D</b> — оптическая сила (диоптрии). 1 дптр = 1 м⁻¹</span></p>
+</div>
 
-                            <th lang="en" class="lang-content">FUEL</th>
-                            <th lang="en" class="lang-content">BENEFITS</th>
-                            <th lang="en" class="lang-content">DRAWBACK</th>
-                            <th lang="en" class="lang-content">ECOLOGY</th>
-                            <th lang="en" class="lang-content">COST</th>
+<div class="card rounded-custom p-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="text-center"><div class="text-6xl mb-2">🔵</div>
+<p class="heading-font text-sm text-amber-700"><span lang="kk" class="lang-content">Жинаушы</span><span lang="en" class="lang-content">Converging</span><span lang="ru" class="lang-content">Собирающая</span></p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Ортасы қалың<br/>F > 0, D > 0</span><span lang="en" class="lang-content">Thicker centre<br/>F > 0, D > 0</span><span lang="ru" class="lang-content">Толще в центре<br/>F > 0, D > 0</span></p>
+</div>
+<div class="text-center"><div class="text-6xl mb-2">🔶</div>
+<p class="heading-font text-sm text-amber-700"><span lang="kk" class="lang-content">Шашыратушы</span><span lang="en" class="lang-content">Diverging</span><span lang="ru" class="lang-content">Рассеивающая</span></p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Шеті қалың<br/>F < 0, D < 0</span><span lang="en" class="lang-content">Thicker edges<br/>F < 0, D < 0</span><span lang="ru" class="lang-content">Толще по краям<br/>F < 0, D < 0</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-                            <th lang="ru" class="lang-content">ТОПЛИВО</th>
-                            <th lang="ru" class="lang-content">ПРЕИМУЩЕСТВА</th>
-                            <th lang="ru" class="lang-content">НЕДОСТАТОК</th>
-                            <th lang="ru" class="lang-content">ЭКОЛОГИЯ</th>
-                            <th lang="ru" class="lang-content">СТОИМОСТЬ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Мұнай</strong></td>
-                            <td lang="kk" class="lang-content">q=46, Сұйық, Ысыту</td>
-                            <td lang="kk" class="lang-content">Ласпы газы</td>
-                            <td lang="kk" class="lang-content">Төмен</td>
-                            <td lang="kk" class="lang-content">Орта</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Бейне құру (жинаушы)</span>
+<span lang="en" class="lang-content">📐 Image construction (converging)</span>
+<span lang="ru" class="lang-content">📐 Построение изображения (собирающая)</span></h2>
+<div class="card-warm rounded-custom p-6 mb-4">
+<p class="heading-font text-amber-700 mb-3">🌟 <span lang="kk" class="lang-content">3 «сиқырлы» сәуле:</span><span lang="en" class="lang-content">Three "magic" rays:</span><span lang="ru" class="lang-content">3 «волшебных» луча:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><b>1.</b> <span lang="kk" class="lang-content">Бас оске <b>параллель</b> сәуле — линзадан кейін <b>фокус арқылы</b> өтеді.</span><span lang="en" class="lang-content">Ray <b>parallel</b> to axis → passes through <b>focal point</b> F after lens.</span><span lang="ru" class="lang-content">Луч, идущий <b>параллельно</b> оси → после линзы через <b>фокус</b> F.</span></li>
+<li><b>2.</b> <span lang="kk" class="lang-content">Линзаның <b>оптикалық центрі</b> арқылы өтетін сәуле — <b>сынбайды</b>.</span><span lang="en" class="lang-content">Ray through <b>optical centre</b> → goes <b>straight</b>, undeviated.</span><span lang="ru" class="lang-content">Луч через <b>оптический центр</b> → проходит <b>прямо</b>, без преломления.</span></li>
+<li><b>3.</b> <span lang="kk" class="lang-content">Фокус арқылы өтетін сәуле — линзадан кейін оське <b>параллель</b> болады.</span><span lang="en" class="lang-content">Ray through <b>F</b> → exits <b>parallel</b> to axis.</span><span lang="ru" class="lang-content">Луч через <b>фокус F</b> → после линзы <b>параллельно</b> оси.</span></li>
+</ul>
+<p class="text-xs text-slate-600 mt-3 italic"><span lang="kk" class="lang-content">Бейне — 2 сәуленің қиылысуы. 3-сі — тексеру!</span><span lang="en" class="lang-content">Image = intersection of any 2 rays; 3rd is a check.</span><span lang="ru" class="lang-content">Изображение — пересечение 2-х лучей; 3-й — проверка.</span></p>
+</div>
 
-                            <td lang="en" class="lang-content"><strong>Oil</strong></td>
-                            <td lang="en" class="lang-content">q=46, Liquid, Heating</td>
-                            <td lang="en" class="lang-content">Exhaust fumes</td>
-                            <td lang="en" class="lang-content">Low</td>
-                            <td lang="en" class="lang-content">Medium</td>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center">
+<svg width="500" height="240" viewBox="0 0 500 240">
+<line x1="20" y1="120" x2="480" y2="120" stroke="#475569" stroke-width="1.5"/>
+<ellipse cx="250" cy="120" rx="15" ry="80" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="2"/>
+<circle cx="170" cy="120" r="3" fill="#475569"/>
+<text x="165" y="140" font-size="11" fill="#475569">F</text>
+<circle cx="330" cy="120" r="3" fill="#475569"/>
+<text x="325" y="140" font-size="11" fill="#475569">F</text>
+<circle cx="90" cy="120" r="3" fill="#475569"/>
+<text x="80" y="140" font-size="11" fill="#475569">2F</text>
+<circle cx="410" cy="120" r="3" fill="#475569"/>
+<text x="400" y="140" font-size="11" fill="#475569">2F</text>
+<line x1="90" y1="120" x2="90" y2="60" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="90,60 84,68 96,68" fill="#fbbf24"/>
+<text x="60" y="55" font-size="13" fill="#d97706" font-weight="bold">object</text>
+<line x1="90" y1="60" x2="250" y2="60" stroke="#dc2626" stroke-width="1.5"/>
+<line x1="250" y1="60" x2="410" y2="180" stroke="#dc2626" stroke-width="1.5"/>
+<line x1="90" y1="60" x2="410" y2="180" stroke="#16a34a" stroke-width="1.5"/>
+<line x1="90" y1="60" x2="250" y2="60" stroke-dasharray="2,2"/>
+<line x1="90" y1="60" x2="330" y2="120" stroke="#9333ea" stroke-width="1.5"/>
+<line x1="330" y1="120" x2="450" y2="180" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="3,2"/>
+<line x1="410" y1="120" x2="410" y2="180" stroke="#dc2626" stroke-width="3"/>
+<polygon points="410,180 404,172 416,172" fill="#dc2626"/>
+<text x="380" y="200" font-size="13" fill="#dc2626" font-weight="bold">image</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2"><span lang="kk" class="lang-content">d > 2F: бейне <b>нақты, төңкерілген, кіші</b></span><span lang="en" class="lang-content">d > 2F: <b>real, inverted, reduced</b></span><span lang="ru" class="lang-content">d > 2F: <b>действительное, перевёрнутое, уменьшенное</b></span></p>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content"><strong>Нефть</strong></td>
-                            <td lang="ru" class="lang-content">q=46, Жидкость, Топливо</td>
-                            <td lang="ru" class="lang-content">Выхлопные газы</td>
-                            <td lang="ru" class="lang-content">Низкая</td>
-                            <td lang="ru" class="lang-content">Средняя</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Көмір</strong></td>
-                            <td lang="kk" class="lang-content">q=27, Дешовы, Батарея</td>
-                            <td lang="kk" class="lang-content">Көбік газ (CO₂, SO₂)</td>
-                            <td lang="kk" class="lang-content">Өте төмен</td>
-                            <td lang="kk" class="lang-content">Төмен</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Бейне типтері</span>
+<span lang="en" class="lang-content">📊 Image types</span>
+<span lang="ru" class="lang-content">📊 Типы изображений</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t text-sm w-full">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Заттың орны</span><span lang="en" class="lang-content">Object position</span><span lang="ru" class="lang-content">Положение предмета</span></th>
+<th><span lang="kk" class="lang-content">Бейне</span><span lang="en" class="lang-content">Image</span><span lang="ru" class="lang-content">Изображение</span></th>
+<th><span lang="kk" class="lang-content">Қолдану</span><span lang="en" class="lang-content">Use</span><span lang="ru" class="lang-content">Применение</span></th>
+</tr></thead>
+<tbody>
+<tr><td>d > 2F</td><td><span lang="kk" class="lang-content">нақты, төңкерілген, <b>кіші</b></span><span lang="en" class="lang-content">real, inverted, <b>smaller</b></span><span lang="ru" class="lang-content">действ., перевёрн., <b>меньше</b></span></td><td>📷 <span lang="kk" class="lang-content">Фотокамера</span><span lang="en" class="lang-content">Camera</span><span lang="ru" class="lang-content">Фотоаппарат</span></td></tr>
+<tr><td>d = 2F</td><td><span lang="kk" class="lang-content">нақты, төңк., <b>тең</b></span><span lang="en" class="lang-content">real, inverted, <b>same size</b></span><span lang="ru" class="lang-content">действ., перевёрн., <b>равное</b></span></td><td><span lang="kk" class="lang-content">Көшіру</span><span lang="en" class="lang-content">1:1 copy</span><span lang="ru" class="lang-content">1:1 копия</span></td></tr>
+<tr><td>F < d < 2F</td><td><span lang="kk" class="lang-content">нақты, төңк., <b>үлкен</b></span><span lang="en" class="lang-content">real, inverted, <b>larger</b></span><span lang="ru" class="lang-content">действ., перевёрн., <b>больше</b></span></td><td>🎬 <span lang="kk" class="lang-content">Проектор</span><span lang="en" class="lang-content">Projector</span><span lang="ru" class="lang-content">Проектор</span></td></tr>
+<tr><td>d = F</td><td><span lang="kk" class="lang-content">бейне <b>жоқ</b> (∞-да)</span><span lang="en" class="lang-content"><b>no image</b> (at ∞)</span><span lang="ru" class="lang-content"><b>нет</b> (в ∞)</span></td><td><span lang="kk" class="lang-content">Прожектор</span><span lang="en" class="lang-content">Spotlight</span><span lang="ru" class="lang-content">Прожектор</span></td></tr>
+<tr class="bg-amber-50"><td>d < F</td><td><span lang="kk" class="lang-content"><b>жалған</b>, тіке, <b>үлкен</b></span><span lang="en" class="lang-content"><b>virtual</b>, upright, <b>magnified</b></span><span lang="ru" class="lang-content"><b>мнимое</b>, прямое, <b>увеличенное</b></span></td><td>🔍 <span lang="kk" class="lang-content">Лупа</span><span lang="en" class="lang-content">Magnifier</span><span lang="ru" class="lang-content">Лупа</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content"><strong>Coal</strong></td>
-                            <td lang="en" class="lang-content">q=27, Cheap, Abundant</td>
-                            <td lang="en" class="lang-content">Toxic gases (CO₂, SO₂)</td>
-                            <td lang="en" class="lang-content">Very low</td>
-                            <td lang="en" class="lang-content">Low</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-amber-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Заттан жинаушы линзаға дейін d = 30 см, F = 10 см. f-ті табыңыз.</span>
+<span lang="en" class="lang-content">Object 30 cm from converging lens, F = 10 cm. Find image distance f.</span>
+<span lang="ru" class="lang-content">Предмет на d = 30 см от собирающей линзы, F = 10 см. Найти f.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-amber-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>d = 30 см</li><li>F = 10 см</li><li>f — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-amber-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.05rem">
+1/f = 1/F − 1/d = 1/10 − 1/30
+<br/>1/f = 2/30 → f = <span class="num">15</span> см
+</div>
+<div class="badge badge-emerald mt-3">✅ f = 15 см (real, inverted)</div>
+</div></div></div>
+</section>
 
-                            <td lang="ru" class="lang-content"><strong>Уголь</strong></td>
-                            <td lang="ru" class="lang-content">q=27, Дешево, Много</td>
-                            <td lang="ru" class="lang-content">Ядовитые газы (CO₂, SO₂)</td>
-                            <td lang="ru" class="lang-content">Очень низкая</td>
-                            <td lang="ru" class="lang-content">Низкая</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Газ</strong></td>
-                            <td lang="kk" class="lang-content">q=55, Таза, Жылдам</td>
-                            <td lang="kk" class="lang-content">Су және CO₂</td>
-                            <td lang="kk" class="lang-content">Жоғары</td>
-                            <td lang="kk" class="lang-content">Орта</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-amber-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-amber-700 mb-2">1/F = 1/d + 1/f</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Линза формуласы</span><span lang="en" class="lang-content">Lens equation</span><span lang="ru" class="lang-content">Формула линзы</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔵</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">Жинаушы</span><span lang="en" class="lang-content">Converging</span><span lang="ru" class="lang-content">Собирающая</span></p>
+<p class="text-slate-700 text-base">F > 0, D > 0</p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔍</div>
+<p class="heading-font text-xl text-amber-700 mb-2">d < F</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Лупа → үлкейтілген</span><span lang="en" class="lang-content">Magnifier image</span><span lang="ru" class="lang-content">Лупа → увеличение</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content"><strong>Gas</strong></td>
-                            <td lang="en" class="lang-content">q=55, Clean, Fast</td>
-                            <td lang="en" class="lang-content">Water, CO₂ only</td>
-                            <td lang="en" class="lang-content">High</td>
-                            <td lang="en" class="lang-content">Medium</td>
-
-                            <td lang="ru" class="lang-content"><strong>Газ</strong></td>
-                            <td lang="ru" class="lang-content">q=55, Чистый, Быстро</td>
-                            <td lang="ru" class="lang-content">Только вода, CO₂</td>
-                            <td lang="ru" class="lang-content">Высокая</td>
-                            <td lang="ru" class="lang-content">Средняя</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>БиоЖАНАРМАЙ</strong></td>
-                            <td lang="kk" class="lang-content">q=17-20, Орамды, Жоғары</td>
-                            <td lang="kk" class="lang-content">CO₂ сабағы</td>
-                            <td lang="kk" class="lang-content">Өте жоғары</td>
-                            <td lang="kk" class="lang-content">Жоғары</td>
-
-                            <td lang="en" class="lang-content"><strong>Biofuel</strong></td>
-                            <td lang="en" class="lang-content">q=17-20, Renewable, Future</td>
-                            <td lang="en" class="lang-content">CO₂ neutral</td>
-                            <td lang="en" class="lang-content">Very high</td>
-                            <td lang="en" class="lang-content">High</td>
-
-                            <td lang="ru" class="lang-content"><strong>БиоЖАНАРМАЙ</strong></td>
-                            <td lang="ru" class="lang-content">q=17-20, Возобновимое, Будущее</td>
-                            <td lang="ru" class="lang-content">CO₂ нейтральное</td>
-                            <td lang="ru" class="lang-content">Очень высокая</td>
-                            <td lang="ru" class="lang-content">Высокая</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТОПЛИВДАРЫНЫҢ ОНДІКТІГІНІҢ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. ENERGY DENSITY</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Энергетическая плотность</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>📊 ОНДІКТІГІНІҢ ОРАНА:</strong> Газ (55 МДж/кг) > Мұнай (46 МДж/кг) > Көмір (27 МДж/кг) > БиоЖАНАРМАЙ (17-20 МДж/кг)</p>
-                <p lang="en" class="lang-content text-sm"><strong>📊 ENERGY RANKING:</strong> Gas (55 MJ/kg) > Oil (46 MJ/kg) > Coal (27 MJ/kg) > Biofuel (17-20 MJ/kg)</p>
-                <p lang="ru" class="lang-content text-sm"><strong>📊 РЕЙТИНГ ЭНЕРГИИ:</strong> Газ (55 МДж/кг) > Нефть (46 МДж/кг) > Уголь (27 МДж/кг) > Биотопливо (17-20 МДж/кг)</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>💡 ӨНГЕЛІ:</strong> Газ ең эффективті. Көмір дешово, батареяга. Биотопливо ағартылған болашақ. Елсі түктеген кейбір мәселе - өндіктігінең, экология, құндығы.</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>💡 INSIGHT:</strong> Gas most efficient. Coal cheap, abundant. Biofuel sustainable future. Each has pros/cons - energy, ecology, cost.</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>💡 ВЫВОД:</strong> Газ эффективнее. Уголь дешевле, много. Биотопливо устойчивое будущее. У каждого есть плюсы/минусы - энергия, экология, стоимость.</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fed2d8; border-radius: 1rem; border-top: 4px solid #ef4444;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-red-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-red-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-red-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Топливдарының әрқайсы өзге сипаттамасы болады. Газ - ең эффективті және таза, бірақ дәрітігі жоғары. Көмір - төмен құндығы, бірақ ластанды. Мұнай - орта, автомобиль. Биотопливо - болашақ, экологиялық. Выбор топливо - энергия, экология, экономика балансы!</p>
-            <p lang="en" class="lang-content text-sm">Each fuel has unique properties. Gas most efficient and clean, but expensive. Coal cheap, but pollutes. Oil medium, cars. Biofuel future, ecological. Choosing fuel balances energy, ecology, economics!</p>
-            <p lang="ru" class="lang-content text-sm">У каждого топлива уникальные свойства. Газ эффективнее и чище, но дорого. Уголь дешево, но загрязняет. Нефть среднее, автомобили. Биотопливо будущее, экологично. Выбор топлива балансирует энергию, экологию, экономику!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

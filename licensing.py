@@ -41,7 +41,29 @@ if getattr(sys, 'frozen', False):
 else:
     _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-LICENSE_FILE = os.path.join(_BASE_DIR, "license.dat")
+
+def _user_data_dir() -> str:
+    """Папка для хранения license.dat в пользовательском профиле.
+
+    Хранить лицензию рядом с EXE нельзя:
+      - после установки в Program Files папка read-only без админа;
+      - PyInstaller _MEIPASS — это временная распаковка, не для записи.
+    """
+    if sys.platform == 'win32':
+        base = os.environ.get('APPDATA') or os.path.expanduser('~')
+    elif sys.platform == 'darwin':
+        base = os.path.expanduser('~/Library/Application Support')
+    else:
+        base = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/.config')
+    d = os.path.join(base, 'InteractivePosters')
+    try:
+        os.makedirs(d, exist_ok=True)
+    except Exception:
+        pass
+    return d
+
+
+LICENSE_FILE = os.path.join(_user_data_dir(), "license.dat")
 
 # Максимально допустимый откат часов (часы). Если часы откатили больше —
 # считаем попыткой обхода.
@@ -93,7 +115,8 @@ def get_device_id() -> str:
 
 def validate_key(key_str: str) -> tuple:
     """
-    Проверяет HMAC-подпись ключа и декодирует payload.
+    Проверяет HMAC-подпись ключа с привязкой к device_id текущего устройства.
+    Ключ валиден ТОЛЬКО на том устройстве, для которого был сгенерирован.
     Возвращает (True, data_dict) или (False, error_message).
     """
     clean = key_str.replace('-', '').replace(' ', '').upper()
@@ -111,10 +134,13 @@ def validate_key(key_str: str) -> tuple:
 
     payload, sig = raw[:4], raw[4:]
     secret = _get_secret()
-    expected = hmac.new(secret, payload, hashlib.sha256).digest()[:8]
+    device_id = get_device_id()
+    # HMAC проверяет payload + device_id → ключ привязан к конкретному устройству
+    hmac_data = payload + device_id.encode()
+    expected = hmac.new(secret, hmac_data, hashlib.sha256).digest()[:8]
 
     if not hmac.compare_digest(sig, expected):
-        return False, "Неверный ключ активации"
+        return False, "Ключ не подходит для этого устройства"
 
     val = struct.unpack('>I', payload)[0]
     data = {

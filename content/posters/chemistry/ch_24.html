@@ -1,334 +1,288 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ауа - газдарының қоспасы</title>
+    <title>Воздух — смесь газов</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #451a03, #78350f, #1c1917); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #0c4a6e, #075985, #082f49);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #f59e0b; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #fbbf24; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #fbbf24; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #fbbf24; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #38bdf8; color: #082f49; border-color: transparent; font-weight: 800; }
+        .gas-btn { transition: all 0.2s; cursor: pointer; }
+        .gas-btn:hover { transform: translateY(-3px); }
+        .gas-btn.active { background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; }
+        .pie-segment { transition: all 0.3s; cursor: pointer; }
+        .pie-segment:hover { transform: scale(1.04); transform-origin: 200px 200px; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Ауа - Газдарының Қоспасы!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Air - Mixture of Gases!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Воздух - смесь газов!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">Ауа 78% N₂, 21% O₂, 1% Ar және басқа газдар. Құрамы өзгеріс емес (физикалық құрамдас). БАРЛЫҚ ӨМІРДІҢ НЕГІЗДЕРІ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">Air is 78% N₂, 21% O₂, 1% Ar and other gases. Composition varies by location (physical mixture). FOUNDATION OF ALL LIFE!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">Воздух состоит из 78% N₂, 21% O₂, 1% Ar и других газов. Состав варьирует (физическая смесь). ОСНОВА ВСЕЙ ЖИЗНИ!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-sky-400"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. АУА ҚҰРАМЫ - ДИАГРАММА</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. AIR COMPOSITION - DIAGRAM</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Состав воздуха - диаграмма</h2>
-
-            <div class="rule-card">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.2);">
-                        <p lang="kk" class="lang-content text-sm font-bold mb-3">📊 АУАНЫҢ ҚҰРАМЫ:</p>
-                        <svg viewBox="0 0 200 200" style="max-width: 200px; margin: 10px auto;">
-                            <!-- Nitrogen pie chart section -->
-                            <circle cx="100" cy="100" r="80" fill="#3b82f6" stroke="#333" stroke-width="2"/>
-                            <text x="100" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="white">N₂</text>
-                            <text x="100" y="80" text-anchor="middle" font-size="12" font-weight="bold" fill="white">78%</text>
-                            <!-- Oxygen section -->
-                            <circle cx="100" cy="100" r="80" fill="#ef4444" stroke="#333" stroke-width="2"/>
-                            <path d="M 100,20 A 80,80 0 0,1 140,30" fill="#ef4444"/>
-                            <text x="120" y="45" text-anchor="middle" font-size="12" font-weight="bold" fill="white">O₂ 21%</text>
-                            <!-- Argon and others -->
-                            <circle cx="100" cy="100" r="80" fill="#6366f1" stroke="#333" stroke-width="2"/>
-                            <path d="M 140,30 A 80,80 0 0,1 145,35" fill="#6366f1"/>
-                            <text x="150" y="50" text-anchor="middle" font-size="10" fill="white">Ar+etc 1%</text>
-                        </svg>
-
-                        <p lang="en" class="lang-content text-sm font-bold mb-3" style="margin-top: 15px;">📊 AIR COMPOSITION:</p>
-                        <p lang="en" class="lang-content text-sm">• 78% Nitrogen (N₂)</p>
-                        <p lang="en" class="lang-content text-sm">• 21% Oxygen (O₂)</p>
-                        <p lang="en" class="lang-content text-sm">• 1% Argon (Ar), CO₂, H₂O, etc</p>
-
-                        <p lang="ru" class="lang-content text-sm font-bold mb-3" style="margin-top: 15px;">📊 СОСТАВ ВОЗДУХА:</p>
-                        <p lang="ru" class="lang-content text-sm">• 78% Азот (N₂)</p>
-                        <p lang="ru" class="lang-content text-sm">• 21% Кислород (O₂)</p>
-                        <p lang="ru" class="lang-content text-sm">• 1% Аргон (Ar), CO₂, H₂O и т.д</p>
-                    </div>
-
-                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.2);">
-                        <p lang="kk" class="lang-content text-sm font-bold mb-3">⚗️ АУАНЫҢ ҚАСИЕТТЕРІ:</p>
-                        <p lang="kk" class="lang-content text-sm">✓ Түссіз газдар қоспасы</p>
-                        <p lang="kk" class="lang-content text-sm">✓ Иіссіз (немесе өте сұлақ иісі)</p>
-                        <p lang="kk" class="lang-content text-sm">✓ Физикалық құрамдас (химиялық емес)</p>
-                        <p lang="kk" class="lang-content text-sm">✓ Органикалық маса үшін өте қажет</p>
-
-                        <p lang="en" class="lang-content text-sm font-bold mb-3" style="margin-top: 15px;">⚗️ PROPERTIES OF AIR:</p>
-                        <p lang="en" class="lang-content text-sm">✓ Colorless gas mixture</p>
-                        <p lang="en" class="lang-content text-sm">✓ Odorless (or very faint smell)</p>
-                        <p lang="en" class="lang-content text-sm">✓ Physical mixture (not chemical)</p>
-                        <p lang="en" class="lang-content text-sm">✓ Essential for organic life</p>
-
-                        <p lang="ru" class="lang-content text-sm font-bold mb-3" style="margin-top: 15px;">⚗️ СВОЙСТВА ВОЗДУХА:</p>
-                        <p lang="ru" class="lang-content text-sm">✓ Бесцветная смесь газов</p>
-                        <p lang="ru" class="lang-content text-sm">✓ Без запаха (или очень слабый)</p>
-                        <p lang="ru" class="lang-content text-sm">✓ Физическая смесь (не химическая)</p>
-                        <p lang="ru" class="lang-content text-sm">✓ Необходима для органической жизни</p>
-                    </div>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-6 glass rounded-custom p-8 flex flex-col items-center">
+            <h2 id="pie-heading" class="heading-font text-xl mb-4 opacity-80 uppercase tracking-wider self-start"></h2>
+            <svg viewBox="0 0 400 400" class="w-full max-w-[400px]">
+                <circle cx="200" cy="200" r="160" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+                <path id="seg-N2" class="pie-segment" onclick="selectGas('N2')" d="" fill="#38bdf8" stroke="#082f49" stroke-width="2"/>
+                <path id="seg-O2" class="pie-segment" onclick="selectGas('O2')" d="" fill="#ef4444" stroke="#082f49" stroke-width="2"/>
+                <path id="seg-Ar" class="pie-segment" onclick="selectGas('Ar')" d="" fill="#a855f7" stroke="#082f49" stroke-width="2"/>
+                <path id="seg-CO2" class="pie-segment" onclick="selectGas('CO2')" d="" fill="#f59e0b" stroke="#082f49" stroke-width="2"/>
+                <circle cx="200" cy="200" r="60" fill="#082f49" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                <text x="200" y="195" text-anchor="middle" fill="white" font-size="14" font-weight="bold" id="svg-center-title"></text>
+                <text x="200" y="215" text-anchor="middle" fill="#38bdf8" font-size="12" id="svg-center-sub"></text>
+            </svg>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full mt-6">
+                <div onclick="selectGas('N2')" id="gas-N2" class="gas-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-lg font-bold" style="color:#38bdf8">N₂</div>
+                    <div class="text-xs text-white/70" id="gas-N2-pct">78%</div>
+                </div>
+                <div onclick="selectGas('O2')" id="gas-O2" class="gas-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-lg font-bold" style="color:#ef4444">O₂</div>
+                    <div class="text-xs text-white/70" id="gas-O2-pct">21%</div>
+                </div>
+                <div onclick="selectGas('Ar')" id="gas-Ar" class="gas-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-lg font-bold" style="color:#a855f7">Ar</div>
+                    <div class="text-xs text-white/70" id="gas-Ar-pct">0,93%</div>
+                </div>
+                <div onclick="selectGas('CO2')" id="gas-CO2" class="gas-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-lg font-bold" style="color:#f59e0b">CO₂</div>
+                    <div class="text-xs text-white/70" id="gas-CO2-pct">0,04%</div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. АУА ҚҰРАМЫНДАҒЫ КОМПОНЕНТТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. COMPONENTS IN AIR COMPOSITION</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Компоненты в составе воздуха</h2>
+        <div class="lg:col-span-6 glass rounded-custom p-8 flex flex-col border-l-4 border-sky-500">
+            <div id="info-icon" class="text-5xl mb-4">💨</div>
+            <h3 id="info-title" class="heading-font text-3xl mb-4 text-sky-300"></h3>
+            <p id="info-text" class="text-lg leading-relaxed text-white/80 mb-6"></p>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ГАЗ</th>
-                            <th lang="kk" class="lang-content">ПАЙЫЗЫ</th>
-                            <th lang="kk" class="lang-content">ФУНКЦИЯСЫ</th>
-                            <th lang="kk" class="lang-content">МӘНІ</th>
-
-                            <th lang="en" class="lang-content">GAS</th>
-                            <th lang="en" class="lang-content">PERCENTAGE</th>
-                            <th lang="en" class="lang-content">FUNCTION</th>
-                            <th lang="en" class="lang-content">VALUE</th>
-
-                            <th lang="ru" class="lang-content">ГАЗ</th>
-                            <th lang="ru" class="lang-content">ПРОЦЕНТ</th>
-                            <th lang="ru" class="lang-content">ФУНКЦИЯ</th>
-                            <th lang="ru" class="lang-content">ЗНАЧЕНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>N₂</strong> (азот)</td>
-                            <td lang="kk" class="lang-content"><strong>78%</strong></td>
-                            <td lang="kk" class="lang-content">Өмір үшін қажет емес (инерт)</td>
-                            <td lang="kk" class="lang-content">Білге жүргізеді</td>
-
-                            <td lang="en" class="lang-content"><strong>N₂</strong> (nitrogen)</td>
-                            <td lang="en" class="lang-content"><strong>78%</strong></td>
-                            <td lang="en" class="lang-content">Not needed for life (inert)</td>
-                            <td lang="en" class="lang-content">Dilutes oxygen</td>
-
-                            <td lang="ru" class="lang-content"><strong>N₂</strong> (азот)</td>
-                            <td lang="ru" class="lang-content"><strong>78%</strong></td>
-                            <td lang="ru" class="lang-content">Не нужен для жизни (инертный)</td>
-                            <td lang="ru" class="lang-content">Разбавляет кислород</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>O₂</strong> (оттегі)</td>
-                            <td lang="kk" class="lang-content"><strong>21%</strong></td>
-                            <td lang="kk" class="lang-content">Тыныштыру үшін қажет</td>
-                            <td lang="kk" class="lang-content">Өмір үшін өте қажет!</td>
-
-                            <td lang="en" class="lang-content"><strong>O₂</strong> (oxygen)</td>
-                            <td lang="en" class="lang-content"><strong>21%</strong></td>
-                            <td lang="en" class="lang-content">Needed for breathing</td>
-                            <td lang="en" class="lang-content">Essential for life!</td>
-
-                            <td lang="ru" class="lang-content"><strong>O₂</strong> (кислород)</td>
-                            <td lang="ru" class="lang-content"><strong>21%</strong></td>
-                            <td lang="ru" class="lang-content">Нужен для дыхания</td>
-                            <td lang="ru" class="lang-content">Необходим для жизни!</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Ar</strong> (аргон)</td>
-                            <td lang="kk" class="lang-content"><strong>0.93%</strong></td>
-                            <td lang="kk" class="lang-content">Инерт газ</td>
-                            <td lang="kk" class="lang-content">Шамдағы істей іңгібі</td>
-
-                            <td lang="en" class="lang-content"><strong>Ar</strong> (argon)</td>
-                            <td lang="en" class="lang-content"><strong>0.93%</strong></td>
-                            <td lang="en" class="lang-content">Inert gas</td>
-                            <td lang="en" class="lang-content">Used in lamps</td>
-
-                            <td lang="ru" class="lang-content"><strong>Ar</strong> (аргон)</td>
-                            <td lang="ru" class="lang-content"><strong>0.93%</strong></td>
-                            <td lang="ru" class="lang-content">Инертный газ</td>
-                            <td lang="ru" class="lang-content">Используется в лампах</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>CO₂</strong></td>
-                            <td lang="kk" class="lang-content"><strong>0.03%</strong></td>
-                            <td lang="kk" class="lang-content">Фотосинтездің үшін</td>
-                            <td lang="kk" class="lang-content">Өндіктігіне ұлығап</td>
-
-                            <td lang="en" class="lang-content"><strong>CO₂</strong></td>
-                            <td lang="en" class="lang-content"><strong>0.03%</strong></td>
-                            <td lang="en" class="lang-content">Photosynthesis</td>
-                            <td lang="en" class="lang-content">Climate importance</td>
-
-                            <td lang="ru" class="lang-content"><strong>CO₂</strong></td>
-                            <td lang="ru" class="lang-content"><strong>0.03%</strong></td>
-                            <td lang="ru" class="lang-content">Фотосинтез</td>
-                            <td lang="ru" class="lang-content">Климатическое значение</td>
-                        </tr>
-                    </table>
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop1-label"></div>
+                    <div id="prop1-value" class="text-base font-bold text-sky-300"></div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop2-label"></div>
+                    <div id="prop2-value" class="text-base font-bold text-sky-300"></div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop3-label"></div>
+                    <div id="prop3-value" class="text-base font-bold text-sky-300"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </main>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Ауа - физикалық құрамдас (химиялық емес): 78% N₂, 21% O₂, 1% Ar және басқалар. Оттегі өмір үшін өте қажет. Азот инерт, тыныштыруды қажет емес. CO₂ өндіктіліге ұлығап болады. Ауа барлық органикалық өмірдің негіздері!</p>
-            <p lang="en" class="lang-content text-sm">Air - physical mixture (not chemical): 78% N₂, 21% O₂, 1% Ar and others. Oxygen is essential for life. Nitrogen is inert, not needed for breathing. CO₂ affects climate. Air is the foundation of all organic life!</p>
-            <p lang="ru" class="lang-content text-sm">Воздух - физическая смесь (не химическая): 78% N₂, 21% O₂, 1% Ar и др. Кислород необходим для жизни. Азот инертен, не нужен для дыхания. CO₂ влияет на климат. Воздух - основание всей органической жизни!</p>
-        </footer>
-    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-sky-500/10 transition-colors">
+            <div class="w-14 h-14 bg-sky-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🌍</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-sky-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-sky-500/10 transition-colors">
+            <div class="w-14 h-14 bg-sky-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🌡️</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-sky-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-sky-500/10 transition-colors">
+            <div class="w-14 h-14 bg-sky-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">♻️</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-sky-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-sky-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
+        const gases = ['N2', 'O2', 'Ar', 'CO2'];
+        const fractions = { N2: 0.78, O2: 0.21, Ar: 0.0093, CO2: 0.0007 };
+
+        const translations = {
+            ru: {
+                title: "Воздух — смесь газов",
+                subtitle: "Невидимая оболочка, без которой нет жизни",
+                pieHeading: "Состав воздуха",
+                centerTitle: "Воздух",
+                centerSub: "100%",
+                gases: {
+                    N2: { icon: "🌫️", title: "Азот N₂", text: "Главный компонент воздуха — 78%. Инертный, не поддерживает горение и дыхание. Нужен растениям как сырьё для белков (через азотфиксирующие бактерии).", prop1Label: "Доля", prop1: "78%", prop2Label: "M(г/моль)", prop2: "28", prop3Label: "Свойство", prop3: "Инертный" },
+                    O2: { icon: "🔥", title: "Кислород O₂", text: "21% воздуха. Поддерживает дыхание и горение. Окислитель практически во всех реакциях живой клетки. Без него животная жизнь невозможна.", prop1Label: "Доля", prop1: "21%", prop2Label: "M(г/моль)", prop2: "32", prop3Label: "Свойство", prop3: "Окислитель" },
+                    Ar: { icon: "💡", title: "Аргон Ar", text: "Около 1% воздуха. Благородный (инертный) газ — не вступает в реакции. Используется в лампах накаливания, сварке, упаковке продуктов.", prop1Label: "Доля", prop1: "0,93%", prop2Label: "M(г/моль)", prop2: "40", prop3Label: "Свойство", prop3: "Благородный" },
+                    CO2: { icon: "🌱", title: "Углекислый газ CO₂", text: "Всего 0,04% — но критичный для жизни. Сырьё фотосинтеза у растений. При избытке усиливает парниковый эффект и нагревает планету.", prop1Label: "Доля", prop1: "0,04%", prop2Label: "M(г/моль)", prop2: "44", prop3Label: "Свойство", prop3: "Парниковый" }
+                },
+                cards: [
+                    { title: "Что такое воздух", desc: "Природная смесь газов, окружающая Землю. Не имеет постоянной химической формулы, потому что это именно смесь, а не вещество." },
+                    { title: "Физические свойства", desc: "Бесцветный, без запаха и вкуса. Имеет массу (1 м³ ≈ 1,29 кг при 0 °C). С высотой плотность уменьшается." },
+                    { title: "Значение", desc: "Атмосфера защищает от метеоритов и УФ-излучения, регулирует температуру, переносит водяной пар и обеспечивает дыхание всех живых существ." }
+                ],
+                quote: "«Атмосфера — это тонкая голубая кожура на яблоке Земли»",
+                author: "Карл Саган"
+            },
+            kz: {
+                title: "Ауа — газдар қоспасы",
+                subtitle: "Тіршіліксіз болмайтын көрінбейтін қабық",
+                pieHeading: "Ауа құрамы",
+                centerTitle: "Ауа",
+                centerSub: "100%",
+                gases: {
+                    N2: { icon: "🌫️", title: "Азот N₂", text: "Ауаның негізгі бөлігі — 78%. Инертті, жану мен тыныс алуды қолдамайды. Өсімдіктерге белок шикізаты ретінде керек (азот байланыстырушы бактериялар арқылы).", prop1Label: "Үлесі", prop1: "78%", prop2Label: "M(г/моль)", prop2: "28", prop3Label: "Қасиеті", prop3: "Инертті" },
+                    O2: { icon: "🔥", title: "Оттегі O₂", text: "Ауаның 21%-ы. Тыныс алу мен жануды қолдайды. Тірі жасушаның барлық дерлік реакцияларында тотықтырғыш. Онсыз жануарлар тіршілігі мүмкін емес.", prop1Label: "Үлесі", prop1: "21%", prop2Label: "M(г/моль)", prop2: "32", prop3Label: "Қасиеті", prop3: "Тотықтырғыш" },
+                    Ar: { icon: "💡", title: "Аргон Ar", text: "Ауаның шамамен 1%-ы. Асыл (инертті) газ — реакцияларға түспейді. Қыздыру шамдарында, дәнекерлеуде, өнім орамында қолданылады.", prop1Label: "Үлесі", prop1: "0,93%", prop2Label: "M(г/моль)", prop2: "40", prop3Label: "Қасиеті", prop3: "Асыл" },
+                    CO2: { icon: "🌱", title: "Көмірқышқыл газ CO₂", text: "Тек 0,04% — бірақ тіршілікке шешуші. Өсімдіктер фотосинтезінің шикізаты. Артық мөлшерде парниктік әсерді күшейтеді.", prop1Label: "Үлесі", prop1: "0,04%", prop2Label: "M(г/моль)", prop2: "44", prop3Label: "Қасиеті", prop3: "Парниктік" }
+                },
+                cards: [
+                    { title: "Ауа дегеніміз не", desc: "Жерді қоршаған табиғи газдар қоспасы. Тұрақты химиялық формуласы жоқ, өйткені бұл — зат емес, дәл қоспа." },
+                    { title: "Физикалық қасиеттері", desc: "Түссіз, иіссіз, дәмсіз. Массасы бар (0 °C-та 1 м³ ≈ 1,29 кг). Биіктікке байланысты тығыздығы азаяды." },
+                    { title: "Маңызы", desc: "Атмосфера метеориттер мен УК-сәулелерден қорғайды, температураны реттейді, су буын тасымалдайды және тіршілікке тыныс алуды қамтамасыз етеді." }
+                ],
+                quote: "«Атмосфера — Жер алмасының жұқа көк қабығы»",
+                author: "Карл Саган"
+            },
+            en: {
+                title: "Air — a mixture of gases",
+                subtitle: "The invisible shell that makes life possible",
+                pieHeading: "Composition of air",
+                centerTitle: "Air",
+                centerSub: "100%",
+                gases: {
+                    N2: { icon: "🌫️", title: "Nitrogen N₂", text: "The main part of air — 78%. Inert, does not support burning or breathing. Plants need it for proteins (via nitrogen-fixing bacteria).", prop1Label: "Share", prop1: "78%", prop2Label: "M(g/mol)", prop2: "28", prop3Label: "Property", prop3: "Inert" },
+                    O2: { icon: "🔥", title: "Oxygen O₂", text: "21% of air. Supports breathing and combustion. The oxidiser in nearly all living-cell reactions. Animal life is impossible without it.", prop1Label: "Share", prop1: "21%", prop2Label: "M(g/mol)", prop2: "32", prop3Label: "Property", prop3: "Oxidiser" },
+                    Ar: { icon: "💡", title: "Argon Ar", text: "About 1% of air. A noble (inert) gas — does not react. Used in light bulbs, welding and food packaging.", prop1Label: "Share", prop1: "0.93%", prop2Label: "M(g/mol)", prop2: "40", prop3Label: "Property", prop3: "Noble" },
+                    CO2: { icon: "🌱", title: "Carbon dioxide CO₂", text: "Only 0.04% — but vital. Raw material for photosynthesis. In excess it strengthens the greenhouse effect.", prop1Label: "Share", prop1: "0.04%", prop2Label: "M(g/mol)", prop2: "44", prop3Label: "Property", prop3: "Greenhouse" }
+                },
+                cards: [
+                    { title: "What is air", desc: "A natural mixture of gases surrounding Earth. It has no fixed chemical formula because it is a mixture, not a single substance." },
+                    { title: "Physical properties", desc: "Colourless, odourless, tasteless. Has mass (1 m³ ≈ 1.29 kg at 0 °C). Density decreases with altitude." },
+                    { title: "Importance", desc: "The atmosphere shields us from meteorites and UV, regulates temperature, transports water vapour and provides breath for all living things." }
+                ],
+                quote: "«The atmosphere is a thin blue skin on the apple of Earth»",
+                author: "Carl Sagan"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentGas = 'N2';
+
+        function polarToCart(cx,cy,r,a){return [cx + r*Math.cos(a-Math.PI/2), cy + r*Math.sin(a-Math.PI/2)];}
+        function arcPath(cx,cy,r,startA,endA){
+            const [x1,y1]=polarToCart(cx,cy,r,startA);
+            const [x2,y2]=polarToCart(cx,cy,r,endA);
+            const large=(endA-startA)>Math.PI?1:0;
+            return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
+        }
+
+        function drawPie() {
+            let cur = 0;
+            const cx = 200, cy = 200, r = 160;
+            gases.forEach(g => {
+                const start = cur * 2 * Math.PI;
+                cur += fractions[g];
+                const end = cur * 2 * Math.PI;
+                document.getElementById('seg-' + g).setAttribute('d', arcPath(cx, cy, r, start, end));
             });
         }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
+        }
+
+        function selectGas(g) {
+            currentGas = g;
+            document.querySelectorAll('.gas-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('gas-' + g).classList.add('active');
+            updateInfo();
+        }
+
+        function updateInfo() {
+            const t = translations[currentLang];
+            const g = t.gases[currentGas];
+            document.getElementById('info-icon').textContent = g.icon;
+            document.getElementById('info-title').textContent = g.title;
+            document.getElementById('info-text').textContent = g.text;
+            document.getElementById('prop1-label').textContent = g.prop1Label;
+            document.getElementById('prop1-value').textContent = g.prop1;
+            document.getElementById('prop2-label').textContent = g.prop2Label;
+            document.getElementById('prop2-value').textContent = g.prop2;
+            document.getElementById('prop3-label').textContent = g.prop3Label;
+            document.getElementById('prop3-value').textContent = g.prop3;
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('pie-heading').textContent = t.pieHeading;
+            document.getElementById('svg-center-title').textContent = t.centerTitle;
+            document.getElementById('svg-center-sub').textContent = t.centerSub;
+            updateInfo();
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            drawPie();
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            selectGas('N2');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -337,128 +291,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

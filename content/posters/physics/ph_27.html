@@ -1,395 +1,195 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Архимед күші</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #eff6ff; /* blue-50 */
-            overflow-x: hidden;
-            color: #1e3a8a; /* blue-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Blue Theme */
-        .header-card {
-            background-color: #2563eb; /* blue-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #1e40af; /* blue-800 */
-            border-bottom: 3px solid #93c5fd; /* blue-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #dbeafe; /* blue-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #1d4ed8; /* blue-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #2563eb; /* blue-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #2563eb;
-            background-color: #ffffff;
-            color: #2563eb;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #eff6ff;
-        }
-        .lang-btn.active {
-            background-color: #2563eb;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #bfdbfe;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #1e3a8a;
-            text-anchor: middle;
-        }
-        .svg-water {
-            fill: #dbeafe; /* blue-100 */
-            opacity: 0.8;
-        }
-        .svg-force-arrow-up {
-            stroke: #dc2626; /* Red for Buoyant Force */
-            stroke-width: 4;
-            marker-end: url(#arrowhead-red);
-        }
-        .svg-force-arrow-down {
-            stroke: #1e3a8a; /* Blue for Weight/Pressure */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-blue);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мощность</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-blue-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жұмыс және энергия</span>
+<span lang="en" class="lang-content">Grade 8 · Work and energy</span>
+<span lang="ru" class="lang-content">8 класс · Работа и энергия</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Қуат</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Power</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Мощность</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Қуат деген не?</span>
+<span lang="en" class="lang-content">⚡ What is power?</span>
+<span lang="ru" class="lang-content">⚡ Что такое мощность?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Жүк машинасы мен жеңіл автокөлік бір сатылы жоғарыға бірдей жүкті тасыса — <b>жұмыс бірдей</b>. Бірақ жүк машинасы оны <b>1 минутта</b> жасайды, ал адам <b>1 сағатта</b>. Кім «күштірек»? Бұл сұраққа жауап беретін шама — <b class="text-indigo-700">қуат</b>. Қуат — <b>бірлік уақытта жасалған жұмысты</b> көрсетеді. Қанша тез — сонша қуатты.</span>
+<span lang="en" class="lang-content">A truck and a man can carry the same load to the same height — they do <b>equal work</b>. But the truck takes <b>1 minute</b>, the man — <b>1 hour</b>. Who is «stronger»? The quantity that answers this is <b class="text-indigo-700">power</b>. Power shows how much <b>work is done per unit of time</b>. Faster = more powerful.</span>
+<span lang="ru" class="lang-content">Грузовик и человек могут поднять одинаковый груз на одну высоту — <b>работа одинакова</b>. Но грузовик делает это за <b>1 минуту</b>, человек — за <b>1 час</b>. Кто «сильнее»? Ответ даёт <b class="text-indigo-700">мощность</b>. Мощность показывает, какая <b>работа выполняется за единицу времени</b>. Быстрее = мощнее.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">АРХИМЕД КҮШІ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ARCHIMEDES' FORCE</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">АРХИМЕДОВА СИЛА</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">📐 Қуат формуласы:</span>
+<span lang="en" class="lang-content">📐 Power formula:</span>
+<span lang="ru" class="lang-content">📐 Формула мощности:</span></p>
+<div class="formula text-center" style="font-size:1.7rem">
+<span class="var">N</span> = <span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1.3rem"><span class="var" style="display:block;border-bottom:2px solid #fde68a">A</span><span class="var" style="display:block">t</span></span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">N</b> — қуат, <span class="unit-pill">Вт</span> (ватт)</span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">P</b> — power, <span class="unit-pill">W</span> (watt)</span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">N</b> — мощность, <span class="unit-pill">Вт</span> (ватт)</span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">A</b> — жұмыс, <span class="unit-pill">Дж</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">A</b> — work, <span class="unit-pill">J</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">A</b> — работа, <span class="unit-pill">Дж</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">t</b> — уақыт, <span class="unit-pill">с</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">t</b> — time, <span class="unit-pill">s</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">t</b> — время, <span class="unit-pill">с</span></span>
+</p>
+</div>
+<p class="text-xs text-slate-600 mt-3 text-center"><b>1 Вт = 1 Дж/с</b> · <span lang="kk" class="lang-content">шотланд инженері Джеймс Уатт құрметіне</span><span lang="en" class="lang-content">named after Scottish engineer James Watt</span><span lang="ru" class="lang-content">в честь Джеймса Уатта</span></p>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-blue-100">Сұйықтық пен газдың кері итеруші күші.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-blue-100">The upward buoyant force of fluids.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-blue-100">Выталкивающая сила жидкости и газа.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-3">N = A/t</p>
+<div class="formula text-center" style="font-size:1rem">
+1 кВт = <span class="num">1000</span> Вт
+<br/>1 МВт = <span class="num">10⁶</span> Вт
+<br/>1 ат.с. ≈ <span class="num">736</span> Вт
+</div>
+<p class="text-center text-slate-700 text-sm mt-3">
+<span lang="kk" class="lang-content">Жиі қолданылатын бірліктер</span>
+<span lang="en" class="lang-content">Common units</span>
+<span lang="ru" class="lang-content">Часто употребляемые</span></p>
+</div></div></section>
 
-        <!-- 1. КҮШТІҢ ПАЙДА БОЛУ СЕБЕБІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Неге денелер су бетіне шығады?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Why do objects float up?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Почему тела всплывают?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🐎 Аттың күші — тарихи бірлік</span>
+<span lang="en" class="lang-content">🐎 Horsepower — a historical unit</span>
+<span lang="ru" class="lang-content">🐎 Лошадиная сила — исторически</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content">XVIII ғасырда <b>Джеймс Уатт</b> бу машинасын ойлап тауып, оны сатушы ретінде қаншасы аттың жұмысын алмастыратынын көрсету керек болды. Ол шахта тауып аттың 1 минутта 33 000 фунт-футты жасайтынын анықтап, бұл бірлікке <b>«ат күші» (ат.с.)</b> деп атап шықты. Бір ат күші ≈ <b>736 Вт</b>. Қазір бұл бірлік автомобильдер мен қозғалтқыштарда қолданылады.</span>
+<span lang="en" class="lang-content">In the 18th century <b>James Watt</b> needed to advertise his steam engine by showing how many horses it replaced. He measured that a horse does 33 000 foot-pounds per minute and named this unit <b>«horsepower» (hp)</b>. One hp ≈ <b>736 W</b>. Today this unit is used in cars and engines.</span>
+<span lang="ru" class="lang-content">В XVIII веке <b>Джеймсу Уатту</b>, продававшему свои паровые машины, нужно было показать, сколько лошадей они заменяют. Он измерил, что лошадь выполняет 33 000 фунт-футов в минуту, и назвал этот труд <b>«лошадиной силой» (л.с.)</b>. 1 л.с. ≈ <b>736 Вт</b>. Сегодня применяется для авто и двигателей.</span></p>
+</div>
+</section>
 
-            <div class="rule-card border-t-blue-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Сұйықтық ішінде қысым тереңдікке байланысты өзгереді. Дененің <strong>төменгі жағына</strong> түсетін қысым жоғарғы жағына қарағанда <strong>көп</strong> болады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Pressure increases with depth. The pressure on the <strong>bottom</strong> of the object is <strong>greater</strong> than on the top.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Давление в жидкости растет с глубиной. Давление на <strong>нижнюю грань</strong> тела <strong>больше</strong>, чем на верхнюю.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Айналадағы қуаттар</span>
+<span lang="en" class="lang-content">📊 Powers around us</span>
+<span lang="ru" class="lang-content">📊 Мощности вокруг нас</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Объект</span><span lang="en" class="lang-content">Object</span><span lang="ru" class="lang-content">Объект</span></th>
+<th><span lang="kk" class="lang-content">Қуат</span><span lang="en" class="lang-content">Power</span><span lang="ru" class="lang-content">Мощность</span></th>
+<th><span lang="kk" class="lang-content">Ескерту</span><span lang="en" class="lang-content">Note</span><span lang="ru" class="lang-content">Примечание</span></th>
+</tr></thead>
+<tbody>
+<tr><td>💡 <span lang="kk" class="lang-content">LED шамы</span><span lang="en" class="lang-content">LED bulb</span><span lang="ru" class="lang-content">LED-лампа</span></td><td>5–15 Вт</td><td><span lang="kk" class="lang-content">үнемді</span><span lang="en" class="lang-content">efficient</span><span lang="ru" class="lang-content">экономно</span></td></tr>
+<tr><td>📱 <span lang="kk" class="lang-content">Смартфон зарядтаған кезде</span><span lang="en" class="lang-content">Phone charging</span><span lang="ru" class="lang-content">Зарядка телефона</span></td><td>10–25 Вт</td><td>—</td></tr>
+<tr><td>👤 <span lang="kk" class="lang-content">Адам тыныш күйде</span><span lang="en" class="lang-content">Person at rest</span><span lang="ru" class="lang-content">Человек в покое</span></td><td>≈ 100 Вт</td><td><span lang="kk" class="lang-content">метаболизм</span><span lang="en" class="lang-content">metabolism</span><span lang="ru" class="lang-content">обмен веществ</span></td></tr>
+<tr><td>💻 <span lang="kk" class="lang-content">Ноутбук</span><span lang="en" class="lang-content">Laptop</span><span lang="ru" class="lang-content">Ноутбук</span></td><td>50–100 Вт</td><td>—</td></tr>
+<tr><td>🔥 <span lang="kk" class="lang-content">Электр шайнегі</span><span lang="en" class="lang-content">Electric kettle</span><span lang="ru" class="lang-content">Электрочайник</span></td><td>2 кВт</td><td><span lang="kk" class="lang-content">кЖ-ды жылдам жылытады</span><span lang="en" class="lang-content">fast heating</span><span lang="ru" class="lang-content">быстрый нагрев</span></td></tr>
+<tr><td>🏃 <span lang="kk" class="lang-content">Жүгіруші</span><span lang="en" class="lang-content">Runner</span><span lang="ru" class="lang-content">Бегун</span></td><td>700–1000 Вт</td><td><span lang="kk" class="lang-content">қысқа мерзімде</span><span lang="en" class="lang-content">short time</span><span lang="ru" class="lang-content">кратко</span></td></tr>
+<tr><td>🐎 <span lang="kk" class="lang-content">Ат</span><span lang="en" class="lang-content">Horse</span><span lang="ru" class="lang-content">Лошадь</span></td><td>≈ 750 Вт</td><td>1 ат күші</td></tr>
+<tr><td>🚗 <span lang="kk" class="lang-content">Автомобиль</span><span lang="en" class="lang-content">Car</span><span lang="ru" class="lang-content">Автомобиль</span></td><td>50–150 кВт</td><td>70–200 ат.с.</td></tr>
+<tr><td>🚂 <span lang="kk" class="lang-content">Электровоз</span><span lang="en" class="lang-content">Electric loco</span><span lang="ru" class="lang-content">Электровоз</span></td><td>5–10 МВт</td><td>—</td></tr>
+<tr><td>🚀 <span lang="kk" class="lang-content">Зымыран «Saturn V»</span><span lang="en" class="lang-content">Saturn V rocket</span><span lang="ru" class="lang-content">Ракета Saturn V</span></td><td>190 ГВт</td><td><span lang="kk" class="lang-content">барлық ұлы күштер</span><span lang="en" class="lang-content">enormous!</span><span lang="ru" class="lang-content">колоссально</span></td></tr>
+<tr><td>☀️ <span lang="kk" class="lang-content">Күн (Жерге)</span><span lang="en" class="lang-content">Sun (on Earth)</span><span lang="ru" class="lang-content">Солнце (на Землю)</span></td><td>1,7·10¹⁷ Вт</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+</section>
 
-                <!-- Illustration 1: Pressure Difference -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#1e3a8a" />
-                        </marker>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚀 Қуат пен жылдамдық байланысы</span>
+<span lang="en" class="lang-content">🚀 Power & velocity link</span>
+<span lang="ru" class="lang-content">🚀 Связь мощности и скорости</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Тұрақты жылдамдықпен қозғалатын дене үшін қуатты тағы бір формуламен есептеуге болады. Жұмыс A = F·s, ал s = v·t, демек:</span>
+<span lang="en" class="lang-content">For a body moving at constant velocity we can express power differently. Work A = F·s and s = v·t, so:</span>
+<span lang="ru" class="lang-content">Для тела, движущегося с постоянной скоростью, мощность можно выразить иначе. Работа A = F·s, путь s = v·t, значит:</span></p>
+<div class="formula text-center" style="font-size:1.7rem">
+<span class="var">N</span> = <span class="var">F</span> · <span class="var">v</span>
+</div>
+<p class="text-slate-700 text-base mt-4">
+<span lang="kk" class="lang-content"><b>Маңызды салдары:</b> автомобиль <b>максималды жылдамдыққа</b> қозғалғанда барлық қуаты үйкеліс пен ауаның кедергісіне жұмсалады. Көп жылдамдық керек болса — көп қуат қажет. Жылдамдықты 2 есе арттыру үшін қуатты <b>2 есе</b> емес, шамамен <b>4–8 есе</b> арттыру керек!</span>
+<span lang="en" class="lang-content"><b>Important:</b> at <b>top speed</b>, all engine power is used to overcome friction and air resistance. Doubling speed requires <b>4–8 times more power</b>, not just 2×!</span>
+<span lang="ru" class="lang-content"><b>Важно:</b> на <b>максимальной скорости</b> вся мощность двигателя уходит на преодоление трения и сопротивления воздуха. Удвоить скорость — нужно увеличить мощность в <b>4–8 раз</b>, а не в 2!</span></p>
+</div>
+</section>
 
-                    <!-- Water -->
-                    <rect x="50" y="20" width="300" height="160" fill="#e0f2fe" stroke="#3b82f6" stroke-width="2"/>
-                    <path d="M 50 30 Q 80 20, 120 30 T 200 30 T 280 30 T 350 30" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.6"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Көтергіш 200 кг массалы жүкті 10 м биіктікке 20 секундта көтерді. Көтергіштің қуатын табыңыз. (g = 10 Н/кг)</span>
+<span lang="en" class="lang-content">📘 Problem: A lift raised a 200 kg load to 10 m in 20 s. Find the lift's power. (g = 10 N/kg)</span>
+<span lang="ru" class="lang-content">📘 Задача: Подъёмник поднял груз массой 200 кг на высоту 10 м за 20 с. Найти мощность подъёмника. (g = 10 Н/кг)</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m = 200 <span class="unit-pill">кг</span></li>
+<li>h = 10 <span class="unit-pill">м</span></li>
+<li>t = 20 <span class="unit-pill">с</span></li>
+<li>g = 10 <span class="unit-pill">Н/кг</span></li>
+<li>N — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+<span class="var">F</span> = <span class="var">mg</span> = <span class="num">200</span>·<span class="num">10</span> = <span class="num">2000</span> Н
+<br/><span class="var">A</span> = <span class="var">Fh</span> = <span class="num">2000</span>·<span class="num">10</span> = <span class="num">20 000</span> Дж
+<br/><span class="var">N</span> = <span class="var">A</span>/<span class="var">t</span> = <span class="num">20 000</span>/<span class="num">20</span>
+<br/><span class="var">N</span> = <span class="num">1000</span> <span class="unit">Вт</span> = <span class="num">1</span> <span class="unit">кВт</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ 1000 Вт = 1 кВт</span><span lang="en" class="lang-content">✅ 1000 W = 1 kW</span><span lang="ru" class="lang-content">✅ 1000 Вт = 1 кВт</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <!-- Submerged Cube -->
-                    <rect x="150" y="60" width="100" height="80" fill="#fcd34d" stroke="#d97706" stroke-width="2"/>
-                    <text x="200" y="105" class="svg-label" fill="#b45309" font-weight="bold">BODY</text>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">N = A/t</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жұмыстың уақытқа қатынасы</span><span lang="en" class="lang-content">Work per time</span><span lang="ru" class="lang-content">Работа за единицу времени</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">[N] = Вт</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">1 Вт = 1 Дж/с</span><span lang="en" class="lang-content">1 W = 1 J/s</span><span lang="ru" class="lang-content">1 Вт = 1 Дж/с</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚗</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">N = F·v</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тұрақты жылдамдықта</span><span lang="en" class="lang-content">At constant speed</span><span lang="ru" class="lang-content">При постоянной скорости</span></p></div>
+</div></footer>
 
-                    <!-- Top Pressure (Small Arrows) -->
-                    <line x1="170" y1="40" x2="170" y2="60" class="svg-force-arrow-down" />
-                    <line x1="200" y1="40" x2="200" y2="60" class="svg-force-arrow-down" />
-                    <line x1="230" y1="40" x2="230" y2="60" class="svg-force-arrow-down" />
-                    <text x="260" y="55" font-size="12" fill="#1e3a8a">P₁ (Small)</text>
-
-                    <!-- Bottom Pressure (Big Arrows) -->
-                    <line x1="170" y1="180" x2="170" y2="140" stroke="#dc2626" stroke-width="4" marker-end="url(#arrowhead-red)"/>
-                    <line x1="200" y1="180" x2="200" y2="140" stroke="#dc2626" stroke-width="4" marker-end="url(#arrowhead-red)"/>
-                    <line x1="230" y1="180" x2="230" y2="140" stroke="#dc2626" stroke-width="4" marker-end="url(#arrowhead-red)"/>
-                    <text x="260" y="170" font-size="12" fill="#dc2626" font-weight="bold">P₂ (BIG)</text>
-
-                    <!-- Resultant Force Text -->
-                    <text x="360" y="100" font-size="14" fill="#dc2626" font-weight="bold" writing-mode="vertical-rl">F_arch</text>
-                </svg>
-
-                <p lang="kk" class="lang-content mt-2 text-center text-sm font-semibold text-blue-800">Қорытқы күш жоғары қарай бағытталады!</p>
-                <p lang="en" class="lang-content mt-2 text-center text-sm font-semibold text-blue-800">The resultant force is directed upwards!</p>
-                <p lang="ru" class="lang-content mt-2 text-center text-sm font-semibold text-blue-800">Результирующая сила направлена вверх!</p>
-            </div>
-        </section>
-
-        <!-- 2. АРХИМЕД ЗАҢЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Архимед заңы</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Archimedes' Principle</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Закон Архимеда</h2>
-
-            <div class="rule-card border-t-indigo-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Сұйыққа (немесе газға) батырылған денеге, осы дене ығыстырып шығарған сұйықтың <strong>салмағына тең</strong> кері итеруші күш әсер етеді.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    A body immersed in a fluid is buoyed up by a force equal to the <strong>weight</strong> of the fluid displaced by the body.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    На тело, погруженное в жидкость (или газ), действует выталкивающая сила, равная <strong>весу</strong> жидкости, вытесненной этим телом.
-                </p>
-
-                <div class="example-block border-l-indigo-400 bg-indigo-50 text-center mb-4">
-                    <p class="text-2xl font-bold text-indigo-900 mb-2">F_A = ρ_с · g · V_д</p>
-                    <p class="text-sm text-indigo-800">
-                        ρ_с - сұйық тығыздығы (liquid density)<br>
-                        V_д - батқан бөліктің көлемі (submerged volume)
-                    </p>
-                </div>
-
-                <!-- Illustration 2: Displaced Water -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Eureka Can -->
-                    <path d="M 50 50 L 50 150 L 150 150 L 150 90 L 180 80 L 180 70 L 150 70 L 150 50 Z" fill="none" stroke="#1e3a8a" stroke-width="2"/>
-                    <!-- Water inside (Full) -->
-                    <path d="M 52 70 L 52 148 L 148 148 L 148 70 Z" fill="#bfdbfe"/>
-
-                    <!-- Object submerged -->
-                    <rect x="80" y="80" width="40" height="40" fill="#fcd34d" stroke="#d97706"/>
-
-                    <!-- Spout Flow -->
-                    <path d="M 150 75 Q 180 75, 190 100" fill="none" stroke="#60a5fa" stroke-width="3"/>
-                    <path d="M 190 100 L 190 140" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="4"/>
-
-                    <!-- Measuring Cup -->
-                    <rect x="170" y="140" width="40" height="40" fill="none" stroke="#1e3a8a" stroke-width="2"/>
-                    <rect x="172" y="160" width="36" height="20" fill="#bfdbfe"/> <!-- Displaced Water -->
-
-                    <!-- Weight Scale -->
-                    <line x1="190" y1="180" x2="190" y2="190" stroke="#000"/>
-                    <text x="190" y="205" font-size="12" text-anchor="middle" font-weight="bold">Weight = F_A</text>
-
-                    <!-- Labels -->
-                    <text x="100" y="105" font-size="10" text-anchor="middle" fill="#92400e">Body</text>
-                    <text x="250" y="160" font-size="12" fill="#1e40af">Ығысқан су / Displaced Water</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ЖҮЗУ ШАРТТАРЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Денелердің жүзу шарттары</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Floating Conditions</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Условия плавания тел</h2>
-
-            <div class="rule-card border-t-green-500">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                    <!-- Sinking -->
-                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
-                        <h4 class="font-bold text-red-800 mb-2">Батады / Sinks</h4>
-                        <p class="text-sm">F_A < mg</p>
-                        <p class="text-xs text-gray-500">ρ_body > ρ_liquid</p>
-                        <!-- Illus -->
-                        <svg viewBox="0 0 100 100" class="w-full h-20 mt-2">
-                            <rect x="0" y="0" width="100" height="100" fill="#e0f2fe"/>
-                            <circle cx="50" cy="85" r="10" fill="#4b5563"/> <!-- Iron Ball bottom -->
-                            <line x1="50" y1="85" x2="50" y2="95" stroke="#000" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
-                        </svg>
-                    </div>
-
-                    <!-- Floating inside -->
-                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
-                        <h4 class="font-bold text-green-800 mb-2">Жүзеді / Floats</h4>
-                        <p class="text-sm">F_A = mg</p>
-                        <p class="text-xs text-gray-500">ρ_body = ρ_liquid</p>
-                         <!-- Illus -->
-                        <svg viewBox="0 0 100 100" class="w-full h-20 mt-2">
-                            <rect x="0" y="0" width="100" height="100" fill="#e0f2fe"/>
-                            <circle cx="50" cy="50" r="10" fill="#22c55e"/> <!-- Green Fish middle -->
-                        </svg>
-                    </div>
-
-                    <!-- Rising -->
-                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                        <h4 class="font-bold text-yellow-800 mb-2">Қалқиды / Rises</h4>
-                        <p class="text-sm">F_A > mg</p>
-                        <p class="text-xs text-gray-500">ρ_body < ρ_liquid</p>
-                         <!-- Illus -->
-                        <svg viewBox="0 0 100 100" class="w-full h-20 mt-2">
-                            <rect x="0" y="0" width="100" height="100" fill="#e0f2fe"/>
-                            <circle cx="50" cy="15" r="10" fill="#fcd34d"/> <!-- Ball top -->
-                            <line x1="0" y1="25" x2="100" y2="25" stroke="#3b82f6"/> <!-- Water line -->
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-blue-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-blue-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-blue-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-blue-800">
-                Архимед күші = Дене ығыстырған сұйық салмағы. Егер дене сұйықтан жеңіл болса (тығыздығы аз), ол қалқып шығады.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-blue-800">
-                Buoyant force = Weight of displaced fluid. If the object is lighter (less dense) than the fluid, it will float.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-blue-800">
-                Архимедова сила = Вес вытесненной жидкости. Если тело легче (менее плотное), чем жидкость, оно всплывает.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

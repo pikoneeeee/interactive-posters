@@ -1,399 +1,197 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Энергия и Закон сохранения</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fdf4ff; /* fuchsia-50 */
-            overflow-x: hidden;
-            color: #701a75; /* fuchsia-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Fuchsia Theme */
-        .header-card {
-            background-color: #c026d3; /* fuchsia-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(192, 38, 211, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #86198f; /* fuchsia-800 */
-            border-bottom: 3px solid #f0abfc; /* fuchsia-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #fae8ff; /* fuchsia-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #a21caf; /* fuchsia-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #c026d3; /* fuchsia-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #c026d3;
-            background-color: #ffffff;
-            color: #c026d3;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #fdf4ff;
-        }
-        .lang-btn.active {
-            background-color: #c026d3;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #f5d0fe;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #86198f;
-            text-anchor: middle;
-        }
-        .svg-bar-bg {
-            fill: #e5e7eb;
-        }
-        .svg-bar-pe {
-            fill: #2563eb; /* Blue for Potential */
-        }
-        .svg-bar-ke {
-            fill: #dc2626; /* Red for Kinetic */
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расчёт количества теплоты</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-fuchsia-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жылу құбылыстары</span>
+<span lang="en" class="lang-content">Grade 8 · Thermal phenomena</span>
+<span lang="ru" class="lang-content">8 класс · Тепловые явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Жылу мөлшерін есептеу</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Calculating heat quantity</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Расчёт количества теплоты</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Негізгі формулалар</span>
+<span lang="en" class="lang-content">📐 Main formulas</span>
+<span lang="ru" class="lang-content">📐 Основные формулы</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-lg text-indigo-700 mb-2">🔥 <span lang="kk" class="lang-content">Қыздыру</span><span lang="en" class="lang-content">Heating</span><span lang="ru" class="lang-content">Нагревание</span></p>
+<div class="formula text-center" style="font-size:1.3rem">Q = cm(t₂ − t₁)</div>
+<p class="text-slate-700 text-xs mt-3">
+<span lang="kk" class="lang-content">t₂ &gt; t₁ → Q &gt; 0 — дене жылуды <b>алады</b></span>
+<span lang="en" class="lang-content">t₂ &gt; t₁ → Q &gt; 0 — body <b>absorbs</b> heat</span>
+<span lang="ru" class="lang-content">t₂ &gt; t₁ → Q &gt; 0 — тело <b>получает</b> тепло</span></p>
+</div>
+<div class="card-rose rounded-custom p-6">
+<p class="heading-font text-lg text-rose-700 mb-2">❄️ <span lang="kk" class="lang-content">Суыту</span><span lang="en" class="lang-content">Cooling</span><span lang="ru" class="lang-content">Охлаждение</span></p>
+<div class="formula text-center" style="font-size:1.3rem">Q = cm(t₁ − t₂)</div>
+<p class="text-slate-700 text-xs mt-3">
+<span lang="kk" class="lang-content">t₂ &lt; t₁ → Q &lt; 0 — дене жылуды <b>береді</b></span>
+<span lang="en" class="lang-content">t₂ &lt; t₁ → Q &lt; 0 — body <b>releases</b> heat</span>
+<span lang="ru" class="lang-content">t₂ &lt; t₁ → Q &lt; 0 — тело <b>отдаёт</b> тепло</span></p>
+</div>
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-lg text-emerald-700 mb-2">⚖️ <span lang="kk" class="lang-content">Жылу баланс</span><span lang="en" class="lang-content">Heat balance</span><span lang="ru" class="lang-content">Тепловой баланс</span></p>
+<div class="formula text-center" style="font-size:1.3rem">Q<sub>отд</sub> = Q<sub>пол</sub></div>
+<p class="text-slate-700 text-xs mt-3">
+<span lang="kk" class="lang-content">Тұйық жүйеде: берілген жылу = алынған жылу</span>
+<span lang="en" class="lang-content">Closed system: heat given = heat received</span>
+<span lang="ru" class="lang-content">В замкн. сист.: отданное = полученное</span></p>
+</div>
+</div>
+</section>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ЭНЕРГИЯНЫҢ САҚТАЛУ ЗАҢЫ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">LAW OF CONSERVATION OF ENERGY</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ЗАКОН СОХРАНЕНИЯ ЭНЕРГИИ</h1>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп шешу алгоритмі</span>
+<span lang="en" class="lang-content">🧮 Problem solving algorithm</span>
+<span lang="ru" class="lang-content">🧮 Алгоритм решения задач</span></h2>
+<div class="card rounded-custom p-6">
+<ol class="text-slate-700 list-decimal pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>«Берілген»</b> бөлімін жазыңыз: m, t₁, t₂, c (кестеден).</span><span lang="en" class="lang-content">Write down <b>«Given»</b>: m, t₁, t₂, c (from table).</span><span lang="ru" class="lang-content">Запишите <b>«Дано»</b>: m, t₁, t₂, c (из таблицы).</span></li>
+<li><span lang="kk" class="lang-content">Барлық бірлікті <b>СИ-ге аударыңыз</b> (грамм → кг).</span><span lang="en" class="lang-content">Convert all units to <b>SI</b> (g → kg).</span><span lang="ru" class="lang-content">Переведите единицы в <b>СИ</b> (г → кг).</span></li>
+<li><span lang="kk" class="lang-content">Заттың <b>с</b>-сын <b>анықтамалық кестеден</b> алыңыз.</span><span lang="en" class="lang-content">Look up <b>c</b> in a <b>reference table</b>.</span><span lang="ru" class="lang-content">Возьмите <b>c</b> из <b>справочной таблицы</b>.</span></li>
+<li><span lang="kk" class="lang-content"><b>Q = cmΔt</b> формуласына сан мәндерін қойыңыз.</span><span lang="en" class="lang-content">Plug numbers into <b>Q = cmΔt</b>.</span><span lang="ru" class="lang-content">Подставьте значения в <b>Q = cmΔt</b>.</span></li>
+<li><span lang="kk" class="lang-content"><b>Бірліктерді тексеріңіз</b>: жауап Джоульде болуы керек.</span><span lang="en" class="lang-content"><b>Check units</b>: answer must be in joules.</span><span lang="ru" class="lang-content"><b>Проверьте единицы</b>: ответ в джоулях.</span></li>
+<li><span lang="kk" class="lang-content">Үлкен сандарды <b>кДж, МДж</b> түрінде беріңіз.</span><span lang="en" class="lang-content">Express big numbers as <b>kJ, MJ</b>.</span><span lang="ru" class="lang-content">Большие числа — в <b>кДж, МДж</b>.</span></li>
+</ol>
+</div>
+</section>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-fuchsia-100">Энергия жоғалмайды, тек бір түрден екінші түрге ауысады.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-fuchsia-100">Energy is not lost, only transformed from one form to another.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-fuchsia-100">Энергия не исчезает, а лишь превращается из одного вида в другой.</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📘 Есеп 1: Қарапайым</span>
+<span lang="en" class="lang-content">📘 Problem 1: Basic</span>
+<span lang="ru" class="lang-content">📘 Задача 1: Простая</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">2 кг суды 20°C-тан 80°C-қа дейін қыздыру үшін қанша жылу қажет?</span>
+<span lang="en" class="lang-content">How much heat is needed to warm 2 kg of water from 20°C to 80°C?</span>
+<span lang="ru" class="lang-content">Сколько теплоты нужно, чтобы нагреть 2 кг воды от 20°C до 80°C?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m = 2 <span class="unit-pill">кг</span></li>
+<li>t₁ = 20 <span class="unit-pill">°C</span></li>
+<li>t₂ = 80 <span class="unit-pill">°C</span></li>
+<li>c = 4200 <span class="unit-pill">Дж/(кг·°C)</span></li>
+<li>Q — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+Δt = 80 − 20 = 60 °C
+<br/>Q = cmΔt = 4200·2·60
+<br/>Q = <span class="num">504 000</span> <span class="unit">Дж</span> ≈ <span class="num">504</span> <span class="unit">кДж</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ ≈ 504 кДж</span><span lang="en" class="lang-content">✅ ≈ 504 kJ</span><span lang="ru" class="lang-content">✅ ≈ 504 кДж</span></div>
+</div>
+</div>
+</div>
+</section>
 
-        <!-- 1. ЭНЕРГИЯ ТҮРЛЕРІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Механикалық энергия (E)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Mechanical Energy (E)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Механическая энергия (E)</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📕 Есеп 2: Жылу баланс</span>
+<span lang="en" class="lang-content">📕 Problem 2: Heat balance</span>
+<span lang="ru" class="lang-content">📕 Задача 2: Тепловой баланс</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">200 г, 100°C ыстық су 300 г, 20°C суық сумен араласты. Соңғы температураны табыңыз.</span>
+<span lang="en" class="lang-content">200 g of water at 100°C is mixed with 300 g of water at 20°C. Find the final temperature.</span>
+<span lang="ru" class="lang-content">200 г воды при 100°C смешали с 300 г воды при 20°C. Найдите конечную температуру.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m₁ = 0,2 <span class="unit-pill">кг</span>, t₁ = 100 °C</li>
+<li>m₂ = 0,3 <span class="unit-pill">кг</span>, t₂ = 20 °C</li>
+<li>c = 4200 <span class="unit-pill">Дж/(кг·°C)</span></li>
+<li>t — ?</li>
+</ul>
+<p class="text-xs text-slate-600 mt-3"><span lang="kk" class="lang-content">Идея: ыстық су жылуды <b>береді</b>, ал суық су <b>алады</b>:</span><span lang="en" class="lang-content">Idea: hot water <b>releases</b> heat, cold water <b>absorbs</b>:</span><span lang="ru" class="lang-content">Идея: горячая вода <b>отдаёт</b>, холодная — <b>получает</b>:</span></p>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.95rem">
+Q<sub>отд</sub> = Q<sub>пол</sub>
+<br/>m₁c(t₁ − t) = m₂c(t − t₂)
+<br/>0,2·(100 − t) = 0,3·(t − 20)
+<br/>20 − 0,2t = 0,3t − 6
+<br/>26 = 0,5t
+<br/>t = <span class="num">52</span> <span class="unit">°C</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ t = 52 °C</span><span lang="en" class="lang-content">✅ t = 52 °C</span><span lang="ru" class="lang-content">✅ t = 52 °C</span></div>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="rule-card border-t-fuchsia-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Толық механикалық энергия екі бөліктен тұрады: <span class="text-blue-600 font-bold">Потенциалдық (биіктік)</span> және <span class="text-red-600 font-bold">Кинетикалық (жылдамдық)</span>.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Total mechanical energy consists of two parts: <span class="text-blue-600 font-bold">Potential (Height)</span> and <span class="text-red-600 font-bold">Kinetic (Speed)</span>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Полная механическая энергия состоит из двух частей: <span class="text-blue-600 font-bold">Потенциальной (высота)</span> и <span class="text-red-600 font-bold">Кинетической (скорость)</span>.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📗 Есеп 3: Заттың түрін табу</span>
+<span lang="en" class="lang-content">📗 Problem 3: Find the substance</span>
+<span lang="ru" class="lang-content">📗 Задача 3: Определить вещество</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">0,5 кг металл 22 800 Дж жылумен қыздырылса, ол 20°C-тан 140°C-қа дейін көтерілді. Бұл қандай металл?</span>
+<span lang="en" class="lang-content">0.5 kg of metal heated by 22 800 J rose from 20°C to 140°C. What metal is it?</span>
+<span lang="ru" class="lang-content">0,5 кг металла нагрели на 22 800 Дж, его температура выросла с 20°C до 140°C. Какой это металл?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m = 0,5 <span class="unit-pill">кг</span></li>
+<li>Q = 22 800 <span class="unit-pill">Дж</span></li>
+<li>Δt = 120 <span class="unit-pill">°C</span></li>
+<li>c — ?, <span lang="kk" class="lang-content">зат — ?</span><span lang="en" class="lang-content">substance — ?</span><span lang="ru" class="lang-content">вещество — ?</span></li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.95rem">
+c = Q/(mΔt)
+<br/>c = 22 800/(0,5·120)
+<br/>c = <span class="num">380</span> <span class="unit">Дж/(кг·°C)</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ Бұл — мыс (c = 380)!</span><span lang="en" class="lang-content">✅ It's copper!</span><span lang="ru" class="lang-content">✅ Это медь!</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="example-block border-l-fuchsia-400 bg-fuchsia-50 text-center mb-4">
-                    <p class="text-3xl font-bold text-fuchsia-900 mb-2">E = E_p + E_k</p>
-                    <div class="flex justify-center gap-8 mt-2 text-sm font-semibold">
-                        <span class="text-blue-600">E_p = mgh</span>
-                        <span class="text-red-600">E_k = mv²/2</span>
-                    </div>
-                </div>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Маңызды формулалар</span>
+<span lang="en" class="lang-content">🎯 Key formulas</span>
+<span lang="ru" class="lang-content">🎯 Ключевые формулы</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔥</div>
+<p class="heading-font text-lg text-indigo-700 mb-1">Q = cmΔt</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Қыздыру/суыту</span><span lang="en" class="lang-content">Heating/cooling</span><span lang="ru" class="lang-content">Нагрев/охлаждение</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-lg text-indigo-700 mb-1">Q<sub>отд</sub> = Q<sub>пол</sub></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Жылу баланс теңдеуі</span><span lang="en" class="lang-content">Heat balance equation</span><span lang="ru" class="lang-content">Уравнение баланса</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📊</div>
+<p class="heading-font text-lg text-indigo-700 mb-1">c = Q/(mΔt)</p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">c-ны табу</span><span lang="en" class="lang-content">Find c</span><span lang="ru" class="lang-content">Нахождение c</span></p></div>
+</div></footer>
 
-                <!-- Illustration 1: Skater on Ramp -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ramp path -->
-                    <path d="M 50 50 Q 200 250, 350 100" fill="none" stroke="#a21caf" stroke-width="4"/>
-
-                    <!-- Ground line reference -->
-                    <line x1="20" y1="180" x2="380" y2="180" stroke="#d1d5db" stroke-dasharray="4"/>
-
-                    <!-- Point A (Top Left) -->
-                    <circle cx="50" cy="50" r="10" fill="#2563eb"/>
-                    <text x="50" y="30" font-weight="bold" fill="#2563eb" text-anchor="middle">Max Ep</text>
-                    <text x="50" y="42" font-size="10" fill="#2563eb" text-anchor="middle">v=0</text>
-
-                    <!-- Point B (Bottom) -->
-                    <circle cx="200" cy="150" r="10" fill="#dc2626"/>
-                    <text x="200" y="175" font-weight="bold" fill="#dc2626" text-anchor="middle">Max Ek</text>
-                    <text x="200" y="185" font-size="10" fill="#dc2626" text-anchor="middle">h=min</text>
-                    <!-- Speed lines -->
-                    <line x1="185" y1="150" x2="165" y2="150" stroke="#dc2626" stroke-width="2"/>
-                    <line x1="215" y1="150" x2="235" y2="150" stroke="#dc2626" stroke-width="2"/>
-
-                    <!-- Point C (Middle Right) -->
-                    <circle cx="350" cy="100" r="10" fill="#a21caf"/>
-                    <text x="350" y="80" font-weight="bold" fill="#a21caf" text-anchor="middle">Ep + Ek</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ЭНЕРГИЯНЫҢ САҚТАЛУЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Сақталу заңы</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Conservation Law</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Закон сохранения</h2>
-
-            <div class="rule-card border-t-purple-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Тұйық жүйеде денелердің толық механикалық энергиясы <strong>өзгермейді</strong>. Энергия жоғалмайды, ол тек бір түрден екінші түрге айналады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    In a closed system, the total mechanical energy remains <strong>constant</strong>. Energy is not lost, it just transforms from one form to another.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    В замкнутой системе полная механическая энергия тел остается <strong>постоянной</strong>. Энергия не исчезает, а лишь превращается из одного вида в другой.
-                </p>
-
-                <!-- Illustration 2: Pendulum Energy Exchange -->
-                <svg class="illustration-svg" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ceiling -->
-                    <rect x="150" y="10" width="100" height="5" fill="#4b5563"/>
-
-                    <!-- Pendulum Path (Arc) -->
-                    <path d="M 100 100 Q 200 200, 300 100" fill="none" stroke="#e5e7eb" stroke-dasharray="4"/>
-
-                    <!-- Position 1 (Left High) -->
-                    <line x1="200" y1="15" x2="100" y2="100" stroke="#4b5563"/>
-                    <circle cx="100" cy="100" r="15" fill="#2563eb"/>
-                    <!-- Bar Chart 1 -->
-                    <rect x="70" y="60" width="10" height="40" class="svg-bar-pe"/> <!-- Ep Full -->
-                    <rect x="82" y="100" width="10" height="0" class="svg-bar-ke"/> <!-- Ek Empty -->
-                    <text x="80" y="55" font-size="10" fill="#2563eb">Ep</text>
-
-                    <!-- Position 2 (Center Low) -->
-                    <line x1="200" y1="15" x2="200" y2="150" stroke="#4b5563"/>
-                    <circle cx="200" cy="150" r="15" fill="#dc2626"/>
-                    <!-- Speed lines -->
-                    <line x1="180" y1="150" x2="160" y2="150" stroke="#dc2626" stroke-width="2"/>
-                    <line x1="220" y1="150" x2="240" y2="150" stroke="#dc2626" stroke-width="2"/>
-                    <!-- Bar Chart 2 -->
-                    <rect x="220" y="160" width="10" height="0" class="svg-bar-pe"/> <!-- Ep Empty -->
-                    <rect x="232" y="120" width="10" height="40" class="svg-bar-ke"/> <!-- Ek Full -->
-                    <text x="235" y="115" font-size="10" fill="#dc2626">Ek</text>
-
-                    <!-- Position 3 (Right High) -->
-                    <line x1="200" y1="15" x2="300" y2="100" stroke="#4b5563"/>
-                    <circle cx="300" cy="100" r="15" fill="#2563eb"/>
-                    <!-- Bar Chart 3 -->
-                    <rect x="320" y="60" width="10" height="40" class="svg-bar-pe"/> <!-- Ep Full -->
-                    <rect x="332" y="100" width="10" height="0" class="svg-bar-ke"/> <!-- Ek Empty -->
-
-                    <!-- Labels -->
-                    <text x="200" y="200" class="svg-label" font-weight="bold">E_total = Constant</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ЭНЕРГИЯНЫҢ АЙНАЛУЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Энергияның айналуы (Мысал)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Energy Transformation (Example)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Превращение энергии (Пример)</h2>
-
-            <div class="rule-card border-t-pink-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Доп жоғарыдан құлағанда: Биіктік азаяды (Ep ↓), бірақ Жылдамдық артады (Ek ↑).
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    When a ball falls: Height decreases (Ep ↓), but Speed increases (Ek ↑).
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Когда мяч падает: Высота уменьшается (Ep ↓), но Скорость растет (Ek ↑).
-                </p>
-
-                <!-- Illustration 3: Falling Ball -->
-                <svg class="illustration-svg" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ground -->
-                    <line x1="50" y1="230" x2="350" y2="230" stroke="#4b5563" stroke-width="2"/>
-
-                    <!-- Time Step 1 (Top) -->
-                    <g transform="translate(100, 30)">
-                        <circle cx="0" cy="0" r="15" fill="#2563eb"/>
-                        <text x="25" y="5" font-size="12" fill="#2563eb">100% Ep</text>
-                        <text x="25" y="20" font-size="12" fill="#dc2626">0% Ek</text>
-                    </g>
-
-                    <!-- Time Step 2 (Middle) -->
-                    <g transform="translate(100, 130)">
-                        <circle cx="0" cy="0" r="15" fill="#a21caf"/> <!-- Purple mix -->
-                        <line x1="0" y1="-15" x2="0" y2="-35" stroke="#9ca3af" stroke-dasharray="4"/> <!-- Path -->
-                        <line x1="0" y1="20" x2="0" y2="40" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/> <!-- Velocity -->
-                        <text x="25" y="5" font-size="12" fill="#2563eb">50% Ep</text>
-                        <text x="25" y="20" font-size="12" fill="#dc2626">50% Ek</text>
-                    </g>
-
-                    <!-- Time Step 3 (Bottom) -->
-                    <g transform="translate(100, 215)">
-                        <circle cx="0" cy="0" r="15" fill="#dc2626"/>
-                        <line x1="0" y1="-15" x2="0" y2="-35" stroke="#9ca3af" stroke-dasharray="4"/>
-                        <text x="25" y="5" font-size="12" fill="#2563eb">0% Ep</text>
-                        <text x="25" y="20" font-size="12" fill="#dc2626">100% Ek</text>
-                    </g>
-
-                    <!-- Arrow Definitions -->
-                    <defs>
-                        <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                    </defs>
-
-                    <!-- Summary Text Right -->
-                    <text x="280" y="100" class="svg-label" font-size="16">Ep → Ek</text>
-                    <text x="280" y="120" class="svg-label" font-size="12">Transform</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-fuchsia-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-fuchsia-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-fuchsia-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-fuchsia-800">
-                Энергия ешқашан жоғалмайды. Ол тек бір түрден (потенциалдық) екінші түрге (кинетикалық) ауысады.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-fuchsia-800">
-                Energy is never lost. It only changes from one form (potential) to another (kinetic).
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-fuchsia-800">
-                Энергия никогда не исчезает. Она только переходит из одной формы (потенциальной) в другую (кинетическую).
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

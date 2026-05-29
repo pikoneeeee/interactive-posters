@@ -1,184 +1,171 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЖЫЛУ БЕРУ табиғатта және технологияда</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #dcfce7 0%, #bbf7d0 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #15803d; border-bottom: 3px solid #bbf7d0; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #22c55e; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #22c55e; background: white; color: #22c55e; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #22c55e; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #22c55e; color: white; text-align: center; }
-        .info-box { background: linear-gradient(135deg, #bbf7d0 0%, #dcfce7 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #22c55e; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .example-card { background: #f0fdf4; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #22c55e; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Закон Джоуля-Ленца</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-green-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-rose-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Жылулық әрекет</span>
+<span lang="en" class="lang-content">Grade 9 · Thermal action</span>
+<span lang="ru" class="lang-content">9 класс · Тепловое действие</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-rose-700">Джоуль–Ленц заңы. Қыздыру құрылғылары</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-rose-700">Joule–Lenz law. Heating devices</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-rose-700">Закон Джоуля–Ленца. Нагревательные приборы</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Теплопередачи табиғатта және технике</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Heat Transfer in Nature and Technology</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Теплопередача в природе и технике</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-green-100">Табиғат: Жер сәулеленең, су циклі, хайуандары. Техника: Өндіктігінің, сумасылар, электр. ПРАКТИКАЛЫҚ ҚОЛДАНУ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-green-100">Nature: Earth radiation, water cycle, animals. Technology: Heating, boilers, electricity. PRACTICAL APPLICATIONS!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-green-100">Природа: излучение Земли, водный цикл, животные. Техника: отопление, котлы, электричество. ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔥 Тоқтың жылулық әрекеті</span>
+<span lang="en" class="lang-content">🔥 Thermal action of current</span>
+<span lang="ru" class="lang-content">🔥 Тепловое действие тока</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Тоқ өткізгіш арқылы өткенде электрондар <b>атомдармен соқтығысады</b>. Соқтығыс нәтижесінде атомдардың <b>тербелісі күшейеді</b> — өткізгіш <b>қызады</b>. Бұл құбылысты <b>тоқтың жылулық әрекеті</b> деп атайды. Сонымен қатар жылуға айналған энергияны <b>дәл есептеуге</b> болады!</span>
+<span lang="en" class="lang-content">When current flows, electrons <b>collide with atoms</b>. The collisions <b>increase atomic vibrations</b>, and the conductor <b>heats up</b>. This is the <b>thermal action of current</b>. Moreover, this heat can be calculated <b>precisely</b>!</span>
+<span lang="ru" class="lang-content">При прохождении тока электроны <b>сталкиваются с атомами</b>. Столкновения <b>усиливают колебания</b> атомов — проводник <b>нагревается</b>. Это <b>тепловое действие тока</b>. И его <b>можно точно посчитать</b>!</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-rose-900 font-bold mb-2">📜 <span lang="kk" class="lang-content">Джоуль–Ленц заңы (1841–1842):</span><span lang="en" class="lang-content">Joule–Lenz law (1841–1842):</span><span lang="ru" class="lang-content">Закон Джоуля–Ленца (1841–1842):</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+Q = I² · R · t
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Бөлінген жылу = тоқтың квадраты × кедергі × уақыт</span>
+<span lang="en" class="lang-content">Heat released = current² × resistance × time</span>
+<span lang="ru" class="lang-content">Выделенное тепло = ток² × сопротивление × время</span></p>
+</div>
+</div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Табиғат пен техникадағы жылу беру</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. HEAT TRANSFER IN NATURE</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Теплопередача в природе</h2>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center mb-3">
+<svg width="280" height="200" viewBox="0 0 280 200">
+<defs><filter id="glow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+<line x1="20" y1="100" x2="80" y2="100" stroke="#1e293b" stroke-width="3"/>
+<line x1="200" y1="100" x2="260" y2="100" stroke="#1e293b" stroke-width="3"/>
+<path d="M80,100 L90,90 L100,110 L110,90 L120,110 L130,90 L140,110 L150,90 L160,110 L170,90 L180,110 L190,90 L200,100" stroke="#dc2626" stroke-width="4" fill="none"/>
+<rect x="80" y="80" width="120" height="40" fill="none" stroke="#fca5a5" stroke-width="1" stroke-dasharray="3,3" rx="5"/>
+<circle cx="100" cy="65" r="6" fill="#f59e0b" opacity="0.7"/>
+<circle cx="140" cy="60" r="8" fill="#f59e0b" opacity="0.8"/>
+<circle cx="180" cy="65" r="6" fill="#f59e0b" opacity="0.7"/>
+<text x="140" y="155" font-size="13" text-anchor="middle" fill="#dc2626" font-weight="bold">R, t, I</text>
+<text x="140" y="175" font-size="11" text-anchor="middle" fill="#475569">Q = I²Rt</text>
+<text x="40" y="120" font-size="10" fill="#475569">e⁻ →</text>
+<text x="220" y="120" font-size="10" fill="#475569">→ e⁻</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center"><span lang="kk" class="lang-content">Электрондардың атомдармен соқтығысуы → жылу</span><span lang="en" class="lang-content">Electron-atom collisions → heat</span><span lang="ru" class="lang-content">Столкновения электронов с атомами → тепло</span></p>
+</div></div></section>
 
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>☀️ КҮНДІКТІГІНІҢ СӘУЛЕСІ</strong></p>
-                        <p lang="kk" class="lang-content">Сәулеленең арқылы Жерді қыздырады (ғарышта өтінеді)</p>
-                        <p lang="kk" class="lang-content">• Атмосфера өтінеді</p>
-                        <p lang="kk" class="lang-content">• Жердің бетін қыздырады</p>
-                        <p lang="kk" class="lang-content">• Айналасындағы ауа конвекция арқылы ыстықталады</p>
-                        <p lang="kk" class="lang-content"><strong>НӘТИЖЕСІ:</strong> Күн циклы, өндіктігінің, өндіктігінің дөңінің</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Үш баламалы формула</span>
+<span lang="en" class="lang-content">📐 Three equivalent formulas</span>
+<span lang="ru" class="lang-content">📐 Три эквивалентные формулы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-rose-700 text-base mb-2"><span lang="kk" class="lang-content">Тізбектей жалғ.</span><span lang="en" class="lang-content">Series</span><span lang="ru" class="lang-content">Послед. соед.</span></p>
+<div class="formula" style="font-size:1.6rem">Q = I²Rt</div>
+<p class="text-xs mt-2"><span lang="kk" class="lang-content">I — бірдей</span><span lang="en" class="lang-content">I — same</span><span lang="ru" class="lang-content">I — одинаковый</span></p>
+</div>
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-rose-700 text-base mb-2"><span lang="kk" class="lang-content">Әмбебап</span><span lang="en" class="lang-content">Universal</span><span lang="ru" class="lang-content">Универсальная</span></p>
+<div class="formula" style="font-size:1.6rem">Q = UIt</div>
+<p class="text-xs mt-2"><span lang="kk" class="lang-content">A = Q (барлық А → Q)</span><span lang="en" class="lang-content">A = Q (all work → heat)</span><span lang="ru" class="lang-content">A = Q (вся работа → тепло)</span></p>
+</div>
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-rose-700 text-base mb-2"><span lang="kk" class="lang-content">Параллель</span><span lang="en" class="lang-content">Parallel</span><span lang="ru" class="lang-content">Парал. соед.</span></p>
+<div class="formula" style="font-size:1.6rem">Q = U²t/R</div>
+<p class="text-xs mt-2"><span lang="kk" class="lang-content">U — бірдей</span><span lang="en" class="lang-content">U — same</span><span lang="ru" class="lang-content">U — одинаковое</span></p>
+</div>
+</div>
 
-                        <p lang="en" class="lang-content"><strong>☀️ SOLAR RADIATION</strong></p>
-                        <p lang="en" class="lang-content">Heats Earth by radiation (travels through space)</p>
-                        <p lang="en" class="lang-content">• Passes through atmosphere</p>
-                        <p lang="en" class="lang-content">• Heats Earth's surface</p>
-                        <p lang="en" class="lang-content">• Surrounding air heats by convection</p>
-                        <p lang="en" class="lang-content"><strong>RESULT:</strong> Day-night cycle, seasons, climate</p>
+<div class="card-warm rounded-custom p-5 mt-5">
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">💡 <b>Парадокс:</b> Тізбектей жалғанғанда <b>үлкен R</b> қызады (Q = I²R), параллель жалғанғанда <b>кіші R</b> қызады (Q = U²/R). Сондықтан үй желісінде <b>қыздыру элементі (R үлкен)</b> және <b>сым (R кіші)</b> параллель емес, ал қыздырғыш ішіндегі <b>спираль</b> ең үлкен R-ге ие!</span>
+<span lang="en" class="lang-content">💡 <b>Paradox:</b> In series, <b>larger R</b> heats more (Q = I²R); in parallel, <b>smaller R</b> heats more (Q = U²/R). So in home wiring the <b>heating element (large R)</b> heats while wires (small R) stay cold!</span>
+<span lang="ru" class="lang-content">💡 <b>Парадокс:</b> При последовательном — больше нагревается <b>больший R</b> (Q = I²R), при параллельном — <b>меньший R</b> (Q = U²/R). Поэтому в проводке <b>спираль нагревателя (большой R)</b> греется, а <b>провода (малый R)</b> — нет!</span></p>
+</div>
+</section>
 
-                        <p lang="ru" class="lang-content"><strong>☀️ СОЛНЕЧНОЕ ИЗЛУЧЕНИЕ</strong></p>
-                        <p lang="ru" class="lang-content">Нагревает Землю путём излучения (проходит через космос)</p>
-                        <p lang="ru" class="lang-content">• Проходит через атмосферу</p>
-                        <p lang="ru" class="lang-content">• Нагревает поверхность Земли</p>
-                        <p lang="ru" class="lang-content">• Воздух нагревается конвекцией</p>
-                        <p lang="ru" class="lang-content"><strong>РЕЗУЛЬТАТ:</strong> День-ночь, времена года, климат</p>
-                    </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🍳 Қыздыру құрылғылары</span>
+<span lang="en" class="lang-content">🍳 Heating devices</span>
+<span lang="ru" class="lang-content">🍳 Нагревательные приборы</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="card rounded-custom p-5 text-center"><div class="text-5xl mb-2">🍵</div>
+<p class="heading-font text-rose-700"><span lang="kk" class="lang-content">Шай қайнатқыш</span><span lang="en" class="lang-content">Kettle</span><span lang="ru" class="lang-content">Чайник</span></p>
+<p class="text-xs text-slate-600 mt-1">2000 Вт</p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-5xl mb-2">👕</div>
+<p class="heading-font text-rose-700"><span lang="kk" class="lang-content">Үтік</span><span lang="en" class="lang-content">Iron</span><span lang="ru" class="lang-content">Утюг</span></p>
+<p class="text-xs text-slate-600 mt-1">1500 Вт</p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-5xl mb-2">💇</div>
+<p class="heading-font text-rose-700"><span lang="kk" class="lang-content">Фен</span><span lang="en" class="lang-content">Hairdryer</span><span lang="ru" class="lang-content">Фен</span></p>
+<p class="text-xs text-slate-600 mt-1">1800 Вт</p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-5xl mb-2">🔥</div>
+<p class="heading-font text-rose-700"><span lang="kk" class="lang-content">Жылытқыш</span><span lang="en" class="lang-content">Heater</span><span lang="ru" class="lang-content">Обогреватель</span></p>
+<p class="text-xs text-slate-600 mt-1">2500 Вт</p></div>
+</div>
 
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>💧 СУ ЦИКЛЫ</strong></p>
-                        <p lang="kk" class="lang-content">1. Күндіктігінің су буға айналдырды (өндіктігінің)</p>
-                        <p lang="kk" class="lang-content">2. Буы атмосферасына көтеріледі (конвекция)</p>
-                        <p lang="kk" class="lang-content">3. Жоғарысы суытылады, бұлын болады</p>
-                        <p lang="kk" class="lang-content">4. Жауыны құйын (өндіктігінең, конвекция)</p>
-                        <p lang="kk" class="lang-content"><strong>МАҢЫЗЫ:</strong> Өндіктігінең сақтау, өндіктігінең ауыстыру</p>
+<div class="card rounded-custom p-6 mt-5">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Барлық қыздыру құрылғыларында <b>нихром</b> немесе <b>фехраль</b> спираль қолданылады. Олар: ⭐ <b>жоғары меншікті кедергі</b> (ρ үлкен → көп жылу), ⭐ <b>жоғары балқу температурасы</b> (1400 °C дейін), ⭐ <b>оттегімен баяу әрекеттеседі</b> (тотықпайды). Ең қызған спираль — <b>лампа жіпшесінің вольфрамы</b> (≈ 2500 °C, сондықтан жарық!).</span>
+<span lang="en" class="lang-content">All heaters use <b>nichrome</b> or <b>kanthal</b> wire: ⭐ <b>high resistivity</b> (more heat), ⭐ <b>high melting point</b> (~1400 °C), ⭐ <b>oxidation-resistant</b>. The hottest filament is <b>tungsten in incandescent bulbs</b> (~2500 °C — that's why it glows!).</span>
+<span lang="ru" class="lang-content">Во всех нагревателях используется <b>нихром</b> или <b>фехраль</b>: ⭐ <b>высокое удельное сопротивление</b> (даёт тепло), ⭐ <b>высокая температура плавления</b> (~1400 °C), ⭐ <b>не окисляется</b>. Самая горячая спираль — <b>вольфрам в лампах накаливания</b> (~2500 °C — поэтому светится!).</span></p>
+</div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>💧 WATER CYCLE</strong></p>
-                        <p lang="en" class="lang-content">1. Sun evaporates water to vapor (heating)</p>
-                        <p lang="en" class="lang-content">2. Vapor rises to atmosphere (convection)</p>
-                        <p lang="en" class="lang-content">3. At high altitude cools, forms clouds</p>
-                        <p lang="en" class="lang-content">4. Rain falls back (all transfers involved)</p>
-                        <p lang="en" class="lang-content"><strong>IMPORTANCE:</strong> Energy transfer, climate regulation</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-rose-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Example</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-rose-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Электр пеші: I = 5 А, R = 44 Ом, t = 10 мин. Бөлінген жылуды табыңыз.</span>
+<span lang="en" class="lang-content">Heater: I = 5 A, R = 44 Ω, t = 10 min. Find the heat released.</span>
+<span lang="ru" class="lang-content">Электроплитка: I = 5 А, R = 44 Ом, t = 10 мин. Найти количество выделенной теплоты.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-rose-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>I = 5 А</li><li>R = 44 Ом</li><li>t = 10 мин = 600 с</li><li>Q — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-rose-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+Q = I²Rt = 25 · 44 · 600
+<br/>Q = <span class="num">660 000</span> Дж = <span class="num">660</span> кДж
+</div>
+<div class="badge badge-emerald mt-3">✅ Q = 660 кДж</div>
+</div></div></div>
+</section>
 
-                        <p lang="ru" class="lang-content"><strong>💧 ВОДНЫЙ ЦИКЛ</strong></p>
-                        <p lang="ru" class="lang-content">1. Солнце испаряет воду в пар (нагревание)</p>
-                        <p lang="ru" class="lang-content">2. Пар поднимается в атмосферу (конвекция)</p>
-                        <p lang="ru" class="lang-content">3. На высоте охлаждается, образует облака</p>
-                        <p lang="ru" class="lang-content">4. Идёт дождь обратно (все передачи участвуют)</p>
-                        <p lang="ru" class="lang-content"><strong>ВАЖНОСТЬ:</strong> Передача энергии, регулирование климата</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-rose-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📜</div>
+<p class="heading-font text-xl text-rose-700 mb-2">Q = I²Rt</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Джоуль–Ленц</span><span lang="en" class="lang-content">Joule–Lenz</span><span lang="ru" class="lang-content">Джоуль–Ленц</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌀</div>
+<p class="heading-font text-xl text-rose-700 mb-2">↑R, ↑I, ↑t</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">↑ Жылу</span><span lang="en" class="lang-content">↑ Heat</span><span lang="ru" class="lang-content">↑ Тепло</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔥</div>
+<p class="heading-font text-xl text-rose-700 mb-2">Нихром</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қыздыру материалы</span><span lang="en" class="lang-content">Heating wire material</span><span lang="ru" class="lang-content">Материал спирали</span></p></div>
+</div></footer>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТЕХНИКАДА ЖЫЛУ БЕРУ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. HEAT TRANSFER IN TECHNOLOGY</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Теплопередача в технике</h2>
-
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>🏠 ҮЙДІ ЫСЫТУ ЖҮЙЕСІ</strong></p>
-                        <p lang="kk" class="lang-content">1. Котлі газ/мұнай ысындарды (ысыту)</p>
-                        <p lang="kk" class="lang-content">2. Сумасы бөлме ағынына ыстықталады (конвекция)</p>
-                        <p lang="kk" class="lang-content">3. Батарея радиаторы сәулелене + өндіктігінең</p>
-                        <p lang="kk" class="lang-content">4. Бөлме ауасы ыстықталады</p>
-                        <p lang="kk" class="lang-content"><strong>МЫСАЛ:</strong> Су батареясы өндіктігінең + сәулелене</p>
-
-                        <p lang="en" class="lang-content"><strong>🏠 HOME HEATING SYSTEM</strong></p>
-                        <p lang="en" class="lang-content">1. Boiler burns gas/oil (heating process)</p>
-                        <p lang="en" class="lang-content">2. Hot water flows through pipes (convection)</p>
-                        <p lang="en" class="lang-content">3. Radiator transfers heat by radiation + conduction</p>
-                        <p lang="en" class="lang-content">4. Room air warms up</p>
-                        <p lang="en" class="lang-content"><strong>EXAMPLE:</strong> Water radiator = conduction + radiation</p>
-
-                        <p lang="ru" class="lang-content"><strong>🏠 СИСТЕМА ОТОПЛЕНИЯ</strong></p>
-                        <p lang="ru" class="lang-content">1. Котёл сжигает газ/масло (нагревание)</p>
-                        <p lang="ru" class="lang-content">2. Горячая вода течёт в трубах (конвекция)</p>
-                        <p lang="ru" class="lang-content">3. Радиатор отдаёт тепло излучением + теплопроводностью</p>
-                        <p lang="ru" class="lang-content">4. Воздух в комнате нагревается</p>
-                        <p lang="ru" class="lang-content"><strong>ПРИМЕР:</strong> Водяной радиатор = теплопроводность + излучение</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>⚡ ЭЛЕКТР ӨНДІКТІГІНЕҢ</strong></p>
-                        <p lang="kk" class="lang-content">• Электр спирали ыстықталады (өндіктігінең)</p>
-                        <p lang="kk" class="lang-content">• Су ысындарды (өндіктігінең)</p>
-                        <p lang="kk" class="lang-content">• Ауа ысындарды (конвекция)</p>
-                        <p lang="kk" class="lang-content">• Мысал: Электр чайнигі, өндіктігінің, фен</p>
-
-                        <p lang="en" class="lang-content"><strong>⚡ ELECTRIC HEATING</strong></p>
-                        <p lang="en" class="lang-content">• Electric coil heats up (conduction)</p>
-                        <p lang="en" class="lang-content">• Water heats directly (conduction)</p>
-                        <p lang="en" class="lang-content">• Air heats (convection)</p>
-                        <p lang="en" class="lang-content">• Example: Electric kettle, stove, hair dryer</p>
-
-                        <p lang="ru" class="lang-content"><strong>⚡ ЭЛЕКТРИЧЕСКОЕ ОТОПЛЕНИЕ</strong></p>
-                        <p lang="ru" class="lang-content">• Электрическая спираль нагревается (теплопроводность)</p>
-                        <p lang="ru" class="lang-content">• Вода нагревается (теплопроводность)</p>
-                        <p lang="ru" class="lang-content">• Воздух нагревается (конвекция)</p>
-                        <p lang="ru" class="lang-content">• Пример: Электрический чайник, плита, фен</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #bbf7d0; border-radius: 1rem; border-top: 4px solid #22c55e;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-green-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-green-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-green-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Табиғатта: Күндіктігінің сәулелене Жерді (климат), су циклы ағын. Технике: Өндіктігінің (батарея), конвекция (ауа), сәулеленең (инфракрас). Үш ертегелі бәлгелі орыны табыс! Табиғат пен техника бірдей заңы құрсинди!</p>
-            <p lang="en" class="lang-content text-sm">In nature: Solar radiation heats Earth (climate), water cycle flows. In technology: Conduction (radiators), convection (air), radiation (infrared). All three methods work together! Nature and technology follow same laws!</p>
-            <p lang="ru" class="lang-content text-sm">В природе: Солнечное излучение нагревает Землю (климат), водный цикл течёт. В технике: Теплопроводность (радиаторы), конвекция (воздух), излучение (инфракрас). Все три способа работают вместе! Природа и техника следуют одним законам!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

@@ -21,7 +21,8 @@ import subprocess
 import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DIST_DIR = os.path.join(SCRIPT_DIR, 'dist')
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+DIST_DIR = os.path.join(PROJECT_ROOT, 'builds', 'android')
 
 
 def ensure_java_home():
@@ -222,6 +223,7 @@ def main():
     print(f"✅ Успешно: {success}  ❌ Ошибок: {failed}")
     if success > 0:
         print(f"📁 Готовые APK: {DIST_DIR}")
+        print(f"   (EXE сборки: {os.path.join(PROJECT_ROOT, 'builds', 'windows')})")
     print(f"{'=' * 50}")
 
 

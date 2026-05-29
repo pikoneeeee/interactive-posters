@@ -1,417 +1,218 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Сила трения</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-            overflow-x: hidden;
-            color: #0f172a; /* slate-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Slate Theme */
-        .header-card {
-            background-color: #334155; /* slate-700 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(51, 65, 85, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #1e293b; /* slate-800 */
-            border-bottom: 3px solid #94a3b8; /* slate-400 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #e2e8f0; /* slate-200 */
-            border-radius: 1rem;
-            border-top: 4px solid #475569; /* slate-600 */
-        }
-         .term {
-            font-weight: bold;
-            color: #334155; /* slate-700 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #334155;
-            background-color: #ffffff;
-            color: #334155;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #f1f5f9;
-        }
-        .lang-btn.active {
-            background-color: #334155;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 200px;
-            margin: 15px 0;
-            border: 1px solid #cbd5e1;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #334155;
-            text-anchor: middle;
-        }
-        .svg-force-arrow-red {
-            stroke: #dc2626; /* Красный для трения */
-            stroke-width: 4;
-            marker-end: url(#arrowhead-red);
-        }
-        .svg-motion-arrow-green {
-            stroke: #16a34a; /* Зеленый для движения */
-            stroke-width: 4;
-            marker-end: url(#arrowhead-green);
-        }
-        .svg-magnify {
-            fill: #f1f5f9;
-            stroke: #64748b;
-            stroke-width: 2;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Давление твёрдых тел</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-gray-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Қысым</span>
+<span lang="en" class="lang-content">Grade 7 · Pressure</span>
+<span lang="ru" class="lang-content">7 класс · Давление</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Қатты денелердің қысымы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Pressure of solid bodies</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Давление твёрдых тел</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Қысым деген не?</span>
+<span lang="en" class="lang-content">📏 What is pressure?</span>
+<span lang="ru" class="lang-content">📏 Что такое давление?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Қарда жүрген кезде шаңғымен жүрсе — батпайсыз, ал қарапайым аяқкиіммен — батасыз. Сізде сол масса, бірақ <b>әсер ету ауданы</b> әртүрлі. <b class="text-indigo-700">Қысым</b> — күштің <b>аудан бірлігіне</b> түсетін мөлшерін көрсететін шама. Шынында да маңыздысы <b>күштің шамасы емес</b>, ол <b>қандай аудан бойынша</b> бөлінетіні.</span>
+<span lang="en" class="lang-content">In snow, with skis you don't sink, with shoes you do. Same mass — different <b>contact area</b>. <b class="text-indigo-700">Pressure</b> shows the force <b>per unit area</b>. What matters isn't just the magnitude of the force — it's how it's <b>spread over the area</b>.</span>
+<span lang="ru" class="lang-content">На снегу: на лыжах не проваливаешься, а в ботинках — да. Масса та же, но <b>площадь опоры</b> разная. <b class="text-indigo-700">Давление</b> — это сила, приходящаяся на <b>единицу площади</b>. Важна не сама величина силы, а то, на какую <b>площадь</b> она распределена.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ҮЙКЕЛІС КҮШІ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">FRICTION FORCE</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">СИЛА ТРЕНИЯ</h1>
+<div class="card-accent rounded-2xl p-5">
+<div class="formula text-center" style="font-size:1.8rem">
+<span class="var">p</span> = <span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1.3rem"><span class="var" style="display:block;border-bottom:2px solid #fde68a">F</span><span class="var" style="display:block">S</span></span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">p</b> — қысым, <span class="unit-pill">Па</span> (паскаль)</span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">p</b> — pressure, <span class="unit-pill">Pa</span> (pascal)</span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">p</b> — давление, <span class="unit-pill">Па</span> (паскаль)</span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">F</b> — күш, <span class="unit-pill">Н</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">F</b> — force, <span class="unit-pill">N</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">F</b> — сила, <span class="unit-pill">Н</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">S</b> — аудан, <span class="unit-pill">м²</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">S</b> — area, <span class="unit-pill">m²</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">S</b> — площадь, <span class="unit-pill">м²</span></span>
+</p>
+</div>
+<p class="text-xs text-slate-600 mt-3 text-center"><b>1 Па = 1 Н/м²</b> · <span lang="kk" class="lang-content">француз ғалымы Блез Паскаль құрметіне</span><span lang="en" class="lang-content">named after Blaise Pascal</span><span lang="ru" class="lang-content">в честь Блеза Паскаля</span></p>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-slate-100">Қозғалысқа кедергі жасайтын күш.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-slate-100">The force that opposes motion.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-slate-100">Сила, препятствующая движению.</p>
-        </header>
+<div class="card-warm rounded-custom p-6 flex flex-col items-center justify-center">
+<svg viewBox="0 0 200 180" style="width:160px">
+<polygon points="100,20 180,160 20,160" fill="#fef3c7" stroke="#b45309" stroke-width="3"/>
+<text x="100" y="70" text-anchor="middle" fill="#b45309" font-weight="900" font-size="42" font-family="serif">F</text>
+<line x1="40" y1="100" x2="160" y2="100" stroke="#b45309" stroke-width="2"/>
+<text x="60" y="140" text-anchor="middle" fill="#b45309" font-weight="900" font-size="32" font-family="serif">p</text>
+<text x="140" y="140" text-anchor="middle" fill="#b45309" font-weight="900" font-size="32" font-family="serif">S</text>
+</svg>
+<p class="text-sm text-slate-700 mt-2 text-center"><b>p = F/S · F = pS · S = F/p</b></p>
+</div></div></section>
 
-        <!-- 1. ҮЙКЕЛІС ДЕГЕНІМІЗ НЕ? -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Үйкеліс дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Friction?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое трение?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🦶 Әсер ауданы — бәрін шешеді</span>
+<span lang="en" class="lang-content">🦶 Contact area decides everything</span>
+<span lang="ru" class="lang-content">🦶 Площадь решает всё</span></h2>
+<div class="card rounded-custom p-6">
+<div class="svg-wrap mb-3">
+<svg viewBox="0 0 720 240" style="width:100%;max-width:720px;margin:auto">
+<!-- Снег -->
+<rect x="0" y="180" width="720" height="60" fill="#e0f2fe"/>
+<text x="20" y="225" font-size="11" fill="#0c4a6e">
+<tspan class="lang-content" lang="kk">қар</tspan><tspan class="lang-content" lang="en">snow</tspan><tspan class="lang-content" lang="ru">снег</tspan>
+</text>
 
-            <div class="rule-card border-t-slate-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Үйкеліс күші</span> – денелер жанасқанда пайда болатын және олардың салыстырмалы қозғалысына <strong>қарсы</strong> бағытталған күш.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Friction</span> is a force that arises when bodies touch and acts <strong>against</strong> their relative motion.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Сила трения</span> – это сила, возникающая при соприкосновении тел и направленная <strong>против</strong> их относительного движения.
-                </p>
+<!-- Слон в ботинках -->
+<g>
+<ellipse cx="120" cy="220" rx="40" ry="30" fill="#94a3b8"/>
+<text x="120" y="140" text-anchor="middle" font-size="40">🐘</text>
+<text x="120" y="170" text-anchor="middle" font-size="11" font-weight="700">m = 5000 кг</text>
+<text x="120" y="220" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">S = 0,1 м²</text>
+<text x="120" y="245" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="700">p = 5·10⁵ Па</text>
+</g>
 
-                <!-- Illustration 1: Microscopic View -->
-                <svg class="illustration-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                        <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a" />
-                        </marker>
-                    </defs>
+<!-- Девушка на каблуках -->
+<g transform="translate(280,0)">
+<rect x="40" y="200" width="80" height="20" fill="#f43f5e"/>
+<rect x="73" y="220" width="14" height="20" fill="#f43f5e"/>
+<text x="80" y="140" text-anchor="middle" font-size="40">👠</text>
+<text x="80" y="170" text-anchor="middle" font-size="11" font-weight="700">m = 60 кг</text>
+<text x="80" y="245" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="700">p = 30·10⁶ Па!</text>
+<text x="80" y="262" text-anchor="middle" fill="#64748b" font-size="10">
+<tspan class="lang-content" lang="kk">S = каблук 1 см²</tspan>
+<tspan class="lang-content" lang="en">S = heel 1 cm²</tspan>
+<tspan class="lang-content" lang="ru">S = каблук 1 см²</tspan>
+</text>
+</g>
 
-                    <!-- Block -->
-                    <rect x="50" y="50" width="100" height="60" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
-                    <text x="100" y="85" class="svg-label" font-weight="bold">BLOCK</text>
+<!-- Танк -->
+<g transform="translate(500,0)">
+<rect x="20" y="180" width="180" height="30" fill="#475569"/>
+<rect x="60" y="160" width="100" height="20" fill="#475569"/>
+<text x="110" y="140" text-anchor="middle" font-size="40">🪖</text>
+<text x="110" y="170" text-anchor="middle" font-size="11" font-weight="700">m = 50 т</text>
+<text x="110" y="245" text-anchor="middle" fill="#16a34a" font-size="13" font-weight="700">p = 0,5·10⁵ Па</text>
+<text x="110" y="262" text-anchor="middle" fill="#64748b" font-size="10">
+<tspan class="lang-content" lang="kk">шынжыр табан кең</tspan>
+<tspan class="lang-content" lang="en">tracks are wide</tspan>
+<tspan class="lang-content" lang="ru">широкие гусеницы</tspan>
+</text>
+</g>
+</svg>
+</div>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content"><b>Тосын факт:</b> биік өкшелі етіктегі қыздың қарға түсіретін қысымы — пілден де үлкен! Себебі өкше ауданы өте кіші. Танк ауыр болғанмен — шынжыр табаны кең, сондықтан қарға батпайды.</span>
+<span lang="en" class="lang-content"><b>Surprising fact:</b> a woman in stiletto heels presses on the snow harder than an elephant! Heels have tiny area. A tank, though heavy, has wide tracks — doesn't sink.</span>
+<span lang="ru" class="lang-content"><b>Удивительный факт:</b> девушка на шпильках давит на снег сильнее, чем слон! Каблук — маленькая площадь. Танк, хоть и тяжёлый — широкие гусеницы, не проваливается.</span></p>
+</div>
+</section>
 
-                    <!-- Surface -->
-                    <line x1="10" y1="110" x2="390" y2="110" stroke="#94a3b8" stroke-width="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠 Қысымды үлкейту/азайту жолдары</span>
+<span lang="en" class="lang-content">🛠 Increasing/decreasing pressure</span>
+<span lang="ru" class="lang-content">🛠 Как изменить давление</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-rose rounded-custom p-6">
+<p class="heading-font text-lg text-rose-700 mb-3">
+<span lang="kk" class="lang-content">⬆️ Қысымды үлкейту үшін</span>
+<span lang="en" class="lang-content">⬆️ To increase pressure</span>
+<span lang="ru" class="lang-content">⬆️ Увеличить давление</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>Ауданды азайту</b> (S ↓)</span><span lang="en" class="lang-content"><b>Decrease area</b> (S ↓)</span><span lang="ru" class="lang-content"><b>Уменьшить площадь</b> (S ↓)</span></li>
+<li><span lang="kk" class="lang-content">Пышақ, шеге, ине, балта — <b>үшкір</b> ұштары бар</span><span lang="en" class="lang-content">Knife, nail, needle, axe — <b>sharp</b> edges</span><span lang="ru" class="lang-content">Нож, гвоздь, игла, топор — <b>острые</b> края</span></li>
+<li><span lang="kk" class="lang-content">Жыртқыштардың тістері мен тырнақтары</span><span lang="en" class="lang-content">Predator teeth and claws</span><span lang="ru" class="lang-content">Зубы и когти хищников</span></li>
+<li><span lang="kk" class="lang-content">Көлік шынайларының жіңішке кенерлері</span><span lang="en" class="lang-content">Thin edges of skates</span><span lang="ru" class="lang-content">Тонкие лезвия коньков</span></li>
+</ul>
+</div>
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-lg text-emerald-700 mb-3">
+<span lang="kk" class="lang-content">⬇️ Қысымды азайту үшін</span>
+<span lang="en" class="lang-content">⬇️ To decrease pressure</span>
+<span lang="ru" class="lang-content">⬇️ Уменьшить давление</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>Ауданды ұлғайту</b> (S ↑)</span><span lang="en" class="lang-content"><b>Increase area</b> (S ↑)</span><span lang="ru" class="lang-content"><b>Увеличить площадь</b> (S ↑)</span></li>
+<li><span lang="kk" class="lang-content">Тракторлар мен танкілерде <b>шынжыр табан</b></span><span lang="en" class="lang-content">Tractors and tanks use <b>tracks</b></span><span lang="ru" class="lang-content">У тракторов и танков — <b>гусеницы</b></span></li>
+<li><span lang="kk" class="lang-content">Шаңғы, парашют</span><span lang="en" class="lang-content">Skis, parachute</span><span lang="ru" class="lang-content">Лыжи, парашют</span></li>
+<li><span lang="kk" class="lang-content">Үлкен <b>табаны</b> бар жүк машиналары</span><span lang="en" class="lang-content">Trucks with wide <b>tyres</b></span><span lang="ru" class="lang-content">Грузовики с широкими <b>шинами</b></span></li>
+<li><span lang="kk" class="lang-content">Іргетас (фундамент) — ғимарат массасын кең аудан бойынша таратады</span><span lang="en" class="lang-content">Foundations spread the building's weight</span><span lang="ru" class="lang-content">Фундамент распределяет вес здания</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                    <!-- Motion Arrow -->
-                    <line x1="150" y1="80" x2="200" y2="80" class="svg-motion-arrow-green"/>
-                    <text x="175" y="70" font-size="12" fill="#16a34a" font-weight="bold">v (Motion)</text>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Массасы 60 кг адамның екі аяғы орнында тұр. Бір аяқтың табанының ауданы 200 см². Адамның еденге түсіретін қысымын табыңыз.</span>
+<span lang="en" class="lang-content">📘 Problem: A 60 kg person stands on two feet. One foot has a sole area of 200 cm². Find the pressure on the floor.</span>
+<span lang="ru" class="lang-content">📘 Задача: Человек массой 60 кг стоит на двух ногах. Площадь подошвы одной ноги — 200 см². Найти давление на пол.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген (СИ):</span><span lang="en" class="lang-content">Given (SI):</span><span lang="ru" class="lang-content">Дано (СИ):</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m = 60 кг</li>
+<li>S₁ = 200 см² = 0,02 м²</li>
+<li>S = 2·S₁ = <b>0,04 м²</b></li>
+<li>g = 10 Н/кг</li>
+<li>p — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.05rem">
+<span class="var">F</span> = <span class="var">mg</span> = <span class="num">60</span>·<span class="num">10</span> = <span class="num">600</span> <span class="unit">Н</span>
+<br/><span class="var">p</span> = <span class="var">F</span>/<span class="var">S</span> = <span class="num">600</span>/<span class="num">0,04</span>
+<br/><span class="var">p</span> = <span class="num">15 000</span> <span class="unit">Па</span> = <span class="num">15</span> <span class="unit">кПа</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ 15 000 Па = 15 кПа</span><span lang="en" class="lang-content">✅ 15 000 Pa = 15 kPa</span><span lang="ru" class="lang-content">✅ 15 000 Па = 15 кПа</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <!-- Friction Arrow -->
-                    <line x1="50" y1="110" x2="10" y2="110" class="svg-force-arrow-red"/>
-                    <text x="30" y="130" font-size="12" fill="#dc2626" font-weight="bold">F_friction</text>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">p = F/S</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Аудан бірлігіне түсетін күш</span><span lang="en" class="lang-content">Force per unit area</span><span lang="ru" class="lang-content">Сила на единицу площади</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔢</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">[p] = Па</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">1 Па = 1 Н/м²</span><span lang="en" class="lang-content">1 Pa = 1 N/m²</span><span lang="ru" class="lang-content">1 Па = 1 Н/м²</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔪</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">S ↓ → p ↑</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Аудан кіші — қысым көп</span><span lang="en" class="lang-content">Smaller area — more pressure</span><span lang="ru" class="lang-content">Меньше площадь — больше давление</span></p></div>
+</div></footer>
 
-                    <!-- Magnifying Glass Effect -->
-                    <g transform="translate(250, 40)">
-                        <circle cx="60" cy="60" r="50" class="svg-magnify" fill="#fff"/>
-                        <!-- Top Rough Surface (Block) -->
-                        <path d="M 20 60 L 30 70 L 40 55 L 50 65 L 60 50 L 70 65 L 80 55 L 90 70 L 100 60 L 100 20 L 20 20 Z" fill="#e2e8f0" stroke="#64748b"/>
-                        <!-- Bottom Rough Surface (Ground) -->
-                        <path d="M 20 62 L 30 72 L 40 57 L 50 67 L 60 52 L 70 67 L 80 57 L 90 72 L 100 62 L 100 100 L 20 100 Z" fill="#f1f5f9" stroke="#94a3b8"/>
-                        <!-- Handle -->
-                        <path d="M 100 95 L 130 125" stroke="#334155" stroke-width="8" stroke-linecap="round"/>
-
-                        <text x="60" y="130" class="svg-label" font-size="12">Zoom</text>
-                    </g>
-                </svg>
-
-                <p lang="kk" class="lang-content mt-2 text-sm text-gray-600">Себебі: Беттердің кедір-бұдырлығы және молекулалардың өзара тартылуы.</p>
-                <p lang="en" class="lang-content mt-2 text-sm text-gray-600">Cause: Surface roughness and molecular attraction.</p>
-                <p lang="ru" class="lang-content mt-2 text-sm text-gray-600">Причина: Шероховатость поверхностей и взаимное притяжение молекул.</p>
-            </div>
-        </section>
-
-        <!-- 2. ҮЙКЕЛІС ТҮРЛЕРІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Үйкеліс түрлері</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Types of Friction</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Виды трения</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 1. Static -->
-                <div class="rule-card border-t-red-500">
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="kk">1. Тыныштық үйкелісі</h3>
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="en">1. Static Friction</h3>
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="ru">1. Трение покоя</h3>
-
-                    <svg class="w-full h-24 mb-2" viewBox="0 0 100 80">
-                        <rect x="20" y="40" width="40" height="30" fill="#fca5a5" stroke="#dc2626"/>
-                        <line x1="0" y1="70" x2="100" y2="70" stroke="#000"/>
-                        <!-- Person trying to push -->
-                        <circle cx="10" cy="40" r="5" fill="#475569"/>
-                        <line x1="10" y1="45" x2="20" y2="55" stroke="#475569" stroke-width="2"/>
-                        <text x="50" y="30" font-size="10" fill="#dc2626" text-anchor="middle">Ең үлкен / Max</text>
-                    </svg>
-                    <p lang="kk" class="lang-content text-sm text-center">Денені орнынан қозғау ең қиын.</p>
-                    <p lang="en" class="lang-content text-sm text-center">Hardest to start moving.</p>
-                    <p lang="ru" class="lang-content text-sm text-center">Сдвинуть с места труднее всего.</p>
-                </div>
-
-                <!-- 2. Sliding -->
-                <div class="rule-card border-t-orange-500">
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="kk">2. Сырғанау үйкелісі</h3>
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="en">2. Sliding Friction</h3>
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="ru">2. Трение скольжения</h3>
-
-                    <svg class="w-full h-24 mb-2" viewBox="0 0 100 80">
-                        <rect x="30" y="40" width="40" height="30" fill="#fdba74" stroke="#d97706"/>
-                        <line x1="0" y1="70" x2="100" y2="70" stroke="#000"/>
-                         <!-- Motion lines -->
-                        <line x1="75" y1="55" x2="90" y2="55" stroke="#16a34a" marker-end="url(#arrowhead-green)"/>
-                    </svg>
-                    <p lang="kk" class="lang-content text-sm text-center">Тыныштық үйкелісінен азырақ.</p>
-                    <p lang="en" class="lang-content text-sm text-center">Less than static friction.</p>
-                    <p lang="ru" class="lang-content text-sm text-center">Меньше, чем трение покоя.</p>
-                </div>
-
-                <!-- 3. Rolling -->
-                <div class="rule-card border-t-green-500">
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="kk">3. Домалау үйкелісі</h3>
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="en">3. Rolling Friction</h3>
-                    <h3 class="font-bold text-lg text-center mb-2 lang-content" lang="ru">3. Трение качения</h3>
-
-                    <svg class="w-full h-24 mb-2" viewBox="0 0 100 80">
-                        <circle cx="50" cy="55" r="15" fill="#86efac" stroke="#16a34a"/>
-                        <line x1="0" y1="70" x2="100" y2="70" stroke="#000"/>
-                        <!-- Motion lines -->
-                        <line x1="70" y1="55" x2="90" y2="55" stroke="#16a34a" marker-end="url(#arrowhead-green)"/>
-                    </svg>
-                    <p lang="kk" class="lang-content text-sm text-center">Ең аз үйкеліс (дөңгелек).</p>
-                    <p lang="en" class="lang-content text-sm text-center">The least friction (wheels).</p>
-                    <p lang="ru" class="lang-content text-sm text-center">Самое маленькое (колеса).</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. ПАЙДАСЫ МЕН ЗИЯНЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Пайдасы мен Зияны</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Pros and Cons</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Польза и Вред</h2>
-
-            <div class="rule-card border-t-gray-500">
-                <div class="flex flex-col md:flex-row gap-6">
-                    <!-- Useful -->
-                    <div class="flex-1 bg-green-50 p-4 rounded-lg border border-green-200">
-                        <h4 class="font-bold text-green-800 text-lg mb-2 text-center" lang="kk">Пайдалы (Арттыру керек)</h4>
-                        <h4 class="font-bold text-green-800 text-lg mb-2 text-center" lang="en">Useful (Increase it)</h4>
-                        <h4 class="font-bold text-green-800 text-lg mb-2 text-center" lang="ru">Полезное (Увеличить)</h4>
-                        <ul class="list-disc pl-5 text-sm text-gray-700">
-                            <li lang="kk">Жүру, зат ұстау</li>
-                            <li lang="en">Walking, holding things</li>
-                            <li lang="ru">Ходьба, удержание предметов</li>
-                            <li lang="kk">Көлік тежегіші (Тормоз)</li>
-                            <li lang="en">Brakes</li>
-                            <li lang="ru">Тормоза автомобиля</li>
-                        </ul>
-                         <!-- Illustration: Shoe -->
-                        <svg class="w-full h-20 mt-2" viewBox="0 0 100 50">
-                             <path d="M 10 40 L 30 20 L 70 20 L 90 40 Z" fill="#bbf7d0"/>
-                             <line x1="10" y1="45" x2="90" y2="45" stroke="#16a34a" stroke-width="2" stroke-dasharray="2"/>
-                             <text x="50" y="15" font-size="10" text-anchor="middle" fill="#166534">Grip (Ұстасу)</text>
-                        </svg>
-                    </div>
-
-                    <!-- Harmful -->
-                    <div class="flex-1 bg-red-50 p-4 rounded-lg border border-red-200">
-                        <h4 class="font-bold text-red-800 text-lg mb-2 text-center" lang="kk">Зиянды (Азайту керек)</h4>
-                        <h4 class="font-bold text-red-800 text-lg mb-2 text-center" lang="en">Harmful (Decrease it)</h4>
-                        <h4 class="font-bold text-red-800 text-lg mb-2 text-center" lang="ru">Вредное (Уменьшить)</h4>
-                         <ul class="list-disc pl-5 text-sm text-gray-700">
-                            <li lang="kk">Деттің қызуы, тозуы</li>
-                            <li lang="en">Heating, wear and tear</li>
-                            <li lang="ru">Нагрев, износ деталей</li>
-                            <li lang="kk">Энергия шығыны</li>
-                            <li lang="en">Energy loss</li>
-                            <li lang="ru">Потеря энергии</li>
-                        </ul>
-                         <!-- Illustration: Oil -->
-                         <svg class="w-full h-20 mt-2" viewBox="0 0 100 50">
-                             <rect x="20" y="30" width="60" height="10" fill="#94a3b8"/> <!-- Surface 1 -->
-                             <rect x="20" y="10" width="60" height="10" fill="#94a3b8"/> <!-- Surface 2 -->
-                             <!-- Oil droplets -->
-                             <circle cx="30" cy="25" r="3" fill="#fbbf24"/>
-                             <circle cx="50" cy="25" r="3" fill="#fbbf24"/>
-                             <circle cx="70" cy="25" r="3" fill="#fbbf24"/>
-                             <text x="50" y="8" font-size="8" text-anchor="middle" fill="#92400e">Oil (Майлау)</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-slate-800">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-slate-800">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-slate-800">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-slate-700">
-                Үйкеліссіз біз жүре алмас едік, бірақ ол тетіктерді тоздырады. Домалау үйкелісі сырғанау үйкелісінен әлдеқайда аз (сондықтан дөңгелек ойлап табылған!).
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-slate-700">
-                Without friction, we couldn't walk, but it wears out machinery. Rolling friction is much less than sliding friction (that's why the wheel was invented!).
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-slate-700">
-                Без трения мы не могли бы ходить, но оно изнашивает механизмы. Трение качения намного меньше трения скольжения (поэтому придумали колесо!).
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

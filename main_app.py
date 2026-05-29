@@ -3,7 +3,8 @@ import sys
 import os
 import json
 import logging
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton
+import ctypes
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QMessageBox
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWebEngineCore import QWebEngineSettings, QWebEngineProfile, QWebEngineScript
 from PySide6.QtWebChannel import QWebChannel
@@ -179,6 +180,28 @@ class MainWindow(QMainWindow):
         self.btn_back_overlay.hide()  # Скрываем при запуске
         # ================================
 
+        # === КНОПКА "DEVICE ID" (всегда видна, верхний правый угол) ===
+        self.btn_device_id = QPushButton("ℹ ID", self.central_widget)
+        self.btn_device_id.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_device_id.setStyleSheet("""
+            QPushButton {
+                background-color: rgba(0, 0, 0, 0.25);
+                color: rgba(255, 255, 255, 0.55);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 6px;
+                font-size: 11px;
+                padding: 3px 8px;
+            }
+            QPushButton:hover {
+                background-color: rgba(99, 102, 241, 0.7);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+        """)
+        self.btn_device_id.clicked.connect(self._show_device_id)
+        self.btn_device_id.show()
+        # ===============================================================
+
         self.layout.addWidget(self.web_view)
         # === Overlay навигация (стрелки поверх плаката) ===
         # === КНОПКИ НАВИГАЦИИ (не перекрывают плакат) ===
@@ -268,6 +291,46 @@ class MainWindow(QMainWindow):
         self.web_view.page().scripts().insert(lang_script)
         # =======================================================
 
+        # === Защита от копирования текста ===
+        anticopy_script = QWebEngineScript()
+        anticopy_script.setName("anti-copy-protection")
+        anticopy_script.setInjectionPoint(QWebEngineScript.InjectionPoint.DocumentReady)
+        anticopy_script.setWorldId(QWebEngineScript.ScriptWorldId.MainWorld)
+        anticopy_script.setRunsOnSubFrames(True)
+        anticopy_script.setSourceCode("""
+            (function() {
+                var style = document.createElement('style');
+                style.textContent =
+                    '* { -webkit-user-select: none !important; -moz-user-select: none !important; ' +
+                    '-ms-user-select: none !important; user-select: none !important; ' +
+                    '-webkit-touch-callout: none !important; }' +
+                    '::selection { background: transparent !important; }' +
+                    '::-moz-selection { background: transparent !important; }' +
+                    'input, textarea { -webkit-user-select: text !important; user-select: text !important; }';
+                document.head.appendChild(style);
+
+                document.addEventListener('copy', function(e){ e.preventDefault(); }, true);
+                document.addEventListener('cut', function(e){ e.preventDefault(); }, true);
+                document.addEventListener('selectstart', function(e){
+                    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+                    e.preventDefault();
+                }, true);
+                document.addEventListener('contextmenu', function(e){ e.preventDefault(); }, true);
+                document.addEventListener('dragstart', function(e){ e.preventDefault(); }, true);
+
+                // Блокируем клавиатурные сочетания: Ctrl+C/A/U/S/P, F12
+                document.addEventListener('keydown', function(e){
+                    if (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+                    if (e.ctrlKey && ['c','a','u','s','p'].indexOf(e.key.toLowerCase()) !== -1) {
+                        e.preventDefault();
+                    }
+                    if (e.key === 'F12') e.preventDefault();
+                }, true);
+            })();
+        """)
+        self.web_view.page().scripts().insert(anticopy_script)
+        # ====================================
+
         # Загрузка данных и навигация
         self.load_all_data()
         self.navigate()
@@ -276,6 +339,12 @@ class MainWindow(QMainWindow):
         """Вызывается после полной загрузки страницы"""
         if not ok:
             return
+
+        if self.current_screen == 'activation':
+            device_id = licensing.get_device_id()
+            self.web_view.page().runJavaScript(
+                f"document.getElementById('deviceId').textContent='{device_id}';"
+            )
 
         if self.current_screen == 'poster':
             # Устанавливаем правильный язык для обоих типов плакатов
@@ -331,6 +400,15 @@ class MainWindow(QMainWindow):
             render_widget.update()
             render_widget.repaint()
 
+        # ФИКС: микро-resize пинает Chromium compositor чтобы он пушил кадры.
+        # Без этого после смены URL стрелками плакат остаётся "пустым" до взаимодействия.
+        if self._repaint_ticks in (1, 3, 6, 12):
+            w = self.web_view.width()
+            h = self.web_view.height()
+            if w > 0 and h > 0:
+                self.web_view.resize(w, h + 1)
+                self.web_view.resize(w, h)
+
         # Поднять overlay-кнопки
         if hasattr(self, 'nav_left') and self.nav_left.isVisible():
             self.nav_left.raise_()
@@ -362,15 +440,33 @@ class MainWindow(QMainWindow):
         if hasattr(self, 'btn_next'):
             self.btn_next.move(16, btn_y)
 
-        # 3. Кнопка «НАЗАД» — ВСЕГДА поверх всего (последний raise)
+        # 3. Кнопка «НАЗАД»
         if hasattr(self, 'btn_back_overlay'):
             self.btn_back_overlay.setGeometry(12, 12, 120, 40)
             self.btn_back_overlay.raise_()
 
+        # 4. Кнопка Device ID — верхний правый угол
+        if hasattr(self, 'btn_device_id'):
+            self.btn_device_id.setGeometry(w - 72, 12, 60, 26)
+            self.btn_device_id.raise_()
+
+    def _show_device_id(self):
+        """Показать Device ID в диалоге"""
+        device_id = licensing.get_device_id()
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Device ID")
+        msg.setText(
+            f"<b>ID этого устройства:</b><br><br>"
+            f"<span style='font-family:monospace; font-size:18px; letter-spacing:3px;'>"
+            f"{device_id}</span><br><br>"
+            f"<small>Сообщите этот ID для получения лицензионного ключа</small>"
+        )
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
+
     def load_all_data(self) -> None:
         """Загружаем структуру предметов и переводы"""
         try:
-            # Логирование путей
             print(f"\n{'=' * 80}")
             print(f"🔍 DEBUG ЗАГРУЗКА:")
             print(f"{'=' * 80}")
@@ -394,7 +490,6 @@ class MainWindow(QMainWindow):
             if os.path.exists(subjects_file):
                 with open(subjects_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                    # Преобразуем список в словарь для удобного доступа
                     if isinstance(data, dict) and 'subjects' in data:
                         self.subjects_structure = {s['id']: s for s in data['subjects']}
                     else:
@@ -859,4 +954,18 @@ if __name__ == '__main__':
     main_window = MainWindow()
     main_window.resize(1280, 800)
     main_window.show()
+
+    # ── Защита от скриншотов / записи экрана ──────────────────────
+    # SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE) делает окно
+    # невидимым для PrintScreen, Snipping Tool, OBS, любых средств захвата.
+    # Работает на уровне DWM (Desktop Window Manager).
+    if sys.platform == 'win32':
+        try:
+            hwnd = int(main_window.winId())
+            WDA_EXCLUDEFROMCAPTURE = 0x00000011
+            ctypes.windll.user32.SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE)
+            logging.info('Защита от захвата экрана активирована (WDA_EXCLUDEFROMCAPTURE)')
+        except Exception as e:
+            logging.warning(f'Не удалось установить защиту от захвата: {e}')
+
     sys.exit(app.exec())

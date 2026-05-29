@@ -1,276 +1,187 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сәулеленү - Излучение</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fef08a 0%, #fef3c7 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #eab308 0%, #a16207 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #a16207; border-bottom: 3px solid #fef3c7; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #eab308; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #eab308; background: white; color: #eab308; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #eab308; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #eab308; color: white; }
-        .info-box { background: linear-gradient(135deg, #fef3c7 0%, #fef08a 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #eab308; margin: 10px 0; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .example-card { background: #fef9e7; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #eab308; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Параллельное соединение проводников</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-yellow-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр тогы</span>
+<span lang="en" class="lang-content">Grade 9 · Electric current</span>
+<span lang="ru" class="lang-content">9 класс · Электрический ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Өткізгіштердің параллель қосылуы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Parallel connection of conductors</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Параллельное соединение проводников</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Сәулеленү (Излучение)</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Radiation</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Излучение</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-yellow-100">Ішінгі энергиясы электромагниттік түрінде ауыстырылады. Сәулеленулі теңіздіктің биіктігі = c/ν. Абсолютты қара дене = максимум сәулеленең. ТОЛЫҚ ТЕОРИЯ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-yellow-100">Internal energy transferred as electromagnetic waves. Wavelength λ = c/ν. Black body = maximum radiation. COMPLETE THEORY!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-yellow-100">Внутренняя энергия передаётся электромагнитными волнами. Длина волны λ = c/ν. Абсолютно чёрное тело = максимальное излучение. ПОЛНАЯ ТЕОРИЯ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⫴ Параллель қосылу дегеніміз не?</span>
+<span lang="en" class="lang-content">⫴ What is parallel connection?</span>
+<span lang="ru" class="lang-content">⫴ Что такое параллельное соединение?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Параллель қосылу</b> — өткізгіштер екі <b>ортақ түйін</b> арқылы жалғанады. Әр элементте <b>өз жолы</b> бар, тоқ оларды <b>бір-біріне тәуелсіз</b> өтеді. Барлық параллель элементтер бір <b>«құбыр желісіне»</b> ұқсас: суды бөлгенде әр құбыр <b>бір қысыммен</b> жұмыс істейді. <b>Үй сымдары</b>, барлық розеткалар — параллель!</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Parallel connection</b> — conductors share two <b>common junctions</b>. Each element has its <b>own path</b>; current passes through them <b>independently</b>. Like a <b>«pipe manifold»</b>: water at the same pressure splits into many branches. <b>Home wiring</b>, sockets — parallel!</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Параллельное соединение</b> — проводники соединены двумя <b>общими узлами</b>. У каждого — <b>свой путь</b>, ток проходит <b>независимо</b>. Это как <b>«трубопровод-разветвитель»</b>: вода под одним давлением раздаётся по веткам. <b>Домашняя проводка</b>, розетки — всё параллельно!</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. СӘУЛЕЛЕНҮНІҢ АНЫҚТАМАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. DEFINITION OF RADIATION</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение излучения</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">🔑 <span lang="kk" class="lang-content">Параллель 3 заңы:</span><span lang="en" class="lang-content">3 parallel laws:</span><span lang="ru" class="lang-content">3 закона параллельного:</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
+<div class="bg-blue-50 rounded-xl p-3"><p class="font-bold text-blue-700">I</p><p class="text-base font-bold">I = I₁ + I₂</p><p class="text-xs"><span lang="kk" class="lang-content">бөлінеді</span><span lang="en" class="lang-content">splits</span><span lang="ru" class="lang-content">делится</span></p></div>
+<div class="bg-amber-50 rounded-xl p-3"><p class="font-bold text-amber-700">U</p><p class="text-base font-bold">U = U₁ = U₂</p><p class="text-xs"><span lang="kk" class="lang-content">барлық тармақта бірдей</span><span lang="en" class="lang-content">same on each</span><span lang="ru" class="lang-content">одинаково на каждой</span></p></div>
+<div class="bg-rose-50 rounded-xl p-3"><p class="font-bold text-rose-700">R</p><p class="text-base font-bold">1/R = 1/R₁ + 1/R₂</p><p class="text-xs"><span lang="kk" class="lang-content">азаяды</span><span lang="en" class="lang-content">decreases</span><span lang="ru" class="lang-content">уменьшается</span></p></div>
+</div>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>🌞 СӘУЛЕЛЕНЕҢ:</strong> Жылу ішінде ауырылған энергия электромагниттік толқындар түрінде (光 сәулеле). Барлық сәндеген дене сәулелене тұрады. Температура жоғары болса, сәулеленің көбейеді.</p>
-                <p lang="en" class="lang-content text-sm"><strong>🌞 RADIATION:</strong> Heat energy transferred as electromagnetic waves (light rays). All heated bodies emit radiation. Higher temperature = more radiation.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🌞 ИЗЛУЧЕНИЕ:</strong> Тепловая энергия передаётся электромагнитными волнами (световые лучи). Все нагретые тела излучают энергию. Выше температура = больше излучение.</p>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 260 200" style="width:220px">
+<!-- Внешний контур -->
+<line x1="40" y1="40" x2="220" y2="40" stroke="#1e293b" stroke-width="2.5"/>
+<line x1="40" y1="160" x2="220" y2="160" stroke="#1e293b" stroke-width="2.5"/>
+<line x1="40" y1="40" x2="40" y2="160" stroke="#1e293b" stroke-width="2.5"/>
+<line x1="220" y1="40" x2="220" y2="160" stroke="#1e293b" stroke-width="2.5"/>
+<!-- Узлы -->
+<circle cx="80" cy="40" r="4" fill="#1e293b"/>
+<circle cx="160" cy="40" r="4" fill="#1e293b"/>
+<circle cx="80" cy="160" r="4" fill="#1e293b"/>
+<circle cx="160" cy="160" r="4" fill="#1e293b"/>
+<!-- R1 R2 параллельно -->
+<line x1="80" y1="40" x2="80" y2="80" stroke="#1e293b" stroke-width="2"/>
+<rect x="65" y="80" width="30" height="40" fill="#fef3c7" stroke="#1e293b" stroke-width="2"/>
+<text x="80" y="105" text-anchor="middle" font-size="11" font-weight="700">R₁</text>
+<line x1="80" y1="120" x2="80" y2="160" stroke="#1e293b" stroke-width="2"/>
+<line x1="160" y1="40" x2="160" y2="80" stroke="#1e293b" stroke-width="2"/>
+<rect x="145" y="80" width="30" height="40" fill="#fef3c7" stroke="#1e293b" stroke-width="2"/>
+<text x="160" y="105" text-anchor="middle" font-size="11" font-weight="700">R₂</text>
+<line x1="160" y1="120" x2="160" y2="160" stroke="#1e293b" stroke-width="2"/>
+<!-- Батарея на верху -->
+<line x1="125" y1="40" x2="125" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="140" y1="40" x2="140" y2="20" stroke="#1e293b" stroke-width="2"/>
+<line x1="115" y1="20" x2="135" y2="20" stroke="#1e293b" stroke-width="4"/>
+<line x1="130" y1="15" x2="150" y2="15" stroke="#1e293b" stroke-width="2"/>
+<!-- Стрелки тока -->
+<text x="60" y="105" font-size="10" font-weight="700" fill="#4338ca">I₁</text>
+<text x="180" y="105" font-size="10" font-weight="700" fill="#4338ca">I₂</text>
+<text x="120" y="180" text-anchor="middle" font-size="11" font-weight="700" fill="#4338ca">→ I →</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">2 резистор параллель</span>
+<span lang="en" class="lang-content">2 resistors in parallel</span>
+<span lang="ru" class="lang-content">2 резистора параллельно</span></p>
+</div></div></section>
 
-                <div class="overflow-x-auto" style="margin-top: 15px;">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">БЕЛГІ</th>
-                            <th lang="kk" class="lang-content">ӨЛШЕМ БІРЛІГІ</th>
-                            <th lang="kk" class="lang-content">МЫСАЛ</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🤔 Неге R азаяды?</span>
+<span lang="en" class="lang-content">🤔 Why does R decrease?</span>
+<span lang="ru" class="lang-content">🤔 Почему R уменьшается?</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Қос жол қосылса — электрондарға кеңірек «трасса» ашылады. <b>Жалпы қима ауданы</b> ұлғаяды. R = ρL/S формуласынан: <b>S ↑ → R ↓</b>! Сондықтан 2 бірдей резистор қосса — R/2 болады. Параллель кедергі әрқашан <b>ең кіші элементтен де кіші</b>.</span>
+<span lang="en" class="lang-content">A second path means a wider «highway» for electrons — the <b>total cross-section</b> grows. From R = ρL/S: <b>more S → less R</b>! Two equal resistors in parallel give R/2. Parallel R is always <b>smaller than the smallest resistor</b>.</span>
+<span lang="ru" class="lang-content">Появление второй ветки = расширение «магистрали» для электронов. <b>Общая площадь сечения</b> растёт. R = ρL/S: <b>S ↑ → R ↓</b>! Два одинаковых резистора параллельно дают R/2. Параллельное R всегда <b>меньше самого маленького</b>.</span></p>
 
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">SYMBOL</th>
-                            <th lang="en" class="lang-content">UNIT</th>
-                            <th lang="en" class="lang-content">EXAMPLE</th>
+<div class="card-accent rounded-2xl p-5 mt-4">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">2 резистор үшін формула:</span><span lang="en" class="lang-content">For 2 resistors:</span><span lang="ru" class="lang-content">Для 2 резисторов:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+R = <span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1.1rem"><span class="var" style="display:block;border-bottom:2px solid #fde68a">R₁ · R₂</span><span class="var" style="display:block">R₁ + R₂</span></span>
+</div>
+<p class="text-slate-700 text-sm mt-3 text-center">
+<span lang="kk" class="lang-content">Бірдей R₁ = R₂ = R<sub>0</sub> болса → R = R<sub>0</sub>/2</span>
+<span lang="en" class="lang-content">If R₁ = R₂ = R<sub>0</sub> → R = R<sub>0</sub>/2</span>
+<span lang="ru" class="lang-content">Если R₁ = R₂ = R<sub>0</sub> → R = R<sub>0</sub>/2</span></p>
+</div>
+</div>
+</section>
 
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">СИМВОЛ</th>
-                            <th lang="ru" class="lang-content">ЕДИНИЦА</th>
-                            <th lang="ru" class="lang-content">ПРИМЕР</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Сәулеленің теңіздіктігі</td>
-                            <td lang="kk" class="lang-content">λ (лямбда)</td>
-                            <td lang="kk" class="lang-content">м (метр), нм</td>
-                            <td lang="kk" class="lang-content">Қызыл: 700 нм | Сокол: 400 нм</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп шығару</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 R₁ = 6 Ом, R₂ = 3 Ом параллель. U = 12 В. R, I, I₁, I₂ табу.</span>
+<span lang="en" class="lang-content">📘 R₁ = 6 Ω, R₂ = 3 Ω in parallel. U = 12 V. Find R, I, I₁, I₂.</span>
+<span lang="ru" class="lang-content">📘 R₁ = 6 Ом, R₂ = 3 Ом параллельно. U = 12 В. Найти R, I, I₁, I₂.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>R₁ = 6 Ом, R₂ = 3 Ом</li>
+<li>U = 12 В</li>
+<li>R, I, I₁, I₂ — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.9rem">
+R = R₁R₂/(R₁+R₂) = 6·3/9 = <span class="num">2</span> Ом
+<br/>I₁ = U/R₁ = 12/6 = <span class="num">2</span> А
+<br/>I₂ = U/R₂ = 12/3 = <span class="num">4</span> А
+<br/>I = I₁ + I₂ = <span class="num">6</span> А
+<br/><b>Тексеру:</b> I = U/R = 12/2 = 6 ✓
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ R=2 Ом, I=6 А</span><span lang="en" class="lang-content">✅ R=2 Ω, I=6 A</span><span lang="ru" class="lang-content">✅ R=2 Ом, I=6 А</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content">Wavelength</td>
-                            <td lang="en" class="lang-content">λ (lambda)</td>
-                            <td lang="en" class="lang-content">m (meter), nm</td>
-                            <td lang="en" class="lang-content">Red: 700 nm | Violet: 400 nm</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🏠 Үй сымдары — неге параллель?</span>
+<span lang="en" class="lang-content">🏠 Why is home wiring parallel?</span>
+<span lang="ru" class="lang-content">🏠 Почему домашняя проводка — параллельна?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-base text-emerald-700 mb-2">✅ <span lang="kk" class="lang-content">Артықшылықтары:</span><span lang="en" class="lang-content">Advantages:</span><span lang="ru" class="lang-content">Плюсы:</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content">Әр құрылғы өз кернеуінде (<b>220 В</b>) жұмыс істейді</span><span lang="en" class="lang-content">Each device gets its rated voltage (<b>220 V</b>)</span><span lang="ru" class="lang-content">Каждый прибор работает на своём <b>220 В</b></span></li>
+<li><span lang="kk" class="lang-content">Бір құрылғы сөнсе — басқалары жұмыс істей береді</span><span lang="en" class="lang-content">One device off → others still work</span><span lang="ru" class="lang-content">Один прибор сломан — другие работают</span></li>
+<li><span lang="kk" class="lang-content">Әр құрылғыны <b>жеке-жеке</b> қосып-сөндіруге болады</span><span lang="en" class="lang-content">Independent on/off</span><span lang="ru" class="lang-content">Можно включать <b>раздельно</b></span></li>
+</ul>
+</div>
+<div class="card-warm rounded-custom p-6">
+<p class="heading-font text-base text-orange-700 mb-2">⚠️ <span lang="kk" class="lang-content">Кемшіліктер:</span><span lang="en" class="lang-content">Disadvantages:</span><span lang="ru" class="lang-content">Минусы:</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content">Көп құрылғы қосылса — <b>жалпы тоқ артады</b></span><span lang="en" class="lang-content">Many devices → <b>total current grows</b></span><span lang="ru" class="lang-content">Много приборов → <b>общий ток растёт</b></span></li>
+<li><span lang="kk" class="lang-content">Сым қызып, өрт қаупі — <b>қысқа тұйықталу</b>!</span><span lang="en" class="lang-content">Wires heat → fire risk! <b>Short circuit!</b></span><span lang="ru" class="lang-content">Провода греются → пожар! <b>КЗ</b>!</span></li>
+<li><span lang="kk" class="lang-content">Сондықтан <b>пробкалар, автомат</b> керек</span><span lang="en" class="lang-content">That's why we need <b>fuses, breakers</b></span><span lang="ru" class="lang-content">Нужны <b>предохранители, автоматы</b></span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content">Длина волны</td>
-                            <td lang="ru" class="lang-content">λ (лямбда)</td>
-                            <td lang="ru" class="lang-content">м (метр), нм</td>
-                            <td lang="ru" class="lang-content">Красный: 700 нм | Фиолетовый: 400 нм</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Сәулеленің жиілігі</td>
-                            <td lang="kk" class="lang-content">ν (ню)</td>
-                            <td lang="kk" class="lang-content">Гц (герц)</td>
-                            <td lang="kk" class="lang-content">Қызыл: 4.3×10¹⁴ Гц</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">U = const</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Барлық тармақта бірдей</span><span lang="en" class="lang-content">Same on each branch</span><span lang="ru" class="lang-content">На каждой ветке</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">➕</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">I = ΣI<sub>i</sub></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тоқтар қосылады</span><span lang="en" class="lang-content">Currents add</span><span lang="ru" class="lang-content">Токи складываются</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚧</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">1/R = Σ(1/R<sub>i</sub>)</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">R азаяды</span><span lang="en" class="lang-content">R decreases</span><span lang="ru" class="lang-content">R уменьшается</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content">Frequency</td>
-                            <td lang="en" class="lang-content">ν (nu)</td>
-                            <td lang="en" class="lang-content">Hz (hertz)</td>
-                            <td lang="en" class="lang-content">Red: 4.3×10¹⁴ Hz</td>
-
-                            <td lang="ru" class="lang-content">Частота волны</td>
-                            <td lang="ru" class="lang-content">ν (ню)</td>
-                            <td lang="ru" class="lang-content">Гц (герц)</td>
-                            <td lang="ru" class="lang-content">Красный: 4.3×10¹⁴ Гц</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Сәулеленің жылдамдығы</td>
-                            <td lang="kk" class="lang-content">c</td>
-                            <td lang="kk" class="lang-content">м/с</td>
-                            <td lang="kk" class="lang-content">c = 3×10⁸ м/с (төңіргесіндігі)</td>
-
-                            <td lang="en" class="lang-content">Speed of light</td>
-                            <td lang="en" class="lang-content">c</td>
-                            <td lang="en" class="lang-content">m/s</td>
-                            <td lang="en" class="lang-content">c = 3×10⁸ m/s (constant)</td>
-
-                            <td lang="ru" class="lang-content">Скорость света</td>
-                            <td lang="ru" class="lang-content">c</td>
-                            <td lang="ru" class="lang-content">м/с</td>
-                            <td lang="ru" class="lang-content">c = 3×10⁸ м/с (постоянная)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>🔴 ФОРМУЛА:</strong> λ × ν = c | Теңіздік × жиілік = 3×10⁸ м/с</p>
-                <p lang="en" class="lang-content text-sm"><strong>🔴 FORMULA:</strong> λ × ν = c | Wavelength × Frequency = 3×10⁸ m/s</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🔴 ФОРМУЛА:</strong> λ × ν = c | Длина волны × Частота = 3×10⁸ м/с</p>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ЭЛЕКТРОМАГНИТТІК СПЕКТРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. ELECTROMAGNETIC SPECTRUM</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Электромагнитный спектр</h2>
-
-            <div class="rule-card">
-                <div class="grid-3">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📻 Радиолташ</strong></p>
-                        <p lang="kk" class="lang-content">λ > 1 мм</p>
-                        <p lang="kk" class="lang-content">Радио, телевизия, wi-fi</p>
-
-                        <p lang="en" class="lang-content"><strong>📻 Radio Waves</strong></p>
-                        <p lang="en" class="lang-content">λ > 1 mm</p>
-                        <p lang="en" class="lang-content">Radio, TV, wifi</p>
-
-                        <p lang="ru" class="lang-content"><strong>📻 Радиоволны</strong></p>
-                        <p lang="ru" class="lang-content">λ > 1 мм</p>
-                        <p lang="ru" class="lang-content">Радио, ТВ, wi-fi</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>🌡️ Инфракрас</strong></p>
-                        <p lang="kk" class="lang-content">700 нм - 1 мм</p>
-                        <p lang="kk" class="lang-content">Жылу, өндіктігінің, камера</p>
-
-                        <p lang="en" class="lang-content"><strong>🌡️ Infrared</strong></p>
-                        <p lang="en" class="lang-content">700 nm - 1 mm</p>
-                        <p lang="en" class="lang-content">Heat, cooking, thermal camera</p>
-
-                        <p lang="ru" class="lang-content"><strong>🌡️ Инфракрасный</strong></p>
-                        <p lang="ru" class="lang-content">700 нм - 1 мм</p>
-                        <p lang="ru" class="lang-content">Тепло, готовка, тепловизор</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>👁️ Көзімен көрінді</strong></p>
-                        <p lang="kk" class="lang-content">400-700 нм</p>
-                        <p lang="kk" class="lang-content">Қызыл, сарынай, жасыл, сокол</p>
-
-                        <p lang="en" class="lang-content"><strong>👁️ Visible Light</strong></p>
-                        <p lang="en" class="lang-content">400-700 nm</p>
-                        <p lang="en" class="lang-content">Red, orange, green, violet</p>
-
-                        <p lang="ru" class="lang-content"><strong>👁️ Видимый свет</strong></p>
-                        <p lang="ru" class="lang-content">400-700 нм</p>
-                        <p lang="ru" class="lang-content">Красный, жёлтый, зелёный, фиолетовый</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>☀️ Ультрасокол</strong></p>
-                        <p lang="kk" class="lang-content">10-400 нм</p>
-                        <p lang="kk" class="lang-content">Күннің сәулесі, дезинфекция</p>
-
-                        <p lang="en" class="lang-content"><strong>☀️ Ultraviolet</strong></p>
-                        <p lang="en" class="lang-content">10-400 nm</p>
-                        <p lang="en" class="lang-content">Sunlight, disinfection</p>
-
-                        <p lang="ru" class="lang-content"><strong>☀️ Ультрафиолетовый</strong></p>
-                        <p lang="ru" class="lang-content">10-400 нм</p>
-                        <p lang="ru" class="lang-content">Солнечные лучи, дезинфекция</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>☢️ Рентген</strong></p>
-                        <p lang="kk" class="lang-content">0.01-10 нм</p>
-                        <p lang="kk" class="lang-content">Медициналық сәулегілік</p>
-
-                        <p lang="en" class="lang-content"><strong>☢️ X-rays</strong></p>
-                        <p lang="en" class="lang-content">0.01-10 nm</p>
-                        <p lang="en" class="lang-content">Medical imaging</p>
-
-                        <p lang="ru" class="lang-content"><strong>☢️ Рентгеновский</strong></p>
-                        <p lang="ru" class="lang-content">0.01-10 нм</p>
-                        <p lang="ru" class="lang-content">Медицинское сканирование</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>☢️ Гамма</strong></p>
-                        <p lang="kk" class="lang-content">< 0.01 нм</p>
-                        <p lang="kk" class="lang-content">Радиоактивті дәндіктігінің</p>
-
-                        <p lang="en" class="lang-content"><strong>☢️ Gamma Rays</strong></p>
-                        <p lang="en" class="lang-content">< 0.01 nm</p>
-                        <p lang="en" class="lang-content">Radioactive decay</p>
-
-                        <p lang="ru" class="lang-content"><strong>☢️ Гамма-лучи</strong></p>
-                        <p lang="ru" class="lang-content">< 0.01 нм</p>
-                        <p lang="ru" class="lang-content">Радиоактивный распад</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. АБСОЛЮТТЫ ҚА ДЕНЕ (ЧЕРНОЕ ТЕЛО)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. BLACK BODY</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Абсолютно чёрное тело</h2>
-
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>🖤 АНЫҚТАМАСЫ:</strong> Абсолютты қа дене - барлық түскен сәулеленісін сіңіретін және барлық температурасында сәулелене беретін идеальды дене.</p>
-                <p lang="en" class="lang-content text-sm"><strong>🖤 DEFINITION:</strong> Black body - ideal body that absorbs all incident radiation and emits at all temperatures.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🖤 ОПРЕДЕЛЕНИЕ:</strong> Абсолютно чёрное тело - идеальное тело, поглощающее всё падающее излучение и излучающее при любой температуре.</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>⭐ МЫСАЛ:</strong> Сокғын (сияқты материал), уголь, қара фарба. Күндіктігі (Солнце) = шамамен абсолютты қа дене.</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>⭐ EXAMPLES:</strong> Coal (like material), black paint. The Sun ≈ approximate black body.</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>⭐ ПРИМЕРЫ:</strong> Уголь (как материал), чёрная краска. Солнце ≈ приблизительное чёрное тело.</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔴 СТЕФАН-БОЛЦМАННЫҢ ЗАҢЫ:</strong> P = σ·A·T⁴ (Сәулеленің мөлшері = болимдіктік × аймақ × температура⁴)</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔴 STEFAN-BOLTZMANN LAW:</strong> P = σ·A·T⁴ (Power = constant × area × temperature⁴)</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔴 ЗАКОН СТЕФАНА-БОЛЬЦМАНА:</strong> P = σ·A·T⁴ (Мощность = константа × площадь × температура⁴)</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fef3c7; border-radius: 1rem; border-top: 4px solid #eab308;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Сәулеленең - барлық сәндеген денелердің электромагниттік толқындарымен энергия ауыстырады. λ = c/ν формуласы байланыстырады. Электромагниттік спектр радиодан гамма-сәулегіге өтеді. Абсолютты қа дене - максимум сәулелене беретін идеалды дене!</p>
-            <p lang="en" class="lang-content text-sm">Radiation is energy transfer by electromagnetic waves from all heated bodies. λ = c/ν formula connects them. EM spectrum ranges from radio to gamma rays. Black body is ideal maximum radiator!</p>
-            <p lang="ru" class="lang-content text-sm">Излучение - это передача энергии электромагнитными волнами от всех нагретых тел. λ = c/ν формула их связывает. ЭМ спектр простирается от радио до гамма-лучей. Абсолютно чёрное тело - идеальный максимальный излучатель!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

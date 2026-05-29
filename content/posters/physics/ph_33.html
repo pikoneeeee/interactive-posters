@@ -1,422 +1,204 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Механическая работа. Мощность</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7fee7; /* lime-50 */
-            overflow-x: hidden;
-            color: #365314; /* lime-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Lime Theme */
-        .header-card {
-            background-color: #65a30d; /* lime-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(101, 163, 13, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #3f6212; /* lime-800 */
-            border-bottom: 3px solid #bef264; /* lime-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #ecfccb; /* lime-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #4d7c0f; /* lime-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #65a30d; /* lime-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #65a30d;
-            background-color: #ffffff;
-            color: #65a30d;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #f7fee7;
-        }
-        .lang-btn.active {
-            background-color: #65a30d;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 220px;
-            margin: 15px 0;
-            border: 1px solid #d9f99d;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #3f6212;
-            text-anchor: middle;
-        }
-        .svg-arrow {
-            stroke: #dc2626; /* Red for Force */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-red);
-        }
-        .svg-dist-arrow {
-            stroke: #2563eb; /* Blue for Distance */
-            stroke-width: 3;
-            marker-end: url(#arrowhead-blue);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Закон сохранения механической энергии</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-lime-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жұмыс және энергия</span>
+<span lang="en" class="lang-content">Grade 8 · Work and energy</span>
+<span lang="ru" class="lang-content">8 класс · Работа и энергия</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Механикалық энергияның сақталу заңы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Conservation of mechanical energy</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Закон сохранения механической энергии</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Энергия жоғалмайды, тек түрленеді</span>
+<span lang="en" class="lang-content">🌟 Energy is never lost, only transformed</span>
+<span lang="ru" class="lang-content">🌟 Энергия не исчезает, она превращается</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b>Тұйық механикалық жүйеде</b> (сыртқы күштер жоқ, үйкеліс ескерілмейді) кинетикалық және потенциалдық энергиялардың <b>қосындысы</b> уақыт өте келе <b>өзгермейді</b>. Бұл — <b class="text-indigo-700">механикалық энергияның сақталу заңы</b>. Энергия бір түрден екінші түрге <b>ауысады</b>, бірақ толық қосындысы <b>тұрақты</b>.</span>
+<span lang="en" class="lang-content">In a <b>closed mechanical system</b> (no external forces, no friction) the <b>sum</b> of kinetic and potential energies <b>does not change</b> in time. This is the <b class="text-indigo-700">law of conservation of mechanical energy</b>. Energy <b>transforms</b> from one form to another, but the <b>total stays constant</b>.</span>
+<span lang="ru" class="lang-content">В <b>замкнутой механической системе</b> (нет внешних сил, нет трения) <b>сумма</b> кинетической и потенциальной энергий <b>не меняется</b> со временем. Это <b class="text-indigo-700">закон сохранения механической энергии</b>. Энергия <b>переходит</b> из одного вида в другой, но <b>общая величина постоянна</b>.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">МЕХАНИКАЛЫҚ ЖҰМЫС ЖӘНЕ ҚУАТ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">MECHANICAL WORK AND POWER</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">МЕХАНИЧЕСКАЯ РАБОТА И МОЩНОСТЬ</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Заң формуласы:</span><span lang="en" class="lang-content">Law formula:</span><span lang="ru" class="lang-content">Формула закона:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+<span class="var">E</span><sub>к</sub> + <span class="var">E</span><sub>п</sub> = <span class="var">const</span>
+</div>
+<div class="formula text-center mt-2" style="font-size:1.2rem">
+<span class="var">E</span><sub>к1</sub> + <span class="var">E</span><sub>п1</sub> = <span class="var">E</span><sub>к2</sub> + <span class="var">E</span><sub>п2</sub>
+</div>
+<p class="text-slate-700 text-sm mt-3 text-center">
+<span lang="kk" class="lang-content">Кез келген 2 уақыт мезетіндегі толық энергиялар тең</span>
+<span lang="en" class="lang-content">Total energy is equal at any two moments in time</span>
+<span lang="ru" class="lang-content">Полная энергия одинакова в любые два момента времени</span></p>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-lime-100">Күштің нәтижесі және орындалу жылдамдығы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-lime-100">The result of force and the speed of execution.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-lime-100">Результат действия силы и скорость выполнения.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-2">⚡</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-2">E<sub>полн</sub> = const</p>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content"><b>Шарты:</b> үйкеліс жоқ, тек тартылыс пен серпімділік</span>
+<span lang="en" class="lang-content"><b>Conditions:</b> no friction, only gravity & elasticity</span>
+<span lang="ru" class="lang-content"><b>Условие:</b> нет трения, только тяжесть и упругость</span></p>
+</div></div></section>
 
-        <!-- 1. МЕХАНИКАЛЫҚ ЖҰМЫС -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Жұмыс қашан атқарылады?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. When is Work Done?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Когда совершается работа?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🍎 Классикалық мысал: құлайтын алма</span>
+<span lang="en" class="lang-content">🍎 Classic example: a falling apple</span>
+<span lang="ru" class="lang-content">🍎 Классический пример: падающее яблоко</span></h2>
+<div class="card rounded-custom p-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 380 320" style="width:100%;max-width:380px;margin:auto">
+<!-- Земля -->
+<line x1="0" y1="290" x2="380" y2="290" stroke="#1e293b" stroke-width="3"/>
+<!-- 3 положения яблока -->
+<circle cx="80" cy="50" r="15" fill="#dc2626" stroke="#1e293b" stroke-width="2"/>
+<circle cx="200" cy="170" r="15" fill="#dc2626" stroke="#1e293b" stroke-width="2"/>
+<circle cx="320" cy="280" r="15" fill="#dc2626" stroke="#1e293b" stroke-width="2"/>
+<!-- Подписи -->
+<text x="80" y="25" text-anchor="middle" font-weight="700" font-size="11">
+<tspan class="lang-content" lang="kk">A: v=0, h=H</tspan>
+<tspan class="lang-content" lang="en">A: v=0, h=H</tspan>
+<tspan class="lang-content" lang="ru">A: v=0, h=H</tspan>
+</text>
+<text x="200" y="150" text-anchor="middle" font-weight="700" font-size="11">B: v↑, h/2</text>
+<text x="320" y="260" text-anchor="middle" font-weight="700" font-size="11">
+<tspan class="lang-content" lang="kk">C: v=макс, h=0</tspan>
+<tspan class="lang-content" lang="en">C: v=max, h=0</tspan>
+<tspan class="lang-content" lang="ru">C: v=макс, h=0</tspan>
+</text>
+<!-- Стрелки -->
+<path d="M95,60 Q150,80 185,160" fill="none" stroke="#4338ca" stroke-width="2" stroke-dasharray="4 2"/>
+<path d="M215,180 Q260,210 305,275" fill="none" stroke="#4338ca" stroke-width="2" stroke-dasharray="4 2"/>
+<!-- E подписи -->
+<rect x="0" y="290" width="380" height="30" fill="#fef3c7"/>
+</svg>
+</div>
 
-            <div class="rule-card border-t-lime-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Жұмыс (A)</span> жасалу үшін екі шарт орындалуы керек:<br>
-                    1. Денеге <strong>күш (F)</strong> әсер етуі керек.<br>
-                    2. Дене сол күштің әсерінен <strong>қозғалуы (s)</strong> керек.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    For <span class="term" lang="en">Work (A)</span> to be done, two conditions must be met:<br>
-                    1. A <strong>force (F)</strong> must act on the object.<br>
-                    2. The object must <strong>move (s)</strong> under the action of that force.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Чтобы совершалась <span class="term" lang="ru">Работа (A)</span>, нужны два условия:<br>
-                    1. На тело должна действовать <strong>сила (F)</strong>.<br>
-                    2. Тело должно <strong>перемещаться (s)</strong> под действием этой силы.
-                </p>
+<div>
+<table class="t text-sm">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Нүкте</span><span lang="en" class="lang-content">Point</span><span lang="ru" class="lang-content">Точка</span></th>
+<th>E<sub>к</sub></th><th>E<sub>п</sub></th><th>E<sub>полн</sub></th>
+</tr></thead>
+<tbody>
+<tr><td><b>A</b> (h=H)</td><td>0</td><td class="text-emerald-700">mgH</td><td>mgH</td></tr>
+<tr><td><b>B</b> (h=H/2)</td><td class="text-amber-600">mgH/2</td><td class="text-emerald-700">mgH/2</td><td>mgH</td></tr>
+<tr><td><b>C</b> (h=0)</td><td class="text-amber-600">mgH</td><td>0</td><td>mgH</td></tr>
+</tbody>
+</table>
+<p class="text-slate-700 text-sm mt-3">
+<span lang="kk" class="lang-content">🔑 Алма құлап жатқанда: <b>потенциалдық</b> энергия азаяды, ал <b>кинетикалық</b> — өседі. Жалпы қосынды — <b>тұрақты</b>.</span>
+<span lang="en" class="lang-content">🔑 As the apple falls: <b>potential energy</b> decreases and <b>kinetic energy</b> grows. The total — <b>stays constant</b>.</span>
+<span lang="ru" class="lang-content">🔑 Падая, яблоко теряет <b>потенциальную</b> энергию и приобретает <b>кинетическую</b>. Общая сумма — <b>неизменна</b>.</span></p>
+</div>
+</div>
+</div>
+</section>
 
-                <div class="example-block border-l-lime-400 bg-lime-50 text-center mb-4">
-                    <p class="text-3xl font-bold text-lime-900 mb-2">A = F · s</p>
-                    <p class="text-sm text-lime-800">Unit: Joule (J) / Джоуль (Дж)</p>
-                    <p class="text-xs text-gray-600 mt-1">1 J = 1 N · 1 m</p>
-                </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎢 Сақталу заңының мысалдары</span>
+<span lang="en" class="lang-content">🎢 Examples of energy conservation</span>
+<span lang="ru" class="lang-content">🎢 Примеры сохранения энергии</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🎢</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Американдық тау</span><span lang="en" class="lang-content">Roller coaster</span><span lang="ru" class="lang-content">Американские горки</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">E<sub>п</sub> ↔ E<sub>к</sub></span><span lang="en" class="lang-content">E<sub>p</sub> ↔ E<sub>k</sub></span><span lang="ru" class="lang-content">E<sub>п</sub> ↔ E<sub>к</sub></span></p></div>
+<div class="tile"><div class="tile-emoji">🪂</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Маятник</span><span lang="en" class="lang-content">Pendulum</span><span lang="ru" class="lang-content">Маятник</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Шетте E<sub>п</sub>, төменде E<sub>к</sub></span><span lang="en" class="lang-content">E<sub>p</sub> at edges, E<sub>k</sub> at bottom</span><span lang="ru" class="lang-content">E<sub>п</sub> по краям, E<sub>к</sub> внизу</span></p></div>
+<div class="tile"><div class="tile-emoji">🏊</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Трамплин</span><span lang="en" class="lang-content">Diving board</span><span lang="ru" class="lang-content">Трамплин</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Серпімді → жоғары</span><span lang="en" class="lang-content">Elastic → up</span><span lang="ru" class="lang-content">Упругая → вверх</span></p></div>
+<div class="tile"><div class="tile-emoji">🏹</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Садақ</span><span lang="en" class="lang-content">Bow</span><span lang="ru" class="lang-content">Лук</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">kx²/2 → mv²/2</span><span lang="en" class="lang-content">kx²/2 → mv²/2</span><span lang="ru" class="lang-content">kx²/2 → mv²/2</span></p></div>
+</div>
+</section>
 
-                <!-- Illustration 1: Work Done -->
-                <svg class="illustration-svg" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                        <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚠️ Үйкеліс барда не болады?</span>
+<span lang="en" class="lang-content">⚠️ What if there is friction?</span>
+<span lang="ru" class="lang-content">⚠️ А если есть трение?</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Шынайы өмірде үйкеліс әрқашан бар. Сондықтан <b>механикалық</b> энергия сақталмайды — оның бір бөлігі <b>жылулық</b> энергияға айналады. Бірақ <b class="text-indigo-700">жалпы энергия (механикалық + жылулық + ...) сақталады</b>! Бұл — әлемнің ең негізгі заңы — <b>энергияның сақталу заңы</b>.</span>
+<span lang="en" class="lang-content">In real life friction is always present. So <b>mechanical</b> energy is not conserved — part of it becomes <b>thermal</b> energy. But <b class="text-indigo-700">total energy (mechanical + thermal + ...) is always conserved</b>! This is the most fundamental law of the universe — <b>the law of conservation of energy</b>.</span>
+<span lang="ru" class="lang-content">В реальности трение всегда есть. Поэтому <b>механическая</b> энергия не сохраняется — часть переходит в <b>тепловую</b>. Но <b class="text-indigo-700">полная энергия (механическая + тепловая + ...) сохраняется всегда</b>! Это — самый фундаментальный закон Вселенной — <b>закон сохранения энергии</b>.</span></p>
+</div>
+</section>
 
-                    <!-- Floor -->
-                    <line x1="0" y1="120" x2="400" y2="120" stroke="#9ca3af" stroke-width="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Дене 20 м биіктіктен ауырлық күшінің әсерінен құлайды. Жерге қандай жылдамдықпен соғылады? (g = 10 м/с², үйкелісті ескермейміз)</span>
+<span lang="en" class="lang-content">📘 Problem: A body falls freely from 20 m. What speed does it have at the ground? (g = 10 m/s², no friction)</span>
+<span lang="ru" class="lang-content">📘 Задача: Тело свободно падает с высоты 20 м. С какой скоростью оно ударится о землю? (g = 10 м/с², без трения)</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>h = 20 <span class="unit-pill">м</span></li>
+<li>g = 10 <span class="unit-pill">м/с²</span></li>
+<li>v₀ = 0</li>
+<li>v — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.95rem">
+E<sub>п</sub> = E<sub>к</sub>
+<br/>mgh = mv²/2
+<br/>v² = 2gh = 2·10·20 = 400
+<br/>v = √400 = <span class="num">20</span> <span class="unit">м/с</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ v = 20 м/с (72 км/ч)</span><span lang="en" class="lang-content">✅ v = 20 m/s</span><span lang="ru" class="lang-content">✅ v = 20 м/с</span></div>
+</div>
+</div>
+<p class="text-slate-600 text-sm mt-3"><span lang="kk" class="lang-content">💡 Назар аударыңыз: масса жауабына әсер етпейді!</span><span lang="en" class="lang-content">💡 Note: mass does not affect the answer!</span><span lang="ru" class="lang-content">💡 Обратите внимание: масса не влияет на ответ!</span></p>
+</div>
+</section>
 
-                    <!-- Start Position (Ghost) -->
-                    <rect x="50" y="70" width="50" height="50" fill="none" stroke="#9ca3af" stroke-dasharray="4"/>
-                    <text x="75" y="65" font-size="10" fill="#9ca3af" text-anchor="middle">Start</text>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">E<sub>к</sub> + E<sub>п</sub> = const</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тұйық жүйеде</span><span lang="en" class="lang-content">In a closed system</span><span lang="ru" class="lang-content">В замкнутой системе</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">E<sub>п</sub> ↔ E<sub>к</sub></span><span lang="en" class="lang-content">E<sub>p</sub> ↔ E<sub>k</sub></span><span lang="ru" class="lang-content">E<sub>п</sub> ↔ E<sub>к</sub></span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Бір түрден екіншіге</span><span lang="en" class="lang-content">One form ↔ another</span><span lang="ru" class="lang-content">Из одного вида в другой</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌌</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Жалпы заң</span><span lang="en" class="lang-content">Universal law</span><span lang="ru" class="lang-content">Универсальный закон</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Энергия пайда болмайды, жоғалмайды</span><span lang="en" class="lang-content">Energy never appears nor vanishes</span><span lang="ru" class="lang-content">Энергия не возникает и не исчезает</span></p></div>
+</div></footer>
 
-                    <!-- Motion Path -->
-                    <path d="M 100 95 L 250 95" stroke="#2563eb" stroke-dasharray="2" opacity="0.5"/>
-
-                    <!-- End Position (Solid) -->
-                    <rect x="250" y="70" width="50" height="50" fill="#bef264" stroke="#65a30d" stroke-width="2"/>
-
-                    <!-- Pushing Person -->
-                    <circle cx="230" cy="75" r="10" fill="#fca5a5"/>
-                    <line x1="230" y1="85" x2="230" y2="110" stroke="#000" stroke-width="2"/>
-                    <line x1="230" y1="110" x2="210" y2="120" stroke="#000" stroke-width="2"/> <!-- Leg -->
-                    <line x1="230" y1="110" x2="240" y2="120" stroke="#000" stroke-width="2"/> <!-- Leg -->
-                    <line x1="230" y1="90" x2="250" y2="90" stroke="#000" stroke-width="2"/> <!-- Arms -->
-
-                    <!-- Force Arrow -->
-                    <line x1="250" y1="50" x2="200" y2="50" stroke="#dc2626" stroke-width="3" marker-end="url(#arrowhead-red)"/>
-                    <text x="225" y="45" font-size="14" fill="#dc2626" font-weight="bold">F</text>
-
-                    <!-- Distance Arrow -->
-                    <line x1="50" y1="135" x2="300" y2="135" class="svg-dist-arrow" />
-                    <line x1="50" y1="130" x2="50" y2="140" stroke="#2563eb"/>
-                    <line x1="300" y1="130" x2="300" y2="140" stroke="#2563eb"/>
-                    <text x="175" y="145" font-size="14" fill="#2563eb" font-weight="bold">s</text>
-
-                    <text x="350" y="100" font-size="16" fill="#65a30d" font-weight="bold">A > 0</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ЖҰМЫС ҚАШАН НӨЛГЕ ТЕҢ? -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Жұмыс қашан 0-ге тең? (A = 0)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. When is Work Zero? (A = 0)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Когда работа равна нулю? (A = 0)</h2>
-
-            <div class="rule-card border-t-red-500">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Case 1: No Motion -->
-                    <div class="bg-red-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-red-900 mb-2 text-center" lang="kk">1. Қозғалыс жоқ (s = 0)</h4>
-                        <h4 class="font-bold text-red-900 mb-2 text-center" lang="ru">1. Нет движения (s = 0)</h4>
-                        <p class="text-sm mb-2 text-center">Қабырғаны итеру. Күш бар, бірақ орын ауыстыру жоқ.</p>
-
-                        <svg viewBox="0 0 150 100" class="w-full h-32">
-                            <rect x="100" y="10" width="20" height="80" fill="#9ca3af"/> <!-- Wall -->
-                            <circle cx="60" cy="30" r="10" fill="#fca5a5"/> <!-- Head -->
-                            <line x1="60" y1="40" x2="60" y2="70" stroke="#000" stroke-width="2"/> <!-- Body -->
-                            <line x1="60" y1="50" x2="100" y2="50" stroke="#000" stroke-width="2"/> <!-- Arms -->
-                            <!-- Sweat drops -->
-                            <path d="M 50 20 Q 45 25, 50 30" fill="none" stroke="#3b82f6"/>
-                            <path d="M 70 20 Q 75 25, 70 30" fill="none" stroke="#3b82f6"/>
-
-                            <text x="75" y="90" font-weight="bold" fill="#dc2626">A = 0</text>
-                        </svg>
-                    </div>
-
-                    <!-- Case 2: Perpendicular Force -->
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-blue-900 mb-2 text-center" lang="kk">2. Күш перпендикуляр (90°)</h4>
-                        <h4 class="font-bold text-blue-900 mb-2 text-center" lang="ru">2. Сила перпендикулярна (90°)</h4>
-                        <p class="text-sm mb-2 text-center">Сөмкені көтеріп тұрып, көлденең жүру. Ауырлық күшінің жұмысы 0.</p>
-
-                        <svg viewBox="0 0 150 100" class="w-full h-32">
-                            <line x1="0" y1="90" x2="150" y2="90" stroke="#9ca3af"/>
-                            <!-- Person walking -->
-                            <circle cx="50" cy="30" r="10" fill="#fca5a5"/>
-                            <line x1="50" y1="40" x2="50" y2="70" stroke="#000" stroke-width="2"/>
-                            <line x1="50" y1="70" x2="40" y2="90" stroke="#000" stroke-width="2"/>
-                            <line x1="50" y1="70" x2="60" y2="90" stroke="#000" stroke-width="2"/>
-                            <!-- Holding Bag -->
-                            <line x1="50" y1="50" x2="50" y2="60" stroke="#000" stroke-width="2"/>
-                            <rect x="40" y="60" width="20" height="15" fill="#fcd34d" stroke="#b45309"/> <!-- Bag -->
-
-                            <!-- Forces -->
-                            <line x1="50" y1="65" x2="50" y2="85" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowhead-red)"/> <!-- Gravity F -->
-                            <text x="60" y="80" font-size="10" fill="#dc2626">F (mg)</text>
-
-                            <!-- Motion -->
-                            <line x1="80" y1="50" x2="120" y2="50" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
-                            <text x="100" y="45" font-size="10" fill="#2563eb">v (s)</text>
-
-                            <!-- Right Angle Symbol -->
-                            <path d="M 50 65 L 60 65 L 60 50" fill="none" stroke="#000"/>
-
-                            <text x="100" y="80" font-weight="bold" fill="#1e3a8a">A = 0</text>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. ҚУАТ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Қуат (N)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Power (N)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Мощность (N)</h2>
-
-            <div class="rule-card border-t-yellow-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Қуат</span> – жұмыстың орындалу жылдамдығы. Бірдей жұмысты кім <strong>тез</strong> жасаса, соның қуаты <strong>көп</strong>.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Power</span> is the rate of doing work. Whoever does the same work <strong>faster</strong> has <strong>more</strong> power.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Мощность</span> – скорость выполнения работы. Кто выполнит ту же работу <strong>быстрее</strong>, у того мощность <strong>больше</strong>.
-                </p>
-
-                <div class="example-block border-l-yellow-400 bg-yellow-50 text-center mb-4">
-                    <p class="text-3xl font-bold text-yellow-900 mb-2">N = A / t</p>
-                    <p class="text-sm text-yellow-800">Unit: Watt (W) / Ватт (Вт)</p>
-                    <p class="text-xs text-gray-600 mt-1">1 W = 1 J / 1 s</p>
-                </div>
-
-                <!-- Illustration 3: Stairs (Running vs Walking) -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Stairs -->
-                    <path d="M 20 180 L 80 180 L 80 150 L 140 150 L 140 120 L 200 120 L 200 90 L 260 90 L 260 60 L 320 60" fill="none" stroke="#9ca3af" stroke-width="2"/>
-
-                    <!-- Scenario A (Fast) -->
-                    <g transform="translate(300, 40)">
-                        <circle cx="10" cy="0" r="8" fill="#fca5a5"/>
-                        <line x1="10" y1="8" x2="10" y2="25" stroke="#ef4444" stroke-width="2"/>
-                        <line x1="10" y1="25" x2="-5" y2="40" stroke="#ef4444" stroke-width="2"/> <!-- Leg -->
-                        <line x1="10" y1="25" x2="25" y2="35" stroke="#ef4444" stroke-width="2"/> <!-- Leg running -->
-                        <text x="-30" y="0" font-size="12" fill="#b91c1c" font-weight="bold">FAST!</text>
-                        <text x="-30" y="15" font-size="10" fill="#78350f">t = 5 sec</text>
-                    </g>
-
-                    <!-- Scenario B (Slow) -->
-                    <g transform="translate(100, 160)">
-                        <circle cx="10" cy="0" r="8" fill="#e5e7eb" stroke="#4b5563"/>
-                        <line x1="10" y1="8" x2="10" y2="25" stroke="#4b5563" stroke-width="2"/>
-                        <line x1="10" y1="25" x2="5" y2="40" stroke="#4b5563" stroke-width="2"/>
-                        <line x1="10" y1="25" x2="15" y2="40" stroke="#4b5563" stroke-width="2"/>
-                        <text x="25" y="0" font-size="12" fill="#4b5563">Slow...</text>
-                        <text x="25" y="15" font-size="10" fill="#4b5563">t = 20 sec</text>
-                    </g>
-
-                    <!-- Comparison -->
-                    <text x="50" y="50" class="svg-label" font-size="16" fill="#a16207">Work (A) is EQUAL</text>
-                    <text x="50" y="70" class="svg-label" font-size="16" fill="#dc2626" font-weight="bold">N_fast > N_slow</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-lime-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-lime-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-lime-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-lime-800">
-                Жұмыс (Дж) — бұл күш пен орын ауыстырудың көбейтіндісі. Қуат (Вт) — жұмыстың орындалу жылдамдығы.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-lime-800">
-                Work (J) is Force times Displacement. Power (W) is the rate (speed) of doing work.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-lime-800">
-                Работа (Дж) — это произведение силы на перемещение. Мощность (Вт) — это скорость выполнения работы.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

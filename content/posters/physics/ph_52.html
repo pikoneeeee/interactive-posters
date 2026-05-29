@@ -1,235 +1,170 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Қарапайым механизмдің КПД</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background-color: #fed7aa; opacity: 0.98; }
-        body { background: linear-gradient(to bottom, #fef3c7 0%, #fed7aa 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #ea580c 0%, #9a3412 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #9a3412; border-bottom: 3px solid #fed7aa; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #ea580c; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #ea580c; background: white; color: #ea580c; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #ea580c; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #ea580c; color: white; }
-        .illustration { background: linear-gradient(135deg, #fed7aa 0%, #fef3c7 100%); padding: 25px; border-radius: 1rem; margin: 15px 0; text-align: center; }
-        svg { max-width: 100%; height: auto; }
-        .info-box { background: linear-gradient(135deg, #fed7aa 0%, #fef3c7 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #ea580c; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .example-card { background: #fef08a; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #ea580c; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электрическое поле. Проводники и диэлектрики</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-orange-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр құбылыстары</span>
+<span lang="en" class="lang-content">Grade 9 · Electric phenomena</span>
+<span lang="ru" class="lang-content">9 класс · Электрические явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электр өрісі. Өткізгіштер мен диэлектриктер</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Electric field. Conductors and dielectrics</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электрическое поле. Проводники и диэлектрики</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Қарапайым Механизмдің КПД</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Efficiency of Simple Mechanism</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">КПД простого механизма</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-orange-100">η = (Aпол / Aполн) × 100% болмақ та. Пайда болған жұмыс / жиынтық жұмыс. КПД әрқашан 100% астам емес! ТОЛЫҚ АНАЛИЗ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-orange-100">η = (A_useful / A_total) × 100% formula. Useful work / total work. Efficiency never exceeds 100%! COMPLETE ANALYSIS!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-orange-100">η = (A_полезная / A_полная) × 100% формула. Полезная работа / полная работа. КПД никогда не превышает 100%! ПОЛНЫЙ АНАЛИЗ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌐 Электр өрісі — заряд айналасында</span>
+<span lang="en" class="lang-content">🌐 Electric field around a charge</span>
+<span lang="ru" class="lang-content">🌐 Электрическое поле — вокруг заряда</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Зарядталған денелер бір-біріне <b>тікелей жанаспай</b> әсер етеді. Қалай? <b class="text-indigo-700">Электр өрісі</b> арқылы. Әр заряд <b>айналасында</b> өріс жасайды; ол кеңістікке таралады және басқа зарядқа <b>күшпен</b> әсер етеді. Электр өрісі — <b>материяның ерекше түрі</b>: оны көру мүмкін емес, бірақ оны <b>сезінуге, өлшеуге</b> болады.</span>
+<span lang="en" class="lang-content">Charged bodies act on each other <b>without direct contact</b>. How? Through the <b class="text-indigo-700">electric field</b>. Every charge creates a field <b>around itself</b>; the field fills space and exerts a <b>force</b> on other charges. Electric field is a <b>special form of matter</b>: invisible but real — measurable.</span>
+<span lang="ru" class="lang-content">Заряженные тела действуют друг на друга <b>без прямого контакта</b>. Как? Через <b class="text-indigo-700">электрическое поле</b>. Каждый заряд создаёт <b>вокруг себя</b> поле; оно заполняет пространство и действует <b>силой</b> на другие заряды. Электрическое поле — <b>особый вид материи</b>: невидимый, но реальный — измеримый.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. КПД АНЫҚТАМАСЫ ЖӘНЕ ФОРМУЛАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. EFFICIENCY DEFINITION AND FORMULA</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение и формула КПД</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">⚡ <span lang="kk" class="lang-content">Өрістің сипаттамалары:</span><span lang="en" class="lang-content">Field properties:</span><span lang="ru" class="lang-content">Свойства поля:</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content">Зарядтан <b>барлық жаққа</b> таралады</span><span lang="en" class="lang-content">Spreads <b>in all directions</b></span><span lang="ru" class="lang-content">Распространяется <b>во все стороны</b></span></li>
+<li><span lang="kk" class="lang-content">Қашықтығымен <b>әлсірейді</b></span><span lang="en" class="lang-content"><b>Weakens</b> with distance</span><span lang="ru" class="lang-content"><b>Ослабевает</b> с расстоянием</span></li>
+<li><span lang="kk" class="lang-content">Басқа зарядқа <b>күшпен</b> әсер етеді</span><span lang="en" class="lang-content">Exerts a <b>force</b> on other charges</span><span lang="ru" class="lang-content">Действует <b>силой</b> на другие заряды</span></li>
+</ul>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-lg font-bold mb-4" style="color: #9a3412; text-align: center;">η = (A_пол / A_полн) × 100%</p>
-                <p lang="en" class="lang-content text-lg font-bold mb-4" style="color: #9a3412; text-align: center;">η = (A_useful / A_total) × 100%</p>
-                <p lang="ru" class="lang-content text-lg font-bold mb-4" style="color: #9a3412; text-align: center;">η = (A_полезная / A_полная) × 100%</p>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 240" style="width:200px">
+<!-- Положительный заряд -->
+<circle cx="120" cy="120" r="22" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+<text x="120" y="128" text-anchor="middle" font-size="22" font-weight="700" fill="#b91c1c">+</text>
+<!-- Силовые линии -->
+<g stroke="#b91c1c" stroke-width="1.5" fill="none">
+<line x1="142" y1="120" x2="220" y2="120" marker-end="url(#arr52)"/>
+<line x1="98" y1="120" x2="20" y2="120" marker-end="url(#arr52)"/>
+<line x1="120" y1="98" x2="120" y2="20" marker-end="url(#arr52)"/>
+<line x1="120" y1="142" x2="120" y2="220" marker-end="url(#arr52)"/>
+<line x1="136" y1="104" x2="200" y2="40" marker-end="url(#arr52)"/>
+<line x1="104" y1="104" x2="40" y2="40" marker-end="url(#arr52)"/>
+<line x1="136" y1="136" x2="200" y2="200" marker-end="url(#arr52)"/>
+<line x1="104" y1="136" x2="40" y2="200" marker-end="url(#arr52)"/>
+</g>
+<defs><marker id="arr52" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b91c1c"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Күш сызықтары + зарядтан шығады</span>
+<span lang="en" class="lang-content">Field lines exit a + charge</span>
+<span lang="ru" class="lang-content">Силовые линии выходят из +</span></p>
+</div></div></section>
 
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">БЕЛГІ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">ӨНДІКТІГІНІҢ</th>
-                            <th lang="kk" class="lang-content">МЫСАЛДАРЫ</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Күш сызықтары — өрістің суреті</span>
+<span lang="en" class="lang-content">📏 Field lines — picture of the field</span>
+<span lang="ru" class="lang-content">📏 Силовые линии — картина поля</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Күш сызықтары</b> — электр өрісінің әсер бағыты. Олар <b>оң (+) зарядтан шығады</b> және <b>теріс (−) зарядқа кіреді</b>. Күш сызықтары неғұрлым жиі болса — өріс соғұрлым <b>күшті</b>. Сызықтар <b>қиылыспайды</b>!</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Field lines</b> show the direction of the field. They <b>exit + charges</b> and <b>enter − charges</b>. The denser the lines, the <b>stronger</b> the field. Lines <b>never cross</b>!</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Силовые линии</b> показывают направление поля. Они <b>выходят из + заряда</b> и <b>входят в − заряд</b>. Чем гуще линии — тем <b>сильнее</b> поле. Линии <b>никогда не пересекаются</b>!</span></p>
 
-                            <th lang="en" class="lang-content">SYMBOL</th>
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">APPLICATION</th>
-                            <th lang="en" class="lang-content">EXAMPLES</th>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-warm rounded-2xl p-4 text-center">
+<p class="font-bold text-orange-700 mb-2"><span lang="kk" class="lang-content">+ оң зарядта</span><span lang="en" class="lang-content">+ charge</span><span lang="ru" class="lang-content">+ заряд</span></p>
+<div class="text-4xl">⊕→→→</div>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Сыртқа</span><span lang="en" class="lang-content">Outward</span><span lang="ru" class="lang-content">Наружу</span></p>
+</div>
+<div class="card-accent rounded-2xl p-4 text-center">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">− теріс зарядта</span><span lang="en" class="lang-content">− charge</span><span lang="ru" class="lang-content">− заряд</span></p>
+<div class="text-4xl">→→→⊖</div>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Ішке</span><span lang="en" class="lang-content">Inward</span><span lang="ru" class="lang-content">Внутрь</span></p>
+</div>
+<div class="card-emerald rounded-2xl p-4 text-center">
+<p class="font-bold text-emerald-700 mb-2"><span lang="kk" class="lang-content">+ − диполь</span><span lang="en" class="lang-content">+ − dipole</span><span lang="ru" class="lang-content">+ − диполь</span></p>
+<div class="text-4xl">⊕↝↝⊖</div>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">+ дан − ге</span><span lang="en" class="lang-content">From + to −</span><span lang="ru" class="lang-content">От + к −</span></p>
+</div>
+</div>
+</div>
+</section>
 
-                            <th lang="ru" class="lang-content">СИМВОЛ</th>
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ПРИМЕНЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ПРИМЕРЫ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>η</strong></td>
-                            <td lang="kk" class="lang-content">КПД (коэффициент полезного действия)</td>
-                            <td lang="kk" class="lang-content">Механизмдің мәселе-сіліктігі</td>
-                            <td lang="kk" class="lang-content">0-100% арасындағы мәндер</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔌 Өткізгіштер мен диэлектриктер</span>
+<span lang="en" class="lang-content">🔌 Conductors and dielectrics</span>
+<span lang="ru" class="lang-content">🔌 Проводники и диэлектрики</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-xl text-emerald-700 mb-3">⚡ <span lang="kk" class="lang-content">Өткізгіштер</span><span lang="en" class="lang-content">Conductors</span><span lang="ru" class="lang-content">Проводники</span></p>
+<p class="text-slate-700 text-base mb-3">
+<span lang="kk" class="lang-content">Электр зарядын <b>оңай өткізетін</b> заттар. Ішінде <b>еркін зарядтары</b> бар (бос электрондар немесе иондар).</span>
+<span lang="en" class="lang-content">Materials that conduct charge <b>easily</b>. Contain <b>free charges</b> (free electrons or ions).</span>
+<span lang="ru" class="lang-content">Вещества, которые <b>легко пропускают</b> заряд. Содержат <b>свободные заряды</b> (электроны/ионы).</span></p>
+<p class="font-bold text-emerald-700 mb-1"><span lang="kk" class="lang-content">Мысалдар:</span><span lang="en" class="lang-content">Examples:</span><span lang="ru" class="lang-content">Примеры:</span></p>
+<p class="text-slate-700 text-sm">🥉 <span lang="kk" class="lang-content">Барлық металдар (мыс, темір, алюминий)</span><span lang="en" class="lang-content">All metals</span><span lang="ru" class="lang-content">Все металлы</span> · 💧 <span lang="kk" class="lang-content">тұзды/қышқыл су</span><span lang="en" class="lang-content">salt water</span><span lang="ru" class="lang-content">солёная вода</span> · 🌱 <span lang="kk" class="lang-content">тірі дене</span><span lang="en" class="lang-content">living body</span><span lang="ru" class="lang-content">тело</span> · 🌍 <span lang="kk" class="lang-content">Жер</span><span lang="en" class="lang-content">Earth</span><span lang="ru" class="lang-content">Земля</span></p>
+</div>
+<div class="card-warm rounded-custom p-6">
+<p class="heading-font text-xl text-orange-700 mb-3">🛡 <span lang="kk" class="lang-content">Диэлектриктер (изоляторлар)</span><span lang="en" class="lang-content">Dielectrics (insulators)</span><span lang="ru" class="lang-content">Диэлектрики (изоляторы)</span></p>
+<p class="text-slate-700 text-base mb-3">
+<span lang="kk" class="lang-content">Зарядты <b>өткізбейтін</b> заттар. Барлық зарядтар атомдарда <b>«байлаулы»</b>, еркін қозғала алмайды.</span>
+<span lang="en" class="lang-content">Materials that <b>do not conduct</b> charge. All charges are <b>bound</b> in atoms — cannot move freely.</span>
+<span lang="ru" class="lang-content">Вещества, <b>не пропускающие</b> заряд. Все заряды <b>связаны</b> в атомах — не могут двигаться.</span></p>
+<p class="font-bold text-orange-700 mb-1"><span lang="kk" class="lang-content">Мысалдар:</span><span lang="en" class="lang-content">Examples:</span><span lang="ru" class="lang-content">Примеры:</span></p>
+<p class="text-slate-700 text-sm">🪟 <span lang="kk" class="lang-content">Шыны</span><span lang="en" class="lang-content">Glass</span><span lang="ru" class="lang-content">Стекло</span> · 🥤 <span lang="kk" class="lang-content">пластмасса, резина</span><span lang="en" class="lang-content">plastic, rubber</span><span lang="ru" class="lang-content">пластик, резина</span> · 🪵 <span lang="kk" class="lang-content">құрғақ ағаш</span><span lang="en" class="lang-content">dry wood</span><span lang="ru" class="lang-content">сухое дерево</span> · 🌬 <span lang="kk" class="lang-content">құрғақ ауа</span><span lang="en" class="lang-content">dry air</span><span lang="ru" class="lang-content">сухой воздух</span> · 🛢 <span lang="kk" class="lang-content">мұнай</span><span lang="en" class="lang-content">oil</span><span lang="ru" class="lang-content">масло</span></p>
+</div>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content"><strong>η</strong></td>
-                            <td lang="en" class="lang-content">Efficiency (useful action coefficient)</td>
-                            <td lang="en" class="lang-content">Mechanism effectiveness</td>
-                            <td lang="en" class="lang-content">Values between 0-100%</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Практикалық қолданыс</span>
+<span lang="en" class="lang-content">🌟 Practical use</span>
+<span lang="ru" class="lang-content">🌟 Практическое применение</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🔌</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Электр сымдары</span><span lang="en" class="lang-content">Electric wires</span><span lang="ru" class="lang-content">Провода</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Мыс ішінде + изоляция</span><span lang="en" class="lang-content">Copper inside + insulator</span><span lang="ru" class="lang-content">Медь + изоляция</span></p></div>
+<div class="tile"><div class="tile-emoji">⚡</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Жоғары қуат</span><span lang="en" class="lang-content">Power lines</span><span lang="ru" class="lang-content">ЛЭП</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Шыны/фарфор изоляция</span><span lang="en" class="lang-content">Glass/porcelain insulators</span><span lang="ru" class="lang-content">Стекло/фарфор изоляторы</span></p></div>
+<div class="tile"><div class="tile-emoji">🚗</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Жанармай құю</span><span lang="en" class="lang-content">Refueling</span><span lang="ru" class="lang-content">Заправка</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Жерге қосады (статикалық)</span><span lang="en" class="lang-content">Grounding (static)</span><span lang="ru" class="lang-content">Заземление (статика)</span></p></div>
+<div class="tile"><div class="tile-emoji">⚠️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Найзағай</span><span lang="en" class="lang-content">Lightning</span><span lang="ru" class="lang-content">Молния</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Найзағайтартқыш — өткізгіш</span><span lang="en" class="lang-content">Lightning rod conducts</span><span lang="ru" class="lang-content">Громоотвод проводит</span></p></div>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content"><strong>η</strong></td>
-                            <td lang="ru" class="lang-content">КПД (коэффициент полезного действия)</td>
-                            <td lang="ru" class="lang-content">Эффективность механизма</td>
-                            <td lang="ru" class="lang-content">Значения между 0-100%</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>A_пол</strong></td>
-                            <td lang="kk" class="lang-content">Пайда болған жұмыс</td>
-                            <td lang="kk" class="lang-content">Қажетті істің өндіктігінің</td>
-                            <td lang="kk" class="lang-content">Ауырлықтың көтерілгені, құмаланудың ырысы</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌐</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Өріс — материя</span><span lang="en" class="lang-content">Field is matter</span><span lang="ru" class="lang-content">Поле — материя</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Зарядтар арасында әсер</span><span lang="en" class="lang-content">Connects charges</span><span lang="ru" class="lang-content">Связывает заряды</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Өткізгіш</span><span lang="en" class="lang-content">Conductor</span><span lang="ru" class="lang-content">Проводник</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Металдар, су, тірі дене</span><span lang="en" class="lang-content">Metals, water, body</span><span lang="ru" class="lang-content">Металлы, вода, тело</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🛡</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Диэлектрик</span><span lang="en" class="lang-content">Dielectric</span><span lang="ru" class="lang-content">Диэлектрик</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Шыны, пластмасса, ауа</span><span lang="en" class="lang-content">Glass, plastic, air</span><span lang="ru" class="lang-content">Стекло, пластик, воздух</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content"><strong>A_useful</strong></td>
-                            <td lang="en" class="lang-content">Useful work done</td>
-                            <td lang="en" class="lang-content">Desired work output</td>
-                            <td lang="en" class="lang-content">Lifting weight, moving load</td>
-
-                            <td lang="ru" class="lang-content"><strong>A_полезная</strong></td>
-                            <td lang="ru" class="lang-content">Полезная проделанная работа</td>
-                            <td lang="ru" class="lang-content">Желаемый результат работы</td>
-                            <td lang="ru" class="lang-content">Подъём груза, перемещение</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>A_полн</strong></td>
-                            <td lang="kk" class="lang-content">Жиынтық жұмыс</td>
-                            <td lang="kk" class="lang-content">Барлық іс-әрекеттің бірлігі</td>
-                            <td lang="kk" class="lang-content">Жұмыстың толық (табан жұмысы + пайда)</td>
-
-                            <td lang="en" class="lang-content"><strong>A_total</strong></td>
-                            <td lang="en" class="lang-content">Total work done</td>
-                            <td lang="en" class="lang-content">All work performed</td>
-                            <td lang="en" class="lang-content">Total work (friction + useful)</td>
-
-                            <td lang="ru" class="lang-content"><strong>A_полная</strong></td>
-                            <td lang="ru" class="lang-content">Полная проделанная работа</td>
-                            <td lang="ru" class="lang-content">Вся выполненная работа</td>
-                            <td lang="ru" class="lang-content">Полная работа (трение + полезная)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>⚠️ МАҢЫЗДЫ:</strong> КПД әрқашан 100% астам емес! Қалған энергия - жылу түбінде (үйкеліс, ауырыңғылау). Өндіктігінің механизмі - 60-95% КПД.</p>
-                <p lang="en" class="lang-content text-sm"><strong>⚠️ IMPORTANT:</strong> Efficiency never exceeds 100%! Remaining energy becomes heat (friction, air resistance). Real mechanism - 60-95% efficiency.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>⚠️ ВАЖНО:</strong> КПД никогда не превышает 100%! Остаток энергии становится теплом (трение, сопротивление воздуха). Реальный механизм - 60-95% КПД.</p>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. МЕХАНИЗМДЕРДІҢ КПД МЫСАЛДАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. EFFICIENCY EXAMPLES OF MECHANISMS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Примеры КПД различных механизмов</h2>
-
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📋 МЫСАЛ 1: БЛОК</strong></p>
-                        <p lang="kk" class="lang-content">Пайда болған жұмыс: A_пол = 500 Дж</p>
-                        <p lang="kk" class="lang-content">Жиынтық жұмыс: A_полн = 600 Дж</p>
-                        <p lang="kk" class="lang-content">КПД = (500/600) × 100% = 83.3%</p>
-                        <p lang="kk" class="lang-content">🔴 Сыр емес (үйкеліс, құм) - 100 Дж жырақ</p>
-
-                        <p lang="en" class="lang-content"><strong>📋 EXAMPLE 1: PULLEY</strong></p>
-                        <p lang="en" class="lang-content">Useful work: A_useful = 500 J</p>
-                        <p lang="en" class="lang-content">Total work: A_total = 600 J</p>
-                        <p lang="en" class="lang-content">Efficiency = (500/600) × 100% = 83.3%</p>
-                        <p lang="en" class="lang-content">🔴 Lost (friction, resistance) - 100 J</p>
-
-                        <p lang="ru" class="lang-content"><strong>📋 ПРИМЕР 1: БЛОК</strong></p>
-                        <p lang="ru" class="lang-content">Полезная работа: A_полезная = 500 Дж</p>
-                        <p lang="ru" class="lang-content">Полная работа: A_полная = 600 Дж</p>
-                        <p lang="ru" class="lang-content">КПД = (500/600) × 100% = 83.3%</p>
-                        <p lang="ru" class="lang-content">🔴 Потери (трение, сопротивление) - 100 Дж</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📋 МЫСАЛ 2: РЫЧАГ</strong></p>
-                        <p lang="kk" class="lang-content">Пайда болған жұмыс: A_пол = 800 Дж</p>
-                        <p lang="kk" class="lang-content">Жиынтық жұмыс: A_полн = 1000 Дж</p>
-                        <p lang="kk" class="lang-content">КПД = (800/1000) × 100% = 80%</p>
-                        <p lang="kk" class="lang-content">🔴 Сыр емес - 200 Дж жырақ</p>
-
-                        <p lang="en" class="lang-content"><strong>📋 EXAMPLE 2: LEVER</strong></p>
-                        <p lang="en" class="lang-content">Useful work: A_useful = 800 J</p>
-                        <p lang="en" class="lang-content">Total work: A_total = 1000 J</p>
-                        <p lang="en" class="lang-content">Efficiency = (800/1000) × 100% = 80%</p>
-                        <p lang="en" class="lang-content">🔴 Lost - 200 J</p>
-
-                        <p lang="ru" class="lang-content"><strong>📋 ПРИМЕР 2: РЫЧАГ</strong></p>
-                        <p lang="ru" class="lang-content">Полезная работа: A_полезная = 800 Дж</p>
-                        <p lang="ru" class="lang-content">Полная работа: A_полная = 1000 Дж</p>
-                        <p lang="ru" class="lang-content">КПД = (800/1000) × 100% = 80%</p>
-                        <p lang="ru" class="lang-content">🔴 Потери - 200 Дж</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>⚙️ ӨНДІКТІГІНІҢ МЕХАНИЗМДЕРДІҢ КПД:</strong></p>
-                <p lang="kk" class="lang-content text-sm">• Шпил (идеалды) = 100% | Шпил (нақты) = 85-90%</p>
-                <p lang="kk" class="lang-content text-sm">• Рычаг = 85-95% | Блок = 75-95%</p>
-                <p lang="kk" class="lang-content text-sm">• Көңіс (эклектик) = 60-75% | Электр қозғалтқышы = 80-95%</p>
-                <p lang="kk" class="lang-content text-sm">• Дизель қозғалтқышы = 30-40% | Түндік ұшқын = 20-30%</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>⚙️ KPD OF REAL MECHANISMS:</strong></p>
-                <p lang="en" class="lang-content text-sm">• Inclined plane (ideal) = 100% | Inclined plane (real) = 85-90%</p>
-                <p lang="en" class="lang-content text-sm">• Lever = 85-95% | Pulley = 75-95%</p>
-                <p lang="en" class="lang-content text-sm">• Gear (ecliptic) = 60-75% | Electric motor = 80-95%</p>
-                <p lang="en" class="lang-content text-sm">• Diesel engine = 30-40% | Wind turbine = 20-30%</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>⚙️ КПД РЕАЛЬНЫХ МЕХАНИЗМОВ:</strong></p>
-                <p lang="ru" class="lang-content text-sm">• Наклонная плоскость (идеал) = 100% | Наклонная плоскость (реальная) = 85-90%</p>
-                <p lang="ru" class="lang-content text-sm">• Рычаг = 85-95% | Блок = 75-95%</p>
-                <p lang="ru" class="lang-content text-sm">• Зубчатка = 60-75% | Электромотор = 80-95%</p>
-                <p lang="ru" class="lang-content text-sm">• Дизельный двигатель = 30-40% | Ветровой генератор = 20-30%</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fed7aa; border-radius: 1rem; border-top: 4px solid #ea580c;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-orange-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-orange-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-orange-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">КПД механизмдердің мәселе-сіліктігін өлшейміз. η = (A_пол / A_полн) × 100%. Әрқашан 100% астам емес (үйкеліс, ауырыңғылау). Өндіктігінің механизмдер - 60-95% КПД. Энергияны сақтау маңызды!</p>
-            <p lang="en" class="lang-content text-sm">Efficiency measures mechanism effectiveness. η = (A_useful / A_total) × 100%. Never exceeds 100% (friction, resistance). Real mechanisms - 60-95% efficiency. Saving energy is important!</p>
-            <p lang="ru" class="lang-content text-sm">КПД измеряет эффективность механизма. η = (A_полезная / A_полная) × 100%. Никогда не превышает 100% (трение, сопротивление). Реальные механизмы - 60-95% КПД. Важно сохранять энергию!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

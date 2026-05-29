@@ -1,176 +1,159 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плавление және кристаллизация - Процесс</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #e0e7ff 0%, #dbeafe 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #3730a3; border-bottom: 3px solid #dbeafe; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #4f46e5; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #4f46e5; background: white; color: #4f46e5; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #4f46e5; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #4f46e5; color: white; text-align: center; }
-        .info-box { background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #4f46e5; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .crystal-card { background: #f0f4ff; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #4f46e5; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Движение по окружности</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-indigo-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Кинематика</span>
+<span lang="en" class="lang-content">Grade 10 · Kinematics</span>
+<span lang="ru" class="lang-content">10 класс · Кинематика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Шеңбер бойымен қозғалыс</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Motion in a circle</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Движение тела по окружности</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Балқу және кристалдану</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Melting and Crystallization</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Плавление и кристаллизация</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-indigo-100">Сұйық → кристальдық құрамасындағы. Молекулалар өндіктігінің. КРИСТАЛЬ ҚҰРАМАСЫНДАҒЫ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-indigo-100">Liquid → crystalline structure. Molecules arrange in order. CRYSTAL FORMATION!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-indigo-100">Жидкое → кристаллическое. Молекулы упорядочиваются. ОБРАЗОВАНИЕ КРИСТАЛЛОВ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔄 Бірқалыпты шеңбер қозғалыс</span>
+<span lang="en" class="lang-content">🔄 Uniform circular motion</span>
+<span lang="ru" class="lang-content">🔄 Равномерное движение по окружности</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Дене <b>шеңбер</b> бойымен <b>тұрақты модулімен</b> қозғалса (мысалы, жіптің ұшындағы шар, спутник, карусель). <b>Жылдамдық бағыты</b> үнемі <b>өзгеріп</b> отырады! Сондықтан үдеу <b>нөл емес</b> — ол <b>центрге</b> бағытталған.</span>
+<span lang="en" class="lang-content">A body moves along a <b>circle</b> with <b>constant speed</b> (a ball on string, satellite, carousel). The <b>direction</b> of velocity keeps <b>changing</b>! Therefore acceleration is <b>non-zero</b> and points to the <b>centre</b>.</span>
+<span lang="ru" class="lang-content">Тело движется по <b>окружности</b> с <b>постоянным модулем</b> скорости (шарик на нити, спутник, карусель). <b>Направление</b> скорости всё время <b>меняется</b>! Поэтому есть <b>ускорение</b> — направленное к <b>центру</b>.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. КРИСТАЛДАНУ ПРОЦЕСІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. CRYSTALLIZATION PROCESS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Процесс кристаллизации</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-sky-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Негізгі шамалар:</span><span lang="en" class="lang-content">Key quantities:</span><span lang="ru" class="lang-content">Основные величины:</span></p>
+<ul class="text-slate-700 text-sm space-y-1">
+<li><b>T</b> — <span lang="kk" class="lang-content">период (1 айналымға уақыт), с</span><span lang="en" class="lang-content">period (time for 1 lap), s</span><span lang="ru" class="lang-content">период (время 1 оборота), с</span></li>
+<li><b>ν</b> — <span lang="kk" class="lang-content">жиілік, Гц (= об/с)</span><span lang="en" class="lang-content">frequency, Hz (= rev/s)</span><span lang="ru" class="lang-content">частота, Гц (= об/с)</span></li>
+<li><b>ω</b> — <span lang="kk" class="lang-content">бұрыштық жылдамдық, рад/с</span><span lang="en" class="lang-content">angular velocity, rad/s</span><span lang="ru" class="lang-content">угловая скорость, рад/с</span></li>
+<li><b>R</b> — <span lang="kk" class="lang-content">шеңбер радиусы, м</span><span lang="en" class="lang-content">circle radius, m</span><span lang="ru" class="lang-content">радиус окружности, м</span></li>
+</ul>
+</div>
+</div>
 
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="crystal-card">
-                        <p lang="kk" class="lang-content"><strong>🔥 Балқу ПРОЦЕСІ</strong></p>
-                        <p lang="kk" class="lang-content">1. Қатты материал + жылу</p>
-                        <p lang="kk" class="lang-content">2. Т = T_плав-ға өндіктігінең</p>
-                        <p lang="kk" class="lang-content">3. Молекулалар ұрпақтары</p>
-                        <p lang="kk" class="lang-content">4. Кристальды құрамасындағы - ломается</p>
-                        <p lang="kk" class="lang-content">5. Сұйық құрамасындағы (chaotic)</p>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center mb-3">
+<svg width="280" height="240" viewBox="0 0 280 240">
+<circle cx="140" cy="120" r="80" fill="none" stroke="#0284c7" stroke-width="2" stroke-dasharray="4,3"/>
+<circle cx="140" cy="120" r="3" fill="#1e293b"/>
+<circle cx="220" cy="120" r="6" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+<line x1="220" y1="120" x2="220" y2="60" stroke="#16a34a" stroke-width="3"/>
+<polygon points="220,60 214,72 226,72" fill="#16a34a"/>
+<text x="225" y="80" font-size="13" fill="#16a34a" font-weight="bold">v⃗</text>
+<line x1="220" y1="120" x2="160" y2="120" stroke="#dc2626" stroke-width="3"/>
+<polygon points="160,120 172,114 172,126" fill="#dc2626"/>
+<text x="180" y="115" font-size="13" fill="#dc2626" font-weight="bold">aᵤ</text>
+<line x1="140" y1="120" x2="220" y2="120" stroke="#475569" stroke-width="1"/>
+<text x="175" y="135" font-size="11" fill="#475569">R</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center"><span lang="kk" class="lang-content">v⃗ — жанама; a⃗ — центрге</span><span lang="en" class="lang-content">v⃗ tangent; a⃗ toward centre</span><span lang="ru" class="lang-content">v⃗ — по касательной; a⃗ — к центру</span></p>
+</div>
+</div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>🔥 MELTING PROCESS</strong></p>
-                        <p lang="en" class="lang-content">1. Solid material + heat</p>
-                        <p lang="en" class="lang-content">2. T = T_melt increases</p>
-                        <p lang="en" class="lang-content">3. Molecules vibrate more</p>
-                        <p lang="en" class="lang-content">4. Crystal structure breaks</p>
-                        <p lang="en" class="lang-content">5. Liquid forms (chaotic)</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Формулалар</span>
+<span lang="en" class="lang-content">📐 Equations</span>
+<span lang="ru" class="lang-content">📐 Формулы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="card-accent rounded-custom p-5 text-center">
+<p class="heading-font text-sky-700 text-sm mb-1"><span lang="kk" class="lang-content">Период:</span><span lang="en" class="lang-content">Period:</span><span lang="ru" class="lang-content">Период:</span></p>
+<div class="formula" style="font-size:1.3rem">T = 1/ν</div>
+</div>
+<div class="card-accent rounded-custom p-5 text-center">
+<p class="heading-font text-sky-700 text-sm mb-1"><span lang="kk" class="lang-content">Сызықтық жылд.:</span><span lang="en" class="lang-content">Linear speed:</span><span lang="ru" class="lang-content">Лин. скорость:</span></p>
+<div class="formula" style="font-size:1.2rem">v = 2πR/T</div>
+</div>
+<div class="card-accent rounded-custom p-5 text-center">
+<p class="heading-font text-sky-700 text-sm mb-1"><span lang="kk" class="lang-content">Бұрыштық:</span><span lang="en" class="lang-content">Angular:</span><span lang="ru" class="lang-content">Угловая:</span></p>
+<div class="formula" style="font-size:1.2rem">ω = 2π/T<br/>v = ωR</div>
+</div>
+<div class="card-accent rounded-custom p-5 text-center">
+<p class="heading-font text-sky-700 text-sm mb-1"><span lang="kk" class="lang-content">Орт. үдеу:</span><span lang="en" class="lang-content">Centripetal a:</span><span lang="ru" class="lang-content">Центрост. уск.:</span></p>
+<div class="formula" style="font-size:1.2rem">aᵤ = v²/R = ω²R</div>
+</div>
+</div>
+</section>
 
-                        <p lang="ru" class="lang-content"><strong>🔥 ПРОЦЕСС ПЛАВЛЕНИЯ</strong></p>
-                        <p lang="ru" class="lang-content">1. Твёрдое + тепло</p>
-                        <p lang="ru" class="lang-content">2. Т = T_плав растёт</p>
-                        <p lang="ru" class="lang-content">3. Молекулы колеблются больше</p>
-                        <p lang="ru" class="lang-content">4. Кристаллическая структура ломается</p>
-                        <p lang="ru" class="lang-content">5. Жидкость образуется (хаос)</p>
-                    </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌍 Қолдану</span>
+<span lang="en" class="lang-content">🌍 Applications</span>
+<span lang="ru" class="lang-content">🌍 Применения</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🌍</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Жерге Айдың айналуы</span><span lang="en" class="lang-content">Moon orbits Earth</span><span lang="ru" class="lang-content">Луна вокруг Земли</span></p>
+<p class="text-xs text-slate-600 mt-1">T = 27,3 сут</p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🛰️</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">МКС орбита</span><span lang="en" class="lang-content">ISS orbit</span><span lang="ru" class="lang-content">Орбита МКС</span></p>
+<p class="text-xs text-slate-600 mt-1">T = 90 мин</p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🎡</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">Аттракцион</span><span lang="en" class="lang-content">Ferris wheel</span><span lang="ru" class="lang-content">Колесо обозрения</span></p>
+<p class="text-xs text-slate-600 mt-1">T ≈ 5 мин</p></div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">💿</div>
+<p class="heading-font text-sky-700 text-sm"><span lang="kk" class="lang-content">CD-диск</span><span lang="en" class="lang-content">CD disc</span><span lang="ru" class="lang-content">CD-диск</span></p>
+<p class="text-xs text-slate-600 mt-1">200–500 об/мин</p></div>
+</div>
+</section>
 
-                    <div class="crystal-card">
-                        <p lang="kk" class="lang-content"><strong>❄️ КРИСТАЛЛДАНУ ПРОЦЕСІ</strong></p>
-                        <p lang="kk" class="lang-content">1. Сұйық материал - охлаждение</p>
-                        <p lang="kk" class="lang-content">2. Т = T_плав-ға төмен болады</p>
-                        <p lang="kk" class="lang-content">3. Молекулалар жүрістеу</p>
-                        <p lang="kk" class="lang-content">4. Ядралы құрамасындағы (seeds)</p>
-                        <p lang="kk" class="lang-content">5. Кристаль құрамасындағы - әндіктігінең!</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-sky-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">МКС R = 6800 км радиусымен 90 мин-да Жерді айналады. Жылдамдық пен үдеуді табыңыз.</span>
+<span lang="en" class="lang-content">ISS orbits Earth at R = 6800 km, T = 90 min. Find v and aᵤ.</span>
+<span lang="ru" class="lang-content">МКС летает по орбите R = 6800 км с периодом 90 мин. Найти v и aᵤ.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>R = 6,8·10⁶ м</li><li>T = 5400 с</li><li>v — ?  aᵤ — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+v = 2π·6,8·10⁶/5400 ≈ <span class="num">7900</span> м/с
+<br/>aᵤ = v²/R ≈ <span class="num">9,2</span> м/с²
+</div>
+<div class="badge badge-emerald mt-3">≈ g ! → невесомость</div>
+</div></div></div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>❄️ CRYSTALLIZATION PROCESS</strong></p>
-                        <p lang="en" class="lang-content">1. Liquid material - cooling</p>
-                        <p lang="en" class="lang-content">2. T = T_melt decreases</p>
-                        <p lang="en" class="lang-content">3. Molecules slow down</p>
-                        <p lang="en" class="lang-content">4. Nucleation centers (seeds)</p>
-                        <p lang="en" class="lang-content">5. Crystal structure forms!</p>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-sky-700 mb-2">T, ν, ω</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Шеңбер шамалары</span><span lang="en" class="lang-content">Circular quantities</span><span lang="ru" class="lang-content">Величины окружности</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚡</div>
+<p class="heading-font text-xl text-sky-700 mb-2">v = ωR</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Сызықтық жылдамдық</span><span lang="en" class="lang-content">Linear speed</span><span lang="ru" class="lang-content">Линейная скорость</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🎯</div>
+<p class="heading-font text-xl text-sky-700 mb-2">aᵤ = v²/R</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Центрге бағытталған</span><span lang="en" class="lang-content">Toward centre</span><span lang="ru" class="lang-content">К центру</span></p></div>
+</div></footer>
 
-                        <p lang="ru" class="lang-content"><strong>❄️ ПРОЦЕСС КРИСТАЛЛИЗАЦИИ</strong></p>
-                        <p lang="ru" class="lang-content">1. Жидкое - охлаждение</p>
-                        <p lang="ru" class="lang-content">2. Т = T_плав понижается</p>
-                        <p lang="ru" class="lang-content">3. Молекулы замедляются</p>
-                        <p lang="ru" class="lang-content">4. Центры зародышей (семена)</p>
-                        <p lang="ru" class="lang-content">5. Кристаллическая структура образуется!</p>
-                    </div>
-                </div>
-
-                <p style="text-align: center; font-weight: bold; color: #3730a3; font-size: 18px; margin: 20px 0;">
-                    Плавление: Solid + Q → Liquid | Кристаллизация: Liquid - Q → Solid
-                </p>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ПРАКТИКАЛЫҚ ҚОЛДАНУ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. PRACTICAL APPLICATIONS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Практические приложения</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>💎 КРИСТАЛЬ ӨНДІКТІГІНІҢ:</strong></p>
-                <p lang="kk" class="lang-content text-sm">1. Отливка металлов (темір, мыс, алюминий) - машина құрамасындағы</p>
-                <p lang="kk" class="lang-content text-sm">2. Мұз өндіктігінің - холодильник, заморозка</p>
-                <p lang="kk" class="lang-content text-sm">3. Гемс құрамасындағы - ағындарын өндіктігінең (алмаз, рубин)</p>
-                <p lang="kk" class="lang-content text-sm">4. Кристаль салтанатының - полупроводниковлар (кремний, германий)</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>💎 CRYSTAL FORMATION USES:</strong></p>
-                <p lang="en" class="lang-content text-sm">1. Metal casting (iron, copper, aluminum) - mechanical parts</p>
-                <p lang="en" class="lang-content text-sm">2. Ice formation - refrigeration, freezing</p>
-                <p lang="en" class="lang-content text-sm">3. Gemstones - crystallization (diamond, ruby)</p>
-                <p lang="en" class="lang-content text-sm">4. Crystal semiconductors (silicon, germanium)</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>💎 ПРИМЕНЕНИЕ КРИСТАЛЛИЗАЦИИ:</strong></p>
-                <p lang="ru" class="lang-content text-sm">1. Отливка металлов (железо, медь, алюминий) - машинные детали</p>
-                <p lang="ru" class="lang-content text-sm">2. Образование льда - холодильники, заморозка</p>
-                <p lang="ru" class="lang-content text-sm">3. Драгоценные камни - кристаллизация (алмаз, рубин)</p>
-                <p lang="ru" class="lang-content text-sm">4. Кристаллические полупроводники (кремний, германий)</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔬  ACELERATION МЕТОДЫ:</strong></p>
-                <p lang="kk" class="lang-content text-sm">• Медленная охлаждение (slow cooling) - большие кристаллы</p>
-                <p lang="kk" class="lang-content text-sm">• Быстрая охлаждение (quick cooling) - маленькие кристаллы</p>
-                <p lang="kk" class="lang-content text-sm">• Посев (seeding) - заданное направление кристаллов</p>
-
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔬 CONTROL METHODS:</strong></p>
-                <p lang="en" class="lang-content text-sm">• Slow cooling - large crystals</p>
-                <p lang="en" class="lang-content text-sm">• Fast cooling - small crystals</p>
-                <p lang="en" class="lang-content text-sm">• Seeding - controlled direction</p>
-
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>🔬 МЕТОДЫ КОНТРОЛЯ:</strong></p>
-                <p lang="ru" class="lang-content text-sm">• Медленное охлаждение - большие кристаллы</p>
-                <p lang="ru" class="lang-content text-sm">• Быстрое охлаждение - маленькие кристаллы</p>
-                <p lang="ru" class="lang-content text-sm">• Посев (seeding) - контролируемое направление</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #dbeafe; border-radius: 1rem; border-top: 4px solid #4f46e5;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Плавления және кристаллизация - обратные процессы. Плавления: solid + Q → liquid. Кристаллизация: liquid - Q → solid. Практика: металл отливка, мұз образование, геммстоун кристаллы. Молекулалар упорядочивают = кристальная структура!</p>
-            <p lang="en" class="lang-content text-sm">Melting and crystallization are opposite processes. Melting: solid + Q → liquid. Crystallization: liquid - Q → solid. Practice: metal casting, ice formation, gemstone crystals. Molecules order themselves = crystal structure!</p>
-            <p lang="ru" class="lang-content text-sm">Плавление и кристаллизация - противоположные процессы. Плавление: твёрдое + Q → жидкое. Кристаллизация: жидкое - Q → твёрдое. Практика: отливка металлов, образование льда, кристаллы драгоценных камней. Молекулы упорядочиваются = кристаллическая структура!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

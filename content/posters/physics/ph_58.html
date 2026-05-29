@@ -1,321 +1,170 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Жылу өткізгіштік / Теплопроводность - Interactive Poster</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <link rel="stylesheet" href="../../libs/fonts.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .lang-content { display: none; }
-        body.lang-kk .content-kk, body.lang-en .content-en, body.lang-ru .content-ru {
-            display: block; animation: fadeIn 0.4s ease-out;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white; color: black; }
-            .bg-amber-600 { background: white !important; color: black !important; border: 2px solid black; }
-            .text-white { color: black !important; }
-            .card { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; }
-        }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электрическое сопротивление. Удельное сопротивление</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 lang-kk" id="main-body">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<nav class="fixed top-0 w-full bg-white/95 backdrop-blur shadow-sm z-50 border-b border-slate-200 no-print">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-white font-bold">λ</div>
-                <span class="font-bold text-xl text-slate-800">Thermo<span class="text-amber-600">Stat</span></span>
-            </div>
-            <div class="flex gap-1 bg-slate-100 p-1 rounded-lg">
-                <button onclick="setLang('kk')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-kk">Қаз</button>
-                <button onclick="setLang('ru')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-ru">Рус</button>
-                <button onclick="setLang('en')" class="px-3 py-1 rounded text-sm font-medium transition-colors lang-btn" id="btn-en">Eng</button>
-            </div>
-        </div>
-    </nav>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр тогы</span>
+<span lang="en" class="lang-content">Grade 9 · Electric current</span>
+<span lang="ru" class="lang-content">9 класс · Электрический ток</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электр кедергісі. Меншікті кедергі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Resistance. Resistivity</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электрическое сопротивление. Удельное сопротивление</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-    <main class="max-w-7xl mx-auto px-4 pt-24 pb-12 space-y-8">
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚧 Кедергі — R</span>
+<span lang="en" class="lang-content">🚧 Resistance — R</span>
+<span lang="ru" class="lang-content">🚧 Сопротивление — R</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электр кедергісі</b> — өткізгіштің тоқтың өтуіне <b>қарсыласу</b> қасиеті. Электрондар металдың ішінде жүргенде атомдармен <b>соқтығысады</b>, бұл олардың қозғалысын <b>баяулатады</b>. Соқтығыстар көп болған сайын — кедергі үлкен. Кедергі бірлігі — <b>Ом (Ω)</b>, неміс ғалымы <b>Георг Ом</b>-ның құрметіне.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Electrical resistance</b> is a conductor's ability to <b>resist</b> the flow of current. Electrons inside the metal <b>collide</b> with atoms, slowing down. More collisions → higher resistance. Unit — <b>ohm (Ω)</b>, after German physicist <b>Georg Ohm</b>.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Электрическое сопротивление</b> — способность проводника <b>препятствовать</b> току. Электроны в металле <b>сталкиваются</b> с атомами, замедляясь. Чем больше столкновений — тем выше сопротивление. Единица — <b>Ом (Ω)</b>, в честь немецкого учёного <b>Георга Ома</b>.</span></p>
 
-        <header class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-8 shadow-xl text-white relative overflow-hidden card">
-            <div class="relative z-10">
-                <div class="content-kk">
-                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Жылу өткізгіштік</h1>
-                    <p class="text-amber-100 text-xl max-w-3xl">Энергияның дененің қатты қызған бөлігінен аз қызған бөлігіне зат тасымалдаусыз берілуі.</p>
-                </div>
-                <div class="content-ru">
-                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Теплопроводность</h1>
-                    <p class="text-amber-100 text-xl max-w-3xl">Перенос энергии от более нагретых частей тела к менее нагретым без переноса вещества.</p>
-                </div>
-                <div class="content-en">
-                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Heat Conduction</h1>
-                    <p class="text-amber-100 text-xl max-w-3xl">Transfer of energy from hotter to colder parts of a body without transfer of matter.</p>
-                </div>
-            </div>
-            <svg class="absolute right-0 top-0 h-full w-1/3 opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-                 <path d="M0 100 Q 25 50 50 100 T 100 100 V 0 H 0 Z" fill="white"/>
-            </svg>
-        </header>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Кедергі неге тәуелді?</span><span lang="en" class="lang-content">Resistance depends on:</span><span lang="ru" class="lang-content">Сопротивление зависит от:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+<span class="var">R</span> = <span class="var">ρ</span> · <span style="display:inline-block;text-align:center;vertical-align:middle;font-size:1.1rem"><span class="var" style="display:block;border-bottom:2px solid #fde68a">L</span><span class="var" style="display:block">S</span></span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">R</b> — кедергі, <span class="unit-pill">Ом</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">R</b> — resistance, <span class="unit-pill">Ω</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">R</b> — сопротивление, <span class="unit-pill">Ом</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">ρ</b> — меншікті кедергі, <span class="unit-pill">Ом·м</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">ρ</b> — resistivity, <span class="unit-pill">Ω·m</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">ρ</b> — уд. сопрот., <span class="unit-pill">Ом·м</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">L</b> — өткізгіш ұзындығы, <span class="unit-pill">м</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">L</b> — length, <span class="unit-pill">m</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">L</b> — длина, <span class="unit-pill">м</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">S</b> — қима ауданы, <span class="unit-pill">м²</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">S</b> — cross-section, <span class="unit-pill">m²</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">S</b> — сечение, <span class="unit-pill">м²</span></span></p>
+</div>
+</div>
+</div>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 font-bold text-xl flex items-center justify-center">1</span>
-                    <h2 class="text-2xl font-bold">
-                        <span class="content-kk">Бұл қалай жұмыс істейді?</span>
-                        <span class="content-ru">Как это работает?</span>
-                        <span class="content-en">How does it work?</span>
-                    </h2>
-                </div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">🚧</div>
+<p class="heading-font text-2xl text-indigo-700 text-center mb-2">1 Ом = 1 В/А</p>
+<p class="text-slate-700 text-sm text-center">
+<span lang="kk" class="lang-content">Ұзындық ↑ → R ↑<br/>Қима ↑ → R ↓</span>
+<span lang="en" class="lang-content">Length ↑ → R ↑<br/>Cross-section ↑ → R ↓</span>
+<span lang="ru" class="lang-content">Длиннее → R выше<br/>Толще → R ниже</span></p>
+</div></div></section>
 
-                <div class="space-y-4 text-slate-600">
-                    <p class="content-kk">Бұл процесс <b>молекулалық деңгейде</b> жүреді. Жылдам қозғалатын (ыстық) молекулалар баяу қозғалатын (суық) көршілерімен соқтығысып, оларға энергия береді.</p>
-                    <p class="content-ru">Процесс происходит на <b>молекулярном уровне</b>. Быстрые (горячие) молекулы сталкиваются с медленными (холодными) соседями, передавая им энергию.</p>
-                    <p class="content-en">The process happens at the <b>molecular level</b>. Fast (hot) molecules collide with slow (cold) neighbors, transferring energy to them.</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔍 Кедергінің 3 факторы</span>
+<span lang="en" class="lang-content">🔍 3 factors of resistance</span>
+<span lang="ru" class="lang-content">🔍 3 фактора сопротивления</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="card-accent rounded-custom p-5">
+<p class="heading-font text-base text-indigo-700 mb-2">📏 <span lang="kk" class="lang-content">1. Ұзындық (L)</span><span lang="en" class="lang-content">1. Length (L)</span><span lang="ru" class="lang-content">1. Длина (L)</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">L 2 есе ↑ → R 2 есе ↑. Электрондар көп соқтығысады.</span><span lang="en" class="lang-content">2× longer → 2× more R. More collisions.</span><span lang="ru" class="lang-content">В 2 раза длиннее → R в 2 раза. Больше столкновений.</span></p>
+</div>
+<div class="card-accent rounded-custom p-5">
+<p class="heading-font text-base text-indigo-700 mb-2">⚪ <span lang="kk" class="lang-content">2. Қима (S)</span><span lang="en" class="lang-content">2. Cross-section (S)</span><span lang="ru" class="lang-content">2. Сечение (S)</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">S 2 есе ↑ → R 2 есе ↓. Электрондарға кең «жол».</span><span lang="en" class="lang-content">2× thicker → R/2. Wider «road».</span><span lang="ru" class="lang-content">В 2 раза толще → R/2. Шире «дорога».</span></p>
+</div>
+<div class="card-accent rounded-custom p-5">
+<p class="heading-font text-base text-indigo-700 mb-2">🧪 <span lang="kk" class="lang-content">3. Заттың түрі (ρ)</span><span lang="en" class="lang-content">3. Material (ρ)</span><span lang="ru" class="lang-content">3. Материал (ρ)</span></p>
+<p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Заттардың «электрлік таза»-лығы. ρ кесте арқылы.</span><span lang="en" class="lang-content">Material's «electrical cleanness». See table.</span><span lang="ru" class="lang-content">«Электрическая чистота». См. таблицу.</span></p>
+</div>
+</div>
+</section>
 
-                    <div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500 mt-4">
-                        <p class="font-bold text-amber-800">
-                            <span class="content-kk">ЕСТЕ САҚТА: Заттың өзі орын ауыстырмайды!</span>
-                            <span class="content-ru">ВАЖНО: Само вещество не перемещается!</span>
-                            <span class="content-en">NOTE: Matter itself does not move!</span>
-                        </p>
-                    </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Меншікті кедергілер (ρ)</span>
+<span lang="en" class="lang-content">📊 Resistivity values (ρ)</span>
+<span lang="ru" class="lang-content">📊 Значения удельного сопротивления (ρ)</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Зат</span><span lang="en" class="lang-content">Material</span><span lang="ru" class="lang-content">Вещество</span></th>
+<th>ρ, Ом·мм²/м</th>
+<th><span lang="kk" class="lang-content">Қолданысы</span><span lang="en" class="lang-content">Use</span><span lang="ru" class="lang-content">Применение</span></th>
+</tr></thead>
+<tbody>
+<tr class="bg-emerald-50"><td>🥇 <span lang="kk" class="lang-content">Күміс</span><span lang="en" class="lang-content">Silver</span><span lang="ru" class="lang-content">Серебро</span></td><td class="text-emerald-700"><b>0,016</b></td><td><span lang="kk" class="lang-content">арнайы контактілер</span><span lang="en" class="lang-content">special contacts</span><span lang="ru" class="lang-content">контакты</span></td></tr>
+<tr class="bg-emerald-50"><td>🥉 <span lang="kk" class="lang-content">Мыс</span><span lang="en" class="lang-content">Copper</span><span lang="ru" class="lang-content">Медь</span></td><td class="text-emerald-700">0,017</td><td><span lang="kk" class="lang-content">сымдар (стандарт!)</span><span lang="en" class="lang-content">wires (standard)</span><span lang="ru" class="lang-content">провода (стандарт!)</span></td></tr>
+<tr><td>⚙️ <span lang="kk" class="lang-content">Алюминий</span><span lang="en" class="lang-content">Aluminum</span><span lang="ru" class="lang-content">Алюминий</span></td><td>0,028</td><td><span lang="kk" class="lang-content">ЛЭП (жеңіл)</span><span lang="en" class="lang-content">power lines (light)</span><span lang="ru" class="lang-content">ЛЭП (легче меди)</span></td></tr>
+<tr><td>⚒ <span lang="kk" class="lang-content">Темір</span><span lang="en" class="lang-content">Iron</span><span lang="ru" class="lang-content">Железо</span></td><td>0,1</td><td><span lang="kk" class="lang-content">рельс, болт</span><span lang="en" class="lang-content">rails, bolts</span><span lang="ru" class="lang-content">рельсы</span></td></tr>
+<tr><td>🪙 <span lang="kk" class="lang-content">Нихром</span><span lang="en" class="lang-content">Nichrome</span><span lang="ru" class="lang-content">Нихром</span></td><td>1,1</td><td><span lang="kk" class="lang-content">шай қайнатқыш, үтік (қызады!)</span><span lang="en" class="lang-content">heaters (heats up)</span><span lang="ru" class="lang-content">нагреватели</span></td></tr>
+<tr class="bg-rose-50"><td>🛡 <span lang="kk" class="lang-content">Шыны</span><span lang="en" class="lang-content">Glass</span><span lang="ru" class="lang-content">Стекло</span></td><td class="text-rose-700"><b>10¹⁰⁻¹⁴</b></td><td><span lang="kk" class="lang-content">изолятор!</span><span lang="en" class="lang-content">insulator!</span><span lang="ru" class="lang-content">изолятор!</span></td></tr>
+</tbody>
+</table>
+<p class="text-slate-600 text-sm mt-3"><span lang="kk" class="lang-content">📌 ρ кіші → жақсы өткізгіш. ρ үлкен → диэлектрик.</span><span lang="en" class="lang-content">📌 Lower ρ → better conductor.</span><span lang="ru" class="lang-content">📌 Меньше ρ → лучше проводит.</span></p>
+</div>
+</section>
 
-                    <ul class="list-disc pl-5 space-y-2 mt-4">
-                        <li>
-                            <span class="content-kk">Қатты денелерде (әсіресе металдарда) жақсы жүреді.</span>
-                            <span class="content-ru">Лучше всего происходит в твердых телах (особенно металлах).</span>
-                            <span class="content-en">Best in solids (especially metals).</span>
-                        </li>
-                        <li>
-                            <span class="content-kk">Сұйықтықтарда — нашар.</span>
-                            <span class="content-ru">В жидкостях — плохо.</span>
-                            <span class="content-en">Poor in liquids.</span>
-                        </li>
-                        <li>
-                            <span class="content-kk">Газдарда — өте нашар (вакуумда мүлдем жоқ).</span>
-                            <span class="content-ru">В газах — очень плохо (в вакууме невозможно).</span>
-                            <span class="content-en">Very poor in gases (impossible in vacuum).</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп шығару</span>
+<span lang="en" class="lang-content">🧮 Problem solving</span>
+<span lang="ru" class="lang-content">🧮 Решение задач</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: 100 м ұзындықты, S = 0,5 мм² мыс сым кедергісін табу. (ρ = 0,017 Ом·мм²/м)</span>
+<span lang="en" class="lang-content">📘 Problem: Resistance of a copper wire 100 m long, S = 0.5 mm²?</span>
+<span lang="ru" class="lang-content">📘 Задача: Сопротивление медного провода длиной 100 м и S = 0,5 мм²?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>L = 100 м</li>
+<li>S = 0,5 мм²</li>
+<li>ρ = 0,017 Ом·мм²/м</li>
+<li>R — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+R = ρL/S
+<br/>R = 0,017·100/0,5
+<br/>R = <span class="num">3,4</span> <span class="unit">Ом</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ R = 3,4 Ом</span><span lang="en" class="lang-content">✅ R = 3.4 Ω</span><span lang="ru" class="lang-content">✅ R = 3,4 Ом</span></div>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="card bg-slate-900 p-8 rounded-3xl shadow-lg border border-slate-700 flex flex-col items-center justify-center">
-                <h3 class="text-slate-400 mb-4 text-sm uppercase tracking-widest text-center">
-                    <span class="content-kk">Молекулалық модель</span>
-                    <span class="content-ru">Молекулярная модель</span>
-                    <span class="content-en">Molecular Model</span>
-                </h3>
-                <svg viewBox="0 0 400 150" class="w-full h-auto">
-                    <path d="M40 120 Q 50 80 40 60 Q 30 80 40 120 Z" fill="#ef4444">
-                        <animate attributeName="d" values="M40 120 Q 50 80 40 60 Q 30 80 40 120 Z; M40 120 Q 60 90 40 50 Q 20 90 40 120 Z; M40 120 Q 50 80 40 60 Q 30 80 40 120 Z" dur="0.5s" repeatCount="indefinite"/>
-                    </path>
-                    <text x="40" y="140" fill="#ef4444" text-anchor="middle" font-size="12">HEAT</text>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧊 Асқынөткізгіштік</span>
+<span lang="en" class="lang-content">🧊 Superconductivity</span>
+<span lang="ru" class="lang-content">🧊 Сверхпроводимость</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">1911 жылы голландиялық ғалым <b>Х. Камерлинг-Оннес</b> кейбір металдарды <b>−269°C-қа</b> дейін салқындатқанда олардың <b>кедергісі нөлге</b> айналатынын ашты. Бұл — <b class="text-indigo-700">асқынөткізгіштік</b>. Қазіргі күнде асқынөткізгіштер: <b>МРТ магниттер, поездар (маглев), термоядро реакторлары</b> (Қазақстанда — <b>токамак КТМ</b>!).</span>
+<span lang="en" class="lang-content">In 1911 Dutch scientist <b>H. Kamerlingh Onnes</b> discovered that some metals cooled to <b>−269°C</b> have <b>zero resistance</b>. This is <b class="text-indigo-700">superconductivity</b>. Today it powers <b>MRI magnets, maglev trains, fusion reactors</b> (Kazakhstan's <b>KTM tokamak</b>!).</span>
+<span lang="ru" class="lang-content">В 1911 г. голландец <b>Х. Камерлинг-Оннес</b> обнаружил, что у некоторых металлов при <b>−269°C</b> сопротивление <b>равно нулю</b>. Это — <b class="text-indigo-700">сверхпроводимость</b>. Применение: <b>магниты МРТ, маглев-поезда, термоядерные реакторы</b> (в Казахстане — <b>токамак КТМ</b>!).</span></p>
+</div>
+</section>
 
-                    <rect x="70" y="50" width="300" height="40" rx="5" fill="#334155" stroke="#475569"/>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚧</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">R = ρL/S</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Кедергі формуласы</span><span lang="en" class="lang-content">Resistance formula</span><span lang="ru" class="lang-content">Формула R</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">[R] = Ом</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Г. Ом</span><span lang="en" class="lang-content">G. Ohm</span><span lang="ru" class="lang-content">Г. Ом</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🥉</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Мыс — стандарт</span><span lang="en" class="lang-content">Copper standard</span><span lang="ru" class="lang-content">Медь — стандарт</span></p>
+<p class="text-slate-700 text-base">ρ = 0,017 Ом·мм²/м</p></div>
+</div></footer>
 
-                    <g>
-                        <circle cx="85" cy="70" r="8" fill="#ef4444">
-                            <animate attributeName="cx" values="85;87;83;85" dur="0.1s" repeatCount="indefinite"/>
-                            <animate attributeName="cy" values="70;72;68;70" dur="0.1s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="105" cy="70" r="8" fill="#f97316">
-                            <animate attributeName="cx" values="105;106;104;105" dur="0.2s" repeatCount="indefinite"/>
-                            <animate attributeName="cy" values="70;71;69;70" dur="0.2s" repeatCount="indefinite"/>
-                        </circle>
-                    </g>
-
-                    <g>
-                        <circle cx="125" cy="70" r="8" fill="#f59e0b">
-                            <animate attributeName="cx" values="125;126;124;125" dur="0.4s" repeatCount="indefinite"/>
-                        </circle>
-                         <circle cx="145" cy="70" r="8" fill="#fbbf24">
-                            <animate attributeName="cx" values="145;145.5;144.5;145" dur="0.6s" repeatCount="indefinite"/>
-                        </circle>
-                    </g>
-
-                    <g>
-                         <circle cx="165" cy="70" r="8" fill="#3b82f6"/>
-                         <circle cx="185" cy="70" r="8" fill="#3b82f6"/>
-                         <circle cx="205" cy="70" r="8" fill="#3b82f6"/>
-                         <circle cx="225" cy="70" r="8" fill="#3b82f6"/>
-                         <circle cx="345" cy="70" r="8" fill="#3b82f6"/>
-                    </g>
-
-                    <line x1="80" y1="30" x2="200" y2="30" stroke="white" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="5,5"/>
-                    <text x="140" y="20" fill="white" font-size="10" text-anchor="middle">Energy Flow</text>
-
-                    <defs>
-                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                            <path d="M0,0 L0,6 L9,3 z" fill="white" />
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <section class="card bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
-             <div class="p-6 bg-slate-50 border-b border-slate-200">
-                <h3 class="font-bold text-slate-700 text-lg text-center uppercase tracking-wide">
-                    <span class="content-kk">Жылу өткізгіштік коэффициенттері</span>
-                    <span class="content-ru">Коэффициенты теплопроводности</span>
-                    <span class="content-en">Thermal Conductivity Coefficients</span>
-                </h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="p-6 border-r border-slate-100">
-                    <h4 class="text-green-600 font-bold mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <span class="content-kk">Өткізгіштер (Жақсы)</span>
-                        <span class="content-ru">Проводники (Хорошие)</span>
-                        <span class="content-en">Conductors (Good)</span>
-                    </h4>
-                    <table class="w-full text-sm">
-                        <tr class="border-b border-slate-100"><td class="py-2">💎 <span class="content-ru">Алмаз</span><span class="content-en">Diamond</span></td><td class="font-mono text-right text-slate-500">2000 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">🥈 <span class="content-ru">Серебро</span><span class="content-en">Silver</span></td><td class="font-mono text-right text-slate-500">430 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">🥉 <span class="content-ru">Медь</span><span class="content-en">Copper</span></td><td class="font-mono text-right text-slate-500">400 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">🥇 <span class="content-ru">Золото</span><span class="content-en">Gold</span></td><td class="font-mono text-right text-slate-500">320 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">🏗️ <span class="content-ru">Алюминий</span><span class="content-en">Aluminum</span></td><td class="font-mono text-right text-slate-500">236 W/(m·K)</td></tr>
-                        <tr><td class="py-2">🔩 <span class="content-ru">Железо</span><span class="content-en">Iron</span></td><td class="font-mono text-right text-slate-500">80 W/(m·K)</td></tr>
-                    </table>
-                </div>
-
-                <div class="p-6">
-                    <h4 class="text-blue-500 font-bold mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        <span class="content-kk">Оқшаулағыштар (Нашар)</span>
-                        <span class="content-ru">Изоляторы (Плохие)</span>
-                        <span class="content-en">Insulators (Poor)</span>
-                    </h4>
-                    <table class="w-full text-sm">
-                        <tr class="border-b border-slate-100"><td class="py-2">🧱 <span class="content-ru">Кирпич</span><span class="content-en">Brick</span></td><td class="font-mono text-right text-slate-500">0.8 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">💧 <span class="content-ru">Вода</span><span class="content-en">Water</span></td><td class="font-mono text-right text-slate-500">0.6 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">🪵 <span class="content-ru">Дерево</span><span class="content-en">Wood</span></td><td class="font-mono text-right text-slate-500">0.15 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">🧶 <span class="content-ru">Шерсть</span><span class="content-en">Wool</span></td><td class="font-mono text-right text-slate-500">0.04 W/(m·K)</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2">💭 <span class="content-ru">Воздух</span><span class="content-en">Air</span></td><td class="font-mono text-right text-slate-500">0.026 W/(m·K)</td></tr>
-                        <tr><td class="py-2">🌌 <span class="content-ru">Вакуум</span><span class="content-en">Vacuum</span></td><td class="font-mono text-right text-slate-500">0 W/(m·K)</td></tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="card bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
-            <h2 class="text-2xl font-bold mb-8 text-center text-slate-800">
-                <span class="content-kk">Өмірлік мысалдар</span>
-                <span class="content-ru">Примеры из жизни</span>
-                <span class="content-en">Real Life Examples</span>
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                <div class="bg-orange-50 p-5 rounded-xl border border-orange-100">
-                    <h4 class="font-bold text-orange-800 mb-3 border-b border-orange-200 pb-2 flex items-center gap-2">
-                        🍳 <span class="content-kk">Жылуды беру (Пайдалы)</span><span class="content-ru">Передача тепла (Польза)</span>
-                    </h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>1. <span class="content-ru">Металлическая сковорода.</span><span class="content-kk">Металл таба.</span></li>
-                        <li>2. <span class="content-ru">Радиатор отопления (металл).</span><span class="content-kk">Жылу радиаторы.</span></li>
-                        <li>3. <span class="content-ru">Утюг (подошва).</span><span class="content-kk">Үтіктің табаны.</span></li>
-                        <li>4. <span class="content-ru">Паяльник (медное жало).</span><span class="content-kk">Дәнекерлегіш.</span></li>
-                        <li>5. <span class="content-ru">Процессорный кулер (алюминий).</span><span class="content-kk">Компьютер кулері.</span></li>
-                        <li>6. <span class="content-ru">Ложка в горячем чае.</span><span class="content-kk">Шайдағы қасық.</span></li>
-                        <li>7. <span class="content-ru">Гриль решетка.</span><span class="content-kk">Гриль торы.</span></li>
-                        <li>8. <span class="content-ru">Двигатель авто (охлаждение).</span><span class="content-kk">Көлік моторы.</span></li>
-                        <li>9. <span class="content-ru">Кипятильник.</span><span class="content-kk">Қайнатқыш.</span></li>
-                        <li>10. <span class="content-ru">Теплый пол.</span><span class="content-kk">Жылы еден.</span></li>
-                    </ul>
-                </div>
-
-                <div class="bg-blue-50 p-5 rounded-xl border border-blue-100">
-                    <h4 class="font-bold text-blue-800 mb-3 border-b border-blue-200 pb-2 flex items-center gap-2">
-                        🧥 <span class="content-kk">Жылуды сақтау (Оқшаулау)</span><span class="content-ru">Сохранение тепла (Изоляция)</span>
-                    </h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>11. <span class="content-ru">Зимняя шуба (мех держит воздух).</span><span class="content-kk">Қысқы тон.</span></li>
-                        <li>12. <span class="content-ru">Пластиковые окна (воздух внутри).</span><span class="content-kk">Пластик терезе.</span></li>
-                        <li>13. <span class="content-ru">Термос (вакуум).</span><span class="content-kk">Термос.</span></li>
-                        <li>14. <span class="content-ru">Кирпичные стены дома.</span><span class="content-kk">Кірпіш үй.</span></li>
-                        <li>15. <span class="content-ru">Деревянная ручка сковороды.</span><span class="content-kk">Табаның ағаш сабы.</span></li>
-                        <li>16. <span class="content-ru">Пуховое одеяло.</span><span class="content-kk">Мамық көрпе.</span></li>
-                        <li>17. <span class="content-ru">Снег (защищает озимые).</span><span class="content-kk">Қар жамылғысы.</span></li>
-                        <li>18. <span class="content-ru">Пенопласт.</span><span class="content-kk">Пенопласт.</span></li>
-                        <li>19. <span class="content-ru">Войлочная юрта.</span><span class="content-kk">Киіз үй.</span></li>
-                        <li>20. <span class="content-ru">Прихватки для кухни.</span><span class="content-kk">Ас үй қолғабы.</span></li>
-                    </ul>
-                </div>
-
-                 <div class="bg-green-50 p-5 rounded-xl border border-green-100">
-                    <h4 class="font-bold text-green-800 mb-3 border-b border-green-200 pb-2 flex items-center gap-2">
-                        🌍 <span class="content-kk">Табиғат және Тұрмыс</span><span class="content-ru">Природа и Быт</span>
-                    </h4>
-                    <ul class="space-y-2 text-slate-700">
-                        <li>21. <span class="content-ru">Птицы нахохливаются в мороз.</span><span class="content-kk">Құстардың үрпиюі.</span></li>
-                        <li>22. <span class="content-ru">Лед на озере (греет воду снизу).</span><span class="content-kk">Мұз астындағы су.</span></li>
-                        <li>23. <span class="content-ru">Ожог от металла сильнее (чем от дерева).</span><span class="content-kk">Металлдан күю.</span></li>
-                        <li>24. <span class="content-ru">Прохладная плитка на полу.</span><span class="content-kk">Салқын кафель.</span></li>
-                        <li>25. <span class="content-ru">Сауна (деревянные полки).</span><span class="content-kk">Сауна.</span></li>
-                        <li>26. <span class="content-ru">Иглу (дом из снега).</span><span class="content-kk">Иглу.</span></li>
-                        <li>27. <span class="content-ru">Космический скафандр.</span><span class="content-kk">Скафандр.</span></li>
-                        <li>28. <span class="content-ru">Стекловата.</span><span class="content-kk">Шыны мақта.</span></li>
-                        <li>29. <span class="content-ru">Промерзание грунта.</span><span class="content-kk">Жердің тоңуы.</span></li>
-                        <li>30. <span class="content-ru">Горячий песок на пляже.</span><span class="content-kk">Ыстық құм.</span></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center text-slate-400 py-8">
-            <p class="content-kk">© 2025 Интерактивті білім беру плакаты. Барлық құқықтар қорғалған.</p>
-            <p class="content-ru">© 2025 Интерактивный образовательный плакат. Все права защищены.</p>
-            <p class="content-en">© 2025 Interactive Educational Poster. All rights reserved.</p>
-        </footer>
-
-    </main>
-
-    <script>
-        function setLang(lang) {
-            document.getElementById('main-body').className = `bg-slate-50 text-slate-800 lang-${lang}`;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if(btn.id === `btn-${lang}`) {
-                    btn.classList.add('bg-amber-500', 'text-white');
-                    btn.classList.remove('text-slate-600', 'hover:bg-slate-200');
-                } else {
-                    btn.classList.remove('bg-amber-500', 'text-white');
-                    btn.classList.add('text-slate-600', 'hover:bg-slate-200');
-                }
-            });
-        }
-        // Initialize
-        setLang('kk');
-    </script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js">
-    // Функция переключения языков (Автоматически добавлено скриптом)
-    function switchLang(lang) {
-        var container = document.getElementById('poster-container');
-        if (container) {
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-        }
-        var buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-</script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

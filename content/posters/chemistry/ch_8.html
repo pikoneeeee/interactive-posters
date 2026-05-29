@@ -1,281 +1,301 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Атомдар және молекулалар</title>
+    <title>Атомы и молекулы</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #451a03, #78350f, #1c1917); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #0c1445, #1e3a8a, #0f172a);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #f59e0b; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #fbbf24; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #fbbf24; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #fbbf24; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #38bdf8; color: #0f172a; border-color: transparent; font-weight: 800; }
+        .element-btn { transition: all 0.2s; cursor: pointer; }
+        .element-btn:hover { transform: translateY(-3px); }
+        .element-btn.active { background: rgba(56, 189, 248, 0.25); border-color: #38bdf8; }
+        @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .electron-orbit { animation: orbit 8s linear infinite; transform-origin: 200px 175px; }
+        .electron-orbit-2 { animation: orbit 5s linear infinite reverse; transform-origin: 200px 175px; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Атомдар және Молекулалар</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Atoms & Molecules</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Атомы и молекулы</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">Атом - ең кіші бөлінік зат. Молекула - атомдың біріктігі. 10-10 метр өлшемі! Электрон облак моделі!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">Atom - smallest particle of matter. Molecule - union of atoms. 10⁻¹⁰ meters! Electron cloud model!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">Атом - наименьшая частица вещества. Молекула - объединение атомов. 10⁻¹⁰ метров! Модель электронного облака!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-sky-400"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. АТОМ ҚҰРЫЛЫМЫ ЖӘНЕ МОДЕЛЬДЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. ATOM STRUCTURE & MODELS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Структура атома и модели</h2>
-
-            <div class="rule-card">
-                <div class="space-y-4">
-                    <div class="info-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>⚛️ ТАРИХИ МОДЕЛЬДЕРІ:</strong><br/>
-                        1. <strong>Дальтон (1808):</strong> Атом - бөлінбейтін сфера (ақымы сыйпы)<br/>
-                        2. <strong>Томсон (1897):</strong> Электрон - "құлпынды дәмі" моделі<br/>
-                        3. <strong>Резерфорд (1909):</strong> Өздіктерінің орталығында ядро + электрон орбита<br/>
-                        4. <strong>Бор (1913):</strong> Орбиталар - рөлі энергия деңгейі<br/>
-                        5. <strong>Шредингер (1925):</strong> ЭЛЕКТРОН ОБЛАК моделі - әйтшісі ғалыми!</p>
-                        <p lang="en" class="lang-content text-sm"><strong>⚛️ HISTORICAL MODELS:</strong><br/>
-                        1. <strong>Dalton (1808):</strong> Atom - indivisible sphere<br/>
-                        2. <strong>Thomson (1897):</strong> Electron - "plum pudding" model<br/>
-                        3. <strong>Rutherford (1909):</strong> Nucleus + electron orbits<br/>
-                        4. <strong>Bohr (1913):</strong> Energy levels<br/>
-                        5. <strong>Schrödinger (1925):</strong> ELECTRON CLOUD - most scientific!</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>⚛️ ИСТОРИЧЕСКИЕ МОДЕЛИ:</strong><br/>
-                        1. <strong>Дальтон (1808):</strong> неделимая сфера<br/>
-                        2. <strong>Томсон (1897):</strong> "плумпудинг"<br/>
-                        3. <strong>Резерфорд (1909):</strong> ядро + орбиты<br/>
-                        4. <strong>Бор (1913):</strong> энергетические уровни<br/>
-                        5. <strong>Шредингер (1925):</strong> облако электронов!</p>
-                    </div>
-
-                    <div class="info-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>⚛️ АТОМ ҚҰРАМЫ:</strong><br/>
-                        • <strong>Ядро:</strong> Протондар (+) + нейтрондар (0)<br/>
-                        • <strong>Электрондар:</strong> (-) облакындағы уақыт орындалатын<br/>
-                        • <strong>Өлшемі:</strong> ~10⁻¹⁰ метр (ангстрем!)<br/>
-                        • <strong>Ядро өлшемі:</strong> ~10⁻¹⁵ метр (қатты жабық!)<br/>
-                        • <strong>Жалпы массасы:</strong> 99.9% ядро деген!</p>
-                        <p lang="en" class="lang-content text-sm"><strong>⚛️ ATOM COMPOSITION:</strong><br/>
-                        • <strong>Nucleus:</strong> Protons (+) + Neutrons (0)<br/>
-                        • <strong>Electrons:</strong> (-) electron cloud<br/>
-                        • <strong>Size:</strong> ~10⁻¹⁰ m (angstrom!)<br/>
-                        • <strong>Nucleus size:</strong> ~10⁻¹⁵ m (extremely dense!)<br/>
-                        • <strong>Total mass:</strong> 99.9% nucleus!</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>⚛️ СОСТАВ АТОМА:</strong><br/>
-                        • <strong>Ядро:</strong> протоны (+) + нейтроны (0)<br/>
-                        • <strong>Электроны:</strong> (-) электронное облако<br/>
-                        • <strong>Размер:</strong> ~10⁻¹⁰ м (ангстрем!)<br/>
-                        • <strong>Размер ядра:</strong> ~10⁻¹⁵ м (сверхплотное!)<br/>
-                        • <strong>Общая масса:</strong> 99.9% ядро!</p>
-                    </div>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-7 glass rounded-custom p-8 relative overflow-hidden">
+            <h2 id="canvas-heading" class="heading-font text-xl mb-4 opacity-80 uppercase tracking-wider"></h2>
+            <svg viewBox="0 0 400 350" class="w-full h-[400px]">
+                <defs>
+                    <radialGradient id="nucleusGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fbbf24"/>
+                        <stop offset="100%" stop-color="#dc2626"/>
+                    </radialGradient>
+                </defs>
+                <ellipse cx="200" cy="175" rx="130" ry="50" fill="none" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <ellipse cx="200" cy="175" rx="130" ry="50" fill="none" stroke="rgba(56,189,248,0.4)" stroke-width="1.5" transform="rotate(60 200 175)"/>
+                <ellipse cx="200" cy="175" rx="130" ry="50" fill="none" stroke="rgba(56,189,248,0.4)" stroke-width="1.5" transform="rotate(120 200 175)"/>
+                <circle cx="200" cy="175" r="28" fill="url(#nucleusGrad)" stroke="#fff" stroke-width="2"/>
+                <text id="svg-nucleus" x="200" y="180" text-anchor="middle" fill="white" font-weight="bold" font-size="14"></text>
+                <g class="electron-orbit">
+                    <circle cx="330" cy="175" r="7" fill="#38bdf8"/>
+                    <circle cx="330" cy="175" r="7" fill="#38bdf8" opacity="0.4"/>
+                </g>
+                <g class="electron-orbit-2">
+                    <circle cx="135" cy="115" r="7" fill="#a5f3fc"/>
+                </g>
+                <text id="svg-electron-label" x="200" y="330" text-anchor="middle" fill="#a5f3fc" font-size="14"></text>
+            </svg>
+            <div class="grid grid-cols-4 gap-3 mt-4">
+                <div onclick="selectElement('H')" id="el-H" class="element-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-2xl font-bold">H</div>
+                    <div id="el-H-name" class="text-xs text-white/60"></div>
+                </div>
+                <div onclick="selectElement('O')" id="el-O" class="element-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-2xl font-bold">O</div>
+                    <div id="el-O-name" class="text-xs text-white/60"></div>
+                </div>
+                <div onclick="selectElement('C')" id="el-C" class="element-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-2xl font-bold">C</div>
+                    <div id="el-C-name" class="text-xs text-white/60"></div>
+                </div>
+                <div onclick="selectElement('Fe')" id="el-Fe" class="element-btn glass rounded-2xl p-3 text-center border border-white/10">
+                    <div class="text-2xl font-bold">Fe</div>
+                    <div id="el-Fe-name" class="text-xs text-white/60"></div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. МОЛЕКУЛАЛАР ЖӘНЕ ҚАСИЕТТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Molecules & Properties</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Молекулы и их свойства</h2>
-
-            <div class="rule-card">
-                <div class="grid grid-cols-2 gap-4">
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.15);">
-                        <p lang="kk" class="lang-content text-sm"><strong>🔬 МОЛЕКУЛАЛАР:</strong><br/>
-                        ✓ 2+ атом біріктігі<br/>
-                        ✓ Ковалент байланыста<br/>
-                        ✓ Зат табиғаты сақтайды<br/>
-                        ✓ Мысал: H₂O (су), O₂ (газ)</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🔬 MOLECULES:</strong><br/>
-                        ✓ Union of 2+ atoms<br/>
-                        ✓ Covalent bonds<br/>
-                        ✓ Preserve substance properties<br/>
-                        ✓ Example: H₂O, O₂</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🔬 МОЛЕКУЛЫ:</strong><br/>
-                        ✓ объединение 2+ атомов<br/>
-                        ✓ ковалентная связь<br/>
-                        ✓ сохраняют свойства<br/>
-                        ✓ Пример: H₂O, O₂</p>
-                    </div>
-
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 0.75rem; border-left: 3px solid rgba(255,255,255,0.15);">
-                        <p lang="kk" class="lang-content text-sm"><strong>⚛️ АТОМДАР:</strong><br/>
-                        ✓ Бір элементтің ең кіші бөлінік<br/>
-                        ✓ Өздіктерінің табиғатын сақтамайды<br/>
-                        ✓ Мысал: Натрий Na (метал)<br/>
-                        ✓ О₂ айырып O атом (**өткенді!**)</p>
-                        <p lang="en" class="lang-content text-sm"><strong>⚛️ ATOMS:</strong><br/>
-                        ✓ Smallest particle of element<br/>
-                        ✓ Isolated = different properties!<br/>
-                        ✓ Example: Na atom (not metal)<br/>
-                        ✓ O atom from O₂ = reactive!</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>⚛️ АТОМЫ:</strong><br/>
-                        ✓ наименьшая частица элемента<br/>
-                        ✓ изолированные = другие свойства!<br/>
-                        ✓ Пример: атом Na (не металл!)<br/>
-                        ✓ атом О из О₂ = активный!</p>
-                    </div>
+        <div class="lg:col-span-5 glass rounded-custom p-8 flex flex-col justify-center border-l-4 border-sky-500">
+            <div class="text-5xl mb-4">⚛️</div>
+            <h3 id="info-title" class="heading-font text-3xl mb-4 text-sky-300"></h3>
+            <p id="info-text" class="text-lg leading-relaxed text-white/80 mb-6"></p>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop1-label"></div>
+                    <div id="prop1-value" class="text-lg font-bold text-sky-300"></div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop2-label"></div>
+                    <div id="prop2-value" class="text-lg font-bold text-sky-300"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </main>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Атомдар - зат ең кіші бөлінігі (10⁻¹⁰ м). Құрамы: ядро (протон + нейтрон) + электрон облако. Модельдері эволюция: Дальтон → Томсон → Резерфорд → Бор → Шредингер (электрон облак - әйтшісі ғалыми!). Молекулалар - 2+ атом біріктігі ковалент байланысында. Молекула зат табиғаты сақтайды, ал атом сағындалмайды!</p>
-            <p lang="en" class="lang-content text-sm">Atoms - smallest particles (10⁻¹⁰ m). Nucleus (proton+neutron) + electron cloud. Model evolution: Dalton → Thomson → Rutherford → Bohr → Schrödinger (electron cloud = most scientific!). Molecules - 2+ atoms united by covalent bonds. Molecule preserves substance properties, isolated atom = different!</p>
-            <p lang="ru" class="lang-content text-sm">Атомы - наименьшие частицы вещества (10⁻¹⁰ м). Ядро (протон+нейтрон) + облако электронов. Эволюция моделей: Дальтон → Томсон → Резерфорд → Бор → Шредингер (облако электронов). Молекулы - 2+ атомов с ковалентными связями. Молекула сохраняет свойства вещества!</p>
-        </footer>
-    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-sky-500/10 transition-colors">
+            <div class="w-14 h-14 bg-sky-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">⚛️</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-sky-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-sky-500/10 transition-colors">
+            <div class="w-14 h-14 bg-sky-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🔗</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-sky-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-sky-500/10 transition-colors">
+            <div class="w-14 h-14 bg-sky-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">📏</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-sky-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <section class="glass rounded-custom p-8 mb-8">
+        <h3 id="examples-heading" class="heading-font text-2xl mb-6 text-sky-300"></h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white/5 rounded-2xl p-5 text-center">
+                <div class="text-3xl font-bold text-sky-300 mb-2">H₂O</div>
+                <div id="ex1-name" class="text-sm text-white/70"></div>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-5 text-center">
+                <div class="text-3xl font-bold text-sky-300 mb-2">CO₂</div>
+                <div id="ex2-name" class="text-sm text-white/70"></div>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-5 text-center">
+                <div class="text-3xl font-bold text-sky-300 mb-2">O₂</div>
+                <div id="ex3-name" class="text-sm text-white/70"></div>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-5 text-center">
+                <div class="text-3xl font-bold text-sky-300 mb-2">NaCl</div>
+                <div id="ex4-name" class="text-sm text-white/70"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-sky-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Атомы и Молекулы",
+                subtitle: "Невидимые строители всего вещества",
+                canvasHeading: "Строение атома",
+                electronLabel: "Электроны вращаются вокруг ядра",
+                examplesHeading: "Знакомые молекулы",
+                elements: {
+                    H: { name: "Водород", title: "Атом водорода", text: "Самый простой и лёгкий атом во Вселенной. Имеет 1 протон и 1 электрон. Из водорода состоит более 90% всех атомов космоса.", prop1: "1 протон", prop2: "1 электрон" },
+                    O: { name: "Кислород", title: "Атом кислорода", text: "Восьмой элемент таблицы. Содержит 8 протонов, 8 нейтронов и 8 электронов. Без него невозможно дыхание и горение.", prop1: "8 протонов", prop2: "8 электронов" },
+                    C: { name: "Углерод", title: "Атом углерода", text: "Основа всей органической химии. 6 протонов и 6 электронов. Образует длинные цепочки — основу жизни.", prop1: "6 протонов", prop2: "6 электронов" },
+                    Fe: { name: "Железо", title: "Атом железа", text: "Металл, ключ к гемоглобину крови. 26 протонов и 26 электронов. Самый стабильный элемент с точки зрения ядра.", prop1: "26 протонов", prop2: "26 электронов" }
+                },
+                cards: [
+                    { title: "Что такое атом", desc: "Атом — мельчайшая частица химического элемента, сохраняющая его свойства. Состоит из ядра (протоны + нейтроны) и электронной оболочки." },
+                    { title: "Что такое молекула", desc: "Молекула — частица, образованная из двух или более атомов, связанных химической связью. Это наименьшая частица вещества, сохраняющая его свойства." },
+                    { title: "Размеры", desc: "Диаметр атома около 10⁻¹⁰ метра (0,1 нм). Если бы яблоко увеличили до размеров Земли, его атомы стали бы размером с обычное яблоко." }
+                ],
+                examples: ["Вода", "Углекислый газ", "Кислород", "Поваренная соль"],
+                quote: "«Если в результате какой-то мировой катастрофы все накопленные знания были бы уничтожены, то одной фразой, которую можно передать потомкам, была бы: всё состоит из атомов»",
+                author: "Ричард Фейнман"
+            },
+            kz: {
+                title: "Атомдар мен Молекулалар",
+                subtitle: "Барлық заттың көрінбейтін құрылысшылары",
+                canvasHeading: "Атом құрылысы",
+                electronLabel: "Электрондар ядроны айналдырып қозғалады",
+                examplesHeading: "Таныс молекулалар",
+                elements: {
+                    H: { name: "Сутегі", title: "Сутегі атомы", text: "Әлемдегі ең қарапайым және жеңіл атом. 1 протон және 1 электроннан тұрады. Ғарыштағы атомдардың 90%-дан астамы — сутегі.", prop1: "1 протон", prop2: "1 электрон" },
+                    O: { name: "Оттегі", title: "Оттегі атомы", text: "Кестенің сегізінші элементі. 8 протон, 8 нейтрон және 8 электронға ие. Тыныс алу мен жанусыз ол мүмкін емес.", prop1: "8 протон", prop2: "8 электрон" },
+                    C: { name: "Көміртек", title: "Көміртек атомы", text: "Бүкіл органикалық химияның негізі. 6 протон және 6 электрон. Ұзын тізбектер құрып, тіршіліктің іргетасын қалайды.", prop1: "6 протон", prop2: "6 электрон" },
+                    Fe: { name: "Темір", title: "Темір атомы", text: "Қан гемоглобинінің кілті болатын металл. 26 протон, 26 электрон. Ядролық тұрғыдан ең тұрақты элемент.", prop1: "26 протон", prop2: "26 электрон" }
+                },
+                cards: [
+                    { title: "Атом дегеніміз не", desc: "Атом — химиялық элементтің ең кіші бөлшегі, оның қасиеттерін сақтайды. Ядродан (протон + нейтрон) және электрон қабатынан тұрады." },
+                    { title: "Молекула дегеніміз не", desc: "Молекула — химиялық байланыспен біріккен екі немесе одан көп атомнан тұратын бөлшек. Заттың қасиеттерін сақтайтын ең кіші бөлшек." },
+                    { title: "Өлшемдер", desc: "Атом диаметрі шамамен 10⁻¹⁰ метр (0,1 нм). Алманы Жер көлеміне дейін үлкейтсек, оның атомдары қарапайым алма көлемінде болар еді." }
+                ],
+                examples: ["Су", "Көмірқышқыл газы", "Оттегі", "Ас тұзы"],
+                quote: "«Егер дүниежүзілік апаттан кейін барлық білім жойылса, ұрпақтарға бір сөйлеммен жеткізетініміз: бәрі атомдардан тұрады»",
+                author: "Ричард Фейнман"
+            },
+            en: {
+                title: "Atoms & Molecules",
+                subtitle: "Invisible builders of all matter",
+                canvasHeading: "Structure of the atom",
+                electronLabel: "Electrons orbit around the nucleus",
+                examplesHeading: "Familiar molecules",
+                elements: {
+                    H: { name: "Hydrogen", title: "Hydrogen atom", text: "The simplest and lightest atom in the Universe. Has 1 proton and 1 electron. Over 90% of all atoms in the cosmos are hydrogen.", prop1: "1 proton", prop2: "1 electron" },
+                    O: { name: "Oxygen", title: "Oxygen atom", text: "The eighth element. Contains 8 protons, 8 neutrons and 8 electrons. Breathing and combustion are impossible without it.", prop1: "8 protons", prop2: "8 electrons" },
+                    C: { name: "Carbon", title: "Carbon atom", text: "The foundation of all organic chemistry. 6 protons and 6 electrons. Forms long chains — the basis of life.", prop1: "6 protons", prop2: "6 electrons" },
+                    Fe: { name: "Iron", title: "Iron atom", text: "A metal, key to blood haemoglobin. 26 protons and 26 electrons. The most nuclear-stable element.", prop1: "26 protons", prop2: "26 electrons" }
+                },
+                cards: [
+                    { title: "What is an atom", desc: "An atom is the smallest particle of a chemical element that retains its properties. It consists of a nucleus (protons + neutrons) and an electron shell." },
+                    { title: "What is a molecule", desc: "A molecule is a particle made of two or more atoms held together by chemical bonds. It is the smallest particle of a substance that keeps its properties." },
+                    { title: "Sizes", desc: "Atomic diameter is about 10⁻¹⁰ metres (0.1 nm). If an apple were enlarged to the size of Earth, its atoms would be the size of an apple." }
+                ],
+                examples: ["Water", "Carbon dioxide", "Oxygen", "Table salt"],
+                quote: "«If in some cataclysm all of scientific knowledge were destroyed, the one sentence I would pass on to the next generations is: all things are made of atoms»",
+                author: "Richard Feynman"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentEl = 'H';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function selectElement(el) {
+            currentEl = el;
+            document.querySelectorAll('.element-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('el-' + el).classList.add('active');
+            updateUI();
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('canvas-heading').textContent = t.canvasHeading;
+            document.getElementById('svg-nucleus').textContent = currentEl;
+            document.getElementById('svg-electron-label').textContent = t.electronLabel;
+
+            ['H','O','C','Fe'].forEach(e => {
+                document.getElementById('el-' + e + '-name').textContent = t.elements[e].name;
+            });
+
+            const el = t.elements[currentEl];
+            document.getElementById('info-title').textContent = el.title;
+            document.getElementById('info-text').textContent = el.text;
+            document.getElementById('prop1-label').textContent = (currentLang === 'ru' ? 'Состав' : currentLang === 'kz' ? 'Құрамы' : 'Composition');
+            document.getElementById('prop2-label').textContent = (currentLang === 'ru' ? 'Электроны' : currentLang === 'kz' ? 'Электрондар' : 'Electrons');
+            document.getElementById('prop1-value').textContent = el.prop1;
+            document.getElementById('prop2-value').textContent = el.prop2;
+
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+
+            document.getElementById('examples-heading').textContent = t.examplesHeading;
+            for (let i = 0; i < 4; i++) {
+                document.getElementById('ex' + (i+1) + '-name').textContent = t.examples[i];
+            }
+
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            selectElement('H');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -284,14 +304,12 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
     <div class="oi-map-toolbar">
       <div class="oi-map-tabs">
         <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
       </div>
       <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
     </div>
-
     <div class="oi-map-viewport" data-oi-map-viewport>
       <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
     </div>
@@ -301,111 +319,32 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
     <div class="oi-map-toolbar">
       <div class="oi-map-tabs">
         <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
+        <button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
       </div>
       <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
     </div>
-
     <div class="oi-map-viewport" data-oi-table-viewport>
       <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
+      <img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
     </div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

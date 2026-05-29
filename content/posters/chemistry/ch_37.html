@@ -1,320 +1,347 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ерігіштік. Қаныққан және қанықпаған</title>
+    <title>Растворимость веществ</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at bottom right, #7c2d12, #9a3412, #1c1917); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #831843, #9d174d, #0f172a);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(251,146,60,0.08); border: 1px solid rgba(251,146,60,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #fb923c; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #fdba74; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #fdba74; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #fdba74; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(251,146,60,0.08); border: 1px solid rgba(251,146,60,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #f472b6; color: #1f2937; border-color: transparent; font-weight: 800; }
+        .subst-btn { transition: all 0.2s; cursor: pointer; }
+        .subst-btn.active { background: rgba(244, 114, 182, 0.2); border-color: #f472b6; }
+        .formula-style { font-family: 'Courier New', monospace; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Ерігіштік. Қаныққан және қанықпаған!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Solubility. Saturated & Unsaturated!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Растворимость. Насыщенные и ненасыщенные!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">Растворимость - 100 г сув-та қанша еріген зат ертейді. Төзімсіз < төзімді < төзімді (ағы). NaCl 36 г/100мл, KMnO₄ өте сәлсі!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">Solubility - how much substance dissolves in 100g solvent. Unsaturated < saturated < supersaturated. NaCl 36 g/100ml, KMnO₄ slightly soluble!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">Растворимость - сколько вещества растворяется в 100г растворителя. Ненасыщенный < насыщенный < пересыщенный. NaCl 36 г/100мл, KMnO₄ слабо растворяется!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-pink-400"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Ерігіштікті анықтау</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. DEFINITION OF SOLUBILITY</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение растворимости</h2>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-7 glass rounded-custom p-8">
+            <h2 id="curve-heading" class="heading-font text-xl mb-4 opacity-80 uppercase tracking-wider"></h2>
 
-            <div class="illustration">
-                <svg viewBox="0 0 600 200" width="100%" height="200">
-                    <!-- Solubility curve concept -->
-                    <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="bold">Ерігіштік - 100 г су-та еріген зат (г)</text>
+            <svg viewBox="0 0 500 320" class="w-full">
+                <line x1="60" y1="40" x2="60" y2="280" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                <line x1="60" y1="280" x2="460" y2="280" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                <g stroke="rgba(255,255,255,0.08)" stroke-width="1">
+                    <line x1="60" y1="220" x2="460" y2="220"/>
+                    <line x1="60" y1="160" x2="460" y2="160"/>
+                    <line x1="60" y1="100" x2="460" y2="100"/>
+                    <line x1="60" y1="40" x2="460" y2="40"/>
+                </g>
+                <g fill="rgba(255,255,255,0.5)" font-size="11" text-anchor="end">
+                    <text x="55" y="285">0</text>
+                    <text x="55" y="225">50</text>
+                    <text x="55" y="165">100</text>
+                    <text x="55" y="105">150</text>
+                    <text x="55" y="45">200</text>
+                </g>
+                <g fill="rgba(255,255,255,0.5)" font-size="11" text-anchor="middle">
+                    <text x="60" y="298">0</text>
+                    <text x="160" y="298">20</text>
+                    <text x="260" y="298">40</text>
+                    <text x="360" y="298">60</text>
+                    <text x="460" y="298">100 °C</text>
+                </g>
+                <text id="svg-y-label" x="20" y="160" text-anchor="middle" fill="#fbcfe8" font-size="12" font-weight="bold" transform="rotate(-90 20 160)"></text>
+                <text id="svg-x-label" x="260" y="318" text-anchor="middle" fill="#fbcfe8" font-size="12" font-weight="bold"></text>
+                <path id="curve-KNO3" d="" fill="none" stroke="#fb7185" stroke-width="3"/>
+                <path id="curve-NaCl" d="" fill="none" stroke="#fbbf24" stroke-width="3"/>
+                <path id="curve-Ca" d="" fill="none" stroke="#60a5fa" stroke-width="3"/>
+                <g id="curve-labels"></g>
+            </svg>
 
-                    <!-- Bar chart -->
-                    <rect x="50" y="80" width="40" height="80" fill="#4ecdc4" stroke="#000" stroke-width="1"/>
-                    <text x="70" y="170" text-anchor="middle" font-size="12">NaCl</text>
-                    <text x="70" y="185" text-anchor="middle" font-size="10">36 г</text>
-
-                    <rect x="130" y="100" width="40" height="60" fill="#ff6b6b" stroke="#000" stroke-width="1"/>
-                    <text x="150" y="170" text-anchor="middle" font-size="12">KNO₃</text>
-                    <text x="150" y="185" text-anchor="middle" font-size="10">13 г</text>
-
-                    <rect x="210" y="130" width="40" height="30" fill="#ffd93d" stroke="#000" stroke-width="1"/>
-                    <text x="230" y="170" text-anchor="middle" font-size="12">KMnO₄</text>
-                    <text x="230" y="185" text-anchor="middle" font-size="10">6 г</text>
-
-                    <rect x="290" y="140" width="40" height="20" fill="#95e1d3" stroke="#000" stroke-width="1"/>
-                    <text x="310" y="170" text-anchor="middle" font-size="12">CaSO₄</text>
-                    <text x="310" y="185" text-anchor="middle" font-size="10">0.2 г</text>
-
-                    <!-- Y-axis -->
-                    <line x1="40" y1="160" x2="360" y2="160" stroke="#000" stroke-width="2"/>
-                    <line x1="40" y1="160" x2="40" y2="50" stroke="#000" stroke-width="2"/>
-                    <text x="20" y="65" font-size="10">100г</text>
-                    <text x="35" y="190" font-size="10" text-anchor="end">0</text>
-                </svg>
-            </div>
-
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ЕРГІШТІК ТҮРЛЕРІ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">МЫСАЛДАРЫ</th>
-
-                            <th lang="en" class="lang-content">SOLUBILITY TYPES</th>
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">EXAMPLES</th>
-
-                            <th lang="ru" class="lang-content">ТИПЫ РАСТВОРИМОСТИ</th>
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ПРИМЕРЫ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ӨНДІКТІГІ СӘЛСІ</strong></td>
-                            <td lang="kk" class="lang-content">< 1 г / 100 мл су</td>
-                            <td lang="kk" class="lang-content">CaSO₄, BaSO₄, AgCl</td>
-
-                            <td lang="en" class="lang-content"><strong>SLIGHTLY SOLUBLE</strong></td>
-                            <td lang="en" class="lang-content">< 1 g / 100 ml water</td>
-                            <td lang="en" class="lang-content">CaSO₄, BaSO₄, AgCl</td>
-
-                            <td lang="ru" class="lang-content"><strong>МАЛОРАСТВОРИМОЕ</strong></td>
-                            <td lang="ru" class="lang-content">< 1 г / 100 мл воды</td>
-                            <td lang="ru" class="lang-content">CaSO₄, BaSO₄, AgCl</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ӨНДІКТІГІ ОРТА</strong></td>
-                            <td lang="kk" class="lang-content">1-10 г / 100 мл су</td>
-                            <td lang="kk" class="lang-content">KMnO₄, Ca(OH)₂</td>
-
-                            <td lang="en" class="lang-content"><strong>MODERATELY SOLUBLE</strong></td>
-                            <td lang="en" class="lang-content">1-10 g / 100 ml water</td>
-                            <td lang="en" class="lang-content">KMnO₄, Ca(OH)₂</td>
-
-                            <td lang="ru" class="lang-content"><strong>СРЕДНЕРАСТВОРИМОЕ</strong></td>
-                            <td lang="ru" class="lang-content">1-10 г / 100 мл воды</td>
-                            <td lang="ru" class="lang-content">KMnO₄, Ca(OH)₂</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ӨНДІКТІГІ КҮШТІ</strong></td>
-                            <td lang="kk" class="lang-content">> 10 г / 100 мл су</td>
-                            <td lang="kk" class="lang-content">NaCl, KNO₃, NaOH</td>
-
-                            <td lang="en" class="lang-content"><strong>HIGHLY SOLUBLE</strong></td>
-                            <td lang="en" class="lang-content">> 10 g / 100 ml water</td>
-                            <td lang="en" class="lang-content">NaCl, KNO₃, NaOH</td>
-
-                            <td lang="ru" class="lang-content"><strong>ХОРОШО РАСТВОРИМОЕ</strong></td>
-                            <td lang="ru" class="lang-content">> 10 г / 100 мл воды</td>
-                            <td lang="ru" class="lang-content">NaCl, KNO₃, NaOH</td>
-                        </tr>
-                    </table>
+            <div class="grid grid-cols-3 gap-3 mt-4">
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full" style="background:#fb7185"></div>
+                    <div>
+                        <div class="text-sm font-bold formula-style">KNO₃</div>
+                        <div id="lab-KNO3" class="text-xs text-white/60"></div>
+                    </div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full" style="background:#fbbf24"></div>
+                    <div>
+                        <div class="text-sm font-bold formula-style">NaCl</div>
+                        <div id="lab-NaCl" class="text-xs text-white/60"></div>
+                    </div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full" style="background:#60a5fa"></div>
+                    <div>
+                        <div class="text-sm font-bold formula-style">Ca(OH)₂</div>
+                        <div id="lab-Ca" class="text-xs text-white/60"></div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТӨЗІМСІЗ, ТӨЗІМДІ, ӘРІ ТӨЗІМДІ ЕРТІНДІКТЕР</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. UNSATURATED, SATURATED, SUPERSATURATED</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Ненасыщенные, насыщенные, пересыщенные</h2>
-
-            <div class="illustration">
-                <svg viewBox="0 0 600 180" width="100%" height="180">
-                    <!-- Unsaturated -->
-                    <circle cx="70" cy="60" r="6" fill="#ff6b6b"/>
-                    <circle cx="100" cy="50" r="6" fill="#ff6b6b"/>
-                    <rect x="40" y="20" width="100" height="100" fill="lightblue" opacity="0.3" stroke="#000" stroke-width="2" rx="5"/>
-                    <text x="90" y="140" text-anchor="middle" font-size="12" font-weight="bold">Төзімсіз</text>
-                    <text x="90" y="160" text-anchor="middle" font-size="10">(мүлік еріген)</text>
-
-                    <!-- Saturated -->
-                    <circle cx="200" cy="40" r="6" fill="#ff6b6b"/>
-                    <circle cx="220" cy="50" r="6" fill="#ff6b6b"/>
-                    <circle cx="240" cy="45" r="6" fill="#ff6b6b"/>
-                    <circle cx="230" cy="70" r="6" fill="#ff6b6b"/>
-                    <circle cx="250" cy="75" r="6" fill="#ff6b6b"/>
-                    <circle cx="270" cy="60" r="6" fill="#ff6b6b"/>
-                    <line x1="200" y1="85" x2="270" y2="85" stroke="#000" stroke-width="2"/>
-                    <rect x="170" y="20" width="100" height="80" fill="lightblue" opacity="0.3" stroke="#000" stroke-width="2" rx="5"/>
-                    <text x="220" y="140" text-anchor="middle" font-size="12" font-weight="bold">Төзімді</text>
-                    <text x="220" y="160" text-anchor="middle" font-size="10">(максималды еріген)</text>
-
-                    <!-- Supersaturated -->
-                    <circle cx="330" cy="35" r="6" fill="#ff6b6b"/>
-                    <circle cx="350" cy="40" r="6" fill="#ff6b6b"/>
-                    <circle cx="370" cy="38" r="6" fill="#ff6b6b"/>
-                    <circle cx="340" cy="60" r="6" fill="#ff6b6b"/>
-                    <circle cx="360" cy="65" r="6" fill="#ff6b6b"/>
-                    <circle cx="380" cy="55" r="6" fill="#ff6b6b"/>
-                    <circle cx="350" cy="75" r="6" fill="#ff6b6b"/>
-                    <circle cx="370" cy="80" r="6" fill="#ff6b6b"/>
-                    <rect x="300" y="20" width="100" height="80" fill="blue" opacity="0.2" stroke="#ff0000" stroke-width="2" stroke-dasharray="5,5" rx="5"/>
-                    <text x="350" y="140" text-anchor="middle" font-size="12" font-weight="bold">Әрі төзімді</text>
-                    <text x="350" y="160" text-anchor="middle" font-size="10">(өте еріген)</text>
-                </svg>
+        <div class="lg:col-span-5 glass rounded-custom p-8 border-l-4 border-pink-500">
+            <h3 id="types-heading" class="heading-font text-xl mb-4 text-pink-300 uppercase tracking-wider"></h3>
+            <div class="space-y-3 mb-5">
+                <div onclick="setType('soluble')" id="type-soluble" class="subst-btn bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="flex items-center gap-3 mb-1">
+                        <div class="text-2xl">✅</div>
+                        <h4 id="type1-title" class="font-bold text-pink-300"></h4>
+                    </div>
+                    <p id="type1-desc" class="text-white/70 text-sm leading-relaxed"></p>
+                </div>
+                <div onclick="setType('low')" id="type-low" class="subst-btn bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="flex items-center gap-3 mb-1">
+                        <div class="text-2xl">⚠️</div>
+                        <h4 id="type2-title" class="font-bold text-pink-300"></h4>
+                    </div>
+                    <p id="type2-desc" class="text-white/70 text-sm leading-relaxed"></p>
+                </div>
+                <div onclick="setType('insoluble')" id="type-insoluble" class="subst-btn bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="flex items-center gap-3 mb-1">
+                        <div class="text-2xl">❌</div>
+                        <h4 id="type3-title" class="font-bold text-pink-300"></h4>
+                    </div>
+                    <p id="type3-desc" class="text-white/70 text-sm leading-relaxed"></p>
+                </div>
             </div>
-        </section>
+            <div class="bg-black/30 rounded-2xl p-4 border border-pink-500/20">
+                <div id="examples-label" class="text-xs text-pink-300 uppercase tracking-widest mb-2"></div>
+                <div id="examples-text" class="text-white/85 leading-relaxed formula-style"></div>
+            </div>
+        </div>
+    </main>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Растворимость - заттың 100 г еріткішке еріну өлшемі. Төзімсіз ертінді - мүлік еріген, төзімді - максималды еріген, әрі төзімді - өте еріген. Температура растворимостысын өзгертеді!</p>
-            <p lang="en" class="lang-content text-sm">Solubility - measure of substance dissolving in 100g solvent. Unsaturated - not fully dissolved, saturated - maximally dissolved, supersaturated - too much dissolved. Temperature changes solubility!</p>
-            <p lang="ru" class="lang-content text-sm">Растворимость - мера растворения вещества в 100г растворителя. Ненасыщенный - не полностью растворён, насыщенный - максимально растворён, пересыщенный - переразвернут. Температура меняет растворимость!</p>
-        </footer>
-    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-pink-500/10 transition-colors">
+            <div class="w-14 h-14 bg-pink-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🌡️</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-pink-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-pink-500/10 transition-colors">
+            <div class="w-14 h-14 bg-pink-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">💨</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-pink-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-pink-500/10 transition-colors">
+            <div class="w-14 h-14 bg-pink-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🧬</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-pink-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-pink-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
+        const translations = {
+            ru: {
+                title: "Растворимость веществ",
+                subtitle: "Сколько вещества можно растворить в воде",
+                curveHeading: "Кривые растворимости",
+                yLabel: "г вещества на 100 г воды",
+                xLabel: "Температура",
+                labels: {
+                    KNO3: "Растёт сильно с T",
+                    NaCl: "Почти не меняется",
+                    Ca:   "Уменьшается с T"
+                },
+                typesHeading: "Классификация по растворимости",
+                types: {
+                    soluble:    { title: "Растворимые", desc: "Более 1 г растворяется в 100 г воды." },
+                    low:        { title: "Малорастворимые", desc: "От 0,01 до 1 г в 100 г воды." },
+                    insoluble:  { title: "Практически нерастворимые", desc: "Менее 0,01 г в 100 г воды." }
+                },
+                examplesLabel: "Примеры",
+                examples: {
+                    soluble:    "NaCl, KNO₃, NaOH, HCl, H₂SO₄, сахар, спирт",
+                    low:        "Ca(OH)₂, CaSO₄, PbCl₂, Ag₂SO₄",
+                    insoluble:  "AgCl, BaSO₄, CaCO₃, Cu(OH)₂, Fe₂S₃"
+                },
+                cards: [
+                    { title: "Влияние температуры", desc: "Для большинства твёрдых веществ растворимость растёт с температурой (KNO₃). Но для гидроксида кальция и сульфата лития — уменьшается." },
+                    { title: "Газы и давление", desc: "Растворимость газов уменьшается при нагревании и растёт с давлением. Поэтому при открытии бутылки с газировкой выходит CO₂." },
+                    { title: "Биология", desc: "Кислород плохо растворим в воде, но именно растворённый O₂ используют рыбы для дыхания. В тёплой воде O₂ меньше — рыба «задыхается»." }
+                ],
+                quote: "«Хороший растворитель — это лучший детектив химика»",
+                author: "Принцип лабораторной практики"
+            },
+            kz: {
+                title: "Заттардың ерігіштігі",
+                subtitle: "Суда заттың қанша мөлшері еритіні",
+                curveHeading: "Ерігіштік қисықтары",
+                yLabel: "100 г судағы заттың грамы",
+                xLabel: "Температура",
+                labels: {
+                    KNO3: "T-мен күрт өседі",
+                    NaCl: "Дерлік өзгермейді",
+                    Ca:   "T-мен азаяды"
+                },
+                typesHeading: "Ерігіштік бойынша жіктеу",
+                types: {
+                    soluble:    { title: "Еритін", desc: "100 г суда 1 г-нан көп ериді." },
+                    low:        { title: "Аз еритін", desc: "100 г суда 0,01–1 г ериді." },
+                    insoluble:  { title: "Іс жүзінде ерімейтін", desc: "100 г суда 0,01 г-нан аз ериді." }
+                },
+                examplesLabel: "Мысалдар",
+                examples: {
+                    soluble:    "NaCl, KNO₃, NaOH, HCl, H₂SO₄, қант, спирт",
+                    low:        "Ca(OH)₂, CaSO₄, PbCl₂, Ag₂SO₄",
+                    insoluble:  "AgCl, BaSO₄, CaCO₃, Cu(OH)₂, Fe₂S₃"
+                },
+                cards: [
+                    { title: "Температураның әсері", desc: "Қатты заттардың көпшілігінде ерігіштік температурамен өседі (KNO₃). Бірақ кальций гидроксиді мен литий сульфаты үшін — азаяды." },
+                    { title: "Газдар мен қысым", desc: "Газдардың ерігіштігі қыздырғанда азаяды, қысыммен өседі. Сондықтан газдалған суы бар бөтелкені ашқанда CO₂ шығады." },
+                    { title: "Биология", desc: "Оттегі суда нашар ериді, бірақ балық тыныс алу үшін дәл еріген O₂-ні пайдаланады. Жылы суда O₂ аз — балық «тұншығады»." }
+                ],
+                quote: "«Жақсы еріткіш — химиктің ең жақсы детективі»",
+                author: "Зертханалық тәжірибе қағидасы"
+            },
+            en: {
+                title: "Solubility of substances",
+                subtitle: "How much of a substance dissolves in water",
+                curveHeading: "Solubility curves",
+                yLabel: "g per 100 g of water",
+                xLabel: "Temperature",
+                labels: {
+                    KNO3: "Rises sharply with T",
+                    NaCl: "Almost unchanged",
+                    Ca:   "Decreases with T"
+                },
+                typesHeading: "Classification by solubility",
+                types: {
+                    soluble:    { title: "Soluble", desc: "More than 1 g dissolves in 100 g of water." },
+                    low:        { title: "Slightly soluble", desc: "From 0.01 to 1 g in 100 g of water." },
+                    insoluble:  { title: "Practically insoluble", desc: "Less than 0.01 g in 100 g of water." }
+                },
+                examplesLabel: "Examples",
+                examples: {
+                    soluble:    "NaCl, KNO₃, NaOH, HCl, H₂SO₄, sugar, alcohol",
+                    low:        "Ca(OH)₂, CaSO₄, PbCl₂, Ag₂SO₄",
+                    insoluble:  "AgCl, BaSO₄, CaCO₃, Cu(OH)₂, Fe₂S₃"
+                },
+                cards: [
+                    { title: "Effect of temperature", desc: "For most solids, solubility grows with temperature (KNO₃). But calcium hydroxide and lithium sulfate behave the opposite way." },
+                    { title: "Gases and pressure", desc: "Gas solubility falls as temperature rises and grows with pressure. That is why opening a fizzy drink releases CO₂." },
+                    { title: "Biology", desc: "Oxygen is poorly soluble in water, yet dissolved O₂ is exactly what fish breathe. In warm water there is less O₂ — fish suffocate." }
+                ],
+                quote: "«A good solvent is the chemist's best detective»",
+                author: "Lab-practice principle"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentType = 'soluble';
+
+        function curvePath(values) {
+            const pts = values.map(([x,y]) => {
+                const px = 60 + (x/100) * 400;
+                const py = 280 - (y/200) * 240;
+                return `${px},${Math.max(40, py)}`;
             });
+            return 'M ' + pts.join(' L ');
         }
+
+        function drawCurves() {
+            document.getElementById('curve-KNO3').setAttribute('d', curvePath([[0,13],[20,32],[40,64],[60,109],[80,168],[100,246]]));
+            document.getElementById('curve-NaCl').setAttribute('d', curvePath([[0,36],[20,36],[40,36.5],[60,37],[80,38],[100,39.2]]));
+            document.getElementById('curve-Ca').setAttribute('d', curvePath([[0,1.85],[20,1.7],[40,1.4],[60,1.2],[80,0.95],[100,0.77]]));
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
+        }
+
+        function setType(t) {
+            currentType = t;
+            document.querySelectorAll('.subst-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('type-' + t).classList.add('active');
+            const tr = translations[currentLang];
+            document.getElementById('examples-text').textContent = tr.examples[t];
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('curve-heading').textContent = t.curveHeading;
+            document.getElementById('svg-y-label').textContent = t.yLabel;
+            document.getElementById('svg-x-label').textContent = t.xLabel;
+            document.getElementById('lab-KNO3').textContent = t.labels.KNO3;
+            document.getElementById('lab-NaCl').textContent = t.labels.NaCl;
+            document.getElementById('lab-Ca').textContent = t.labels.Ca;
+            document.getElementById('types-heading').textContent = t.typesHeading;
+            document.getElementById('type1-title').textContent = t.types.soluble.title;
+            document.getElementById('type1-desc').textContent = t.types.soluble.desc;
+            document.getElementById('type2-title').textContent = t.types.low.title;
+            document.getElementById('type2-desc').textContent = t.types.low.desc;
+            document.getElementById('type3-title').textContent = t.types.insoluble.title;
+            document.getElementById('type3-desc').textContent = t.types.insoluble.desc;
+            document.getElementById('examples-label').textContent = t.examplesLabel;
+            document.getElementById('examples-text').textContent = t.examples[currentType];
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            drawCurves();
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            setType('soluble');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -323,128 +350,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

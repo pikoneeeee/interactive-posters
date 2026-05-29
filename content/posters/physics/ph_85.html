@@ -1,215 +1,137 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Қанықпаған және қаныққан булар</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #f3e8ff 0%, #e9d5ff 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #6b21a8; border-bottom: 3px solid #e9d5ff; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #a855f7; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #a855f7; background: white; color: #a855f7; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #a855f7; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #a855f7; color: white; text-align: center; }
-        .info-box { background: linear-gradient(135deg, #e9d5ff 0%, #f3e8ff 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #a855f7; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .compare-card { background: #faf5ff; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #a855f7; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Движение ИСЗ. Космические скорости</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-purple-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-emerald-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Динамика</span>
+<span lang="en" class="lang-content">Grade 10 · Dynamics</span>
+<span lang="ru" class="lang-content">10 класс · Динамика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Жасанды серіктер. Ғарыштық жылдамдықтар</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Satellite motion. Cosmic velocities</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-emerald-700">Движение ИСЗ. Космические скорости</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Қанықпаған және қаныққан булар</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Unsaturated and Saturated Vapors</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Ненасыщенные и насыщенные пары</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-purple-100">Жұптың екі түрі. Тығыздық, қысым салыстыру. САЛЫСТЫРМАЛЫ ТАЛДАУ</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-purple-100">Two different vapor types. Density, T, pressure comparison. COMPARISON ANALYSIS!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-purple-100">Два типа пара. Плотность, Т, давление сравнение. СРАВНИТЕЛЬНЫЙ АНАЛИЗ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛰️ Серік неге құламайды?</span>
+<span lang="en" class="lang-content">🛰️ Why don't satellites fall?</span>
+<span lang="ru" class="lang-content">🛰️ Почему спутники не падают?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Серік <b>үздіксіз құлап</b> жатыр, бірақ оның <b>көлденең жылдамдығы</b> сонша үлкен — Жер айналасында айналуға тура келеді! Орбитада <b>тартылыс күші</b> <b>центрге тартатын</b> күштің рөлін атқарады:</span>
+<span lang="en" class="lang-content">A satellite is <b>continuously falling</b>, but its <b>horizontal speed</b> is so high that it curves around the Earth! Gravity supplies the <b>centripetal force</b>:</span>
+<span lang="ru" class="lang-content">Спутник <b>непрерывно падает</b>, но его <b>горизонтальная скорость</b> столь велика, что он огибает Землю! Гравитация играет роль <b>центростремительной</b> силы:</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. САЛЫСТЫРМАЛЫ КЕСТЕСІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. COMPARISON TABLE</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Таблица сравнения</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-emerald-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Орбита теңдеуі:</span><span lang="en" class="lang-content">Orbit equation:</span><span lang="ru" class="lang-content">Уравнение орбиты:</span></p>
+<div class="formula text-center" style="font-size:1.3rem">
+mv²/r = GMm/r²   ⇒   v = √(GM/r)
+</div>
+</div>
+</div>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ПАРАМЕТР</th>
-                            <th lang="kk" class="lang-content">НЕНАСЫЩЕННЫЙ</th>
-                            <th lang="kk" class="lang-content">ЫЛЫҚТАЛҒАН</th>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center">
+<svg width="280" height="240" viewBox="0 0 280 240">
+<circle cx="140" cy="120" r="60" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+<text x="140" y="125" font-size="14" text-anchor="middle" fill="white" font-weight="bold">⊕</text>
+<circle cx="140" cy="120" r="100" fill="none" stroke="#9333ea" stroke-width="2" stroke-dasharray="4,3"/>
+<circle cx="240" cy="120" r="6" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+<line x1="240" y1="120" x2="240" y2="60" stroke="#16a34a" stroke-width="3"/>
+<polygon points="240,60 234,72 246,72" fill="#16a34a"/>
+<text x="245" y="80" font-size="13" fill="#16a34a" font-weight="bold">v</text>
+<line x1="240" y1="120" x2="160" y2="120" stroke="#dc2626" stroke-width="3"/>
+<polygon points="160,120 170,114 170,126" fill="#dc2626"/>
+<text x="180" y="115" font-size="13" fill="#dc2626" font-weight="bold">F_грав</text>
+</svg>
+</div>
+</div>
+</div>
+</section>
 
-                            <th lang="en" class="lang-content">PARAMETER</th>
-                            <th lang="en" class="lang-content">UNSATURATED</th>
-                            <th lang="en" class="lang-content">SATURATED</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚀 Ғарыштық жылдамдықтар</span>
+<span lang="en" class="lang-content">🚀 Cosmic velocities</span>
+<span lang="ru" class="lang-content">🚀 Космические скорости</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-emerald-700 text-base mb-2">1️⃣ <span lang="kk" class="lang-content">Бірінші</span><span lang="en" class="lang-content">First</span><span lang="ru" class="lang-content">Первая</span></p>
+<div class="formula" style="font-size:1.3rem">v₁ = √(gR)</div>
+<p class="text-2xl font-bold text-emerald-700 my-2">≈ 7,9 км/с</p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Жер айналасында орбита</span><span lang="en" class="lang-content">To orbit Earth</span><span lang="ru" class="lang-content">Чтобы быть на орбите</span></p>
+</div>
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-emerald-700 text-base mb-2">2️⃣ <span lang="kk" class="lang-content">Екінші</span><span lang="en" class="lang-content">Second</span><span lang="ru" class="lang-content">Вторая</span></p>
+<div class="formula" style="font-size:1.3rem">v₂ = √2·v₁</div>
+<p class="text-2xl font-bold text-emerald-700 my-2">≈ 11,2 км/с</p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Жерден қашу (Айға, Марсқа)</span><span lang="en" class="lang-content">Escape Earth (to Moon, Mars)</span><span lang="ru" class="lang-content">Покинуть Землю (на Луну)</span></p>
+</div>
+<div class="card-accent rounded-custom p-6 text-center">
+<p class="heading-font text-emerald-700 text-base mb-2">3️⃣ <span lang="kk" class="lang-content">Үшінші</span><span lang="en" class="lang-content">Third</span><span lang="ru" class="lang-content">Третья</span></p>
+<div class="formula" style="font-size:1.3rem">v₃</div>
+<p class="text-2xl font-bold text-emerald-700 my-2">≈ 16,7 км/с</p>
+<p class="text-xs text-slate-600"><span lang="kk" class="lang-content">Күн жүйесінен қашу</span><span lang="en" class="lang-content">Escape Solar System</span><span lang="ru" class="lang-content">Покинуть Солн. сист.</span></p>
+</div>
+</div>
 
-                            <th lang="ru" class="lang-content">ПАРАМЕТР</th>
-                            <th lang="ru" class="lang-content">НЕНАСЫЩЕННЫЙ</th>
-                            <th lang="ru" class="lang-content">НАСЫЩЕННЫЙ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Плотность</td>
-                            <td lang="kk" class="lang-content">Төмен, артуы мүмкін</td>
-                            <td lang="kk" class="lang-content">Максимум</td>
+<div class="card-warm rounded-custom p-5 mt-4">
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">⭐ <b>Спутник-1</b> (1957, КСРО) — алғашқы серік! <b>Гагарин</b> (1961) — алғашқы ғарышкер. <b>Voyager-1</b> 17 км/с-пен 1977-ден ұшып, <b>интерстеллярлық</b> кеңістікте!</span>
+<span lang="en" class="lang-content">⭐ <b>Sputnik-1</b> (1957, USSR) — first satellite. <b>Gagarin</b> (1961) — first human in space. <b>Voyager-1</b> at 17 km/s since 1977 — now <b>interstellar</b>!</span>
+<span lang="ru" class="lang-content">⭐ <b>Спутник-1</b> (1957, СССР). <b>Гагарин</b> (1961). <b>«Вояджер-1»</b> летит со скоростью 17 км/с — уже в <b>межзвёздном</b> пространстве!</span></p>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content">Density</td>
-                            <td lang="en" class="lang-content">Low, can increase</td>
-                            <td lang="en" class="lang-content">Maximum</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-emerald-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌐 Орбиталар түрлері</span>
+<span lang="en" class="lang-content">🌐 Orbit types</span>
+<span lang="ru" class="lang-content">🌐 Виды орбит</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="card rounded-custom p-5"><div class="text-4xl text-center mb-2">📡</div>
+<p class="heading-font text-emerald-700 text-base text-center mb-1">LEO (200–2000 км)</p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content"><b>МКС</b>, Хаббл, Starlink. T ≈ 90 мин.</span><span lang="en" class="lang-content"><b>ISS</b>, Hubble, Starlink. T ≈ 90 min.</span><span lang="ru" class="lang-content"><b>МКС</b>, Хаббл, Starlink. T ≈ 90 мин.</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-4xl text-center mb-2">🌎</div>
+<p class="heading-font text-emerald-700 text-base text-center mb-1">GEO (35 786 км)</p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content"><b>Геостационарлық:</b> T = 24 с — Жермен бірге айналады! Теле/байланыс.</span><span lang="en" class="lang-content"><b>Geostationary:</b> T = 24 h — stays above one spot. TV/comm sats.</span><span lang="ru" class="lang-content"><b>Геостационарная:</b> T = 24 ч — над одной точкой. ТВ, связь.</span></p>
+</div>
+<div class="card rounded-custom p-5"><div class="text-4xl text-center mb-2">🧭</div>
+<p class="heading-font text-emerald-700 text-base text-center mb-1">MEO (~20 000 км)</p>
+<p class="text-xs text-slate-700"><span lang="kk" class="lang-content"><b>GPS, ГЛОНАСС</b>. T ≈ 12 сағ.</span><span lang="en" class="lang-content"><b>GPS, GLONASS</b>. T ≈ 12 h.</span><span lang="ru" class="lang-content"><b>GPS, ГЛОНАСС</b>. T ≈ 12 ч.</span></p>
+</div>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content">Плотность</td>
-                            <td lang="ru" class="lang-content">Низкая, может расти</td>
-                            <td lang="ru" class="lang-content">Максимум</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Температура</td>
-                            <td lang="kk" class="lang-content">< T_қайнау</td>
-                            <td lang="kk" class="lang-content">= T_қайнау</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-emerald-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">1️⃣</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">7,9 км/с</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Орбитаға</span><span lang="en" class="lang-content">To orbit</span><span lang="ru" class="lang-content">На орбиту</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">2️⃣</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">11,2 км/с</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жерден қашу</span><span lang="en" class="lang-content">Escape Earth</span><span lang="ru" class="lang-content">Покинуть Землю</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">3️⃣</div>
+<p class="heading-font text-xl text-emerald-700 mb-2">16,7 км/с</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Күн жүйесінен</span><span lang="en" class="lang-content">Leave Solar Sys.</span><span lang="ru" class="lang-content">Покинуть СС</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content">Temperature</td>
-                            <td lang="en" class="lang-content">< T_boiling</td>
-                            <td lang="en" class="lang-content">= T_boiling</td>
-
-                            <td lang="ru" class="lang-content">Температура</td>
-                            <td lang="ru" class="lang-content">< T_кипения</td>
-                            <td lang="ru" class="lang-content">= T_кипения</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Деңсаулық</td>
-                            <td lang="kk" class="lang-content">сұйық қоспасындағы</td>
-                            <td lang="kk" class="lang-content">сұйық ұзын қоспасындағы</td>
-
-                            <td lang="en" class="lang-content">Equilibrium</td>
-                            <td lang="en" class="lang-content">No liquid</td>
-                            <td lang="en" class="lang-content">With liquid</td>
-
-                            <td lang="ru" class="lang-content">Равновесие</td>
-                            <td lang="ru" class="lang-content">Без жидкости</td>
-                            <td lang="ru" class="lang-content">С жидкостью</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Конденсация</td>
-                            <td lang="kk" class="lang-content">Т төмен → конденс</td>
-                            <td lang="kk" class="lang-content">Т тұрақты, ыңғайл = конденс</td>
-
-                            <td lang="en" class="lang-content">Condensation</td>
-                            <td lang="en" class="lang-content">T↓ → condenses</td>
-                            <td lang="en" class="lang-content">T const, evap = cond</td>
-
-                            <td lang="ru" class="lang-content">Конденсация</td>
-                            <td lang="ru" class="lang-content">Т↓ → конденсируется</td>
-                            <td lang="ru" class="lang-content">Т const, испар = конд</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ПРАКТИКАЛЫҚ МЫСАЛДАР</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. PRACTICAL EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Практические примеры</h2>
-
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="compare-card">
-                        <p lang="kk" class="lang-content"><strong>💨 НЕНАСЫЩЕННЫЙ ҰЗЫН</strong></p>
-                        <p lang="kk" class="lang-content">• Сулы құрамасындағы 50°C</p>
-                        <p lang="kk" class="lang-content">• T < 100°C қайнау</p>
-                        <p lang="kk" class="lang-content">• Төмен ығалдау</p>
-                        <p lang="kk" class="lang-content">• Сұйық құрамасындағы</p>
-                        <p lang="kk" class="lang-content">• Конденсация мүмкін</p>
-
-                        <p lang="en" class="lang-content"><strong>💨 UNSATURATED VAPOR</strong></p>
-                        <p lang="en" class="lang-content">• Water vapor at 50°C</p>
-                        <p lang="en" class="lang-content">• T < 100°C boiling</p>
-                        <p lang="en" class="lang-content">• Low humidity</p>
-                        <p lang="en" class="lang-content">• No liquid phase</p>
-                        <p lang="en" class="lang-content">• Condensation possible</p>
-
-                        <p lang="ru" class="lang-content"><strong>💨 НЕНАСЫЩЕННЫЙ ПАР</strong></p>
-                        <p lang="ru" class="lang-content">• Водяной пар при 50°C</p>
-                        <p lang="ru" class="lang-content">• Т < 100°C кипения</p>
-                        <p lang="ru" class="lang-content">• Низкая влажность</p>
-                        <p lang="ru" class="lang-content">• Без жидкой фазы</p>
-                        <p lang="ru" class="lang-content">• Конденсация возможна</p>
-                    </div>
-
-                    <div class="compare-card">
-                        <p lang="kk" class="lang-content"><strong>💧 ЫЛЫҚТАЛҒАН ҰЗЫН</strong></p>
-                        <p lang="kk" class="lang-content">• Сулы құрамасындағы 100°C</p>
-                        <p lang="kk" class="lang-content">• T = 100°C қайнау</p>
-                        <p lang="kk" class="lang-content">• Максимум ығалдау</p>
-                        <p lang="kk" class="lang-content">• Сұйық + газ қоспасындағы</p>
-                        <p lang="kk" class="lang-content">• Деңсаулық сақталады</p>
-
-                        <p lang="en" class="lang-content"><strong>💧 SATURATED VAPOR</strong></p>
-                        <p lang="en" class="lang-content">• Water vapor at 100°C</p>
-                        <p lang="en" class="lang-content">• T = 100°C boiling</p>
-                        <p lang="en" class="lang-content">• Maximum humidity</p>
-                        <p lang="en" class="lang-content">• Liquid + gas mixture</p>
-                        <p lang="en" class="lang-content">• Equilibrium maintained</p>
-
-                        <p lang="ru" class="lang-content"><strong>💧 НАСЫЩЕННЫЙ ПАР</strong></p>
-                        <p lang="ru" class="lang-content">• Водяной пар при 100°C</p>
-                        <p lang="ru" class="lang-content">• Т = 100°C кипения</p>
-                        <p lang="ru" class="lang-content">• Максимальная влажность</p>
-                        <p lang="ru" class="lang-content">• Жидкость + газ смесь</p>
-                        <p lang="ru" class="lang-content">• Равновесие сохраняется</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>🔑 ІРІЛІ ҰСТАНУ:</strong> Ненасыщенный ұзын - төмен плотность, дөнгелек. Ылықталған ұзын - максимум плотность, деңсаулық. Фазалық өзгеру байланысты!</p>
-                <p lang="en" class="lang-content text-sm"><strong>🔑 KEY POINTS:</strong> Unsaturated vapor - low density, can vary. Saturated vapor - max density, equilibrium. Phase transition related!</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🔑 КЛЮЧЕВЫЕ МОМЕНТЫ:</strong> Ненасыщенный пар - низкая плотность, может изменяться. Насыщенный пар - макс плотность, равновесие. Связано с фазовым переходом!</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #e9d5ff; border-radius: 1rem; border-top: 4px solid #a855f7;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-purple-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Ненасыщенный ұзын - төмен плотность, T < T_қайнау, сұйық құрамасындағы. Ылықталған ұзын - максимум плотность, T = T_қайнау, деңсаулық. Фізика ұзындарының!</p>
-            <p lang="en" class="lang-content text-sm">Unsaturated vapor - low density, T < T_boiling, no liquid. Saturated vapor - max density, T = T_boiling, equilibrium. Physics of vapors!</p>
-            <p lang="ru" class="lang-content text-sm">Ненасыщенный пар - низкая плотность, Т < Т_кипения, без жидкости. Насыщенный пар - макс плотность, Т = Т_кипения, равновесие. Физика паров!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

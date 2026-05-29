@@ -1,333 +1,343 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Органикасыз құрамдас заттардың негіздегі сыныптарды</title>
+    <title>Основные классы неорганических соединений</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #451a03, #78350f, #1c1917); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #4c1d95, #6d28d9, #0f172a);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #f59e0b; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #fbbf24; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #fbbf24; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #fbbf24; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(245,158,11,0.08); border: 1px solid rgba(251,191,36,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #a78bfa; color: #1e1b4b; border-color: transparent; font-weight: 800; }
+        .class-btn { transition: all 0.2s; cursor: pointer; }
+        .class-btn:hover { transform: translateY(-4px); }
+        .class-btn.active { transform: translateY(-4px) scale(1.03); }
+        .formula-style { font-family: 'Courier New', monospace; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Бейорганикалық қосылыстардың кластары!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Inorganic Compound Classes!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Классы неорганических соединений!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">4 негіздегі сынып: оксидтер (XₓOᵧ), негіздер (MOH), қышқылдар (HₓA), тұздар (MₓAᵧ). Әр сыныптың өзі рөлі! ОРГАНИКАСЫЗ ХИМИЯ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">4 main classes: oxides (XₓOᵧ), bases (MOH), acids (HₓA), salts (MₓAᵧ). Each class own role! INORGANIC CHEMISTRY!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">4 основных класса: оксиды (XₓOᵧ), основания (MOH), кислоты (HₓA), соли (MₓAᵧ). Каждый класс своя роль! НЕОРГАНИЧЕСКАЯ ХИМИЯ!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-violet-300"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Бейорганикалық қосылыстардың жіктелуі</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. CLASSIFICATION OF INORGANIC COMPOUNDS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Классификация неорганических соединений</h2>
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div onclick="selectClass('oxides')" id="cls-oxides" class="class-btn glass rounded-custom p-6 text-center border border-white/10" style="--accent:#fb7185">
+            <div class="text-4xl mb-2">🔥</div>
+            <div class="formula-style font-bold text-xl text-rose-400">M_xO_y</div>
+            <div id="cls-oxides-name" class="text-sm text-white/70 mt-1"></div>
+        </div>
+        <div onclick="selectClass('acids')" id="cls-acids" class="class-btn glass rounded-custom p-6 text-center border border-white/10">
+            <div class="text-4xl mb-2">🍋</div>
+            <div class="formula-style font-bold text-xl text-amber-300">H_xА</div>
+            <div id="cls-acids-name" class="text-sm text-white/70 mt-1"></div>
+        </div>
+        <div onclick="selectClass('bases')" id="cls-bases" class="class-btn glass rounded-custom p-6 text-center border border-white/10">
+            <div class="text-4xl mb-2">🧼</div>
+            <div class="formula-style font-bold text-xl text-emerald-300">M(OH)_n</div>
+            <div id="cls-bases-name" class="text-sm text-white/70 mt-1"></div>
+        </div>
+        <div onclick="selectClass('salts')" id="cls-salts" class="class-btn glass rounded-custom p-6 text-center border border-white/10">
+            <div class="text-4xl mb-2">🧂</div>
+            <div class="formula-style font-bold text-xl text-sky-300">M_xА_y</div>
+            <div id="cls-salts-name" class="text-sm text-white/70 mt-1"></div>
+        </div>
+    </section>
 
-            <div class="illustration">
-                <svg viewBox="0 0 600 250" width="100%" height="250">
-                    <!-- Main classification -->
-                    <rect x="200" y="10" width="200" height="40" fill="#0284c7" stroke="#000" stroke-width="2" rx="5"/>
-                    <text x="300" y="40" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Органикасыз құрамдас</text>
+    <main class="glass rounded-custom p-8 mb-8 border-l-4 border-violet-400">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <div id="info-icon" class="text-5xl mb-3">🔥</div>
+                <h2 id="info-title" class="heading-font text-3xl mb-4 text-violet-300"></h2>
+                <p id="info-text" class="text-lg leading-relaxed text-white/85 mb-5"></p>
 
-                    <!-- Four classes -->
-                    <rect x="30" y="80" width="100" height="80" fill="#bae6fd" stroke="#0284c7" stroke-width="2" rx="5"/>
-                    <text x="80" y="110" text-anchor="middle" font-size="12" font-weight="bold">Оксидтер</text>
-                    <text x="80" y="130" text-anchor="middle" font-size="10">XₓOᵧ</text>
-                    <text x="80" y="150" text-anchor="middle" font-size="9">CaO, CO₂</text>
-
-                    <rect x="160" y="80" width="100" height="80" fill="#7dd3fc" stroke="#0284c7" stroke-width="2" rx="5"/>
-                    <text x="210" y="110" text-anchor="middle" font-size="12" font-weight="bold">Негіздер</text>
-                    <text x="210" y="130" text-anchor="middle" font-size="10">MOH</text>
-                    <text x="210" y="150" text-anchor="middle" font-size="9">NaOH, KOH</text>
-
-                    <rect x="290" y="80" width="100" height="80" fill="#38bdf8" stroke="#0284c7" stroke-width="2" rx="5"/>
-                    <text x="340" y="110" text-anchor="middle" font-size="12" font-weight="bold">Қышқылдар</text>
-                    <text x="340" y="130" text-anchor="middle" font-size="10">HₓA</text>
-                    <text x="340" y="150" text-anchor="middle" font-size="9">HCl, H₂SO₄</text>
-
-                    <rect x="420" y="80" width="100" height="80" fill="#0ea5e9" stroke="#0284c7" stroke-width="2" rx="5"/>
-                    <text x="470" y="110" text-anchor="middle" font-size="12" font-weight="bold">Тұздар</text>
-                    <text x="470" y="130" text-anchor="middle" font-size="10">MₓAᵧ</text>
-                    <text x="470" y="150" text-anchor="middle" font-size="9">NaCl, CaSO₄</text>
-
-                    <!-- Arrows from main to classes -->
-                    <line x1="250" y1="50" x2="80" y2="80" stroke="#0284c7" stroke-width="1" marker-end="url(#arrowhead)"/>
-                    <line x1="280" y1="50" x2="210" y2="80" stroke="#0284c7" stroke-width="1" marker-end="url(#arrowhead)"/>
-                    <line x1="320" y1="50" x2="340" y2="80" stroke="#0284c7" stroke-width="1" marker-end="url(#arrowhead)"/>
-                    <line x1="350" y1="50" x2="470" y2="80" stroke="#0284c7" stroke-width="1" marker-end="url(#arrowhead)"/>
-
-                    <!-- Reactions section -->
-                    <text x="300" y="200" text-anchor="middle" font-size="14" font-weight="bold">Негіздегі реакциялар</text>
-
-                    <!-- Acid-base -->
-                    <rect x="40" y="220" width="130" height="25" fill="#dcfce7" stroke="#0284c7" stroke-width="1" rx="3"/>
-                    <text x="105" y="237" text-anchor="middle" font-size="11">Қышқыл + Негіз → Түз</text>
-
-                    <!-- Acid-oxide -->
-                    <rect x="190" y="220" width="130" height="25" fill="#dcfce7" stroke="#0284c7" stroke-width="1" rx="3"/>
-                    <text x="255" y="237" text-anchor="middle" font-size="11">Оксид + Қышқыл → Түз</text>
-
-                    <!-- Base-oxide -->
-                    <rect x="340" y="220" width="130" height="25" fill="#dcfce7" stroke="#0284c7" stroke-width="1" rx="3"/>
-                    <text x="405" y="237" text-anchor="middle" font-size="11">Оксид + Негіз → Түз</text>
-
-                    <!-- Arrow marker -->
-                    <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                            <polygon points="0 0, 10 3, 0 6" fill="#0284c7"/>
-                        </marker>
-                    </defs>
-                </svg>
+                <h3 id="examples-label" class="text-violet-300 text-sm uppercase tracking-widest mb-2"></h3>
+                <div id="examples-list" class="space-y-2 mb-5"></div>
             </div>
+            <div>
+                <h3 id="props-label" class="text-violet-300 text-sm uppercase tracking-widest mb-3"></h3>
+                <div id="props-list" class="space-y-2 mb-5"></div>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">Сынып</th>
-                            <th lang="kk" class="lang-content">ФОРМУЛА</th>
-                            <th lang="kk" class="lang-content">МЫСАЛДАРЫ</th>
-                            <th lang="kk" class="lang-content">ӨНДІКТІГІ</th>
-
-                            <th lang="en" class="lang-content">CLASS</th>
-                            <th lang="en" class="lang-content">FORMULA</th>
-                            <th lang="en" class="lang-content">EXAMPLES</th>
-                            <th lang="en" class="lang-content">USE</th>
-
-                            <th lang="ru" class="lang-content">КЛАСС</th>
-                            <th lang="ru" class="lang-content">ФОРМУЛА</th>
-                            <th lang="ru" class="lang-content">ПРИМЕРЫ</th>
-                            <th lang="ru" class="lang-content">ПРИМЕНЕНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ОКСИДТЕР</strong></td>
-                            <td lang="kk" class="lang-content">XₓOᵧ</td>
-                            <td lang="kk" class="lang-content">CaO, CO₂, SiO₂</td>
-                            <td lang="kk" class="lang-content">Өндіктігінің негіздері</td>
-
-                            <td lang="en" class="lang-content"><strong>OXIDES</strong></td>
-                            <td lang="en" class="lang-content">XₓOᵧ</td>
-                            <td lang="en" class="lang-content">CaO, CO₂, SiO₂</td>
-                            <td lang="en" class="lang-content">Industrial basis</td>
-
-                            <td lang="ru" class="lang-content"><strong>ОКСИДЫ</strong></td>
-                            <td lang="ru" class="lang-content">XₓOᵧ</td>
-                            <td lang="ru" class="lang-content">CaO, CO₂, SiO₂</td>
-                            <td lang="ru" class="lang-content">Промышленная база</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>НЕГІЗДЕР</strong></td>
-                            <td lang="kk" class="lang-content">MOH, M(OH)ₙ</td>
-                            <td lang="kk" class="lang-content">NaOH, Ca(OH)₂</td>
-                            <td lang="kk" class="lang-content">Нейтралдану</td>
-
-                            <td lang="en" class="lang-content"><strong>BASES</strong></td>
-                            <td lang="en" class="lang-content">MOH, M(OH)ₙ</td>
-                            <td lang="en" class="lang-content">NaOH, Ca(OH)₂</td>
-                            <td lang="en" class="lang-content">Neutralization</td>
-
-                            <td lang="ru" class="lang-content"><strong>ОСНОВАНИЯ</strong></td>
-                            <td lang="ru" class="lang-content">MOH, M(OH)ₙ</td>
-                            <td lang="ru" class="lang-content">NaOH, Ca(OH)₂</td>
-                            <td lang="ru" class="lang-content">Нейтрализация</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ҚЫШҚЫЛДАР</strong></td>
-                            <td lang="kk" class="lang-content">HₓA</td>
-                            <td lang="kk" class="lang-content">HCl, H₂SO₄, HNO₃</td>
-                            <td lang="kk" class="lang-content">Өндіктіктің</td>
-
-                            <td lang="en" class="lang-content"><strong>ACIDS</strong></td>
-                            <td lang="en" class="lang-content">HₓA</td>
-                            <td lang="en" class="lang-content">HCl, H₂SO₄, HNO₃</td>
-                            <td lang="en" class="lang-content">Industrial</td>
-
-                            <td lang="ru" class="lang-content"><strong>КИСЛОТЫ</strong></td>
-                            <td lang="ru" class="lang-content">HₓA</td>
-                            <td lang="ru" class="lang-content">HCl, H₂SO₄, HNO₃</td>
-                            <td lang="ru" class="lang-content">Промышленные</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ТҰЗДАР</strong></td>
-                            <td lang="kk" class="lang-content">MₓAᵧ</td>
-                            <td lang="kk" class="lang-content">NaCl, CaSO₄, KNO₃</td>
-                            <td lang="kk" class="lang-content">Сыйай ерітіндісі</td>
-
-                            <td lang="en" class="lang-content"><strong>SALTS</strong></td>
-                            <td lang="en" class="lang-content">MₓAᵧ</td>
-                            <td lang="en" class="lang-content">NaCl, CaSO₄, KNO₃</td>
-                            <td lang="en" class="lang-content">Useful solutions</td>
-
-                            <td lang="ru" class="lang-content"><strong>СОЛИ</strong></td>
-                            <td lang="ru" class="lang-content">MₓAᵧ</td>
-                            <td lang="ru" class="lang-content">NaCl, CaSO₄, KNO₃</td>
-                            <td lang="ru" class="lang-content">Полезные растворы</td>
-                        </tr>
-                    </table>
-                </div>
+                <h3 id="usage-label" class="text-violet-300 text-sm uppercase tracking-widest mb-3"></h3>
+                <p id="usage-text" class="text-white/80 leading-relaxed bg-black/30 rounded-2xl p-5 border border-violet-400/20"></p>
             </div>
-        </section>
+        </div>
+    </main>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Органикасыз құрамдас - 4 негіздегі сынып: оксидтер (XₓOᵧ), негіздер (MOH), қышқылдар (HₓA), тұздар (MₓAᵧ). Әр сыныптың өзі анықтамасы, формуласы, мысалдары, өндіктігі. Органикасыз химия - технологияның негіздері!</p>
-            <p lang="en" class="lang-content text-sm">Inorganic compounds - 4 main classes: oxides (XₓOᵧ), bases (MOH), acids (HₓA), salts (MₓAᵧ). Each class own definition, formula, examples, use. Inorganic chemistry - foundation of technology!</p>
-            <p lang="ru" class="lang-content text-sm">Неорганические соединения - 4 основных класса: оксиды (XₓOᵧ), основания (MOH), кислоты (HₓA), соли (MₓAᵧ). Каждый класс своё определение, формула, примеры, применение. Неорганическая химия - основа технологии!</p>
-        </footer>
-    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-violet-500/10 transition-colors">
+            <div class="w-14 h-14 bg-violet-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🌐</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-violet-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-violet-500/10 transition-colors">
+            <div class="w-14 h-14 bg-violet-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🔄</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-violet-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-violet-500/10 transition-colors">
+            <div class="w-14 h-14 bg-violet-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🧪</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-violet-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-violet-300 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Основные классы неорг. соединений",
+                subtitle: "Четыре фундаментальных класса веществ",
+                names: { oxides: "Оксиды", acids: "Кислоты", bases: "Основания", salts: "Соли" },
+                classes: {
+                    oxides: {
+                        icon: "🔥",
+                        title: "Оксиды",
+                        text: "Сложные вещества из двух элементов, один из которых — кислород со степенью окисления −2. Делятся на основные (Na₂O, CaO), кислотные (CO₂, SO₃), амфотерные (Al₂O₃, ZnO) и несолеобразующие (CO, NO).",
+                        examples: ["CO₂ — углекислый газ", "Fe₂O₃ — оксид железа (ржавчина)", "SiO₂ — кварц, песок", "H₂O — вода (тоже оксид!)"],
+                        props: ["Чаще твёрдые, реже газы", "Реагируют с кислотами и щелочами", "Большинство нерастворимо в воде"],
+                        usage: "Известь (CaO) — для побелки и строительства, кварцевый песок (SiO₂) — стекло и микроэлектроника, оксид железа — пигмент."
+                    },
+                    acids: {
+                        icon: "🍋",
+                        title: "Кислоты",
+                        text: "Вещества, состоящие из атомов водорода (способных замещаться металлом) и кислотного остатка. В воде диссоциируют с образованием H⁺ — отсюда кислый вкус.",
+                        examples: ["HCl — соляная кислота", "H₂SO₄ — серная кислота", "HNO₃ — азотная кислота", "CH₃COOH — уксусная кислота"],
+                        props: ["Кислый вкус, окрашивают лакмус в красный", "Реагируют с металлами с выделением H₂", "Реагируют с основаниями и солями"],
+                        usage: "Серная кислота — самое массовое промышленное вещество (удобрения, аккумуляторы). Соляная — в желудке человека. Уксусная — в пищевой промышленности."
+                    },
+                    bases: {
+                        icon: "🧼",
+                        title: "Основания",
+                        text: "Соединения металла с гидроксогруппой OH. Растворимые в воде называют щелочами. Они мыльные на ощупь и едкие.",
+                        examples: ["NaOH — едкий натр", "KOH — едкое кали", "Ca(OH)₂ — гашёная известь", "NH₄OH — нашатырный спирт"],
+                        props: ["Мыльные на ощупь, лакмус — синий", "Реагируют с кислотами (нейтрализация)", "Щёлочи — едкие, разъедают кожу"],
+                        usage: "NaOH — производство мыла, бумаги. Ca(OH)₂ — побелка деревьев, нейтрализация кислых почв. Mg(OH)₂ — антацид от изжоги."
+                    },
+                    salts: {
+                        icon: "🧂",
+                        title: "Соли",
+                        text: "Продукты замещения водорода в кислоте на металл. Состоят из катиона металла и аниона кислотного остатка. Самый разнообразный класс.",
+                        examples: ["NaCl — поваренная соль", "CaCO₃ — мел, известняк", "CuSO₄ — медный купорос", "NaHCO₃ — пищевая сода"],
+                        props: ["Твёрдые, кристаллические", "Многие растворимы в воде", "Имеют ионную решётку"],
+                        usage: "Соли используют в кулинарии, медицине, удобрениях. NaCl — приправа, KNO₃ — удобрение, CaSO₄·2H₂O — гипс."
+                    }
+                },
+                examplesLabel: "Примеры",
+                propsLabel: "Свойства",
+                usageLabel: "Применение",
+                cards: [
+                    { title: "Связь между классами", desc: "Оксиды → кислоты или основания → соли. Так с помощью реакций можно перейти от одного класса к другому — это «генетическая связь» неорганики." },
+                    { title: "Реакция нейтрализации", desc: "Кислота + основание = соль + вода. Это типичная реакция, лежащая в основе многих биологических и промышленных процессов." },
+                    { title: "Качественные реакции", desc: "Каждый класс имеет «свои» индикаторы: лакмус, фенолфталеин, метилоранж. Они меняют цвет в зависимости от среды." }
+                ],
+                quote: "«Четыре класса — четыре стороны мира неорганической химии»",
+                author: "Дмитрий Менделеев"
+            },
+            kz: {
+                title: "Бейорганикалық қосылыстардың негізгі кластары",
+                subtitle: "Заттардың төрт іргелі класы",
+                names: { oxides: "Оксидтер", acids: "Қышқылдар", bases: "Негіздер", salts: "Тұздар" },
+                classes: {
+                    oxides: {
+                        icon: "🔥",
+                        title: "Оксидтер",
+                        text: "Екі элементтен тұратын күрделі заттар, оның бірі — −2 тотығу дәрежесіндегі оттегі. Негіздік (Na₂O, CaO), қышқылдық (CO₂, SO₃), амфотерлік (Al₂O₃, ZnO) және тұз түзбейтін (CO, NO) болып бөлінеді.",
+                        examples: ["CO₂ — көмірқышқыл газы", "Fe₂O₃ — темір оксиді (тат)", "SiO₂ — кварц, құм", "H₂O — су (бұл да оксид!)"],
+                        props: ["Көбіне қатты, кейбірі газ", "Қышқыл мен сілтілермен әрекеттеседі", "Көпшілігі суда ерімейді"],
+                        usage: "Әк (CaO) — әктеу мен құрылыс үшін, кварц құмы (SiO₂) — әйнек пен микроэлектроника, темір оксиді — пигмент."
+                    },
+                    acids: {
+                        icon: "🍋",
+                        title: "Қышқылдар",
+                        text: "Сутегі атомдарынан (металмен ауысатын) және қышқыл қалдығынан тұратын заттар. Суда H⁺ түзе диссоциацияланады — қышқыл дәмнің себебі сол.",
+                        examples: ["HCl — тұз қышқылы", "H₂SO₄ — күкірт қышқылы", "HNO₃ — азот қышқылы", "CH₃COOH — сірке қышқылы"],
+                        props: ["Қышқыл дәмді, лакмусты қызартады", "Металдармен әрекеттесіп H₂ бөледі", "Негіздермен, тұздармен әрекеттеседі"],
+                        usage: "Күкірт қышқылы — өнеркәсіптің ең көп қолданылатын заты (тыңайтқыш, аккумулятор). Тұз қышқылы — асқазанда. Сірке қышқылы — тамақ өнеркәсібінде."
+                    },
+                    bases: {
+                        icon: "🧼",
+                        title: "Негіздер",
+                        text: "Металдың гидроксотоп OH-мен қосылысы. Суда еритіндері сілтілер деп аталады. Олар саусақта сабындай, кейбірі күйдіргіш.",
+                        examples: ["NaOH — күйдіргіш натр", "KOH — күйдіргіш калий", "Ca(OH)₂ — сөнген әк", "NH₄OH — нашатыр спирті"],
+                        props: ["Саусақта сабынды, лакмусты көк түске бояйды", "Қышқылдармен әрекеттеседі (бейтараптау)", "Сілтілер күйдіргіш, теріні зақымдайды"],
+                        usage: "NaOH — сабын, қағаз өндіру. Ca(OH)₂ — ағаш әктеу, қышқыл топырақты бейтараптау. Mg(OH)₂ — асқазан ауыруына қарсы дәрі."
+                    },
+                    salts: {
+                        icon: "🧂",
+                        title: "Тұздар",
+                        text: "Қышқылдағы сутегін металмен алмастырудан түзілген заттар. Метал катионы мен қышқыл қалдық анионынан тұрады. Ең әр түрлі класс.",
+                        examples: ["NaCl — ас тұзы", "CaCO₃ — бор, әктас", "CuSO₄ — мыс купоросы", "NaHCO₃ — ас содасы"],
+                        props: ["Қатты, кристалл түрінде", "Көпшілігі суда ериді", "Ион тор құрылымы"],
+                        usage: "Тұздар тамақ, медицина, тыңайтқышта қолданылады. NaCl — дәмдеуіш, KNO₃ — тыңайтқыш, CaSO₄·2H₂O — гипс."
+                    }
+                },
+                examplesLabel: "Мысалдар",
+                propsLabel: "Қасиеттері",
+                usageLabel: "Қолданылуы",
+                cards: [
+                    { title: "Кластар арасындағы байланыс", desc: "Оксидтер → қышқыл немесе негіз → тұз. Реакциялар арқылы бір кластан екіншісіне өтуге болады — бейорганикалық химияның «генетикалық байланысы»." },
+                    { title: "Бейтараптау реакциясы", desc: "Қышқыл + негіз = тұз + су. Көптеген биологиялық және өнеркәсіптік процестердің негізі." },
+                    { title: "Сапалық реакциялар", desc: "Әр кластың өз индикаторлары: лакмус, фенолфталеин, метилоранж. Олар орта түрін көрсетеді." }
+                ],
+                quote: "«Төрт класс — бейорганикалық химия әлемінің төрт қыры»",
+                author: "Дмитрий Менделеев"
+            },
+            en: {
+                title: "Main classes of inorganic compounds",
+                subtitle: "Four fundamental classes of substances",
+                names: { oxides: "Oxides", acids: "Acids", bases: "Bases", salts: "Salts" },
+                classes: {
+                    oxides: {
+                        icon: "🔥",
+                        title: "Oxides",
+                        text: "Compounds of two elements, one of which is oxygen with oxidation state −2. They split into basic (Na₂O, CaO), acidic (CO₂, SO₃), amphoteric (Al₂O₃, ZnO) and non-salt-forming (CO, NO).",
+                        examples: ["CO₂ — carbon dioxide", "Fe₂O₃ — iron oxide (rust)", "SiO₂ — quartz, sand", "H₂O — water (also an oxide!)"],
+                        props: ["Often solid, sometimes gases", "React with acids and alkalis", "Most are insoluble in water"],
+                        usage: "Lime (CaO) for whitewashing and construction; quartz sand (SiO₂) for glass and microelectronics; iron oxide as a pigment."
+                    },
+                    acids: {
+                        icon: "🍋",
+                        title: "Acids",
+                        text: "Substances built from hydrogen atoms (replaceable by a metal) and an acid residue. In water they release H⁺ — hence the sour taste.",
+                        examples: ["HCl — hydrochloric acid", "H₂SO₄ — sulfuric acid", "HNO₃ — nitric acid", "CH₃COOH — acetic acid"],
+                        props: ["Sour, turn litmus red", "React with metals releasing H₂", "React with bases and salts"],
+                        usage: "Sulfuric acid is the world's largest-scale industrial chemical. Hydrochloric acid is in the human stomach. Acetic acid is used in food."
+                    },
+                    bases: {
+                        icon: "🧼",
+                        title: "Bases",
+                        text: "Compounds of a metal with the hydroxide group OH. Those that dissolve in water are called alkalis — slippery and caustic.",
+                        examples: ["NaOH — caustic soda", "KOH — caustic potash", "Ca(OH)₂ — slaked lime", "NH₄OH — ammonia water"],
+                        props: ["Slippery, litmus turns blue", "React with acids (neutralisation)", "Alkalis are caustic to skin"],
+                        usage: "NaOH — soap and paper making. Ca(OH)₂ — whitewashing, neutralising acid soils. Mg(OH)₂ — antacid against heartburn."
+                    },
+                    salts: {
+                        icon: "🧂",
+                        title: "Salts",
+                        text: "Products of replacing hydrogen in an acid with a metal. Consist of a metal cation and an acid-residue anion. The most diverse class.",
+                        examples: ["NaCl — table salt", "CaCO₃ — chalk, limestone", "CuSO₄ — copper sulfate", "NaHCO₃ — baking soda"],
+                        props: ["Solid, crystalline", "Many are water-soluble", "Have ionic lattices"],
+                        usage: "Salts are used in cooking, medicine and fertilisers. NaCl — seasoning, KNO₃ — fertiliser, CaSO₄·2H₂O — gypsum."
+                    }
+                },
+                examplesLabel: "Examples",
+                propsLabel: "Properties",
+                usageLabel: "Applications",
+                cards: [
+                    { title: "Links between classes", desc: "Oxide → acid or base → salt. Reactions let you travel between classes — the genetic link of inorganic chemistry." },
+                    { title: "Neutralisation", desc: "Acid + base = salt + water. The reaction at the heart of countless biological and industrial processes." },
+                    { title: "Qualitative reactions", desc: "Each class has its own indicators: litmus, phenolphthalein, methyl orange — they show the type of medium." }
+                ],
+                quote: "«Four classes — four faces of the inorganic-chemistry world»",
+                author: "Dmitri Mendeleev"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentClass = 'oxides';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function selectClass(c) {
+            currentClass = c;
+            document.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('cls-' + c).classList.add('active');
+            renderInfo();
+        }
+
+        function renderInfo() {
+            const t = translations[currentLang];
+            const c = t.classes[currentClass];
+            document.getElementById('info-icon').textContent = c.icon;
+            document.getElementById('info-title').textContent = c.title;
+            document.getElementById('info-text').textContent = c.text;
+            document.getElementById('examples-list').innerHTML = c.examples.map(e =>
+                `<div class="bg-white/5 rounded-xl p-3 border border-white/10 formula-style text-white/90">${e}</div>`
+            ).join('');
+            document.getElementById('props-list').innerHTML = c.props.map(p =>
+                `<div class="bg-white/5 rounded-xl p-3 border border-white/10 text-white/85 flex gap-2"><span class="text-violet-300">▸</span>${p}</div>`
+            ).join('');
+            document.getElementById('usage-text').textContent = c.usage;
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            ['oxides','acids','bases','salts'].forEach(c => {
+                document.getElementById('cls-' + c + '-name').textContent = t.names[c];
+            });
+            document.getElementById('examples-label').textContent = t.examplesLabel;
+            document.getElementById('props-label').textContent = t.propsLabel;
+            document.getElementById('usage-label').textContent = t.usageLabel;
+            renderInfo();
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            selectClass('oxides');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -336,128 +346,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

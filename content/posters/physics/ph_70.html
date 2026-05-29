@@ -1,263 +1,158 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторная работа - Удельная теплоёмкость</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #f3e8ff 0%, #ede9fe 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #5b21b6; border-bottom: 3px solid #ede9fe; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #7c3aed; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #7c3aed; background: white; color: #7c3aed; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #7c3aed; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #7c3aed; color: white; text-align: center; }
-        .info-box { background: linear-gradient(135deg, #ede9fe 0%, #f3e8ff 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #7c3aed; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .lab-card { background: #f5f3ff; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #7c3aed; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электромагнитная индукция</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-purple-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-purple-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Фарадей заңы</span>
+<span lang="en" class="lang-content">Grade 9 · Faraday's law</span>
+<span lang="ru" class="lang-content">9 класс · Закон Фарадея</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Электрмагниттік индукция</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Electromagnetic induction</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-purple-700">Электромагнитная индукция</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Лабораторлық Жұмыс</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Laboratory Work</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Лабораторная работа</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-purple-100">Өндіктігінің құрамасындағы өндіктігінің есептеу. Қатты дене нақ жылусыйлығы өлшеу. ПРАКТИКАЛЫҚ ӨНДІКТІГІНІҢ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-purple-100">Measuring specific heat capacity of solid body. Using water calorimeter. PRACTICAL PHYSICS!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-purple-100">Измерение удельной теплоёмкости твёрдого тела. Использование водного калориметра. ПРАКТИЧЕСКАЯ ФИЗИКА!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚡ Фарадей ашуы (1831)</span>
+<span lang="en" class="lang-content">⚡ Faraday's discovery (1831)</span>
+<span lang="ru" class="lang-content">⚡ Открытие Фарадея (1831)</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-purple-700">Электрмагниттік индукция</b> — <b>өзгеретін магнит өрісі</b> өткізгіш контурда <b>тоқ</b> туғызатын құбылыс. Майкл <b>Фарадей</b> 10 жыл бойы эксперимент жасап, бұл құбылысты ашты. Ол барлық қазіргі <b>электр энергетикасының</b> негізі!</span>
+<span lang="en" class="lang-content"><b class="text-purple-700">Electromagnetic induction</b> — a <b>changing magnetic field</b> creates a <b>current</b> in a conductor. Michael <b>Faraday</b> spent 10 years on the experiment. It is the foundation of <b>modern electric power</b>!</span>
+<span lang="ru" class="lang-content"><b class="text-purple-700">Электромагнитная индукция</b> — возникновение <b>тока</b> в контуре при <b>изменении магнитного поля</b>. Майкл <b>Фарадей</b> 10 лет ставил опыты. Это основа всей современной <b>электроэнергетики</b>!</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ЯЩЫЛ ҚҰРАМАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. APPARATUS SETUP</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Оборудование</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-purple-900 font-bold mb-2">🔄 <span lang="kk" class="lang-content">Тоқ пайда болу шарты:</span><span lang="en" class="lang-content">Condition for current:</span><span lang="ru" class="lang-content">Условие появления тока:</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Контур арқылы өтетін <b>магнит ағыны Ф</b> <b>өзгеруі керек</b>! Ф = B·S·cos α. Өзгерте аламыз: ① B-ні (магнитті жақындату/алыстату), ② S-ні (рамка ауданын), ③ бұрышты (рамканы бұру).</span>
+<span lang="en" class="lang-content">The <b>magnetic flux Φ</b> through the loop must <b>change</b>! Φ = B·S·cos α. We can vary ① B (move a magnet), ② S (area), ③ angle.</span>
+<span lang="ru" class="lang-content"><b>Магнитный поток Φ</b> через контур должен <b>меняться</b>! Φ = B·S·cos α. Менять можно: ① B (двигать магнит), ② S (площадь), ③ угол.</span></p>
+</div>
+</div>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ҚҰРАМАСЫ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">ҚОЛДАНУ</th>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center mb-3">
+<svg width="320" height="220" viewBox="0 0 320 220">
+<g stroke="#9333ea" stroke-width="3" fill="none">
+<ellipse cx="160" cy="120" rx="80" ry="30"/>
+</g>
+<rect x="80" y="50" width="40" height="50" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="3"/>
+<text x="100" y="80" font-size="14" text-anchor="middle" font-weight="bold" fill="#1d4ed8">N</text>
+<rect x="80" y="100" width="40" height="20" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="3"/>
+<text x="100" y="115" font-size="11" text-anchor="middle" font-weight="bold" fill="#dc2626">S</text>
+<line x1="100" y1="130" x2="100" y2="170" stroke="#16a34a" stroke-width="3"/>
+<polygon points="100,175 95,165 105,165" fill="#16a34a"/>
+<text x="115" y="170" font-size="11" fill="#16a34a">↓</text>
+<rect x="220" y="100" width="60" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="3"/>
+<text x="250" y="125" font-size="14" text-anchor="middle" font-weight="bold" fill="#d97706">G</text>
+<text x="160" y="200" font-size="12" text-anchor="middle" fill="#475569">
+<tspan>магнитты жылжыту → тоқ</tspan>
+</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center"><span lang="kk" class="lang-content">Магнитты қозғалтсақ — гальванометр <b>тоқты</b> көрсетеді!</span><span lang="en" class="lang-content">Move magnet → galvanometer shows <b>current</b>!</span><span lang="ru" class="lang-content">Двигаем магнит → гальванометр показывает <b>ток</b>!</span></p>
+</div>
+</div>
+</section>
 
-                            <th lang="en" class="lang-content">APPARATUS</th>
-                            <th lang="en" class="lang-content">DESCRIPTION</th>
-                            <th lang="en" class="lang-content">PURPOSE</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Фарадей және Ленц заңдары</span>
+<span lang="en" class="lang-content">📐 Faraday's & Lenz's laws</span>
+<span lang="ru" class="lang-content">📐 Законы Фарадея и Ленца</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-purple-700 mb-3">📜 <span lang="kk" class="lang-content">Фарадей заңы:</span><span lang="en" class="lang-content">Faraday's law:</span><span lang="ru" class="lang-content">Закон Фарадея:</span></p>
+<div class="formula text-center" style="font-size:1.4rem">
+ε = − ΔΦ / Δt
+</div>
+<p class="text-slate-700 text-sm mt-3">
+<span lang="kk" class="lang-content">Индукция ЭҚК-сі (<b>ε</b>) контурдан өтетін магнит ағынының <b>өзгеру жылдамдығына тең</b>. Ағын қаншалықты <b>тез</b> өзгерсе, ЭҚК соншалықты <b>үлкен</b>!</span>
+<span lang="en" class="lang-content">Induced EMF (<b>ε</b>) equals the <b>rate of change</b> of magnetic flux. Faster change → bigger EMF!</span>
+<span lang="ru" class="lang-content">ЭДС индукции (<b>ε</b>) равна <b>скорости изменения</b> магнитного потока. Чем быстрее меняется Ф — тем больше ε!</span></p>
+</div>
 
-                            <th lang="ru" class="lang-content">ОБОРУДОВАНИЕ</th>
-                            <th lang="ru" class="lang-content">ОПИСАНИЕ</th>
-                            <th lang="ru" class="lang-content">НАЗНАЧЕНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Калориметр</td>
-                            <td lang="kk" class="lang-content">Су ағындарының ыстық құрамасындағы</td>
-                            <td lang="kk" class="lang-content">Су температурасы өлшеу</td>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-purple-700 mb-3">🔁 <span lang="kk" class="lang-content">Ленц ережесі:</span><span lang="en" class="lang-content">Lenz's rule:</span><span lang="ru" class="lang-content">Правило Ленца:</span></p>
+<p class="text-slate-700 text-base mb-2">
+<span lang="kk" class="lang-content">Индукциялық тоқтың бағыты <b>оған себеп болған өзгеріске қарсы тұратын</b> магнит ағынын тудырады.</span>
+<span lang="en" class="lang-content">The induced current direction always <b>opposes the change</b> that caused it.</span>
+<span lang="ru" class="lang-content">Направление индукционного тока такое, чтобы <b>противодействовать</b> вызвавшему его изменению.</span></p>
+<p class="text-xs text-slate-600 italic">
+<span lang="kk" class="lang-content">«Табиғат өзгерістерді жек көреді!»</span>
+<span lang="en" class="lang-content">«Nature hates changes!»</span>
+<span lang="ru" class="lang-content">«Природа сопротивляется изменениям!»</span></p>
+</div>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content">Calorimeter</td>
-                            <td lang="en" class="lang-content">Insulated container with water</td>
-                            <td lang="en" class="lang-content">Measure water temperature</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚙️ Генератор — токты қалай өндіреді</span>
+<span lang="en" class="lang-content">⚙️ Generator — how electricity is made</span>
+<span lang="ru" class="lang-content">⚙️ Генератор — как добывают ток</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b class="text-purple-700">Электр генератор</b> — <b>механикалық энергияны</b> электрге айналдырады (мотор кері!). Магнит өрісінде рамканы <b>айналдырамыз</b> → Ф үздіксіз өзгереді → индукция ЭҚК пайда болады. <b>Барлық электр станциялары</b> осылай жұмыс істейді: <b>СЭС, ЖЭС, АЭС, жел, күн</b> — олардың айырмашылығы тек <b>генератор қалай айналады</b>! Қазақстанда ~75% электр — ЖЭС-тан (көмір).</span>
+<span lang="en" class="lang-content">An <b class="text-purple-700">electric generator</b> turns <b>mechanical energy</b> into electricity (motor in reverse!). A coil spins in a magnetic field → Φ changes → EMF appears. <b>All power plants</b> (hydro, coal, nuclear, wind, solar-thermal) just differ in <b>how the rotor is spun</b>. Kazakhstan: ~75% from coal plants.</span>
+<span lang="ru" class="lang-content"><b class="text-purple-700">Электрогенератор</b> превращает <b>механическую энергию</b> в электрическую (это мотор наоборот!). Вращаем рамку в поле → Φ меняется → возникает ЭДС. <b>Все электростанции</b> (ГЭС, ТЭС, АЭС, ветровые, тепловые от солнца) отличаются <b>лишь способом вращения</b> ротора. В РК ~75% энергии — от ТЭС (угля).</span></p>
+</div>
+</section>
 
-                            <td lang="ru" class="lang-content">Калориметр</td>
-                            <td lang="ru" class="lang-content">Изолированный контейнер с водой</td>
-                            <td lang="ru" class="lang-content">Измерить температуру воды</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Қатты дене (мыс, төмен)</td>
-                            <td lang="kk" class="lang-content">Нақ жылусыйлығы өлшеу үшін</td>
-                            <td lang="kk" class="lang-content">Сынақтын объектісі</td>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-purple-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛠️ Қолдану — қазіргі әлемде</span>
+<span lang="en" class="lang-content">🛠️ Applications — modern world</span>
+<span lang="ru" class="lang-content">🛠️ Применения — современный мир</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">🏭</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Электр станциялары</span><span lang="en" class="lang-content">Power plants</span><span lang="ru" class="lang-content">Электростанции</span></p></div>
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">🔌</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Трансформатор</span><span lang="en" class="lang-content">Transformer</span><span lang="ru" class="lang-content">Трансформатор</span></p></div>
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">📱</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Сымсыз зарядт.</span><span lang="en" class="lang-content">Wireless charging</span><span lang="ru" class="lang-content">Беспров. зарядка</span></p></div>
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">💳</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">RFID, NFC, метро карта</span><span lang="en" class="lang-content">RFID, NFC, transit cards</span><span lang="ru" class="lang-content">RFID, NFC, метро-карты</span></p></div>
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">🍳</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Индукциялық плита</span><span lang="en" class="lang-content">Induction stove</span><span lang="ru" class="lang-content">Индукционная плита</span></p></div>
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">🛡️</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Металл детектор</span><span lang="en" class="lang-content">Metal detector</span><span lang="ru" class="lang-content">Металлоискатель</span></p></div>
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">🎤</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Микрофон</span><span lang="en" class="lang-content">Microphone</span><span lang="ru" class="lang-content">Микрофон</span></p></div>
+<div class="card-accent rounded-custom p-5 text-center"><div class="text-4xl mb-2">🚄</div>
+<p class="heading-font text-purple-700 text-sm"><span lang="kk" class="lang-content">Эл. машина рек.</span><span lang="en" class="lang-content">EV regen-brake</span><span lang="ru" class="lang-content">Рекуперация EV</span></p></div>
+</div>
+</section>
 
-                            <td lang="en" class="lang-content">Solid body (copper, lead)</td>
-                            <td lang="en" class="lang-content">Unknown specific heat sample</td>
-                            <td lang="en" class="lang-content">Test object</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-purple-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📜</div>
+<p class="heading-font text-xl text-purple-700 mb-2">ε = −ΔΦ/Δt</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Фарадей заңы</span><span lang="en" class="lang-content">Faraday's law</span><span lang="ru" class="lang-content">Закон Фарадея</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔁</div>
+<p class="heading-font text-xl text-purple-700 mb-2"><span lang="kk" class="lang-content">Ленц</span><span lang="en" class="lang-content">Lenz</span><span lang="ru" class="lang-content">Ленц</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қарсылық бағыты</span><span lang="en" class="lang-content">Opposes the change</span><span lang="ru" class="lang-content">Противодействие</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚙️</div>
+<p class="heading-font text-xl text-purple-700 mb-2"><span lang="kk" class="lang-content">Генератор</span><span lang="en" class="lang-content">Generator</span><span lang="ru" class="lang-content">Генератор</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Мех → эл.</span><span lang="en" class="lang-content">Mech → Elec</span><span lang="ru" class="lang-content">Мех → Эл.</span></p></div>
+</div></footer>
 
-                            <td lang="ru" class="lang-content">Твёрдое тело (медь, свинец)</td>
-                            <td lang="ru" class="lang-content">Образец для определения c</td>
-                            <td lang="ru" class="lang-content">Тестируемый объект</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Градусник (термометр)</td>
-                            <td lang="kk" class="lang-content">0°C дан 100°C ойындағы</td>
-                            <td lang="kk" class="lang-content">Температурасы өлшеу</td>
-
-                            <td lang="en" class="lang-content">Thermometer</td>
-                            <td lang="en" class="lang-content">Range 0°C to 100°C</td>
-                            <td lang="en" class="lang-content">Measure temperature</td>
-
-                            <td lang="ru" class="lang-content">Термометр</td>
-                            <td lang="ru" class="lang-content">Диапазон 0°C до 100°C</td>
-                            <td lang="ru" class="lang-content">Измеряет температуру</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Тығындағы қосындысы</td>
-                            <td lang="kk" class="lang-content">Дөңгелек сыймалығы болмайты</td>
-                            <td lang="kk" class="lang-content">Ағындарының массасы өлшеу</td>
-
-                            <td lang="en" class="lang-content">Balance (scale)</td>
-                            <td lang="en" class="lang-content">Measures mass in grams</td>
-                            <td lang="en" class="lang-content">Measure body mass</td>
-
-                            <td lang="ru" class="lang-content">Весы</td>
-                            <td lang="ru" class="lang-content">Измеряет массу в граммах</td>
-                            <td lang="ru" class="lang-content">Измерить массу тела</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. СЫНАҚ ЖҮРГІТУ ӘДІСІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. PROCEDURE</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Ход проведения работы</h2>
-
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="lab-card">
-                        <p lang="kk" class="lang-content"><strong>1️⃣ ДАЙЫНДАУ</strong></p>
-                        <p lang="kk" class="lang-content">• Қатты денеңі және калориметрінің массасы өлшеу (мг, мс)</p>
-                        <p lang="kk" class="lang-content">• Калориметрге су құю (200-300 мл)</p>
-                        <p lang="kk" class="lang-content">• Су температурасы өлшеу (t₁)</p>
-
-                        <p lang="en" class="lang-content"><strong>1️⃣ PREPARATION</strong></p>
-                        <p lang="en" class="lang-content">• Measure mass of body and water (m_body, m_water)</p>
-                        <p lang="en" class="lang-content">• Pour water in calorimeter (200-300 ml)</p>
-                        <p lang="en" class="lang-content">• Measure water temperature (t₁)</p>
-
-                        <p lang="ru" class="lang-content"><strong>1️⃣ ПОДГОТОВКА</strong></p>
-                        <p lang="ru" class="lang-content">• Измерить массу тела и воды (m_тела, m_воды)</p>
-                        <p lang="ru" class="lang-content">• Налить воду в калориметр (200-300 мл)</p>
-                        <p lang="ru" class="lang-content">• Измерить температуру воды (t₁)</p>
-                    </div>
-
-                    <div class="lab-card">
-                        <p lang="kk" class="lang-content"><strong>2️⃣ НАГРЕВАНИЕ</strong></p>
-                        <p lang="kk" class="lang-content">• Қатты денеңі қазанының ыстық суында (90-100°C)</p>
-                        <p lang="kk" class="lang-content">• 10-15 минут ыстықтау</p>
-                        <p lang="kk" class="lang-content">• Ыстық денеңі термометр қарай өлшеу (t₂)</p>
-
-                        <p lang="en" class="lang-content"><strong>2️⃣ HEATING</strong></p>
-                        <p lang="en" class="lang-content">• Heat body in boiling water (90-100°C)</p>
-                        <p lang="en" class="lang-content">• Heat for 10-15 minutes</p>
-                        <p lang="en" class="lang-content">• Measure hot body temperature (t₂)</p>
-
-                        <p lang="ru" class="lang-content"><strong>2️⃣ НАГРЕВАНИЕ</strong></p>
-                        <p lang="ru" class="lang-content">• Нагреть тело в кипящей воде (90-100°C)</p>
-                        <p lang="ru" class="lang-content">• Нагревать 10-15 минут</p>
-                        <p lang="ru" class="lang-content">• Измерить температуру горячего тела (t₂)</p>
-                    </div>
-
-                    <div class="lab-card">
-                        <p lang="kk" class="lang-content"><strong>3️⃣ АРАЛУДЫҢ</strong></p>
-                        <p lang="kk" class="lang-content">• Ыстық денеңі калориметрге құю</p>
-                        <p lang="kk" class="lang-content">• Су аралуды (мамасын) түндіктігінің</p>
-                        <p lang="kk" class="lang-content">• Соңғы температурасы өлшеу (t₃)</p>
-
-                        <p lang="en" class="lang-content"><strong>3️⃣ MIXING</strong></p>
-                        <p lang="en" class="lang-content">• Place hot body in calorimeter</p>
-                        <p lang="en" class="lang-content">• Stir water gently</p>
-                        <p lang="en" class="lang-content">• Measure final temperature (t₃)</p>
-
-                        <p lang="ru" class="lang-content"><strong>3️⃣ СМЕШИВАНИЕ</strong></p>
-                        <p lang="ru" class="lang-content">• Поместить горячее тело в калориметр</p>
-                        <p lang="ru" class="lang-content">• Осторожно перемешать воду</p>
-                        <p lang="ru" class="lang-content">• Измерить финальную температуру (t₃)</p>
-                    </div>
-
-                    <div class="lab-card">
-                        <p lang="kk" class="lang-content"><strong>4️⃣ ЕСЕПТЕУ</strong></p>
-                        <p lang="kk" class="lang-content">• Су сіңіргенің жылу: Q_су = m_су × c_су × (t₃ - t₁)</p>
-                        <p lang="kk" class="lang-content">• Дене бөлінгенің жылу: Q_дене = m_дене × c_дене × (t₂ - t₃)</p>
-                        <p lang="kk" class="lang-content">• Теңдеу: Q_су = Q_дене</p>
-
-                        <p lang="en" class="lang-content"><strong>4️⃣ CALCULATION</strong></p>
-                        <p lang="en" class="lang-content">• Heat absorbed by water: Q_water = m_w × c_w × Δt</p>
-                        <p lang="en" class="lang-content">• Heat released by body: Q_body = m_b × c_b × Δt</p>
-                        <p lang="en" class="lang-content">• Equation: Q_water = Q_body</p>
-
-                        <p lang="ru" class="lang-content"><strong>4️⃣ РАСЧЁТ</strong></p>
-                        <p lang="ru" class="lang-content">• Тепло поглощено водой: Q_воды = m_в × c_в × Δt</p>
-                        <p lang="ru" class="lang-content">• Тепло выделено телом: Q_тела = m_т × c_т × Δt</p>
-                        <p lang="ru" class="lang-content">• Уравнение: Q_воды = Q_тела</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ЕСЕПТЕУ МЫСАЛЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. CALCULATION EXAMPLE</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Пример расчёта</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>ӨЛШЕНГЕН МӘНДЕР:</strong> m_дене = 200 г = 0.2 кг | m_су = 250 г = 0.25 кг | t₁ = 20°C | t₂ = 95°C | t₃ = 25°C | c_су = 4200 Дж/(кг·°C)</p>
-                <p lang="en" class="lang-content text-sm"><strong>MEASURED VALUES:</strong> m_body = 200 g = 0.2 kg | m_water = 250 g = 0.25 kg | t₁ = 20°C | t₂ = 95°C | t₃ = 25°C | c_water = 4200 J/(kg·°C)</p>
-                <p lang="ru" class="lang-content text-sm"><strong>ИЗМЕРЕННЫЕ ЗНАЧЕНИЯ:</strong> m_тела = 200 г = 0.2 кг | m_воды = 250 г = 0.25 кг | t₁ = 20°C | t₂ = 95°C | t₃ = 25°C | c_воды = 4200 Дж/(кг·°C)</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>ЕСЕПТЕУ:</strong></p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>CALCULATION:</strong></p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>РАСЧЁТ:</strong></p>
-
-                <p lang="kk" class="lang-content text-sm">1) Q_су = 0.25 × 4200 × (25-20) = 0.25 × 4200 × 5 = 5250 Дж</p>
-                <p lang="en" class="lang-content text-sm">1) Q_water = 0.25 × 4200 × (25-20) = 0.25 × 4200 × 5 = 5250 J</p>
-                <p lang="ru" class="lang-content text-sm">1) Q_воды = 0.25 × 4200 × (25-20) = 0.25 × 4200 × 5 = 5250 Дж</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 8px;">2) Q_дене = Q_су = 5250 Дж</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 8px;">2) Q_body = Q_water = 5250 J</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 8px;">2) Q_тела = Q_воды = 5250 Дж</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 8px;">3) c_дене = Q_дене / (m_дене × Δt_дене) = 5250 / (0.2 × 70) = 5250 / 14 = 375 Дж/(кг·°C)</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 8px;">3) c_body = Q_body / (m_body × Δt_body) = 5250 / (0.2 × 70) = 5250 / 14 = 375 J/(kg·°C)</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 8px;">3) c_тела = Q_тела / (m_тела × Δt_тела) = 5250 / (0.2 × 70) = 5250 / 14 = 375 Дж/(кг·°C)</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>✅ НӘТИЖЕСІ:</strong> c = 375 Дж/(кг·°C) ≈ 400 (мыс) - өндіктігінің қателігі: (400-375)/400 × 100% = 6.25%</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>✅ RESULT:</strong> c = 375 J/(kg·°C) ≈ 400 (copper) - error: (400-375)/400 × 100% = 6.25%</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>✅ РЕЗУЛЬТАТ:</strong> c = 375 Дж/(кг·°C) ≈ 400 (медь) - ошибка: (400-375)/400 × 100% = 6.25%</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #ede9fe; border-radius: 1rem; border-top: 4px solid #7c3aed;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-purple-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-purple-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Лабораторлық жұмыс - өндіктігінің құрамасындағы өндіктігінің өлшеу. Калориметр сысындағы су сіңіргенің жылу = дене бөлінгенің жылу. Есептеу арқылы нақ жылусыйлығы табу. Практикалық сағындық - теориялық мәндіне қарай 5-10% қателігі нормалды!</p>
-            <p lang="en" class="lang-content text-sm">Laboratory work measures specific heat capacity. Heat absorbed by water in calorimeter = heat released by body. Find c through calculation. Experimental accuracy - 5-10% error compared to theoretical value is normal!</p>
-            <p lang="ru" class="lang-content text-sm">Лабораторная работа измеряет удельную теплоёмкость. Тепло поглощено водой в калориметре = тепло выделено телом. Находим c через расчёты. Экспериментальная точность - 5-10% ошибки от теоретического значения норма!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

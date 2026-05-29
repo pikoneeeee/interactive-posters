@@ -1,395 +1,192 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Излучение</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fffbeb; /* amber-50 */
-            overflow-x: hidden;
-            color: #78350f; /* amber-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Amber Theme */
-        .header-card {
-            background-color: #d97706; /* amber-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #92400e; /* amber-800 */
-            border-bottom: 3px solid #fcd34d; /* amber-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #fef3c7; /* amber-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #b45309; /* amber-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #d97706; /* amber-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #d97706;
-            background-color: #ffffff;
-            color: #d97706;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #fffbeb;
-        }
-        .lang-btn.active {
-            background-color: #d97706;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #fde68a;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #92400e;
-            text-anchor: middle;
-        }
-        .svg-ray {
-            stroke: #f59e0b; /* amber-500 */
-            stroke-width: 2;
-            stroke-dasharray: 4;
-            marker-end: url(#arrowhead);
-        }
-        .svg-wave {
-            fill: none;
-            stroke: #dc2626;
-            stroke-width: 2;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кипение. Удельная теплота парообразования</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-orange-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жылу құбылыстары</span>
+<span lang="en" class="lang-content">Grade 8 · Thermal phenomena</span>
+<span lang="ru" class="lang-content">8 класс · Тепловые явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Қайнау. Меншікті бу түзу жылуы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Boiling. Specific heat of vaporization</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Кипение. Удельная теплота парообразования</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🔥 Қайнау дегеніміз не?</span>
+<span lang="en" class="lang-content">🔥 What is boiling?</span>
+<span lang="ru" class="lang-content">🔥 Что такое кипение?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Қайнау</b> — сұйықтың <b>бүкіл көлемінде</b> жылдам бу шығу процесі. Булану <b>тек беттен</b> жүрсе, қайнау кезінде <b>ішінде көпіршіктер</b> пайда болады — бұл нағыз бу. Әр сұйықтың өз <b>қайнау температурасы</b> (t<sub>қ</sub>) бар, ол <b>қысымға</b> тәуелді. Қалыпты атмосфералық қысымда судың t<sub>қ</sub> = 100°C. Қайнау <b>тұрақты температурада</b> өтеді!</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Boiling</b> is rapid vapour formation in the <b>entire volume</b> of a liquid. While evaporation only occurs at the <b>surface</b>, during boiling <b>bubbles</b> appear inside — pure vapour. Each liquid has its own <b>boiling point</b> (t<sub>b</sub>), depending on <b>pressure</b>. At normal atmospheric pressure water boils at 100°C. Boiling happens at <b>constant temperature</b>!</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Кипение</b> — бурное парообразование во <b>всём объёме</b> жидкости. В отличие от испарения (только с <b>поверхности</b>) при кипении внутри появляются <b>пузырьки</b> чистого пара. У каждой жидкости — своя <b>температура кипения</b> (t<sub>кип</sub>), зависящая от <b>давления</b>. При атмосферном давлении вода кипит при 100°C. Кипение идёт при <b>постоянной температуре</b>!</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">СӘУЛЕЛЕНУ (ИЗЛУЧЕНИЕ)</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">RADIATION</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ИЗЛУЧЕНИЕ</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Бу түзу жылуы:</span><span lang="en" class="lang-content">Vaporization heat:</span><span lang="ru" class="lang-content">Тепло парообразования:</span></p>
+<div class="formula text-center" style="font-size:1.6rem">
+<span class="var">Q</span> = <span class="var">L</span> · <span class="var">m</span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">Q</b> — бу түзу жылуы, <span class="unit-pill">Дж</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">Q</b> — heat, <span class="unit-pill">J</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">Q</b> — тепло, <span class="unit-pill">Дж</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">L</b> — меншікті бу түзу жылуы, <span class="unit-pill">Дж/кг</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">L</b> — specific heat of vaporization, <span class="unit-pill">J/kg</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">L</b> — уд. теплота парообр., <span class="unit-pill">Дж/кг</span></span></p>
+<p><span lang="kk" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span><span lang="en" class="lang-content"><b style="color:#4338ca">m</b> — mass, <span class="unit-pill">kg</span></span><span lang="ru" class="lang-content"><b style="color:#4338ca">m</b> — масса, <span class="unit-pill">кг</span></span></p>
+</div>
+<p class="text-xs text-rose-700 mt-3 text-center"><b>Су үшін L = 2,3·10⁶ Дж/кг</b> — өте үлкен мән!</p>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-amber-100">Энергияның сәуле арқылы таралуы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-amber-100">Transfer of energy by waves.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-amber-100">Передача энергии лучами.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 200 220" style="width:180px">
+<!-- Кастрюля -->
+<line x1="20" y1="40" x2="20" y2="200" stroke="#1e293b" stroke-width="3"/>
+<line x1="180" y1="40" x2="180" y2="200" stroke="#1e293b" stroke-width="3"/>
+<line x1="20" y1="200" x2="180" y2="200" stroke="#1e293b" stroke-width="3"/>
+<!-- Вода -->
+<rect x="20" y="80" width="160" height="120" fill="#93c5fd" opacity="0.7"/>
+<!-- Пузыри -->
+<g fill="#fff" stroke="#1e40af" stroke-width="1.5">
+<circle cx="60" cy="180" r="6"/><circle cx="100" cy="170" r="8"/><circle cx="140" cy="180" r="6"/>
+<circle cx="70" cy="140" r="7"/><circle cx="120" cy="130" r="9"/><circle cx="160" cy="140" r="5"/>
+<circle cx="50" cy="100" r="5"/><circle cx="110" cy="90" r="6"/>
+</g>
+<!-- Пар сверху -->
+<g fill="#cbd5e1" opacity="0.7">
+<ellipse cx="50" cy="50" rx="20" ry="10"/><ellipse cx="110" cy="35" rx="25" ry="12"/><ellipse cx="160" cy="55" rx="20" ry="10"/>
+</g>
+<!-- Огонь -->
+<text x="100" y="220" text-anchor="middle" font-size="20">🔥</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Қайнауда көпіршіктер пайда болады</span>
+<span lang="en" class="lang-content">Bubbles form during boiling</span>
+<span lang="ru" class="lang-content">При кипении — пузырьки</span></p>
+</div></div></section>
 
-        <!-- 1. АНЫҚТАМАСЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Сәулелену дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Radiation?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое излучение?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⛰ Қайнау температурасы қысымға тәуелді!</span>
+<span lang="en" class="lang-content">⛰ Boiling point depends on pressure!</span>
+<span lang="ru" class="lang-content">⛰ Температура кипения зависит от давления!</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-warm rounded-custom p-6">
+<p class="heading-font text-base text-orange-700 mb-2">🏔 <span lang="kk" class="lang-content">Биікте — қысым аз → t<sub>қ</sub> аз</span><span lang="en" class="lang-content">🏔 Higher — less pressure → lower t<sub>b</sub></span><span lang="ru" class="lang-content">🏔 В горах — меньше давления → меньше t<sub>кип</sub></span></p>
+<table class="t text-sm">
+<thead><tr><th><span lang="kk" class="lang-content">Биіктік</span><span lang="en" class="lang-content">Altitude</span><span lang="ru" class="lang-content">Высота</span></th><th>t<sub>қ</sub>, °C</th></tr></thead>
+<tbody>
+<tr><td>0 м (<span lang="kk" class="lang-content">теңіз деңгейі</span><span lang="en" class="lang-content">sea level</span><span lang="ru" class="lang-content">уровень моря</span>)</td><td>100</td></tr>
+<tr><td>2000 м</td><td>93</td></tr>
+<tr><td>4000 м (<span lang="kk" class="lang-content">Памир</span><span lang="en" class="lang-content">Pamir</span><span lang="ru" class="lang-content">Памир</span>)</td><td>87</td></tr>
+<tr><td>8848 м (<span lang="kk" class="lang-content">Эверест</span><span lang="en" class="lang-content">Everest</span><span lang="ru" class="lang-content">Эверест</span>)</td><td>70</td></tr>
+</tbody>
+</table>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">📌 Эверестте картоп қанша пісірсеңіз де піспейді!</span><span lang="en" class="lang-content">📌 On Everest potatoes never cook properly!</span><span lang="ru" class="lang-content">📌 На Эвересте картофель не сваришь!</span></p>
+</div>
 
-            <div class="rule-card border-t-amber-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Сәулелену</span> – энергияның электромагниттік толқындар арқылы берілуі. Бұл жылу берілудің вакуумде (ауасыз кеңістікте) жүре алатын жалғыз түрі.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Radiation</span> is the transfer of energy by electromagnetic waves. This is the only type of heat transfer that can occur in a vacuum.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Излучение</span> – это передача энергии электромагнитными волнами. Это единственный вид теплопередачи, который может происходить в вакууме.
-                </p>
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-base text-emerald-700 mb-2">🍲 <span lang="kk" class="lang-content">Скороварка — керісінше</span><span lang="en" class="lang-content">🍲 Pressure cooker — opposite</span><span lang="ru" class="lang-content">🍲 Скороварка — наоборот</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content"><b>Скороваркада</b> қысым 2 атм-ге дейін көтеріледі, су тек 120°C-да қайнайды. Тағам тезірек және құнарлырақ дайын болады. Шипалы суда (минералды бұлақтар) минеральды заттар ериді → t<sub>қ</sub> жоғары.</span>
+<span lang="en" class="lang-content">In a <b>pressure cooker</b> pressure rises to 2 atm, water boils only at 120°C — food cooks faster and retains more nutrients. Salt water boils slightly above 100°C.</span>
+<span lang="ru" class="lang-content">В <b>скороварке</b> давление поднимается до 2 атм, вода закипает только при 120°C — еда готовится быстрее и сохраняет больше пользы. Солёная вода кипит чуть выше 100°C.</span></p>
+</div>
+</div>
+</section>
 
-                <!-- Illustration 1: Sun to Earth -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                            <polygon points="0 0, 8 3, 0 6" fill="#f59e0b" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Қайнау температуралары мен L</span>
+<span lang="en" class="lang-content">📊 Boiling points and L</span>
+<span lang="ru" class="lang-content">📊 Температуры кипения и L</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Зат</span><span lang="en" class="lang-content">Substance</span><span lang="ru" class="lang-content">Вещество</span></th>
+<th>t<sub>қ</sub>, °C</th>
+<th>L, МДж/кг</th>
+</tr></thead>
+<tbody>
+<tr><td>💎 <span lang="kk" class="lang-content">Сұйық сутегі</span><span lang="en" class="lang-content">Liquid H₂</span><span lang="ru" class="lang-content">Жидкий водород</span></td><td>−253</td><td>0,45</td></tr>
+<tr><td>❄️ <span lang="kk" class="lang-content">Сұйық азот</span><span lang="en" class="lang-content">Liquid N₂</span><span lang="ru" class="lang-content">Жидкий азот</span></td><td>−196</td><td>0,20</td></tr>
+<tr><td>🦴 <span lang="kk" class="lang-content">Спирт</span><span lang="en" class="lang-content">Alcohol</span><span lang="ru" class="lang-content">Спирт</span></td><td>78</td><td>0,84</td></tr>
+<tr class="bg-blue-50"><td>💧 <span lang="kk" class="lang-content">Су</span><span lang="en" class="lang-content">Water</span><span lang="ru" class="lang-content">Вода</span></td><td>100</td><td class="text-blue-700"><b>2,3</b></td></tr>
+<tr><td>🪨 <span lang="kk" class="lang-content">Сынап</span><span lang="en" class="lang-content">Mercury</span><span lang="ru" class="lang-content">Ртуть</span></td><td>357</td><td>0,29</td></tr>
+<tr><td>⚗️ <span lang="kk" class="lang-content">Қорғасын</span><span lang="en" class="lang-content">Lead</span><span lang="ru" class="lang-content">Свинец</span></td><td>1740</td><td>0,86</td></tr>
+<tr><td>🥉 <span lang="kk" class="lang-content">Мыс</span><span lang="en" class="lang-content">Copper</span><span lang="ru" class="lang-content">Медь</span></td><td>2567</td><td>4,79</td></tr>
+<tr><td>⚒ <span lang="kk" class="lang-content">Темір</span><span lang="en" class="lang-content">Iron</span><span lang="ru" class="lang-content">Железо</span></td><td>2750</td><td>6,3</td></tr>
+</tbody>
+</table>
+<p class="text-slate-600 text-sm mt-3"><span lang="kk" class="lang-content">📌 <b>Судың L</b> судың c-сынан 540 есе үлкен! 1 кг суды бір градусқа жылыту 4200 Дж, ал оны буға айналдыру 2 300 000 Дж керек!</span><span lang="en" class="lang-content">📌 Water's L is 540× its c! 1 kg water heated by 1°C — 4200 J, evaporated — 2 300 000 J!</span><span lang="ru" class="lang-content">📌 L воды в 540 раз больше её c! Нагреть 1 кг на 1°C — 4200 Дж, испарить — 2 300 000 Дж!</span></p>
+</div>
+</section>
 
-                    <!-- Space Background -->
-                    <rect x="0" y="0" width="400" height="200" fill="#1e1b4b" opacity="0.1"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: 2 кг 20°C суды толық буға айналдыру үшін қанша жылу қажет?</span>
+<span lang="en" class="lang-content">📘 Problem: How much heat is needed to completely vaporize 2 kg of water at 20°C?</span>
+<span lang="ru" class="lang-content">📘 Задача: Сколько тепла нужно, чтобы полностью испарить 2 кг воды при 20°C?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m = 2 <span class="unit-pill">кг</span></li>
+<li>t₁ = 20°C, t<sub>қ</sub> = 100°C</li>
+<li>c = 4200 <span class="unit-pill">Дж/(кг·°C)</span></li>
+<li>L = 2,3·10⁶ <span class="unit-pill">Дж/кг</span></li>
+<li>Q — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.9rem">
+Q₁ = cm(t<sub>қ</sub>−t₁) = 4200·2·80
+<br/>Q₁ = <span class="num">672 000</span> Дж ≈ 0,67 МДж
+<br/>Q₂ = Lm = 2,3·10⁶·2
+<br/>Q₂ = <span class="num">4 600 000</span> Дж = 4,6 МДж
+<br/>Q = Q₁+Q₂ ≈ <span class="num">5,27</span> <span class="unit">МДж</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ ~5,27 МДж</span><span lang="en" class="lang-content">✅ ~5.27 MJ</span><span lang="ru" class="lang-content">✅ ~5,27 МДж</span></div>
+</div>
+</div>
+<p class="text-slate-600 text-sm mt-3"><span lang="kk" class="lang-content">📌 Бу түзу <b>7 есе</b> қыздырудан көп энергия қажет етеді!</span><span lang="en" class="lang-content">📌 Vaporization needs <b>7×</b> more energy than warming!</span><span lang="ru" class="lang-content">📌 Парообразование требует в <b>7 раз</b> больше энергии, чем нагрев!</span></p>
+</div>
+</section>
 
-                    <!-- Sun -->
-                    <g transform="translate(60, 100)">
-                        <circle cx="0" cy="0" r="40" fill="#facc15" stroke="#f59e0b" stroke-width="4"/>
-                        <!-- Rays -->
-                        <line x1="45" y1="0" x2="60" y2="0" stroke="#f59e0b" stroke-width="3"/>
-                        <line x1="32" y1="32" x2="42" y2="42" stroke="#f59e0b" stroke-width="3"/>
-                        <line x1="0" y1="45" x2="0" y2="60" stroke="#f59e0b" stroke-width="3"/>
-                        <line x1="-32" y1="32" x2="-42" y2="42" stroke="#f59e0b" stroke-width="3"/>
-                        <line x1="-45" y1="0" x2="-60" y2="0" stroke="#f59e0b" stroke-width="3"/>
-                        <line x1="-32" y1="-32" x2="-42" y2="-42" stroke="#f59e0b" stroke-width="3"/>
-                        <line x1="0" y1="-45" x2="0" y2="-60" stroke="#f59e0b" stroke-width="3"/>
-                        <line x1="32" y1="-32" x2="42" y2="-42" stroke="#f59e0b" stroke-width="3"/>
-                    </g>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔥</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">Q = Lm</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Бу түзу жылуы</span><span lang="en" class="lang-content">Vaporization heat</span><span lang="ru" class="lang-content">Тепло парообразования</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💧</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">L<sub>су</sub> = 2,3 МДж/кг</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Судың L өте үлкен</span><span lang="en" class="lang-content">Water has huge L</span><span lang="ru" class="lang-content">У воды огромное L</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌡️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">T = const</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Қайнау тұрақты T-да</span><span lang="en" class="lang-content">Boiling at constant T</span><span lang="ru" class="lang-content">Кипение при пост. T</span></p></div>
+</div></footer>
 
-                    <!-- Earth -->
-                    <g transform="translate(340, 100)">
-                        <circle cx="0" cy="0" r="30" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
-                        <path d="M -15 -10 Q 0 -20, 10 -5 T 10 10 T -10 15 Z" fill="#22c55e" opacity="0.8"/> <!-- Continent -->
-                    </g>
-
-                    <!-- Radiation Waves -->
-                    <path d="M 110 100 Q 140 80, 170 100 T 230 100 T 290 100" class="svg-wave" stroke="#f59e0b"/>
-                    <path d="M 110 80 Q 140 60, 170 80 T 230 80 T 290 80" class="svg-wave" stroke="#f59e0b"/>
-                    <path d="M 110 120 Q 140 100, 170 120 T 230 120 T 290 120" class="svg-wave" stroke="#f59e0b"/>
-
-                    <text x="200" y="160" class="svg-label" font-weight="bold">Vacuum (No Air)</text>
-                    <text x="200" y="50" class="svg-label" font-weight="bold" fill="#f59e0b">Electromagnetic Waves</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. СӘУЛЕНІ ЖҰТУ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Түс және Жұту</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Color and Absorption</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Цвет и Поглощение</h2>
-
-            <div class="rule-card border-t-gray-800">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <strong>Қара</strong> денелер энергияны жақсы жұтады және жақсы шығарады. <strong>Ақ</strong> және жылтыр денелер сәулені шағылдырады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <strong>Dark</strong> surfaces absorb and emit radiation well. <strong>White</strong> and shiny surfaces reflect radiation.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <strong>Темные</strong> тела хорошо поглощают и излучают энергию. <strong>Белые</strong> и блестящие тела отражают лучи.
-                </p>
-
-                <!-- Illustration 2: Black vs White Shirts/Objects -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Sun Source -->
-                    <circle cx="200" cy="30" r="20" fill="#facc15"/>
-                    <!-- Rays down -->
-                    <line x1="180" y1="40" x2="100" y2="80" class="svg-ray"/>
-                    <line x1="220" y1="40" x2="300" y2="80" class="svg-ray"/>
-
-                    <!-- Black Object -->
-                    <rect x="70" y="90" width="60" height="80" fill="#1f2937" stroke="#000"/>
-                    <text x="100" y="130" fill="#fff" text-anchor="middle" font-size="12">BLACK</text>
-
-                    <!-- Absorption Arrows (Going IN) -->
-                    <line x1="80" y1="80" x2="90" y2="95" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red)"/>
-                    <line x1="100" y1="80" x2="100" y2="95" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red)"/>
-                    <line x1="120" y1="80" x2="110" y2="95" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-red)"/>
-
-                    <text x="100" y="190" class="svg-label" font-weight="bold" fill="#ef4444">HOT (Ыстық)</text>
-
-                    <!-- White Object -->
-                    <rect x="270" y="90" width="60" height="80" fill="#fff" stroke="#9ca3af" stroke-width="2"/>
-                    <text x="300" y="130" fill="#9ca3af" text-anchor="middle" font-size="12">WHITE</text>
-
-                    <!-- Reflection Arrows (Bouncing OFF) -->
-                    <path d="M 280 80 L 290 90 L 280 70" fill="none" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)"/>
-                    <path d="M 300 80 L 300 90 L 300 65" fill="none" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)"/>
-                    <path d="M 320 80 L 310 90 L 320 70" fill="none" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)"/>
-
-                    <text x="300" y="190" class="svg-label" font-weight="bold" fill="#3b82f6">COOL (Салқын)</text>
-
-                    <defs>
-                        <marker id="arrow-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                            <polygon points="0 0, 8 3, 0 6" fill="#ef4444" />
-                        </marker>
-                        <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                            <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ҚОЛДАНЫЛУЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Қолданылуы</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Applications</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Применение</h2>
-
-            <div class="rule-card border-t-cyan-500">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Thermos -->
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="kk">Термос</h3>
-                        <h3 class="font-bold text-blue-900 mb-2 text-center" lang="ru">Термос</h3>
-                        <svg viewBox="0 0 100 120" class="w-full h-32">
-                            <!-- Outer Shell -->
-                            <rect x="30" y="10" width="40" height="100" fill="#e5e7eb" stroke="#4b5563" rx="5"/>
-                            <!-- Inner Flask (Silver) -->
-                            <rect x="35" y="20" width="30" height="80" fill="#fff" stroke="#9ca3af" stroke-width="2"/>
-                            <!-- Vacuum Space -->
-                            <path d="M 35 20 L 35 100 M 65 20 L 65 100" stroke="#facc15" stroke-dasharray="2"/>
-                            <!-- Reflection rays -->
-                            <line x1="45" y1="50" x2="35" y2="60" stroke="#f59e0b" stroke-width="1"/>
-                            <line x1="35" y1="60" x2="45" y2="70" stroke="#f59e0b" stroke-width="1"/>
-                            <text x="50" y="115" font-size="8" text-anchor="middle">Silver (Күміс)</text>
-                        </svg>
-                        <p class="text-xs text-center mt-2 text-gray-600">Күміс қабат сәулені шағылдырады, вакуум өткізбейді.</p>
-                    </div>
-
-                    <!-- Greenhouse -->
-                    <div class="bg-green-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-green-900 mb-2 text-center" lang="kk">Жылыжай</h3>
-                        <h3 class="font-bold text-green-900 mb-2 text-center" lang="ru">Парник</h3>
-                        <svg viewBox="0 0 100 120" class="w-full h-32">
-                            <!-- Glass House -->
-                            <path d="M 20 60 L 20 100 L 80 100 L 80 60 L 50 40 Z" fill="#ecfccb" stroke="#65a30d" stroke-width="2" opacity="0.7"/>
-                            <!-- Sun rays entering -->
-                            <line x1="10" y1="20" x2="40" y2="50" stroke="#facc15" stroke-width="2"/>
-                            <!-- Heat trapped inside -->
-                            <path d="M 30 90 Q 40 80, 50 90 T 70 90" fill="none" stroke="#ef4444" stroke-width="2"/>
-                            <text x="50" y="115" font-size="8" text-anchor="middle">Trap Heat</text>
-                        </svg>
-                        <p class="text-xs text-center mt-2 text-gray-600">Шыны күн сәулесін өткізеді, бірақ жердің жылуын шығармайды.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-amber-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-amber-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-amber-800">
-                Сәулелену – вакуум арқылы жылудың берілуі. Қара денелер тез қызады және тез суиды. Ақ денелер сәулені шағылдырады.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-amber-800">
-                Radiation is heat transfer through a vacuum. Dark objects heat up and cool down quickly. White objects reflect radiation.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-amber-800">
-                Излучение – это передача тепла через вакуум. Темные тела быстро нагреваются и остывают. Белые тела отражают лучи.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

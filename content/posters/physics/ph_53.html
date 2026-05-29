@@ -1,202 +1,155 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Энергия. Энергияның сақталу заңы</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fef08a 0%, #fef3c7 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #ca8a04 0%, #78350f 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #78350f; border-bottom: 3px solid #fef3c7; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #ca8a04; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #ca8a04; background: white; color: #ca8a04; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #ca8a04; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #ca8a04; color: white; }
-        .illustration { background: linear-gradient(135deg, #fef3c7 0%, #fef08a 100%); padding: 25px; border-radius: 1rem; margin: 15px 0; text-align: center; }
-        svg { max-width: 100%; height: auto; }
-        .info-box { background: linear-gradient(135deg, #fef3c7 0%, #fef08a 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #ca8a04; margin: 10px 0; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .example-card { background: #fef9e7; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #ca8a04; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Строение атома</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-yellow-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Электр құбылыстары</span>
+<span lang="en" class="lang-content">Grade 9 · Electric phenomena</span>
+<span lang="ru" class="lang-content">9 класс · Электрические явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Атомның құрылысы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Structure of the atom</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Строение атома</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Энергия және Сақталу Заңы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Energy and Law of Conservation</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Энергия и закон сохранения</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-yellow-100">Энергия = жұмыстың қабілеттілігі. Кинетикалық энергия (қозғалыс), потенциалды энергия (орналасу). E_сағ = E_кин + E_пот = const! ТОЛЫҚ ТЕОРИЯ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-yellow-100">Energy = ability to do work. Kinetic energy (motion), potential energy (position). E_total = E_kin + E_pot = const! COMPLETE THEORY!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-yellow-100">Энергия = способность совершать работу. Кинетическая энергия (движение), потенциальная энергия (положение). E_общ = E_кин + E_пот = const! ПОЛНАЯ ТЕОРИЯ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚛️ Атомның планетарлық моделі</span>
+<span lang="en" class="lang-content">⚛️ Planetary model of the atom</span>
+<span lang="ru" class="lang-content">⚛️ Планетарная модель атома</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">1911 жылы ағылшын ғалымы <b>Эрнест Резерфорд</b> алтын фольгаға α-бөлшектерді атып, атомның <b>ішінде көп бос орын</b> бар екенін көрсетті. Ол <b class="text-indigo-700">планетарлық модельді</b> ұсынды: атом <b>Күн жүйесіне ұқсас</b>. Ортасында — <b>ядро</b> (өте ауыр, оң зарядты), оның айналасында — <b>электрондар</b> (жеңіл, теріс зарядты) орбита бойынша қозғалады. Атомның <b>көлемі — 99,9% бос</b>!</span>
+<span lang="en" class="lang-content">In 1911 English physicist <b>Ernest Rutherford</b> fired α-particles at gold foil and discovered the atom is <b>mostly empty</b>. He proposed the <b class="text-indigo-700">planetary model</b>: the atom resembles a <b>solar system</b>. At the center — a <b>nucleus</b> (heavy, positive); around it — <b>electrons</b> (light, negative) orbit. <b>99.9% of the atom is empty space</b>!</span>
+<span lang="ru" class="lang-content">В 1911 году английский физик <b>Эрнест Резерфорд</b>, обстреливая золотую фольгу α-частицами, открыл, что атом <b>в основном пуст</b>. Он предложил <b class="text-indigo-700">планетарную модель</b>: атом похож на <b>Солнечную систему</b>. В центре — <b>ядро</b> (тяжёлое, положительное), вокруг — <b>электроны</b> (лёгкие, отрицательные) на орбитах. <b>99,9% объёма атома — пустота</b>!</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ЭНЕРГИЯ ТҮРЛЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. TYPES OF ENERGY</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Виды энергии</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Өлшемдер салыстыруы:</span><span lang="en" class="lang-content">Size comparison:</span><span lang="ru" class="lang-content">Сравнение размеров:</span></p>
+<ul class="text-slate-700 text-sm list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content">Атом ≈ 10⁻¹⁰ м</span><span lang="en" class="lang-content">Atom ≈ 10⁻¹⁰ m</span><span lang="ru" class="lang-content">Атом ≈ 10⁻¹⁰ м</span></li>
+<li><span lang="kk" class="lang-content">Ядро ≈ 10⁻¹⁵ м <b>(100 000 есе кіші)</b></span><span lang="en" class="lang-content">Nucleus ≈ 10⁻¹⁵ m <b>(100 000× smaller)</b></span><span lang="ru" class="lang-content">Ядро ≈ 10⁻¹⁵ м <b>(в 100 000 раз меньше)</b></span></li>
+<li><span lang="kk" class="lang-content">Егер ядро — футбол добы болса, атом — <b>стадион</b>!</span><span lang="en" class="lang-content">If nucleus = football, atom = <b>stadium</b>!</span><span lang="ru" class="lang-content">Если ядро — футбольный мяч, то атом — <b>стадион</b>!</span></li>
+</ul>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>⚡ КИНЕТИКАЛЫҚ ЭНЕРГИЯ:</strong> E_кин = (m × v²) / 2</p>
-                <p lang="kk" class="lang-content text-sm">• Қозғалыс энергиясы | Массасы және жылдамдығынан байланысты</p>
-                <p lang="kk" class="lang-content text-sm">• Мысал: Доп ұшып барғанда, аралықта жүргенде, ағындағы су</p>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 240" style="width:200px">
+<!-- Орбиты -->
+<ellipse cx="120" cy="120" rx="80" ry="30" fill="none" stroke="#94a3b8" stroke-width="1.5" transform="rotate(30 120 120)"/>
+<ellipse cx="120" cy="120" rx="80" ry="30" fill="none" stroke="#94a3b8" stroke-width="1.5" transform="rotate(90 120 120)"/>
+<ellipse cx="120" cy="120" rx="80" ry="30" fill="none" stroke="#94a3b8" stroke-width="1.5" transform="rotate(150 120 120)"/>
+<!-- Ядро -->
+<circle cx="120" cy="120" r="20" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+<text x="120" y="125" text-anchor="middle" font-size="16" font-weight="700" fill="#b91c1c">+</text>
+<!-- Электроны -->
+<circle cx="60" cy="100" r="6" fill="#1e40af"/>
+<circle cx="180" cy="140" r="6" fill="#1e40af"/>
+<circle cx="170" cy="65" r="6" fill="#1e40af"/>
+<circle cx="80" cy="175" r="6" fill="#1e40af"/>
+<text x="60" y="105" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">−</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Резерфорд моделі</span>
+<span lang="en" class="lang-content">Rutherford's model</span>
+<span lang="ru" class="lang-content">Модель Резерфорда</span></p>
+</div></div></section>
 
-                <p lang="en" class="lang-content text-sm"><strong>⚡ KINETIC ENERGY:</strong> E_kin = (m × v²) / 2</p>
-                <p lang="en" class="lang-content text-sm">• Energy of motion | Depends on mass and velocity</p>
-                <p lang="en" class="lang-content text-sm">• Example: Flying ball, moving car, flowing water</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧬 Атомның құрамы</span>
+<span lang="en" class="lang-content">🧬 Components of the atom</span>
+<span lang="ru" class="lang-content">🧬 Состав атома</span></h2>
+<div class="card rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Бөлшек</span><span lang="en" class="lang-content">Particle</span><span lang="ru" class="lang-content">Частица</span></th>
+<th><span lang="kk" class="lang-content">Заряд</span><span lang="en" class="lang-content">Charge</span><span lang="ru" class="lang-content">Заряд</span></th>
+<th><span lang="kk" class="lang-content">Масса</span><span lang="en" class="lang-content">Mass</span><span lang="ru" class="lang-content">Масса</span></th>
+<th><span lang="kk" class="lang-content">Орналасуы</span><span lang="en" class="lang-content">Location</span><span lang="ru" class="lang-content">Где находится</span></th>
+</tr></thead>
+<tbody>
+<tr class="bg-rose-50"><td>🔴 <span lang="kk" class="lang-content">Протон</span><span lang="en" class="lang-content">Proton (p)</span><span lang="ru" class="lang-content">Протон (p)</span></td><td class="text-rose-700"><b>+e</b></td><td>1,673·10⁻²⁷ кг</td><td><span lang="kk" class="lang-content">Ядрода</span><span lang="en" class="lang-content">Nucleus</span><span lang="ru" class="lang-content">В ядре</span></td></tr>
+<tr class="bg-gray-50"><td>⚪ <span lang="kk" class="lang-content">Нейтрон</span><span lang="en" class="lang-content">Neutron (n)</span><span lang="ru" class="lang-content">Нейтрон (n)</span></td><td>0</td><td>1,675·10⁻²⁷ кг</td><td><span lang="kk" class="lang-content">Ядрода</span><span lang="en" class="lang-content">Nucleus</span><span lang="ru" class="lang-content">В ядре</span></td></tr>
+<tr class="bg-blue-50"><td>🔵 <span lang="kk" class="lang-content">Электрон</span><span lang="en" class="lang-content">Electron (e)</span><span lang="ru" class="lang-content">Электрон (e)</span></td><td class="text-blue-700"><b>−e</b></td><td>9,11·10⁻³¹ кг <span class="text-rose-700">(1836× жеңіл!)</span></td><td><span lang="kk" class="lang-content">Орбитада</span><span lang="en" class="lang-content">Orbits</span><span lang="ru" class="lang-content">На орбите</span></td></tr>
+</tbody>
+</table>
+<p class="text-slate-600 text-sm mt-3"><span lang="kk" class="lang-content">📌 <b>Элементар заряд:</b> e = 1,6·10⁻¹⁹ Кл — табиғаттағы ең кіші заряд. Барлық зарядтар е-ге <b>еселі</b>.</span><span lang="en" class="lang-content">📌 <b>Elementary charge:</b> e = 1.6·10⁻¹⁹ C — smallest in nature. All charges are <b>multiples of e</b>.</span><span lang="ru" class="lang-content">📌 <b>Элементарный заряд:</b> e = 1,6·10⁻¹⁹ Кл — наименьший в природе. Все заряды — <b>кратны e</b>.</span></p>
+</div>
+</section>
 
-                <p lang="ru" class="lang-content text-sm"><strong>⚡ КИНЕТИЧЕСКАЯ ЭНЕРГИЯ:</strong> E_кин = (m × v²) / 2</p>
-                <p lang="ru" class="lang-content text-sm">• Энергия движения | Зависит от массы и скорости</p>
-                <p lang="ru" class="lang-content text-sm">• Пример: Летящий мяч, движущийся автомобиль, текущая вода</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Бейтарап атом — балансталған</span>
+<span lang="en" class="lang-content">⚖️ Neutral atom — balanced</span>
+<span lang="ru" class="lang-content">⚖️ Нейтральный атом — сбалансирован</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Қалыпты жағдайда атомдағы <b>протондар саны = электрондар саны</b>, сондықтан атом <b>бейтарап</b> (жалпы заряд = 0). Бірақ үйкеу немесе басқа әсер кезінде атом <b>электрон жоғалтуы</b> немесе <b>алуы</b> мүмкін. Сонда атом <b class="text-indigo-700">ионға</b> айналады.</span>
+<span lang="en" class="lang-content">Normally, an atom has <b>protons = electrons</b>, so it is <b>neutral</b> (total charge = 0). But by friction or other action an atom can <b>lose</b> or <b>gain</b> electrons, becoming an <b class="text-indigo-700">ion</b>.</span>
+<span lang="ru" class="lang-content">В обычном состоянии число <b>протонов = числу электронов</b>, поэтому атом <b>нейтрален</b> (заряд = 0). Но при трении или другом воздействии атом может <b>потерять</b> или <b>приобрести</b> электроны, превращаясь в <b class="text-indigo-700">ион</b>.</span></p>
 
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 15px;"><strong>📍 ПОТЕНЦИАЛДЫ ЭНЕРГИЯ:</strong> E_пот = m × g × h</p>
-                <p lang="kk" class="lang-content text-sm">• Орналасуға энергиясы | Массасы, ауырыңғылау, биіктігінен байланысты</p>
-                <p lang="kk" class="lang-content text-sm">• Мысал: Төбеде тұрған дене, шыршында сәке, суға датчик</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+<div class="card-warm rounded-2xl p-5">
+<p class="font-bold text-orange-700 mb-2">➕ <span lang="kk" class="lang-content">Оң ион (катион)</span><span lang="en" class="lang-content">Positive ion (cation)</span><span lang="ru" class="lang-content">Положительный ион (катион)</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Атом электрон <b>жоғалтты</b>: e⁻ &lt; p⁺ → жалпы заряд <b>+</b>.</span>
+<span lang="en" class="lang-content">Atom <b>lost</b> electrons: e⁻ &lt; p⁺ → total charge <b>+</b>.</span>
+<span lang="ru" class="lang-content">Атом <b>потерял</b> электроны: e⁻ &lt; p⁺ → заряд <b>+</b>.</span></p>
+</div>
+<div class="card-rose rounded-2xl p-5">
+<p class="font-bold text-rose-700 mb-2">➖ <span lang="kk" class="lang-content">Теріс ион (анион)</span><span lang="en" class="lang-content">Negative ion (anion)</span><span lang="ru" class="lang-content">Отрицательный ион (анион)</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Атом электрон <b>алды</b>: e⁻ &gt; p⁺ → жалпы заряд <b>−</b>.</span>
+<span lang="en" class="lang-content">Atom <b>gained</b> electrons: e⁻ &gt; p⁺ → total charge <b>−</b>.</span>
+<span lang="ru" class="lang-content">Атом <b>получил</b> электроны: e⁻ &gt; p⁺ → заряд <b>−</b>.</span></p>
+</div>
+</div>
+</div>
+</section>
 
-                <p lang="en" class="lang-content text-sm" style="margin-top: 15px;"><strong>📍 POTENTIAL ENERGY:</strong> E_pot = m × g × h</p>
-                <p lang="en" class="lang-content text-sm">• Energy of position | Depends on mass, gravity, height</p>
-                <p lang="en" class="lang-content text-sm">• Example: Body on top, apple on tree, dam with water</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💡 Үйкеу кезінде не болады?</span>
+<span lang="en" class="lang-content">💡 What happens during friction?</span>
+<span lang="ru" class="lang-content">💡 Что происходит при трении?</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content">Үйкеу кезінде <b>протондар</b> ядрода қалады, бірақ <b>электрондар</b> бір денеден екіншісіне ауысады. <b>Электрондарды бере</b>тін дене <b>оң</b> зарядталады, <b>алатын</b> дене — <b>теріс</b>. Мысалы, эбонит таяқша + жүн мата: эбонит электрондарды <b>тартып алады</b> → эбонит ⊖, жүн ⊕. Бұл — <b>зарядтың сақталу заңы</b>: жалпы зарядтың саны өзгермейді!</span>
+<span lang="en" class="lang-content">During friction, <b>protons</b> stay in the nucleus, but <b>electrons</b> jump from one body to another. The one <b>giving up</b> electrons becomes <b>positive</b>, the one <b>gaining</b> them — <b>negative</b>. Example: ebonite + wool — ebonite <b>pulls in</b> electrons → ebonite ⊖, wool ⊕. This is the <b>charge conservation law</b>!</span>
+<span lang="ru" class="lang-content">При трении <b>протоны</b> остаются в ядре, а <b>электроны</b> переходят с одного тела на другое. Тело, <b>отдавшее</b> электроны, становится <b>положительным</b>, <b>получившее</b> — <b>отрицательным</b>. Пример: эбонит + шерсть — эбонит <b>забирает</b> электроны → эбонит ⊖, шерсть ⊕. Это <b>закон сохранения заряда</b>!</span></p>
+</div>
+</section>
 
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 15px;"><strong>📍 ПОТЕНЦИАЛЬНАЯ ЭНЕРГИЯ:</strong> E_пот = m × g × h</p>
-                <p lang="ru" class="lang-content text-sm">• Энергия положения | Зависит от массы, гравитации, высоты</p>
-                <p lang="ru" class="lang-content text-sm">• Пример: Тело на вершине, яблоко на дереве, вода в плотине</p>
-            </div>
-        </section>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚛️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Ядро + электрондар</span><span lang="en" class="lang-content">Nucleus + electrons</span><span lang="ru" class="lang-content">Ядро + электроны</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Атомның құрамы</span><span lang="en" class="lang-content">Atom structure</span><span lang="ru" class="lang-content">Состав атома</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔬</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">e = 1,6·10⁻¹⁹ Кл</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Элементар заряд</span><span lang="en" class="lang-content">Elementary charge</span><span lang="ru" class="lang-content">Элементарный заряд</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔄</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Электрондар жылжиды</span><span lang="en" class="lang-content">Electrons move</span><span lang="ru" class="lang-content">Электроны движутся</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Зарядтанудың себебі</span><span lang="en" class="lang-content">Cause of charging</span><span lang="ru" class="lang-content">Причина электризации</span></p></div>
+</div></footer>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ЭНЕРГИЯНЫҢ САҚТАЛУ ЗАҢЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. LAW OF ENERGY CONSERVATION</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Закон сохранения энергии</h2>
-
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-lg font-bold mb-4" style="color: #78350f; text-align: center;">E_сағ = E_кин + E_пот = const</p>
-                <p lang="en" class="lang-content text-lg font-bold mb-4" style="color: #78350f; text-align: center;">E_total = E_kin + E_pot = const</p>
-                <p lang="ru" class="lang-content text-lg font-bold mb-4" style="color: #78350f; text-align: center;">E_общ = E_кин + E_пот = const</p>
-
-                <p lang="kk" class="lang-content text-sm"><strong>✅ АНЫҚТАМАСЫ:</strong> Жиынтық энергия өзгермейді, біреуі азайса екіншісі өсінеді. Энергия жоқ болмайды, тек түрі өзгеді.</p>
-                <p lang="en" class="lang-content text-sm"><strong>✅ DEFINITION:</strong> Total energy doesn't change, if one decreases other increases. Energy doesn't disappear, only changes form.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>✅ ОПРЕДЕЛЕНИЕ:</strong> Полная энергия не изменяется, если одна уменьшается другая увеличивается. Энергия не исчезает, только меняет вид.</p>
-
-                <div class="grid-3" style="margin-top: 15px;">
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>📌 МЫСАЛ:</strong> Дене төбеден құлам</p>
-                        <p lang="kk" class="lang-content">E_пот = 100 Дж (максимум)</p>
-                        <p lang="kk" class="lang-content">E_кин = 0 Дж (міндіміндіміс)</p>
-                        <p lang="kk" class="lang-content">↓ құлайды ↓</p>
-                        <p lang="kk" class="lang-content">E_пот = 50 Дж (жартысы)</p>
-                        <p lang="kk" class="lang-content">E_кин = 50 Дж (жартысы)</p>
-                        <p lang="kk" class="lang-content">↓құлайды ↓</p>
-                        <p lang="kk" class="lang-content">E_пот = 0 Дж (жоқ)</p>
-                        <p lang="kk" class="lang-content">E_кин = 100 Дж (барлығы)</p>
-
-                        <p lang="en" class="lang-content"><strong>📌 EXAMPLE:</strong> Body falls from top</p>
-                        <p lang="en" class="lang-content">E_pot = 100 J (max)</p>
-                        <p lang="en" class="lang-content">E_kin = 0 J (min)</p>
-                        <p lang="en" class="lang-content">↓falling↓</p>
-                        <p lang="en" class="lang-content">E_pot = 50 J (half)</p>
-                        <p lang="en" class="lang-content">E_kin = 50 J (half)</p>
-                        <p lang="en" class="lang-content">↓falling↓</p>
-                        <p lang="en" class="lang-content">E_pot = 0 J (none)</p>
-                        <p lang="en" class="lang-content">E_kin = 100 J (all)</p>
-
-                        <p lang="ru" class="lang-content"><strong>📌 ПРИМЕР:</strong> Тело падает с вершины</p>
-                        <p lang="ru" class="lang-content">E_пот = 100 Дж (макс)</p>
-                        <p lang="ru" class="lang-content">E_кин = 0 Дж (мин)</p>
-                        <p lang="ru" class="lang-content">↓падает↓</p>
-                        <p lang="ru" class="lang-content">E_пот = 50 Дж (половина)</p>
-                        <p lang="ru" class="lang-content">E_кин = 50 Дж (половина)</p>
-                        <p lang="ru" class="lang-content">↓падает↓</p>
-                        <p lang="ru" class="lang-content">E_пот = 0 Дж (нет)</p>
-                        <p lang="ru" class="lang-content">E_кин = 100 Дж (всё)</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>🔄 ТРАНСФОРМАЦИЯ:</strong></p>
-                        <p lang="kk" class="lang-content">• Су тұтқын → E_пот</p>
-                        <p lang="kk" class="lang-content">• Су құлайды → E_кін</p>
-                        <p lang="kk" class="lang-content">• Турбина өндіктігінің → E_электр</p>
-                        <p lang="kk" class="lang-content">• Лампа → E_жылу</p>
-                        <p lang="kk" class="lang-content">• Барлығы сақталды!</p>
-
-                        <p lang="en" class="lang-content"><strong>🔄 TRANSFORMATION:</strong></p>
-                        <p lang="en" class="lang-content">• Water in dam → E_pot</p>
-                        <p lang="en" class="lang-content">• Water falls → E_kin</p>
-                        <p lang="en" class="lang-content">• Turbine → E_electric</p>
-                        <p lang="en" class="lang-content">• Lamp → E_heat</p>
-                        <p lang="en" class="lang-content">• All conserved!</p>
-
-                        <p lang="ru" class="lang-content"><strong>🔄 ТРАНСФОРМАЦИЯ:</strong></p>
-                        <p lang="ru" class="lang-content">• Вода в плотине → E_пот</p>
-                        <p lang="ru" class="lang-content">• Вода падает → E_кин</p>
-                        <p lang="ru" class="lang-content">• Турбина → E_электр</p>
-                        <p lang="ru" class="lang-content">• Лампа → E_тепло</p>
-                        <p lang="ru" class="lang-content">• Всё сохранено!</p>
-                    </div>
-
-                    <div class="example-card">
-                        <p lang="kk" class="lang-content"><strong>⚠️ ШЫНАЙЫ:</strong></p>
-                        <p lang="kk" class="lang-content">• Үйкеліс → E_жылу</p>
-                        <p lang="kk" class="lang-content">• Ауырыңғылау → E_жылу</p>
-                        <p lang="kk" class="lang-content">• Дыбысы → E_жылу</p>
-                        <p lang="kk" class="lang-content">Ішінде сақталды, тек түрі өзгеді!</p>
-
-                        <p lang="en" class="lang-content"><strong>⚠️ IN REALITY:</strong></p>
-                        <p lang="en" class="lang-content">• Friction → E_heat</p>
-                        <p lang="en" class="lang-content">• Resistance → E_heat</p>
-                        <p lang="en" class="lang-content">• Sound → E_heat</p>
-                        <p lang="en" class="lang-content">Still conserved, just changes form!</p>
-
-                        <p lang="ru" class="lang-content"><strong>⚠️ В ДЕЙСТВИТЕЛЬНОСТИ:</strong></p>
-                        <p lang="ru" class="lang-content">• Трение → E_тепло</p>
-                        <p lang="ru" class="lang-content">• Сопротивление → E_тепло</p>
-                        <p lang="ru" class="lang-content">• Звук → E_тепло</p>
-                        <p lang="ru" class="lang-content">Всё сохранено, просто меняет форму!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fef3c7; border-radius: 1rem; border-top: 4px solid #ca8a04;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-yellow-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Энергия = жұмыстың қабілеттілігі. Екі түрі: кинетикалық (қозғалыс) және потенциалды (орналасу). Жиынтық энергия сақталды (E = const). Түрі өзгеме де сақталды! Энергия - табиғаттың ең маңызды ресурсы!</p>
-            <p lang="en" class="lang-content text-sm">Energy = ability to do work. Two types: kinetic (motion) and potential (position). Total energy is conserved (E = const). Changes form but conserved! Energy is nature's most important resource!</p>
-            <p lang="ru" class="lang-content text-sm">Энергия = способность совершать работу. Два вида: кинетическая (движение) и потенциальная (положение). Полная энергия сохраняется (E = const). Меняет форму но сохраняется! Энергия - самый важный ресурс природы!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

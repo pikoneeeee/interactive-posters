@@ -1,390 +1,162 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Тепловое движение. Температура</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fff1f2; /* rose-50 */
-            overflow-x: hidden;
-            color: #881337; /* rose-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Rose/Red Theme */
-        .header-card {
-            background-color: #e11d48; /* rose-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #9f1239; /* rose-800 */
-            border-bottom: 3px solid #fda4af; /* rose-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #ffe4e6; /* rose-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #be123c; /* rose-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #e11d48; /* rose-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #e11d48;
-            background-color: #ffffff;
-            color: #e11d48;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #fff1f2;
-        }
-        .lang-btn.active {
-            background-color: #e11d48;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 250px;
-            margin: 15px 0;
-            border: 1px solid #fecdd3;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #881337;
-            text-anchor: middle;
-        }
-        .svg-molecule {
-            stroke: #fff;
-            stroke-width: 1;
-        }
-        .svg-path {
-            fill: none;
-            stroke: #fb7185;
-            stroke-width: 2;
-            stroke-dasharray: 4;
-        }
-        .svg-velocity {
-            stroke-width: 2;
-            marker-end: url(#arrowhead);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Закон сохранения энергии в тепловых процессах</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-rose-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">8 сынып · Жылу құбылыстары</span>
+<span lang="en" class="lang-content">Grade 8 · Thermal phenomena</span>
+<span lang="ru" class="lang-content">8 класс · Тепловые явления</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Жылу үрдістеріндегі энергия сақталу заңы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Conservation of energy in thermal processes</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Закон сохранения энергии в тепловых процессах</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Жылу баланс теңдеуі</span>
+<span lang="en" class="lang-content">⚖️ Heat balance equation</span>
+<span lang="ru" class="lang-content">⚖️ Уравнение теплового баланса</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Энергияның сақталу заңы жылулық құбылыстарға да жатады. <b>Тұйық жүйеде</b> (сыртпен жылу алмаспайтын) <b>барлық денелердің ішкі энергияларының жиынтығы өзгермейді</b>. Егер бір дене жылуды <b>береді</b>, ал екіншісі — <b>алады</b>, бұл шамалар <b>тең</b> болуы керек. Бұл — <b class="text-indigo-700">жылу баланс теңдеуі</b>.</span>
+<span lang="en" class="lang-content">The law of energy conservation applies to thermal phenomena too. In a <b>closed system</b> (no heat exchange with outside) the <b>total internal energy stays constant</b>. If one body <b>releases</b> heat and another <b>absorbs</b> it, the amounts must be <b>equal</b>. This is the <b class="text-indigo-700">heat balance equation</b>.</span>
+<span lang="ru" class="lang-content">Закон сохранения энергии действует и в тепловых явлениях. В <b>замкнутой системе</b> (без теплообмена с окружением) <b>полная внутренняя энергия не меняется</b>. Если одно тело <b>отдаёт</b> тепло, а другое — <b>получает</b>, эти количества <b>равны</b>. Это — <b class="text-indigo-700">уравнение теплового баланса</b>.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ЖЫЛУЛЫҚ ҚОЗҒАЛЫС. ТЕМПЕРАТУРА</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">THERMAL MOTION. TEMPERATURE</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ТЕПЛОВОЕ ДВИЖЕНИЕ. ТЕМПЕРАТУРА</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">📐 <span lang="kk" class="lang-content">Теңдеу:</span><span lang="en" class="lang-content">Equation:</span><span lang="ru" class="lang-content">Уравнение:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+<span class="var">Q</span><sub>отд</sub> = <span class="var">Q</span><sub>пол</sub>
+</div>
+<p class="text-slate-700 text-sm mt-3">
+<span lang="kk" class="lang-content"><b>Жалпы түрі:</b> ΣQ<sub>отд</sub> = ΣQ<sub>пол</sub> — барлық берілген жылулардың қосындысы барлық алынғандардың қосындысына тең.</span>
+<span lang="en" class="lang-content"><b>General form:</b> ΣQ<sub>released</sub> = ΣQ<sub>absorbed</sub> — total heat released equals total absorbed.</span>
+<span lang="ru" class="lang-content"><b>Общий вид:</b> ΣQ<sub>отд</sub> = ΣQ<sub>пол</sub> — сумма отданных = сумме полученных.</span></p>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-rose-100">Молекулалардың хаосты қозғалысы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-rose-100">Chaotic motion of molecules.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-rose-100">Хаотичное движение молекул.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-2">Q<sub>отд</sub> = Q<sub>пол</sub></p>
+<p class="text-slate-700 text-sm text-center">
+<span lang="kk" class="lang-content">Тұйық жүйеде</span>
+<span lang="en" class="lang-content">In a closed system</span>
+<span lang="ru" class="lang-content">В замкнутой системе</span></p>
+</div></div></section>
 
-        <!-- 1. ЖЫЛУЛЫҚ ҚОЗҒАЛЫС -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Жылулық қозғалыс дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Thermal Motion?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое тепловое движение?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп шешу алгоритмі</span>
+<span lang="en" class="lang-content">🧮 Solving algorithm</span>
+<span lang="ru" class="lang-content">🧮 Алгоритм решения</span></h2>
+<div class="card rounded-custom p-6">
+<ol class="text-slate-700 list-decimal pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>Жылу беретін</b> және <b>жылу алатын</b> денелерді анықта.</span><span lang="en" class="lang-content">Identify which body <b>releases</b> and which <b>absorbs</b> heat.</span><span lang="ru" class="lang-content">Определи, кто <b>отдаёт</b>, а кто <b>получает</b> тепло.</span></li>
+<li><span lang="kk" class="lang-content">Әр процеске <b>жылу мөлшерін</b> формуламен жаз: Q = cmΔt (қыздыру), Q = λm (балқу), Q = Lm (булану), Q = qm (жану).</span><span lang="en" class="lang-content">For each process write the <b>heat formula</b>: Q = cmΔt, Q = λm (melting), Q = Lm (vaporisation), Q = qm (combustion).</span><span lang="ru" class="lang-content">Для каждого процесса запиши <b>формулу тепла</b>: Q = cmΔt, Q = λm, Q = Lm, Q = qm.</span></li>
+<li><span lang="kk" class="lang-content"><b>Жылу баланс теңдеуін</b> құр: ΣQ<sub>отд</sub> = ΣQ<sub>пол</sub>.</span><span lang="en" class="lang-content">Write the <b>balance equation</b>: ΣQ<sub>rel</sub> = ΣQ<sub>abs</sub>.</span><span lang="ru" class="lang-content">Составь <b>уравнение</b>: ΣQ<sub>отд</sub> = ΣQ<sub>пол</sub>.</span></li>
+<li><span lang="kk" class="lang-content">Белгісізді алгебралық тұрғыдан <b>табыңыз</b>.</span><span lang="en" class="lang-content"><b>Solve</b> for the unknown.</span><span lang="ru" class="lang-content">Найди <b>неизвестное</b>.</span></li>
+</ol>
+</div>
+</section>
 
-            <div class="rule-card border-t-rose-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Жылулық қозғалыс</span> – зат бөлшектерінің (атомдар мен молекулалардың) ретсіз, хаосты қозғалысы. Ол ешқашан тоқтамайды.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Thermal motion</span> is the random, chaotic motion of particles (atoms and molecules). It never stops.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Тепловое движение</span> – это беспорядочное, хаотичное движение частиц вещества (атомов и молекул). Оно никогда не прекращается.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📘 Есеп 1: Шай араластыру</span>
+<span lang="en" class="lang-content">📘 Problem 1: Mixing tea</span>
+<span lang="ru" class="lang-content">📘 Задача 1: Смешивание</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">100 г, 90°C ыстық шайға 50 г, 20°C сүт құйылды. Соңғы температура қандай болады?</span>
+<span lang="en" class="lang-content">100 g of hot tea (90°C) is mixed with 50 g of milk (20°C). Find the final temperature.</span>
+<span lang="ru" class="lang-content">В 100 г горячего чая (90°C) налили 50 г молока (20°C). Какова конечная температура?</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m₁ = 0,1 кг, t₁ = 90 °C</li>
+<li>m₂ = 0,05 кг, t₂ = 20 °C</li>
+<li>c = 4200 Дж/(кг·°C)</li>
+<li>t — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.95rem">
+cm₁(t₁ − t) = cm₂(t − t₂)
+<br/>0,1·(90 − t) = 0,05·(t − 20)
+<br/>9 − 0,1t = 0,05t − 1
+<br/>10 = 0,15t
+<br/>t ≈ <span class="num">66,7</span> <span class="unit">°C</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ ~67 °C</span><span lang="en" class="lang-content">✅ ~67 °C</span><span lang="ru" class="lang-content">✅ ~67 °C</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                <!-- Illustration 1: Brownian Motion Path -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                            <polygon points="0 0, 8 3, 0 6" fill="#be123c" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📕 Есеп 2: Калориметрмен</span>
+<span lang="en" class="lang-content">📕 Problem 2: Calorimeter</span>
+<span lang="ru" class="lang-content">📕 Задача 2: Калориметр</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Алюминий калориметрге (m=200 г) 300 г, 20°C су құйылды. Соңра 100 г, 100°C темір шарик батырылды. Соңғы температура қандай?</span>
+<span lang="en" class="lang-content">An aluminum calorimeter (m=200 g) holds 300 g of water at 20°C. A 100 g iron ball at 100°C is dropped in. Final temperature?</span>
+<span lang="ru" class="lang-content">В алюминиевый калориметр (m=200 г) налили 300 г воды (20°C). Опустили железный шар 100 г (100°C). Найти конечную температуру.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>m<sub>а</sub> = 0,2 кг, c<sub>а</sub> = 900</li>
+<li>m<sub>в</sub> = 0,3 кг, c<sub>в</sub> = 4200, t<sub>в</sub> = 20°C</li>
+<li>m<sub>ж</sub> = 0,1 кг, c<sub>ж</sub> = 460, t<sub>ж</sub> = 100°C</li>
+<li>t — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:0.85rem">
+m<sub>ж</sub>c<sub>ж</sub>(100−t) = m<sub>в</sub>c<sub>в</sub>(t−20)+m<sub>а</sub>c<sub>а</sub>(t−20)
+<br/>0,1·460·(100−t) = (0,3·4200+0,2·900)·(t−20)
+<br/>46(100−t) = 1440(t−20)
+<br/>4600 − 46t = 1440t − 28800
+<br/>33400 = 1486t
+<br/>t ≈ <span class="num">22,5</span> <span class="unit">°C</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ ~22,5 °C</span><span lang="en" class="lang-content">✅ ~22.5 °C</span><span lang="ru" class="lang-content">✅ ~22,5 °C</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <rect x="50" y="20" width="300" height="160" fill="#fff1f2" stroke="#be123c" stroke-width="2" rx="10"/>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">ΣQ<sub>отд</sub> = ΣQ<sub>пол</sub></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Жалпы баланс</span><span lang="en" class="lang-content">General balance</span><span lang="ru" class="lang-content">Общий баланс</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌡️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">t<sub>қ</sub> аралықта</span><span lang="en" class="lang-content">t<sub>fin</sub> in between</span><span lang="ru" class="lang-content">t<sub>кон</sub> между t₁ и t₂</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Соңғы T t₁&lt;t&lt;t₂</span><span lang="en" class="lang-content">Final temp between</span><span lang="ru" class="lang-content">Между крайними</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🔬</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Калориметр</span><span lang="en" class="lang-content">Calorimeter</span><span lang="ru" class="lang-content">Калориметр</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тұйық жүйенің моделі</span><span lang="en" class="lang-content">Closed-system model</span><span lang="ru" class="lang-content">Модель замкнутой системы</span></p></div>
+</div></footer>
 
-                    <!-- Random Path -->
-                    <path d="M 100 100 L 140 60 L 180 120 L 220 50 L 250 140 L 300 100" class="svg-path"/>
-
-                    <!-- Particle at end -->
-                    <circle cx="300" cy="100" r="8" fill="#e11d48" class="svg-molecule"/>
-
-                    <!-- Colliding molecules (background) -->
-                    <circle cx="140" cy="60" r="4" fill="#fda4af" opacity="0.6"/>
-                    <circle cx="180" cy="120" r="4" fill="#fda4af" opacity="0.6"/>
-                    <circle cx="220" cy="50" r="4" fill="#fda4af" opacity="0.6"/>
-                    <circle cx="250" cy="140" r="4" fill="#fda4af" opacity="0.6"/>
-
-                    <text x="200" y="170" class="svg-label" font-weight="bold">Chaos (Хаос)</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ТЕМПЕРАТУРА -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Температура және Жылдамдық</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Temperature and Speed</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Температура и Скорость</h2>
-
-            <div class="rule-card border-t-red-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Температура неғұрлым жоғары болса, молекулалар соғұрлым <strong>жылдам</strong> қозғалады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    The higher the temperature, the <strong>faster</strong> the molecules move.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Чем выше температура, тем <strong>быстрее</strong> движутся молекулы.
-                </p>
-
-                <!-- Illustration 2: Cold vs Hot -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Cold -->
-                    <g transform="translate(40, 40)">
-                        <rect x="0" y="0" width="140" height="120" fill="#e0f2fe" stroke="#3b82f6" stroke-width="2"/>
-                        <text x="70" y="-10" class="svg-label" fill="#2563eb">LOW T° (Суық)</text>
-                        <!-- Slow Molecules -->
-                        <circle cx="40" cy="40" r="6" fill="#3b82f6" class="svg-molecule"/>
-                        <line x1="40" y1="40" x2="50" y2="40" stroke="#1d4ed8" class="svg-velocity"/>
-
-                        <circle cx="100" cy="80" r="6" fill="#3b82f6" class="svg-molecule"/>
-                        <line x1="100" y1="80" x2="90" y2="90" stroke="#1d4ed8" class="svg-velocity"/>
-                    </g>
-
-                    <!-- Hot -->
-                    <g transform="translate(220, 40)">
-                        <rect x="0" y="0" width="140" height="120" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
-                        <text x="70" y="-10" class="svg-label" fill="#dc2626">HIGH T° (Ыстық)</text>
-                        <!-- Fast Molecules -->
-                        <circle cx="40" cy="40" r="6" fill="#ef4444" class="svg-molecule"/>
-                        <line x1="40" y1="40" x2="80" y2="40" stroke="#991b1b" stroke-width="3" class="svg-velocity"/> <!-- Long arrow -->
-
-                        <circle cx="100" cy="80" r="6" fill="#ef4444" class="svg-molecule"/>
-                        <line x1="100" y1="80" x2="60" y2="110" stroke="#991b1b" stroke-width="3" class="svg-velocity"/>
-                    </g>
-                </svg>
-
-                <div class="example-block border-l-red-400 bg-red-50 text-center">
-                    <p class="text-lg font-semibold text-red-900">E_k ~ T</p>
-                    <p class="text-sm text-red-800">Кинетикалық энергия температураға тура пропорционал.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. ДИФФУЗИЯ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Диффузия</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Diffusion</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Диффузия</h2>
-
-            <div class="rule-card border-t-purple-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Диффузия</span> – жылулық қозғалыс салдарынан бір зат молекулаларының екінші зат молекулаларына араласуы.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Diffusion</span> is the mixing of molecules of one substance with another due to thermal motion.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Диффузия</span> – это проникновение молекул одного вещества между молекулами другого вследствие теплового движения.
-                </p>
-
-                <!-- Illustration 3: Diffusion Process -->
-                <svg class="illustration-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Container -->
-                    <rect x="100" y="30" width="200" height="100" fill="none" stroke="#475569" stroke-width="2"/>
-
-                    <!-- Left Particles (Blue) -->
-                    <g id="blue-particles">
-                        <circle cx="120" cy="50" r="5" fill="#3b82f6"/>
-                        <circle cx="120" cy="80" r="5" fill="#3b82f6"/>
-                        <circle cx="120" cy="110" r="5" fill="#3b82f6"/>
-                        <circle cx="140" cy="65" r="5" fill="#3b82f6"/>
-                        <circle cx="140" cy="95" r="5" fill="#3b82f6"/>
-
-                        <!-- Mixing into right -->
-                        <circle cx="180" cy="60" r="5" fill="#3b82f6" opacity="0.8"/>
-                        <circle cx="220" cy="100" r="5" fill="#3b82f6" opacity="0.6"/>
-                    </g>
-
-                    <!-- Right Particles (Yellow) -->
-                    <g id="yellow-particles">
-                        <circle cx="280" cy="50" r="5" fill="#eab308"/>
-                        <circle cx="280" cy="80" r="5" fill="#eab308"/>
-                        <circle cx="280" cy="110" r="5" fill="#eab308"/>
-                        <circle cx="260" cy="65" r="5" fill="#eab308"/>
-                        <circle cx="260" cy="95" r="5" fill="#eab308"/>
-
-                        <!-- Mixing into left -->
-                        <circle cx="220" cy="70" r="5" fill="#eab308" opacity="0.8"/>
-                        <circle cx="170" cy="90" r="5" fill="#eab308" opacity="0.6"/>
-                    </g>
-
-                    <!-- Arrows indicating mixing -->
-                    <path d="M 150 40 Q 200 20, 250 40" fill="none" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead)"/>
-                    <path d="M 250 120 Q 200 140, 150 120" fill="none" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead)"/>
-
-                    <text x="200" y="160" class="svg-label" font-weight="bold">Mixing (Араласу)</text>
-                </svg>
-
-                <p lang="kk" class="lang-content mt-2 text-sm text-gray-600">Температура жоғарылаған сайын диффузия жылдамдайды.</p>
-                <p lang="en" class="lang-content mt-2 text-sm text-gray-600">Diffusion speeds up as temperature increases.</p>
-                <p lang="ru" class="lang-content mt-2 text-sm text-gray-600">С повышением температуры диффузия ускоряется.</p>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-rose-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-rose-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-rose-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-rose-800">
-                Барлық денелер қозғалыстағы бөлшектерден тұрады. Температура – бұл қозғалыс энергиясы. Ыстық суда қант тез ериді (диффузия).
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-rose-800">
-                All matter consists of moving particles. Temperature is motion energy. Sugar dissolves faster in hot water (diffusion).
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-rose-800">
-                Все тела состоят из движущихся частиц. Температура – это энергия движения. В горячей воде сахар растворяется быстрее (диффузия).
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

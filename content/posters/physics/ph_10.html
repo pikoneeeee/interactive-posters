@@ -1,364 +1,191 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат 7: Инерция</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            overflow-x: hidden;
-            color: #1a202c;
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы */
-        .header-card {
-            background-color: #be185d; /* Розовый-700 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(190, 24, 93, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #9d174d; /* Розовый-800 */
-            border-bottom: 3px solid #f9a8d4; /* Розовый-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #fdf2f8; /* Өте ашық розовый */
-            border-left: 4px solid #f472b6; /* Розовый-400 */
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #f1f5f9; /* Ашық сұр */
-            border-radius: 1rem;
-            border-top: 4px solid #64748b; /* Сұр */
-        }
-        .feature-list li {
-            margin-bottom: 8px;
-            list-style: none;
-            padding-left: 20px;
-            position: relative;
-        }
-        .feature-list li::before {
-            content: '💨'; /* Эмодзи */
-            position: absolute;
-            left: 0;
-            color: #be185d; /* Розовый */
-        }
-         .term {
-            font-weight: bold;
-            color: #9d174d; /* pink-800 */
-        }
-        .mono {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #334155; /* slate-700 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #be185d;
-            background-color: #ffffff;
-            color: #be185d;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #fdf2f8;
-        }
-        .lang-btn.active {
-            background-color: #be185d;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 150px;
-            margin: 10px 0;
-            border: 1px solid #fbcfe8;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
-    // Функция переключения языков (Автоматически добавлено скриптом)
-    function switchLang(lang) {
-        var container = document.getElementById('poster-container');
-        if (container) {
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-        }
-        var buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(function(btn) {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-</script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Инерция</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-gray-100">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Денелердің әсерлесуі</span>
+<span lang="en" class="lang-content">Grade 7 · Interaction of bodies</span>
+<span lang="ru" class="lang-content">7 класс · Взаимодействие тел</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Инерция</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Inertia</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Инерция</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🛹 Инерция деген не?</span>
+<span lang="en" class="lang-content">🛹 What is inertia?</span>
+<span lang="ru" class="lang-content">🛹 Что такое инерция?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Инерция</b> (лат. «inertia» — «жалқаулық») — дененің жылдамдығын <b>сыртқы әсер болмаса өзгертпеу қасиеті</b>. Егер бір дене де әсер етпесе: тыныш дене тыныш қалады, ал қозғалатын дене сол бағытта және сол жылдамдықпен <b>мәңгі қозғала береді</b>. Бұл — табиғаттың іргелі заңдарының бірі.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Inertia</b> (from Latin «inertia» — «laziness») is the property of a body to <b>maintain its velocity</b> in the absence of external interaction. If no other body acts on it, a body at rest stays at rest, and a moving body keeps moving with the same speed in the same direction <b>forever</b>. This is one of the fundamental laws of nature.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Инерция</b> (от лат. «inertia» — «лень») — это свойство тела <b>сохранять свою скорость</b> при отсутствии внешних воздействий. Если на тело ничто не действует: покоящееся тело остаётся в покое, а движущееся продолжает двигаться с прежней скоростью в том же направлении <b>бесконечно</b>. Это один из фундаментальных законов природы.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 7: ИНЕРЦИЯ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">PHYSICS 7: INERTIA</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight">ФИЗИКА 7: ИНЕРЦИЯ</h1>
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b>Бұл идеяны 1632 жылы Галилей</b> өзінің тәжірибелерімен дәлелдеген. Содан кейін <b>Ньютон 1687 жылы</b> өзінің «<i>Үш заңының</i>» біріншісі ретінде қалыптастырған. Ал күнделікті өмірде барлық дене тоқтайды — себебі үйкеліс және ауаның кедергісі әсер етеді.</span>
+<span lang="en" class="lang-content"><b>Galileo proved this idea in 1632</b> by his thought experiments. Then in 1687 <b>Newton</b> formulated it as his <i>first law of motion</i>. In everyday life, all bodies eventually stop — because friction and air resistance act on them.</span>
+<span lang="ru" class="lang-content"><b>Эту идею в 1632 г. доказал Галилей</b> своими опытами. Затем в 1687 г. <b>Ньютон</b> сформулировал её как свой <i>первый закон движения</i>. В повседневной жизни все тела всё-таки останавливаются — потому что на них действуют трение и сопротивление воздуха.</span></p>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-gray-100">Дененің өз жылдамдығын сақтау қасиеті. Ньютонның бірінші заңы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-gray-100">The property of a body to maintain its velocity. Newton's First Law.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-gray-100">Свойство тела сохранять свою скорость. Первый закон Ньютона.</p>
-        </header>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">💡 Аристотель vs Галилей:</span>
+<span lang="en" class="lang-content">💡 Aristotle vs Galileo:</span>
+<span lang="ru" class="lang-content">💡 Аристотель против Галилея:</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content"><b>Аристотель (б.э.д. 350 ж.):</b> «Қозғалу үшін күш керек». 2000 жыл бойы солай саналды. <b>Галилей (1632):</b> «Қозғалу үшін емес, жылдамдықты <b>өзгерту үшін</b> күш керек». Ғылым революциясы!</span>
+<span lang="en" class="lang-content"><b>Aristotle (350 BC):</b> «Force is needed to keep something moving». This was believed for 2000 years. <b>Galileo (1632):</b> «Force is needed to <b>change</b> velocity, not to maintain it». A scientific revolution!</span>
+<span lang="ru" class="lang-content"><b>Аристотель (350 г. до н.э.):</b> «Чтобы двигаться, нужна сила». В это верили 2000 лет. <b>Галилей (1632):</b> «Сила нужна не чтобы двигаться, а чтобы <b>изменить</b> скорость». Научная революция!</span></p>
+</div>
+</div>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">🏒</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-3">
+<span lang="kk" class="lang-content">Идеалды мысал</span>
+<span lang="en" class="lang-content">Ideal example</span>
+<span lang="ru" class="lang-content">Идеальный пример</span></p>
+<p class="text-center text-slate-700 text-base">
+<span lang="kk" class="lang-content">Хоккей шайбасы тегіс <b>мұзда</b> үйкеліс аз болғандықтан ұзақ сырғанайды. Ал ваккумда — мәңгі қозғалар еді!</span>
+<span lang="en" class="lang-content">A hockey puck slides far on <b>ice</b> because of low friction. In a vacuum — it would slide forever!</span>
+<span lang="ru" class="lang-content">Хоккейная шайба долго скользит по <b>льду</b> — там мало трения. А в вакууме — двигалась бы вечно!</span></p>
+</div></div></section>
 
-        <!-- 1. ИНЕРЦИЯ ДЕГЕНІМІЗ НЕ? -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Инерция дегеніміз не?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. What is Inertia?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Что такое Инерция?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎬 Галилейдің тәжірибесі</span>
+<span lang="en" class="lang-content">🎬 Galileo's experiment</span>
+<span lang="ru" class="lang-content">🎬 Опыт Галилея</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Галилей екі көлбеу жазықтықты бір-біріне қарама-қарсы қойды. Доп бірінші жазықтықтан түсіп, екіншісіне сол биіктікке шықты. Содан соң ол екінші жазықтықты <b>күрт төмендете бастады</b> — доп әр сайын <b>алысырақ ұшып</b> бара берді. <b>Тұжырым:</b> егер екінші жазықтық <b>көлденең</b> болса, доп <b>тоқтамас еді!</b></span>
+<span lang="en" class="lang-content">Galileo placed two inclined planes facing each other. A ball rolled down one and up the other, reaching the same height. Then he gradually <b>lowered the second plane</b> — and the ball went <b>farther each time</b>. <b>Conclusion:</b> if the second plane were <b>horizontal</b>, the ball <b>would never stop!</b></span>
+<span lang="ru" class="lang-content">Галилей расположил две наклонных плоскости друг напротив друга. Шар скатывался с одной и поднимался на ту же высоту по другой. Затем он начал <b>опускать вторую плоскость</b> — шар каждый раз катился <b>всё дальше</b>. <b>Вывод:</b> если бы вторая плоскость стала <b>горизонтальной</b>, шар <b>не остановился бы никогда!</b></span></p>
 
-            <div class="rule-card border-t-pink-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Инерция</span> – бұл дененің өзінің <span class="term" lang="kk">тыныштық күйін</span> немесе <span class="term" lang="kk">түзусызықты бірқалыпты қозғалысын</span> (жылдамдығын) сақтау қасиеті. Бұл құбылыс денеге басқа денелер әсер етпегенде (немесе әсерлер теңгерілгенде) байқалады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Inertia</span> is the property of a body to remain in its state of <span class="term" lang="en">rest</span> or <span class="term" lang="en">uniform motion in a straight line</span> (its velocity) unless acted upon by an external force.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Инерция</span> – это свойство тела сохранять свое <span class="term" lang="ru">состояние покоя</span> или <span class="term" lang="ru">прямолинейного равномерного движения</span> (свою скорость) при отсутствии или компенсации внешних воздействий.
-                </p>
+<div class="svg-wrap">
+<svg viewBox="0 0 720 240" style="width:100%;max-width:720px;margin:auto" font-family="'Inter',sans-serif">
+<!-- Опыт 1: одинаковые плоскости -->
+<g>
+<line x1="20" y1="180" x2="120" y2="80" stroke="#1e293b" stroke-width="3"/>
+<line x1="120" y1="180" x2="220" y2="80" stroke="#1e293b" stroke-width="3"/>
+<line x1="20" y1="180" x2="220" y2="180" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 2"/>
+<circle cx="200" cy="100" r="10" fill="#dc2626"/>
+<path d="M50,90 Q120,160 180,90" fill="none" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4 2"/>
+<text x="120" y="220" text-anchor="middle" font-size="12" fill="#64748b">
+<tspan class="lang-content" lang="kk">1. Бірдей биіктікке шығады</tspan>
+<tspan class="lang-content" lang="en">1. Returns to same height</tspan>
+<tspan class="lang-content" lang="ru">1. Поднимается на ту же высоту</tspan>
+</text>
+</g>
+<!-- Опыт 2: опущенная плоскость -->
+<g transform="translate(250,0)">
+<line x1="20" y1="180" x2="120" y2="80" stroke="#1e293b" stroke-width="3"/>
+<line x1="120" y1="180" x2="240" y2="130" stroke="#1e293b" stroke-width="3"/>
+<circle cx="220" cy="138" r="10" fill="#dc2626"/>
+<path d="M50,90 Q140,180 200,135" fill="none" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4 2"/>
+<text x="130" y="220" text-anchor="middle" font-size="12" fill="#64748b">
+<tspan class="lang-content" lang="kk">2. Алысырақ домалайды</tspan>
+<tspan class="lang-content" lang="en">2. Rolls farther</tspan>
+<tspan class="lang-content" lang="ru">2. Катится дальше</tspan>
+</text>
+</g>
+<!-- Опыт 3: горизонтальная -->
+<g transform="translate(500,0)">
+<line x1="20" y1="180" x2="120" y2="80" stroke="#1e293b" stroke-width="3"/>
+<line x1="120" y1="180" x2="220" y2="180" stroke="#1e293b" stroke-width="3"/>
+<line x1="220" y1="180" x2="270" y2="180" stroke="#dc2626" stroke-width="3" stroke-dasharray="6 3"/>
+<circle cx="200" cy="170" r="10" fill="#dc2626"/>
+<text x="125" y="220" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="700">
+<tspan class="lang-content" lang="kk">3. ∞ домалайды!</tspan>
+<tspan class="lang-content" lang="en">3. Rolls forever!</tspan>
+<tspan class="lang-content" lang="ru">3. Катится бесконечно!</tspan>
+</text>
+</g>
+</svg>
+</div>
+</div></section>
 
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700"><strong>Маңызды:</strong> Инерция – бұл күш емес, бұл дененің <strong>қасиеті</strong> (оның "жалқаулығы" немесе "қырсықтығы").</p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700"><strong>Important:</strong> Inertia is not a force; it is a <strong>property</strong> of matter (its "laziness" or "stubbornness").</p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700"><strong>Важно:</strong> Инерция – это не сила, это <strong>свойство</strong> тела (его "лень" или "упрямство").</p>
-            </div>
-        </section>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚌 Күнделікті өмірден</span>
+<span lang="en" class="lang-content">🚌 Everyday inertia</span>
+<span lang="ru" class="lang-content">🚌 Инерция в жизни</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card-emerald rounded-custom p-6">
+<p class="heading-font text-lg text-emerald-700 mb-3">
+<span lang="kk" class="lang-content">✅ Пайдалы жағдайлар</span>
+<span lang="en" class="lang-content">✅ Useful examples</span>
+<span lang="ru" class="lang-content">✅ Полезные случаи</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>Шамды басу:</b> балға шамды басайын дегенде, ағаш сапты қозғалтсаң — шамның басы инерциямен ұшып кеп тиеді.</span><span lang="en" class="lang-content"><b>Hammer:</b> a hammer head stays put while the handle moves up — fits more tightly.</span><span lang="ru" class="lang-content"><b>Насаживание молотка:</b> ударяя ручкой о пол — головка по инерции «насаживается» на ручку.</span></li>
+<li><span lang="kk" class="lang-content"><b>Шаңды қаққанда:</b> кілемді ұрсаң — кілем қозғалады, ал шаң инерция бойынша қалады, шығарып тастайды.</span><span lang="en" class="lang-content"><b>Dust beating:</b> when you hit a rug, the rug moves but the dust stays — and falls out.</span><span lang="ru" class="lang-content"><b>Выбивание пыли:</b> ковёр ударяют — он движется, пыль по инерции остаётся, и отделяется.</span></li>
+<li><span lang="kk" class="lang-content"><b>Спорт:</b> жүгірушілер табысты <b>финиш сызығынан кейін</b> жалғастырады.</span><span lang="en" class="lang-content"><b>Sports:</b> runners coast past the <b>finish line</b> due to inertia.</span><span lang="ru" class="lang-content"><b>Спорт:</b> бегуны по инерции пробегают <b>дальше финиша</b>.</span></li>
+</ul>
+</div>
+<div class="card-rose rounded-custom p-6">
+<p class="heading-font text-lg text-rose-700 mb-3">
+<span lang="kk" class="lang-content">⚠️ Қауіпті жағдайлар</span>
+<span lang="en" class="lang-content">⚠️ Dangerous cases</span>
+<span lang="ru" class="lang-content">⚠️ Опасные случаи</span></p>
+<ul class="text-slate-700 list-disc pl-6 space-y-2 text-base">
+<li><span lang="kk" class="lang-content"><b>Автомобиль кенет тоқтаса:</b> жолаушылар алға инерциямен ұшады. Сондықтан <b>қауіпсіздік белдігі</b> керек!</span><span lang="en" class="lang-content"><b>Sudden braking:</b> passengers fly forward — that's why <b>seat belts</b> are essential!</span><span lang="ru" class="lang-content"><b>Резкое торможение:</b> пассажиры по инерции летят вперёд. Поэтому нужен <b>ремень безопасности</b>!</span></li>
+<li><span lang="kk" class="lang-content"><b>Жол бетіндегі мұз:</b> үйкеліс аз, машина бұрылмайды — тура алға ұшады.</span><span lang="en" class="lang-content"><b>Ice on the road:</b> low friction — car slides straight, can't turn.</span><span lang="ru" class="lang-content"><b>Лёд на дороге:</b> мало трения — машина не успевает повернуть, скользит прямо.</span></li>
+<li><span lang="kk" class="lang-content"><b>Кеме инерциясы:</b> үлкен теңіз кемесін тоқтату үшін <b>5–7 км</b> жол қажет.</span><span lang="en" class="lang-content"><b>Ship inertia:</b> a large ocean liner needs <b>5–7 km</b> to stop!</span><span lang="ru" class="lang-content"><b>Инерция корабля:</b> большому лайнеру нужно <b>5–7 км</b>, чтобы остановиться!</span></li>
+</ul>
+</div>
+</div></section>
 
-        <!-- 2. ИНЕРЦИЯ ТҮРЛЕРІ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Инерцияның көріністері (Иллюстрация)</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Manifestations of Inertia (Illustrated)</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Проявления Инерции (Иллюстрация)</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Инерттілік — масса</span>
+<span lang="en" class="lang-content">⚖️ Inertness — mass</span>
+<span lang="ru" class="lang-content">⚖️ Инертность — масса</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Барлық денелер инерциялы болғанымен, <b>әртүрлі дәрежеде</b> өзгеріске қарсы тұрады. Мысалы, велосипедті 5 м/с-қа жеделдету оңай, бірақ жүк машинасын осындай жылдамдыққа жеткізу қиын. Дененің инерциясының өлшемі — <b class="text-indigo-700">масса</b>. Масса неғұрлым үлкен болса — дене соғұрлым <b>инертті</b>.</span>
+<span lang="en" class="lang-content">All bodies have inertia, but they resist change to <b>different degrees</b>. A bicycle accelerates to 5 m/s easily; a truck — with difficulty. The measure of a body's inertia is its <b class="text-indigo-700">mass</b>. The larger the mass, the more <b>inert</b> the body.</span>
+<span lang="ru" class="lang-content">Все тела инертны, но сопротивляются изменению по-разному. Велосипед легко разогнать до 5 м/с, грузовик — трудно. Мера инертности тела — это <b class="text-indigo-700">масса</b>. Чем больше масса, тем <b>инертнее</b> тело.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<div class="tile"><div class="tile-emoji">🪶</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Қанат — m = 0,001 кг</span><span lang="en" class="lang-content">Feather — m = 0.001 kg</span><span lang="ru" class="lang-content">Перо — m = 0,001 кг</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Сәл жел — қозғалады</span><span lang="en" class="lang-content">Light breeze moves it</span><span lang="ru" class="lang-content">Слабый ветерок — двигает</span></p></div>
+<div class="tile"><div class="tile-emoji">🚗</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Автокөлік — m = 1500 кг</span><span lang="en" class="lang-content">Car — m = 1500 kg</span><span lang="ru" class="lang-content">Машина — m = 1500 кг</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Қозғалту үшін қозғалтқыш керек</span><span lang="en" class="lang-content">Needs an engine to move</span><span lang="ru" class="lang-content">Нужен двигатель, чтобы двигать</span></p></div>
+<div class="tile"><div class="tile-emoji">🚢</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Кеме — m = 100 000 т</span><span lang="en" class="lang-content">Ship — m = 100 000 t</span><span lang="ru" class="lang-content">Корабль — m = 100 000 т</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Күшті турбиналар да баяу қозғайды</span><span lang="en" class="lang-content">Even huge turbines move it slowly</span><span lang="ru" class="lang-content">Даже мощные турбины двигают медленно</span></p></div>
+</div>
+</div>
+</section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⏸</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">v = const</span><span lang="en" class="lang-content">v = const</span><span lang="ru" class="lang-content">v = const</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Сыртқы әсер жоқ → жылдамдық сақталады</span><span lang="en" class="lang-content">No external force → velocity is preserved</span><span lang="ru" class="lang-content">Нет внешних сил → скорость сохраняется</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📜</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Галилей · Ньютон</span><span lang="en" class="lang-content">Galileo · Newton</span><span lang="ru" class="lang-content">Галилей · Ньютон</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Инерция заңы — Ньютонның 1-ші заңы</span><span lang="en" class="lang-content">Inertia = Newton's 1st law</span><span lang="ru" class="lang-content">Инерция = 1-й закон Ньютона</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">m ↑ → <span lang="kk" class="lang-content">инертті</span><span lang="en" class="lang-content">inert</span><span lang="ru" class="lang-content">инертно</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Масса үлкен болса — қозғалу қиын</span><span lang="en" class="lang-content">More mass — harder to change motion</span><span lang="ru" class="lang-content">Больше масса — труднее изменить движение</span></p></div>
+</div></footer>
 
-                <!-- 1. Тыныштық инерциясы -->
-                <div class="rule-card border-t-blue-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Тыныштық инерциясы</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Inertia of Rest</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-blue-700 mb-3">1. Инерция покоя</h3>
-
-                    <p lang="kk" class="lang-content">Дене өз тыныштық күйін сақтауға тырысады.</p>
-                    <p lang="en" class="lang-content">A body tries to stay at rest.</p>
-                    <p lang="ru" class="lang-content">Тело стремится сохранить состояние покоя.</p>
-
-                    <!-- Иллюстрация: Тиын және карта -->
-                    <svg class="illustration-svg" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Стақан -->
-                        <path d="M 100 80 L 110 30 L 190 30 L 200 80 Z" stroke="#3b82f6" stroke-width="2" fill="none"/>
-                        <!-- Карта -->
-                        <rect x="90" y="25" width="120" height="5" fill="#f472b6"/>
-                        <!-- Тиын -->
-                        <ellipse cx="150" cy="20" rx="15" ry="5" fill="#facc15"/>
-                        <!-- Бағыттауыш -->
-                        <line x1="210" y1="27" x2="250" y2="27" stroke="#dc2626" stroke-width="2"/>
-                        <polyline points="250 27, 240 22, 240 32, 250 27" fill="#dc2626"/>
-                        <text x="215" y="20" font-size="10" class="action-force" lang="kk">Шерту</text>
-                        <text x="215" y="20" font-size="10" class="action-force" lang="en">Flick</text>
-                        <text x="215" y="20" font-size="10" class="action-force" lang="ru">Щелчок</text>
-                        <!-- Тиынның құлауы -->
-                        <ellipse cx="150" cy="50" rx="15" ry="5" fill="#facc15" opacity="0.5"/>
-                        <line x1="150" y1="25" x2="150" y2="45" stroke="#facc15" stroke-width="2" stroke-dasharray="2"/>
-                    </svg>
-
-                    <p lang="kk" class="lang-content mt-2"><strong>Мысал:</strong> Егер картаны жылдам шертсе, тиын инерциямен орнында қалып, стақанға түседі.</p>
-                    <p lang="en" class="lang-content mt-2"><strong>Example:</strong> If you flick the card quickly, the coin stays in place due to inertia and falls into the glass.</p>
-                    <p lang="ru" class="lang-content mt-2"><strong>Пример:</strong> Если быстро выбить карту, монета по инерции остается на месте и падает в стакан.</p>
-                </div>
-
-                <!-- 2. Қозғалыс инерциясы -->
-                <div class="rule-card border-t-red-500">
-                    <h3 lang="kk" class="lang-content text-xl font-bold text-red-700 mb-3">2. Қозғалыс инерциясы</h3>
-                    <h3 lang="en" class="lang-content text-xl font-bold text-red-700 mb-3">2. Inertia of Motion</h3>
-                    <h3 lang="ru" class="lang-content text-xl font-bold text-red-700 mb-3">2. Инерция движения</h3>
-
-                    <p lang="kk" class="lang-content">Дене өз қозғалыс жылдамдығын сақтауға тырысады.</p>
-                    <p lang="en" class="lang-content">A body tries to keep moving.</p>
-                    <p lang="ru" class="lang-content">Тело стремится сохранить свою скорость движения.</p>
-
-                    <!-- Иллюстрация: Автобус -->
-                    <svg class="illustration-svg" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Автобус -->
-                        <rect x="100" y="30" width="100" height="60" fill="#fdf2f8" stroke="#f472b6"/>
-                        <rect x="110" y="40" width="80" height="20" fill="#fff" stroke="#f9a8d4"/>
-                        <circle cx="120" cy="90" r="8" fill="#334155"/>
-                        <circle cx="180" cy="90" r="8" fill="#334155"/>
-                        <!-- Адам -->
-                        <circle cx="150" cy="45" r="8" fill="#be185d" transform="rotate(25 150 45)"/>
-                        <line x1="150" y1="53" x2="160" y2="80" stroke="#be185d" stroke-width="3" transform="rotate(25 155 66)"/>
-
-                        <!-- Тоқтау -->
-                        <text x="50" y="55" font-size="24" font-weight="bold" fill="#dc2626">STOP!</text>
-                        <line x1="100" y1="60" x2="80" y2="60" stroke="#dc2626" stroke-width="3"/>
-                        <polyline points="80 60, 90 55, 90 65, 80 60" fill="#dc2626"/>
-                    </svg>
-
-                    <p lang="kk" class="lang-content mt-2"><strong>Мысал:</strong> Автобус кенет тоқтағанда, жолаушылар инерциямен алға қарай қозғалысын жалғастыруға тырысады.</p>
-                    <p lang="en" class="lang-content mt-2"><strong>Example:</strong> When a bus stops suddenly, passengers lurch forward, trying to continue their motion by inertia.</p>
-                    <p lang="ru" class="lang-content mt-2"><strong>Пример:</strong> Когда автобус резко тормозит, пассажиры по инерции наклоняются вперед, стараясь сохранить свое движение.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. МАССА ЖӘНЕ ИНЕРЦИЯ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Масса және Инерттілік</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Mass and Inertia</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Масса и Инертность</h2>
-
-            <div class="rule-card border-t-gray-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="kk">Масса (m)</span> – бұл дененің <strong>инерттілігінің</strong> (инерциясының) өлшемі.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="en">Mass (m)</span> is the measure of a body's <strong>inertia</strong>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    <span class="term" lang="ru">Масса (m)</span> – это мера <strong>инертности</strong> (инерции) тела.
-                </p>
-
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">Дененің массасы <strong>неғұрлым үлкен</strong> болса, оның инерциясы соғұрлым <strong>көп</strong> болады (яғни, оны орнынан қозғалту немесе тоқтату қиынырақ).</p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">The <strong>greater</strong> the mass of a body, the <strong>greater</strong> its inertia (i.e., it is harder to start or stop)..</p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">Чем <strong>больше</strong> масса тела, тем <strong>больше</strong> его инерция (т.е. его труднее сдвинуть с места или остановить).</p>
-
-                <!-- Иллюстрация: Тас пен доп -->
-                <svg class="illustration-svg" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Жеңіл доп -->
-                    <circle cx="70" cy="80" r="15" fill="#f472b6"/>
-                    <line x1="70" y1="80" x2="100" y2="80" stroke="#9d174d" stroke-width="2" stroke-dasharray="3"/>
-                    <polyline points="100 80, 90 75, 90 85, 100 80" fill="#9d174d"/>
-                    <text x="85" y="70" font-size="10" text-anchor="middle" class="lang-content" lang="kk">Оңай</text>
-                    <text x="85" y="70" font-size="10" text-anchor="middle" class="lang-content" lang="en">Easy</text>
-                    <text x="85" y="70" font-size="10" text-anchor="middle" class="lang-content" lang="ru">Легко</text>
-
-                    <!-- Ауыр тас -->
-                    <path d="M 200 80 Q 210 60, 230 60 Q 250 60, 260 80 Z" fill="#9ca3af"/>
-                    <line x1="230" y1="80" x2="240" y2="80" stroke="#334155" stroke-width="2" stroke-dasharray="3"/>
-                    <polyline points="240 80, 235 77, 235 83, 240 80" fill="#334155"/>
-                    <text x="235" y="70" font-size="10" text-anchor="middle" class="lang-content" lang="kk">Қиын</text>
-                    <text x="235" y="70" font-size="10" text-anchor="middle" class="lang-content" lang="en">Hard</text>
-                    <text x="235" y="70" font-size="10" text-anchor="middle" class="lang-content" lang="ru">Трудно</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-gray-800">БАСТЫ ОЙ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-gray-800">SUMMARY</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-gray-800">ГЛАВНАЯ МЫСЛЬ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                <span class="term" lang="kk">Инерция</span> – бұл "жалқаулық" сияқты: тыныш тұрған дене қозғалғысы келмейді, ал қозғалып тұрған дене тоқтағысы келмейді.<br>
-                Дененің <span class="term" lang="kk">массасы</span> неғұрлым көп болса, оның инерциясы (жалқаулығы) соғұрлым көп болады.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                <span class="term" lang="en">Inertia</span> is like "laziness": an object at rest wants to stay at rest, and an object in motion wants to stay in motion.<br>
-                The more <span class="term" lang="en">mass</span> a body has, the more inertia ("laziness") it has.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-gray-700">
-                <span class="term" lang="ru">Инерция</span> – это как "лень": тело в покое не хочет двигаться, а движущееся тело не хочет останавливаться.<br>
-                Чем больше <span class="term" lang="ru">масса</span> тела, тем больше у него инерция ("лень").
-            </p>
-        </footer>
-
-    </div>
-
-    
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

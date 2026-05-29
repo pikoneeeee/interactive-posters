@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электрическое поле. Напряжённость</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
+</head>
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
+
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">11 сынып · Электростатика</span>
+<span lang="en" class="lang-content">Grade 11 · Electrostatics</span>
+<span lang="ru" class="lang-content">11 класс · Электростатика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электр өрісі. Кернеулік</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Electric field. Field strength</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Электрическое поле. Напряжённость</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌐 Өріс деген не?</span>
+<span lang="en" class="lang-content">🌐 What is a field?</span>
+<span lang="ru" class="lang-content">🌐 Что такое поле?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Электр өрісі</b> — электр зарядтары айналасында пайда болатын <b>материяның ерекше түрі</b>. Көзге көрінбейді, бірақ <b>әсері нақты</b>: басқа зарядқа күшпен ықпал етеді. <b>Майкл Фарадей</b> 1830-шы жылдары ұсынған өріс концепциясы — заманауи физиканың <b>негізі</b>. Әсер <b>қашықтан ғана емес</b>, өріс арқылы <b>жарық жылдамдығымен</b> таралады!</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">An electric field</b> is a <b>special form of matter</b> existing around any electric charge. Invisible — yet very real: it exerts a force on any other charge. The field concept by <b>Michael Faraday</b> (1830s) is the <b>foundation</b> of modern physics: interactions don't happen «at a distance», they propagate <b>through the field at the speed of light</b>!</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Электрическое поле</b> — <b>особая форма материи</b>, окружающая электрические заряды. Невидимо, но реально: действует силой на другой заряд. Концепция поля, введённая <b>Майклом Фарадеем</b> (1830-е), — <b>фундамент</b> современной физики: взаимодействия передаются <b>не «через пустоту»</b>, а через поле со <b>скоростью света</b>!</span></p>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">💡 <span lang="kk" class="lang-content">Өрістің 3 қасиеті:</span><span lang="en" class="lang-content">3 properties of a field:</span><span lang="ru" class="lang-content">3 свойства поля:</span></p>
+<ul class="text-slate-700 text-base list-disc pl-6 space-y-1">
+<li><span lang="kk" class="lang-content"><b>Материалдық</b>: энергиясы мен импульсі бар!</span><span lang="en" class="lang-content"><b>Material:</b> carries energy and momentum!</span><span lang="ru" class="lang-content"><b>Материально:</b> обладает энергией и импульсом!</span></li>
+<li><span lang="kk" class="lang-content"><b>Үздіксіздік</b>: кеңістіктің әр нүктесінде анықталған</span><span lang="en" class="lang-content"><b>Continuous</b>: defined at every point in space</span><span lang="ru" class="lang-content"><b>Непрерывно:</b> определено в каждой точке</span></li>
+<li><span lang="kk" class="lang-content"><b>Векторлық</b>: бағыты бар (E⃗)</span><span lang="en" class="lang-content"><b>Vector:</b> has direction (E⃗)</span><span lang="ru" class="lang-content"><b>Векторно:</b> имеет направление (E⃗)</span></li>
+</ul>
+</div></div>
+<div class="card rounded-custom p-6 flex flex-col items-center justify-center">
+<div class="text-7xl mb-3">🌌</div>
+<p class="heading-font text-xl text-indigo-700 text-center mb-3">
+<span lang="kk" class="lang-content">Заряд → Өріс → Күш</span>
+<span lang="en" class="lang-content">Charge → Field → Force</span>
+<span lang="ru" class="lang-content">Заряд → Поле → Сила</span></p>
+<p class="text-center text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Әр заряд кеңістікте өріс <b>тудырады</b>, ал басқа зарядқа сол өріс <b>әсер етеді</b>.</span>
+<span lang="en" class="lang-content">Each charge <b>creates</b> a field; the field acts on any other charge.</span>
+<span lang="ru" class="lang-content">Каждый заряд <b>создаёт</b> поле; на другой заряд действует именно поле.</span></p>
+</div></div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Кернеулік E — өріс күшін сипаттайды</span>
+<span lang="en" class="lang-content">📐 Strength E — describes the field</span>
+<span lang="ru" class="lang-content">📐 Напряжённость E — характеризует поле</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b>Электр өрісінің кернеулігі</b> — өрістің берілген <b>нүктесіндегі</b> күштік сипаттамасы. Сынау зарядына әсер ететін күшті <b>осы зарядқа бөлгенде</b>:</span>
+<span lang="en" class="lang-content"><b>Electric field strength</b> — the force exerted on a small <b>test charge</b> divided by that charge:</span>
+<span lang="ru" class="lang-content"><b>Напряжённость электрического поля</b> — векторная характеристика поля в данной точке. Сила, действующая на пробный заряд, делённая на сам заряд:</span></p>
+
+<div class="formula text-center" style="font-size:1.6rem">
+E⃗ = F⃗ / q
+</div>
+
+<p class="text-sm text-slate-700 mt-3 text-center">
+<span lang="kk" class="lang-content">[E] = <b>Н/Кл = В/м</b>. Бағыты — <b>оң зарядқа</b> әсер ететін күштің бағытымен бірдей.</span>
+<span lang="en" class="lang-content">[E] = <b>N/C = V/m</b>. Direction = direction of force on a <b>positive</b> test charge.</span>
+<span lang="ru" class="lang-content">[E] = <b>Н/Кл = В/м</b>. Направление — как сила на <b>положительный</b> пробный заряд.</span></p>
+
+<div class="card-accent rounded-2xl p-4 mt-4">
+<p class="text-indigo-900 font-bold mb-1"><span lang="kk" class="lang-content">📍 Нүктелік зарядтың өрісі:</span><span lang="en" class="lang-content">📍 Field of a point charge:</span><span lang="ru" class="lang-content">📍 Поле точечного заряда:</span></p>
+<div class="formula text-center" style="font-size:1.3rem">
+E = k · |Q| / r²
+</div>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">⭐ r ↑ → E ↓ (квадратымен). q-дан тәуелсіз!</span><span lang="en" class="lang-content">⭐ Falls as 1/r². Doesn't depend on test charge q.</span><span lang="ru" class="lang-content">⭐ E падает как 1/r². От q пробного не зависит.</span></p>
+</div>
+</div>
+
+<div class="card rounded-custom p-6">
+<p class="heading-font text-lg text-indigo-700 mb-3">📊 <span lang="kk" class="lang-content">Электр өрістерінің мысалдары:</span><span lang="en" class="lang-content">Examples of electric fields:</span><span lang="ru" class="lang-content">Примеры электрических полей:</span></p>
+<table class="t text-sm">
+<tbody>
+<tr><td><span lang="kk" class="lang-content">Жер беті</span><span lang="en" class="lang-content">Earth surface</span><span lang="ru" class="lang-content">У поверхности Земли</span></td><td>~100 В/м</td></tr>
+<tr><td><span lang="kk" class="lang-content">Үй розеткасы (~)</span><span lang="en" class="lang-content">House socket (~)</span><span lang="ru" class="lang-content">Розетка дома (~)</span></td><td>~150 В/м</td></tr>
+<tr><td><span lang="kk" class="lang-content">Ауаның сынуы</span><span lang="en" class="lang-content">Air breakdown</span><span lang="ru" class="lang-content">Пробой воздуха</span></td><td>3·10⁶ В/м</td></tr>
+<tr><td><span lang="kk" class="lang-content">Күн сәулесінде</span><span lang="en" class="lang-content">In sunlight</span><span lang="ru" class="lang-content">В солнечном свете</span></td><td>~10³ В/м</td></tr>
+<tr><td><span lang="kk" class="lang-content">Лазер сәулесінде</span><span lang="en" class="lang-content">In a laser beam</span><span lang="ru" class="lang-content">В лазерном луче</span></td><td>10¹⁰ В/м</td></tr>
+<tr class="bg-rose-50"><td><span lang="kk" class="lang-content">Сутегі атомында</span><span lang="en" class="lang-content">Inside H atom</span><span lang="ru" class="lang-content">Внутри атома H</span></td><td class="text-rose-700"><b>~5·10¹¹ В/м</b></td></tr>
+</tbody></table>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Өріс сызықтары — Фарадей әдісі</span>
+<span lang="en" class="lang-content">📏 Field lines — Faraday's picture</span>
+<span lang="ru" class="lang-content">📏 Линии поля — метод Фарадея</span></h2>
+<div class="card rounded-custom p-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+<div class="svg-wrap">
+<p class="heading-font text-sm text-indigo-700 text-center mb-2"><span lang="kk" class="lang-content">+ зарядтан</span><span lang="en" class="lang-content">From +</span><span lang="ru" class="lang-content">От + заряда</span></p>
+<svg viewBox="0 0 200 180" style="width:100%">
+<defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+<circle cx="100" cy="90" r="14" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+<text x="100" y="95" text-anchor="middle" font-weight="700" fill="#b45309">+</text>
+<g stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#ar1)">
+<line x1="113" y1="90" x2="180" y2="90"/><line x1="87" y1="90" x2="20" y2="90"/>
+<line x1="100" y1="77" x2="100" y2="20"/><line x1="100" y1="103" x2="100" y2="160"/>
+<line x1="110" y1="80" x2="160" y2="35"/><line x1="90" y1="80" x2="40" y2="35"/>
+<line x1="110" y1="100" x2="160" y2="145"/><line x1="90" y1="100" x2="40" y2="145"/>
+</g>
+</svg>
+<p class="text-xs text-slate-600 text-center mt-1"><span lang="kk" class="lang-content">Сыртқа</span><span lang="en" class="lang-content">Outward</span><span lang="ru" class="lang-content">Наружу</span></p>
+</div>
+
+<div class="svg-wrap">
+<p class="heading-font text-sm text-indigo-700 text-center mb-2"><span lang="kk" class="lang-content">− зарядқа</span><span lang="en" class="lang-content">To −</span><span lang="ru" class="lang-content">К − заряду</span></p>
+<svg viewBox="0 0 200 180" style="width:100%">
+<defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0284c7"/></marker></defs>
+<circle cx="100" cy="90" r="14" fill="#bae6fd" stroke="#0284c7" stroke-width="2"/>
+<text x="100" y="95" text-anchor="middle" font-weight="700" fill="#0284c7">−</text>
+<g stroke="#0284c7" stroke-width="2" fill="none" marker-end="url(#ar2)">
+<line x1="180" y1="90" x2="115" y2="90"/><line x1="20" y1="90" x2="85" y2="90"/>
+<line x1="100" y1="20" x2="100" y2="75"/><line x1="100" y1="160" x2="100" y2="105"/>
+<line x1="160" y1="35" x2="112" y2="82"/><line x1="40" y1="35" x2="88" y2="82"/>
+<line x1="160" y1="145" x2="112" y2="98"/><line x1="40" y1="145" x2="88" y2="98"/>
+</g>
+</svg>
+<p class="text-xs text-slate-600 text-center mt-1"><span lang="kk" class="lang-content">Ішке</span><span lang="en" class="lang-content">Inward</span><span lang="ru" class="lang-content">Внутрь</span></p>
+</div>
+
+<div class="svg-wrap">
+<p class="heading-font text-sm text-indigo-700 text-center mb-2"><span lang="kk" class="lang-content">Біртекті өріс</span><span lang="en" class="lang-content">Uniform field</span><span lang="ru" class="lang-content">Однородное поле</span></p>
+<svg viewBox="0 0 200 180" style="width:100%">
+<defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker></defs>
+<rect x="20" y="20" width="20" height="140" fill="#fde68a" stroke="#b45309"/>
+<text x="30" y="100" text-anchor="middle" font-weight="700" fill="#b45309">+</text>
+<rect x="160" y="20" width="20" height="140" fill="#bae6fd" stroke="#0284c7"/>
+<text x="170" y="100" text-anchor="middle" font-weight="700" fill="#0284c7">−</text>
+<g stroke="#7c3aed" stroke-width="2" fill="none" marker-end="url(#ar3)">
+<line x1="45" y1="40" x2="155" y2="40"/>
+<line x1="45" y1="70" x2="155" y2="70"/>
+<line x1="45" y1="100" x2="155" y2="100"/>
+<line x1="45" y1="130" x2="155" y2="130"/>
+<line x1="45" y1="155" x2="155" y2="155"/>
+</g>
+</svg>
+<p class="text-xs text-slate-600 text-center mt-1"><span lang="kk" class="lang-content">Параллель пластиналар</span><span lang="en" class="lang-content">Parallel plates</span><span lang="ru" class="lang-content">Между пластинами</span></p>
+</div>
+
+</div>
+<div class="card-accent rounded-2xl p-5 mt-5">
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">🌟 <b>Өріс сызықтары қасиеттері:</b> ① оң зарядтан шығып теріске кіреді; ② еш жерде <b>қиылыспайды</b> (бірмәнділік); ③ <b>тығыздығы</b> — E шамасының өлшемі; ④ <b>тұйықталмайды</b> (электростатикада).</span>
+<span lang="en" class="lang-content">🌟 <b>Properties of field lines:</b> ① start at +, end at −; ② <b>never cross</b>; ③ <b>density</b> indicates field magnitude; ④ <b>not closed</b> in electrostatics.</span>
+<span lang="ru" class="lang-content">🌟 <b>Свойства линий:</b> ① начинаются на +, заканчиваются на −; ② <b>не пересекаются</b>; ③ <b>густота</b> отражает модуль E; ④ <b>не замкнуты</b> в электростатике.</span></p>
+</div>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">➕ Суперпозиция принципі</span>
+<span lang="en" class="lang-content">➕ Superposition principle</span>
+<span lang="ru" class="lang-content">➕ Принцип суперпозиции</span></h2>
+<div class="card-warm rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Көп зарядты жүйенің кез келген нүктесіндегі өріс — әр зарядтың жеке тудыратын өрістерінің <b>векторлық қосындысы</b>:</span>
+<span lang="en" class="lang-content">In a system of many charges the resultant field at any point is the <b>vector sum</b> of the individual fields:</span>
+<span lang="ru" class="lang-content">В системе многих зарядов результирующее поле — <b>векторная сумма</b> отдельных полей:</span></p>
+<div class="formula text-center" style="font-size:1.4rem">
+E⃗ = E⃗₁ + E⃗₂ + … + E⃗ₙ
+</div>
+<p class="text-sm text-slate-700 mt-3"><span lang="kk" class="lang-content">⭐ Бұл принцип жоғары дәлдікпен орындалады және <b>барлық электродинамиканың</b> негізі.</span><span lang="en" class="lang-content">⭐ Holds to very high accuracy and is the basis of <b>all electrodynamics</b>.</span><span lang="ru" class="lang-content">⭐ Соблюдается с огромной точностью — основа <b>всей электродинамики</b>.</span></p>
+</div>
+</section>
+
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Worked problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Q = 5 нКл нүктелік зарядтан r = 10 см қашықтықтағы E-ні және сол нүктеге қойылған q = 2 нКл зарядқа әсер ететін F-ті табыңыз.</span>
+<span lang="en" class="lang-content">Point charge Q = 5 nC. Find E at r = 10 cm and the force on q = 2 nC placed there.</span>
+<span lang="ru" class="lang-content">Точечный заряд Q = 5 нКл. Найти E на расстоянии r = 10 см и силу на заряд q = 2 нКл в этой точке.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-base space-y-1">
+<li>Q = 5·10⁻⁹ Кл</li><li>r = 0,1 м</li><li>q = 2·10⁻⁹ Кл</li><li>k = 9·10⁹</li><li class="text-indigo-700 font-bold">E, F — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+E = kQ/r² = 9·10⁹·5·10⁻⁹/0,01
+<br/>E = <span class="num">4500</span> В/м
+<br/>F = qE = 2·10⁻⁹·4500
+<br/>F = <span class="num">9·10⁻⁶</span> Н = 9 мкН
+</div>
+<div class="badge badge-emerald mt-3">✅ E = 4500 В/м, F = 9 мкН</div>
+</div></div></div>
+</section>
+
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌐</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">E⃗ = F⃗/q</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Кернеулік анықтамасы</span><span lang="en" class="lang-content">Definition</span><span lang="ru" class="lang-content">Определение</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📍</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">E = kQ/r²</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Нүктелік заряд</span><span lang="en" class="lang-content">Point charge</span><span lang="ru" class="lang-content">Точечный заряд</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">➕</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">E⃗ = ΣE⃗ᵢ</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Суперпозиция</span><span lang="en" class="lang-content">Superposition</span><span lang="ru" class="lang-content">Суперпозиция</span></p></div>
+</div></footer>
+
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

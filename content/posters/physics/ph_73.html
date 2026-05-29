@@ -1,317 +1,168 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЖАНАРМАЙ энергиясы - Удельная теплота сгорания</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fed7aa 0%, #fdebc8 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #f97316 0%, #b45309 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #b45309; border-bottom: 3px solid #fdebc8; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #f97316; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #f97316; background: white; color: #f97316; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #f97316; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #f97316; color: white; }
-        .info-box { background: linear-gradient(135deg, #fdebc8 0%, #fed7aa 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #f97316; margin: 10px 0; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .fuel-card { background: #fffbeb; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #f97316; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Преломление света</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-orange-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-amber-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">9 сынып · Геометриялық оптика</span>
+<span lang="en" class="lang-content">Grade 9 · Geometric optics</span>
+<span lang="ru" class="lang-content">9 класс · Геометрическая оптика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Жарықтың сынуы</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Refraction of light</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-amber-700">Преломление света</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">ЖАНАРМАЙ Энергиясы</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Fuel Energy</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Энергия топлива</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-orange-100">q = Q / m формуласы. 1 кг ЖАНАРМАЙ сгорае жылусы. ПРАКТИКАЛЫҚ ЭНЕРГИЯ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-orange-100">q = Q / m formula. Heat released by 1 kg fuel. PRACTICAL ENERGY!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-orange-100">q = Q / m формула. Тепло от сжигания 1 кг топлива. ПРАКТИЧЕСКАЯ ЭНЕРГИЯ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💧 Сыну құбылысы</span>
+<span lang="en" class="lang-content">💧 Refraction phenomenon</span>
+<span lang="ru" class="lang-content">💧 Явление преломления</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content">Жарық бір <b>мөлдір ортадан</b> екіншісіне (мысалы, ауадан суға) өткенде оның <b>бағыты өзгереді</b> — бұл <b class="text-amber-700">жарықтың сынуы</b>. Себебі: жарық <b>әртүрлі</b> орталарда <b>әртүрлі жылдамдықпен</b> таралады! Суда жарық ауадағыдан <b>1,33 есе</b> баяу.</span>
+<span lang="en" class="lang-content">When light passes from one <b>transparent medium</b> to another (air → water), its <b>direction changes</b> — this is <b class="text-amber-700">refraction</b>. Cause: light travels at <b>different speeds</b> in different media. In water it is <b>1.33×</b> slower.</span>
+<span lang="ru" class="lang-content">При переходе света из одной <b>прозрачной среды</b> в другую (воздух → вода) его <b>направление изменяется</b> — это <b class="text-amber-700">преломление света</b>. Причина: свет распространяется в средах с <b>разной скоростью</b>! В воде в <b>1,33 раза</b> медленнее.</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. АНЫҚТАМАСЫ ЖӘНЕ ФОРМУЛАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. DEFINITION AND FORMULA</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение и формула</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-amber-900 font-bold mb-2">📜 <span lang="kk" class="lang-content">Снеллиус заңы (1621):</span><span lang="en" class="lang-content">Snell's law (1621):</span><span lang="ru" class="lang-content">Закон Снеллиуса (1621):</span></p>
+<div class="formula text-center" style="font-size:1.4rem">
+sin α / sin β = n₂ / n₁ = n
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content"><b>n</b> — сыну көрсеткіші. Ауа n ≈ 1; су 1,33; шыны 1,5; алмаз 2,42</span>
+<span lang="en" class="lang-content"><b>n</b> — refractive index. Air ≈ 1; water 1.33; glass 1.5; diamond 2.42</span>
+<span lang="ru" class="lang-content"><b>n</b> — показатель преломления. Воздух ≈ 1; вода 1,33; стекло 1,5; алмаз 2,42</span></p>
+</div>
+</div>
 
-            <div class="rule-card">
-                <p lang="kk" class="lang-content text-sm"><strong>🔥 УДЕЛЬНАЯ ТЕПЛОТА СГОРАНИЯ:</strong> ЖАНАРМАЙ 1 кг толығының сгорау кезінде бөлінетін жылу мөлшері.</p>
-                <p lang="en" class="lang-content text-sm"><strong>🔥 SPECIFIC HEAT OF COMBUSTION:</strong> Heat released by 1 kg of fuel burning completely.</p>
-                <p lang="ru" class="lang-content text-sm"><strong>🔥 УДЕЛЬНАЯ ТЕПЛОТА СГОРАНИЯ:</strong> Количество тепла, выделяемое при полном сгорании 1 кг топлива.</p>
+<div class="card rounded-custom p-6">
+<div class="flex justify-center">
+<svg width="320" height="220" viewBox="0 0 320 220">
+<rect x="20" y="20" width="280" height="100" fill="#e0f2fe" opacity="0.6"/>
+<rect x="20" y="120" width="280" height="80" fill="#0284c7" opacity="0.4"/>
+<text x="40" y="40" font-size="11" fill="#475569">air (n₁=1)</text>
+<text x="40" y="140" font-size="11" fill="#0284c7">water (n₂=1.33)</text>
+<line x1="160" y1="20" x2="160" y2="200" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="60" y1="40" x2="160" y2="120" stroke="#dc2626" stroke-width="2.5"/>
+<polygon points="160,120 152,108 144,116" fill="#dc2626"/>
+<line x1="160" y1="120" x2="220" y2="200" stroke="#16a34a" stroke-width="2.5"/>
+<polygon points="220,200 210,193 213,188" fill="#16a34a"/>
+<line x1="160" y1="120" x2="260" y2="40" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,2"/>
+<path d="M 160,90 A 30,30 0 0 1 145,110" stroke="#dc2626" stroke-width="1" fill="none"/>
+<text x="142" y="105" font-size="13" fill="#dc2626" font-weight="bold">α</text>
+<path d="M 160,150 A 30,30 0 0 0 178,168" stroke="#16a34a" stroke-width="1" fill="none"/>
+<text x="170" y="170" font-size="13" fill="#16a34a" font-weight="bold">β</text>
+<text x="55" y="35" font-size="11" fill="#dc2626">падающий</text>
+<text x="220" y="195" font-size="11" fill="#16a34a">преломл.</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-1"><span lang="kk" class="lang-content">Ауадан суға: β < α — сәуле нормаль жаққа жақындайды</span><span lang="en" class="lang-content">Air → water: β < α — ray bends toward normal</span><span lang="ru" class="lang-content">Воздух → вода: β < α — луч приближается к нормали</span></p>
+</div>
+</div>
+</section>
 
-                <p style="text-align: center; font-weight: bold; color: #b45309; font-size: 18px; margin: 10px 0;">
-                    q = Q / m  или  Q = q × m
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Сыну көрсеткіштері</span>
+<span lang="en" class="lang-content">📊 Refractive indices</span>
+<span lang="ru" class="lang-content">📊 Показатели преломления</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<table class="t text-sm">
+<thead><tr><th><span lang="kk" class="lang-content">Орта</span><span lang="en" class="lang-content">Medium</span><span lang="ru" class="lang-content">Среда</span></th><th>n</th><th>v, км/с</th></tr></thead>
+<tbody>
+<tr><td><span lang="kk" class="lang-content">Вакуум</span><span lang="en" class="lang-content">Vacuum</span><span lang="ru" class="lang-content">Вакуум</span></td><td>1,0000</td><td>300 000</td></tr>
+<tr><td><span lang="kk" class="lang-content">Ауа</span><span lang="en" class="lang-content">Air</span><span lang="ru" class="lang-content">Воздух</span></td><td>1,0003</td><td>≈300 000</td></tr>
+<tr><td><span lang="kk" class="lang-content">Мұз</span><span lang="en" class="lang-content">Ice</span><span lang="ru" class="lang-content">Лёд</span></td><td>1,31</td><td>229 000</td></tr>
+<tr><td>💧 <span lang="kk" class="lang-content">Су</span><span lang="en" class="lang-content">Water</span><span lang="ru" class="lang-content">Вода</span></td><td>1,33</td><td>225 000</td></tr>
+<tr><td><span lang="kk" class="lang-content">Спирт</span><span lang="en" class="lang-content">Alcohol</span><span lang="ru" class="lang-content">Спирт</span></td><td>1,36</td><td>220 000</td></tr>
+<tr><td>🪟 <span lang="kk" class="lang-content">Шыны</span><span lang="en" class="lang-content">Glass</span><span lang="ru" class="lang-content">Стекло</span></td><td>1,50–1,90</td><td>200 000</td></tr>
+<tr class="bg-amber-50"><td>💎 <span lang="kk" class="lang-content">Алмаз</span><span lang="en" class="lang-content">Diamond</span><span lang="ru" class="lang-content">Алмаз</span></td><td class="text-amber-700"><b>2,42</b></td><td>124 000</td></tr>
+</tbody></table>
+</div>
+<div class="card-warm rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-3">💡 <span lang="kk" class="lang-content">Қызық фактілер:</span><span lang="en" class="lang-content">Fun facts:</span><span lang="ru" class="lang-content">Интересные факты:</span></p>
+<ul class="text-slate-700 text-sm space-y-2">
+<li><span lang="kk" class="lang-content">⭐ <b>Жоғары n</b> — жарық <b>баяу</b>, бағыты <b>көп өзгереді</b>.</span><span lang="en" class="lang-content">⭐ <b>Higher n</b> → light is <b>slower</b>, bends <b>more</b>.</span><span lang="ru" class="lang-content">⭐ <b>Больше n</b> → свет <b>медленнее</b>, отклоняется <b>сильнее</b>.</span></li>
+<li><span lang="kk" class="lang-content">💎 <b>Алмаз</b> неге жарқырайды? Жоғары n → жарық <b>«қалып қояды»</b> → көп шағылу.</span><span lang="en" class="lang-content">💎 Why does <b>diamond</b> sparkle? High n → light gets «trapped» (TIR).</span><span lang="ru" class="lang-content">💎 Почему <b>алмаз</b> блестит? Большое n → свет «застревает» (полное отражение).</span></li>
+<li><span lang="kk" class="lang-content">🌈 <b>Кемпірқосақ</b> — су тамшыларында ақ жарық спектрге <b>ыдырайды</b>.</span><span lang="en" class="lang-content">🌈 <b>Rainbow</b> — water droplets disperse white light into spectrum.</span><span lang="ru" class="lang-content">🌈 <b>Радуга</b> — капли воды разлагают свет в спектр.</span></li>
+</ul>
+</div>
+</div>
+</section>
 
-                <div class="overflow-x-auto" style="margin-top: 15px;">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">БЕЛГІ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">ӨЛШЕМ</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Толық ішкі шағылу</span>
+<span lang="en" class="lang-content">🌟 Total internal reflection</span>
+<span lang="ru" class="lang-content">🌟 Полное внутреннее отражение</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed">
+<span lang="kk" class="lang-content"><b>Тығыз ортадан сирек ортаға</b> (мысалы, судан ауаға) жарық өткенде α өсіп <b>шекті бұрышқа</b> жетсе — сәуле <b>сынбайды</b>, <b>толық</b> кері шағылады! Бұл құбылысты <b>оптикалық талшықтар</b> (интернет), <b>перископтар</b>, <b>зергерлік әшекейлер</b> үшін қолданады.</span>
+<span lang="en" class="lang-content">From a <b>denser to a less dense</b> medium (water → air), once α reaches the <b>critical angle</b>, light <b>cannot refract</b> — it reflects <b>completely</b>! Used in <b>optical fibres</b> (internet), <b>periscopes</b>, jewellery.</span>
+<span lang="ru" class="lang-content">При переходе из <b>более плотной</b> среды в <b>менее плотную</b> (вода → воздух) при α больше <b>предельного угла</b> свет <b>не преломляется</b>, а <b>полностью</b> отражается! Используют в <b>оптоволокне</b> (интернет), <b>перископах</b>, ювелирном деле.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-amber-700 mb-3">🌐 <span lang="kk" class="lang-content">Шекті бұрыштар (ауаға):</span><span lang="en" class="lang-content">Critical angles (to air):</span><span lang="ru" class="lang-content">Предельные углы (в воздух):</span></p>
+<ul class="text-slate-700 text-sm space-y-1">
+<li>💧 <span lang="kk" class="lang-content">Су:</span><span lang="en" class="lang-content">Water:</span><span lang="ru" class="lang-content">Вода:</span> <b>49°</b></li>
+<li>🪟 <span lang="kk" class="lang-content">Шыны:</span><span lang="en" class="lang-content">Glass:</span><span lang="ru" class="lang-content">Стекло:</span> <b>~42°</b></li>
+<li>💎 <span lang="kk" class="lang-content">Алмаз:</span><span lang="en" class="lang-content">Diamond:</span><span lang="ru" class="lang-content">Алмаз:</span> <b>24°</b></li>
+</ul>
+<p class="text-xs text-slate-600 mt-3"><span lang="kk" class="lang-content">⭐ Алмазда жарық 14 рет ішке шағылады — сондықтан жалтырауық!</span><span lang="en" class="lang-content">⭐ In diamond, light reflects ~14 times — that's the sparkle!</span><span lang="ru" class="lang-content">⭐ В алмазе свет отражается ~14 раз — отсюда блеск!</span></p>
+</div>
+</div>
+</section>
 
-                            <th lang="en" class="lang-content">SYMBOL</th>
-                            <th lang="en" class="lang-content">MEANING</th>
-                            <th lang="en" class="lang-content">UNIT</th>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-amber-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">👀 Сыну: күнделікті өмірде</span>
+<span lang="en" class="lang-content">👀 Refraction in everyday life</span>
+<span lang="ru" class="lang-content">👀 Преломление в жизни</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🥄</div>
+<p class="text-sm text-slate-700"><span lang="kk" class="lang-content">Қасық суда <b>сынғандай</b></span><span lang="en" class="lang-content">Spoon looks <b>broken</b> in water</span><span lang="ru" class="lang-content">Ложка в воде <b>преломляется</b></span></p>
+</div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🐟</div>
+<p class="text-sm text-slate-700"><span lang="kk" class="lang-content">Балық <b>көрінгеннен жақын</b></span><span lang="en" class="lang-content">Fish appears <b>closer</b></span><span lang="ru" class="lang-content">Рыба кажется <b>ближе</b></span></p>
+</div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🌅</div>
+<p class="text-sm text-slate-700"><span lang="kk" class="lang-content">Күн көкжиектен <b>ертерек</b> көтеріледі</span><span lang="en" class="lang-content">Sun rises <b>earlier</b> at horizon</span><span lang="ru" class="lang-content">Солнце «всходит» <b>раньше</b></span></p>
+</div>
+<div class="card rounded-custom p-5 text-center"><div class="text-4xl mb-2">🏜️</div>
+<p class="text-sm text-slate-700"><span lang="kk" class="lang-content">Шөл миражы</span><span lang="en" class="lang-content">Desert mirage</span><span lang="ru" class="lang-content">Мираж в пустыне</span></p>
+</div>
+</div>
+</section>
 
-                            <th lang="ru" class="lang-content">СИМВОЛ</th>
-                            <th lang="ru" class="lang-content">ЗНАЧЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ЕДИНИЦА</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">q</td>
-                            <td lang="kk" class="lang-content">Удельная теплота сгорания</td>
-                            <td lang="kk" class="lang-content">Дж/кг</td>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-amber-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📜</div>
+<p class="heading-font text-xl text-amber-700 mb-2">n = c/v</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Сыну көрсеткіші</span><span lang="en" class="lang-content">Refractive index</span><span lang="ru" class="lang-content">Показатель преломления</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">↗️</div>
+<p class="heading-font text-xl text-amber-700 mb-2">n↑ → v↓</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тығыз орта — баяу</span><span lang="en" class="lang-content">Denser → slower</span><span lang="ru" class="lang-content">Плотнее → медленнее</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌟</div>
+<p class="heading-font text-xl text-amber-700 mb-2"><span lang="kk" class="lang-content">Толық шағылу</span><span lang="en" class="lang-content">Total internal</span><span lang="ru" class="lang-content">Полное отраж.</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Оптоволокно, алмаз</span><span lang="en" class="lang-content">Fiber, diamond</span><span lang="ru" class="lang-content">Оптоволокно, алмаз</span></p></div>
+</div></footer>
 
-                            <td lang="en" class="lang-content">q</td>
-                            <td lang="en" class="lang-content">Specific heat of combustion</td>
-                            <td lang="en" class="lang-content">J/kg</td>
-
-                            <td lang="ru" class="lang-content">q</td>
-                            <td lang="ru" class="lang-content">Удельная теплота сгорания</td>
-                            <td lang="ru" class="lang-content">Дж/кг</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Q</td>
-                            <td lang="kk" class="lang-content">Жылу мөлшері</td>
-                            <td lang="kk" class="lang-content">Дж</td>
-
-                            <td lang="en" class="lang-content">Q</td>
-                            <td lang="en" class="lang-content">Heat released</td>
-                            <td lang="en" class="lang-content">J</td>
-
-                            <td lang="ru" class="lang-content">Q</td>
-                            <td lang="ru" class="lang-content">Количество тепла</td>
-                            <td lang="ru" class="lang-content">Дж</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">m</td>
-                            <td lang="kk" class="lang-content">ЖАНАРМАЙ массасы</td>
-                            <td lang="kk" class="lang-content">кг</td>
-
-                            <td lang="en" class="lang-content">m</td>
-                            <td lang="en" class="lang-content">Fuel mass</td>
-                            <td lang="en" class="lang-content">kg</td>
-
-                            <td lang="ru" class="lang-content">m</td>
-                            <td lang="ru" class="lang-content">Масса топлива</td>
-                            <td lang="ru" class="lang-content">кг</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТОПЛИВДАРЫНЫҢ УДЕЛЬНАЯ ТЕПЛОТА</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. SPECIFIC HEAT OF FUELS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Удельная теплота топлив</h2>
-
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ТОПЛИВЫ</th>
-                            <th lang="kk" class="lang-content">q (Дж/кг)</th>
-                            <th lang="kk" class="lang-content">МДж/кг</th>
-                            <th lang="kk" class="lang-content">ТҮРІ</th>
-
-                            <th lang="en" class="lang-content">FUEL</th>
-                            <th lang="en" class="lang-content">q (J/kg)</th>
-                            <th lang="en" class="lang-content">MJ/kg</th>
-                            <th lang="en" class="lang-content">TYPE</th>
-
-                            <th lang="ru" class="lang-content">ТОПЛИВО</th>
-                            <th lang="ru" class="lang-content">q (Дж/кг)</th>
-                            <th lang="ru" class="lang-content">МДж/кг</th>
-                            <th lang="ru" class="lang-content">ТИП</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Көмір</td>
-                            <td lang="kk" class="lang-content">27×10⁶</td>
-                            <td lang="kk" class="lang-content">27</td>
-                            <td lang="kk" class="lang-content">Қатты</td>
-
-                            <td lang="en" class="lang-content">Coal</td>
-                            <td lang="en" class="lang-content">27×10⁶</td>
-                            <td lang="en" class="lang-content">27</td>
-                            <td lang="en" class="lang-content">Solid</td>
-
-                            <td lang="ru" class="lang-content">Уголь</td>
-                            <td lang="ru" class="lang-content">27×10⁶</td>
-                            <td lang="ru" class="lang-content">27</td>
-                            <td lang="ru" class="lang-content">Твёрдый</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Мұнай</td>
-                            <td lang="kk" class="lang-content">46×10⁶</td>
-                            <td lang="kk" class="lang-content">46</td>
-                            <td lang="kk" class="lang-content">Сұйық</td>
-
-                            <td lang="en" class="lang-content">Oil</td>
-                            <td lang="en" class="lang-content">46×10⁶</td>
-                            <td lang="en" class="lang-content">46</td>
-                            <td lang="en" class="lang-content">Liquid</td>
-
-                            <td lang="ru" class="lang-content">Нефть</td>
-                            <td lang="ru" class="lang-content">46×10⁶</td>
-                            <td lang="ru" class="lang-content">46</td>
-                            <td lang="ru" class="lang-content">Жидкость</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Газ (метан)</td>
-                            <td lang="kk" class="lang-content">55×10⁶</td>
-                            <td lang="kk" class="lang-content">55</td>
-                            <td lang="kk" class="lang-content">Газ</td>
-
-                            <td lang="en" class="lang-content">Natural gas</td>
-                            <td lang="en" class="lang-content">55×10⁶</td>
-                            <td lang="en" class="lang-content">55</td>
-                            <td lang="en" class="lang-content">Gas</td>
-
-                            <td lang="ru" class="lang-content">Газ (метан)</td>
-                            <td lang="ru" class="lang-content">55×10⁶</td>
-                            <td lang="ru" class="lang-content">55</td>
-                            <td lang="ru" class="lang-content">Газ</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Дрова</td>
-                            <td lang="kk" class="lang-content">17×10⁶</td>
-                            <td lang="kk" class="lang-content">17</td>
-                            <td lang="kk" class="lang-content">Қатты</td>
-
-                            <td lang="en" class="lang-content">Wood</td>
-                            <td lang="en" class="lang-content">17×10⁶</td>
-                            <td lang="en" class="lang-content">17</td>
-                            <td lang="en" class="lang-content">Solid</td>
-
-                            <td lang="ru" class="lang-content">Дрова</td>
-                            <td lang="ru" class="lang-content">17×10⁶</td>
-                            <td lang="ru" class="lang-content">17</td>
-                            <td lang="ru" class="lang-content">Твёрдый</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>📊 САЛЫСТЫРМАЛЫ:</strong> Газ (55) > Мұнай (46) > Көмір (27) > Дрова (17). Газ ең эффективті, дрова ең төмен. МДж/кг = 10⁶ Дж/кг!</p>
-                <p lang="en" class="lang-content text-sm"><strong>📊 COMPARISON:</strong> Gas (55) > Oil (46) > Coal (27) > Wood (17). Gas most efficient, wood least. MJ/kg = 10⁶ J/kg!</p>
-                <p lang="ru" class="lang-content text-sm"><strong>📊 СРАВНЕНИЕ:</strong> Газ (55) > Нефть (46) > Уголь (27) > Дрова (17). Газ эффективнее, дрова менее. МДж/кг = 10⁶ Дж/кг!</p>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. ЕСЕПТЕУ МЫСАЛДАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. CALCULATION EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Примеры расчётов</h2>
-
-            <div class="rule-card">
-                <div class="grid-3">
-                    <div class="fuel-card">
-                        <p lang="kk" class="lang-content"><strong>⛽ МЫСАЛ 1: Мұнай</strong></p>
-                        <p lang="kk" class="lang-content">m = 2 кг, q = 46×10⁶</p>
-                        <p lang="kk" class="lang-content">Q = q × m</p>
-                        <p lang="kk" class="lang-content">Q = 46×10⁶ × 2</p>
-                        <p lang="kk" class="lang-content"><strong>Q = 92×10⁶ Дж = 92 МДж</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>⛽ EXAMPLE 1: Oil</strong></p>
-                        <p lang="en" class="lang-content">m = 2 kg, q = 46×10⁶</p>
-                        <p lang="en" class="lang-content">Q = q × m</p>
-                        <p lang="en" class="lang-content">Q = 46×10⁶ × 2</p>
-                        <p lang="en" class="lang-content"><strong>Q = 92×10⁶ J = 92 MJ</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>⛽ ПРИМЕР 1: Нефть</strong></p>
-                        <p lang="ru" class="lang-content">m = 2 кг, q = 46×10⁶</p>
-                        <p lang="ru" class="lang-content">Q = q × m</p>
-                        <p lang="ru" class="lang-content">Q = 46×10⁶ × 2</p>
-                        <p lang="ru" class="lang-content"><strong>Q = 92×10⁶ Дж = 92 МДж</strong></p>
-                    </div>
-
-                    <div class="fuel-card">
-                        <p lang="kk" class="lang-content"><strong>🪨 МЫСАЛ 2: Көмір</strong></p>
-                        <p lang="kk" class="lang-content">m = 5 кг, q = 27×10⁶</p>
-                        <p lang="kk" class="lang-content">Q = q × m</p>
-                        <p lang="kk" class="lang-content">Q = 27×10⁶ × 5</p>
-                        <p lang="kk" class="lang-content"><strong>Q = 135×10⁶ Дж = 135 МДж</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>🪨 EXAMPLE 2: Coal</strong></p>
-                        <p lang="en" class="lang-content">m = 5 kg, q = 27×10⁶</p>
-                        <p lang="en" class="lang-content">Q = q × m</p>
-                        <p lang="en" class="lang-content">Q = 27×10⁶ × 5</p>
-                        <p lang="en" class="lang-content"><strong>Q = 135×10⁶ J = 135 MJ</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>🪨 ПРИМЕР 2: Уголь</strong></p>
-                        <p lang="ru" class="lang-content">m = 5 кг, q = 27×10⁶</p>
-                        <p lang="ru" class="lang-content">Q = q × m</p>
-                        <p lang="ru" class="lang-content">Q = 27×10⁶ × 5</p>
-                        <p lang="ru" class="lang-content"><strong>Q = 135×10⁶ Дж = 135 МДж</strong></p>
-                    </div>
-
-                    <div class="fuel-card">
-                        <p lang="kk" class="lang-content"><strong>💨 МЫСАЛ 3: Газ</strong></p>
-                        <p lang="kk" class="lang-content">Q = 110×10⁶ Дж, q = 55×10⁶</p>
-                        <p lang="kk" class="lang-content">m = Q / q</p>
-                        <p lang="kk" class="lang-content">m = 110×10⁶ / 55×10⁶</p>
-                        <p lang="kk" class="lang-content"><strong>m = 2 кг газ сгорел</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>💨 EXAMPLE 3: Gas</strong></p>
-                        <p lang="en" class="lang-content">Q = 110×10⁶ J, q = 55×10⁶</p>
-                        <p lang="en" class="lang-content">m = Q / q</p>
-                        <p lang="en" class="lang-content">m = 110×10⁶ / 55×10⁶</p>
-                        <p lang="en" class="lang-content"><strong>m = 2 kg gas burned</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>💨 ПРИМЕР 3: Газ</strong></p>
-                        <p lang="ru" class="lang-content">Q = 110×10⁶ Дж, q = 55×10⁶</p>
-                        <p lang="ru" class="lang-content">m = Q / q</p>
-                        <p lang="ru" class="lang-content">m = 110×10⁶ / 55×10⁶</p>
-                        <p lang="ru" class="lang-content"><strong>m = 2 кг газа сгорело</strong></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fdebc8; border-radius: 1rem; border-top: 4px solid #f97316;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-orange-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-orange-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-orange-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Удельная теплота сгорания (q) - 1 кг ЖАНАРМАЙ сгорау кезінде бөлінетін жылу. Q = q × m формуласы. Газ ең эффективті (55 МДж/кг), дрова төмен (17 МДж/кг). Топливы энергиясы - практикалық көлік, электр, құрылғылар!</p>
-            <p lang="en" class="lang-content text-sm">Specific heat of combustion (q) = heat from 1 kg fuel burning. Q = q × m formula. Gas most efficient (55 MJ/kg), wood least (17 MJ/kg). Fuel energy powers transport, electricity, devices!</p>
-            <p lang="ru" class="lang-content text-sm">Удельная теплота сгорания (q) = тепло от 1 кг топлива. Q = q × m формула. Газ эффективнее (55 МДж/кг), дрова меньше (17 МДж/кг). Энергия топлива питает транспорт, электричество, приборы!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

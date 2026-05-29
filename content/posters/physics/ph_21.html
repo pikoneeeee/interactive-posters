@@ -1,391 +1,210 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Давление в жидкости и газе</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f9ff; /* sky-50 */
-            overflow-x: hidden;
-            color: #0c4a6e; /* sky-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Sky Theme */
-        .header-card {
-            background-color: #0284c7; /* sky-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #0369a1; /* sky-700 */
-            border-bottom: 3px solid #7dd3fc; /* sky-300 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #e0f2fe; /* sky-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #0369a1; /* sky-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #0284c7; /* sky-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #0284c7;
-            background-color: #ffffff;
-            color: #0284c7;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #f0f9ff;
-        }
-        .lang-btn.active {
-            background-color: #0284c7;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 220px;
-            margin: 15px 0;
-            border: 1px solid #bae6fd;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #0369a1;
-            text-anchor: middle;
-        }
-        .svg-water {
-            fill: #7dd3fc;
-            opacity: 0.6;
-        }
-        .svg-arrow-force {
-            stroke: #dc2626;
-            stroke-width: 2;
-            marker-end: url(#arrowhead-red);
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сообщающиеся сосуды</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-sky-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Қысым</span>
+<span lang="en" class="lang-content">Grade 7 · Pressure</span>
+<span lang="ru" class="lang-content">7 класс · Давление</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Жалғасқан ыдыстар</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Connected vessels</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Сообщающиеся сосуды</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌊 Не үшін су бір деңгейде орналасады?</span>
+<span lang="en" class="lang-content">🌊 Why does water settle to one level?</span>
+<span lang="ru" class="lang-content">🌊 Почему вода устанавливается на одном уровне?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content"><b class="text-indigo-700">Жалғасқан ыдыстар</b> — астыңғы жағынан немесе түтікпен <b>бір-бірімен қосылған</b> ыдыстар. Олардағы бір текті сұйық — қандай пішінде болса да — <b>бірдей деңгейде</b> орналасады. Шай қалпағы, бак, U-түтік, фонтан — бәрі осы принципке негізделген.</span>
+<span lang="en" class="lang-content"><b class="text-indigo-700">Connected vessels</b> are vessels joined by a tube or at the bottom. A single homogeneous liquid in them — whatever the shape — settles at the <b>same level</b>. Teapot, tank, U-tube, fountain — all rely on this principle.</span>
+<span lang="ru" class="lang-content"><b class="text-indigo-700">Сообщающиеся сосуды</b> — это ёмкости, соединённые трубкой или в нижней части. Однородная жидкость в них — какой бы ни была форма — устанавливается на <b>одном уровне</b>. Чайник, бак, U-образная трубка, фонтан — всё на этом принципе.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">СҰЙЫҚТАР МЕН ГАЗДАРДАҒЫ ҚЫСЫМ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">PRESSURE IN LIQUIDS AND GASES</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ДАВЛЕНИЕ В ЖИДКОСТЯХ И ГАЗАХ</h1>
+<p class="text-slate-700 text-base leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b>Себебі</b>: тереңдіктің бірдей нүктелерінде қысым да бірдей (p = ρgh). Егер деңгейлер әртүрлі болса, бір жағынан қысым артық болады және сұйық сол жаққа қарай ағады. Деңгейлер теңесе — қысымдар теңеседі — ағыс тоқтайды.</span>
+<span lang="en" class="lang-content"><b>Why</b>: at equal depths the pressure is equal (p = ρgh). If the levels differ, pressure is higher on one side and liquid flows there. When levels equalise, pressures balance — flow stops.</span>
+<span lang="ru" class="lang-content"><b>Почему</b>: на одной глубине давление одинаково (p = ρgh). При разных уровнях давление выше с одной стороны, и жидкость перетекает туда. Когда уровни сравняются — давления тоже — поток прекращается.</span></p>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-sky-100">Паскаль заңы және Архимед күшінің негіздері.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-sky-100">Pascal's Law and fundamentals of buoyancy.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-sky-100">Закон Паскаля и основы выталкивающей силы.</p>
-        </header>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">📌 Бір текті сұйықтар үшін:</span>
+<span lang="en" class="lang-content">📌 For a single homogeneous liquid:</span>
+<span lang="ru" class="lang-content">📌 Для однородной жидкости:</span></p>
+<div class="formula text-center" style="font-size:1.5rem">
+<span class="var">h</span>₁ = <span class="var">h</span>₂ = <span class="var">h</span>₃ = ...
+</div>
+</div>
+</div>
 
-        <!-- 1. ПАСКАЛЬ ЗАҢЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Паскаль заңы</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. Pascal's Law</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Закон Паскаля</h2>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 240 220" style="width:200px">
+<!-- Сосуды разной формы -->
+<rect x="20" y="40" width="30" height="160" fill="none" stroke="#1e293b" stroke-width="3"/>
+<polygon points="80,40 110,40 130,200 70,200" fill="none" stroke="#1e293b" stroke-width="3"/>
+<rect x="150" y="40" width="60" height="160" fill="none" stroke="#1e293b" stroke-width="3"/>
+<!-- Соединительная трубка снизу -->
+<rect x="20" y="195" width="190" height="20" fill="#1e293b"/>
+<!-- Вода -->
+<rect x="22" y="110" width="26" height="90" fill="#93c5fd" opacity="0.8"/>
+<polygon points="83,110 107,110 130,200 70,200" fill="#93c5fd" opacity="0.8"/>
+<rect x="152" y="110" width="56" height="90" fill="#93c5fd" opacity="0.8"/>
+<!-- Линия уровня -->
+<line x1="0" y1="110" x2="230" y2="110" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="220" y="105" fill="#dc2626" font-size="11" font-weight="700">h</text>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-3">
+<span lang="kk" class="lang-content">Барлық ыдыстарда — бірдей деңгей</span>
+<span lang="en" class="lang-content">All vessels — same level</span>
+<span lang="ru" class="lang-content">Во всех — одинаковый уровень</span></p>
+</div></div></section>
 
-            <div class="rule-card border-t-sky-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Сұйықтар мен газдарға түсірілген қысым <strong>барлық бағытқа бірдей</strong> беріледі.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Pressure applied to an enclosed fluid is transmitted <strong>equally in all directions</strong>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Давление, производимое на жидкость или газ, передается <strong>одинаково во все стороны</strong>.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">⚖️ Әртүрлі сұйықтар: U-түтіктің формуласы</span>
+<span lang="en" class="lang-content">⚖️ Different liquids: U-tube formula</span>
+<span lang="ru" class="lang-content">⚖️ Разные жидкости: формула U-трубки</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Жалғасқан ыдыстарға <b>әртүрлі сұйықтар</b> құйсақ (мысалы, сол жақта судың үстіне май), деңгейлер <b>тең емес</b> болады. <b>Тығыздығы аз</b> сұйықтың деңгейі <b>жоғары</b> болады. Олардың биіктіктері тығыздықтарына кері пропорционал:</span>
+<span lang="en" class="lang-content">If we pour <b>different liquids</b> into connected vessels (e.g. oil on top of water on one side), the levels <b>differ</b>. The <b>lighter</b> liquid sits <b>higher</b>. Heights are inversely proportional to densities:</span>
+<span lang="ru" class="lang-content">Если в сообщающиеся сосуды налить <b>разные жидкости</b> (например, на воду — масло), уровни <b>не совпадают</b>. Менее <b>плотная</b> жидкость стоит <b>выше</b>. Высоты обратно пропорциональны плотностям:</span></p>
+<div class="card-accent rounded-2xl p-5">
+<div class="formula text-center" style="font-size:1.5rem">
+<span class="var">ρ</span>₁<span class="var">h</span>₁ = <span class="var">ρ</span>₂<span class="var">h</span>₂
+</div>
+<p class="text-slate-700 text-sm mt-3 text-center">
+<span lang="kk" class="lang-content">түбіндегі қысымдар тең болғандықтан</span>
+<span lang="en" class="lang-content">because pressures at the bottom are equal</span>
+<span lang="ru" class="lang-content">так как давления на дне равны</span></p>
+</div>
+</div>
+<div class="card-accent rounded-custom p-6">
+<div class="svg-wrap">
+<svg viewBox="0 0 280 240" style="width:100%;max-width:280px;margin:auto">
+<!-- U-трубка -->
+<path d="M30,30 L30,180 Q30,210 60,210 L220,210 Q250,210 250,180 L250,30" fill="none" stroke="#1e293b" stroke-width="3"/>
+<!-- Вода (слева) -->
+<path d="M30,80 L30,180 Q30,210 60,210 L140,210 L140,140 Q140,135 130,135 L40,135 Q30,135 30,140 Z" fill="#93c5fd" opacity="0.8"/>
+<path d="M30,80 L70,80 L70,135 L30,135 Z" fill="#93c5fd" opacity="0.8"/>
+<!-- Масло справа (выше) -->
+<path d="M140,140 L140,210 L220,210 Q250,210 250,180 L250,50 L210,50 L210,140 Z" fill="#fbbf24" opacity="0.8"/>
+<!-- Метки -->
+<line x1="0" y1="50" x2="20" y2="50" stroke="#b45309" stroke-width="2"/>
+<line x1="0" y1="80" x2="20" y2="80" stroke="#1e40af" stroke-width="2"/>
+<text x="260" y="55" fill="#b45309" font-size="11" font-weight="700">масло</text>
+<text x="3" y="75" fill="#1e40af" font-size="10" font-weight="700">вода</text>
+<!-- Высоты -->
+<text x="265" y="120" fill="#b45309" font-size="11">h₂</text>
+<text x="3" y="110" fill="#1e40af" font-size="11">h₁</text>
+</svg>
+</div>
+<p class="text-slate-700 text-xs text-center mt-2">
+<span lang="kk" class="lang-content">Майдың деңгейі судан жоғары (ρ май &lt; ρ су)</span>
+<span lang="en" class="lang-content">Oil level higher than water's (ρ oil &lt; ρ water)</span>
+<span lang="ru" class="lang-content">Масло выше воды (ρ масла &lt; ρ воды)</span></p>
+</div>
+</div>
+</section>
 
-                <!-- Illustration 1: Pascal's Sphere -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626" />
-                        </marker>
-                        <marker id="arrowhead-water" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8" />
-                        </marker>
-                    </defs>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🚰 Күнделікті қолдану</span>
+<span lang="en" class="lang-content">🚰 Everyday applications</span>
+<span lang="ru" class="lang-content">🚰 Применения в жизни</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="tile"><div class="tile-emoji">🫖</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Шай қалпағы</span><span lang="en" class="lang-content">Teapot</span><span lang="ru" class="lang-content">Чайник</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Тұмсық пен корпус — жалғасқан</span><span lang="en" class="lang-content">Spout & body connected</span><span lang="ru" class="lang-content">Носик и корпус — сообщ.</span></p></div>
+<div class="tile"><div class="tile-emoji">⛲</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Фонтан</span><span lang="en" class="lang-content">Fountain</span><span lang="ru" class="lang-content">Фонтан</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Биік резервуар арқылы</span><span lang="en" class="lang-content">From high reservoir</span><span lang="ru" class="lang-content">От высокого резервуара</span></p></div>
+<div class="tile"><div class="tile-emoji">🚽</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Унитаз</span><span lang="en" class="lang-content">Toilet</span><span lang="ru" class="lang-content">Унитаз</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Иілген сифон — жалғасу</span><span lang="en" class="lang-content">Curved siphon</span><span lang="ru" class="lang-content">Изогнутый сифон</span></p></div>
+<div class="tile"><div class="tile-emoji">📐</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Сулы деңгей</span><span lang="en" class="lang-content">Water level</span><span lang="ru" class="lang-content">Гидроуровень</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Құрылыста көлденеңдікті өлшеу</span><span lang="en" class="lang-content">Builder's level tool</span><span lang="ru" class="lang-content">В строительстве — выравнивание</span></p></div>
+<div class="tile"><div class="tile-emoji">🏞️</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Шлюздер</span><span lang="en" class="lang-content">Locks (canals)</span><span lang="ru" class="lang-content">Шлюзы</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Кеме әр деңгейге өтеді</span><span lang="en" class="lang-content">Ships change levels</span><span lang="ru" class="lang-content">Суда меняют уровень</span></p></div>
+<div class="tile"><div class="tile-emoji">⚗️</div>
+<p class="heading-font text-base text-indigo-700">U-<span lang="kk" class="lang-content">түтік</span><span lang="en" class="lang-content">tube</span><span lang="ru" class="lang-content">трубка</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Зертханада тығыздық өлшеу</span><span lang="en" class="lang-content">Lab density measurement</span><span lang="ru" class="lang-content">В лабе — измерение ρ</span></p></div>
+<div class="tile"><div class="tile-emoji">🚿</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Су құбыры</span><span lang="en" class="lang-content">Plumbing</span><span lang="ru" class="lang-content">Водопровод</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Қала барлық суы — жалғасқан</span><span lang="en" class="lang-content">All city pipes connected</span><span lang="ru" class="lang-content">Все трубы — сообщающиеся</span></p></div>
+<div class="tile"><div class="tile-emoji">⛽</div>
+<p class="heading-font text-base text-indigo-700"><span lang="kk" class="lang-content">Жанармай датчигі</span><span lang="en" class="lang-content">Fuel gauge</span><span lang="ru" class="lang-content">Датчик топлива</span></p>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Біркелкі деңгей принципі</span><span lang="en" class="lang-content">Same-level principle</span><span lang="ru" class="lang-content">Принцип равного уровня</span></p></div>
+</div>
+</section>
 
-                    <!-- Piston Mechanism -->
-                    <rect x="150" y="20" width="100" height="40" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>
-                    <rect x="150" y="20" width="100" height="10" fill="#94a3b8" stroke="#475569"/> <!-- Piston -->
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: U-түтіктің бір тармағында 10 см биіктікте су (ρ₁ = 1000 кг/м³). Екінші тармаққа бензин (ρ₂ = 800 кг/м³) құйылды. Бензиннің биіктігі қанша?</span>
+<span lang="en" class="lang-content">📘 Problem: One arm of a U-tube has water (ρ₁ = 1000 kg/m³) 10 cm high. Gasoline (ρ₂ = 800 kg/m³) is poured into the other arm. Find the gasoline column height.</span>
+<span lang="ru" class="lang-content">📘 Задача: В одно колено U-трубки налита вода (ρ₁ = 1000 кг/м³) высотой 10 см. В другое колено наливают бензин (ρ₂ = 800 кг/м³). Найти высоту столба бензина.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>ρ₁ = 1000 <span class="unit-pill">кг/м³</span></li>
+<li>h₁ = 10 см</li>
+<li>ρ₂ = 800 <span class="unit-pill">кг/м³</span></li>
+<li>h₂ — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.05rem">
+<span class="var">ρ</span>₁<span class="var">h</span>₁ = <span class="var">ρ</span>₂<span class="var">h</span>₂
+<br/><span class="var">h</span>₂ = <span class="var">ρ</span>₁<span class="var">h</span>₁/<span class="var">ρ</span>₂
+<br/><span class="var">h</span>₂ = <span class="num">1000</span>·<span class="num">10</span>/<span class="num">800</span> = <span class="num">12,5</span> <span class="unit">см</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ Жауабы: 12,5 см</span><span lang="en" class="lang-content">✅ Answer: 12.5 cm</span><span lang="ru" class="lang-content">✅ Ответ: 12,5 см</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <!-- Pushing Hand/Force -->
-                    <line x1="200" y1="20" x2="200" y2="0" stroke="#475569" stroke-width="6"/>
-                    <line x1="200" y1="-5" x2="200" y2="20" stroke="#dc2626" stroke-width="3" marker-end="url(#arrowhead-red)"/>
-                    <text x="215" y="15" fill="#dc2626" font-weight="bold">F</text>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🌊</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Бір текті → бір деңгей</span><span lang="en" class="lang-content">Same liquid — same level</span><span lang="ru" class="lang-content">Одна жидкость — один уровень</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Пішінге тәуелсіз</span><span lang="en" class="lang-content">Independent of shape</span><span lang="ru" class="lang-content">Независимо от формы</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⚖️</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">ρ₁h₁ = ρ₂h₂</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Әртүрлі сұйықтар үшін</span><span lang="en" class="lang-content">For different liquids</span><span lang="ru" class="lang-content">Для разных жидкостей</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🚰</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Күнделікті өмірде</span><span lang="en" class="lang-content">In daily life</span><span lang="ru" class="lang-content">В быту</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Шай қалпағы, фонтан, унитаз...</span><span lang="en" class="lang-content">Teapot, fountain, toilet…</span><span lang="ru" class="lang-content">Чайник, фонтан, унитаз…</span></p></div>
+</div></footer>
 
-                    <!-- Sphere -->
-                    <circle cx="200" cy="110" r="50" fill="#bae6fd" stroke="#0369a1" stroke-width="2"/>
-
-                    <!-- Water Jets (Equal length = Equal Pressure) -->
-                    <g stroke="#38bdf8" stroke-width="3">
-                        <line x1="250" y1="110" x2="290" y2="110" marker-end="url(#arrowhead-water)"/>
-                        <line x1="150" y1="110" x2="110" y2="110" marker-end="url(#arrowhead-water)"/>
-                        <line x1="200" y1="160" x2="200" y2="200" marker-end="url(#arrowhead-water)"/>
-                        <line x1="235" y1="145" x2="265" y2="175" marker-end="url(#arrowhead-water)"/>
-                        <line x1="165" y1="145" x2="135" y2="175" marker-end="url(#arrowhead-water)"/>
-                        <line x1="235" y1="75" x2="265" y2="45" marker-end="url(#arrowhead-water)"/>
-                        <line x1="165" y1="75" x2="135" y2="45" marker-end="url(#arrowhead-water)"/>
-                    </g>
-
-                    <text x="200" y="115" class="svg-label" font-size="12">P_in = P_out</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. ГИДРОСТАТИКАЛЫҚ ҚЫСЫМ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Тереңдікке тәуелділік</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Dependence on Depth</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Зависимость от глубины</h2>
-
-            <div class="rule-card border-t-blue-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Тереңдік артқан сайын сұйықтық бағанының салмағы артады, сондықтан қысым да артады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    As depth increases, the weight of the fluid column increases, so pressure increases.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    С увеличением глубины вес столба жидкости растет, поэтому давление увеличивается.
-                </p>
-
-                <div class="example-block border-l-blue-400 bg-blue-50 text-center mb-4">
-                    <p class="text-2xl font-bold text-blue-800">P = ρ · g · h</p>
-                    <p class="text-sm text-blue-700 mt-1">h - тереңдік (depth) / ρ - тығыздық (density)</p>
-                </div>
-
-                <!-- Illustration 2: Vessel with Holes -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Tank -->
-                    <rect x="50" y="30" width="100" height="150" fill="none" stroke="#0369a1" stroke-width="3"/>
-                    <rect x="53" y="33" width="94" height="144" class="svg-water"/>
-
-                    <!-- Hole 1 (Top - Weak Jet) -->
-                    <circle cx="150" cy="60" r="3" fill="#0369a1"/>
-                    <path d="M 150 60 Q 180 60, 190 100" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="4"/>
-                    <text x="200" y="90" font-size="10" fill="#0369a1">Аз қысым / Low P</text>
-
-                    <!-- Hole 2 (Middle - Medium Jet) -->
-                    <circle cx="150" cy="100" r="3" fill="#0369a1"/>
-                    <path d="M 150 100 Q 210 100, 240 160" fill="none" stroke="#0ea5e9" stroke-width="3" stroke-dasharray="4"/>
-
-                    <!-- Hole 3 (Bottom - Strong Jet) -->
-                    <circle cx="150" cy="140" r="3" fill="#0369a1"/>
-                    <path d="M 150 140 Q 250 140, 300 190" fill="none" stroke="#0ea5e9" stroke-width="4"/>
-                    <text x="280" y="180" font-size="12" font-weight="bold" fill="#0369a1">Көп қысым / High P</text>
-
-                    <!-- Depth Ruler -->
-                    <line x1="30" y1="30" x2="30" y2="180" stroke="#475569" marker-end="url(#arrowhead-black)"/>
-                    <text x="20" y="100" class="svg-label" style="writing-mode: vertical-rl;">h (Тереңдік)</text>
-
-                    <defs>
-                        <marker id="arrowhead-black" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ҚАТЫНАС ЫДЫСТАР -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Қатынас ыдыстар</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Communicating Vessels</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Сообщающиеся сосуды</h2>
-
-            <div class="rule-card border-t-cyan-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Пішініне қарамастан, біртекті сұйықтық қатынас ыдыстарда <strong>бір деңгейде</strong> орналасады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Regardless of shape, a homogeneous liquid in communicating vessels settles at the <strong>same level</strong>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Независимо от формы, однородная жидкость в сообщающихся сосудах устанавливается на <strong>одном уровне</strong>.
-                </p>
-
-                <!-- Illustration 3: Communicating Vessels -->
-                <svg class="illustration-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Base Pipe -->
-                    <rect x="50" y="140" width="300" height="20" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>
-                    <!-- Liquid in Base -->
-                    <rect x="50" y="140" width="300" height="20" class="svg-water"/>
-
-                    <!-- Tube 1 (Straight) -->
-                    <rect x="60" y="50" width="30" height="90" fill="none" stroke="#0369a1" stroke-width="2"/>
-                    <rect x="61" y="80" width="28" height="60" class="svg-water"/> <!-- Level at y=80 -->
-
-                    <!-- Tube 2 (Wide) -->
-                    <rect x="130" y="50" width="50" height="90" fill="none" stroke="#0369a1" stroke-width="2"/>
-                    <rect x="131" y="80" width="48" height="60" class="svg-water"/>
-
-                    <!-- Tube 3 (Zigzag/Funny shape) -->
-                    <path d="M 220 140 L 220 110 L 250 110 L 250 50 L 280 50 L 280 140" fill="none" stroke="#0369a1" stroke-width="2"/>
-                    <!-- Liquid fill manual for zigzag -->
-                    <path d="M 221 140 L 221 110 L 250 110 L 250 80 L 279 80 L 279 140" class="svg-water"/>
-
-                    <!-- Tube 4 (Thin) -->
-                    <rect x="330" y="50" width="10" height="90" fill="none" stroke="#0369a1" stroke-width="2"/>
-                    <rect x="331" y="80" width="8" height="60" class="svg-water"/>
-
-                    <!-- Level Line -->
-                    <line x1="40" y1="80" x2="360" y2="80" stroke="#dc2626" stroke-dasharray="4" stroke-width="2"/>
-                    <text x="370" y="85" font-size="12" fill="#dc2626" font-weight="bold">Level</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-sky-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-sky-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-sky-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-sky-800">
-                Паскаль заңы: Қысым барлық жаққа бірдей таралады.<br>
-                Тереңдік артса, қысым артады. Қатынас ыдыстарда деңгей бірдей болады.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-sky-800">
-                Pascal's Law: Pressure spreads equally.<br>
-                Deeper = Higher Pressure. Levels are equal in communicating vessels.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-sky-800">
-                Закон Паскаля: Давление передается одинаково.<br>
-                Глубже = Больше давление. В сообщающихся сосудах уровни равны.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

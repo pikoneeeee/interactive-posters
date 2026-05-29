@@ -1,196 +1,166 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плавление және бәндіктігінің - Т-график</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #cffafe 0%, #a5f3fc 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #0e7490; border-bottom: 3px solid #a5f3fc; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #0891b2; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #0891b2; background: white; color: #0891b2; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #0891b2; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 10px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #0891b2; color: white; }
-        .info-box { background: linear-gradient(135deg, #a5f3fc 0%, #cffafe 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #0891b2; margin: 10px 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .phase-card { background: #ecf9ff; padding: 15px; border-radius: 0.5rem; border-left: 4px solid #0891b2; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Графики движения. Перемещение</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-cyan-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Кинематика</span>
+<span lang="en" class="lang-content">Grade 10 · Kinematics</span>
+<span lang="ru" class="lang-content">10 класс · Кинематика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Қозғалыс графиктері. Орын ауыстыру</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Motion graphs. Displacement</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Графики движения. Перемещение</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Балқу және қатаю</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Melting and Freezing</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Плавление и отвердевание</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-cyan-100">T-график және λ формула. Қатты → сұйық → газ. ФАЗАЛЫК ӨЗГЕРУ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-cyan-100">T-graph and λ formula. Solid → liquid → gas. PHASE TRANSITION!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-cyan-100">Т-график и λ формула. Твёрдое → жидкое → газ. ФАЗОВЫЙ ПЕРЕХОД!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📏 Жол vs Орын ауыстыру</span>
+<span lang="en" class="lang-content">📏 Path vs Displacement</span>
+<span lang="ru" class="lang-content">📏 Путь vs Перемещение</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-sky-700 mb-3">📐 <span lang="kk" class="lang-content">Жол (s) — скаляр:</span><span lang="en" class="lang-content">Path (s) — scalar:</span><span lang="ru" class="lang-content">Путь (s) — скаляр:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Траектория <b>ұзындығы</b>. Әрқашан <b>оң</b>. Жинақталады. Стадион бойымен 1 шеңбер: s = 400 м.</span>
+<span lang="en" class="lang-content"><b>Length</b> of trajectory. Always <b>positive</b>. Accumulates. One lap of stadium: s = 400 m.</span>
+<span lang="ru" class="lang-content"><b>Длина</b> траектории. Всегда <b>положительная</b>. Накапливается. 1 круг стадиона: s = 400 м.</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-sky-700 mb-3">➡️ <span lang="kk" class="lang-content">Орын ауыстыру (Δr⃗) — вектор:</span><span lang="en" class="lang-content">Displacement (Δr⃗) — vector:</span><span lang="ru" class="lang-content">Перемещение (Δr⃗) — вектор:</span></p>
+<p class="text-slate-700 text-base">
+<span lang="kk" class="lang-content">Бастапқыдан соңғы нүктеге <b>түзу сызық</b>. Модулі ≤ s. <b>1 шеңбер: Δr⃗ = 0!</b></span>
+<span lang="en" class="lang-content">Straight line from start to end. Magnitude ≤ s. <b>Full lap: Δr⃗ = 0!</b></span>
+<span lang="ru" class="lang-content"><b>Вектор</b> от начала к концу пути. Модуль ≤ s. <b>Полный круг: Δr⃗ = 0!</b></span></p>
+</div>
+</div>
+</section>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ФАЗАЛЫҚ ӨЗГЕРУ АНЫҚТАМАСЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. PHASE TRANSITION DEFINITION</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Определение фазового перехода</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📊 Графиктер</span>
+<span lang="en" class="lang-content">📊 Graphs</span>
+<span lang="ru" class="lang-content">📊 Графики</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-            <div class="rule-card">
-                <div class="grid-2">
-                    <div class="phase-card">
-                        <p lang="kk" class="lang-content"><strong>❄️ ПЛАВЛЕНИЕ (Solid → Liquid)</strong></p>
-                        <p lang="kk" class="lang-content">• Температура ұстықтарлығына (T_плав)</p>
-                        <p lang="kk" class="lang-content">• Төмен орындалды құрамасындағы</p>
-                        <p lang="kk" class="lang-content">• Молекулалар ағындарындағы</p>
-                        <p lang="kk" class="lang-content">• Әндіктігінің ең үлкен О (λ)</p>
+<div class="card rounded-custom p-5">
+<p class="heading-font text-sky-700 mb-2">📈 x(t) — <span lang="kk" class="lang-content">координат</span><span lang="en" class="lang-content">position</span><span lang="ru" class="lang-content">координата</span></p>
+<div class="flex justify-center">
+<svg width="260" height="160" viewBox="0 0 260 160">
+<line x1="30" y1="20" x2="30" y2="140" stroke="#1e293b" stroke-width="2"/>
+<line x1="30" y1="140" x2="240" y2="140" stroke="#1e293b" stroke-width="2"/>
+<text x="15" y="25" font-size="11">x</text><text x="235" y="155" font-size="11">t</text>
+<line x1="30" y1="130" x2="220" y2="40" stroke="#0284c7" stroke-width="3"/>
+<text x="100" y="75" font-size="11" fill="#0284c7">v = const</text>
+<path d="M 30,130 Q 100,130 220,30" fill="none" stroke="#dc2626" stroke-width="3"/>
+<text x="120" y="115" font-size="11" fill="#dc2626">a = const</text>
+</svg>
+</div>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Бұрыш — v; қисық — үдеу</span><span lang="en" class="lang-content">slope = v; curve → accel.</span><span lang="ru" class="lang-content">Наклон = v; кривая → ускорение</span></p>
+</div>
 
-                        <p lang="en" class="lang-content"><strong>❄️ MELTING (Solid → Liquid)</strong></p>
-                        <p lang="en" class="lang-content">• Temperature increases (T_melt)</p>
-                        <p lang="en" class="lang-content">• Crystal structure breaks</p>
-                        <p lang="en" class="lang-content">• Molecules move freely</p>
-                        <p lang="en" class="lang-content">• Requires latent heat (λ)</p>
+<div class="card rounded-custom p-5">
+<p class="heading-font text-sky-700 mb-2">📈 v(t) — <span lang="kk" class="lang-content">жылдамдық</span><span lang="en" class="lang-content">velocity</span><span lang="ru" class="lang-content">скорость</span></p>
+<div class="flex justify-center">
+<svg width="260" height="160" viewBox="0 0 260 160">
+<line x1="30" y1="20" x2="30" y2="140" stroke="#1e293b" stroke-width="2"/>
+<line x1="30" y1="140" x2="240" y2="140" stroke="#1e293b" stroke-width="2"/>
+<text x="15" y="25" font-size="11">v</text><text x="235" y="155" font-size="11">t</text>
+<line x1="30" y1="80" x2="220" y2="80" stroke="#16a34a" stroke-width="3"/>
+<text x="100" y="70" font-size="11" fill="#16a34a">v = const</text>
+<line x1="30" y1="130" x2="220" y2="40" stroke="#0284c7" stroke-width="3"/>
+<text x="140" y="100" font-size="11" fill="#0284c7">a > 0</text>
+<rect x="30" y="80" width="190" height="60" fill="#bae6fd" opacity="0.4"/>
+<text x="120" y="125" font-size="10" fill="#0284c7">S = s</text>
+</svg>
+</div>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Аудан — жол (s); бұрыш — a</span><span lang="en" class="lang-content">Area = path; slope = a</span><span lang="ru" class="lang-content">Площадь = путь; наклон = a</span></p>
+</div>
 
-                        <p lang="ru" class="lang-content"><strong>❄️ ПЛАВЛЕНИЕ (Твёрдое → Жидкое)</strong></p>
-                        <p lang="ru" class="lang-content">• Температура повышается (T_плав)</p>
-                        <p lang="ru" class="lang-content">• Кристаллическая структура ломается</p>
-                        <p lang="ru" class="lang-content">• Молекулы движутся свободно</p>
-                        <p lang="ru" class="lang-content">• Требует скрытую теплоту (λ)</p>
-                    </div>
+<div class="card rounded-custom p-5">
+<p class="heading-font text-sky-700 mb-2">📈 a(t) — <span lang="kk" class="lang-content">үдеу</span><span lang="en" class="lang-content">acceleration</span><span lang="ru" class="lang-content">ускорение</span></p>
+<div class="flex justify-center">
+<svg width="260" height="160" viewBox="0 0 260 160">
+<line x1="30" y1="20" x2="30" y2="140" stroke="#1e293b" stroke-width="2"/>
+<line x1="30" y1="140" x2="240" y2="140" stroke="#1e293b" stroke-width="2"/>
+<text x="15" y="25" font-size="11">a</text><text x="235" y="155" font-size="11">t</text>
+<line x1="30" y1="60" x2="220" y2="60" stroke="#9333ea" stroke-width="3"/>
+<text x="100" y="50" font-size="11" fill="#9333ea">a = const</text>
+<rect x="30" y="60" width="190" height="80" fill="#e9d5ff" opacity="0.4"/>
+<text x="120" y="105" font-size="10" fill="#9333ea">S = Δv</text>
+</svg>
+</div>
+<p class="text-xs text-slate-600 mt-1"><span lang="kk" class="lang-content">Аудан — Δv (жылдамдықтың өзгерісі)</span><span lang="en" class="lang-content">Area = Δv (velocity change)</span><span lang="ru" class="lang-content">Площадь = Δv (изменение скорости)</span></p>
+</div>
+</div>
+</section>
 
-                    <div class="phase-card">
-                        <p lang="kk" class="lang-content"><strong>🔥 ӨНДІКТІГІНІҢ (Liquid → Solid)</strong></p>
-                        <p lang="kk" class="lang-content">• Температура төмен болады</p>
-                        <p lang="kk" class="lang-content">• Молекулалар бәндіктігінің</p>
-                        <p lang="kk" class="lang-content">• Кристальдық құрамасындағы</p>
-                        <p lang="kk" class="lang-content">• Q = λ × m (энергия бөлінсін)</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🎯 Графиктерді оқу әдістері</span>
+<span lang="en" class="lang-content">🎯 How to read graphs</span>
+<span lang="ru" class="lang-content">🎯 Как читать графики</span></h2>
+<div class="card-warm rounded-custom p-6">
+<ul class="text-slate-700 text-base space-y-2">
+<li>⭐ <span lang="kk" class="lang-content"><b>x(t):</b> ⤴ түзу — бірқалыпты; парабола — үдемелі; көлденең — тыныштық.</span><span lang="en" class="lang-content"><b>x(t):</b> straight line — uniform; parabola — accelerated; flat — at rest.</span><span lang="ru" class="lang-content"><b>x(t):</b> прямая — равном.; парабола — ускор.; горизонталь — покой.</span></li>
+<li>⭐ <span lang="kk" class="lang-content"><b>v(t):</b> көлденең — бірқалыпты; еңіс — үдемелі. Аудан = жол.</span><span lang="en" class="lang-content"><b>v(t):</b> flat — uniform; sloped — accelerated. Area = path.</span><span lang="ru" class="lang-content"><b>v(t):</b> горизонталь — равном.; наклон — ускор. Площадь = путь.</span></li>
+<li>⭐ <span lang="kk" class="lang-content"><b>a(t):</b> көлденең — бірқалыпты үдемелі. Аудан = Δv.</span><span lang="en" class="lang-content"><b>a(t):</b> flat — uniformly accel. Area = Δv.</span><span lang="ru" class="lang-content"><b>a(t):</b> горизонталь — равноуск. Площадь = Δv.</span></li>
+<li>⭐ <span lang="kk" class="lang-content"><b>Кездесу:</b> екі графиктің <b>қиылысуы</b> — денелер кездескен сәт.</span><span lang="en" class="lang-content"><b>Meeting:</b> intersection of two x(t) graphs.</span><span lang="ru" class="lang-content"><b>Встреча:</b> точка <b>пересечения</b> двух графиков x(t).</span></li>
+</ul>
+</div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>🔥 FREEZING (Liquid → Solid)</strong></p>
-                        <p lang="en" class="lang-content">• Temperature decreases</p>
-                        <p lang="en" class="lang-content">• Molecules arrange orderly</p>
-                        <p lang="en" class="lang-content">• Crystal structure forms</p>
-                        <p lang="en" class="lang-content">• Q = λ × m (heat released)</p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-sky-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">v(t) графигі түзу. v₀ = 5 м/с, t = 8 с-та v = 21 м/с. Үдеу мен жолды табыңыз.</span>
+<span lang="en" class="lang-content">v(t) is a straight line: v₀ = 5 m/s, after t = 8 s v = 21 m/s. Find a and s.</span>
+<span lang="ru" class="lang-content">График v(t) — прямая. v₀ = 5 м/с, через t = 8 с v = 21 м/с. Найдите a и s.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>v₀ = 5 м/с</li><li>v = 21 м/с</li><li>t = 8 с</li>
+</ul></div>
+<div>
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+a = (21−5)/8 = <span class="num">2</span> м/с²
+<br/>s = (v₀+v)/2 · t = 13·8 = <span class="num">104</span> м
+</div>
+<div class="badge badge-emerald mt-3">✅ a = 2 м/с², s = 104 м</div>
+</div></div></div>
+</section>
 
-                        <p lang="ru" class="lang-content"><strong>🔥 ОТВЕРДЕВАНИЕ (Жидкое → Твёрдое)</strong></p>
-                        <p lang="ru" class="lang-content">• Температура понижается</p>
-                        <p lang="ru" class="lang-content">• Молекулы упорядочиваются</p>
-                        <p lang="ru" class="lang-content">• Кристаллическая структура</p>
-                        <p lang="ru" class="lang-content">• Q = λ × m (тепло выделяется)</p>
-                    </div>
-                </div>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-sky-700 mb-2">|Δr⃗| ≤ s</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Орын ауыс. ≤ жол</span><span lang="en" class="lang-content">Displacement ≤ path</span><span lang="ru" class="lang-content">Перемещ. ≤ путь</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-sky-700 mb-2">S = ∫v dt</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">v(t) астындағы аудан</span><span lang="en" class="lang-content">Area under v(t)</span><span lang="ru" class="lang-content">Площадь под v(t)</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📊</div>
+<p class="heading-font text-xl text-sky-700 mb-2">tan α = v / a</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Графиктің бұрышы</span><span lang="en" class="lang-content">Slope = quantity</span><span lang="ru" class="lang-content">Наклон = величина</span></p></div>
+</div></footer>
 
-                <p style="text-align: center; font-weight: bold; color: #0e7490; font-size: 18px; margin: 20px 0;">
-                    Q = λ × m  (λ = удельная теплота плавления/отвердевания)
-                </p>
-
-                <div class="overflow-x-auto" style="margin-top: 15px;">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">МАТЕРИАЛ</th>
-                            <th lang="kk" class="lang-content">T_плав (°C)</th>
-                            <th lang="kk" class="lang-content">λ (кДж/кг)</th>
-
-                            <th lang="en" class="lang-content">MATERIAL</th>
-                            <th lang="en" class="lang-content">T_melt (°C)</th>
-                            <th lang="en" class="lang-content">λ (kJ/kg)</th>
-
-                            <th lang="ru" class="lang-content">МАТЕРИАЛ</th>
-                            <th lang="ru" class="lang-content">T_плав (°C)</th>
-                            <th lang="ru" class="lang-content">λ (кДж/кг)</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Мұз</td>
-                            <td lang="kk" class="lang-content">0</td>
-                            <td lang="kk" class="lang-content">334</td>
-
-                            <td lang="en" class="lang-content">Ice</td>
-                            <td lang="en" class="lang-content">0</td>
-                            <td lang="en" class="lang-content">334</td>
-
-                            <td lang="ru" class="lang-content">Лёд</td>
-                            <td lang="ru" class="lang-content">0</td>
-                            <td lang="ru" class="lang-content">334</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Мыс</td>
-                            <td lang="kk" class="lang-content">1083</td>
-                            <td lang="kk" class="lang-content">209</td>
-
-                            <td lang="en" class="lang-content">Copper</td>
-                            <td lang="en" class="lang-content">1083</td>
-                            <td lang="en" class="lang-content">209</td>
-
-                            <td lang="ru" class="lang-content">Медь</td>
-                            <td lang="ru" class="lang-content">1083</td>
-                            <td lang="ru" class="lang-content">209</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ТЕМПЕРАТУРА-УАҚЫТ ГРАФИК</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. TEMPERATURE-TIME GRAPH</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. График температуры-времени</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>📈 ГРАФИК СИПАТТАМАСЫ:</strong></p>
-                <p lang="kk" class="lang-content text-sm">1. ҚАТТЫ: Т артады (40°C дан -10°C-қа) - линия өндіктігінең (1 минут)</p>
-                <p lang="kk" class="lang-content text-sm">2. ПЛАВЛЕННЯ: Т = 0°C (тұрақты) - горизонталь сызық (10 минут) - енгізіу λ!</p>
-                <p lang="kk" class="lang-content text-sm">3. СҰЙЫҚ: Т артады (0°C дан 50°C-қа) - линия өндіктігінең (5 минут)</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>📈 GRAPH FEATURES:</strong></p>
-                <p lang="en" class="lang-content text-sm">1. SOLID: T increases (-10°C to 0°C) - sloped line (1 min)</p>
-                <p lang="en" class="lang-content text-sm">2. MELTING: T = 0°C (constant) - horizontal (10 min) - needs λ!</p>
-                <p lang="en" class="lang-content text-sm">3. LIQUID: T increases (0°C to 50°C) - sloped line (5 min)</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>📈 ГРАФИК ХАРАКТЕРИСТИК:</strong></p>
-                <p lang="ru" class="lang-content text-sm">1. ТВЁРДОЕ: Т растёт (-10°C до 0°C) - наклонная (1 мин)</p>
-                <p lang="ru" class="lang-content text-sm">2. ПЛАВЛЕНИЕ: Т = 0°C (const) - горизонталь (10 мин) - требует λ!</p>
-                <p lang="ru" class="lang-content text-sm">3. ЖИДКОЕ: Т растёт (0°C до 50°C) - наклонная (5 мин)</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #a5f3fc; border-radius: 1rem; border-top: 4px solid #0891b2;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-cyan-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Плавления және өндіктігінің - фазалық өзгеру. T-график хоризонталь төресек - плавлення! Q = λ × m энергия қажет. Мұз (0°C, 334 кДж), мыс (1083°C, 209 кДж). Физика фазасы!</p>
-            <p lang="en" class="lang-content text-sm">Melting and freezing are phase transitions. T-graph flat section = melting! Q = λ × m energy needed. Ice (0°C, 334 kJ), copper (1083°C, 209 kJ). Physics of phases!</p>
-            <p lang="ru" class="lang-content text-sm">Плавление и отвердевание - фазовые переходы. Т-график плоская часть = плавление! Q = λ × m энергия нужна. Лёд (0°C, 334 кДж), медь (1083°C, 209 кДж). Физика фаз!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

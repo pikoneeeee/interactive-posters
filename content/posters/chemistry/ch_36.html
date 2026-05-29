@@ -1,303 +1,314 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ерітіндіктер</title>
+    <title>Растворы</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #4a044e, #581c87, #0f172a); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #4a044e, #581c87, #0f172a);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(232,121,249,0.08); border: 1px solid rgba(232,121,249,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #e879f9; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #f0abfc; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #f0abfc; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #f0abfc; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(232,121,249,0.08); border: 1px solid rgba(232,121,249,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #e879f9; color: #0f172a; border-color: transparent; font-weight: 800; }
+        .type-card { transition: all 0.3s; cursor: pointer; }
+        .type-card.active { background: rgba(232, 121, 249, 0.18); border-color: #e879f9; transform: scale(1.02); }
+        @keyframes bubble { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-3px) scale(1.05); } }
+        .particle { animation: bubble 2s ease-in-out infinite; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Ерітінділер!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Solutions!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Растворы!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">Ерітінді = еріген зат + еріткіш. Су ендіктігінің еріткіш. NaCl + H₂O = төзімсіз ертінді. Гомогендік ерітінді!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">Solution = dissolved substance + solvent. Water universal solvent. NaCl + H₂O = homogeneous solution. UNIFORM SOLUTIONS!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">Раствор = растворённое вещество + растворитель. Вода универсальный растворитель. NaCl + H₂O = однородный раствор. РАСТВОРЫ ВЕЗДЕ!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-fuchsia-400"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ЕРТІНДІ ҚҰРАМЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. COMPOSITION OF SOLUTIONS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Состав растворов</h2>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-6 glass rounded-custom p-8">
+            <h2 id="scheme-heading" class="heading-font text-xl mb-6 opacity-80 uppercase tracking-wider"></h2>
 
-            <div class="illustration">
-                <svg viewBox="0 0 400 200" width="100%" height="200">
-                    <!-- Solute molecules -->
-                    <circle cx="80" cy="60" r="8" fill="#ff6b6b" stroke="#000" stroke-width="1"/>
-                    <circle cx="100" cy="50" r="8" fill="#ff6b6b" stroke="#000" stroke-width="1"/>
-                    <circle cx="120" cy="65" r="8" fill="#ff6b6b" stroke="#000" stroke-width="1"/>
-                    <text x="80" y="110" text-anchor="middle" font-size="14" font-weight="bold">Еріген зат</text>
-                    <text x="80" y="130" text-anchor="middle" font-size="12">(NaCl, CuSO₄)</text>
+            <svg viewBox="0 0 500 280" class="w-full">
+                <g>
+                    <rect x="40" y="50" width="100" height="160" rx="10" fill="rgba(232,121,249,0.1)" stroke="#e879f9" stroke-width="2"/>
+                    <circle class="particle" cx="70" cy="100" r="10" fill="#f0abfc"/>
+                    <circle class="particle" cx="100" cy="130" r="10" fill="#f0abfc"/>
+                    <circle class="particle" cx="115" cy="170" r="10" fill="#f0abfc"/>
+                    <text id="svg-solute-name" x="90" y="240" text-anchor="middle" fill="#f0abfc" font-size="14" font-weight="bold"></text>
+                </g>
+                <text x="180" y="135" text-anchor="middle" fill="white" font-size="36" font-weight="bold">+</text>
+                <g>
+                    <rect x="220" y="50" width="100" height="160" rx="10" fill="rgba(56,189,248,0.1)" stroke="#38bdf8" stroke-width="2"/>
+                    <circle cx="245" cy="100" r="7" fill="#7dd3fc"/>
+                    <circle cx="280" cy="115" r="7" fill="#7dd3fc"/>
+                    <circle cx="270" cy="155" r="7" fill="#7dd3fc"/>
+                    <circle cx="295" cy="180" r="7" fill="#7dd3fc"/>
+                    <circle cx="250" cy="190" r="7" fill="#7dd3fc"/>
+                    <text id="svg-solvent-name" x="270" y="240" text-anchor="middle" fill="#7dd3fc" font-size="14" font-weight="bold"></text>
+                </g>
+                <text x="360" y="135" text-anchor="middle" fill="white" font-size="36" font-weight="bold">=</text>
+                <g>
+                    <rect x="400" y="50" width="100" height="160" rx="10" fill="rgba(255,255,255,0.08)" stroke="#fff" stroke-width="2"/>
+                    <circle cx="420" cy="80" r="5" fill="#f0abfc"/>
+                    <circle cx="450" cy="100" r="5" fill="#f0abfc"/>
+                    <circle cx="480" cy="120" r="5" fill="#f0abfc"/>
+                    <circle cx="425" cy="140" r="5" fill="#f0abfc"/>
+                    <circle cx="465" cy="160" r="5" fill="#f0abfc"/>
+                    <circle cx="430" cy="190" r="5" fill="#f0abfc"/>
+                    <circle cx="475" cy="195" r="5" fill="#f0abfc"/>
+                    <circle cx="445" cy="175" r="4" fill="#7dd3fc"/>
+                    <circle cx="460" cy="80" r="4" fill="#7dd3fc"/>
+                    <circle cx="420" cy="115" r="4" fill="#7dd3fc"/>
+                    <text id="svg-solution-name" x="450" y="240" text-anchor="middle" fill="white" font-size="14" font-weight="bold"></text>
+                </g>
+            </svg>
 
-                    <!-- Plus sign -->
-                    <text x="200" y="80" text-anchor="middle" font-size="32" font-weight="bold">+</text>
+            <p id="scheme-caption" class="text-white/70 mt-4 text-center leading-relaxed"></p>
+        </div>
 
-                    <!-- Solvent molecules -->
-                    <circle cx="280" cy="50" r="6" fill="#4ecdc4" stroke="#000" stroke-width="1"/>
-                    <circle cx="300" cy="40" r="6" fill="#4ecdc4" stroke="#000" stroke-width="1"/>
-                    <circle cx="320" cy="55" r="6" fill="#4ecdc4" stroke="#000" stroke-width="1"/>
-                    <circle cx="310" cy="75" r="6" fill="#4ecdc4" stroke="#000" stroke-width="1"/>
-                    <text x="300" y="110" text-anchor="middle" font-size="14" font-weight="bold">Еріткіш</text>
-                    <text x="300" y="130" text-anchor="middle" font-size="12">(H₂O - негіздегі)</text>
-
-                    <!-- Equals sign -->
-                    <text x="200" y="160" text-anchor="middle" font-size="32" font-weight="bold">=</text>
-
-                    <!-- Solution -->
-                    <rect x="330" y="20" width="60" height="120" fill="none" stroke="#16a34a" stroke-width="3" rx="5"/>
-                    <text x="360" y="85" text-anchor="middle" font-size="14" font-weight="bold">Ертінді</text>
-                    <text x="360" y="110" text-anchor="middle" font-size="11">(Гомогендік)</text>
-                </svg>
-            </div>
-
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">КОМПОНЕНТ</th>
-                            <th lang="kk" class="lang-content">АНЫҚТАМАСЫ</th>
-                            <th lang="kk" class="lang-content">МЫСАЛДАРЫ</th>
-
-                            <th lang="en" class="lang-content">COMPONENT</th>
-                            <th lang="en" class="lang-content">DEFINITION</th>
-                            <th lang="en" class="lang-content">EXAMPLES</th>
-
-                            <th lang="ru" class="lang-content">КОМПОНЕНТ</th>
-                            <th lang="ru" class="lang-content">ОПРЕДЕЛЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ПРИМЕРЫ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ЕРІГЕН ЗАТ</strong></td>
-                            <td lang="kk" class="lang-content">Ертіндіге ішінді бөлінген</td>
-                            <td lang="kk" class="lang-content">NaCl, CuSO₄, KMnO₄</td>
-
-                            <td lang="en" class="lang-content"><strong>SOLUTE</strong></td>
-                            <td lang="en" class="lang-content">Dissolves in solvent</td>
-                            <td lang="en" class="lang-content">NaCl, CuSO₄, KMnO₄</td>
-
-                            <td lang="ru" class="lang-content"><strong>РАСТВОРЁННОЕ ВЕЩЕСТВО</strong></td>
-                            <td lang="ru" class="lang-content">Растворяется в растворителе</td>
-                            <td lang="ru" class="lang-content">NaCl, CuSO₄, KMnO₄</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>ЕРІТКІШ</strong></td>
-                            <td lang="kk" class="lang-content">Еріген затты ертейді</td>
-                            <td lang="kk" class="lang-content">H₂O (негіздегі), этанол</td>
-
-                            <td lang="en" class="lang-content"><strong>SOLVENT</strong></td>
-                            <td lang="en" class="lang-content">Dissolves the solute</td>
-                            <td lang="en" class="lang-content">H₂O (usually), ethanol</td>
-
-                            <td lang="ru" class="lang-content"><strong>РАСТВОРИТЕЛЬ</strong></td>
-                            <td lang="ru" class="lang-content">Растворяет растворённое вещество</td>
-                            <td lang="ru" class="lang-content">H₂O (обычно), этанол</td>
-                        </tr>
-                    </table>
+        <div class="lg:col-span-6 glass rounded-custom p-8 border-l-4 border-fuchsia-500">
+            <h2 id="types-heading" class="heading-font text-xl mb-4 text-fuchsia-300 uppercase tracking-wider"></h2>
+            <div class="space-y-3 mb-5">
+                <div onclick="setType('dilute')" id="type-dilute" class="type-card bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center gap-4">
+                    <div class="w-12 h-16 rounded-lg border-2 border-fuchsia-400/40 relative overflow-hidden flex-shrink-0">
+                        <div class="absolute inset-x-0 bottom-0 bg-fuchsia-500/15 h-full"></div>
+                        <div class="absolute w-1.5 h-1.5 bg-fuchsia-300 rounded-full top-1/3 left-1/4"></div>
+                        <div class="absolute w-1.5 h-1.5 bg-fuchsia-300 rounded-full top-2/3 left-2/3"></div>
+                    </div>
+                    <div>
+                        <h4 id="type1-title" class="font-bold text-fuchsia-300"></h4>
+                        <p id="type1-desc" class="text-white/70 text-sm"></p>
+                    </div>
+                </div>
+                <div onclick="setType('concentrated')" id="type-concentrated" class="type-card bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center gap-4">
+                    <div class="w-12 h-16 rounded-lg border-2 border-fuchsia-400/40 relative overflow-hidden flex-shrink-0">
+                        <div class="absolute inset-x-0 bottom-0 bg-fuchsia-500/40 h-full"></div>
+                    </div>
+                    <div>
+                        <h4 id="type2-title" class="font-bold text-fuchsia-300"></h4>
+                        <p id="type2-desc" class="text-white/70 text-sm"></p>
+                    </div>
+                </div>
+                <div onclick="setType('saturated')" id="type-saturated" class="type-card bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center gap-4">
+                    <div class="w-12 h-16 rounded-lg border-2 border-fuchsia-400/40 relative overflow-hidden flex-shrink-0">
+                        <div class="absolute inset-x-0 bottom-0 bg-fuchsia-500/70 h-full"></div>
+                        <div class="absolute bottom-1 left-2 w-2 h-1 bg-fuchsia-200 rounded-sm"></div>
+                        <div class="absolute bottom-2 right-1 w-2 h-1 bg-fuchsia-200 rounded-sm"></div>
+                    </div>
+                    <div>
+                        <h4 id="type3-title" class="font-bold text-fuchsia-300"></h4>
+                        <p id="type3-desc" class="text-white/70 text-sm"></p>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ЕРТІНДІ ТҮРЛЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. TYPES OF SOLUTIONS</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Типы растворов</h2>
-
-            <div class="illustration">
-                <svg viewBox="0 0 500 150" width="100%" height="150">
-                    <!-- Dilute solution -->
-                    <circle cx="60" cy="50" r="5" fill="#ff6b6b" opacity="0.3"/>
-                    <circle cx="100" cy="40" r="5" fill="#ff6b6b" opacity="0.3"/>
-                    <circle cx="80" cy="80" r="5" fill="#ff6b6b" opacity="0.3"/>
-                    <rect x="30" y="20" width="100" height="90" fill="lightblue" opacity="0.3" stroke="#000" stroke-width="2" rx="5"/>
-                    <text x="80" y="135" text-anchor="middle" font-size="12" font-weight="bold">Сәлсі</text>
-
-                    <!-- Concentrated solution -->
-                    <circle cx="220" cy="40" r="5" fill="#ff6b6b"/>
-                    <circle cx="240" cy="50" r="5" fill="#ff6b6b"/>
-                    <circle cx="260" cy="45" r="5" fill="#ff6b6b"/>
-                    <circle cx="230" cy="70" r="5" fill="#ff6b6b"/>
-                    <circle cx="250" cy="75" r="5" fill="#ff6b6b"/>
-                    <circle cx="270" cy="60" r="5" fill="#ff6b6b"/>
-                    <rect x="190" y="20" width="100" height="90" fill="lightblue" opacity="0.5" stroke="#000" stroke-width="2" rx="5"/>
-                    <text x="240" y="135" text-anchor="middle" font-size="12" font-weight="bold">Құйын</text>
-
-                    <!-- Saturated solution -->
-                    <circle cx="380" cy="35" r="5" fill="#ff6b6b"/>
-                    <circle cx="400" cy="45" r="5" fill="#ff6b6b"/>
-                    <circle cx="420" cy="40" r="5" fill="#ff6b6b"/>
-                    <circle cx="390" cy="65" r="5" fill="#ff6b6b"/>
-                    <circle cx="410" cy="70" r="5" fill="#ff6b6b"/>
-                    <circle cx="430" cy="60" r="5" fill="#ff6b6b"/>
-                    <circle cx="400" cy="90" r="5" fill="#ff6b6b"/>
-                    <rect x="350" y="20" width="100" height="90" fill="blue" opacity="0.4" stroke="#000" stroke-width="2" rx="5"/>
-                    <text x="400" y="135" text-anchor="middle" font-size="12" font-weight="bold">Төзімді</text>
-                </svg>
+            <div class="bg-black/30 rounded-2xl p-4 border border-fuchsia-500/20">
+                <div id="example-label" class="text-xs text-fuchsia-300 uppercase tracking-widest mb-2"></div>
+                <p id="example-text" class="text-white/80 leading-relaxed"></p>
             </div>
-        </section>
+        </div>
+    </main>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Ертінді - еріген зат + еріткіш (негіздегі су). Ертіндіңің түрлері: сәлсі (бәрі еріген), құйын (көп еріген), төзімді (максималды еріген). Гомогендік ертінді - бір фаза. Су ендіктігінің еріткіш!</p>
-            <p lang="en" class="lang-content text-sm">Solution = dissolved substance + solvent (usually water). Types: dilute (little dissolved), concentrated (much dissolved), saturated (maximum dissolved). Homogeneous solution - one phase. Water universal solvent!</p>
-            <p lang="ru" class="lang-content text-sm">Раствор = растворённое вещество + растворитель (обычно вода). Типы: разбавленный (мало растворено), концентрированный (много растворено), насыщенный (максимально растворено). Однородный раствор - одна фаза. Вода универсальный растворитель!</p>
-        </footer>
-    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-fuchsia-500/10 transition-colors">
+            <div class="w-14 h-14 bg-fuchsia-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">💧</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-fuchsia-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-fuchsia-500/10 transition-colors">
+            <div class="w-14 h-14 bg-fuchsia-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🧪</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-fuchsia-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-fuchsia-500/10 transition-colors">
+            <div class="w-14 h-14 bg-fuchsia-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🌊</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-fuchsia-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-fuchsia-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Растворы",
+                subtitle: "Однородные смеси, без которых не работает живая клетка",
+                schemeHeading: "Состав раствора",
+                soluteName: "Растворённое вещество",
+                solventName: "Растворитель",
+                solutionName: "Раствор",
+                schemeCaption: "Раствор — однородная (гомогенная) смесь, в которой частицы растворённого вещества равномерно распределены между молекулами растворителя.",
+                typesHeading: "Типы растворов",
+                types: {
+                    dilute:       { title: "Разбавленный", desc: "Очень мало растворённого вещества" },
+                    concentrated: { title: "Концентрированный", desc: "Много растворённого вещества" },
+                    saturated:    { title: "Насыщенный", desc: "Больше уже не растворяется при данной температуре" }
+                },
+                examples: {
+                    dilute:       "Подсоленная вода для отваривания макарон — раствор разбавленный, концентрация ниже предельной.",
+                    concentrated: "Морская вода — концентрированный раствор солей: плотность выше, в нём легче плавать.",
+                    saturated:    "Если в стакан воды насыпать сахар и долго мешать — наступит момент, когда сахар перестанет растворяться. Это насыщенный раствор."
+                },
+                exampleLabel: "Бытовой пример",
+                cards: [
+                    { title: "Универсальный растворитель", desc: "Вода растворяет почти всё благодаря своей полярности. На воде основаны кровь, сок растений, морская вода и почти все реакции в живой клетке." },
+                    { title: "Другие растворители", desc: "Этанол, ацетон, бензин растворяют то, что не растворяет вода: жиры, лаки, краски. Используются в промышленности и медицине." },
+                    { title: "Сплавы — твёрдые растворы", desc: "Сталь, бронза, латунь — это растворы металлов в металлах. Они твёрдые, но имеют ту же однородную структуру, что и жидкие растворы." }
+                ],
+                quote: "«Подобное растворяется в подобном»",
+                author: "Принцип химии растворов"
+            },
+            kz: {
+                title: "Ерітінділер",
+                subtitle: "Тірі жасуша жұмыс істемейтін біртекті қоспалар",
+                schemeHeading: "Ерітінді құрамы",
+                soluteName: "Еріген зат",
+                solventName: "Еріткіш",
+                solutionName: "Ерітінді",
+                schemeCaption: "Ерітінді — еріген зат бөлшектері еріткіш молекулаларының арасында біркелкі таралған біртекті (гомогенді) қоспа.",
+                typesHeading: "Ерітінділер түрлері",
+                types: {
+                    dilute:       { title: "Сұйытылған", desc: "Еріген заты өте аз" },
+                    concentrated: { title: "Концентрлі", desc: "Еріген заты көп" },
+                    saturated:    { title: "Қаныққан", desc: "Берілген температурада артық ермейді" }
+                },
+                examples: {
+                    dilute:       "Макарон қайнатуға арналған тұздалған су — сұйытылған ерітінді, концентрациясы шегі төмен.",
+                    concentrated: "Теңіз суы — тұздардың концентрлі ерітіндісі: тығыздығы жоғары, онда жүзу жеңіл.",
+                    saturated:    "Стақандағы суға қант салып, ұзақ араластырсаңыз — бір сәтте қант ерімей қалады. Бұл қаныққан ерітінді."
+                },
+                exampleLabel: "Тұрмыстық мысал",
+                cards: [
+                    { title: "Әмбебап еріткіш", desc: "Су полярлы болғандықтан барлық дерлік нәрсені ерітеді. Қан, өсімдік шырыны, теңіз суы — бәрі су ерітіндісі." },
+                    { title: "Басқа еріткіштер", desc: "Этанол, ацетон, бензин су еріте алмайтын майлар мен бояуларды ерітеді. Өнеркәсіп пен медицинада қолданылады." },
+                    { title: "Қорытпалар — қатты ерітінділер", desc: "Болат, қола, жез — металдардағы металдар ерітіндісі. Қатты болса да, сұйық ерітінді сияқты біртекті құрылымды." }
+                ],
+                quote: "«Ұқсас ұқсасында ериді»",
+                author: "Ерітінділер химиясының қағидасы"
+            },
+            en: {
+                title: "Solutions",
+                subtitle: "Homogeneous mixtures without which no living cell works",
+                schemeHeading: "Composition of a solution",
+                soluteName: "Solute",
+                solventName: "Solvent",
+                solutionName: "Solution",
+                schemeCaption: "A solution is a homogeneous mixture in which the particles of the solute are evenly distributed between the molecules of the solvent.",
+                typesHeading: "Types of solutions",
+                types: {
+                    dilute:       { title: "Dilute", desc: "Very little solute" },
+                    concentrated: { title: "Concentrated", desc: "A lot of solute" },
+                    saturated:    { title: "Saturated", desc: "No more dissolves at this temperature" }
+                },
+                examples: {
+                    dilute:       "Salted water for boiling pasta is a dilute solution — its concentration is below the maximum.",
+                    concentrated: "Sea water is a concentrated salt solution — denser, so it is easier to float in it.",
+                    saturated:    "If you keep adding sugar to a glass of water, eventually it stops dissolving. That is a saturated solution."
+                },
+                exampleLabel: "Everyday example",
+                cards: [
+                    { title: "Universal solvent", desc: "Water dissolves almost everything thanks to its polarity. Blood, plant sap, sea water — almost every living-cell reaction takes place in water." },
+                    { title: "Other solvents", desc: "Ethanol, acetone, petrol dissolve fats, varnishes and paints that water cannot. Widely used in industry and medicine." },
+                    { title: "Alloys — solid solutions", desc: "Steel, bronze, brass — solutions of metals in metals. Though solid, they have the same homogeneous structure as a liquid solution." }
+                ],
+                quote: "«Like dissolves like»",
+                author: "Solution-chemistry principle"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentType = 'dilute';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function setType(t) {
+            currentType = t;
+            document.querySelectorAll('.type-card').forEach(c => c.classList.remove('active'));
+            document.getElementById('type-' + t).classList.add('active');
+            const tr = translations[currentLang];
+            document.getElementById('example-text').textContent = tr.examples[t];
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('scheme-heading').textContent = t.schemeHeading;
+            document.getElementById('svg-solute-name').textContent = t.soluteName;
+            document.getElementById('svg-solvent-name').textContent = t.solventName;
+            document.getElementById('svg-solution-name').textContent = t.solutionName;
+            document.getElementById('scheme-caption').textContent = t.schemeCaption;
+            document.getElementById('types-heading').textContent = t.typesHeading;
+            document.getElementById('type1-title').textContent = t.types.dilute.title;
+            document.getElementById('type1-desc').textContent = t.types.dilute.desc;
+            document.getElementById('type2-title').textContent = t.types.concentrated.title;
+            document.getElementById('type2-desc').textContent = t.types.concentrated.desc;
+            document.getElementById('type3-title').textContent = t.types.saturated.title;
+            document.getElementById('type3-desc').textContent = t.types.saturated.desc;
+            document.getElementById('example-label').textContent = t.exampleLabel;
+            document.getElementById('example-text').textContent = t.examples[currentType];
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            setType('dilute');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -306,128 +317,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

@@ -1,397 +1,257 @@
 <!DOCTYPE html>
-<!-- Бастапқы тіл - Қазақша -->
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плакат: Давление газа</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #eef2ff; /* indigo-50 */
-            overflow-x: hidden;
-            color: #312e81; /* indigo-900 */
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        /* Тақырып карточкасы - Indigo Theme */
-        .header-card {
-            background-color: #4f46e5; /* indigo-600 */
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
-            color: white;
-            padding: 40px;
-        }
-        /* Бөлім тақырыбы */
-        .section-heading {
-            color: #3730a3; /* indigo-800 */
-            border-bottom: 3px solid #818cf8; /* indigo-400 */
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        /* Ереже карточкасы */
-        .rule-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid;
-        }
-        .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        /* Мысал блогы */
-        .example-block {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        /* Түйін */
-        .footer-card {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            background-color: #e0e7ff; /* indigo-100 */
-            border-radius: 1rem;
-            border-top: 4px solid #4338ca; /* indigo-700 */
-        }
-         .term {
-            font-weight: bold;
-            color: #4f46e5; /* indigo-600 */
-        }
-
-        /* Language switcher */
-        .lang-switcher {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        .lang-btn {
-            padding: 8px 16px;
-            border: 2px solid #4f46e5;
-            background-color: #ffffff;
-            color: #4f46e5;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            background-color: #eef2ff;
-        }
-        .lang-btn.active {
-            background-color: #4f46e5;
-            color: #ffffff;
-        }
-
-        /* ТІЛ АУЫСТЫРУДЫҢ CSS ЕРЕЖЕЛЕРІ */
-        .lang-content {
-            display: none;
-        }
-        .lang-kk .lang-content[lang="kk"],
-        .lang-en .lang-content[lang="en"],
-        .lang-ru .lang-content[lang="ru"] {
-            display: block;
-        }
-        .lang-kk span.lang-content[lang="kk"],
-        .lang-en span.lang-content[lang="en"],
-        .lang-ru span.lang-content[lang="ru"] {
-            display: inline;
-        }
-
-        .illustration-svg {
-            width: 100%;
-            height: 220px;
-            margin: 15px 0;
-            border: 1px solid #c7d2fe;
-            border-radius: 0.5rem;
-            background-color: #fff;
-        }
-        /* Стили для подписей в SVG */
-        .svg-label {
-            font-size: 14px;
-            font-weight: 600;
-            fill: #3730a3;
-            text-anchor: middle;
-        }
-        .svg-molecule {
-            fill: #4f46e5;
-        }
-        .svg-arrow-velocity {
-            stroke: #ef4444; /* Red for speed/heat */
-            stroke-width: 2;
-        }
-
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Давление в жидкости на дно и стенки сосуда</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-indigo-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<!-- ID-і бар негізгі контейнер -->
-    <div id="poster-container" class="container lang-kk">
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-indigo-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">7 сынып · Қысым</span>
+<span lang="en" class="lang-content">Grade 7 · Pressure</span>
+<span lang="ru" class="lang-content">7 класс · Давление</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Сұйықтағы қысым: түбі мен қабырғаларына</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Pressure of liquid on the bottom and walls</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-indigo-700">Давление жидкости на дно и стенки сосуда</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <!-- ТІЛ АУЫСТЫРҒЫШ / LANGUAGE SWITCHER -->
-        <div class="lang-switcher">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">💧 Сұйық — ауырлық пен қозғалғыштық</span>
+<span lang="en" class="lang-content">💧 Liquid — weight and flow</span>
+<span lang="ru" class="lang-content">💧 Жидкость — тяжесть и текучесть</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="card rounded-custom p-8 lg:col-span-2">
+<p class="text-slate-700 text-lg leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Газ сияқты, сұйық та <b>ыдыстың қабырғаларына және түбіне</b> қысым жасайды. Бірақ <b>екі маңызды айырмашылық</b> бар: 1) сұйықтың массасы <b>ауырлық күшін</b> туындатады, олардың қысымы <b>тереңдікке байланысты</b>; 2) сұйық <b>сығылмайды</b>, сондықтан Паскаль заңы дәл орындалады.</span>
+<span lang="en" class="lang-content">Like gases, liquids press on the <b>walls and bottom</b> of their container. But there are <b>two key differences</b>: 1) liquid has weight and that creates pressure that <b>depends on depth</b>; 2) liquids are <b>almost incompressible</b>, so Pascal's law applies exactly.</span>
+<span lang="ru" class="lang-content">Как и газы, жидкости давят на <b>стенки и дно</b> сосуда. Но есть <b>два ключевых отличия</b>: 1) жидкость имеет вес — поэтому давление <b>зависит от глубины</b>; 2) жидкости почти <b>несжимаемы</b>, поэтому закон Паскаля выполняется точно.</span></p>
 
-        <!-- БАСТЫ ТАҚЫРЫП -->
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ГАЗ ҚЫСЫМЫ</h1>
-            <h1 lang="en" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">GAS PRESSURE</h1>
-            <h1 lang="ru" class="lang-content text-3xl sm:text-4xl font-extrabold tracking-tight uppercase">ДАВЛЕНИЕ ГАЗА</h1>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-indigo-900 font-bold mb-2">
+<span lang="kk" class="lang-content">📐 Гидростатикалық қысым формуласы</span>
+<span lang="en" class="lang-content">📐 Hydrostatic pressure formula</span>
+<span lang="ru" class="lang-content">📐 Формула гидростатического давления</span></p>
+<div class="formula text-center" style="font-size:1.8rem">
+<span class="var">p</span> = <span class="var">ρ</span> · <span class="var">g</span> · <span class="var">h</span>
+</div>
+<div class="mt-3 text-sm text-slate-700 text-center space-y-1">
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">p</b> — қысым, <span class="unit-pill">Па</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">p</b> — pressure, <span class="unit-pill">Pa</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">p</b> — давление, <span class="unit-pill">Па</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">ρ</b> — сұйықтың тығыздығы, <span class="unit-pill">кг/м³</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">ρ</b> — liquid density, <span class="unit-pill">kg/m³</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">ρ</b> — плотность жидкости, <span class="unit-pill">кг/м³</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">g</b> = 9,8 <span class="unit-pill">Н/кг</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">g</b> = 9.8 <span class="unit-pill">N/kg</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">g</b> = 9,8 <span class="unit-pill">Н/кг</span></span>
+</p>
+<p>
+<span lang="kk" class="lang-content"><b style="color:#4338ca">h</b> — тереңдік, <span class="unit-pill">м</span></span>
+<span lang="en" class="lang-content"><b style="color:#4338ca">h</b> — depth, <span class="unit-pill">m</span></span>
+<span lang="ru" class="lang-content"><b style="color:#4338ca">h</b> — глубина, <span class="unit-pill">м</span></span>
+</p>
+</div>
+</div>
+</div>
 
-            <p lang="kk" class="lang-content mt-2 text-xl font-medium text-indigo-100">Молекулалардың соғылуы.</p>
-            <p lang="en" class="lang-content mt-2 text-xl font-medium text-indigo-100">Collision of molecules.</p>
-            <p lang="ru" class="lang-content mt-2 text-xl font-medium text-indigo-100">Удары молекул.</p>
-        </header>
+<div class="card rounded-custom p-8 flex flex-col items-center justify-center">
+<div class="svg-wrap">
+<svg viewBox="0 0 200 240" style="width:160px">
+<!-- Сосуд -->
+<line x1="20" y1="20" x2="20" y2="220" stroke="#1e293b" stroke-width="3"/>
+<line x1="180" y1="20" x2="180" y2="220" stroke="#1e293b" stroke-width="3"/>
+<line x1="20" y1="220" x2="180" y2="220" stroke="#1e293b" stroke-width="3"/>
+<!-- Вода -->
+<rect x="20" y="50" width="160" height="170" fill="#93c5fd" opacity="0.7"/>
+<!-- Стрелки давления на разной глубине -->
+<g stroke="#dc2626" stroke-width="2" fill="none">
+<line x1="20" y1="80" x2="35" y2="80" marker-end="url(#arr20)"/>
+<line x1="180" y1="80" x2="165" y2="80" marker-end="url(#arr20)"/>
+<line x1="20" y1="140" x2="45" y2="140" marker-end="url(#arr20)"/>
+<line x1="180" y1="140" x2="155" y2="140" marker-end="url(#arr20)"/>
+<line x1="20" y1="200" x2="55" y2="200" marker-end="url(#arr20)"/>
+<line x1="180" y1="200" x2="145" y2="200" marker-end="url(#arr20)"/>
+</g>
+<!-- Стрелки давления на дно -->
+<g stroke="#dc2626" stroke-width="2" fill="none">
+<line x1="50" y1="220" x2="50" y2="235" marker-end="url(#arr20)"/>
+<line x1="100" y1="220" x2="100" y2="235" marker-end="url(#arr20)"/>
+<line x1="150" y1="220" x2="150" y2="235" marker-end="url(#arr20)"/>
+</g>
+<text x="190" y="80" fill="#64748b" font-size="11">h₁</text>
+<text x="190" y="140" fill="#64748b" font-size="11">h₂</text>
+<text x="190" y="200" fill="#64748b" font-size="11">h₃</text>
+<defs><marker id="arr20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+</svg>
+</div>
+<p class="text-slate-700 text-sm text-center mt-2">
+<span lang="kk" class="lang-content">Тереңдік артса — қысым артады</span>
+<span lang="en" class="lang-content">Deeper — higher pressure</span>
+<span lang="ru" class="lang-content">Глубже — больше давление</span></p>
+</div></div></section>
 
-        <!-- 1. ТАБИҒАТЫ -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Қысым қалай пайда болады?</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. How is Pressure Created?</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Как возникает давление?</h2>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🤔 Формуланың дәлелдемесі</span>
+<span lang="en" class="lang-content">🤔 Derivation</span>
+<span lang="ru" class="lang-content">🤔 Вывод формулы</span></h2>
+<div class="card-accent rounded-custom p-8">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Аудан <b>S</b>, биіктігі <b>h</b> сұйық бағанын қарастырайық:</span>
+<span lang="en" class="lang-content">Consider a column of liquid with base area <b>S</b> and height <b>h</b>:</span>
+<span lang="ru" class="lang-content">Рассмотрим столб жидкости с площадью основания <b>S</b> и высотой <b>h</b>:</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<ol class="text-slate-700 list-decimal pl-6 space-y-2 text-sm">
+<li><span lang="kk" class="lang-content">Көлемі: <b>V = Sh</b></span><span lang="en" class="lang-content">Volume: <b>V = Sh</b></span><span lang="ru" class="lang-content">Объём: <b>V = Sh</b></span></li>
+<li><span lang="kk" class="lang-content">Массасы: <b>m = ρV = ρSh</b></span><span lang="en" class="lang-content">Mass: <b>m = ρV = ρSh</b></span><span lang="ru" class="lang-content">Масса: <b>m = ρV = ρSh</b></span></li>
+<li><span lang="kk" class="lang-content">Ауырлық күші: <b>F = mg = ρShg</b></span><span lang="en" class="lang-content">Weight: <b>F = mg = ρShg</b></span><span lang="ru" class="lang-content">Сила тяжести: <b>F = mg = ρShg</b></span></li>
+<li><span lang="kk" class="lang-content">Қысым: <b>p = F/S = ρShg/S = ρgh</b></span><span lang="en" class="lang-content">Pressure: <b>p = F/S = ρShg/S = ρgh</b></span><span lang="ru" class="lang-content">Давление: <b>p = F/S = ρShg/S = ρgh</b></span></li>
+</ol>
+</div>
+<div>
+<div class="card rounded-2xl p-4 bg-white">
+<p class="text-indigo-900 font-bold mb-2 text-center">
+<span lang="kk" class="lang-content">🔑 Маңызды қорытынды</span>
+<span lang="en" class="lang-content">🔑 Key conclusion</span>
+<span lang="ru" class="lang-content">🔑 Важный вывод</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Қысым <b>аудан S-ке тәуелді емес</b>! Шынынан да, ыдыстың формасы маңызды емес — тек <b>тереңдік пен тығыздық</b> маңызды.</span>
+<span lang="en" class="lang-content">Pressure does <b>not depend on the area S</b>! In fact, the shape of the container doesn't matter — only <b>depth and density</b>.</span>
+<span lang="ru" class="lang-content">Давление <b>не зависит от площади S</b>! Действительно, форма сосуда не важна — важна только <b>глубина и плотность</b>.</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="rule-card border-t-indigo-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Газ қысымы газ молекулаларының ыдыс қабырғаларына <strong>соғылуынан</strong> пайда болады. Молекулалар неғұрлым көп соғылса, қысым соғұрлым жоғары болады.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Gas pressure is caused by gas molecules <strong>colliding</strong> with the walls of the container. The more frequent the collisions, the higher the pressure.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Давление газа создается <strong>ударами</strong> молекул газа о стенки сосуда. Чем чаще и сильнее удары, тем выше давление.
-                </p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌊 Гидростатикалық парадокс</span>
+<span lang="en" class="lang-content">🌊 Hydrostatic paradox</span>
+<span lang="ru" class="lang-content">🌊 Гидростатический парадокс</span></h2>
+<div class="card rounded-custom p-6">
+<p class="text-slate-700 text-base leading-relaxed mb-4">
+<span lang="kk" class="lang-content">Әртүрлі пішіндегі үш ыдыс. Олардағы судың деңгейі бірдей (h). Қандай ыдыстың түбіне ең үлкен қысым түседі?</span>
+<span lang="en" class="lang-content">Three differently-shaped containers, all filled to the same height (h). Which one has the highest pressure on the bottom?</span>
+<span lang="ru" class="lang-content">Три сосуда разной формы. Вода налита до одной высоты (h). На дно какого сосуда давление больше?</span></p>
+<div class="svg-wrap">
+<svg viewBox="0 0 600 240" style="width:100%;max-width:600px;margin:auto">
+<!-- Цилиндр -->
+<rect x="40" y="40" width="100" height="160" fill="none" stroke="#1e293b" stroke-width="3"/>
+<rect x="40" y="60" width="100" height="140" fill="#93c5fd" opacity="0.7"/>
+<text x="90" y="225" text-anchor="middle" font-size="13" font-weight="700">p = ρgh</text>
+<!-- Расширяющийся -->
+<polygon points="220,40 320,40 340,200 200,200" fill="none" stroke="#1e293b" stroke-width="3"/>
+<polygon points="222,60 318,60 340,200 200,200" fill="#93c5fd" opacity="0.7"/>
+<text x="270" y="225" text-anchor="middle" font-size="13" font-weight="700">p = ρgh</text>
+<!-- Сужающийся -->
+<polygon points="420,40 540,40 510,200 450,200" fill="none" stroke="#1e293b" stroke-width="3"/>
+<polygon points="422,60 538,60 510,200 450,200" fill="#93c5fd" opacity="0.7"/>
+<text x="480" y="225" text-anchor="middle" font-size="13" font-weight="700">p = ρgh</text>
+<!-- Уровень воды -->
+<line x1="20" y1="60" x2="560" y2="60" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="570" y="65" fill="#dc2626" font-size="13" font-weight="700">h</text>
+</svg>
+</div>
+<p class="text-slate-700 text-base mt-3 text-center">
+<span lang="kk" class="lang-content">🎯 <b>Бәрінде бірдей!</b> Қысым тек <b>тереңдікке</b> тәуелді. Ыдыстың формасы маңызды емес.</span>
+<span lang="en" class="lang-content">🎯 <b>All the same!</b> Pressure depends only on <b>depth</b>. Shape doesn't matter.</span>
+<span lang="ru" class="lang-content">🎯 <b>Везде одинаково!</b> Давление зависит только от <b>глубины</b>. Форма сосуда не важна.</span></p>
+</div>
+</section>
 
-                <!-- Illustration 1: Molecular Motion -->
-                <svg class="illustration-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Container -->
-                    <rect x="100" y="30" width="200" height="120" fill="none" stroke="#312e81" stroke-width="4" rx="5"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌊 Теңіздің тереңдігінде</span>
+<span lang="en" class="lang-content">🌊 Deep in the sea</span>
+<span lang="ru" class="lang-content">🌊 На глубине океана</span></h2>
+<div class="card-rose rounded-custom p-6 overflow-x-auto">
+<table class="t">
+<thead><tr>
+<th><span lang="kk" class="lang-content">Тереңдік (м)</span><span lang="en" class="lang-content">Depth (m)</span><span lang="ru" class="lang-content">Глубина (м)</span></th>
+<th><span lang="kk" class="lang-content">Қысым (атм)</span><span lang="en" class="lang-content">Pressure (atm)</span><span lang="ru" class="lang-content">Давление (атм)</span></th>
+<th><span lang="kk" class="lang-content">Қысым (Па)</span><span lang="en" class="lang-content">Pressure (Pa)</span><span lang="ru" class="lang-content">Давление (Па)</span></th>
+<th><span lang="kk" class="lang-content">Қайда?</span><span lang="en" class="lang-content">Where?</span><span lang="ru" class="lang-content">Где?</span></th>
+</tr></thead>
+<tbody>
+<tr><td>0</td><td>1</td><td>10⁵</td><td>🌊 <span lang="kk" class="lang-content">су беті</span><span lang="en" class="lang-content">surface</span><span lang="ru" class="lang-content">поверхность</span></td></tr>
+<tr><td>10</td><td>2</td><td>2·10⁵</td><td>🤿 <span lang="kk" class="lang-content">сүңгуір</span><span lang="en" class="lang-content">diver</span><span lang="ru" class="lang-content">ныряльщик</span></td></tr>
+<tr><td>40</td><td>5</td><td>5·10⁵</td><td>🐟 <span lang="kk" class="lang-content">сүңгу шегі</span><span lang="en" class="lang-content">scuba limit</span><span lang="ru" class="lang-content">предел дайвера</span></td></tr>
+<tr><td>1000</td><td>101</td><td>10⁷</td><td>🐋 <span lang="kk" class="lang-content">кашалот</span><span lang="en" class="lang-content">sperm whale</span><span lang="ru" class="lang-content">кашалот</span></td></tr>
+<tr><td>4000</td><td>401</td><td>4·10⁷</td><td>🚢 <span lang="kk" class="lang-content">«Титаник»</span><span lang="en" class="lang-content">«Titanic»</span><span lang="ru" class="lang-content">«Титаник»</span></td></tr>
+<tr><td>11000</td><td>1100</td><td>1,1·10⁸</td><td>⚓ <span lang="kk" class="lang-content">Марианна шұңқыры</span><span lang="en" class="lang-content">Mariana Trench</span><span lang="ru" class="lang-content">Марианская впадина</span></td></tr>
+</tbody>
+</table>
+<p class="text-slate-600 text-sm mt-3">
+<span lang="kk" class="lang-content">📌 10 м-ге қаннша тереңдеген сайын — қысым +1 атм артады. Марианна шұңқыры түбінде — <b>1100 ат</b>, бұл сіздің денеңізге орналасқан 110 пілдің күшіне тең!</span>
+<span lang="en" class="lang-content">📌 Every 10 m down adds about 1 atm of pressure. At the bottom of the Mariana Trench — <b>1100 atm</b>, equivalent to 110 elephants on your body!</span>
+<span lang="ru" class="lang-content">📌 Каждые 10 м глубины — это ещё +1 атм давления. На дне Марианской впадины — <b>1100 атм</b>, как 110 слонов на теле!</span></p>
+</div>
+</section>
 
-                    <!-- Molecules -->
-                    <circle cx="120" cy="50" r="5" class="svg-molecule"/>
-                    <line x1="120" y1="50" x2="135" y2="65" stroke="#a5b4fc" stroke-width="2"/>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-indigo-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Мысал есеп</span>
+<span lang="en" class="lang-content">🧮 Example problem</span>
+<span lang="ru" class="lang-content">🧮 Пример задачи</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-indigo-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">📘 Есеп: Бассейн тереңдігі 2 м. Түбіндегі су қысымын табыңыз. Судың тығыздығы 1000 кг/м³, g = 10 Н/кг.</span>
+<span lang="en" class="lang-content">📘 Problem: A pool is 2 m deep. Find the water pressure at the bottom. ρ = 1000 kg/m³, g = 10 N/kg.</span>
+<span lang="ru" class="lang-content">📘 Задача: Бассейн глубиной 2 м. Найти давление воды на дно. ρ = 1000 кг/м³, g = 10 Н/кг.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>h = 2 <span class="unit-pill">м</span></li>
+<li>ρ = 1000 <span class="unit-pill">кг/м³</span></li>
+<li>g = 10 <span class="unit-pill">Н/кг</span></li>
+<li>p — ?</li>
+</ul>
+</div>
+<div>
+<p class="font-bold text-indigo-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1.1rem">
+<span class="var">p</span> = <span class="var">ρgh</span>
+<br/><span class="var">p</span> = <span class="num">1000</span>·<span class="num">10</span>·<span class="num">2</span>
+<br/><span class="var">p</span> = <span class="num">20 000</span> <span class="unit">Па</span> = <span class="num">20</span> <span class="unit">кПа</span>
+</div>
+<div class="badge badge-emerald mt-3"><span lang="kk" class="lang-content">✅ Жауабы: 20 кПа</span><span lang="en" class="lang-content">✅ Answer: 20 kPa</span><span lang="ru" class="lang-content">✅ Ответ: 20 кПа</span></div>
+</div>
+</div>
+</div>
+</section>
 
-                    <circle cx="280" cy="130" r="5" class="svg-molecule"/>
-                    <line x1="280" y1="130" x2="260" y2="110" stroke="#a5b4fc" stroke-width="2"/>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-indigo-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">💧</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">p = ρgh</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Гидростатикалық қысым формуласы</span><span lang="en" class="lang-content">Hydrostatic pressure formula</span><span lang="ru" class="lang-content">Формула гидростатики</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📏</div>
+<p class="heading-font text-xl text-indigo-700 mb-2">h ↑ → p ↑</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тереңдікке тура пропорционал</span><span lang="en" class="lang-content">Proportional to depth</span><span lang="ru" class="lang-content">Прямо пропорционально глубине</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🥽</div>
+<p class="heading-font text-xl text-indigo-700 mb-2"><span lang="kk" class="lang-content">Формасы маңызды емес</span><span lang="en" class="lang-content">Shape doesn't matter</span><span lang="ru" class="lang-content">Форма не важна</span></p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Тек тереңдік пен тығыздық</span><span lang="en" class="lang-content">Only depth and density</span><span lang="ru" class="lang-content">Только глубина и плотность</span></p></div>
+</div></footer>
 
-                    <circle cx="150" cy="100" r="5" class="svg-molecule"/>
-                    <line x1="150" y1="100" x2="180" y2="100" stroke="#a5b4fc" stroke-width="2"/>
-
-                    <circle cx="250" cy="60" r="5" class="svg-molecule"/>
-                    <line x1="250" y1="60" x2="230" y2="40" stroke="#a5b4fc" stroke-width="2"/>
-
-                    <!-- Impact Visualization -->
-                    <g>
-                        <circle cx="102" cy="90" r="5" class="svg-molecule" fill="#ef4444"/> <!-- Hitting wall -->
-                        <path d="M 90 80 L 100 90 L 90 100" fill="none" stroke="#ef4444" stroke-width="2"/> <!-- Bounce path -->
-                        <!-- Impact lines -->
-                        <line x1="95" y1="85" x2="85" y2="80" stroke="#ef4444"/>
-                        <line x1="95" y1="95" x2="85" y2="100" stroke="#ef4444"/>
-                        <text x="50" y="95" fill="#ef4444" font-weight="bold" font-size="12">BANG!</text>
-                    </g>
-
-                    <text x="200" y="170" class="svg-label" font-size="12">Random Motion (Хаосты қозғалыс)</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 2. КӨЛЕМГЕ ТӘУЕЛДІЛІК -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. Көлем және Қысым</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. Volume and Pressure</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Объем и Давление</h2>
-
-            <div class="rule-card border-t-cyan-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Егер газдың көлемін <strong>азайтсақ</strong> (сықсақ), молекулалар жиі соғылысады → қысым <strong>артады</strong>.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    If we <strong>decrease</strong> the volume (squeeze), molecules collide more often → pressure <strong>increases</strong>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Если <strong>уменьшить</strong> объем газа (сжать его), молекулы будут ударяться чаще → давление <strong>увеличится</strong>.
-                </p>
-
-                <!-- Illustration 2: Piston -->
-                <svg class="illustration-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Case 1: Large Volume -->
-                    <g transform="translate(50, 20)">
-                        <rect x="0" y="40" width="100" height="100" fill="#f0f9ff" stroke="#0891b2" stroke-width="2"/>
-                        <rect x="0" y="40" width="100" height="10" fill="#67e8f9" stroke="#0891b2"/> <!-- Piston Head -->
-                        <line x1="50" y1="40" x2="50" y2="10" stroke="#0891b2" stroke-width="4"/> <!-- Rod -->
-
-                        <!-- Sparse Molecules -->
-                        <circle cx="20" cy="70" r="4" class="svg-molecule"/>
-                        <circle cx="80" cy="120" r="4" class="svg-molecule"/>
-                        <circle cx="50" cy="90" r="4" class="svg-molecule"/>
-
-                        <text x="50" y="160" class="svg-label" font-size="12">Үлкен V - Аз P</text>
-                        <text x="50" y="175" class="svg-label" font-size="12">Big V - Low P</text>
-                    </g>
-
-                    <!-- Arrow -->
-                    <line x1="170" y1="90" x2="210" y2="90" stroke="#3730a3" stroke-width="2" marker-end="url(#arrowhead-indigo)"/>
-
-                    <!-- Case 2: Small Volume -->
-                    <g transform="translate(230, 20)">
-                        <rect x="0" y="80" width="100" height="60" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"/>
-                        <rect x="0" y="80" width="100" height="10" fill="#67e8f9" stroke="#0891b2"/> <!-- Piston Head Down -->
-                        <line x1="50" y1="80" x2="50" y2="10" stroke="#0891b2" stroke-width="4"/> <!-- Rod Down -->
-
-                        <!-- Dense Molecules -->
-                        <circle cx="20" cy="100" r="4" class="svg-molecule"/>
-                        <circle cx="80" cy="130" r="4" class="svg-molecule"/>
-                        <circle cx="50" cy="110" r="4" class="svg-molecule"/>
-                        <circle cx="30" cy="125" r="4" class="svg-molecule"/>
-                        <circle cx="70" cy="95" r="4" class="svg-molecule"/>
-
-                        <text x="50" y="160" class="svg-label" font-size="12" font-weight="bold" fill="#dc2626">Кіші V - Көп P</text>
-                        <text x="50" y="175" class="svg-label" font-size="12" font-weight="bold" fill="#dc2626">Small V - High P</text>
-                    </g>
-
-                    <defs>
-                        <marker id="arrowhead-indigo" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#3730a3" />
-                        </marker>
-                    </defs>
-                </svg>
-            </div>
-        </section>
-
-        <!-- 3. ТЕМПЕРАТУРАҒА ТӘУЕЛДІЛІК -->
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. Температура және Қысым</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. Temperature and Pressure</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Температура и Давление</h2>
-
-            <div class="rule-card border-t-orange-500">
-                <p lang="kk" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    Газды <strong>қыздырғанда</strong>, молекулалар жылдам қозғалады → қаттырақ соғылады → қысым <strong>артады</strong>.
-                </p>
-                <p lang="en" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    When gas is <strong>heated</strong>, molecules move faster → hit harder → pressure <strong>increases</strong>.
-                </p>
-                <p lang="ru" class="lang-content text-base md:text-lg mb-3 text-gray-700">
-                    При <strong>нагревании</strong> газа молекулы движутся быстрее → ударяются сильнее → давление <strong>растет</strong>.
-                </p>
-
-                <!-- Illustration 3: Heating Gas -->
-                <svg class="illustration-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Flask -->
-                    <circle cx="200" cy="100" r="60" fill="none" stroke="#ea580c" stroke-width="3"/>
-                    <rect x="190" y="20" width="20" height="25" fill="none" stroke="#ea580c" stroke-width="3"/>
-
-                    <!-- Cold Molecules (Left half - conceptual) -->
-                    <g opacity="0.3">
-                         <circle cx="170" cy="80" r="4" fill="#3b82f6"/>
-                         <text x="100" y="50" font-size="12" fill="#3b82f6">Cold (Суық)</text>
-                    </g>
-
-                    <!-- Hot Molecules (Inside) -->
-                    <circle cx="200" cy="80" r="5" fill="#dc2626"/>
-                    <line x1="200" y1="80" x2="230" y2="60" class="svg-arrow-velocity"/> <!-- Fast -->
-
-                    <circle cx="180" cy="120" r="5" fill="#dc2626"/>
-                    <line x1="180" y1="120" x2="160" y2="150" class="svg-arrow-velocity"/> <!-- Fast -->
-
-                    <circle cx="230" cy="110" r="5" fill="#dc2626"/>
-                    <line x1="230" y1="110" x2="250" y2="110" class="svg-arrow-velocity"/> <!-- Fast -->
-
-                    <!-- Fire -->
-                    <path d="M 180 170 Q 200 150, 220 170 Q 210 200, 200 180 Q 190 200, 180 170" fill="#f97316"/>
-                    <text x="200" y="195" font-size="12" text-anchor="middle" fill="#c2410c" font-weight="bold">HEAT (ЖЫЛУ)</text>
-
-                    <!-- Pressure Gauge -->
-                    <circle cx="230" cy="40" r="15" fill="#fff" stroke="#374151" stroke-width="2"/>
-                    <line x1="230" y1="40" x2="240" y2="30" stroke="#dc2626" stroke-width="2"/> <!-- Pointer High -->
-                    <text x="255" y="35" font-size="12" fill="#dc2626" font-weight="bold">P ↑</text>
-                </svg>
-            </div>
-        </section>
-
-        <!-- ТҮЙІН -->
-        <footer class="footer-card">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">ЕСТЕ САҚТАҢЫЗ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">REMEMBER</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-indigo-900">ЗАПОМНИТЕ</h3>
-
-            <p lang="kk" class="lang-content text-md font-semibold leading-relaxed text-indigo-800">
-                Газ қысымы молекулалардың соғылуынан пайда болады.<br>
-                Көлем азайса → Қысым артады.<br>
-                Температура артса → Қысым артады.
-            </p>
-            <p lang="en" class="lang-content text-md font-semibold leading-relaxed text-indigo-800">
-                Gas pressure comes from molecular collisions.<br>
-                Volume down → Pressure up.<br>
-                Temperature up → Pressure up.
-            </p>
-            <p lang="ru" class="lang-content text-md font-semibold leading-relaxed text-indigo-800">
-                Давление газа возникает из-за ударов молекул.<br>
-                Объем меньше → Давление больше.<br>
-                Температура выше → Давление больше.
-            </p>
-        </footer>
-
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            if (container) {
-                container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-                container.classList.add('lang-' + lang);
-            }
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('onclick') === `switchLang('${lang}')`) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            switchLang('kk'); // Default
-        });
-
-        // QWebChannel Integration for Back Button
-        function goBack() {
-            if (typeof bridge !== 'undefined' && bridge) {
-                bridge.onBackClicked();
-            } else {
-                console.log('Bridge not found');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof QWebChannel !== 'undefined' && typeof qt !== 'undefined') {
-                new QWebChannel(qt.webChannelTransport, function(channel) {
-                    window.bridge = channel.objects.bridge;
-                });
-            }
-        });
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-    <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

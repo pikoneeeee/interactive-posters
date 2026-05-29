@@ -1,334 +1,346 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сутегінің қасиеттері, алдыңғы және қолдануы</title>
+    <title>Водород: свойства и применение</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top left, #0c1445, #1e1b4b, #0f172a); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #422006, #713f12, #1c1917);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #818cf8; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #a5b4fc; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #a5b4fc; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #a5b4fc; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #fcd34d; color: #1c1917; border-color: transparent; font-weight: 800; }
+        .tab-btn { transition: all 0.2s; cursor: pointer; }
+        .tab-btn.active { background: rgba(252, 211, 77, 0.2); border-color: #fcd34d; }
+        .formula-style { font-family: 'Courier New', monospace; }
+        @keyframes rise { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+        .h-atom { animation: rise 2s ease-in-out infinite alternate; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Сутектің қасиеттері, алынуы және қолданылуы!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Hydrogen Properties, Obtaining & Application!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Свойства, получение и применение водорода!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">H₂ - ең жеңіл газ, түссіз, иіссіз. Zn + HCl → ZnCl₂ + H₂↑. Өндіктігі: әрлі жану, анамаз, күтіндік! БОЛАШАҚТЫҢ ТОПЛИВАСЫ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">H₂ - lightest gas, colorless, odorless. Zn + HCl → ZnCl₂ + H₂↑. Uses: powerful fuel, balloons, research! FUEL OF FUTURE!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">H₂ - самый лёгкий газ, без цвета, без запаха. Zn + HCl → ZnCl₂ + H₂↑. Применения: мощное топливо, дирижабли, исследования! ТОПЛИВО БУДУЩЕГО!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-yellow-300"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. СУТЕГІНІҢ ФИЗИКАЛЫҚ ҚАСИЕТТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. PHYSICAL PROPERTIES OF HYDROGEN</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Физические свойства водорода</h2>
-
-            <div class="rule-card">
-                <div class="space-y-3">
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>🎨 ТҮС:</strong> Түссіз газ</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🎨 COLOR:</strong> Colorless gas</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🎨 ЦВЕТ:</strong> Бесцветный газ</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>👃 ИІС:</strong> Иіссіз (немесе өте сұлақ иісі)</p>
-                        <p lang="en" class="lang-content text-sm"><strong>👃 SMELL:</strong> Odorless (or very faint)</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>👃 ЗАПАХ:</strong> Без запаха (или очень слабый)</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>⚖️ МАССА:</strong> Mr(H₂) = 2 г/моль (ең жеңіл газ!)</p>
-                        <p lang="en" class="lang-content text-sm"><strong>⚖️ MASS:</strong> Mr(H₂) = 2 g/mol (lightest gas!)</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>⚖️ МАССА:</strong> Mr(H₂) = 2 г/моль (самый лёгкий газ!)</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>💧 СУҒА ЕРІТІНДІКТІГІ:</strong> Өте сөлінбеген</p>
-                        <p lang="en" class="lang-content text-sm"><strong>💧 WATER SOLUBILITY:</strong> Slightly soluble</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>💧 РАСТВОРИМОСТЬ В ВОДЕ:</strong> Плохо растворяется</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>🌡️ ТЕМПЕРАТУРА:</strong> Қайнау: -253°C, Балқу: -259°C</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🌡️ TEMPERATURE:</strong> Boiling: -253°C, Melting: -259°C</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🌡️ ТЕМПЕРАТУРА:</strong> Кипение: -253°C, плавление: -259°C</p>
-                    </div>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-5 glass rounded-custom p-8 flex flex-col items-center">
+            <h2 id="molecule-heading" class="heading-font text-xl mb-4 opacity-80 uppercase tracking-wider self-start"></h2>
+            <svg viewBox="0 0 360 320" class="w-full max-w-[360px]">
+                <line x1="135" y1="160" x2="225" y2="160" stroke="#fcd34d" stroke-width="6"/>
+                <circle class="h-atom" cx="130" cy="160" r="50" fill="url(#hGrad)" stroke="#fef3c7" stroke-width="3"/>
+                <circle class="h-atom" cx="230" cy="160" r="50" fill="url(#hGrad)" stroke="#fef3c7" stroke-width="3"/>
+                <text x="130" y="170" text-anchor="middle" fill="#1c1917" font-size="36" font-weight="bold">H</text>
+                <text x="230" y="170" text-anchor="middle" fill="#1c1917" font-size="36" font-weight="bold">H</text>
+                <text id="svg-mol-name" x="180" y="270" text-anchor="middle" fill="#fde68a" font-size="18" font-weight="bold"></text>
+                <text id="svg-mol-mass" x="180" y="295" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="13"></text>
+                <defs>
+                    <radialGradient id="hGrad"><stop offset="0%" stop-color="#fef9c3"/><stop offset="100%" stop-color="#ca8a04"/></radialGradient>
+                </defs>
+            </svg>
+            <div class="grid grid-cols-2 gap-3 w-full mt-4">
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop1-label"></div>
+                    <div class="text-lg font-bold text-yellow-300">−253 °C</div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop2-label"></div>
+                    <div class="text-lg font-bold text-yellow-300">−259 °C</div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop3-label"></div>
+                    <div id="prop3-value" class="text-lg font-bold text-yellow-300"></div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop4-label"></div>
+                    <div id="prop4-value" class="text-lg font-bold text-yellow-300"></div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. СУТЕГІНІҢ АЛДЫҢҒЫ ӘДІСТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. METHODS OF OBTAINING HYDROGEN</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Способы получения водорода</h2>
-
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">ӘДІСІ</th>
-                            <th lang="kk" class="lang-content">ТЕҢДЕУ</th>
-                            <th lang="kk" class="lang-content">ШАРТТАРЫ</th>
-                            <th lang="kk" class="lang-content">ҚОЛДАНЫЛУЫ</th>
-
-                            <th lang="en" class="lang-content">METHOD</th>
-                            <th lang="en" class="lang-content">EQUATION</th>
-                            <th lang="en" class="lang-content">CONDITIONS</th>
-                            <th lang="en" class="lang-content">USE</th>
-
-                            <th lang="ru" class="lang-content">СПОСОБ</th>
-                            <th lang="ru" class="lang-content">УРАВНЕНИЕ</th>
-                            <th lang="ru" class="lang-content">УСЛОВИЯ</th>
-                            <th lang="ru" class="lang-content">ПРИМЕНЕНИЕ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Металл + қышқыл</strong></td>
-                            <td lang="kk" class="lang-content">Zn + 2HCl → ZnCl₂ + H₂↑</td>
-                            <td lang="kk" class="lang-content">Бөлме температурасы</td>
-                            <td lang="kk" class="lang-content">Лабораторияда</td>
-
-                            <td lang="en" class="lang-content"><strong>Metal + acid</strong></td>
-                            <td lang="en" class="lang-content">Zn + 2HCl → ZnCl₂ + H₂↑</td>
-                            <td lang="en" class="lang-content">Room temperature</td>
-                            <td lang="en" class="lang-content">Laboratory</td>
-
-                            <td lang="ru" class="lang-content"><strong>Металл + кислота</strong></td>
-                            <td lang="ru" class="lang-content">Zn + 2HCl → ZnCl₂ + H₂↑</td>
-                            <td lang="ru" class="lang-content">Комнатная температура</td>
-                            <td lang="ru" class="lang-content">Лаборатория</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Ыстық суы + металл</strong></td>
-                            <td lang="kk" class="lang-content">2Fe + 3H₂O → Fe₃O₄ + 3H₂↑</td>
-                            <td lang="kk" class="lang-content">Ыстық (700-800°C)</td>
-                            <td lang="kk" class="lang-content">Өндіктік масштабы</td>
-
-                            <td lang="en" class="lang-content"><strong>Hot water + metal</strong></td>
-                            <td lang="en" class="lang-content">2Fe + 3H₂O → Fe₃O₄ + 3H₂↑</td>
-                            <td lang="en" class="lang-content">Hot (700-800°C)</td>
-                            <td lang="en" class="lang-content">Industrial</td>
-
-                            <td lang="ru" class="lang-content"><strong>Горячая вода + металл</strong></td>
-                            <td lang="ru" class="lang-content">2Fe + 3H₂O → Fe₃O₄ + 3H₂↑</td>
-                            <td lang="ru" class="lang-content">Горячее (700-800°C)</td>
-                            <td lang="ru" class="lang-content">Промышленность</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content"><strong>Электролиз суы</strong></td>
-                            <td lang="kk" class="lang-content">2H₂O → 2H₂↑ + O₂↑</td>
-                            <td lang="kk" class="lang-content">Электрок өндіктігі</td>
-                            <td lang="kk" class="lang-content">Ең таза сутегі</td>
-
-                            <td lang="en" class="lang-content"><strong>Water electrolysis</strong></td>
-                            <td lang="en" class="lang-content">2H₂O → 2H₂↑ + O₂↑</td>
-                            <td lang="en" class="lang-content">Electric current</td>
-                            <td lang="en" class="lang-content">Purest hydrogen</td>
-
-                            <td lang="ru" class="lang-content"><strong>Электролиз воды</strong></td>
-                            <td lang="ru" class="lang-content">2H₂O → 2H₂↑ + O₂↑</td>
-                            <td lang="ru" class="lang-content">Электрический ток</td>
-                            <td lang="ru" class="lang-content">Чистейший водород</td>
-                        </tr>
-                    </table>
-                </div>
+        <div class="lg:col-span-7 glass rounded-custom p-8 border-l-4 border-yellow-400">
+            <div class="flex flex-wrap gap-2 mb-5">
+                <button onclick="setTab('prep')" id="tab-prep" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold" id-label="prep"></button>
+                <button onclick="setTab('reactions')" id="tab-reactions" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold"></button>
+                <button onclick="setTab('uses')" id="tab-uses" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold"></button>
             </div>
-        </section>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">3. СУТЕГІНІҢ ҚОЛДАНУЛАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">3. APPLICATIONS OF HYDROGEN</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">3. Применения водорода</h2>
+            <h3 id="tab-title" class="heading-font text-2xl mb-4 text-yellow-300"></h3>
+            <div id="tab-body" class="space-y-3"></div>
+        </div>
+    </main>
 
-            <div class="rule-card">
-                <div class="space-y-3">
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>🚀 ҒАРЫШ ТЕХНИКАСЫ:</strong> Ракеталардың ынамдырмасы сутегіге. O₂ арқылы өндіктік.</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🚀 SPACE TECHNOLOGY:</strong> Rocket fuel. Most powerful fuel source!</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🚀 КОСМИЧЕСКИЕ ТЕХНОЛОГИИ:</strong> Ракетное топливо. Мощнейший источник энергии!</p>
-                    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-yellow-500/10 transition-colors">
+            <div class="w-14 h-14 bg-yellow-400/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">⭐</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-yellow-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-yellow-500/10 transition-colors">
+            <div class="w-14 h-14 bg-yellow-400/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🚀</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-yellow-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-yellow-500/10 transition-colors">
+            <div class="w-14 h-14 bg-yellow-400/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🌍</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-yellow-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
 
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>🎈 ДИРИЖАБДЛЕР:</strong> Сутегі ең жеңіл газ, дирижабль өлеңдісіне қолданады.</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🎈 BALLOONS:</strong> Hydrogen is lightest gas, used in balloons and zeppelins.</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🎈 ДИРИЖАБЛИ:</strong> Водород самый лёгкий газ, используется в дирижаблях.</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>🏭 Өнеркәсіп:</strong> Аммониак істеу (NH₃), мұнай өндіктігі, металл өндіктігі.</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🏭 INDUSTRY:</strong> Ammonia production (NH₃), oil refining, metal production.</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🏭 ПРОМЫШЛЕННОСТЬ:</strong> Производство аммиака (NH₃), переработка нефти, металлургия.</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>⚡ БОЛАШАҚ ҚУАТЫ:</strong> Сутегі ячейка технологиясы - өндіктіктің болашағы.</p>
-                        <p lang="en" class="lang-content text-sm"><strong>⚡ FUTURE ENERGY:</strong> Hydrogen fuel cell technology - energy of future!</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>⚡ ЭНЕРГИЯ БУДУЩЕГО:</strong> Технология водородных топливных элементов - энергия будущего!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Сутегі (H₂) - ең жеңіл газ (Mr = 2), түссіз, иіссіз. Алдыңғы әдістері: 1) металл + қышқыл (Zn + HCl), 2) ыстық су + металл, 3) электролиз су. Қолданулары: ғарыш (ракета), дирижабль, өндіктік (NH₃, мұнай), болашақ энергиясы (сутегі ячейкасы). Сутегі болашақтың топливасы!</p>
-            <p lang="en" class="lang-content text-sm">Hydrogen (H₂) - lightest gas (Mr = 2), colorless, odorless. Obtaining methods: 1) metal + acid (Zn + HCl), 2) hot water + metal, 3) water electrolysis. Applications: space (rockets), balloons, industry (NH₃, oil), future energy (hydrogen fuel cells). Hydrogen is fuel of future!</p>
-            <p lang="ru" class="lang-content text-sm">Водород (H₂) - самый лёгкий газ (Mr = 2), бесцветный, без запаха. Способы получения: 1) металл + кислота (Zn + HCl), 2) горячая вода + металл, 3) электролиз воды. Применения: космос (ракеты), дирижабли, промышленность (NH₃, нефть), энергия будущего (топливные элементы). Водород - топливо будущего!</p>
-        </footer>
-    </div>
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-yellow-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Водород: H₂",
+                subtitle: "Самый лёгкий и распространённый элемент Вселенной",
+                moleculeHeading: "Молекула H₂",
+                molName: "Водород, H₂",
+                molMass: "Mᵣ = 2 • газ • в 14,5 раз легче воздуха",
+                prop1: "Т. кипения",
+                prop2: "Т. плавления",
+                prop3: "Цвет",
+                prop3val: "Бесцветен",
+                prop4: "Запах",
+                prop4val: "Без запаха",
+                tabs: { prep: "Получение", reactions: "Реакции", uses: "Применение" },
+                content: {
+                    prep: {
+                        title: "Получение водорода",
+                        items: [
+                            { eq: "Zn + 2 HCl → ZnCl₂ + H₂↑", desc: "В лаборатории — действие кислот на активные металлы (Zn, Fe, Mg)." },
+                            { eq: "2 H₂O → 2 H₂↑ + O₂↑", desc: "Электролиз воды — экологически чистый промышленный способ." },
+                            { eq: "CH₄ + H₂O → CO + 3 H₂", desc: "Конверсия метана с водяным паром — основной промышленный способ." }
+                        ]
+                    },
+                    reactions: {
+                        title: "Химические свойства",
+                        items: [
+                            { eq: "2 H₂ + O₂ → 2 H₂O", desc: "Горение с образованием воды — выделяется огромное количество тепла." },
+                            { eq: "H₂ + Cl₂ → 2 HCl", desc: "С галогенами образует кислоты. На свету реакция идёт со взрывом." },
+                            { eq: "CuO + H₂ → Cu + H₂O", desc: "Восстанавливает металлы из оксидов — используется в металлургии." }
+                        ]
+                    },
+                    uses: {
+                        title: "Применение",
+                        items: [
+                            { eq: "🚀 Ракетное топливо", desc: "Жидкий H₂ — самое энергоёмкое топливо в космонавтике (двигатели Saturn V, Space Shuttle)." },
+                            { eq: "⚗️ Синтез аммиака", desc: "N₂ + 3 H₂ → 2 NH₃ — основа производства удобрений и взрывчатых веществ." },
+                            { eq: "⚡ Водородная энергетика", desc: "Топливные элементы превращают H₂ в электричество — будущее экологичного транспорта." }
+                        ]
+                    }
+                },
+                cards: [
+                    { title: "Положение в таблице", desc: "Элемент №1 в таблице Менделеева. Один протон в ядре, один электрон. Изотопы: протий, дейтерий, тритий." },
+                    { title: "Водород во Вселенной", desc: "Из него состоят звёзды и межзвёздный газ — около 75% всей массы Вселенной. На Земле в чистом виде встречается редко." },
+                    { title: "Зелёный водород", desc: "Получаемый электролизом на солнечных и ветровых станциях — ключ к декарбонизации энергетики и промышленности." }
+                ],
+                quote: "«Водород — топливо XXI века: лёгкий, чистый и бесконечный»",
+                author: "Жюль Верн"
+            },
+            kz: {
+                title: "Сутегі: H₂",
+                subtitle: "Әлемдегі ең жеңіл әрі көп таралған элемент",
+                moleculeHeading: "H₂ молекуласы",
+                molName: "Сутегі, H₂",
+                molMass: "Mᵣ = 2 • газ • ауадан 14,5 есе жеңіл",
+                prop1: "Қайнау т-сы",
+                prop2: "Балқу т-сы",
+                prop3: "Түсі",
+                prop3val: "Түссіз",
+                prop4: "Иісі",
+                prop4val: "Иіссіз",
+                tabs: { prep: "Алу", reactions: "Реакциялар", uses: "Қолданылуы" },
+                content: {
+                    prep: {
+                        title: "Сутегіні алу",
+                        items: [
+                            { eq: "Zn + 2 HCl → ZnCl₂ + H₂↑", desc: "Зертханада — белсенді металдарға қышқыл әсер ету (Zn, Fe, Mg)." },
+                            { eq: "2 H₂O → 2 H₂↑ + O₂↑", desc: "Суды электролиздеу — экологиялық таза өнеркәсіптік әдіс." },
+                            { eq: "CH₄ + H₂O → CO + 3 H₂", desc: "Метанды су буымен айналдыру — негізгі өнеркәсіптік әдіс." }
+                        ]
+                    },
+                    reactions: {
+                        title: "Химиялық қасиеттер",
+                        items: [
+                            { eq: "2 H₂ + O₂ → 2 H₂O", desc: "Жанғанда су түзіледі — өте көп жылу бөлінеді." },
+                            { eq: "H₂ + Cl₂ → 2 HCl", desc: "Галогендермен қышқыл түзеді. Жарықта жарылыс жасайды." },
+                            { eq: "CuO + H₂ → Cu + H₂O", desc: "Металдарды оксидтерінен қалпына келтіреді — металлургияда қолданылады." }
+                        ]
+                    },
+                    uses: {
+                        title: "Қолданылуы",
+                        items: [
+                            { eq: "🚀 Зымыран отыны", desc: "Сұйық H₂ — ғарыштағы ең қуатты отын (Saturn V, Space Shuttle қозғалтқыштары)." },
+                            { eq: "⚗️ Аммиак синтезі", desc: "N₂ + 3 H₂ → 2 NH₃ — тыңайтқыш пен жарылғыш зат өндірісінің негізі." },
+                            { eq: "⚡ Сутегі энергетикасы", desc: "Отын элементтері H₂-ні электрге айналдырады — таза көліктің болашағы." }
+                        ]
+                    }
+                },
+                cards: [
+                    { title: "Кестедегі орны", desc: "Менделеев кестесіндегі №1 элемент. Ядрода 1 протон, 1 электрон. Изотоптары: протий, дейтерий, тритий." },
+                    { title: "Сутегі әлемде", desc: "Жұлдыздар мен жұлдызаралық газ — Әлем массасының шамамен 75%-ы. Жерде таза күйінде сирек кездеседі." },
+                    { title: "Жасыл сутегі", desc: "Күн мен жел станцияларында электролиз арқылы алынады — энергетика мен өнеркәсіпті көміртексіздендірудің кілті." }
+                ],
+                quote: "«Сутегі — XXI ғасырдың отыны: жеңіл, таза әрі сарқылмас»",
+                author: "Жюль Верн"
+            },
+            en: {
+                title: "Hydrogen: H₂",
+                subtitle: "The lightest and most abundant element in the Universe",
+                moleculeHeading: "The H₂ molecule",
+                molName: "Hydrogen, H₂",
+                molMass: "Mᵣ = 2 • gas • 14.5× lighter than air",
+                prop1: "Boiling point",
+                prop2: "Melting point",
+                prop3: "Colour",
+                prop3val: "Colourless",
+                prop4: "Smell",
+                prop4val: "Odourless",
+                tabs: { prep: "Preparation", reactions: "Reactions", uses: "Uses" },
+                content: {
+                    prep: {
+                        title: "Preparation of hydrogen",
+                        items: [
+                            { eq: "Zn + 2 HCl → ZnCl₂ + H₂↑", desc: "Lab method — acids acting on active metals (Zn, Fe, Mg)." },
+                            { eq: "2 H₂O → 2 H₂↑ + O₂↑", desc: "Electrolysis of water — a clean industrial process." },
+                            { eq: "CH₄ + H₂O → CO + 3 H₂", desc: "Steam reforming of methane — the main industrial route." }
+                        ]
+                    },
+                    reactions: {
+                        title: "Chemical properties",
+                        items: [
+                            { eq: "2 H₂ + O₂ → 2 H₂O", desc: "Burning gives water and releases huge amounts of heat." },
+                            { eq: "H₂ + Cl₂ → 2 HCl", desc: "Reacts with halogens to give acids. In light the reaction explodes." },
+                            { eq: "CuO + H₂ → Cu + H₂O", desc: "Reduces metals from their oxides — used in metallurgy." }
+                        ]
+                    },
+                    uses: {
+                        title: "Applications",
+                        items: [
+                            { eq: "🚀 Rocket fuel", desc: "Liquid H₂ is the most energetic chemical fuel in spaceflight (Saturn V, Space Shuttle engines)." },
+                            { eq: "⚗️ Ammonia synthesis", desc: "N₂ + 3 H₂ → 2 NH₃ — the basis for fertilisers and explosives." },
+                            { eq: "⚡ Hydrogen energy", desc: "Fuel cells turn H₂ into electricity — the future of clean transport." }
+                        ]
+                    }
+                },
+                cards: [
+                    { title: "Place in the table", desc: "Element #1 in Mendeleev's table. One proton, one electron. Isotopes: protium, deuterium, tritium." },
+                    { title: "Hydrogen in the Universe", desc: "Stars and interstellar gas — about 75% of the Universe's mass. On Earth it is rarely found in pure form." },
+                    { title: "Green hydrogen", desc: "Made by electrolysis using solar and wind power — the key to decarbonising energy and industry." }
+                ],
+                quote: "«Hydrogen is the fuel of the 21st century: light, clean and inexhaustible»",
+                author: "Jules Verne"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentTab = 'prep';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function setTab(t) {
+            currentTab = t;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + t).classList.add('active');
+            renderTab();
+        }
+
+        function renderTab() {
+            const t = translations[currentLang];
+            const content = t.content[currentTab];
+            document.getElementById('tab-title').textContent = content.title;
+            const body = document.getElementById('tab-body');
+            body.innerHTML = content.items.map(it => `
+                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                    <div class="formula-style text-yellow-300 font-bold mb-1">${it.eq}</div>
+                    <div class="text-white/70 text-sm leading-relaxed">${it.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('molecule-heading').textContent = t.moleculeHeading;
+            document.getElementById('svg-mol-name').textContent = t.molName;
+            document.getElementById('svg-mol-mass').textContent = t.molMass;
+            document.getElementById('prop1-label').textContent = t.prop1;
+            document.getElementById('prop2-label').textContent = t.prop2;
+            document.getElementById('prop3-label').textContent = t.prop3;
+            document.getElementById('prop3-value').textContent = t.prop3val;
+            document.getElementById('prop4-label').textContent = t.prop4;
+            document.getElementById('prop4-value').textContent = t.prop4val;
+            document.getElementById('tab-prep').textContent = t.tabs.prep;
+            document.getElementById('tab-reactions').textContent = t.tabs.reactions;
+            document.getElementById('tab-uses').textContent = t.tabs.uses;
+            renderTab();
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            setTab('prep');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -337,128 +349,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>

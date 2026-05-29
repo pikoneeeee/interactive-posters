@@ -1,169 +1,150 @@
 <!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Плавление және сақтау - Есептеу мысалдары</title>
-    <link rel="stylesheet" href="../../libs/tailwind.min.css">
-    <style>
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #fecaca 0%, #fca5a5 100%); }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        .header-card { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 40px; border-radius: 1rem; }
-        .section-heading { color: #991b1b; border-bottom: 3px solid #fca5a5; display: inline-block; padding-bottom: 5px; margin-bottom: 25px; font-weight: 700; }
-        .rule-card { background: white; border-radius: 0.75rem; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid #dc2626; margin-bottom: 20px; }
-        .lang-btn { padding: 8px 16px; border: 2px solid #dc2626; background: white; color: #dc2626; border-radius: 0.5rem; font-weight: 600; cursor: pointer; }
-        .lang-btn.active { background: #dc2626; color: white; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        .info-box { background: linear-gradient(135deg, #fca5a5 0%, #fecaca 100%); padding: 15px; border-radius: 0.75rem; border-left: 4px solid #dc2626; margin: 10px 0; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .calc-card { background: #fef2f2; padding: 12px; border-radius: 0.5rem; border-left: 3px solid #dc2626; font-size: 11px; }
-    </style>
-    <script src="../../libs/chart.min.js"></script>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Свободное падение тел</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css"><link rel="stylesheet" href="../../libs/fonts.css"><link rel="stylesheet" href="_ph_style.css">
 </head>
-<body class="bg-red-50">
+<body class="p-6 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1500px;margin:auto">
 
-<div id="poster-container" class="container lang-kk">
-        <div style="display:flex; justify-content:center; margin-bottom:20px; gap:10px;">
-            <button class="lang-btn active" onclick="switchLang('kk')">Қазақша</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ru')">Русский</button>
-        </div>
+<header class="card rounded-custom p-10 mb-8 flex flex-col md:flex-row justify-between items-center border-b-2 border-sky-300">
+<div><p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+<span lang="kk" class="lang-content">10 сынып · Кинематика</span>
+<span lang="en" class="lang-content">Grade 10 · Kinematics</span>
+<span lang="ru" class="lang-content">10 класс · Кинематика</span></p>
+<h1 lang="kk" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Денелердің еркін түсуі</h1>
+<h1 lang="en" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Free fall of bodies</h1>
+<h1 lang="ru" class="lang-content heading-font text-3xl md:text-5xl text-sky-700">Свободное падение тел</h1></div>
+<div class="flex gap-2 mt-4 md:mt-0">
+<button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+<button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+<button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+</div></header>
 
-        <header class="header-card text-center mb-10">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Балқу және қатаю</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Melting and Hardening</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Плавление и отвердевание</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-red-100">Q = λ × m есептеу. Мұз ішену, төмен сақты. ПРАКТИКАЛЫҚ МЫСАЛДАР!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-red-100">Q = λ × m calculations. Ice melting, metal hardening. PRACTICAL EXAMPLES!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-red-100">Q = λ × m расчёты. Плавление льда, затвердевание металла. ПРАКТИЧЕСКИЕ ПРИМЕРЫ!</p>
-        </header>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🍎 Еркін түсу деген не?</span>
+<span lang="en" class="lang-content">🍎 What is free fall?</span>
+<span lang="ru" class="lang-content">🍎 Что такое свободное падение?</span></h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="card rounded-custom p-8">
+<p class="text-slate-700 text-lg leading-relaxed mb-3">
+<span lang="kk" class="lang-content"><b class="text-sky-700">Еркін түсу</b> — дененің тек <b>ауырлық күшінің</b> әсерінен қозғалуы (ауаның кедергісі жоқ). Барлық денелер <b>үдеуі бірдей</b>: <b>g ≈ 9,8 м/с²</b> (есепте ≈ 10 м/с²) — Жер бетіне қарай бағытталған.</span>
+<span lang="en" class="lang-content"><b class="text-sky-700">Free fall</b> — motion under <b>gravity only</b> (no air drag). All bodies fall with the <b>same acceleration</b>: <b>g ≈ 9.8 m/s²</b> (problems often use 10), directed toward Earth.</span>
+<span lang="ru" class="lang-content"><b class="text-sky-700">Свободное падение</b> — движение под действием <b>только силы тяжести</b> (без сопротивления воздуха). Все тела падают с <b>одинаковым ускорением</b>: <b>g ≈ 9,8 м/с²</b> (в задачах ≈ 10).</span></p>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. Балқу МЫСАЛДАРЫ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. MELTING EXAMPLES</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Примеры плавления</h2>
+<div class="card-accent rounded-2xl p-5">
+<p class="text-sky-900 font-bold mb-2">📜 <span lang="kk" class="lang-content">Галилей (1589) — Пиза мұнарасы:</span><span lang="en" class="lang-content">Galileo (1589) — Tower of Pisa:</span><span lang="ru" class="lang-content">Галилей (1589) — Пизанская башня:</span></p>
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">Ауыр және жеңіл шарларды бірге тастап, олардың <b>бір уақытта</b> жерге жететінін көрсетті! Ауадағы кедергі ғана айырмашылыққа әсер етеді.</span>
+<span lang="en" class="lang-content">Dropped a heavy and a light ball — they hit the ground <b>simultaneously</b>! Only air resistance creates differences.</span>
+<span lang="ru" class="lang-content">Бросал тяжёлый и лёгкий шары — упали <b>одновременно</b>! Различия только из-за сопротивления воздуха.</span></p>
+</div>
+</div>
 
-            <div class="rule-card">
-                <div class="grid-3">
-                    <div class="calc-card">
-                        <p lang="kk" class="lang-content"><strong>❄️ МЫСАЛ 1: Мұз</strong></p>
-                        <p lang="kk" class="lang-content">m = 2 кг, λ = 334 кДж/кг</p>
-                        <p lang="kk" class="lang-content">Q = λ × m</p>
-                        <p lang="kk" class="lang-content">Q = 334 × 2</p>
-                        <p lang="kk" class="lang-content"><strong>Q = 668 кДж</strong></p>
+<div class="card rounded-custom p-6">
+<p class="heading-font text-sky-700 mb-3">📊 g <span lang="kk" class="lang-content">мәндері (планеталар):</span><span lang="en" class="lang-content">values (planets):</span><span lang="ru" class="lang-content">на планетах:</span></p>
+<table class="t text-sm">
+<tbody>
+<tr><td>🌙 <span lang="kk" class="lang-content">Ай</span><span lang="en" class="lang-content">Moon</span><span lang="ru" class="lang-content">Луна</span></td><td>1,62 м/с²</td></tr>
+<tr><td>♂️ <span lang="kk" class="lang-content">Марс</span><span lang="en" class="lang-content">Mars</span><span lang="ru" class="lang-content">Марс</span></td><td>3,7 м/с²</td></tr>
+<tr class="bg-sky-50"><td>🌍 <span lang="kk" class="lang-content">Жер</span><span lang="en" class="lang-content">Earth</span><span lang="ru" class="lang-content">Земля</span></td><td class="text-sky-700"><b>9,8 м/с²</b></td></tr>
+<tr><td>♀️ <span lang="kk" class="lang-content">Шолпан</span><span lang="en" class="lang-content">Venus</span><span lang="ru" class="lang-content">Венера</span></td><td>8,9 м/с²</td></tr>
+<tr><td>♃ <span lang="kk" class="lang-content">Юпитер</span><span lang="en" class="lang-content">Jupiter</span><span lang="ru" class="lang-content">Юпитер</span></td><td>24,8 м/с²</td></tr>
+<tr><td>☀️ <span lang="kk" class="lang-content">Күн</span><span lang="en" class="lang-content">Sun</span><span lang="ru" class="lang-content">Солнце</span></td><td>274 м/с²</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>❄️ EXAMPLE 1: Ice</strong></p>
-                        <p lang="en" class="lang-content">m = 2 kg, λ = 334 kJ/kg</p>
-                        <p lang="en" class="lang-content">Q = λ × m</p>
-                        <p lang="en" class="lang-content">Q = 334 × 2</p>
-                        <p lang="en" class="lang-content"><strong>Q = 668 kJ</strong></p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">📐 Формулалар</span>
+<span lang="en" class="lang-content">📐 Equations</span>
+<span lang="ru" class="lang-content">📐 Формулы</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-sky-700 mb-2">⬇️ <span lang="kk" class="lang-content">Тыныштықтан түсу:</span><span lang="en" class="lang-content">Falling from rest:</span><span lang="ru" class="lang-content">Падение из покоя:</span></p>
+<div class="formula text-center" style="font-size:1.2rem">
+v = g·t  ·  h = g·t²/2  ·  v² = 2gh
+</div>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">v₀ = 0</span><span lang="en" class="lang-content">v₀ = 0</span><span lang="ru" class="lang-content">v₀ = 0</span></p>
+</div>
+<div class="card-accent rounded-custom p-6">
+<p class="heading-font text-sky-700 mb-2">⬆️ <span lang="kk" class="lang-content">Тігінен жоғары лақтыру:</span><span lang="en" class="lang-content">Vertical throw up:</span><span lang="ru" class="lang-content">Бросок вверх:</span></p>
+<div class="formula text-center" style="font-size:1.15rem">
+v = v₀ − g·t  ·  h = v₀t − gt²/2
+</div>
+<p class="text-xs text-slate-600 mt-2"><span lang="kk" class="lang-content">Максимум биіктікте v = 0</span><span lang="en" class="lang-content">At max height v = 0</span><span lang="ru" class="lang-content">В верхней точке v = 0</span></p>
+</div>
+</div>
 
-                        <p lang="ru" class="lang-content"><strong>❄️ ПРИМЕР 1: Лёд</strong></p>
-                        <p lang="ru" class="lang-content">m = 2 кг, λ = 334 кДж/кг</p>
-                        <p lang="ru" class="lang-content">Q = λ × m</p>
-                        <p lang="ru" class="lang-content">Q = 334 × 2</p>
-                        <p lang="ru" class="lang-content"><strong>Q = 668 кДж</strong></p>
-                    </div>
+<div class="card-warm rounded-custom p-5 mt-4">
+<p class="text-slate-700 text-sm">
+<span lang="kk" class="lang-content">⭐ <b>Көтерілу уақыты = түсу уақыты:</b> t↑ = t↓ = v₀/g. Максимум биіктік: h<sub>max</sub> = v₀²/(2g).</span>
+<span lang="en" class="lang-content">⭐ <b>Rise time = fall time:</b> t↑ = t↓ = v₀/g. Max height: h<sub>max</sub> = v₀²/(2g).</span>
+<span lang="ru" class="lang-content">⭐ <b>Время подъёма = времени падения:</b> t↑ = t↓ = v₀/g. Макс. высота: h<sub>max</sub> = v₀²/(2g).</span></p>
+</div>
+</section>
 
-                    <div class="calc-card">
-                        <p lang="kk" class="lang-content"><strong>🔥 МЫСАЛ 2: Мыс</strong></p>
-                        <p lang="kk" class="lang-content">m = 5 кг, λ = 209 кДж/кг</p>
-                        <p lang="kk" class="lang-content">Q = λ × m</p>
-                        <p lang="kk" class="lang-content">Q = 209 × 5</p>
-                        <p lang="kk" class="lang-content"><strong>Q = 1045 кДж</strong></p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🧮 Есеп</span>
+<span lang="en" class="lang-content">🧮 Problem</span>
+<span lang="ru" class="lang-content">🧮 Задача</span></h2>
+<div class="card rounded-custom p-8">
+<p class="text-sky-900 font-bold mb-3 text-lg">
+<span lang="kk" class="lang-content">Дене 20 м биіктіктен түсірілді. Түсу уақытын және жерге соққанда жылдамдықты табыңыз.</span>
+<span lang="en" class="lang-content">A body is dropped from 20 m. Find the fall time and the speed on impact.</span>
+<span lang="ru" class="lang-content">Тело сброшено с h = 20 м. Найти время падения и скорость в момент удара.</span></p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="card-accent rounded-2xl p-4">
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Берілген:</span><span lang="en" class="lang-content">Given:</span><span lang="ru" class="lang-content">Дано:</span></p>
+<ul class="text-slate-700 list-none text-sm space-y-1">
+<li>h = 20 м</li><li>g = 10 м/с²</li><li>v₀ = 0</li><li>t — ?  v — ?</li>
+</ul></div>
+<div>
+<p class="font-bold text-sky-700 mb-2"><span lang="kk" class="lang-content">Шешуі:</span><span lang="en" class="lang-content">Solution:</span><span lang="ru" class="lang-content">Решение:</span></p>
+<div class="formula text-left" style="font-size:1rem">
+t = √(2h/g) = √4 = <span class="num">2</span> с
+<br/>v = g·t = 10·2 = <span class="num">20</span> м/с
+</div>
+<div class="badge badge-emerald mt-3">✅ t = 2 с, v = 20 м/с</div>
+</div></div></div>
+</section>
 
-                        <p lang="en" class="lang-content"><strong>🔥 EXAMPLE 2: Copper</strong></p>
-                        <p lang="en" class="lang-content">m = 5 kg, λ = 209 kJ/kg</p>
-                        <p lang="en" class="lang-content">Q = λ × m</p>
-                        <p lang="en" class="lang-content">Q = 209 × 5</p>
-                        <p lang="en" class="lang-content"><strong>Q = 1045 kJ</strong></p>
+<section class="mb-8">
+<h2 class="heading-font text-2xl text-sky-700 uppercase tracking-widest mb-6">
+<span lang="kk" class="lang-content">🌟 Қызықты деректер</span>
+<span lang="en" class="lang-content">🌟 Fun facts</span>
+<span lang="ru" class="lang-content">🌟 Интересные факты</span></h2>
+<div class="card-warm rounded-custom p-6">
+<ul class="text-slate-700 text-base space-y-2">
+<li>🌙 <span lang="kk" class="lang-content"><b>1971</b> — Аполлон-15 ғарышкері Айда қауырсын мен балғаны қатар тастап, олар <b>бір уақытта</b> түсетінін көрсетті!</span><span lang="en" class="lang-content"><b>1971</b> — Apollo 15 astronaut dropped a feather and a hammer on the Moon — they fell <b>at the same time</b>!</span><span lang="ru" class="lang-content"><b>1971</b> — астронавт Аполлона-15 одновременно бросил на Луне перо и молоток — упали <b>одновременно</b>!</span></li>
+<li>🎢 <span lang="kk" class="lang-content"><b>Парашют:</b> ауаның кедергісі →  v<sub>max</sub> ≈ 55 м/с (200 км/сағ).</span><span lang="en" class="lang-content"><b>Skydiver:</b> air drag → terminal velocity ≈ 55 m/s (200 km/h).</span><span lang="ru" class="lang-content"><b>Парашютист:</b> сопротивление воздуха → конечная скорость ≈ 55 м/с (200 км/ч).</span></li>
+<li>🚀 <span lang="kk" class="lang-content"><b>Невесомость</b> МКС-те: ғарышкерлер де, станция да Жерге <b>еркін түсіп</b> жатыр!</span><span lang="en" class="lang-content"><b>Weightlessness</b> on ISS: astronauts and the station are <b>both in free fall</b>!</span><span lang="ru" class="lang-content"><b>Невесомость</b> на МКС: и космонавты, и станция <b>в свободном падении</b>!</span></li>
+</ul>
+</div>
+</section>
 
-                        <p lang="ru" class="lang-content"><strong>🔥 ПРИМЕР 2: Медь</strong></p>
-                        <p lang="ru" class="lang-content">m = 5 кг, λ = 209 кДж/кг</p>
-                        <p lang="ru" class="lang-content">Q = λ × m</p>
-                        <p lang="ru" class="lang-content">Q = 209 × 5</p>
-                        <p lang="ru" class="lang-content"><strong>Q = 1045 кДж</strong></p>
-                    </div>
+<footer class="card rounded-custom p-10">
+<p class="heading-font text-2xl text-sky-700 text-center mb-6">
+<span lang="kk" class="lang-content">🎯 Есте сақта</span>
+<span lang="en" class="lang-content">🎯 Remember</span>
+<span lang="ru" class="lang-content">🎯 Запомни</span></p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">🍎</div>
+<p class="heading-font text-xl text-sky-700 mb-2">g ≈ 9,8 м/с²</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Барлық денелерге</span><span lang="en" class="lang-content">For all bodies</span><span lang="ru" class="lang-content">Для всех тел</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">📐</div>
+<p class="heading-font text-xl text-sky-700 mb-2">h = gt²/2</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Түсу формуласы</span><span lang="en" class="lang-content">Fall formula</span><span lang="ru" class="lang-content">Формула падения</span></p></div>
+<div class="card-accent rounded-2xl p-6 text-center"><div class="text-5xl mb-3">⬆️⬇️</div>
+<p class="heading-font text-xl text-sky-700 mb-2">t↑ = t↓</p>
+<p class="text-slate-700 text-base"><span lang="kk" class="lang-content">Симметрия</span><span lang="en" class="lang-content">Symmetry</span><span lang="ru" class="lang-content">Симметрия</span></p></div>
+</div></footer>
 
-                    <div class="calc-card">
-                        <p lang="kk" class="lang-content"><strong>🪨 МЫСАЛ 3: Темір</strong></p>
-                        <p lang="kk" class="lang-content">Q = 2600 кДж, λ = 260 кДж/кг</p>
-                        <p lang="kk" class="lang-content">m = Q / λ</p>
-                        <p lang="kk" class="lang-content">m = 2600 / 260</p>
-                        <p lang="kk" class="lang-content"><strong>m = 10 кг</strong></p>
-
-                        <p lang="en" class="lang-content"><strong>🪨 EXAMPLE 3: Iron</strong></p>
-                        <p lang="en" class="lang-content">Q = 2600 kJ, λ = 260 kJ/kg</p>
-                        <p lang="en" class="lang-content">m = Q / λ</p>
-                        <p lang="en" class="lang-content">m = 2600 / 260</p>
-                        <p lang="en" class="lang-content"><strong>m = 10 kg</strong></p>
-
-                        <p lang="ru" class="lang-content"><strong>🪨 ПРИМЕР 3: Железо</strong></p>
-                        <p lang="ru" class="lang-content">Q = 2600 кДж, λ = 260 кДж/кг</p>
-                        <p lang="ru" class="lang-content">m = Q / λ</p>
-                        <p lang="ru" class="lang-content">m = 2600 / 260</p>
-                        <p lang="ru" class="lang-content"><strong>m = 10 кг</strong></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ӨНДІКТІГІНІҢ ПРАКТИКАЛЫҚ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. HARDENING PRACTICAL</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Практические примеры отвердевания</h2>
-
-            <div class="info-box">
-                <p lang="kk" class="lang-content text-sm"><strong>🔧 МӘНДІКТІГІНІҢ ҚҰРАМАСЫНДАҒЫ:</strong></p>
-                <p lang="kk" class="lang-content text-sm">1. Темір сдобы (1537°C) - мотор, құрамасындағы</p>
-                <p lang="kk" class="lang-content text-sm">2. Мыс сдобы (1083°C) - электр сәндіктігінің</p>
-                <p lang="kk" class="lang-content text-sm">3. Өндіктігінің құрамасындағы - ағындарын құрамасындағы (молдалау)</p>
-
-                <p lang="en" class="lang-content text-sm"><strong>🔧 PRACTICAL APPLICATIONS:</strong></p>
-                <p lang="en" class="lang-content text-sm">1. Steel casting (1537°C) - engines, structures</p>
-                <p lang="en" class="lang-content text-sm">2. Copper casting (1083°C) - electrical wires</p>
-                <p lang="en" class="lang-content text-sm">3. Ice formation - cooling, refrigeration</p>
-
-                <p lang="ru" class="lang-content text-sm"><strong>🔧 ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ:</strong></p>
-                <p lang="ru" class="lang-content text-sm">1. Отливка стали (1537°C) - моторы, конструкции</p>
-                <p lang="ru" class="lang-content text-sm">2. Отливка меди (1083°C) - электрические провода</p>
-                <p lang="ru" class="lang-content text-sm">3. Образование льда - охлаждение, холодильники</p>
-
-                <p lang="kk" class="lang-content text-sm" style="margin-top: 10px;"><strong>⚡ ЭНЕРГИЯ САЛЫСТЫРМАЛЫ:</strong> Мұз (334 кДж/кг) < Мыс (209 кДж/кг) < Темір (260 кДж/кг). Мұз ең енгіз плавились!</p>
-                <p lang="en" class="lang-content text-sm" style="margin-top: 10px;"><strong>⚡ ENERGY COMPARISON:</strong> Ice (334 kJ/kg) > Copper (209 kJ/kg) < Iron (260 kJ/kg). Ice needs most!</p>
-                <p lang="ru" class="lang-content text-sm" style="margin-top: 10px;"><strong>⚡ СРАВНЕНИЕ ЭНЕРГИИ:</strong> Лёд (334 кДж/кг) > Медь (209 кДж/кг) < Железо (260 кДж/кг). Лёд нужно больше!</p>
-            </div>
-        </section>
-
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: #fca5a5; border-radius: 1rem; border-top: 4px solid #dc2626;">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-red-900">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-red-900">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-red-900">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Плавления және өндіктігінің - Q = λ × m. Мұз (334 кДж/кг) = ең үлкен, темір (260) < мыс (209). Практикалық: темір ағындарының, электр - мыс. Енергия өндіктігінің = физика!</p>
-            <p lang="en" class="lang-content text-sm">Melting and hardening: Q = λ × m. Ice (334 kJ/kg) = largest, iron (260) < copper (209). Practical: steel parts, electrical copper. Energy from heat = physics!</p>
-            <p lang="ru" class="lang-content text-sm">Плавление и отвердевание: Q = λ × m. Лёд (334 кДж/кг) = наибольшее, железо (260) < медь (209). Практика: стальные детали, медь электрическая. Энергия от тепла = физика!</p>
-        </footer>
-    </div>
-
-    <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
-        }
-    </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
-
-<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
-
-
-</body>
-</html>
+</div>
+<script src="_ph_script.js"></script>
+</body></html>

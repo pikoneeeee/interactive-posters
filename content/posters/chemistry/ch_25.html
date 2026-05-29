@@ -1,316 +1,292 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оттегінің қасиеттері</title>
+    <title>Свойства кислорода</title>
     <link rel="stylesheet" href="../../libs/tailwind.min.css">
     <link rel="stylesheet" href="../../libs/fonts.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at bottom right, #1e1b4b, #312e81, #0f172a); color: white; min-height: 100vh; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #7f1d1d, #991b1b, #1c1917);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
         .heading-font { font-family: 'Montserrat', sans-serif; }
-        .glass { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-accent { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25); }
-        .rounded-custom { border-radius: 2rem; }
-        .lang-btn { padding: 10px 24px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
-        .lang-btn.active { background: #a78bfa; color: #0f172a; font-weight: 800; }
-        .lang-content { display: none; }
-        .lang-kk .lang-content[lang="kk"], .lang-en .lang-content[lang="en"], .lang-ru .lang-content[lang="ru"] { display: block; }
-        /* Fix table cells: display table-cell instead of block */
-        .lang-kk th.lang-content[lang="kk"],
-        .lang-kk td.lang-content[lang="kk"],
-        .lang-en th.lang-content[lang="en"],
-        .lang-en td.lang-content[lang="en"],
-        .lang-ru th.lang-content[lang="ru"],
-        .lang-ru td.lang-content[lang="ru"] { display: table-cell; }
-        table { width: 100%; border-collapse: collapse; }
-        table th { background: rgba(255,255,255,0.08); color: #c4b5fd; padding: 16px 20px; font-weight: 700; font-size: 1.05rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.15); }
-        table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1.05rem; vertical-align: top; color: rgba(255,255,255,0.85); }
-        table tr:hover td { background: rgba(255,255,255,0.03); }
-        .formula-block { background: rgba(0,0,0,0.5); color: #c4b5fd; font-family: 'Courier New', monospace; padding: 18px 24px; border-radius: 1rem; font-size: 1.1rem; line-height: 1.7; white-space: pre; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
-        .section-heading { color: #c4b5fd; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
-        .rule-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2rem; margin-bottom: 1.5rem; }
-        .header-card { background: rgba(10,15,35,0.70); border: 1px solid rgba(255,255,255,0.1); border-radius: 2rem; padding: 2.5rem; }
-        .method-box, .property-box, .substance-box, .info-box, .illustration {
-            background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25);
-            border-radius: 1rem; padding: 1.25rem; margin: 0.75rem 0; border-left: none;
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        svg text { fill: white !important; }
-        svg { max-width: 100%; height: auto; }
-    
-        /* Custom content boxes */
-        .step-box, .calculation-box, .calc-box, .example-box, .example-card,
-        .molecule-box, .formula-example, .sign-box, .reaction-box,
-        .calculation-example, .oxide-box, .concept-box, .valency-box,
-        .law-box, .formula-box, .heat-box, .process-box {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin: 0.75rem 0;
-        }
-        .step-box p, .calculation-box p, .calc-box p, .example-box p,
-        .example-card p, .molecule-box p, .formula-example p, .sign-box p,
-        .reaction-box p, .calculation-example p, .oxide-box p, .concept-box p,
-        .valency-box p, .law-box p, .formula-box p, .heat-box p, .process-box p {
-            margin-bottom: 0.35rem;
-            line-height: 1.6;
-        }
+        .rounded-custom { border-radius: 2.5rem; }
+        .lang-btn { transition: all 0.2s; }
+        .lang-btn.active { background: #f87171; color: #1c1917; border-color: transparent; font-weight: 800; }
+        .tab-btn { transition: all 0.2s; cursor: pointer; }
+        .tab-btn.active { background: rgba(248, 113, 113, 0.2); border-color: #f87171; }
+        .formula-style { font-family: 'Courier New', monospace; }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        .o-atom { animation: float 3s ease-in-out infinite; }
+        .o-atom-2 { animation: float 3s ease-in-out infinite reverse; }
     </style>
-    <script src="../../libs/chart.min.js"></script>
 </head>
-<body class="p-6 md:p-10">
+<body class="p-4 md:p-10">
 
-<div id="poster-container" class="lang-kk" style="max-width:1500px;margin:auto;">
-        
-
-        <header class="header-card rounded-custom mb-8 flex flex-col md:flex-row justify-between items-center">
-            <h1 lang="kk" class="lang-content text-4xl font-extrabold uppercase">Оттегінің Қасиеттері!</h1>
-            <h1 lang="en" class="lang-content text-4xl font-extrabold uppercase">Properties of Oxygen!</h1>
-            <h1 lang="ru" class="lang-content text-4xl font-extrabold uppercase">Свойства кислорода!</h1>
-            <p lang="kk" class="lang-content mt-3 text-lg font-medium text-white/60">O₂ - түссіз, иіссіз газ. Суға сөлінбеген. Өту үшін өте қажет. Металл пен жануға сатаса жану. Ең күшті оксидайтқышы! ӨМІРДІҢ НЕГІЗДЕРІ!</p>
-            <p lang="en" class="lang-content mt-3 text-lg font-medium text-white/60">O₂ - colorless, odorless gas. Slightly soluble in water. Essential for life. Combustion of metals and fuels. Strongest oxidizer! FOUNDATION OF LIFE!</p>
-            <p lang="ru" class="lang-content mt-3 text-lg font-medium text-white/60">O₂ - бесцветный, без запаха газ. Плохо растворяется в воде. Необходим для жизни. Горение металлов и топлива. Сильнейший окислитель! ОСНОВА ЖИЗНИ!</p>
-                <div class="flex gap-2 mt-4 md:mt-0">
-            <button onclick="switchLang('ru')" class="lang-btn active">RU</button>
-            <button onclick="switchLang('kk')" class="lang-btn">KZ</button>
-            <button onclick="switchLang('en')" class="lang-btn">EN</button>
+    <header class="glass rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <h1 id="main-title" class="heading-font text-3xl md:text-5xl uppercase tracking-tight text-red-400"></h1>
+            <p id="sub-title" class="mt-2 text-white/60 font-light"></p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">RU</button>
+            <button onclick="setLang('kz')" id="btn-kz" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">KZ</button>
+            <button onclick="setLang('en')" id="btn-en" class="lang-btn px-6 py-2 rounded-full border border-white/20 font-bold">EN</button>
         </div>
     </header>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">1. ОТТЕГІНІҢ ФИЗИКАЛЫҚ ҚАСИЕТТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">1. PHYSICAL PROPERTIES OF OXYGEN</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">1. Физические свойства кислорода</h2>
-
-            <div class="rule-card">
-                <div class="space-y-3">
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>🎨 ТҮС:</strong> Түссіз газ (бояуы жоқ)</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🎨 COLOR:</strong> Colorless gas</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🎨 ЦВЕТ:</strong> Бесцветный газ</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>👃 ИІСІ:</strong> Иіссіз (немесе өте сұлақ иісі)</p>
-                        <p lang="en" class="lang-content text-sm"><strong>👃 SMELL:</strong> Odorless (or very faint)</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>👃 ЗАПАХ:</strong> Без запаха (или очень слабый)</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>🌡️ ТЕМПЕРАТУРАСЫ:</strong> Қайнау нүктесі: -183°C, Балқу нүктесі: -218°C</p>
-                        <p lang="en" class="lang-content text-sm"><strong>🌡️ TEMPERATURE:</strong> Boiling point: -183°C, Melting point: -218°C</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>🌡️ ТЕМПЕРАТУРА:</strong> Точка кипения: -183°C, плавления: -218°C</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>💧 СУДА ЕРІГІШТІК:</strong> Өте сөлінбеген (3 см³ суда 100 см³-ге)</p>
-                        <p lang="en" class="lang-content text-sm"><strong>💧 WATER SOLUBILITY:</strong> Slightly soluble (3 cm³ in 100 cm³ water)</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>💧 РАСТВОРИМОСТЬ В ВОДЕ:</strong> Слабо растворяется (3 см³ в 100 см³ воды)</p>
-                    </div>
-
-                    <div class="property-box">
-                        <p lang="kk" class="lang-content text-sm"><strong>⚖️ ӘЛІ:</strong> Mr(O₂) = 32 г/моль</p>
-                        <p lang="en" class="lang-content text-sm"><strong>⚖️ MASS:</strong> Mr(O₂) = 32 g/mol</p>
-                        <p lang="ru" class="lang-content text-sm"><strong>⚖️ МАССА:</strong> Mr(O₂) = 32 г/моль</p>
-                    </div>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div class="lg:col-span-5 glass rounded-custom p-8 flex flex-col items-center">
+            <h2 id="molecule-heading" class="heading-font text-xl mb-4 opacity-80 uppercase tracking-wider self-start"></h2>
+            <svg viewBox="0 0 360 320" class="w-full max-w-[360px]">
+                <line x1="130" y1="160" x2="230" y2="160" stroke="#f87171" stroke-width="8"/>
+                <line x1="130" y1="150" x2="230" y2="150" stroke="#f87171" stroke-width="8"/>
+                <line x1="130" y1="170" x2="230" y2="170" stroke="#f87171" stroke-width="8" opacity="0.5"/>
+                <circle class="o-atom" cx="120" cy="160" r="55" fill="url(#oxGrad1)" stroke="#fee2e2" stroke-width="3"/>
+                <circle class="o-atom-2" cx="240" cy="160" r="55" fill="url(#oxGrad2)" stroke="#fee2e2" stroke-width="3"/>
+                <text x="120" y="167" text-anchor="middle" fill="white" font-size="32" font-weight="bold">O</text>
+                <text x="240" y="167" text-anchor="middle" fill="white" font-size="32" font-weight="bold">O</text>
+                <text id="svg-mol-name" x="180" y="270" text-anchor="middle" fill="#fecaca" font-size="18" font-weight="bold"></text>
+                <text id="svg-mol-mass" x="180" y="295" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="13"></text>
+                <defs>
+                    <radialGradient id="oxGrad1"><stop offset="0%" stop-color="#fca5a5"/><stop offset="100%" stop-color="#b91c1c"/></radialGradient>
+                    <radialGradient id="oxGrad2"><stop offset="0%" stop-color="#fca5a5"/><stop offset="100%" stop-color="#b91c1c"/></radialGradient>
+                </defs>
+            </svg>
+            <div class="grid grid-cols-2 gap-3 w-full mt-4">
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop-tbo-label"></div>
+                    <div class="text-lg font-bold text-red-300">−183 °C</div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop-tpl-label"></div>
+                    <div class="text-lg font-bold text-red-300">−219 °C</div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop-color-label"></div>
+                    <div id="prop-color-value" class="text-lg font-bold text-red-300"></div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-3 border border-white/10">
+                    <div class="text-xs text-white/50 uppercase tracking-wider" id="prop-solub-label"></div>
+                    <div id="prop-solub-value" class="text-lg font-bold text-red-300"></div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="mb-12">
-            <h2 lang="kk" class="lang-content text-3xl section-heading">2. ОТТЕГІНІҢ ХИМИЯЛЫҚ ҚАСИЕТТЕРІ</h2>
-            <h2 lang="en" class="lang-content text-3xl section-heading">2. CHEMICAL PROPERTIES OF OXYGEN</h2>
-            <h2 lang="ru" class="lang-content text-3xl section-heading">2. Химические свойства кислорода</h2>
+        <div class="lg:col-span-7 glass rounded-custom p-8 border-l-4 border-red-500">
+            <h3 id="reactions-heading" class="heading-font text-xl mb-4 text-red-300 uppercase tracking-wider"></h3>
 
-            <div class="rule-card">
-                <div class="overflow-x-auto">
-                    <table>
-                        <tr>
-                            <th lang="kk" class="lang-content">РЕАКЦИЯ</th>
-                            <th lang="kk" class="lang-content">ТЕҢДЕУ</th>
-                            <th lang="kk" class="lang-content">ТҮРІ</th>
-                            <th lang="kk" class="lang-content">БЕЛГІЛЕРІ</th>
-
-                            <th lang="en" class="lang-content">REACTION</th>
-                            <th lang="en" class="lang-content">EQUATION</th>
-                            <th lang="en" class="lang-content">TYPE</th>
-                            <th lang="en" class="lang-content">SIGNS</th>
-
-                            <th lang="ru" class="lang-content">РЕАКЦИЯ</th>
-                            <th lang="ru" class="lang-content">УРАВНЕНИЕ</th>
-                            <th lang="ru" class="lang-content">ТИП</th>
-                            <th lang="ru" class="lang-content">ПРИЗНАКИ</th>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Металдың жануы (темір)</td>
-                            <td lang="kk" class="lang-content">3Fe + 2O₂ → Fe₃O₄</td>
-                            <td lang="kk" class="lang-content">Синтез</td>
-                            <td lang="kk" class="lang-content">Қызыл-ақ шіршек</td>
-
-                            <td lang="en" class="lang-content">Metal burning (iron)</td>
-                            <td lang="en" class="lang-content">3Fe + 2O₂ → Fe₃O₄</td>
-                            <td lang="en" class="lang-content">Synthesis</td>
-                            <td lang="en" class="lang-content">Red-white spark</td>
-
-                            <td lang="ru" class="lang-content">Горение металла (железо)</td>
-                            <td lang="ru" class="lang-content">3Fe + 2O₂ → Fe₃O₄</td>
-                            <td lang="ru" class="lang-content">Синтез</td>
-                            <td lang="ru" class="lang-content">Красно-белая искра</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Магниесіңде жануы</td>
-                            <td lang="kk" class="lang-content">2Mg + O₂ → 2MgO</td>
-                            <td lang="kk" class="lang-content">Синтез</td>
-                            <td lang="kk" class="lang-content">Ақ жарқын ыс</td>
-
-                            <td lang="en" class="lang-content">Magnesium burning</td>
-                            <td lang="en" class="lang-content">2Mg + O₂ → 2MgO</td>
-                            <td lang="en" class="lang-content">Synthesis</td>
-                            <td lang="en" class="lang-content">White bright heat</td>
-
-                            <td lang="ru" class="lang-content">Горение магния</td>
-                            <td lang="ru" class="lang-content">2Mg + O₂ → 2MgO</td>
-                            <td lang="ru" class="lang-content">Синтез</td>
-                            <td lang="ru" class="lang-content">белое яркое тепло</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Көміртегінің жануы</td>
-                            <td lang="kk" class="lang-content">C + O₂ → CO₂</td>
-                            <td lang="kk" class="lang-content">Синтез</td>
-                            <td lang="kk" class="lang-content">Төде ғана жану</td>
-
-                            <td lang="en" class="lang-content">Carbon burning</td>
-                            <td lang="en" class="lang-content">C + O₂ → CO₂</td>
-                            <td lang="en" class="lang-content">Synthesis</td>
-                            <td lang="en" class="lang-content">No flame</td>
-
-                            <td lang="ru" class="lang-content">Горение углерода</td>
-                            <td lang="ru" class="lang-content">C + O₂ → CO₂</td>
-                            <td lang="ru" class="lang-content">Синтез</td>
-                            <td lang="ru" class="lang-content">Без пламени</td>
-                        </tr>
-                        <tr>
-                            <td lang="kk" class="lang-content">Сутегінің жануы</td>
-                            <td lang="kk" class="lang-content">2H₂ + O₂ → 2H₂O</td>
-                            <td lang="kk" class="lang-content">Синтез</td>
-                            <td lang="kk" class="lang-content">Жаса үнімен жану</td>
-
-                            <td lang="en" class="lang-content">Hydrogen burning</td>
-                            <td lang="en" class="lang-content">2H₂ + O₂ → 2H₂O</td>
-                            <td lang="en" class="lang-content">Synthesis</td>
-                            <td lang="en" class="lang-content">Pop sound</td>
-
-                            <td lang="ru" class="lang-content">Горение водорода</td>
-                            <td lang="ru" class="lang-content">2H₂ + O₂ → 2H₂O</td>
-                            <td lang="ru" class="lang-content">Синтез</td>
-                            <td lang="ru" class="lang-content">Хлопающий звук</td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="flex flex-wrap gap-2 mb-5">
+                <button onclick="setReaction('S')" id="rxn-S" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold">S + O₂</button>
+                <button onclick="setReaction('C')" id="rxn-C" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold">C + O₂</button>
+                <button onclick="setReaction('Mg')" id="rxn-Mg" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold">Mg + O₂</button>
+                <button onclick="setReaction('Fe')" id="rxn-Fe" class="tab-btn glass px-4 py-2 rounded-full border border-white/15 text-sm font-bold">Fe + O₂</button>
             </div>
-        </section>
 
-        <footer style="text-align: center; margin-top: 40px; padding: 24px; background: rgba(10,15,35,0.70); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 lang="kk" class="lang-content text-xl font-extrabold mb-2 text-white">ҚОРЫТЫНДЫ</h3>
-            <h3 lang="en" class="lang-content text-xl font-extrabold mb-2 text-white">CONCLUSION</h3>
-            <h3 lang="ru" class="lang-content text-xl font-extrabold mb-2 text-white">ЗАКЛЮЧЕНИЕ</h3>
-            <p lang="kk" class="lang-content text-sm">Оттегі (O₂) - түссіз, иіссіз газ. Суға өте сөлінбеген. Барлық материалдың жануына өндіктік. Металдар өндіктік жану (Fe, Mg), органикалық өндіктік жану (C, H₂). Оттегі ең құатты оксидайтқышы болып табылады. Оттегі органикалық өмірдің немесе маңызды заты!</p>
-            <p lang="en" class="lang-content text-sm">Oxygen (O₂) - colorless, odorless gas. Slightly soluble in water. Supports combustion of all materials. Metals burn vigorously (Fe, Mg), organic substances burn (C, H₂). Oxygen is the strongest oxidizer. Oxygen is essential for organic life!</p>
-            <p lang="ru" class="lang-content text-sm">Кислород (O₂) - бесцветный, без запаха газ. Плохо растворяется в воде. Поддерживает горение всех материалов. Металлы горят интенсивно (Fe, Mg), органические вещества горят (C, H₂). Кислород - самый сильный окислитель. Кислород необходим для органической жизни!</p>
-        </footer>
-    </div>
+            <div class="bg-black/30 rounded-2xl p-6 mb-5 border border-red-500/20">
+                <div id="rxn-equation" class="text-center text-2xl md:text-3xl formula-style text-red-300 mb-3"></div>
+                <div id="rxn-name" class="text-center text-white/70 text-sm"></div>
+            </div>
+
+            <h4 id="rxn-details-title" class="font-bold text-red-300 mb-2"></h4>
+            <p id="rxn-details-text" class="text-white/80 leading-relaxed"></p>
+        </div>
+    </main>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="glass rounded-custom p-8 hover:bg-red-500/10 transition-colors">
+            <div class="w-14 h-14 bg-red-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🌬️</div>
+            <h4 id="card1-title" class="heading-font text-2xl mb-3 text-red-300"></h4>
+            <p id="card1-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-red-500/10 transition-colors">
+            <div class="w-14 h-14 bg-red-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🧪</div>
+            <h4 id="card2-title" class="heading-font text-2xl mb-3 text-red-300"></h4>
+            <p id="card2-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+        <div class="glass rounded-custom p-8 hover:bg-red-500/10 transition-colors">
+            <div class="w-14 h-14 bg-red-500/20 rounded-2xl mb-4 flex items-center justify-center text-3xl">🏥</div>
+            <h4 id="card3-title" class="heading-font text-2xl mb-3 text-red-300"></h4>
+            <p id="card3-desc" class="text-white/70 leading-relaxed"></p>
+        </div>
+    </section>
+
+    <footer class="glass rounded-custom p-10 text-center">
+        <p id="quote-text" class="text-2xl md:text-3xl italic font-light leading-snug mb-4"></p>
+        <cite id="quote-author" class="text-red-400 font-bold uppercase tracking-widest text-sm"></cite>
+    </footer>
 
     <script>
-        function switchLang(lang) {
-            const container = document.getElementById('poster-container');
-            container.classList.remove('lang-kk', 'lang-en', 'lang-ru');
-            container.classList.add('lang-' + lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('onclick') === `switchLang('${lang}')`);
-            });
+        const translations = {
+            ru: {
+                title: "Свойства кислорода",
+                subtitle: "O₂ — окислитель №1 в природе и технике",
+                moleculeHeading: "Молекула O₂",
+                molName: "Кислород, O₂",
+                molMass: "Mᵣ = 32 • газ при н.у.",
+                propTBO: "Т. кипения",
+                propTPL: "Т. плавления",
+                propColor: "Цвет",
+                colorValue: "Без цвета",
+                propSolub: "Растворимость в воде",
+                solubValue: "Слабая",
+                reactionsHeading: "Реакции с кислородом",
+                reactions: {
+                    S:  { eq: "S + O₂ → SO₂", name: "Горение серы", title: "Образование оксида серы(IV)", text: "Сера загорается синеватым пламенем, образуя удушливый газ SO₂ — оксид серы(IV). Этот газ — основа производства серной кислоты." },
+                    C:  { eq: "C + O₂ → CO₂", name: "Горение углерода", title: "Образование углекислого газа", text: "Уголь горит, выделяя тепло и CO₂. При недостатке O₂ образуется угарный газ CO — ядовитый продукт неполного сгорания." },
+                    Mg: { eq: "2 Mg + O₂ → 2 MgO", name: "Горение магния", title: "Образование оксида магния", text: "Магний горит ослепительно-белым пламенем. Используется в пиротехнике и фотовспышках. Продукт — белый порошок MgO." },
+                    Fe: { eq: "3 Fe + 2 O₂ → Fe₃O₄", name: "Горение железа", title: "Образование железной окалины", text: "Раскалённое железо в кислороде горит снопом искр, образуя смесь оксидов — железную окалину Fe₃O₄." }
+                },
+                cards: [
+                    { title: "Где встречается", desc: "21% воздуха, 49% массы земной коры, 89% массы воды. Кислород — самый распространённый элемент на Земле." },
+                    { title: "Получение", desc: "В лаборатории — разложением KMnO₄, KClO₃ или H₂O₂. В промышленности — разделением жидкого воздуха." },
+                    { title: "Применение", desc: "Медицина (баллоны для дыхания), металлургия (выплавка стали), ракетное топливо (жидкий O₂), сварка (кислородно-ацетиленовая)." }
+                ],
+                quote: "«Кислород — это воздух жизни и пламя горения одновременно»",
+                author: "Антуан Лавуазье"
+            },
+            kz: {
+                title: "Оттегінің қасиеттері",
+                subtitle: "O₂ — табиғат пен техникадағы №1 тотықтырғыш",
+                moleculeHeading: "O₂ молекуласы",
+                molName: "Оттегі, O₂",
+                molMass: "Mᵣ = 32 • қ.ж.-да газ",
+                propTBO: "Қайнау т-сы",
+                propTPL: "Балқу т-сы",
+                propColor: "Түсі",
+                colorValue: "Түссіз",
+                propSolub: "Суда ерігіштігі",
+                solubValue: "Аз",
+                reactionsHeading: "Оттегімен реакциялар",
+                reactions: {
+                    S:  { eq: "S + O₂ → SO₂", name: "Күкірттің жануы", title: "Күкірт(IV) оксидінің түзілуі", text: "Күкірт көгілдір жалынмен жанып, тұншықтырғыш SO₂ — күкірт(IV) оксидін түзеді. Бұл газ — күкірт қышқылы өндірісінің негізі." },
+                    C:  { eq: "C + O₂ → CO₂", name: "Көміртектің жануы", title: "Көмірқышқыл газының түзілуі", text: "Көмір жанғанда жылу мен CO₂ бөлінеді. O₂ жетіспегенде улы CO — иіс газы түзіледі." },
+                    Mg: { eq: "2 Mg + O₂ → 2 MgO", name: "Магнийдің жануы", title: "Магний оксидінің түзілуі", text: "Магний шамдай ақ жалынмен жанады. Пиротехникада, фотожарықта қолданылады. Өнімі — ақ MgO ұнтағы." },
+                    Fe: { eq: "3 Fe + 2 O₂ → Fe₃O₄", name: "Темірдің жануы", title: "Темір қаспағының түзілуі", text: "Қызған темір оттегіде ұшқын шашып жанады, темір қаспағы Fe₃O₄ түзіледі." }
+                },
+                cards: [
+                    { title: "Қайда кездеседі", desc: "Ауаның 21%-ы, жер қыртысының 49%-ы, судың 89%-ы. Оттегі — Жердегі ең көп таралған элемент." },
+                    { title: "Алу", desc: "Зертханада — KMnO₄, KClO₃ немесе H₂O₂ ыдыратып. Өнеркәсіпте — сұйық ауаны бөлу арқылы." },
+                    { title: "Қолданылуы", desc: "Медицина (тыныс баллондары), металлургия (болат қорыту), зымыран отыны (сұйық O₂), дәнекерлеу." }
+                ],
+                quote: "«Оттегі — бір мезгілде тіршілік ауасы әрі жану жалыны»",
+                author: "Антуан Лавуазье"
+            },
+            en: {
+                title: "Properties of oxygen",
+                subtitle: "O₂ — the #1 oxidiser in nature and technology",
+                moleculeHeading: "The O₂ molecule",
+                molName: "Oxygen, O₂",
+                molMass: "Mᵣ = 32 • gas at STP",
+                propTBO: "Boiling point",
+                propTPL: "Melting point",
+                propColor: "Colour",
+                colorValue: "Colourless",
+                propSolub: "Solubility in water",
+                solubValue: "Low",
+                reactionsHeading: "Reactions with oxygen",
+                reactions: {
+                    S:  { eq: "S + O₂ → SO₂", name: "Burning sulfur", title: "Formation of sulfur(IV) oxide", text: "Sulfur burns with a bluish flame producing SO₂ — the basis of sulfuric-acid manufacture." },
+                    C:  { eq: "C + O₂ → CO₂", name: "Burning carbon", title: "Formation of carbon dioxide", text: "Coal burns releasing heat and CO₂. With too little O₂ the toxic carbon monoxide CO is produced instead." },
+                    Mg: { eq: "2 Mg + O₂ → 2 MgO", name: "Burning magnesium", title: "Formation of magnesium oxide", text: "Magnesium burns with a dazzling white flame. Used in pyrotechnics and photo-flashes. The product is white MgO powder." },
+                    Fe: { eq: "3 Fe + 2 O₂ → Fe₃O₄", name: "Burning iron", title: "Formation of iron mill scale", text: "Red-hot iron in oxygen burns with showers of sparks, forming mill-scale Fe₃O₄." }
+                },
+                cards: [
+                    { title: "Where it is found", desc: "21% of air, 49% of Earth's crust, 89% of water. Oxygen is the most abundant element on Earth." },
+                    { title: "Preparation", desc: "In the lab — by decomposition of KMnO₄, KClO₃ or H₂O₂. Industrially — by fractional distillation of liquid air." },
+                    { title: "Applications", desc: "Medicine (breathing cylinders), metallurgy (steel-making), rocket fuel (liquid O₂), oxy-acetylene welding." }
+                ],
+                quote: "«Oxygen is the air of life and the flame of combustion at the same time»",
+                author: "Antoine Lavoisier"
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentRxn = 'S';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            try { localStorage.setItem('poster_lang', lang); } catch(e){}
+            updateUI();
         }
+
+        function setReaction(r) {
+            currentRxn = r;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('rxn-' + r).classList.add('active');
+            updateRxn();
+        }
+
+        function updateRxn() {
+            const t = translations[currentLang];
+            const r = t.reactions[currentRxn];
+            document.getElementById('rxn-equation').textContent = r.eq;
+            document.getElementById('rxn-name').textContent = r.name;
+            document.getElementById('rxn-details-title').textContent = r.title;
+            document.getElementById('rxn-details-text').textContent = r.text;
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('main-title').textContent = t.title;
+            document.getElementById('sub-title').textContent = t.subtitle;
+            document.getElementById('molecule-heading').textContent = t.moleculeHeading;
+            document.getElementById('svg-mol-name').textContent = t.molName;
+            document.getElementById('svg-mol-mass').textContent = t.molMass;
+            document.getElementById('prop-tbo-label').textContent = t.propTBO;
+            document.getElementById('prop-tpl-label').textContent = t.propTPL;
+            document.getElementById('prop-color-label').textContent = t.propColor;
+            document.getElementById('prop-color-value').textContent = t.colorValue;
+            document.getElementById('prop-solub-label').textContent = t.propSolub;
+            document.getElementById('prop-solub-value').textContent = t.solubValue;
+            document.getElementById('reactions-heading').textContent = t.reactionsHeading;
+            updateRxn();
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('card' + (i+1) + '-title').textContent = t.cards[i].title;
+                document.getElementById('card' + (i+1) + '-desc').textContent = t.cards[i].desc;
+            }
+            document.getElementById('quote-text').textContent = t.quote;
+            document.getElementById('quote-author').textContent = t.author;
+        }
+
+        window.onload = () => {
+            let s = 'ru';
+            try { s = localStorage.getItem('poster_lang') || 'ru'; } catch(e){}
+            if (s === 'kk') s = 'kz';
+            setReaction('S');
+            setLang(s);
+        };
     </script>
-<script>/* poster-lang-init */
-(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
-if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
-</script>
 
 <script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
 
-
 <style data-oi-map-overlay>
-.oi-map-btn{
-  position:fixed; right:16px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.oi-table-btn{
-  position:fixed; right:120px; bottom:16px; z-index:9999;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.15);
-  background:#fff; cursor:pointer; font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-
-.oi-map-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:10000;
-  display:none; align-items:center; justify-content:center; padding:18px;
-}
-.oi-map-backdrop[aria-hidden="false"]{ display:flex; }
-
-.oi-map-modal{
-  width:min(1200px, 100%); height:min(85vh, 900px);
-  background:#111; border-radius:14px; overflow:hidden; position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.oi-map-close{
-  position:absolute; top:10px; right:10px; z-index:3;
-  width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.35); color:#fff; cursor:pointer; font-size:22px;
-}
-
-.oi-map-viewport{
-  width:100%; height:100%; overflow:auto; -webkit-overflow-scrolling:touch;
-  touch-action: pan-x pan-y;
-  background:#000;
-  padding-top:62px; /* место под тулбар */
-}
-
-.oi-map-img{
-  display:block;
-  transform-origin: 0 0;
-  user-select:none; -webkit-user-drag:none;
-}
-
-.oi-map-toolbar{
-  position:absolute; left:12px; top:12px; right:12px; z-index:2;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  pointer-events:none;
-}
-
-.oi-map-tabs{ display:flex; gap:8px; flex-wrap:wrap; pointer-events:auto; }
-
-.oi-map-tab{
-  min-width:36px; height:34px; padding:0 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.35); color:#fff;
-  cursor:pointer; font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;
-}
-
-.oi-map-tab.is-active{
-  background:rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.45);
-}
-
-.oi-map-hint{
-  pointer-events:none;
-  color:#fff; opacity:.85; font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
-  padding:8px 10px; border-radius:10px;
-}
+.oi-map-btn{position:fixed;right:16px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-table-btn{position:fixed;right:120px;bottom:16px;z-index:9999;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.oi-map-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;}
+.oi-map-backdrop[aria-hidden="false"]{display:flex;}
+.oi-map-modal{width:min(1200px,100%);height:min(85vh,900px);background:#111;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.oi-map-close{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font-size:22px;}
+.oi-map-viewport{width:100%;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#000;padding-top:62px;}
+.oi-map-img{display:block;transform-origin:0 0;user-select:none;-webkit-user-drag:none;}
+.oi-map-toolbar{position:absolute;left:12px;top:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none;}
+.oi-map-tabs{display:flex;gap:8px;flex-wrap:wrap;pointer-events:auto;}
+.oi-map-tab{min-width:36px;height:34px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;cursor:pointer;font:600 14px system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+.oi-map-tab.is-active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45);}
+.oi-map-hint{pointer-events:none;color:#fff;opacity:.85;font:12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:8px 10px;border-radius:10px;}
 </style>
 
 <button class="oi-map-btn" style="display:none" type="button" data-oi-map-btn>🗺️ Карта</button>
@@ -319,128 +295,31 @@ if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-map-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Карта">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-map-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button>
-      </div>
-      <div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-map-viewport>
-      <img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-map-tab="1">1</button></div><div class="oi-map-hint">Колёсико/трекпад — зум • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-map-viewport><img class="oi-map-img" data-oi-map-img data-map="1" src="../../assets/maps/mendeleev_1.png" alt="map 1" style="display:block;"></div>
   </div>
 </div>
 
 <div class="oi-map-backdrop" aria-hidden="true" data-oi-table-backdrop>
   <div class="oi-map-modal" role="dialog" aria-modal="true" aria-label="Таблица Менделеева">
     <button class="oi-map-close" type="button" aria-label="Закрыть" data-oi-table-close>×</button>
-
-    <div class="oi-map-toolbar">
-      <div class="oi-map-tabs">
-        <button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button>
-<button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button>
-      </div>
-      <div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div>
-    </div>
-
-    <div class="oi-map-viewport" data-oi-table-viewport>
-      <img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;">
-<img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;">
-    </div>
+    <div class="oi-map-toolbar"><div class="oi-map-tabs"><button type="button" class="oi-map-tab is-active" data-oi-table-tab="1">1</button><button type="button" class="oi-map-tab" data-oi-table-tab="2">2</button></div><div class="oi-map-hint">Таблица Менделеева • Esc — закрыть</div></div>
+    <div class="oi-map-viewport" data-oi-table-viewport><img class="oi-map-img" data-oi-table-img data-table="1" src="../../assets/maps/mendeleev_1.png" alt="table 1" style="display:block;"><img class="oi-map-img" data-oi-table-img data-table="2" src="../../assets/maps/mendeleev_2.png" alt="table 2" style="display:none;"></div>
   </div>
 </div>
 
-
 <script data-oi-map-overlay>
 (function(){
-  // ====== MAPS ======
-  const mapBtn = document.querySelector('[data-oi-map-btn]');
-  const mapBackdrop = document.querySelector('[data-oi-map-backdrop]');
-  const mapCloseBtn = document.querySelector('[data-oi-map-close]');
-  const mapViewport = document.querySelector('[data-oi-map-viewport]');
-  const mapTabs = Array.from(document.querySelectorAll('[data-oi-map-tab]'));
-  const mapImgs = Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
-
-  // ====== MENDELEEV ======
-  const tableBtn = document.querySelector('[data-oi-table-btn]');
-  const tableBackdrop = document.querySelector('[data-oi-table-backdrop]');
-  const tableCloseBtn = document.querySelector('[data-oi-table-close]');
-  const tableViewport = document.querySelector('[data-oi-table-viewport]');
-  const tableTabs = Array.from(document.querySelectorAll('[data-oi-table-tab]'));
-  const tableImgs = Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
-
-  let scale = 1;
-
-  function applyScale(){
-    mapImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-    tableImgs.forEach(img => { img.style.transform = `scale(${scale})`; });
-  }
-
-  function openBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeBackdrop(backdrop){
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  function showMap(n){
-    mapImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-map') === String(n)) ? 'block' : 'none';
-    });
-    mapTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-map-tab') === String(n)));
-    if(mapViewport){ mapViewport.scrollTop = 0; mapViewport.scrollLeft = 0; }
-  }
-
-  function showTable(n){
-    tableImgs.forEach(img => {
-      img.style.display = (img.getAttribute('data-table') === String(n)) ? 'block' : 'none';
-    });
-    tableTabs.forEach(t => t.classList.toggle('is-active', t.getAttribute('data-oi-table-tab') === String(n)));
-    if(tableViewport){ tableViewport.scrollTop = 0; tableViewport.scrollLeft = 0; }
-  }
-
-  // MAP events
-  if(mapBtn && mapBackdrop && mapCloseBtn && mapViewport && mapImgs.length){
-    mapBtn.addEventListener('click', () => openBackdrop(mapBackdrop));
-    mapCloseBtn.addEventListener('click', () => closeBackdrop(mapBackdrop));
-    mapBackdrop.addEventListener('click', (e)=>{ if(e.target === mapBackdrop) closeBackdrop(mapBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(mapBackdrop); });
-    mapTabs.forEach(t => t.addEventListener('click', () => showMap(t.getAttribute('data-oi-map-tab'))));
-
-    mapViewport.addEventListener('wheel', (e)=>{
-      if(mapBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showMap(1);
-  }
-
-  // TABLE events
-  if(tableBtn && tableBackdrop && tableCloseBtn && tableViewport && tableImgs.length){
-    tableBtn.addEventListener('click', () => openBackdrop(tableBackdrop));
-    tableCloseBtn.addEventListener('click', () => closeBackdrop(tableBackdrop));
-    tableBackdrop.addEventListener('click', (e)=>{ if(e.target === tableBackdrop) closeBackdrop(tableBackdrop); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeBackdrop(tableBackdrop); });
-    tableTabs.forEach(t => t.addEventListener('click', () => showTable(t.getAttribute('data-oi-table-tab'))));
-
-    tableViewport.addEventListener('wheel', (e)=>{
-      if(tableBackdrop.getAttribute('aria-hidden') !== 'false') return;
-      e.preventDefault();
-      const delta = -Math.sign(e.deltaY) * 0.1;
-      scale = Math.min(4, Math.max(0.6, scale + delta));
-      applyScale();
-    }, {passive:false});
-
-    showTable(1);
-  }
-
+  const mapBtn=document.querySelector('[data-oi-map-btn]'),mapBackdrop=document.querySelector('[data-oi-map-backdrop]'),mapCloseBtn=document.querySelector('[data-oi-map-close]'),mapViewport=document.querySelector('[data-oi-map-viewport]'),mapTabs=Array.from(document.querySelectorAll('[data-oi-map-tab]')),mapImgs=Array.from(document.querySelectorAll('[data-oi-map-img][data-map]'));
+  const tableBtn=document.querySelector('[data-oi-table-btn]'),tableBackdrop=document.querySelector('[data-oi-table-backdrop]'),tableCloseBtn=document.querySelector('[data-oi-table-close]'),tableViewport=document.querySelector('[data-oi-table-viewport]'),tableTabs=Array.from(document.querySelectorAll('[data-oi-table-tab]')),tableImgs=Array.from(document.querySelectorAll('[data-oi-table-img][data-table]'));
+  let scale=1;
+  function applyScale(){mapImgs.forEach(i=>i.style.transform=`scale(${scale})`);tableImgs.forEach(i=>i.style.transform=`scale(${scale})`);}
+  function openBackdrop(b){b.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeBackdrop(b){b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function showMap(n){mapImgs.forEach(i=>i.style.display=(i.getAttribute('data-map')===String(n))?'block':'none');mapTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-map-tab')===String(n)));if(mapViewport){mapViewport.scrollTop=0;mapViewport.scrollLeft=0;}}
+  function showTable(n){tableImgs.forEach(i=>i.style.display=(i.getAttribute('data-table')===String(n))?'block':'none');tableTabs.forEach(t=>t.classList.toggle('is-active',t.getAttribute('data-oi-table-tab')===String(n)));if(tableViewport){tableViewport.scrollTop=0;tableViewport.scrollLeft=0;}}
+  if(mapBtn&&mapBackdrop&&mapCloseBtn&&mapViewport&&mapImgs.length){mapBtn.addEventListener('click',()=>openBackdrop(mapBackdrop));mapCloseBtn.addEventListener('click',()=>closeBackdrop(mapBackdrop));mapBackdrop.addEventListener('click',e=>{if(e.target===mapBackdrop)closeBackdrop(mapBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(mapBackdrop);});mapTabs.forEach(t=>t.addEventListener('click',()=>showMap(t.getAttribute('data-oi-map-tab'))));mapViewport.addEventListener('wheel',e=>{if(mapBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showMap(1);}
+  if(tableBtn&&tableBackdrop&&tableCloseBtn&&tableViewport&&tableImgs.length){tableBtn.addEventListener('click',()=>openBackdrop(tableBackdrop));tableCloseBtn.addEventListener('click',()=>closeBackdrop(tableBackdrop));tableBackdrop.addEventListener('click',e=>{if(e.target===tableBackdrop)closeBackdrop(tableBackdrop);});window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBackdrop(tableBackdrop);});tableTabs.forEach(t=>t.addEventListener('click',()=>showTable(t.getAttribute('data-oi-table-tab'))));tableViewport.addEventListener('wheel',e=>{if(tableBackdrop.getAttribute('aria-hidden')!=='false')return;e.preventDefault();const d=-Math.sign(e.deltaY)*0.1;scale=Math.min(4,Math.max(0.6,scale+d));applyScale();},{passive:false});showTable(1);}
   applyScale();
 })();
 </script>
