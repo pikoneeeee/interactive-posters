@@ -33,6 +33,7 @@ SUBJECTS_REV = {
     0: 'physics', 1: 'mathematics', 2: 'biology', 3: 'chemistry',
     4: 'geography', 5: 'informatics', 6: 'historykaz', 7: 'worldhistory',
     8: 'kazakhlang', 9: 'russianlang', 10: 'englishlang',
+    15: 'allsubjects',
 }
 
 # ─── Пути ───────────────────────────────────────────────────────

@@ -40,6 +40,7 @@ SUBJECTS = {
     'kazakhlang': 8,
     'russianlang': 9,
     'englishlang': 10,
+    'allsubjects': 15,
 }
 SUBJECTS_REV = {v: k for k, v in SUBJECTS.items()}
 
