@@ -135,14 +135,19 @@ class MainActivity : AppCompatActivity() {
         loadAllData()
 
         // ── Gate активации ────────────────────────────────────────
-        // Проверяем лицензию. Если не активирована — показываем экран ввода ключа.
-        val status = Licensing.getLicenseStatus(this)
-        if (!status.valid) {
-            Log.i(TAG, "Лицензия не активирована: ${status.reason}")
-            showActivationScreen()
-            return
+        // Для сборок с REQUIRES_ACTIVATION=false (напр. music, grafika)
+        // лицензия не проверяется и ключ не запрашивается.
+        if (BuildConfig.REQUIRES_ACTIVATION) {
+            val status = Licensing.getLicenseStatus(this)
+            if (!status.valid) {
+                Log.i(TAG, "Лицензия не активирована: ${status.reason}")
+                showActivationScreen()
+                return
+            }
+            Log.i(TAG, "Лицензия активна, осталось дней: ${status.daysLeft}")
+        } else {
+            Log.i(TAG, "Активация отключена для этой сборки (REQUIRES_ACTIVATION=false)")
         }
-        Log.i(TAG, "Лицензия активна, осталось дней: ${status.daysLeft}")
 
         navigateAfterActivation()
     }

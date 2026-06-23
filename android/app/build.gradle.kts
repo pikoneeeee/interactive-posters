@@ -13,6 +13,10 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
+
+        // По умолчанию приложение требует активацию лицензионным ключом.
+        // Отдельные flavor-сборки могут отключить это (REQUIRES_ACTIVATION = false).
+        buildConfigField("Boolean", "REQUIRES_ACTIVATION", "true")
     }
 
     // Подпись релизных APK
@@ -120,6 +124,22 @@ android {
             applicationIdSuffix = ".englishlang"
             buildConfigField("String", "SUBJECT_ID", "\"englishlang\"")
             buildConfigField("String", "APP_TITLE", "\"English — Интерактивные плакаты\"")
+        }
+        create("music") {
+            dimension = "subject"
+            applicationIdSuffix = ".music"
+            buildConfigField("String", "SUBJECT_ID", "\"music\"")
+            buildConfigField("String", "APP_TITLE", "\"Музыкальная грамота — Интерактивные плакаты\"")
+            // Без активации — лицензионный ключ не запрашивается
+            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
+        }
+        create("grafika") {
+            dimension = "subject"
+            applicationIdSuffix = ".grafika"
+            buildConfigField("String", "SUBJECT_ID", "\"grafika\"")
+            buildConfigField("String", "APP_TITLE", "\"Графика и проектирование — Интерактивные плакаты\"")
+            // Без активации — лицензионный ключ не запрашивается
+            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
         }
     }
 

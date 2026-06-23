@@ -33,7 +33,8 @@ MAIN_ASSETS = os.path.join(ANDROID_APP, 'src', 'main', 'assets')
 ALL_SUBJECTS = [
     'physics', 'mathematics', 'biology', 'chemistry',
     'geography', 'informatics', 'historykaz', 'worldhistory',
-    'kazakhlang', 'russianlang', 'englishlang'
+    'kazakhlang', 'russianlang', 'englishlang',
+    'music', 'grafika'
 ]
 
 
@@ -67,8 +68,11 @@ def sync_common_assets():
         os.path.join(MAIN_ASSETS, 'libs')
     )
 
-    # assets/ (карты, таблицы Менделеева и т.д.)
-    sync_folder(
+    # assets/ (карты, таблицы Менделеева и т.д.) — общие для всех сборок.
+    # Предметные папки (content/assets/<subject>/) НЕ кладём в общий main —
+    # они копируются только в свой flavor (см. sync_subject_posters),
+    # чтобы, например, картинки музыки не попадали в APK других предметов.
+    sync_common_subdir_except_subjects(
         os.path.join(CONTENT_DIR, 'assets'),
         os.path.join(MAIN_ASSETS, 'assets')
     )
@@ -94,6 +98,19 @@ def sync_subject_posters(subject_id):
 
     count = sync_folder(src_dir, dst_dir)
     sync_folder(src_dir, dst_all)
+
+    # Предметные ресурсы (картинки и т.п.): content/assets/<id>/ →
+    # только в свой flavor и в allsubjects (НЕ в общий main).
+    subj_assets = os.path.join(CONTENT_DIR, 'assets', subject_id)
+    if os.path.exists(subj_assets):
+        sync_folder(
+            subj_assets,
+            os.path.join(ANDROID_APP, 'src', subject_id, 'assets', 'assets', subject_id)
+        )
+        sync_folder(
+            subj_assets,
+            os.path.join(ANDROID_APP, 'src', 'allsubjects', 'assets', 'assets', subject_id)
+        )
 
     # Создаём subjects_<id>.json с единственным предметом для этого flavor
     create_single_subject_json(subject_id)
@@ -126,6 +143,35 @@ def create_single_subject_json(subject_id):
         json.dump(out_data, f, ensure_ascii=False, indent=2)
 
     print(f"  ✓ subjects.json для {subject_id} ({len(filtered[0].get('topics', []))} тем)")
+
+
+def sync_common_subdir_except_subjects(src, dst):
+    """Копирует содержимое src → dst, пропуская папки с именем предмета.
+
+    Предметные папки (например content/assets/music/) синхронизируются
+    отдельно в свой flavor, поэтому в общий main их класть не нужно.
+    """
+    if not os.path.exists(src):
+        return 0
+
+    if os.path.exists(dst):
+        shutil.rmtree(dst)
+    os.makedirs(dst, exist_ok=True)
+
+    count = 0
+    for name in sorted(os.listdir(src)):
+        if name in ALL_SUBJECTS:
+            continue  # предметные ресурсы → в свой flavor, не в общий main
+        s = os.path.join(src, name)
+        d = os.path.join(dst, name)
+        if os.path.isdir(s):
+            shutil.copytree(s, d)
+            count += sum(len(files) for _, _, files in os.walk(d))
+        else:
+            shutil.copy2(s, d)
+            count += 1
+    print(f"  ✓ assets/ ({count} общих файлов)")
+    return count
 
 
 def sync_folder(src, dst):

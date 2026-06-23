@@ -32,7 +32,8 @@ def ensure_java_home():
 
     # Типичные места, где Android Studio ставит JBR (JetBrains Runtime)
     candidates = [
-        # Полноценный JDK 17 (Adoptium) — нужен для AGP (jlink/jmods)
+        # Полноценный JDK 17 (Adoptium/Temurin) — нужен для AGP (jlink/jmods)
+        r'D:\temurin17\jdk-17.0.19+10',
         r'D:\jdk17\jdk-17.0.18+8',
         # JBR из Android Studio (запасной вариант)
         r'D:\apps\jbr',
@@ -64,7 +65,8 @@ ensure_java_home()
 ALL_SUBJECTS = [
     'physics', 'mathematics', 'biology', 'chemistry',
     'geography', 'informatics', 'historykaz', 'worldhistory',
-    'kazakhlang', 'russianlang', 'englishlang'
+    'kazakhlang', 'russianlang', 'englishlang',
+    'music', 'grafika'
 ]
 
 # Короткие алиасы для удобства
@@ -80,6 +82,9 @@ ALIASES = {
     'kz': 'kazakhlang',
     'ru': 'russianlang',
     'en': 'englishlang',
+    'mus': 'music',
+    'gp': 'grafika',
+    'graf': 'grafika',
 }
 
 
