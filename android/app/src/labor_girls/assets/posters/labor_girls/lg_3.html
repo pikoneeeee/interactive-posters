@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пейзаж. Линейная и воздушная перспектива</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+#lpDemo .guide{display:none;}
+#lpDemo.on .guide{display:inline;}
+#airDemo .set-air{display:none;}
+#airDemo.air .set-flat{display:none;}
+#airDemo.air .set-air{display:inline;}
+.demo-btn{padding:10px 18px;border-radius:999px;border:2px solid rgba(190,18,60,.35);background:#fff;
+  color:#881337;font-weight:700;cursor:pointer;transition:all .15s;font-size:1rem;}
+.demo-btn:hover{background:rgba(190,18,60,.07);}
+.demo-btn.active{background:#be123c;color:#fff;border-color:#be123c;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · 1-бөлім · Бейнелеу өнері</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Section 1 · Visual Arts</span>
+      <span lang="ru" class="lang-content">Художественный труд · Раздел 1 · Визуальное искусство</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🏞️ Пейзаж. Перспектива</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🏞️ Landscape. Perspective</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🏞️ Пейзаж. Линейная и воздушная перспектива</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Перспектива жазық параққа кеңістік пен тереңдік береді.</span>
+      <span lang="en" class="lang-content">Perspective gives space and depth to a flat sheet.</span>
+      <span lang="ru" class="lang-content">Перспектива придаёт плоскому листу пространство и глубину.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- TYPES -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">🗂️ Пейзаж түрлері</span>
+    <span lang="en" class="lang-content">🗂️ Types of Landscape</span>
+    <span lang="ru" class="lang-content">🗂️ Виды пейзажа</span>
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div class="tile"><div class="tile-icon">🌲</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Табиғи</span><span lang="en" class="lang-content">Natural</span><span lang="ru" class="lang-content">Природный</span></p></div>
+    <div class="tile"><div class="tile-icon">⛵</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Теңіз</span><span lang="en" class="lang-content">Sea</span><span lang="ru" class="lang-content">Морской</span></p></div>
+    <div class="tile"><div class="tile-icon">🏙️</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Қалалық</span><span lang="en" class="lang-content">City</span><span lang="ru" class="lang-content">Городской</span></p></div>
+    <div class="tile"><div class="tile-icon">🌾</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Ауылдық</span><span lang="en" class="lang-content">Rural</span><span lang="ru" class="lang-content">Сельский</span></p></div>
+    <div class="tile"><div class="tile-icon">⛰️</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Таулы</span><span lang="en" class="lang-content">Mountain</span><span lang="ru" class="lang-content">Горный</span></p></div>
+    <div class="tile"><div class="tile-icon">🏭</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Өнеркәсіптік</span><span lang="en" class="lang-content">Industrial</span><span lang="ru" class="lang-content">Индустриальный</span></p></div>
+  </div>
+</section>
+
+<!-- MASTERPIECES -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">🖼️ Пейзаж шеберлері</span>
+    <span lang="en" class="lang-content">🖼️ Landscape Masterpieces</span>
+    <span lang="ru" class="lang-content">🖼️ Шедевры пейзажа</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін кескінді басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a painting to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на картину, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/peyzaj.jpg" alt="Рожь"></div>
+      <div class="body"><div class="genre-name"><span lang="kk" class="lang-content">Табиғи</span><span lang="en" class="lang-content">Natural</span><span lang="ru" class="lang-content">Природный</span></div><div class="genre-cap">И. Шишкин — «Рожь»</div></div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/ls_autumn.jpg" alt="Золотая осень"></div>
+      <div class="body"><div class="genre-name"><span lang="kk" class="lang-content">Күз</span><span lang="en" class="lang-content">Autumn</span><span lang="ru" class="lang-content">Осенний</span></div><div class="genre-cap">И. Левитан — «Золотая осень»</div></div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/marina.jpg" alt="Девятый вал"></div>
+      <div class="body"><div class="genre-name"><span lang="kk" class="lang-content">Теңіз</span><span lang="en" class="lang-content">Sea</span><span lang="ru" class="lang-content">Морской</span></div><div class="genre-cap">И. Айвазовский — «Девятый вал»</div></div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/ls_city.jpg" alt="Московский дворик"></div>
+      <div class="body"><div class="genre-name"><span lang="kk" class="lang-content">Қалалық</span><span lang="en" class="lang-content">City</span><span lang="ru" class="lang-content">Городской</span></div><div class="genre-cap">В. Поленов — «Московский дворик»</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LINEAR PERSPECTIVE -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">📐 Сызықтық перспектива</span>
+    <span lang="en" class="lang-content">📐 Linear Perspective</span>
+    <span lang="ru" class="lang-content">📐 Линейная перспектива</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div class="art-frame">
+      <div class="art-mat" style="height:300px"><img src="../../assets/labor_girls/gen_linear.jpg" alt="Линейная перспектива: аллея уходит к точке схода"></div>
+    </div>
+    <div>
+      <div class="card-accent rounded-xl p-4 mb-3">
+        <p class="font-bold mb-1" style="color:#881337"><span lang="kk" class="lang-content">Көкжиек сызығы</span><span lang="en" class="lang-content">Horizon line</span><span lang="ru" class="lang-content">Линия горизонта</span></p>
+        <p class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Көз деңгейіндегі сызық.</span><span lang="en" class="lang-content">The line at eye level.</span><span lang="ru" class="lang-content">Линия на уровне глаз наблюдателя.</span></p>
+      </div>
+      <div class="card-accent rounded-xl p-4 mb-3">
+        <p class="font-bold mb-1" style="color:#881337"><span lang="kk" class="lang-content">Түйісу нүктесі (VP)</span><span lang="en" class="lang-content">Vanishing point</span><span lang="ru" class="lang-content">Точка схода</span></p>
+        <p class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Параллель сызықтар осы нүктеде түйіседі.</span><span lang="en" class="lang-content">Parallel lines converge at this point.</span><span lang="ru" class="lang-content">В ней сходятся параллельные линии.</span></p>
+      </div>
+      <div class="card-accent rounded-xl p-4">
+        <p class="font-bold mb-1" style="color:#881337"><span lang="kk" class="lang-content">Қашықтаған сайын кішірейеді</span><span lang="en" class="lang-content">Smaller with distance</span><span lang="ru" class="lang-content">Дальше — меньше</span></p>
+        <p class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Заттар алыстаған сайын кішірейіп көрінеді.</span><span lang="en" class="lang-content">Objects look smaller as they recede.</span><span lang="ru" class="lang-content">Предметы кажутся меньше по мере удаления.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AERIAL PERSPECTIVE -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">🌫️ Әуелік перспектива</span>
+    <span lang="en" class="lang-content">🌫️ Aerial Perspective</span>
+    <span lang="ru" class="lang-content">🌫️ Воздушная перспектива</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div class="art-frame">
+      <div class="art-mat" style="height:300px"><img src="../../assets/labor_girls/gen_aerial.jpg" alt="Воздушная перспектива: горные хребты в голубой дымке"></div>
+    </div>
+    <div>
+      <p class="text-stone-700 mb-3">
+        <span lang="kk" class="lang-content"><b>Әуелік перспектива</b> — қашықтаған заттар <b>бозғылт, көкшіл</b> әрі контрасы азаяды. Ауа қабаты түсті «жуады».</span>
+        <span lang="en" class="lang-content"><b>Aerial perspective</b>: distant objects become <b>paler, bluish</b> and lose contrast — the air "washes out" colour.</span>
+        <span lang="ru" class="lang-content"><b>Воздушная перспектива</b>: дальние предметы становятся <b>бледнее, голубее</b> и теряют контраст — воздух «размывает» цвет.</span>
+      </p>
+      <div class="flex flex-wrap">
+        <span class="badge"><span lang="kk" class="lang-content">Жақын — анық, қанық</span><span lang="en" class="lang-content">Near — sharp, vivid</span><span lang="ru" class="lang-content">Ближе — чётко, ярко</span></span>
+        <span class="badge"><span lang="kk" class="lang-content">Алыс — бозғылт, көкшіл</span><span lang="en" class="lang-content">Far — pale, bluish</span><span lang="ru" class="lang-content">Дальше — бледно, голубо</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="card-rose rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Key Takeaways</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white/15 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Көкжиек</span><span lang="en" class="lang-content">Horizon</span><span lang="ru" class="lang-content">Горизонт</span></p><p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Көз деңгейі.</span><span lang="en" class="lang-content">Eye level.</span><span lang="ru" class="lang-content">Уровень глаз.</span></p></div>
+    <div class="bg-white/15 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Сызықтық</span><span lang="en" class="lang-content">Linear</span><span lang="ru" class="lang-content">Линейная</span></p><p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Сызықтар VP-ге түйіседі.</span><span lang="en" class="lang-content">Lines converge to VP.</span><span lang="ru" class="lang-content">Линии сходятся в точке.</span></p></div>
+    <div class="bg-white/15 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Әуелік</span><span lang="en" class="lang-content">Aerial</span><span lang="ru" class="lang-content">Воздушная</span></p><p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Алыс — бозғылт, көкшіл.</span><span lang="en" class="lang-content">Far — pale &amp; blue.</span><span lang="ru" class="lang-content">Даль — бледная, голубая.</span></p></div>
+  </div>
+</footer>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){
+  if(lang==='kz')lang='kk';
+  currentLang=lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+function toggleLP(){
+  var d=document.getElementById('lpDemo');
+  var on=d.getAttribute('class')!=='on';
+  d.setAttribute('class', on?'on':'');
+  document.getElementById('lpBtn').classList.toggle('active',on);
+}
+function toggleAir(){
+  var d=document.getElementById('airDemo');
+  var on=d.getAttribute('class')!=='air';
+  d.setAttribute('class', on?'air':'');
+  document.getElementById('airBtn').classList.toggle('active',on);
+}
+function openLB(card){
+  document.getElementById('lb-img').src=card.querySelector('.pic img').src;
+  document.getElementById('lb-name').innerHTML=card.querySelector('.genre-name').innerHTML;
+  var cap=card.querySelector('.genre-cap'); document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';
+  var d=card.querySelector('.genre-desc'); document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

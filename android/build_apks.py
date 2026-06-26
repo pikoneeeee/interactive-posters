@@ -66,7 +66,7 @@ ALL_SUBJECTS = [
     'physics', 'mathematics', 'biology', 'chemistry',
     'geography', 'informatics', 'historykaz', 'worldhistory',
     'kazakhlang', 'russianlang', 'englishlang',
-    'music', 'grafika'
+    'music', 'grafika', 'labor_girls', 'nvp', 'labor_boys'
 ]
 
 # Короткие алиасы для удобства
@@ -85,6 +85,7 @@ ALIASES = {
     'mus': 'music',
     'gp': 'grafika',
     'graf': 'grafika',
+    'nvp': 'nvp',
 }
 
 

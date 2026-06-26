@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Машиноведение: механизмы и передачи</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+/* poster-specific helpers — no mb-9/7/11, no arbitrary [..] classes */
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.def-list dt{font-weight:800;color:#881337;font-family:'Montserrat',sans-serif;margin-top:.6rem;}
+.def-list dd{margin:0 0 .35rem 0;color:#57534e;line-height:1.55;}
+.spec-table{width:100%;border-collapse:collapse;font-size:.95rem;}
+.spec-table th,.spec-table td{border:1px solid rgba(190,18,60,0.18);padding:.6rem .7rem;text-align:left;vertical-align:top;}
+.spec-table th{background:rgba(190,18,60,0.10);color:#881337;font-family:'Montserrat',sans-serif;}
+.spec-table tr:nth-child(even) td{background:rgba(255,247,237,0.6);}
+.formula{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.15rem;}
+.kv{background:rgba(225,29,72,0.06);border-radius:.8rem;padding:.9rem 1.1rem;border:1px solid rgba(190,18,60,0.18);}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 4-бөлім · Машина және электротехника</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 4 · Machines &amp; Electrics</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 4 · Машины и электротехника</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">Машинатану: механизмдер мен берілістер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">Machine Science: Mechanisms and Gears</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">Машиноведение: механизмы и передачи</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Қозғалыс пен күш машинада қалай беріледі: тісті дөңгелек, белдік, шынжыр және червяк берілістері.</span>
+      <span lang="en" class="lang-content">How motion and force travel through a machine: gear, belt, chain and worm drives.</span>
+      <span lang="ru" class="lang-content">Как движение и сила передаются в машине: зубчатые, ременные, цепные и червячные передачи.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO ESSAY + HERO IMAGE -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+  <div class="card rounded-custom p-8 md:col-span-2">
+    <h2 class="heading-font text-2xl font-bold mb-3" style="color:#be123c">
+      <span lang="kk" class="lang-content">Машина деген не?</span>
+      <span lang="en" class="lang-content">What is a machine?</span>
+      <span lang="ru" class="lang-content">Что такое машина?</span>
+    </h2>
+    <p class="lead">
+      <span lang="kk" class="lang-content"><b>Машина</b> — энергияны пайдалы жұмысқа айналдыратын құрылғы. Әрбір машинада үш бөлік бар: <b>қозғаушы</b> (қозғалтқыш, адам күші), <b>беруші</b> (механизм) және <b>атқарушы</b> (жұмыс мүшесі). <b>Механизм</b> — қозғалысты бір буыннан екіншісіне беретін және түрлендіретін бөлшектер тізбегі. <b>Беріліс (передача)</b> — қозғалыс пен айналу моментін бір білікке (валға) екіншісіне беретін механизм. Беріліс жылдамдықты, бағытты және күшті өзгерте алады: кіші тісті дөңгелек үлкенін айналдырғанда жылдамдық азаяды, ал күш артады.</span>
+      <span lang="en" class="lang-content">A <b>machine</b> is a device that turns energy into useful work. Every machine has three parts: the <b>driver</b> (engine or muscle power), the <b>transmission</b> (the mechanism) and the <b>working part</b> (the tool that acts on the workpiece). A <b>mechanism</b> is a chain of parts that transfers and transforms motion from one link to another. A <b>drive (transmission)</b> is the mechanism that carries rotation and torque from one shaft to another. A drive can change speed, direction and force: when a small gear turns a large one, speed drops but force grows.</span>
+      <span lang="ru" class="lang-content"><b>Машина</b> — это устройство, превращающее энергию в полезную работу. В каждой машине есть три части: <b>двигатель</b> (мотор или сила человека), <b>передаточный механизм</b> и <b>рабочий орган</b>, который действует на изделие. <b>Механизм</b> — это цепочка деталей, которая передаёт и преобразует движение от одного звена к другому. <b>Передача</b> — это механизм, переносящий вращение и крутящий момент с одного вала на другой. Передача может изменять скорость, направление и силу: когда маленькое колесо вращает большое, скорость падает, а сила (момент) возрастает.</span>
+    </p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="badge"><span lang="kk" class="lang-content">Қозғаушы</span><span lang="en" class="lang-content">Driver</span><span lang="ru" class="lang-content">Двигатель</span></span>
+      <span class="badge"><span lang="kk" class="lang-content">Беріліс</span><span lang="en" class="lang-content">Transmission</span><span lang="ru" class="lang-content">Передача</span></span>
+      <span class="badge"><span lang="kk" class="lang-content">Атқарушы мүше</span><span lang="en" class="lang-content">Working part</span><span lang="ru" class="lang-content">Рабочий орган</span></span>
+      <span class="badge"><span lang="kk" class="lang-content">Айналу моменті</span><span lang="en" class="lang-content">Torque</span><span lang="ru" class="lang-content">Крутящий момент</span></span>
+    </div>
+  </div>
+
+  <div class="genre-card" onclick="openLB(this)">
+    <div class="zoom-hint">⤢</div>
+    <div class="pic"><img src="../../assets/labor_boys/lb21_gears.jpg" alt=""></div>
+    <div class="body">
+      <div class="genre-name">
+        <span lang="kk" class="lang-content">Тісті берілістер</span>
+        <span lang="en" class="lang-content">Gear wheels</span>
+        <span lang="ru" class="lang-content">Зубчатые колёса</span>
+      </div>
+      <div class="genre-cap">
+        <span lang="kk" class="lang-content">Үлкен қиғаш тісті дөңгелектер</span>
+        <span lang="en" class="lang-content">Large helical gear wheels</span>
+        <span lang="ru" class="lang-content">Крупные косозубые колёса</span>
+      </div>
+      <div class="genre-desc">
+        <span lang="kk" class="lang-content">Тістер бір-біріне ілінеді де, сырғанаусыз дәл беріліс жасайды.</span>
+        <span lang="en" class="lang-content">Teeth mesh together and transmit motion exactly, without slipping.</span>
+        <span lang="ru" class="lang-content">Зубья входят в зацепление и передают движение точно, без проскальзывания.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPES OF DRIVES — schematic + definition list -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div class="card-accent rounded-custom p-2 art-frame" style="border:none">
+    <div class="art-mat" style="width:100%;height:340px">
+      <img src="../../assets/labor_boys/lb21_scheme.jpg" alt="">
+    </div>
+  </div>
+  <div class="card rounded-custom p-8">
+    <h2 class="heading-font text-2xl font-bold mb-3" style="color:#be123c">
+      <span lang="kk" class="lang-content">Берілістердің негізгі түрлері</span>
+      <span lang="en" class="lang-content">Main types of drives</span>
+      <span lang="ru" class="lang-content">Основные виды передач</span>
+    </h2>
+    <dl class="def-list">
+      <dt><span lang="kk" class="lang-content">Тісті беріліс</span><span lang="en" class="lang-content">Gear drive</span><span lang="ru" class="lang-content">Зубчатая передача</span></dt>
+      <dd><span lang="kk" class="lang-content">Тістері ілінген екі дөңгелек. Дәл, қуатты, сырғанамайды; бағытты қарама-қарсыға өзгертеді.</span><span lang="en" class="lang-content">Two toothed wheels in mesh. Precise, powerful, no slip; reverses the direction of rotation.</span><span lang="ru" class="lang-content">Два колеса с зубьями в зацеплении. Точная, мощная, без скольжения; меняет направление вращения на обратное.</span></dd>
+      <dt><span lang="kk" class="lang-content">Белдік беріліс</span><span lang="en" class="lang-content">Belt drive</span><span lang="ru" class="lang-content">Ременная передача</span></dt>
+      <dd><span lang="kk" class="lang-content">Екі шкивті икемді белдік байланыстырады. Тыныш, жұмсақ, алыс қашықтыққа береді; сәл сырғанауы мүмкін.</span><span lang="en" class="lang-content">A flexible belt links two pulleys. Quiet and smooth, works over distance; may slip a little.</span><span lang="ru" class="lang-content">Гибкий ремень связывает два шкива. Тихая и плавная, работает на расстоянии; может немного проскальзывать.</span></dd>
+      <dt><span lang="kk" class="lang-content">Шынжыр беріліс</span><span lang="en" class="lang-content">Chain drive</span><span lang="ru" class="lang-content">Цепная передача</span></dt>
+      <dd><span lang="kk" class="lang-content">Жұлдызшаларды (звёздочки) шынжыр байланыстырады. Сырғанамайды әрі алыс қашықтыққа береді — велосипед, мотоцикл.</span><span lang="en" class="lang-content">A chain links two sprockets. No slip and works at a distance — bicycles, motorcycles.</span><span lang="ru" class="lang-content">Цепь связывает две звёздочки. Без проскальзывания и на расстоянии — велосипед, мотоцикл.</span></dd>
+      <dt><span lang="kk" class="lang-content">Червяк беріліс</span><span lang="en" class="lang-content">Worm drive</span><span lang="ru" class="lang-content">Червячная передача</span></dt>
+      <dd><span lang="kk" class="lang-content">Бұрандалы червяк тісті дөңгелекті айналдырады. Жылдамдықты қатты азайтады, өздігінен тежеледі.</span><span lang="en" class="lang-content">A screw-like worm turns a gear wheel. Greatly reduces speed and is self-locking.</span><span lang="ru" class="lang-content">Винтовой червяк вращает зубчатое колесо. Сильно снижает скорость и самотормозится.</span></dd>
+    </dl>
+  </div>
+</section>
+
+<!-- GEAR RATIO — formula / how-it-works -->
+<section class="card rounded-custom p-8 mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-4" style="color:#be123c">
+    <span lang="kk" class="lang-content">Беріліс саны: жылдамдық пен күш</span>
+    <span lang="en" class="lang-content">Gear ratio: speed and force</span>
+    <span lang="ru" class="lang-content">Передаточное число: скорость и сила</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="kv">
+      <p class="formula">u = z₂ / z₁ = n₁ / n₂</p>
+      <p class="lead mt-2">
+        <span lang="kk" class="lang-content"><b>u</b> — беріліс саны; <b>z</b> — тіс саны; <b>n</b> — айналу жиілігі. Жетекші (1) кіші, жетектегі (2) үлкен болса, <b>u &gt; 1</b>.</span>
+        <span lang="en" class="lang-content"><b>u</b> is the gear ratio; <b>z</b> the number of teeth; <b>n</b> the speed of rotation. If driver (1) is small and driven (2) is large, then <b>u &gt; 1</b>.</span>
+        <span lang="ru" class="lang-content"><b>u</b> — передаточное число; <b>z</b> — число зубьев; <b>n</b> — частота вращения. Если ведущее (1) меньше, а ведомое (2) больше, то <b>u &gt; 1</b>.</span>
+      </p>
+    </div>
+    <div class="kv">
+      <p class="heading-font font-bold" style="color:#881337">
+        <span lang="kk" class="lang-content">Баяулату (u &gt; 1)</span>
+        <span lang="en" class="lang-content">Reduction (u &gt; 1)</span>
+        <span lang="ru" class="lang-content">Понижение (u &gt; 1)</span>
+      </p>
+      <p class="lead mt-2">
+        <span lang="kk" class="lang-content">Жылдамдық <b>азаяды</b>, ал айналу моменті (күш) <b>артады</b>. Ауыр жүкті көтеруге, бұрғылауға қолайлы.</span>
+        <span lang="en" class="lang-content">Speed <b>drops</b>, but torque (force) <b>rises</b>. Good for lifting heavy loads and drilling.</span>
+        <span lang="ru" class="lang-content">Скорость <b>падает</b>, а крутящий момент (сила) <b>растёт</b>. Подходит для подъёма тяжестей и сверления.</span>
+      </p>
+    </div>
+    <div class="kv">
+      <p class="heading-font font-bold" style="color:#881337">
+        <span lang="kk" class="lang-content">Жеделдету (u &lt; 1)</span>
+        <span lang="en" class="lang-content">Overdrive (u &lt; 1)</span>
+        <span lang="ru" class="lang-content">Повышение (u &lt; 1)</span>
+      </p>
+      <p class="lead mt-2">
+        <span lang="kk" class="lang-content">Жылдамдық <b>артады</b>, момент <b>азаяды</b>. Желдеткіш, бұрғы шпинделі сияқты жылдам тораптарда.</span>
+        <span lang="en" class="lang-content">Speed <b>rises</b>, torque <b>drops</b>. Used in fast parts like fans and drill spindles.</span>
+        <span lang="ru" class="lang-content">Скорость <b>растёт</b>, момент <b>падает</b>. Применяется в быстрых узлах: вентиляторы, шпиндель дрели.</span>
+      </p>
+    </div>
+  </div>
+  <p class="lead mt-4">
+    <span lang="kk" class="lang-content"><b>Мысал:</b> жетекші дөңгелекте z₁ = 20 тіс, жетектегі дөңгелекте z₂ = 60 тіс. Сонда u = 60 / 20 = <b>3</b>. Жетекші үш рет айналғанда, жетектегі дөңгелек бір рет қана айналады, бірақ күш үш есе артады.</span>
+    <span lang="en" class="lang-content"><b>Example:</b> the driving wheel has z₁ = 20 teeth, the driven wheel z₂ = 60 teeth. Then u = 60 / 20 = <b>3</b>. For every three turns of the driver, the driven wheel turns once — but the force is three times greater.</span>
+    <span lang="ru" class="lang-content"><b>Пример:</b> на ведущем колесе z₁ = 20 зубьев, на ведомом z₂ = 60 зубьев. Тогда u = 60 / 20 = <b>3</b>. На каждые три оборота ведущего колеса ведомое делает один оборот, зато сила возрастает в три раза.</span>
+  </p>
+</section>
+
+<!-- COMPARISON TABLE — 3 per-language tables -->
+<section class="card rounded-custom p-8 mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-4" style="color:#be123c">
+    <span lang="kk" class="lang-content">Берілістерді салыстыру</span>
+    <span lang="en" class="lang-content">Comparison of drives</span>
+    <span lang="ru" class="lang-content">Сравнение передач</span>
+  </h2>
+
+  <div class="lang-content" lang="ru">
+    <table class="spec-table">
+      <thead><tr><th>Передача</th><th>Связь</th><th>Достоинства</th><th>Недостатки</th><th>Где применяют</th></tr></thead>
+      <tbody>
+        <tr><td>Зубчатая</td><td>зацепление зубьев</td><td>точная, мощная, без скольжения</td><td>шум, нужна смазка, дороже</td><td>коробки передач, часы, станки</td></tr>
+        <tr><td>Ременная</td><td>трение ремня о шкив</td><td>тихая, плавная, на расстоянии</td><td>проскальзывание, износ ремня</td><td>станки, стиральные машины, авто</td></tr>
+        <tr><td>Цепная</td><td>цепь и звёздочки</td><td>без скольжения, на расстоянии</td><td>шум, требует смазки</td><td>велосипед, мотоцикл, конвейер</td></tr>
+        <tr><td>Червячная</td><td>винт и колесо</td><td>большое понижение, самоторможение</td><td>низкий КПД, нагрев</td><td>лебёдки, домкраты, рулевое</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="kk">
+    <table class="spec-table">
+      <thead><tr><th>Беріліс</th><th>Байланыс</th><th>Артықшылығы</th><th>Кемшілігі</th><th>Қолданылуы</th></tr></thead>
+      <tbody>
+        <tr><td>Тісті</td><td>тістердің ілінісі</td><td>дәл, қуатты, сырғанамайды</td><td>шу, майлау керек, қымбат</td><td>беріліс қорабы, сағат, станок</td></tr>
+        <tr><td>Белдік</td><td>белдіктің үйкелісі</td><td>тыныш, жұмсақ, қашықтыққа</td><td>сырғанау, белдік тозады</td><td>станок, кір жуғыш, көлік</td></tr>
+        <tr><td>Шынжыр</td><td>шынжыр мен жұлдызша</td><td>сырғанамайды, қашықтыққа</td><td>шу, майлауды қажет етеді</td><td>велосипед, мотоцикл, конвейер</td></tr>
+        <tr><td>Червяк</td><td>бұранда мен дөңгелек</td><td>қатты баяулатады, өзі тежеледі</td><td>ПӘК төмен, қызады</td><td>шығыр, домкрат, руль</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="en">
+    <table class="spec-table">
+      <thead><tr><th>Drive</th><th>Link</th><th>Advantages</th><th>Drawbacks</th><th>Where used</th></tr></thead>
+      <tbody>
+        <tr><td>Gear</td><td>meshing teeth</td><td>precise, powerful, no slip</td><td>noisy, needs oil, costlier</td><td>gearboxes, clocks, machine tools</td></tr>
+        <tr><td>Belt</td><td>friction belt–pulley</td><td>quiet, smooth, works at distance</td><td>slips, belt wears out</td><td>machines, washers, cars</td></tr>
+        <tr><td>Chain</td><td>chain and sprockets</td><td>no slip, works at distance</td><td>noisy, needs lubrication</td><td>bicycle, motorcycle, conveyor</td></tr>
+        <tr><td>Worm</td><td>screw and wheel</td><td>big reduction, self-locking</td><td>low efficiency, heats up</td><td>winches, jacks, steering</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- GALLERY — real photos of drives -->
+<section class="mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-4" style="color:#be123c">
+    <span lang="kk" class="lang-content">Берілістер өмірде: суретке басып, үлкейт</span>
+    <span lang="en" class="lang-content">Drives in real life: tap a photo to enlarge</span>
+    <span lang="ru" class="lang-content">Передачи в жизни: нажми на фото, чтобы увеличить</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">⤢</div>
+      <div class="pic"><img src="../../assets/labor_boys/lb21_chain.jpg" alt=""></div>
+      <div class="body">
+        <div class="genre-name">
+          <span lang="kk" class="lang-content">Шынжыр беріліс</span>
+          <span lang="en" class="lang-content">Chain drive</span>
+          <span lang="ru" class="lang-content">Цепная передача</span>
+        </div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Велосипед: шынжыр мен жұлдызша</span>
+          <span lang="en" class="lang-content">Bicycle: chain and sprockets</span>
+          <span lang="ru" class="lang-content">Велосипед: цепь и звёздочки</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Педальдан артқы дөңгелекке қозғалысты сырғанаусыз береді. Жұлдызшаны ауыстырсаң — беріліс саны өзгереді.</span>
+          <span lang="en" class="lang-content">Carries motion from the pedals to the rear wheel without slipping. Change the sprocket and the gear ratio changes.</span>
+          <span lang="ru" class="lang-content">Передаёт движение от педалей к заднему колесу без проскальзывания. Сменишь звёздочку — изменится передаточное число.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">⤢</div>
+      <div class="pic"><img src="../../assets/labor_boys/lb21_belt.jpg" alt=""></div>
+      <div class="body">
+        <div class="genre-name">
+          <span lang="kk" class="lang-content">Белдік беріліс</span>
+          <span lang="en" class="lang-content">Belt drive</span>
+          <span lang="ru" class="lang-content">Ременная передача</span>
+        </div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Компрессор: сынадай белдік пен шкив</span>
+          <span lang="en" class="lang-content">Compressor: V-belt and pulley</span>
+          <span lang="ru" class="lang-content">Компрессор: клиновой ремень и шкив</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Қозғалтқыштың кіші шкиві үлкен маховикті айналдырады. Белдік тыныш әрі жұмсақ жұмыс істейді.</span>
+          <span lang="en" class="lang-content">The motor's small pulley turns the large flywheel. The belt runs quietly and smoothly.</span>
+          <span lang="ru" class="lang-content">Маленький шкив мотора вращает большой маховик. Ремень работает тихо и плавно.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">⤢</div>
+      <div class="pic"><img src="../../assets/labor_boys/lb21_worm.jpg" alt=""></div>
+      <div class="body">
+        <div class="genre-name">
+          <span lang="kk" class="lang-content">Червяк беріліс</span>
+          <span lang="en" class="lang-content">Worm drive</span>
+          <span lang="ru" class="lang-content">Червячная передача</span>
+        </div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Бұрандалы червяк пен тісті дөңгелек</span>
+          <span lang="en" class="lang-content">Screw worm and gear wheel</span>
+          <span lang="ru" class="lang-content">Винтовой червяк и зубчатое колесо</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Бір айналымда дөңгелек тек бір тіске жылжиды — сондықтан жылдамдық қатты азаяды әрі өзі тежеледі.</span>
+          <span lang="en" class="lang-content">In one turn the wheel moves by just one tooth — so speed drops sharply and the drive is self-locking.</span>
+          <span lang="ru" class="lang-content">За один оборот колесо смещается на один зуб — поэтому скорость резко падает, а передача самотормозится.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STEP-BY-STEP — how to read a drive -->
+<section class="card rounded-custom p-8 mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-4" style="color:#be123c">
+    <span lang="kk" class="lang-content">Берілісті қалай «оқу» керек</span>
+    <span lang="en" class="lang-content">How to "read" a drive</span>
+    <span lang="ru" class="lang-content">Как «прочитать» передачу</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="flex items-start gap-4">
+      <div class="step-num">1</div>
+      <p class="lead">
+        <span lang="kk" class="lang-content"><b>Жетекші буынды тап.</b> Қозғалыс қайдан басталады? Қозғалтқышқа немесе тұтқаға жалғанған бөлшек — жетекші.</span>
+        <span lang="en" class="lang-content"><b>Find the driver.</b> Where does motion start? The part linked to the motor or handle is the driver.</span>
+        <span lang="ru" class="lang-content"><b>Найди ведущее звено.</b> Откуда начинается движение? Деталь, связанная с мотором или ручкой, — ведущая.</span>
+      </p>
+    </div>
+    <div class="flex items-start gap-4">
+      <div class="step-num">2</div>
+      <p class="lead">
+        <span lang="kk" class="lang-content"><b>Байланыс түрін анықта.</b> Тістер ме, белдік пе, шынжыр ма, әлде бұранда ма? Бұл — беріліс түрі.</span>
+        <span lang="en" class="lang-content"><b>Identify the link.</b> Teeth, a belt, a chain or a screw? That tells you the type of drive.</span>
+        <span lang="ru" class="lang-content"><b>Определи тип связи.</b> Зубья, ремень, цепь или винт? Это и есть вид передачи.</span>
+      </p>
+    </div>
+    <div class="flex items-start gap-4">
+      <div class="step-num">3</div>
+      <p class="lead">
+        <span lang="kk" class="lang-content"><b>Өлшемдерін салыстыр.</b> Жетектегі дөңгелек үлкенірек пе? Олай болса — баяулату, күш артады.</span>
+        <span lang="en" class="lang-content"><b>Compare the sizes.</b> Is the driven wheel bigger? Then it is a reduction — force increases.</span>
+        <span lang="ru" class="lang-content"><b>Сравни размеры.</b> Ведомое колесо больше? Значит, это понижение — сила возрастает.</span>
+      </p>
+    </div>
+    <div class="flex items-start gap-4">
+      <div class="step-num">4</div>
+      <p class="lead">
+        <span lang="kk" class="lang-content"><b>Беріліс санын есепте.</b> u = z₂ / z₁. Осыдан жылдамдық пен моменттің қалай өзгеретінін білесің.</span>
+        <span lang="en" class="lang-content"><b>Work out the ratio.</b> u = z₂ / z₁. From this you learn how speed and torque change.</span>
+        <span lang="ru" class="lang-content"><b>Посчитай передаточное число.</b> u = z₂ / z₁. По нему узнаешь, как меняются скорость и момент.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY / KEY TERMS -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div class="card-rose rounded-custom p-8">
+    <h2 class="heading-font text-2xl font-bold mb-3">
+      <span lang="kk" class="lang-content">Қауіпсіздік ережелері</span>
+      <span lang="en" class="lang-content">Safety rules</span>
+      <span lang="ru" class="lang-content">Правила безопасности</span>
+    </h2>
+    <ul class="space-y-2" style="line-height:1.6">
+      <li><span lang="kk" class="lang-content">• Жұмыс істеп тұрған берілісті ешқашан қолмен ұстама — саусақ тістер мен шынжырға кіріп кетуі мүмкін.</span><span lang="en" class="lang-content">• Never touch a running drive — fingers can be caught between teeth or in the chain.</span><span lang="ru" class="lang-content">• Никогда не трогай работающую передачу — пальцы может затянуть в зубья или цепь.</span></li>
+      <li><span lang="kk" class="lang-content">• Қорғаныш қаптамасынсыз (кожух) машинаны қоспа.</span><span lang="en" class="lang-content">• Do not switch on a machine without its guard cover.</span><span lang="ru" class="lang-content">• Не включай машину без защитного кожуха.</span></li>
+      <li><span lang="kk" class="lang-content">• Кең жең мен бос киімді түйме, ұзын шашты бас.</span><span lang="en" class="lang-content">• Button up loose sleeves and clothing; tie back long hair.</span><span lang="ru" class="lang-content">• Застегни свободные рукава и одежду, убери длинные волосы.</span></li>
+      <li><span lang="kk" class="lang-content">• Реттеу мен майлауды тек тоқтатылған машинада жаса.</span><span lang="en" class="lang-content">• Adjust and lubricate only when the machine is stopped.</span><span lang="ru" class="lang-content">• Настройку и смазку выполняй только на остановленной машине.</span></li>
+    </ul>
+  </div>
+  <div class="card rounded-custom p-8">
+    <h2 class="heading-font text-2xl font-bold mb-3" style="color:#be123c">
+      <span lang="kk" class="lang-content">Негізгі терминдер</span>
+      <span lang="en" class="lang-content">Key terms</span>
+      <span lang="ru" class="lang-content">Ключевые термины</span>
+    </h2>
+    <dl class="def-list">
+      <dt><span lang="kk" class="lang-content">Білік (вал)</span><span lang="en" class="lang-content">Shaft</span><span lang="ru" class="lang-content">Вал</span></dt>
+      <dd><span lang="kk" class="lang-content">Айналатын деталь, оған дөңгелектер мен шкивтер бекітіледі.</span><span lang="en" class="lang-content">A rotating part that carries the wheels and pulleys.</span><span lang="ru" class="lang-content">Вращающаяся деталь, на которой закреплены колёса и шкивы.</span></dd>
+      <dt><span lang="kk" class="lang-content">Мойынтірек (подшипник)</span><span lang="en" class="lang-content">Bearing</span><span lang="ru" class="lang-content">Подшипник</span></dt>
+      <dd><span lang="kk" class="lang-content">Білікті ұстап, үйкелісті азайтып, оңай айналуға көмектеседі.</span><span lang="en" class="lang-content">Holds the shaft and reduces friction so it turns easily.</span><span lang="ru" class="lang-content">Держит вал и снижает трение, помогая ему легко вращаться.</span></dd>
+      <dt><span lang="kk" class="lang-content">ПӘК (КПД)</span><span lang="en" class="lang-content">Efficiency</span><span lang="ru" class="lang-content">КПД</span></dt>
+      <dd><span lang="kk" class="lang-content">Пайдалы жұмыстың кіріс энергияға қатынасы; үйкеліс пен жылудан төмендейді.</span><span lang="en" class="lang-content">The ratio of useful work to input energy; lowered by friction and heat.</span><span lang="ru" class="lang-content">Отношение полезной работы к затраченной энергии; снижается из-за трения и нагрева.</span></dd>
+    </dl>
+  </div>
+</section>
+
+<!-- LIGHTBOX (keep inside #poster-container) -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

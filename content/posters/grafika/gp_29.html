@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Окружности в аксонометрии</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 5 · Аксонометрия</span>
+      <span lang="en" class="lang-content">Graphics · Section 5 · Axonometry</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 5 · Аксонометрия</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">⭕ Аксонометриядағы шеңберлер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">⭕ Circles in Axonometric Projection</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">⭕ Окружности в аксонометрии</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Шеңбер аксонометрияда эллипске айналады. Эллипсті төрт орталықты тәсілмен салу.</span>
+      <span lang="en" class="lang-content">A circle becomes an ellipse in axonometry. Construction using the four-centre approximation method.</span>
+      <span lang="ru" class="lang-content">Окружность в аксонометрии превращается в эллипс. Построение четырёхцентровым способом.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Why circles become ellipses -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Неліктен шеңбер эллипске айналады?</span>
+    <span lang="en" class="lang-content">💡 Why Does a Circle Become an Ellipse?</span>
+    <span lang="ru" class="lang-content">💡 Почему окружность становится эллипсом?</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content">Изометрияда осьтер бойынша өлшемдер коэффициент k арқылы өзгереді. Шеңбер — барлық бағытта тең радиусы бар фигура. Бірақ аксонометрияда бір бағыт «қысқарады» — бұл шеңберді <b>эллипске</b> айналдырады.</span>
+        <span lang="en" class="lang-content">In isometry, dimensions along axes are scaled by coefficient k. A circle has equal radius in all directions. But in axonometry one direction is foreshortened — this turns the circle into an <b>ellipse</b>.</span>
+        <span lang="ru" class="lang-content">В изометрии размеры по осям изменяются с коэффициентом k. Окружность имеет равный радиус во всех направлениях. Но в аксонометрии одно направление «сжимается» — это превращает окружность в <b>эллипс</b>.</span>
+      </p>
+      <div class="grid grid-cols-1 gap-3 text-sm">
+        <div class="card-accent rounded-xl p-3">
+          <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Изометриядағы эллипс</span><span lang="en" class="lang-content">Ellipse in isometry</span><span lang="ru" class="lang-content">Эллипс в изометрии</span></p>
+          <p class="text-slate-600 mt-1"><span lang="kk" class="lang-content">Үлкен ось = <b>1,22·d</b> · · Кіші ось = <b>0,71·d</b></span><span lang="en" class="lang-content">Major axis = <b>1.22·d</b> · Minor axis = <b>0.71·d</b></span><span lang="ru" class="lang-content">Большая ось = <b>1,22·d</b> · Малая ось = <b>0,71·d</b></span></p>
+        </div>
+      </div>
+    </div>
+    <!-- Three ellipses in three planes — exact isometric geometry -->
+    <!-- Cube 3x3x3 in iso at s=22, cx=170, cy=140 (computed precisely) -->
+    <!-- A=(0,0,0)→(170,140), B=(3,0,0)→(227,173), C=(3,3,0)→(170,206), D=(0,3,0)→(113,173) -->
+    <!-- E=(0,0,3)→(170,74), F=(3,0,3)→(227,107), G=(3,3,3)→(170,140), H=(0,3,3)→(113,107) -->
+    <!-- Top face EFGH centered at (170,107) -->
+    <!-- Right face ABFE (V plane, perpend. to Y) centered at (198.5,123.5), tilted at 60° -->
+    <!-- Left face ADHE (W plane, perpend. to X) centered at (141.5,123.5), tilted at 120° -->
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 340 280" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Isometric cube wireframe -->
+        <!-- Top face EFGH -->
+        <polygon points="170,74 227,107 170,140 113,107" fill="rgba(124,58,237,0.04)" stroke="#7c3aed" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <!-- Right face ABFE -->
+        <polygon points="170,140 227,173 227,107 170,74" fill="rgba(124,58,237,0.04)" stroke="#7c3aed" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <!-- Left face ADHE -->
+        <polygon points="170,140 113,173 113,107 170,74" fill="rgba(124,58,237,0.04)" stroke="#7c3aed" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <!-- Bottom edges -->
+        <line x1="170" y1="140" x2="170" y2="206" stroke="#7c3aed" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="113" y1="173" x2="170" y2="206" stroke="#7c3aed" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="227" y1="173" x2="170" y2="206" stroke="#7c3aed" stroke-width="0.8" stroke-dasharray="2,2"/>
+
+        <!-- ELLIPSE ON H FACE (top, horizontal plane) — major axis HORIZONTAL -->
+        <ellipse cx="170" cy="107" rx="50" ry="29"
+                 fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="2.5"/>
+        <!-- Major/minor axes of H ellipse -->
+        <line x1="120" y1="107" x2="220" y2="107" stroke="#ef4444" stroke-width="0.7" stroke-dasharray="3,2"/>
+        <line x1="170" y1="78" x2="170" y2="136" stroke="#ef4444" stroke-width="0.7" stroke-dasharray="3,2"/>
+
+        <!-- ELLIPSE ON V FACE (right side, perpend. to Y) — major axis at 60° (along long diag) -->
+        <ellipse cx="198.5" cy="123.5" rx="50" ry="29"
+                 transform="rotate(60 198.5 123.5)"
+                 fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="2.5"/>
+
+        <!-- ELLIPSE ON W FACE (left side, perpend. to X) — major axis at -60° (along long diag) -->
+        <ellipse cx="141.5" cy="123.5" rx="50" ry="29"
+                 transform="rotate(-60 141.5 123.5)"
+                 fill="rgba(5,150,105,0.15)" stroke="#059669" stroke-width="2.5"/>
+
+        <!-- Labels OUTSIDE the cube with leader lines -->
+        <!-- H label (top, red) -->
+        <text x="245" y="65" font-size="10" fill="#ef4444" font-weight="bold">H — горизонт.</text>
+        <line x1="240" y1="65" x2="200" y2="100" stroke="#ef4444" stroke-width="0.7"/>
+        <text x="245" y="78" font-size="8" fill="#ef4444">больш. ось горизонт.</text>
+
+        <!-- V label (right, blue) -->
+        <text x="270" y="170" font-size="10" fill="#2563eb" font-weight="bold">V — фронт.</text>
+        <line x1="265" y1="167" x2="225" y2="140" stroke="#2563eb" stroke-width="0.7"/>
+        <text x="270" y="183" font-size="8" fill="#2563eb">ось ⟂ оси Y</text>
+
+        <!-- W label (left, green) -->
+        <text x="5" y="170" font-size="10" fill="#059669" font-weight="bold">W — профил.</text>
+        <line x1="60" y1="167" x2="115" y2="140" stroke="#059669" stroke-width="0.7"/>
+        <text x="5" y="183" font-size="8" fill="#059669">ось ⟂ оси X</text>
+
+        <!-- Bottom summary -->
+        <text x="170" y="235" font-size="10" fill="#7c3aed" text-anchor="middle" font-weight="bold">Эллипс на каждой грани куба</text>
+        <text x="170" y="250" font-size="9" fill="#64748b" text-anchor="middle">a = 1,22d  ·  b = 0,71d  ·  Большая ось ⟂ оси, перпендик. грани</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Ellipse axes orientation -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Эллипстің үлкен осінің бағыты</span>
+    <span lang="en" class="lang-content">📐 Direction of Major Axis</span>
+    <span lang="ru" class="lang-content">📐 Направление большой оси эллипса</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <table class="t">
+      <thead>
+        <tr>
+          <th><span lang="kk" class="lang-content">Жазықтық</span><span lang="en" class="lang-content">Plane</span><span lang="ru" class="lang-content">Плоскость</span></th>
+          <th><span lang="kk" class="lang-content">Үлкен ос бағыты</span><span lang="en" class="lang-content">Major axis direction</span><span lang="ru" class="lang-content">Направление большой оси</span></th>
+          <th><span lang="kk" class="lang-content">Үлкен ось = </span><span lang="en" class="lang-content">Major axis =</span><span lang="ru" class="lang-content">Большая ось =</span></th>
+          <th><span lang="kk" class="lang-content">Кіші ось = </span><span lang="en" class="lang-content">Minor axis =</span><span lang="ru" class="lang-content">Малая ось =</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="text-red-600 font-bold">H <span class="text-slate-500 font-normal">(горизонт.)</span></td><td><span lang="kk" class="lang-content">Горизонталь</span><span lang="en" class="lang-content">Horizontal</span><span lang="ru" class="lang-content">Горизонталь</span></td><td>1,22·d</td><td>0,71·d</td></tr>
+        <tr><td class="text-blue-600 font-bold">V <span class="text-slate-500 font-normal">(фронтальная)</span></td><td><span lang="kk" class="lang-content">Тік (вертикаль)</span><span lang="en" class="lang-content">Vertical</span><span lang="ru" class="lang-content">Вертикаль</span></td><td>1,22·d</td><td>0,71·d</td></tr>
+        <tr><td class="text-green-600 font-bold">W <span class="text-slate-500 font-normal">(профильная)</span></td><td><span lang="kk" class="lang-content">Тік (вертикаль)</span><span lang="en" class="lang-content">Vertical</span><span lang="ru" class="lang-content">Вертикаль</span></td><td>1,22·d</td><td>0,71·d</td></tr>
+      </tbody>
+    </table>
+    <div class="card-accent rounded-xl p-3 mt-4 text-sm">
+      <p class="text-violet-800"><span lang="kk" class="lang-content">💡 Үш жазықтықта да эллипстің өлшемдері бірдей (1,22·d × 0,71·d), бірақ бағыты әртүрлі. H жазықтығында — горизонталь; V және W жазықтықтарда — вертикаль.</span><span lang="en" class="lang-content">💡 All three planes have the same ellipse size (1.22·d × 0.71·d), but different orientations. H plane: horizontal; V and W planes: vertical.</span><span lang="ru" class="lang-content">💡 Во всех трёх плоскостях эллипс одного размера (1,22·d × 0,71·d), но ориентация разная. В H: горизонталь; в V и W: вертикаль.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Four-centre method -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔧 Төрт орталықты тәсілмен эллипс салу</span>
+    <span lang="en" class="lang-content">🔧 Four-Centre Ellipse Approximation</span>
+    <span lang="ru" class="lang-content">🔧 Четырёхцентровый способ построения эллипса</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 300 260" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bounding rhombus (isometric square) -->
+        <polygon points="150,20 250,75 150,130 50,75" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Diagonals of rhombus -->
+        <line x1="150" y1="20" x2="150" y2="130" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="50" y1="75" x2="250" y2="75" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- 4 centres -->
+        <circle cx="150" cy="20" r="5" fill="#ef4444"/>
+        <circle cx="150" cy="130" r="5" fill="#ef4444"/>
+        <circle cx="95" cy="75" r="5" fill="#7c3aed"/>
+        <circle cx="205" cy="75" r="5" fill="#7c3aed"/>
+        <!-- Labels -->
+        <text x="155" y="18" font-size="9" fill="#ef4444">O₁</text>
+        <text x="155" y="140" font-size="9" fill="#ef4444">O₂</text>
+        <text x="68" y="78" font-size="9" fill="#7c3aed">O₃</text>
+        <text x="210" y="78" font-size="9" fill="#7c3aed">O₄</text>
+        <!-- Four arcs forming the ellipse -->
+        <!-- Large arcs (from O3 and O4) -->
+        <path d="M 250,75 A 155,155 0 0,1 50,75" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <path d="M 50,75 A 155,155 0 0,1 250,75" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <!-- Small arcs (from O1 and O2) -->
+        <path d="M 50,75 Q 75,20 150,20" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <path d="M 250,75 Q 225,20 150,20" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <path d="M 50,75 Q 75,130 150,130" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <path d="M 250,75 Q 225,130 150,130" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <!-- Radius lines from centres -->
+        <line x1="95" y1="75" x2="50" y2="75" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="95" y1="75" x2="250" y2="75" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="150" y1="20" x2="50" y2="75" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="150" y1="20" x2="250" y2="75" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="60" y="200" font-size="9" fill="#7c3aed">4 центра → 4 дуги → эллипс</text>
+        <text x="60" y="215" font-size="8" fill="#64748b">Приближённый (но достаточный)</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <ol class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-3 items-start"><span class="step-num flex-shrink-0">1</span>
+          <span lang="kk" class="lang-content">Шеңбердің диаметрі d-ға тең изометриялық ромб сызу (диагональдары 1,22·d × 0,71·d)</span>
+          <span lang="en" class="lang-content">Draw the isometric rhombus with diagonals 1.22·d × 0.71·d (equal to d in each axial direction)</span>
+          <span lang="ru" class="lang-content">Построить изометрический ромб с диагоналями 1,22·d × 0,71·d</span>
+        </li>
+        <li class="flex gap-3 items-start"><span class="step-num flex-shrink-0">2</span>
+          <span lang="kk" class="lang-content">Ромбтың тупой бұрыштарын (O₁ и O₂) — 2 орталық ретінде белгілеу</span>
+          <span lang="en" class="lang-content">Mark the obtuse angle vertices of the rhombus as centres O₁ and O₂</span>
+          <span lang="ru" class="lang-content">Тупые углы ромба — центры O₁ и O₂</span>
+        </li>
+        <li class="flex gap-3 items-start"><span class="step-num flex-shrink-0">3</span>
+          <span lang="kk" class="lang-content">O₁-O₂ диагональынан O₃ және O₄ орталықтарын табу (кіші доғалар орталығы)</span>
+          <span lang="en" class="lang-content">Find O₃ and O₄ on the short diagonal — centres for the small arcs</span>
+          <span lang="ru" class="lang-content">Найти O₃ и O₄ на короткой диагонали — центры малых дуг</span>
+        </li>
+        <li class="flex gap-3 items-start"><span class="step-num flex-shrink-0">4</span>
+          <span lang="kk" class="lang-content">4 орталықтан 4 доға сызу → эллипс дайын</span>
+          <span lang="en" class="lang-content">Draw 4 arcs from 4 centres → ellipse complete</span>
+          <span lang="ru" class="lang-content">Провести 4 дуги из 4 центров → эллипс готов</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Үлкен ось = 1,22·d</span><span lang="en" class="lang-content">Major axis = 1.22·d</span><span lang="ru" class="lang-content">Большая ось = 1,22·d</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Диаметрден 22% үлкен</span><span lang="en" class="lang-content">22% larger than diameter</span><span lang="ru" class="lang-content">На 22% больше диаметра</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Кіші ось = 0,71·d</span><span lang="en" class="lang-content">Minor axis = 0.71·d</span><span lang="ru" class="lang-content">Малая ось = 0,71·d</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Диаметрден 29% кіші</span><span lang="en" class="lang-content">29% smaller than diameter</span><span lang="ru" class="lang-content">На 29% меньше диаметра</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">4 орталықты тәсіл</span><span lang="en" class="lang-content">Four-centre method</span><span lang="ru" class="lang-content">Четырёхцентровый способ</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Ыңғайлы жуықтама — нақты эллипстен айырмашылығы аз</span><span lang="en" class="lang-content">Convenient approximation — barely different from a true ellipse</span><span lang="ru" class="lang-content">Удобное приближение — отличие от точного эллипса незначительно</span></p></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

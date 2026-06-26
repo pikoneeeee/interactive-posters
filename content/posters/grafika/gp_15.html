@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Метод прямоугольного проецирования</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_teal.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-teal-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 3 · Проекциялық черчение</span>
+      <span lang="en" class="lang-content">Graphics · Section 3 · Projection Drawing</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 3 · Проекционное черчение</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">📦 Тіктөртбұрышты проекциялау әдісі</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">📦 Orthographic Projection Method</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">📦 Метод прямоугольного проецирования</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Монж әдісі: үш проекция жазықтығы, олардың орналасуы.</span>
+      <span lang="en" class="lang-content">Monge's method: three projection planes and their layout on a drawing.</span>
+      <span lang="ru" class="lang-content">Метод Монжа: три плоскости проекций и их развёртка на чертеже.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- What is projection -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Проекция дегеніміз не?</span>
+    <span lang="en" class="lang-content">💡 What is Projection?</span>
+    <span lang="ru" class="lang-content">💡 Что такое проекция?</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-teal-700">Проекция</b> — кеңістіктегі заттың жазықтықтағы бейнесі. Тіктөртбұрышты (ортогональды) проекцияда нысанға түсетін сәулелер жазықтыққа <b>перпендикуляр</b> болады.</span>
+        <span lang="en" class="lang-content"><b class="text-teal-700">Projection</b> — the image of a 3D object on a flat plane. In orthographic projection the projecting rays are <b>perpendicular</b> to the projection plane.</span>
+        <span lang="ru" class="lang-content"><b class="text-teal-700">Проекция</b> — изображение объекта на плоскости. При прямоугольной (ортогональной) проекции лучи перпендикулярны плоскости проецирования.</span>
+      </p>
+      <div class="card-accent rounded-xl p-4">
+        <p class="font-bold text-teal-800 mb-2">
+          <span lang="kk" class="lang-content">Неліктен бірнеше проекция керек?</span>
+          <span lang="en" class="lang-content">Why do we need multiple projections?</span>
+          <span lang="ru" class="lang-content">Почему нужно несколько проекций?</span>
+        </p>
+        <p class="text-slate-700 text-sm">
+          <span lang="kk" class="lang-content">Бір проекция заттың толық пішінін бермейді. Үш проекция бірге заттың барлық өлшемдерін — ені, биіктігі, тереңдігін — анықтайды.</span>
+          <span lang="en" class="lang-content">One projection alone does not fully describe an object. Three views together define all dimensions — width, height, and depth.</span>
+          <span lang="ru" class="lang-content">Одна проекция не передаёт форму предмета полностью. Три проекции вместе определяют все размеры — ширину, высоту и глубину.</span>
+        </p>
+      </div>
+    </div>
+    <!-- 3D diagram of projection planes -->
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 240" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Front plane V (фронтальная) -->
+        <polygon points="50,40 200,40 200,160 50,160" fill="rgba(37,99,235,0.12)" stroke="#1d4ed8" stroke-width="2"/>
+        <text x="110" y="105" font-size="11" fill="#1d4ed8" font-weight="bold">V</text>
+        <text x="90" y="120" font-size="9" fill="#1d4ed8">Фронтальная</text>
+        <!-- Horizontal plane H (горизонтальная) — bottom, skewed -->
+        <polygon points="50,160 200,160 260,210 110,210" fill="rgba(16,185,129,0.12)" stroke="#059669" stroke-width="2"/>
+        <text x="160" y="195" font-size="11" fill="#059669" font-weight="bold">H</text>
+        <text x="130" y="208" font-size="9" fill="#059669">Горизонтальная</text>
+        <!-- Profile plane W (профильная) — right -->
+        <polygon points="200,40 260,90 260,210 200,160" fill="rgba(245,158,11,0.12)" stroke="#d97706" stroke-width="2"/>
+        <text x="218" y="140" font-size="11" fill="#d97706" font-weight="bold">W</text>
+        <text x="205" y="155" font-size="8" fill="#d97706">Профильная</text>
+        <!-- Axes OX, OY, OZ -->
+        <line x1="50" y1="160" x2="200" y2="160" stroke="#64748b" stroke-width="1.5"/>
+        <line x1="50" y1="160" x2="110" y2="210" stroke="#64748b" stroke-width="1.5"/>
+        <line x1="50" y1="160" x2="50" y2="40" stroke="#64748b" stroke-width="1.5"/>
+        <text x="195" y="175" font-size="10" fill="#64748b">X</text>
+        <text x="115" y="220" font-size="10" fill="#64748b">Y</text>
+        <text x="36" y="40" font-size="10" fill="#64748b">Z</text>
+        <!-- Object (small cube) -->
+        <rect x="95" y="75" width="40" height="35" fill="rgba(255,255,255,0.7)" stroke="#1e293b" stroke-width="1.5"/>
+        <polygon points="135,75 155,58 155,93 135,110" fill="rgba(255,255,255,0.5)" stroke="#1e293b" stroke-width="1.5"/>
+        <polygon points="95,110 135,110 155,93 115,93" fill="rgba(200,220,255,0.5)" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- O origin -->
+        <circle cx="50" cy="160" r="3" fill="#1e293b"/>
+        <text x="37" y="158" font-size="9" fill="#1e293b">O</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Three planes -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Үш проекция жазықтығы</span>
+    <span lang="en" class="lang-content">📐 Three Projection Planes</span>
+    <span lang="ru" class="lang-content">📐 Три плоскости проекций</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card rounded-custom p-5 border-t-4 border-teal-500">
+      <div class="text-3xl mb-2 text-center">🟦</div>
+      <h3 class="heading-font font-bold text-teal-700 text-center mb-2">V</h3>
+      <p class="font-bold text-slate-800 text-center mb-2">
+        <span lang="kk" class="lang-content">Фронталды жазықтық</span>
+        <span lang="en" class="lang-content">Frontal Plane</span>
+        <span lang="ru" class="lang-content">Фронтальная плоскость</span>
+      </p>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Алдынан қарағанда көрінетін бейне — <b>Басты көрініс</b></span>
+        <span lang="en" class="lang-content">View from the front — <b>Main (Front) View</b></span>
+        <span lang="ru" class="lang-content">Вид спереди — <b>Главный вид</b></span>
+      </p>
+      <div class="card-accent rounded-lg p-2 mt-3 text-center text-xs text-teal-700">
+        <span lang="kk" class="lang-content">OX (ені) + OZ (биіктігі)</span>
+        <span lang="en" class="lang-content">OX (width) + OZ (height)</span>
+        <span lang="ru" class="lang-content">OX (ширина) + OZ (высота)</span>
+      </div>
+    </div>
+    <div class="card rounded-custom p-5 border-t-4 border-emerald-500">
+      <div class="text-3xl mb-2 text-center">🟩</div>
+      <h3 class="heading-font font-bold text-emerald-700 text-center mb-2">H</h3>
+      <p class="font-bold text-slate-800 text-center mb-2">
+        <span lang="kk" class="lang-content">Горизонталды жазықтық</span>
+        <span lang="en" class="lang-content">Horizontal Plane</span>
+        <span lang="ru" class="lang-content">Горизонтальная плоскость</span>
+      </p>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Үстінен қарағанда — <b>Жоғарыдан көрініс</b></span>
+        <span lang="en" class="lang-content">View from above — <b>Top View (Plan)</b></span>
+        <span lang="ru" class="lang-content">Вид сверху — <b>Вид сверху (план)</b></span>
+      </p>
+      <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2 mt-3 text-center text-xs text-emerald-700">
+        <span lang="kk" class="lang-content">OX (ені) + OY (тереңдігі)</span>
+        <span lang="en" class="lang-content">OX (width) + OY (depth)</span>
+        <span lang="ru" class="lang-content">OX (ширина) + OY (глубина)</span>
+      </div>
+    </div>
+    <div class="card rounded-custom p-5 border-t-4 border-amber-500">
+      <div class="text-3xl mb-2 text-center">🟧</div>
+      <h3 class="heading-font font-bold text-amber-700 text-center mb-2">W</h3>
+      <p class="font-bold text-slate-800 text-center mb-2">
+        <span lang="kk" class="lang-content">Профилді жазықтық</span>
+        <span lang="en" class="lang-content">Profile Plane</span>
+        <span lang="ru" class="lang-content">Профильная плоскость</span>
+      </p>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Сол жақтан қарағанда — <b>Сол жақтан көрініс</b></span>
+        <span lang="en" class="lang-content">View from the left — <b>Left Side View</span>
+        <span lang="ru" class="lang-content">Вид слева — <b>Вид слева</b></span>
+      </p>
+      <div class="bg-amber-50 border border-amber-200 rounded-lg p-2 mt-3 text-center text-xs text-amber-700">
+        <span lang="kk" class="lang-content">OY (тереңдігі) + OZ (биіктігі)</span>
+        <span lang="en" class="lang-content">OY (depth) + OZ (height)</span>
+        <span lang="ru" class="lang-content">OY (глубина) + OZ (высота)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Unfolding to drawing -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📄 Жазықтықтарды сызбаға жазу</span>
+    <span lang="en" class="lang-content">📄 Unfolding the Planes onto the Drawing</span>
+    <span lang="ru" class="lang-content">📄 Развёртка плоскостей на чертёж</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 260" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main view (front) -->
+        <rect x="80" y="10" width="130" height="100" fill="rgba(37,99,235,0.08)" stroke="#1d4ed8" stroke-width="2"/>
+        <text x="130" y="65" font-size="10" fill="#1d4ed8" font-weight="bold">Главный</text>
+        <text x="130" y="78" font-size="10" fill="#1d4ed8" font-weight="bold">вид</text>
+        <!-- Top view (below main) -->
+        <rect x="80" y="130" width="130" height="80" fill="rgba(16,185,129,0.08)" stroke="#059669" stroke-width="2"/>
+        <text x="130" y="175" font-size="10" fill="#059669" font-weight="bold">Вид</text>
+        <text x="115" y="188" font-size="10" fill="#059669" font-weight="bold">сверху</text>
+        <!-- Left view (right of main) -->
+        <rect x="230" y="10" width="65" height="100" fill="rgba(245,158,11,0.08)" stroke="#d97706" stroke-width="2"/>
+        <text x="245" y="55" font-size="10" fill="#d97706" font-weight="bold">Вид</text>
+        <text x="242" y="68" font-size="10" fill="#d97706" font-weight="bold">слева</text>
+        <!-- Connection lines -->
+        <line x1="145" y1="110" x2="145" y2="130" stroke="#64748b" stroke-width="1" stroke-dasharray="4,2"/>
+        <line x1="210" y1="60" x2="230" y2="60" stroke="#64748b" stroke-width="1" stroke-dasharray="4,2"/>
+        <!-- Arrows -->
+        <text x="90" y="8" font-size="9" fill="#64748b">←ширина→</text>
+        <text x="17" y="65" font-size="9" fill="#64748b" transform="rotate(-90,17,65)">↑высота↑</text>
+        <text x="88" y="225" font-size="9" fill="#64748b">←ширина→</text>
+        <text x="242" y="125" font-size="8" fill="#d97706" transform="rotate(-90,242,125)">глубина</text>
+        <!-- Bisector for depth transfer (45°) -->
+        <line x1="210" y1="130" x2="300" y2="220" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,2"/>
+        <text x="245" y="165" font-size="8" fill="#ef4444">45°</text>
+        <text x="220" y="155" font-size="8" fill="#ef4444">постоян.</text>
+        <text x="220" y="164" font-size="8" fill="#ef4444">прямая</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font font-bold text-teal-800 mb-4">
+        <span lang="kk" class="lang-content">📌 Сызбадағы көріністердің орналасуы</span>
+        <span lang="en" class="lang-content">📌 Standard Layout of Views</span>
+        <span lang="ru" class="lang-content">📌 Расположение видов на чертеже</span>
+      </h3>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="text-teal-600">🟦</span>
+          <span lang="kk" class="lang-content"><b>Басты көрініс</b> — ортада орналасады, нысанды барынша толық сипаттайды</span>
+          <span lang="en" class="lang-content"><b>Front view</b> — placed in the centre, must show the most about the object</span>
+          <span lang="ru" class="lang-content"><b>Главный вид</b> — в центре, даёт наибольшее представление о форме</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-emerald-600">🟩</span>
+          <span lang="kk" class="lang-content"><b>Жоғарыдан көрініс</b> — басты көріністің астында, дәл ортасына тура</span>
+          <span lang="en" class="lang-content"><b>Top view</b> — directly below the front view</span>
+          <span lang="ru" class="lang-content"><b>Вид сверху</b> — строго под главным</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-amber-600">🟧</span>
+          <span lang="kk" class="lang-content"><b>Сол жақтан көрініс</b> — басты көріністің оң жағында</span>
+          <span lang="en" class="lang-content"><b>Left side view</b> — to the right of the front view</span>
+          <span lang="ru" class="lang-content"><b>Вид слева</b> — справа от главного</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-red-600">📐</span>
+          <span lang="kk" class="lang-content"><b>45° тұрақты сызық</b> — тереңдікті жоғарыдан sol-ке ауыстыруға қолданылады</span>
+          <span lang="en" class="lang-content"><b>45° constant line</b> — transfers depth from top view to left view</span>
+          <span lang="ru" class="lang-content"><b>Постоянная прямая 45°</b> — переносит глубину от вида сверху к виду слева</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-teal rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">V — Фронтальная</p>
+      <p class="text-teal-200"><span lang="kk" class="lang-content">Алдынан → ені + биіктігі</span><span lang="en" class="lang-content">From front → width + height</span><span lang="ru" class="lang-content">Спереди → ширина + высота</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">H — Горизонтальная</p>
+      <p class="text-teal-200"><span lang="kk" class="lang-content">Үстінен → ені + тереңдігі</span><span lang="en" class="lang-content">From above → width + depth</span><span lang="ru" class="lang-content">Сверху → ширина + глубина</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">W — Профильная</p>
+      <p class="text-teal-200"><span lang="kk" class="lang-content">Солдан → тереңдігі + биіктігі</span><span lang="en" class="lang-content">From left → depth + height</span><span lang="ru" class="lang-content">Слева → глубина + высота</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

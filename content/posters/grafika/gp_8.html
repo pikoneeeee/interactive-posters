@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лекальные кривые</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-blue-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 2 · Геометриялық салулар</span>
+      <span lang="en" class="lang-content">Graphics · Section 2 · Geometric Constructions</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 2 · Геометрические построения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">〰️ Лекалды қисықтар</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">〰️ Conic Curves (French Curves)</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">〰️ Лекальные кривые</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Эллипс, парабола, гипербола — нүктелер бойынша салу және лекалмен жалғастыру.</span>
+      <span lang="en" class="lang-content">Ellipse, parabola, hyperbola — constructed point-by-point and traced with a french curve.</span>
+      <span lang="ru" class="lang-content">Эллипс, парабола, гипербола — построение по точкам и обводка лекалом.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Ellipse -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">1️⃣ Эллипс</span>
+    <span lang="en" class="lang-content">1️⃣ Ellipse</span>
+    <span lang="ru" class="lang-content">1️⃣ Эллипс</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 320 220" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Axes -->
+        <line x1="20" y1="110" x2="300" y2="110" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,2"/>
+        <line x1="160" y1="10" x2="160" y2="210" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,2"/>
+        <!-- Construction circles -->
+        <circle cx="160" cy="110" r="110" fill="none" stroke="rgba(37,99,235,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+        <circle cx="160" cy="110" r="65" fill="none" stroke="rgba(37,99,235,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Ellipse -->
+        <ellipse cx="160" cy="110" rx="110" ry="65" fill="rgba(37,99,235,0.07)" stroke="#1d4ed8" stroke-width="2.5"/>
+        <!-- Sample construction point -->
+        <line x1="210" y1="10" x2="210" y2="210" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,2"/>
+        <circle cx="210" cy="54" r="3" fill="#f59e0b"/>
+        <line x1="210" y1="54" x2="210" y2="76" stroke="#ef4444" stroke-width="1.5"/>
+        <circle cx="210" cy="76" r="4" fill="#ef4444"/>
+        <!-- Axes labels -->
+        <text x="274" y="107" font-size="10" fill="#1e293b">2a</text>
+        <text x="163" y="17" font-size="10" fill="#1e293b">2b</text>
+        <!-- a and b -->
+        <line x1="160" y1="110" x2="270" y2="110" stroke="#64748b" stroke-width="1"/>
+        <text x="210" y="125" font-size="10" fill="#64748b">a (большая)</text>
+        <line x1="160" y1="110" x2="160" y2="45" stroke="#64748b" stroke-width="1"/>
+        <text x="165" y="80" font-size="10" fill="#64748b">b (малая)</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="font-bold text-blue-800 mb-3">
+        <span lang="kk" class="lang-content">📌 Анықтама</span>
+        <span lang="en" class="lang-content">📌 Definition</span>
+        <span lang="ru" class="lang-content">📌 Определение</span>
+      </p>
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b>Эллипс</b> — екі фокусқа дейінгі қашықтықтар қосындысы тұрақты болатын нүктелер жиыны. Конустың қисық бетін кесу арқылы алынады.</span>
+        <span lang="en" class="lang-content"><b>Ellipse</b> — the locus of points where the sum of distances to two foci is constant. Obtained by cutting a cone at an angle.</span>
+        <span lang="ru" class="lang-content"><b>Эллипс</b> — геометрическое место точек, сумма расстояний от которых до двух фокусов постоянна. Получается при наклонном сечении конуса.</span>
+      </p>
+      <h4 class="font-bold text-blue-800 mb-2 text-sm">
+        <span lang="kk" class="lang-content">Нүктелер бойынша салу:</span>
+        <span lang="en" class="lang-content">Point-by-point construction:</span>
+        <span lang="ru" class="lang-content">Построение по точкам:</span>
+      </h4>
+      <ol class="space-y-2 text-sm text-slate-700">
+        <li><b>1.</b> <span lang="kk" class="lang-content">a және b жарты-осьтерімен концентрлі шеңберлер сызу</span><span lang="en" class="lang-content">Draw two concentric circles with semi-axes a and b</span><span lang="ru" class="lang-content">Начертить два концентрических круга радиусами a и b</span></li>
+        <li><b>2.</b> <span lang="kk" class="lang-content">Радиус-сызықтарды сал; үлкен шеңбердегі нүктеден тік, кіші шеңбердегіден көлденең жүргіз</span><span lang="en" class="lang-content">Draw radii; from the outer point drop vertical, from inner draw horizontal — their intersection is a point on the ellipse</span><span lang="ru" class="lang-content">Провести радиусы; из точки на большом круге — вертикаль, на малом — горизонталь; пересечение — точка эллипса</span></li>
+        <li><b>3.</b> <span lang="kk" class="lang-content">Нүктелерді <b>лекалмен</b> тегіс сызықпен жалғастыру</span><span lang="en" class="lang-content">Connect points with a <b>french curve</b> smoothly</span><span lang="ru" class="lang-content">Соединить точки плавной кривой с помощью <b>лекала</b></span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Parabola -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">2️⃣ Парабола</span>
+    <span lang="en" class="lang-content">2️⃣ Parabola</span>
+    <span lang="ru" class="lang-content">2️⃣ Парабола</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 220" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Axes -->
+        <line x1="20" y1="200" x2="280" y2="200" stroke="#94a3b8" stroke-width="1"/>
+        <line x1="150" y1="200" x2="150" y2="10" stroke="#94a3b8" stroke-width="1"/>
+        <text x="270" y="195" font-size="9" fill="#64748b">X</text>
+        <text x="153" y="15" font-size="9" fill="#64748b">Y</text>
+        <!-- Parabola y = x²/80 scaled -->
+        <path d="M 30,200 Q 90,140 150,20 Q 210,140 270,200" fill="rgba(37,99,235,0.08)" stroke="#1d4ed8" stroke-width="2.5"/>
+        <!-- Focus -->
+        <circle cx="150" cy="180" r="4" fill="#ef4444"/>
+        <text x="156" y="178" font-size="9" fill="#ef4444">F (фокус)</text>
+        <!-- Directrix -->
+        <line x1="20" y1="220" x2="280" y2="220" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="22" y="218" font-size="9" fill="#f59e0b">директриса</text>
+        <!-- Vertex -->
+        <circle cx="150" cy="20" r="4" fill="#16a34a"/>
+        <text x="155" y="18" font-size="9" fill="#16a34a">V (вершина)</text>
+        <!-- Sample points -->
+        <circle cx="90" cy="110" r="3" fill="#2563eb"/>
+        <circle cx="210" cy="110" r="3" fill="#2563eb"/>
+        <circle cx="60" cy="155" r="3" fill="#2563eb"/>
+        <circle cx="240" cy="155" r="3" fill="#2563eb"/>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="font-bold text-blue-800 mb-2">
+        <span lang="kk" class="lang-content">📌 Анықтама</span>
+        <span lang="en" class="lang-content">📌 Definition</span>
+        <span lang="ru" class="lang-content">📌 Определение</span>
+      </p>
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b>Парабола</b> — фокустан және директрисадан тең қашықтықтағы нүктелер жиыны. Формула: y = x²/(2p)</span>
+        <span lang="en" class="lang-content"><b>Parabola</b> — locus of points equidistant from the focus and the directrix. Formula: y = x²/(2p)</span>
+        <span lang="ru" class="lang-content"><b>Парабола</b> — геометрическое место точек, равноудалённых от фокуса и директрисы. Формула: y = x²/(2p)</span>
+      </p>
+      <div class="card-accent rounded-xl p-3 text-sm">
+        <p class="font-bold text-blue-800 mb-1">
+          <span lang="kk" class="lang-content">⚙️ Техникада қолданылуы:</span>
+          <span lang="en" class="lang-content">⚙️ Technical applications:</span>
+          <span lang="ru" class="lang-content">⚙️ Применение в технике:</span>
+        </p>
+        <ul class="text-slate-600 space-y-1">
+          <li>• <span lang="kk" class="lang-content">Параболалық антеннаның пішіні</span><span lang="en" class="lang-content">Shape of parabolic antennas</span><span lang="ru" class="lang-content">Форма параболических антенн</span></li>
+          <li>• <span lang="kk" class="lang-content">Автокөлік фаралары рефлекторы</span><span lang="en" class="lang-content">Car headlight reflectors</span><span lang="ru" class="lang-content">Отражатели автомобильных фар</span></li>
+          <li>• <span lang="kk" class="lang-content">Нысана мен снарядтың ұшу траекториясы</span><span lang="en" class="lang-content">Projectile trajectory in physics</span><span lang="ru" class="lang-content">Траектория полёта снаряда</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hyperbola -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">3️⃣ Гипербола</span>
+    <span lang="en" class="lang-content">3️⃣ Hyperbola</span>
+    <span lang="ru" class="lang-content">3️⃣ Гипербола</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 220" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Axes -->
+        <line x1="10" y1="110" x2="290" y2="110" stroke="#94a3b8" stroke-width="1"/>
+        <line x1="150" y1="10" x2="150" y2="210" stroke="#94a3b8" stroke-width="1"/>
+        <!-- Asymptotes -->
+        <line x1="50" y1="10" x2="250" y2="210" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="250" y1="10" x2="50" y2="210" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="255" y="12" font-size="8" fill="#f59e0b">асимптота</text>
+        <!-- Right branch -->
+        <path d="M 220,10 Q 190,60 185,110 Q 190,160 220,210" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+        <!-- Left branch -->
+        <path d="M 80,10 Q 110,60 115,110 Q 110,160 80,210" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+        <!-- Foci -->
+        <circle cx="210" cy="110" r="4" fill="#ef4444"/>
+        <circle cx="90" cy="110" r="4" fill="#ef4444"/>
+        <text x="214" y="108" font-size="9" fill="#ef4444">F₂</text>
+        <text x="72" y="108" font-size="9" fill="#ef4444">F₁</text>
+        <!-- Vertices -->
+        <circle cx="185" cy="110" r="3" fill="#16a34a"/>
+        <circle cx="115" cy="110" r="3" fill="#16a34a"/>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="font-bold text-blue-800 mb-2">
+        <span lang="kk" class="lang-content">📌 Анықтама</span>
+        <span lang="en" class="lang-content">📌 Definition</span>
+        <span lang="ru" class="lang-content">📌 Определение</span>
+      </p>
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b>Гипербола</b> — екі фокусқа дейінгі қашықтықтар айырмасы тұрақты болатын нүктелер жиыны. ||F₁P| − |F₂P|| = 2a</span>
+        <span lang="en" class="lang-content"><b>Hyperbola</b> — locus of points where the difference of distances to two foci is constant. ||F₁P| − |F₂P|| = 2a</span>
+        <span lang="ru" class="lang-content"><b>Гипербола</b> — геометрическое место точек, разность расстояний от которых до двух фокусов постоянна. ||F₁P| − |F₂P|| = 2a</span>
+      </p>
+      <div class="card-accent rounded-xl p-3 text-sm">
+        <p class="font-bold text-blue-800 mb-1">
+          <span lang="kk" class="lang-content">🔧 Асимптоталар</span>
+          <span lang="en" class="lang-content">🔧 Asymptotes</span>
+          <span lang="ru" class="lang-content">🔧 Асимптоты</span>
+        </p>
+        <p class="text-slate-600">
+          <span lang="kk" class="lang-content">Гипербола тармақтары асимптоталарға жақындай береді, бірақ ешқашан қиыспайды. Формула: y = ±(b/a)x</span>
+          <span lang="en" class="lang-content">The branches approach the asymptotes but never meet them. Formula: y = ±(b/a)x</span>
+          <span lang="ru" class="lang-content">Ветви гиперболы приближаются к асимптотам, но никогда их не достигают. Формула: y = ±(b/a)x</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How to use a french curve -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">✏️ Лекалмен жұмыс жасау</span>
+    <span lang="en" class="lang-content">✏️ Using a French Curve</span>
+    <span lang="ru" class="lang-content">✏️ Работа с лекалом</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="tile">
+      <div class="tile-icon">📐</div>
+      <p class="font-bold text-blue-800 mt-2">
+        <span lang="kk" class="lang-content">Нүктелерді белгілеу</span>
+        <span lang="en" class="lang-content">Mark points first</span>
+        <span lang="ru" class="lang-content">Сначала точки</span>
+      </p>
+      <p class="text-slate-600 text-sm mt-1">
+        <span lang="kk" class="lang-content">Кем дегенде 5–7 нүктені анықтап, белгілеу</span>
+        <span lang="en" class="lang-content">Determine and mark at least 5–7 points</span>
+        <span lang="ru" class="lang-content">Определить и нанести не менее 5–7 точек</span>
+      </p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">🔄</div>
+      <p class="font-bold text-blue-800 mt-2">
+        <span lang="kk" class="lang-content">Лекалды бейімдеу</span>
+        <span lang="en" class="lang-content">Match the curve</span>
+        <span lang="ru" class="lang-content">Подобрать лекало</span>
+      </p>
+      <p class="text-slate-600 text-sm mt-1">
+        <span lang="kk" class="lang-content">Лекалды нүктелерге сіліктіріп, бір-бірімен сай келетін бөлімін табу</span>
+        <span lang="en" class="lang-content">Slide the french curve to find the section fitting 3–4 consecutive points</span>
+        <span lang="ru" class="lang-content">Подобрать участок лекала, совпадающий с 3–4 точками</span>
+      </p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">✒️</div>
+      <p class="font-bold text-blue-800 mt-2">
+        <span lang="kk" class="lang-content">Кесіндімен сызу</span>
+        <span lang="en" class="lang-content">Draw in sections</span>
+        <span lang="ru" class="lang-content">Обводить участками</span>
+      </p>
+      <p class="text-slate-600 text-sm mt-1">
+        <span lang="kk" class="lang-content">Кесінді-кесінді сызу, лекалды жылжытып жатыр. Бірігу нүктелерінде тегіс болу</span>
+        <span lang="en" class="lang-content">Draw section by section moving the curve. Ensure smooth joins</span>
+        <span lang="ru" class="lang-content">Обводить поэтапно, перекладывая лекало. Стыки должны быть плавными</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="card-blue rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Салыстыру кестесі</span>
+    <span lang="en" class="lang-content">🧠 Comparison Table</span>
+    <span lang="ru" class="lang-content">🧠 Сравнительная таблица</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold text-lg mb-1">Эллипс</p>
+      <p class="text-blue-200"><span lang="kk" class="lang-content">|F₁P| + |F₂P| = 2a = тұрақты</span><span lang="en" class="lang-content">Sum of distances = 2a = const</span><span lang="ru" class="lang-content">Сумма расстояний = 2a = const</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold text-lg mb-1">Парабола</p>
+      <p class="text-blue-200"><span lang="kk" class="lang-content">|FP| = |директриса| = тұрақты</span><span lang="en" class="lang-content">Distance to focus = distance to directrix</span><span lang="ru" class="lang-content">Расстояние до фокуса = до директрисы</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold text-lg mb-1">Гипербола</p>
+      <p class="text-blue-200"><span lang="kk" class="lang-content">||F₁P| − |F₂P|| = 2a = тұрақты</span><span lang="en" class="lang-content">Difference of distances = 2a = const</span><span lang="ru" class="lang-content">Разность расстояний = 2a = const</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

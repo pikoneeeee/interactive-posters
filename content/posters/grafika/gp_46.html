@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Введение в 3D-моделирование</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_emerald.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-emerald-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 12 · 3D-модельдеу</span>
+      <span lang="en" class="lang-content">Graphics · Section 12 · 3D Modelling</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 12 · 3D-моделирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🧊 3D-модельдеуге кіріспе</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🧊 Introduction to 3D Modelling</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🧊 Введение в 3D-моделирование</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">3D-нысанды компьютерде құру: түрлері, әдістер, қолданылуы.</span>
+      <span lang="en" class="lang-content">Creating 3D objects on a computer: types, methods, applications.</span>
+      <span lang="ru" class="lang-content">Создание объёмных объектов на компьютере: виды, методы, применение.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Что такое 3D-моделирование -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 3D-модельдеу дегеніміз не?</span>
+    <span lang="en" class="lang-content">💡 What is 3D Modelling?</span>
+    <span lang="ru" class="lang-content">💡 Что такое 3D-моделирование?</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-emerald-700">3D-модельдеу</b> — кеңістіктік нысанды компьютерде <b>геометриялық сипаттама</b> арқылы құру процесі. Модель — нысанның математикалық қаңқасы (vertices, edges, faces).</span>
+        <span lang="en" class="lang-content"><b class="text-emerald-700">3D modelling</b> is the process of creating a spatial object on a computer through a <b>geometric description</b>. A model is the object's mathematical skeleton (vertices, edges, faces).</span>
+        <span lang="ru" class="lang-content"><b class="text-emerald-700">3D-моделирование</b> — процесс создания пространственного объекта на компьютере через <b>геометрическое описание</b>. Модель — математический каркас объекта (вершины, рёбра, грани).</span>
+      </p>
+      <div class="card-accent rounded-xl p-4">
+        <p class="font-bold text-emerald-800 mb-2">
+          <span lang="kk" class="lang-content">🔑 Үш негізгі компонент</span>
+          <span lang="en" class="lang-content">🔑 Three core components</span>
+          <span lang="ru" class="lang-content">🔑 Три ключевых компонента</span>
+        </p>
+        <ul class="space-y-1 text-sm text-slate-700">
+          <li>• <b class="text-emerald-700">Vertex</b> — <span lang="kk" class="lang-content">төбе (3D-нүкте x, y, z)</span><span lang="en" class="lang-content">vertex (3D point x, y, z)</span><span lang="ru" class="lang-content">вершина (3D-точка x, y, z)</span></li>
+          <li>• <b class="text-emerald-700">Edge</b> — <span lang="kk" class="lang-content">қыр (екі төбені байланыстыратын сызық)</span><span lang="en" class="lang-content">edge (line connecting two vertices)</span><span lang="ru" class="lang-content">ребро (линия между двумя вершинами)</span></li>
+          <li>• <b class="text-emerald-700">Face</b> — <span lang="kk" class="lang-content">бет (3+ қырмен шектелген жазықтық)</span><span lang="en" class="lang-content">face (surface bounded by 3+ edges)</span><span lang="ru" class="lang-content">грань (плоскость, ограниченная 3+ рёбрами)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SVG: vertex/edge/face on a cube -->
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 320 260" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Isometric cube 2x2x2 at center (160,130) with s=30 -->
+        <!-- Top face EFGH -->
+        <polygon points="160,70 212,100 160,130 108,100"
+                 fill="rgba(5,150,105,0.18)" stroke="#059669" stroke-width="2"/>
+        <!-- Right front face ABFE -->
+        <polygon points="160,130 212,160 212,100 160,70"
+                 fill="rgba(5,150,105,0.10)" stroke="#059669" stroke-width="2"/>
+        <!-- Left front face ADHE -->
+        <polygon points="160,130 108,160 108,100 160,70"
+                 fill="rgba(5,150,105,0.14)" stroke="#059669" stroke-width="2"/>
+
+        <!-- Highlight one vertex (top-back) -->
+        <circle cx="160" cy="70" r="6" fill="#ef4444" stroke="white" stroke-width="2"/>
+        <line x1="160" y1="70" x2="240" y2="35" stroke="#ef4444" stroke-width="1.2"/>
+        <text x="244" y="35" font-size="11" fill="#ef4444" font-weight="bold">Vertex</text>
+        <text x="244" y="48" font-size="9" fill="#64748b">(точка x,y,z)</text>
+
+        <!-- Highlight one edge (right top edge) -->
+        <line x1="160" y1="70" x2="212" y2="100" stroke="#2563eb" stroke-width="4"/>
+        <line x1="200" y1="80" x2="260" y2="155" stroke="#2563eb" stroke-width="1.2"/>
+        <text x="264" y="158" font-size="11" fill="#2563eb" font-weight="bold">Edge</text>
+        <text x="264" y="171" font-size="9" fill="#64748b">(ребро)</text>
+
+        <!-- Highlight one face (top) -->
+        <polygon points="160,70 212,100 160,130 108,100"
+                 fill="rgba(217,119,6,0.30)" stroke="#d97706" stroke-width="2"/>
+        <line x1="130" y1="105" x2="60" y2="155" stroke="#d97706" stroke-width="1.2"/>
+        <text x="10" y="170" font-size="11" fill="#d97706" font-weight="bold">Face</text>
+        <text x="10" y="183" font-size="9" fill="#64748b">(грань)</text>
+
+        <!-- Bottom annotation -->
+        <text x="160" y="220" font-size="11" fill="#059669" text-anchor="middle" font-weight="bold">Полигональная сетка (Mesh)</text>
+        <text x="160" y="235" font-size="9" fill="#64748b" text-anchor="middle">8 vertices · 12 edges · 6 faces</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Типы 3D-моделирования -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 3D-модельдеу түрлері</span>
+    <span lang="en" class="lang-content">📐 Types of 3D Modelling</span>
+    <span lang="ru" class="lang-content">📐 Типы 3D-моделирования</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="tile">
+      <div class="tile-icon">🔷</div>
+      <p class="font-bold text-emerald-800 mt-2">
+        <span lang="kk" class="lang-content">Полигональды</span>
+        <span lang="en" class="lang-content">Polygonal</span>
+        <span lang="ru" class="lang-content">Полигональное</span>
+      </p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Көпбұрыштардан жасалған тор (mesh). Ойындар, анимация.</span>
+        <span lang="en" class="lang-content">Mesh of polygons. Games, animation.</span>
+        <span lang="ru" class="lang-content">Сетка из полигонов. Игры, анимация.</span>
+      </p>
+      <p class="text-slate-400 text-xs mt-2">Blender, 3ds Max, Maya</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">🌊</div>
+      <p class="font-bold text-emerald-800 mt-2">
+        <span lang="kk" class="lang-content">NURBS</span>
+        <span lang="en" class="lang-content">NURBS Surfaces</span>
+        <span lang="ru" class="lang-content">NURBS-поверхности</span>
+      </p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Математикалық қисықтар. Дәл, тегіс. Авто, кеме дизайны.</span>
+        <span lang="en" class="lang-content">Math curves. Precise, smooth. Auto, marine design.</span>
+        <span lang="ru" class="lang-content">Математические кривые. Точно, гладко. Автомобили, корабли.</span>
+      </p>
+      <p class="text-slate-400 text-xs mt-2">Rhino, Alias</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">⚙️</div>
+      <p class="font-bold text-emerald-800 mt-2">
+        <span lang="kk" class="lang-content">Параметрлік</span>
+        <span lang="en" class="lang-content">Parametric (CAD)</span>
+        <span lang="ru" class="lang-content">Параметрическое (CAD)</span>
+      </p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Эскиз + операциялар + өлшемдер. Инженерия.</span>
+        <span lang="en" class="lang-content">Sketch + operations + dimensions. Engineering.</span>
+        <span lang="ru" class="lang-content">Эскиз + операции + размеры. Инженерия.</span>
+      </p>
+      <p class="text-slate-400 text-xs mt-2">SolidWorks, Fusion 360, КОМПАС</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">🎨</div>
+      <p class="font-bold text-emerald-800 mt-2">
+        <span lang="kk" class="lang-content">Скульптинг</span>
+        <span lang="en" class="lang-content">Sculpting</span>
+        <span lang="ru" class="lang-content">Скульптинг</span>
+      </p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Цифрлық саз балшықпен жұмыс. Кино, кейіпкерлер.</span>
+        <span lang="en" class="lang-content">Digital clay. Cinema, characters.</span>
+        <span lang="ru" class="lang-content">Цифровая глина. Кино, персонажи.</span>
+      </p>
+      <p class="text-slate-400 text-xs mt-2">ZBrush, Mudbox</p>
+    </div>
+  </div>
+</section>
+
+<!-- Где применяется -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Қолдану салалары</span>
+    <span lang="en" class="lang-content">🎯 Areas of Application</span>
+    <span lang="ru" class="lang-content">🎯 Где применяется</span>
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div class="card-accent rounded-xl p-3 text-center text-sm">
+      <div class="text-2xl">🏗️</div>
+      <p class="font-bold text-emerald-800 mt-1"><span lang="kk" class="lang-content">Инженерия</span><span lang="en" class="lang-content">Engineering</span><span lang="ru" class="lang-content">Инженерия</span></p>
+    </div>
+    <div class="card-accent rounded-xl p-3 text-center text-sm">
+      <div class="text-2xl">🎬</div>
+      <p class="font-bold text-emerald-800 mt-1"><span lang="kk" class="lang-content">Кино/VFX</span><span lang="en" class="lang-content">Film/VFX</span><span lang="ru" class="lang-content">Кино/VFX</span></p>
+    </div>
+    <div class="card-accent rounded-xl p-3 text-center text-sm">
+      <div class="text-2xl">🎮</div>
+      <p class="font-bold text-emerald-800 mt-1"><span lang="kk" class="lang-content">Ойындар</span><span lang="en" class="lang-content">Games</span><span lang="ru" class="lang-content">Игры</span></p>
+    </div>
+    <div class="card-accent rounded-xl p-3 text-center text-sm">
+      <div class="text-2xl">🏛️</div>
+      <p class="font-bold text-emerald-800 mt-1"><span lang="kk" class="lang-content">Сәулет</span><span lang="en" class="lang-content">Architecture</span><span lang="ru" class="lang-content">Архитектура</span></p>
+    </div>
+    <div class="card-accent rounded-xl p-3 text-center text-sm">
+      <div class="text-2xl">🖨️</div>
+      <p class="font-bold text-emerald-800 mt-1"><span lang="kk" class="lang-content">3D-басып шығару</span><span lang="en" class="lang-content">3D Printing</span><span lang="ru" class="lang-content">3D-печать</span></p>
+    </div>
+    <div class="card-accent rounded-xl p-3 text-center text-sm">
+      <div class="text-2xl">🏥</div>
+      <p class="font-bold text-emerald-800 mt-1"><span lang="kk" class="lang-content">Медицина</span><span lang="en" class="lang-content">Medicine</span><span lang="ru" class="lang-content">Медицина</span></p>
+    </div>
+  </div>
+</section>
+
+<footer class="card-emerald rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">Vertex → Edge → Face</p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Кез-келген 3D-модельдің негізгі құрамы</span>
+        <span lang="en" class="lang-content">Basic building blocks of any 3D model</span>
+        <span lang="ru" class="lang-content">Основа любой 3D-модели</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Әр сала — өз әдісі</span>
+        <span lang="en" class="lang-content">Each field — own method</span>
+        <span lang="ru" class="lang-content">Каждая сфера — свой метод</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">CAD: параметрлік; кино: полигональды + скульпт</span>
+        <span lang="en" class="lang-content">CAD: parametric; film: polygonal + sculpt</span>
+        <span lang="ru" class="lang-content">CAD: параметрика; кино: полигоны + скульпт</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Дұрыс құрал = жылдамдық</span>
+        <span lang="en" class="lang-content">Right tool = speed</span>
+        <span lang="ru" class="lang-content">Правильный инструмент = скорость</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Бөлшек → CAD; тірі ағза → скульптинг</span>
+        <span lang="en" class="lang-content">Part → CAD; creature → sculpting</span>
+        <span lang="ru" class="lang-content">Деталь → CAD; существо → скульптинг</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

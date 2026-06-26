@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Деление отрезка и угла</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-blue-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 2 · Геометриялық салулар</span>
+      <span lang="en" class="lang-content">Graphics · Section 2 · Geometric Constructions</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 2 · Геометрические построения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">✂️ Кесінді мен бұрышты бөлу</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">✂️ Bisecting a Segment and an Angle</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">✂️ Деление отрезка и угла</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Циркуль мен сызғышпен орындалатын базалық геометриялық салулар.</span>
+      <span lang="en" class="lang-content">Fundamental geometric constructions using compass and straightedge.</span>
+      <span lang="ru" class="lang-content">Базовые геометрические построения с помощью циркуля и линейки.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Bisect segment -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">1️⃣ Кесіндіні 2 тең бөлікке бөлу</span>
+    <span lang="en" class="lang-content">1️⃣ Bisecting a Line Segment</span>
+    <span lang="ru" class="lang-content">1️⃣ Деление отрезка на 2 равные части</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 180" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Segment AB -->
+        <line x1="40" y1="90" x2="260" y2="90" stroke="#1e293b" stroke-width="2.5"/>
+        <circle cx="40" cy="90" r="4" fill="#1e293b"/>
+        <circle cx="260" cy="90" r="4" fill="#1e293b"/>
+        <text x="34" y="108" font-size="12" fill="#1e293b" font-weight="bold">A</text>
+        <text x="257" y="108" font-size="12" fill="#1e293b" font-weight="bold">B</text>
+        <!-- Arc from A -->
+        <path d="M 40,50 A 80,80 0 0,1 40,130" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Arc from B -->
+        <path d="M 260,50 A 80,80 0 0,0 260,130" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Intersection points -->
+        <circle cx="150" cy="42" r="4" fill="#ef4444"/>
+        <circle cx="150" cy="138" r="4" fill="#ef4444"/>
+        <!-- Perpendicular bisector -->
+        <line x1="150" y1="20" x2="150" y2="160" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <!-- Midpoint -->
+        <circle cx="150" cy="90" r="5" fill="#16a34a"/>
+        <text x="155" y="87" font-size="10" fill="#16a34a" font-weight="bold">M</text>
+        <!-- Labels -->
+        <text x="55" y="70" font-size="9" fill="#2563eb">r &gt; AB/2</text>
+        <text x="162" y="42" font-size="9" fill="#ef4444">C</text>
+        <text x="162" y="138" font-size="9" fill="#ef4444">D</text>
+        <text x="100" y="15" font-size="9" fill="#ef4444">перпендикуляр CD</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font font-bold text-blue-800 mb-4">
+        <span lang="kk" class="lang-content">📋 Алгоритм</span>
+        <span lang="en" class="lang-content">📋 Algorithm</span>
+        <span lang="ru" class="lang-content">📋 Алгоритм</span>
+      </h3>
+      <ol class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-3"><span class="step-num">1</span><span lang="kk" class="lang-content">AB кесіндісінің жартысынан үлкен радиуспен циркульді <b>A нүктесіне</b> орнату</span><span lang="en" class="lang-content">Set compass to radius <b>greater than AB/2</b>, place at point <b>A</b></span><span lang="ru" class="lang-content">Установить циркуль в точку <b>A</b>, радиус больше AB/2</span></li>
+        <li class="flex gap-3"><span class="step-num">2</span><span lang="kk" class="lang-content">AB-нің екі жағынан <b>доғалар</b> сызу (C және D нүктелерін алу)</span><span lang="en" class="lang-content">Draw arcs above and below the segment — get points <b>C</b> and <b>D</b></span><span lang="ru" class="lang-content">Прочертить дуги с обеих сторон AB — получить точки <b>C</b> и <b>D</b></span></li>
+        <li class="flex gap-3"><span class="step-num">3</span><span lang="kk" class="lang-content">Сол радиуспен <b>B нүктесінен</b> де доғалар сызу</span><span lang="en" class="lang-content">Repeat with the same radius from point <b>B</b></span><span lang="ru" class="lang-content">Повторить с той же точки <b>B</b></span></li>
+        <li class="flex gap-3"><span class="step-num">4</span><span lang="kk" class="lang-content"><b>C мен D</b> нүктелерін сызықпен қосу — ол кесіндіні M нүктесінде бөледі</span><span lang="en" class="lang-content">Connect <b>C and D</b> — this perpendicular bisector crosses AB at midpoint <b>M</b></span><span lang="ru" class="lang-content">Соединить <b>C и D</b> — перпендикуляр пересечёт AB в середине <b>M</b></span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Bisect angle -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">2️⃣ Бұрышты екіге бөлу</span>
+    <span lang="en" class="lang-content">2️⃣ Bisecting an Angle</span>
+    <span lang="ru" class="lang-content">2️⃣ Деление угла пополам</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 200" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Angle AOB -->
+        <line x1="150" y1="160" x2="270" y2="160" stroke="#1e293b" stroke-width="2.5"/>
+        <line x1="150" y1="160" x2="70" y2="50" stroke="#1e293b" stroke-width="2.5"/>
+        <circle cx="150" cy="160" r="4" fill="#1e293b"/>
+        <text x="155" y="175" font-size="12" fill="#1e293b" font-weight="bold">O</text>
+        <!-- Arc from O -->
+        <path d="M 270,160 A 120,120 0 0,0 100,80" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <!-- Mark points on sides -->
+        <circle cx="230" cy="160" r="4" fill="#2563eb"/>
+        <circle cx="108" cy="92" r="4" fill="#2563eb"/>
+        <text x="232" y="153" font-size="10" fill="#2563eb">D</text>
+        <text x="95" y="90" font-size="10" fill="#2563eb">E</text>
+        <!-- Arcs from D and E -->
+        <path d="M 175,117 A 30,30 0 0,0 175,117" fill="none"/>
+        <circle cx="175" cy="120" r="4" fill="#ef4444"/>
+        <text x="180" y="118" font-size="10" fill="#ef4444">F</text>
+        <!-- Bisector -->
+        <line x1="150" y1="160" x2="210" y2="50" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3"/>
+        <!-- Small arcs from D and E -->
+        <path d="M 155,120 A 40,40 0 0,1 197,138" fill="none" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <path d="M 80,117 A 50,50 0 0,0 135,95" fill="none" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,2" transform="translate(30,5)"/>
+        <!-- Angle mark -->
+        <path d="M 175,160 A 25,25 0 0,0 163,138" fill="none" stroke="#94a3b8" stroke-width="1"/>
+        <path d="M 163,138 A 25,25 0 0,0 150,160" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,1"/>
+        <text x="168" y="150" font-size="8" fill="#64748b">α/2</text>
+        <text x="155" y="150" font-size="8" fill="#64748b">α/2</text>
+        <text x="185" y="50" font-size="9" fill="#ef4444">биссектриса</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font font-bold text-blue-800 mb-4">
+        <span lang="kk" class="lang-content">📋 Алгоритм</span>
+        <span lang="en" class="lang-content">📋 Algorithm</span>
+        <span lang="ru" class="lang-content">📋 Алгоритм</span>
+      </h3>
+      <ol class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-3"><span class="step-num">1</span><span lang="kk" class="lang-content">Бұрыш төбесі <b>O</b>-дан кез-келген R радиуспен доға сызу — бұрыш сызықтарымен D және E нүктелерінде қиылысады</span><span lang="en" class="lang-content">From vertex <b>O</b>, draw an arc of any radius R — it intersects the two sides at <b>D</b> and <b>E</b></span><span lang="ru" class="lang-content">Из вершины <b>O</b> провести дугу любого радиуса — пересечёт стороны в точках <b>D</b> и <b>E</b></span></li>
+        <li class="flex gap-3"><span class="step-num">2</span><span lang="kk" class="lang-content"><b>D</b> және <b>E</b> нүктелерінен бір радиуспен доғалар сызу — F нүктесін алу</span><span lang="en" class="lang-content">From <b>D</b> and <b>E</b>, draw equal arcs to find point <b>F</b></span><span lang="ru" class="lang-content">Из точек <b>D</b> и <b>E</b> провести равные дуги — найти точку <b>F</b></span></li>
+        <li class="flex gap-3"><span class="step-num">3</span><span lang="kk" class="lang-content"><b>OF</b> сызығын жүргізу — бұрыш биссектрисасы</span><span lang="en" class="lang-content">Draw ray <b>OF</b> — it is the angle bisector</span><span lang="ru" class="lang-content">Провести прямую <b>OF</b> — биссектриса угла</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Perpendicular from point -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">3️⃣ Перпендикуляр салу</span>
+    <span lang="en" class="lang-content">3️⃣ Constructing Perpendiculars</span>
+    <span lang="ru" class="lang-content">3️⃣ Построение перпендикуляров</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5">
+      <p class="font-bold text-blue-800 mb-3">
+        <span lang="kk" class="lang-content">📌 Сызықтағы нүктеден</span>
+        <span lang="en" class="lang-content">📌 From a point ON the line</span>
+        <span lang="ru" class="lang-content">📌 Из точки НА прямой</span>
+      </p>
+      <ol class="space-y-2 text-sm text-slate-700">
+        <li><span class="text-blue-600 font-bold">1.</span> <span lang="kk" class="lang-content">M нүктесінен тең радиуспен сызықта A, B нүктелерін белгілеу</span><span lang="en" class="lang-content">From M, mark equal distances A, B on the line</span><span lang="ru" class="lang-content">Из точки M отметить равные отрезки A, B на прямой</span></li>
+        <li><span class="text-blue-600 font-bold">2.</span> <span lang="kk" class="lang-content">A және B нүктелерінен AM > ½ арқылы доғалар сызып C нүктесін алу</span><span lang="en" class="lang-content">From A and B, draw equal arcs to find C above</span><span lang="ru" class="lang-content">Из A и B провести дуги и найти точку C выше прямой</span></li>
+        <li><span class="text-blue-600 font-bold">3.</span> <span lang="kk" class="lang-content">MC — перпендикуляр</span><span lang="en" class="lang-content">MC is the perpendicular</span><span lang="ru" class="lang-content">MC — перпендикуляр</span></li>
+      </ol>
+    </div>
+    <div class="card rounded-custom p-5">
+      <p class="font-bold text-blue-800 mb-3">
+        <span lang="kk" class="lang-content">📌 Сызықтан тыс нүктеден</span>
+        <span lang="en" class="lang-content">📌 From a point OFF the line</span>
+        <span lang="ru" class="lang-content">📌 Из точки ВНЕ прямой</span>
+      </p>
+      <ol class="space-y-2 text-sm text-slate-700">
+        <li><span class="text-blue-600 font-bold">1.</span> <span lang="kk" class="lang-content">M нүктесінен сызықпен A, B нүктелерін алатын доға сызу</span><span lang="en" class="lang-content">From M, draw an arc cutting the line at A and B</span><span lang="ru" class="lang-content">Из M провести дугу, пересекающую прямую в A и B</span></li>
+        <li><span class="text-blue-600 font-bold">2.</span> <span lang="kk" class="lang-content">A және B нүктелерінен тең доғалар арқылы C нүктесін табу</span><span lang="en" class="lang-content">From A and B find point C on the other side</span><span lang="ru" class="lang-content">Из A и B найти точку C по другую сторону прямой</span></li>
+        <li><span class="text-blue-600 font-bold">3.</span> <span lang="kk" class="lang-content">MC — перпендикуляр (сызықпен N нүктесінде қиылысады)</span><span lang="en" class="lang-content">MC is perpendicular to the line at N</span><span lang="ru" class="lang-content">MC — перпендикуляр (пересекает прямую в точке N)</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer class="card-blue rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-3">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold">
+        <span lang="kk" class="lang-content">Кесіндіні бөлу</span>
+        <span lang="en" class="lang-content">Bisecting a segment</span>
+        <span lang="ru" class="lang-content">Деление отрезка</span>
+      </p>
+      <p class="text-blue-200 mt-1">
+        <span lang="kk" class="lang-content">Перпендикулярлы биссектриса — екі тең бөліктің ортасы</span>
+        <span lang="en" class="lang-content">Perpendicular bisector passes through the midpoint</span>
+        <span lang="ru" class="lang-content">Серединный перпендикуляр проходит через середину</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold">
+        <span lang="kk" class="lang-content">Бұрышты бөлу</span>
+        <span lang="en" class="lang-content">Bisecting an angle</span>
+        <span lang="ru" class="lang-content">Деление угла</span>
+      </p>
+      <p class="text-blue-200 mt-1">
+        <span lang="kk" class="lang-content">Биссектриса — бұрыштың екі тең бөлігі арасындағы сызық</span>
+        <span lang="en" class="lang-content">Bisector divides the angle into two equal halves</span>
+        <span lang="ru" class="lang-content">Биссектриса делит угол на два равных</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold">
+        <span lang="kk" class="lang-content">Перпендикуляр</span>
+        <span lang="en" class="lang-content">Perpendicular</span>
+        <span lang="ru" class="lang-content">Перпендикуляр</span>
+      </p>
+      <p class="text-blue-200 mt-1">
+        <span lang="kk" class="lang-content">90° бұрышпен қиылысатын сызық</span>
+        <span lang="en" class="lang-content">A line meeting another at exactly 90°</span>
+        <span lang="ru" class="lang-content">Линия, пересекающая другую под углом 90°</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

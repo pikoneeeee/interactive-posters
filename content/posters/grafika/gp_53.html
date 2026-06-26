@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Скругление и фаска в 3D</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_emerald.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-emerald-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 12 · 3D-модельдеу</span>
+      <span lang="en" class="lang-content">Graphics · Section 12 · 3D Modelling</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 12 · 3D-моделирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">⌒ Дөңгелету және фаска</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">⌒ Fillet and Chamfer</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">⌒ Скругление и фаска в 3D</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Үшкір қырларды өңдеу — қауіпсіздік, кернеуді азайту, жинау ыңғайлылығы.</span>
+      <span lang="en" class="lang-content">Treating sharp edges — for safety, reducing stress, ease of assembly.</span>
+      <span lang="ru" class="lang-content">Обработка острых рёбер — для безопасности, снижения напряжений, удобства сборки.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Comparison: sharp / fillet / chamfer -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Үш жағдайды салыстыру</span>
+    <span lang="en" class="lang-content">📐 Three Cases Compared</span>
+    <span lang="ru" class="lang-content">📐 Сравнение трёх случаев</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <!-- Sharp edge -->
+    <div class="card rounded-custom p-5 border-t-4 border-red-400">
+      <h3 class="font-bold text-red-700 text-center mb-3">❌ <span lang="kk" class="lang-content">Үшкір қыр</span><span lang="en" class="lang-content">Sharp edge</span><span lang="ru" class="lang-content">Острое ребро</span></h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 160 120" style="width:160px;height:120px" xmlns="http://www.w3.org/2000/svg">
+          <!-- L-shape side view -->
+          <polygon points="30,90 30,30 70,30 70,60 130,60 130,90"
+                   fill="rgba(220,38,38,0.10)" stroke="#dc2626" stroke-width="2"/>
+          <!-- Highlight the 90° corner -->
+          <circle cx="70" cy="60" r="14" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="78" y="65" font-size="10" fill="#dc2626" font-weight="bold">90°</text>
+          <line x1="60" y1="55" x2="80" y2="55" stroke="#dc2626" stroke-width="0.7"/>
+          <line x1="75" y1="50" x2="75" y2="70" stroke="#dc2626" stroke-width="0.7"/>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Қауіпті: <b>қол кесуі мүмкін</b>, <b>кернеу концентрациясы</b>, өндіруге қиын.</span>
+        <span lang="en" class="lang-content">Hazards: <b>can cut hand</b>, <b>stress concentration</b>, hard to machine.</span>
+        <span lang="ru" class="lang-content">Опасно: <b>может порезать</b>, <b>концентратор напряжений</b>, сложно в производстве.</span>
+      </p>
+    </div>
+
+    <!-- Fillet -->
+    <div class="card rounded-custom p-5 border-t-4 border-emerald-500">
+      <h3 class="font-bold text-emerald-800 text-center mb-3">⌒ <span lang="kk" class="lang-content">Дөңгелету (Fillet)</span><span lang="en" class="lang-content">Fillet</span><span lang="ru" class="lang-content">Скругление (Fillet)</span></h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 160 120" style="width:160px;height:120px" xmlns="http://www.w3.org/2000/svg">
+          <!-- L-shape with filleted corner -->
+          <path d="M 30,90 L 30,30 L 70,30 L 70,45 Q 70,60 85,60 L 130,60 L 130,90 Z"
+                fill="rgba(5,150,105,0.15)" stroke="#059669" stroke-width="2"/>
+          <!-- Radius indicator -->
+          <line x1="70" y1="60" x2="85" y2="60" stroke="#059669" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <line x1="70" y1="60" x2="70" y2="45" stroke="#059669" stroke-width="0.8" stroke-dasharray="3,2"/>
+          <circle cx="70" cy="60" r="2" fill="#059669"/>
+          <text x="72" y="80" font-size="11" fill="#059669" font-weight="bold">R</text>
+          <line x1="77" y1="53" x2="83" y2="47" stroke="#059669" stroke-width="1" marker-end="url(#arrG)"/>
+          <defs>
+            <marker id="arrG" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#059669"/></marker>
+          </defs>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content"><b>Радиуспен R</b> тегіс өту. Қырды доғаға ауыстырады.</span>
+        <span lang="en" class="lang-content">Smooth transition by <b>radius R</b>. Replaces edge with an arc.</span>
+        <span lang="ru" class="lang-content">Плавный переход <b>радиусом R</b>. Заменяет ребро дугой.</span>
+      </p>
+      <div class="formula mt-2 text-xs text-center">Fillet R = 3 мм</div>
+    </div>
+
+    <!-- Chamfer -->
+    <div class="card rounded-custom p-5 border-t-4 border-blue-500">
+      <h3 class="font-bold text-blue-800 text-center mb-3">◢ <span lang="kk" class="lang-content">Фаска (Chamfer)</span><span lang="en" class="lang-content">Chamfer</span><span lang="ru" class="lang-content">Фаска (Chamfer)</span></h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 160 120" style="width:160px;height:120px" xmlns="http://www.w3.org/2000/svg">
+          <!-- L-shape with chamfered corner -->
+          <polygon points="30,90 30,30 70,30 70,45 85,60 130,60 130,90"
+                   fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="2"/>
+          <!-- Chamfer dimensions -->
+          <line x1="60" y1="45" x2="80" y2="45" stroke="#2563eb" stroke-width="0.8"/>
+          <line x1="75" y1="55" x2="95" y2="55" stroke="#2563eb" stroke-width="0.8"/>
+          <text x="55" y="42" font-size="9" fill="#2563eb">c</text>
+          <text x="88" y="73" font-size="9" fill="#2563eb">c</text>
+          <text x="50" y="62" font-size="11" fill="#2563eb" font-weight="bold">45°</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Қырды <b>тік сызықпен</b> кеседі. Әдетте 45°, өлшемі c.</span>
+        <span lang="en" class="lang-content">Cuts the edge with a <b>straight line</b>. Usually 45°, size c.</span>
+        <span lang="ru" class="lang-content">Срезает ребро <b>прямой линией</b>. Обычно 45°, размер c.</span>
+      </p>
+      <div class="formula mt-2 text-xs text-center">Chamfer 2 × 45°</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3D box demonstration -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🧊 3D-кубта қолдану</span>
+    <span lang="en" class="lang-content">🧊 Applied to a 3D Cube</span>
+    <span lang="ru" class="lang-content">🧊 Применение на 3D-кубе</span>
+  </h2>
+  <div class="blueprint p-6">
+    <svg viewBox="0 0 540 220" style="width:100%;max-width:540px;display:block;margin:auto" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- ── Sharp cube ── -->
+      <text x="90" y="20" font-size="11" fill="#dc2626" text-anchor="middle" font-weight="bold">Острые рёбра</text>
+      <!-- Iso cube at (90, 100), s=22 -->
+      <polygon points="90,55 134,77 90,100 46,77" fill="rgba(220,38,38,0.20)" stroke="#dc2626" stroke-width="2.5"/>
+      <polygon points="90,100 134,122 134,77 90,55" fill="rgba(220,38,38,0.10)" stroke="#dc2626" stroke-width="2.5"/>
+      <polygon points="90,100 46,122 46,77 90,55" fill="rgba(220,38,38,0.15)" stroke="#dc2626" stroke-width="2.5"/>
+      <line x1="90" y1="100" x2="90" y2="144" stroke="#dc2626" stroke-width="2"/>
+      <line x1="46" y1="122" x2="90" y2="144" stroke="#dc2626" stroke-width="2"/>
+      <line x1="134" y1="122" x2="90" y2="144" stroke="#dc2626" stroke-width="2"/>
+      <text x="90" y="190" font-size="9" fill="#64748b" text-anchor="middle">Резкие 90° грани</text>
+
+      <line x1="160" y1="100" x2="200" y2="100" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrP)"/>
+
+      <!-- ── Filleted cube ── -->
+      <text x="270" y="20" font-size="11" fill="#059669" text-anchor="middle" font-weight="bold">Fillet R</text>
+      <!-- Iso cube with rounded edges (approximation: cube with rounded corners) -->
+      <!-- Top face with rounded points -->
+      <path d="M 232,77 Q 234,75 236,77 L 268,93 Q 272,95 268,97 L 268,99 Q 270,100 268,102 L 236,118
+               Q 232,120 232,118 L 232,82 Q 230,80 232,77 Z"
+            fill="rgba(5,150,105,0.20)" stroke="#059669" stroke-width="2.5"/>
+      <!-- Simpler approach: draw cube with curved corners using paths -->
+      <path d="M 270,55 Q 273,55 275,57 L 313,77 Q 316,79 313,82 L 270,103 Q 266,103 264,100 L 226,80 Q 224,78 226,75 L 264,55 Q 268,53 270,55 Z"
+            fill="rgba(5,150,105,0.20)" stroke="#059669" stroke-width="2.5"/>
+      <!-- Right face -->
+      <path d="M 313,77 Q 316,79 313,82 L 313,118 Q 313,121 311,123 L 270,144 Q 268,144 268,141 L 268,103 Q 268,100 270,100 L 311,80 Q 313,79 313,77 Z"
+            fill="rgba(5,150,105,0.12)" stroke="#059669" stroke-width="2.5"/>
+      <!-- Left face -->
+      <path d="M 226,80 Q 224,78 226,75 Q 225,77 226,80 L 226,118 Q 226,121 228,123 L 269,144 Q 271,144 271,141 L 271,103 Q 271,100 269,100 L 228,80 Q 226,80 226,80 Z"
+            fill="rgba(5,150,105,0.16)" stroke="#059669" stroke-width="2.5"/>
+      <text x="270" y="190" font-size="9" fill="#64748b" text-anchor="middle">Плавные округлые рёбра</text>
+
+      <line x1="340" y1="100" x2="380" y2="100" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrP)"/>
+
+      <!-- ── Chamfered cube ── -->
+      <text x="450" y="20" font-size="11" fill="#2563eb" text-anchor="middle" font-weight="bold">Chamfer c × 45°</text>
+      <!-- Iso cube with chamfered corners (octagonal-like) -->
+      <!-- Top face is a hexagon-ish -->
+      <polygon points="445,55 455,55 491,77 491,87 481,93 449,93 415,77 415,67 425,61 445,55"
+               fill="rgba(37,99,235,0.20)" stroke="#2563eb" stroke-width="2.5"/>
+      <!-- Right face -->
+      <polygon points="491,77 491,87 491,118 481,135 449,144 449,93 491,87"
+               fill="rgba(37,99,235,0.12)" stroke="#2563eb" stroke-width="2.5"/>
+      <!-- Left face -->
+      <polygon points="415,77 415,67 415,118 425,135 449,144 449,93 415,87"
+               fill="rgba(37,99,235,0.16)" stroke="#2563eb" stroke-width="2.5"/>
+      <text x="450" y="190" font-size="9" fill="#64748b" text-anchor="middle">Срезы 45° на рёбрах</text>
+
+      <defs>
+        <marker id="arrP" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#7c3aed"/></marker>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+<!-- When to use -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Қашан нені таңдау?</span>
+    <span lang="en" class="lang-content">🎯 When to Choose Which?</span>
+    <span lang="ru" class="lang-content">🎯 Когда что выбрать?</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5">
+      <h3 class="font-bold text-emerald-800 mb-3">⌒ Fillet — <span lang="kk" class="lang-content">қашан?</span><span lang="en" class="lang-content">when?</span><span lang="ru" class="lang-content">когда?</span></h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>✔ <span lang="kk" class="lang-content">Кернеуді азайту керек (механика жүктемесі)</span><span lang="en" class="lang-content">Need to reduce stress (mechanical load)</span><span lang="ru" class="lang-content">Нужно снизить напряжения (механика)</span></li>
+        <li>✔ <span lang="kk" class="lang-content">Тегіс ағыс (сұйық, ауа)</span><span lang="en" class="lang-content">Smooth fluid flow (liquid, air)</span><span lang="ru" class="lang-content">Плавное обтекание (жидкость, воздух)</span></li>
+        <li>✔ <span lang="kk" class="lang-content">Эстетика, эргономика (бітіктегі бөлшектер)</span><span lang="en" class="lang-content">Aesthetics, ergonomics (handled parts)</span><span lang="ru" class="lang-content">Эстетика, эргономика</span></li>
+      </ul>
+    </div>
+    <div class="card rounded-custom p-5">
+      <h3 class="font-bold text-blue-800 mb-3">◢ Chamfer — <span lang="kk" class="lang-content">қашан?</span><span lang="en" class="lang-content">when?</span><span lang="ru" class="lang-content">когда?</span></h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>✔ <span lang="kk" class="lang-content">Болт/гайка кіретін жерлер (бастау)</span><span lang="en" class="lang-content">Bolt/nut entry points (lead-in)</span><span lang="ru" class="lang-content">Входные кромки для болтов/гаек</span></li>
+        <li>✔ <span lang="kk" class="lang-content">Дәнекерлеу алдында (пісіру қанауы)</span><span lang="en" class="lang-content">Before welding (weld preparation)</span><span lang="ru" class="lang-content">Перед сваркой (разделка)</span></li>
+        <li>✔ <span lang="kk" class="lang-content">Тез өндіру (бір өту)</span><span lang="en" class="lang-content">Faster machining (single pass)</span><span lang="ru" class="lang-content">Быстрая обработка (один проход)</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-emerald rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Параметрлер</span>
+    <span lang="en" class="lang-content">🧠 Parameters</span>
+    <span lang="ru" class="lang-content">🧠 Параметры</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-2">⌒ Fillet</p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">1 параметр: <b>R</b> (мм). Әдетте 1-5 мм.</span>
+        <span lang="en" class="lang-content">1 parameter: <b>R</b> (mm). Typical 1-5 mm.</span>
+        <span lang="ru" class="lang-content">1 параметр: <b>R</b> (мм). Обычно 1-5 мм.</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-2">◢ Chamfer</p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">2 параметр: <b>c × α°</b>. Әдетте 1×45° немесе 2×45°.</span>
+        <span lang="en" class="lang-content">2 parameters: <b>c × α°</b>. Typical 1×45° or 2×45°.</span>
+        <span lang="ru" class="lang-content">2 параметра: <b>c × α°</b>. Обычно 1×45° или 2×45°.</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

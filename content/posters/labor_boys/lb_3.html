@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Чтение чертежа: виды, линии, размеры</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+/* poster-specific helpers — standard tailwind spacing only, no arbitrary value classes */
+.lead{font-size:1.05rem;line-height:1.78;color:#44403c;}
+.lead b{color:#881337;}
+.linerow{display:flex;align-items:center;gap:1rem;padding:.55rem 0;border-bottom:1px dashed rgba(190,18,60,.18);}
+.linerow:last-child{border-bottom:none;}
+.linerow .swatch{flex-shrink:0;width:150px;}
+.linerow .swatch svg{display:block;width:100%;height:26px;}
+.dim-key{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.55rem;}
+.dim-key .num{width:1.9rem;height:1.9rem;border-radius:50%;background:var(--rose);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0;}
+.viewbox{background:#fbf3e8;border:1px solid rgba(190,18,60,.15);border-radius:1rem;padding:1rem;}
+table.t{width:100%;border-collapse:collapse;font-size:.92rem;}
+table.t th,table.t td{border:1px solid rgba(190,18,60,.2);padding:.6rem .7rem;text-align:left;vertical-align:top;}
+table.t th{background:rgba(190,18,60,.10);color:#881337;font-family:'Montserrat',sans-serif;}
+table.t tr:nth-child(even) td{background:rgba(190,18,60,.035);}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 1-бөлім · Графика және жобалау</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 1 · Graphics &amp; Design</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 1 · Графика и проектирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Сызбаны оқу: көріністер, сызықтар, өлшемдер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Reading a Drawing: Views, Lines, Dimensions</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Чтение чертежа: виды, линии, размеры</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Сызба — инженердің тілі: оны оқи білген адам кез келген бұйымды жасай алады.</span>
+      <span lang="en" class="lang-content">A drawing is the engineer's language — whoever can read it can make any part.</span>
+      <span lang="ru" class="lang-content">Чертёж — язык инженера: кто умеет его читать, тот сможет изготовить любую деталь.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO ESSAY -->
+<section class="card card-accent rounded-custom p-6 mb-8">
+  <p class="lead">
+    <span lang="kk" class="lang-content"><b>Чертёж (сызба)</b> — бұйымның пішіні мен өлшемдерін шартты сызықтармен дәл бейнелейтін графикалық құжат. Суреттен айырмашылығы: ол <b>көркем</b> емес, <b>дәл</b> болуы керек. Сызбаны оқу деген — оны қарап, заттың нақты пішінін, өлшемін және қалай жасалатынын түсіну. Ол үшін үш нәрсені білу қажет: <b>көріністер</b> (заттың әртүрлі жақтан көрінісі), <b>сызықтар</b> (әрқайсысының өз мағынасы бар) және <b>өлшемдер</b> (миллиметрмен берілген сандар).</span>
+    <span lang="en" class="lang-content"><b>A technical drawing</b> is a graphic document that shows the shape and size of a part precisely, using conventional lines. Unlike a picture it must be <b>accurate</b>, not artistic. To <b>read</b> a drawing means to look at it and understand the real shape of the object, its size and how it is to be made. For that you need three things: <b>views</b> (the object seen from different sides), <b>lines</b> (each carries its own meaning) and <b>dimensions</b> (numbers given in millimetres).</span>
+    <span lang="ru" class="lang-content"><b>Чертёж</b> — это графический документ, который точно изображает форму и размеры детали с помощью условных линий. В отличие от рисунка он должен быть <b>точным</b>, а не художественным. <b>Читать</b> чертёж — значит, глядя на него, понимать реальную форму предмета, его размеры и то, как его изготовить. Для этого нужно знать три вещи: <b>виды</b> (предмет с разных сторон), <b>линии</b> (каждая со своим значением) и <b>размеры</b> (числа в миллиметрах).</span>
+  </p>
+  <div class="mt-4">
+    <span class="badge"><span lang="kk" class="lang-content">Көріністер</span><span lang="en" class="lang-content">Views</span><span lang="ru" class="lang-content">Виды</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Сызықтар</span><span lang="en" class="lang-content">Lines</span><span lang="ru" class="lang-content">Линии</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Өлшемдер</span><span lang="en" class="lang-content">Dimensions</span><span lang="ru" class="lang-content">Размеры</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Масштаб</span><span lang="en" class="lang-content">Scale</span><span lang="ru" class="lang-content">Масштаб</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Бұрыштама (штамп)</span><span lang="en" class="lang-content">Title block</span><span lang="ru" class="lang-content">Основная надпись</span></span>
+  </div>
+</section>
+
+<!-- 1. VIEWS -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">🧊 1. Көріністер: затты үш жақтан көру</span>
+    <span lang="en" class="lang-content">🧊 1. Views: Seeing the Part from Three Sides</span>
+    <span lang="ru" class="lang-content">🧊 1. Виды: предмет с трёх сторон</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap an image to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на изображение, чтобы увеличить.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div class="genre-card" onclick="openLB(this)" style="background:transparent;border:none;box-shadow:none">
+      <div class="pic" style="height:300px;border-radius:1rem"><img src="../../assets/labor_boys/lb3_views.jpg" alt="Проекции детали на три плоскости"></div>
+      <div class="body" style="padding-left:0;padding-right:0">
+        <div class="genre-name"><span lang="kk" class="lang-content">Үш көрініске жобалау</span><span lang="en" class="lang-content">Projection onto three views</span><span lang="ru" class="lang-content">Проецирование на три вида</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">Көлемді зат → жазық көріністер</span><span lang="en" class="lang-content">3D object → flat views</span><span lang="ru" class="lang-content">Объёмный предмет → плоские виды</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Затты әр жаққа «жарықпен» жобалап, жазық сызбаға айналдырамыз.</span><span lang="en" class="lang-content">The object is "projected" onto each side and turned into a flat drawing.</span><span lang="ru" class="lang-content">Предмет «проецируют» на каждую сторону и превращают в плоский чертёж.</span></div>
+      </div>
+    </div>
+    <div>
+      <p class="text-stone-700 mb-4">
+        <span lang="kk" class="lang-content">Бір сурет затты толық сипаттай алмайды. Сондықтан затты <b>үш негізгі көрініспен</b> бейнелейді — әрқайсысы белгілі бір жаққа қарап тұрғандай:</span>
+        <span lang="en" class="lang-content">One picture cannot fully describe a part. So an object is shown with <b>three main views</b>, as if you looked at it from a fixed side each time:</span>
+        <span lang="ru" class="lang-content">Один рисунок не может полностью описать деталь. Поэтому предмет изображают <b>тремя основными видами</b> — будто смотришь на него каждый раз с одной стороны:</span>
+      </p>
+      <div class="dim-key"><span class="num">1</span><span><b><span lang="kk" class="lang-content">Бас көрініс (алдынан)</span><span lang="en" class="lang-content">Front view</span><span lang="ru" class="lang-content">Главный вид (спереди)</span></b> — <span lang="kk" class="lang-content">ең көп ақпарат беретін, негізгі көрініс.</span><span lang="en" class="lang-content">the most informative, the main view.</span><span lang="ru" class="lang-content">самый информативный, главный.</span></span></div>
+      <div class="dim-key"><span class="num">2</span><span><b><span lang="kk" class="lang-content">Үстінен көрініс</span><span lang="en" class="lang-content">Top view</span><span lang="ru" class="lang-content">Вид сверху</span></b> — <span lang="kk" class="lang-content">бас көріністің астына салынады.</span><span lang="en" class="lang-content">placed below the front view.</span><span lang="ru" class="lang-content">располагается под главным видом.</span></span></div>
+      <div class="dim-key"><span class="num">3</span><span><b><span lang="kk" class="lang-content">Сол жақтан көрініс</span><span lang="en" class="lang-content">Left/side view</span><span lang="ru" class="lang-content">Вид слева (сбоку)</span></b> — <span lang="kk" class="lang-content">бас көріністің оң жағына салынады.</span><span lang="en" class="lang-content">placed to the right of the front view.</span><span lang="ru" class="lang-content">располагается справа от главного вида.</span></span></div>
+      <p class="text-stone-600 text-sm mt-3">
+        <span lang="kk" class="lang-content">💡 Көріністер бір-бірімен <b>проекциялық байланыста</b> тұрады: ұзындық пен биіктік көрші көріністерде сәйкес келеді.</span>
+        <span lang="en" class="lang-content">💡 The views stay in <b>projection alignment</b>: length and height match across neighbouring views.</span>
+        <span lang="ru" class="lang-content">💡 Виды связаны <b>проекционной связью</b>: длина и высота совпадают на соседних видах.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. LINES (SVG chart) -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">➖ 2. Сызықтар: әрқайсысының өз мағынасы</span>
+    <span lang="en" class="lang-content">➖ 2. Lines: Each Has Its Own Meaning</span>
+    <span lang="ru" class="lang-content">➖ 2. Линии: у каждой своё значение</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">Сызбадағы әр сызық — белгілі бір «сөз». Оларды шатастыруға болмайды (МемСТ 2.303).</span>
+    <span lang="en" class="lang-content">Every line in a drawing is a kind of "word". They must not be confused (per GOST / ISO line standards).</span>
+    <span lang="ru" class="lang-content">Каждая линия чертежа — это своего рода «слово». Их нельзя путать (ГОСТ 2.303).</span>
+  </p>
+  <div class="card rounded-custom p-6">
+    <div class="linerow">
+      <div class="swatch"><svg viewBox="0 0 150 26"><line x1="2" y1="13" x2="148" y2="13" stroke="#1c1917" stroke-width="3.4"/></svg></div>
+      <div><b style="color:#881337"><span lang="kk" class="lang-content">Тұтас қалың негізгі</span><span lang="en" class="lang-content">Thick continuous</span><span lang="ru" class="lang-content">Сплошная толстая основная</span></b><br><span class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Заттың көрінетін контурлары.</span><span lang="en" class="lang-content">Visible outlines of the part.</span><span lang="ru" class="lang-content">Видимый контур детали.</span></span></div>
+    </div>
+    <div class="linerow">
+      <div class="swatch"><svg viewBox="0 0 150 26"><line x1="2" y1="13" x2="148" y2="13" stroke="#1c1917" stroke-width="1.1"/></svg></div>
+      <div><b style="color:#881337"><span lang="kk" class="lang-content">Тұтас жұқа</span><span lang="en" class="lang-content">Thin continuous</span><span lang="ru" class="lang-content">Сплошная тонкая</span></b><br><span class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Өлшем, шығару және штрих сызықтары.</span><span lang="en" class="lang-content">Dimension, extension and hatching lines.</span><span lang="ru" class="lang-content">Размерные, выносные и линии штриховки.</span></span></div>
+    </div>
+    <div class="linerow">
+      <div class="swatch"><svg viewBox="0 0 150 26"><line x1="2" y1="13" x2="148" y2="13" stroke="#1c1917" stroke-width="1.7" stroke-dasharray="11,6"/></svg></div>
+      <div><b style="color:#881337"><span lang="kk" class="lang-content">Үзік (штрих)</span><span lang="en" class="lang-content">Dashed (hidden)</span><span lang="ru" class="lang-content">Штриховая</span></b><br><span class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Көрінбейтін контурлар (тесік, ойық ішінде).</span><span lang="en" class="lang-content">Hidden outlines (holes, inner edges).</span><span lang="ru" class="lang-content">Невидимый контур (отверстия, рёбра внутри).</span></span></div>
+    </div>
+    <div class="linerow">
+      <div class="swatch"><svg viewBox="0 0 150 26"><line x1="2" y1="13" x2="148" y2="13" stroke="#1c1917" stroke-width="1.3" stroke-dasharray="16,4,3,4"/></svg></div>
+      <div><b style="color:#881337"><span lang="kk" class="lang-content">Штрихпунктир (осьтік)</span><span lang="en" class="lang-content">Dash-dot (centre line)</span><span lang="ru" class="lang-content">Штрихпунктирная (осевая)</span></b><br><span class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Симметрия осі, шеңбер центрі.</span><span lang="en" class="lang-content">Axis of symmetry, centre of circles.</span><span lang="ru" class="lang-content">Ось симметрии, центр окружности.</span></span></div>
+    </div>
+    <div class="linerow">
+      <div class="swatch"><svg viewBox="0 0 150 26"><path d="M2 13 H60 l6 -7 l8 14 l6 -7 H148" fill="none" stroke="#1c1917" stroke-width="1.4"/></svg></div>
+      <div><b style="color:#881337"><span lang="kk" class="lang-content">Үзу сызығы</span><span lang="en" class="lang-content">Break line</span><span lang="ru" class="lang-content">Линия обрыва</span></b><br><span class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Заттың бір бөлігін үзіп көрсету.</span><span lang="en" class="lang-content">Shows that part of the object is cut off.</span><span lang="ru" class="lang-content">Показывает обрыв части предмета.</span></span></div>
+    </div>
+    <div class="linerow">
+      <div class="swatch"><svg viewBox="0 0 150 26"><line x1="14" y1="13" x2="136" y2="13" stroke="#1c1917" stroke-width="1.1"/><path d="M14 13 l9 -4 v8 z" fill="#1c1917"/><path d="M136 13 l-9 -4 v8 z" fill="#1c1917"/></svg></div>
+      <div><b style="color:#881337"><span lang="kk" class="lang-content">Өлшем сызығы</span><span lang="en" class="lang-content">Dimension line</span><span lang="ru" class="lang-content">Размерная линия</span></b><br><span class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Екі ұшында жебесі бар, өлшемді көрсетеді.</span><span lang="en" class="lang-content">Has arrowheads at both ends; shows a size.</span><span lang="ru" class="lang-content">Со стрелками на концах, указывает размер.</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. DIMENSIONS -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">📏 3. Өлшемдер: затты қалай өлшейді</span>
+    <span lang="en" class="lang-content">📏 3. Dimensions: How Size Is Shown</span>
+    <span lang="ru" class="lang-content">📏 3. Размеры: как указывают величину</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div>
+      <p class="text-stone-700 mb-4">
+        <span lang="kk" class="lang-content">Өлшемдер сызбаны нақты бұйымға айналдырады. Олар әрқашан <b>миллиметрмен</b> беріледі (өлшем бірлігі жазылмайды). Өлшем үш элементтен тұрады:</span>
+        <span lang="en" class="lang-content">Dimensions turn a drawing into a real part. They are always given in <b>millimetres</b> (the unit is not written). A dimension has three elements:</span>
+        <span lang="ru" class="lang-content">Размеры превращают чертёж в реальную деталь. Они всегда даются в <b>миллиметрах</b> (единицу не пишут). Размер состоит из трёх элементов:</span>
+      </p>
+      <div class="dim-key"><span class="num">1</span><span><b><span lang="kk" class="lang-content">Шығару сызықтары</span><span lang="en" class="lang-content">Extension lines</span><span lang="ru" class="lang-content">Выносные линии</span></b> — <span lang="kk" class="lang-content">контурдан шығып тұратын жұқа сызықтар.</span><span lang="en" class="lang-content">thin lines extending from the outline.</span><span lang="ru" class="lang-content">тонкие линии от контура детали.</span></span></div>
+      <div class="dim-key"><span class="num">2</span><span><b><span lang="kk" class="lang-content">Өлшем сызығы + жебелер</span><span lang="en" class="lang-content">Dimension line + arrows</span><span lang="ru" class="lang-content">Размерная линия со стрелками</span></b> — <span lang="kk" class="lang-content">қашықтықты көрсетеді.</span><span lang="en" class="lang-content">spans the distance measured.</span><span lang="ru" class="lang-content">показывает измеряемое расстояние.</span></span></div>
+      <div class="dim-key"><span class="num">3</span><span><b><span lang="kk" class="lang-content">Өлшем саны</span><span lang="en" class="lang-content">Dimension number</span><span lang="ru" class="lang-content">Размерное число</span></b> — <span lang="kk" class="lang-content">сызықтың үстіне жазылады.</span><span lang="en" class="lang-content">written above the line.</span><span lang="ru" class="lang-content">пишется над линией.</span></span></div>
+      <p class="text-stone-600 text-sm mt-3">
+        <span lang="kk" class="lang-content">💡 Диаметр алдында <b>⌀</b> белгісі, радиус алдында <b>R</b>, шаршы алдында <b>□</b> қойылады.</span>
+        <span lang="en" class="lang-content">💡 A diameter is marked with <b>⌀</b>, a radius with <b>R</b>, and a square with <b>□</b> before the number.</span>
+        <span lang="ru" class="lang-content">💡 Перед диаметром ставят <b>⌀</b>, перед радиусом — <b>R</b>, перед стороной квадрата — <b>□</b>.</span>
+      </p>
+    </div>
+    <div class="genre-card" onclick="openLB(this)" style="background:transparent;border:none;box-shadow:none">
+      <div class="pic" style="height:300px;border-radius:1rem"><img src="../../assets/labor_boys/lb3_dims.jpg" alt="Простановка размеров пластины с отверстием"></div>
+      <div class="body" style="padding-left:0;padding-right:0">
+        <div class="genre-name"><span lang="kk" class="lang-content">Өлшемдерді қою</span><span lang="en" class="lang-content">Placing dimensions</span><span lang="ru" class="lang-content">Простановка размеров</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">Ені, биіктігі, тесік диаметрі</span><span lang="en" class="lang-content">Width, height, hole diameter</span><span lang="ru" class="lang-content">Ширина, высота, диаметр отверстия</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Тіктөртбұрышты пластина мен тесіктің өлшемдері.</span><span lang="en" class="lang-content">Dimensions of a flat plate with a round hole.</span><span lang="ru" class="lang-content">Размеры плоской пластины с круглым отверстием.</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE: views (3 per-language tables) -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">🗂️ Негізгі сызықтардың кестесі</span>
+    <span lang="en" class="lang-content">🗂️ Reference Table of Main Lines</span>
+    <span lang="ru" class="lang-content">🗂️ Сводная таблица основных линий</span>
+  </h2>
+  <div class="card rounded-custom p-5">
+    <div class="lang-content" lang="ru">
+      <table class="t">
+        <tr><th>Линия</th><th>Вид</th><th>Назначение</th></tr>
+        <tr><td>Сплошная толстая основная</td><td>──────</td><td>Видимый контур детали</td></tr>
+        <tr><td>Сплошная тонкая</td><td>──────</td><td>Размерные, выносные линии, штриховка</td></tr>
+        <tr><td>Штриховая</td><td>– – – –</td><td>Невидимый контур (скрытые отверстия, рёбра)</td></tr>
+        <tr><td>Штрихпунктирная тонкая</td><td>—·—·—</td><td>Оси симметрии, центровые линии</td></tr>
+        <tr><td>Сплошная волнистая / с изломом</td><td>∿∿∿</td><td>Линия обрыва, граница вида и разреза</td></tr>
+      </table>
+    </div>
+    <div class="lang-content" lang="kk">
+      <table class="t">
+        <tr><th>Сызық</th><th>Түрі</th><th>Қызметі</th></tr>
+        <tr><td>Тұтас қалың негізгі</td><td>──────</td><td>Заттың көрінетін контуры</td></tr>
+        <tr><td>Тұтас жұқа</td><td>──────</td><td>Өлшем, шығару сызықтары, штрих</td></tr>
+        <tr><td>Үзік (штрих)</td><td>– – – –</td><td>Көрінбейтін контур (жасырын тесік, қыр)</td></tr>
+        <tr><td>Жұқа штрихпунктир</td><td>—·—·—</td><td>Симметрия осі, центр сызығы</td></tr>
+        <tr><td>Толқынды / сынық тұтас</td><td>∿∿∿</td><td>Үзу сызығы, көрініс пен қима шекарасы</td></tr>
+      </table>
+    </div>
+    <div class="lang-content" lang="en">
+      <table class="t">
+        <tr><th>Line</th><th>Style</th><th>Purpose</th></tr>
+        <tr><td>Thick continuous (main)</td><td>──────</td><td>Visible outline of the part</td></tr>
+        <tr><td>Thin continuous</td><td>──────</td><td>Dimension, extension lines, hatching</td></tr>
+        <tr><td>Dashed</td><td>– – – –</td><td>Hidden outline (concealed holes, edges)</td></tr>
+        <tr><td>Thin dash-dot</td><td>—·—·—</td><td>Axes of symmetry, centre lines</td></tr>
+        <tr><td>Continuous wavy / zig-zag</td><td>∿∿∿</td><td>Break line, boundary of view and section</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WORKING DRAWING + TITLE BLOCK -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">📋 Жұмыс сызбасы және бұрыштама</span>
+    <span lang="en" class="lang-content">📋 The Working Drawing &amp; the Title Block</span>
+    <span lang="ru" class="lang-content">📋 Рабочий чертёж и основная надпись</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div class="flex flex-col items-center justify-center">
+      <div class="art-frame" style="max-width:480px;width:100%">
+        <div class="art-mat" style="height:300px"><img src="../../assets/labor_boys/lb3_sheet.jpg" alt="Рабочий чертёж детали с основной надписью"></div>
+      </div>
+      <p class="text-center mt-2" style="color:#a16207;font-size:.85rem;font-style:italic">
+        <span lang="kk" class="lang-content">Дайын жұмыс сызбасы: көріністер, өлшемдер, бұрыштама</span>
+        <span lang="en" class="lang-content">A finished working drawing: views, dimensions, title block</span>
+        <span lang="ru" class="lang-content">Готовый рабочий чертёж: виды, размеры, основная надпись</span>
+      </p>
+    </div>
+    <div>
+      <p class="text-stone-700 mb-4">
+        <span lang="kk" class="lang-content">Әрбір сызбаның оң төменгі бұрышында <b>бұрыштама (штамп)</b> болады. Онда бұйымның аты, материалы, масштабы, орындаушы және құжат нөмірі жазылады. Сызбаны оқуды осы штамптан бастаған дұрыс.</span>
+        <span lang="en" class="lang-content">Every drawing has a <b>title block</b> in the bottom-right corner. It states the part's name, material, scale, who drew it and the document number. It is wise to start reading a drawing from this block.</span>
+        <span lang="ru" class="lang-content">У каждого чертежа в правом нижнем углу есть <b>основная надпись (штамп)</b>. В ней указывают название детали, материал, масштаб, исполнителя и номер документа. Чтение чертежа разумно начинать именно со штампа.</span>
+      </p>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="card-accent rounded-xl p-3">
+          <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Масштаб</span><span lang="en" class="lang-content">Scale</span><span lang="ru" class="lang-content">Масштаб</span></p>
+          <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">1:1 — нақты өлшем; 2:1 — үлкейтілген; 1:2 — кішірейтілген.</span><span lang="en" class="lang-content">1:1 full size; 2:1 enlarged; 1:2 reduced.</span><span lang="ru" class="lang-content">1:1 — натуральная; 2:1 — увеличено; 1:2 — уменьшено.</span></p>
+        </div>
+        <div class="card-accent rounded-xl p-3">
+          <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Материал</span><span lang="en" class="lang-content">Material</span><span lang="ru" class="lang-content">Материал</span></p>
+          <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Болат, алюминий, ағаш — штампта көрсетіледі.</span><span lang="en" class="lang-content">Steel, aluminium, wood — stated in the block.</span><span lang="ru" class="lang-content">Сталь, алюминий, дерево — указан в штампе.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO READ — step by step -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">✅ Сызбаны қалай оқу керек: 5 қадам</span>
+    <span lang="en" class="lang-content">✅ How to Read a Drawing: 5 Steps</span>
+    <span lang="ru" class="lang-content">✅ Как читать чертёж: 5 шагов</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div class="tile" style="text-align:left">
+      <div class="flex items-center gap-2 mb-2"><span class="step-num">1</span><span class="tile-icon" style="font-size:1.8rem">🏷️</span></div>
+      <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Штампты оқу</span><span lang="en" class="lang-content">Read the block</span><span lang="ru" class="lang-content">Читаем штамп</span></p>
+      <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Аты, материалы, масштабы.</span><span lang="en" class="lang-content">Name, material, scale.</span><span lang="ru" class="lang-content">Название, материал, масштаб.</span></p>
+    </div>
+    <div class="tile" style="text-align:left">
+      <div class="flex items-center gap-2 mb-2"><span class="step-num">2</span><span class="tile-icon" style="font-size:1.8rem">👁️</span></div>
+      <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Көріністерді анықтау</span><span lang="en" class="lang-content">Find the views</span><span lang="ru" class="lang-content">Находим виды</span></p>
+      <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Қанша көрініс бар?</span><span lang="en" class="lang-content">How many views?</span><span lang="ru" class="lang-content">Сколько видов?</span></p>
+    </div>
+    <div class="tile" style="text-align:left">
+      <div class="flex items-center gap-2 mb-2"><span class="step-num">3</span><span class="tile-icon" style="font-size:1.8rem">🧠</span></div>
+      <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Пішінді елестету</span><span lang="en" class="lang-content">Picture the shape</span><span lang="ru" class="lang-content">Представляем форму</span></p>
+      <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Көріністерді бір затқа біріктіру.</span><span lang="en" class="lang-content">Combine views into one object.</span><span lang="ru" class="lang-content">Соединяем виды в один предмет.</span></p>
+    </div>
+    <div class="tile" style="text-align:left">
+      <div class="flex items-center gap-2 mb-2"><span class="step-num">4</span><span class="tile-icon" style="font-size:1.8rem">📏</span></div>
+      <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Өлшемдерді оқу</span><span lang="en" class="lang-content">Read dimensions</span><span lang="ru" class="lang-content">Читаем размеры</span></p>
+      <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Ұзындық, биіктік, диаметр.</span><span lang="en" class="lang-content">Length, height, diameter.</span><span lang="ru" class="lang-content">Длина, высота, диаметр.</span></p>
+    </div>
+    <div class="tile" style="text-align:left">
+      <div class="flex items-center gap-2 mb-2"><span class="step-num">5</span><span class="tile-icon" style="font-size:1.8rem">🔧</span></div>
+      <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Жасауды жоспарлау</span><span lang="en" class="lang-content">Plan the making</span><span lang="ru" class="lang-content">Планируем изготовление</span></p>
+      <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Қандай құрал керек?</span><span lang="en" class="lang-content">Which tools are needed?</span><span lang="ru" class="lang-content">Какие нужны инструменты?</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="card-rose rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Key Takeaways</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Көріністер</span><span lang="en" class="lang-content">Views</span><span lang="ru" class="lang-content">Виды</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Алдынан, үстінен, сол жақтан — проекциялық байланыста.</span><span lang="en" class="lang-content">Front, top, side — kept in projection alignment.</span><span lang="ru" class="lang-content">Спереди, сверху, слева — в проекционной связи.</span></p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Сызықтар</span><span lang="en" class="lang-content">Lines</span><span lang="ru" class="lang-content">Линии</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Қалың — контур; үзік — жасырын; штрихпунктир — ось.</span><span lang="en" class="lang-content">Thick — outline; dashed — hidden; dash-dot — axis.</span><span lang="ru" class="lang-content">Толстая — контур; штриховая — скрытое; штрихпунктир — ось.</span></p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Өлшемдер</span><span lang="en" class="lang-content">Dimensions</span><span lang="ru" class="lang-content">Размеры</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Әрқашан миллиметрмен; ⌀ — диаметр, R — радиус.</span><span lang="en" class="lang-content">Always in millimetres; ⌀ — diameter, R — radius.</span><span lang="ru" class="lang-content">Всегда в миллиметрах; ⌀ — диаметр, R — радиус.</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<!-- LIGHTBOX (inside #poster-container in template; kept here per shared script) -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

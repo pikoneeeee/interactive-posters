@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Массив и зеркало в 3D</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_emerald.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-emerald-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 12 · 3D-модельдеу</span>
+      <span lang="en" class="lang-content">Graphics · Section 12 · 3D Modelling</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 12 · 3D-моделирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">⋮⋮⋮ Массив және айна (Pattern / Mirror)</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">⋮⋮⋮ Pattern and Mirror</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">⋮⋮⋮ Массив и зеркало (Pattern / Mirror)</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Бір элементті көшіріп қайталау — модельдеу уақытын өте жылдамдатады.</span>
+      <span lang="en" class="lang-content">Copying and repeating one element — dramatically speeds up modelling.</span>
+      <span lang="ru" class="lang-content">Копирование и повторение одного элемента — резко ускоряет моделирование.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Three operations -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Үш қайталау түрі</span>
+    <span lang="en" class="lang-content">📐 Three Patterning Methods</span>
+    <span lang="ru" class="lang-content">📐 Три способа массива</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+    <!-- LINEAR PATTERN -->
+    <div class="card rounded-custom p-5 border-t-4 border-emerald-500">
+      <h3 class="font-bold text-emerald-800 text-center mb-3">➡️ <span lang="kk" class="lang-content">Сызықты массив</span><span lang="en" class="lang-content">Linear Pattern</span><span lang="ru" class="lang-content">Линейный массив</span></h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 220 110" style="width:200px;height:100px" xmlns="http://www.w3.org/2000/svg">
+          <!-- Plate -->
+          <rect x="10" y="30" width="200" height="50" fill="rgba(5,150,105,0.08)" stroke="#059669" stroke-width="2"/>
+          <!-- Original hole (highlighted) -->
+          <circle cx="30" cy="55" r="6" fill="rgba(220,38,38,0.30)" stroke="#dc2626" stroke-width="2"/>
+          <!-- Copies -->
+          <circle cx="60" cy="55" r="6" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="1.5"/>
+          <circle cx="90" cy="55" r="6" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="1.5"/>
+          <circle cx="120" cy="55" r="6" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="1.5"/>
+          <circle cx="150" cy="55" r="6" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="1.5"/>
+          <circle cx="180" cy="55" r="6" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="1.5"/>
+          <!-- Distance d -->
+          <line x1="30" y1="22" x2="60" y2="22" stroke="#1e293b" stroke-width="0.7"/>
+          <polygon points="30,22 36,19 36,25" fill="#1e293b"/>
+          <polygon points="60,22 54,19 54,25" fill="#1e293b"/>
+          <text x="45" y="17" font-size="8" fill="#1e293b" text-anchor="middle">d</text>
+          <text x="30" y="100" font-size="8" fill="#dc2626" text-anchor="middle">оригинал</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Элементті <b>қашықтық d</b> және <b>сан N</b> бойынша түзу сызықпен қайталау. Тесіктер, тістер.</span>
+        <span lang="en" class="lang-content">Repeats along a line with <b>spacing d</b> and <b>count N</b>. Holes, teeth.</span>
+        <span lang="ru" class="lang-content">Повтор вдоль прямой с <b>шагом d</b> и <b>числом N</b>. Отверстия, зубцы.</span>
+      </p>
+      <div class="formula mt-3 text-xs text-center">d = 30 мм · N = 6</div>
+    </div>
+
+    <!-- CIRCULAR PATTERN -->
+    <div class="card rounded-custom p-5 border-t-4 border-blue-500">
+      <h3 class="font-bold text-blue-800 text-center mb-3">⭕ <span lang="kk" class="lang-content">Айналмалы массив</span><span lang="en" class="lang-content">Circular Pattern</span><span lang="ru" class="lang-content">Круговой массив</span></h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 180 180" style="width:160px;height:160px" xmlns="http://www.w3.org/2000/svg">
+          <!-- Disk -->
+          <circle cx="90" cy="90" r="70" fill="rgba(37,99,235,0.06)" stroke="#2563eb" stroke-width="2"/>
+          <!-- Centre -->
+          <circle cx="90" cy="90" r="4" fill="#2563eb"/>
+          <line x1="40" y1="90" x2="140" y2="90" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2,2"/>
+          <line x1="90" y1="40" x2="90" y2="140" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2,2"/>
+          <!-- 6 holes around center (60° apart, r=50) -->
+          <!-- 0° (right) -->
+          <circle cx="140" cy="90" r="6" fill="rgba(220,38,38,0.30)" stroke="#dc2626" stroke-width="2"/>
+          <text x="155" y="93" font-size="8" fill="#dc2626">①</text>
+          <!-- 60° -->
+          <circle cx="115" cy="46.7" r="6" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="1.5"/>
+          <!-- 120° -->
+          <circle cx="65" cy="46.7" r="6" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="1.5"/>
+          <!-- 180° -->
+          <circle cx="40" cy="90" r="6" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="1.5"/>
+          <!-- 240° -->
+          <circle cx="65" cy="133.3" r="6" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="1.5"/>
+          <!-- 300° -->
+          <circle cx="115" cy="133.3" r="6" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="1.5"/>
+          <!-- Angle indicator -->
+          <path d="M 130,80 A 50,50 0 0,0 110,57" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+          <text x="125" y="60" font-size="9" fill="#1e293b" font-weight="bold">60°</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Орталық айналасында <b>бұрыш α</b> бойынша қайталау. Шестерня, фланец тесіктері.</span>
+        <span lang="en" class="lang-content">Repeats around center with <b>angle α</b>. Gear teeth, flange holes.</span>
+        <span lang="ru" class="lang-content">Повтор вокруг центра с <b>углом α</b>. Зубья шестерни, отверстия фланца.</span>
+      </p>
+      <div class="formula mt-3 text-xs text-center">α = 60° · N = 6 (360°/60°)</div>
+    </div>
+
+    <!-- MIRROR -->
+    <div class="card rounded-custom p-5 border-t-4 border-amber-500">
+      <h3 class="font-bold text-amber-800 text-center mb-3">⇋ <span lang="kk" class="lang-content">Айна (Mirror)</span><span lang="en" class="lang-content">Mirror</span><span lang="ru" class="lang-content">Зеркало</span></h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 220 110" style="width:200px;height:100px" xmlns="http://www.w3.org/2000/svg">
+          <!-- Mirror axis (dashed vertical) -->
+          <line x1="110" y1="10" x2="110" y2="100" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="110" y="105" font-size="9" fill="#dc2626" text-anchor="middle">ось зеркала</text>
+          <!-- Left original (L-shape) -->
+          <polygon points="30,80 30,30 65,30 65,55 95,55 95,80"
+                   fill="rgba(220,38,38,0.20)" stroke="#dc2626" stroke-width="2"/>
+          <text x="60" y="20" font-size="9" fill="#dc2626" text-anchor="middle">оригинал</text>
+          <!-- Right mirrored (L-shape, flipped) -->
+          <polygon points="190,80 190,30 155,30 155,55 125,55 125,80"
+                   fill="rgba(217,119,6,0.20)" stroke="#d97706" stroke-width="2"/>
+          <text x="160" y="20" font-size="9" fill="#d97706" text-anchor="middle">зеркальная копия</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Жазықтық арқылы <b>симметриялы</b> көшірме. Симметриялы бөлшектер үшін уақытты үнемдейді.</span>
+        <span lang="en" class="lang-content"><b>Symmetric</b> copy across a plane. Saves time for symmetric parts.</span>
+        <span lang="ru" class="lang-content"><b>Симметричная</b> копия через плоскость. Экономит время для симметричных деталей.</span>
+      </p>
+      <div class="formula mt-3 text-xs text-center">L − rt — Mirror — L − lt</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Real-world example: car wheel -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🛞 Іс жүзіндегі мысал — авто дөңгелегі</span>
+    <span lang="en" class="lang-content">🛞 Real Example — Car Wheel</span>
+    <span lang="ru" class="lang-content">🛞 Пример из жизни — автомобильное колесо</span>
+  </h2>
+  <div class="blueprint p-6">
+    <svg viewBox="0 0 600 250" style="width:100%;max-width:600px;display:block;margin:auto" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- ── Step 1: hub + ONE bolt hole ── -->
+      <text x="120" y="20" font-size="11" fill="#059669" text-anchor="middle" font-weight="bold">① Один элемент</text>
+      <circle cx="120" cy="130" r="80" fill="rgba(5,150,105,0.08)" stroke="#059669" stroke-width="2"/>
+      <circle cx="120" cy="130" r="20" fill="rgba(5,150,105,0.20)" stroke="#059669" stroke-width="2"/>
+      <!-- single bolt hole at top -->
+      <circle cx="120" cy="80" r="8" fill="rgba(220,38,38,0.30)" stroke="#dc2626" stroke-width="2"/>
+      <text x="120" y="230" font-size="9" fill="#64748b" text-anchor="middle">1 отверстие под болт</text>
+
+      <!-- arrow -->
+      <line x1="220" y1="130" x2="280" y2="130" stroke="#7c3aed" stroke-width="2"/>
+      <polygon points="280,130 270,125 270,135" fill="#7c3aed"/>
+      <text x="250" y="120" font-size="9" fill="#7c3aed" text-anchor="middle">Circular Pattern (×5)</text>
+
+      <!-- ── Step 2: 5 bolt holes from circular pattern ── -->
+      <text x="430" y="20" font-size="11" fill="#2563eb" text-anchor="middle" font-weight="bold">② Готовый диск с 5 отверстиями</text>
+      <circle cx="430" cy="130" r="80" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="2"/>
+      <circle cx="430" cy="130" r="20" fill="rgba(37,99,235,0.20)" stroke="#2563eb" stroke-width="2"/>
+      <!-- 5 holes at 72° apart, r=50 from center -->
+      <!-- 0° (top): (430, 80) -->
+      <circle cx="430" cy="80" r="8" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <!-- 72°: (430+50*sin72°, 130-50*cos72°) = (430+47.6, 130-15.5) = (478, 115) -->
+      <circle cx="478" cy="115" r="8" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <!-- 144°: (430+50*sin144°, 130-50*cos144°) = (430+29.4, 130+40.5) = (459, 170) -->
+      <circle cx="459" cy="170" r="8" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <!-- 216°: (430+50*sin216°, 130-50*cos216°) = (430-29.4, 130+40.5) = (401, 170) -->
+      <circle cx="401" cy="170" r="8" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <!-- 288°: (430+50*sin288°, 130-50*cos288°) = (430-47.6, 130-15.5) = (382, 115) -->
+      <circle cx="382" cy="115" r="8" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <!-- Centre dot -->
+      <circle cx="430" cy="130" r="3" fill="#2563eb"/>
+      <text x="430" y="230" font-size="9" fill="#64748b" text-anchor="middle">5 отверстий через 72°</text>
+    </svg>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚡ Артықшылықтары</span>
+    <span lang="en" class="lang-content">⚡ Benefits</span>
+    <span lang="ru" class="lang-content">⚡ Преимущества</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="tile"><div class="tile-icon">⚡</div><p class="font-bold text-emerald-800 mt-2"><span lang="kk" class="lang-content">Жылдамдық</span><span lang="en" class="lang-content">Speed</span><span lang="ru" class="lang-content">Скорость</span></p><p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">10 тесіктің орнына 1 — 10× жылдам</span><span lang="en" class="lang-content">1 hole instead of 10 — 10× faster</span><span lang="ru" class="lang-content">1 отверстие вместо 10 — в 10× быстрее</span></p></div>
+    <div class="tile"><div class="tile-icon">🔧</div><p class="font-bold text-emerald-800 mt-2"><span lang="kk" class="lang-content">Параметрлік</span><span lang="en" class="lang-content">Parametric</span><span lang="ru" class="lang-content">Параметрика</span></p><p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">N немесе d-ні өзгерту → бәрі жаңарады</span><span lang="en" class="lang-content">Change N or d → all update</span><span lang="ru" class="lang-content">Изменишь N или d → всё обновится</span></p></div>
+    <div class="tile"><div class="tile-icon">🎯</div><p class="font-bold text-emerald-800 mt-2"><span lang="kk" class="lang-content">Дәлдік</span><span lang="en" class="lang-content">Precision</span><span lang="ru" class="lang-content">Точность</span></p><p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Қашықтықтар автоматты, қателер жоқ</span><span lang="en" class="lang-content">Spacings automatic, no errors</span><span lang="ru" class="lang-content">Расстояния автоматом, без ошибок</span></p></div>
+  </div>
+</section>
+
+<footer class="card-emerald rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Үш формула</span>
+    <span lang="en" class="lang-content">🧠 Three Formulas</span>
+    <span lang="ru" class="lang-content">🧠 Три формулы</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4 text-center"><div class="font-bold text-lg mb-1">Linear</div><div class="text-emerald-100">N × d</div></div>
+    <div class="bg-white/10 rounded-xl p-4 text-center"><div class="font-bold text-lg mb-1">Circular</div><div class="text-emerald-100">N × α (или 360°/N)</div></div>
+    <div class="bg-white/10 rounded-xl p-4 text-center"><div class="font-bold text-lg mb-1">Mirror</div><div class="text-emerald-100">⟂ плоскость симметрии</div></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

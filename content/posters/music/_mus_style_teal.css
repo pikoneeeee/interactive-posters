@@ -1,0 +1,177 @@
+/* _mus_style.css — Музыкальная грамота · Тема: Teal (плакаты 11-20) */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0fdf4 100%);
+  color: #1e1b2e;
+  min-height: 100vh;
+}
+.heading-font { font-family: 'Montserrat', sans-serif; }
+
+.card {
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(13,148,136,0.16);
+  box-shadow: 0 4px 20px rgba(13,148,136,0.08);
+}
+.card-accent {
+  background: rgba(13,148,136,0.06);
+  border: 1px solid rgba(13,148,136,0.22);
+}
+.card-music {
+  background: linear-gradient(135deg, #134e4a, #0f766e 60%, #0d9488);
+  color: white;
+}
+.rounded-custom { border-radius: 1.5rem; }
+
+/* ===== language switching ===== */
+.lang-btn {
+  padding: 8px 20px; border-radius: 9999px;
+  border: 2px solid rgba(13,148,136,0.35);
+  background: transparent; color: #0f766e;
+  font-weight: 700; cursor: pointer; font-size: 1rem;
+  transition: all 0.2s;
+}
+.lang-btn:hover { background: rgba(13,148,136,0.08); }
+.lang-btn.active { background: #0d9488; color: white; border-color: #0d9488; }
+
+.lang-content { display: none !important; }
+.lang-kk .lang-content[lang="kk"],
+.lang-en .lang-content[lang="en"],
+.lang-ru .lang-content[lang="ru"] { display: block !important; }
+.lang-kk span.lang-content[lang="kk"],
+.lang-en span.lang-content[lang="en"],
+.lang-ru span.lang-content[lang="ru"] { display: inline !important; }
+
+/* ===== stage panel (staff-lined backdrop for SVG / illustrations) ===== */
+.stage {
+  background-color: #f0fdfa;
+  background-image:
+    linear-gradient(rgba(13,148,136,0.13) 1px, transparent 1px);
+  background-size: 100% 16px;
+  border-radius: 1rem; padding: 1.4rem;
+  border: 1px solid rgba(13,148,136,0.18);
+}
+.plain-stage {
+  background: #f0fdfa; border-radius: 1rem; padding: 1.2rem;
+  border: 1px solid rgba(13,148,136,0.18);
+}
+
+/* ===== photo frame ===== */
+.photo {
+  border-radius: 1rem; overflow: hidden;
+  border: 1px solid rgba(13,148,136,0.20);
+  box-shadow: 0 6px 22px rgba(17,94,89,0.12);
+  position: relative;
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo .cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(transparent, rgba(30,27,46,0.78));
+  color: #fff; font-size: 0.82rem; padding: 22px 12px 9px; font-weight: 600;
+}
+
+/* ===== tables ===== */
+table.t { width: 100%; border-collapse: collapse; }
+table.t th {
+  background: rgba(13,148,136,0.10); color: #115e59;
+  padding: 13px 16px; font-weight: 700; font-size: 1rem;
+  text-align: left; border-bottom: 2px solid rgba(13,148,136,0.22);
+}
+table.t td {
+  padding: 11px 16px; border-bottom: 1px solid rgba(15,23,42,0.07);
+  font-size: 1rem; vertical-align: middle; color: #334155;
+}
+table.t tr:hover td { background: rgba(13,148,136,0.05); }
+
+/* ===== tiles / badges / steps ===== */
+.tile {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(13,148,136,0.18);
+  border-radius: 1rem; padding: 1.25rem; text-align: center;
+  transition: all 0.2s; box-shadow: 0 2px 8px rgba(13,148,136,0.05);
+}
+.tile:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(13,148,136,0.14); }
+.tile-icon { font-size: 2.2rem; }
+
+.badge {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  font-weight: 700; font-size: 0.9rem; margin: 2px;
+  background: rgba(13,148,136,0.10); color: #115e59;
+  border: 1px solid rgba(13,148,136,0.25);
+}
+
+.step-num {
+  width: 2rem; height: 2rem; border-radius: 50%;
+  background: #0d9488; color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.95rem; flex-shrink: 0;
+}
+
+.tip {
+  background: #0c2e2a; color: #99f6e4;
+  font-family: 'Courier New', monospace;
+  padding: 14px 20px; border-radius: 0.75rem;
+  font-size: 1rem; border: 1px solid #134e4a; line-height: 1.7;
+}
+
+/* ===== interactive piano keyboard ===== */
+.pianobar { display: flex; position: relative; user-select: none;
+  height: 150px; max-width: 100%; margin: auto; }
+.wkey {
+  flex: 1 0 0; background: linear-gradient(#fff, #ecfdf8);
+  border: 1px solid #93cbc3; border-radius: 0 0 7px 7px;
+  position: relative; cursor: pointer; transition: background 0.08s;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 8px; font-size: 0.72rem; font-weight: 700; color: #0f766e; z-index: 1;
+}
+.wkey:hover { background: linear-gradient(#fff, #d3f5ee); }
+.wkey:active, .wkey.lit { background: linear-gradient(#99f6e4, #5eead4); }
+.bkey {
+  position: absolute; top: 0; width: 9%; height: 62%;
+  background: linear-gradient(#134e4a, #0a2622);
+  border-radius: 0 0 5px 5px; cursor: pointer; z-index: 2;
+  box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+  font-size: 0.55rem; color: #5eead4; text-align: center; padding-top: 4px; font-weight: 700;
+}
+.bkey:active, .bkey.lit { background: linear-gradient(#0d9488, #115e59); }
+
+/* ===== clickable note / sound buttons ===== */
+.notebtn {
+  cursor: pointer; transition: all 0.15s;
+  border: 2px solid rgba(13,148,136,0.30); background: rgba(13,148,136,0.06);
+  border-radius: 0.8rem; padding: 10px 8px; text-align: center;
+}
+.notebtn:hover { background: rgba(13,148,136,0.14); transform: translateY(-2px); }
+.notebtn:active, .notebtn.lit { background: #0d9488; color: #fff; border-color: #0d9488; }
+.notebtn .glyph { font-size: 1.9rem; line-height: 1; }
+
+.playbtn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  background: #0d9488; color: #fff; border: none; border-radius: 999px;
+  padding: 9px 20px; font-weight: 700; font-size: 0.95rem; transition: all 0.15s;
+}
+.playbtn:hover { background: #0f766e; transform: translateY(-1px); }
+.playbtn:active { transform: scale(0.97); }
+
+.hint {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: #0d9488; font-weight: 600;
+  background: rgba(13,148,136,0.08); border-radius: 999px; padding: 3px 12px;
+}
+
+/* svg note flash for rhythm players */
+.beatdot { transition: all 0.1s; }
+
+/* clickable notes drawn inside SVG staves */
+.svgnote { cursor: pointer; }
+.svgnote ellipse, .svgnote circle { transition: fill 0.12s; }
+.svgnote:hover ellipse, .svgnote:hover circle { fill: #2dd4bf; }
+.svgnote.lit ellipse, .svgnote.lit circle { fill: #16a34a; }
+.svgnote text { pointer-events: none; }
+
+/* generic responsive svg */
+.svgwrap { width: 100%; overflow-x: auto; }
+.svgwrap svg { width: 100%; height: auto; min-width: 520px; }
+
+/* full-instrument photos (portrait) shown uncropped */
+.photo.contain{background:#ffffff;}
+.photo.contain img{object-fit:contain;background:#ffffff;}

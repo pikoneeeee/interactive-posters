@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Косоугольная диметрия</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 5 · Аксонометрия</span>
+      <span lang="en" class="lang-content">Graphics · Section 5 · Axonometry</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 5 · Аксонометрия</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📐 Қиғаш диметрия</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📐 Oblique Dimetric Projection</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📐 Косоугольная диметрия</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">X және Z осьтері нақты масштабта, Y осі жартылай — фронталды беттер бұрмалынбайды.</span>
+      <span lang="en" class="lang-content">X and Z at true scale, Y halved — frontal faces are not distorted.</span>
+      <span lang="ru" class="lang-content">X и Z в натуральную величину, Y вдвое меньше — фронтальные грани не искажаются.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Parameters -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Диметрия параметрлері (ГОСТ 2.317)</span>
+    <span lang="en" class="lang-content">📐 Dimetry Parameters (GOST 2.317)</span>
+    <span lang="ru" class="lang-content">📐 Параметры диметрии (ГОСТ 2.317)</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <table class="t">
+        <thead>
+          <tr>
+            <th><span lang="kk" class="lang-content">Ось</span><span lang="en" class="lang-content">Axis</span><span lang="ru" class="lang-content">Ось</span></th>
+            <th><span lang="kk" class="lang-content">Бұрыш</span><span lang="en" class="lang-content">Angle</span><span lang="ru" class="lang-content">Угол</span></th>
+            <th><span lang="kk" class="lang-content">Коэффициент</span><span lang="en" class="lang-content">Coefficient</span><span lang="ru" class="lang-content">Коэффициент</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="font-bold text-violet-700">X</td><td>0° (горизонталь)</td><td><b class="text-green-700">k = 1,0</b> (нақты)</td></tr>
+          <tr><td class="font-bold text-violet-700">Z</td><td>90° (тік)</td><td><b class="text-green-700">k = 1,0</b> (нақты)</td></tr>
+          <tr><td class="font-bold text-violet-700">Y</td><td>45°</td><td><b class="text-amber-600">k = 0,5</b> (жарты)</td></tr>
+        </tbody>
+      </table>
+      <div class="card-accent rounded-xl p-3 mt-4 text-sm">
+        <p class="font-bold text-violet-800 mb-1">
+          <span lang="kk" class="lang-content">💡 Негізгі ерекшелік:</span>
+          <span lang="en" class="lang-content">💡 Key feature:</span>
+          <span lang="ru" class="lang-content">💡 Главная особенность:</span>
+        </p>
+        <p class="text-slate-700">
+          <span lang="kk" class="lang-content">Фронталды беттер (XZ жазықтығы) <b>бұрмалынбайды</b> — нақты пішінде. Y бағытында ғана <b>2 есе кішірейеді</b>.</span>
+          <span lang="en" class="lang-content">Frontal faces (XZ plane) are <b>not distorted</b> — true shape. Only Y direction is <b>halved</b>.</span>
+          <span lang="ru" class="lang-content">Фронтальные грани (плоскость XZ) <b>не искажаются</b> — истинная форма. Только Y уменьшается <b>вдвое</b>.</span>
+        </p>
+      </div>
+    </div>
+    <!-- Dimetry axes SVG — clean separated axes + box -->
+    <!-- Box: front face XZ, width 100, height 80, at front bottom-left (50,180) -->
+    <!-- Y depth = 40 actual, halved = 20 visible, direction 45° UP-RIGHT -->
+    <!-- Shift = (20*cos45°, -20*sin45°) ≈ (14, -14) -->
+    <!-- Back face: (64,166), (164,166), (164,86), (64,86) -->
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 260" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- AXES drawn first (BEHIND the box, transparent area only) -->
+        <!-- X axis (horizontal right) -->
+        <line x1="20" y1="180" x2="50" y2="180" stroke="#2563eb" stroke-width="2"/>
+        <line x1="150" y1="180" x2="265" y2="180" stroke="#2563eb" stroke-width="2"/>
+        <polygon points="265,180 254,175 254,185" fill="#2563eb"/>
+        <text x="270" y="184" font-size="12" fill="#2563eb" font-weight="bold">X</text>
+        <text x="195" y="200" font-size="9" fill="#2563eb">k = 1,0 (0°)</text>
+
+        <!-- Z axis (vertical up) -->
+        <line x1="50" y1="180" x2="50" y2="150" stroke="#ef4444" stroke-width="2"/>
+        <line x1="50" y1="80" x2="50" y2="30" stroke="#ef4444" stroke-width="2"/>
+        <polygon points="50,30 45,42 55,42" fill="#ef4444"/>
+        <text x="42" y="22" font-size="12" fill="#ef4444" font-weight="bold">Z</text>
+        <text x="10" y="60" font-size="9" fill="#ef4444">k = 1,0</text>
+        <text x="10" y="72" font-size="9" fill="#ef4444">(90°)</text>
+
+        <!-- Y axis (45° up-right, dashed segment, then full at exit) -->
+        <line x1="50" y1="180" x2="240" y2="50" stroke="#d97706" stroke-width="2" stroke-dasharray="5,3"/>
+        <polygon points="240,50 232,58 240,64" fill="#d97706"/>
+        <text x="245" y="48" font-size="12" fill="#d97706" font-weight="bold">Y</text>
+        <text x="245" y="63" font-size="9" fill="#d97706">k = 0,5</text>
+        <text x="245" y="75" font-size="9" fill="#d97706">(45°)</text>
+
+        <!-- Origin marker -->
+        <circle cx="50" cy="180" r="3.5" fill="#7c3aed"/>
+        <text x="30" y="196" font-size="10" fill="#7c3aed" font-weight="bold">O</text>
+
+        <!-- BOX (drawn on top of axes) -->
+        <!-- Front face XZ at y=0: (50,180), (150,180), (150,100), (50,100) -->
+        <!-- Back face shifted by Y (45°, halved): (64,166), (164,166), (164,86), (64,86) -->
+
+        <!-- Top face (visible) -->
+        <polygon points="50,100 150,100 164,86 64,86"
+                 fill="rgba(124,58,237,0.10)" stroke="#7c3aed" stroke-width="1.5"/>
+
+        <!-- Right face (visible) -->
+        <polygon points="150,100 150,180 164,166 164,86"
+                 fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1.5"/>
+
+        <!-- Front face (true shape, drawn last on top) -->
+        <rect x="50" y="100" width="100" height="80" fill="rgba(124,58,237,0.06)" stroke="#7c3aed" stroke-width="2"/>
+
+        <!-- Hidden back edges (dashed) -->
+        <line x1="50" y1="100" x2="64" y2="86" stroke="#7c3aed" stroke-width="0.8" stroke-dasharray="3,2"/>
+        <line x1="50" y1="180" x2="64" y2="166" stroke="#7c3aed" stroke-width="0.8" stroke-dasharray="3,2"/>
+        <line x1="64" y1="86" x2="64" y2="166" stroke="#7c3aed" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+        <!-- Labels (in safe zones) -->
+        <text x="100" y="145" font-size="10" fill="#7c3aed" text-anchor="middle" font-weight="bold">фронт. грань</text>
+        <text x="100" y="158" font-size="9" fill="#7c3aed" text-anchor="middle">(k=1 — истинная)</text>
+        <text x="170" y="115" font-size="8" fill="#d97706">глубина ÷ 2</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Isometry vs Dimetry comparison -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚖️ Изометрия vs Диметрия</span>
+    <span lang="en" class="lang-content">⚖️ Isometry vs Dimetry</span>
+    <span lang="ru" class="lang-content">⚖️ Изометрия vs Диметрия</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <table class="t">
+      <thead>
+        <tr>
+          <th><span lang="kk" class="lang-content">Параметр</span><span lang="en" class="lang-content">Parameter</span><span lang="ru" class="lang-content">Параметр</span></th>
+          <th class="text-violet-600"><span lang="kk" class="lang-content">Изометрия</span><span lang="en" class="lang-content">Isometry</span><span lang="ru" class="lang-content">Изометрия</span></th>
+          <th class="text-amber-600"><span lang="kk" class="lang-content">Диметрия</span><span lang="en" class="lang-content">Dimetry</span><span lang="ru" class="lang-content">Диметрия</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span lang="kk" class="lang-content">X, Y бұрыштары</span><span lang="en" class="lang-content">X, Y angles</span><span lang="ru" class="lang-content">Углы X, Y</span></td>
+          <td class="text-violet-700">30° / 30°</td>
+          <td class="text-amber-700">0° / 45°</td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Коэффициенттер</span><span lang="en" class="lang-content">Coefficients</span><span lang="ru" class="lang-content">Коэффициенты</span></td>
+          <td class="text-violet-700">kx=ky=kz=1</td>
+          <td class="text-amber-700">kx=kz=1, ky=0,5</td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Фронталды бет</span><span lang="en" class="lang-content">Front face</span><span lang="ru" class="lang-content">Фронтальная грань</span></td>
+          <td class="text-violet-700"><span lang="kk" class="lang-content">Ромб (бұрмалынған)</span><span lang="en" class="lang-content">Rhombus (distorted)</span><span lang="ru" class="lang-content">Ромб (искажена)</span></td>
+          <td class="text-amber-700"><span lang="kk" class="lang-content">Тіктөртбұрыш (нақты!)</span><span lang="en" class="lang-content">Rectangle (true shape!)</span><span lang="ru" class="lang-content">Прямоугольник (истинная!)</span></td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Тереңдік</span><span lang="en" class="lang-content">Depth</span><span lang="ru" class="lang-content">Глубина</span></td>
+          <td class="text-violet-700"><span lang="kk" class="lang-content">Нақты</span><span lang="en" class="lang-content">True</span><span lang="ru" class="lang-content">Истинная</span></td>
+          <td class="text-amber-700"><span lang="kk" class="lang-content">Жартылай (0,5)</span><span lang="en" class="lang-content">Halved (×0.5)</span><span lang="ru" class="lang-content">Вдвое меньше (×0,5)</span></td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Қолайлы</span><span lang="en" class="lang-content">Best for</span><span lang="ru" class="lang-content">Подходит для</span></td>
+          <td class="text-violet-700"><span lang="kk" class="lang-content">Кез-келген форма</span><span lang="en" class="lang-content">Any shape</span><span lang="ru" class="lang-content">Любые формы</span></td>
+          <td class="text-amber-700"><span lang="kk" class="lang-content">Күрделі фронталды бет</span><span lang="en" class="lang-content">Complex frontal face</span><span lang="ru" class="lang-content">Сложная фронтальная грань</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- When to use dimetry -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Диметрияны қашан таңдаймыз?</span>
+    <span lang="en" class="lang-content">🎯 When to Choose Dimetry?</span>
+    <span lang="ru" class="lang-content">🎯 Когда выбирать диметрию?</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="tile">
+      <div class="tile-icon">🔲</div>
+      <p class="font-bold text-violet-800 mt-2 text-sm"><span lang="kk" class="lang-content">Күрделі фронтальды бет</span><span lang="en" class="lang-content">Complex frontal face</span><span lang="ru" class="lang-content">Сложная фронтальная грань</span></p>
+      <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Фасад бөлшіктелген болса, диметрия оны бұрмаламайды</span><span lang="en" class="lang-content">If the front face is detailed, dimetry preserves it exactly</span><span lang="ru" class="lang-content">Если фасад детальный — диметрия не искажает его</span></p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">⭕</div>
+      <p class="font-bold text-violet-800 mt-2 text-sm"><span lang="kk" class="lang-content">Шеңберлер — фронталды бетте</span><span lang="en" class="lang-content">Circles on the front face</span><span lang="ru" class="lang-content">Окружности на фронтальной грани</span></p>
+      <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Диметрияда фронтальды шеңберлер дөңгелек болып қалады (эллипс емес)</span><span lang="en" class="lang-content">In dimetry, front-face circles remain circles (not ellipses)</span><span lang="ru" class="lang-content">В диметрии фронтальные окружности остаются кругами</span></p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">🏗️</div>
+      <p class="font-bold text-violet-800 mt-2 text-sm"><span lang="kk" class="lang-content">Архитектура, фасадтар</span><span lang="en" class="lang-content">Architecture, facades</span><span lang="ru" class="lang-content">Архитектура, фасады</span></p>
+      <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Ғимарат фасадын дәл беру үшін жиі қолданылады</span><span lang="en" class="lang-content">Commonly used for building facades to show true front appearance</span><span lang="ru" class="lang-content">Часто применяется для фасадов зданий</span></p>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">X: 0° / Z: 90°</p>
+      <p class="text-violet-200"><span lang="kk" class="lang-content">Горизонталь + тік — нақты масштаб k=1</span><span lang="en" class="lang-content">Horizontal + vertical — true scale k=1</span><span lang="ru" class="lang-content">Горизонталь + вертикаль — масштаб k=1</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">Y: 45° / k=0,5</p>
+      <p class="text-violet-200"><span lang="kk" class="lang-content">Y бойынша өлшемдерді 2-ге бөл</span><span lang="en" class="lang-content">Divide all Y dimensions by 2</span><span lang="ru" class="lang-content">Все размеры по Y делить на 2</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Фронтальды бет = нақты</span><span lang="en" class="lang-content">Front face = true shape</span><span lang="ru" class="lang-content">Фронтальная грань = истинная</span></p>
+      <p class="text-violet-200"><span lang="kk" class="lang-content">Бұрмалынбайды — диметрияның артықшылығы</span><span lang="en" class="lang-content">Not distorted — the advantage of dimetry</span><span lang="ru" class="lang-content">Не искажается — преимущество диметрии</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

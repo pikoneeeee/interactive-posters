@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Нанесение размеров</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-blue-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 1 · Өлшемдер</span>
+      <span lang="en" class="lang-content">Graphics · Section 1 · Dimensioning</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 1 · Нанесение размеров</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">📏 Өлшемдерді нанесение ету — ГОСТ 2.307</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">📏 Dimensioning — GOST 2.307</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">📏 Нанесение размеров — ГОСТ 2.307</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Сызба өлшемдерін дұрыс қою — бірмәнді оқылуды қамтамасыз ету.</span>
+      <span lang="en" class="lang-content">Correct dimensioning ensures the drawing is read unambiguously.</span>
+      <span lang="ru" class="lang-content">Правильная простановка размеров обеспечивает однозначное чтение чертежа.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Elements of a dimension -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔩 Өлшемнің элементтері</span>
+    <span lang="en" class="lang-content">🔩 Elements of a Dimension</span>
+    <span lang="ru" class="lang-content">🔩 Элементы размера</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 320 200" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Part outline -->
+        <rect x="60" y="40" width="200" height="100" fill="none" stroke="#1e293b" stroke-width="3"/>
+        <!-- Extension lines -->
+        <line x1="60" y1="160" x2="60" y2="175" stroke="#1e293b" stroke-width="1.2"/>
+        <line x1="260" y1="160" x2="260" y2="175" stroke="#1e293b" stroke-width="1.2"/>
+        <!-- Dimension line horizontal -->
+        <line x1="60" y1="170" x2="260" y2="170" stroke="#1e293b" stroke-width="1.2"/>
+        <!-- Arrows -->
+        <polygon points="60,170 72,166 72,174" fill="#1e293b"/>
+        <polygon points="260,170 248,166 248,174" fill="#1e293b"/>
+        <!-- Dimension value -->
+        <text x="160" y="167" font-size="12" fill="#1e293b" text-anchor="middle" font-weight="bold">200</text>
+        <!-- Vertical dimension -->
+        <line x1="270" y1="40" x2="285" y2="40" stroke="#1e293b" stroke-width="1.2"/>
+        <line x1="270" y1="140" x2="285" y2="140" stroke="#1e293b" stroke-width="1.2"/>
+        <line x1="280" y1="40" x2="280" y2="140" stroke="#1e293b" stroke-width="1.2"/>
+        <polygon points="280,40 276,52 284,52" fill="#1e293b"/>
+        <polygon points="280,140 276,128 284,128" fill="#1e293b"/>
+        <text x="295" y="95" font-size="12" fill="#1e293b" text-anchor="middle" font-weight="bold" transform="rotate(-90,295,95)">100</text>
+        <!-- Labels -->
+        <text x="40" y="155" font-size="8" fill="#2563eb">выносная</text>
+        <text x="40" y="163" font-size="8" fill="#2563eb">линия</text>
+        <text x="115" y="186" font-size="8" fill="#dc2626">размерная линия</text>
+        <text x="135" y="155" font-size="8" fill="#16a34a">число</text>
+        <!-- Arrow annotation -->
+        <text x="50" y="175" font-size="8" fill="#7c3aed">←стрелка</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <div class="space-y-4">
+        <div class="flex gap-3 items-start">
+          <div class="w-3 h-3 rounded-full bg-blue-600 mt-1 flex-shrink-0"></div>
+          <div>
+            <p class="font-bold text-blue-800"><span lang="kk" class="lang-content">Шығарма сызықтар</span><span lang="en" class="lang-content">Extension Lines</span><span lang="ru" class="lang-content">Выносные линии</span></p>
+            <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Контурдан 1–2 мм тыс шығып, өлшем сызығынан 3–5 мм өтеді. Сплошная тонкая сызықпен.</span><span lang="en" class="lang-content">Start 1–2 mm from the outline, extend 3–5 mm beyond the dimension line. Drawn as solid thin lines.</span><span lang="ru" class="lang-content">Отступ от контура 1–2 мм, выступают за размерную линию на 3–5 мм. Сплошные тонкие линии.</span></p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="w-3 h-3 rounded-full bg-red-500 mt-1 flex-shrink-0"></div>
+          <div>
+            <p class="font-bold text-blue-800"><span lang="kk" class="lang-content">Өлшем сызығы</span><span lang="en" class="lang-content">Dimension Line</span><span lang="ru" class="lang-content">Размерная линия</span></p>
+            <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Контурдан кемінде 10 мм, өлшемдер арасы кемінде 7 мм. Ортасында сан жазылады.</span><span lang="en" class="lang-content">Minimum 10 mm from outline, 7 mm between adjacent dimensions. Value written in the middle.</span><span lang="ru" class="lang-content">Минимум 10 мм от контура, 7 мм между соседними размерами. Число пишется посередине.</span></p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="w-3 h-3 rounded-full bg-purple-600 mt-1 flex-shrink-0"></div>
+          <div>
+            <p class="font-bold text-blue-800"><span lang="kk" class="lang-content">Стрелкалар</span><span lang="en" class="lang-content">Arrows</span><span lang="ru" class="lang-content">Стрелки</span></p>
+            <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Ұзындығы ≈ 3–5 мм. Толтырылған үшбұрыш. Ішке немесе сыртқа бағытталған.</span><span lang="en" class="lang-content">Length ≈ 3–5 mm. Filled arrowhead. Pointing inward or outward.</span><span lang="ru" class="lang-content">Длина ≈ 3–5 мм. Закрашенный треугольник. Направлены внутрь или наружу.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Signs: diameter, radius, square -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔣 Арнайы белгілер</span>
+    <span lang="en" class="lang-content">🔣 Special Symbols</span>
+    <span lang="ru" class="lang-content">🔣 Специальные знаки</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card rounded-custom p-6 text-center">
+      <div class="text-5xl font-bold text-blue-700 mb-3">⌀</div>
+      <p class="heading-font font-bold text-blue-800">
+        <span lang="kk" class="lang-content">Диаметр</span>
+        <span lang="en" class="lang-content">Diameter</span>
+        <span lang="ru" class="lang-content">Диаметр</span>
+      </p>
+      <p class="text-slate-600 text-sm mt-2">
+        <span lang="kk" class="lang-content">Цилиндрлер мен шеңберлер үшін. Бірден бір сызба болса — «⌀50» деп жазылады.</span>
+        <span lang="en" class="lang-content">For cylinders and circles. Written as «⌀50» when only one view is shown.</span>
+        <span lang="ru" class="lang-content">Для цилиндров и окружностей. При одном виде пишется «⌀50».</span>
+      </p>
+      <div class="formula mt-3 text-center">⌀50</div>
+    </div>
+    <div class="card rounded-custom p-6 text-center">
+      <div class="text-5xl font-bold text-blue-700 mb-3">R</div>
+      <p class="heading-font font-bold text-blue-800">
+        <span lang="kk" class="lang-content">Радиус</span>
+        <span lang="en" class="lang-content">Radius</span>
+        <span lang="ru" class="lang-content">Радиус</span>
+      </p>
+      <p class="text-slate-600 text-sm mt-2">
+        <span lang="kk" class="lang-content">Доғалар үшін. Өлшем сызығы орталықтан шетке бағытталады, бір стрелка.</span>
+        <span lang="en" class="lang-content">For arcs. The dimension line runs from centre to arc, with one arrowhead.</span>
+        <span lang="ru" class="lang-content">Для дуг. Размерная линия от центра к дуге, одна стрелка.</span>
+      </p>
+      <div class="formula mt-3 text-center">R25</div>
+    </div>
+    <div class="card rounded-custom p-6 text-center">
+      <div class="text-5xl font-bold text-blue-700 mb-3">□</div>
+      <p class="heading-font font-bold text-blue-800">
+        <span lang="kk" class="lang-content">Квадрат</span>
+        <span lang="en" class="lang-content">Square</span>
+        <span lang="ru" class="lang-content">Квадрат</span>
+      </p>
+      <p class="text-slate-600 text-sm mt-2">
+        <span lang="kk" class="lang-content">Квадрат қимасы үшін. Бір өлшем ғана жазылады. «□40» — 40×40 мм квадрат.</span>
+        <span lang="en" class="lang-content">For square cross-sections. Only one dimension written. «□40» means 40×40 mm.</span>
+        <span lang="ru" class="lang-content">Для квадратного сечения. Пишется одна цифра. «□40» означает 40×40 мм.</span>
+      </p>
+      <div class="formula mt-3 text-center">□40</div>
+    </div>
+  </div>
+</section>
+
+<!-- Rules -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚠️ Өлшемдерді қою ережелері</span>
+    <span lang="en" class="lang-content">⚠️ Rules for Placing Dimensions</span>
+    <span lang="ru" class="lang-content">⚠️ Правила простановки размеров</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5">
+      <h3 class="font-bold text-green-700 mb-3">
+        <span lang="kk" class="lang-content">✅ Дұрыс</span>
+        <span lang="en" class="lang-content">✅ Correct</span>
+        <span lang="ru" class="lang-content">✅ Правильно</span>
+      </h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Өлшемдер <b>бір рет</b> қойылады — тек белгілі бір жерде</span><span lang="en" class="lang-content">Dimensions placed <b>once only</b> — in the most informative view</span><span lang="ru" class="lang-content">Размер проставляется <b>один раз</b> — в наиболее информативном виде</span></li>
+        <li>• <span lang="kk" class="lang-content">Өлшем сандары сызықтардан <b>1 мм жоғары</b> немесе сол жақта</span><span lang="en" class="lang-content">Numbers placed <b>1 mm above</b> horizontal lines or to the left of vertical</span><span lang="ru" class="lang-content">Числа располагаются <b>на 1 мм выше</b> горизонтальных или слева от вертикальных линий</span></li>
+        <li>• <span lang="kk" class="lang-content">Кіші бөлшектер — <b>ішке</b> (орын болса), үлкендер — сыртқа</span><span lang="en" class="lang-content">Small gaps → arrows <b>outside</b>; large gaps → arrows inside</span><span lang="ru" class="lang-content">При малом месте стрелки ставятся <b>снаружи</b></span></li>
+      </ul>
+    </div>
+    <div class="card rounded-custom p-5">
+      <h3 class="font-bold text-red-600 mb-3">
+        <span lang="kk" class="lang-content">❌ Қате</span>
+        <span lang="en" class="lang-content">❌ Wrong</span>
+        <span lang="ru" class="lang-content">❌ Ошибки</span>
+      </h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Контур сызықтарын өлшем немесе шығарма ретінде <b>қолдануға болмайды</b></span><span lang="en" class="lang-content">Outline lines must <b>not be used</b> as dimension or extension lines</span><span lang="ru" class="lang-content">Линии контура <b>нельзя</b> использовать как размерные или выносные</span></li>
+        <li>• <span lang="kk" class="lang-content">Өлшем сызықтары бір-бірімен және шығарма сызықтармен <b>кесілмеуі</b> тиіс</span><span lang="en" class="lang-content">Dimension lines should <b>not cross</b> each other or extension lines if avoidable</span><span lang="ru" class="lang-content">Размерные линии <b>не должны пересекаться</b> между собой и с выносными, если этого можно избежать</span></li>
+        <li>• <span lang="kk" class="lang-content">Бір мезетте <b>бір сан ашық</b> болуы керек — дыбысталымасыз</span><span lang="en" class="lang-content">Do <b>not duplicate</b> dimensions — each size stated once</span><span lang="ru" class="lang-content"><b>Не повторять</b> размеры — каждый указывается один раз</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-blue rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Негізгі өлшемдер</span>
+    <span lang="en" class="lang-content">🧠 Key Spacing Values</span>
+    <span lang="ru" class="lang-content">🧠 Основные расстояния</span>
+  </h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">10 мм</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Контурдан 1-ші өлшемге</span><span lang="en" class="lang-content">Outline to 1st dim. line</span><span lang="ru" class="lang-content">От контура до 1-й размерной</span></div></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">7 мм</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Өлшемдер арасы</span><span lang="en" class="lang-content">Between dim. lines</span><span lang="ru" class="lang-content">Между размерными</span></div></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">1–2 мм</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Контурдан шығарма бастауы</span><span lang="en" class="lang-content">Extension line start</span><span lang="ru" class="lang-content">Начало выносной от контура</span></div></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">3–5 мм</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Шығарманың асуы</span><span lang="en" class="lang-content">Extension line overshoot</span><span lang="ru" class="lang-content">Выход выносной</span></div></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

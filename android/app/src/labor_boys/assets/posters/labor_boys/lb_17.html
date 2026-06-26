@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Разметка, резка, опиливание металла</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.svgwrap{background:#fffdf9;border:1px solid rgba(190,18,60,.16);border-radius:1.25rem;padding:1.1rem;
+  box-shadow:0 4px 16px rgba(136,19,55,.07);}
+.svgwrap svg{display:block;width:100%;height:auto;}
+.note{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:.95rem 1.15rem;}
+.note p{color:#57534e;font-size:.93rem;line-height:1.5;}
+.note b{color:#881337;}
+.symtbl{width:100%;border-collapse:collapse;font-size:.95rem;}
+.symtbl th{background:rgba(190,18,60,.10);color:#881337;font-family:'Montserrat',sans-serif;
+  text-align:left;padding:.6rem .8rem;border-bottom:2px solid rgba(190,18,60,.25);}
+.symtbl td{padding:.55rem .8rem;border-bottom:1px solid rgba(190,18,60,.12);color:#44403c;vertical-align:top;}
+.symtbl tr:hover td{background:rgba(190,18,60,.04);}
+.rule{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1rem;padding:1.1rem 1.15rem;
+  box-shadow:0 2px 10px rgba(136,19,55,.05);transition:all .2s;}
+.rule:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(136,19,55,.13);}
+.rule .ic{font-size:2rem;line-height:1;}
+.rule h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;margin:.4rem 0 .2rem;}
+.rule p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.flow{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1rem;}
+.flow p{color:#44403c;font-size:.97rem;line-height:1.55;}
+.flow b{color:#881337;}
+.opcard{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1.1rem;
+  padding:1.25rem 1.3rem;box-shadow:0 2px 12px rgba(136,19,55,.06);}
+.opcard h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.12rem;}
+.opcard p{color:#57534e;font-size:.94rem;line-height:1.55;margin-top:.45rem;}
+.opcard .num{font-family:'Montserrat',sans-serif;font-weight:800;color:#be123c;font-size:1.5rem;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 3-бөлім · Металл өңдеу</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 3 · Metalworking</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 3 · Обработка металла</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Металды белгілеу, кесу, егеу</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Marking, Cutting and Filing Metal</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Разметка, резка, опиливание металла</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Тегіс табақтан дайын бөлшекке дейінгі үш негізгі слесарлық амал — дәл өлшеп, дұрыс кесіп, таза егеу.</span>
+      <span lang="en" class="lang-content">The three core bench-metalwork operations — measure precisely, cut correctly, file cleanly — from flat sheet to finished part.</span>
+      <span lang="ru" class="lang-content">Три главные слесарные операции — точно разметить, верно отрезать, чисто опилить — от плоского листа до готовой детали.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content">Металдан бөлшек жасау әрдайым үш кезеңнен басталады. Алдымен болашақ бөлшектің сұлбасын дайындамаға көшіреді — бұл <b>белгілеу (разметка)</b>. Содан соң артық металды алып тастайды — бұл <b>кесу</b>: жұқа табақты қайшымен, қалыңын темір ара (ножовка) немесе кескішпен. Соңында жиектерді тегістеп, өлшемге дәл жеткізеді — бұл <b>егеу (опиливание)</b> егеумен (напильник). Үш амалдың ортақ заңы — <b>«жеті рет өлше, бір рет кес»</b>: дәл белгілеу болмаса, ешбір кесу мен егеу қатені түзей алмайды. Бұл жұмыстар тискіде (стуктаушы тиски) бекітіліп, қорғаныш көзілдірікпен орындалады.</span>
+    <span lang="en" class="lang-content">Making a part from metal always begins with three stages. First the outline of the future part is transferred onto the workpiece — this is <b>marking out</b>. Then the surplus metal is removed — this is <b>cutting</b>: thin sheet with snips, thicker stock with a <b>hacksaw</b> or a chisel. Finally the edges are levelled and brought exactly to size — this is <b>filing</b> with a <b>file</b>. The shared law of all three is <b>"measure seven times, cut once"</b>: without accurate marking no amount of cutting or filing can fix the mistake. The work is held in a <b>bench vice</b> and done in safety goggles.</span>
+    <span lang="ru" class="lang-content">Изготовление детали из металла всегда начинается с трёх этапов. Сначала контур будущей детали переносят на заготовку — это <b>разметка</b>. Затем удаляют лишний металл — это <b>резка</b>: тонкий лист — ножницами, толстый — слесарной <b>ножовкой</b> или зубилом. В конце кромки выравнивают и доводят точно до размера — это <b>опиливание</b> <b>напильником</b>. Общий закон всех трёх операций — <b>«семь раз отмерь — один раз отрежь»</b>: без точной разметки ни резка, ни опиливание ошибку не исправят. Работу зажимают в <b>слесарных тисках</b> и выполняют в защитных очках.</span>
+  </p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <span class="badge">📐 <span lang="kk" class="lang-content">белгілеу</span><span lang="en" class="lang-content">marking</span><span lang="ru" class="lang-content">разметка</span></span>
+    <span class="badge">✂️ <span lang="kk" class="lang-content">кесу</span><span lang="en" class="lang-content">cutting</span><span lang="ru" class="lang-content">резка</span></span>
+    <span class="badge">🪚 <span lang="kk" class="lang-content">егеу</span><span lang="en" class="lang-content">filing</span><span lang="ru" class="lang-content">опиливание</span></span>
+    <span class="badge">🗜️ <span lang="kk" class="lang-content">тиски</span><span lang="en" class="lang-content">bench vice</span><span lang="ru" class="lang-content">тиски</span></span>
+    <span class="badge">📏 <span lang="kk" class="lang-content">дәлдік 0,5 мм</span><span lang="en" class="lang-content">accuracy 0.5 mm</span><span lang="ru" class="lang-content">точность 0,5 мм</span></span>
+  </div>
+</section>
+
+<!-- THREE OPERATIONS GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Үш амал — үш құрал</span>
+    <span lang="en" class="lang-content">Three operations — three tools</span>
+    <span lang="ru" class="lang-content">Три операции — три инструмента</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb17_punch.jpg" alt="Кернер / center punch"></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">кернер — нүкте салатын құрал</span><span lang="en" class="lang-content">centre punch — marks a dot</span><span lang="ru" class="lang-content">кернер — наносит точку</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Белгілеуде сызатты <b>чертилкамен</b> (рисмус) сызады, ал бұрғылау орнын <b>кернермен</b> белгілейді: ұшын нүктеге қойып, балғамен бір соғады. Шұңқыр бұрғыны сырғанаудан сақтайды.</span><span lang="en" class="lang-content">In marking, lines are scratched with a <b>scriber</b>, and the spot for drilling is fixed with a <b>centre punch</b>: place the tip on the point and tap once with a hammer. The dimple stops the drill from sliding.</span><span lang="ru" class="lang-content">При разметке риски проводят <b>чертилкой</b>, а место сверления отмечают <b>кернером</b>: ставят остриё на точку и бьют молотком один раз. Лунка не даёт сверлу соскользнуть.</span></div>
+      <div class="body">
+        <h3 class="genre-name">📐 <span lang="kk" class="lang-content">Белгілеу — кернер</span><span lang="en" class="lang-content">Marking — punch</span><span lang="ru" class="lang-content">Разметка — кернер</span></h3>
+        <p class="genre-desc" style="margin-top:.4rem"><span lang="kk" class="lang-content">Сызбаны металға дәл көшіреді: сызаттар мен бұрғылау нүктелері.</span><span lang="en" class="lang-content">Transfers the drawing onto metal: lines and drill points.</span><span lang="ru" class="lang-content">Точно переносит чертёж на металл: риски и точки сверления.</span></p>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb17_hacksaw.jpg" alt="Слесарная ножовка / hacksaw"></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">темір ара — алмалы жүзі бар</span><span lang="en" class="lang-content">hacksaw — replaceable blade</span><span lang="ru" class="lang-content">ножовка — со сменным полотном</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Темір ара — рамадан, тұтқадан және <b>алмалы жүзден</b> тұрады. Тістері алға қарай иілуі керек: ара тек <b>ілгері жүргенде</b> кеседі. Жүз керіліп бекітіледі, кесу баяу да біркелкі болады.</span><span lang="en" class="lang-content">A hacksaw is a frame, a handle and a <b>replaceable blade</b>. The teeth must point forward: the saw cuts only on the <b>forward stroke</b>. The blade is tensioned tight, and you saw slowly and evenly.</span><span lang="ru" class="lang-content">Ножовка состоит из рамки, ручки и <b>сменного полотна</b>. Зубья должны смотреть вперёд: пила режет только при <b>движении вперёд</b>. Полотно натягивают туго, пилят медленно и равномерно.</span></div>
+      <div class="body">
+        <h3 class="genre-name">✂️ <span lang="kk" class="lang-content">Кесу — темір ара</span><span lang="en" class="lang-content">Cutting — hacksaw</span><span lang="ru" class="lang-content">Резка — ножовка</span></h3>
+        <p class="genre-desc" style="margin-top:.4rem"><span lang="kk" class="lang-content">Қалың табақ пен сырықты сызаттан 1 мм қалдырып кеседі.</span><span lang="en" class="lang-content">Cuts thick sheet and bar, leaving ~1 mm to the line.</span><span lang="ru" class="lang-content">Режет толстый лист и пруток, отступив ~1 мм от риски.</span></p>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb17_file.jpg" alt="Напильник / file"></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">егеу — болат, насечкалы</span><span lang="en" class="lang-content">file — steel, with cut teeth</span><span lang="ru" class="lang-content">напильник — стальной, с насечкой</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Егеудің бетінде көлбеу <b>тіс жолдары (насечка)</b> бар — әрқайсысы кішкентай кескіш. Егеуді екі қолмен ұстап, <b>ілгері</b> жүргенде басады, кейін қайтарғанда көтереді. Жұмыс тискіде, көз деңгейінде орындалады.</span><span lang="en" class="lang-content">A file's surface carries angled rows of <b>teeth (the cut)</b> — each a tiny cutter. Hold the file with both hands, press on the <b>forward</b> stroke and lift it on the return. The work is held in a vice at elbow height.</span><span lang="ru" class="lang-content">На поверхности напильника — косые ряды <b>зубьев (насечка)</b>, каждый из которых маленький резец. Держат напильник двумя руками, нажимают при движении <b>вперёд</b> и приподнимают на обратном ходу. Работают в тисках на уровне локтя.</span></div>
+      <div class="body">
+        <h3 class="genre-name">🪚 <span lang="kk" class="lang-content">Егеу — напильник</span><span lang="en" class="lang-content">Filing — file</span><span lang="ru" class="lang-content">Опиливание — напильник</span></h3>
+        <p class="genre-desc" style="margin-top:.4rem"><span lang="kk" class="lang-content">Жиекті тегістеп, өлшемге дәл жеткізеді әрі тазалайды.</span><span lang="en" class="lang-content">Levels the edge, brings it to size and cleans it up.</span><span lang="ru" class="lang-content">Выравнивает кромку, доводит до размера и зачищает.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKING DIAGRAM + EXPLANATION -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Белгілеу қалай жасалады</span>
+    <span lang="en" class="lang-content">How marking out is done</span>
+    <span lang="ru" class="lang-content">Как выполняется разметка</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div class="svgwrap">
+      <svg viewBox="0 0 460 300" role="img" aria-label="Marking out diagram">
+        <!-- workpiece -->
+        <rect x="40" y="40" width="380" height="220" rx="6" fill="#cbd5e1" stroke="#475569" stroke-width="3"/>
+        <rect x="40" y="40" width="380" height="220" rx="6" fill="url(#hatch)" opacity="0.25"/>
+        <defs>
+          <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="10" stroke="#94a3b8" stroke-width="2"/>
+          </pattern>
+        </defs>
+        <!-- base edges (datum) -->
+        <line x1="40" y1="260" x2="420" y2="260" stroke="#0f766e" stroke-width="5"/>
+        <line x1="40" y1="40" x2="40" y2="260" stroke="#0f766e" stroke-width="5"/>
+        <text x="200" y="282" font-family="Inter" font-size="13" font-weight="800" fill="#0f766e" text-anchor="middle"><tspan lang="kk" class="lang-content">базалық қыр</tspan><tspan lang="en" class="lang-content">datum (base) edge</tspan><tspan lang="ru" class="lang-content">базовая кромка</tspan></text>
+        <!-- scribed lines -->
+        <line x1="120" y1="40" x2="120" y2="260" stroke="#be123c" stroke-width="2.5" stroke-dasharray="2 0"/>
+        <line x1="330" y1="40" x2="330" y2="260" stroke="#be123c" stroke-width="2.5"/>
+        <line x1="40" y1="110" x2="420" y2="110" stroke="#be123c" stroke-width="2.5"/>
+        <!-- punch dots on intersections -->
+        <circle cx="120" cy="110" r="5" fill="#881337"/>
+        <circle cx="330" cy="110" r="5" fill="#881337"/>
+        <circle cx="225" cy="185" r="9" fill="none" stroke="#b45309" stroke-width="3"/>
+        <circle cx="225" cy="185" r="3.5" fill="#b45309"/>
+        <!-- dimensions -->
+        <line x1="120" y1="30" x2="330" y2="30" stroke="#1e293b" stroke-width="1.5"/>
+        <line x1="120" y1="26" x2="120" y2="34" stroke="#1e293b" stroke-width="1.5"/>
+        <line x1="330" y1="26" x2="330" y2="34" stroke="#1e293b" stroke-width="1.5"/>
+        <text x="225" y="22" font-family="Inter" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">L</text>
+        <!-- labels -->
+        <text x="332" y="60" font-family="Inter" font-size="11" font-weight="700" fill="#be123c"><tspan lang="kk" class="lang-content">сызат</tspan><tspan lang="en" class="lang-content">scribed line</tspan><tspan lang="ru" class="lang-content">риска</tspan></text>
+        <text x="235" y="170" font-family="Inter" font-size="11" font-weight="700" fill="#b45309"><tspan lang="kk" class="lang-content">бұрғы нүктесі</tspan><tspan lang="en" class="lang-content">drill centre</tspan><tspan lang="ru" class="lang-content">центр сверления</tspan></text>
+      </svg>
+      <p class="text-center text-stone-500 text-sm mt-2"><span lang="kk" class="lang-content">Базадан өлшеп, сызатты сызып, нүкте салу</span><span lang="en" class="lang-content">Measure from the datum, scribe the lines, punch the dots</span><span lang="ru" class="lang-content">Меряем от базы, чертим риски, кернируем точки</span></p>
+    </div>
+    <div>
+      <p class="lead">
+        <span lang="kk" class="lang-content"><b>Белгілеу</b> — сызбадағы өлшемдерді металл бетіне дәл көшіру. Барлық өлшемді бір <b>базалық қырдан</b> алу керек — сонда қателер жинақталмайды. Сызатты <b>чертилкамен</b> болат сызғышты немесе бұрышты (угольник) бойлай бір рет жүргізіп салады. Сызаттар қиылысқан жерге және бұрғылау орындарына <b>кернермен</b> нүкте салады. Бетті жақсы көру үшін оны бормен немесе көк бояумен (медный купорос) жұқа жағады.</span>
+        <span lang="en" class="lang-content"><b>Marking out</b> means copying the drawing's dimensions onto the metal exactly. Take every measurement from one <b>datum edge</b> — then errors don't add up. Scribe each line in a single pass with a <b>scriber</b> guided by a steel rule or a try-square. At the line crossings and at drill points make a dot with a <b>centre punch</b>. To see the surface clearly, coat it thinly with chalk or layout blue.</span>
+        <span lang="ru" class="lang-content"><b>Разметка</b> — это точный перенос размеров с чертежа на металл. Все размеры берут от одной <b>базовой кромки</b> — тогда ошибки не накапливаются. Риску проводят <b>чертилкой</b> за один проход вдоль стальной линейки или угольника. На пересечениях рисок и в местах сверления ставят точку <b>кернером</b>. Чтобы хорошо видеть поверхность, её тонко покрывают мелом или раствором медного купороса.</span>
+      </p>
+      <div class="note mt-4"><p>💡 <b><span lang="kk" class="lang-content">Неге бір базадан?</span><span lang="en" class="lang-content">Why from one datum?</span><span lang="ru" class="lang-content">Почему от одной базы?</span></b> <span lang="kk" class="lang-content">Әр өлшемді алдыңғы сызаттан өлшесең, кішкене қателер қосылып, соңғы бөлшек көп бұрмаланады. Бір қырдан өлшесең — әр өлшем тәуелсіз әрі дәл.</span><span lang="en" class="lang-content">If you measure each size from the previous line, small errors add together and the final part is badly off. Measuring from one edge keeps every dimension independent and accurate.</span><span lang="ru" class="lang-content">Если мерить каждый размер от предыдущей риски, мелкие ошибки складываются и деталь сильно «уходит». От одной кромки каждый размер независим и точен.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILE TYPES TABLE (3 per-language) + photo -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Егеулердің түрлері</span>
+    <span lang="en" class="lang-content">Types of file</span>
+    <span lang="ru" class="lang-content">Виды напильников</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="genre-card lg:col-span-1" onclick="openLB(this)">
+      <div class="pic" style="height:260px"><img src="../../assets/labor_boys/lb17_files_set.jpg" alt="Набор надфилей / set of needle files"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Надфильдер жинағы</span><span lang="en" class="lang-content">A set of needle files</span><span lang="ru" class="lang-content">Набор надфилей</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">ұсақ дәл жұмысқа арналған кіші егеулер</span><span lang="en" class="lang-content">small files for fine, precise work</span><span lang="ru" class="lang-content">маленькие напильники для точной работы</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content"><b>Надфильдер</b> — ұсақ егеулер: дөңгелек, үшбұрыш, жалпақ, жартылай дөңгелек. Олармен кілт ойығы, тіс арасы, кішкене тесік сияқты нәзік жерлерді өңдейді.</span><span lang="en" class="lang-content"><b>Needle files</b> are small files — round, triangular, flat, half-round. They work delicate spots like keyways, the gaps between teeth and tiny openings.</span><span lang="ru" class="lang-content"><b>Надфили</b> — это маленькие напильники: круглый, трёхгранный, плоский, полукруглый. Ими обрабатывают тонкие места: шпоночные пазы, промежутки между зубьями, мелкие отверстия.</span></div>
+      <div class="body">
+        <h3 class="genre-name" style="font-size:1.02rem">🪡 <span lang="kk" class="lang-content">Надфильдер</span><span lang="en" class="lang-content">Needle files</span><span lang="ru" class="lang-content">Надфили</span></h3>
+        <p class="genre-desc" style="margin-top:.4rem"><span lang="kk" class="lang-content">Кіші, дәл жұмысқа: әр пішін — өз орнына.</span><span lang="en" class="lang-content">For small, precise work: each shape has its job.</span><span lang="ru" class="lang-content">Для мелкой точной работы: каждой форме — своё место.</span></p>
+      </div>
+    </div>
+    <div class="card rounded-custom p-5 lg:col-span-2">
+      <div class="lang-content" lang="ru">
+        <table class="symtbl">
+          <thead><tr><th>Форма сечения</th><th>Где применяют</th></tr></thead>
+          <tbody>
+            <tr><td><b>Плоский</b></td><td>Прямые кромки и широкие плоские поверхности — основной напильник.</td></tr>
+            <tr><td><b>Квадратный</b></td><td>Прямоугольные пазы, отверстия и углы 90°.</td></tr>
+            <tr><td><b>Трёхгранный</b></td><td>Внутренние углы, заточка пил, острые углы менее 90°.</td></tr>
+            <tr><td><b>Круглый</b></td><td>Круглые отверстия и вогнутые поверхности.</td></tr>
+            <tr><td><b>Полукруглый</b></td><td>И плоские, и вогнутые места — самый универсальный.</td></tr>
+          </tbody>
+        </table>
+        <p class="text-stone-500 text-sm mt-3">Насечка бывает <b>драчёвая</b> (крупная, для черновой работы), <b>личная</b> (средняя) и <b>бархатная</b> (мелкая, для чистовой и доводки).</p>
+      </div>
+      <div class="lang-content" lang="kk">
+        <table class="symtbl">
+          <thead><tr><th>Қима пішіні</th><th>Қолданылуы</th></tr></thead>
+          <tbody>
+            <tr><td><b>Жалпақ</b></td><td>Түзу қырлар мен кең тегіс беттер — негізгі егеу.</td></tr>
+            <tr><td><b>Шаршы</b></td><td>Тікбұрышты ойықтар, тесіктер және 90° бұрыштар.</td></tr>
+            <tr><td><b>Үшбұрышты</b></td><td>Ішкі бұрыштар, араны қайрау, 90°-тан кіші өткір бұрыштар.</td></tr>
+            <tr><td><b>Дөңгелек</b></td><td>Дөңгелек тесіктер мен ойыс беттер.</td></tr>
+            <tr><td><b>Жартылай дөңгелек</b></td><td>Тегіс те, ойыс та жерлер — ең әмбебап.</td></tr>
+          </tbody>
+        </table>
+        <p class="text-stone-500 text-sm mt-3">Насечка <b>ірі</b> (драчёвая — дөрекі жұмысқа), <b>орташа</b> (личная) және <b>ұсақ</b> (бархатная — таза өңдеуге) болады.</p>
+      </div>
+      <div class="lang-content" lang="en">
+        <table class="symtbl">
+          <thead><tr><th>Cross-section</th><th>Where it is used</th></tr></thead>
+          <tbody>
+            <tr><td><b>Flat</b></td><td>Straight edges and wide flat faces — the main file.</td></tr>
+            <tr><td><b>Square</b></td><td>Rectangular slots, holes and 90° corners.</td></tr>
+            <tr><td><b>Triangular</b></td><td>Inside corners, sharpening saws, sharp angles under 90°.</td></tr>
+            <tr><td><b>Round</b></td><td>Round holes and concave surfaces.</td></tr>
+            <tr><td><b>Half-round</b></td><td>Both flat and concave spots — the most versatile.</td></tr>
+          </tbody>
+        </table>
+        <p class="text-stone-500 text-sm mt-3">The cut may be <b>bastard</b> (coarse, for rough work), <b>second-cut</b> (medium) or <b>smooth</b> (fine, for finishing and final sizing).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP BY STEP: sheet to part -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Табақтан бөлшекке дейін: жұмыс реті</span>
+    <span lang="en" class="lang-content">From sheet to part: the work sequence</span>
+    <span lang="ru" class="lang-content">От листа к детали: порядок работы</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="flow"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Сызбаны оқы.</span><span lang="en" class="lang-content">Read the drawing.</span><span lang="ru" class="lang-content">Прочитай чертёж.</span></b> <span lang="kk" class="lang-content">Бөлшектің пішіні мен өлшемдерін, бұрғылау орындарын анықта. Базалық қырды таңда.</span><span lang="en" class="lang-content">Work out the part's shape, its sizes and the drill points. Choose the datum edge.</span><span lang="ru" class="lang-content">Определи форму и размеры детали, места сверления. Выбери базовую кромку.</span></p></div>
+    <div class="flow"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Белгіле.</span><span lang="en" class="lang-content">Mark it out.</span><span lang="ru" class="lang-content">Размечай.</span></b> <span lang="kk" class="lang-content">Базадан өлшеп, чертилкамен сызаттарды сыз, қиылыстарды кернермен белгіле.</span><span lang="en" class="lang-content">Measuring from the datum, scribe the lines and punch the crossings.</span><span lang="ru" class="lang-content">Меряя от базы, проведи риски чертилкой и накерни пересечения.</span></p></div>
+    <div class="flow"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Тискіге бекіт.</span><span lang="en" class="lang-content">Clamp in the vice.</span><span lang="ru" class="lang-content">Зажми в тиски.</span></b> <span lang="kk" class="lang-content">Дайындаманы тискіге берік қыс; кесу сызығы тиски жиегіне жақын тұрсын — діріл азаяды.</span><span lang="en" class="lang-content">Hold the workpiece firmly; keep the cut line close to the vice jaws — less vibration.</span><span lang="ru" class="lang-content">Надёжно зажми заготовку; линия реза должна быть у самых губок — меньше вибрация.</span></p></div>
+    <div class="flow"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Кес.</span><span lang="en" class="lang-content">Cut.</span><span lang="ru" class="lang-content">Режь.</span></b> <span lang="kk" class="lang-content">Сызаттан <b>1 мм қалдырып</b> кес: артық металды кейін егеп аласың. Темір араны баяу, толық амплитудамен жүргіз.</span><span lang="en" class="lang-content">Cut <b>1 mm clear of the line</b>: you'll file the surplus away later. Use slow, full strokes of the hacksaw.</span><span lang="ru" class="lang-content">Режь <b>отступив 1 мм от риски</b>: лишний металл потом снимешь напильником. Веди ножовку медленно, на всю длину.</span></p></div>
+    <div class="flow"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Дөрекі еге.</span><span lang="en" class="lang-content">Rough-file.</span><span lang="ru" class="lang-content">Опили начерно.</span></b> <span lang="kk" class="lang-content">Драчёвый егеумен артық металды сызатқа дейін ал. Қырдың түзулігін угольникпен тексер.</span><span lang="en" class="lang-content">With a bastard file take the surplus down to the line. Check the edge for square with a try-square.</span><span lang="ru" class="lang-content">Драчёвым напильником сними лишнее до риски. Проверь прямоту кромки угольником.</span></p></div>
+    <div class="flow" style="margin-bottom:0"><div class="step-num">6</div><p><b><span lang="kk" class="lang-content">Таза өңде.</span><span lang="en" class="lang-content">Finish.</span><span lang="ru" class="lang-content">Опили начисто.</span></b> <span lang="kk" class="lang-content">Личной/бархатный егеумен бетті тегістеп, өткір қырларды майдалап (фаска) ал. Өлшемді сызғышпен тексер.</span><span lang="en" class="lang-content">With a smoother file level the surface and break the sharp edges. Check the size with a rule.</span><span lang="ru" class="lang-content">Личным/бархатным напильником выровняй поверхность и сними острые кромки (фаска). Проверь размер линейкой.</span></p></div>
+  </div>
+</section>
+
+<!-- COMMON DEFECTS (3 per-language tables) -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Жиі кездесетін қателер және себептері</span>
+    <span lang="en" class="lang-content">Common mistakes and their causes</span>
+    <span lang="ru" class="lang-content">Частые ошибки и их причины</span>
+  </h2>
+  <div class="card rounded-custom p-5">
+    <div class="lang-content" lang="ru">
+      <table class="symtbl">
+        <thead><tr><th>Дефект</th><th>Причина</th><th>Как избежать</th></tr></thead>
+        <tbody>
+          <tr><td>Размер «ушёл»</td><td>Мерили от разных кромок</td><td>Все размеры — от одной базы</td></tr>
+          <tr><td>Полотно ножовки сломалось</td><td>Слабое натяжение, перекос, рывки</td><td>Натянуть туго, пилить ровно и без спешки</td></tr>
+          <tr><td>Кромка «завалена» (непрямой угол)</td><td>Перекос напильника, нажим в конце хода</td><td>Держать ровно, нажим — только вперёд</td></tr>
+          <tr><td>Глубокие царапины</td><td>Грубая насечка на чистовом этапе</td><td>Сначала драчёвый, потом личной/бархатный</td></tr>
+          <tr><td>Напильник «забит» стружкой</td><td>Опилки застряли между зубьями</td><td>Чистить стальной щёткой (кардой)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="kk">
+      <table class="symtbl">
+        <thead><tr><th>Ақау</th><th>Себебі</th><th>Алдын алу</th></tr></thead>
+        <tbody>
+          <tr><td>Өлшем «кетіп қалды»</td><td>Әр қырдан өлшелді</td><td>Барлық өлшем — бір базадан</td></tr>
+          <tr><td>Ара жүзі сынды</td><td>Әлсіз керу, қисаю, кенет соққы</td><td>Тығыз керу, біркелкі әрі асықпай кесу</td></tr>
+          <tr><td>Қыр «құлады» (тік емес бұрыш)</td><td>Егеу қисық, жүрістің соңында басу</td><td>Тегіс ұстау, басу — тек ілгері</td></tr>
+          <tr><td>Терең сызаттар</td><td>Таза кезеңде ірі насечка</td><td>Әуелі драчёвый, сосын личной/бархатный</td></tr>
+          <tr><td>Егеу жоңқаға толды</td><td>Жоңқа тістер арасына кептелді</td><td>Болат щёткамен (карда) тазалау</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="en">
+      <table class="symtbl">
+        <thead><tr><th>Defect</th><th>Cause</th><th>How to avoid it</th></tr></thead>
+        <tbody>
+          <tr><td>Size is off</td><td>Measured from different edges</td><td>Take all sizes from one datum</td></tr>
+          <tr><td>Hacksaw blade snapped</td><td>Low tension, twisting, jerky strokes</td><td>Tension it tight, saw evenly and unhurried</td></tr>
+          <tr><td>Edge "rocked" (not square)</td><td>File tilted, pressing at end of stroke</td><td>Keep it level, press only on the forward stroke</td></tr>
+          <tr><td>Deep scratches</td><td>Coarse cut used at the finishing stage</td><td>Bastard first, then second-cut/smooth</td></tr>
+          <tr><td>File clogged with chips</td><td>Filings stuck between the teeth</td><td>Clean with a steel brush (file card)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Қауіпсіздік ережелері</span>
+    <span lang="en" class="lang-content">Safety rules</span>
+    <span lang="ru" class="lang-content">Правила безопасности</span>
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="rule"><div class="ic">🥽</div><h4><span lang="kk" class="lang-content">Көзілдірік ки</span><span lang="en" class="lang-content">Wear goggles</span><span lang="ru" class="lang-content">Надевай очки</span></h4><p><span lang="kk" class="lang-content">Кесу мен егеуде ұсақ жоңқа ұшады — әрқашан қорғаныш көзілдірік ки.</span><span lang="en" class="lang-content">Cutting and filing throw off sharp chips — always wear safety goggles.</span><span lang="ru" class="lang-content">При резке и опиливании летит острая стружка — всегда работай в защитных очках.</span></p></div>
+    <div class="rule"><div class="ic">🪵</div><h4><span lang="kk" class="lang-content">Сапты тексер</span><span lang="en" class="lang-content">Check the handle</span><span lang="ru" class="lang-content">Проверь ручку</span></h4><p><span lang="kk" class="lang-content">Егеуді <b>сапсыз</b> қолданба: жалаңаш құйрығы (хвостовик) алақанды жарақаттайды.</span><span lang="en" class="lang-content">Never use a file <b>without a handle</b>: the bare tang can stab your palm.</span><span lang="ru" class="lang-content">Не работай напильником <b>без ручки</b>: голый хвостовик ранит ладонь.</span></p></div>
+    <div class="rule"><div class="ic">🗜️</div><h4><span lang="kk" class="lang-content">Берік бекіт</span><span lang="en" class="lang-content">Clamp firmly</span><span lang="ru" class="lang-content">Зажимай надёжно</span></h4><p><span lang="kk" class="lang-content">Дайындама тискіде босаңсымасын — қозғалса, құрал сырғанап, қол жарақаттанады.</span><span lang="en" class="lang-content">The workpiece must not move in the vice — if it slips, the tool can slip and cut you.</span><span lang="ru" class="lang-content">Заготовка не должна болтаться в тисках — если сдвинется, инструмент соскользнёт.</span></p></div>
+    <div class="rule"><div class="ic">🧹</div><h4><span lang="kk" class="lang-content">Жоңқаны қолмен сыпырма</span><span lang="en" class="lang-content">Don't brush chips by hand</span><span lang="ru" class="lang-content">Не сметай стружку рукой</span></h4><p><span lang="kk" class="lang-content">Металл жоңқасы өткір. Оны тек щёткамен сыпыр, ешқашан жалаң қолмен тиме.</span><span lang="en" class="lang-content">Metal chips are sharp. Sweep them only with a brush, never with bare hands.</span><span lang="ru" class="lang-content">Металлическая стружка острая. Сметай её только щёткой, никогда голой рукой.</span></p></div>
+    <div class="rule"><div class="ic">🔪</div><h4><span lang="kk" class="lang-content">Өткір қырды ал</span><span lang="en" class="lang-content">Break sharp edges</span><span lang="ru" class="lang-content">Снимай заусенцы</span></h4><p><span lang="kk" class="lang-content">Кескеннен кейінгі үшкір жүздер (заусенцы) кеседі — оларды бірден егеп ал.</span><span lang="en" class="lang-content">The sharp burrs left after cutting can cut you — file them off at once.</span><span lang="ru" class="lang-content">Острые заусенцы после реза ранят — сразу опили их напильником.</span></p></div>
+    <div class="rule"><div class="ic">👨‍🏫</div><h4><span lang="kk" class="lang-content">Мұғаліммен бірге</span><span lang="en" class="lang-content">With the teacher</span><span lang="ru" class="lang-content">Вместе с учителем</span></h4><p><span lang="kk" class="lang-content">Жаңа құралды бірінші рет мұғалімнің көрсетуімен қолдан.</span><span lang="en" class="lang-content">Use any new tool for the first time only under the teacher's guidance.</span><span lang="ru" class="lang-content">Новый инструмент в первый раз используй под руководством учителя.</span></p></div>
+  </div>
+</section>
+
+<!-- REMEMBER -->
+<section class="card-rose rounded-custom p-7 md:p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-3">
+    <span lang="kk" class="lang-content">💡 Есте сақта</span>
+    <span lang="en" class="lang-content">💡 Remember</span>
+    <span lang="ru" class="lang-content">💡 Запомните</span>
+  </h3>
+  <p class="text-lg" style="max-width:64rem;line-height:1.7">
+    <span lang="kk" class="lang-content">Әр металл бөлшегі үш амалдан өтеді: <b>белгілеу → кесу → егеу</b>. Дәлдік белгілеуден басталады — барлық өлшемді бір базадан ал. Кескенде сызаттан 1 мм қалдыр, артығын егеп таза жеткіз. Құралды дұрыс ұста, көзілдірікпен жұмыс істе. <b>Жеті рет өлше — бір рет кес!</b></span>
+    <span lang="en" class="lang-content">Every metal part goes through three operations: <b>mark → cut → file</b>. Accuracy starts with marking — take all sizes from one datum. When cutting leave 1 mm to the line, then file the surplus down clean. Hold the tools correctly and work in goggles. <b>Measure seven times — cut once!</b></span>
+    <span lang="ru" class="lang-content">Каждая металлическая деталь проходит три операции: <b>разметка → резка → опиливание</b>. Точность начинается с разметки — все размеры бери от одной базы. При резке оставляй 1 мм до риски, затем опили лишнее начисто. Держи инструмент правильно и работай в очках. <b>Семь раз отмерь — один раз отрежь!</b></span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

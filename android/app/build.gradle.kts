@@ -63,73 +63,73 @@ android {
             dimension = "subject"
             applicationIdSuffix = ".physics"
             buildConfigField("String", "SUBJECT_ID", "\"physics\"")
-            buildConfigField("String", "APP_TITLE", "\"Физика — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Физика\"")
         }
         create("mathematics") {
             dimension = "subject"
             applicationIdSuffix = ".mathematics"
             buildConfigField("String", "SUBJECT_ID", "\"mathematics\"")
-            buildConfigField("String", "APP_TITLE", "\"Математика — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Математика\"")
         }
         create("biology") {
             dimension = "subject"
             applicationIdSuffix = ".biology"
             buildConfigField("String", "SUBJECT_ID", "\"biology\"")
-            buildConfigField("String", "APP_TITLE", "\"Биология — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Биология\"")
         }
         create("chemistry") {
             dimension = "subject"
             applicationIdSuffix = ".chemistry"
             buildConfigField("String", "SUBJECT_ID", "\"chemistry\"")
-            buildConfigField("String", "APP_TITLE", "\"Химия — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Химия\"")
         }
         create("geography") {
             dimension = "subject"
             applicationIdSuffix = ".geography"
             buildConfigField("String", "SUBJECT_ID", "\"geography\"")
-            buildConfigField("String", "APP_TITLE", "\"География — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"География\"")
         }
         create("informatics") {
             dimension = "subject"
             applicationIdSuffix = ".informatics"
             buildConfigField("String", "SUBJECT_ID", "\"informatics\"")
-            buildConfigField("String", "APP_TITLE", "\"Информатика — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Информатика\"")
         }
         create("historykaz") {
             dimension = "subject"
             applicationIdSuffix = ".historykaz"
             buildConfigField("String", "SUBJECT_ID", "\"historykaz\"")
-            buildConfigField("String", "APP_TITLE", "\"История Казахстана — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"История Казахстана\"")
         }
         create("worldhistory") {
             dimension = "subject"
             applicationIdSuffix = ".worldhistory"
             buildConfigField("String", "SUBJECT_ID", "\"worldhistory\"")
-            buildConfigField("String", "APP_TITLE", "\"Всемирная история — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Всемирная история\"")
         }
         create("kazakhlang") {
             dimension = "subject"
             applicationIdSuffix = ".kazakhlang"
             buildConfigField("String", "SUBJECT_ID", "\"kazakhlang\"")
-            buildConfigField("String", "APP_TITLE", "\"Қазақ тілі — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Қазақ тілі\"")
         }
         create("russianlang") {
             dimension = "subject"
             applicationIdSuffix = ".russianlang"
             buildConfigField("String", "SUBJECT_ID", "\"russianlang\"")
-            buildConfigField("String", "APP_TITLE", "\"Русский язык — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Русский язык\"")
         }
         create("englishlang") {
             dimension = "subject"
             applicationIdSuffix = ".englishlang"
             buildConfigField("String", "SUBJECT_ID", "\"englishlang\"")
-            buildConfigField("String", "APP_TITLE", "\"English — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Английский язык\"")
         }
         create("music") {
             dimension = "subject"
             applicationIdSuffix = ".music"
             buildConfigField("String", "SUBJECT_ID", "\"music\"")
-            buildConfigField("String", "APP_TITLE", "\"Музыкальная грамота — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Музыкальная грамота\"")
             // Без активации — лицензионный ключ не запрашивается
             buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
         }
@@ -137,7 +137,31 @@ android {
             dimension = "subject"
             applicationIdSuffix = ".grafika"
             buildConfigField("String", "SUBJECT_ID", "\"grafika\"")
-            buildConfigField("String", "APP_TITLE", "\"Графика и проектирование — Интерактивные плакаты\"")
+            buildConfigField("String", "APP_TITLE", "\"Графика и проектирование\"")
+            // Без активации — лицензионный ключ не запрашивается
+            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
+        }
+        create("labor_girls") {
+            dimension = "subject"
+            applicationIdSuffix = ".laborgirls"
+            buildConfigField("String", "SUBJECT_ID", "\"labor_girls\"")
+            buildConfigField("String", "APP_TITLE", "\"Художественный труд\"")
+            // Без активации — лицензионный ключ не запрашивается
+            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
+        }
+        create("nvp") {
+            dimension = "subject"
+            applicationIdSuffix = ".nvp"
+            buildConfigField("String", "SUBJECT_ID", "\"nvp\"")
+            buildConfigField("String", "APP_TITLE", "\"Начальная военная подготовка\"")
+            // Без активации — лицензионный ключ не запрашивается
+            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
+        }
+        create("labor_boys") {
+            dimension = "subject"
+            applicationIdSuffix = ".laborboys"
+            buildConfigField("String", "SUBJECT_ID", "\"labor_boys\"")
+            buildConfigField("String", "APP_TITLE", "\"Художественный труд (мальчики)\"")
             // Без активации — лицензионный ключ не запрашивается
             buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
         }

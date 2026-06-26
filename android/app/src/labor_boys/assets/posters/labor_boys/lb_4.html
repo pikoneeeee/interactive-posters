@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проектирование изделия: от идеи к чертежу</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.flow-card{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,0.18);
+  border-radius:1.1rem;padding:1.15rem 1.1rem 1.25rem;box-shadow:0 3px 14px rgba(136,19,55,0.07);
+  display:flex;flex-direction:column;gap:.55rem;height:100%;}
+.flow-card .ic{font-size:2rem;line-height:1;}
+table.lb4-tab{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.96);
+  border-radius:.9rem;overflow:hidden;box-shadow:0 3px 14px rgba(136,19,55,0.07);font-size:.95rem;}
+table.lb4-tab th,table.lb4-tab td{padding:.7rem .9rem;text-align:left;border-bottom:1px solid rgba(190,18,60,0.12);vertical-align:top;}
+table.lb4-tab thead th{background:#9f1239;color:#fff;font-family:'Montserrat',sans-serif;font-size:.9rem;letter-spacing:.02em;}
+table.lb4-tab tbody tr:nth-child(even){background:rgba(225,29,72,0.045);}
+table.lb4-tab td:first-child{font-weight:700;color:#881337;white-space:nowrap;}
+.req-card{background:rgba(225,29,72,0.06);border:1px solid rgba(190,18,60,0.22);border-radius:1rem;padding:1rem 1.1rem;}
+.req-card .ic{font-size:1.6rem;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 1-бөлім · Графика және жобалау</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 1 · Graphics &amp; Design</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 1 · Графика и проектирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Бұйымды жобалау: идеядан сызбаға дейін</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Designing a Product: From Idea to Drawing</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Проектирование изделия: от идеи к чертежу</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Әр бұйым ойдан басталып, нобай мен дәл сызба арқылы шеберханада өмірге келеді.</span>
+      <span lang="en" class="lang-content">Every product starts as an idea and comes to life through a sketch and a precise drawing.</span>
+      <span lang="ru" class="lang-content">Каждое изделие начинается с идеи и оживает через эскиз и точный чертёж.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card card-accent rounded-custom p-6 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content"><b>Жобалау (проектирование)</b> — болашақ бұйымды алдын ала ойлап, оның пішінін, өлшемдерін, материалын және жасау тәртібін анықтайтын шығармашылық-техникалық үдеріс. Шебер ағашты кеспес бұрын <b>ойды қағазға</b> түсіреді: алдымен еркін <b>нобай</b>, содан кейін дәл <b>сызба</b>. Дұрыс жоба — артық материал мен қателіктерден сақтайды, уақытты үнемдейді.</span>
+    <span lang="en" class="lang-content"><b>Designing (engineering design)</b> is the creative-technical process of planning a future product in advance — defining its shape, dimensions, material and order of work. Before cutting any wood, the maker puts the <b>idea on paper</b>: first a free <b>sketch</b>, then a precise <b>drawing</b>. A good design saves material, prevents mistakes and saves time.</span>
+    <span lang="ru" class="lang-content"><b>Проектирование</b> — это творческо-техническая работа, в которой будущее изделие продумывают заранее: определяют его форму, размеры, материал и порядок изготовления. Прежде чем резать древесину, мастер переносит <b>идею на бумагу</b>: сначала свободный <b>эскиз</b>, затем точный <b>чертёж</b>. Хороший проект экономит материал, время и защищает от ошибок.</span>
+  </p>
+</section>
+
+<!-- WORKFLOW: 5 stages -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">🧭 Жобалаудың 5 кезеңі</span>
+    <span lang="en" class="lang-content">🧭 The 5 Stages of Designing</span>
+    <span lang="ru" class="lang-content">🧭 5 этапов проектирования</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div class="flow-card">
+      <div class="flex items-center gap-3"><span class="step-num">1</span><span class="ic">💡</span></div>
+      <div class="genre-name" style="font-size:1.02rem"><span lang="kk" class="lang-content">Идея мен мақсат</span><span lang="en" class="lang-content">Idea &amp; goal</span><span lang="ru" class="lang-content">Идея и цель</span></div>
+      <p class="genre-desc" style="margin-top:0"><span lang="kk" class="lang-content">Бұйым не үшін керек? Кімге, қандай функция атқарады — соны анықтаймыз.</span><span lang="en" class="lang-content">What is the product for? Who needs it and what function it serves.</span><span lang="ru" class="lang-content">Зачем нужно изделие? Кому и какую задачу оно решает.</span></p>
+    </div>
+    <div class="flow-card">
+      <div class="flex items-center gap-3"><span class="step-num">2</span><span class="ic">✏️</span></div>
+      <div class="genre-name" style="font-size:1.02rem"><span lang="kk" class="lang-content">Нобай (эскиз)</span><span lang="en" class="lang-content">Sketch</span><span lang="ru" class="lang-content">Эскиз</span></div>
+      <p class="genre-desc" style="margin-top:0"><span lang="kk" class="lang-content">Қолмен еркін сурет: жалпы пішін, нұсқаларды салыстырамыз.</span><span lang="en" class="lang-content">A free hand drawing: general shape, comparing variants.</span><span lang="ru" class="lang-content">Свободный рисунок от руки: общая форма, сравнение вариантов.</span></p>
+    </div>
+    <div class="flow-card">
+      <div class="flex items-center gap-3"><span class="step-num">3</span><span class="ic">📐</span></div>
+      <div class="genre-name" style="font-size:1.02rem"><span lang="kk" class="lang-content">Сызба</span><span lang="en" class="lang-content">Drawing</span><span lang="ru" class="lang-content">Чертёж</span></div>
+      <p class="genre-desc" style="margin-top:0"><span lang="kk" class="lang-content">Сызғыш, циркуль, масштаб: дәл өлшемдер мен проекциялар.</span><span lang="en" class="lang-content">Ruler, compass, scale: exact dimensions and projections.</span><span lang="ru" class="lang-content">Линейка, циркуль, масштаб: точные размеры и проекции.</span></p>
+    </div>
+    <div class="flow-card">
+      <div class="flex items-center gap-3"><span class="step-num">4</span><span class="ic">🪚</span></div>
+      <div class="genre-name" style="font-size:1.02rem"><span lang="kk" class="lang-content">Дайындау</span><span lang="en" class="lang-content">Making</span><span lang="ru" class="lang-content">Изготовление</span></div>
+      <p class="genre-desc" style="margin-top:0"><span lang="kk" class="lang-content">Сызба бойынша материалды белгілеп, кесіп, бұйымды жасаймыз.</span><span lang="en" class="lang-content">Mark, cut and build the product following the drawing.</span><span lang="ru" class="lang-content">По чертежу размечаем, режем и собираем изделие.</span></p>
+    </div>
+    <div class="flow-card">
+      <div class="flex items-center gap-3"><span class="step-num">5</span><span class="ic">✅</span></div>
+      <div class="genre-name" style="font-size:1.02rem"><span lang="kk" class="lang-content">Бағалау</span><span lang="en" class="lang-content">Evaluation</span><span lang="ru" class="lang-content">Оценка</span></div>
+      <p class="genre-desc" style="margin-top:0"><span lang="kk" class="lang-content">Дайын бұйымды жобамен салыстырамыз, сапасын тексереміз.</span><span lang="en" class="lang-content">Compare the finished item with the plan; check quality.</span><span lang="ru" class="lang-content">Сравниваем готовое изделие с проектом, проверяем качество.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">🖼️ Идеядан бұйымға дейін — суреттермен</span>
+    <span lang="en" class="lang-content">🖼️ From Idea to Product — in Pictures</span>
+    <span lang="ru" class="lang-content">🖼️ От идеи к изделию — в картинках</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін кескінді басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap an image to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на изображение, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb4_sketch.jpg" alt="Эскиз механизма"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">1 · Идея–нобай</span><span lang="en" class="lang-content">1 · Idea sketch</span><span lang="ru" class="lang-content">1 · Идея-эскиз</span></div>
+        <div class="genre-cap">Leonardo da Vinci — sketch of a roller chain</div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Ойлар мен механизм бөлшектерінің еркін нобайы.</span><span lang="en" class="lang-content">A free sketch of ideas and machine parts.</span><span lang="ru" class="lang-content">Свободный набросок идей и деталей механизма.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb4_tools.jpg" alt="Чертёжная доска и инструменты"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">2 · Сызу құралдары</span><span lang="en" class="lang-content">2 · Drawing tools</span><span lang="ru" class="lang-content">2 · Чертёжные инструменты</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">Сызу тақтасы, рейсшина, бұрыштамалар</span><span lang="en" class="lang-content">Drawing board, T-square, set squares</span><span lang="ru" class="lang-content">Доска, рейсшина, угольники</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Циркуль, транспортир, сызғыш — дәл сызба құралдары.</span><span lang="en" class="lang-content">Compass, protractor, ruler — tools for precise drawing.</span><span lang="ru" class="lang-content">Циркуль, транспортир, линейка — для точного чертежа.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb4_drawing.jpg" alt="Построение линии по линейке"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">3 · Сызбаны салу</span><span lang="en" class="lang-content">3 · Making the drawing</span><span lang="ru" class="lang-content">3 · Построение чертежа</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">Қарындаш пен сызғышты дұрыс ұстау</span><span lang="en" class="lang-content">Holding the pencil and ruler correctly</span><span lang="ru" class="lang-content">Правильная постановка карандаша и линейки</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Түзу сызықтар сызғыш бойымен дәл жүргізіледі.</span><span lang="en" class="lang-content">Straight lines are drawn precisely along the ruler.</span><span lang="ru" class="lang-content">Прямые линии проводят точно вдоль линейки.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb4_product.jpg" alt="Готовые деревянные изделия"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">4 · Дайын бұйым</span><span lang="en" class="lang-content">4 · Finished product</span><span lang="ru" class="lang-content">4 · Готовое изделие</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">Қолдан жасалған ағаш бұйымдар</span><span lang="en" class="lang-content">Handmade wooden products</span><span lang="ru" class="lang-content">Изделия из дерева ручной работы</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Орындықтар, тостағандар — жобаның нәтижесі.</span><span lang="en" class="lang-content">Stools and bowls — the result of a design.</span><span lang="ru" class="lang-content">Табуреты и чаши — результат проекта.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKETCH vs DRAWING comparison -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">⚖️ Нобай мен сызбаның айырмашылығы</span>
+    <span lang="en" class="lang-content">⚖️ Sketch vs Technical Drawing</span>
+    <span lang="ru" class="lang-content">⚖️ Чем эскиз отличается от чертежа</span>
+  </h2>
+  <div class="lang-content" lang="ru">
+    <table class="lb4-tab">
+      <thead><tr><th>Признак</th><th>Эскиз</th><th>Чертёж</th></tr></thead>
+      <tbody>
+        <tr><td>Как выполняют</td><td>От руки, быстро</td><td>По линейке, циркулем, точно</td></tr>
+        <tr><td>Масштаб</td><td>Примерный, без масштаба</td><td>Строгий масштаб (1:1, 1:2, 2:1)</td></tr>
+        <tr><td>Размеры</td><td>Главные, ориентировочно</td><td>Все размеры с допусками</td></tr>
+        <tr><td>Назначение</td><td>Зафиксировать идею</td><td>Изготовить изделие</td></tr>
+        <tr><td>Линии</td><td>Свободные, набросочные</td><td>По стандарту (ГОСТ/ЕСКД)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="kk">
+    <table class="lb4-tab">
+      <thead><tr><th>Белгісі</th><th>Нобай</th><th>Сызба</th></tr></thead>
+      <tbody>
+        <tr><td>Орындау тәсілі</td><td>Қолмен, жылдам</td><td>Сызғышпен, циркульмен, дәл</td></tr>
+        <tr><td>Масштаб</td><td>Шамамен, масштабсыз</td><td>Қатаң масштаб (1:1, 1:2, 2:1)</td></tr>
+        <tr><td>Өлшемдер</td><td>Негізгілері, болжаммен</td><td>Барлық өлшем дәлдікпен</td></tr>
+        <tr><td>Мақсаты</td><td>Идеяны бекіту</td><td>Бұйымды дайындау</td></tr>
+        <tr><td>Сызықтар</td><td>Еркін, нобайлы</td><td>Стандарт бойынша (МемСТ/ЕСКД)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="en">
+    <table class="lb4-tab">
+      <thead><tr><th>Feature</th><th>Sketch</th><th>Technical drawing</th></tr></thead>
+      <tbody>
+        <tr><td>How it is made</td><td>By hand, quickly</td><td>With ruler &amp; compass, precisely</td></tr>
+        <tr><td>Scale</td><td>Approximate, no scale</td><td>Strict scale (1:1, 1:2, 2:1)</td></tr>
+        <tr><td>Dimensions</td><td>Main ones, roughly</td><td>All sizes with tolerances</td></tr>
+        <tr><td>Purpose</td><td>To capture the idea</td><td>To manufacture the product</td></tr>
+        <tr><td>Lines</td><td>Free, sketchy</td><td>To standard (GOST/ESKD)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PROJECTION SCHEMATIC -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">📊 Үш көрініс — проекциялар</span>
+    <span lang="en" class="lang-content">📊 Three Views — Projections</span>
+    <span lang="ru" class="lang-content">📊 Три вида — проекции</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div>
+      <div class="art-frame">
+        <div class="art-mat" style="height:320px"><img src="../../assets/labor_boys/lb4_projection.jpg" alt="Чертёж в трёх проекциях"></div>
+      </div>
+      <p class="text-center mt-2" style="color:#a16207;font-size:.85rem;font-style:italic">
+        <span lang="kk" class="lang-content">Тіктөртбұрышты бұйымның үш проекциясы (схема)</span>
+        <span lang="en" class="lang-content">Three projections of a rectangular part (schematic)</span>
+        <span lang="ru" class="lang-content">Три проекции прямоугольной детали (схема)</span>
+      </p>
+    </div>
+    <div>
+      <p class="text-stone-700 mb-4">
+        <span lang="kk" class="lang-content">Көлемді бұйымды жазық қағазда көрсету үшін оны <b>бірнеше жағынан</b> бейнелейді. Әдетте үш негізгі көрініс жеткілікті:</span>
+        <span lang="en" class="lang-content">To show a 3D product on flat paper, it is drawn from <b>several sides</b>. Usually three main views are enough:</span>
+        <span lang="ru" class="lang-content">Чтобы показать объёмное изделие на плоском листе, его изображают с <b>нескольких сторон</b>. Обычно достаточно трёх основных видов:</span>
+      </p>
+      <div class="grid grid-cols-1 gap-3">
+        <div class="req-card flex items-start gap-3"><span class="ic">⬛</span><div>
+          <p class="font-bold" style="color:#881337"><span lang="kk" class="lang-content">Алдынан қарау</span><span lang="en" class="lang-content">Front view</span><span lang="ru" class="lang-content">Вид спереди</span></p>
+          <p class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Басты көрініс — биіктік пен ені.</span><span lang="en" class="lang-content">The main view — height and width.</span><span lang="ru" class="lang-content">Главный вид — высота и ширина.</span></p>
+        </div></div>
+        <div class="req-card flex items-start gap-3"><span class="ic">⬆️</span><div>
+          <p class="font-bold" style="color:#881337"><span lang="kk" class="lang-content">Үстінен қарау</span><span lang="en" class="lang-content">Top view</span><span lang="ru" class="lang-content">Вид сверху</span></p>
+          <p class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Басты көріністің үстіне орналасады — ені мен тереңдігі.</span><span lang="en" class="lang-content">Placed above the front view — width and depth.</span><span lang="ru" class="lang-content">Располагается над главным — ширина и глубина.</span></p>
+        </div></div>
+        <div class="req-card flex items-start gap-3"><span class="ic">➡️</span><div>
+          <p class="font-bold" style="color:#881337"><span lang="kk" class="lang-content">Бүйірінен қарау</span><span lang="en" class="lang-content">Side view</span><span lang="ru" class="lang-content">Вид сбоку</span></p>
+          <p class="text-stone-600 text-sm"><span lang="kk" class="lang-content">Оң жағында — биіктік пен тереңдік.</span><span lang="en" class="lang-content">To the right — height and depth.</span><span lang="ru" class="lang-content">Справа — высота и глубина.</span></p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT A GOOD DESIGN NEEDS -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">🎯 Жақсы жобаның талаптары</span>
+    <span lang="en" class="lang-content">🎯 What a Good Design Needs</span>
+    <span lang="ru" class="lang-content">🎯 Требования к хорошему проекту</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="req-card"><div class="ic">🛠️</div>
+      <p class="font-bold mt-1" style="color:#881337"><span lang="kk" class="lang-content">Пайдалылық</span><span lang="en" class="lang-content">Usefulness</span><span lang="ru" class="lang-content">Польза</span></p>
+      <p class="text-stone-600 text-sm mt-1"><span lang="kk" class="lang-content">Бұйым өз қызметін жақсы атқаруы керек.</span><span lang="en" class="lang-content">The product must do its job well.</span><span lang="ru" class="lang-content">Изделие должно хорошо выполнять свою задачу.</span></p>
+    </div>
+    <div class="req-card"><div class="ic">💪</div>
+      <p class="font-bold mt-1" style="color:#881337"><span lang="kk" class="lang-content">Беріктік</span><span lang="en" class="lang-content">Strength</span><span lang="ru" class="lang-content">Прочность</span></p>
+      <p class="text-stone-600 text-sm mt-1"><span lang="kk" class="lang-content">Материал мен қосылыстар мықты болуы тиіс.</span><span lang="en" class="lang-content">Material and joints must be reliable.</span><span lang="ru" class="lang-content">Материал и соединения должны быть надёжны.</span></p>
+    </div>
+    <div class="req-card"><div class="ic">✨</div>
+      <p class="font-bold mt-1" style="color:#881337"><span lang="kk" class="lang-content">Әсемдік</span><span lang="en" class="lang-content">Beauty</span><span lang="ru" class="lang-content">Красота</span></p>
+      <p class="text-stone-600 text-sm mt-1"><span lang="kk" class="lang-content">Пішін мен пропорция жарасымды болсын.</span><span lang="en" class="lang-content">Shape and proportions should be pleasing.</span><span lang="ru" class="lang-content">Форма и пропорции должны быть гармоничны.</span></p>
+    </div>
+    <div class="req-card"><div class="ic">♻️</div>
+      <p class="font-bold mt-1" style="color:#881337"><span lang="kk" class="lang-content">Үнемділік</span><span lang="en" class="lang-content">Economy</span><span lang="ru" class="lang-content">Экономичность</span></p>
+      <p class="text-stone-600 text-sm mt-1"><span lang="kk" class="lang-content">Материал мен уақытты ұтымды жұмсау.</span><span lang="en" class="lang-content">Use material and time wisely.</span><span lang="ru" class="lang-content">Рационально расходовать материал и время.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- KEY TERMS -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">🔑 Негізгі терминдер</span>
+    <span lang="en" class="lang-content">🔑 Key Terms</span>
+    <span lang="ru" class="lang-content">🔑 Ключевые термины</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <span class="badge"><span lang="kk" class="lang-content">Жобалау</span><span lang="en" class="lang-content">Design</span><span lang="ru" class="lang-content">Проектирование</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Нобай / эскиз</span><span lang="en" class="lang-content">Sketch</span><span lang="ru" class="lang-content">Эскиз</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Сызба</span><span lang="en" class="lang-content">Drawing</span><span lang="ru" class="lang-content">Чертёж</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Масштаб</span><span lang="en" class="lang-content">Scale</span><span lang="ru" class="lang-content">Масштаб</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Проекция</span><span lang="en" class="lang-content">Projection</span><span lang="ru" class="lang-content">Проекция</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Өлшем</span><span lang="en" class="lang-content">Dimension</span><span lang="ru" class="lang-content">Размер</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Пропорция</span><span lang="en" class="lang-content">Proportion</span><span lang="ru" class="lang-content">Пропорция</span></span>
+    <span class="badge"><span lang="kk" class="lang-content">Конструкция</span><span lang="en" class="lang-content">Construction</span><span lang="ru" class="lang-content">Конструкция</span></span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="card-rose rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Key Takeaways</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Идея → сызба → бұйым</span><span lang="en" class="lang-content">Idea → drawing → product</span><span lang="ru" class="lang-content">Идея → чертёж → изделие</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Әр бұйым ойдан басталады.</span><span lang="en" class="lang-content">Every product starts as an idea.</span><span lang="ru" class="lang-content">Любое изделие начинается с идеи.</span></p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Нобай ≠ сызба</span><span lang="en" class="lang-content">Sketch ≠ drawing</span><span lang="ru" class="lang-content">Эскиз ≠ чертёж</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Нобай — еркін, сызба — дәл әрі масштабпен.</span><span lang="en" class="lang-content">A sketch is free; a drawing is exact and to scale.</span><span lang="ru" class="lang-content">Эскиз свободный, чертёж точный и в масштабе.</span></p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Үш көрініс</span><span lang="en" class="lang-content">Three views</span><span lang="ru" class="lang-content">Три вида</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Алдынан, үстінен, бүйірінен.</span><span lang="en" class="lang-content">Front, top and side.</span><span lang="ru" class="lang-content">Спереди, сверху и сбоку.</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX (keep inside #poster-container) -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

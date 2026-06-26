@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Разрезы</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+<style>
+.hatch-box {
+  background-image: repeating-linear-gradient(45deg, #334155 0, #334155 1px, transparent 0, transparent 50%);
+  background-size: 6px 6px;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  width: 60px; height: 40px;
+  display: inline-block;
+}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 4 · Кесінділер мен тіліктер</span>
+      <span lang="en" class="lang-content">Graphics · Section 4 · Sections and Cuts</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 4 · Разрезы и сечения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">✂️ Кесінділер (разрезы) — ГОСТ 2.305</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">✂️ Sections (Разрезы) — GOST 2.305</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">✂️ Разрезы — ГОСТ 2.305</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Бөлшектің ішкі пішінін кесу жазықтығы арқылы көрсету.</span>
+      <span lang="en" class="lang-content">Showing the internal form of a part through a cutting plane.</span>
+      <span lang="ru" class="lang-content">Показ внутренней формы детали через плоскость разреза.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- What is a section -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Кесінді дегеніміз не?</span>
+    <span lang="en" class="lang-content">💡 What is a Section Cut?</span>
+    <span lang="ru" class="lang-content">💡 Что такое разрез?</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-violet-700">Кесінді</b> — бөлшекті шартты жазықтықпен кескендегі ішкі пішінінің бейнесі. Жазықтық артында қалған барлық нәрсе де көрсетіледі. Ішкі тесіктер мен ойыстарды штрих сызықпен сызудың орнына кесінді жасаймыз.</span>
+        <span lang="en" class="lang-content"><b class="text-violet-700">A section</b> (разрез) is the image obtained when an object is cut by a cutting plane. Everything beyond the cut is also shown. Used instead of many dashed lines to reveal internal holes and recesses.</span>
+        <span lang="ru" class="lang-content"><b class="text-violet-700">Разрез</b> — изображение, полученное при условном рассечении предмета секущей плоскостью. Показывается всё, что находится в плоскости разреза и за ней. Применяется вместо штриховых линий для внутренних элементов.</span>
+      </p>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="card-accent rounded-xl p-3 text-center text-sm">
+          <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Кесу сызығы</span><span lang="en" class="lang-content">Cutting plane line</span><span lang="ru" class="lang-content">Линия разреза</span></p>
+          <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Штрихпунктирная тонкая, буквамен белгіленеді: А–А</span><span lang="en" class="lang-content">Dot-dash line, labelled A–A</span><span lang="ru" class="lang-content">Штрихпунктирная, обозначается буквами А–А</span></p>
+        </div>
+        <div class="card-accent rounded-xl p-3 text-center text-sm">
+          <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Штрихтеу</span><span lang="en" class="lang-content">Hatching</span><span lang="ru" class="lang-content">Штриховка</span></p>
+          <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Кесу жазықтығымен тиген беттерге 45° бұрышымен</span><span lang="en" class="lang-content">Applied to cut surfaces at 45°</span><span lang="ru" class="lang-content">На поверхностях в плоскости разреза под 45°</span></p>
+        </div>
+      </div>
+    </div>
+    <!-- SVG: simple section of a cylinder -->
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 220" style="width:100%;max-width:330px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Full view on left -->
+        <text x="40" y="10" font-size="9" fill="#64748b" text-anchor="middle">Вид</text>
+        <rect x="10" y="15" width="60" height="100" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <line x1="22" y1="15" x2="22" y2="115" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <line x1="58" y1="15" x2="58" y2="115" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Internal hole hidden lines -->
+        <line x1="28" y1="15" x2="28" y2="115" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,2"/>
+        <line x1="52" y1="15" x2="52" y2="115" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,2"/>
+        <!-- Arrow: cutting plane -->
+        <line x1="80" y1="65" x2="130" y2="65" stroke="#ef4444" stroke-width="2"/>
+        <polygon points="130,65 118,60 118,70" fill="#ef4444"/>
+        <text x="100" y="55" font-size="9" fill="#ef4444" font-weight="bold">А–А</text>
+        <!-- Section on right -->
+        <text x="215" y="10" font-size="9" fill="#1d4ed8" text-anchor="middle">А–А (разрез)</text>
+        <rect x="150" y="15" width="130" height="100" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <!-- Outer hatching -->
+        <defs>
+          <pattern id="h45" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#334155" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <!-- Left hatch band -->
+        <rect x="150" y="15" width="30" height="100" fill="url(#h45)" stroke="none"/>
+        <rect x="150" y="15" width="30" height="100" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Right hatch band -->
+        <rect x="250" y="15" width="30" height="100" fill="url(#h45)" stroke="none"/>
+        <rect x="250" y="15" width="30" height="100" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Hole (empty, no hatch) -->
+        <rect x="180" y="15" width="70" height="100" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Centre line in section -->
+        <line x1="215" y1="5" x2="215" y2="125" stroke="#1e293b" stroke-width="1" stroke-dasharray="8,3,2,3"/>
+        <!-- Labels -->
+        <text x="163" y="70" font-size="8" fill="#334155">штрих-ка</text>
+        <text x="185" y="70" font-size="8" fill="#2563eb">отверстие</text>
+        <text x="185" y="82" font-size="8" fill="#2563eb">(без штр.)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Types of section cuts -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Кесінді түрлері</span>
+    <span lang="en" class="lang-content">📐 Types of Section Cuts</span>
+    <span lang="ru" class="lang-content">📐 Виды разрезов</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card rounded-custom p-5 border-t-4 border-violet-500">
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 120 100" style="width:120px;height:100px" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <line x1="10" y1="50" x2="110" y2="50" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="8,3,2,3"/>
+          <text x="60" y="40" font-size="9" fill="#1e293b" text-anchor="middle">↑</text>
+          <rect x="10" y="50" width="100" height="40" fill="url(#h45)" stroke="none"/>
+          <rect x="10" y="10" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <text x="60" y="65" font-size="8" fill="#334155" text-anchor="middle">штрихов.</text>
+          <text x="108" y="48" font-size="8" fill="#1d4ed8">A</text>
+          <text x="108" y="58" font-size="8" fill="#1d4ed8">A</text>
+        </svg>
+      </div>
+      <p class="font-bold text-violet-800 text-center mb-2">
+        <span lang="kk" class="lang-content">Горизонталды</span>
+        <span lang="en" class="lang-content">Horizontal</span>
+        <span lang="ru" class="lang-content">Горизонтальный</span>
+      </p>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Кесу жазықтығы горизонтальды (H). Жоғарыдан көрініс орнын алады.</span>
+        <span lang="en" class="lang-content">Cutting plane is horizontal. Replaces the top view.</span>
+        <span lang="ru" class="lang-content">Секущая плоскость горизонтальная. Заменяет вид сверху.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-5 border-t-4 border-emerald-500">
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 120 100" style="width:120px;height:100px" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <line x1="60" y1="10" x2="60" y2="90" stroke="#059669" stroke-width="2" stroke-dasharray="8,3,2,3"/>
+          <rect x="60" y="10" width="50" height="80" fill="url(#h45)" stroke="none"/>
+          <rect x="10" y="10" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <text x="60" y="8" font-size="8" fill="#059669" text-anchor="middle">A  A</text>
+        </svg>
+      </div>
+      <p class="font-bold text-emerald-800 text-center mb-2">
+        <span lang="kk" class="lang-content">Вертикалды фронтальды</span>
+        <span lang="en" class="lang-content">Vertical Frontal</span>
+        <span lang="ru" class="lang-content">Вертикальный фронтальный</span>
+      </p>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Кесу жазықтығы V-жазықтығына параллель. Басты көрініс орнын алады.</span>
+        <span lang="en" class="lang-content">Cutting plane parallel to V plane. Replaces the front view.</span>
+        <span lang="ru" class="lang-content">Секущая параллельна V. Заменяет главный вид.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-5 border-t-4 border-amber-500">
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 120 100" style="width:120px;height:100px" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <line x1="65" y1="10" x2="65" y2="90" stroke="#d97706" stroke-width="2" stroke-dasharray="8,3,2,3"/>
+          <rect x="65" y="10" width="45" height="80" fill="url(#h45)" stroke="none"/>
+          <rect x="10" y="10" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <text x="50" y="8" font-size="8" fill="#d97706">Б  Б</text>
+        </svg>
+      </div>
+      <p class="font-bold text-amber-800 text-center mb-2">
+        <span lang="kk" class="lang-content">Вертикалды профилді</span>
+        <span lang="en" class="lang-content">Vertical Profile</span>
+        <span lang="ru" class="lang-content">Вертикальный профильный</span>
+      </p>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Кесу жазықтығы W-жазықтығына параллель. Сол жақтан көрінісі орнын алады.</span>
+        <span lang="en" class="lang-content">Cutting plane parallel to W plane. Replaces the left view.</span>
+        <span lang="ru" class="lang-content">Секущая параллельна W. Заменяет вид слева.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Hatching rules -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📋 Штрихтеу ережелері</span>
+    <span lang="en" class="lang-content">📋 Hatching Rules</span>
+    <span lang="ru" class="lang-content">📋 Правила штриховки</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <table class="t">
+      <thead>
+        <tr>
+          <th><span lang="kk" class="lang-content">Материал</span><span lang="en" class="lang-content">Material</span><span lang="ru" class="lang-content">Материал</span></th>
+          <th><span lang="kk" class="lang-content">Штрихтеу</span><span lang="en" class="lang-content">Hatching</span><span lang="ru" class="lang-content">Штриховка</span></th>
+          <th><span lang="kk" class="lang-content">Бұрыш / қадам</span><span lang="en" class="lang-content">Angle / pitch</span><span lang="ru" class="lang-content">Угол / шаг</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span lang="kk" class="lang-content">Металдар (жалпы)</span><span lang="en" class="lang-content">Metals (general)</span><span lang="ru" class="lang-content">Металлы (общее)</span></td>
+          <td><span lang="kk" class="lang-content">Жіңішке тегіс сызықтар</span><span lang="en" class="lang-content">Thin parallel lines</span><span lang="ru" class="lang-content">Тонкие параллельные линии</span></td>
+          <td>45° / 2–10 мм</td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Ағаш</span><span lang="en" class="lang-content">Wood</span><span lang="ru" class="lang-content">Дерево</span></td>
+          <td><span lang="kk" class="lang-content">Қиылысқан сызықтар</span><span lang="en" class="lang-content">Crossed lines</span><span lang="ru" class="lang-content">Перекрещивающиеся</span></td>
+          <td>45° + 135°</td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Шыны</span><span lang="en" class="lang-content">Glass</span><span lang="ru" class="lang-content">Стекло</span></td>
+          <td><span lang="kk" class="lang-content">Сирек сызықтар</span><span lang="en" class="lang-content">Sparse lines</span><span lang="ru" class="lang-content">Редкие линии</span></td>
+          <td>45° / 5–10 мм</td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Бетон</span><span lang="en" class="lang-content">Concrete</span><span lang="ru" class="lang-content">Бетон</span></td>
+          <td><span lang="kk" class="lang-content">Нүктелер мен сызықтар</span><span lang="en" class="lang-content">Dots and lines</span><span lang="ru" class="lang-content">Точки и линии</span></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-accent rounded-xl p-4 mt-4">
+      <p class="text-sm text-violet-800">
+        <span lang="kk" class="lang-content">⚠️ Бір бөлшектің барлық кесінділерінде штриховка бірдей болуы керек (бір бағыт, бір қадам). Бос жерлер (тесіктер, ойыстар) штрихталмайды.</span>
+        <span lang="en" class="lang-content">⚠️ All section views of the same part must have identical hatching (same direction, same pitch). Empty spaces (holes, recesses) are not hatched.</span>
+        <span lang="ru" class="lang-content">⚠️ Все разрезы одной детали имеют одинаковую штриховку (направление, шаг). Пустые места (отверстия, выемки) не штрихуются.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Негізгі ережелер</span>
+    <span lang="en" class="lang-content">🧠 Key Rules</span>
+    <span lang="ru" class="lang-content">🧠 Основные правила</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Кесу сызығы</span><span lang="en" class="lang-content">Cutting line</span><span lang="ru" class="lang-content">Линия разреза</span></p>
+      <p class="text-violet-200"><span lang="kk" class="lang-content">Штрихпунктирная, соңында стрелкалар мен әріптер (А–А)</span><span lang="en" class="lang-content">Dot-dash, arrows and letters at ends (A–A)</span><span lang="ru" class="lang-content">Штрихпунктирная, стрелки и буквы (А–А)</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Штрихтеу</span><span lang="en" class="lang-content">Hatching</span><span lang="ru" class="lang-content">Штриховка</span></p>
+      <p class="text-violet-200"><span lang="kk" class="lang-content">45°, жіңішке сплошная, қадам 2–10 мм</span><span lang="en" class="lang-content">45°, thin solid lines, 2–10 mm pitch</span><span lang="ru" class="lang-content">45°, тонкая, шаг 2–10 мм</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Разрез ≠ Сечение</span><span lang="en" class="lang-content">Section ≠ Cross-section</span><span lang="ru" class="lang-content">Разрез ≠ Сечение</span></p>
+      <p class="text-violet-200"><span lang="kk" class="lang-content">Разрез — жазықтықта + артында. Сечение — тек жазықтықта</span><span lang="en" class="lang-content">Section: plane + beyond. Cross-section: plane only</span><span lang="ru" class="lang-content">Разрез: плоскость + за ней. Сечение: только плоскость</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

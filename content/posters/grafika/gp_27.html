@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прямоугольная изометрия</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 5 · Аксонометрия</span>
+      <span lang="en" class="lang-content">Graphics · Section 5 · Axonometry</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 5 · Аксонометрия</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📦 Тіктөртбұрышты изометрия</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📦 Rectangular Isometric Projection</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📦 Прямоугольная изометрия</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Үш осьтің бірдей бұрыштары мен коэффициенттері — ең жиі қолданылатын аксонометрия.</span>
+      <span lang="en" class="lang-content">Equal angles and coefficients for all three axes — the most widely used axonometric projection.</span>
+      <span lang="ru" class="lang-content">Равные углы и коэффициенты для всех трёх осей — наиболее распространённая аксонометрия.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Изометрия дегеніміз не?</span>
+    <span lang="en" class="lang-content">💡 What is Isometry?</span>
+    <span lang="ru" class="lang-content">💡 Что такое изометрия?</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-violet-700">Аксонометрия</b> — үш өлшемді нысанды бір жазықтықта нақты болып көрінетіндей бейнелеу. Изометрияда барлық үш осьтің коэффициенті бірдей, осьтер бірдей бұрышта.</span>
+        <span lang="en" class="lang-content"><b class="text-violet-700">Axonometric projection</b> represents a 3D object on a flat plane. In isometry all three axis coefficients are equal and axes are equally angled.</span>
+        <span lang="ru" class="lang-content"><b class="text-violet-700">Аксонометрия</b> — изображение трёхмерного объекта на плоскости. В изометрии все три оси имеют одинаковый коэффициент и равные углы.</span>
+      </p>
+      <div class="card-accent rounded-xl p-4 text-sm">
+        <p class="font-bold text-violet-800 mb-3">
+          <span lang="kk" class="lang-content">📐 Изометрия параметрлері (ГОСТ 2.317):</span>
+          <span lang="en" class="lang-content">📐 Isometry parameters (GOST 2.317):</span>
+          <span lang="ru" class="lang-content">📐 Параметры изометрии (ГОСТ 2.317):</span>
+        </p>
+        <table class="w-full text-xs">
+          <tr class="border-b border-violet-200"><td class="py-1 font-bold text-red-600">Z</td><td class="py-1">90° (тік / vertical / вертикаль)</td><td class="py-1 font-bold text-green-700">k = 1</td></tr>
+          <tr class="border-b border-violet-200"><td class="py-1 font-bold text-blue-600">X</td><td class="py-1">30° (оң / right / вправо)</td><td class="py-1 font-bold text-green-700">k = 1</td></tr>
+          <tr><td class="py-1 font-bold text-green-600">Y</td><td class="py-1">30° (сол / left / влево)</td><td class="py-1 font-bold text-green-700">k = 1</td></tr>
+        </table>
+        <p class="text-slate-500 text-xs mt-2">
+          <span lang="kk" class="lang-content">Нақты мән k=0,82, практикада k=1 қолданылады (22% үлкейеді)</span>
+          <span lang="en" class="lang-content">True k=0.82; in practice k=1 is used (22% larger)</span>
+          <span lang="ru" class="lang-content">Точно k=0,82; на практике k=1 (изображение на 22% больше)</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Precise isometric cube SVG -->
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 260" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Isometric axes -->
+        <line x1="150" y1="160" x2="150" y2="50" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,3"/>
+        <polygon points="150,50 146,62 154,62" fill="#ef4444"/>
+        <text x="155" y="46" font-size="11" fill="#ef4444" font-weight="bold">Z</text>
+        <text x="130" y="110" font-size="9" fill="#ef4444">90°</text>
+
+        <line x1="150" y1="160" x2="255" y2="218" stroke="#2563eb" stroke-width="2" stroke-dasharray="5,3"/>
+        <polygon points="255,218 244,212 248,222" fill="#2563eb"/>
+        <text x="258" y="223" font-size="11" fill="#2563eb" font-weight="bold">X</text>
+        <text x="193" y="172" font-size="9" fill="#2563eb">30°</text>
+
+        <line x1="150" y1="160" x2="45" y2="218" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,3"/>
+        <polygon points="45,218 56,212 52,222" fill="#16a34a"/>
+        <text x="28" y="223" font-size="11" fill="#16a34a" font-weight="bold">Y</text>
+        <text x="100" y="172" font-size="9" fill="#16a34a">30°</text>
+
+        <!-- Precise isometric cube (s=18, 4×4×4 units, center at 150,160) -->
+        <!-- Vertices computed: front-bot-l=(150,160), front-bot-r=(212,196),
+             back-bot-r=(150,232), back-bot-l=(88,196),
+             front-top-l=(150,88), front-top-r=(212,124),
+             back-top-r=(150,160), back-top-l=(88,124) -->
+
+        <!-- Top face (lighter) -->
+        <polygon points="150,88 212,124 150,160 88,124"
+                 fill="rgba(124,58,237,0.20)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Front-right face -->
+        <polygon points="212,124 212,196 150,232 150,160"
+                 fill="rgba(124,58,237,0.10)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Front-left face -->
+        <polygon points="88,124 150,160 150,232 88,196"
+                 fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="2"/>
+
+        <!-- Hidden edges (dashed) -->
+        <line x1="150" y1="160" x2="150" y2="232" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+        <line x1="88" y1="196" x2="150" y2="232" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+        <line x1="212" y1="196" x2="150" y2="232" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+
+        <!-- Dimension labels -->
+        <text x="183" y="245" font-size="9" fill="#2563eb">a</text>
+        <text x="114" y="245" font-size="9" fill="#16a34a">a</text>
+        <text x="220" y="157" font-size="9" fill="#ef4444">a</text>
+
+        <!-- Centre dot -->
+        <circle cx="150" cy="160" r="3" fill="#7c3aed"/>
+        <text x="135" y="175" font-size="8" fill="#7c3aed">O</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📦 «Қорап» тәсілі — 4 қадам</span>
+    <span lang="en" class="lang-content">📦 The «Box» Method — 4 Steps</span>
+    <span lang="ru" class="lang-content">📦 Метод «ящика» — 4 шага</span>
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="tile"><div class="step-num mx-auto">1</div>
+      <p class="font-bold text-violet-800 mt-3 text-sm"><span lang="kk" class="lang-content">Осьтер + қорап</span><span lang="en" class="lang-content">Axes + box</span><span lang="ru" class="lang-content">Оси + ящик</span></p>
+      <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">X 30° оңға, Y 30° солға, Z тік</span><span lang="en" class="lang-content">X 30° right, Y 30° left, Z vertical</span><span lang="ru" class="lang-content">X 30° вправо, Y 30° влево, Z вверх</span></p>
+    </div>
+    <div class="tile"><div class="step-num mx-auto">2</div>
+      <p class="font-bold text-violet-800 mt-3 text-sm"><span lang="kk" class="lang-content">Параллелепипед</span><span lang="en" class="lang-content">Enclosing box</span><span lang="ru" class="lang-content">Параллелепипед</span></p>
+      <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Бөлшекті сыйдыратын «қорап» — X, Y, Z өлшемдермен</span><span lang="en" class="lang-content">Draw box fitting the part's X, Y, Z</span><span lang="ru" class="lang-content">Ящик по X, Y, Z размерам детали</span></p>
+    </div>
+    <div class="tile"><div class="step-num mx-auto">3</div>
+      <p class="font-bold text-violet-800 mt-3 text-sm"><span lang="kk" class="lang-content">Пішінді «кесу»</span><span lang="en" class="lang-content">Carve the shape</span><span lang="ru" class="lang-content">«Вырезать» форму</span></p>
+      <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Осьтерден өлшей отырып, артық бөліктерді алу</span><span lang="en" class="lang-content">Measure from axes, remove excess material</span><span lang="ru" class="lang-content">Отмерять от осей, убрать лишнее</span></p>
+    </div>
+    <div class="tile"><div class="step-num mx-auto">4</div>
+      <p class="font-bold text-violet-800 mt-3 text-sm"><span lang="kk" class="lang-content">Контурды жирелеу</span><span lang="en" class="lang-content">Reinforce outline</span><span lang="ru" class="lang-content">Обвести контур</span></p>
+      <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Штрихтік сызықсыз, негізгі сызықпен</span><span lang="en" class="lang-content">No hidden lines; thick visible lines only</span><span lang="ru" class="lang-content">Без штриховых; только видимые толстые</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📊 Изометрия параметрлері</span>
+    <span lang="en" class="lang-content">📊 Isometry Parameters</span>
+    <span lang="ru" class="lang-content">📊 Параметры изометрии</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+      <div class="card-accent rounded-xl p-5">
+        <div class="text-3xl font-bold text-red-600 mb-2">Z: 90°</div>
+        <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Биіктік осі</span><span lang="en" class="lang-content">Height axis</span><span lang="ru" class="lang-content">Ось высоты</span></p>
+        <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Тік жоғары, деформация жоқ</span><span lang="en" class="lang-content">Straight up, no distortion</span><span lang="ru" class="lang-content">Вертикально вверх, без искажений</span></p>
+      </div>
+      <div class="card-accent rounded-xl p-5">
+        <div class="text-3xl font-bold text-blue-600 mb-2">X, Y: 30°</div>
+        <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Горизонталды осьтер</span><span lang="en" class="lang-content">Horizontal axes</span><span lang="ru" class="lang-content">Горизонтальные оси</span></p>
+        <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Горизонталдан 30° — оңға және солға</span><span lang="en" class="lang-content">30° from horizontal — right and left</span><span lang="ru" class="lang-content">30° от горизонтали — вправо и влево</span></p>
+      </div>
+      <div class="card-accent rounded-xl p-5">
+        <div class="text-3xl font-bold text-green-700 mb-2">k = 1</div>
+        <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Практикалық коэффициент</span><span lang="en" class="lang-content">Practical coefficient</span><span lang="ru" class="lang-content">Практический коэффициент</span></p>
+        <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Барлық осьтер бойынша бірдей масштаб</span><span lang="en" class="lang-content">Equal scale along all three axes</span><span lang="ru" class="lang-content">Одинаковый масштаб по всем осям</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Изометрияның формулалары</span>
+    <span lang="en" class="lang-content">🧠 Key Isometry Values</span>
+    <span lang="ru" class="lang-content">🧠 Ключевые значения изометрии</span>
+  </h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold text-red-300">Z: 90°</div><p class="text-violet-200 mt-1">k = 1</p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold text-blue-300">X: 30°</div><p class="text-violet-200 mt-1">k = 1</p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold text-green-300">Y: 30°</div><p class="text-violet-200 mt-1">k = 1</p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold">Эллипс</div><p class="text-violet-200 mt-1">1,22d × 0,71d</p></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

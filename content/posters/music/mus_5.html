@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Названия нот и октавы</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_mus_style.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Музыка · 5-бөлім · Дыбыс биіктігі</span>
+      <span lang="en" class="lang-content">Music · Section 5 · Pitch</span>
+      <span lang="ru" class="lang-content">Музыка · Раздел 5 · Высота звука</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🎹 Нота атаулары және октавалар</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🎹 Note Names and Octaves</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🎹 Названия нот и октавы</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Бар болғаны 7 атау — бірақ олар бүкіл пернетақтаны толтырады.</span>
+      <span lang="en" class="lang-content">Just 7 names — yet they fill the whole keyboard.</span>
+      <span lang="ru" class="lang-content">Всего 7 названий — но они заполняют всю клавиатуру.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- SECTION 1: 7 notes + interactive keyboard -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎵 Жеті нота</span>
+    <span lang="en" class="lang-content">🎵 The Seven Notes</span>
+    <span lang="ru" class="lang-content">🎵 Семь нот</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="flex flex-wrap gap-2 mb-5 items-center">
+      <span class="badge text-base">До</span><span class="text-slate-400">→</span>
+      <span class="badge text-base">Ре</span><span class="text-slate-400">→</span>
+      <span class="badge text-base">Ми</span><span class="text-slate-400">→</span>
+      <span class="badge text-base">Фа</span><span class="text-slate-400">→</span>
+      <span class="badge text-base">Соль</span><span class="text-slate-400">→</span>
+      <span class="badge text-base">Ля</span><span class="text-slate-400">→</span>
+      <span class="badge text-base">Си</span><span class="text-slate-400">→</span>
+      <span class="badge text-base" style="background:#7c3aed;color:#fff">До</span>
+      <span class="text-slate-500 text-sm ml-2">(C D E F G A B → C)</span>
+    </div>
+    <p class="text-slate-700 mb-4">
+      <span lang="kk" class="lang-content">7 нотадан кейін атаулар <b class="text-violet-700">қайталанады</b>, бірақ дыбыс жоғарырақ болады. Бұл қайталану — <b class="text-violet-700">октава</b>.</span>
+      <span lang="en" class="lang-content">After 7 notes the names <b class="text-violet-700">repeat</b>, but higher. This repetition is the <b class="text-violet-700">octave</b>.</span>
+      <span lang="ru" class="lang-content">После 7 нот названия <b class="text-violet-700">повторяются</b>, но звучат выше. Это повторение и есть <b class="text-violet-700">октава</b>.</span>
+    </p>
+    <p class="hint mb-3">🎧
+      <span lang="kk" class="lang-content">пернелерді басып, гамманы тыңдаңыз</span>
+      <span lang="en" class="lang-content">tap the keys and play the scale</span>
+      <span lang="ru" class="lang-content">нажимайте на клавиши и сыграйте гамму</span>
+    </p>
+    <!-- interactive piano: C4..C5 -->
+    <div class="pianobar" style="max-width:760px">
+      <div class="wkey" id="k0" onclick="tone(261.63,0.6);litKey(this)">До</div>
+      <div class="wkey" id="k1" onclick="tone(293.66,0.6);litKey(this)">Ре</div>
+      <div class="wkey" id="k2" onclick="tone(329.63,0.6);litKey(this)">Ми</div>
+      <div class="wkey" id="k3" onclick="tone(349.23,0.6);litKey(this)">Фа</div>
+      <div class="wkey" id="k4" onclick="tone(392.00,0.6);litKey(this)">Соль</div>
+      <div class="wkey" id="k5" onclick="tone(440.00,0.6);litKey(this)">Ля</div>
+      <div class="wkey" id="k6" onclick="tone(493.88,0.6);litKey(this)">Си</div>
+      <div class="wkey" id="k7" onclick="tone(523.25,0.6);litKey(this)">До</div>
+      <!-- black keys -->
+      <div class="bkey" style="left:8.0%"  onclick="event.stopPropagation();tone(277.18,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:20.5%" onclick="event.stopPropagation();tone(311.13,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:45.5%" onclick="event.stopPropagation();tone(369.99,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:58.0%" onclick="event.stopPropagation();tone(415.30,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:70.5%" onclick="event.stopPropagation();tone(466.16,0.6);litKey(this)"></div>
+    </div>
+    <div class="mt-5">
+      <button class="playbtn" onclick="playScale()">▶
+        <span lang="kk" class="lang-content">Гамманы ойнату (до–до)</span>
+        <span lang="en" class="lang-content">Play the scale (C–C)</span>
+        <span lang="ru" class="lang-content">Сыграть гамму (до–до)</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: octaves -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📚 Октавалар</span>
+    <span lang="en" class="lang-content">📚 Octaves</span>
+    <span lang="ru" class="lang-content">📚 Октавы</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 mb-3">
+        <span lang="kk" class="lang-content">Октава — бір <b>до</b>-дан келесі <b>до</b>-ға дейінгі қашықтық. Пернетақта бірнеше октаваға бөлінеді — төменнен жоғары қарай.</span>
+        <span lang="en" class="lang-content">An octave is the distance from one <b>C (до)</b> to the next <b>C</b>. The keyboard is divided into several octaves — from low to high.</span>
+        <span lang="ru" class="lang-content">Октава — это расстояние от одной <b>до</b> до следующей <b>до</b>. Клавиатура делится на несколько октав — от низких к высоким.</span>
+      </p>
+      <table class="t">
+        <thead>
+          <tr>
+            <th><span lang="kk" class="lang-content">Октава</span><span lang="en" class="lang-content">Octave</span><span lang="ru" class="lang-content">Октава</span></th>
+            <th><span lang="kk" class="lang-content">Регистр</span><span lang="en" class="lang-content">Register</span><span lang="ru" class="lang-content">Регистр</span></th>
+            <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Mark</span><span lang="ru" class="lang-content">Обозн.</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span lang="kk" class="lang-content">Контроктава</span><span lang="en" class="lang-content">Contra</span><span lang="ru" class="lang-content">Контроктава</span></td><td><span lang="kk" class="lang-content">өте төмен</span><span lang="en" class="lang-content">very low</span><span lang="ru" class="lang-content">очень низкий</span></td><td>До₁</td></tr>
+          <tr><td><b class="text-violet-700"><span lang="kk" class="lang-content">Үлкен октава</span><span lang="en" class="lang-content">Great</span><span lang="ru" class="lang-content">Большая</span></b></td><td><span lang="kk" class="lang-content">төмен</span><span lang="en" class="lang-content">low</span><span lang="ru" class="lang-content">низкий</span></td><td>До</td></tr>
+          <tr><td><b class="text-violet-700"><span lang="kk" class="lang-content">Кіші октава</span><span lang="en" class="lang-content">Small</span><span lang="ru" class="lang-content">Малая</span></b></td><td><span lang="kk" class="lang-content">орташа</span><span lang="en" class="lang-content">middle</span><span lang="ru" class="lang-content">средний</span></td><td>до</td></tr>
+          <tr><td><b class="text-violet-700"><span lang="kk" class="lang-content">Бірінші октава</span><span lang="en" class="lang-content">One-line (1st)</span><span lang="ru" class="lang-content">Первая</span></b></td><td><span lang="kk" class="lang-content">негізгі</span><span lang="en" class="lang-content">central</span><span lang="ru" class="lang-content">центральный</span></td><td>до¹</td></tr>
+          <tr><td><span lang="kk" class="lang-content">Екінші октава</span><span lang="en" class="lang-content">Two-line (2nd)</span><span lang="ru" class="lang-content">Вторая</span></td><td><span lang="kk" class="lang-content">жоғары</span><span lang="en" class="lang-content">high</span><span lang="ru" class="lang-content">высокий</span></td><td>до²</td></tr>
+          <tr><td><span lang="kk" class="lang-content">Үшінші октава</span><span lang="en" class="lang-content">Three-line (3rd)</span><span lang="ru" class="lang-content">Третья</span></td><td><span lang="kk" class="lang-content">өте жоғары</span><span lang="en" class="lang-content">very high</span><span lang="ru" class="lang-content">очень высокий</span></td><td>до³</td></tr>
+        </tbody>
+      </table>
+      <div class="card-accent rounded-xl p-4 mt-4">
+        <p class="text-slate-700 text-sm">
+          <span lang="kk" class="lang-content">📌 <b>До¹</b> (бірінші октаваның до) — пернетақтаның дәл ортасында тұрады және барлық ноталардың «бастапқы нүктесі» болып саналады.</span>
+          <span lang="en" class="lang-content">📌 <b>Middle C (до¹)</b> sits in the very centre of the keyboard and is the "starting point" for all notes.</span>
+          <span lang="ru" class="lang-content">📌 <b>До¹</b> (до первой октавы) находится в самом центре клавиатуры и служит «точкой отсчёта» для всех нот.</span>
+        </p>
+      </div>
+    </div>
+    <div class="grid grid-rows-2 gap-6">
+      <div class="photo">
+        <img src="../../assets/music/mus5_piano.jpg" alt="piano keyboard">
+        <div class="cap"><span lang="kk" class="lang-content">Бір ғана 7 атау пернетақтаның бойымен қайталанады</span><span lang="en" class="lang-content">The same 7 names repeat along the keyboard</span><span lang="ru" class="lang-content">Одни и те же 7 названий повторяются вдоль клавиатуры</span></div>
+      </div>
+      <div class="photo">
+        <img src="../../assets/music/mus5_keys.jpg" alt="hands on keys">
+        <div class="cap"><span lang="kk" class="lang-content">Әр перне — өз биіктігі бар нота</span><span lang="en" class="lang-content">Each key is a note with its own pitch</span><span lang="ru" class="lang-content">Каждая клавиша — нота со своей высотой</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="card-music rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Key Takeaways</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">7</p>
+      <p class="text-violet-100 text-sm"><span lang="kk" class="lang-content">До-Ре-Ми-Фа-Соль-Ля-Си — барлығы 7 атау.</span><span lang="en" class="lang-content">Do-Re-Mi-Fa-Sol-La-Ti — only 7 names.</span><span lang="ru" class="lang-content">До-Ре-Ми-Фа-Соль-Ля-Си — всего 7 названий.</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Октава = до→до</span>
+        <span lang="en" class="lang-content">Octave = C→C</span>
+        <span lang="ru" class="lang-content">Октава = до→до</span>
+      </p>
+      <p class="text-violet-100 text-sm"><span lang="kk" class="lang-content">7 нотадан кейін атаулар қайталанады.</span><span lang="en" class="lang-content">After 7 notes the names repeat.</span><span lang="ru" class="lang-content">После 7 нот названия повторяются.</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">До¹</p>
+      <p class="text-violet-100 text-sm"><span lang="kk" class="lang-content">Бірінші октаваның до — орталық нота.</span><span lang="en" class="lang-content">Middle C is the central note.</span><span lang="ru" class="lang-content">До первой октавы — центральная нота.</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang===lang);
+  });
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+
+<script>/* ===== Web Audio ===== */
+var _ac=null;
+function actx(){ if(!_ac){ try{_ac=new (window.AudioContext||window.webkitAudioContext)({latencyHint:'playback'});}catch(e){} } if(_ac&&_ac.state==='suspended'){_ac.resume();} return _ac; }
+function tone(freq,dur,type){
+  var c=actx(); if(!c) return; type=type||'sine';
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type; o.frequency.value=freq;
+  o.connect(g); g.connect(c.destination);
+  var t=c.currentTime;
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(0.32,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.start(t); o.stop(t+dur+0.03);
+}
+function flash(el){ if(!el) return; el.classList.add('lit'); setTimeout(function(){el.classList.remove('lit');},220); }
+function litKey(el){ if(!el) return; el.classList.add('lit'); setTimeout(function(){el.classList.remove('lit');},230); }
+function playScale(){
+  var seq=[[261.63,'k0'],[293.66,'k1'],[329.63,'k2'],[349.23,'k3'],[392.00,'k4'],[440.00,'k5'],[493.88,'k6'],[523.25,'k7']];
+  seq.forEach(function(s,i){
+    setTimeout(function(){ tone(s[0],0.5); var k=document.getElementById(s[1]); litKey(k); }, i*430);
+  });
+}
+</script>
+
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D-примитивы</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_emerald.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-emerald-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 12 · 3D-модельдеу</span>
+      <span lang="en" class="lang-content">Graphics · Section 12 · 3D Modelling</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 12 · 3D-моделирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🔷 3D-примитивтер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🔷 3D Primitives</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🔷 3D-примитивы</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Кез-келген күрделі форманы құру үшін негізгі қарапайым денелер.</span>
+      <span lang="en" class="lang-content">Basic shapes used to build any complex form.</span>
+      <span lang="ru" class="lang-content">Базовые тела, из которых строятся любые сложные формы.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- 6 primitives -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🧊 6 негізгі примитив</span>
+    <span lang="en" class="lang-content">🧊 6 Basic Primitives</span>
+    <span lang="ru" class="lang-content">🧊 6 базовых примитивов</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <!-- CUBE -->
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 180 160" style="width:160px;height:140px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <!-- Iso cube 2x2x2, s=25, centered at (90,100) -->
+        <!-- E(0,0,2)=(90,50), F(2,0,2)=(133,75), G(2,2,2)=(90,100), H(0,2,2)=(47,75) -->
+        <!-- A(0,0,0)=(90,100), B(2,0,0)=(133,125), C(2,2,0)=(90,150), D(0,2,0)=(47,125) -->
+        <polygon points="90,50 133,75 90,100 47,75" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="2"/>
+        <polygon points="90,100 133,125 133,75 90,50" fill="rgba(5,150,105,0.15)" stroke="#059669" stroke-width="2"/>
+        <polygon points="90,100 47,125 47,75 90,50" fill="rgba(5,150,105,0.20)" stroke="#059669" stroke-width="2"/>
+        <line x1="90" y1="100" x2="90" y2="150" stroke="#059669" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+        <line x1="47" y1="125" x2="90" y2="150" stroke="#059669" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+        <line x1="133" y1="125" x2="90" y2="150" stroke="#059669" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+      </svg>
+      <p class="font-bold text-emerald-800 mt-2">🟩 <span lang="kk" class="lang-content">Куб (Box)</span><span lang="en" class="lang-content">Cube (Box)</span><span lang="ru" class="lang-content">Куб (Box)</span></p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Ені × биіктігі × тереңдігі</span>
+        <span lang="en" class="lang-content">Width × Height × Depth</span>
+        <span lang="ru" class="lang-content">Ширина × Высота × Глубина</span>
+      </p>
+      <div class="formula mt-2 text-xs">8V · 12E · 6F</div>
+    </div>
+
+    <!-- SPHERE -->
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 180 160" style="width:160px;height:140px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <!-- Sphere = circle + 2 ellipses (latitude lines) -->
+        <circle cx="90" cy="80" r="55" fill="rgba(5,150,105,0.20)" stroke="#059669" stroke-width="2"/>
+        <!-- Horizontal equator -->
+        <ellipse cx="90" cy="80" rx="55" ry="15" fill="none" stroke="#059669" stroke-width="1.5"/>
+        <!-- Vertical "front" meridian (visible part solid, back dashed) -->
+        <ellipse cx="90" cy="80" rx="15" ry="55" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="0"/>
+        <!-- Pole markers -->
+        <circle cx="90" cy="80" r="2" fill="#059669"/>
+      </svg>
+      <p class="font-bold text-emerald-800 mt-2">⚪ <span lang="kk" class="lang-content">Сфера</span><span lang="en" class="lang-content">Sphere</span><span lang="ru" class="lang-content">Сфера</span></p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Радиус (r)</span>
+        <span lang="en" class="lang-content">Radius (r)</span>
+        <span lang="ru" class="lang-content">Радиус (r)</span>
+      </p>
+      <div class="formula mt-2 text-xs">V = ⁴⁄₃ π r³</div>
+    </div>
+
+    <!-- CYLINDER -->
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 180 160" style="width:160px;height:140px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <!-- Cylinder: 2 ellipses + 2 vertical lines -->
+        <!-- Bottom ellipse (full) at (90, 130), rx=45, ry=12 -->
+        <ellipse cx="90" cy="130" rx="45" ry="12" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="2"/>
+        <!-- Body fill -->
+        <rect x="45" y="40" width="90" height="90" fill="rgba(5,150,105,0.18)" stroke="none"/>
+        <!-- Vertical sides -->
+        <line x1="45" y1="40" x2="45" y2="130" stroke="#059669" stroke-width="2"/>
+        <line x1="135" y1="40" x2="135" y2="130" stroke="#059669" stroke-width="2"/>
+        <!-- Top ellipse (full) at (90, 40) -->
+        <ellipse cx="90" cy="40" rx="45" ry="12" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="2"/>
+        <!-- Bottom back half (dashed) -->
+        <path d="M 45,130 A 45,12 0 0,1 135,130" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.5"/>
+      </svg>
+      <p class="font-bold text-emerald-800 mt-2">🥫 <span lang="kk" class="lang-content">Цилиндр</span><span lang="en" class="lang-content">Cylinder</span><span lang="ru" class="lang-content">Цилиндр</span></p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Радиус + биіктігі</span>
+        <span lang="en" class="lang-content">Radius + height</span>
+        <span lang="ru" class="lang-content">Радиус + высота</span>
+      </p>
+      <div class="formula mt-2 text-xs">V = π r² h</div>
+    </div>
+
+    <!-- CONE -->
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 180 160" style="width:160px;height:140px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <!-- Bottom ellipse -->
+        <ellipse cx="90" cy="130" rx="45" ry="12" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="2"/>
+        <!-- Triangle sides -->
+        <polygon points="45,130 90,30 135,130" fill="rgba(5,150,105,0.18)" stroke="#059669" stroke-width="2"/>
+        <!-- Apex point -->
+        <circle cx="90" cy="30" r="3" fill="#059669"/>
+        <!-- Back arc of bottom (dashed) -->
+        <path d="M 45,130 A 45,12 0 0,1 135,130" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.5"/>
+      </svg>
+      <p class="font-bold text-emerald-800 mt-2">🔺 <span lang="kk" class="lang-content">Конус</span><span lang="en" class="lang-content">Cone</span><span lang="ru" class="lang-content">Конус</span></p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Радиус + биіктігі</span>
+        <span lang="en" class="lang-content">Radius + height</span>
+        <span lang="ru" class="lang-content">Радиус + высота</span>
+      </p>
+      <div class="formula mt-2 text-xs">V = ⅓ π r² h</div>
+    </div>
+
+    <!-- PYRAMID -->
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 180 160" style="width:160px;height:140px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <!-- Square base in iso projection: -->
+        <!-- (1,0,0)→(133,115), (1,1,0)→(90,140), (0,1,0)→(47,115), (0,0,0)→(90,90) -->
+        <polygon points="90,90 133,115 90,140 47,115" fill="rgba(5,150,105,0.18)" stroke="#059669" stroke-width="2"/>
+        <!-- Apex at top, at top center, z=2 -->
+        <line x1="90" y1="30" x2="133" y2="115" stroke="#059669" stroke-width="2"/>
+        <line x1="90" y1="30" x2="90" y2="140" stroke="#059669" stroke-width="2"/>
+        <line x1="90" y1="30" x2="47" y2="115" stroke="#059669" stroke-width="2"/>
+        <line x1="90" y1="30" x2="90" y2="90" stroke="#059669" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+        <!-- Front face fill -->
+        <polygon points="90,30 133,115 90,140" fill="rgba(5,150,105,0.22)"/>
+        <polygon points="90,30 90,140 47,115" fill="rgba(5,150,105,0.28)"/>
+      </svg>
+      <p class="font-bold text-emerald-800 mt-2">🔶 <span lang="kk" class="lang-content">Пирамида</span><span lang="en" class="lang-content">Pyramid</span><span lang="ru" class="lang-content">Пирамида</span></p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Негіз + биіктігі</span>
+        <span lang="en" class="lang-content">Base + apex height</span>
+        <span lang="ru" class="lang-content">Основание + вершина</span>
+      </p>
+      <div class="formula mt-2 text-xs">V = ⅓ Sₒ h</div>
+    </div>
+
+    <!-- TORUS -->
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 180 160" style="width:160px;height:140px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <!-- Torus = outer ellipse - inner ellipse, with cross-section -->
+        <!-- Outer -->
+        <ellipse cx="90" cy="80" rx="65" ry="22" fill="rgba(5,150,105,0.25)" stroke="#059669" stroke-width="2"/>
+        <!-- Inner hole -->
+        <ellipse cx="90" cy="80" rx="20" ry="7" fill="rgba(255,255,255,1)" stroke="#059669" stroke-width="1.5"/>
+        <!-- Top arc highlighting roundness -->
+        <path d="M 25,80 A 65,28 0 0,1 155,80" fill="none" stroke="#059669" stroke-width="2"/>
+        <!-- Bottom arc (hidden, dashed) -->
+        <path d="M 25,80 A 65,28 0 0,0 155,80" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.5"/>
+      </svg>
+      <p class="font-bold text-emerald-800 mt-2">🍩 <span lang="kk" class="lang-content">Тор (Тороид)</span><span lang="en" class="lang-content">Torus</span><span lang="ru" class="lang-content">Тор</span></p>
+      <p class="text-slate-600 text-xs mt-1">
+        <span lang="kk" class="lang-content">Үлкен R + кіші r</span>
+        <span lang="en" class="lang-content">Major R + minor r</span>
+        <span lang="ru" class="lang-content">Большой R + малый r</span>
+      </p>
+      <div class="formula mt-2 text-xs">V = 2π² R r²</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- How they're combined -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔧 Қалай біріктіріледі?</span>
+    <span lang="en" class="lang-content">🔧 How They Combine</span>
+    <span lang="ru" class="lang-content">🔧 Как комбинируются?</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <p class="text-slate-700 text-sm mb-4">
+      <span lang="kk" class="lang-content">Күрделі бөлшек — бірнеше примитивтердің <b>қосылуы немесе айырылуы</b>. Мысалы: тесігі бар тікбұрышты блок = куб <b>−</b> цилиндр.</span>
+      <span lang="en" class="lang-content">A complex part is the <b>sum or difference</b> of several primitives. Example: a rectangular block with a hole = cube <b>−</b> cylinder.</span>
+      <span lang="ru" class="lang-content">Сложная деталь — это <b>сумма или разность</b> нескольких примитивов. Пример: прямоугольный блок с отверстием = куб <b>−</b> цилиндр.</span>
+    </p>
+    <div class="formula text-center text-lg">
+      <span lang="kk" class="lang-content">Деталь = Куб + Цилиндр − Конус − Тесік</span>
+      <span lang="en" class="lang-content">Part = Cube + Cylinder − Cone − Hole</span>
+      <span lang="ru" class="lang-content">Деталь = Куб + Цилиндр − Конус − Отверстие</span>
+    </div>
+  </div>
+</section>
+
+<footer class="card-emerald rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">6 негізгі форма</span>
+        <span lang="en" class="lang-content">6 basic shapes</span>
+        <span lang="ru" class="lang-content">6 базовых форм</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Куб · Сфера · Цилиндр · Конус · Пирамида · Тор</span>
+        <span lang="en" class="lang-content">Cube · Sphere · Cylinder · Cone · Pyramid · Torus</span>
+        <span lang="ru" class="lang-content">Куб · Сфера · Цилиндр · Конус · Пирамида · Тор</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Бір немесе бірнеше өлшем</span>
+        <span lang="en" class="lang-content">1-3 dimensions</span>
+        <span lang="ru" class="lang-content">1-3 размера</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Әр примитив — өзіндік параметрлер</span>
+        <span lang="en" class="lang-content">Each primitive — own parameters</span>
+        <span lang="ru" class="lang-content">У каждого — свои параметры</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Конструктор</span>
+        <span lang="en" class="lang-content">Lego principle</span>
+        <span lang="ru" class="lang-content">Принцип конструктора</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Күрделі = примитивтердің біріктірмесі</span>
+        <span lang="en" class="lang-content">Complex = combination of primitives</span>
+        <span lang="ru" class="lang-content">Сложное = комбинация примитивов</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

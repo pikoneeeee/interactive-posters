@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Соединение деталей из дерева</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+/* process timeline */
+.tstep{display:flex;gap:1rem;align-items:flex-start;}
+.tstep .body{flex:1;}
+.tstep h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.1rem;margin-bottom:.15rem;}
+.tstep p{color:#44403c;font-size:.97rem;line-height:1.55;}
+.tstep p b{color:#9f1239;}
+.tline{border-left:2px dashed rgba(190,18,60,.28);margin-left:1rem;padding-left:1.9rem;}
+.tline > .tstep{position:relative;padding-bottom:1.5rem;}
+.tline > .tstep:last-child{padding-bottom:0;}
+.tline > .tstep .step-num{position:absolute;left:-3rem;margin-top:.1rem;}
+.minicap{font-size:.78rem;color:#a16207;font-style:italic;text-align:center;margin-top:.4rem;}
+.tip{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1rem;
+  padding:1rem 1.15rem;box-shadow:0 3px 14px rgba(136,19,55,.06);}
+.tip h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;margin-bottom:.25rem;}
+.tip p{color:#57534e;font-size:.92rem;line-height:1.5;}
+.jt{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:.85rem 1rem;}
+.jt h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:.98rem;margin-bottom:.2rem;}
+.jt p{color:#57534e;font-size:.88rem;line-height:1.45;}
+.imgcard .pic{height:200px;background:#1c1917;border-radius:.9rem;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.imgcard .pic img{width:100%;height:100%;object-fit:cover;}
+table.spec{width:100%;border-collapse:collapse;font-size:.92rem;background:rgba(255,255,255,0.96);
+  border-radius:.9rem;overflow:hidden;box-shadow:0 3px 14px rgba(136,19,55,.07);}
+table.spec th{background:var(--rose,#be123c);color:#fff;text-align:left;padding:.7rem .9rem;font-weight:700;font-size:.9rem;}
+table.spec td{padding:.65rem .9rem;border-top:1px solid rgba(190,18,60,.14);color:#44403c;vertical-align:top;}
+table.spec tr:nth-child(even) td{background:rgba(225,29,72,0.035);}
+table.spec td b{color:#9f1239;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 2-бөлім · Ағаш өңдеу</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 2 · Woodworking</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 2 · Обработка древесины</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪵 Ағаш бөлшектерін біріктіру</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪵 Joining Wooden Parts</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪵 Соединение деталей из дерева</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Бөлек бөлшектерден берік бұйым: желімдеу, шеге, бұранда және ағаш ұластырмалары.</span>
+      <span lang="en" class="lang-content">From separate parts to a sturdy item: glue, nails, screws and woodworking joints.</span>
+      <span lang="ru" class="lang-content">Из отдельных деталей — прочное изделие: клей, гвозди, шурупы и столярные соединения.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content">Кез келген ағаш бұйым — табуретка, сөре, жәшік немесе ойыншық — көбіне бір емес, <b>бірнеше бөлшектен</b> құралады. Оларды бір-бірімен дұрыс <b>біріктіру (соединение)</b> — ағаш ұстасының басты шеберлігі. Қосылыс берік, тегіс әрі ұқыпты болуы керек: дұрыс жасалған жалғау бұйымды ұзақ қызмет еткізеді, ал нашар жалғау бұйымды сынғыш етеді. Барлық қосылыстарды екі үлкен топқа бөлуге болады: <b>ажыратылатын</b> (бұзбай шешуге болатын — бұранда, болт) және <b>ажыратылмайтын</b> (тек бұзып ажырататын — желім, шеге, ағаш ұластырмалары). Бұл плакатта осы тәсілдерді және оларды қалай таңдау керектігін қарастырамыз.</span>
+    <span lang="en" class="lang-content">Almost any wooden item — a stool, a shelf, a box or a toy — is usually made not from one piece but from <b>several parts</b>. Putting them together correctly — making a good <b>joint</b> — is the carpenter's main skill. A joint must be strong, flush and tidy: a well-made joint lets the item serve for years, while a poor one makes it fragile. All joints fall into two big groups: <b>detachable</b> (can be taken apart without damage — screws, bolts) and <b>permanent</b> (can only be separated by breaking — glue, nails, woodworking joints). This poster looks at these methods and at how to choose between them.</span>
+    <span lang="ru" class="lang-content">Почти любое деревянное изделие — табурет, полка, ящик или игрушка — обычно состоит не из одной, а из <b>нескольких деталей</b>. Правильно <b>соединить</b> их между собой — главное мастерство столяра. Соединение должно быть прочным, ровным и аккуратным: хорошо сделанное соединение позволяет изделию служить годами, а плохое делает его хрупким. Все соединения делят на две большие группы: <b>разъёмные</b> (можно разобрать без повреждений — шурупы, болты) и <b>неразъёмные</b> (разделить можно только сломав — клей, гвозди, столярные соединения). На этом плакате мы разберём эти способы и то, как выбрать между ними.</span>
+  </p>
+</section>
+
+<!-- TWO FAMILIES -->
+<section class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+  <div class="card-accent rounded-custom p-6">
+    <div class="badge mb-2">🔩 <span lang="kk" class="lang-content">Ажыратылатын</span><span lang="en" class="lang-content">Detachable</span><span lang="ru" class="lang-content">Разъёмные</span></div>
+    <p class="lead" style="font-size:.98rem">
+      <span lang="kk" class="lang-content">Бұйымды <b>бұзбай шешіп, қайта жинауға</b> болады. Мысалы: <b>бұранда (шуруп), болт пен гайка</b>. Жөндеуге, тасымалдауға ыңғайлы — жиналмалы жиһаз осылай жасалады.</span>
+      <span lang="en" class="lang-content">The item <b>can be taken apart and reassembled</b> without damage. For example: <b>screws, bolts and nuts</b>. Handy for repair and transport — flat-pack furniture is built this way.</span>
+      <span lang="ru" class="lang-content">Изделие <b>можно разобрать и собрать заново</b> без повреждений. Например: <b>шурупы, болты с гайками</b>. Удобно для ремонта и перевозки — так делают сборную мебель.</span>
+    </p>
+  </div>
+  <div class="card-accent rounded-custom p-6">
+    <div class="badge mb-2">🔨 <span lang="kk" class="lang-content">Ажыратылмайтын</span><span lang="en" class="lang-content">Permanent</span><span lang="ru" class="lang-content">Неразъёмные</span></div>
+    <p class="lead" style="font-size:.98rem">
+      <span lang="kk" class="lang-content">Бөлшектер <b>мықтап, біржола</b> қосылады; ажырату үшін бұйымды бұзу керек. Мысалы: <b>желімдеу, шеге, тісті ұластырмалар</b>. Ең берік, көрікті қосылыстар осы топта.</span>
+      <span lang="en" class="lang-content">The parts are joined <b>firmly and for good</b>; to separate them you must break the item. For example: <b>gluing, nails, interlocking joints</b>. The strongest, most elegant joints belong to this group.</span>
+      <span lang="ru" class="lang-content">Детали соединяются <b>прочно и навсегда</b>; чтобы разделить, изделие придётся сломать. Например: <b>склеивание, гвозди, врезные соединения</b>. Самые прочные и красивые соединения — в этой группе.</span>
+    </p>
+  </div>
+</section>
+
+<!-- METHODS COMPARISON TABLE (3 per-language tables) -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Біріктіру тәсілдерін салыстыру</span>
+    <span lang="en" class="lang-content">Comparing the Joining Methods</span>
+    <span lang="ru" class="lang-content">Сравнение способов соединения</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Әр тәсілдің күшті жағы мен қолданылуы.</span>
+    <span lang="en" class="lang-content">The strengths and uses of each method.</span>
+    <span lang="ru" class="lang-content">Сильные стороны и применение каждого способа.</span>
+  </p>
+
+  <div class="lang-content" lang="ru">
+    <table class="spec">
+      <thead><tr><th>Способ</th><th>Тип</th><th>Прочность</th><th>Где применяют</th></tr></thead>
+      <tbody>
+        <tr><td><b>Гвоздь</b></td><td>неразъёмный</td><td>средняя, быстрый</td><td>опалубка, ящики, черновые работы</td></tr>
+        <tr><td><b>Шуруп / саморез</b></td><td>разъёмный</td><td>высокая, держит крепко</td><td>мебель, петли, ремонт</td></tr>
+        <tr><td><b>Болт с гайкой</b></td><td>разъёмный</td><td>очень высокая</td><td>нагруженные узлы, сборная мебель</td></tr>
+        <tr><td><b>Клей (склеивание)</b></td><td>неразъёмный</td><td>высокая по всей площади</td><td>щиты, фанера, ламели</td></tr>
+        <tr><td><b>Нагель / шкант</b></td><td>неразъёмный</td><td>высокая, скрытое</td><td>мебель без видимого крепежа</td></tr>
+        <tr><td><b>Шип и проушина</b></td><td>неразъёмный</td><td>очень высокая</td><td>рамы, двери, столы</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="kk">
+    <table class="spec">
+      <thead><tr><th>Тәсіл</th><th>Түрі</th><th>Беріктігі</th><th>Қолданылуы</th></tr></thead>
+      <tbody>
+        <tr><td><b>Шеге</b></td><td>ажыратылмайтын</td><td>орташа, жылдам</td><td>қалып, жәшік, дөрекі жұмыс</td></tr>
+        <tr><td><b>Бұранда / саморез</b></td><td>ажыратылатын</td><td>жоғары, мықты ұстайды</td><td>жиһаз, топса, жөндеу</td></tr>
+        <tr><td><b>Болт пен гайка</b></td><td>ажыратылатын</td><td>өте жоғары</td><td>жүк түсетін түйін, жиналмалы жиһаз</td></tr>
+        <tr><td><b>Желім (желімдеу)</b></td><td>ажыратылмайтын</td><td>барлық бетте жоғары</td><td>қалқан, фанера, ламель</td></tr>
+        <tr><td><b>Ағаш шеге (нагель/шкант)</b></td><td>ажыратылмайтын</td><td>жоғары, жасырын</td><td>көрінбейтін бекіткішсіз жиһаз</td></tr>
+        <tr><td><b>Тіс пен ұя</b></td><td>ажыратылмайтын</td><td>өте жоғары</td><td>жақтау, есік, үстел</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="en">
+    <table class="spec">
+      <thead><tr><th>Method</th><th>Type</th><th>Strength</th><th>Where it is used</th></tr></thead>
+      <tbody>
+        <tr><td><b>Nail</b></td><td>permanent</td><td>medium, fast</td><td>formwork, crates, rough work</td></tr>
+        <tr><td><b>Screw</b></td><td>detachable</td><td>high, holds firmly</td><td>furniture, hinges, repair</td></tr>
+        <tr><td><b>Bolt &amp; nut</b></td><td>detachable</td><td>very high</td><td>loaded joints, flat-pack furniture</td></tr>
+        <tr><td><b>Glue (gluing)</b></td><td>permanent</td><td>high over the whole area</td><td>panels, plywood, laminations</td></tr>
+        <tr><td><b>Dowel</b></td><td>permanent</td><td>high, hidden</td><td>furniture with no visible fasteners</td></tr>
+        <tr><td><b>Mortise &amp; tenon</b></td><td>permanent</td><td>very high</td><td>frames, doors, tables</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WOODWORKING JOINTS — CARD GRID -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Негізгі ұстагерлік ұластырмалар</span>
+    <span lang="en" class="lang-content">Main Woodworking Joints</span>
+    <span lang="ru" class="lang-content">Основные столярные соединения</span>
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="jt"><h4>┳ <span lang="kk" class="lang-content">Тіс пен ұя</span><span lang="en" class="lang-content">Mortise &amp; tenon</span><span lang="ru" class="lang-content">Шип и проушина</span></h4><p><span lang="kk" class="lang-content">Бір бөлшектегі «тіс» екіншісіндегі «ұяға» кіреді. Жақтау мен есіктің ең берік қосылысы.</span><span lang="en" class="lang-content">A "tenon" on one part fits a "mortise" in the other. The strongest joint for frames and doors.</span><span lang="ru" class="lang-content">«Шип» одной детали входит в «проушину» другой. Самое прочное соединение рам и дверей.</span></p></div>
+    <div class="jt"><h4>⋈ <span lang="kk" class="lang-content">Қарлығаш құйрық</span><span lang="en" class="lang-content">Dovetail</span><span lang="ru" class="lang-content">«Ласточкин хвост»</span></h4><p><span lang="kk" class="lang-content">Сыналы тістер бір-біріне ілінеді. Тартқанда ажырамайды — жәшік бұрыштарына таптырмас.</span><span lang="en" class="lang-content">Wedge-shaped pins interlock. They cannot be pulled apart — ideal for drawer corners.</span><span lang="ru" class="lang-content">Клиновидные шипы цепляются друг за друга. Не вытягиваются — идеален для углов ящиков.</span></p></div>
+    <div class="jt"><h4>▥ <span lang="kk" class="lang-content">Тісті (саусақ) жалғау</span><span lang="en" class="lang-content">Finger joint</span><span lang="ru" class="lang-content">Шиповое (на «гребёнку»)</span></h4><p><span lang="kk" class="lang-content">Тарақ тәрізді тістер бір-біріне кіреді. Желіммен — желімдеу беті үлкен, өте берік.</span><span lang="en" class="lang-content">Comb-like fingers slot together. With glue the bonding area is large and very strong.</span><span lang="ru" class="lang-content">Гребёнчатые шипы входят друг в друга. С клеем — большая площадь и высокая прочность.</span></p></div>
+    <div class="jt"><h4>▤ <span lang="kk" class="lang-content">Жартылай қию (вполдерева)</span><span lang="en" class="lang-content">Half-lap</span><span lang="ru" class="lang-content">Вполдерева</span></h4><p><span lang="kk" class="lang-content">Екі бөлшектен жартылай ағаш аршылып, тегіс беттер бетпе-бет қосылады.</span><span lang="en" class="lang-content">Half the thickness is cut from each part so the flat faces sit flush together.</span><span lang="ru" class="lang-content">У обеих деталей срезают половину толщины, ровные грани ложатся заподлицо.</span></p></div>
+  </div>
+</section>
+
+<!-- GLUING PROCESS TIMELINE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Желімдеп біріктіру: 6 қадам</span>
+    <span lang="en" class="lang-content">Joining by Gluing: 6 Steps</span>
+    <span lang="ru" class="lang-content">Соединение склеиванием: 6 шагов</span>
+  </h2>
+  <p class="text-stone-500 mb-6 text-sm">
+    <span lang="kk" class="lang-content">Екі тақтайды берік желімді қосылысқа айналдыру.</span>
+    <span lang="en" class="lang-content">Turning two boards into a strong glued joint.</span>
+    <span lang="ru" class="lang-content">Как превратить две доски в прочное клеевое соединение.</span>
+  </p>
+
+  <div class="card rounded-custom p-7 md:p-8">
+    <div class="tline">
+
+      <div class="tstep">
+        <div class="step-num">1</div>
+        <div class="body">
+          <h3><span lang="kk" class="lang-content">Беттерді дайындау</span><span lang="en" class="lang-content">Prepare the surfaces</span><span lang="ru" class="lang-content">Подготовка поверхностей</span></h3>
+          <p><span lang="kk" class="lang-content">Қосылатын беттерді <b>тегіс әрі таза</b> етеміз: рандалап, шаң мен майды кетіреміз. Желім тек <b>тегіс, бір-біріне дәл жанасатын</b> беттерде ғана берік ұстайды.</span><span lang="en" class="lang-content">We make the mating faces <b>flat and clean</b>: plane them, remove dust and grease. Glue only holds well on <b>flat surfaces that touch each other exactly</b>.</span><span lang="ru" class="lang-content">Делаем склеиваемые грани <b>ровными и чистыми</b>: строгаем, убираем пыль и жир. Клей держит прочно только на <b>ровных, плотно прилегающих</b> поверхностях.</span></p>
+        </div>
+      </div>
+
+      <div class="tstep">
+        <div class="step-num">2</div>
+        <div class="body">
+          <h3><span lang="kk" class="lang-content">Құрғақтай тексеру</span><span lang="en" class="lang-content">Dry-fit first</span><span lang="ru" class="lang-content">Примерка «насухо»</span></h3>
+          <p><span lang="kk" class="lang-content">Желімсіз бөлшектерді жинап көреміз: саңылау жоқ па, бұрыштар тура ма? <b>Алдымен тексер, сосын желімде</b> — қателікті уақытында табамыз.</span><span lang="en" class="lang-content">We assemble the parts without glue: any gaps, are the corners square? <b>Check first, glue second</b> — so mistakes are caught in time.</span><span lang="ru" class="lang-content">Собираем детали без клея: нет ли щелей, прямые ли углы? <b>Сначала примерь, потом клей</b> — так ошибку находят вовремя.</span></p>
+        </div>
+      </div>
+
+      <div class="tstep">
+        <div class="step-num">3</div>
+        <div class="body">
+          <h3><span lang="kk" class="lang-content">Желімді жағу</span><span lang="en" class="lang-content">Apply the glue</span><span lang="ru" class="lang-content">Нанесение клея</span></h3>
+          <p><span lang="kk" class="lang-content">Желімді (мысалы, ПВА) <b>екі бетке де жұқа әрі біркелкі</b> жағамыз. Артық желім қажет емес: ол сыртқа ағып, бұйымды былғайды.</span><span lang="en" class="lang-content">We spread the glue (e.g. PVA) <b>thinly and evenly on both faces</b>. No need for excess: it squeezes out and messes up the item.</span><span lang="ru" class="lang-content">Наносим клей (например, ПВА) <b>тонко и равномерно на обе грани</b>. Лишний клей не нужен: он выдавливается и пачкает изделие.</span></p>
+        </div>
+      </div>
+
+      <div class="tstep">
+        <div class="step-num">4</div>
+        <div class="body">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+            <div>
+              <h3><span lang="kk" class="lang-content">Қысып бекіту</span><span lang="en" class="lang-content">Clamp under pressure</span><span lang="ru" class="lang-content">Сжатие под прессом</span></h3>
+              <p><span lang="kk" class="lang-content">Бөлшектерді <b>қысқыштармен (струбцина)</b> қысамыз. Қысым желімді жұқа қабатқа жайып, беттерді тығыз қосады — қосылыс сонда ғана берік болады.</span><span lang="en" class="lang-content">We squeeze the parts with <b>clamps</b>. The pressure spreads the glue into a thin layer and presses the faces tight — only then is the joint strong.</span><span lang="ru" class="lang-content">Сжимаем детали <b>струбцинами</b>. Давление распределяет клей тонким слоем и плотно прижимает грани — только так соединение получается прочным.</span></p>
+            </div>
+            <div class="imgcard">
+              <div class="pic" onclick="openLB(this)">
+                <img src="../../assets/labor_boys/lb9_gluing_clamps.jpg" alt="Склеенные доски под струбцинами">
+                <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Қысқыштар астында</span><span lang="en" class="lang-content">Under bar clamps</span><span lang="ru" class="lang-content">Под струбцинами</span></div>
+                <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">қалқанды желімдеу</span><span lang="en" class="lang-content">gluing up a panel</span><span lang="ru" class="lang-content">склейка щита</span></div>
+              </div>
+              <p class="minicap"><span lang="kk" class="lang-content">тақтайлар қысқышпен қысылған</span><span lang="en" class="lang-content">boards pressed in clamps</span><span lang="ru" class="lang-content">доски сжаты струбцинами</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tstep">
+        <div class="step-num">5</div>
+        <div class="body">
+          <h3><span lang="kk" class="lang-content">Кептіру (ұстау)</span><span lang="en" class="lang-content">Let it cure</span><span lang="ru" class="lang-content">Выдержка (сушка)</span></h3>
+          <p><span lang="kk" class="lang-content">Бұйымды қыспаған күйі <b>желім кепкенше</b> қалдырамыз (көбіне бірнеше сағат). Бұл уақытта оны қозғамаймыз — әйтпесе қосылыс әлсіреп қалады.</span><span lang="en" class="lang-content">We leave the item clamped <b>until the glue has cured</b> (often several hours). During this time we do not move it — otherwise the joint becomes weak.</span><span lang="ru" class="lang-content">Оставляем изделие в зажиме, <b>пока клей не схватится</b> (часто несколько часов). В это время его не трогаем — иначе соединение ослабнет.</span></p>
+        </div>
+      </div>
+
+      <div class="tstep">
+        <div class="step-num">6</div>
+        <div class="body">
+          <h3><span lang="kk" class="lang-content">Тазалау мен өңдеу</span><span lang="en" class="lang-content">Clean up and finish</span><span lang="ru" class="lang-content">Зачистка и отделка</span></h3>
+          <p><span lang="kk" class="lang-content">Қысқышты алып, <b>артық кепкен желімді</b> қырамыз, қосылысты <b>еспе қағазбен</b> тегістейміз. Енді бұйымды бояуға не лактауға болады.</span><span lang="en" class="lang-content">We remove the clamps, scrape off <b>any dried squeeze-out</b> and smooth the joint with <b>sandpaper</b>. Now the item can be painted or varnished.</span><span lang="ru" class="lang-content">Снимаем зажим, счищаем <b>лишний застывший клей</b> и выравниваем шов <b>наждачной бумагой</b>. Теперь изделие можно красить или лакировать.</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Қосылыстар галереясы</span>
+    <span lang="en" class="lang-content">Gallery of Joints</span>
+    <span lang="ru" class="lang-content">Галерея соединений</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Толық көру үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to view it in full.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы рассмотреть.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb9_joints_overview.jpg" alt="Образцы столярных соединений"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Қосылыс үлгілері</span><span lang="en" class="lang-content">Joint samples</span><span lang="ru" class="lang-content">Образцы соединений</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">мұражай витринасы</span><span lang="en" class="lang-content">museum display</span><span lang="ru" class="lang-content">музейная витрина</span></div>
+        <p class="text-stone-600 text-sm mt-2"><span lang="kk" class="lang-content">Бір витринада әртүрлі ұстагерлік қосылыстар: тіс-ұя, қарлығаш құйрық, жартылай қию.</span><span lang="en" class="lang-content">Different woodworking joints in one display: mortise-and-tenon, dovetail, half-lap.</span><span lang="ru" class="lang-content">Разные столярные соединения в одной витрине: шип-проушина, «ласточкин хвост», вполдерева.</span></p>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb9_dovetail_diagram.jpg" alt="Схема соединения «ласточкин хвост»"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Қарлығаш құйрық (схема)</span><span lang="en" class="lang-content">Dovetail (scheme)</span><span lang="ru" class="lang-content">«Ласточкин хвост» (схема)</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">сыналы тістер</span><span lang="en" class="lang-content">wedge-shaped pins</span><span lang="ru" class="lang-content">клиновидные шипы</span></div>
+        <p class="text-stone-600 text-sm mt-2"><span lang="kk" class="lang-content">Тістер қалай ілінетінін көрсететін сызба: тартқанда қосылыс ашылмайды.</span><span lang="en" class="lang-content">A diagram of how the pins interlock: the joint does not pull open.</span><span lang="ru" class="lang-content">Схема, как сцепляются шипы: при растяжении соединение не раскрывается.</span></p>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb9_finger_joint.jpg" alt="Шиповое соединение «гребёнка»"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Тісті (саусақ) жалғау</span><span lang="en" class="lang-content">Finger joint</span><span lang="ru" class="lang-content">Шиповое («гребёнка»)</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">желімделген тістер</span><span lang="en" class="lang-content">glued fingers</span><span lang="ru" class="lang-content">склеенные шипы</span></div>
+        <p class="text-stone-600 text-sm mt-2"><span lang="kk" class="lang-content">Екі түсті ағаштың тарақ тістері бір-біріне кіріп, желіммен берік ұсталады.</span><span lang="en" class="lang-content">Comb-like fingers of two wood tones slot together and are held firmly with glue.</span><span lang="ru" class="lang-content">Гребёнчатые шипы из дерева двух оттенков входят друг в друга и держатся на клее.</span></p>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb9_gluing_clamps.jpg" alt="Склейка щита под струбцинами"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Желімдеп қысу</span><span lang="en" class="lang-content">Gluing under clamps</span><span lang="ru" class="lang-content">Склейка под струбцинами</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">ажыратылмайтын қосылыс</span><span lang="en" class="lang-content">permanent joint</span><span lang="ru" class="lang-content">неразъёмное соединение</span></div>
+        <p class="text-stone-600 text-sm mt-2"><span lang="kk" class="lang-content">Тақтайлар қысқыштармен қысылып, кең қалқанға желімделеді — берік әрі тегіс.</span><span lang="en" class="lang-content">Boards are clamped and glued into a wide panel — strong and flat.</span><span lang="ru" class="lang-content">Доски сжимают струбцинами и склеивают в широкий щит — прочно и ровно.</span></p>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb9_nail_joint.jpg" alt="Забивание гвоздя молотком"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Шегемен бекіту</span><span lang="en" class="lang-content">Nailing</span><span lang="ru" class="lang-content">Соединение гвоздём</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">балға және шеге</span><span lang="en" class="lang-content">hammer and nail</span><span lang="ru" class="lang-content">молоток и гвоздь</span></div>
+        <p class="text-stone-600 text-sm mt-2"><span lang="kk" class="lang-content">Шеге — ең жылдам тәсіл: балғамен қағамыз. Дөрекі әрі уақытша жұмысқа ыңғайлы.</span><span lang="en" class="lang-content">A nail is the fastest method: driven in with a hammer. Handy for rough or temporary work.</span><span lang="ru" class="lang-content">Гвоздь — самый быстрый способ: забивают молотком. Удобен для черновых и временных работ.</span></p>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb9_joints_overview.jpg" alt="Деревянные соединения крупным планом"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Дайын қосылыстар</span><span lang="en" class="lang-content">Finished joints</span><span lang="ru" class="lang-content">Готовые соединения</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">бекіткішсіз</span><span lang="en" class="lang-content">no metal fasteners</span><span lang="ru" class="lang-content">без металлического крепежа</span></div>
+        <p class="text-stone-600 text-sm mt-2"><span lang="kk" class="lang-content">Шебер қолда ағаштың өзі бекіткіш болады: шеге де, бұранда да керек емес.</span><span lang="en" class="lang-content">In skilled hands the wood itself is the fastener: no nails or screws needed.</span><span lang="ru" class="lang-content">В умелых руках само дерево становится крепежом: ни гвоздей, ни шурупов не нужно.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SAFETY / RULES -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Ережелер мен қауіпсіздік</span>
+    <span lang="en" class="lang-content">Rules &amp; Safety</span>
+    <span lang="ru" class="lang-content">Правила и безопасность</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="tip"><h4>📏 <span lang="kk" class="lang-content">Алдымен өлше</span><span lang="en" class="lang-content">Measure first</span><span lang="ru" class="lang-content">Сначала разметка</span></h4><p><span lang="kk" class="lang-content">Тесік пен тісті дәл белгіле: «жеті рет өлше, бір рет кес».</span><span lang="en" class="lang-content">Mark holes and tenons precisely: "measure seven times, cut once".</span><span lang="ru" class="lang-content">Точно размечай отверстия и шипы: «семь раз отмерь, один отрежь».</span></p></div>
+    <div class="tip"><h4>🕳️ <span lang="kk" class="lang-content">Тесік бұрғыла</span><span lang="en" class="lang-content">Pre-drill</span><span lang="ru" class="lang-content">Сверли отверстие</span></h4><p><span lang="kk" class="lang-content">Бұранда салар алдында жіңішке тесік бұрғыла — ағаш жарылмайды.</span><span lang="en" class="lang-content">Drill a thin pilot hole before a screw — the wood won't split.</span><span lang="ru" class="lang-content">Перед шурупом сверли тонкое отверстие — дерево не треснет.</span></p></div>
+    <div class="tip"><h4>🔨 <span lang="kk" class="lang-content">Саусақты сақта</span><span lang="en" class="lang-content">Protect fingers</span><span lang="ru" class="lang-content">Береги пальцы</span></h4><p><span lang="kk" class="lang-content">Шегені тістеуікпен ұстап қақ, балғаны мықтап ұста.</span><span lang="en" class="lang-content">Hold the nail with pliers when starting it, grip the hammer firmly.</span><span lang="ru" class="lang-content">Придерживай гвоздь плоскогубцами, крепко держи молоток.</span></p></div>
+    <div class="tip"><h4>🧴 <span lang="kk" class="lang-content">Желімді үнемде</span><span lang="en" class="lang-content">Don't over-glue</span><span lang="ru" class="lang-content">Не лей клей</span></h4><p><span lang="kk" class="lang-content">Жұқа қабат жеткілікті; артық желім сыртқа ағып, дақ қалдырады.</span><span lang="en" class="lang-content">A thin layer is enough; excess glue runs out and leaves marks.</span><span lang="ru" class="lang-content">Достаточно тонкого слоя; лишний клей вытекает и оставляет пятна.</span></p></div>
+    <div class="tip"><h4>📐 <span lang="kk" class="lang-content">Бұрышты тексер</span><span lang="en" class="lang-content">Check the angle</span><span lang="ru" class="lang-content">Проверяй угол</span></h4><p><span lang="kk" class="lang-content">Қысар алдында бұрыштықпен (угольник) 90° екенін тексер.</span><span lang="en" class="lang-content">Before clamping, check it is 90° with a try-square.</span><span lang="ru" class="lang-content">Перед сжатием проверь угольником, что угол 90°.</span></p></div>
+    <div class="tip"><h4>🧹 <span lang="kk" class="lang-content">Орынды жина</span><span lang="en" class="lang-content">Tidy up</span><span lang="ru" class="lang-content">Убирай место</span></h4><p><span lang="kk" class="lang-content">Шеге мен ұнтақты жинап, құралды орнына қой; жұмыстан соң сана.</span><span lang="en" class="lang-content">Collect nails and dust, put tools back; count them after work.</span><span lang="ru" class="lang-content">Собери гвозди и опилки, верни инструмент; после работы пересчитай.</span></p></div>
+  </div>
+</section>
+
+<!-- HOW TO CHOOSE -->
+<section class="mb-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+  <div class="card-rose rounded-custom p-6">
+    <h3 class="heading-font text-lg font-extrabold mb-2">⚡ <span lang="kk" class="lang-content">Жылдам керек пе?</span><span lang="en" class="lang-content">Need it fast?</span><span lang="ru" class="lang-content">Нужно быстро?</span></h3>
+    <p style="font-size:.95rem;line-height:1.6">
+      <span lang="kk" class="lang-content">Шеге таңда: тез әрі қарапайым. Бірақ беріктігі орташа — дөрекі жұмысқа лайық.</span>
+      <span lang="en" class="lang-content">Choose nails: quick and simple. But strength is only medium — good for rough work.</span>
+      <span lang="ru" class="lang-content">Выбирай гвозди: быстро и просто. Но прочность средняя — для черновых работ.</span>
+    </p>
+  </div>
+  <div class="card-rose rounded-custom p-6">
+    <h3 class="heading-font text-lg font-extrabold mb-2">🔧 <span lang="kk" class="lang-content">Шешу керек пе?</span><span lang="en" class="lang-content">Need to dismantle?</span><span lang="ru" class="lang-content">Нужно разбирать?</span></h3>
+    <p style="font-size:.95rem;line-height:1.6">
+      <span lang="kk" class="lang-content">Бұранда не болт таңда: бұйымды бұзбай шешіп, қайта жинай аласың.</span>
+      <span lang="en" class="lang-content">Choose screws or bolts: you can take the item apart and rebuild it without damage.</span>
+      <span lang="ru" class="lang-content">Выбирай шурупы или болты: изделие можно разобрать и собрать без повреждений.</span>
+    </p>
+  </div>
+  <div class="card-rose rounded-custom p-6">
+    <h3 class="heading-font text-lg font-extrabold mb-2">💪 <span lang="kk" class="lang-content">Мықты әрі көрікті?</span><span lang="en" class="lang-content">Strong and elegant?</span><span lang="ru" class="lang-content">Прочно и красиво?</span></h3>
+    <p style="font-size:.95rem;line-height:1.6">
+      <span lang="kk" class="lang-content">Желім мен ағаш ұластырмаларын таңда: бекіткіш көрінбейді, қосылыс өте берік.</span>
+      <span lang="en" class="lang-content">Choose glue and woodworking joints: no fastener shows and the joint is very strong.</span>
+      <span lang="ru" class="lang-content">Выбирай клей и столярные соединения: крепёж не виден, а соединение очень прочное.</span>
+    </p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="card rounded-custom p-7 md:p-8 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+    <span lang="kk" class="lang-content">💬 Қорытынды</span>
+    <span lang="en" class="lang-content">💬 In a nutshell</span>
+    <span lang="ru" class="lang-content">💬 Главное</span>
+  </h3>
+  <p class="lead" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Ағаш бөлшектерін біріктірудің бір ғана дұрыс жолы жоқ — әр <b>тапсырмаға өз тәсілі</b> бар. Тез әрі дөрекі жұмысқа — шеге, шешілетін бұйымға — бұранда мен болт, ал ең берік әрі көрікті бұйымға — желім және ұстагерлік ұластырмалар. Қай тәсілді таңдасаң да, басты ереже біреу: беттерді мұқият дайында, дәл өлше, қысып бекіт және ұқыптылықты ұмытпа. Сонда бөлек бөлшектер <b>бір бүтін, берік бұйымға</b> айналады.</span>
+    <span lang="en" class="lang-content">There is no single right way to join wooden parts — <b>each task has its own method</b>. For fast, rough work use nails; for an item you may dismantle, screws and bolts; for the strongest, finest work, glue and woodworking joints. Whatever you choose, one rule stays: prepare the surfaces carefully, measure precisely, clamp under pressure and stay neat. Then separate parts become <b>one whole, sturdy item</b>.</span>
+    <span lang="ru" class="lang-content">Нет единственно верного способа соединить детали из дерева — у <b>каждой задачи свой способ</b>. Для быстрой, черновой работы — гвозди; для изделия, которое можно разбирать, — шурупы и болты; для самого прочного и красивого — клей и столярные соединения. Что бы ты ни выбрал, правило одно: тщательно готовь поверхности, точно размечай, сжимай под прессом и не забывай об аккуратности. Тогда отдельные детали станут <b>единым, прочным изделием</b>.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX (keep inside #poster-container) -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

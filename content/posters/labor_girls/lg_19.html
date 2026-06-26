@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Построение чертежа: юбка-полусолнце</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.95rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.5;}
+.step b{color:#881337;}
+.tool{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1rem;overflow:hidden;
+  box-shadow:0 3px 14px rgba(136,19,55,.07);cursor:pointer;transition:all .2s;}
+.tool:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(136,19,55,.15);}
+.tool .pic{background:#fff;display:flex;align-items:center;justify-content:center;height:170px;border-bottom:1px solid rgba(190,18,60,.1);}
+.tool .pic img{max-width:100%;max-height:100%;object-fit:contain;}
+.tool .body{padding:.85rem 1rem 1rem;}
+.tool h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;}
+.tool p{color:#57534e;font-size:.88rem;line-height:1.45;margin-top:.2rem;}
+.formula-box{background:linear-gradient(135deg,#9f1239,#be123c 55%,#e11d48);color:#fff;border-radius:1.25rem;
+  padding:1.6rem 1.4rem;box-shadow:0 10px 30px rgba(136,19,55,.22);text-align:center;}
+.formula-box .f{font-family:'Montserrat',sans-serif;font-weight:800;font-size:2.1rem;letter-spacing:.5px;line-height:1.2;}
+.formula-box .f small{font-size:1rem;font-weight:600;opacity:.92;}
+.calc{background:rgba(255,255,255,0.96);border:1px dashed rgba(190,18,60,.4);border-radius:1rem;padding:1.1rem 1.2rem;}
+.calc .row{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0;border-bottom:1px dotted rgba(190,18,60,.18);font-size:.97rem;color:#44403c;}
+.calc .row:last-child{border-bottom:none;}
+.calc .row b{color:#881337;}
+.calc .res{color:#be123c;font-weight:800;}
+.svgwrap{background:#fffdf9;border:1px solid rgba(190,18,60,.16);border-radius:1.25rem;padding:1rem;
+  box-shadow:0 4px 16px rgba(136,19,55,.07);}
+.svgwrap svg{display:block;width:100%;height:auto;}
+.note{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:.9rem 1.1rem;}
+.note p{color:#57534e;font-size:.93rem;line-height:1.5;}
+.note b{color:#881337;}
+table.tbl{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.96);border-radius:1rem;overflow:hidden;
+  box-shadow:0 4px 16px rgba(136,19,55,.07);font-size:.95rem;}
+table.tbl th{background:#9f1239;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;padding:.7rem .8rem;text-align:left;font-size:.92rem;}
+table.tbl td{padding:.65rem .8rem;border-top:1px solid rgba(190,18,60,.14);color:#44403c;vertical-align:top;}
+table.tbl tr:nth-child(even) td{background:rgba(190,18,60,.035);}
+table.tbl td b{color:#881337;}
+.tag{display:inline-block;background:#be123c;color:#fff;border-radius:50%;width:1.7rem;height:1.7rem;
+  text-align:center;line-height:1.7rem;font-weight:800;font-size:.9rem;font-family:'Montserrat',sans-serif;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · Тігін ісі · Сызба құру</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Sewing · Pattern Drafting</span>
+      <span lang="ru" class="lang-content">Художественный труд · Швейное дело · Построение чертежа</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Сызба құру: «жарты күн» юбкасы</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Drafting the Half-Circle Skirt</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">📐 Построение чертежа: юбка-полусолнце</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Екі өлшем мен бір формула — әдемі, кең юбканың сызбасы дайын.</span>
+      <span lang="en" class="lang-content">Two measurements and one formula — and the pattern for a wide, flowing skirt is ready.</span>
+      <span lang="ru" class="lang-content">Две мерки и одна формула — и чертёж пышной, летящей юбки готов.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO + HERO -->
+<section class="card rounded-custom p-6 md:p-7 mb-10 grid grid-cols-1 lg:grid-cols-3 gap-7 items-center">
+  <div class="lg:col-span-2">
+    <h2 class="heading-font text-2xl font-extrabold mb-3" style="color:#881337">
+      <span lang="kk" class="lang-content">«Жарты күн» деген не?</span>
+      <span lang="en" class="lang-content">What is a half-circle skirt?</span>
+      <span lang="ru" class="lang-content">Что такое «полусолнце»?</span>
+    </h2>
+    <p class="lead">
+      <span lang="kk" class="lang-content"><b>Юбка-полусолнце («жарты күн»)</b> — белден кесіліп, төменге қарай кеңейіп, толқынды қатпарлар (фалда) түзетін юбка. Оның сызбасы — жарты шеңбер: матаны жайып салғанда юбка <b>180°-қа</b> жазылады. Белдемше неғұрлым кең болса, фалдалар соғұрлым мол әрі әдемі болады. Сызбаны салу үшін бар болғаны екі өлшем мен бір формула жеткілікті — сондықтан бұл бастаушыға ең қолайлы юбка пішіні.</span>
+      <span lang="en" class="lang-content">A <b>half-circle (half-sun) skirt</b> is cut at the waist and flares out into soft, wavy folds. Its pattern is a half-circle: spread flat, the skirt opens to <b>180°</b>. The wider the spread, the fuller and more graceful the folds. To draft it you need only two measurements and one formula — which makes it the friendliest skirt shape for a beginner.</span>
+      <span lang="ru" class="lang-content"><b>Юбка-полусолнце</b> — это юбка, отрезная по талии и расширяющаяся книзу мягкими волнистыми складками (фалдами). Её чертёж — это половина круга: разложенная на ткани, юбка раскрывается на <b>180°</b>. Чем шире разворот, тем пышнее и красивее ложатся фалды. Чтобы построить чертёж, нужны всего две мерки и одна формула — поэтому это самый удобный фасон для начинающих.</span>
+    </p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="badge"><span lang="kk" class="lang-content">180° — жарты шеңбер</span><span lang="en" class="lang-content">180° — half-circle</span><span lang="ru" class="lang-content">180° — половина круга</span></span>
+      <span class="badge"><span lang="kk" class="lang-content">белдеуге отырады</span><span lang="en" class="lang-content">sits on a waistband</span><span lang="ru" class="lang-content">сидит на поясе</span></span>
+      <span class="badge"><span lang="kk" class="lang-content">фалдалы силуэт</span><span lang="en" class="lang-content">flared silhouette</span><span lang="ru" class="lang-content">фалды по низу</span></span>
+    </div>
+  </div>
+  <div>
+    <div class="genre-card" onclick="openLB(this)" style="cursor:pointer">
+      <div class="pic" style="height:330px"><img src="../../assets/labor_girls/p19_hero.jpg" alt="Юбка-полусолнце"></div>
+      <div class="zoom-hint">🔍</div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Кең, фалдалы юбка</span><span lang="en" class="lang-content">A wide, flowing skirt</span><span lang="ru" class="lang-content">Пышная, летящая юбка</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">«жарты күн» силуэті</span><span lang="en" class="lang-content">half-circle silhouette</span><span lang="ru" class="lang-content">силуэт «полусолнце»</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Не қажет? Құрал-жабдық</span>
+    <span lang="en" class="lang-content">What you need: tools</span>
+    <span lang="ru" class="lang-content">Что нужно: инструменты</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+    <div class="tool" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p19_tape.jpg" alt="Сантиметровая лента"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Сантиметрлік таспа</span><span lang="en" class="lang-content">Tape measure</span><span lang="ru" class="lang-content">Сантиметровая лента</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Сантиметрлік таспа</span><span lang="en" class="lang-content">Tape measure</span><span lang="ru" class="lang-content">Сантиметровая лента</span></h3>
+        <p><span lang="kk" class="lang-content">Дене өлшемдерін алу үшін.</span><span lang="en" class="lang-content">For taking body measurements.</span><span lang="ru" class="lang-content">Чтобы снять мерки с фигуры.</span></p>
+      </div>
+    </div>
+    <div class="tool" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p19_chalk.jpg" alt="Портновский мел"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Тігінші бор</span><span lang="en" class="lang-content">Tailor's chalk</span><span lang="ru" class="lang-content">Портновский мел</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Тігінші бор</span><span lang="en" class="lang-content">Tailor's chalk</span><span lang="ru" class="lang-content">Портновский мел</span></h3>
+        <p><span lang="kk" class="lang-content">Матаға сызбаны түсіруге.</span><span lang="en" class="lang-content">To draw the pattern on cloth.</span><span lang="ru" class="lang-content">Чтобы перенести чертёж на ткань.</span></p>
+      </div>
+    </div>
+    <div class="tool" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p19_tools.jpg" alt="Нитки, иглы, ножницы"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Қайшы, ине, жіп</span><span lang="en" class="lang-content">Scissors, pins, thread</span><span lang="ru" class="lang-content">Ножницы, булавки, нитки</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Қайшы, ине, жіп</span><span lang="en" class="lang-content">Scissors &amp; pins</span><span lang="ru" class="lang-content">Ножницы и булавки</span></h3>
+        <p><span lang="kk" class="lang-content">Пішу мен тігуге арналған.</span><span lang="en" class="lang-content">For cutting and sewing.</span><span lang="ru" class="lang-content">Для раскроя и шитья.</span></p>
+      </div>
+    </div>
+    <div class="tool" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p19_fabric.jpg" alt="Ткань"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Мата</span><span lang="en" class="lang-content">Fabric</span><span lang="ru" class="lang-content">Ткань</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Мата</span><span lang="en" class="lang-content">Fabric</span><span lang="ru" class="lang-content">Ткань</span></h3>
+        <p><span lang="kk" class="lang-content">Жұмсақ, түсетін мата таңдаңыз.</span><span lang="en" class="lang-content">Choose soft, draping cloth.</span><span lang="ru" class="lang-content">Берите мягкую, драпирующуюся.</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="note mt-4">
+    <p>📏 <span lang="kk" class="lang-content"><b>Қосымша:</b> ұзын сызғыш не сантиметр, циркуль рөлін атқаратын жіп пен бор (центрден доға салу үшін), үтік және түйреуіштер.</span><span lang="en" class="lang-content"><b>Also handy:</b> a long ruler, a piece of string with chalk tied on (it works like a compass to draw the arcs from the centre), an iron and pins.</span><span lang="ru" class="lang-content"><b>Пригодятся также:</b> длинная линейка, шнур с привязанным мелом (он работает как циркуль — чертит дуги из центра), утюг и булавки.</span></p>
+  </div>
+</section>
+
+<!-- MEASUREMENTS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">1-қадам. Өлшем алу</span>
+    <span lang="en" class="lang-content">Step 1. Take the measurements</span>
+    <span lang="ru" class="lang-content">Шаг 1. Снимаем мерки</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div class="svgwrap">
+      <svg viewBox="0 0 360 360" role="img" aria-label="Где снимать мерки">
+        <!-- figure silhouette -->
+        <g fill="#fde2e7" stroke="#be123c" stroke-width="2.2">
+          <!-- torso -->
+          <path d="M150 60 q30 0 30 26 q0 18 -8 30 q26 8 30 40 l6 36 q1 8 -8 8 l-90 0 q-9 0 -8 -8 l6 -36 q4 -32 30 -40 q-8 -12 -8 -30 q0 -26 30 -26 z"/>
+          <!-- skirt (half-sun shape) -->
+          <path d="M101 200 l158 0 q40 96 64 150 q4 8 -6 8 l-274 0 q-10 0 -6 -8 q24 -54 64 -150 z" fill="#bae6fd" stroke="#0369a1"/>
+        </g>
+        <!-- waist line OT -->
+        <line x1="92" y1="200" x2="268" y2="200" stroke="#9f1239" stroke-width="2.6" stroke-dasharray="2 0"/>
+        <circle cx="92" cy="200" r="3.4" fill="#9f1239"/><circle cx="268" cy="200" r="3.4" fill="#9f1239"/>
+        <text x="180" y="192" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="15" font-weight="800" fill="#9f1239">ОТ</text>
+        <!-- length Du -->
+        <line x1="296" y1="201" x2="296" y2="358" stroke="#0369a1" stroke-width="2.4"/>
+        <line x1="289" y1="201" x2="303" y2="201" stroke="#0369a1" stroke-width="2.4"/>
+        <line x1="289" y1="358" x2="303" y2="358" stroke="#0369a1" stroke-width="2.4"/>
+        <text x="316" y="284" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="15" font-weight="800" fill="#0369a1">Дю</text>
+      </svg>
+    </div>
+    <div>
+      <p class="lead mb-4"><span lang="kk" class="lang-content">«Жарты күн» юбкасына бар болғаны <b>екі</b> өлшем керек:</span><span lang="en" class="lang-content">A half-circle skirt needs just <b>two</b> measurements:</span><span lang="ru" class="lang-content">Для юбки-полусолнце нужны всего <b>две</b> мерки:</span></p>
+      <div class="step"><div class="step-num">ОТ</div><p><b><span lang="kk" class="lang-content">Бел орамы (ОТ).</span><span lang="en" class="lang-content">Waist circumference.</span><span lang="ru" class="lang-content">Обхват талии (ОТ).</span></b> <span lang="kk" class="lang-content">Сантиметрді белдің ең жіңішке жеріне тегіс, тым қыспай ораңыз.</span><span lang="en" class="lang-content">Wrap the tape around the narrowest part of the waist, snug but not tight.</span><span lang="ru" class="lang-content">Оберните ленту по самому узкому месту талии — плотно, но не туго.</span></p></div>
+      <div class="step"><div class="step-num">Дю</div><p><b><span lang="kk" class="lang-content">Юбка ұзындығы (Дю).</span><span lang="en" class="lang-content">Skirt length.</span><span lang="ru" class="lang-content">Длина юбки (Дю).</span></b> <span lang="kk" class="lang-content">Белден қалаған төменгі шекараға дейінгі тік қашықтық.</span><span lang="en" class="lang-content">The vertical distance from the waist down to the desired hem.</span><span lang="ru" class="lang-content">Расстояние по вертикали от талии до желаемого низа.</span></p></div>
+      <div class="note mt-3"><p>💡 <span lang="kk" class="lang-content">Белге <b>0–1 см</b> бостық қосуға болады — юбка қыспай тұрады. Мысалы: ОТ = 64 см, Дю = 50 см.</span><span lang="en" class="lang-content">You may add <b>0–1 cm</b> of ease to the waist so it isn't tight. Example: waist = 64 cm, length = 50 cm.</span><span lang="ru" class="lang-content">К талии можно добавить <b>0–1 см</b> на свободу, чтобы не давило. Пример: ОТ = 64 см, Дю = 50 см.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULA + CALC -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">2-қадам. Радиусты есептеу</span>
+    <span lang="en" class="lang-content">Step 2. Calculate the radius</span>
+    <span lang="ru" class="lang-content">Шаг 2. Рассчитываем радиус</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+    <div class="formula-box flex flex-col justify-center">
+      <p class="mb-2" style="font-size:.95rem;opacity:.92"><span lang="kk" class="lang-content">Кіші (бел) радиусы:</span><span lang="en" class="lang-content">Small (waist) radius:</span><span lang="ru" class="lang-content">Малый радиус (по талии):</span></p>
+      <div class="f">R = ОТ ÷ 3,14<br><small><span lang="kk" class="lang-content">(жарты шеңбер үшін, π ≈ 3,14)</span><span lang="en" class="lang-content">(for a half-circle, π ≈ 3.14)</span><span lang="ru" class="lang-content">(для полукруга, π ≈ 3,14)</span></small></div>
+      <div style="height:1px;background:rgba(255,255,255,.3);margin:1.1rem 0"></div>
+      <p class="mb-2" style="font-size:.95rem;opacity:.92"><span lang="kk" class="lang-content">Үлкен (төменгі) радиус:</span><span lang="en" class="lang-content">Large (hem) radius:</span><span lang="ru" class="lang-content">Большой радиус (по низу):</span></p>
+      <div class="f">R₂ = R + Дю</div>
+    </div>
+    <div class="calc flex flex-col justify-center">
+      <p class="font-bold mb-2" style="color:#881337"><span lang="kk" class="lang-content">Мысал: ОТ = 64 см, Дю = 50 см</span><span lang="en" class="lang-content">Example: waist = 64 cm, length = 50 cm</span><span lang="ru" class="lang-content">Пример: ОТ = 64 см, Дю = 50 см</span></p>
+      <div class="row"><span><b>R</b> = 64 ÷ 3,14</span><span class="res">≈ 20,5 <span lang="kk" class="lang-content">см</span><span lang="en" class="lang-content">cm</span><span lang="ru" class="lang-content">см</span></span></div>
+      <div class="row"><span><b>R₂</b> = 20,5 + 50</span><span class="res">= 70,5 <span lang="kk" class="lang-content">см</span><span lang="en" class="lang-content">cm</span><span lang="ru" class="lang-content">см</span></span></div>
+      <div class="row"><span><span lang="kk" class="lang-content">Доғаларды салатын центр</span><span lang="en" class="lang-content">Centre for the arcs</span><span lang="ru" class="lang-content">Центр для дуг</span></span><span class="res">O</span></div>
+      <p class="text-sm mt-3" style="color:#57534e;line-height:1.55"><span lang="kk" class="lang-content">Енді бір центрден (О) екі доға саламыз: ішкі — R-мен (бел), сыртқы — R₂-мен (төменгі шек). Жіптің бір ұшын О-ға бекітіп, екінші ұшындағы бормен доға жүргізген ыңғайлы.</span><span lang="en" class="lang-content">Now, from one centre (O), draw two arcs: the inner one with radius R (waist), the outer one with R₂ (hem). The easiest way is to pin one end of the string at O and draw with the chalk on the other end.</span><span lang="ru" class="lang-content">Теперь из одного центра (О) проводим две дуги: внутреннюю радиусом R (талия) и внешнюю радиусом R₂ (низ). Удобнее всего закрепить конец шнура в точке О и чертить мелом на другом конце.</span></p>
+    </div>
+  </div>
+  <div class="note mt-4"><p>🧮 <span lang="kk" class="lang-content"><b>Неге 3,14?</b> Толық шеңбердің ұзындығы — 2πR. «Жарты күн» белі — жарты шеңбер, ұзындығы πR. Ол ОТ-ға тең болуы керек: πR = ОТ, демек R = ОТ ÷ π = ОТ ÷ 3,14. (Толық «күн» юбкасында бел — толық шеңбер, сондықтан R = ОТ ÷ 6,28.)</span><span lang="en" class="lang-content"><b>Why 3.14?</b> A full circle's length is 2πR. The waist of a half-sun skirt is a half-circle, length πR. It must equal the waist: πR = ОТ, so R = ОТ ÷ π = ОТ ÷ 3.14. (In a full "sun" skirt the waist is a whole circle, so R = ОТ ÷ 6.28.)</span><span lang="ru" class="lang-content"><b>Почему 3,14?</b> Длина полной окружности — 2πR. Талия «полусолнца» — это полуокружность длиной πR. Она должна равняться ОТ: πR = ОТ, значит R = ОТ ÷ π = ОТ ÷ 3,14. (У полной юбки-«солнце» талия — целая окружность, поэтому R = ОТ ÷ 6,28.)</span></p></div>
+</section>
+
+<!-- THE DRAWING -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">3-қадам. Сызбаны салу</span>
+    <span lang="en" class="lang-content">Step 3. Draw the pattern</span>
+    <span lang="ru" class="lang-content">Шаг 3. Строим чертёж</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div class="svgwrap">
+      <svg viewBox="0 0 420 360" role="img" aria-label="Чертёж юбки-полусолнце">
+        <!-- half-circle skirt drawn from centre O at top-left corner -->
+        <!-- outer sector (hem) -->
+        <path d="M40 40 L380 40 A340 340 0 0 1 40 380 Z" fill="#bae6fd" fill-opacity="0.5" stroke="#0369a1" stroke-width="2.4"/>
+        <!-- inner cut-out (waist) -->
+        <path d="M40 40 L130 40 A90 90 0 0 1 40 130 Z" fill="#ffffff" stroke="#9f1239" stroke-width="2.6"/>
+        <!-- centre O -->
+        <circle cx="40" cy="40" r="4.5" fill="#881337"/>
+        <text x="26" y="34" font-family="Montserrat,sans-serif" font-size="16" font-weight="800" fill="#881337">O</text>
+        <!-- R radius (inner) along top -->
+        <line x1="40" y1="40" x2="130" y2="40" stroke="#9f1239" stroke-width="2.4"/>
+        <text x="78" y="32" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#9f1239">R</text>
+        <!-- Du from inner arc to outer arc along top -->
+        <line x1="130" y1="40" x2="380" y2="40" stroke="#0369a1" stroke-width="2.4"/>
+        <text x="250" y="32" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#0369a1">Дю</text>
+        <!-- R2 along left edge -->
+        <line x1="40" y1="130" x2="40" y2="380" stroke="#0369a1" stroke-width="2.4" stroke-dasharray="6 4"/>
+        <text x="48" y="320" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#0369a1">R₂ = R+Дю</text>
+        <!-- labels for lines T (waist) and N (hem) -->
+        <text x="150" y="118" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#9f1239" transform="rotate(45 150 118)"><tspan>—</tspan></text>
+        <!-- 90 degree marker -->
+        <path d="M40 64 L64 64 L64 40" fill="none" stroke="#a8a29e" stroke-width="1.6"/>
+        <!-- waist arc label -->
+        <text x="205" y="225" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#0369a1">
+          <tspan lang="kk" class="lang-content">төменгі сызық (Н)</tspan><tspan lang="en" class="lang-content">hem line (H)</tspan><tspan lang="ru" class="lang-content">линия низа (Н)</tspan></text>
+        <text x="96" y="100" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#9f1239">
+          <tspan lang="kk" class="lang-content">бел (Т)</tspan><tspan lang="en" class="lang-content">waist (T)</tspan><tspan lang="ru" class="lang-content">талия (Т)</tspan></text>
+        <!-- 180 angle note -->
+        <text x="300" y="200" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="20" font-weight="800" fill="#0369a1" opacity="0.55">180°</text>
+      </svg>
+    </div>
+    <div>
+      <p class="lead mb-4"><span lang="kk" class="lang-content">Матаны екі қабат етіп бүктеп, бүктеме бұрышын <b>центр О</b> етіп аламыз:</span><span lang="en" class="lang-content">Fold the fabric in two and use the corner of the fold as <b>centre O</b>:</span><span lang="ru" class="lang-content">Складываем ткань вдвое и берём угол сгиба за <b>центр О</b>:</span></p>
+      <div class="step"><div class="tag">1</div><p><span lang="kk" class="lang-content">О нүктесінен <b>R = 20,5 см</b> доға салып, <b>бел сызығын (Т)</b> аламыз.</span><span lang="en" class="lang-content">From point O draw an arc with <b>R = 20.5 cm</b> — this is the <b>waist line (T)</b>.</span><span lang="ru" class="lang-content">Из точки О чертим дугу радиусом <b>R = 20,5 см</b> — это <b>линия талии (Т)</b>.</span></p></div>
+      <div class="step"><div class="tag">2</div><p><span lang="kk" class="lang-content">Сол О-дан <b>R₂ = 70,5 см</b> доға салып, <b>төменгі сызықты (Н)</b> аламыз.</span><span lang="en" class="lang-content">From the same O draw an arc with <b>R₂ = 70.5 cm</b> — the <b>hem line (H)</b>.</span><span lang="ru" class="lang-content">Из той же О чертим дугу радиусом <b>R₂ = 70,5 см</b> — это <b>линия низа (Н)</b>.</span></p></div>
+      <div class="step"><div class="tag">3</div><p><span lang="kk" class="lang-content">Екі доғаны қырларымен (радиустармен) тұйықтап, жарты сақина пішінін аламыз.</span><span lang="en" class="lang-content">Close the two arcs with the side radii to get a half-ring shape.</span><span lang="ru" class="lang-content">Замыкаем дуги боковыми радиусами — получаем форму полукольца.</span></p></div>
+      <div class="step"><div class="tag">4</div><p><span lang="kk" class="lang-content">Тігіс пен төменгі бүкпеге <b>1–4 см</b> қосымша қосамыз.</span><span lang="en" class="lang-content">Add <b>1–4 cm</b> seam and hem allowances all around.</span><span lang="ru" class="lang-content">Прибавляем <b>1–4 см</b> на швы и подгибку низа.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">«Күн», «жарты күн», «клиньевая» — салыстыру</span>
+    <span lang="en" class="lang-content">Sun, half-sun and gored — compared</span>
+    <span lang="ru" class="lang-content">«Солнце», «полусолнце» и клиньевая — сравнение</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Радиус формуласы юбканың қанша градусқа жайылатынына байланысты.</span>
+    <span lang="en" class="lang-content">The radius formula depends on how many degrees the skirt spreads over.</span>
+    <span lang="ru" class="lang-content">Формула радиуса зависит от того, на сколько градусов разворачивается юбка.</span>
+  </p>
+  <div class="lang-content" lang="ru">
+    <table class="tbl">
+      <thead><tr><th>Фасон</th><th>Разворот</th><th>Формула радиуса R</th><th>Пышность / расход ткани</th></tr></thead>
+      <tbody>
+        <tr><td><b>Солнце</b></td><td>360° (полный круг)</td><td>R = ОТ ÷ 6,28</td><td>Самые пышные фалды; ткани нужно больше всего.</td></tr>
+        <tr><td><b>Полусолнце</b></td><td>180° (половина круга)</td><td>R = ОТ ÷ 3,14</td><td>Умеренно пышная, лёгкие фалды; экономнее «солнца».</td></tr>
+        <tr><td><b>Полуклёш (¼)</b></td><td>90° (четверть)</td><td>R = ОТ ÷ 1,57</td><td>Небольшое расширение книзу; ткани мало.</td></tr>
+        <tr><td><b>Клиньевая</b></td><td>из клиньев</td><td>строится по клиньям</td><td>Пышность задаётся числом клиньев; расход средний.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="kk">
+    <table class="tbl">
+      <thead><tr><th>Фасон</th><th>Жайылуы</th><th>R радиус формуласы</th><th>Пышность / мата шығыны</th></tr></thead>
+      <tbody>
+        <tr><td><b>Күн</b></td><td>360° (толық шеңбер)</td><td>R = ОТ ÷ 6,28</td><td>Ең мол фалда; мата ең көп кетеді.</td></tr>
+        <tr><td><b>Жарты күн</b></td><td>180° (жарты шеңбер)</td><td>R = ОТ ÷ 3,14</td><td>Орташа кең, жеңіл фалда; «күннен» үнемді.</td></tr>
+        <tr><td><b>Жарты клёш (¼)</b></td><td>90° (ширек)</td><td>R = ОТ ÷ 1,57</td><td>Төменге аздап кеңейеді; мата аз кетеді.</td></tr>
+        <tr><td><b>Сыналы (клиньевая)</b></td><td>сыналардан</td><td>сына бойынша құрылады</td><td>Кеңдік сына санымен реттеледі; шығын орташа.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="en">
+    <table class="tbl">
+      <thead><tr><th>Style</th><th>Spread</th><th>Radius formula R</th><th>Fullness / fabric use</th></tr></thead>
+      <tbody>
+        <tr><td><b>Full sun</b></td><td>360° (full circle)</td><td>R = waist ÷ 6.28</td><td>Fullest folds; uses the most fabric.</td></tr>
+        <tr><td><b>Half-sun</b></td><td>180° (half-circle)</td><td>R = waist ÷ 3.14</td><td>Moderately full, light folds; thriftier than the sun.</td></tr>
+        <tr><td><b>Quarter flare</b></td><td>90° (quarter)</td><td>R = waist ÷ 1.57</td><td>Slight flare to the hem; little fabric.</td></tr>
+        <tr><td><b>Gored</b></td><td>made of gores</td><td>built from panels</td><td>Fullness set by the number of gores; medium use.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CUT & SEW -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">4-қадам. Пішу және тігу</span>
+    <span lang="en" class="lang-content">Step 4. Cut and sew</span>
+    <span lang="ru" class="lang-content">Шаг 4. Раскрой и пошив</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div>
+      <div class="step"><div class="tag">1</div><p><b><span lang="kk" class="lang-content">Бүктеп бекіту.</span><span lang="en" class="lang-content">Fold &amp; pin.</span><span lang="ru" class="lang-content">Сложить и закрепить.</span></b> <span lang="kk" class="lang-content">Матаны екі қабат бүктеп, түйреуішпен бекітеміз, сызбаны борлап түсіреміз.</span><span lang="en" class="lang-content">Fold the fabric double, pin it, and chalk the pattern onto it.</span><span lang="ru" class="lang-content">Складываем ткань вдвое, скалываем булавками и переносим чертёж мелом.</span></p></div>
+      <div class="step"><div class="tag">2</div><p><b><span lang="kk" class="lang-content">Қиямыз.</span><span lang="en" class="lang-content">Cut.</span><span lang="ru" class="lang-content">Вырезаем.</span></b> <span lang="kk" class="lang-content">Қосымшаны ескеріп, екі доға бойымен қиямыз.</span><span lang="en" class="lang-content">Cut along both arcs, keeping the allowances.</span><span lang="ru" class="lang-content">Режем по обеим дугам, не забыв про припуски.</span></p></div>
+      <div class="step"><div class="tag">3</div><p><b><span lang="kk" class="lang-content">Белдеу.</span><span lang="en" class="lang-content">Waistband.</span><span lang="ru" class="lang-content">Пояс.</span></b> <span lang="kk" class="lang-content">Бел сызығына белдеу тігіп, бүйірге сырма (молния) орнатамыз.</span><span lang="en" class="lang-content">Sew a waistband to the waist line and set a zip in the side.</span><span lang="ru" class="lang-content">Притачиваем пояс к линии талии, в боковой шов вшиваем молнию.</span></p></div>
+      <div class="step"><div class="tag">4</div><p><b><span lang="kk" class="lang-content">Төменгі жиек.</span><span lang="en" class="lang-content">Hem.</span><span lang="ru" class="lang-content">Низ.</span></b> <span lang="kk" class="lang-content">Юбканы бір күн ілдіріп қойып, содан кейін төменін теңестіріп бүктеп тігеміз.</span><span lang="en" class="lang-content">Let the skirt hang for a day, then level and stitch the hem.</span><span lang="ru" class="lang-content">Даём юбке отвисеться сутки, затем ровняем и подшиваем низ.</span></p></div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)" style="cursor:pointer">
+      <div class="pic" style="height:300px"><img src="../../assets/labor_girls/p19_cut.jpg" alt="Раскрой по выкройке"></div>
+      <div class="zoom-hint">🔍</div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Сызба бойынша пішу</span><span lang="en" class="lang-content">Cutting by the pattern</span><span lang="ru" class="lang-content">Раскрой по выкройке</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">матаны доға бойымен қияды</span><span lang="en" class="lang-content">cutting the cloth along the arcs</span><span lang="ru" class="lang-content">ткань режут вдоль дуг</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="note mt-4"><p>✂️ <span lang="kk" class="lang-content"><b>Маңызды:</b> «жарты күн» бір тұтас бөліктен (бір тігіспен) немесе екі бөліктен (екі бүйір тігісімен) пішілуі мүмкін — матаның еніне байланысты. Қиғаш жіп (косая) бойындағы жерлер созылмауы үшін юбканы ілдіріп қою керек.</span><span lang="en" class="lang-content"><b>Important:</b> a half-sun can be cut as one whole piece (one seam) or as two pieces (two side seams) — it depends on the fabric width. Because some edges fall on the bias, let the skirt hang before hemming so it won't stretch unevenly.</span><span lang="ru" class="lang-content"><b>Важно:</b> «полусолнце» можно выкроить из одного полотна (один шов) или из двух (два боковых шва) — зависит от ширины ткани. Часть срезов идёт по косой, поэтому перед подшивкой юбке дают отвисеться, чтобы низ не растянулся неровно.</span></p></div>
+</section>
+
+<!-- GALLERY twirl -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Нәтиже: фалда қалай «билейді»</span>
+    <span lang="en" class="lang-content">The result: how the folds "dance"</span>
+    <span lang="ru" class="lang-content">Результат: как «танцуют» фалды</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="genre-card" onclick="openLB(this)" style="cursor:pointer">
+      <div class="pic" style="height:340px"><img src="../../assets/labor_girls/p19_twirl.jpg" alt="Юбка в движении"></div>
+      <div class="zoom-hint">🔍</div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Қозғалыстағы юбка</span><span lang="en" class="lang-content">The skirt in motion</span><span lang="ru" class="lang-content">Юбка в движении</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">фалдалар толқынданады</span><span lang="en" class="lang-content">the folds ripple out</span><span lang="ru" class="lang-content">фалды расходятся волной</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Доға бойынша кесілген юбка айналғанда қоңырау тәрізді жайылады.</span><span lang="en" class="lang-content">Cut along an arc, the skirt opens out like a bell when it spins.</span><span lang="ru" class="lang-content">Скроенная по дуге, юбка при повороте раскрывается колоколом.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)" style="cursor:pointer">
+      <div class="pic" style="height:340px"><img src="../../assets/labor_girls/p19_hero.jpg" alt="Готовая юбка-полусолнце"></div>
+      <div class="zoom-hint">🔍</div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Дайын силуэт</span><span lang="en" class="lang-content">The finished silhouette</span><span lang="ru" class="lang-content">Готовый силуэт</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">белден кеңейеді</span><span lang="en" class="lang-content">flares from the waist</span><span lang="ru" class="lang-content">расширяется от талии</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Белде жатық, төменге қарай мол — бұл «жарты күннің» басты белгісі.</span><span lang="en" class="lang-content">Smooth at the waist, full at the hem — the signature of a half-sun.</span><span lang="ru" class="lang-content">Гладко в талии и пышно книзу — главная примета «полусолнца».</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REMEMBER -->
+<section class="card-rose rounded-custom p-7 md:p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-3">
+    <span lang="kk" class="lang-content">💡 Есте сақта</span>
+    <span lang="en" class="lang-content">💡 Remember</span>
+    <span lang="ru" class="lang-content">💡 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white bg-opacity-15 rounded-2xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Екі өлшем</span><span lang="en" class="lang-content">Two measurements</span><span lang="ru" class="lang-content">Две мерки</span></p>
+      <p class="text-sm" style="line-height:1.5"><span lang="kk" class="lang-content">Бел орамы (ОТ) және юбка ұзындығы (Дю) — осы екеуі жеткілікті.</span><span lang="en" class="lang-content">Waist (ОТ) and length (Дю) — these two are enough.</span><span lang="ru" class="lang-content">Обхват талии (ОТ) и длина (Дю) — этих двух достаточно.</span></p>
+    </div>
+    <div class="bg-white bg-opacity-15 rounded-2xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Басты формула</span><span lang="en" class="lang-content">The key formula</span><span lang="ru" class="lang-content">Главная формула</span></p>
+      <p class="text-sm" style="line-height:1.5"><span lang="kk" class="lang-content">R = ОТ ÷ 3,14, содан кейін R₂ = R + Дю. Бір центрден екі доға.</span><span lang="en" class="lang-content">R = ОТ ÷ 3.14, then R₂ = R + Дю. Two arcs from one centre.</span><span lang="ru" class="lang-content">R = ОТ ÷ 3,14, затем R₂ = R + Дю. Две дуги из одного центра.</span></p>
+    </div>
+    <div class="bg-white bg-opacity-15 rounded-2xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Қосымша мен отыру</span><span lang="en" class="lang-content">Allowances &amp; hanging</span><span lang="ru" class="lang-content">Припуски и отвес</span></p>
+      <p class="text-sm" style="line-height:1.5"><span lang="kk" class="lang-content">Тігіске қосымша қос, юбканы ілдіріп қойып барып төменін теңестір.</span><span lang="en" class="lang-content">Add seam allowances and let it hang before levelling the hem.</span><span lang="ru" class="lang-content">Добавь припуски и дай отвисеться перед выравниванием низа.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){
+  if(lang==='kz')lang='kk';
+  currentLang=lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+function openLB(card){
+  document.getElementById('lb-img').src=card.querySelector('.pic img').src;
+  var n=card.querySelector('.genre-name'); document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';
+  var cap=card.querySelector('.genre-cap'); document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';
+  var d=card.querySelector('.genre-desc'); document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

@@ -34,7 +34,7 @@ ALL_SUBJECTS = [
     'physics', 'mathematics', 'biology', 'chemistry',
     'geography', 'informatics', 'historykaz', 'worldhistory',
     'kazakhlang', 'russianlang', 'englishlang',
-    'music', 'grafika'
+    'music', 'grafika', 'labor_girls', 'labor_boys', 'nvp'
 ]
 
 

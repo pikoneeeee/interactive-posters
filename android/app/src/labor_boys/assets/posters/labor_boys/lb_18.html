@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сверление и соединение металла (заклёпки, пайка, резьба)</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.5;}
+.step b{color:#881337;}
+.mtbl{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.96);border-radius:1rem;overflow:hidden;
+  box-shadow:0 3px 14px rgba(136,19,55,.07);}
+.mtbl th{background:var(--rose);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;
+  padding:.7rem .9rem;text-align:left;font-size:.95rem;}
+.mtbl td{padding:.65rem .9rem;border-top:1px solid rgba(190,18,60,.12);color:#44403c;font-size:.93rem;vertical-align:top;}
+.mtbl td:first-child{font-weight:700;color:#881337;white-space:nowrap;}
+.mtbl tr:nth-child(even) td{background:rgba(255,241,242,0.5);}
+.rule{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:1rem 1.15rem;}
+.rule h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;margin-bottom:.25rem;}
+.rule p{color:#57534e;font-size:.92rem;line-height:1.45;}
+.note{background:rgba(255,255,255,0.95);border-left:5px solid #be123c;border-radius:.6rem;
+  padding:.85rem 1.1rem;color:#57534e;font-size:.93rem;line-height:1.5;}
+.note b{color:#881337;}
+.formula{background:#1c1917;color:#fde68a;font-family:'Montserrat',sans-serif;font-weight:800;
+  border-radius:.8rem;padding:.9rem 1.1rem;text-align:center;font-size:1.05rem;letter-spacing:.4px;
+  box-shadow:0 6px 18px rgba(0,0,0,.22);}
+.formula small{display:block;color:#fcd34d;font-weight:600;font-size:.78rem;letter-spacing:0;margin-top:.35rem;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 3-бөлім · Металл өңдеу</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 3 · Metalworking</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 3 · Обработка металла</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🔩 Металды бұрғылау және біріктіру (тойтарма, дәнекерлеу, бұранда)</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🔩 Drilling and Joining Metal (Rivets, Soldering, Threads)</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🔩 Сверление и соединение металла (заклёпки, пайка, резьба)</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Алдымен дәл тесік бұрғылаймыз — содан кейін бөлшектерді тойтармамен, дәнекермен немесе бұрандамен біріктіреміз.</span>
+      <span lang="en" class="lang-content">First we drill an accurate hole — then we join the parts with rivets, solder or a threaded fastener.</span>
+      <span lang="ru" class="lang-content">Сначала сверлим точное отверстие — затем соединяем детали заклёпкой, пайкой или резьбой.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content">Бір металл бөлшектен бұйым жасау сирек кездеседі — әдетте бірнеше бөлшекті бір-бірімен <b>біріктіреміз</b>. Ал біріктірудің көбі <b>дәл тесіктен</b> басталады: тесік қисық не диаметрі қате болса, бүкіл түйіспе бос болады. Сондықтан осы плакатта алдымен <b>бұрғылауды</b> (тесік шығару), содан кейін металды біріктірудің үш негізгі тәсілін қарастырамыз: <b>тойтарма (заклёпка)</b> — ажыратылмайтын механикалық түйіс; <b>дәнекерлеу (пайка)</b> — балқыған дәнекермен жабыстыру; <b>бұрандалы қосылыс (резьба)</b> — бұрандама мен сомынмен ажыратылатын түйіс. Әр тәсілдің өз орны, артықшылығы және қауіпсіздік ережесі бар.</span>
+    <span lang="en" class="lang-content">A product is rarely made from a single piece of metal — usually several parts are <b>joined</b> together. And most joining begins with an <b>accurate hole</b>: if the hole is crooked or the wrong diameter, the whole joint will be loose. So on this poster we look first at <b>drilling</b> (making holes), and then at the three main ways to join metal: <b>riveting</b> — a permanent mechanical joint; <b>soldering</b> — bonding with molten solder; and a <b>threaded joint</b> — a removable connection made with a screw and a nut. Each method has its place, its advantages and its safety rules.</span>
+    <span lang="ru" class="lang-content">Изделие редко делают из одной металлической детали — обычно несколько деталей <b>соединяют</b> вместе. А большинство соединений начинается с <b>точного отверстия</b>: если отверстие кривое или неверного диаметра, весь стык будет шататься. Поэтому на этом плакате мы сначала разберём <b>сверление</b> (получение отверстий), а затем три основных способа соединения металла: <b>заклёпка</b> — неразъёмное механическое соединение; <b>пайка</b> — скрепление расплавленным припоем; <b>резьбовое соединение</b> — разъёмный стык из винта и гайки. У каждого способа своё применение, свои достоинства и свои правила безопасности.</span>
+  </p>
+</section>
+
+<!-- DRILLING -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">1. Бұрғылау — тесік шығару</span>
+    <span lang="en" class="lang-content">1. Drilling — Making Holes</span>
+    <span lang="ru" class="lang-content">1. Сверление — получение отверстий</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Металды бұрғылаудың негізгі құралы — <b>бұрғылау станогы</b> (сверлильный станок) мен спираль <b>бұрғы</b> (сверло). Тесік дәл, тік әрі қажетті диаметрде болуы керек.</span>
+    <span lang="en" class="lang-content">The main tools for drilling metal are a <b>drill press</b> and a twist <b>drill bit</b>. The hole must be accurate, straight and of the required diameter.</span>
+    <span lang="ru" class="lang-content">Основной инструмент для сверления металла — <b>сверлильный станок</b> и спиральное <b>сверло</b>. Отверстие должно быть точным, прямым и нужного диаметра.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div>
+      <div class="genre-card" onclick="openLB(this)">
+        <span class="zoom-hint">🔍</span>
+        <div class="pic" style="height:280px"><img src="../../assets/labor_boys/lb18_drillpress.jpg" alt="Сверление на сверлильном станке"></div>
+        <div class="body">
+          <div class="genre-name"><span lang="kk" class="lang-content">Бұрғылау станогы</span><span lang="en" class="lang-content">Drill press</span><span lang="ru" class="lang-content">Сверлильный станок</span></div>
+          <div class="genre-cap"><span lang="kk" class="lang-content">бөлшек тискіде бекітіледі</span><span lang="en" class="lang-content">the part is clamped in a vice</span><span lang="ru" class="lang-content">деталь зажата в тисках</span></div>
+          <div class="genre-desc"><span lang="kk" class="lang-content">Бөлшекті қолмен ұстамай, тискіге қыспалаймыз: бұрғы оны айналдырып жіберуі мүмкін.</span><span lang="en" class="lang-content">Never hold the part by hand — clamp it in a vice, or the drill can spin it around.</span><span lang="ru" class="lang-content">Деталь не держат рукой, а зажимают в тисках: сверло может закрутить её.</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Белгілеу.</span><span lang="en" class="lang-content">Marking.</span><span lang="ru" class="lang-content">Разметка.</span></b> <span lang="kk" class="lang-content">Тесік ортасын <b>кернермен</b> (керн) нүктелейміз — бұрғы сырғымайды.</span><span lang="en" class="lang-content">Punch the centre of the hole with a <b>centre punch</b> so the bit does not wander.</span><span lang="ru" class="lang-content">Центр отверстия намечают <b>кернером</b> — сверло не соскользнёт.</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Бекіту.</span><span lang="en" class="lang-content">Clamping.</span><span lang="ru" class="lang-content">Закрепление.</span></b> <span lang="kk" class="lang-content">Бөлшекті машиналық тискіге қатты қыстырамыз, астына төсем қоямыз.</span><span lang="en" class="lang-content">Clamp the part firmly in a machine vice with a backing block underneath.</span><span lang="ru" class="lang-content">Деталь прочно зажимают в машинных тисках, под низ кладут подкладку.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Бұрғылау.</span><span lang="en" class="lang-content">Drilling.</span><span lang="ru" class="lang-content">Сверление.</span></b> <span lang="kk" class="lang-content">Бұрғыны баяу әрі бірқалыпты түсіреміз; қаттырақ басып жібермейміз.</span><span lang="en" class="lang-content">Feed the bit down slowly and evenly; do not press too hard.</span><span lang="ru" class="lang-content">Сверло подают вниз медленно и равномерно; не давят слишком сильно.</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Салқындату.</span><span lang="en" class="lang-content">Cooling.</span><span lang="ru" class="lang-content">Охлаждение.</span></b> <span lang="kk" class="lang-content">Болатты бұрғылағанда майлап-салқындатамыз — бұрғы күюден сақталады.</span><span lang="en" class="lang-content">When drilling steel, add cutting fluid so the bit does not overheat.</span><span lang="ru" class="lang-content">При сверлении стали подают смазку-охлаждение — сверло не перегреется.</span></p></div>
+      <p class="note mt-2"><span lang="kk" class="lang-content"><b>Жоңқа (стружка).</b> Тесіктен спираль металл жоңқасы шығады — оны қолмен алмаймыз, қылшақпен тазалаймыз.</span><span lang="en" class="lang-content"><b>Swarf.</b> The hole throws out spiral metal chips — never clear them by hand, use a brush.</span><span lang="ru" class="lang-content"><b>Стружка.</b> Из отверстия выходит спиральная металлическая стружка — её убирают щёткой, а не рукой.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- DRILL BIT CLOSE-UP + ANATOMY -->
+<section class="mb-10">
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+    <div>
+      <div class="art-frame" onclick="openLB(this)">
+        <div class="art-mat pic" style="height:320px"><img src="../../assets/labor_boys/lb18_drillbit.jpg" alt="Спиральное сверло со стружкой"></div>
+        <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Спираль бұрғы</span><span lang="en" class="lang-content">Twist drill bit</span><span lang="ru" class="lang-content">Спиральное сверло</span></div>
+        <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">металл жоңқасын шығарып жатыр</span><span lang="en" class="lang-content">cutting metal and clearing swarf</span><span lang="ru" class="lang-content">режет металл и выводит стружку</span></div>
+        <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Спираль ойықтар (канавки) жоңқаны тесіктен жоғары қарай шығарады.</span><span lang="en" class="lang-content">The spiral flutes carry the chips up and out of the hole.</span><span lang="ru" class="lang-content">Спиральные канавки выводят стружку вверх из отверстия.</span></div>
+      </div>
+      <p class="text-center text-xs mt-2 text-stone-500"><span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз</span><span lang="en" class="lang-content">🔍 Tap the photo to enlarge</span><span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить</span></p>
+    </div>
+    <div class="lg:col-span-2">
+      <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+        <span lang="kk" class="lang-content">Спираль бұрғының құрылысы</span>
+        <span lang="en" class="lang-content">Parts of a Twist Drill Bit</span>
+        <span lang="ru" class="lang-content">Устройство спирального сверла</span>
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="rule"><h4>✂️ <span lang="kk" class="lang-content">Кескіш ұшы</span><span lang="en" class="lang-content">Cutting tip</span><span lang="ru" class="lang-content">Режущая часть</span></h4><p><span lang="kk" class="lang-content">Екі кескіш қыр металды кеседі. Ұшы өткір болуы керек.</span><span lang="en" class="lang-content">Two cutting edges slice the metal. The tip must be sharp.</span><span lang="ru" class="lang-content">Две режущие кромки срезают металл. Кончик должен быть острым.</span></p></div>
+        <div class="rule"><h4>🌀 <span lang="kk" class="lang-content">Ойықтар</span><span lang="en" class="lang-content">Flutes</span><span lang="ru" class="lang-content">Канавки</span></h4><p><span lang="kk" class="lang-content">Спираль ойықтар жоңқаны тесіктен шығарады.</span><span lang="en" class="lang-content">The spiral flutes carry chips out of the hole.</span><span lang="ru" class="lang-content">Спиральные канавки выводят стружку из отверстия.</span></p></div>
+        <div class="rule"><h4>🔧 <span lang="kk" class="lang-content">Сабы</span><span lang="en" class="lang-content">Shank</span><span lang="ru" class="lang-content">Хвостовик</span></h4><p><span lang="kk" class="lang-content">Тегіс сап патронға (қыстырғышқа) бекітіледі.</span><span lang="en" class="lang-content">The smooth shank is held in the chuck.</span><span lang="ru" class="lang-content">Гладкий хвостовик зажимается в патроне.</span></p></div>
+      </div>
+      <p class="note mt-4"><span lang="kk" class="lang-content"><b>Материал.</b> Металды бұрғылауға <b>HSS</b> (жылдам кескіш болат) бұрғылары қолданылады — олар ағашқа арналған бұрғыдан гөрі қаттырақ әрі ыстыққа төзімді.</span><span lang="en" class="lang-content"><b>Material.</b> Metal is drilled with <b>HSS</b> (high-speed steel) bits — they are harder and more heat-resistant than wood bits.</span><span lang="ru" class="lang-content"><b>Материал.</b> Металл сверлят свёрлами из <b>HSS</b> (быстрорежущей стали) — они твёрже и жароустойчивее свёрл по дереву.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">2. Біріктірудің үш тәсілі — салыстыру</span>
+    <span lang="en" class="lang-content">2. Three Ways to Join — Compared</span>
+    <span lang="ru" class="lang-content">2. Три способа соединения — сравнение</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Қай тәсілді таңдау бұйымның мақсатына байланысты: оны кейін ажырату керек пе, қандай күшке төтеп беруі тиіс?</span>
+    <span lang="en" class="lang-content">Which method to choose depends on the purpose of the part: will it ever need to come apart, and what load must it bear?</span>
+    <span lang="ru" class="lang-content">Какой способ выбрать, зависит от назначения детали: нужно ли её потом разбирать и какую нагрузку она должна нести?</span>
+  </p>
+
+  <div class="lang-content" lang="ru">
+    <table class="mtbl">
+      <thead><tr><th>Способ</th><th>Что это</th><th>Соединение</th><th>Где применяют</th></tr></thead>
+      <tbody>
+        <tr><td>Заклёпка</td><td>Металлический стержень с головкой, расклёпываемый в отверстии</td><td>Неразъёмное</td><td>Каркасы, листовой металл, мосты, авиация</td></tr>
+        <tr><td>Пайка</td><td>Скрепление деталей расплавленным припоем (олово)</td><td>Неразъёмное</td><td>Электроника, жесть, провода, радиаторы</td></tr>
+        <tr><td>Резьба</td><td>Винт (болт) и гайка с винтовой нарезкой</td><td>Разъёмное</td><td>Машины, мебель, всё, что разбирают для ремонта</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="kk">
+    <table class="mtbl">
+      <thead><tr><th>Тәсіл</th><th>Не екені</th><th>Түйіс</th><th>Қайда қолданады</th></tr></thead>
+      <tbody>
+        <tr><td>Тойтарма</td><td>Бастиегі бар металл шыбық, тесікте тойтарылады</td><td>Ажыратылмайтын</td><td>Қаңқалар, табақ металл, көпірлер, авиация</td></tr>
+        <tr><td>Дәнекерлеу</td><td>Бөлшектерді балқыған дәнекермен (қалайы) жабыстыру</td><td>Ажыратылмайтын</td><td>Электроника, қаңылтыр, сым, радиатор</td></tr>
+        <tr><td>Бұранда</td><td>Бұрандалы бұрандама (болт) мен сомын</td><td>Ажыратылатын</td><td>Машиналар, жиһаз, жөнделетін бұйымдар</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="en">
+    <table class="mtbl">
+      <thead><tr><th>Method</th><th>What it is</th><th>Joint</th><th>Where used</th></tr></thead>
+      <tbody>
+        <tr><td>Rivet</td><td>A metal pin with a head, hammered flat inside a hole</td><td>Permanent</td><td>Frames, sheet metal, bridges, aircraft</td></tr>
+        <tr><td>Soldering</td><td>Bonding parts with molten solder (tin alloy)</td><td>Permanent</td><td>Electronics, tinware, wires, radiators</td></tr>
+        <tr><td>Thread</td><td>A screw (bolt) and a nut with a helical thread</td><td>Removable</td><td>Machines, furniture, anything repaired</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- RIVETS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">3. Тойтарма (заклёпка) — ажыратылмайтын түйіс</span>
+    <span lang="en" class="lang-content">3. Rivets — A Permanent Joint</span>
+    <span lang="ru" class="lang-content">3. Заклёпки — неразъёмное соединение</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Тойтарма — бастиегі бар жұмсақ металл шыбық. Екі тесіктен өткізіп, бос ұшын балғамен жалпайтамыз — екінші бастиек пайда болады.</span>
+    <span lang="en" class="lang-content">A rivet is a soft metal pin with a head. It is pushed through two holes and its free end is hammered flat — forming a second head.</span>
+    <span lang="ru" class="lang-content">Заклёпка — мягкий металлический стержень с головкой. Её вставляют в два отверстия и расклёпывают свободный конец молотком — образуется вторая головка.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Тесік бұрғылау.</span><span lang="en" class="lang-content">Drill the holes.</span><span lang="ru" class="lang-content">Сверлим отверстия.</span></b> <span lang="kk" class="lang-content">Екі бөлшекті қатар қойып, тойтарма диаметріндей тесік бұрғылаймыз.</span><span lang="en" class="lang-content">Put the two parts together and drill a hole the diameter of the rivet.</span><span lang="ru" class="lang-content">Складываем две детали и сверлим отверстие под диаметр заклёпки.</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Тойтарма салу.</span><span lang="en" class="lang-content">Insert the rivet.</span><span lang="ru" class="lang-content">Вставляем заклёпку.</span></b> <span lang="kk" class="lang-content">Бастиегі бір жақта тұратындай етіп тесікке кіргіземіз.</span><span lang="en" class="lang-content">Push it in so the head sits on one side.</span><span lang="ru" class="lang-content">Вставляем так, чтобы готовая головка была с одной стороны.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Тойтару.</span><span lang="en" class="lang-content">Set the rivet.</span><span lang="ru" class="lang-content">Расклёпываем.</span></b> <span lang="kk" class="lang-content">Бос ұшын балғамен ұрып жалпайтамыз — екінші бастиек жасалады.</span><span lang="en" class="lang-content">Hammer the free end flat to form the second head.</span><span lang="ru" class="lang-content">Молотком расплющиваем свободный конец — образуется вторая головка.</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Тексеру.</span><span lang="en" class="lang-content">Check.</span><span lang="ru" class="lang-content">Проверяем.</span></b> <span lang="kk" class="lang-content">Түйіс берік әрі бөлшектер тербелмейтін болуы керек.</span><span lang="en" class="lang-content">The joint must be tight and the parts must not wobble.</span><span lang="ru" class="lang-content">Соединение должно быть плотным, детали не должны шататься.</span></p></div>
+      <p class="note mt-2"><span lang="kk" class="lang-content"><b>Заманауи тәсіл.</b> Бір жағынан ғана қол жететін жерде <b>сору тойтармасы</b> (вытяжная заклёпка) мен қол құралы — <b>заклёпочник</b> қолданылады.</span><span lang="en" class="lang-content"><b>Modern way.</b> Where you can reach only one side, a <b>pop (blind) rivet</b> and a hand <b>rivet gun</b> are used.</span><span lang="ru" class="lang-content"><b>Современный способ.</b> Где доступна только одна сторона, применяют <b>вытяжную заклёпку</b> и ручной <b>заклёпочник</b>.</span></p>
+    </div>
+    <div>
+      <div class="genre-card" onclick="openLB(this)">
+        <span class="zoom-hint">🔍</span>
+        <div class="pic" style="height:300px"><img src="../../assets/labor_boys/lb18_rivets.jpg" alt="Заклёпочное соединение стальной балки"></div>
+        <div class="body">
+          <div class="genre-name"><span lang="kk" class="lang-content">Тойтармалы түйіс</span><span lang="en" class="lang-content">Riveted joint</span><span lang="ru" class="lang-content">Заклёпочное соединение</span></div>
+          <div class="genre-cap"><span lang="kk" class="lang-content">болат арқалықтағы тойтарма қатарлары</span><span lang="en" class="lang-content">rows of rivets in a steel beam</span><span lang="ru" class="lang-content">ряды заклёпок в стальной балке</span></div>
+          <div class="genre-desc"><span lang="kk" class="lang-content">Дөңес бастиектердің көп қатары — ескі көпірлер мен қаңқалардың берік түйісі.</span><span lang="en" class="lang-content">Many rows of domed heads — the strong joint of old bridges and frames.</span><span lang="ru" class="lang-content">Множество рядов выпуклых головок — прочное соединение старых мостов и каркасов.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLDERING -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">4. Дәнекерлеу (пайка) — балқыған дәнекермен біріктіру</span>
+    <span lang="en" class="lang-content">4. Soldering — Joining with Molten Solder</span>
+    <span lang="ru" class="lang-content">4. Пайка — соединение расплавленным припоем</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Дәнекерлеуде бөлшектер балқымайды — оларды балқыған <b>дәнекер (припой)</b> жабыстырады. Дәнекердің балқу температурасы металдан төмен.</span>
+    <span lang="en" class="lang-content">In soldering the parts themselves do not melt — they are bonded by molten <b>solder</b>, an alloy that melts at a lower temperature than the metal.</span>
+    <span lang="ru" class="lang-content">При пайке сами детали не плавятся — их скрепляет расплавленный <b>припой</b>, сплав с температурой плавления ниже, чем у металла деталей.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div>
+      <div class="genre-card" onclick="openLB(this)">
+        <span class="zoom-hint">🔍</span>
+        <div class="pic" style="height:300px"><img src="../../assets/labor_boys/lb18_solder.jpg" alt="Пайка медной трубы горелкой"></div>
+        <div class="body">
+          <div class="genre-name"><span lang="kk" class="lang-content">Мыс құбырды дәнекерлеу</span><span lang="en" class="lang-content">Soldering a copper pipe</span><span lang="ru" class="lang-content">Пайка медной трубы</span></div>
+          <div class="genre-cap"><span lang="kk" class="lang-content">түйіс жанарғымен қыздырылады</span><span lang="en" class="lang-content">the joint is heated with a torch</span><span lang="ru" class="lang-content">стык прогревают горелкой</span></div>
+          <div class="genre-desc"><span lang="kk" class="lang-content">Қыздырылған түйіске тиген дәнекер балқып, саңылауға өзі тартылады.</span><span lang="en" class="lang-content">Touched to the hot joint, the solder melts and is drawn into the gap by itself.</span><span lang="ru" class="lang-content">Припой касается горячего стыка, плавится и сам затягивается в зазор.</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Тазалау.</span><span lang="en" class="lang-content">Clean.</span><span lang="ru" class="lang-content">Зачищаем.</span></b> <span lang="kk" class="lang-content">Түйісетін беттерді жалтырағанша тазалаймыз: кір бетке дәнекер жабыспайды.</span><span lang="en" class="lang-content">Clean the surfaces until shiny — solder will not stick to a dirty surface.</span><span lang="ru" class="lang-content">Зачищаем поверхности до блеска: к грязной поверхности припой не пристанет.</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Флюс жағу.</span><span lang="en" class="lang-content">Apply flux.</span><span lang="ru" class="lang-content">Наносим флюс.</span></b> <span lang="kk" class="lang-content"><b>Флюс</b> (канифоль не паста) тотты кетіреді, дәнекерді жайылтады.</span><span lang="en" class="lang-content"><b>Flux</b> (rosin or paste) removes oxide and helps the solder flow.</span><span lang="ru" class="lang-content"><b>Флюс</b> (канифоль или паста) убирает окисел и помогает припою растекаться.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Қыздыру.</span><span lang="en" class="lang-content">Heat.</span><span lang="ru" class="lang-content">Прогреваем.</span></b> <span lang="kk" class="lang-content">Түйісті <b>дәнекерлегішпен</b> (паяльник) не жанарғымен қыздырамыз — дәнекерді емес, металды.</span><span lang="en" class="lang-content">Heat the joint with a <b>soldering iron</b> or torch — heat the metal, not the solder.</span><span lang="ru" class="lang-content">Прогреваем стык <b>паяльником</b> или горелкой — нагревают металл, а не сам припой.</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Дәнекер беру.</span><span lang="en" class="lang-content">Feed solder.</span><span lang="ru" class="lang-content">Подаём припой.</span></b> <span lang="kk" class="lang-content">Қызған түйіске дәнекерді тигіземіз — ол балқып, саңылауды толтырады.</span><span lang="en" class="lang-content">Touch solder to the hot joint — it melts and fills the gap.</span><span lang="ru" class="lang-content">Касаемся припоем горячего стыка — он плавится и заполняет зазор.</span></p></div>
+      <div class="step"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Суыту.</span><span lang="en" class="lang-content">Cool.</span><span lang="ru" class="lang-content">Остужаем.</span></b> <span lang="kk" class="lang-content">Қозғалтпай суытамыз — суыған дәнекер жылтыр әрі тегіс болуы керек.</span><span lang="en" class="lang-content">Let it cool without moving — a good joint is shiny and smooth.</span><span lang="ru" class="lang-content">Даём остыть без движения — хороший шов блестящий и ровный.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THREADS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">5. Бұранда (резьба) — ажыратылатын түйіс</span>
+    <span lang="en" class="lang-content">5. Threads — A Removable Joint</span>
+    <span lang="ru" class="lang-content">5. Резьба — разъёмное соединение</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Бұрандалы түйісті кез келген уақытта ашуға болады. Ішкі бұранданы (тесікте) <b>метчик (тапом)</b>, сыртқы бұранданы (шыбықта) <b>плашка (дайс)</b> арқылы кеседі.</span>
+    <span lang="en" class="lang-content">A threaded joint can be opened any time. An internal thread (in a hole) is cut with a <b>tap</b>, an external thread (on a rod) with a <b>die</b>.</span>
+    <span lang="ru" class="lang-content">Резьбовое соединение можно в любой момент разобрать. Внутреннюю резьбу (в отверстии) нарезают <b>метчиком</b>, наружную (на стержне) — <b>плашкой</b>.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div>
+      <div class="art-frame" onclick="openLB(this)">
+        <div class="art-mat pic" style="height:300px;background:#fff"><img src="../../assets/labor_boys/lb18_tap.jpg" alt="Метчик в воротке для нарезания резьбы"></div>
+        <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Метчик пен воротка</span><span lang="en" class="lang-content">Tap in a T-wrench</span><span lang="ru" class="lang-content">Метчик в воротке</span></div>
+        <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">тесікте ішкі бұранда кеседі</span><span lang="en" class="lang-content">cuts an internal thread in a hole</span><span lang="ru" class="lang-content">нарезает внутреннюю резьбу в отверстии</span></div>
+        <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Тісті ұшы бұрылған сайын металды кесіп, бұранда қалыптастырады.</span><span lang="en" class="lang-content">As it turns, the toothed tip cuts the metal and forms the thread.</span><span lang="ru" class="lang-content">Зубчатый кончик при вращении срезает металл и формирует резьбу.</span></div>
+      </div>
+      <p class="text-center text-xs mt-2 text-stone-500"><span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз</span><span lang="en" class="lang-content">🔍 Tap the photo to enlarge</span><span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить</span></p>
+    </div>
+    <div>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Тесік бұрғылау.</span><span lang="en" class="lang-content">Drill the hole.</span><span lang="ru" class="lang-content">Сверлим отверстие.</span></b> <span lang="kk" class="lang-content">Бұранда диаметрінен сәл кіші тесік бұрғылаймыз (мыс., М6 үшін ⌀5 мм).</span><span lang="en" class="lang-content">Drill a hole slightly smaller than the thread (e.g. ⌀5 mm for M6).</span><span lang="ru" class="lang-content">Сверлим отверстие чуть меньше резьбы (например, ⌀5 мм под М6).</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Метчикті орнату.</span><span lang="en" class="lang-content">Fit the tap.</span><span lang="ru" class="lang-content">Ставим метчик.</span></b> <span lang="kk" class="lang-content">Метчикті <b>вороткаға</b> бекітіп, тесікке тік қоямыз.</span><span lang="en" class="lang-content">Fix the tap in a <b>T-wrench</b> and set it straight into the hole.</span><span lang="ru" class="lang-content">Закрепляем метчик в <b>воротке</b> и ставим строго прямо.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Кесу.</span><span lang="en" class="lang-content">Cut.</span><span lang="ru" class="lang-content">Нарезаем.</span></b> <span lang="kk" class="lang-content">Екі бұрау алға — жарты бұрау артқа: жоңқа сынып, метчик сынбайды.</span><span lang="en" class="lang-content">Two turns forward, half a turn back: this breaks the chip and saves the tap.</span><span lang="ru" class="lang-content">Два оборота вперёд — пол-оборота назад: стружка ломается, метчик не сломается.</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Майлау.</span><span lang="en" class="lang-content">Lubricate.</span><span lang="ru" class="lang-content">Смазываем.</span></b> <span lang="kk" class="lang-content">Майлап отырамыз — бұранда таза әрі тегіс шығады.</span><span lang="en" class="lang-content">Keep adding oil — the thread comes out clean and smooth.</span><span lang="ru" class="lang-content">Постоянно смазываем — резьба выходит чистой и ровной.</span></p></div>
+      <div class="formula my-3">M6 → ⌀5,0&nbsp;мм
+        <small><span lang="kk" class="lang-content">тесік ⌀ ≈ бұранда − қадам (М6, қадам 1 мм)</span><span lang="en" class="lang-content">hole ⌀ ≈ thread − pitch (M6, pitch 1 mm)</span><span lang="ru" class="lang-content">⌀ отверстия ≈ резьба − шаг (М6, шаг 1 мм)</span></small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="card rounded-custom p-7 md:p-8 mb-10 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">⚠️ Қауіпсіздік ережелері</span>
+    <span lang="en" class="lang-content">⚠️ Safety Rules</span>
+    <span lang="ru" class="lang-content">⚠️ Правила безопасности</span>
+  </h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="rule"><h4>🥽 <span lang="kk" class="lang-content">Көзілдірік</span><span lang="en" class="lang-content">Goggles</span><span lang="ru" class="lang-content">Очки</span></h4><p><span lang="kk" class="lang-content">Бұрғылағанда қорғаныш көзілдірік киеміз — жоңқа ұшады.</span><span lang="en" class="lang-content">Wear safety goggles when drilling — chips fly off.</span><span lang="ru" class="lang-content">При сверлении надеваем защитные очки — стружка летит.</span></p></div>
+    <div class="rule"><h4>🔥 <span lang="kk" class="lang-content">Ыстық металл</span><span lang="en" class="lang-content">Hot metal</span><span lang="ru" class="lang-content">Горячий металл</span></h4><p><span lang="kk" class="lang-content">Дәнекерленген түйіс пен паяльник ыстық — суығанша ұстамаймыз.</span><span lang="en" class="lang-content">A soldered joint and the iron are hot — do not touch until cool.</span><span lang="ru" class="lang-content">Паяный стык и паяльник горячие — не трогаем, пока не остынут.</span></p></div>
+    <div class="rule"><h4>💨 <span lang="kk" class="lang-content">Желдету</span><span lang="en" class="lang-content">Ventilation</span><span lang="ru" class="lang-content">Проветривание</span></h4><p><span lang="kk" class="lang-content">Дәнекерлеу түтінін жұтпаймыз — желдетілген жерде жұмыс істейміз.</span><span lang="en" class="lang-content">Do not breathe solder fumes — work in a ventilated place.</span><span lang="ru" class="lang-content">Не вдыхаем дым пайки — работаем в проветриваемом месте.</span></p></div>
+    <div class="rule"><h4>✋ <span lang="kk" class="lang-content">Бекіт</span><span lang="en" class="lang-content">Clamp it</span><span lang="ru" class="lang-content">Закрепи</span></h4><p><span lang="kk" class="lang-content">Бөлшекті қолмен ұстамай, тискіге қыстырамыз.</span><span lang="en" class="lang-content">Clamp the part in a vice, never hold it by hand.</span><span lang="ru" class="lang-content">Деталь зажимаем в тисках, а не держим рукой.</span></p></div>
+  </div>
+</section>
+
+<!-- KEY REMINDERS -->
+<section class="card rounded-custom p-7 md:p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">✅ Есте сақта</span>
+    <span lang="en" class="lang-content">✅ Remember</span>
+    <span lang="ru" class="lang-content">✅ Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="rule"><h4>1</h4><p><span lang="kk" class="lang-content">Әр түйіс <b>дәл тесіктен</b> басталады: кернерле, бекіт, баяу бұрғыла.</span><span lang="en" class="lang-content">Every joint starts with an <b>accurate hole</b>: punch, clamp, drill slowly.</span><span lang="ru" class="lang-content">Любое соединение начинается с <b>точного отверстия</b>: накерни, закрепи, сверли медленно.</span></p></div>
+    <div class="rule"><h4>2</h4><p><span lang="kk" class="lang-content">Тойтарма мен дәнекер — <b>ажыратылмайтын</b>, ал бұранда — <b>ажыратылатын</b> түйіс.</span><span lang="en" class="lang-content">Rivets and solder give a <b>permanent</b> joint; a thread gives a <b>removable</b> one.</span><span lang="ru" class="lang-content">Заклёпка и пайка — <b>неразъёмное</b> соединение, резьба — <b>разъёмное</b>.</span></p></div>
+    <div class="rule"><h4>3</h4><p><span lang="kk" class="lang-content">Тазалық пен майлау — сапаның кепілі: таза бет, флюс, салқындату.</span><span lang="en" class="lang-content">Cleanliness and lubrication ensure quality: clean surface, flux, cooling.</span><span lang="ru" class="lang-content">Чистота и смазка — залог качества: чистая поверхность, флюс, охлаждение.</span></p></div>
+  </div>
+  <p class="lead mt-5" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Бұрғылау, тойтарма, дәнекерлеу және бұранда — металл өңдеудің негізгі дағдылары. Қай тәсілді таңдасаң да, басты ереже бір: дәлдік, тазалық және қауіпсіздік.</span>
+    <span lang="en" class="lang-content">Drilling, riveting, soldering and threading are the core skills of metalworking. Whatever method you choose, the main rule is the same: accuracy, cleanliness and safety.</span>
+    <span lang="ru" class="lang-content">Сверление, заклёпки, пайка и резьба — основные навыки обработки металла. Какой бы способ ты ни выбрал, главное правило одно: точность, чистота и безопасность.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX (keep inside #poster-container) -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

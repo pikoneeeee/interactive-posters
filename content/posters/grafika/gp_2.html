@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Типы линий</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style.css">
+<style>
+.line-preview { height: 10px; margin: 6px 0; border-radius: 2px; }
+.lp-solid-thick { border-top: 4px solid #1e293b; }
+.lp-solid-thin  { border-top: 1.5px solid #1e293b; }
+.lp-dashed      { border-top: 4px dashed #1e293b; }
+.lp-dotdash     { border-top: 2px solid transparent;
+  background: repeating-linear-gradient(90deg,#1e293b 0,#1e293b 10px,transparent 10px,transparent 13px,#1e293b 13px,#1e293b 14px,transparent 14px,transparent 17px);
+  background-clip: padding-box; height:3px; }
+.lp-wave        { border-top: 2px solid #1e293b; position:relative; }
+.lp-doubledash  { border-top: 2px solid transparent;
+  background: repeating-linear-gradient(90deg,#1e293b 0,#1e293b 8px,transparent 8px,transparent 11px,#1e293b 11px,#1e293b 12px,transparent 12px,transparent 15px,#1e293b 15px,#1e293b 16px,transparent 16px,transparent 19px);
+  background-clip: padding-box; height:3px; }
+.line-card { background:white; border:1px solid rgba(37,99,235,0.15); border-radius:1rem; padding:1rem 1.25rem; }
+.line-card:hover { border-color:rgba(37,99,235,0.40); box-shadow:0 4px 16px rgba(37,99,235,0.10); }
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-blue-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 1 · Сызық түрлері</span>
+      <span lang="en" class="lang-content">Graphics · Section 1 · Line Types</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 1 · Типы линий</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">✏️ Сызық түрлері — ГОСТ 2.303</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">✏️ Line Types — GOST 2.303</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">✏️ Типы линий — ГОСТ 2.303</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Сызбадағы барлық сызық түрлері, олардың қалыңдығы мен мақсаты.</span>
+      <span lang="en" class="lang-content">All line types used in drawings, their thickness and purpose.</span>
+      <span lang="ru" class="lang-content">Все типы линий на чертеже, их толщина и назначение.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- All line types -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📏 Сызық түрлері кестесі</span>
+    <span lang="en" class="lang-content">📏 Line Types Reference Table</span>
+    <span lang="ru" class="lang-content">📏 Таблица типов линий</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <!-- 1. Solid thick -->
+    <div class="line-card">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="badge">S = 0,5…1,4 мм</span>
+        <span class="font-bold text-blue-800">
+          <span lang="kk" class="lang-content">Сплошная жуан</span>
+          <span lang="en" class="lang-content">Solid Thick</span>
+          <span lang="ru" class="lang-content">Сплошная толстая</span>
+        </span>
+      </div>
+      <div class="lp-solid-thick line-preview mb-3"></div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">🎯 <b>Көрінетін контур</b> — бөлшектің шекарасын, оның ішкі және сыртқы пішінін сызуға қолданылады. Сызбаның негізгі сызығы.</span>
+        <span lang="en" class="lang-content">🎯 <b>Visible outline</b> — used to draw the boundary, external and internal visible edges of a part. The main drawing line.</span>
+        <span lang="ru" class="lang-content">🎯 <b>Видимый контур</b> — применяется для изображения видимых линий контура детали. Основная линия чертежа.</span>
+      </p>
+    </div>
+
+    <!-- 2. Solid thin -->
+    <div class="line-card">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="badge">S/3…S/2</span>
+        <span class="font-bold text-blue-800">
+          <span lang="kk" class="lang-content">Сплошная жіңішке</span>
+          <span lang="en" class="lang-content">Solid Thin</span>
+          <span lang="ru" class="lang-content">Сплошная тонкая</span>
+        </span>
+      </div>
+      <div class="lp-solid-thin line-preview mb-3"></div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">🎯 <b>Өлшем, шығарма сызықтары</b>; штрихтелген сызықтар; кесінді мен сызбаның шекарасы.</span>
+        <span lang="en" class="lang-content">🎯 <b>Dimension and extension lines</b>; hatching lines; section and view boundaries.</span>
+        <span lang="ru" class="lang-content">🎯 <b>Размерные и выносные линии</b>; линии штриховки; линии-выноски; границы сечений и видов.</span>
+      </p>
+    </div>
+
+    <!-- 3. Dashed -->
+    <div class="line-card">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="badge">S/3…S/2 · 8–15 мм</span>
+        <span class="font-bold text-blue-800">
+          <span lang="kk" class="lang-content">Штрих сызық</span>
+          <span lang="en" class="lang-content">Dashed Line</span>
+          <span lang="ru" class="lang-content">Штриховая линия</span>
+        </span>
+      </div>
+      <div class="lp-dashed line-preview mb-3"></div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">🎯 <b>Көрінбейтін контур</b> — бөлшектің жасырын жерлерін (тесіктер, ойыстар) сызуға қолданылады.</span>
+        <span lang="en" class="lang-content">🎯 <b>Hidden outline</b> — used to show hidden edges (holes, recesses) of a part not visible from the given view.</span>
+        <span lang="ru" class="lang-content">🎯 <b>Невидимый контур</b> — применяется для изображения скрытых рёбер и граней детали (отверстия, углубления).</span>
+      </p>
+    </div>
+
+    <!-- 4. Dot-dash -->
+    <div class="line-card">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="badge">S/3 · 5–30 мм</span>
+        <span class="font-bold text-blue-800">
+          <span lang="kk" class="lang-content">Штрихнүктелі жіңішке</span>
+          <span lang="en" class="lang-content">Dot-Dash (Center)</span>
+          <span lang="ru" class="lang-content">Штрихпунктирная тонкая</span>
+        </span>
+      </div>
+      <div class="lp-dotdash line-preview mb-3" style="height:6px"></div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">🎯 <b>Симметрия осьтері, центрлік сызықтар</b> — тесіктер мен цилиндрлердің орталығын белгілейді. Оту сызығынан 3–5 мм шығып тұруы керек.</span>
+        <span lang="en" class="lang-content">🎯 <b>Symmetry axes and centre lines</b> — marks the centre of holes and cylinders. Must extend 3–5 mm beyond the outline.</span>
+        <span lang="ru" class="lang-content">🎯 <b>Оси симметрии, центровые линии</b> — обозначают центры отверстий и цилиндров. Должны выходить за контур на 3–5 мм.</span>
+      </p>
+    </div>
+
+    <!-- 5. Wavy -->
+    <div class="line-card">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="badge">S/3…S/2</span>
+        <span class="font-bold text-blue-800">
+          <span lang="kk" class="lang-content">Толқынды сызық</span>
+          <span lang="en" class="lang-content">Wavy Line</span>
+          <span lang="ru" class="lang-content">Волнистая линия</span>
+        </span>
+      </div>
+      <div class="mb-3">
+        <svg viewBox="0 0 300 14" height="14" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,7 Q15,2 30,7 Q45,12 60,7 Q75,2 90,7 Q105,12 120,7 Q135,2 150,7 Q165,12 180,7 Q195,2 210,7 Q225,12 240,7 Q255,2 270,7 Q285,12 300,7" fill="none" stroke="#1e293b" stroke-width="2"/>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">🎯 <b>Үзу сызығы</b> — ұзын бөлшектерді, бөлімдер мен кесінділердің шекарасын белгілеу үшін қолданылады.</span>
+        <span lang="en" class="lang-content">🎯 <b>Break line</b> — used to indicate the boundary of a partial view or section, and to shorten long parts.</span>
+        <span lang="ru" class="lang-content">🎯 <b>Линия обрыва</b> — применяется для обозначения границы частичного вида или разреза, а также для укорачивания длинных предметов.</span>
+      </p>
+    </div>
+
+    <!-- 6. Double dot-dash -->
+    <div class="line-card">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="badge">S/3 · фантом</span>
+        <span class="font-bold text-blue-800">
+          <span lang="kk" class="lang-content">Екі нүктелі штрих</span>
+          <span lang="en" class="lang-content">Double Dot-Dash</span>
+          <span lang="ru" class="lang-content">Двухточечная штрихпунктирная</span>
+        </span>
+      </div>
+      <div class="lp-doubledash line-preview mb-3" style="height:6px"></div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">🎯 <b>Жылжымалы бөліктердің бастапқы/шекті жағдайлары</b>, пайдаланылмайтын контурлар (фантомды бейне).</span>
+        <span lang="en" class="lang-content">🎯 <b>Initial/extreme positions of moving parts</b> and outlines of adjacent parts (phantom line).</span>
+        <span lang="ru" class="lang-content">🎯 <b>Начальные/крайние положения подвижных частей</b>, контуры соседних деталей (линия фантома).</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Visual Example -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔩 Сызбадағы сызықтар — мысал</span>
+    <span lang="en" class="lang-content">🔩 Lines on a Drawing — Example</span>
+    <span lang="ru" class="lang-content">🔩 Линии на чертеже — пример</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 200" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer shape: thick solid -->
+        <rect x="60" y="40" width="180" height="120" fill="none" stroke="#1e293b" stroke-width="3"/>
+        <!-- Hidden rectangle inside -->
+        <rect x="100" y="75" width="100" height="50" fill="none" stroke="#1e293b" stroke-width="2" stroke-dasharray="8,4"/>
+        <!-- Center lines of hidden rect -->
+        <line x1="80" y1="100" x2="220" y2="100" stroke="#1e293b" stroke-width="1"
+              stroke-dasharray="12,4,2,4"/>
+        <line x1="150" y1="60" x2="150" y2="140" stroke="#1e293b" stroke-width="1"
+              stroke-dasharray="12,4,2,4"/>
+        <!-- Dimension lines -->
+        <line x1="60" y1="175" x2="240" y2="175" stroke="#1e293b" stroke-width="1"/>
+        <line x1="60" y1="170" x2="60" y2="180" stroke="#1e293b" stroke-width="1"/>
+        <line x1="240" y1="170" x2="240" y2="180" stroke="#1e293b" stroke-width="1"/>
+        <text x="150" y="173" font-size="10" fill="#1e293b" text-anchor="middle">180</text>
+        <!-- Break line -->
+        <path d="M60,155 Q75,149 90,155 Q105,161 120,155" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Labels -->
+        <text x="50" y="37" font-size="8" fill="#1d4ed8">контур (толстая)</text>
+        <text x="62" y="94" font-size="8" fill="#64748b">скрытый</text>
+        <text x="155" y="60" font-size="8" fill="#64748b">осевая</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font font-bold text-blue-800 mb-4">
+        <span lang="kk" class="lang-content">⚠️ Маңызды ережелер</span>
+        <span lang="en" class="lang-content">⚠️ Important Rules</span>
+        <span lang="ru" class="lang-content">⚠️ Важные правила</span>
+      </h3>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="text-blue-600 font-bold flex-shrink-0">1.</span>
+          <span lang="kk" class="lang-content">Сызба бір <b>негізгі қалыңдықта</b> S орындалады (0,5–1,4 мм). Барлық басқа сызықтар осыған пропорционал.</span>
+          <span lang="en" class="lang-content">All drawings use one <b>base thickness</b> S (0.5–1.4 mm). All other lines are proportional to it.</span>
+          <span lang="ru" class="lang-content">Чертёж выполняется с одной <b>основной толщиной</b> S (0,5–1,4 мм). Все другие линии пропорциональны ей.</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-blue-600 font-bold flex-shrink-0">2.</span>
+          <span lang="kk" class="lang-content">Штрихтер арасындағы саңылаулар <b>тұрақты</b> болуы керек: штриховая — 3–5 мм, штрихпунктирная — 3–5 мм.</span>
+          <span lang="en" class="lang-content">The gaps between dashes must be <b>consistent</b>: dashed — 3–5 mm, dot-dash — 3–5 mm gaps.</span>
+          <span lang="ru" class="lang-content">Промежутки между штрихами должны быть <b>равномерными</b>: штриховая — 3–5 мм, штрихпунктирная — 3–5 мм.</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-blue-600 font-bold flex-shrink-0">3.</span>
+          <span lang="kk" class="lang-content">Осьтік сызықтар <b>штрихпен</b> басталып, аяқталуы керек (нүктемен емес).</span>
+          <span lang="en" class="lang-content">Centrelines must start and end with a <b>dash</b>, not a dot.</span>
+          <span lang="ru" class="lang-content">Осевые линии должны начинаться и заканчиваться <b>штрихом</b>, не точкой.</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-blue-600 font-bold flex-shrink-0">4.</span>
+          <span lang="kk" class="lang-content">Штрихтік сызықтар бір-бірімен немесе сплошная сызықпен <b>штрихпен кесіліп</b> жатуы тиіс (саңылаумен емес).</span>
+          <span lang="en" class="lang-content">Dashed lines must <b>intersect at a dash</b>, not at a gap.</span>
+          <span lang="ru" class="lang-content">Штриховые линии должны пересекаться <b>штрихом</b>, а не промежутком.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-blue rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4 text-white">
+    <span lang="kk" class="lang-content">🧠 Жылдам анықтамалық</span>
+    <span lang="en" class="lang-content">🧠 Quick Reference</span>
+    <span lang="ru" class="lang-content">🧠 Быстрый справочник</span>
+  </h3>
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-white text-sm">
+    <div class="bg-white/10 rounded-xl p-3"><b>Сплошная толстая</b><br><span class="text-blue-200">→ видимый контур</span></div>
+    <div class="bg-white/10 rounded-xl p-3"><b>Сплошная тонкая</b><br><span class="text-blue-200">→ размеры, штриховка</span></div>
+    <div class="bg-white/10 rounded-xl p-3"><b>Штриховая</b><br><span class="text-blue-200">→ скрытый контур</span></div>
+    <div class="bg-white/10 rounded-xl p-3"><b>Штрихпунктирная</b><br><span class="text-blue-200">→ оси симметрии</span></div>
+    <div class="bg-white/10 rounded-xl p-3"><b>Волнистая</b><br><span class="text-blue-200">→ линия обрыва</span></div>
+    <div class="bg-white/10 rounded-xl p-3"><b>Двухточечная</b><br><span class="text-blue-200">→ фантомный контур</span></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

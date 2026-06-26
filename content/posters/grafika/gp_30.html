@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Построение детали в изометрии</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 5 · Аксонометрия</span>
+      <span lang="en" class="lang-content">Graphics · Section 5 · Axonometry</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 5 · Аксонометрия</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🔩 Изометрияда бөлшек салу</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🔩 Drawing a Part in Isometry</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🔩 Построение детали в изометрии</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Ящичный способ — кез-келген бөлшекке қолданылатын қадамдық алгоритм.</span>
+      <span lang="en" class="lang-content">The box method — a step-by-step algorithm applicable to any part.</span>
+      <span lang="ru" class="lang-content">Ящичный способ — пошаговый алгоритм для построения любой детали.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Steps + precise SVG -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔨 Қадамдық алгоритм — нақты изометриялық схема</span>
+    <span lang="en" class="lang-content">🔨 Step-by-step — Precise Isometric Diagram</span>
+    <span lang="ru" class="lang-content">🔨 Пошаговый алгоритм — точная изометрическая схема</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <div class="space-y-4">
+      <div class="card rounded-custom p-4">
+        <div class="flex gap-3 items-start">
+          <div class="step-num flex-shrink-0">1</div>
+          <div>
+            <p class="font-bold text-violet-800 text-sm mb-1">
+              <span lang="kk" class="lang-content">Осьтер + негіз «қорап»</span>
+              <span lang="en" class="lang-content">Axes + base enclosing box</span>
+              <span lang="ru" class="lang-content">Оси + описывающий «ящик»</span>
+            </p>
+            <p class="text-slate-600 text-sm">
+              <span lang="kk" class="lang-content">Z тік (↑), X 30° оңға, Y 30° солға. Бөлшектің ең үлкен өлшемдерімен параллелепипед сызу.</span>
+              <span lang="en" class="lang-content">Z vertical (↑), X 30° right, Y 30° left. Draw parallelepiped at maximum part dimensions.</span>
+              <span lang="ru" class="lang-content">Z вертикаль (↑), X 30° вправо, Y 30° влево. Параллелепипед по максимальным размерам.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card rounded-custom p-4">
+        <div class="flex gap-3 items-start">
+          <div class="step-num flex-shrink-0">2</div>
+          <div>
+            <p class="font-bold text-violet-800 text-sm mb-1">
+              <span lang="kk" class="lang-content">Ступеньдерді «кесу»</span>
+              <span lang="en" class="lang-content">«Cut» the steps</span>
+              <span lang="ru" class="lang-content">«Срезать» ступени</span>
+            </p>
+            <p class="text-slate-600 text-sm">
+              <span lang="kk" class="lang-content">Сызбадан X, Y, Z бойынша өлшемдерді алу. Осьтерден белгілеп, артық бөліктерді кесіп алу.</span>
+              <span lang="en" class="lang-content">Read X, Y, Z step dimensions from orthographic. Measure from axes, remove excess.</span>
+              <span lang="ru" class="lang-content">Снять размеры ступеней из ортогональных видов. Отложить от осей, убрать лишнее.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card rounded-custom p-4">
+        <div class="flex gap-3 items-start">
+          <div class="step-num flex-shrink-0">3</div>
+          <div>
+            <p class="font-bold text-violet-800 text-sm mb-1">
+              <span lang="kk" class="lang-content">Цилиндр / тесік → эллипс</span>
+              <span lang="en" class="lang-content">Cylinder / hole → ellipse</span>
+              <span lang="ru" class="lang-content">Цилиндр / отверстие → эллипс</span>
+            </p>
+            <p class="text-slate-600 text-sm">
+              <span lang="kk" class="lang-content">H жазықтығы (горизонталь): горизонталь эллипс, a=1,22·d, b=0,71·d. Төрт орталықты тәсіл.</span>
+              <span lang="en" class="lang-content">H plane (horizontal): horizontal ellipse, a=1.22·d, b=0.71·d. Four-centre method.</span>
+              <span lang="ru" class="lang-content">Плоскость H (горизонталь): горизонтальный эллипс, a=1,22·d, b=0,71·d. 4-центровый способ.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card rounded-custom p-4">
+        <div class="flex gap-3 items-start">
+          <div class="step-num flex-shrink-0">4</div>
+          <div>
+            <p class="font-bold text-violet-800 text-sm mb-1">
+              <span lang="kk" class="lang-content">Жасырын сызықсыз жирелеу</span>
+              <span lang="en" class="lang-content">Reinforce outline, no hidden lines</span>
+              <span lang="ru" class="lang-content">Обвести видимый контур, без штриховых</span>
+            </p>
+            <p class="text-slate-600 text-sm">
+              <span lang="kk" class="lang-content">Аксонометрияда штрихтік сызықтар сызылмайды. Барлық көрінетін қырлары негізгі сызықпен.</span>
+              <span lang="en" class="lang-content">No hidden lines in axonometry. All visible edges in thick solid line.</span>
+              <span lang="ru" class="lang-content">Скрытые линии не рисуются. Все видимые рёбра — основной (толстой) линией.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Precise isometric SVG: stepped block + cylinder -->
+    <!-- Computed coordinates (s=15, cx=155, cy=190, ox=-3.5, oy=-2.5):
+         Base (7x5x3): bottom-FL(142,145) FR(233,198) BR(168,235) BL(77,183)
+                       top-FL(142,100) FR(233,153) BR(168,190) BL(77,138)
+         Upper(5x3x3): z=3: FL(142,115) FR(207,153) BR(168,175) BL(103,138)
+                       z=6: FL(142,70)  FR(207,108) BR(168,130) BL(103,93)
+         Cyl: z=6 ctr(155,100) z=8 ctr(155,70), rx=28, ry=16 -->
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 310 310" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="m1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+          </marker>
+        </defs>
+
+        <!-- ① BOUNDING BOX (dashed grey) -->
+        <!-- Top face -->
+        <polygon points="142,100 233,153 168,190 77,138"
+                 fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5,3"/>
+        <!-- Front-right side -->
+        <polygon points="233,153 233,198 168,235 168,190"
+                 fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5,3"/>
+        <!-- Front-left side -->
+        <polygon points="77,138 142,100 142,145 77,183"
+                 fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5,3"/>
+        <!-- Bottom edges -->
+        <line x1="142" y1="145" x2="233" y2="198" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="233" y1="198" x2="168" y2="235" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="168" y1="235" x2="77" y2="183" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="77" y1="183" x2="142" y2="145" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="235" y="100" font-size="9" fill="#94a3b8">① «Ящик»</text>
+
+        <!-- ② BASE BLOCK (7x5x3, solid) -->
+        <!-- Left face -->
+        <polygon points="77,138 142,100 142,145 77,183"
+                 fill="rgba(124,58,237,0.09)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Top face -->
+        <polygon points="142,100 233,153 168,190 77,138"
+                 fill="rgba(124,58,237,0.17)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Right face -->
+        <polygon points="233,153 233,198 168,235 168,190"
+                 fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Front bottom edge -->
+        <line x1="142" y1="145" x2="233" y2="198" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Front bottom-left -->
+        <line x1="77" y1="183" x2="142" y2="145" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Bottom right -->
+        <line x1="233" y1="198" x2="168" y2="235" stroke="#7c3aed" stroke-width="2"/>
+        <line x1="168" y1="235" x2="77" y2="183" stroke="#7c3aed" stroke-width="2"/>
+
+        <!-- ② UPPER BLOCK (5x3x3, on top of base) -->
+        <!-- Left face -->
+        <polygon points="103,93 142,70 142,115 103,138"
+                 fill="rgba(124,58,237,0.10)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Top face -->
+        <polygon points="142,70 207,108 168,130 103,93"
+                 fill="rgba(124,58,237,0.22)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Right face -->
+        <polygon points="207,108 207,153 168,175 168,130"
+                 fill="rgba(124,58,237,0.13)" stroke="#7c3aed" stroke-width="2"/>
+        <!-- Bottom edges of upper block (on base top) -->
+        <line x1="103" y1="138" x2="142" y2="115" stroke="#7c3aed" stroke-width="1.5"/>
+        <line x1="142" y1="115" x2="207" y2="153" stroke="#7c3aed" stroke-width="1.5"/>
+        <line x1="207" y1="153" x2="168" y2="175" stroke="#7c3aed" stroke-width="1.5"/>
+        <line x1="168" y1="175" x2="103" y2="138" stroke="#7c3aed" stroke-width="1.5"/>
+
+        <!-- ③ CYLINDER on top of upper block -->
+        <!-- Bottom ellipse (at z=6, cy=100) - dashed -->
+        <ellipse cx="155" cy="100" rx="28" ry="16"
+                 fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Top ellipse (at z=8, cy=70) - solid -->
+        <ellipse cx="155" cy="70" rx="28" ry="16"
+                 fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="2.5"/>
+        <!-- Cylinder sides (left and right tangent lines) -->
+        <line x1="127" y1="70" x2="127" y2="100" stroke="#ef4444" stroke-width="2"/>
+        <line x1="183" y1="70" x2="183" y2="100" stroke="#ef4444" stroke-width="2"/>
+        <!-- Centre lines of cylinder top ellipse -->
+        <line x1="127" y1="70" x2="183" y2="70" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+        <line x1="155" y1="55" x2="155" y2="85" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+
+        <!-- Labels -->
+        <text x="190" y="70" font-size="9" fill="#ef4444" font-weight="bold">③ эллипс</text>
+        <text x="38" y="270" font-size="9" fill="#7c3aed">② ступени «срезаны»</text>
+        <text x="38" y="283" font-size="9" fill="#64748b">④ обвести контур (без штриховых)</text>
+
+        <!-- Dimension indicators -->
+        <line x1="242" y1="100" x2="252" y2="100" stroke="#64748b" stroke-width="1"/>
+        <line x1="242" y1="145" x2="252" y2="145" stroke="#64748b" stroke-width="1"/>
+        <line x1="247" y1="100" x2="247" y2="145" stroke="#64748b" stroke-width="1" marker-start="url(#m1)" marker-end="url(#m1)"/>
+        <text x="256" y="127" font-size="8" fill="#64748b">H₂</text>
+
+        <line x1="242" y1="145" x2="252" y2="145" stroke="#64748b" stroke-width="1"/>
+        <line x1="242" y1="235" x2="252" y2="235" stroke="#64748b" stroke-width="1"/>
+        <line x1="247" y1="145" x2="247" y2="235" stroke="#64748b" stroke-width="1" marker-start="url(#m1)" marker-end="url(#m1)"/>
+        <text x="256" y="195" font-size="8" fill="#64748b">H₁</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Quick rules -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚠️ Жиі жіберілетін қателер</span>
+    <span lang="en" class="lang-content">⚠️ Common Mistakes</span>
+    <span lang="ru" class="lang-content">⚠️ Типичные ошибки</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card rounded-custom p-4 border-l-4 border-red-400">
+      <p class="font-bold text-red-600 mb-2">❌ <span lang="kk" class="lang-content">Штрихтік сызықтар</span><span lang="en" class="lang-content">Hidden lines</span><span lang="ru" class="lang-content">Штриховые линии</span></p>
+      <p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Аксонометрияда жасырын сызықтар СЫЗЫЛМАЙДЫ</span><span lang="en" class="lang-content">Hidden lines are NOT drawn in axonometry</span><span lang="ru" class="lang-content">В аксонометрии скрытые линии НЕ РИСУЮТСЯ</span></p>
+    </div>
+    <div class="card rounded-custom p-4 border-l-4 border-red-400">
+      <p class="font-bold text-red-600 mb-2">❌ <span lang="kk" class="lang-content">Эллипс бағыты дұрыс емес</span><span lang="en" class="lang-content">Wrong ellipse orientation</span><span lang="ru" class="lang-content">Неправильная ориентация эллипса</span></p>
+      <p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">H жазықтығында — горизонталь, V/W жазықтықтарда — вертикаль</span><span lang="en" class="lang-content">H plane → horizontal; V/W planes → vertical</span><span lang="ru" class="lang-content">Плоскость H → горизонтально; V/W → вертикально</span></p>
+    </div>
+    <div class="card rounded-custom p-4 border-l-4 border-red-400">
+      <p class="font-bold text-red-600 mb-2">❌ <span lang="kk" class="lang-content">Осьтен өлшемемеу</span><span lang="en" class="lang-content">Not measuring from axes</span><span lang="ru" class="lang-content">Не откладывать от осей</span></p>
+      <p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Барлық өлшемдер осьтерден X, Y, Z бойынша белгіленеді</span><span lang="en" class="lang-content">All dimensions must be measured from the X, Y, Z axes</span><span lang="ru" class="lang-content">Все размеры откладываются от осей по X, Y, Z</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📋 Жылдам анықтамалық</span>
+    <span lang="en" class="lang-content">📋 Quick Reference</span>
+    <span lang="ru" class="lang-content">📋 Быстрый справочник</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <div>
+        <p class="font-bold text-violet-800 mb-2"><span lang="kk" class="lang-content">Изометриялық осьтер:</span><span lang="en" class="lang-content">Isometric axes:</span><span lang="ru" class="lang-content">Изометрические оси:</span></p>
+        <ul class="space-y-1 text-slate-700">
+          <li><span class="text-red-500 font-bold">Z: 90°</span> — <span lang="kk" class="lang-content">тік жоғары, k=1</span><span lang="en" class="lang-content">straight up, k=1</span><span lang="ru" class="lang-content">вертикально вверх, k=1</span></li>
+          <li><span class="text-blue-500 font-bold">X: 30°</span> — <span lang="kk" class="lang-content">оң жаққа, k=1</span><span lang="en" class="lang-content">to the right, k=1</span><span lang="ru" class="lang-content">вправо, k=1</span></li>
+          <li><span class="text-green-600 font-bold">Y: 30°</span> — <span lang="kk" class="lang-content">сол жаққа, k=1</span><span lang="en" class="lang-content">to the left, k=1</span><span lang="ru" class="lang-content">влево, k=1</span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-bold text-violet-800 mb-2"><span lang="kk" class="lang-content">Эллипс (H жазықтығы):</span><span lang="en" class="lang-content">Ellipse (H plane):</span><span lang="ru" class="lang-content">Эллипс (плоскость H):</span></p>
+        <ul class="space-y-1 text-slate-700">
+          <li><span lang="kk" class="lang-content">Үлкен ось (горизонталь):</span><span lang="en" class="lang-content">Major (horiz.):</span><span lang="ru" class="lang-content">Большая (горизонт.):</span> <b>1,22 · d</b></li>
+          <li><span lang="kk" class="lang-content">Кіші ось (вертикаль):</span><span lang="en" class="lang-content">Minor (vert.):</span><span lang="ru" class="lang-content">Малая (вертикаль):</span> <b>0,71 · d</b></li>
+          <li><span lang="kk" class="lang-content">Тәсіл:</span><span lang="en" class="lang-content">Method:</span><span lang="ru" class="lang-content">Способ:</span> <b>4-<span lang="kk" class="lang-content">орталықты</span><span lang="en" class="lang-content">centre</span><span lang="ru" class="lang-content">центровый</span></b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 «Қорап» тәсілі — 4 қадам</span>
+    <span lang="en" class="lang-content">🧠 Box Method — 4 Steps</span>
+    <span lang="ru" class="lang-content">🧠 Ящичный способ — 4 шага</span>
+  </h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold mb-1">1</div><p class="text-violet-200"><span lang="kk" class="lang-content">Осьтер + қорап</span><span lang="en" class="lang-content">Axes + box</span><span lang="ru" class="lang-content">Оси + ящик</span></p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold mb-1">2</div><p class="text-violet-200"><span lang="kk" class="lang-content">Ступеньдер</span><span lang="en" class="lang-content">Cut steps</span><span lang="ru" class="lang-content">Срезать ступени</span></p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold mb-1">3</div><p class="text-violet-200"><span lang="kk" class="lang-content">Шеңбер → эллипс</span><span lang="en" class="lang-content">Circle → ellipse</span><span lang="ru" class="lang-content">Окружность → эллипс</span></p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-xl font-bold mb-1">4</div><p class="text-violet-200"><span lang="kk" class="lang-content">Жасырын жоқ</span><span lang="en" class="lang-content">No hidden lines</span><span lang="ru" class="lang-content">Без скрытых</span></p></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

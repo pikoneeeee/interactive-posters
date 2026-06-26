@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Совмещение вида и разреза</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 4 · Кесінділер мен тіліктер</span>
+      <span lang="en" class="lang-content">Graphics · Section 4 · Sections and Cuts</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 4 · Разрезы и сечения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">⊕ Көрініс пен кесіндіні біріктіру</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">⊕ Half-View / Half-Section</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">⊕ Совмещение вида и разреза</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Симметриялы бөлшектер үшін жартысын вид, жартысын кесінді ретінде бейнелеу.</span>
+      <span lang="en" class="lang-content">For symmetric parts — show one half as a view, the other half as a section.</span>
+      <span lang="ru" class="lang-content">Для симметричных деталей — половина вида и половина разреза в одном изображении.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Concept -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Негізгі идея</span>
+    <span lang="en" class="lang-content">💡 Core Idea</span>
+    <span lang="ru" class="lang-content">💡 Основная идея</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 300 260" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hv" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#334155" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <!-- Axis of symmetry (dividing line) - dot-dash -->
+        <line x1="150" y1="10" x2="150" y2="250" stroke="#7c3aed" stroke-width="2" stroke-dasharray="10,4,2,4"/>
+        <text x="155" y="15" font-size="9" fill="#7c3aed">ось симметрии</text>
+
+        <!-- LEFT HALF: external view (no hatching) -->
+        <!-- Outer shape left -->
+        <path d="M 150,40 L 60,40 L 60,220 L 150,220" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Internal hole visible from outside (hidden lines on left half) -->
+        <line x1="150" y1="90" x2="85" y2="90" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="150" y1="170" x2="85" y2="170" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="85" y1="90" x2="85" y2="170" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <!-- Label: Вид -->
+        <text x="80" y="240" font-size="10" fill="#1e293b" text-anchor="middle">ВИД</text>
+        <text x="80" y="252" font-size="8" fill="#64748b" text-anchor="middle">(внешняя форма)</text>
+
+        <!-- RIGHT HALF: section (with hatching and visible internal) -->
+        <!-- Outer shape right -->
+        <path d="M 150,40 L 240,40 L 240,220 L 150,220" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Hatching right half (metal, except hole) -->
+        <rect x="150" y="40" width="90" height="50" fill="url(#hv)"/>
+        <rect x="150" y="170" width="90" height="50" fill="url(#hv)"/>
+        <rect x="150" y="90" width="15" height="80" fill="url(#hv)"/>
+        <rect x="225" y="90" width="15" height="80" fill="url(#hv)"/>
+        <!-- Internal hole (open, white) -->
+        <rect x="165" y="90" width="60" height="80" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Outer borders right -->
+        <path d="M 150,40 L 240,40 L 240,220 L 150,220" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Label: Разрез -->
+        <text x="220" y="240" font-size="10" fill="#7c3aed" text-anchor="middle">РАЗРЕЗ</text>
+        <text x="220" y="252" font-size="8" fill="#64748b" text-anchor="middle">(внутренняя форма)</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content">Бөлшек симметриялы болса, бір бейнеде <b>жартысы вид</b> (сыртқы пішін), <b>жартысы кесінді</b> (ішкі пішін) ретінде бейнеленеді. Бұл орын үнемдейді және екі есе ақпарат береді.</span>
+        <span lang="en" class="lang-content">When a part is symmetric, one image shows <b>half as an external view</b> and <b>half as a section</b>. This saves space and gives twice the information.</span>
+        <span lang="ru" class="lang-content">Если деталь симметрична, в одном изображении половина — <b>вид</b> (внешняя форма), половина — <b>разрез</b> (внутренняя форма). Экономит место, даёт вдвое больше информации.</span>
+      </p>
+      <div class="space-y-3 text-sm">
+        <div class="bg-violet-50 border-l-4 border-violet-500 p-3 rounded-r-xl">
+          <p class="font-bold text-violet-800 mb-1">
+            <span lang="kk" class="lang-content">🔑 Бөлу сызығы</span>
+            <span lang="en" class="lang-content">🔑 Dividing line</span>
+            <span lang="ru" class="lang-content">🔑 Линия раздела</span>
+          </p>
+          <p class="text-slate-700">
+            <span lang="kk" class="lang-content">Вид пен кесінді арасындағы шек — <b>штрихпунктирная осевая</b> сызық (симметрия осі). Сплошная тонкая немесе толстая ЖОҚТАН сызылмайды!</span>
+            <span lang="en" class="lang-content">The boundary between view and section is the <b>dot-dash centre line</b> (axis of symmetry). Never a solid line!</span>
+            <span lang="ru" class="lang-content">Граница между видом и разрезом — <b>штрихпунктирная осевая</b> линия (ось симметрии). Сплошной линией НЕ проводится!</span>
+          </p>
+        </div>
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-xl">
+          <p class="font-bold text-amber-700 mb-1">
+            <span lang="kk" class="lang-content">⚠️ Маңызды ереже</span>
+            <span lang="en" class="lang-content">⚠️ Important rule</span>
+            <span lang="ru" class="lang-content">⚠️ Важное правило</span>
+          </p>
+          <p class="text-slate-700">
+            <span lang="kk" class="lang-content">Кесінді жарты — <b>оң жағында</b> (немесе төменгі жарты — горизонталды ось болса). Вид жарты — <b>сол жағында</b>.</span>
+            <span lang="en" class="lang-content">Section half is on the <b>right</b> (or lower half for horizontal axis). View half is on the <b>left</b>.</span>
+            <span lang="ru" class="lang-content">Разрез — <b>правая</b> половина (или нижняя при горизонтальной оси). Вид — <b>левая</b> половина.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- When to use, when not -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📋 Ережелер мен шектеулер</span>
+    <span lang="en" class="lang-content">📋 Rules and Restrictions</span>
+    <span lang="ru" class="lang-content">📋 Правила и ограничения</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5 border-t-4 border-green-400">
+      <h3 class="font-bold text-green-700 mb-3">✅ <span lang="kk" class="lang-content">Қолданылатын жағдайлар</span><span lang="en" class="lang-content">When to apply</span><span lang="ru" class="lang-content">Когда применять</span></h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Бөлшек кемінде <b>бір симметрия осіне</b> ие</span><span lang="en" class="lang-content">Part has at least <b>one axis of symmetry</b></span><span lang="ru" class="lang-content">Деталь имеет хотя бы <b>одну ось симметрии</b></span></li>
+        <li>• <span lang="kk" class="lang-content">Ішкі де, сыртқы да пішін маңызды</span><span lang="en" class="lang-content">Both internal and external shape are important</span><span lang="ru" class="lang-content">Важны и внешняя, и внутренняя форма</span></li>
+        <li>• <span lang="kk" class="lang-content">Орын үнемдеу қажет (формат шағын)</span><span lang="en" class="lang-content">Space saving is needed (smaller format)</span><span lang="ru" class="lang-content">Нужна экономия места (небольшой формат)</span></li>
+      </ul>
+    </div>
+    <div class="card rounded-custom p-5 border-t-4 border-red-400">
+      <h3 class="font-bold text-red-600 mb-3">❌ <span lang="kk" class="lang-content">Шектеулер</span><span lang="en" class="lang-content">Restrictions</span><span lang="ru" class="lang-content">Ограничения</span></h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Симметрия осінде <b>контур сызығы</b> болса — бөлуге болмайды (ось сол сызықпен сәйкес келеді)</span><span lang="en" class="lang-content">If a <b>visible line coincides</b> with the axis — cannot split (the line would be lost)</span><span lang="ru" class="lang-content">Если <b>видимая линия контура</b> совпадает с осью — нельзя (линия потеряется)</span></li>
+        <li>• <span lang="kk" class="lang-content">Бөлшек симметриялы болмаса — биріктіруге болмайды</span><span lang="en" class="lang-content">If the part is not symmetric — cannot combine</span><span lang="ru" class="lang-content">Если деталь несимметрична — нельзя совмещать</span></li>
+        <li>• <span lang="kk" class="lang-content">Вид жарты мен кесінді жарты арасына <b>сплошная сызық сызуға болмайды</b></span><span lang="en" class="lang-content">Do <b>not draw</b> a solid line between the view and section halves</span><span lang="ru" class="lang-content"><b>Нельзя</b> проводить сплошную линию между видом и разрезом</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Dimensioning in half-view -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📏 Размерлерді қою</span>
+    <span lang="en" class="lang-content">📏 Placing Dimensions</span>
+    <span lang="ru" class="lang-content">📏 Нанесение размеров</span>
+  </h2>
+  <div class="card rounded-custom p-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+      <div class="card-accent rounded-xl p-4">
+        <p class="font-bold text-violet-800 mb-2">
+          <span lang="kk" class="lang-content">Сыртқы өлшемдер</span>
+          <span lang="en" class="lang-content">External dimensions</span>
+          <span lang="ru" class="lang-content">Внешние размеры</span>
+        </p>
+        <p class="text-slate-600">
+          <span lang="kk" class="lang-content"><b>Вид жақта</b> — сыртқы өлшемдер (ені, биіктігі)</span>
+          <span lang="en" class="lang-content">On the <b>view side</b> — external dimensions (width, height)</span>
+          <span lang="ru" class="lang-content">На стороне <b>вида</b> — внешние размеры (ширина, высота)</span>
+        </p>
+      </div>
+      <div class="card-accent rounded-xl p-4">
+        <p class="font-bold text-violet-800 mb-2">
+          <span lang="kk" class="lang-content">Ішкі өлшемдер</span>
+          <span lang="en" class="lang-content">Internal dimensions</span>
+          <span lang="ru" class="lang-content">Внутренние размеры</span>
+        </p>
+        <p class="text-slate-600">
+          <span lang="kk" class="lang-content"><b>Кесінді жақта</b> — ішкі тесіктер мен ойыстардың өлшемдері</span>
+          <span lang="en" class="lang-content">On the <b>section side</b> — dimensions of holes and recesses</span>
+          <span lang="ru" class="lang-content">На стороне <b>разреза</b> — размеры отверстий и углублений</span>
+        </p>
+      </div>
+      <div class="card-accent rounded-xl p-4">
+        <p class="font-bold text-violet-800 mb-2">
+          <span lang="kk" class="lang-content">Симметриялық размерлер</span>
+          <span lang="en" class="lang-content">Symmetric dimensions</span>
+          <span lang="ru" class="lang-content">Симметричные размеры</span>
+        </p>
+        <p class="text-slate-600">
+          <span lang="kk" class="lang-content">Бүкіл диаметр немесе ені — ⌀ немесе толық өлшем ретінде, осьтен тыс шығара берілген</span>
+          <span lang="en" class="lang-content">Full diameter or width — shown as ⌀ or full size, extension line past the axis</span>
+          <span lang="ru" class="lang-content">Полный диаметр — через ⌀; выносная линия выносится за ось</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Тек симметриялы деталь</span><span lang="en" class="lang-content">Symmetric parts only</span><span lang="ru" class="lang-content">Только симметричные детали</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Симметрия жоқ → биріктіруге болмайды</span><span lang="en" class="lang-content">No symmetry → cannot combine</span><span lang="ru" class="lang-content">Нет симметрии → нельзя совмещать</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Ось = бөлу сызығы</span><span lang="en" class="lang-content">Axis = dividing line</span><span lang="ru" class="lang-content">Ось = граница</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Штрихпунктирная — сплошная ЕМЕС</span><span lang="en" class="lang-content">Dot-dash — NOT a solid line</span><span lang="ru" class="lang-content">Штрихпунктирная — НЕ сплошная</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Сол=Вид, Оң=Кесінді</span><span lang="en" class="lang-content">Left=View, Right=Section</span><span lang="ru" class="lang-content">Лево=Вид, Право=Разрез</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Стандартты орналасу тәртібі</span><span lang="en" class="lang-content">Standard arrangement convention</span><span lang="ru" class="lang-content">Стандартный порядок расположения</span></p></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

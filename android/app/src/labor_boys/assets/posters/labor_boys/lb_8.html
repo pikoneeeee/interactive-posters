@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сверление, долбление, зачистка</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.op-icon{font-size:2.4rem;line-height:1;}
+.num-table{width:100%;border-collapse:collapse;font-size:.95rem;}
+.num-table th,.num-table td{border:1px solid rgba(190,18,60,0.18);padding:.6rem .8rem;text-align:left;vertical-align:top;}
+.num-table th{background:rgba(190,18,60,0.10);color:#881337;font-family:'Montserrat',sans-serif;}
+.num-table tr:nth-child(even) td{background:rgba(255,247,237,0.6);}
+.step-row{display:flex;gap:1rem;align-items:flex-start;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 2-бөлім · Ағаш өңдеу</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 2 · Woodworking</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 2 · Обработка древесины</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🛠️ Бұрғылау, ою және тазалау</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🛠️ Drilling, Chiselling, Sanding</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🛠️ Сверление, долбление, зачистка</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Тесік ашу, ұя ою және бетті тегістеу — бұйымды дайын күйге жеткізетін үш амал.</span>
+      <span lang="en" class="lang-content">Boring holes, cutting recesses and smoothing the surface — three steps that finish a workpiece.</span>
+      <span lang="ru" class="lang-content">Получение отверстий, выборка гнёзд и выравнивание поверхности — три операции, доводящие изделие до готовности.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO ESSAY -->
+<section class="card card-accent rounded-custom p-6 mb-8">
+  <p class="lead">
+    <span lang="kk" class="lang-content">Ағашты пішінге келтіріп, біріктіргеннен кейін көбіне <b>тесік</b> ашу (бұрандама, ағаш қазық, топса үшін), <b>ұя</b> ою (тенон-ұя қосылысы үшін) және бетті <b>тазалау</b> қажет. Бұл үш амал бұйымды дәл әрі әдемі етеді. Әрбір амалдың өз құралы, өз тәсілі және өз қауіпсіздік ережелері бар. Дұрыс реттілік: алдымен <b>бұрғылау мен ою</b>, ең соңында <b>тазалау</b> — өйткені кесу мен жону кезінде жаңа сызаттар пайда болады.</span>
+    <span lang="en" class="lang-content">After wood is shaped and joined, you usually need to <b>bore holes</b> (for screws, dowels and hinges), <b>cut recesses</b> (for a mortise-and-tenon joint) and <b>smooth</b> the surface. These three operations make a workpiece accurate and attractive. Each one has its own tools, technique and safety rules. The correct order is <b>drilling and chiselling first</b>, and <b>sanding last</b> — because cutting and fitting always leave fresh marks.</span>
+    <span lang="ru" class="lang-content">После того как древесину распилили, обстрогали и соединили, обычно нужно получить <b>отверстия</b> (под шурупы, нагели, петли), выбрать <b>гнёзда</b> (для соединения «шип-проушина») и выровнять <b>поверхность</b>. Эти три операции делают изделие точным и красивым. У каждой свой инструмент, своя техника и свои правила безопасности. Правильный порядок: сначала <b>сверление и долбление</b>, и только в самом конце — <b>зачистка</b>, потому что резка и подгонка всегда оставляют новые следы.</span>
+  </p>
+</section>
+
+<!-- THREE OPERATIONS GRID -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">🔧 Үш негізгі амал</span>
+    <span lang="en" class="lang-content">🔧 The Three Core Operations</span>
+    <span lang="ru" class="lang-content">🔧 Три основные операции</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="card rounded-custom p-6 border-l-8" style="border-color:#be123c">
+      <div class="op-icon">🌀</div>
+      <h3 class="heading-font font-extrabold text-lg mt-2 mb-2" style="color:#881337">
+        <span lang="kk" class="lang-content">Бұрғылау</span><span lang="en" class="lang-content">Drilling</span><span lang="ru" class="lang-content">Сверление</span>
+      </h3>
+      <p class="text-stone-600 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content">Айналатын бұрғымен дөңгелек <b>тесік</b> ашу. Қол дрелімен немесе тік бұрғылау станогында орындалады.</span>
+        <span lang="en" class="lang-content">Making a round <b>hole</b> with a rotating bit, using a hand drill or a drill press.</span>
+        <span lang="ru" class="lang-content">Получение круглого <b>отверстия</b> вращающимся сверлом — ручной дрелью или на сверлильном станке.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-6 border-l-8" style="border-color:#b45309">
+      <div class="op-icon">⛏️</div>
+      <h3 class="heading-font font-extrabold text-lg mt-2 mb-2" style="color:#881337">
+        <span lang="kk" class="lang-content">Ою (қашау)</span><span lang="en" class="lang-content">Chiselling</span><span lang="ru" class="lang-content">Долбление</span>
+      </h3>
+      <p class="text-stone-600 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content">Қашаумен (стамеска) және ағаш балғамен төрт бұрышты <b>ұя</b> немесе ойық кесу.</span>
+        <span lang="en" class="lang-content">Cutting a square <b>recess</b> or groove with a chisel struck by a wooden mallet.</span>
+        <span lang="ru" class="lang-content">Выборка прямоугольного <b>гнезда</b> или паза стамеской (долотом) с ударом киянкой.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-6 border-l-8" style="border-color:#16a34a">
+      <div class="op-icon">🧽</div>
+      <h3 class="heading-font font-extrabold text-lg mt-2 mb-2" style="color:#881337">
+        <span lang="kk" class="lang-content">Тазалау</span><span lang="en" class="lang-content">Sanding</span><span lang="ru" class="lang-content">Зачистка</span>
+      </h3>
+      <p class="text-stone-600 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content">Ажарлағыш қағазбен (шкурка) бетті <b>тегістеп</b>, талшық бойымен жылтыр етіп өңдеу.</span>
+        <span lang="en" class="lang-content">Smoothing the surface with sandpaper, always working <b>along the grain</b>.</span>
+        <span lang="ru" class="lang-content"><b>Выравнивание</b> поверхности наждачной бумагой (шкуркой) строго вдоль волокон.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- STEP-BY-STEP: DRILLING -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">🌀 Тесікті дұрыс бұрғылау</span>
+    <span lang="en" class="lang-content">🌀 How to Drill a Hole Correctly</span>
+    <span lang="ru" class="lang-content">🌀 Как правильно просверлить отверстие</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">Тесіктің таза әрі дәл шығуы реттілікке байланысты.</span>
+    <span lang="en" class="lang-content">A clean, accurate hole depends on following the right order.</span>
+    <span lang="ru" class="lang-content">Чистота и точность отверстия зависят от правильной последовательности.</span>
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5 step-row">
+      <div class="step-num">1</div>
+      <p class="text-stone-700 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content"><b>Белгілеу.</b> Тесік ортасын білікпен (шило) тесіп белгілеңіз — бұрғы сырғымайды.</span>
+        <span lang="en" class="lang-content"><b>Mark the centre.</b> Punch a small dent with an awl so the bit cannot wander.</span>
+        <span lang="ru" class="lang-content"><b>Разметка.</b> Наколите центр шилом — сверло не «уведёт» в сторону.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-5 step-row">
+      <div class="step-num">2</div>
+      <p class="text-stone-700 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content"><b>Бекіту.</b> Дайындаманы қысқышпен (струбцина) үстелге берік бекітіңіз.</span>
+        <span lang="en" class="lang-content"><b>Clamp the work.</b> Fix the workpiece firmly to the bench with a clamp.</span>
+        <span lang="ru" class="lang-content"><b>Закрепление.</b> Надёжно зажмите заготовку струбциной на столе.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-5 step-row">
+      <div class="step-num">3</div>
+      <p class="text-stone-700 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content"><b>Бұрғыны таңдау.</b> Тесік диаметріне сәйкес ағаш бұрғысын қойып, тік ұстаңыз.</span>
+        <span lang="en" class="lang-content"><b>Choose the bit.</b> Fit a wood bit of the right diameter and hold the drill vertical.</span>
+        <span lang="ru" class="lang-content"><b>Выбор сверла.</b> Вставьте сверло по дереву нужного диаметра, держите дрель вертикально.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-5 step-row">
+      <div class="step-num">4</div>
+      <p class="text-stone-700 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content"><b>Бұрғылау.</b> Біркелкі баспен бұрғылаңыз; шетке жетерде қысымды азайтыңыз.</span>
+        <span lang="en" class="lang-content"><b>Drill steadily.</b> Apply even pressure; ease off as the bit nears the far side.</span>
+        <span lang="ru" class="lang-content"><b>Сверление.</b> Давите равномерно; у выхода сверла ослабьте нажим.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-5 step-row">
+      <div class="step-num">5</div>
+      <p class="text-stone-700 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content"><b>Жыртықты болдырмау.</b> Астына керексіз тақтай қойыңыз — шыққан жер жыртылмайды.</span>
+        <span lang="en" class="lang-content"><b>Prevent tear-out.</b> Place a scrap board underneath so the exit stays clean.</span>
+        <span lang="ru" class="lang-content"><b>Без сколов.</b> Подложите снизу обрезок доски — выход отверстия будет чистым.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-5 step-row">
+      <div class="step-num">6</div>
+      <p class="text-stone-700 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content"><b>Тазарту.</b> Жоңқаны үрлеп шығарыңыз, тесік жиегін зімпарамен тегістеңіз.</span>
+        <span lang="en" class="lang-content"><b>Clean up.</b> Blow out the chips and ease the rim with fine sandpaper.</span>
+        <span lang="ru" class="lang-content"><b>Очистка.</b> Удалите стружку, снимите заусенцы с края мелкой шкуркой.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">📷 Құралдар мен амалдар</span>
+    <span lang="en" class="lang-content">📷 Tools &amp; Operations</span>
+    <span lang="ru" class="lang-content">📷 Инструменты и операции</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap an image to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <!-- Drill press -->
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb8_drillpress.jpg" alt="Сверлильный станок"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Бұрғылау станогы</span><span lang="en" class="lang-content">Drill press</span><span lang="ru" class="lang-content">Сверлильный станок</span></div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Тік бұрғылау машинасы</span><span lang="en" class="lang-content">Bench / pillar drill</span><span lang="ru" class="lang-content">Настольный (станочный) способ</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Станок тесікті дәл тік әрі бір тереңдікте ашуға мүмкіндік береді.</span>
+          <span lang="en" class="lang-content">A drill press keeps the hole perfectly vertical and at a set depth.</span>
+          <span lang="ru" class="lang-content">Станок держит сверло строго вертикально и на заданной глубине.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forstner bit -->
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb8_forstner.jpg" alt="Сверло Форстнера"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Форстнер бұрғысы</span><span lang="en" class="lang-content">Forstner bit</span><span lang="ru" class="lang-content">Сверло Форстнера</span></div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Ағашқа арналған бұрғы</span><span lang="en" class="lang-content">Bit for clean flat holes</span><span lang="ru" class="lang-content">Сверло по дереву</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Тегіс түбі бар, таза кең тесік ашуға арналған ағаш бұрғысы.</span>
+          <span lang="en" class="lang-content">A wood bit that bores wide, flat-bottomed holes with clean edges.</span>
+          <span lang="ru" class="lang-content">Бурит широкие отверстия с плоским дном и чистыми краями.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chiselling action -->
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb8_chisel.jpg" alt="Долбление стамеской"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Қашаумен ою</span><span lang="en" class="lang-content">Chiselling</span><span lang="ru" class="lang-content">Долбление</span></div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Шебер қашаумен жұмыс істеуде</span><span lang="en" class="lang-content">A craftsman at work</span><span lang="ru" class="lang-content">Мастер за работой</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Қашау жүзін материалға бұрап, артық ағашты кесіп алады.</span>
+          <span lang="en" class="lang-content">The chisel's edge slices away waste wood little by little.</span>
+          <span lang="ru" class="lang-content">Лезвие стамески снимает лишнюю древесину слой за слоем.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chisels set -->
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb8_chisels.jpg" alt="Набор стамесок"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Қашаулар жинағы</span><span lang="en" class="lang-content">Set of chisels</span><span lang="ru" class="lang-content">Набор стамесок</span></div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Әртүрлі ені бар жүздер</span><span lang="en" class="lang-content">Various blade widths</span><span lang="ru" class="lang-content">Лезвия разной ширины</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Ұяның еніне қарай тиісті қашау таңдалады; жүзі үнемі өткір болуы керек.</span>
+          <span lang="en" class="lang-content">Pick a chisel to match the recess width; keep the edge razor-sharp.</span>
+          <span lang="ru" class="lang-content">Стамеску подбирают под ширину гнезда; лезвие держат острым.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sanding -->
+    <div class="genre-card" onclick="openLB(this)">
+      <span class="zoom-hint">🔍</span>
+      <div class="pic"><img src="../../assets/labor_boys/lb8_sandpaper.jpg" alt="Зачистка наждачной бумагой"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Ажарлағыш блок</span><span lang="en" class="lang-content">Sanding block</span><span lang="ru" class="lang-content">Шлифовальный брусок</span></div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Зімпара қағазы ұсталатын блок</span><span lang="en" class="lang-content">Block holding the abrasive</span><span lang="ru" class="lang-content">Брусок с наждачкой</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Блок қағазды тегіс ұстайды — бет біркелкі, толқынсыз болады.</span>
+          <span lang="en" class="lang-content">A block keeps the paper flat so the surface stays even, with no waves.</span>
+          <span lang="ru" class="lang-content">Брусок держит бумагу ровно — поверхность выходит без волн и завалов.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grit-info card (text tile, no image) -->
+    <div class="card card-accent rounded-custom p-5 flex flex-col justify-center">
+      <h4 class="heading-font font-extrabold mb-2" style="color:#881337">
+        <span lang="kk" class="lang-content">📏 Түйіршік (зернистость)</span><span lang="en" class="lang-content">📏 Grit (P-number)</span><span lang="ru" class="lang-content">📏 Зернистость (номер P)</span>
+      </h4>
+      <p class="text-stone-600 text-sm leading-relaxed">
+        <span lang="kk" class="lang-content">Зімпара нөмірі неғұрлым <b>үлкен</b> болса, түйіршік соғұрлым <b>ұсақ</b>. Алдымен ірі (P80) → одан кейін орташа (P120) → соңында ұсақ (P240) қолданылады.</span>
+        <span lang="en" class="lang-content">The <b>higher</b> the P-number, the <b>finer</b> the grit. Start coarse (P80) → then medium (P120) → finish fine (P240).</span>
+        <span lang="ru" class="lang-content">Чем <b>больше</b> номер P, тем <b>мельче</b> зерно. Сначала крупная (P80) → затем средняя (P120) → в конце мелкая (P240).</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON TABLE (3 per-language) -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">📊 Амал, құрал, нәтиже</span>
+    <span lang="en" class="lang-content">📊 Operation, Tool, Result</span>
+    <span lang="ru" class="lang-content">📊 Операция, инструмент, результат</span>
+  </h2>
+  <div class="card rounded-custom p-5">
+    <div class="lang-content" lang="ru">
+      <table class="num-table">
+        <thead><tr><th>Операция</th><th>Инструмент</th><th>Что получаем</th><th>Главное правило</th></tr></thead>
+        <tbody>
+          <tr><td><b>Сверление</b></td><td>Дрель, сверло по дереву, сверлильный станок</td><td>Круглое отверстие</td><td>Сверло держать строго перпендикулярно</td></tr>
+          <tr><td><b>Долбление</b></td><td>Стамеска, долото, киянка</td><td>Гнездо или паз</td><td>Резать от середины к краям разметки</td></tr>
+          <tr><td><b>Зачистка</b></td><td>Наждачная бумага, брусок, рашпиль</td><td>Гладкая поверхность</td><td>Шлифовать только вдоль волокон</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="kk">
+      <table class="num-table">
+        <thead><tr><th>Амал</th><th>Құрал</th><th>Нәтиже</th><th>Басты ереже</th></tr></thead>
+        <tbody>
+          <tr><td><b>Бұрғылау</b></td><td>Дрель, ағаш бұрғысы, бұрғылау станогы</td><td>Дөңгелек тесік</td><td>Бұрғыны қатаң тік ұстау</td></tr>
+          <tr><td><b>Ою</b></td><td>Қашау, долото, ағаш балға</td><td>Ұя немесе ойық</td><td>Ортадан белгі шетіне қарай кесу</td></tr>
+          <tr><td><b>Тазалау</b></td><td>Зімпара қағазы, блок, рашпиль</td><td>Тегіс бет</td><td>Тек талшық бойымен ажарлау</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="en">
+      <table class="num-table">
+        <thead><tr><th>Operation</th><th>Tool</th><th>Result</th><th>Key rule</th></tr></thead>
+        <tbody>
+          <tr><td><b>Drilling</b></td><td>Drill, wood bit, drill press</td><td>A round hole</td><td>Keep the bit strictly perpendicular</td></tr>
+          <tr><td><b>Chiselling</b></td><td>Chisel, mortise chisel, mallet</td><td>A recess or groove</td><td>Cut from the centre toward the marked edges</td></tr>
+          <tr><td><b>Sanding</b></td><td>Sandpaper, block, rasp</td><td>A smooth surface</td><td>Sand only along the grain</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY FOOTER -->
+<footer class="card-rose rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">⚠️ Қауіпсіздік ережелері</span>
+    <span lang="en" class="lang-content">⚠️ Safety Rules</span>
+    <span lang="ru" class="lang-content">⚠️ Правила безопасности</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Бекіту</span><span lang="en" class="lang-content">Clamp it</span><span lang="ru" class="lang-content">Закрепи</span></p>
+      <p class="text-rose-100 text-sm">
+        <span lang="kk" class="lang-content">Дайындаманы әрқашан қысқышпен бекіт — қолыңмен ұстама.</span>
+        <span lang="en" class="lang-content">Always clamp the workpiece — never hold it by hand.</span>
+        <span lang="ru" class="lang-content">Заготовку всегда зажимай струбциной — не держи рукой.</span>
+      </p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Жүзден алыс</span><span lang="en" class="lang-content">Mind the edge</span><span lang="ru" class="lang-content">Руки за лезвием</span></p>
+      <p class="text-rose-100 text-sm">
+        <span lang="kk" class="lang-content">Қашаудың жүзін денеңнен ары қарай бағытта — қолыңды жүздің артына қой.</span>
+        <span lang="en" class="lang-content">Push the chisel away from your body; keep hands behind the edge.</span>
+        <span lang="ru" class="lang-content">Веди стамеску от себя; руки держи позади лезвия.</span>
+      </p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Көзіңді қорға</span><span lang="en" class="lang-content">Protect eyes</span><span lang="ru" class="lang-content">Защити глаза</span></p>
+      <p class="text-rose-100 text-sm">
+        <span lang="kk" class="lang-content">Бұрғылау мен тазалауда көзілдірік ки; шаңды демалма, маска қолдан.</span>
+        <span lang="en" class="lang-content">Wear goggles when drilling or sanding; use a mask against dust.</span>
+        <span lang="ru" class="lang-content">При сверлении и зачистке надевай очки; от пыли используй маску.</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX (keep inside #poster-container) -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

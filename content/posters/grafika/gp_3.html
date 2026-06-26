@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Чертёжный шрифт</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style.css">
+<style>
+.char-cell {
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem; font-weight: 700;
+  color: #1e40af;
+  background: #f0f5ff;
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: 0.4rem;
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1;
+  min-width: 2.2rem;
+}
+.font-demo {
+  font-family: 'Courier New', monospace;
+  background: #f8faff;
+  border: 1.5px solid rgba(37,99,235,0.2);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  line-height: 2.2;
+  letter-spacing: 0.05em;
+}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-blue-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 1 · Сызба шрифті</span>
+      <span lang="en" class="lang-content">Graphics · Section 1 · Drawing Font</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 1 · Чертёжный шрифт</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">🔤 Сызба шрифті — ГОСТ 2.304</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">🔤 Drawing Font — GOST 2.304</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">🔤 Чертёжный шрифт — ГОСТ 2.304</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Сызбадағы жазулар стандартқа сай орындалуы тиіс.</span>
+      <span lang="en" class="lang-content">All inscriptions on drawings must conform to the standard.</span>
+      <span lang="ru" class="lang-content">Все надписи на чертежах выполняются по стандарту.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Font types -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Шрифт параметрлері</span>
+    <span lang="en" class="lang-content">📐 Font Parameters</span>
+    <span lang="ru" class="lang-content">📐 Параметры шрифта</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <table class="t">
+        <thead>
+          <tr>
+            <th><span lang="kk" class="lang-content">Параметр</span><span lang="en" class="lang-content">Parameter</span><span lang="ru" class="lang-content">Параметр</span></th>
+            <th><span lang="kk" class="lang-content">Белгілеу</span><span lang="en" class="lang-content">Symbol</span><span lang="ru" class="lang-content">Обозначение</span></th>
+            <th><span lang="kk" class="lang-content">Мән (тип Б)</span><span lang="en" class="lang-content">Value (type B)</span><span lang="ru" class="lang-content">Значение (тип Б)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span lang="kk" class="lang-content">Шрифт биіктігі</span><span lang="en" class="lang-content">Letter height</span><span lang="ru" class="lang-content">Высота букв</span></td>
+            <td><b class="text-blue-700">h</b></td>
+            <td>2,5 / 3,5 / 5 / 7 / 10 / 14 / 20 мм</td>
+          </tr>
+          <tr>
+            <td><span lang="kk" class="lang-content">Кіші әріп биіктігі</span><span lang="en" class="lang-content">Lowercase height</span><span lang="ru" class="lang-content">Высота строч. букв</span></td>
+            <td><b class="text-blue-700">c</b></td>
+            <td>≈ 0,7h</td>
+          </tr>
+          <tr>
+            <td><span lang="kk" class="lang-content">Сызықтар арасы</span><span lang="en" class="lang-content">Line spacing</span><span lang="ru" class="lang-content">Расстояние между строками</span></td>
+            <td><b class="text-blue-700">b</b></td>
+            <td>≥ 1,7h</td>
+          </tr>
+          <tr>
+            <td><span lang="kk" class="lang-content">Сөздер арасы</span><span lang="en" class="lang-content">Word spacing</span><span lang="ru" class="lang-content">Расстояние между словами</span></td>
+            <td><b class="text-blue-700">e</b></td>
+            <td>≥ 0,6h</td>
+          </tr>
+          <tr>
+            <td><span lang="kk" class="lang-content">Сызық қалыңдығы</span><span lang="en" class="lang-content">Stroke width</span><span lang="ru" class="lang-content">Толщина линий знаков</span></td>
+            <td><b class="text-blue-700">d</b></td>
+            <td>h/10 (тип Б)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Font types explanation -->
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font font-bold text-blue-800 mb-4">
+        <span lang="kk" class="lang-content">Шрифт түрлері</span>
+        <span lang="en" class="lang-content">Font Types</span>
+        <span lang="ru" class="lang-content">Типы шрифта</span>
+      </h3>
+      <div class="space-y-4">
+        <div class="card-accent rounded-xl p-4">
+          <p class="font-bold text-blue-800">
+            <span lang="kk" class="lang-content">Тип А — жіңішке</span>
+            <span lang="en" class="lang-content">Type A — Narrow</span>
+            <span lang="ru" class="lang-content">Тип А — узкий</span>
+          </p>
+          <p class="text-slate-600 text-sm mt-1">d = h/14 &nbsp;|&nbsp;
+            <span lang="kk" class="lang-content">Тігінен немесе 75° еңкейіп</span>
+            <span lang="en" class="lang-content">Upright or 75° italic</span>
+            <span lang="ru" class="lang-content">Прямой или наклонный 75°</span>
+          </p>
+        </div>
+        <div class="card-accent rounded-xl p-4">
+          <p class="font-bold text-blue-800">
+            <span lang="kk" class="lang-content">Тип Б — стандартты (жиі қолданылады)</span>
+            <span lang="en" class="lang-content">Type B — Standard (most common)</span>
+            <span lang="ru" class="lang-content">Тип Б — стандартный (наиболее распространён)</span>
+          </p>
+          <p class="text-slate-600 text-sm mt-1">d = h/10 &nbsp;|&nbsp;
+            <span lang="kk" class="lang-content">Тігінен немесе 75° еңкейіп</span>
+            <span lang="en" class="lang-content">Upright or 75° italic</span>
+            <span lang="ru" class="lang-content">Прямой или наклонный 75°</span>
+          </p>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+          <p class="text-amber-800 text-sm font-medium">
+            <span lang="kk" class="lang-content">⚠️ Оқу мекемелерінде негізінен <b>Тип Б, 75° еңкейіп</b> қолданылады.</span>
+            <span lang="en" class="lang-content">⚠️ In educational institutions, <b>Type B, 75° italic</b> is mainly used.</span>
+            <span lang="ru" class="lang-content">⚠️ В учебных заведениях применяется преимущественно <b>Тип Б, наклон 75°</b>.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Alphabet display -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔡 Сызба шрифті — орыс алфавиті</span>
+    <span lang="en" class="lang-content">🔡 Drawing Font — Cyrillic Alphabet</span>
+    <span lang="ru" class="lang-content">🔡 Чертёжный шрифт — русский алфавит</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="font-demo mb-4 text-lg font-bold tracking-widest text-blue-900">
+      А Б В Г Д Е Ж З И К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я
+    </div>
+    <div class="font-demo mb-4 text-base text-slate-700">
+      а б в г д е ж з и к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я
+    </div>
+    <div class="font-demo text-lg font-bold text-blue-900">
+      A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+    </div>
+    <div class="font-demo mt-2 text-xl font-bold text-blue-900">
+      0 1 2 3 4 5 6 7 8 9
+    </div>
+  </div>
+</section>
+
+<!-- SVG illustration — letter proportions -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📏 Әріп пропорциялары</span>
+    <span lang="en" class="lang-content">📏 Letter Proportions</span>
+    <span lang="ru" class="lang-content">📏 Пропорции букв</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 320 200" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Guide lines -->
+        <line x1="20" y1="30" x2="300" y2="30" stroke="rgba(37,99,235,0.3)" stroke-width="1" stroke-dasharray="4,2"/>
+        <line x1="20" y1="130" x2="300" y2="130" stroke="rgba(37,99,235,0.3)" stroke-width="1" stroke-dasharray="4,2"/>
+        <line x1="20" y1="150" x2="300" y2="150" stroke="rgba(37,99,235,0.3)" stroke-width="0.8" stroke-dasharray="3,2"/>
+        <!-- Big letter А -->
+        <text x="50" y="125" font-size="90" fill="#1e3a8a" font-family="Courier New" font-weight="bold" font-style="italic">А</text>
+        <!-- Dimension h -->
+        <line x1="15" y1="30" x2="15" y2="130" stroke="#ef4444" stroke-width="1.5" marker-start="url(#arr)" marker-end="url(#arr)"/>
+        <text x="5" y="85" font-size="11" fill="#ef4444" font-weight="bold">h</text>
+        <!-- Baseline label -->
+        <text x="22" y="145" font-size="9" fill="#64748b">базовая линия</text>
+        <!-- Capital line label -->
+        <text x="22" y="27" font-size="9" fill="#64748b">верхняя линия</text>
+        <!-- Slant angle -->
+        <line x1="160" y1="130" x2="200" y2="30" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="185" y="110" font-size="9" fill="#f59e0b">75°</text>
+        <!-- Stroke width -->
+        <text x="235" y="90" font-size="9" fill="#1d4ed8">d = h/10</text>
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#ef4444"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font font-bold text-blue-800 mb-4">
+        <span lang="kk" class="lang-content">✏️ Сызба шрифтін жазу ережелері</span>
+        <span lang="en" class="lang-content">✏️ Rules for Writing Drawing Font</span>
+        <span lang="ru" class="lang-content">✏️ Правила выполнения чертёжного шрифта</span>
+      </h3>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2 items-start">
+          <span class="step-num text-xs">1</span>
+          <span lang="kk" class="lang-content">Барлық жазулар <b>жұқа қарандаш сызықтарымен</b> белгіленеді: жоғарғы, төменгі, еңкейу сызықтары.</span>
+          <span lang="en" class="lang-content">All inscriptions are first <b>marked with thin pencil guidelines</b>: top, bottom, and slant lines.</span>
+          <span lang="ru" class="lang-content">Все надписи сначала <b>разбиваются тонкими вспомогательными линиями</b>: верхней, нижней, наклонными.</span>
+        </li>
+        <li class="flex gap-2 items-start">
+          <span class="step-num text-xs">2</span>
+          <span lang="kk" class="lang-content">Шрифт биіктігі <b>h</b> = 2,5 мм — ескертпелер; h = 3,5 мм — өлшем сандары; h = 5 мм — атаулар.</span>
+          <span lang="en" class="lang-content">Font height <b>h</b> = 2.5 mm for notes; h = 3.5 mm for dimensions; h = 5 mm for titles.</span>
+          <span lang="ru" class="lang-content">Высота шрифта <b>h</b> = 2,5 мм — примечания; h = 3,5 мм — размерные числа; h = 5 мм — заголовки.</span>
+        </li>
+        <li class="flex gap-2 items-start">
+          <span class="step-num text-xs">3</span>
+          <span lang="kk" class="lang-content">Еңкейіп жазу кезінде — оң жаққа <b>75°</b> бұрышымен (15° тігінен).</span>
+          <span lang="en" class="lang-content">When italic — lean to the right at <b>75°</b> from horizontal (15° from vertical).</span>
+          <span lang="ru" class="lang-content">При наклонном написании — уклон вправо под углом <b>75°</b> к горизонту (15° от вертикали).</span>
+        </li>
+        <li class="flex gap-2 items-start">
+          <span class="step-num text-xs">4</span>
+          <span lang="kk" class="lang-content">Бір сызбада бір ғана <b>шрифт түрі мен еңкею</b> қолданылуы керек.</span>
+          <span lang="en" class="lang-content">Only <b>one font type and slant</b> should be used throughout one drawing.</span>
+          <span lang="ru" class="lang-content">В одном чертеже применяется только <b>один тип шрифта и наклон</b>.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-blue rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Негізгі өлшемдер (тип Б)</span>
+    <span lang="en" class="lang-content">🧠 Key Dimensions (Type B)</span>
+    <span lang="ru" class="lang-content">🧠 Основные размеры (тип Б)</span>
+  </h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">h</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Биіктік</span><span lang="en" class="lang-content">Height</span><span lang="ru" class="lang-content">Высота</span></div></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">h/10</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Қалыңдық</span><span lang="en" class="lang-content">Stroke width</span><span lang="ru" class="lang-content">Толщина</span></div></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">75°</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Еңкею</span><span lang="en" class="lang-content">Slant</span><span lang="ru" class="lang-content">Наклон</span></div></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="text-2xl font-bold">1,7h</div><div class="text-blue-200 mt-1"><span lang="kk" class="lang-content">Жол аралығы</span><span lang="en" class="lang-content">Line spacing</span><span lang="ru" class="lang-content">Межстрочный</span></div></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

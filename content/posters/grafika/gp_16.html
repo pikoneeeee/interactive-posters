@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Три вида: построение и взаимосвязь</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_teal.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-teal-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 3 · Проекциялық черчение</span>
+      <span lang="en" class="lang-content">Graphics · Section 3 · Projection Drawing</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 3 · Проекционное черчение</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🔗 Үш көрініс: салу және өзара байланыс</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🔗 Three Views: Construction and Relationships</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🔗 Три вида: построение и взаимосвязь</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Байланыс сызықтары, өлшемдерді ауыстыру, тұрақты сызық.</span>
+      <span lang="en" class="lang-content">Projection lines, size transfer, the 45° constant line.</span>
+      <span lang="ru" class="lang-content">Линии связи, перенос размеров, постоянная прямая.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Three views of a wedge-shaped part -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📐 Байланыс сызықтары</span>
+    <span lang="en" class="lang-content">📐 Projection (Connection) Lines</span>
+    <span lang="ru" class="lang-content">📐 Линии связи (проекционные)</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-2">
+      <svg viewBox="0 0 340 300" style="width:100%;max-width:380px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Front view (main) — top left -->
+        <rect x="10" y="10" width="130" height="110" fill="rgba(37,99,235,0.07)" stroke="#1d4ed8" stroke-width="2"/>
+        <!-- Object in front view: L-shape -->
+        <rect x="25" y="25" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <rect x="25" y="25" width="50" height="40" fill="rgba(37,99,235,0.10)" stroke="#1e293b" stroke-width="2"/>
+        <text x="55" y="8" font-size="10" fill="#1d4ed8" font-weight="bold" text-anchor="middle">Главный вид</text>
+
+        <!-- Top view — bottom left -->
+        <rect x="10" y="150" width="130" height="110" fill="rgba(16,185,129,0.07)" stroke="#059669" stroke-width="2"/>
+        <rect x="25" y="165" width="100" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <rect x="25" y="165" width="100" height="40" fill="rgba(16,185,129,0.10)" stroke="#1e293b" stroke-width="2"/>
+        <text x="55" y="145" font-size="10" fill="#059669" font-weight="bold" text-anchor="middle">Вид сверху</text>
+
+        <!-- Left view — top right -->
+        <rect x="170" y="10" width="110" height="110" fill="rgba(245,158,11,0.07)" stroke="#d97706" stroke-width="2"/>
+        <rect x="185" y="25" width="80" height="80" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <rect x="225" y="25" width="40" height="80" fill="rgba(245,158,11,0.10)" stroke="#1e293b" stroke-width="2"/>
+        <text x="225" y="8" font-size="10" fill="#d97706" font-weight="bold" text-anchor="middle">Вид слева</text>
+
+        <!-- Horizontal connection lines (front ↔ top) -->
+        <line x1="25" y1="120" x2="25" y2="150" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="5,3"/>
+        <line x1="75" y1="120" x2="75" y2="150" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="5,3"/>
+        <line x1="125" y1="120" x2="125" y2="150" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="5,3"/>
+        <!-- Horizontal connection lines (front ↔ left) -->
+        <line x1="140" y1="25" x2="170" y2="25" stroke="#d97706" stroke-width="1" stroke-dasharray="5,3"/>
+        <line x1="140" y1="65" x2="170" y2="65" stroke="#d97706" stroke-width="1" stroke-dasharray="5,3"/>
+        <line x1="140" y1="105" x2="170" y2="105" stroke="#d97706" stroke-width="1" stroke-dasharray="5,3"/>
+
+        <!-- 45° constant line -->
+        <line x1="140" y1="150" x2="290" y2="300" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <text x="200" y="220" font-size="9" fill="#ef4444" transform="rotate(45,200,220)">постоян. прямая 45°</text>
+
+        <!-- Transfer lines from top view to left via 45° -->
+        <line x1="125" y1="165" x2="165" y2="165" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,2"/>
+        <line x1="165" y1="165" x2="165" y2="295" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+        <!-- Labels -->
+        <text x="50" y="135" font-size="8" fill="#1d4ed8">↕ линии связи</text>
+        <text x="143" y="48" font-size="8" fill="#d97706">→ линии связи</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font font-bold text-teal-800 mb-4">
+        <span lang="kk" class="lang-content">Байланыс сызықтарының ережелері</span>
+        <span lang="en" class="lang-content">Rules for Connection Lines</span>
+        <span lang="ru" class="lang-content">Правила линий связи</span>
+      </h3>
+      <div class="space-y-4 text-sm text-slate-700">
+        <div class="flex gap-3 items-start">
+          <div class="w-2 h-2 rounded-full bg-teal-500 mt-2 flex-shrink-0"></div>
+          <div>
+            <p class="font-bold text-teal-700">
+              <span lang="kk" class="lang-content">Тік байланыс (V ↔ H)</span>
+              <span lang="en" class="lang-content">Vertical connection (Front ↔ Top)</span>
+              <span lang="ru" class="lang-content">Вертикальные связи (Главный ↔ Вид сверху)</span>
+            </p>
+            <p class="mt-1">
+              <span lang="kk" class="lang-content">Басты көріністе де, жоғарыдан да ені (X өлшемі) бірдей. Тік байланыс сызықтары олардың сәйкесін көрсетеді.</span>
+              <span lang="en" class="lang-content">Width (X dimension) is the same in both front and top views. Vertical lines align matching features.</span>
+              <span lang="ru" class="lang-content">Ширина (X) одинакова в главном и виде сверху. Вертикальные линии связывают соответствующие элементы.</span>
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="w-2 h-2 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
+          <div>
+            <p class="font-bold text-amber-700">
+              <span lang="kk" class="lang-content">Көлденең байланыс (V ↔ W)</span>
+              <span lang="en" class="lang-content">Horizontal connection (Front ↔ Left)</span>
+              <span lang="ru" class="lang-content">Горизонтальные связи (Главный ↔ Вид слева)</span>
+            </p>
+            <p class="mt-1">
+              <span lang="kk" class="lang-content">Биіктік (Z өлшемі) басты көріністе де, сол жақтан да бірдей. Көлденең байланыс сызықтары олардың деңгейін көрсетеді.</span>
+              <span lang="en" class="lang-content">Height (Z) is the same in front and left views. Horizontal lines align feature heights.</span>
+              <span lang="ru" class="lang-content">Высота (Z) одинакова в главном и виде слева. Горизонтальные линии выравнивают высоты элементов.</span>
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="w-2 h-2 rounded-full bg-red-500 mt-2 flex-shrink-0"></div>
+          <div>
+            <p class="font-bold text-red-700">
+              <span lang="kk" class="lang-content">Тұрақты сызық 45° (H → W)</span>
+              <span lang="en" class="lang-content">45° Constant Line (Top → Left)</span>
+              <span lang="ru" class="lang-content">Постоянная прямая 45° (Сверху → Влево)</span>
+            </p>
+            <p class="mt-1">
+              <span lang="kk" class="lang-content">Жоғарыдан Y (тереңдік) өлшемін сол жаққа ауыстыру үшін 45° биссектриса қолданылады.</span>
+              <span lang="en" class="lang-content">A 45° bisector transfers depth (Y) from the top view to the left view.</span>
+              <span lang="ru" class="lang-content">Биссектриса 45° переносит глубину (Y) от вида сверху к виду слева.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dimensions shared between views -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📊 Қай өлшем қай көріністе?</span>
+    <span lang="en" class="lang-content">📊 Which Dimension in Which View?</span>
+    <span lang="ru" class="lang-content">📊 Какой размер — в каком виде?</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <table class="t">
+      <thead>
+        <tr>
+          <th><span lang="kk" class="lang-content">Өлшем</span><span lang="en" class="lang-content">Dimension</span><span lang="ru" class="lang-content">Размер</span></th>
+          <th class="text-teal-600">
+            <span lang="kk" class="lang-content">Басты көрініс (V)</span>
+            <span lang="en" class="lang-content">Front View (V)</span>
+            <span lang="ru" class="lang-content">Главный вид (V)</span>
+          </th>
+          <th class="text-emerald-600">
+            <span lang="kk" class="lang-content">Жоғарыдан (H)</span>
+            <span lang="en" class="lang-content">Top View (H)</span>
+            <span lang="ru" class="lang-content">Вид сверху (H)</span>
+          </th>
+          <th class="text-amber-600">
+            <span lang="kk" class="lang-content">Солдан (W)</span>
+            <span lang="en" class="lang-content">Left View (W)</span>
+            <span lang="ru" class="lang-content">Вид слева (W)</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>X</b> — <span lang="kk" class="lang-content">Ені</span><span lang="en" class="lang-content">Width</span><span lang="ru" class="lang-content">Ширина</span></td>
+          <td class="text-center text-green-600 font-bold text-lg">✓</td>
+          <td class="text-center text-green-600 font-bold text-lg">✓</td>
+          <td class="text-center text-slate-400">—</td>
+        </tr>
+        <tr>
+          <td><b>Y</b> — <span lang="kk" class="lang-content">Тереңдігі</span><span lang="en" class="lang-content">Depth</span><span lang="ru" class="lang-content">Глубина</span></td>
+          <td class="text-center text-slate-400">—</td>
+          <td class="text-center text-green-600 font-bold text-lg">✓</td>
+          <td class="text-center text-green-600 font-bold text-lg">✓</td>
+        </tr>
+        <tr>
+          <td><b>Z</b> — <span lang="kk" class="lang-content">Биіктігі</span><span lang="en" class="lang-content">Height</span><span lang="ru" class="lang-content">Высота</span></td>
+          <td class="text-center text-green-600 font-bold text-lg">✓</td>
+          <td class="text-center text-slate-400">—</td>
+          <td class="text-center text-green-600 font-bold text-lg">✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- How to build the 3rd view from 2 -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔨 Екі көрінісінен үшіншісін салу</span>
+    <span lang="en" class="lang-content">🔨 Building the Third View from Two</span>
+    <span lang="ru" class="lang-content">🔨 Построение третьего вида по двум данным</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="tile"><div class="step-num mx-auto">1</div><p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">Нысанның жалпы пішімін анықтау (параллелепипед, цилиндр...)</span><span lang="en" class="lang-content">Identify the basic shape (box, cylinder…)</span><span lang="ru" class="lang-content">Определить общую форму предмета</span></p></div>
+    <div class="tile"><div class="step-num mx-auto">2</div><p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">Белгілі екі көрінісінен X, Y, Z өлшемдерін шығару</span><span lang="en" class="lang-content">Extract X, Y, Z dimensions from the two given views</span><span lang="ru" class="lang-content">Из двух видов извлечь X, Y, Z</span></p></div>
+    <div class="tile"><div class="step-num mx-auto">3</div><p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">Байланыс сызықтары мен 45° сызық арқылы үшінші көріністі сызу</span><span lang="en" class="lang-content">Use connection lines and 45° line to draw the third view</span><span lang="ru" class="lang-content">По линиям связи и 45° построить третий вид</span></p></div>
+    <div class="tile"><div class="step-num mx-auto">4</div><p class="text-slate-700 text-sm mt-3"><span lang="kk" class="lang-content">Жасырын контурларды штрихтік сызықпен белгілеу</span><span lang="en" class="lang-content">Mark hidden edges with dashed lines</span><span lang="ru" class="lang-content">Невидимые рёбра — штриховой линией</span></p></div>
+  </div>
+</section>
+
+<footer class="card-teal rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Негізгі тұжырым</span>
+    <span lang="en" class="lang-content">🧠 Key Takeaway</span>
+    <span lang="ru" class="lang-content">🧠 Главный вывод</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Ені = X</span><span lang="en" class="lang-content">Width = X</span><span lang="ru" class="lang-content">Ширина = X</span></p>
+      <p class="text-teal-200"><span lang="kk" class="lang-content">Басты және жоғарыдан — бірдей</span><span lang="en" class="lang-content">Same in front and top view</span><span lang="ru" class="lang-content">Одинаковая в главном и сверху</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Биіктік = Z</span><span lang="en" class="lang-content">Height = Z</span><span lang="ru" class="lang-content">Высота = Z</span></p>
+      <p class="text-teal-200"><span lang="kk" class="lang-content">Басты және солдан — бірдей</span><span lang="en" class="lang-content">Same in front and left view</span><span lang="ru" class="lang-content">Одинаковая в главном и слева</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Тереңдік = Y</span><span lang="en" class="lang-content">Depth = Y</span><span lang="ru" class="lang-content">Глубина = Y</span></p>
+      <p class="text-teal-200"><span lang="kk" class="lang-content">Жоғарыдан және солдан — 45° арқылы</span><span lang="en" class="lang-content">Top and left via 45° constant line</span><span lang="ru" class="lang-content">Сверху и слева через 45°</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

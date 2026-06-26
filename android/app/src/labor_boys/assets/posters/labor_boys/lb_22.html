@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сборочный чертёж и детали машин</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.spec-tbl{width:100%;border-collapse:collapse;font-size:.95rem;}
+.spec-tbl th,.spec-tbl td{border:1px solid rgba(190,18,60,0.18);padding:.6rem .8rem;text-align:left;vertical-align:top;}
+.spec-tbl thead th{background:rgba(190,18,60,0.10);color:#881337;font-family:'Montserrat',sans-serif;}
+.spec-tbl tbody tr:nth-child(even){background:rgba(190,18,60,0.035);}
+.feat-img{width:100%;border-radius:1rem;display:block;background:#1c1917;}
+.num-line{display:flex;gap:.85rem;align-items:flex-start;margin-bottom:.95rem;}
+.part-ico{font-size:2.1rem;line-height:1;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 4-бөлім · Машина және электротехника</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 4 · Machines &amp; Electrics</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 4 · Машины и электротехника</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">Құрастыру сызбасы және машина бөлшектері</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">Assembly Drawing and Machine Parts</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">Сборочный чертёж и детали машин</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Бөлшектер қалай сызбада көрсетіліп, бір тетікке жиналатынын танимыз.</span>
+      <span lang="en" class="lang-content">How separate parts are drawn and joined into one working mechanism.</span>
+      <span lang="ru" class="lang-content">Как отдельные детали изображают на чертеже и собирают в единый механизм.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO ESSAY + FEATURE EXPLODED VIEW -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 items-center">
+  <div class="card rounded-custom p-8">
+    <h2 class="heading-font text-2xl font-bold mb-4" style="color:#881337">
+      <span lang="kk" class="lang-content">Машина бөлшектерден жиналады</span>
+      <span lang="en" class="lang-content">A machine is built from parts</span>
+      <span lang="ru" class="lang-content">Машина собирается из деталей</span>
+    </h2>
+    <p class="lead">
+      <span lang="kk" class="lang-content">Кез келген машина — қайшыдан бастап автомобиль қозғалтқышына дейін — бөлек жасалған <b>бөлшектерден</b> тұрады. Бөлшек дегеніміз — біртұтас материалдан құрама-құраусыз жасалған дайындама (білік, тісті дөңгелек, бұранда). Бірнеше бөлшек қосылып <b>құрама бірлікті</b> (тораптар) құрайды, ал тораптар жиналып машина болады. Әр бөлшектің пішіні мен өлшемі <b>жұмыс сызбасында</b> көрсетіледі, ал олардың бір-бірімен қалай қосылатыны — <b>құрастыру сызбасында</b>.</span>
+      <span lang="en" class="lang-content">Every machine — from scissors to a car engine — is made of separately produced <b>parts</b>. A part is a single piece made from one material without assembly (a shaft, a gear, a bolt). Several parts joined together form an <b>assembly unit</b>, and units combine into the finished machine. The shape and size of each part are given on its <b>working drawing</b>, while the way they fit together is shown on the <b>assembly drawing</b>.</span>
+      <span lang="ru" class="lang-content">Любая машина — от ножниц до автомобильного двигателя — состоит из отдельно изготовленных <b>деталей</b>. Деталь — это изделие из одного материала, выполненное без сборки (вал, зубчатое колесо, болт). Несколько деталей, соединённых вместе, образуют <b>сборочную единицу</b> (узел), а узлы складываются в машину. Форму и размеры каждой детали задаёт её <b>рабочий чертёж</b>, а то, как они соединяются между собой, показывает <b>сборочный чертёж</b>.</span>
+    </p>
+  </div>
+  <div class="card rounded-custom p-4">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic" style="height:300px"><img src="../../assets/labor_boys/lb22_assembly.jpg" alt=""><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name">
+          <span lang="kk" class="lang-content">Шестерналы сорғының жайылма сызбасы</span>
+          <span lang="en" class="lang-content">Exploded view of a gear pump</span>
+          <span lang="ru" class="lang-content">Деталировка шестерёнчатого насоса</span>
+        </div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Әр бөлшек бөлек көрсетілген — нағыз техникалық сурет</span>
+          <span lang="en" class="lang-content">Each part shown separately — a real technical illustration</span>
+          <span lang="ru" class="lang-content">Каждая деталь показана отдельно — реальная техническая иллюстрация</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Жайылма (құрастыру) сызба корпус, білік, жетекші және серік тісті дөңгелектер, төлкелер мен тығыздағыштың бір-біріне қалай жиналатынын көрсетеді.</span>
+          <span lang="en" class="lang-content">An exploded assembly view shows how the case, shaft, drive and idler gears, bushings and seal come together into one unit.</span>
+          <span lang="ru" class="lang-content">Сборочный чертёж в разнесённом виде показывает, как корпус, вал, ведущая и ведомая шестерни, втулки и сальник соединяются в один узел.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEFINITIONS: detail vs assembly drawing (comparison table x3) -->
+<section class="card rounded-custom p-8 mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">Жұмыс сызбасы мен құрастыру сызбасы</span>
+    <span lang="en" class="lang-content">Working drawing vs. assembly drawing</span>
+    <span lang="ru" class="lang-content">Рабочий чертёж и сборочный чертёж</span>
+  </h2>
+  <p class="lead mb-5">
+    <span lang="kk" class="lang-content">Екеуі де ГОСТ ережелері бойынша орындалады, бірақ әртүрлі сұраққа жауап береді: біреуі — <b>бөлшекті қалай жасау керек</b>, екіншісі — <b>оны қалай жинау керек</b>.</span>
+    <span lang="en" class="lang-content">Both follow the same drafting standards, but answer different questions: one tells you <b>how to make a part</b>, the other <b>how to assemble it</b>.</span>
+    <span lang="ru" class="lang-content">Оба выполняются по единым правилам, но отвечают на разные вопросы: один говорит, <b>как изготовить деталь</b>, другой — <b>как её собрать</b>.</span>
+  </p>
+
+  <div class="lang-content" lang="ru">
+    <table class="spec-tbl"><thead><tr><th>Признак</th><th>Рабочий (детальный) чертёж</th><th>Сборочный чертёж</th></tr></thead>
+    <tbody>
+      <tr><td>Что показывает</td><td>Одну деталь со всех необходимых сторон</td><td>Изделие из нескольких деталей в собранном виде</td></tr>
+      <tr><td>Размеры</td><td>Все размеры для изготовления</td><td>Только габаритные, установочные и присоединительные</td></tr>
+      <tr><td>Обозначение деталей</td><td>Название и материал в основной надписи</td><td>Номера позиций на полках-выносках</td></tr>
+      <tr><td>Спецификация</td><td>Нет</td><td>Обязательна — перечень всех деталей по позициям</td></tr>
+      <tr><td>Для кого</td><td>Для токаря, фрезеровщика, слесаря</td><td>Для сборщика и контролёра</td></tr>
+    </tbody></table>
+  </div>
+  <div class="lang-content" lang="kk">
+    <table class="spec-tbl"><thead><tr><th>Белгісі</th><th>Жұмыс (бөлшек) сызбасы</th><th>Құрастыру сызбасы</th></tr></thead>
+    <tbody>
+      <tr><td>Нені көрсетеді</td><td>Бір бөлшекті қажетті жақтарынан</td><td>Бірнеше бөлшектен жиналған бұйымды</td></tr>
+      <tr><td>Өлшемдер</td><td>Жасауға қажетті барлық өлшем</td><td>Тек габаритті, орнату және қосу өлшемдері</td></tr>
+      <tr><td>Бөлшектерді белгілеу</td><td>Атауы мен материалы негізгі жазуда</td><td>Шығару сызықтарындағы позиция нөмірлері</td></tr>
+      <tr><td>Спецификация</td><td>Жоқ</td><td>Міндетті — позициялар бойынша барлық бөлшек тізімі</td></tr>
+      <tr><td>Кімге арналған</td><td>Токарь, фрезерлеуші, слесарьға</td><td>Жинаушы мен бақылаушыға</td></tr>
+    </tbody></table>
+  </div>
+  <div class="lang-content" lang="en">
+    <table class="spec-tbl"><thead><tr><th>Feature</th><th>Working (detail) drawing</th><th>Assembly drawing</th></tr></thead>
+    <tbody>
+      <tr><td>What it shows</td><td>One part from all needed sides</td><td>A product of several parts, assembled</td></tr>
+      <tr><td>Dimensions</td><td>Every dimension needed to make it</td><td>Only overall, mounting and connecting sizes</td></tr>
+      <tr><td>Naming parts</td><td>Name and material in the title block</td><td>Item numbers on leader lines</td></tr>
+      <tr><td>Parts list</td><td>None</td><td>Mandatory — a list of all parts by item</td></tr>
+      <tr><td>Who uses it</td><td>Turner, miller, fitter</td><td>Assembler and inspector</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<!-- STEP-BY-STEP: how to read an assembly drawing -->
+<section class="card-accent rounded-custom p-8 mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">Құрастыру сызбасын қалай оқу керек</span>
+    <span lang="en" class="lang-content">How to read an assembly drawing</span>
+    <span lang="ru" class="lang-content">Как читать сборочный чертёж</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+    <div>
+      <div class="num-line"><div class="step-num">1</div><p class="lead">
+        <span lang="kk" class="lang-content">Негізгі жазуды оқы: бұйымның атауын, масштабын және белгісін біл.</span>
+        <span lang="en" class="lang-content">Read the title block: learn the product's name, scale and code.</span>
+        <span lang="ru" class="lang-content">Прочитай основную надпись: узнай название изделия, масштаб и обозначение.</span></p></div>
+      <div class="num-line"><div class="step-num">2</div><p class="lead">
+        <span lang="kk" class="lang-content">Спецификацияны қара — онда барлық бөлшек позиция нөмірімен тізілген.</span>
+        <span lang="en" class="lang-content">Check the parts list — every part is listed there with an item number.</span>
+        <span lang="ru" class="lang-content">Посмотри спецификацию — в ней перечислены все детали с номерами позиций.</span></p></div>
+      <div class="num-line"><div class="step-num">3</div><p class="lead">
+        <span lang="kk" class="lang-content">Позиция нөмірлерін шығару сызықтары арқылы суреттегі бөлшектермен сәйкестендір.</span>
+        <span lang="en" class="lang-content">Match the item numbers, through leader lines, to the parts on the picture.</span>
+        <span lang="ru" class="lang-content">Сопоставь номера позиций по линиям-выноскам с деталями на изображении.</span></p></div>
+    </div>
+    <div>
+      <div class="num-line"><div class="step-num">4</div><p class="lead">
+        <span lang="kk" class="lang-content">Тіліктер (разрездер) арқылы бөлшектердің ішкі қосылыстарын түсін.</span>
+        <span lang="en" class="lang-content">Use the section views to understand the internal connections of parts.</span>
+        <span lang="ru" class="lang-content">По разрезам разберись во внутренних соединениях деталей.</span></p></div>
+      <div class="num-line"><div class="step-num">5</div><p class="lead">
+        <span lang="kk" class="lang-content">Қосылыс түрін анықта: бұрандалы, кілтекті, дәнекерленген немесе тойтармалы.</span>
+        <span lang="en" class="lang-content">Identify the joint type: threaded, keyed, welded or riveted.</span>
+        <span lang="ru" class="lang-content">Определи вид соединения: резьбовое, шпоночное, сварное или заклёпочное.</span></p></div>
+      <div class="num-line"><div class="step-num">6</div><p class="lead">
+        <span lang="kk" class="lang-content">Жинау ретін ойша құр: қай бөлшекті алдымен, қайсысын соңында орнатады.</span>
+        <span lang="en" class="lang-content">Plan the assembly order in your head: which part goes in first, which last.</span>
+        <span lang="ru" class="lang-content">Мысленно выстрой порядок сборки: какую деталь ставят первой, какую последней.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CARD GRID: categories of machine parts -->
+<section class="mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-5 text-center" style="color:#881337">
+    <span lang="kk" class="lang-content">Машина бөлшектерінің негізгі топтары</span>
+    <span lang="en" class="lang-content">Main groups of machine parts</span>
+    <span lang="ru" class="lang-content">Основные группы деталей машин</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="tile">
+      <div class="part-ico">⚙️</div>
+      <div class="genre-name mt-2">
+        <span lang="kk" class="lang-content">Беріліс бөлшектері</span>
+        <span lang="en" class="lang-content">Transmission parts</span>
+        <span lang="ru" class="lang-content">Передаточные</span>
+      </div>
+      <p class="genre-desc">
+        <span lang="kk" class="lang-content">Тісті дөңгелектер, шкивтер, біліктер — қозғалыс пен күшті береді.</span>
+        <span lang="en" class="lang-content">Gears, pulleys, shafts — they transmit motion and force.</span>
+        <span lang="ru" class="lang-content">Зубчатые колёса, шкивы, валы — передают движение и усилие.</span>
+      </p>
+    </div>
+    <div class="tile">
+      <div class="part-ico">🔩</div>
+      <div class="genre-name mt-2">
+        <span lang="kk" class="lang-content">Бекіткіш бөлшектер</span>
+        <span lang="en" class="lang-content">Fasteners</span>
+        <span lang="ru" class="lang-content">Крепёжные</span>
+      </div>
+      <p class="genre-desc">
+        <span lang="kk" class="lang-content">Бұрандалар, гайкалар, шайбалар, тойтармалар — бөлшектерді ұстап тұрады.</span>
+        <span lang="en" class="lang-content">Bolts, nuts, washers, rivets — they hold parts together.</span>
+        <span lang="ru" class="lang-content">Болты, гайки, шайбы, заклёпки — соединяют детали.</span>
+      </p>
+    </div>
+    <div class="tile">
+      <div class="part-ico">🛞</div>
+      <div class="genre-name mt-2">
+        <span lang="kk" class="lang-content">Тірек бөлшектер</span>
+        <span lang="en" class="lang-content">Support parts</span>
+        <span lang="ru" class="lang-content">Опорные</span>
+      </div>
+      <p class="genre-desc">
+        <span lang="kk" class="lang-content">Мойынтіректер мен төлкелер айналмалы білікті ұстайды.</span>
+        <span lang="en" class="lang-content">Bearings and bushings support a rotating shaft.</span>
+        <span lang="ru" class="lang-content">Подшипники и втулки поддерживают вращающийся вал.</span>
+      </p>
+    </div>
+    <div class="tile">
+      <div class="part-ico">🧱</div>
+      <div class="genre-name mt-2">
+        <span lang="kk" class="lang-content">Корпус бөлшектер</span>
+        <span lang="en" class="lang-content">Body parts</span>
+        <span lang="ru" class="lang-content">Корпусные</span>
+      </div>
+      <p class="genre-desc">
+        <span lang="kk" class="lang-content">Корпус, қақпақ, станина — басқа бөлшектерге орын береді.</span>
+        <span lang="en" class="lang-content">Case, cover, frame — they house and align the other parts.</span>
+        <span lang="ru" class="lang-content">Корпус, крышка, станина — вмещают и базируют другие детали.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY with lightbox -->
+<section class="mb-8">
+  <h2 class="heading-font text-2xl font-bold mb-5 text-center" style="color:#881337">
+    <span lang="kk" class="lang-content">Нақты бөлшектер — суретке басып үлкейт</span>
+    <span lang="en" class="lang-content">Real parts — tap a photo to enlarge</span>
+    <span lang="ru" class="lang-content">Настоящие детали — нажми на фото, чтобы увеличить</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb22_gears.jpg" alt=""><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name">
+          <span lang="kk" class="lang-content">Тісті дөңгелектер</span>
+          <span lang="en" class="lang-content">Gears</span>
+          <span lang="ru" class="lang-content">Зубчатые колёса</span>
+        </div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Тісті және құрт берілісі бар тетік</span>
+          <span lang="en" class="lang-content">A mechanism with spur and worm gears</span>
+          <span lang="ru" class="lang-content">Механизм с цилиндрической и червячной передачей</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Тістерінің саны мен модулі арқылы дөңгелектер айналу жылдамдығы мен күшін өзгертеді.</span>
+          <span lang="en" class="lang-content">By their number of teeth and module, gears change the speed and torque of rotation.</span>
+          <span lang="ru" class="lang-content">Числом зубьев и модулем колёса меняют скорость и крутящий момент вращения.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb22_bearing.jpg" alt=""><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name">
+          <span lang="kk" class="lang-content">Мойынтірек тұтқыры</span>
+          <span lang="en" class="lang-content">Bearing unit</span>
+          <span lang="ru" class="lang-content">Подшипниковый узел</span>
+        </div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Білікке арналған домалақ мойынтірек</span>
+          <span lang="en" class="lang-content">A rolling bearing for a shaft</span>
+          <span lang="ru" class="lang-content">Подшипник качения для вала</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Домалақ денелер үйкелісті азайтады, тығыздағыш шаң мен ылғалдан қорғайды.</span>
+          <span lang="en" class="lang-content">Rolling elements cut friction; a seal protects against dust and moisture.</span>
+          <span lang="ru" class="lang-content">Тела качения снижают трение, а сальник защищает от пыли и влаги.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb22_fasteners.jpg" alt=""><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name">
+          <span lang="kk" class="lang-content">Бекіткіш бөлшектер</span>
+          <span lang="en" class="lang-content">Fasteners</span>
+          <span lang="ru" class="lang-content">Крепёжные детали</span>
+        </div>
+        <div class="genre-cap">
+          <span lang="kk" class="lang-content">Бұрандалар, гайкалар, шайбалар</span>
+          <span lang="en" class="lang-content">Bolts, nuts and washers</span>
+          <span lang="ru" class="lang-content">Болты, гайки и шайбы</span>
+        </div>
+        <div class="genre-desc">
+          <span lang="kk" class="lang-content">Стандартты бұйымдар — сызбада тек позициясымен белгіленіп, спецификацияда көрсетіледі.</span>
+          <span lang="en" class="lang-content">Standard items — on a drawing they are marked only by item number and listed in the parts list.</span>
+          <span lang="ru" class="lang-content">Стандартные изделия — на чертеже отмечаются только позицией и заносятся в спецификацию.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- KEY FACTS STRIP -->
+<section class="card-rose rounded-custom p-8 mb-4">
+  <h2 class="heading-font text-2xl font-bold mb-4">
+    <span lang="kk" class="lang-content">Есте сақта</span>
+    <span lang="en" class="lang-content">Remember</span>
+    <span lang="ru" class="lang-content">Запомни</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div>
+      <span class="badge">
+        <span lang="kk" class="lang-content">Позиция</span>
+        <span lang="en" class="lang-content">Item No.</span>
+        <span lang="ru" class="lang-content">Позиция</span>
+      </span>
+      <p class="mt-2" style="line-height:1.6">
+        <span lang="kk" class="lang-content">Әр бөлшекке сызбада жеке позиция нөмірі беріледі.</span>
+        <span lang="en" class="lang-content">Every part gets its own item number on the drawing.</span>
+        <span lang="ru" class="lang-content">Каждой детали на чертеже присваивают свой номер позиции.</span>
+      </p>
+    </div>
+    <div>
+      <span class="badge">
+        <span lang="kk" class="lang-content">Спецификация</span>
+        <span lang="en" class="lang-content">Parts list</span>
+        <span lang="ru" class="lang-content">Спецификация</span>
+      </span>
+      <p class="mt-2" style="line-height:1.6">
+        <span lang="kk" class="lang-content">Спецификация — құрастыру сызбасының міндетті серігі.</span>
+        <span lang="en" class="lang-content">A parts list is a mandatory companion to the assembly drawing.</span>
+        <span lang="ru" class="lang-content">Спецификация — обязательный спутник сборочного чертежа.</span>
+      </p>
+    </div>
+    <div>
+      <span class="badge">
+        <span lang="kk" class="lang-content">Тілік</span>
+        <span lang="en" class="lang-content">Section</span>
+        <span lang="ru" class="lang-content">Разрез</span>
+      </span>
+      <p class="mt-2" style="line-height:1.6">
+        <span lang="kk" class="lang-content">Тіліктер бөлшектердің ішкі қосылысын ашып көрсетеді.</span>
+        <span lang="en" class="lang-content">Section views reveal the internal joints between parts.</span>
+        <span lang="ru" class="lang-content">Разрезы раскрывают внутренние соединения деталей.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

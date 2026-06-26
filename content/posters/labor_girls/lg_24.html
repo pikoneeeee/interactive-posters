@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сервировка стола и столовый этикет</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.95rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.55;}
+.step b{color:#881337;}
+.setting-wrap{background:rgba(255,255,255,0.96);border:1px solid rgba(190,18,60,.16);border-radius:1.3rem;
+  padding:1.2rem;box-shadow:0 6px 24px rgba(136,19,55,.08);}
+.setting-wrap svg{width:100%;height:auto;display:block;}
+.legend{display:grid;grid-template-columns:1fr;gap:.55rem;}
+.legend .li{display:flex;gap:.6rem;align-items:flex-start;font-size:.93rem;color:#44403c;line-height:1.4;}
+.legend .n{flex-shrink:0;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--rose);color:#fff;
+  font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;}
+.legend .li b{color:#881337;}
+table.et{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.96);border-radius:1rem;overflow:hidden;
+  box-shadow:0 4px 18px rgba(136,19,55,.08);font-size:.93rem;}
+table.et th{background:#9f1239;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;padding:.7rem .9rem;text-align:left;font-size:.92rem;}
+table.et td{padding:.7rem .9rem;border-top:1px solid rgba(190,18,60,.13);color:#44403c;vertical-align:top;line-height:1.45;}
+table.et tr:nth-child(even) td{background:rgba(225,29,72,0.035);}
+table.et .good{color:#15803d;font-weight:700;}
+table.et .bad{color:#be123c;font-weight:700;}
+.rule{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:1rem 1.15rem;}
+.rule h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.0rem;margin-bottom:.25rem;}
+.rule p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.dish{background:linear-gradient(135deg,#fff,#fff5f7);border:1px solid rgba(190,18,60,.18);border-radius:.9rem;
+  padding:.9rem 1rem;text-align:center;}
+.dish .ic{font-size:2rem;line-height:1;}
+.dish b{color:#881337;font-family:'Montserrat',sans-serif;display:block;margin-top:.2rem;font-size:.96rem;}
+.dish p{color:#57534e;font-size:.84rem;line-height:1.35;margin-top:.2rem;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · 4-бөлім · Тағамтану мәдениеті</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Section 4 · Food Culture</span>
+      <span lang="ru" class="lang-content">Художественный труд · Раздел 4 · Культура питания</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🍽️ Дастархан жасау және ас үстеліндегі әдеп</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🍽️ Table Setting &amp; Dining Etiquette</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🍽️ Сервировка стола и столовый этикет</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Үстелді әдемі әрі дұрыс жасау, аспап-ыдысты орналастыру және сыпайы тамақтану ережелері.</span>
+      <span lang="en" class="lang-content">How to lay a table beautifully and correctly, place the tableware, and dine politely.</span>
+      <span lang="ru" class="lang-content">Как красиво и правильно накрыть стол, разложить приборы и вести себя за столом.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content"><b>Сервировка (дастархан жасау)</b> — үстелге ыдыс, аспап және сәнді бұйымдарды белгілі тәртіппен қою. Дұрыс сервировка тек әдемілік үшін емес: ол тамақтануды ыңғайлы әрі гигиеналық етеді, әр аспаптың өз орны мен өз қызметі болады. <b>Әдеп (этикет)</b> — үстел басындағы мінез-құлық ережелері: олар адамдарға бір-бірін сыйлап, жайлы отыруға көмектеседі. Әдемі дастархан мен сыпайы мінез — қонақжайлықтың және үй мәдениетінің көрсеткіші.</span>
+    <span lang="en" class="lang-content"><b>Table setting</b> means arranging dishes, cutlery and decorations on the table in a set order. A correct setting is not only beautiful: it makes eating comfortable and hygienic, and every item has its own place and purpose. <b>Etiquette</b> is the set of rules of behaviour at the table; they help people respect one another and feel at ease. A well-laid table and polite manners are signs of hospitality and a cultured home.</span>
+    <span lang="ru" class="lang-content"><b>Сервировка</b> — это расстановка на столе посуды, приборов и украшений в определённом порядке. Правильная сервировка не только красива: она делает еду удобной и гигиеничной, у каждого предмета своё место и назначение. <b>Этикет</b> — это правила поведения за столом; они помогают людям уважать друг друга и чувствовать себя свободно. Красиво накрытый стол и вежливые манеры — признак гостеприимства и культуры дома.</span>
+  </p>
+</section>
+
+<!-- PLACE SETTING DIAGRAM -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Бір адамға арналған орын: схема</span>
+    <span lang="en" class="lang-content">One Place Setting: the Scheme</span>
+    <span lang="ru" class="lang-content">Сервировка одного места: схема</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Аспаптарды сырттан ішке қарай қолданады: әр тағамға — өз аспабы.</span>
+    <span lang="en" class="lang-content">Use the cutlery from the outside in: each course has its own piece.</span>
+    <span lang="ru" class="lang-content">Приборы используют снаружи внутрь: для каждого блюда — свой прибор.</span>
+  </p>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div class="setting-wrap">
+      <svg viewBox="0 0 420 320" role="img" aria-label="place setting scheme">
+        <!-- placemat -->
+        <rect x="20" y="40" width="380" height="250" rx="14" fill="#fdf2f4" stroke="#e8c7cf"/>
+        <!-- charger / dinner plate -->
+        <circle cx="210" cy="185" r="78" fill="#ffffff" stroke="#c9a96b" stroke-width="3"/>
+        <circle cx="210" cy="185" r="63" fill="#fbfbfb" stroke="#d8b888" stroke-width="1.6"/>
+        <!-- napkin on plate -->
+        <rect x="180" y="158" width="60" height="54" rx="4" fill="#fbe7ec" stroke="#e0a9b6" transform="rotate(-8 210 185)"/>
+        <text x="210" y="189" font-size="14" text-anchor="middle" fill="#b76e84">①</text>
+        <!-- bread plate upper left -->
+        <circle cx="92" cy="120" r="30" fill="#ffffff" stroke="#c9a96b" stroke-width="2.4"/>
+        <text x="92" y="125" font-size="13" text-anchor="middle" fill="#b76e84">⑦</text>
+        <!-- butter knife on bread plate -->
+        <rect x="76" y="104" width="32" height="5" rx="2.5" fill="#cfd6dd" stroke="#9aa6b2" transform="rotate(-20 92 106)"/>
+        <!-- forks left: dinner fork (inner) + salad fork (outer) -->
+        <g fill="#cfd6dd" stroke="#9aa6b2" stroke-width="1.2">
+          <rect x="138" y="150" width="7" height="70" rx="3.5"/>
+          <rect x="120" y="150" width="7" height="70" rx="3.5"/>
+        </g>
+        <text x="141" y="240" font-size="12" text-anchor="middle" fill="#7c8794">②</text>
+        <text x="123" y="240" font-size="12" text-anchor="middle" fill="#7c8794">③</text>
+        <!-- knife (inner right, blade toward plate) + spoon (outer) -->
+        <g fill="#cfd6dd" stroke="#9aa6b2" stroke-width="1.2">
+          <rect x="293" y="150" width="7" height="70" rx="3.5"/>
+        </g>
+        <g fill="#dfe5ea" stroke="#9aa6b2" stroke-width="1.2">
+          <ellipse cx="316" cy="158" rx="6" ry="10"/>
+          <rect x="313" y="166" width="6" height="54" rx="3"/>
+        </g>
+        <text x="296" y="240" font-size="12" text-anchor="middle" fill="#7c8794">④</text>
+        <text x="316" y="240" font-size="12" text-anchor="middle" fill="#7c8794">⑤</text>
+        <!-- dessert spoon/fork above plate -->
+        <g fill="#dfe5ea" stroke="#9aa6b2" stroke-width="1.1">
+          <rect x="175" y="92" width="46" height="6" rx="3"/>
+          <ellipse cx="225" cy="95" rx="9" ry="5.5"/>
+        </g>
+        <text x="200" y="84" font-size="12" text-anchor="middle" fill="#7c8794">⑥</text>
+        <!-- glasses upper right -->
+        <g>
+          <path d="M300 96 q12 0 12 14 q0 12 -6 16 v10 q0 4 4 4 h-20 q4 0 4 -4 v-10 q-6 -4 -6 -16 q0 -14 12 -14 z" fill="#eaf4fb" stroke="#9cc3dd" stroke-width="1.6"/>
+          <ellipse cx="334" cy="118" rx="9" ry="7" fill="#eaf4fb" stroke="#9cc3dd" stroke-width="1.6"/>
+          <rect x="331" y="124" width="6" height="14" rx="2" fill="#eaf4fb" stroke="#9cc3dd" stroke-width="1.2"/>
+        </g>
+        <text x="306" y="150" font-size="12" text-anchor="middle" fill="#5a93b8">⑧</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <div class="li"><div class="n">1</div><div><b><span lang="kk" class="lang-content">Негізгі тәрелке</span><span lang="en" class="lang-content">Dinner plate</span><span lang="ru" class="lang-content">Основная тарелка</span></b> — <span lang="kk" class="lang-content">орынның ортасында, шетінен 1–2 см.</span><span lang="en" class="lang-content">in the centre, 1–2 cm from the edge.</span><span lang="ru" class="lang-content">в центре места, в 1–2 см от края.</span></div></div>
+      <div class="li"><div class="n">2</div><div><b><span lang="kk" class="lang-content">Негізгі ас шанышқысы</span><span lang="en" class="lang-content">Dinner fork</span><span lang="ru" class="lang-content">Столовая вилка</span></b> — <span lang="kk" class="lang-content">сол жақта, тәрелкеге жақын.</span><span lang="en" class="lang-content">on the left, nearest the plate.</span><span lang="ru" class="lang-content">слева, ближе к тарелке.</span></div></div>
+      <div class="li"><div class="n">3</div><div><b><span lang="kk" class="lang-content">Салат/закуска шанышқысы</span><span lang="en" class="lang-content">Salad fork</span><span lang="ru" class="lang-content">Закусочная вилка</span></b> — <span lang="kk" class="lang-content">сол жақта, шеткі.</span><span lang="en" class="lang-content">on the left, outermost.</span><span lang="ru" class="lang-content">слева, с краю.</span></div></div>
+      <div class="li"><div class="n">4</div><div><b><span lang="kk" class="lang-content">Пышақ</span><span lang="en" class="lang-content">Knife</span><span lang="ru" class="lang-content">Нож</span></b> — <span lang="kk" class="lang-content">оң жақта, <b>жүзі тәрелкеге қараған.</b></span><span lang="en" class="lang-content">on the right, <b>blade toward the plate.</b></span><span lang="ru" class="lang-content">справа, <b>лезвием к тарелке.</b></span></div></div>
+      <div class="li"><div class="n">5</div><div><b><span lang="kk" class="lang-content">Қасық (сорпа)</span><span lang="en" class="lang-content">Soup spoon</span><span lang="ru" class="lang-content">Ложка (суп)</span></b> — <span lang="kk" class="lang-content">оң жақта, пышақтан тысқары.</span><span lang="en" class="lang-content">on the right, outside the knife.</span><span lang="ru" class="lang-content">справа, снаружи от ножа.</span></div></div>
+      <div class="li"><div class="n">6</div><div><b><span lang="kk" class="lang-content">Десерт аспабы</span><span lang="en" class="lang-content">Dessert cutlery</span><span lang="ru" class="lang-content">Десертный прибор</span></b> — <span lang="kk" class="lang-content">тәрелкенің үстінде, көлденең.</span><span lang="en" class="lang-content">above the plate, horizontally.</span><span lang="ru" class="lang-content">над тарелкой, горизонтально.</span></div></div>
+      <div class="li"><div class="n">7</div><div><b><span lang="kk" class="lang-content">Нан тәрелкесі</span><span lang="en" class="lang-content">Bread plate</span><span lang="ru" class="lang-content">Тарелка для хлеба</span></b> — <span lang="kk" class="lang-content">сол жақ жоғарыда, май пышағымен.</span><span lang="en" class="lang-content">upper left, with a butter knife.</span><span lang="ru" class="lang-content">слева вверху, с ножом для масла.</span></div></div>
+      <div class="li"><div class="n">8</div><div><b><span lang="kk" class="lang-content">Стақан/бокал</span><span lang="en" class="lang-content">Glasses</span><span lang="ru" class="lang-content">Стакан/бокалы</span></b> — <span lang="kk" class="lang-content">пышақтың үстінде, оң жақта.</span><span lang="en" class="lang-content">above the knife, on the right.</span><span lang="ru" class="lang-content">над ножом, справа.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY RULES -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Сервировканың негізгі ережелері</span>
+    <span lang="en" class="lang-content">Key Rules of Table Setting</span>
+    <span lang="ru" class="lang-content">Главные правила сервировки</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Таза дастархан.</span><span lang="en" class="lang-content">A clean cloth.</span><span lang="ru" class="lang-content">Чистая скатерть.</span></b> <span lang="kk" class="lang-content">Алдымен үтіктелген таза дастархан төсейді; астына жұмсақ төсеме қоюға болады.</span><span lang="en" class="lang-content">First lay a clean, ironed tablecloth; a soft underlay may go beneath it.</span><span lang="ru" class="lang-content">Сначала стелют чистую выглаженную скатерть; под неё можно положить мягкую подложку.</span></p></div>
+    <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Шанышқы — солға, пышақ пен қасық — оңға.</span><span lang="en" class="lang-content">Forks left, knife and spoon right.</span><span lang="ru" class="lang-content">Вилки — слева, нож и ложка — справа.</span></b> <span lang="kk" class="lang-content">Пышақтың жүзі әрқашан тәрелкеге қарайды.</span><span lang="en" class="lang-content">The knife blade always faces the plate.</span><span lang="ru" class="lang-content">Лезвие ножа всегда обращено к тарелке.</span></p></div>
+    <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Сырттан ішке.</span><span lang="en" class="lang-content">Outside in.</span><span lang="ru" class="lang-content">Снаружи внутрь.</span></b> <span lang="kk" class="lang-content">Аспаптарды тағам кезегімен қояды: ең шеткісі — алғашқы тағамға.</span><span lang="en" class="lang-content">Cutlery is placed in course order: the outermost is for the first course.</span><span lang="ru" class="lang-content">Приборы кладут по порядку блюд: крайний — для первого блюда.</span></p></div>
+    <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Стақан — оң жақ жоғарыда.</span><span lang="en" class="lang-content">Glass upper right.</span><span lang="ru" class="lang-content">Стакан — справа вверху.</span></b> <span lang="kk" class="lang-content">Су мен сусын ыдысын пышақтың ұшынан жоғары қояды.</span><span lang="en" class="lang-content">Water and drink glasses go above the tip of the knife.</span><span lang="ru" class="lang-content">Стакан для воды и напитков ставят над кончиком ножа.</span></p></div>
+    <div class="step"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Майлық.</span><span lang="en" class="lang-content">The napkin.</span><span lang="ru" class="lang-content">Салфетка.</span></b> <span lang="kk" class="lang-content">Майлықты тәрелкеге не сол жаққа қояды; әдемі бүктесе — сәнді көрінеді.</span><span lang="en" class="lang-content">Place the napkin on the plate or to the left; a neat fold looks elegant.</span><span lang="ru" class="lang-content">Салфетку кладут на тарелку или слева; красиво сложенная выглядит нарядно.</span></p></div>
+    <div class="step"><div class="step-num">6</div><p><b><span lang="kk" class="lang-content">Сәндік әшекей.</span><span lang="en" class="lang-content">A decorative touch.</span><span lang="ru" class="lang-content">Украшение.</span></b> <span lang="kk" class="lang-content">Үстел ортасына гүл не шам қоюға болады — бірақ ол көрінуге кедергі болмауы керек.</span><span lang="en" class="lang-content">Flowers or a candle may go in the centre — but they must not block the view.</span><span lang="ru" class="lang-content">В центр можно поставить цветы или свечу — но они не должны мешать видеть друг друга.</span></p></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Жасалған үстелдер: мысалдар</span>
+    <span lang="en" class="lang-content">Laid Tables: Examples</span>
+    <span lang="ru" class="lang-content">Накрытые столы: примеры</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p24_table.jpg" alt="Сервировка на одного"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Күнделікті орын</span><span lang="en" class="lang-content">Everyday setting</span><span lang="ru" class="lang-content">Повседневное место</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">үйдегі толық дастархан</span><span lang="en" class="lang-content">a full home setting</span><span lang="ru" class="lang-content">полная домашняя сервировка</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Тәрелке ортада, шанышқы солда, пышақ пен қасық оңда, стақан жоғарыда — барлығы өз орнында.</span><span lang="en" class="lang-content">Plate in the centre, fork left, knife and spoon right, glass above — everything in its place.</span><span lang="ru" class="lang-content">Тарелка в центре, вилка слева, нож и ложка справа, стакан сверху — всё на своих местах.</span></div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p24_fortwo.jpg" alt="Стол на двоих"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Екі адамға</span><span lang="en" class="lang-content">Table for two</span><span lang="ru" class="lang-content">Стол на двоих</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">бокал мен төсеме</span><span lang="en" class="lang-content">glasses and placemats</span><span lang="ru" class="lang-content">бокалы и подставки</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Әр орынға жеке төсеме, бокал және аспаптар жинағы — ыңғайлы әрі ұқыпты.</span><span lang="en" class="lang-content">Each place has its own mat, glass and set of cutlery — neat and comfortable.</span><span lang="ru" class="lang-content">У каждого места своя подставка, бокал и набор приборов — удобно и опрятно.</span></div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p24_festive.jpg" alt="Праздничный стол"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Мерекелік үстел</span><span lang="en" class="lang-content">Festive table</span><span lang="ru" class="lang-content">Праздничный стол</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">шам, гүл, майлық</span><span lang="en" class="lang-content">candles, flowers, napkins</span><span lang="ru" class="lang-content">свечи, цветы, салфетки</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Ортада сәнді композиция, әр орынға бүктелген майлық — мейрамдық көңіл-күй осылай туады.</span><span lang="en" class="lang-content">A decorative centrepiece and a folded napkin at each place create a festive mood.</span><span lang="ru" class="lang-content">Декоративная композиция в центре и сложенная салфетка у каждого места создают праздничное настроение.</span></div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p24_napkin.jpg" alt="Складывание салфетки"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Майлықты бүктеу</span><span lang="en" class="lang-content">Napkin folding</span><span lang="ru" class="lang-content">Складывание салфетки</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">«желпуіш» бүктемесі</span><span lang="en" class="lang-content">a fan fold</span><span lang="ru" class="lang-content">складка «веер»</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Матадан жасалған майлықты әртүрлі пішінде бүктеуге болады — бұл үстелге сән береді.</span><span lang="en" class="lang-content">A cloth napkin can be folded into many shapes — this adds elegance to the table.</span><span lang="ru" class="lang-content">Тканевую салфетку можно сложить разными способами — это украшает стол.</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ETIQUETTE TABLE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Ас үстеліндегі әдеп: болады / болмайды</span>
+    <span lang="en" class="lang-content">Dining Etiquette: Do &amp; Don't</span>
+    <span lang="ru" class="lang-content">Столовый этикет: можно / нельзя</span>
+  </h2>
+
+  <div class="lang-content" lang="ru">
+    <table class="et">
+      <thead><tr><th style="width:34%">Ситуация</th><th style="width:33%">✔ Как правильно</th><th style="width:33%">✘ Чего избегать</th></tr></thead>
+      <tbody>
+        <tr><td>Салфетка</td><td class="good">Положить на колени; уголком промокать губы.</td><td class="bad">Засовывать за воротник, вытирать ею лицо и руки.</td></tr>
+        <tr><td>Осанка и локти</td><td class="good">Сидеть прямо, кисти у края стола.</td><td class="bad">Ставить локти на стол, разваливаться на стуле.</td></tr>
+        <tr><td>Приборы</td><td class="good">Брать снаружи внутрь; держать вилку в левой, нож в правой.</td><td class="bad">Размахивать приборами, облизывать нож.</td></tr>
+        <tr><td>Во время еды</td><td class="good">Жевать с закрытым ртом, есть бесшумно.</td><td class="bad">Чавкать, говорить с полным ртом, дуть на горячее.</td></tr>
+        <tr><td>Просьба</td><td class="good">Вежливо попросить передать блюдо.</td><td class="bad">Тянуться через весь стол за едой.</td></tr>
+        <tr><td>Окончание еды</td><td class="good">Положить приборы параллельно на тарелку.</td><td class="bad">Вставать из-за стола, не поблагодарив хозяев.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="kk">
+    <table class="et">
+      <thead><tr><th style="width:34%">Жағдай</th><th style="width:33%">✔ Дұрысы</th><th style="width:33%">✘ Болмайтыны</th></tr></thead>
+      <tbody>
+        <tr><td>Майлық</td><td class="good">Тізеге қою; ұшымен ерінді сүрту.</td><td class="bad">Жағаға қыстыру, бетті-қолды сүрту.</td></tr>
+        <tr><td>Қалып, шынтақ</td><td class="good">Тік отыру, қолды үстел шетіне қою.</td><td class="bad">Шынтақты үстелге қою, орындыққа жайылу.</td></tr>
+        <tr><td>Аспаптар</td><td class="good">Сырттан ішке алу; шанышқы — солда, пышақ — оңда.</td><td class="bad">Аспапты сермеу, пышақты жалау.</td></tr>
+        <tr><td>Тамақ кезінде</td><td class="good">Аузды жауып шайнау, үнсіз жеу.</td><td class="bad">Шапылдату, аузы толы сөйлеу, ыстыққа үрлеу.</td></tr>
+        <tr><td>Өтініш</td><td class="good">Тағамды сыпайы сұрап беруді өтіну.</td><td class="bad">Үстел арқылы созылып алу.</td></tr>
+        <tr><td>Тамақ соңы</td><td class="good">Аспаптарды тәрелкеге қатар қою.</td><td class="bad">Алғыс айтпай үстелден тұру.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="en">
+    <table class="et">
+      <thead><tr><th style="width:34%">Situation</th><th style="width:33%">✔ The right way</th><th style="width:33%">✘ Avoid</th></tr></thead>
+      <tbody>
+        <tr><td>Napkin</td><td class="good">Put it on your lap; dab your lips with a corner.</td><td class="bad">Tucking it into the collar, wiping face and hands with it.</td></tr>
+        <tr><td>Posture &amp; elbows</td><td class="good">Sit upright, hands at the table edge.</td><td class="bad">Resting elbows on the table, slumping in the chair.</td></tr>
+        <tr><td>Cutlery</td><td class="good">Take it outside in; fork in the left hand, knife in the right.</td><td class="bad">Waving cutlery about, licking the knife.</td></tr>
+        <tr><td>While eating</td><td class="good">Chew with your mouth closed, eat quietly.</td><td class="bad">Smacking, talking with a full mouth, blowing on hot food.</td></tr>
+        <tr><td>Asking</td><td class="good">Politely ask for a dish to be passed.</td><td class="bad">Reaching across the whole table for food.</td></tr>
+        <tr><td>Finishing</td><td class="good">Lay the cutlery parallel on the plate.</td><td class="bad">Leaving the table without thanking the hosts.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FINISHED-SIGNAL + DISHES -->
+<section class="mb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <div>
+      <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+        <span lang="kk" class="lang-content">Аспап тілі: «дайын» белгісі</span>
+        <span lang="en" class="lang-content">Cutlery Language: the «Finished» Sign</span>
+        <span lang="ru" class="lang-content">Язык приборов: знак «я закончил»</span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="rule"><h4>⏸️ <span lang="kk" class="lang-content">Үзіліс</span><span lang="en" class="lang-content">A pause</span><span lang="ru" class="lang-content">Пауза</span></h4><p><span lang="kk" class="lang-content">Әлі жеп жатсаңыз — пышақ пен шанышқыны тәрелкеге «^» (үй) тәрізді қиғаш қойыңыз.</span><span lang="en" class="lang-content">Still eating — rest knife and fork crossed like a roof «^» on the plate.</span><span lang="ru" class="lang-content">Ещё едите — положите нож и вилку «домиком» (крест-накрест) на тарелке.</span></p></div>
+        <div class="rule"><h4>✅ <span lang="kk" class="lang-content">Бітті</span><span lang="en" class="lang-content">Finished</span><span lang="ru" class="lang-content">Закончил</span></h4><p><span lang="kk" class="lang-content">Бітірдіңіз — пышақ пен шанышқыны қатар, тәрелкеде сағат тілінің «4-сағат» бағытында қойыңыз.</span><span lang="en" class="lang-content">Done — place knife and fork parallel, pointing to about «4 o'clock» on the plate.</span><span lang="ru" class="lang-content">Закончили — положите нож и вилку параллельно, на «4 часа» на тарелке.</span></p></div>
+      </div>
+      <p class="lead mt-4">
+        <span lang="kk" class="lang-content">Бұл белгілерді бүкіл әлемде түсінеді: даяшы не үй иесі сөзсіз-ақ ыдысты алу не алмауды біледі.</span>
+        <span lang="en" class="lang-content">These signs are understood worldwide: a waiter or host knows without a word whether to clear your plate.</span>
+        <span lang="ru" class="lang-content">Эти знаки понимают во всём мире: официант или хозяин без слов поймёт, убирать тарелку или нет.</span>
+      </p>
+    </div>
+    <div>
+      <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+        <span lang="kk" class="lang-content">Әр аспаптың қызметі</span>
+        <span lang="en" class="lang-content">What Each Item Is For</span>
+        <span lang="ru" class="lang-content">Назначение приборов</span>
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div class="dish"><div class="ic">🍴</div><b><span lang="kk" class="lang-content">Шанышқы</span><span lang="en" class="lang-content">Fork</span><span lang="ru" class="lang-content">Вилка</span></b><p><span lang="kk" class="lang-content">негізгі тағам, салат</span><span lang="en" class="lang-content">main course, salad</span><span lang="ru" class="lang-content">второе, салат</span></p></div>
+        <div class="dish"><div class="ic">🔪</div><b><span lang="kk" class="lang-content">Пышақ</span><span lang="en" class="lang-content">Knife</span><span lang="ru" class="lang-content">Нож</span></b><p><span lang="kk" class="lang-content">кесу, тек оң қолда</span><span lang="en" class="lang-content">cutting, right hand only</span><span lang="ru" class="lang-content">резать, в правой руке</span></p></div>
+        <div class="dish"><div class="ic">🥄</div><b><span lang="kk" class="lang-content">Қасық</span><span lang="en" class="lang-content">Spoon</span><span lang="ru" class="lang-content">Ложка</span></b><p><span lang="kk" class="lang-content">сорпа, десерт</span><span lang="en" class="lang-content">soup, dessert</span><span lang="ru" class="lang-content">суп, десерт</span></p></div>
+        <div class="dish"><div class="ic">🍽️</div><b><span lang="kk" class="lang-content">Тәрелке</span><span lang="en" class="lang-content">Plate</span><span lang="ru" class="lang-content">Тарелка</span></b><p><span lang="kk" class="lang-content">негізгі, терең, нан</span><span lang="en" class="lang-content">dinner, soup, bread</span><span lang="ru" class="lang-content">столовая, суповая, хлеб</span></p></div>
+        <div class="dish"><div class="ic">🥛</div><b><span lang="kk" class="lang-content">Стақан</span><span lang="en" class="lang-content">Glass</span><span lang="ru" class="lang-content">Стакан</span></b><p><span lang="kk" class="lang-content">су, сусын</span><span lang="en" class="lang-content">water, drinks</span><span lang="ru" class="lang-content">вода, напитки</span></p></div>
+        <div class="dish"><div class="ic">🧻</div><b><span lang="kk" class="lang-content">Майлық</span><span lang="en" class="lang-content">Napkin</span><span lang="ru" class="lang-content">Салфетка</span></b><p><span lang="kk" class="lang-content">тазалық, сән</span><span lang="en" class="lang-content">hygiene, decor</span><span lang="ru" class="lang-content">гигиена, украшение</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="card rounded-custom p-7 md:p-8 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+    <span lang="kk" class="lang-content">💬 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">💬 Remember</span>
+    <span lang="ru" class="lang-content">💬 Запомните</span>
+  </h3>
+  <p class="lead" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Сервировканың алтын ережесі қарапайым: <b>шанышқы — солға, пышақ пен қасық — оңға, аспаптар сырттан ішке</b>. Әдемі дастархан тамаққа құрмет көрсетеді, ал сыпайы әдеп — айналаңдағыларға. Үстел басындағы мәдениет — үлкен қонақжайлықтың кішкентай, бірақ маңызды бөлігі.</span>
+    <span lang="en" class="lang-content">The golden rule of table setting is simple: <b>forks on the left, knife and spoon on the right, cutlery from the outside in</b>. A beautiful table shows respect for the food, and polite manners show respect for the people around you. Good behaviour at the table is a small but important part of true hospitality.</span>
+    <span lang="ru" class="lang-content">Золотое правило сервировки простое: <b>вилки — слева, нож и ложка — справа, приборы — снаружи внутрь</b>. Красивый стол выражает уважение к еде, а вежливые манеры — уважение к окружающим. Культура за столом — маленькая, но важная часть настоящего гостеприимства.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){
+  if(lang==='kz')lang='kk';
+  currentLang=lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+function openLB(card){
+  document.getElementById('lb-img').src=card.querySelector('.pic img').src;
+  var n=card.querySelector('.genre-name'); document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';
+  var cap=card.querySelector('.genre-cap'); document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';
+  var d=card.querySelector('.genre-desc'); document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

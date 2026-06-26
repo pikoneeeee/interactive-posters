@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Фортепиано и клавишные</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_mus_style_sky.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-sky-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Музыка · 42-бөлім · Пернелі аспаптар</span>
+      <span lang="en" class="lang-content">Music · Section 42 · Keyboards</span>
+      <span lang="ru" class="lang-content">Музыка · Раздел 42 · Фортепиано и клавишные</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-sky-800">🎹 Фортепиано және пернелі аспаптар</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-sky-800">🎹 The Piano and Keyboard Instruments</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-sky-800">🎹 Фортепиано и клавишные</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Рояль, пианино, орган, клавесин — дыбыс пернелерді басумен туады.</span>
+      <span lang="en" class="lang-content">Grand piano, upright, organ, harpsichord — the sound is born by pressing keys.</span>
+      <span lang="ru" class="lang-content">Рояль, пианино, орган, клавесин — звук рождается нажатием клавиш.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- SECTION 1: what are keyboards + interactive piano -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-sky-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎹 Пернелі аспаптар деген не</span>
+    <span lang="en" class="lang-content">🎹 What Are Keyboard Instruments</span>
+    <span lang="ru" class="lang-content">🎹 Что такое клавишные</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <p class="text-slate-700 mb-4">
+      <span lang="kk" class="lang-content"><b class="text-sky-700">Пернелі аспаптарда</b> дыбыс <b class="text-sky-700">пернелерді</b> (клавиштерді) басумен шығарылады. Бір қатарда орналасқан перне саусақпен басылады — ал ішкі тетік дыбысты тудырады.</span>
+      <span lang="en" class="lang-content"><b class="text-sky-700">In keyboard instruments</b> sound is produced by pressing the <b class="text-sky-700">keys</b>. A finger presses a key in the row — and an inner mechanism makes the sound.</span>
+      <span lang="ru" class="lang-content">У <b class="text-sky-700">клавишных инструментов</b> звук извлекается нажатием <b class="text-sky-700">клавиш</b>. Палец нажимает клавишу в ряду — а внутренний механизм рождает звук.</span>
+    </p>
+    <p class="hint mb-3">🎧
+      <span lang="kk" class="lang-content">пернелерді басып, гамманы тыңдаңыз — содан соң органның созылмалы дыбысын естіңіз</span>
+      <span lang="en" class="lang-content">tap the keys and play the scale — then hear the organ's sustained sound</span>
+      <span lang="ru" class="lang-content">нажимайте на клавиши и сыграйте гамму — затем услышьте тянущийся звук органа</span>
+    </p>
+    <!-- interactive piano: C4..C5 (copied from mus_5) -->
+    <div class="pianobar" style="max-width:760px">
+      <div class="wkey" id="k0" onclick="tone(261.63,0.6);litKey(this)">До</div>
+      <div class="wkey" id="k1" onclick="tone(293.66,0.6);litKey(this)">Ре</div>
+      <div class="wkey" id="k2" onclick="tone(329.63,0.6);litKey(this)">Ми</div>
+      <div class="wkey" id="k3" onclick="tone(349.23,0.6);litKey(this)">Фа</div>
+      <div class="wkey" id="k4" onclick="tone(392.00,0.6);litKey(this)">Соль</div>
+      <div class="wkey" id="k5" onclick="tone(440.00,0.6);litKey(this)">Ля</div>
+      <div class="wkey" id="k6" onclick="tone(493.88,0.6);litKey(this)">Си</div>
+      <div class="wkey" id="k7" onclick="tone(523.25,0.6);litKey(this)">До</div>
+      <!-- black keys -->
+      <div class="bkey" style="left:8.0%"  onclick="event.stopPropagation();tone(277.18,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:20.5%" onclick="event.stopPropagation();tone(311.13,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:45.5%" onclick="event.stopPropagation();tone(369.99,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:58.0%" onclick="event.stopPropagation();tone(415.30,0.6);litKey(this)"></div>
+      <div class="bkey" style="left:70.5%" onclick="event.stopPropagation();tone(466.16,0.6);litKey(this)"></div>
+    </div>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <button class="playbtn" onclick="playScale()">▶
+        <span lang="kk" class="lang-content">Гамманы ойнату</span>
+        <span lang="en" class="lang-content">Play the scale</span>
+        <span lang="ru" class="lang-content">Сыграть гамму</span>
+      </button>
+      <button class="playbtn" onclick="playOrgan()">
+        <span lang="kk" class="lang-content">Орган (созылмалы дыбыс)</span>
+        <span lang="en" class="lang-content">Organ (sustained sound)</span>
+        <span lang="ru" class="lang-content">Орган (тянущийся звук)</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: piano (grand & upright) + organ -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-sky-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎼 Фортепиано және орган</span>
+    <span lang="en" class="lang-content">🎼 The Piano and the Organ</span>
+    <span lang="ru" class="lang-content">🎼 Фортепиано и орган</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font text-lg text-sky-700 font-bold mb-2">
+        <span lang="kk" class="lang-content">Фортепиано — ішекті-пернелі</span>
+        <span lang="en" class="lang-content">The Piano — strings &amp; keys</span>
+        <span lang="ru" class="lang-content">Фортепиано — струнно-клавишный</span>
+      </h3>
+      <p class="text-slate-700 mb-3">
+        <span lang="kk" class="lang-content">Пернені басқанда <b class="text-sky-700">балғашық ішекті соғады</b> — осылай дыбыс туады. Атауы «<b>форте-пиано</b>» = «<b>қатты-ақырын</b>»: қатты да, ақырын да ойнауға болады.</span>
+        <span lang="en" class="lang-content">When a key is pressed, a <b class="text-sky-700">hammer strikes a string</b> — that makes the sound. Its name "<b>forte-piano</b>" means "<b>loud-soft</b>": you can play both loudly and softly.</span>
+        <span lang="ru" class="lang-content">При нажатии клавиши <b class="text-sky-700">молоточек ударяет по струне</b> — так рождается звук. Название «<b>форте-пиано</b>» = «<b>громко-тихо</b>»: можно играть и громко, и тихо.</span>
+      </p>
+      <div class="grid grid-cols-2 gap-3 mb-3">
+        <div class="tile rounded-xl p-4 text-center">
+          <div class="tile-icon">🎹</div>
+          <p class="font-bold text-sky-800 mt-1"><span lang="kk" class="lang-content">Рояль</span><span lang="en" class="lang-content">Grand piano</span><span lang="ru" class="lang-content">Рояль</span></p>
+          <p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">қанат тәрізді, үлкен, концерттік</span><span lang="en" class="lang-content">wing-shaped, large, for concerts</span><span lang="ru" class="lang-content">крыловидный, большой, концертный</span></p>
+        </div>
+        <div class="tile rounded-xl p-4 text-center">
+          <div class="tile-icon">🎵</div>
+          <p class="font-bold text-sky-800 mt-1"><span lang="kk" class="lang-content">Пианино</span><span lang="en" class="lang-content">Upright</span><span lang="ru" class="lang-content">Пианино</span></p>
+          <p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">тік, үйге арналған</span><span lang="en" class="lang-content">vertical, for the home</span><span lang="ru" class="lang-content">вертикальное, домашнее</span></p>
+        </div>
+      </div>
+      <div class="card-accent rounded-xl p-4">
+        <p class="text-slate-700 text-sm">
+          <span lang="kk" class="lang-content">📌 Әдетте <b>88 перне</b>, <b>7 октавадан</b> астам — барлық оркестрден кең диапазон.</span>
+          <span lang="en" class="lang-content">📌 Usually <b>88 keys</b>, more than <b>7 octaves</b> — a wider range than the whole orchestra.</span>
+          <span lang="ru" class="lang-content">📌 Обычно <b>88 клавиш</b>, более <b>7 октав</b> — диапазон шире целого оркестра.</span>
+        </p>
+      </div>
+    </div>
+    <div class="grid grid-rows-2 gap-6">
+      <div class="photo" style="min-height:200px">
+        <img src="../../assets/music/mus5_piano.jpg" alt="piano keyboard">
+        <div class="cap"><span lang="kk" class="lang-content">Фортепиано: перне → балғашық → ішек</span><span lang="en" class="lang-content">Piano: key → hammer → string</span><span lang="ru" class="lang-content">Фортепиано: клавиша → молоточек → струна</span></div>
+      </div>
+      <div class="photo" style="min-height:200px">
+        <img src="../../assets/music/mus_organ.jpg" alt="pipe organ">
+        <div class="cap"><span lang="kk" class="lang-content">Орган: ауа құбырларға беріледі</span><span lang="en" class="lang-content">Organ: air is fed into the pipes</span><span lang="ru" class="lang-content">Орган: воздух подаётся в трубы</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card rounded-custom p-6 mt-6">
+    <h3 class="heading-font text-lg text-sky-700 font-bold mb-2">
+      <span lang="kk" class="lang-content">Орган — «аспаптардың патшасы»</span>
+      <span lang="en" class="lang-content">The Organ — "king of instruments"</span>
+      <span lang="ru" class="lang-content">Орган — «король инструментов»</span>
+    </h3>
+    <p class="text-slate-700">
+      <span lang="kk" class="lang-content"><b class="text-sky-700">Орган</b> — үрмелі пернелі аспап: дыбыс шығу үшін <b class="text-sky-700">ауа құбырларға</b> беріледі. Ол өте үлкен, оны «<b>аспаптардың патшасы</b>» деп атайды. Бірнеше пернетақтасы (мануалы) және аяққа арналған педальдары бар. Орган <b>храмдар мен концерт залдарында</b> естіледі.</span>
+      <span lang="en" class="lang-content">The <b class="text-sky-700">organ</b> is a wind keyboard instrument: to make sound, <b class="text-sky-700">air is fed into pipes</b>. It is enormous and is called the "<b>king of instruments</b>". It has several keyboards (manuals) plus pedals for the feet. The organ sounds in <b>churches and concert halls</b>.</span>
+      <span lang="ru" class="lang-content"><b class="text-sky-700">Орган</b> — духовой клавишный инструмент: для звука <b class="text-sky-700">воздух подаётся в трубы</b>. Он огромный, его называют «<b>королём инструментов</b>». У него несколько клавиатур (мануалов) и педали для ног. Орган звучит в <b>храмах и концертных залах</b>.</span>
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 3: how sound is made — comparison + old keyboards -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-sky-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔍 Дыбыс қалай шығады</span>
+    <span lang="en" class="lang-content">🔍 How the Sound Is Made</span>
+    <span lang="ru" class="lang-content">🔍 Как извлекается звук</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <table class="t">
+        <thead>
+          <tr>
+            <th><span lang="kk" class="lang-content">Аспап</span><span lang="en" class="lang-content">Instrument</span><span lang="ru" class="lang-content">Инструмент</span></th>
+            <th><span lang="kk" class="lang-content">Дыбыс қалай туады</span><span lang="en" class="lang-content">How sound is made</span><span lang="ru" class="lang-content">Как рождается звук</span></th>
+            <th><span lang="kk" class="lang-content">Қаттылық</span><span lang="en" class="lang-content">Loudness</span><span lang="ru" class="lang-content">Громкость</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b class="text-sky-700"><span lang="kk" class="lang-content">Фортепиано</span><span lang="en" class="lang-content">Piano</span><span lang="ru" class="lang-content">Фортепиано</span></b></td>
+            <td><span lang="kk" class="lang-content">балғашық ішекті соғады</span><span lang="en" class="lang-content">hammer strikes a string</span><span lang="ru" class="lang-content">молоточек бьёт по струне</span></td>
+            <td><span lang="kk" class="lang-content">қатты да, ақырын да</span><span lang="en" class="lang-content">loud and soft</span><span lang="ru" class="lang-content">громко и тихо</span></td>
+          </tr>
+          <tr>
+            <td><b class="text-sky-700"><span lang="kk" class="lang-content">Орган</span><span lang="en" class="lang-content">Organ</span><span lang="ru" class="lang-content">Орган</span></b></td>
+            <td><span lang="kk" class="lang-content">ауа құбырларға беріледі</span><span lang="en" class="lang-content">air is fed into pipes</span><span lang="ru" class="lang-content">воздух подаётся в трубы</span></td>
+            <td><span lang="kk" class="lang-content">созылмалы, қуатты</span><span lang="en" class="lang-content">sustained, powerful</span><span lang="ru" class="lang-content">тянущийся, мощный</span></td>
+          </tr>
+          <tr>
+            <td><b class="text-sky-700"><span lang="kk" class="lang-content">Клавесин</span><span lang="en" class="lang-content">Harpsichord</span><span lang="ru" class="lang-content">Клавесин</span></b></td>
+            <td><span lang="kk" class="lang-content">ішек шертіледі (тырнала)</span><span lang="en" class="lang-content">a string is plucked</span><span lang="ru" class="lang-content">струна защипывается</span></td>
+            <td><span lang="kk" class="lang-content">өзгермейді (бірқалыпты)</span><span lang="en" class="lang-content">cannot change</span><span lang="ru" class="lang-content">нельзя менять</span></td>
+          </tr>
+          <tr>
+            <td><b class="text-sky-700"><span lang="kk" class="lang-content">Челеста</span><span lang="en" class="lang-content">Celesta</span><span lang="ru" class="lang-content">Челеста</span></b></td>
+            <td><span lang="kk" class="lang-content">балғашық металл табаққа соғады</span><span lang="en" class="lang-content">hammer strikes metal plates</span><span lang="ru" class="lang-content">молоточек бьёт по металлу</span></td>
+            <td><span lang="kk" class="lang-content">нәзік, қоңыраудай</span><span lang="en" class="lang-content">gentle, bell-like</span><span lang="ru" class="lang-content">нежно, как колокольчики</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card rounded-custom p-6">
+      <h3 class="heading-font text-lg text-sky-700 font-bold mb-3">
+        <span lang="kk" class="lang-content">Көне және нәзік пернелілер</span>
+        <span lang="en" class="lang-content">Old and gentle keyboards</span>
+        <span lang="ru" class="lang-content">Старинные и нежные клавишные</span>
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="tile rounded-xl p-4">
+          <div class="tile-icon">🎻</div>
+          <p class="font-bold text-sky-800 mt-1"><span lang="kk" class="lang-content">Клавесин</span><span lang="en" class="lang-content">Harpsichord</span><span lang="ru" class="lang-content">Клавесин</span></p>
+          <p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Көне аспап (барокко): ішек <b>шертіледі</b>, дыбыс <b>сыңғырлап</b> естіледі, қаттылығын өзгерту мүмкін емес.</span><span lang="en" class="lang-content">An old instrument (Baroque): strings are <b>plucked</b>, the sound is <b>bright and ringing</b>, and you cannot change its loudness.</span><span lang="ru" class="lang-content">Старинный инструмент (барокко): струны <b>защипываются</b>, звук <b>звонкий</b>, нельзя менять громкость.</span></p>
+        </div>
+        <div class="tile rounded-xl p-4">
+          <div class="tile-icon">🔔</div>
+          <p class="font-bold text-sky-800 mt-1"><span lang="kk" class="lang-content">Челеста</span><span lang="en" class="lang-content">Celesta</span><span lang="ru" class="lang-content">Челеста</span></p>
+          <p class="text-slate-600 text-sm"><span lang="kk" class="lang-content">Нәзік, <b>қоңырау</b> тәрізді дыбысы бар кішкентай пернелі аспап.</span><span lang="en" class="lang-content">A small keyboard with a gentle, <b>bell-like</b> sound.</span><span lang="ru" class="lang-content">Небольшой клавишный с нежным, <b>колокольчиковым</b> звуком.</span></p>
+        </div>
+      </div>
+      <div class="card-accent rounded-xl p-4 mt-3">
+        <p class="text-slate-700 text-sm">
+          <span lang="kk" class="lang-content">📌 Барлық пернелілерде перне бар, бірақ дыбыс <b>әртүрлі жолмен</b> шығады: соғу, ауа немесе шерту.</span>
+          <span lang="en" class="lang-content">📌 All keyboards have keys, but the sound is produced in <b>different ways</b>: striking, air, or plucking.</span>
+          <span lang="ru" class="lang-content">📌 У всех клавишных есть клавиши, но звук рождается <b>по-разному</b>: удар, воздух или защип.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="card-music rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Key Takeaways</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">🎹</p>
+      <p class="text-sky-100 text-sm"><span lang="kk" class="lang-content">Пернелі аспаптарда дыбыс пернелерді басумен шығады.</span><span lang="en" class="lang-content">In keyboard instruments sound is made by pressing keys.</span><span lang="ru" class="lang-content">Клавишные — звук извлекается нажатием клавиш.</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Форте-пиано</span>
+        <span lang="en" class="lang-content">Forte-piano</span>
+        <span lang="ru" class="lang-content">Форте-пиано</span>
+      </p>
+      <p class="text-sky-100 text-sm"><span lang="kk" class="lang-content">Фортепиано: балғашық ішекті соғады, «қатты-ақырын».</span><span lang="en" class="lang-content">Piano: a hammer strikes a string, "loud-soft".</span><span lang="ru" class="lang-content">Фортепиано: молоточек бьёт струну, «громко-тихо».</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">👑</p>
+      <p class="text-sky-100 text-sm"><span lang="kk" class="lang-content">Орган — құбырлар мен ауа, «аспаптардың патшасы».</span><span lang="en" class="lang-content">The organ — pipes and air, the "king of instruments".</span><span lang="ru" class="lang-content">Орган — трубы и воздух, «король инструментов».</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang===lang);
+  });
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+
+<script>/* ===== Web Audio ===== */
+var _ac=null;
+function actx(){ if(!_ac){ try{_ac=new (window.AudioContext||window.webkitAudioContext)({latencyHint:'playback'});}catch(e){} } if(_ac&&_ac.state==='suspended'){_ac.resume();} return _ac; }
+function tone(freq,dur,type){
+  var c=actx(); if(!c) return; type=type||'sine';
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type; o.frequency.value=freq;
+  o.connect(g); g.connect(c.destination);
+  var t=c.currentTime;
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(0.32,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.start(t); o.stop(t+dur+0.03);
+}
+function flash(el){ if(!el) return; el.classList.add('lit'); setTimeout(function(){el.classList.remove('lit');},220); }
+function litKey(el){ if(!el) return; el.classList.add('lit'); setTimeout(function(){el.classList.remove('lit');},230); }
+function playScale(){
+  var seq=[[261.63,'k0'],[293.66,'k1'],[329.63,'k2'],[349.23,'k3'],[392.00,'k4'],[440.00,'k5'],[493.88,'k6'],[523.25,'k7']];
+  seq.forEach(function(s,i){
+    setTimeout(function(){ tone(s[0],0.5); var k=document.getElementById(s[1]); litKey(k); }, i*430);
+  });
+}
+function playOrgan(){
+  /* sustained organ-like chord (C major triad) */
+  tone(261.63,2.2);tone(329.63,2.2);tone(392.00,2.2);
+  litKey(document.getElementById('k0'));
+  litKey(document.getElementById('k2'));
+  litKey(document.getElementById('k4'));
+}
+</script>
+
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

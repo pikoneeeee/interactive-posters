@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Токарная обработка древесины</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.5;}
+.step b{color:#881337;}
+/* part / tool card */
+.part{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-left:5px solid #be123c;
+  border-radius:1rem;padding:1.05rem 1.15rem;box-shadow:0 3px 14px rgba(136,19,55,.07);height:100%;}
+.part h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.05rem;}
+.part .sub{color:#a16207;font-size:.8rem;font-style:italic;margin-bottom:.4rem;}
+.part p{color:#57534e;font-size:.92rem;line-height:1.5;}
+/* note / safety box */
+.note{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:1rem 1.15rem;}
+.note h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1rem;margin-bottom:.25rem;}
+.note p{color:#57534e;font-size:.9rem;line-height:1.45;}
+/* spec table */
+.spec{width:100%;border-collapse:collapse;font-size:.93rem;background:rgba(255,255,255,0.95);
+  border-radius:.9rem;overflow:hidden;box-shadow:0 3px 14px rgba(136,19,55,.07);}
+.spec th{background:#9f1239;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;
+  text-align:left;padding:.7rem .9rem;font-size:.92rem;}
+.spec td{padding:.65rem .9rem;border-top:1px solid rgba(190,18,60,.14);color:#44403c;vertical-align:top;}
+.spec tr:nth-child(even) td{background:rgba(225,29,72,0.035);}
+.spec td:first-child{font-weight:700;color:#881337;width:34%;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 2-бөлім · Ағаш өңдеу</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 2 · Woodworking</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 2 · Обработка древесины</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪵 Ағашты токарлық өңдеу</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪵 Wood Turning on a Lathe</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪵 Токарная обработка древесины</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Айналатын дайындама + өткір қашау = дөңгелек әрі тегіс ағаш бұйым.</span>
+      <span lang="en" class="lang-content">A spinning blank + a sharp chisel = a round, smooth wooden object.</span>
+      <span lang="ru" class="lang-content">Вращающаяся заготовка + острая стамеска = круглое и гладкое деревянное изделие.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-6 md:p-7 mb-10 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+  <div>
+    <h2 class="heading-font text-2xl font-extrabold mb-3" style="color:#881337">
+      <span lang="kk" class="lang-content">Токарлық өңдеу дегеніміз не?</span>
+      <span lang="en" class="lang-content">What Is Wood Turning?</span>
+      <span lang="ru" class="lang-content">Что такое токарная обработка?</span>
+    </h2>
+    <p class="lead mb-3">
+      <span lang="kk" class="lang-content"><b>Токарлық өңдеу</b> — ағаш дайындаманы білдек (станок) айналдырып тұрғанда, оны қозғалмайтын өткір <b>қашаумен</b> кесіп өңдеу тәсілі. Дайындама секундына ондаған рет айналады, ал шебер қашауды тірекке (подручник) сүйеп, дайындаманы аз-аздан жонып, оған дөңгелек пішін береді.</span>
+      <span lang="en" class="lang-content"><b>Wood turning</b> is a way of shaping a wooden blank while a machine — the lathe — spins it, and a sharp, hand-held <b>chisel</b> cuts away the wood. The blank turns dozens of times per second, while the craftsman rests the chisel on the tool rest and peels the wood off little by little, giving it a round shape.</span>
+      <span lang="ru" class="lang-content"><b>Токарная обработка</b> — это способ придать деревянной заготовке форму, пока станок (токарный станок) вращает её, а острая ручная <b>стамеска</b> снимает древесину. Заготовка вращается десятки раз в секунду, а мастер опирает стамеску на подручник и снимает стружку понемногу, придавая изделию круглую форму.</span>
+    </p>
+    <p class="lead">
+      <span lang="kk" class="lang-content">Бұл әдістің басты ерекшелігі — <b>айналу осіне</b> симметриялы (дөңгелек қимасы бар) бұйымдарды жасауға мүмкіндік береді: цилиндр, конус, шар, тостаған, шам қойғыш. Бір ағаш кесегінен тегіс, әсем әрі дәл деталь шығады.</span>
+      <span lang="en" class="lang-content">Its key feature is that it produces objects that are symmetrical around the <b>axis of rotation</b> (with a round cross-section): cylinders, cones, spheres, bowls and candlesticks. A single piece of wood becomes a smooth, elegant, precise part.</span>
+      <span lang="ru" class="lang-content">Главная особенность этого способа — он создаёт изделия, симметричные относительно <b>оси вращения</b> (с круглым сечением): цилиндры, конусы, шары, чаши, подсвечники. Из одного куска дерева получается гладкая, изящная и точная деталь.</span>
+    </p>
+  </div>
+  <div class="art-frame" onclick="openLB(this)">
+    <div class="art-mat pic" style="height:340px"><img src="../../assets/labor_boys/lb10_turning.jpg" alt="Руки мастера снимают стружку стамеской с вращающейся деревянной заготовки"></div>
+    <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Токарлық жону</span><span lang="en" class="lang-content">Turning in action</span><span lang="ru" class="lang-content">Точение в работе</span></div>
+    <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">қашау мен жоңқа</span><span lang="en" class="lang-content">a chisel and shavings</span><span lang="ru" class="lang-content">стамеска и стружка</span></div>
+    <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Айналып тұрған дайындамадан өткір қашау жұқа жоңқаны кесіп алады.</span><span lang="en" class="lang-content">A sharp chisel slices a thin curl of shavings off the spinning blank.</span><span lang="ru" class="lang-content">Острая стамеска срезает тонкую стружку с вращающейся заготовки.</span></div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="card rounded-custom p-6 md:p-7 mb-10 grid grid-cols-1 lg:grid-cols-3 gap-7 items-center">
+  <div class="lg:col-span-2">
+    <h2 class="heading-font text-2xl font-extrabold mb-3" style="color:#881337">
+      <span lang="kk" class="lang-content">Білдектің тарихы</span>
+      <span lang="en" class="lang-content">A Short History of the Lathe</span>
+      <span lang="ru" class="lang-content">Немного истории станка</span>
+    </h2>
+    <p class="lead mb-3">
+      <span lang="kk" class="lang-content">Токарлық білдек — адамзаттың ең көне станоктарының бірі. Ежелгі Мысыр мен Грекияда дайындаманы <b>иілген таяқ пен арқанмен</b> айналдырған: бір адам арқанды тартса, екіншісі қашауды ұстаған. Кейін <b>аяқпен басатын</b> (педальды) білдек пайда болды — енді шебердің екі қолы да бос болды.</span>
+      <span lang="en" class="lang-content">The lathe is one of humankind's oldest machines. In ancient Egypt and Greece the blank was spun with a <b>bent stick and a cord</b>: one person pulled the cord while another held the chisel. Later came the <b>foot-powered (treadle)</b> lathe — now both of the craftsman's hands were free.</span>
+      <span lang="ru" class="lang-content">Токарный станок — одна из древнейших машин человечества. В Древнем Египте и Греции заготовку вращали <b>согнутой палкой и верёвкой</b>: один человек тянул верёвку, другой держал резец. Позже появился <b>ножной (педальный)</b> станок — теперь обе руки мастера были свободны.</span>
+    </p>
+    <p class="lead">
+      <span lang="kk" class="lang-content">Бүгінгі білдекті электр қозғалтқыш айналдырады, ал жылдамдықты реттеуге болады. Бірақ жұмыс принципі мыңжылдықтар бойы өзгерген жоқ: <b>дайындама айналады — қашау кеседі</b>.</span>
+      <span lang="en" class="lang-content">Today's lathe is driven by an electric motor and its speed can be adjusted. But the working principle has not changed for thousands of years: <b>the blank spins — the chisel cuts</b>.</span>
+      <span lang="ru" class="lang-content">Сегодняшний станок вращает электромотор, а скорость можно регулировать. Но принцип работы не меняется тысячи лет: <b>заготовка вращается — резец снимает стружку</b>.</span>
+    </p>
+  </div>
+  <div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb10_history.jpg" alt="Старинный ножной токарный станок с большим деревянным маховым колесом"><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Ескі аяқ білдегі</span><span lang="en" class="lang-content">Old treadle lathe</span><span lang="ru" class="lang-content">Старинный ножной станок</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">үлкен маховик дөңгелегі</span><span lang="en" class="lang-content">a large flywheel</span><span lang="ru" class="lang-content">большое маховое колесо</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Шебер аяғымен басып, дөңгелекті айналдырған — содан дайындама да айналған.</span><span lang="en" class="lang-content">The craftsman pressed a treadle that spun the wheel — and the blank with it.</span><span lang="ru" class="lang-content">Мастер нажимал на педаль, крутившую колесо, — а с ним и заготовку.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANATOMY OF THE LATHE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Токарлық білдектің құрылысы</span>
+    <span lang="en" class="lang-content">Anatomy of the Wood Lathe</span>
+    <span lang="ru" class="lang-content">Устройство токарного станка</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Әр бөлшектің өз қызметі бар. 🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">Each part has its own job. 🔍 Tap the photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">У каждой части — своя роль. 🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="card rounded-custom p-5 md:p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div class="art-frame" onclick="openLB(this)">
+      <div class="art-mat pic" style="height:330px"><img src="../../assets/labor_boys/lb10_lathe.jpg" alt="Токарный станок по дереву в мастерской: станина, передняя и задняя бабки"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Токарлық білдек</span><span lang="en" class="lang-content">A wood lathe</span><span lang="ru" class="lang-content">Токарный станок по дереву</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">шеберханада</span><span lang="en" class="lang-content">in the workshop</span><span lang="ru" class="lang-content">в мастерской</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Сол жақта — алдыңғы бабка мен мотор, оң жақта — артқы бабка мен маховик.</span><span lang="en" class="lang-content">The headstock and motor on the left, the tailstock and a handwheel on the right.</span><span lang="ru" class="lang-content">Слева — передняя бабка и мотор, справа — задняя бабка и маховик.</span></div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="part">
+        <h3><span lang="kk" class="lang-content">Станина</span><span lang="en" class="lang-content">Bed</span><span lang="ru" class="lang-content">Станина</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">негіз</span><span lang="en" class="lang-content">the base</span><span lang="ru" class="lang-content">основание</span></div>
+        <p><span lang="kk" class="lang-content">Барлық тораптарды ұстап тұратын берік темір (немесе ағаш) негіз.</span><span lang="en" class="lang-content">The strong metal (or wooden) frame that carries all the other parts.</span><span lang="ru" class="lang-content">Прочная металлическая (или деревянная) основа, несущая все узлы.</span></p>
+      </div>
+      <div class="part">
+        <h3><span lang="kk" class="lang-content">Алдыңғы бабка</span><span lang="en" class="lang-content">Headstock</span><span lang="ru" class="lang-content">Передняя бабка</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">айналдырады</span><span lang="en" class="lang-content">drives the spin</span><span lang="ru" class="lang-content">вращает</span></div>
+        <p><span lang="kk" class="lang-content">Мотор мен шпиндель орналасқан. Дайындаманың бір ұшын ұстап, оны айналдырады.</span><span lang="en" class="lang-content">Holds the motor and spindle. It grips one end of the blank and makes it spin.</span><span lang="ru" class="lang-content">Содержит мотор и шпиндель. Зажимает один конец заготовки и вращает её.</span></p>
+      </div>
+      <div class="part">
+        <h3><span lang="kk" class="lang-content">Артқы бабка</span><span lang="en" class="lang-content">Tailstock</span><span lang="ru" class="lang-content">Задняя бабка</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">бекітеді</span><span lang="en" class="lang-content">holds the other end</span><span lang="ru" class="lang-content">поджимает</span></div>
+        <p><span lang="kk" class="lang-content">Дайындаманың екінші ұшын орталыққа (центр) сүйеп, мықтап ұстап тұрады.</span><span lang="en" class="lang-content">Supports the other end of the blank on a centre and holds it firmly.</span><span lang="ru" class="lang-content">Поджимает второй конец заготовки центром и удерживает её ровно.</span></p>
+      </div>
+      <div class="part">
+        <h3><span lang="kk" class="lang-content">Подручник</span><span lang="en" class="lang-content">Tool rest</span><span lang="ru" class="lang-content">Подручник</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">тірек</span><span lang="en" class="lang-content">the support</span><span lang="ru" class="lang-content">опора</span></div>
+        <p><span lang="kk" class="lang-content">Қашауды сүйейтін тірек. Дайындамаға мүмкіндігінше жақын қойылады.</span><span lang="en" class="lang-content">The rest the chisel leans on. It is set as close to the blank as possible.</span><span lang="ru" class="lang-content">Опора, на которую кладут стамеску. Ставится как можно ближе к заготовке.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP BY STEP -->
+<section class="card rounded-custom p-6 md:p-7 mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Жону реті: қадам-қадам</span>
+    <span lang="en" class="lang-content">The Turning Process, Step by Step</span>
+    <span lang="ru" class="lang-content">Порядок точения: шаг за шагом</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Цилиндр пішінді бұйымды (мысалы, тұтқа) жонудың негізгі реті.</span>
+    <span lang="en" class="lang-content">The basic order for turning a cylindrical part (for example, a handle).</span>
+    <span lang="ru" class="lang-content">Основной порядок точения цилиндрической детали (например, ручки).</span>
+  </p>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 items-start">
+    <div>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Дайындаманы таңда.</span><span lang="en" class="lang-content">Choose the blank.</span><span lang="ru" class="lang-content">Подбери заготовку.</span></b> <span lang="kk" class="lang-content">Жарықшағы, бұтақ көзі жоқ құрғақ ағаш ал. Қырларын алдын ала сегіз қырлы етіп жон.</span><span lang="en" class="lang-content">Take dry wood with no cracks or knots. Roughly plane its edges into an octagon first.</span><span lang="ru" class="lang-content">Возьми сухую древесину без трещин и сучков. Сначала сострогай рёбра «на восьмигранник».</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Білдекке бекіт.</span><span lang="en" class="lang-content">Mount it.</span><span lang="ru" class="lang-content">Закрепи в станке.</span></b> <span lang="kk" class="lang-content">Дайындаманы алдыңғы және артқы бабка центрлерінің арасына қыс, мықтап бекіт.</span><span lang="en" class="lang-content">Clamp the blank between the headstock and tailstock centres and lock it tight.</span><span lang="ru" class="lang-content">Зажми заготовку между центрами передней и задней бабок и надёжно закрепи.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Тіректі қой.</span><span lang="en" class="lang-content">Set the tool rest.</span><span lang="ru" class="lang-content">Установи подручник.</span></b> <span lang="kk" class="lang-content">Подручникті дайындамаға 2–3 мм қашықтықта, ось деңгейіне жақын орнат. Қолмен айналдырып, тиіп-тимейтінін тексер.</span><span lang="en" class="lang-content">Set the tool rest 2–3 mm from the blank, near axis height. Spin it by hand to check nothing touches.</span><span lang="ru" class="lang-content">Поставь подручник в 2–3 мм от заготовки, около оси. Проверни рукой, чтобы ничего не задевало.</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Дөрекі жону.</span><span lang="en" class="lang-content">Rough it round.</span><span lang="ru" class="lang-content">Черновое обтачивание.</span></b> <span lang="kk" class="lang-content">Білдекті қос, жартылай дөңгелек қашаумен (рейер) дайындаманы цилиндрге айналдыр.</span><span lang="en" class="lang-content">Switch on, and with a roughing gouge turn the blank down to a clean cylinder.</span><span lang="ru" class="lang-content">Включи станок и полукруглой стамеской (рейером) обточи заготовку в ровный цилиндр.</span></p></div>
+      <div class="step"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Пішінін бер.</span><span lang="en" class="lang-content">Shape it.</span><span lang="ru" class="lang-content">Придай форму.</span></b> <span lang="kk" class="lang-content">Жалпақ қашаумен (мейсель) ойықтар, белдеулер мен өтпелерді жасап, керекті пішінге келтір.</span><span lang="en" class="lang-content">With a flat chisel (skew) cut grooves, beads and transitions to the shape you want.</span><span lang="ru" class="lang-content">Плоской стамеской (мейселем) выточи канавки, валики и переходы до нужной формы.</span></p></div>
+      <div class="step"><div class="step-num">6</div><p><b><span lang="kk" class="lang-content">Тазала.</span><span lang="en" class="lang-content">Sand it.</span><span lang="ru" class="lang-content">Зачисти.</span></b> <span lang="kk" class="lang-content">Білдек айналып тұрғанда зімпара қағазбен (наждак) бетін тегістеп, жылтыр етіп тазала.</span><span lang="en" class="lang-content">While it still spins, smooth the surface with sandpaper until it is even.</span><span lang="ru" class="lang-content">Пока станок вращается, зачисти поверхность наждачной бумагой до гладкости.</span></p></div>
+      <div class="step"><div class="step-num">7</div><p><b><span lang="kk" class="lang-content">Кесіп ал.</span><span lang="en" class="lang-content">Part it off.</span><span lang="ru" class="lang-content">Отрежь.</span></b> <span lang="kk" class="lang-content">Білдекті өшір, дайындаманы шеш, ұштарын араламен кесіп, тегістеп аяқта.</span><span lang="en" class="lang-content">Switch off, remove the blank, saw off the ends and finish them.</span><span lang="ru" class="lang-content">Выключи станок, сними заготовку, отпили концы и зачисти.</span></p></div>
+    </div>
+    <div>
+      <div class="art-frame" onclick="openLB(this)">
+        <div class="art-mat pic" style="height:300px"><img src="../../assets/labor_boys/lb10_blank.jpg" alt="Деревянная заготовка, обточенная между центрами, на подручнике лежат рядом"></div>
+        <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Центрлер арасында жону</span><span lang="en" class="lang-content">Turning between centres</span><span lang="ru" class="lang-content">Точение между центрами</span></div>
+        <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">цилиндр пішіні</span><span lang="en" class="lang-content">a cylinder shape</span><span lang="ru" class="lang-content">форма цилиндра</span></div>
+        <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Дайындама екі центрдің арасында жонылып, белдеу мен өтпелер пайда болған.</span><span lang="en" class="lang-content">The blank is turned between two centres; beads and transitions have appeared.</span><span lang="ru" class="lang-content">Заготовка обточена между двумя центрами; появились валики и переходы.</span></div>
+      </div>
+      <p class="text-center text-xs mt-2 text-stone-500"><span lang="kk" class="lang-content">центрлер арасында жонылған дайындама</span><span lang="en" class="lang-content">a blank turned between centres</span><span lang="ru" class="lang-content">заготовка, обточенная между центрами</span></p>
+      <div class="note mt-4">
+        <h4>💡 <span lang="kk" class="lang-content">Кеңес</span><span lang="en" class="lang-content">Tip</span><span lang="ru" class="lang-content">Совет</span></h4>
+        <p><span lang="kk" class="lang-content">Қашауды әрқашан тірекке сүйеп, дайындамаға жоғарыдан жуан ұшымен біртіндеп тигіз. Асықпа — жұқа жоңқа таза бет береді.</span><span lang="en" class="lang-content">Always lean the chisel on the rest and bring it to the wood gently, from above. Don't rush — a thin shaving gives a clean surface.</span><span lang="ru" class="lang-content">Всегда опирай стамеску на подручник и подводи к дереву плавно, сверху. Не спеши — тонкая стружка даёт чистую поверхность.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE: two ways to turn -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Жонудың екі тәсілі</span>
+    <span lang="en" class="lang-content">Two Ways of Turning</span>
+    <span lang="ru" class="lang-content">Два способа точения</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Дайындаманы қалай бекіткеніңе байланысты не жасай алатының өзгереді.</span>
+    <span lang="en" class="lang-content">How you mount the blank decides what you can make.</span>
+    <span lang="ru" class="lang-content">От способа крепления заготовки зависит, что можно выточить.</span>
+  </p>
+
+  <div class="lang-content" lang="ru">
+    <table class="spec">
+      <tr><th>Признак</th><th>Между центрами</th><th>На планшайбе / в патроне</th></tr>
+      <tr><td>Как закреплено</td><td>С двух концов — передним и задним центрами</td><td>Только за один конец (торец)</td></tr>
+      <tr><td>Что точат</td><td>Длинные детали: ножки, ручки, балясины, скалки</td><td>Объёмные изделия: чаши, тарелки, шкатулки</td></tr>
+      <tr><td>Направление работы</td><td>Вдоль оси, по длине заготовки</td><td>Снаружи и изнутри, в торец</td></tr>
+      <tr><td>Главные стамески</td><td>Рейер (черновая) и мейсель (чистовая)</td><td>Чашечный рейер и отрезной резец</td></tr>
+    </table>
+  </div>
+  <div class="lang-content" lang="kk">
+    <table class="spec">
+      <tr><th>Белгі</th><th>Центрлер арасында</th><th>Планшайбада / патронда</th></tr>
+      <tr><td>Қалай бекітіледі</td><td>Екі ұшынан — алдыңғы және артқы центрмен</td><td>Тек бір ұшынан (бүйірінен)</td></tr>
+      <tr><td>Не жонылады</td><td>Ұзын детальдар: аяқ, тұтқа, балясина, оқтау</td><td>Көлемді бұйымдар: тостаған, табақ, қобдиша</td></tr>
+      <tr><td>Жұмыс бағыты</td><td>Ось бойымен, дайындаманың ұзындығына</td><td>Сырт жағынан және ішінен, бүйіріне</td></tr>
+      <tr><td>Негізгі қашаулар</td><td>Рейер (дөрекі) және мейсель (таза)</td><td>Тостаған рейері мен кескіш резец</td></tr>
+    </table>
+  </div>
+  <div class="lang-content" lang="en">
+    <table class="spec">
+      <tr><th>Feature</th><th>Between centres</th><th>On a faceplate / in a chuck</th></tr>
+      <tr><td>How it is held</td><td>At both ends — by the head and tail centres</td><td>By one end only (the face)</td></tr>
+      <tr><td>What you make</td><td>Long parts: legs, handles, balusters, rolling pins</td><td>Hollow forms: bowls, plates, boxes</td></tr>
+      <tr><td>Direction of work</td><td>Along the axis, down the length</td><td>Outside and inside, into the face</td></tr>
+      <tr><td>Main chisels</td><td>Roughing gouge and skew chisel</td><td>Bowl gouge and parting tool</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- TOOLS + SAFETY -->
+<section class="mb-10 grid grid-cols-1 lg:grid-cols-2 gap-7 items-stretch">
+  <div class="card rounded-custom p-6 md:p-7">
+    <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+      <span lang="kk" class="lang-content">🪓 Токарь қашаулары</span>
+      <span lang="en" class="lang-content">🪓 Turning Chisels</span>
+      <span lang="ru" class="lang-content">🪓 Токарные стамески</span>
+    </h2>
+    <div class="grid grid-cols-1 gap-4">
+      <div class="part">
+        <h3><span lang="kk" class="lang-content">Рейер (жартылай дөңгелек)</span><span lang="en" class="lang-content">Roughing gouge</span><span lang="ru" class="lang-content">Рейер (полукруглая)</span></h3>
+        <p><span lang="kk" class="lang-content">Дөрекі жонуға арналған науашық тәрізді қашау. Дайындаманы тез цилиндрге айналдырады.</span><span lang="en" class="lang-content">A trough-shaped chisel for rough work. It quickly brings the blank to a cylinder.</span><span lang="ru" class="lang-content">Желобчатая стамеска для черновой работы. Быстро обтачивает заготовку в цилиндр.</span></p>
+      </div>
+      <div class="part">
+        <h3><span lang="kk" class="lang-content">Мейсель (жалпақ, қиғаш)</span><span lang="en" class="lang-content">Skew chisel</span><span lang="ru" class="lang-content">Мейсель (плоская, косая)</span></h3>
+        <p><span lang="kk" class="lang-content">Қиғаш жүзді жалпақ қашау. Таза, тегіс бет, белдеу мен ойық жасайды.</span><span lang="en" class="lang-content">A flat chisel with a slanted edge. It gives a clean, smooth surface, beads and grooves.</span><span lang="ru" class="lang-content">Плоская стамеска с косым лезвием. Даёт чистую гладкую поверхность, валики и канавки.</span></p>
+      </div>
+      <div class="part">
+        <h3><span lang="kk" class="lang-content">Кескіш резец</span><span lang="en" class="lang-content">Parting tool</span><span lang="ru" class="lang-content">Отрезной резец</span></h3>
+        <p><span lang="kk" class="lang-content">Жіңішке тік қашау. Тереңдік ойығын белгілеуге және дайындаманы кесіп алуға керек.</span><span lang="en" class="lang-content">A narrow, straight tool. Used to cut depth grooves and to part the piece off.</span><span lang="ru" class="lang-content">Узкий прямой резец. Нужен для канавок глубины и чтобы отрезать готовую деталь.</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="card-rose rounded-custom p-6 md:p-7 flex flex-col">
+    <h2 class="heading-font text-2xl font-extrabold mb-4 text-white">
+      <span lang="kk" class="lang-content">⚠️ Қауіпсіздік ережелері</span>
+      <span lang="en" class="lang-content">⚠️ Safety Rules</span>
+      <span lang="ru" class="lang-content">⚠️ Правила безопасности</span>
+    </h2>
+    <ul class="space-y-3 text-white" style="font-size:.97rem;line-height:1.5">
+      <li>👓 <span lang="kk" class="lang-content">Көзілдірік (қорғаныш) міндетті — жоңқа көзге ұшады.</span><span lang="en" class="lang-content">Safety goggles are a must — shavings fly into the eyes.</span><span lang="ru" class="lang-content">Защитные очки обязательны — стружка летит в глаза.</span></li>
+      <li>👕 <span lang="kk" class="lang-content">Жеңді түр, шарф пен галстукты шеш, ұзын шашты жинап байла.</span><span lang="en" class="lang-content">Roll up sleeves, remove scarf and tie, tie back long hair.</span><span lang="ru" class="lang-content">Закатай рукава, сними шарф и галстук, убери длинные волосы.</span></li>
+      <li>🔒 <span lang="kk" class="lang-content">Білдекті қоспас бұрын дайындаманың мықтап бекігенін тексер.</span><span lang="en" class="lang-content">Before switching on, check the blank is firmly clamped.</span><span lang="ru" class="lang-content">Перед включением проверь, что заготовка надёжно закреплена.</span></li>
+      <li>✋ <span lang="kk" class="lang-content">Айналып тұрған дайындамаға қолмен тиюге болмайды.</span><span lang="en" class="lang-content">Never touch the spinning blank with your hand.</span><span lang="ru" class="lang-content">Нельзя трогать вращающуюся заготовку рукой.</span></li>
+      <li>🛠️ <span lang="kk" class="lang-content">Подручникті тек білдек толық тоқтағанда жылжыт.</span><span lang="en" class="lang-content">Move the tool rest only when the lathe has fully stopped.</span><span lang="ru" class="lang-content">Переставляй подручник только при полностью остановленном станке.</span></li>
+      <li>🔪 <span lang="kk" class="lang-content">Тек өткір қашаумен жұмыс істе — өтпес құрал «секіреді».</span><span lang="en" class="lang-content">Work only with sharp chisels — a blunt tool "jumps".</span><span lang="ru" class="lang-content">Работай только острыми стамесками — тупой инструмент «прыгает».</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Не жонуға болады?</span>
+    <span lang="en" class="lang-content">What Can You Turn?</span>
+    <span lang="ru" class="lang-content">Что можно выточить?</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Тостаған, тұтқа, ойыншық — бәрі бір осьтің төңірегінде. 🔍 Суретті басыңыз.</span>
+    <span lang="en" class="lang-content">Bowls, handles, toys — all built around one axis. 🔍 Tap a photo.</span>
+    <span lang="ru" class="lang-content">Чаши, ручки, игрушки — всё вокруг одной оси. 🔍 Нажмите на фото.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb10_bowl.jpg" alt="Готовая деревянная чаша, выточенная на токарном станке"><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Ағаш тостаған</span><span lang="en" class="lang-content">Wooden bowl</span><span lang="ru" class="lang-content">Деревянная чаша</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">планшайбада жонылған</span><span lang="en" class="lang-content">turned on a faceplate</span><span lang="ru" class="lang-content">выточена на планшайбе</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Сырты мен іші жонылып, ағаштың табиғи өрнегі сақталған тостаған.</span><span lang="en" class="lang-content">A bowl turned outside and in, keeping the wood's natural grain pattern.</span><span lang="ru" class="lang-content">Чаша, выточенная снаружи и изнутри, с сохранённым природным рисунком дерева.</span></div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb10_blank.jpg" alt="Цилиндрическая деталь, обточенная между центрами"><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Цилиндр / тұтқа</span><span lang="en" class="lang-content">Cylinder / handle</span><span lang="ru" class="lang-content">Цилиндр / ручка</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">центрлер арасында</span><span lang="en" class="lang-content">between centres</span><span lang="ru" class="lang-content">между центрами</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Ұзын детальдар осылай жонылады: оқтау, тұтқа, аяқ, балясина.</span><span lang="en" class="lang-content">Long parts are turned this way: rolling pins, handles, legs, balusters.</span><span lang="ru" class="lang-content">Так точат длинные детали: скалки, ручки, ножки, балясины.</span></div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb10_turning.jpg" alt="Процесс точения: стамеска снимает стружку"><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Жону процесі</span><span lang="en" class="lang-content">The process</span><span lang="ru" class="lang-content">Сам процесс</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">жоңқа — таза кесу белгісі</span><span lang="en" class="lang-content">a curl = a clean cut</span><span lang="ru" class="lang-content">завиток — знак чистого реза</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Дұрыс жонғанда жоңқа ұзын әрі жұқа спираль болып ұшады.</span><span lang="en" class="lang-content">When you cut correctly, the shaving flies off as a long, thin spiral.</span><span lang="ru" class="lang-content">При правильном резе стружка сходит длинной тонкой спиралью.</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="card rounded-custom p-7 md:p-8 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+    <span lang="kk" class="lang-content">💬 Қорытынды</span>
+    <span lang="en" class="lang-content">💬 In a nutshell</span>
+    <span lang="ru" class="lang-content">💬 Главное</span>
+  </h3>
+  <p class="lead" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Токарлық өңдеу — ағаштан дөңгелек, симметриялы әрі тегіс бұйым жасаудың ежелгі әрі дәл тәсілі. Білдек дайындаманы айналдырады, ал шебер тіректі сүйеген өткір қашаумен пішін береді. Дайындаманы дұрыс таңдау, мықтап бекіту, қашауды дұрыс ұстау және қауіпсіздік ережелерін сақтау — сапалы әрі қауіпсіз жұмыстың кепілі.</span>
+    <span lang="en" class="lang-content">Wood turning is an ancient yet precise way to make round, symmetrical, smooth objects from wood. The lathe spins the blank, and the craftsman shapes it with a sharp chisel resting on the tool rest. Choosing the right blank, clamping it firmly, holding the chisel correctly and following the safety rules are the keys to good and safe work.</span>
+    <span lang="ru" class="lang-content">Токарная обработка — древний и в то же время точный способ получить из дерева круглые, симметричные и гладкие изделия. Станок вращает заготовку, а мастер придаёт ей форму острой стамеской, опёртой на подручник. Правильный выбор заготовки, надёжное крепление, верный хват стамески и соблюдение правил безопасности — залог качественной и безопасной работы.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

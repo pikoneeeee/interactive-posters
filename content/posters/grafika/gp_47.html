@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Координаты и оси в 3D</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_emerald.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-emerald-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 12 · 3D-модельдеу</span>
+      <span lang="en" class="lang-content">Graphics · Section 12 · 3D Modelling</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 12 · 3D-моделирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">📐 3D координаттар мен осьтер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">📐 3D Coordinates and Axes</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">📐 Координаты и оси в 3D</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Декарт жүйесі (X, Y, Z), оң қол ережесі, нүкте координаттары.</span>
+      <span lang="en" class="lang-content">Cartesian system (X, Y, Z), right-hand rule, point coordinates.</span>
+      <span lang="ru" class="lang-content">Декартова система (X, Y, Z), правило правой руки, координаты точки.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Cartesian 3D system -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Декарт координат жүйесі</span>
+    <span lang="en" class="lang-content">🎯 Cartesian Coordinate System</span>
+    <span lang="ru" class="lang-content">🎯 Декартова система координат</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- SVG: 3D axes with point P(3,2,2) -->
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 320 280" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Computed: cx=160, cy=200, s=25 -->
+        <!-- Origin (0,0,0) at (160, 200) -->
+        <!-- X axis to (5,0,0)→(268, 262.5) -->
+        <!-- Y axis to (0,5,0)→(52, 262.5) -->
+        <!-- Z axis to (0,0,5)→(160, 75) -->
+
+        <!-- Grid background (XY plane footprint) -->
+        <polygon points="160,200 268,262 160,325 52,262"
+                 fill="rgba(5,150,105,0.05)" stroke="none"/>
+
+        <!-- Z axis (vertical UP, blue) -->
+        <line x1="160" y1="200" x2="160" y2="75" stroke="#2563eb" stroke-width="2.5"/>
+        <polygon points="160,75 154,87 166,87" fill="#2563eb"/>
+        <text x="166" y="68" font-size="14" fill="#2563eb" font-weight="bold">Z</text>
+        <text x="166" y="82" font-size="9" fill="#2563eb">(высота)</text>
+
+        <!-- X axis (down-right at 30°, red) -->
+        <line x1="160" y1="200" x2="268" y2="262" stroke="#dc2626" stroke-width="2.5"/>
+        <polygon points="268,262 257,257 261,267" fill="#dc2626"/>
+        <text x="273" y="266" font-size="14" fill="#dc2626" font-weight="bold">X</text>
+        <text x="273" y="280" font-size="9" fill="#dc2626">(длина)</text>
+
+        <!-- Y axis (down-left at 30°, green) -->
+        <line x1="160" y1="200" x2="52" y2="262" stroke="#059669" stroke-width="2.5"/>
+        <polygon points="52,262 63,257 59,267" fill="#059669"/>
+        <text x="20" y="266" font-size="14" fill="#059669" font-weight="bold">Y</text>
+        <text x="20" y="280" font-size="9" fill="#059669">(глубина)</text>
+
+        <!-- Origin O -->
+        <circle cx="160" cy="200" r="4" fill="#1e293b"/>
+        <text x="166" y="208" font-size="11" fill="#1e293b" font-weight="bold">O</text>
+
+        <!-- Point P(3, 2, 2) -->
+        <!-- Px = (160 + (3-2)*0.866*25, 200 + (3+2)*0.5*25 - 2*25) = (182, 213) -->
+        <!-- Projections: -->
+        <!--   On XY plane (z=0): (3,2,0) → (160+0.866*25, 200+5*0.5*25) = (182, 263) -->
+        <!--   On X axis: (3,0,0) → (160+3*0.866*25, 200+3*0.5*25) = (225, 237) -->
+        <!--   On Y axis: (0,2,0) → (160-2*0.866*25, 200+2*0.5*25) = (117, 225) -->
+        <!--   On Z axis: (0,0,2) → (160, 200-2*25) = (160, 150) -->
+
+        <!-- Dashed projection from P to XY plane -->
+        <line x1="182" y1="213" x2="182" y2="263" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,2"/>
+        <!-- Lines from P projections to axes -->
+        <line x1="182" y1="263" x2="225" y2="237" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="182" y1="263" x2="117" y2="225" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="182" y1="213" x2="160" y2="150" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <!-- Point P -->
+        <circle cx="182" cy="213" r="6" fill="#7c3aed" stroke="white" stroke-width="2"/>
+        <text x="190" y="208" font-size="11" fill="#7c3aed" font-weight="bold">P (3, 2, 2)</text>
+
+        <!-- Tick marks on axes -->
+        <circle cx="225" cy="237" r="3" fill="#dc2626"/>
+        <text x="230" y="252" font-size="9" fill="#dc2626">x=3</text>
+        <circle cx="117" cy="225" r="3" fill="#059669"/>
+        <text x="80" y="218" font-size="9" fill="#059669">y=2</text>
+        <circle cx="160" cy="150" r="3" fill="#2563eb"/>
+        <text x="166" y="153" font-size="9" fill="#2563eb">z=2</text>
+      </svg>
+    </div>
+
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content">Кез-келген нүкте 3D-кеңістікте <b>үш сан</b> арқылы анықталады: <b>(x, y, z)</b>. Бұлар нүктенің сәйкес осьтерге дейінгі қашықтықтары.</span>
+        <span lang="en" class="lang-content">Any point in 3D space is defined by <b>three numbers</b>: <b>(x, y, z)</b>. These are the point's distances along the corresponding axes.</span>
+        <span lang="ru" class="lang-content">Любая точка в 3D-пространстве задаётся <b>тремя числами</b>: <b>(x, y, z)</b>. Это расстояния точки вдоль соответствующих осей.</span>
+      </p>
+      <table class="t text-sm">
+        <thead>
+          <tr>
+            <th><span lang="kk" class="lang-content">Осі</span><span lang="en" class="lang-content">Axis</span><span lang="ru" class="lang-content">Ось</span></th>
+            <th><span lang="kk" class="lang-content">Мағынасы</span><span lang="en" class="lang-content">Meaning</span><span lang="ru" class="lang-content">Значение</span></th>
+            <th><span lang="kk" class="lang-content">Бағыт</span><span lang="en" class="lang-content">Direction</span><span lang="ru" class="lang-content">Направление</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b class="text-red-600">X</b></td>
+            <td><span lang="kk" class="lang-content">Ұзындық, ені</span><span lang="en" class="lang-content">Length, width</span><span lang="ru" class="lang-content">Длина, ширина</span></td>
+            <td><span lang="kk" class="lang-content">Оңға</span><span lang="en" class="lang-content">Right</span><span lang="ru" class="lang-content">Вправо</span></td>
+          </tr>
+          <tr>
+            <td><b class="text-green-700">Y</b></td>
+            <td><span lang="kk" class="lang-content">Тереңдік</span><span lang="en" class="lang-content">Depth</span><span lang="ru" class="lang-content">Глубина</span></td>
+            <td><span lang="kk" class="lang-content">Артқа</span><span lang="en" class="lang-content">Backwards</span><span lang="ru" class="lang-content">От нас</span></td>
+          </tr>
+          <tr>
+            <td><b class="text-blue-600">Z</b></td>
+            <td><span lang="kk" class="lang-content">Биіктік</span><span lang="en" class="lang-content">Height</span><span lang="ru" class="lang-content">Высота</span></td>
+            <td><span lang="kk" class="lang-content">Жоғары</span><span lang="en" class="lang-content">Up</span><span lang="ru" class="lang-content">Вверх</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="formula mt-4">P (x, y, z) = (3, 2, 2)</div>
+    </div>
+  </div>
+</section>
+
+<!-- Right-hand rule -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">✋ Оң қол ережесі</span>
+    <span lang="en" class="lang-content">✋ Right-Hand Rule</span>
+    <span lang="ru" class="lang-content">✋ Правило правой руки</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-emerald-700">Оң қол ережесі</b> — XYZ осьтерінің <b>оң бағытын</b> анықтайтын тәсіл. Әлемнің барлық CAD/3D жүйелері (SolidWorks, Blender, Unity) осы ережемен жұмыс істейді.</span>
+        <span lang="en" class="lang-content"><b class="text-emerald-700">The right-hand rule</b> determines the <b>positive direction</b> of the X, Y, Z axes. All modern CAD/3D systems (SolidWorks, Blender, Unity) use this convention.</span>
+        <span lang="ru" class="lang-content"><b class="text-emerald-700">Правило правой руки</b> определяет <b>положительное направление</b> осей X, Y, Z. Все CAD/3D-системы мира (SolidWorks, Blender, Unity) работают по нему.</span>
+      </p>
+      <ol class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="step-num text-xs">1</span>
+          <span lang="kk" class="lang-content"><b>Бас бармақ</b> → <b class="text-red-600">X</b> оң бағыты</span>
+          <span lang="en" class="lang-content"><b>Thumb</b> → <b class="text-red-600">X</b> positive direction</span>
+          <span lang="ru" class="lang-content"><b>Большой палец</b> → <b class="text-red-600">X</b> положительное направление</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="step-num text-xs">2</span>
+          <span lang="kk" class="lang-content"><b>Сұқ саусақ</b> → <b class="text-green-700">Y</b> оң бағыты</span>
+          <span lang="en" class="lang-content"><b>Index finger</b> → <b class="text-green-700">Y</b> positive direction</span>
+          <span lang="ru" class="lang-content"><b>Указательный</b> → <b class="text-green-700">Y</b> положительное направление</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="step-num text-xs">3</span>
+          <span lang="kk" class="lang-content"><b>Орта саусақ</b> → <b class="text-blue-600">Z</b> оң бағыты</span>
+          <span lang="en" class="lang-content"><b>Middle finger</b> → <b class="text-blue-600">Z</b> positive direction</span>
+          <span lang="ru" class="lang-content"><b>Средний</b> → <b class="text-blue-600">Z</b> положительное направление</span>
+        </li>
+      </ol>
+    </div>
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 280 260" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hand schematic -->
+        <!-- Palm (rectangle) -->
+        <rect x="100" y="130" width="60" height="80" rx="8" fill="rgba(5,150,105,0.10)" stroke="#059669" stroke-width="2"/>
+        <text x="130" y="178" font-size="10" fill="#059669" text-anchor="middle" font-weight="bold">Правая</text>
+        <text x="130" y="192" font-size="10" fill="#059669" text-anchor="middle" font-weight="bold">рука</text>
+
+        <!-- Thumb (X — right, red) -->
+        <line x1="160" y1="150" x2="240" y2="130" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/>
+        <polygon points="240,130 230,125 232,138" fill="#dc2626"/>
+        <text x="244" y="125" font-size="14" fill="#dc2626" font-weight="bold">X</text>
+
+        <!-- Index (Y — forward, green) -->
+        <line x1="115" y1="130" x2="90" y2="40" stroke="#059669" stroke-width="6" stroke-linecap="round"/>
+        <polygon points="90,40 85,52 96,49" fill="#059669"/>
+        <text x="76" y="32" font-size="14" fill="#059669" font-weight="bold">Y</text>
+
+        <!-- Middle (Z — perpendicular to palm, up-right, blue) -->
+        <line x1="145" y1="130" x2="200" y2="50" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+        <polygon points="200,50 195,62 207,60" fill="#2563eb"/>
+        <text x="206" y="46" font-size="14" fill="#2563eb" font-weight="bold">Z</text>
+
+        <!-- 90° angle marks (approximate) -->
+        <text x="142" y="115" font-size="8" fill="#64748b">90°</text>
+        <text x="172" y="142" font-size="8" fill="#64748b">90°</text>
+
+        <text x="140" y="240" font-size="10" fill="#059669" text-anchor="middle" font-weight="bold">Три пальца взаимно ⟂</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Coordinate types -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Координаттар түрлері</span>
+    <span lang="en" class="lang-content">🎯 Coordinate Types</span>
+    <span lang="ru" class="lang-content">🎯 Типы координат</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card rounded-custom p-5 border-t-4 border-emerald-500">
+      <h3 class="font-bold text-emerald-800 mb-2"><span lang="kk" class="lang-content">📍 Абсолюттік</span><span lang="en" class="lang-content">📍 Absolute</span><span lang="ru" class="lang-content">📍 Абсолютные</span></h3>
+      <p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Әлемдік (World) нөлдік нүктеден өлшенеді. Тұрақты.</span><span lang="en" class="lang-content">Measured from world origin. Fixed.</span><span lang="ru" class="lang-content">Считаются от мирового нуля. Постоянные.</span></p>
+      <div class="formula mt-2 text-xs">P (10, 5, 8)</div>
+    </div>
+    <div class="card rounded-custom p-5 border-t-4 border-blue-500">
+      <h3 class="font-bold text-blue-800 mb-2"><span lang="kk" class="lang-content">↗️ Қатысты</span><span lang="en" class="lang-content">↗️ Relative</span><span lang="ru" class="lang-content">↗️ Относительные</span></h3>
+      <p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Алдыңғы нүктеден алмасу. @ префиксі (AutoCAD).</span><span lang="en" class="lang-content">Offset from previous point. @ prefix (AutoCAD).</span><span lang="ru" class="lang-content">Смещение от предыдущей. Префикс @ (AutoCAD).</span></p>
+      <div class="formula mt-2 text-xs">@5, 0, 3</div>
+    </div>
+    <div class="card rounded-custom p-5 border-t-4 border-amber-500">
+      <h3 class="font-bold text-amber-800 mb-2"><span lang="kk" class="lang-content">🔄 Полярлы / Сфералы</span><span lang="en" class="lang-content">🔄 Polar / Spherical</span><span lang="ru" class="lang-content">🔄 Полярные / Сферические</span></h3>
+      <p class="text-slate-700 text-sm"><span lang="kk" class="lang-content">Қашықтық + бұрыштар. Радиус, азимут, биіктік.</span><span lang="en" class="lang-content">Distance + angles. Radius, azimuth, elevation.</span><span lang="ru" class="lang-content">Расстояние + углы. Радиус, азимут, высота.</span></p>
+      <div class="formula mt-2 text-xs">(r, θ, φ)</div>
+    </div>
+  </div>
+</section>
+
+<footer class="card-emerald rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Негізгі ережелер</span>
+    <span lang="en" class="lang-content">🧠 Key Rules</span>
+    <span lang="ru" class="lang-content">🧠 Ключевые правила</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">(x, y, z)</p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">3 сан — 3D-нүктенің толық мәліметі</span>
+        <span lang="en" class="lang-content">3 numbers — complete 3D point info</span>
+        <span lang="ru" class="lang-content">3 числа — полное описание точки</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">3 ось ⟂</span>
+        <span lang="en" class="lang-content">3 axes ⟂</span>
+        <span lang="ru" class="lang-content">3 оси ⟂</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Барлық осьтер бір-біріне перпендикуляр</span>
+        <span lang="en" class="lang-content">All axes mutually perpendicular</span>
+        <span lang="ru" class="lang-content">Все оси взаимно перпендикулярны</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Оң қол ережесі</span>
+        <span lang="en" class="lang-content">Right-hand rule</span>
+        <span lang="ru" class="lang-content">Правая рука</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">CAD/3D әлемдегі стандарт</span>
+        <span lang="en" class="lang-content">Standard for all CAD/3D</span>
+        <span lang="ru" class="lang-content">Стандарт во всех CAD/3D</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

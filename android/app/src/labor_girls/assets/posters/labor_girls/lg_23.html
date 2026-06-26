@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Здоровое питание и пищевая пирамида</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.fgroup{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1.1rem;overflow:hidden;
+  box-shadow:0 3px 14px rgba(136,19,55,.07);cursor:pointer;transition:all .25s;display:flex;flex-direction:column;}
+.fgroup:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(136,19,55,.16);}
+.fgroup .pic{height:185px;background:#1c1917;}
+.fgroup .pic img{width:100%;height:100%;object-fit:cover;display:block;}
+.fgroup .body{padding:.9rem 1.05rem 1.1rem;}
+.fgroup h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.08rem;}
+.fgroup .sub{color:#a16207;font-size:.8rem;font-style:italic;margin:.1rem 0 .35rem;}
+.fgroup p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.svgwrap{background:#fffdf9;border:1px solid rgba(190,18,60,.16);border-radius:1.25rem;padding:1rem;
+  box-shadow:0 4px 16px rgba(136,19,55,.07);}
+.svgwrap svg{display:block;width:100%;height:auto;}
+.rule{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1rem;padding:1.1rem 1.15rem;
+  box-shadow:0 2px 10px rgba(136,19,55,.05);transition:all .2s;}
+.rule:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(136,19,55,.13);}
+.rule .ic{font-size:2rem;line-height:1;}
+.rule h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;margin:.4rem 0 .2rem;}
+.rule p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.note{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:.95rem 1.15rem;}
+.note p{color:#57534e;font-size:.93rem;line-height:1.5;}
+.note b{color:#881337;}
+.pyr-leg{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.7rem;}
+.pyr-leg .sw{width:1.1rem;height:1.1rem;border-radius:4px;flex-shrink:0;margin-top:.15rem;}
+.pyr-leg p{color:#44403c;font-size:.93rem;line-height:1.4;}
+.pyr-leg b{color:#881337;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · Тағамтану · Денсаулық</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Food &amp; Nutrition · Health</span>
+      <span lang="ru" class="lang-content">Художественный труд · Кулинария · Здоровье</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🥗 Дұрыс тамақтану және тағам пирамидасы</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🥗 Healthy Eating &amp; the Food Pyramid</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🥗 Здоровое питание и пищевая пирамида</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Не көп, не аз жейміз? Пирамида күн сайынғы тарелкеңді теңгеруге көмектеседі.</span>
+      <span lang="en" class="lang-content">What to eat more of, and what less? The pyramid helps you balance your daily plate.</span>
+      <span lang="ru" class="lang-content">Чего есть больше, а чего меньше? Пирамида помогает уравновесить твою тарелку.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content"><b>Дұрыс тамақтану</b> — ағзаға керекті заттарды (нәруыз, май, көмірсу, дәрумен, минерал, су) дұрыс мөлшерде беретін тамақтану. Оның үш алтын ережесі бар: <b>тепе-теңдік</b> (керегінше энергия), <b>әртүрлілік</b> (түрлі тағам — түрлі дәрумен) және <b>мөлшер сақтау</b> (артық жемеу). Жасөспірім ағза өсіп жатқандықтан, оған әсіресе сапалы тамақ, таза су және тұрақты тәртіп қажет.</span>
+    <span lang="en" class="lang-content"><b>Healthy eating</b> means giving the body the right amounts of what it needs — proteins, fats, carbohydrates, vitamins, minerals and water. It has three golden rules: <b>balance</b> (the right amount of energy), <b>variety</b> (different foods give different vitamins) and <b>moderation</b> (not too much). A growing teenage body especially needs good food, clean water and a regular routine.</span>
+    <span lang="ru" class="lang-content"><b>Здоровое питание</b> — это питание, которое даёт организму нужные вещества (белки, жиры, углеводы, витамины, минералы и воду) в правильном количестве. У него три золотых правила: <b>баланс</b> (столько энергии, сколько нужно), <b>разнообразие</b> (разная еда — разные витамины) и <b>умеренность</b> (не переедать). Растущему организму подростка особенно нужны качественная еда, чистая вода и режим.</span>
+  </p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <span class="badge">⚖️ <span lang="kk" class="lang-content">тепе-теңдік</span><span lang="en" class="lang-content">balance</span><span lang="ru" class="lang-content">баланс</span></span>
+    <span class="badge">🌈 <span lang="kk" class="lang-content">әртүрлілік</span><span lang="en" class="lang-content">variety</span><span lang="ru" class="lang-content">разнообразие</span></span>
+    <span class="badge">🤏 <span lang="kk" class="lang-content">мөлшер</span><span lang="en" class="lang-content">moderation</span><span lang="ru" class="lang-content">умеренность</span></span>
+    <span class="badge">⏰ <span lang="kk" class="lang-content">тәртіп</span><span lang="en" class="lang-content">routine</span><span lang="ru" class="lang-content">режим</span></span>
+  </div>
+</section>
+
+<!-- PYRAMID -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Тағам пирамидасы</span>
+    <span lang="en" class="lang-content">The Food Pyramid</span>
+    <span lang="ru" class="lang-content">Пищевая пирамида</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div class="svgwrap">
+      <svg viewBox="0 0 460 380" role="img" aria-label="Пищевая пирамида">
+        <!-- tier 5 tip: fats & sweets -->
+        <polygon points="230,20 200,80 260,80" fill="#ef4444"/>
+        <!-- tier 4: protein + dairy -->
+        <polygon points="200,80 260,80 290,150 170,150" fill="#f59e0b"/>
+        <!-- tier 3: fruit + veg -->
+        <polygon points="170,150 290,150 325,225 135,225" fill="#84cc16"/>
+        <!-- tier 2: grains -->
+        <polygon points="135,225 325,225 360,300 100,300" fill="#d97706"/>
+        <!-- base tier: water + movement -->
+        <polygon points="100,300 360,300 392,368 68,368" fill="#0ea5e9"/>
+        <!-- outline -->
+        <polygon points="230,20 392,368 68,368" fill="none" stroke="#881337" stroke-width="2.4"/>
+        <!-- tier divider lines already by fills; numbers/labels on each tier -->
+        <text x="230" y="62" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="13" font-weight="800" fill="#fff">🍬🧈</text>
+        <text x="230" y="125" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#fff">🥚🐟🧀</text>
+        <text x="230" y="198" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="15" font-weight="800" fill="#fff">🥦🍎</text>
+        <text x="230" y="272" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="15" font-weight="800" fill="#fff">🍞🍚</text>
+        <text x="230" y="345" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="15" font-weight="800" fill="#fff">💧🏃</text>
+        <!-- side arrow more/less -->
+        <text x="415" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ef4444"><tspan lang="kk" class="lang-content">аз</tspan><tspan lang="en" class="lang-content">less</tspan><tspan lang="ru" class="lang-content">меньше</tspan></text>
+        <text x="425" y="355" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#0ea5e9"><tspan lang="kk" class="lang-content">көп</tspan><tspan lang="en" class="lang-content">more</tspan><tspan lang="ru" class="lang-content">больше</tspan></text>
+        <line x1="418" y1="78" x2="418" y2="335" stroke="#a8a29e" stroke-width="1.6" stroke-dasharray="4 4"/>
+        <polygon points="418,340 414,330 422,330" fill="#0ea5e9"/>
+      </svg>
+    </div>
+    <div>
+      <p class="lead mb-4"><span lang="kk" class="lang-content">Пирамида қарапайым ережені көрсетеді: <b>табаны кең</b> тағамды көбірек, <b>ұшындағысын</b> азырақ жейміз.</span><span lang="en" class="lang-content">The pyramid shows a simple rule: eat <b>more</b> of the foods at the wide base, and <b>less</b> of those at the narrow tip.</span><span lang="ru" class="lang-content">Пирамида показывает простое правило: продуктов у <b>широкого основания</b> едим больше, а у <b>вершины</b> — меньше.</span></p>
+      <div class="pyr-leg"><span class="sw" style="background:#0ea5e9"></span><p><b><span lang="kk" class="lang-content">Табан: су және қозғалыс.</span><span lang="en" class="lang-content">Base: water &amp; movement.</span><span lang="ru" class="lang-content">Основание: вода и движение.</span></b> <span lang="kk" class="lang-content">Күніне 6–8 стақан су, белсенді қимыл.</span><span lang="en" class="lang-content">6–8 glasses of water a day and an active lifestyle.</span><span lang="ru" class="lang-content">6–8 стаканов воды в день и активность.</span></p></div>
+      <div class="pyr-leg"><span class="sw" style="background:#d97706"></span><p><b><span lang="kk" class="lang-content">Дәнді тағам.</span><span lang="en" class="lang-content">Grains.</span><span lang="ru" class="lang-content">Зерновые.</span></b> <span lang="kk" class="lang-content">Нан, жарма, макарон — басты энергия көзі.</span><span lang="en" class="lang-content">Bread, cereals, pasta — the main source of energy.</span><span lang="ru" class="lang-content">Хлеб, крупы, макароны — главный источник энергии.</span></p></div>
+      <div class="pyr-leg"><span class="sw" style="background:#84cc16"></span><p><b><span lang="kk" class="lang-content">Көкөніс пен жеміс.</span><span lang="en" class="lang-content">Vegetables &amp; fruit.</span><span lang="ru" class="lang-content">Овощи и фрукты.</span></b> <span lang="kk" class="lang-content">Дәрумендер мен талшық — күніне 5 рет.</span><span lang="en" class="lang-content">Vitamins and fibre — five portions a day.</span><span lang="ru" class="lang-content">Витамины и клетчатка — 5 порций в день.</span></p></div>
+      <div class="pyr-leg"><span class="sw" style="background:#f59e0b"></span><p><b><span lang="kk" class="lang-content">Нәруыз бен сүт.</span><span lang="en" class="lang-content">Protein &amp; dairy.</span><span lang="ru" class="lang-content">Белки и молочное.</span></b> <span lang="kk" class="lang-content">Ет, балық, жұмыртқа, бұршақ, сүт — өсу үшін.</span><span lang="en" class="lang-content">Meat, fish, eggs, beans, milk — for growth.</span><span lang="ru" class="lang-content">Мясо, рыба, яйца, бобовые, молоко — для роста.</span></p></div>
+      <div class="pyr-leg"><span class="sw" style="background:#ef4444"></span><p><b><span lang="kk" class="lang-content">Ұшы: майлар мен тәттілер.</span><span lang="en" class="lang-content">Tip: fats &amp; sweets.</span><span lang="ru" class="lang-content">Вершина: жиры и сладости.</span></b> <span lang="kk" class="lang-content">Ең аз мөлшерде, мерекелік тағам ретінде.</span><span lang="en" class="lang-content">The smallest amount — as an occasional treat.</span><span lang="ru" class="lang-content">В наименьшем количестве, как лакомство.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD GROUPS GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Тағам топтары: ағзаға не береді?</span>
+    <span lang="en" class="lang-content">Food groups: what do they give?</span>
+    <span lang="ru" class="lang-content">Группы продуктов: что они дают?</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="fgroup" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p23_grains.jpg" alt="Зерновые"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Дәнді тағам</span><span lang="en" class="lang-content">Grains</span><span lang="ru" class="lang-content">Зерновые</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">нан · жарма · макарон</span><span lang="en" class="lang-content">bread · cereals · pasta</span><span lang="ru" class="lang-content">хлеб · крупы · макароны</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Дәнді тағам</span><span lang="en" class="lang-content">Grains</span><span lang="ru" class="lang-content">Зерновые</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">көмірсу — энергия</span><span lang="en" class="lang-content">carbohydrates — energy</span><span lang="ru" class="lang-content">углеводы — энергия</span></div>
+        <p><span lang="kk" class="lang-content">Күн бойы жұмыс істеуге қуат береді. Тұтас дәнді нан пайдалырақ.</span><span lang="en" class="lang-content">They fuel the whole day. Wholegrain bread is the healthiest choice.</span><span lang="ru" class="lang-content">Дают силы на весь день. Полезнее цельнозерновой хлеб.</span></p>
+      </div>
+    </div>
+    <div class="fgroup" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p23_veg.jpg" alt="Овощи"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Көкөністер</span><span lang="en" class="lang-content">Vegetables</span><span lang="ru" class="lang-content">Овощи</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">дәрумен · талшық</span><span lang="en" class="lang-content">vitamins · fibre</span><span lang="ru" class="lang-content">витамины · клетчатка</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Көкөністер</span><span lang="en" class="lang-content">Vegetables</span><span lang="ru" class="lang-content">Овощи</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">дәрумендер мен талшық</span><span lang="en" class="lang-content">vitamins and fibre</span><span lang="ru" class="lang-content">витамины и клетчатка</span></div>
+        <p><span lang="kk" class="lang-content">Ас қорытуды жақсартады, иммунитетті нығайтады. Жартысы шикі болсын.</span><span lang="en" class="lang-content">They aid digestion and strengthen immunity. Eat half of them raw.</span><span lang="ru" class="lang-content">Улучшают пищеварение и иммунитет. Половину ешь сырыми.</span></p>
+      </div>
+    </div>
+    <div class="fgroup" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p23_fruit.jpg" alt="Фрукты"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Жемістер</span><span lang="en" class="lang-content">Fruit</span><span lang="ru" class="lang-content">Фрукты</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">витамин C · табиғи қант</span><span lang="en" class="lang-content">vitamin C · natural sugar</span><span lang="ru" class="lang-content">витамин C · натуральный сахар</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Жемістер</span><span lang="en" class="lang-content">Fruit</span><span lang="ru" class="lang-content">Фрукты</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">витамин C, табиғи қант</span><span lang="en" class="lang-content">vitamin C, natural sugar</span><span lang="ru" class="lang-content">витамин C, природный сахар</span></div>
+        <p><span lang="kk" class="lang-content">Тәттіге дұрыс балама. Шырынның орнына тұтас жемісті жеген жөн.</span><span lang="en" class="lang-content">A healthy swap for sweets. Whole fruit beats juice.</span><span lang="ru" class="lang-content">Полезная замена сладостям. Целый фрукт лучше сока.</span></p>
+      </div>
+    </div>
+    <div class="fgroup" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p23_protein.jpg" alt="Белковые продукты"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Нәруызды тағам</span><span lang="en" class="lang-content">Protein foods</span><span lang="ru" class="lang-content">Белковые продукты</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">ет · балық · жұмыртқа · бұршақ</span><span lang="en" class="lang-content">meat · fish · eggs · beans</span><span lang="ru" class="lang-content">мясо · рыба · яйца · бобовые</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Нәруызды тағам</span><span lang="en" class="lang-content">Protein foods</span><span lang="ru" class="lang-content">Белковые продукты</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">нәруыз — өсу материалы</span><span lang="en" class="lang-content">protein — building blocks</span><span lang="ru" class="lang-content">белок — материал роста</span></div>
+        <p><span lang="kk" class="lang-content">Ет, балық, жұмыртқа, бұршақ дақылдары бұлшықет пен жасушаны құрайды.</span><span lang="en" class="lang-content">Meat, fish, eggs and legumes build muscle and cells.</span><span lang="ru" class="lang-content">Мясо, рыба, яйца и бобовые строят мышцы и клетки.</span></p>
+      </div>
+    </div>
+    <div class="fgroup" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p23_dairy.jpg" alt="Молочные продукты"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Сүт өнімдері</span><span lang="en" class="lang-content">Dairy</span><span lang="ru" class="lang-content">Молочные продукты</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">кальций · нәруыз</span><span lang="en" class="lang-content">calcium · protein</span><span lang="ru" class="lang-content">кальций · белок</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Сүт өнімдері</span><span lang="en" class="lang-content">Dairy</span><span lang="ru" class="lang-content">Молочные продукты</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">кальций — сүйек пен тіс</span><span lang="en" class="lang-content">calcium — bones &amp; teeth</span><span lang="ru" class="lang-content">кальций — кости и зубы</span></div>
+        <p><span lang="kk" class="lang-content">Сүт, айран, ірімшік сүйекті бекітеді. Жасөспірімге аса маңызды.</span><span lang="en" class="lang-content">Milk, yogurt and cheese strengthen bones — vital for teenagers.</span><span lang="ru" class="lang-content">Молоко, кефир, сыр укрепляют кости. Важны для подростков.</span></p>
+      </div>
+    </div>
+    <div class="fgroup" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p23_fats.jpg" alt="Жиры"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Майлар</span><span lang="en" class="lang-content">Fats &amp; oils</span><span lang="ru" class="lang-content">Жиры и масла</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">энергия қоры · аз мөлшерде</span><span lang="en" class="lang-content">energy store · small amounts</span><span lang="ru" class="lang-content">запас энергии · понемногу</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Майлар мен өсімдік майы</span><span lang="en" class="lang-content">Fats &amp; oils</span><span lang="ru" class="lang-content">Жиры и масла</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">қажет, бірақ аз</span><span lang="en" class="lang-content">needed, but little</span><span lang="ru" class="lang-content">нужны, но немного</span></div>
+        <p><span lang="kk" class="lang-content">Өсімдік майы пайдалырақ. Маймен абай болу керек — олар калорияға бай.</span><span lang="en" class="lang-content">Vegetable oils are healthier. Use sparingly — fats are high in calories.</span><span lang="ru" class="lang-content">Полезнее растительные масла. Их немного — жиры калорийны.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WATER + SWEETS feature -->
+<section class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="card rounded-custom p-6 flex flex-col sm:flex-row gap-5 items-center">
+    <div class="genre-card flex-shrink-0" onclick="openLB(this)" style="cursor:pointer;width:170px">
+      <div class="pic" style="height:200px"><img src="../../assets/labor_girls/p23_water.jpg" alt="Вода"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Таза су</span><span lang="en" class="lang-content">Clean water</span><span lang="ru" class="lang-content">Чистая вода</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">күніне 6–8 стақан</span><span lang="en" class="lang-content">6–8 glasses a day</span><span lang="ru" class="lang-content">6–8 стаканов в день</span></div>
+    </div>
+    <div>
+      <h3 class="heading-font text-xl font-extrabold mb-2" style="color:#0369a1">💧 <span lang="kk" class="lang-content">Су — өмірдің негізі</span><span lang="en" class="lang-content">Water — the basis of life</span><span lang="ru" class="lang-content">Вода — основа жизни</span></h3>
+      <p class="lead" style="font-size:.97rem"><span lang="kk" class="lang-content">Дене салмағының 60%-ы — су. Ол қоректі заттарды тасымалдайды, дене қызуын реттейді. Күніне <b>6–8 стақан</b> таза су ішкен дұрыс; тәтті газдалған сусындарды судың орнына қоюға болмайды.</span><span lang="en" class="lang-content">About 60% of the body is water. It carries nutrients and controls temperature. Drink <b>6–8 glasses</b> of clean water a day; sugary fizzy drinks are no substitute for water.</span><span lang="ru" class="lang-content">Тело на 60% состоит из воды. Она переносит питательные вещества и регулирует температуру. Пей <b>6–8 стаканов</b> чистой воды в день; сладкая газировка воду не заменяет.</span></p>
+    </div>
+  </div>
+  <div class="card rounded-custom p-6 flex flex-col sm:flex-row gap-5 items-center">
+    <div class="genre-card flex-shrink-0" onclick="openLB(this)" style="cursor:pointer;width:170px">
+      <div class="pic" style="height:200px"><img src="../../assets/labor_girls/p23_sweets.jpg" alt="Сладости"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Тәттілер</span><span lang="en" class="lang-content">Sweets</span><span lang="ru" class="lang-content">Сладости</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">мерекелік тағам ғана</span><span lang="en" class="lang-content">an occasional treat</span><span lang="ru" class="lang-content">только как лакомство</span></div>
+    </div>
+    <div>
+      <h3 class="heading-font text-xl font-extrabold mb-2" style="color:#be123c">🍬 <span lang="kk" class="lang-content">Тәттілер — сирек әрі аз</span><span lang="en" class="lang-content">Sweets — rarely and little</span><span lang="ru" class="lang-content">Сладости — редко и мало</span></h3>
+      <p class="lead" style="font-size:.97rem"><span lang="kk" class="lang-content">Кәмпит, торт, газдалған сусын — пирамиданың ұшында. Олар тез энергия береді, бірақ дәруменсіз «бос калория» әрі тісті бұзады. Тәттінің орнына жеміс не құрғақ жеміс таңдау пайдалы.</span><span lang="en" class="lang-content">Candy, cake and soda sit at the very tip. They give quick energy but are "empty calories" with no vitamins, and they harm teeth. Choose fruit or dried fruit instead.</span><span lang="ru" class="lang-content">Конфеты, торт, газировка — на самой вершине. Они дают быструю энергию, но это «пустые калории» без витаминов, к тому же вредят зубам. Лучше выбрать фрукт или сухофрукты.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- HEALTHY PLATE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">«Дұрыс тарелке» ережесі</span>
+    <span lang="en" class="lang-content">The "Healthy Plate" rule</span>
+    <span lang="ru" class="lang-content">Правило «здоровой тарелки»</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <div class="svgwrap">
+      <svg viewBox="0 0 360 320" role="img" aria-label="Здоровая тарелка">
+        <!-- plate -->
+        <circle cx="180" cy="160" r="135" fill="#ffffff" stroke="#a8a29e" stroke-width="3"/>
+        <!-- half: vegetables+fruit (left half) -->
+        <path d="M180 25 A135 135 0 0 0 180 295 Z" fill="#84cc16" fill-opacity="0.85"/>
+        <!-- top-right quarter: grains -->
+        <path d="M180 160 L180 25 A135 135 0 0 1 315 160 Z" fill="#d97706" fill-opacity="0.85"/>
+        <!-- bottom-right quarter: protein -->
+        <path d="M180 160 L315 160 A135 135 0 0 1 180 295 Z" fill="#f59e0b" fill-opacity="0.9"/>
+        <!-- inner ring -->
+        <circle cx="180" cy="160" r="135" fill="none" stroke="#78716c" stroke-width="2"/>
+        <!-- labels -->
+        <text x="110" y="150" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="15" font-weight="800" fill="#fff">½</text>
+        <text x="110" y="172" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff"><tspan lang="kk" class="lang-content">көкөніс+жеміс</tspan><tspan lang="en" class="lang-content">veg + fruit</tspan><tspan lang="ru" class="lang-content">овощи+фрукты</tspan></text>
+        <text x="240" y="100" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#fff">¼</text>
+        <text x="240" y="118" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#fff"><tspan lang="kk" class="lang-content">дәнді</tspan><tspan lang="en" class="lang-content">grains</tspan><tspan lang="ru" class="lang-content">злаки</tspan></text>
+        <text x="240" y="215" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#fff">¼</text>
+        <text x="240" y="233" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#fff"><tspan lang="kk" class="lang-content">нәруыз</tspan><tspan lang="en" class="lang-content">protein</tspan><tspan lang="ru" class="lang-content">белок</tspan></text>
+      </svg>
+    </div>
+    <div>
+      <p class="lead mb-4"><span lang="kk" class="lang-content">Әр тамақты осылай елестетіңіз — қалькулятор қажет емес:</span><span lang="en" class="lang-content">Picture each meal like this — no calculator needed:</span><span lang="ru" class="lang-content">Представь каждый приём пищи так — без всякого калькулятора:</span></p>
+      <div class="pyr-leg"><span class="sw" style="background:#84cc16"></span><p><b>½</b> — <span lang="kk" class="lang-content">тарелкенің жартысы — көкөніс пен жеміс.</span><span lang="en" class="lang-content">half the plate is vegetables and fruit.</span><span lang="ru" class="lang-content">половина тарелки — овощи и фрукты.</span></p></div>
+      <div class="pyr-leg"><span class="sw" style="background:#d97706"></span><p><b>¼</b> — <span lang="kk" class="lang-content">ширегі — дәнді тағам (нан, күріш, қарақұмық).</span><span lang="en" class="lang-content">a quarter is grains (bread, rice, buckwheat).</span><span lang="ru" class="lang-content">четверть — злаки (хлеб, рис, гречка).</span></p></div>
+      <div class="pyr-leg"><span class="sw" style="background:#f59e0b"></span><p><b>¼</b> — <span lang="kk" class="lang-content">ширегі — нәруыз (ет, балық, жұмыртқа, бұршақ).</span><span lang="en" class="lang-content">a quarter is protein (meat, fish, eggs, beans).</span><span lang="ru" class="lang-content">четверть — белок (мясо, рыба, яйца, бобовые).</span></p></div>
+      <div class="note mt-3"><p>🥛 <span lang="kk" class="lang-content">Қосымша: бір стақан су немесе айран, ал тәтті ретінде — жеміс.</span><span lang="en" class="lang-content">Add a glass of water or yogurt, and fruit for dessert.</span><span lang="ru" class="lang-content">Дополни стаканом воды или кефира, а на десерт — фрукт.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Дұрыс тамақтанудың 6 ережесі</span>
+    <span lang="en" class="lang-content">6 rules of healthy eating</span>
+    <span lang="ru" class="lang-content">6 правил здорового питания</span>
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="rule"><div class="ic">🌅</div><h4><span lang="kk" class="lang-content">Таңғы асты өткізбе</span><span lang="en" class="lang-content">Never skip breakfast</span><span lang="ru" class="lang-content">Не пропускай завтрак</span></h4><p><span lang="kk" class="lang-content">Таңғы ас — күннің энергиясы. Бұл оқуға зейін береді.</span><span lang="en" class="lang-content">Breakfast is the day's energy and helps you focus at school.</span><span lang="ru" class="lang-content">Завтрак — энергия дня, помогает сосредоточиться на учёбе.</span></p></div>
+    <div class="rule"><div class="ic">⏰</div><h4><span lang="kk" class="lang-content">Тәртіппен же</span><span lang="en" class="lang-content">Eat on a schedule</span><span lang="ru" class="lang-content">Ешь по режиму</span></h4><p><span lang="kk" class="lang-content">Күніне 4–5 рет, шамамен бір уақытта. Асықпай шайна.</span><span lang="en" class="lang-content">4–5 times a day at regular hours. Chew slowly.</span><span lang="ru" class="lang-content">4–5 раз в день в одно время. Жуй не спеша.</span></p></div>
+    <div class="rule"><div class="ic">🌈</div><h4><span lang="kk" class="lang-content">Әртүрлі же</span><span lang="en" class="lang-content">Eat the rainbow</span><span lang="ru" class="lang-content">Ешь разнообразно</span></h4><p><span lang="kk" class="lang-content">Түрлі-түсті көкөніс пен жеміс — түрлі дәрумен.</span><span lang="en" class="lang-content">Different-coloured fruit and veg give different vitamins.</span><span lang="ru" class="lang-content">Разноцветные овощи и фрукты — разные витамины.</span></p></div>
+    <div class="rule"><div class="ic">🧂</div><h4><span lang="kk" class="lang-content">Тұз бен қантты азайт</span><span lang="en" class="lang-content">Cut salt &amp; sugar</span><span lang="ru" class="lang-content">Меньше соли и сахара</span></h4><p><span lang="kk" class="lang-content">Артық тұз бен қант денсаулыққа зиян. Газдалған сусыннан бас тарт.</span><span lang="en" class="lang-content">Too much salt and sugar harm health. Skip the soda.</span><span lang="ru" class="lang-content">Избыток соли и сахара вреден. Откажись от газировки.</span></p></div>
+    <div class="rule"><div class="ic">💧</div><h4><span lang="kk" class="lang-content">Су іш</span><span lang="en" class="lang-content">Drink water</span><span lang="ru" class="lang-content">Пей воду</span></h4><p><span lang="kk" class="lang-content">Күніне 6–8 стақан таза су — шырынның орнына.</span><span lang="en" class="lang-content">6–8 glasses of clean water a day, instead of juice.</span><span lang="ru" class="lang-content">6–8 стаканов чистой воды в день вместо соков.</span></p></div>
+    <div class="rule"><div class="ic">🍳</div><h4><span lang="kk" class="lang-content">Дұрыс әзірле</span><span lang="en" class="lang-content">Cook it right</span><span lang="ru" class="lang-content">Готовь правильно</span></h4><p><span lang="kk" class="lang-content">Қуырғаннан гөрі буға пісір, қайнат, пеште пісір.</span><span lang="en" class="lang-content">Steam, boil or bake rather than deep-fry.</span><span lang="ru" class="lang-content">Лучше варить, тушить, запекать, чем жарить во фритюре.</span></p></div>
+  </div>
+</section>
+
+<!-- REMEMBER -->
+<section class="card-rose rounded-custom p-7 md:p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-3">
+    <span lang="kk" class="lang-content">💡 Есте сақта</span>
+    <span lang="en" class="lang-content">💡 Remember</span>
+    <span lang="ru" class="lang-content">💡 Запомните</span>
+  </h3>
+  <p class="text-lg" style="max-width:64rem;line-height:1.7">
+    <span lang="kk" class="lang-content">Денсаулықты тарелкеден бастайды. Пирамиданың табанындағы тағамды көп, ұшындағысын аз жеп, түрлі тағаммен теңгерсең — ағзаң өсуге, оқуға және қозғалуға қажет бәрін алады. <b>Дұрыс тамақтан — белсенді бол!</b></span>
+    <span lang="en" class="lang-content">Health starts on your plate. Eat more from the base of the pyramid and less from the tip, keep your meals varied and balanced — and your body gets everything it needs to grow, study and move. <b>Eat well — stay active!</b></span>
+    <span lang="ru" class="lang-content">Здоровье начинается с тарелки. Ешь больше из основания пирамиды и меньше с её вершины, держи питание разнообразным и сбалансированным — и организм получит всё, что нужно для роста, учёбы и движения. <b>Питайся правильно — будь активной!</b></span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){
+  if(lang==='kz')lang='kk';
+  currentLang=lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+function openLB(card){
+  document.getElementById('lb-img').src=card.querySelector('.pic img').src;
+  var n=card.querySelector('.genre-name'); document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';
+  var cap=card.querySelector('.genre-cap'); document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';
+  var d=card.querySelector('.genre-desc'); document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

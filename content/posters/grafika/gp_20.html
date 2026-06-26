@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Выносные элементы</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_teal.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-teal-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 3 · Проекциялық черчение</span>
+      <span lang="en" class="lang-content">Graphics · Section 3 · Projection Drawing</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 3 · Проекционное черчение</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🔎 Шығарылған элементтер (выносные элементы)</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🔎 Detail Views (Выносные элементы)</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🔎 Выносные элементы</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Ұсақ бөліктерді ұлғайтып, размерлерін қою үшін шығарылған бейне.</span>
+      <span lang="en" class="lang-content">An enlarged image of a small part to allow proper dimensioning.</span>
+      <span lang="ru" class="lang-content">Увеличенное изображение мелкой части детали для нанесения размеров.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Definition and example -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Шығарылған элемент дегеніміз не?</span>
+    <span lang="en" class="lang-content">💡 What is a Detail View?</span>
+    <span lang="ru" class="lang-content">💡 Что такое выносной элемент?</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 340 240" style="width:100%;max-width:380px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main part -->
+        <rect x="10" y="30" width="180" height="130" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Small groove/feature that's hard to dimension -->
+        <path d="M 85,30 L 85,50 L 75,58 L 85,66 L 85,80" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <path d="M 105,30 L 105,50 L 115,58 L 105,66 L 105,80" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Circle marking the zoomed area -->
+        <circle cx="95" cy="58" r="22" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <!-- Roman numeral I label -->
+        <text x="104" y="35" font-size="11" fill="#ef4444" font-weight="bold">I</text>
+        <!-- Leader line to detail view -->
+        <line x1="117" y1="58" x2="195" y2="90" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <!-- Detail view (enlarged) -->
+        <circle cx="260" cy="110" r="65" fill="rgba(13,148,136,0.05)" stroke="#0d9488" stroke-width="1.5"/>
+        <!-- Enlarged groove -->
+        <path d="M 230,80 L 230,105 L 215,117 L 230,129 L 230,145" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <path d="M 290,80 L 290,105 L 305,117 L 290,129 L 290,145" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Dimensions in detail view -->
+        <line x1="215" y1="155" x2="305" y2="155" stroke="#1e293b" stroke-width="1"/>
+        <polygon points="215,155 227,151 227,159" fill="#1e293b"/>
+        <polygon points="305,155 293,151 293,159" fill="#1e293b"/>
+        <text x="257" y="152" font-size="10" fill="#1e293b" text-anchor="middle">Ш</text>
+        <line x1="200" y1="80" x2="200" y2="145" stroke="#1e293b" stroke-width="1"/>
+        <polygon points="200,80 196,92 204,92" fill="#1e293b"/>
+        <polygon points="200,145 196,133 204,133" fill="#1e293b"/>
+        <text x="192" y="115" font-size="10" fill="#1e293b" transform="rotate(-90,192,115)">В</text>
+        <!-- Label: I (масштаб) -->
+        <text x="230" y="60" font-size="11" fill="#ef4444" font-weight="bold">I</text>
+        <text x="244" y="60" font-size="10" fill="#0d9488">(2:1)</text>
+        <!-- Annotation -->
+        <text x="15" y="22" font-size="9" fill="#64748b">Основной вид</text>
+        <text x="205" y="190" font-size="9" fill="#0d9488" text-anchor="middle">Выносной элемент I (2:1)</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-teal-700">Шығарылған элемент</b> — основной сызбада өте ұсақ болғандықтан размерлерін қоюға немесе нақты пішінін көрсетуге мүмкіндік бермейтін бөліктің <b>ұлғайтылған бейнесі</b>.</span>
+        <span lang="en" class="lang-content"><b class="text-teal-700">Detail view</b> — an <b>enlarged image</b> of a portion of a part that is too small in the main view to show its shape clearly or to dimension properly.</span>
+        <span lang="ru" class="lang-content"><b class="text-teal-700">Выносной элемент</b> — <b>увеличенное изображение</b> части детали, которая на основном виде слишком мала для нанесения размеров или чёткого показа формы.</span>
+      </p>
+      <h4 class="font-bold text-teal-800 mb-3 text-sm">
+        <span lang="kk" class="lang-content">📋 Орындау ережелері:</span>
+        <span lang="en" class="lang-content">📋 How to create:</span>
+        <span lang="ru" class="lang-content">📋 Правила оформления:</span>
+      </h4>
+      <ol class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2 items-start"><span class="step-num text-xs flex-shrink-0">1</span>
+          <span lang="kk" class="lang-content">Негізгі көріністе шығарылатын жерді <b>штрихтік шеңбермен</b> немесе эллипспен белгілеу</span>
+          <span lang="en" class="lang-content">Mark the area on the main view with a <b>dashed circle</b> or ellipse</span>
+          <span lang="ru" class="lang-content">Отметить место на основном виде <b>штриховой окружностью</b> или эллипсом</span>
+        </li>
+        <li class="flex gap-2 items-start"><span class="step-num text-xs flex-shrink-0">2</span>
+          <span lang="kk" class="lang-content">Шеңберге <b>рим санын</b> қою (I, II, III...) немесе латын әрпін</span>
+          <span lang="en" class="lang-content">Label the circle with a <b>Roman numeral</b> (I, II, III…) or letter</span>
+          <span lang="ru" class="lang-content">Поставить у окружности <b>римскую цифру</b> (I, II, III…) или букву</span>
+        </li>
+        <li class="flex gap-2 items-start"><span class="step-num text-xs flex-shrink-0">3</span>
+          <span lang="kk" class="lang-content">Шығарылған элемент бейнесін жалпы сызбадан тыс орналастыру</span>
+          <span lang="en" class="lang-content">Place the detail view outside and near the main view</span>
+          <span lang="ru" class="lang-content">Разместить выносной элемент рядом с основным видом</span>
+        </li>
+        <li class="flex gap-2 items-start"><span class="step-num text-xs flex-shrink-0">4</span>
+          <span lang="kk" class="lang-content">Белгілеу: <b>«I (2:1)»</b> — цифр және масштаб</span>
+          <span lang="en" class="lang-content">Label: <b>«I (2:1)»</b> — numeral and scale</span>
+          <span lang="ru" class="lang-content">Подписать: <b>«I (2:1)»</b> — цифра и масштаб</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Scale and rules -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📏 Масштаб және ережелер</span>
+    <span lang="en" class="lang-content">📏 Scale and Rules</span>
+    <span lang="ru" class="lang-content">📏 Масштаб и правила</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="tile">
+      <div class="tile-icon">🔍</div>
+      <p class="font-bold text-teal-800 mt-2"><span lang="kk" class="lang-content">Масштаб</span><span lang="en" class="lang-content">Scale</span><span lang="ru" class="lang-content">Масштаб</span></p>
+      <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Негізгі сызбаның масштабынан үлкен: 2:1, 4:1, 5:1, 10:1. Бейне жанына жазылады.</span><span lang="en" class="lang-content">Always larger than the main view: 2:1, 4:1, 5:1, 10:1. Written next to the detail.</span><span lang="ru" class="lang-content">Больше масштаба основного вида: 2:1, 4:1, 5:1, 10:1. Пишется рядом с видом.</span></p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">📐</div>
+      <p class="font-bold text-teal-800 mt-2"><span lang="kk" class="lang-content">Орналасу</span><span lang="en" class="lang-content">Placement</span><span lang="ru" class="lang-content">Расположение</span></p>
+      <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Негізгі сызбамен байланысты жерге — мүмкіндігінше жанына немесе бос кеңістікте</span><span lang="en" class="lang-content">Place as close as possible to the related main view, in available space</span><span lang="ru" class="lang-content">Размещать как можно ближе к связанному основному виду</span></p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">✏️</div>
+      <p class="font-bold text-teal-800 mt-2"><span lang="kk" class="lang-content">Контур сызығы</span><span lang="en" class="lang-content">Outline</span><span lang="ru" class="lang-content">Линия контура</span></p>
+      <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Шығарылған элемент контуры — негізгі (толстая) сызықпен. Толқынды сызық жол жасауы мүмкін.</span><span lang="en" class="lang-content">Detail view outline — thick solid line. A wavy break line may be used.</span><span lang="ru" class="lang-content">Контур выносного элемента — основной (толстой) линией. Возможна волнистая линия.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- When to use -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚙️ Қашан қолданылады?</span>
+    <span lang="en" class="lang-content">⚙️ When to Use?</span>
+    <span lang="ru" class="lang-content">⚙️ Когда применяется?</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5 border-l-4 border-teal-400">
+      <h3 class="font-bold text-teal-700 mb-3">
+        <span lang="kk" class="lang-content">✅ Қолдану жағдайлары</span>
+        <span lang="en" class="lang-content">✅ Use when</span>
+        <span lang="ru" class="lang-content">✅ Применять когда</span>
+      </h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Ұсақ ойыс, паз, бұрандалар, жалғастыру ойықтары</span><span lang="en" class="lang-content">Small grooves, slots, threads, fillet transitions</span><span lang="ru" class="lang-content">Мелкие канавки, пазы, резьбы, сопряжения</span></li>
+        <li>• <span lang="kk" class="lang-content">Негізгі сызбада размерлер бір-біріне кедергі жасайды</span><span lang="en" class="lang-content">Dimensions would crowd each other in the main view</span><span lang="ru" class="lang-content">Размеры мешают друг другу на основном виде</span></li>
+        <li>• <span lang="kk" class="lang-content">Элементтің пішіні негізгі сызбада нақты көрінбейді</span><span lang="en" class="lang-content">Element shape is not clear enough in the main view</span><span lang="ru" class="lang-content">Форма элемента недостаточно видна на основном виде</span></li>
+      </ul>
+    </div>
+    <div class="card rounded-custom p-5 border-l-4 border-red-300">
+      <h3 class="font-bold text-red-600 mb-3">
+        <span lang="kk" class="lang-content">❌ Қолданбаңыз</span>
+        <span lang="en" class="lang-content">❌ Don't use when</span>
+        <span lang="ru" class="lang-content">❌ Не применять когда</span>
+      </h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Негізгі сызбада элемент жеткілікті нақты және размерлер оңай қойылса</span><span lang="en" class="lang-content">The element is clear enough and dimensions fit in the main view</span><span lang="ru" class="lang-content">Элемент достаточно чёток и размеры легко наносятся на основном виде</span></li>
+        <li>• <span lang="kk" class="lang-content">Бейне тек декоративті мақсатта болса</span><span lang="en" class="lang-content">Just for decorative or illustrative purposes</span><span lang="ru" class="lang-content">В декоративных или иллюстративных целях</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-teal rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Шеңбер + цифр</span><span lang="en" class="lang-content">Circle + numeral</span><span lang="ru" class="lang-content">Окружность + цифра</span></p>
+      <p class="text-teal-100"><span lang="kk" class="lang-content">Негізгі сызбада шығарылатын жерді белгілейді</span><span lang="en" class="lang-content">Marks the area being enlarged on the main view</span><span lang="ru" class="lang-content">Обозначает место увеличения на основном виде</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Масштаб үлкен</span><span lang="en" class="lang-content">Larger scale</span><span lang="ru" class="lang-content">Масштаб больше</span></p>
+      <p class="text-teal-100"><span lang="kk" class="lang-content">Шығарылған элемент әрқашан негізгі сызбадан үлкен масштабта</span><span lang="en" class="lang-content">Always at a larger scale than the main view</span><span lang="ru" class="lang-content">Всегда в большем масштабе, чем основной вид</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">«I (2:1)» белгісі</span><span lang="en" class="lang-content">«I (2:1)» label</span><span lang="ru" class="lang-content">Надпись «I (2:1)»</span></p>
+      <p class="text-teal-100"><span lang="kk" class="lang-content">Шығарылған элементтің астына немесе үстіне жазылады</span><span lang="en" class="lang-content">Written above or below the detail view</span><span lang="ru" class="lang-content">Пишется над или под выносным элементом</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

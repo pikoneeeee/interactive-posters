@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>От детали к чертежу: алгоритм</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 3 · Проекциялық черчение</span>
+      <span lang="en" class="lang-content">Graphics · Section 3 · Projection Drawing</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 3 · Проекционное черчение</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📋 Бөлшектен сызбаға: алгоритм</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📋 From Part to Drawing: Algorithm</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">📋 От детали к чертежу: алгоритм</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Нақты бөлшектен дайын сызбаға дейінгі қадамдық нұсқаулық.</span>
+      <span lang="en" class="lang-content">Step-by-step guide from a real part to a finished drawing.</span>
+      <span lang="ru" class="lang-content">Пошаговое руководство от реальной детали до готового чертежа.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Full algorithm -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔨 Сызба орындаудың 6 қадамы</span>
+    <span lang="en" class="lang-content">🔨 6-Step Drawing Process</span>
+    <span lang="ru" class="lang-content">🔨 6 шагов выполнения чертежа</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+    <!-- Step 1 -->
+    <div class="card rounded-custom p-5">
+      <div class="flex gap-4 items-start">
+        <div class="step-num flex-shrink-0 text-lg">1</div>
+        <div>
+          <p class="font-bold text-violet-800 mb-2">
+            <span lang="kk" class="lang-content">Геометриялық пішінді талдау</span>
+            <span lang="en" class="lang-content">Analyse the geometric form</span>
+            <span lang="ru" class="lang-content">Анализ геометрической формы</span>
+          </p>
+          <p class="text-slate-600 text-sm">
+            <span lang="kk" class="lang-content">Бөлшек қандай геометриялық денелерден тұрады? Негізгі форма — параллелепипед, цилиндр, конус, призма? Жасырын элементтер бар ма — тесіктер, ойыстар, пазтар?</span>
+            <span lang="en" class="lang-content">What geometric bodies make up the part? Basic form: box, cylinder, cone, prism? Are there hidden features — holes, recesses, slots?</span>
+            <span lang="ru" class="lang-content">Из каких геометрических тел состоит деталь? Основная форма — параллелепипед, цилиндр, конус, призма? Есть ли скрытые элементы — отверстия, углубления, пазы?</span>
+          </p>
+          <div class="flex gap-2 mt-2">
+            <span class="badge">+ / - форма</span>
+            <span class="badge">полые части</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="card rounded-custom p-5">
+      <div class="flex gap-4 items-start">
+        <div class="step-num flex-shrink-0 text-lg">2</div>
+        <div>
+          <p class="font-bold text-violet-800 mb-2">
+            <span lang="kk" class="lang-content">Басты көріністі таңдау</span>
+            <span lang="en" class="lang-content">Choose the main (front) view</span>
+            <span lang="ru" class="lang-content">Выбор главного вида</span>
+          </p>
+          <p class="text-slate-600 text-sm">
+            <span lang="kk" class="lang-content">Нысанды барынша толық сипаттайтын бағытты таңдаңыз. Бөлшек <b>жұмыс жағдайында</b> немесе <b>өңдеу жағдайында</b> орналастырылады. Жасырын элементтер аз болуы керек.</span>
+            <span lang="en" class="lang-content">Choose the direction that best describes the object. Place the part in its <b>working position</b> or <b>machining position</b>. Minimise hidden lines.</span>
+            <span lang="ru" class="lang-content">Выберите направление, дающее наибольшее представление. Деталь в <b>рабочем положении</b> или <b>положении обработки</b>. Меньше скрытых линий.</span>
+          </p>
+          <div class="flex gap-2 mt-2">
+            <span class="badge">макс. информация</span>
+            <span class="badge">мин. штрих. линий</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card rounded-custom p-5">
+      <div class="flex gap-4 items-start">
+        <div class="step-num flex-shrink-0 text-lg">3</div>
+        <div>
+          <p class="font-bold text-violet-800 mb-2">
+            <span lang="kk" class="lang-content">Көріністер санын анықтау</span>
+            <span lang="en" class="lang-content">Determine the number of views</span>
+            <span lang="ru" class="lang-content">Определение количества видов</span>
+          </p>
+          <p class="text-slate-600 text-sm">
+            <span lang="kk" class="lang-content">Бөлшекті толық анықтауға қажетті ең аз көрініс санын таңдаңыз. Қарапайым бөлшек — 1-2 вид. Күрделі — 3 вид. Разрездер, тіліктер қажет пе?</span>
+            <span lang="en" class="lang-content">Choose the minimum views needed for complete description. Simple parts — 1–2 views. Complex — 3 views. Are sections or cuts needed?</span>
+            <span lang="ru" class="lang-content">Минимальное число видов для полного описания. Простые детали — 1–2 вида. Сложные — 3 вида. Нужны ли разрезы, сечения?</span>
+          </p>
+          <div class="flex gap-2 mt-2">
+            <span class="badge">мин. видов</span>
+            <span class="badge">разрезы?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card rounded-custom p-5">
+      <div class="flex gap-4 items-start">
+        <div class="step-num flex-shrink-0 text-lg">4</div>
+        <div>
+          <p class="font-bold text-violet-800 mb-2">
+            <span lang="kk" class="lang-content">Парақта орналастыру (компоновка)</span>
+            <span lang="en" class="lang-content">Layout on the sheet</span>
+            <span lang="ru" class="lang-content">Компоновка на листе</span>
+          </p>
+          <p class="text-slate-600 text-sm">
+            <span lang="kk" class="lang-content">Форматты таңдаңыз. Масштабты анықтаңыз. Осьтік сызықтар мен негізгі өлшемдерді белгілеп, видтар үшін орын бөліңіз. Размерлерге, жазбаларға орын қалдырыңыз.</span>
+            <span lang="en" class="lang-content">Choose format and scale. Mark axis lines and overall dimensions. Allocate space for views. Leave room for dimensions and notes.</span>
+            <span lang="ru" class="lang-content">Выберите формат и масштаб. Разметьте осевые линии. Отведите место для видов. Оставьте место для размеров и надписей.</span>
+          </p>
+          <div class="flex gap-2 mt-2">
+            <span class="badge">формат</span>
+            <span class="badge">масштаб</span>
+            <span class="badge">осевые</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="card rounded-custom p-5">
+      <div class="flex gap-4 items-start">
+        <div class="step-num flex-shrink-0 text-lg">5</div>
+        <div>
+          <p class="font-bold text-violet-800 mb-2">
+            <span lang="kk" class="lang-content">Видтарды салу</span>
+            <span lang="en" class="lang-content">Draw the views</span>
+            <span lang="ru" class="lang-content">Построение видов</span>
+          </p>
+          <p class="text-slate-600 text-sm">
+            <span lang="kk" class="lang-content">Байланыс сызықтарын пайдалана отырып барлық видтарды бір мезетте салыңыз. Алдымен сплошная тонкая сызықтармен (жобалық), содан кейін негізгі сызықтармен. Жасырын контурлар — штрихтік сызықпен.</span>
+            <span lang="en" class="lang-content">Draw all views simultaneously using projection lines. First in thin lines (construction), then reinforce with thick lines. Hidden lines in dashed.</span>
+            <span lang="ru" class="lang-content">Строить все виды одновременно, используя линии связи. Сначала тонкими (конструктивными), затем обвести основными. Скрытые контуры — штриховой.</span>
+          </p>
+          <div class="flex gap-2 mt-2">
+            <span class="badge">линии связи</span>
+            <span class="badge">тонко → толсто</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="card rounded-custom p-5">
+      <div class="flex gap-4 items-start">
+        <div class="step-num flex-shrink-0 text-lg">6</div>
+        <div>
+          <p class="font-bold text-violet-800 mb-2">
+            <span lang="kk" class="lang-content">Размерлер мен рәсімдеу</span>
+            <span lang="en" class="lang-content">Dimensions and finishing</span>
+            <span lang="ru" class="lang-content">Нанесение размеров и оформление</span>
+          </p>
+          <p class="text-slate-600 text-sm">
+            <span lang="kk" class="lang-content">Размерлерді қою: шығарма сызықтар, размер сызықтары, стрелкалар, сандар. ⌀, R, □ белгілері. Негізгі жазбаны толтыру. Сызбаны тексеру.</span>
+            <span lang="en" class="lang-content">Add dimensions: extension lines, dimension lines, arrows, values. Add ⌀, R, □ symbols. Fill in the title block. Check the drawing.</span>
+            <span lang="ru" class="lang-content">Нанести размеры: выносные, размерные линии, стрелки, числа. Знаки ⌀, R, □. Заполнить основную надпись. Проверить чертёж.</span>
+          </p>
+          <div class="flex gap-2 mt-2">
+            <span class="badge">⌀ R □</span>
+            <span class="badge">штамп</span>
+            <span class="badge">проверка</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Visual flow diagram -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔄 Процесс схемасы</span>
+    <span lang="en" class="lang-content">🔄 Process Flow</span>
+    <span lang="ru" class="lang-content">🔄 Схема процесса</span>
+  </h2>
+  <div class="blueprint p-6">
+    <div class="flex flex-wrap items-center justify-center gap-2 text-sm text-center">
+      <div class="bg-white border border-violet-200 rounded-xl p-3 min-w-24">
+        <div class="text-2xl">🔩</div>
+        <p class="font-bold text-violet-800 text-xs mt-1"><span lang="kk" class="lang-content">Бөлшек</span><span lang="en" class="lang-content">Part</span><span lang="ru" class="lang-content">Деталь</span></p>
+      </div>
+      <div class="text-violet-400 text-xl font-bold">→</div>
+      <div class="bg-white border border-violet-200 rounded-xl p-3 min-w-24">
+        <div class="text-2xl">🔍</div>
+        <p class="font-bold text-violet-800 text-xs mt-1"><span lang="kk" class="lang-content">Талдау</span><span lang="en" class="lang-content">Analyse</span><span lang="ru" class="lang-content">Анализ</span></p>
+      </div>
+      <div class="text-violet-400 text-xl font-bold">→</div>
+      <div class="bg-white border border-violet-200 rounded-xl p-3 min-w-24">
+        <div class="text-2xl">🗂️</div>
+        <p class="font-bold text-violet-800 text-xs mt-1"><span lang="kk" class="lang-content">Компоновка</span><span lang="en" class="lang-content">Layout</span><span lang="ru" class="lang-content">Компоновка</span></p>
+      </div>
+      <div class="text-violet-400 text-xl font-bold">→</div>
+      <div class="bg-white border border-violet-200 rounded-xl p-3 min-w-24">
+        <div class="text-2xl">✏️</div>
+        <p class="font-bold text-violet-800 text-xs mt-1"><span lang="kk" class="lang-content">Видтар</span><span lang="en" class="lang-content">Views</span><span lang="ru" class="lang-content">Виды</span></p>
+      </div>
+      <div class="text-violet-400 text-xl font-bold">→</div>
+      <div class="bg-white border border-violet-200 rounded-xl p-3 min-w-24">
+        <div class="text-2xl">📏</div>
+        <p class="font-bold text-violet-800 text-xs mt-1"><span lang="kk" class="lang-content">Размерлер</span><span lang="en" class="lang-content">Dimensions</span><span lang="ru" class="lang-content">Размеры</span></p>
+      </div>
+      <div class="text-violet-400 text-xl font-bold">→</div>
+      <div class="bg-white border border-violet-200 rounded-xl p-3 min-w-24">
+        <div class="text-2xl">📄</div>
+        <p class="font-bold text-violet-800 text-xs mt-1"><span lang="kk" class="lang-content">Дайын сызба</span><span lang="en" class="lang-content">Final drawing</span><span lang="ru" class="lang-content">Готовый чертёж</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Checklist -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">✅ Тапсыруға дейінгі тексеру тізімі</span>
+    <span lang="en" class="lang-content">✅ Pre-submission Checklist</span>
+    <span lang="ru" class="lang-content">✅ Чеклист перед сдачей</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">Пішімде рамка мен негізгі жазба бар</span><span lang="en" class="lang-content">Format has border and title block</span><span lang="ru" class="lang-content">На формате есть рамка и основная надпись</span></label>
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">Басты көрініс нысанды жақсы сипаттайды</span><span lang="en" class="lang-content">Main view best describes the object</span><span lang="ru" class="lang-content">Главный вид хорошо описывает деталь</span></label>
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">Барлық видтар байланыс сызықтары арқылы байланысты</span><span lang="en" class="lang-content">All views connected by projection lines</span><span lang="ru" class="lang-content">Все виды связаны линиями проекционной связи</span></label>
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">Жасырын контурлар штрихтік сызықпен</span><span lang="en" class="lang-content">Hidden outlines are dashed</span><span lang="ru" class="lang-content">Скрытые контуры — штриховой линией</span></label>
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">Барлық размерлер бір рет қана берілген</span><span lang="en" class="lang-content">Each dimension appears exactly once</span><span lang="ru" class="lang-content">Каждый размер проставлен ровно один раз</span></label>
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">⌀, R, □ белгілері дұрыс қойылған</span><span lang="en" class="lang-content">⌀, R, □ symbols correctly placed</span><span lang="ru" class="lang-content">Знаки ⌀, R, □ проставлены правильно</span></label>
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">Осьтік сызықтар штрихпен басталып, штрихпен аяқталады</span><span lang="en" class="lang-content">Centre lines start and end with a dash</span><span lang="ru" class="lang-content">Осевые линии начинаются и заканчиваются штрихом</span></label>
+      <label class="flex gap-3 items-start"><input type="checkbox" class="mt-1 accent-violet-600"><span lang="kk" class="lang-content">Негізгі жазба толтырылған</span><span lang="en" class="lang-content">Title block fully filled in</span><span lang="ru" class="lang-content">Основная надпись полностью заполнена</span></label>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Алтын ереже</span>
+    <span lang="en" class="lang-content">🧠 Golden Rule</span>
+    <span lang="ru" class="lang-content">🧠 Золотое правило</span>
+  </h3>
+  <p class="text-violet-100 text-base">
+    <span lang="kk" class="lang-content">Жақсы сызба — <b>ең аз</b> видтармен бөлшекті <b>толығымен</b> сипаттайтын сызба. Артық видтар — сызбаны қиындатады. Жетіспейтін вид — бөлшекті жасауға кедергі.</span>
+    <span lang="en" class="lang-content">A good drawing uses the <b>fewest</b> views to <b>completely</b> describe the part. Too many views clutter the drawing; too few make it impossible to manufacture.</span>
+    <span lang="ru" class="lang-content">Хороший чертёж — тот, который <b>минимальным</b> числом видов <b>полностью</b> описывает деталь. Лишние виды — перегружают. Недостающий вид — делает изготовление невозможным.</span>
+  </p>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

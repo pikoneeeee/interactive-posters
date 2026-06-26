@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сложные разрезы и сечения</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 4 · Кесінділер мен тіліктер</span>
+      <span lang="en" class="lang-content">Graphics · Section 4 · Sections and Cuts</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 4 · Разрезы и сечения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🔀 Күрделі кесінділер және тіліктер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🔀 Complex Sections and Cross-Sections</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🔀 Сложные разрезы и сечения</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Сатылы, сынық кесінділер және тілік (сечение) — айырмашылығы мен ережелері.</span>
+      <span lang="en" class="lang-content">Stepped, offset sections and cross-sections — differences and rules.</span>
+      <span lang="ru" class="lang-content">Ступенчатый, ломаный разрезы и сечение — отличия и правила.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Stepped section -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">1️⃣ Сатылы кесінді</span>
+    <span lang="en" class="lang-content">1️⃣ Stepped Section</span>
+    <span lang="ru" class="lang-content">1️⃣ Ступенчатый разрез</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 320 220" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hatch1" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#334155" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <!-- Part top view with stepped cut plane -->
+        <rect x="10" y="10" width="180" height="120" fill="rgba(37,99,235,0.05)" stroke="#1e293b" stroke-width="2"/>
+        <!-- Three holes of different sizes -->
+        <circle cx="50" cy="70" r="20" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <circle cx="100" cy="70" r="15" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <circle cx="155" cy="70" r="22" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <!-- Stepped cut line A-A -->
+        <polyline points="0,50 50,50 50,70 155,70 155,50 200,50"
+                  fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="8,3,2,3"/>
+        <polygon points="0,50 12,45 12,55" fill="#ef4444"/>
+        <polygon points="200,50 188,45 188,55" fill="#ef4444"/>
+        <text x="0" y="42" font-size="10" fill="#ef4444" font-weight="bold">А</text>
+        <text x="192" y="42" font-size="10" fill="#ef4444" font-weight="bold">А</text>
+        <!-- Label the step -->
+        <text x="60" y="67" font-size="8" fill="#ef4444">ступени</text>
+        <!-- Section drawing below -->
+        <text x="90" y="148" font-size="9" fill="#1d4ed8" text-anchor="middle">А–А (сечение развёрнуто)</text>
+        <rect x="10" y="155" width="180" height="55" fill="url(#hatch1)" stroke="none"/>
+        <rect x="10" y="155" width="180" height="55" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <!-- Three holes shown in section -->
+        <circle cx="50" cy="182" r="20" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+        <circle cx="100" cy="182" r="15" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+        <circle cx="155" cy="182" r="22" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="font-bold text-violet-800 mb-3">
+        <span lang="kk" class="lang-content">📌 Сатылы кесінді дегеніміз не?</span>
+        <span lang="en" class="lang-content">📌 What is a Stepped Section?</span>
+        <span lang="ru" class="lang-content">📌 Что такое ступенчатый разрез?</span>
+      </p>
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b>Сатылы кесінді</b> — бірнеше параллель жазықтықтармен жасалған кесінді. Кесу жазықтықтары бір-біріне параллель, бірақ бір деңгейде емес. Олар бір сызбада <b>«жазылған»</b> ретінде берілетіні — «сатылар» жоқ, тегіс кесінді ретінде.</span>
+        <span lang="en" class="lang-content">A <b>stepped section</b> uses multiple parallel cutting planes at different levels. In the drawing they are "unfolded" into a single flat section — the steps are not shown, the result looks like one simple section.</span>
+        <span lang="ru" class="lang-content"><b>Ступенчатый разрез</b> — разрез несколькими параллельными секущими плоскостями. В изображении они «разворачиваются» в одну плоскость — ступени не показываются, результат — единый разрез.</span>
+      </p>
+      <div class="space-y-2 text-sm text-slate-700">
+        <div class="flex gap-2 items-start">
+          <span class="step-num text-xs flex-shrink-0">1</span>
+          <span lang="kk" class="lang-content">Кесу сызығы «Г» немесе «Z» пішінді — жазықтықтардың ауысатын жерлерін көрсетеді</span>
+          <span lang="en" class="lang-content">The cutting line has an «L» or «Z» shape, marking where planes step</span>
+          <span lang="ru" class="lang-content">Линия разреза имеет «Г» или «Z»-форму — показывает переходы плоскостей</span>
+        </div>
+        <div class="flex gap-2 items-start">
+          <span class="step-num text-xs flex-shrink-0">2</span>
+          <span lang="kk" class="lang-content">Кесінді суретінде «саты» сызылмайды — тегіс кесінді ретінде берілетіні</span>
+          <span lang="en" class="lang-content">The resulting section shows no step — it is presented as a flat section</span>
+          <span lang="ru" class="lang-content">На изображении разреза «ступень» не рисуется — результат как у простого разреза</span>
+        </div>
+        <div class="flex gap-2 items-start">
+          <span class="step-num text-xs flex-shrink-0">3</span>
+          <span lang="kk" class="lang-content">Белгілеу: А–А, стрелкалармен және жол бастауларында</span>
+          <span lang="en" class="lang-content">Designation: A–A with arrows and bends marked</span>
+          <span lang="ru" class="lang-content">Обозначение: А–А, стрелки и перегибы на виде</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Offset (broken) section -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">2️⃣ Сынық кесінді</span>
+    <span lang="en" class="lang-content">2️⃣ Offset (Broken) Section</span>
+    <span lang="ru" class="lang-content">2️⃣ Ломаный разрез</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 200" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Part outline -->
+        <ellipse cx="150" cy="80" rx="120" ry="60" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <!-- Offset cutting line B-B (two intersecting planes) -->
+        <polyline points="30,80 90,80 150,20 210,80 270,80"
+                  fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="8,3,2,3"/>
+        <polygon points="30,80 42,75 42,85" fill="#f59e0b"/>
+        <polygon points="270,80 258,75 258,85" fill="#f59e0b"/>
+        <text x="15" y="73" font-size="10" fill="#f59e0b" font-weight="bold">Б</text>
+        <text x="273" y="73" font-size="10" fill="#f59e0b" font-weight="bold">Б</text>
+        <!-- Angle label -->
+        <text x="145" y="38" font-size="9" fill="#f59e0b">угол ≠ 90°</text>
+        <!-- Section result (rotated to common plane) -->
+        <text x="70" y="158" font-size="9" fill="#f59e0b" text-anchor="middle">Б–Б (развёрнуто)</text>
+        <rect x="20" y="163" width="260" height="30" fill="url(#hatch1)" stroke="none"/>
+        <rect x="20" y="163" width="260" height="30" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Hole in section -->
+        <ellipse cx="150" cy="178" rx="25" ry="12" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Arrow indicating rotation -->
+        <path d="M 150,135 Q 170,148 150,163" fill="none" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrf)"/>
+        <defs>
+          <marker id="arrf" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f59e0b"/>
+          </marker>
+        </defs>
+        <text x="155" y="148" font-size="8" fill="#f59e0b">вращение</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="font-bold text-violet-800 mb-3">
+        <span lang="kk" class="lang-content">📌 Сынық кесінді</span>
+        <span lang="en" class="lang-content">📌 Broken (Offset) Section</span>
+        <span lang="ru" class="lang-content">📌 Ломаный разрез</span>
+      </p>
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content">Кесу жазықтықтары бір-бірімен <b>90° емес бұрышта</b> қиылысқан кезде — ломаный кесінді. Бір жазықтық екіншісіне дейін <b>бұрылады</b>, содан кейін сурет орналастырылады.</span>
+        <span lang="en" class="lang-content">When the two cutting planes <b>intersect at an angle</b> — a broken section. One plane is <b>rotated</b> into alignment with the other before the section view is drawn.</span>
+        <span lang="ru" class="lang-content">Когда секущие плоскости <b>пересекаются под углом</b> — ломаный разрез. Одну плоскость <b>разворачивают</b> до совмещения с другой, затем строят разрез.</span>
+      </p>
+      <div class="card-accent rounded-xl p-3 text-sm">
+        <p class="font-bold text-violet-800 mb-1">
+          <span lang="kk" class="lang-content">⚙️ Қолданылуы:</span>
+          <span lang="en" class="lang-content">⚙️ When to use:</span>
+          <span lang="ru" class="lang-content">⚙️ Применяется когда:</span>
+        </p>
+        <p class="text-slate-600">
+          <span lang="kk" class="lang-content">Элементтер бір осьтік сызықта емес, бірақ олардың ішкі пішіндерін бір кесіндімен көрсету керек болғанда.</span>
+          <span lang="en" class="lang-content">Features are not on one axis but you need a single section to reveal all of them.</span>
+          <span lang="ru" class="lang-content">Элементы не лежат на одной оси, но нужно показать их в одном разрезе.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section vs Cross-section (сечение) -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">3️⃣ Тілік (сечение) — разрезден айырмашылығы</span>
+    <span lang="en" class="lang-content">3️⃣ Cross-Section vs Section Cut</span>
+    <span lang="ru" class="lang-content">3️⃣ Сечение — отличие от разреза</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6 border-t-4 border-red-400">
+      <h3 class="font-bold text-red-700 mb-4 text-lg">
+        <span lang="kk" class="lang-content">✂️ Кесінді (Разрез)</span>
+        <span lang="en" class="lang-content">✂️ Section Cut (Разрез)</span>
+        <span lang="ru" class="lang-content">✂️ Разрез</span>
+      </h3>
+      <div class="flex justify-center mb-4">
+        <svg viewBox="0 0 180 120" style="width:160px;height:110px" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hR" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="6" stroke="#334155" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect x="10" y="20" width="160" height="80" fill="url(#hR)" stroke="#1e293b" stroke-width="2"/>
+          <!-- Hole (not hatched) -->
+          <rect x="70" y="20" width="40" height="80" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+          <!-- Arrow showing "behind" -->
+          <line x1="90" y1="110" x2="90" y2="100" stroke="#1d4ed8" stroke-width="1.5"/>
+          <text x="50" y="118" font-size="8" fill="#1d4ed8">+ то, что за плоскостью</text>
+          <text x="20" y="15" font-size="8" fill="#334155">плоскость разреза</text>
+          <!-- plus symbol and more shape -->
+          <line x1="10" y1="55" x2="0" y2="55" stroke="#1d4ed8" stroke-width="1" stroke-dasharray="3,1"/>
+          <text x="0" y="70" font-size="7" fill="#1d4ed8">↓ всё</text>
+          <text x="0" y="80" font-size="7" fill="#1d4ed8">за ней</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Кесу жазықтығы <b>ЖӘНЕ</b> одан артта қалған барлық нәрсе бейнеленеді.</span>
+        <span lang="en" class="lang-content">Shows what is in the cutting plane <b>AND</b> everything behind it.</span>
+        <span lang="ru" class="lang-content">Изображается то, что в плоскости разреза <b>И</b> всё, что находится за ней.</span>
+      </p>
+    </div>
+    <div class="card rounded-custom p-6 border-t-4 border-blue-400">
+      <h3 class="font-bold text-violet-700 mb-4 text-lg">
+        <span lang="kk" class="lang-content">🔲 Тілік (Сечение)</span>
+        <span lang="en" class="lang-content">🔲 Cross-Section (Сечение)</span>
+        <span lang="ru" class="lang-content">🔲 Сечение</span>
+      </h3>
+      <div class="flex justify-center mb-4">
+        <svg viewBox="0 0 180 120" style="width:160px;height:110px" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hS" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="6" stroke="#334155" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <!-- Only the cross-section shape, not a full rectangle -->
+          <path d="M 40,20 L 140,20 L 140,100 L 40,100 Z" fill="url(#hS)" stroke="#1e293b" stroke-width="2"/>
+          <!-- Hole -->
+          <circle cx="90" cy="60" r="20" fill="white" stroke="#1e293b" stroke-width="1.5"/>
+          <!-- X marks showing nothing behind is drawn -->
+          <text x="15" y="55" font-size="18" fill="#ef4444" opacity="0.3">✕</text>
+          <text x="145" y="55" font-size="18" fill="#ef4444" opacity="0.3">✕</text>
+          <text x="25" y="118" font-size="8" fill="#64748b">ТОЛЬКО плоскость разреза</text>
+          <text x="15" y="15" font-size="8" fill="#334155">только то, что в плоскости</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Тек кесу жазықтығы бойынша қиылысқан фигура ғана бейнеленеді. Артында не бар — <b>КӨРСЕТІЛМЕЙДІ</b>.</span>
+        <span lang="en" class="lang-content">Shows <b>ONLY</b> the figure formed at the cutting plane. Nothing behind it is drawn.</span>
+        <span lang="ru" class="lang-content">Показывается <b>ТОЛЬКО</b> фигура в секущей плоскости. Что находится за ней — <b>НЕ РИСУЕТСЯ</b>.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Overlaid vs detached cross-sections -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">4️⃣ Тіліктің орналасу түрлері</span>
+    <span lang="en" class="lang-content">4️⃣ Types of Cross-Section Placement</span>
+    <span lang="ru" class="lang-content">4️⃣ Виды расположения сечений</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5">
+      <h3 class="font-bold text-violet-800 mb-3">
+        <span lang="kk" class="lang-content">📎 Жабысқан тілік (наложенное)</span>
+        <span lang="en" class="lang-content">📎 Overlaid Cross-Section</span>
+        <span lang="ru" class="lang-content">📎 Наложенное сечение</span>
+      </h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Тілік бейнесі <b>сол бөлшектің сызбасы үстіне</b> орналастырылады</span><span lang="en" class="lang-content">The section figure is drawn <b>on top of the view</b> of the part</span><span lang="ru" class="lang-content">Фигура сечения вычерчивается <b>прямо на виде</b> детали</span></li>
+        <li>• <span lang="kk" class="lang-content">Тілік контуры — жіңішке сплошная сызықпен</span><span lang="en" class="lang-content">Outline of cross-section in thin solid lines</span><span lang="ru" class="lang-content">Контур сечения — тонкой сплошной линией</span></li>
+        <li>• <span lang="kk" class="lang-content">Белгіленбейді (егер симметриялы болса)</span><span lang="en" class="lang-content">Not labelled if symmetric</span><span lang="ru" class="lang-content">Не обозначается при симметричном сечении</span></li>
+      </ul>
+    </div>
+    <div class="card rounded-custom p-5">
+      <h3 class="font-bold text-violet-800 mb-3">
+        <span lang="kk" class="lang-content">📤 Шығарылған тілік (вынесенное)</span>
+        <span lang="en" class="lang-content">📤 Detached Cross-Section</span>
+        <span lang="ru" class="lang-content">📤 Вынесенное сечение</span>
+      </h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>• <span lang="kk" class="lang-content">Тілік бейнесі <b>сызбадан тыс</b> немесе бас сызбаны үзіп орналастырылады</span><span lang="en" class="lang-content">The section is placed <b>outside the view</b> or on a break</span><span lang="ru" class="lang-content">Фигура сечения вычерчивается <b>вне контура вида</b> или на разрыве</span></li>
+        <li>• <span lang="kk" class="lang-content">Контур — негізгі сызықпен (толстая сплошная)</span><span lang="en" class="lang-content">Outline in thick solid line</span><span lang="ru" class="lang-content">Контур — основной (толстой сплошной) линией</span></li>
+        <li>• <span lang="kk" class="lang-content">Міндетті белгілеу: А–А, стрелкалар мен штрихпунктирная осевая</span><span lang="en" class="lang-content">Must be labelled: A–A, arrows and dot-dash axis</span><span lang="ru" class="lang-content">Обязательное обозначение: А–А, стрелки, осевая</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Жалпы салыстыру</span>
+    <span lang="en" class="lang-content">🧠 Summary Comparison</span>
+    <span lang="ru" class="lang-content">🧠 Итоговое сравнение</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-3">
+      <p class="font-bold"><span lang="kk" class="lang-content">Қарапайым разрез</span><span lang="en" class="lang-content">Simple section</span><span lang="ru" class="lang-content">Простой разрез</span></p>
+      <p class="text-violet-200 mt-1"><span lang="kk" class="lang-content">Бір жазықтық</span><span lang="en" class="lang-content">One cutting plane</span><span lang="ru" class="lang-content">Одна секущая плоскость</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-3">
+      <p class="font-bold"><span lang="kk" class="lang-content">Сатылы разрез</span><span lang="en" class="lang-content">Stepped section</span><span lang="ru" class="lang-content">Ступенчатый</span></p>
+      <p class="text-violet-200 mt-1"><span lang="kk" class="lang-content">Параллель жазықтықтар → жазылған</span><span lang="en" class="lang-content">Parallel planes → unfolded</span><span lang="ru" class="lang-content">Параллельные плоскости → развёрнуты</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-3">
+      <p class="font-bold"><span lang="kk" class="lang-content">Сынық разрез</span><span lang="en" class="lang-content">Broken section</span><span lang="ru" class="lang-content">Ломаный</span></p>
+      <p class="text-violet-200 mt-1"><span lang="kk" class="lang-content">Бұрышта қиылысқан жазықтықтар → бір жазықтыққа бұрылған</span><span lang="en" class="lang-content">Angled planes → rotated flat</span><span lang="ru" class="lang-content">Плоскости под углом → повёрнуты в одну</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-3">
+      <p class="font-bold"><span lang="kk" class="lang-content">Сечение</span><span lang="en" class="lang-content">Cross-section</span><span lang="ru" class="lang-content">Сечение</span></p>
+      <p class="text-violet-200 mt-1"><span lang="kk" class="lang-content">Тек жазықтықтағы фигура, артыңдасы жоқ</span><span lang="en" class="lang-content">Only the cut figure, nothing behind</span><span lang="ru" class="lang-content">Только фигура в плоскости, без того что за ней</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

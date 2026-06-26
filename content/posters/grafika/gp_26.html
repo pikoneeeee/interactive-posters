@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Местный разрез</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_purple.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-violet-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 4 · Кесінділер мен тіліктер</span>
+      <span lang="en" class="lang-content">Graphics · Section 4 · Sections and Cuts</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 4 · Разрезы и сечения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🪟 Жергілікті кесінді (местный разрез)</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🪟 Local Section (Partial Cut)</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-violet-800">🪟 Местный разрез</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Бөлшекті толығымен кеспей, тек бір нүктедегі ішкі құрылымды көрсету.</span>
+      <span lang="en" class="lang-content">Showing the internal structure at one specific location without cutting the entire part.</span>
+      <span lang="ru" class="lang-content">Показ внутреннего устройства только в одном конкретном месте без разрезания детали целиком.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Definition + SVG -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Жергілікті кесінді дегеніміз не?</span>
+    <span lang="en" class="lang-content">💡 What is a Local Section?</span>
+    <span lang="ru" class="lang-content">💡 Что такое местный разрез?</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 320 220" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hloc" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#334155" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <!-- Full part outline - NOT cut -->
+        <rect x="20" y="40" width="280" height="140" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Bolt hole in the middle - hidden line outside the local section -->
+        <line x1="115" y1="40" x2="115" y2="90" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <line x1="175" y1="40" x2="175" y2="90" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <!-- Wavy break line bounding the local section area -->
+        <path d="M 100,90 Q 110,84 120,90 Q 130,96 140,90 Q 150,84 160,90 Q 170,96 180,90 Q 190,84 200,90" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Hatching inside local section area (below wavy line) -->
+        <rect x="115" y="90" width="60" height="90" fill="white"/>
+        <rect x="20" y="90" width="95" height="90" fill="url(#hloc)"/>
+        <rect x="180" y="90" width="120" height="90" fill="url(#hloc)"/>
+        <!-- Outline below wavy line restored -->
+        <rect x="20" y="90" width="280" height="90" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Internal hole visible in section -->
+        <line x1="115" y1="90" x2="115" y2="180" stroke="#1e293b" stroke-width="1.5"/>
+        <line x1="175" y1="90" x2="175" y2="180" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Label the wavy line -->
+        <text x="195" y="84" font-size="9" fill="#7c3aed">волнистая линия обрыва</text>
+        <!-- Label hatched area -->
+        <text x="25" y="140" font-size="9" fill="#334155">штриховка</text>
+        <!-- Label hole (local cut reveals it) -->
+        <text x="125" y="135" font-size="9" fill="#7c3aed">отверстие</text>
+        <text x="120" y="148" font-size="9" fill="#7c3aed">(видно в</text>
+        <text x="120" y="160" font-size="9" fill="#7c3aed">разрезе)</text>
+        <!-- Full outline labels -->
+        <text x="25" y="35" font-size="9" fill="#64748b">Деталь не разрезается целиком</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-violet-700">Жергілікті кесінді</b> — бөлшектің тек бір <b>нақты жерін</b> ашып көрсететін кесінді. Бөлшектің қалған бөлігі кесілмейді. Кесінді аймағы <b>толқынды үзу сызығымен</b> шектеледі.</span>
+        <span lang="en" class="lang-content"><b class="text-violet-700">Local section</b> — a cut that reveals the internal structure at only one <b>specific location</b>. The rest of the part remains intact. The cut area is bounded by a <b>wavy break line</b>.</span>
+        <span lang="ru" class="lang-content"><b class="text-violet-700">Местный разрез</b> — разрез, открывающий внутреннее устройство только в одном <b>конкретном месте</b>. Остальная часть детали не разрезается. Область разреза ограничивается <b>волнистой линией обрыва</b>.</span>
+      </p>
+      <div class="space-y-3">
+        <div class="flex gap-3 items-start text-sm">
+          <span class="step-num text-xs flex-shrink-0">1</span>
+          <div>
+            <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Толқынды сызық — шекара</span><span lang="en" class="lang-content">Wavy line = boundary</span><span lang="ru" class="lang-content">Волнистая линия = граница</span></p>
+            <p class="text-slate-600"><span lang="kk" class="lang-content">Кесілген аймақ пен кесілмеген аймақты бөледі. Сызықтың пішіні еркін, бірақ тым тегіс емес.</span><span lang="en" class="lang-content">Separates the cut area from the uncut area. The line is freehand but not too smooth.</span><span lang="ru" class="lang-content">Отделяет разрезанную область от неразрезанной. Линия — от руки, но не слишком ровная.</span></p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start text-sm">
+          <span class="step-num text-xs flex-shrink-0">2</span>
+          <div>
+            <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Белгілеу — жоқ</span><span lang="en" class="lang-content">No designation needed</span><span lang="ru" class="lang-content">Обозначения не требует</span></p>
+            <p class="text-slate-600"><span lang="kk" class="lang-content">Жергілікті кесінді стрелка, әріп немесе А–А сияқты белгімен нұсқалмайды.</span><span lang="en" class="lang-content">Local section does not require arrows, letters, or A–A type labels.</span><span lang="ru" class="lang-content">Местный разрез не обозначается стрелками, буквами и подписью вида А–А.</span></p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start text-sm">
+          <span class="step-num text-xs flex-shrink-0">3</span>
+          <div>
+            <p class="font-bold text-violet-800"><span lang="kk" class="lang-content">Штрихтеу — кесілген материал үшін</span><span lang="en" class="lang-content">Hatching on cut material only</span><span lang="ru" class="lang-content">Штриховка — только на срезанном материале</span></p>
+            <p class="text-slate-600"><span lang="kk" class="lang-content">Тек кесілген жер штрихталады. Тесіктер мен бос аймақтар — штрихталмайды.</span><span lang="en" class="lang-content">Only the cut material is hatched. Holes and empty spaces are not.</span><span lang="ru" class="lang-content">Штрихуется только срезанный металл. Отверстия и пустоты — не штрихуются.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison: local vs full section -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚖️ Жергілікті vs Толық кесінді</span>
+    <span lang="en" class="lang-content">⚖️ Local vs Full Section</span>
+    <span lang="ru" class="lang-content">⚖️ Местный vs Полный разрез</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <table class="t">
+      <thead>
+        <tr>
+          <th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Feature</span><span lang="ru" class="lang-content">Признак</span></th>
+          <th class="text-violet-600"><span lang="kk" class="lang-content">Жергілікті кесінді</span><span lang="en" class="lang-content">Local Section</span><span lang="ru" class="lang-content">Местный разрез</span></th>
+          <th class="text-slate-600"><span lang="kk" class="lang-content">Толық кесінді</span><span lang="en" class="lang-content">Full Section</span><span lang="ru" class="lang-content">Полный разрез</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span lang="kk" class="lang-content">Кесілетін аймақ</span><span lang="en" class="lang-content">Cut area</span><span lang="ru" class="lang-content">Область разреза</span></td>
+          <td class="text-violet-700"><span lang="kk" class="lang-content">Бір жер ғана</span><span lang="en" class="lang-content">One specific spot</span><span lang="ru" class="lang-content">Только одно место</span></td>
+          <td><span lang="kk" class="lang-content">Бүкіл бөлшек</span><span lang="en" class="lang-content">Entire part</span><span lang="ru" class="lang-content">Вся деталь</span></td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Шекара сызығы</span><span lang="en" class="lang-content">Boundary line</span><span lang="ru" class="lang-content">Линия границы</span></td>
+          <td class="text-violet-700"><span lang="kk" class="lang-content">Толқынды сызық</span><span lang="en" class="lang-content">Wavy break line</span><span lang="ru" class="lang-content">Волнистая линия обрыва</span></td>
+          <td><span lang="kk" class="lang-content">Контур сызығы</span><span lang="en" class="lang-content">Outline of the part</span><span lang="ru" class="lang-content">Контур детали</span></td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Белгілеу</span><span lang="en" class="lang-content">Designation</span><span lang="ru" class="lang-content">Обозначение</span></td>
+          <td class="text-violet-700"><span lang="kk" class="lang-content">Талап етілмейді</span><span lang="en" class="lang-content">Not required</span><span lang="ru" class="lang-content">Не требуется</span></td>
+          <td><span lang="kk" class="lang-content">А–А, стрелкалар</span><span lang="en" class="lang-content">A–A, arrows</span><span lang="ru" class="lang-content">А–А, стрелки</span></td>
+        </tr>
+        <tr>
+          <td><span lang="kk" class="lang-content">Қолданылуы</span><span lang="en" class="lang-content">Use</span><span lang="ru" class="lang-content">Применение</span></td>
+          <td class="text-violet-700"><span lang="kk" class="lang-content">Жергілікті тесік, паз</span><span lang="en" class="lang-content">Local hole, groove</span><span lang="ru" class="lang-content">Отдельное отверстие, паз</span></td>
+          <td><span lang="kk" class="lang-content">Күрделі ішкі форма</span><span lang="en" class="lang-content">Complex internal form</span><span lang="ru" class="lang-content">Сложная внутренняя форма</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- When to prefer local -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-violet-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Жергілікті кесіндіні қашан таңдаймыз?</span>
+    <span lang="en" class="lang-content">🎯 When to Choose a Local Section?</span>
+    <span lang="ru" class="lang-content">🎯 Когда выбирать местный разрез?</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="tile">
+      <div class="tile-icon">🔩</div>
+      <p class="font-bold text-violet-800 mt-2"><span lang="kk" class="lang-content">Жергілікті тесік</span><span lang="en" class="lang-content">Local hole</span><span lang="ru" class="lang-content">Местное отверстие</span></p>
+      <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Негізгі денеде бір немесе бірнеше тесік бар, бірақ бүкіл бөлшекті кеспеу керек</span><span lang="en" class="lang-content">One or a few holes in the main body, but full section would be excessive</span><span lang="ru" class="lang-content">Одно-два отверстия в теле, но полный разрез избыточен</span></p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">📐</div>
+      <p class="font-bold text-violet-800 mt-2"><span lang="kk" class="lang-content">Сыртқы форма маңызды</span><span lang="en" class="lang-content">External shape matters</span><span lang="ru" class="lang-content">Важна внешняя форма</span></p>
+      <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Толық кесінді сыртқы пішінді «жояды» — жергілікті кесінді екеуін де сақтайды</span><span lang="en" class="lang-content">Full section loses external shape — local section preserves both</span><span lang="ru" class="lang-content">Полный разрез «убивает» внешнюю форму — местный сохраняет и то, и то</span></p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">💡</div>
+      <p class="font-bold text-violet-800 mt-2"><span lang="kk" class="lang-content">Симметриясыз бөлшек</span><span lang="en" class="lang-content">Asymmetric part</span><span lang="ru" class="lang-content">Несимметричная деталь</span></p>
+      <p class="text-slate-600 text-sm mt-1"><span lang="kk" class="lang-content">Биріктіру (совмещение) мүмкін болмаса, жергілікті кесінді — ыңғайлы баламасы</span><span lang="en" class="lang-content">When half-section is not applicable, local section is the practical alternative</span><span lang="ru" class="lang-content">Если совмещение неприменимо, местный разрез — удобная альтернатива</span></p>
+    </div>
+  </div>
+</section>
+
+<footer class="card-purple rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Толқынды сызық</span><span lang="en" class="lang-content">Wavy line</span><span lang="ru" class="lang-content">Волнистая линия</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Жергілікті кесіндінің міндетті белгісі</span><span lang="en" class="lang-content">Mandatory mark of a local section</span><span lang="ru" class="lang-content">Обязательный признак местного разреза</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Белгілеу жоқ</span><span lang="en" class="lang-content">No labelling</span><span lang="ru" class="lang-content">Без обозначения</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">А–А стрелкасы, әріптер — КЕРЕК ЕМЕС</span><span lang="en" class="lang-content">No A–A arrows or letters needed</span><span lang="ru" class="lang-content">Стрелки А–А и буквы — НЕ НУЖНЫ</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Үнемді шешім</span><span lang="en" class="lang-content">Efficient solution</span><span lang="ru" class="lang-content">Экономичное решение</span></p><p class="text-violet-200"><span lang="kk" class="lang-content">Бөлшекті толығымен кеспей, нақты жерін ғана ашады</span><span lang="en" class="lang-content">Reveals only the needed area without cutting the whole part</span><span lang="ru" class="lang-content">Открывает только нужное место без разрезания всей детали</span></p></div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

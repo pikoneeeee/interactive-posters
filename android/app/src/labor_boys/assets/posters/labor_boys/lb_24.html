@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электромонтаж: простая цепь, безопасность</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.5;}
+.step b{color:#881337;}
+/* element card */
+.elem{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-left:5px solid #be123c;
+  border-radius:1rem;padding:1.1rem 1.2rem;box-shadow:0 3px 14px rgba(136,19,55,.07);height:100%;}
+.elem h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.08rem;}
+.elem .sub{color:#a16207;font-size:.82rem;font-style:italic;margin-bottom:.45rem;}
+.elem p{color:#57534e;font-size:.93rem;line-height:1.5;}
+.elem .ico{font-size:1.7rem;line-height:1;}
+/* safety tables */
+.safe-tbl{width:100%;border-collapse:collapse;font-size:.93rem;}
+.safe-tbl th{background:#be123c;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;
+  text-align:left;padding:.7rem .9rem;}
+.safe-tbl td{padding:.65rem .9rem;border-bottom:1px solid rgba(190,18,60,.14);color:#44403c;vertical-align:top;line-height:1.45;}
+.safe-tbl tr:nth-child(even) td{background:rgba(225,29,72,0.04);}
+.safe-tbl td:first-child{font-weight:700;color:#881337;white-space:nowrap;}
+.do-bad{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,.25);border-radius:.9rem;padding:1rem 1.15rem;}
+.do-bad h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#b91c1c;font-size:1rem;margin-bottom:.3rem;}
+.do-bad p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.do-ok{background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,.25);border-radius:.9rem;padding:1rem 1.15rem;}
+.do-ok h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#15803d;font-size:1rem;margin-bottom:.3rem;}
+.do-ok p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.diagram-mat{background:#fff;display:flex;align-items:center;justify-content:center;}
+.tip{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:1rem 1.15rem;}
+.tip h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1rem;margin-bottom:.25rem;}
+.tip p{color:#57534e;font-size:.9rem;line-height:1.45;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 4-бөлім · Машина және электротехника</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 4 · Machines &amp; Electrics</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 4 · Машины и электротехника</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">⚡ Электрмонтаж: қарапайым тізбек, қауіпсіздік</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">⚡ Wiring: A Simple Circuit and Safety</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">⚡ Электромонтаж: простая цепь, безопасность</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Қорек көзі, өткізгіш, ажыратқыш пен шам — тұйық тізбекке қалай қосылады және мұны қалай қауіпсіз жасау керек.</span>
+      <span lang="en" class="lang-content">How a power source, conductor, switch and lamp join into a closed loop — and how to do it safely.</span>
+      <span lang="ru" class="lang-content">Как источник, провод, выключатель и лампа соединяются в замкнутую цепь — и как сделать это безопасно.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO + HERO DIAGRAM -->
+<section class="card rounded-custom p-6 md:p-7 mb-10 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+  <div>
+    <h2 class="heading-font text-2xl font-extrabold mb-3" style="color:#881337">
+      <span lang="kk" class="lang-content">Электр тізбегі дегеніміз не?</span>
+      <span lang="en" class="lang-content">What Is an Electric Circuit?</span>
+      <span lang="ru" class="lang-content">Что такое электрическая цепь?</span>
+    </h2>
+    <p class="lead mb-3">
+      <span lang="kk" class="lang-content"><b>Электр тізбегі</b> — ток жүретін тұйық жол. Ток ағуы үшін жол үзіліссіз болуы керек: қорек көзінің бір полюсінен шығып, өткізгіш, тұтынушы және ажыратқыш арқылы өтіп, екінші полюске қайта оралуы тиіс. Жол кез келген жерден үзілсе — ток тоқтайды, шам сөнеді.</span>
+      <span lang="en" class="lang-content">An <b>electric circuit</b> is a closed path along which current flows. For current to move, the path must be unbroken: it leaves one terminal of the power source, passes through the conductor, the load and the switch, and returns to the other terminal. Break the path anywhere and the current stops — the lamp goes out.</span>
+      <span lang="ru" class="lang-content"><b>Электрическая цепь</b> — это замкнутый путь, по которому течёт ток. Чтобы ток шёл, путь должен быть непрерывным: он выходит из одного полюса источника, проходит через провод, потребитель и выключатель и возвращается к другому полюсу. Разорви путь в любом месте — ток прекратится, лампа погаснет.</span>
+    </p>
+    <p class="lead">
+      <span lang="kk" class="lang-content">Ең қарапайым тізбекте төрт бөлік бар: <b>қорек көзі</b> (батарея), <b>өткізгіш</b> (сым), <b>ажыратқыш</b> (кілт) және <b>тұтынушы</b> (шам). Дәл осы тізбек — қоңырау, шам, ойыншық немесе үй сымдары сияқты кез келген электр құрылғысының негізі.</span>
+      <span lang="en" class="lang-content">The simplest circuit has four parts: a <b>power source</b> (battery), a <b>conductor</b> (wire), a <b>switch</b> (key) and a <b>load</b> (lamp). This very circuit is the foundation of any electrical device — a doorbell, a lamp, a toy or the wiring of a house.</span>
+      <span lang="ru" class="lang-content">В простейшей цепи четыре части: <b>источник питания</b> (батарея), <b>проводник</b> (провод), <b>выключатель</b> (ключ) и <b>потребитель</b> (лампа). Именно эта цепь — основа любого электрического устройства: звонка, лампы, игрушки или домашней проводки.</span>
+    </p>
+  </div>
+  <div>
+    <div class="art-frame" onclick="openLB(this)">
+      <div class="art-mat pic diagram-mat" style="height:330px"><img src="../../assets/labor_boys/lb24_diagram.jpg" alt="Схема простой электрической цепи: батарея, выключатель, лампа"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Қарапайым тізбек схемасы</span><span lang="en" class="lang-content">Simple circuit diagram</span><span lang="ru" class="lang-content">Схема простой цепи</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">батарея · ажыратқыш · шам</span><span lang="en" class="lang-content">battery · switch · lamp</span><span lang="ru" class="lang-content">батарея · выключатель · лампа</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Ток батареядан шығып, тұйық жолмен ажыратқыш пен шам арқылы өтіп, қайта оралады. Көрсеткілер ток бағытын білдіреді.</span><span lang="en" class="lang-content">Current leaves the battery, travels the closed loop through the switch and lamp, and returns. The arrows show the direction of the current.</span><span lang="ru" class="lang-content">Ток выходит из батареи, идёт по замкнутому пути через выключатель и лампу и возвращается. Стрелки показывают направление тока.</span></div>
+    </div>
+    <p class="text-center text-xs mt-2" style="color:#be123c;font-weight:700"><span lang="kk" class="lang-content">тұйық тізбек: ток көрсеткі бойынша жүреді 🔍</span><span lang="en" class="lang-content">a closed loop: current flows along the arrows 🔍</span><span lang="ru" class="lang-content">замкнутый контур: ток идёт по стрелкам 🔍</span></p>
+  </div>
+</section>
+
+<!-- FOUR ELEMENTS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Тізбектің төрт бөлігі</span>
+    <span lang="en" class="lang-content">The Four Parts of a Circuit</span>
+    <span lang="ru" class="lang-content">Четыре части цепи</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Әрқайсысының өз қызметі бар — біреуі болмаса тізбек жұмыс істемейді.</span>
+    <span lang="en" class="lang-content">Each has its own job — without any one of them the circuit will not work.</span>
+    <span lang="ru" class="lang-content">У каждой свой смысл — без любой из них цепь не работает.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="elem">
+      <div class="ico">🔋</div>
+      <h3><span lang="kk" class="lang-content">Қорек көзі</span><span lang="en" class="lang-content">Power source</span><span lang="ru" class="lang-content">Источник питания</span></h3>
+      <div class="sub"><span lang="kk" class="lang-content">токты «итереді»</span><span lang="en" class="lang-content">pushes the current</span><span lang="ru" class="lang-content">«толкает» ток</span></div>
+      <p><span lang="kk" class="lang-content">Батарея немесе аккумулятор кернеу береді — ол токты тізбек бойымен жүргізеді. «+» және «−» полюстері бар.</span><span lang="en" class="lang-content">A battery or accumulator gives a voltage that drives the current around the circuit. It has a «+» and a «−» terminal.</span><span lang="ru" class="lang-content">Батарея или аккумулятор создаёт напряжение, которое гонит ток по цепи. У неё есть полюс «+» и «−».</span></p>
+    </div>
+    <div class="elem">
+      <div class="ico">➖</div>
+      <h3><span lang="kk" class="lang-content">Өткізгіш</span><span lang="en" class="lang-content">Conductor</span><span lang="ru" class="lang-content">Проводник</span></h3>
+      <div class="sub"><span lang="kk" class="lang-content">токты тасымалдайды</span><span lang="en" class="lang-content">carries the current</span><span lang="ru" class="lang-content">переносит ток</span></div>
+      <p><span lang="kk" class="lang-content">Мыс сым ток жақсы өткізеді, ал оның түрлі-түсті оқшаулауы (изоляция) токты ұстап, қолды қорғайды.</span><span lang="en" class="lang-content">A copper wire conducts current well, while its coloured insulation holds the current in and protects your hand.</span><span lang="ru" class="lang-content">Медный провод хорошо проводит ток, а его цветная изоляция удерживает ток и защищает руку.</span></p>
+    </div>
+    <div class="elem">
+      <div class="ico">🔘</div>
+      <h3><span lang="kk" class="lang-content">Ажыратқыш</span><span lang="en" class="lang-content">Switch</span><span lang="ru" class="lang-content">Выключатель</span></h3>
+      <div class="sub"><span lang="kk" class="lang-content">жолды ашады/жабады</span><span lang="en" class="lang-content">opens / closes the path</span><span lang="ru" class="lang-content">размыкает / замыкает</span></div>
+      <p><span lang="kk" class="lang-content">Кілт тізбекті қажет кезде үзеді немесе қосады. Ажыратылғанда ток жоқ, қосылғанда — тізбек тұйықталады.</span><span lang="en" class="lang-content">The key breaks or completes the circuit on demand. Open — no current; closed — the loop is complete.</span><span lang="ru" class="lang-content">Ключ по желанию размыкает или замыкает цепь. Разомкнут — тока нет; замкнут — цепь замкнута.</span></p>
+    </div>
+    <div class="elem">
+      <div class="ico">💡</div>
+      <h3><span lang="kk" class="lang-content">Тұтынушы</span><span lang="en" class="lang-content">Load</span><span lang="ru" class="lang-content">Потребитель</span></h3>
+      <div class="sub"><span lang="kk" class="lang-content">токты жұмысқа жұмсайды</span><span lang="en" class="lang-content">uses the current</span><span lang="ru" class="lang-content">расходует ток</span></div>
+      <p><span lang="kk" class="lang-content">Шам, қозғалтқыш не қоңырау электр энергиясын жарыққа, қозғалысқа немесе дыбысқа айналдырады.</span><span lang="en" class="lang-content">A lamp, motor or bell turns electrical energy into light, motion or sound.</span><span lang="ru" class="lang-content">Лампа, мотор или звонок превращают электрическую энергию в свет, движение или звук.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- STEP BY STEP: ASSEMBLE A SIMPLE CIRCUIT -->
+<section class="card rounded-custom p-6 md:p-7 mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Қарапайым тізбекті қалай құрастыру керек</span>
+    <span lang="en" class="lang-content">How to Assemble a Simple Circuit</span>
+    <span lang="ru" class="lang-content">Как собрать простую цепь</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Тек төмен кернеулі батареямен (4,5 В) жұмыс істе — желі тогы (220 В) қауіпті!</span>
+    <span lang="en" class="lang-content">Work only with a low-voltage battery (4.5 V) — mains current (220 V) is dangerous!</span>
+    <span lang="ru" class="lang-content">Работай только с низковольтной батарейкой (4,5 В) — сетевой ток (220 В) опасен!</span>
+  </p>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 items-start">
+    <div>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Сызбаны оқы.</span><span lang="en" class="lang-content">Read the diagram.</span><span lang="ru" class="lang-content">Прочитай схему.</span></b> <span lang="kk" class="lang-content">Тізбекте не қайда тұратынын алдын ала белгіле: батарея, ажыратқыш, шам.</span><span lang="en" class="lang-content">Decide in advance what goes where: the battery, the switch and the lamp.</span><span lang="ru" class="lang-content">Заранее определи, что где стоит: батарея, выключатель, лампа.</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Сымды тазала.</span><span lang="en" class="lang-content">Strip the wire.</span><span lang="ru" class="lang-content">Зачисти провод.</span></b> <span lang="kk" class="lang-content">Сым ұшын арнайы стриппермен ~1 см тазала — жалаңаш мыс жалтырап тұруы керек.</span><span lang="en" class="lang-content">Strip about 1 cm of insulation from the wire ends with a stripper — the bare copper should be shiny.</span><span lang="ru" class="lang-content">Сними около 1 см изоляции с концов провода стриппером — голая медь должна блестеть.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Қорек көзіне жалға.</span><span lang="en" class="lang-content">Connect the source.</span><span lang="ru" class="lang-content">Подключи источник.</span></b> <span lang="kk" class="lang-content">Бір сымды батареяның «+» полюсіне, екіншісін «−» полюсіне берік бекіт.</span><span lang="en" class="lang-content">Fasten one wire firmly to the «+» terminal of the battery and the other to the «−».</span><span lang="ru" class="lang-content">Надёжно закрепи один провод на полюсе «+» батареи, другой — на «−».</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Ажыратқышты қос.</span><span lang="en" class="lang-content">Add the switch.</span><span lang="ru" class="lang-content">Включи выключатель.</span></b> <span lang="kk" class="lang-content">Бір сымды ажыратқыш арқылы өткіз — ол тізбекті ашып-жабатын болады.</span><span lang="en" class="lang-content">Run one wire through the switch — it will open and close the loop.</span><span lang="ru" class="lang-content">Проведи один провод через выключатель — он будет размыкать и замыкать цепь.</span></p></div>
+      <div class="step"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Шамды жалға.</span><span lang="en" class="lang-content">Connect the lamp.</span><span lang="ru" class="lang-content">Подключи лампу.</span></b> <span lang="kk" class="lang-content">Шам патронының екі түйіспесіне сымдарды бекітіп, тізбекті тұйықта.</span><span lang="en" class="lang-content">Attach the wires to the two contacts of the lamp holder and close the loop.</span><span lang="ru" class="lang-content">Закрепи провода на двух контактах патрона лампы и замкни цепь.</span></p></div>
+      <div class="step"><div class="step-num">6</div><p><b><span lang="kk" class="lang-content">Тексер.</span><span lang="en" class="lang-content">Test it.</span><span lang="ru" class="lang-content">Проверь.</span></b> <span lang="kk" class="lang-content">Ажыратқышты қос: шам жанса — тізбек дұрыс. Жанбаса, барлық түйіспені тексер.</span><span lang="en" class="lang-content">Close the switch: if the lamp lights, the circuit is correct. If not, check every connection.</span><span lang="ru" class="lang-content">Замкни выключатель: загорелась лампа — цепь верна. Если нет — проверь все соединения.</span></p></div>
+    </div>
+    <div>
+      <div class="genre-card" onclick="openLB(this)">
+        <div class="pic"><img src="../../assets/labor_boys/lb24_breadboard.jpg" alt="Макетная плата (breadboard) для сборки цепи"><div class="zoom-hint">🔍</div></div>
+        <div class="body">
+          <div class="genre-name"><span lang="kk" class="lang-content">Макет тақтасы</span><span lang="en" class="lang-content">Breadboard</span><span lang="ru" class="lang-content">Макетная плата</span></div>
+          <div class="genre-cap"><span lang="kk" class="lang-content">дәнекерсіз құрастыру</span><span lang="en" class="lang-content">solder-free assembly</span><span lang="ru" class="lang-content">сборка без пайки</span></div>
+          <div class="genre-desc"><span lang="kk" class="lang-content">Тесіктерге сым мен бөлшектерді жай тығып, тізбекті дәнекерсіз жинауға болады. Қателессең — қайта аласың. Үйренуге өте ыңғайлы.</span><span lang="en" class="lang-content">You simply push wires and parts into the holes to build a circuit without any soldering. Made a mistake? Pull it back out. Ideal for learning.</span><span lang="ru" class="lang-content">Провода и детали просто вставляют в отверстия и собирают цепь без пайки. Ошибся — вынул обратно. Очень удобно для учёбы.</span></div>
+        </div>
+      </div>
+      <div class="tip mt-4">
+        <h4>💡 <span lang="kk" class="lang-content">Қысқа тұйықталу</span><span lang="en" class="lang-content">Short circuit</span><span lang="ru" class="lang-content">Короткое замыкание</span></h4>
+        <p><span lang="kk" class="lang-content">«+» мен «−» полюсін шам арқылы өтпей, тікелей сыммен жалғама! Бұл — <b>қысқа тұйықталу</b>: сым қызып, батарея бұзылып, өрт шығуы мүмкін.</span><span lang="en" class="lang-content">Never join «+» and «−» directly with a wire, bypassing the lamp! That is a <b>short circuit</b>: the wire heats up, the battery is ruined and a fire can start.</span><span lang="ru" class="lang-content">Никогда не соединяй «+» и «−» проводом напрямую, минуя лампу! Это <b>короткое замыкание</b>: провод раскаляется, батарея портится, возможен пожар.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS + PROTECTION GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Құрал-сайман мен қорғаныс</span>
+    <span lang="en" class="lang-content">Tools &amp; Protection</span>
+    <span lang="ru" class="lang-content">Инструменты и защита</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Электрик құралдары мен тізбекті асқын токтан қорғайтын автоматтар. 🔍 Үлкейту үшін суретті бас.</span>
+    <span lang="en" class="lang-content">An electrician's tools and the breakers that protect a circuit from overcurrent. 🔍 Tap a photo to enlarge.</span>
+    <span lang="ru" class="lang-content">Инструменты электрика и автоматы, защищающие цепь от перегрузки. 🔍 Нажми на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb24_tools.jpg" alt="Бокорезы с изолированными ручками"><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Оқшауланған тістеуік</span><span lang="en" class="lang-content">Insulated cutters</span><span lang="ru" class="lang-content">Изолированные бокорезы</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">сым кесуге</span><span lang="en" class="lang-content">for cutting wire</span><span lang="ru" class="lang-content">для резки провода</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Сымды кеседі. Сабындағы қалың резеңке оқшаулау электр тогынан қорғайды — электрик құралдарының басты белгісі.</span><span lang="en" class="lang-content">They cut wire. The thick rubber insulation on the handles guards against electric shock — the hallmark of an electrician's tools.</span><span lang="ru" class="lang-content">Режут провод. Толстая резиновая изоляция на ручках защищает от удара током — главный признак инструмента электрика.</span></div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb24_breaker.jpg" alt="Автоматический выключатель на DIN-рейке"><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Автомат ажыратқыш</span><span lang="en" class="lang-content">Circuit breaker</span><span lang="ru" class="lang-content">Автоматический выключатель</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">асқын токтан қорғайды</span><span lang="en" class="lang-content">guards against overcurrent</span><span lang="ru" class="lang-content">защита от перегрузки</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Ток шектен асса немесе қысқа тұйықталу болса, автомат лезде тізбекті ажыратады. Балқыма сақтандырғышты алмастырады — қайта қосуға болады.</span><span lang="en" class="lang-content">If the current exceeds the limit or a short circuit occurs, the breaker instantly cuts off the circuit. It replaces a fuse and can be switched back on.</span><span lang="ru" class="lang-content">Если ток превысит предел или случится короткое замыкание, автомат мгновенно отключает цепь. Заменяет плавкий предохранитель — его можно включить снова.</span></div>
+      </div>
+    </div>
+
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb24_board.jpg" alt="Старый распределительный щиток с открытой проводкой"><div class="zoom-hint">🔍</div></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Қалай ИСТЕМЕУ керек</span><span lang="en" class="lang-content">How NOT to wire</span><span lang="ru" class="lang-content">Как НЕ надо</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">ескі, қауіпті щиток</span><span lang="en" class="lang-content">an old, unsafe board</span><span lang="ru" class="lang-content">старый, опасный щиток</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Шатасқан, ашық сымдар мен ескі сақтандырғыштар — қауіпті. Дұрыс электрмонтажда әр сым тазалап тартылып, таңбаланып, жабылады.</span><span lang="en" class="lang-content">Tangled, exposed wires and old fuses are dangerous. In correct wiring every wire is run neatly, labelled and covered.</span><span lang="ru" class="lang-content">Запутанные, оголённые провода и старые предохранители — это опасно. В правильном электромонтаже каждый провод проложен аккуратно, подписан и закрыт.</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SAFETY RULES TABLE -->
+<section class="card rounded-custom p-6 md:p-7 mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">⚠️ Электр қауіпсіздігінің ережелері</span>
+    <span lang="en" class="lang-content">⚠️ Rules of Electrical Safety</span>
+    <span lang="ru" class="lang-content">⚠️ Правила электробезопасности</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Электр тогы көрінбейді, бірақ қауіпті. Осы ережелер өмірді сақтайды.</span>
+    <span lang="en" class="lang-content">Electric current is invisible but dangerous. These rules save lives.</span>
+    <span lang="ru" class="lang-content">Электрический ток невидим, но опасен. Эти правила спасают жизнь.</span>
+  </p>
+
+  <div class="lang-content" lang="ru">
+    <table class="safe-tbl">
+      <thead><tr><th>Опасность</th><th>Почему опасно</th><th>Что делать</th></tr></thead>
+      <tbody>
+        <tr><td>Сеть 220 В</td><td>Может убить даже при коротком касании.</td><td>Опыты — только с батарейкой 4,5 В. Розетку не трогай.</td></tr>
+        <tr><td>Мокрые руки</td><td>Вода проводит ток — поражение усиливается.</td><td>Работай только сухими руками и в сухом месте.</td></tr>
+        <tr><td>Голый провод</td><td>Оголённая жила бьёт током и искрит.</td><td>Изоляцию снимай только на концах; повреждённый провод не используй.</td></tr>
+        <tr><td>Перегрузка</td><td>Слишком большой ток греет провод — пожар.</td><td>Ставь автомат/предохранитель; не включай много приборов в одну розетку.</td></tr>
+        <tr><td>Цепь под током</td><td>Ток идёт — касаться контактов опасно.</td><td>Перед сборкой и ремонтом разомкни цепь (выключи).</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="kk">
+    <table class="safe-tbl">
+      <thead><tr><th>Қауіп</th><th>Неге қауіпті</th><th>Не істеу керек</th></tr></thead>
+      <tbody>
+        <tr><td>220 В желі</td><td>Қысқа тигеннің өзінде өлтіруі мүмкін.</td><td>Тәжірибе тек 4,5 В батареямен. Розеткаға тиме.</td></tr>
+        <tr><td>Дымқыл қол</td><td>Су ток өткізеді — зақым күшейеді.</td><td>Тек құрғақ қолмен, құрғақ жерде жұмыс істе.</td></tr>
+        <tr><td>Жалаңаш сым</td><td>Ашық өзек ток соғады әрі ұшқындайды.</td><td>Оқшаулауды тек ұшынан ал; зақымдалған сымды қолданба.</td></tr>
+        <tr><td>Асқын жүктеме</td><td>Шектен тыс ток сымды қыздырады — өрт.</td><td>Автомат/сақтандырғыш қой; бір розеткаға көп құрылғы қоспа.</td></tr>
+        <tr><td>Токтағы тізбек</td><td>Ток жүргенде түйіспеге тию қауіпті.</td><td>Құрастыру мен жөндеу алдында тізбекті ажырат (сөндір).</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lang-content" lang="en">
+    <table class="safe-tbl">
+      <thead><tr><th>Hazard</th><th>Why it is dangerous</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td>230 V mains</td><td>Can kill even with a brief touch.</td><td>Experiment only with a 4.5 V battery. Do not touch sockets.</td></tr>
+        <tr><td>Wet hands</td><td>Water conducts current — the shock is stronger.</td><td>Work only with dry hands in a dry place.</td></tr>
+        <tr><td>Bare wire</td><td>An exposed conductor shocks and sparks.</td><td>Strip insulation only at the ends; never use a damaged wire.</td></tr>
+        <tr><td>Overload</td><td>Too much current heats the wire — a fire.</td><td>Fit a breaker/fuse; don't plug many devices into one socket.</td></tr>
+        <tr><td>Live circuit</td><td>While current flows, touching contacts is dangerous.</td><td>Open (switch off) the circuit before building or repairing it.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- DO / DON'T -->
+<section class="mb-10 grid grid-cols-1 lg:grid-cols-2 gap-5">
+  <div class="do-bad">
+    <h4>🚫 <span lang="kk" class="lang-content">Ешқашан жасама</span><span lang="en" class="lang-content">Never do this</span><span lang="ru" class="lang-content">Никогда не делай</span></h4>
+    <p><span lang="kk" class="lang-content">Розеткаға металл затты тықпа; зақымдалған сымды ұстама; токтағы тізбекті жалаң қолмен тексерме; «+» мен «−» тікелей жалғама; су жанында электрмен жұмыс істеме.</span><span lang="en" class="lang-content">Don't poke metal objects into a socket; don't touch a damaged wire; don't probe a live circuit with bare hands; don't join «+» and «−» directly; don't work with electricity near water.</span><span lang="ru" class="lang-content">Не суй металлические предметы в розетку; не трогай повреждённый провод; не проверяй цепь под током голыми руками; не соединяй «+» и «−» напрямую; не работай с электричеством у воды.</span></p>
+  </div>
+  <div class="do-ok">
+    <h4>✅ <span lang="kk" class="lang-content">Әрқашан жаса</span><span lang="en" class="lang-content">Always do this</span><span lang="ru" class="lang-content">Всегда делай</span></h4>
+    <p><span lang="kk" class="lang-content">Жұмыс алдында тізбекті ажырат; төмен кернеумен үйрен; сымды берік әрі таза жалға; оқшауланған құрал қолдан; күмәнді жағдайда ересектен сұра.</span><span lang="en" class="lang-content">Switch the circuit off before working; learn with low voltage; make firm, clean connections; use insulated tools; if unsure, ask an adult.</span><span lang="ru" class="lang-content">Перед работой обесточь цепь; учись на низком напряжении; делай прочные, чистые соединения; используй изолированный инструмент; сомневаешься — спроси взрослого.</span></p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="card rounded-custom p-7 md:p-8 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+    <span lang="kk" class="lang-content">💬 Қорытынды</span>
+    <span lang="en" class="lang-content">💬 In a nutshell</span>
+    <span lang="ru" class="lang-content">💬 Главное</span>
+  </h3>
+  <p class="lead" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Кез келген электр құрылғысы бір қарапайым ойдан басталады: токтың тұйық жолы. Қорек көзі, өткізгіш, ажыратқыш пен тұтынушы бір тізбекке қосылса — шам жанады. Бірақ электрмен жұмыс істегенде бірінші орында әрқашан <b>қауіпсіздік</b> тұр: төмен кернеу, құрғақ қол, оқшауланған құрал және ажыратылған тізбек. Қарапайым тізбекті түсінсең — үлкен электротехниканың есігі ашылады.</span>
+    <span lang="en" class="lang-content">Every electrical device begins from one simple idea: a closed path for the current. Join a power source, a conductor, a switch and a load into one circuit, and the lamp lights up. But when working with electricity, <b>safety</b> always comes first: low voltage, dry hands, insulated tools and a circuit that is switched off. Understand the simple circuit, and the door to all of electrical engineering opens.</span>
+    <span lang="ru" class="lang-content">Любое электрическое устройство начинается с одной простой идеи: замкнутый путь для тока. Соедини источник, проводник, выключатель и потребитель в одну цепь — и лампа загорится. Но при работе с электричеством на первом месте всегда <b>безопасность</b>: низкое напряжение, сухие руки, изолированный инструмент и обесточенная цепь. Поймёшь простую цепь — откроется дверь во всю электротехнику.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

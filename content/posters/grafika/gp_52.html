@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Булевы операции</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_emerald.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-emerald-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 12 · 3D-модельдеу</span>
+      <span lang="en" class="lang-content">Graphics · Section 12 · 3D Modelling</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 12 · 3D-моделирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">∪ ∩ Буль операциялары</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">∪ ∩ Boolean Operations</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">∪ ∩ Булевы операции</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Қосу (Union), айыру (Subtract), қиылыс (Intersect) — 3 негізгі амал.</span>
+      <span lang="en" class="lang-content">Union, Subtract, Intersect — the 3 fundamental Boolean operations.</span>
+      <span lang="ru" class="lang-content">Объединение, вычитание, пересечение — 3 фундаментальные булевы операции.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Three operations visual -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Үш негізгі амал</span>
+    <span lang="en" class="lang-content">🎯 The Three Operations</span>
+    <span lang="ru" class="lang-content">🎯 Три основные операции</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <!-- UNION -->
+    <div class="card rounded-custom p-5 border-t-4 border-emerald-500">
+      <h3 class="font-bold text-emerald-800 text-center text-lg mb-3">∪ Union (<span lang="kk" class="lang-content">Қосу</span><span lang="en" class="lang-content">Add</span><span lang="ru" class="lang-content">Объединение</span>)</h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 200 140" style="width:180px;height:125px" xmlns="http://www.w3.org/2000/svg">
+          <!-- Two overlapping circles before -->
+          <text x="100" y="15" font-size="9" fill="#64748b" text-anchor="middle">A ∪ B = всё пространство обоих</text>
+          <!-- A -->
+          <circle cx="75" cy="75" r="32" fill="rgba(5,150,105,0.40)" stroke="#059669" stroke-width="2"/>
+          <!-- B -->
+          <circle cx="125" cy="75" r="32" fill="rgba(5,150,105,0.40)" stroke="#059669" stroke-width="2"/>
+          <text x="60" y="80" font-size="11" fill="#1e293b" font-weight="bold">A</text>
+          <text x="135" y="80" font-size="11" fill="#1e293b" font-weight="bold">B</text>
+          <text x="100" y="130" font-size="9" fill="#059669" text-anchor="middle" font-weight="bold">A + B</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Екі денені бір тұтас денеге біріктіреді. Беттер бір-бірімен <b>бірігеді</b>, ішкі шекаралар жоғалады.</span>
+        <span lang="en" class="lang-content">Merges two bodies into one solid. Surfaces are <b>merged</b>, internal boundaries disappear.</span>
+        <span lang="ru" class="lang-content">Объединяет два тела в одно целое. Поверхности <b>сливаются</b>, внутренние границы исчезают.</span>
+      </p>
+      <div class="formula mt-3 text-center text-sm">A ∪ B</div>
+    </div>
+
+    <!-- SUBTRACT -->
+    <div class="card rounded-custom p-5 border-t-4 border-red-500">
+      <h3 class="font-bold text-red-800 text-center text-lg mb-3">∖ Subtract (<span lang="kk" class="lang-content">Айыру</span><span lang="en" class="lang-content">Cut</span><span lang="ru" class="lang-content">Вычитание</span>)</h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 200 140" style="width:180px;height:125px" xmlns="http://www.w3.org/2000/svg">
+          <text x="100" y="15" font-size="9" fill="#64748b" text-anchor="middle">A ∖ B = A без части B</text>
+          <!-- A (full) with B cut out -->
+          <defs>
+            <mask id="cutMask">
+              <rect width="200" height="140" fill="white"/>
+              <circle cx="125" cy="75" r="32" fill="black"/>
+            </mask>
+          </defs>
+          <circle cx="75" cy="75" r="32" fill="rgba(220,38,38,0.40)" stroke="#dc2626" stroke-width="2" mask="url(#cutMask)"/>
+          <!-- B outline as dashed (was subtracted) -->
+          <circle cx="125" cy="75" r="32" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="60" y="80" font-size="11" fill="#1e293b" font-weight="bold">A</text>
+          <text x="135" y="80" font-size="11" fill="#94a3b8" font-weight="bold">B</text>
+          <text x="100" y="130" font-size="9" fill="#dc2626" text-anchor="middle" font-weight="bold">A − B</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">A денесінен B қиылысқан бөлігі алып тасталады. <b>Тесік, ойық, паз</b> жасау үшін негізгі тәсіл.</span>
+        <span lang="en" class="lang-content">Removes B's overlap from A. The main way to create <b>holes, slots, grooves</b>.</span>
+        <span lang="ru" class="lang-content">Удаляет из A пересечение с B. Основной способ создания <b>отверстий, выемок, пазов</b>.</span>
+      </p>
+      <div class="formula mt-3 text-center text-sm">A − B</div>
+    </div>
+
+    <!-- INTERSECT -->
+    <div class="card rounded-custom p-5 border-t-4 border-blue-500">
+      <h3 class="font-bold text-blue-800 text-center text-lg mb-3">∩ Intersect (<span lang="kk" class="lang-content">Қиылыс</span><span lang="en" class="lang-content">Common</span><span lang="ru" class="lang-content">Пересечение</span>)</h3>
+      <div class="flex justify-center mb-3">
+        <svg viewBox="0 0 200 140" style="width:180px;height:125px" xmlns="http://www.w3.org/2000/svg">
+          <text x="100" y="15" font-size="9" fill="#64748b" text-anchor="middle">A ∩ B = только общая часть</text>
+          <!-- A and B outlines -->
+          <circle cx="75" cy="75" r="32" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="125" cy="75" r="32" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <!-- Lens-shaped intersection -->
+          <defs>
+            <clipPath id="lensClip">
+              <circle cx="125" cy="75" r="32"/>
+            </clipPath>
+          </defs>
+          <circle cx="75" cy="75" r="32" fill="rgba(37,99,235,0.50)" stroke="#2563eb" stroke-width="2" clip-path="url(#lensClip)"/>
+          <text x="60" y="80" font-size="11" fill="#94a3b8" font-weight="bold">A</text>
+          <text x="135" y="80" font-size="11" fill="#94a3b8" font-weight="bold">B</text>
+          <text x="100" y="130" font-size="9" fill="#2563eb" text-anchor="middle" font-weight="bold">A ∩ B</text>
+        </svg>
+      </div>
+      <p class="text-slate-700 text-sm">
+        <span lang="kk" class="lang-content">Тек екі денеге де <b>ортақ бөлік</b> қалады. Күрделі геометрияларды табу үшін.</span>
+        <span lang="en" class="lang-content">Only the <b>common region</b> between both bodies remains. Used to extract complex geometries.</span>
+        <span lang="ru" class="lang-content">Остаётся только <b>общая часть</b> обоих тел. Для извлечения сложной геометрии.</span>
+      </p>
+      <div class="formula mt-3 text-center text-sm">A ∩ B</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Practical 3D example -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🔩 Іс жүзіндегі мысал — куб − цилиндр = тесік</span>
+    <span lang="en" class="lang-content">🔩 Real Example — cube − cylinder = hole</span>
+    <span lang="ru" class="lang-content">🔩 Практический пример — куб − цилиндр = отверстие</span>
+  </h2>
+  <div class="blueprint p-6">
+    <svg viewBox="0 0 600 220" style="width:100%;max-width:600px;display:block;margin:auto" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- ── A: Cube ── -->
+      <text x="90" y="20" font-size="11" fill="#059669" text-anchor="middle" font-weight="bold">A — куб</text>
+      <!-- Iso cube at (90, 100), s=22 -->
+      <polygon points="90,55 134,77 90,100 46,77" fill="rgba(5,150,105,0.30)" stroke="#059669" stroke-width="2"/>
+      <polygon points="90,100 134,122 134,77 90,55" fill="rgba(5,150,105,0.15)" stroke="#059669" stroke-width="2"/>
+      <polygon points="90,100 46,122 46,77 90,55" fill="rgba(5,150,105,0.20)" stroke="#059669" stroke-width="2"/>
+      <line x1="90" y1="100" x2="90" y2="144" stroke="#059669" stroke-width="1.5"/>
+      <line x1="46" y1="122" x2="90" y2="144" stroke="#059669" stroke-width="1.5"/>
+      <line x1="134" y1="122" x2="90" y2="144" stroke="#059669" stroke-width="1.5"/>
+
+      <!-- minus sign -->
+      <text x="180" y="105" font-size="22" fill="#dc2626" text-anchor="middle" font-weight="bold">−</text>
+
+      <!-- ── B: Cylinder (smaller, going through) ── -->
+      <text x="250" y="20" font-size="11" fill="#dc2626" text-anchor="middle" font-weight="bold">B — цилиндр</text>
+      <!-- Top ellipse -->
+      <ellipse cx="250" cy="55" rx="18" ry="6" fill="rgba(220,38,38,0.30)" stroke="#dc2626" stroke-width="2"/>
+      <line x1="232" y1="55" x2="232" y2="145" stroke="#dc2626" stroke-width="2"/>
+      <line x1="268" y1="55" x2="268" y2="145" stroke="#dc2626" stroke-width="2"/>
+      <ellipse cx="250" cy="145" rx="18" ry="6" fill="rgba(220,38,38,0.20)" stroke="#dc2626" stroke-width="2"/>
+      <path d="M 232,145 A 18,6 0 0,0 268,145" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+      <!-- equals sign -->
+      <text x="340" y="105" font-size="22" fill="#1e293b" text-anchor="middle" font-weight="bold">=</text>
+
+      <!-- ── Result: Cube with hole ── -->
+      <text x="475" y="20" font-size="11" fill="#2563eb" text-anchor="middle" font-weight="bold">A − B = деталь с отверстием</text>
+      <!-- Iso cube -->
+      <polygon points="475,55 519,77 475,100 431,77" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <polygon points="475,100 519,122 519,77 475,55" fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="2"/>
+      <polygon points="475,100 431,122 431,77 475,55" fill="rgba(37,99,235,0.20)" stroke="#2563eb" stroke-width="2"/>
+      <line x1="475" y1="100" x2="475" y2="144" stroke="#2563eb" stroke-width="1.5"/>
+      <line x1="431" y1="122" x2="475" y2="144" stroke="#2563eb" stroke-width="1.5"/>
+      <line x1="519" y1="122" x2="475" y2="144" stroke="#2563eb" stroke-width="1.5"/>
+      <!-- Hole on top face -->
+      <ellipse cx="475" cy="78" rx="11" ry="4" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+      <!-- Inside of hole (going down) -->
+      <line x1="464" y1="78" x2="464" y2="120" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="486" y1="78" x2="486" y2="120" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,2"/>
+      <ellipse cx="475" cy="120" rx="11" ry="4" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Rules -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚠️ Маңызды ережелер</span>
+    <span lang="en" class="lang-content">⚠️ Important Rules</span>
+    <span lang="ru" class="lang-content">⚠️ Важные правила</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="tile"><div class="tile-icon">🔄</div><p class="font-bold text-emerald-800 mt-2"><span lang="kk" class="lang-content">Union — коммутативті</span><span lang="en" class="lang-content">Union — commutative</span><span lang="ru" class="lang-content">Union — коммутативно</span></p><p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">A∪B = B∪A</span><span lang="en" class="lang-content">A∪B = B∪A — order doesn't matter</span><span lang="ru" class="lang-content">A∪B = B∪A — порядок не важен</span></p></div>
+    <div class="tile"><div class="tile-icon">⚠️</div><p class="font-bold text-emerald-800 mt-2"><span lang="kk" class="lang-content">Subtract — реттік маңызды</span><span lang="en" class="lang-content">Subtract — order matters</span><span lang="ru" class="lang-content">Subtract — порядок важен</span></p><p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">A − B ≠ B − A!</span><span lang="en" class="lang-content">A − B ≠ B − A!</span><span lang="ru" class="lang-content">A − B ≠ B − A!</span></p></div>
+    <div class="tile"><div class="tile-icon">📐</div><p class="font-bold text-emerald-800 mt-2"><span lang="kk" class="lang-content">Қиылыс міндетті</span><span lang="en" class="lang-content">Must overlap</span><span lang="ru" class="lang-content">Должно быть пересечение</span></p><p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Денелер бір-бірімен тиісіп тұруы керек</span><span lang="en" class="lang-content">Bodies must overlap or touch</span><span lang="ru" class="lang-content">Тела должны соприкасаться или пересекаться</span></p></div>
+  </div>
+</section>
+
+<footer class="card-emerald rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 CSG — Constructive Solid Geometry</span>
+    <span lang="en" class="lang-content">🧠 CSG — Constructive Solid Geometry</span>
+    <span lang="ru" class="lang-content">🧠 CSG — Constructive Solid Geometry</span>
+  </h3>
+  <p class="text-emerald-100">
+    <span lang="kk" class="lang-content"><b>Буль операциялары</b> — CSG-нің негізі. Бұл — CAD-та күрделі бөлшектер құрудың классикалық тәсілі: примитивтерден бастап, оларды біріктіріп немесе бір-бірінен алып, соңғы пішінді жасайсыз. Барлық CAD жүйелері (SolidWorks, Fusion, OpenSCAD, Blender) осы принципті қолданады.</span>
+    <span lang="en" class="lang-content"><b>Boolean operations</b> are the foundation of CSG. This is the classical CAD method for building complex parts: start with primitives, combine or subtract them to build the final shape. Every CAD system (SolidWorks, Fusion, OpenSCAD, Blender) uses this principle.</span>
+    <span lang="ru" class="lang-content"><b>Булевы операции</b> — основа CSG. Это классический CAD-метод построения сложных деталей: начинаешь с примитивов, складываешь или вычитаешь их, пока не получишь нужную форму. Каждая CAD-система (SolidWorks, Fusion, OpenSCAD, Blender) использует этот принцип.</span>
+  </p>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

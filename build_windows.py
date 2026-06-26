@@ -46,7 +46,7 @@ APP_PUBLISHER = "DigiTouch"
 ALL_SUBJECTS = [
     "physics", "mathematics", "biology", "chemistry",
     "geography", "informatics", "historykaz", "worldhistory",
-    "kazakhlang", "russianlang", "englishlang",
+    "kazakhlang", "russianlang", "englishlang", "nvp",
 ]
 
 # Короткие алиасы (такие же как в build_apks.py)
@@ -62,6 +62,7 @@ ALIASES = {
     "kz": "kazakhlang",
     "ru": "russianlang",
     "en": "englishlang",
+    "nvp": "nvp",
 }
 
 # Читаемые имена для заголовка окна и инсталлятора
@@ -77,6 +78,7 @@ DISPLAY_NAMES = {
     "kazakhlang":   "Қазақ тілі",
     "russianlang":  "Русский язык",
     "englishlang":  "Английский язык",
+    "nvp":          "НВП",
 }
 
 # Приложение использует только: QtCore, QtGui, QtWidgets, QtNetwork,

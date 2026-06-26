@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Зубчатые передачи</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_amber.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-amber-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 7 · Машина бөлшектері</span>
+      <span lang="en" class="lang-content">Graphics · Section 7 · Machine Elements</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 7 · Машинные детали</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-amber-800">⚙️ Тісті берілістер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-amber-800">⚙️ Gear Drives</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-amber-800">⚙️ Зубчатые передачи</h1>
+    <p class="mt-2 text-slate-600"><span lang="kk" class="lang-content">Шестерня параметрлері мен сызбада шартты бейнелеу ережелері — ГОСТ 2.402.</span><span lang="en" class="lang-content">Gear parameters and conventional drawing rules — GOST 2.402.</span><span lang="ru" class="lang-content">Параметры шестерни и условное изображение на чертеже — ГОСТ 2.402.</span></p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-amber-800 uppercase tracking-widest mb-5"><span lang="kk" class="lang-content">📐 Шестерня параметрлері</span><span lang="en" class="lang-content">📐 Gear Parameters</span><span lang="ru" class="lang-content">📐 Параметры шестерни</span></h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 300 300" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- da (outer / addendum circle, solid thick) -->
+        <circle cx="150" cy="150" r="110" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- d (pitch circle, dot-dash thin) -->
+        <circle cx="150" cy="150" r="95" fill="none" stroke="#d97706" stroke-width="1.5" stroke-dasharray="10,4,2,4"/>
+        <!-- df (root / dedendum circle, solid thin) -->
+        <circle cx="150" cy="150" r="78" fill="none" stroke="#1e293b" stroke-width="1"/>
+        <!-- Bore (shaft hole) -->
+        <circle cx="150" cy="150" r="22" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <!-- Centre cross -->
+        <line x1="150" y1="135" x2="150" y2="165" stroke="#1e293b" stroke-width="1" stroke-dasharray="5,3,1,3"/>
+        <line x1="135" y1="150" x2="165" y2="150" stroke="#1e293b" stroke-width="1" stroke-dasharray="5,3,1,3"/>
+        <!-- Keyway in bore -->
+        <rect x="146" y="128" width="8" height="6" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- 4 representative tooth shapes around the gear -->
+        <!-- Tooth top -->
+        <path d="M 142,50 L 158,50 L 156,40 L 144,40 Z" fill="rgba(217,119,6,0.30)" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Tooth right -->
+        <path d="M 250,142 L 250,158 L 260,156 L 260,144 Z" fill="rgba(217,119,6,0.30)" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Tooth bottom -->
+        <path d="M 142,250 L 158,250 L 156,260 L 144,260 Z" fill="rgba(217,119,6,0.30)" stroke="#1e293b" stroke-width="1.5"/>
+        <!-- Tooth left -->
+        <path d="M 50,142 L 50,158 L 40,156 L 40,144 Z" fill="rgba(217,119,6,0.30)" stroke="#1e293b" stroke-width="1.5"/>
+
+        <!-- Dimension labels -->
+        <line x1="150" y1="150" x2="260" y2="40" stroke="#64748b" stroke-width="0.7" stroke-dasharray="3,2"/>
+        <text x="220" y="60" font-size="9" fill="#1e293b" font-weight="bold">da</text>
+        <text x="170" y="92" font-size="9" fill="#d97706" font-weight="bold">d (делит.)</text>
+        <text x="195" y="118" font-size="9" fill="#1e293b">df</text>
+
+        <!-- Top external annotation -->
+        <text x="150" y="20" font-size="9" fill="#1e293b" text-anchor="middle">Окружность вершин da (толстая)</text>
+        <text x="150" y="290" font-size="9" fill="#d97706" text-anchor="middle">Делительная d (штрихпунктирная)</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <table class="t text-sm">
+        <thead><tr><th><span lang="kk" class="lang-content">Параметр</span><span lang="en" class="lang-content">Parameter</span><span lang="ru" class="lang-content">Параметр</span></th><th><span lang="kk" class="lang-content">Белгі</span><span lang="en" class="lang-content">Symbol</span><span lang="ru" class="lang-content">Обозначение</span></th><th><span lang="kk" class="lang-content">Формула</span><span lang="en" class="lang-content">Formula</span><span lang="ru" class="lang-content">Формула</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="kk" class="lang-content">Модуль</span><span lang="en" class="lang-content">Module</span><span lang="ru" class="lang-content">Модуль</span></td><td><b class="text-amber-700">m</b></td><td><span lang="kk" class="lang-content">Стандартты қатардан</span><span lang="en" class="lang-content">From standard series</span><span lang="ru" class="lang-content">Из стандартного ряда</span></td></tr>
+          <tr><td><span lang="kk" class="lang-content">Тістер саны</span><span lang="en" class="lang-content">Number of teeth</span><span lang="ru" class="lang-content">Число зубьев</span></td><td><b class="text-amber-700">z</b></td><td><span lang="kk" class="lang-content">≥ 17 (астыртын кесусіз)</span><span lang="en" class="lang-content">≥ 17 (no undercut)</span><span lang="ru" class="lang-content">≥ 17 (без подреза)</span></td></tr>
+          <tr><td><span lang="kk" class="lang-content">Бөлгіш шеңбер</span><span lang="en" class="lang-content">Pitch diameter</span><span lang="ru" class="lang-content">Делительный диаметр</span></td><td><b class="text-amber-700">d</b></td><td>d = m·z</td></tr>
+          <tr><td><span lang="kk" class="lang-content">Шыңдар шеңбері</span><span lang="en" class="lang-content">Addendum circle</span><span lang="ru" class="lang-content">Окруж. вершин</span></td><td><b class="text-amber-700">dₐ</b></td><td>dₐ = d + 2m = m(z+2)</td></tr>
+          <tr><td><span lang="kk" class="lang-content">Ойықтар шеңбері</span><span lang="en" class="lang-content">Root circle</span><span lang="ru" class="lang-content">Окруж. впадин</span></td><td><b class="text-amber-700">df</b></td><td>df = d − 2,5m = m(z−2,5)</td></tr>
+          <tr><td><span lang="kk" class="lang-content">Қадам</span><span lang="en" class="lang-content">Circular pitch</span><span lang="ru" class="lang-content">Окружной шаг</span></td><td><b class="text-amber-700">p</b></td><td>p = π·m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-amber-800 uppercase tracking-widest mb-5"><span lang="kk" class="lang-content">📋 Шартты бейнелеу ережелері</span><span lang="en" class="lang-content">📋 Conventional Drawing Rules</span><span lang="ru" class="lang-content">📋 Правила условного изображения</span></h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card rounded-custom p-5"><h3 class="font-bold text-amber-800 mb-2"><span lang="kk" class="lang-content">Шыңдар (dₐ)</span><span lang="en" class="lang-content">Tip circle (dₐ)</span><span lang="ru" class="lang-content">Вершины (dₐ)</span></h3><p class="text-slate-700 text-sm"><span lang="kk" class="lang-content"><b>Сплошная толстая</b> сызық — сыртқы шекара</span><span lang="en" class="lang-content"><b>Solid thick</b> line — outer boundary</span><span lang="ru" class="lang-content"><b>Сплошная толстая</b> — наружная граница</span></p></div>
+    <div class="card rounded-custom p-5"><h3 class="font-bold text-amber-800 mb-2"><span lang="kk" class="lang-content">Бөлгіш (d)</span><span lang="en" class="lang-content">Pitch (d)</span><span lang="ru" class="lang-content">Делительная (d)</span></h3><p class="text-slate-700 text-sm"><span lang="kk" class="lang-content"><b>Штрихпунктирная тонкая</b> — есеп үшін негізгі</span><span lang="en" class="lang-content"><b>Dot-dash thin</b> — main reference</span><span lang="ru" class="lang-content"><b>Штрихпунктирная тонкая</b> — основная для расчётов</span></p></div>
+    <div class="card rounded-custom p-5"><h3 class="font-bold text-amber-800 mb-2"><span lang="kk" class="lang-content">Ойықтар (df)</span><span lang="en" class="lang-content">Root (df)</span><span lang="ru" class="lang-content">Впадины (df)</span></h3><p class="text-slate-700 text-sm"><span lang="kk" class="lang-content"><b>Сплошная тонкая</b>; кесіндіде — толстая</span><span lang="en" class="lang-content"><b>Thin solid</b>; in section view — thick</span><span lang="ru" class="lang-content"><b>Сплошная тонкая</b>; в разрезе — толстая</span></p></div>
+  </div>
+</section>
+
+<footer class="card-amber rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4"><span lang="kk" class="lang-content">🧠 Шестерня формулалары</span><span lang="en" class="lang-content">🧠 Gear Formulas</span><span lang="ru" class="lang-content">🧠 Формулы шестерни</span></h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="font-bold">d = m·z</div><p class="text-amber-100 mt-1"><span lang="kk" class="lang-content">Бөлгіш</span><span lang="en" class="lang-content">Pitch</span><span lang="ru" class="lang-content">Делительный</span></p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="font-bold">dₐ = m(z+2)</div><p class="text-amber-100 mt-1"><span lang="kk" class="lang-content">Шыңдар</span><span lang="en" class="lang-content">Tip</span><span lang="ru" class="lang-content">Вершины</span></p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="font-bold">df = m(z−2,5)</div><p class="text-amber-100 mt-1"><span lang="kk" class="lang-content">Ойықтар</span><span lang="en" class="lang-content">Root</span><span lang="ru" class="lang-content">Впадины</span></p></div>
+    <div class="bg-white/10 rounded-xl p-3 text-center"><div class="font-bold">p = π·m</div><p class="text-amber-100 mt-1"><span lang="kk" class="lang-content">Қадам</span><span lang="en" class="lang-content">Pitch</span><span lang="ru" class="lang-content">Шаг</span></p></div>
+  </div>
+</footer>
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

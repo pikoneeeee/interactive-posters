@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шероховатость поверхности</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_rose.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-rose-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 10 · Дәлдік және сапа</span>
+      <span lang="en" class="lang-content">Graphics · Section 10 · Quality and Tolerance</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 10 · Точность и качество</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-rose-800">📏 Беттің кедір-бұдырлығы</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-rose-800">📏 Surface Roughness</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-rose-800">📏 Шероховатость поверхности</h1>
+    <p class="mt-2 text-slate-600"><span lang="kk" class="lang-content">Беттің сапасын белгілеу — ГОСТ 2.309. Ra параметрі — ең жиі.</span><span lang="en" class="lang-content">Surface quality designation — GOST 2.309. Ra is the most common parameter.</span><span lang="ru" class="lang-content">Обозначение качества поверхности — ГОСТ 2.309. Параметр Ra — самый частый.</span></p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-rose-800 uppercase tracking-widest mb-5"><span lang="kk" class="lang-content">📐 Кедір-бұдырлық — параметрлер</span><span lang="en" class="lang-content">📐 Roughness Parameters</span><span lang="ru" class="lang-content">📐 Параметры шероховатости</span></h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center p-4">
+      <svg viewBox="0 0 340 220" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Reference line (mean) -->
+        <line x1="20" y1="120" x2="320" y2="120" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <text x="22" y="115" font-size="9" fill="#e11d48">средняя линия</text>
+        <!-- Surface profile (zigzag) -->
+        <polyline points="20,120 35,90 50,135 65,105 80,140 95,95 110,130 125,100 140,140 155,95 170,120 185,90 200,135 215,105 230,140 245,95 260,130 275,100 290,140 305,95 320,120"
+                  fill="none" stroke="#1e293b" stroke-width="2"/>
+        <!-- Ra annotation -->
+        <text x="50" y="60" font-size="11" fill="#1e293b" font-weight="bold">Ra — средн. арифм. отклон.</text>
+        <text x="50" y="75" font-size="9" fill="#64748b">от средней линии</text>
+        <!-- Rz - peak to valley -->
+        <line x1="305" y1="95" x2="335" y2="95" stroke="#0369a1" stroke-width="1"/>
+        <line x1="305" y1="140" x2="335" y2="140" stroke="#0369a1" stroke-width="1"/>
+        <line x1="325" y1="95" x2="325" y2="140" stroke="#0369a1" stroke-width="1.2"/>
+        <polygon points="325,95 321,107 329,107" fill="#0369a1"/>
+        <polygon points="325,140 321,128 329,128" fill="#0369a1"/>
+        <text x="335" y="120" font-size="9" fill="#0369a1">Rz</text>
+        <!-- Base annotation -->
+        <text x="170" y="195" font-size="10" fill="#1e293b" text-anchor="middle">Реальная поверхность (увеличенно)</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <table class="t text-sm">
+        <thead><tr><th><span lang="kk" class="lang-content">Параметр</span><span lang="en" class="lang-content">Param.</span><span lang="ru" class="lang-content">Параметр</span></th><th><span lang="kk" class="lang-content">Атауы</span><span lang="en" class="lang-content">Name</span><span lang="ru" class="lang-content">Название</span></th></tr></thead>
+        <tbody>
+          <tr><td><b class="text-rose-700">Ra</b></td><td><span lang="kk" class="lang-content">Орташа арифметикалық ауытқу (мкм). Ең жиі.</span><span lang="en" class="lang-content">Arithmetic mean deviation (μm). Most common.</span><span lang="ru" class="lang-content">Среднее арифмет. отклонение (мкм). Самый частый.</span></td></tr>
+          <tr><td><b class="text-rose-700">Rz</b></td><td><span lang="kk" class="lang-content">10 нүкте бойынша орташа биіктік (мкм)</span><span lang="en" class="lang-content">10-point mean height (μm)</span><span lang="ru" class="lang-content">Высота по 10 точкам (мкм)</span></td></tr>
+          <tr><td><b class="text-rose-700">Rmax</b></td><td><span lang="kk" class="lang-content">Профильдің максималды биіктігі</span><span lang="en" class="lang-content">Maximum profile height</span><span lang="ru" class="lang-content">Макс. высота профиля</span></td></tr>
+        </tbody>
+      </table>
+      <div class="formula mt-3 text-sm">Ra 6,3 → шероховатость не более 6,3 мкм</div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-rose-800 uppercase tracking-widest mb-5"><span lang="kk" class="lang-content">🔣 Шартты белгілер</span><span lang="en" class="lang-content">🔣 Symbols</span><span lang="ru" class="lang-content">🔣 Условные знаки</span></h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 80 60" style="width:80px;height:60px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <path d="M 30,55 L 40,40 L 50,55" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <text x="55" y="35" font-size="10" fill="#1e293b">Ra 6,3</text>
+      </svg>
+      <p class="font-bold text-rose-800 mt-2"><span lang="kk" class="lang-content">Жалпы белгі</span><span lang="en" class="lang-content">Basic symbol</span><span lang="ru" class="lang-content">Базовый знак</span></p>
+      <p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Кез-келген әдіспен жасалған</span><span lang="en" class="lang-content">Any machining method</span><span lang="ru" class="lang-content">Любой способ обработки</span></p>
+    </div>
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 80 60" style="width:80px;height:60px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <path d="M 30,55 L 40,40 L 50,55" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <line x1="35" y1="48" x2="45" y2="48" stroke="#1e293b" stroke-width="2"/>
+        <text x="55" y="35" font-size="10" fill="#1e293b">Ra 0,8</text>
+      </svg>
+      <p class="font-bold text-rose-800 mt-2"><span lang="kk" class="lang-content">Жонумен (механика)</span><span lang="en" class="lang-content">Material removed</span><span lang="ru" class="lang-content">С удалением слоя</span></p>
+      <p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Жону, фрезеру, тегістеу</span><span lang="en" class="lang-content">Turning, milling, grinding</span><span lang="ru" class="lang-content">Точение, фрезерование, шлифование</span></p>
+    </div>
+    <div class="card rounded-custom p-5 text-center">
+      <svg viewBox="0 0 80 60" style="width:80px;height:60px" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <path d="M 30,55 L 40,40 L 50,55" fill="none" stroke="#1e293b" stroke-width="2"/>
+        <circle cx="40" cy="48" r="4" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+        <text x="55" y="35" font-size="10" fill="#1e293b">Ra 25</text>
+      </svg>
+      <p class="font-bold text-rose-800 mt-2"><span lang="kk" class="lang-content">Жонусыз</span><span lang="en" class="lang-content">No material removed</span><span lang="ru" class="lang-content">Без удаления</span></p>
+      <p class="text-slate-600 text-xs"><span lang="kk" class="lang-content">Құю, штампау, прокат</span><span lang="en" class="lang-content">Casting, stamping, rolling</span><span lang="ru" class="lang-content">Литьё, штамповка, прокат</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-rose-800 uppercase tracking-widest mb-5"><span lang="kk" class="lang-content">📊 Ra мәндерінің салыстырмасы</span><span lang="en" class="lang-content">📊 Ra Value Comparison</span><span lang="ru" class="lang-content">📊 Сравнение значений Ra</span></h2>
+  <div class="card rounded-custom p-6">
+    <table class="t">
+      <thead><tr><th>Ra (мкм)</th><th><span lang="kk" class="lang-content">Сапа дәрежесі</span><span lang="en" class="lang-content">Quality grade</span><span lang="ru" class="lang-content">Степень качества</span></th><th><span lang="kk" class="lang-content">Әдіс</span><span lang="en" class="lang-content">Method</span><span lang="ru" class="lang-content">Способ</span></th><th><span lang="kk" class="lang-content">Қолданылуы</span><span lang="en" class="lang-content">Application</span><span lang="ru" class="lang-content">Применение</span></th></tr></thead>
+      <tbody>
+        <tr><td><b>Ra 0,1</b></td><td><span lang="kk" class="lang-content">Айнадай</span><span lang="en" class="lang-content">Mirror-like</span><span lang="ru" class="lang-content">Зеркальная</span></td><td><span lang="kk" class="lang-content">Полировка, доводка</span><span lang="en" class="lang-content">Polishing, lapping</span><span lang="ru" class="lang-content">Полировка, доводка</span></td><td><span lang="kk" class="lang-content">Оптика, өлшеуіш</span><span lang="en" class="lang-content">Optics, gauges</span><span lang="ru" class="lang-content">Оптика, измерительный</span></td></tr>
+        <tr><td><b>Ra 0,8</b></td><td><span lang="kk" class="lang-content">Жоғары сапа</span><span lang="en" class="lang-content">Fine</span><span lang="ru" class="lang-content">Высокое</span></td><td><span lang="kk" class="lang-content">Тегістеу</span><span lang="en" class="lang-content">Grinding</span><span lang="ru" class="lang-content">Шлифование</span></td><td><span lang="kk" class="lang-content">Подшипник, вал</span><span lang="en" class="lang-content">Bearings, shafts</span><span lang="ru" class="lang-content">Подшипники, валы</span></td></tr>
+        <tr><td><b>Ra 3,2</b></td><td><span lang="kk" class="lang-content">Орташа</span><span lang="en" class="lang-content">Medium</span><span lang="ru" class="lang-content">Среднее</span></td><td><span lang="kk" class="lang-content">Жонудың финиші</span><span lang="en" class="lang-content">Finish turning</span><span lang="ru" class="lang-content">Чистовое точение</span></td><td><span lang="kk" class="lang-content">Резьба, посадка</span><span lang="en" class="lang-content">Threads, fits</span><span lang="ru" class="lang-content">Резьбы, посадки</span></td></tr>
+        <tr><td><b>Ra 12,5</b></td><td><span lang="kk" class="lang-content">Дөрекі</span><span lang="en" class="lang-content">Rough</span><span lang="ru" class="lang-content">Грубое</span></td><td><span lang="kk" class="lang-content">Шамалап жону</span><span lang="en" class="lang-content">Rough turning</span><span lang="ru" class="lang-content">Черновое точение</span></td><td><span lang="kk" class="lang-content">Көрінбейтін беттер</span><span lang="en" class="lang-content">Hidden surfaces</span><span lang="ru" class="lang-content">Невидимые поверхности</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="card-rose rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4"><span lang="kk" class="lang-content">🧠 Орналастыру ережелері</span><span lang="en" class="lang-content">🧠 Placement Rules</span><span lang="ru" class="lang-content">🧠 Правила размещения</span></h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Бет үстінде</span><span lang="en" class="lang-content">On surface</span><span lang="ru" class="lang-content">На поверхности</span></p><p class="text-rose-100"><span lang="kk" class="lang-content">Шартты белгі тікелей бетке немесе шығарма сызыққа</span><span lang="en" class="lang-content">Symbol on surface or extension line</span><span lang="ru" class="lang-content">Знак — на поверхности или выносной</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Жоғарғы оң бұрышта</span><span lang="en" class="lang-content">Upper right corner</span><span lang="ru" class="lang-content">В правом верхнем углу</span></p><p class="text-rose-100"><span lang="kk" class="lang-content">Қалған беттер үшін жалпы — () белгімен</span><span lang="en" class="lang-content">Common value for unmarked surfaces — in ( )</span><span lang="ru" class="lang-content">Общее для непомеченных — в скобках ( )</span></p></div>
+    <div class="bg-white/10 rounded-xl p-4"><p class="font-bold mb-1"><span lang="kk" class="lang-content">Бір реттік</span><span lang="en" class="lang-content">Once per surface</span><span lang="ru" class="lang-content">По одному разу</span></p><p class="text-rose-100"><span lang="kk" class="lang-content">Әр бет үшін бір рет — қайталама жоқ</span><span lang="en" class="lang-content">One mark per surface — no duplicates</span><span lang="ru" class="lang-content">Один знак на поверхность, без повторов</span></p></div>
+  </div>
+</footer>
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

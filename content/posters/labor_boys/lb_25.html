@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Основы робототехники и автоматики</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.fcard{background:rgba(255,255,255,0.96);border:1px solid rgba(190,18,60,.16);border-radius:1.1rem;overflow:hidden;
+  box-shadow:0 3px 14px rgba(136,19,55,.07);display:flex;flex-direction:column;height:100%;}
+.fcard .body{padding:1rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:.35rem;}
+.fcard h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.1rem;}
+.fcard p{color:#57534e;font-size:.92rem;line-height:1.5;}
+.grouphead{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem;}
+.grouphead .ico{font-size:1.7rem;line-height:1;}
+.grouphead h3{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.18rem;}
+.rt{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.97);border-radius:1rem;overflow:hidden;
+  box-shadow:0 4px 18px rgba(136,19,55,.08);font-size:.93rem;}
+.rt th{background:linear-gradient(135deg,#9f1239,#be123c 60%,#e11d48);color:#fff;font-family:'Montserrat',sans-serif;
+  font-weight:700;text-align:left;padding:.7rem .85rem;font-size:.9rem;}
+.rt td{padding:.65rem .85rem;border-top:1px solid rgba(190,18,60,.12);color:#44403c;line-height:1.45;vertical-align:top;}
+.rt tr:nth-child(even) td{background:rgba(225,29,72,0.035);}
+.rt td b{color:#881337;}
+.table-wrap{overflow-x:auto;}
+.tip{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:1rem 1.15rem;height:100%;}
+.tip h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem;}
+.tip p{color:#57534e;font-size:.92rem;line-height:1.5;}
+.stepcard{display:flex;gap:.9rem;align-items:flex-start;background:rgba(255,255,255,0.95);
+  border:1px solid rgba(190,18,60,.15);border-radius:1rem;padding:1rem 1.15rem;box-shadow:0 2px 10px rgba(136,19,55,.05);height:100%;}
+.stepcard h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.03rem;margin-bottom:.2rem;}
+.stepcard p{color:#57534e;font-size:.9rem;line-height:1.5;}
+.loopbox{background:linear-gradient(135deg,#fff,#fff5f7);border:2px solid rgba(190,18,60,.22);
+  border-radius:1.3rem;padding:1.4rem;box-shadow:0 6px 22px rgba(136,19,55,.09);}
+.loopnode{background:#fff;border:2px solid rgba(190,18,60,.3);border-radius:.9rem;padding:.85rem .7rem;text-align:center;
+  font-weight:700;color:#881337;font-size:.95rem;box-shadow:0 2px 8px rgba(136,19,55,.06);height:100%;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;gap:.25rem;}
+.loopnode .ic{font-size:1.7rem;line-height:1;}
+.loopnode small{display:block;color:#a16207;font-weight:600;font-size:.78rem;font-style:italic;}
+.arrow{display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#be123c;font-weight:800;}
+@media(max-width:768px){.arrow{transform:rotate(90deg);}}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 4-бөлім · Машина және электротехника</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 4 · Machines &amp; Electrics</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 4 · Машины и электротехника</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🤖 Робототехника және автоматика негіздері</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🤖 Basics of Robotics and Automation</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🤖 Основы робототехники и автоматики</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Робот қалай ойлайды, сезінеді және қозғалады; машиналар жұмысты адамсыз қалай атқарады.</span>
+      <span lang="en" class="lang-content">How a robot thinks, senses and moves, and how machines do work without a human.</span>
+      <span lang="ru" class="lang-content">Как робот «думает», чувствует и движется и как машины делают работу без человека.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO with hero image -->
+<section class="mb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+    <div class="card rounded-custom p-7 lg:col-span-2">
+      <h2 class="heading-font text-2xl font-extrabold mb-3" style="color:#881337">
+        <span lang="kk" class="lang-content">Робот пен автоматика дегеніміз не?</span>
+        <span lang="en" class="lang-content">What are robotics and automation?</span>
+        <span lang="ru" class="lang-content">Что такое робототехника и автоматика?</span>
+      </h2>
+      <p class="lead">
+        <span lang="kk" class="lang-content"><b>Робот</b> — қоршаған ортаны сезіне алатын, шешім қабылдап, өзі қозғала алатын автоматты машина. <b>Робототехника</b> — осындай машиналарды жобалайтын, құрастыратын және басқаратын ғылым мен техника саласы. Ал <b>автоматика</b> — адамның тікелей қатысуынсыз процестерді өздігінен басқаратын жүйелерді зерттейді. Бұл екеуі бір-бірімен тығыз байланысты: автоматика — «миы», робот — «денесі». Заманауи зауытта роботтар дәнекерлейді, бояйды, бөлшектерді жинайды әрі қораптайды; үйде шаңсорғыш-робот еденді тазалайды, кір жуу машинасы суды, температураны және уақытты өзі реттейді. Адам ауыр, қауіпті немесе бірсарынды жұмысты машинаға тапсырып, өзі ойлауды қажет ететін істермен айналысады.</span>
+        <span lang="en" class="lang-content"><b>A robot</b> is an automatic machine that can sense its surroundings, make a decision and move by itself. <b>Robotics</b> is the field of science and engineering that designs, builds and controls such machines. <b>Automation</b> studies systems that control processes on their own, without a human taking part directly. The two are closely linked: automation is the "brain", the robot is the "body". In a modern factory robots weld, paint, assemble parts and pack them; at home a robot vacuum cleans the floor and a washing machine sets the water, temperature and time by itself. People hand heavy, dangerous or monotonous work over to machines and keep the tasks that need real thinking.</span>
+        <span lang="ru" class="lang-content"><b>Робот</b> — это автоматическая машина, которая умеет воспринимать окружающую среду, принимать решение и сама двигаться. <b>Робототехника</b> — это область науки и техники, которая проектирует, собирает и управляет такими машинами. А <b>автоматика</b> изучает системы, которые управляют процессами сами, без прямого участия человека. Эти две вещи тесно связаны: автоматика — это «мозг», а робот — «тело». На современном заводе роботы сваривают, красят, собирают детали и упаковывают их; дома робот-пылесос убирает пол, а стиральная машина сама задаёт воду, температуру и время. Человек передаёт тяжёлую, опасную или однообразную работу машине, а сам занимается тем, что требует мышления.</span>
+      </p>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">🔍</div>
+      <div class="pic" style="height:100%;min-height:260px"><img src="../../assets/labor_boys/lb25_robot_arm.jpg" alt="Промышленный робот-манипулятор"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Өнеркәсіптік робот-қол</span><span lang="en" class="lang-content">Industrial robot arm</span><span lang="ru" class="lang-content">Промышленный робот-манипулятор</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">алты осьті манипулятор (FANUC)</span><span lang="en" class="lang-content">six-axis manipulator (FANUC)</span><span lang="ru" class="lang-content">шестиосевой манипулятор (FANUC)</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Алты буыны бар робот-қол адам қолы жетпейтін дәлдікпен бөлшектерді көтеріп, орналастырады.</span><span lang="en" class="lang-content">A six-joint robot arm picks up and places parts with an accuracy a human hand cannot match.</span><span lang="ru" class="lang-content">Рука-робот с шестью суставами берёт и устанавливает детали с точностью, недоступной руке человека.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS: sense / think / act -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Кез келген робот үш нәрседен тұрады</span>
+    <span lang="en" class="lang-content">Every robot is made of three things</span>
+    <span lang="ru" class="lang-content">Любой робот состоит из трёх частей</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Сезу → ойлау → әрекет ету. Дәл осы үш бөлік адамды да, роботты да қозғалысқа келтіреді.</span>
+    <span lang="en" class="lang-content">Sense → think → act. These same three parts drive both a human and a robot.</span>
+    <span lang="ru" class="lang-content">Воспринять → подумать → действовать. Именно эти три части движут и человеком, и роботом.</span>
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="card-accent rounded-custom p-5">
+      <div class="grouphead" style="color:#15803d"><span class="ico">👁️</span>
+        <h3 style="color:#15803d"><span lang="kk" class="lang-content">1 · Сезу — сенсорлар</span><span lang="en" class="lang-content">1 · Sensing — sensors</span><span lang="ru" class="lang-content">1 · Восприятие — датчики</span></h3>
+      </div>
+      <p class="text-stone-600 text-sm" style="line-height:1.6">
+        <span lang="kk" class="lang-content"><b>Сенсорлар</b> — роботтың «сезім мүшелері». Олар қашықтықты, жарықты, температураны, түсті, иілуді немесе кедергіні өлшеп, оны электр сигналына айналдырады. Мысалы: ультрадыбыстық қашықтық сенсоры, жарық сенсоры, түйісу түймесі.</span>
+        <span lang="en" class="lang-content"><b>Sensors</b> are the robot's "sense organs". They measure distance, light, temperature, colour, bending or an obstacle and turn it into an electrical signal. Examples: an ultrasonic distance sensor, a light sensor, a touch button.</span>
+        <span lang="ru" class="lang-content"><b>Датчики (сенсоры)</b> — это «органы чувств» робота. Они измеряют расстояние, свет, температуру, цвет, изгиб или препятствие и превращают это в электрический сигнал. Примеры: ультразвуковой датчик расстояния, датчик света, кнопка касания.</span>
+      </p>
+    </div>
+    <div class="card-accent rounded-custom p-5">
+      <div class="grouphead" style="color:#1d4ed8"><span class="ico">🧠</span>
+        <h3 style="color:#1d4ed8"><span lang="kk" class="lang-content">2 · Ойлау — контроллер</span><span lang="en" class="lang-content">2 · Thinking — controller</span><span lang="ru" class="lang-content">2 · Мышление — контроллер</span></h3>
+      </div>
+      <p class="text-stone-600 text-sm" style="line-height:1.6">
+        <span lang="kk" class="lang-content"><b>Контроллер</b> (микроконтроллер) — роботтың «миы». Бұл — кішкентай компьютер. Ол сенсорлардан сигнал қабылдап, ішіне жазылған <b>бағдарлама</b> бойынша «егер… онда…» ережелерімен шешім қабылдайды да, қозғалтқыштарға бұйрық береді. Мектепте жиі Arduino тақтасы қолданылады.</span>
+        <span lang="en" class="lang-content"><b>The controller</b> (microcontroller) is the robot's "brain". It is a tiny computer. It receives signals from the sensors, makes a decision by "if… then…" rules written in its <b>program</b>, and gives commands to the motors. At school an Arduino board is often used.</span>
+        <span lang="ru" class="lang-content"><b>Контроллер</b> (микроконтроллер) — это «мозг» робота. Это маленький компьютер. Он принимает сигналы от датчиков, по правилам «если… то…» из записанной в нём <b>программы</b> принимает решение и отдаёт команды двигателям. В школе часто используют плату Arduino.</span>
+      </p>
+    </div>
+    <div class="card-accent rounded-custom p-5">
+      <div class="grouphead" style="color:#b45309"><span class="ico">⚙️</span>
+        <h3 style="color:#b45309"><span lang="kk" class="lang-content">3 · Әрекет — атқарушылар</span><span lang="en" class="lang-content">3 · Acting — actuators</span><span lang="ru" class="lang-content">3 · Действие — приводы</span></h3>
+      </div>
+      <p class="text-stone-600 text-sm" style="line-height:1.6">
+        <span lang="kk" class="lang-content"><b>Атқарушы тетіктер</b> (электр қозғалтқыштар, серво, реле) — роботтың «бұлшықеттері». Олар контроллердің электр бұйрығын нақты қозғалысқа айналдырады: дөңгелекті айналдырады, қолды көтереді, қыспақты жабады. Серво қозғалтқыш белгілі бір бұрышқа дәл бұрылады.</span>
+        <span lang="en" class="lang-content"><b>Actuators</b> (electric motors, servos, relays) are the robot's "muscles". They turn the controller's electrical command into real movement: spin a wheel, raise an arm, close a gripper. A servo motor turns to an exact angle.</span>
+        <span lang="ru" class="lang-content"><b>Исполнительные механизмы</b> (электродвигатели, сервоприводы, реле) — это «мышцы» робота. Они превращают электрическую команду контроллера в реальное движение: крутят колесо, поднимают руку, закрывают захват. Сервопривод поворачивается на точно заданный угол.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENT GALLERY: brain + senses -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Роботтың «миы» мен «сезімі» — нақты бөлшектер</span>
+    <span lang="en" class="lang-content">The robot's "brain" and "senses" — real parts</span>
+    <span lang="ru" class="lang-content">«Мозг» и «чувства» робота — реальные детали</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">🔍</div>
+      <div class="pic"><img src="../../assets/labor_boys/lb25_controller.jpg" alt="Плата Arduino"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Микроконтроллер (Arduino)</span><span lang="en" class="lang-content">Microcontroller (Arduino)</span><span lang="ru" class="lang-content">Микроконтроллер (Arduino)</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">роботтың «миы» — бағдарламаланатын тақта</span><span lang="en" class="lang-content">the robot's "brain" — a programmable board</span><span lang="ru" class="lang-content">«мозг» робота — программируемая плата</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Бұл шағын компьютерге компьютерден бағдарлама жазылады; ол сенсорларды оқып, қозғалтқыштарды басқарады. Контактілеріне сымдар жалғанады.</span><span lang="en" class="lang-content">A program is loaded onto this tiny computer from a PC; it reads the sensors and drives the motors. Wires connect to its pins.</span><span lang="ru" class="lang-content">На этот маленький компьютер с ПК записывают программу; он читает датчики и управляет двигателями. К контактам подключают провода.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">🔍</div>
+      <div class="pic"><img src="../../assets/labor_boys/lb25_sensor.jpg" alt="Ультразвуковой датчик HC-SR04"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Ультрадыбыстық сенсор</span><span lang="en" class="lang-content">Ultrasonic sensor</span><span lang="ru" class="lang-content">Ультразвуковой датчик</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">қашықтықты өлшейді (HC-SR04)</span><span lang="en" class="lang-content">measures distance (HC-SR04)</span><span lang="ru" class="lang-content">измеряет расстояние (HC-SR04)</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Бір «көзі» дыбыс жібереді, екіншісі оның кедергіден қайтуын тыңдайды. Уақыт бойынша робот қашықтықты есептеп, соқтығысудан сақтанады.</span><span lang="en" class="lang-content">One "eye" sends a sound, the other listens for its echo from an obstacle. From the time delay the robot works out the distance and avoids a collision.</span><span lang="ru" class="lang-content">Один «глаз» посылает звук, другой слушает его эхо от препятствия. По времени задержки робот вычисляет расстояние и избегает столкновения.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROL LOOP diagram (open vs closed) -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Автоматты басқару тізбегі</span>
+    <span lang="en" class="lang-content">The automatic control loop</span>
+    <span lang="ru" class="lang-content">Цепь автоматического управления</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Робот ылғи бір шеңберде жұмыс істейді: өлшейді → шешеді → қозғалады → нәтижені тағы өлшейді.</span>
+    <span lang="en" class="lang-content">A robot works in an endless circle: measure → decide → move → measure the result again.</span>
+    <span lang="ru" class="lang-content">Робот работает по кругу: измерить → решить → подвигаться → снова измерить результат.</span>
+  </p>
+  <div class="loopbox mb-5">
+    <div class="grid grid-cols-1 md:grid-cols-7 gap-3 items-stretch">
+      <div class="loopnode"><span class="ic">👁️</span><span lang="kk" class="lang-content">Сенсор</span><span lang="en" class="lang-content">Sensor</span><span lang="ru" class="lang-content">Датчик</span>
+        <small><span lang="kk" class="lang-content">өлшейді</span><span lang="en" class="lang-content">measures</span><span lang="ru" class="lang-content">измеряет</span></small></div>
+      <div class="arrow">➜</div>
+      <div class="loopnode"><span class="ic">🧠</span><span lang="kk" class="lang-content">Контроллер</span><span lang="en" class="lang-content">Controller</span><span lang="ru" class="lang-content">Контроллер</span>
+        <small><span lang="kk" class="lang-content">шешеді</span><span lang="en" class="lang-content">decides</span><span lang="ru" class="lang-content">решает</span></small></div>
+      <div class="arrow">➜</div>
+      <div class="loopnode"><span class="ic">⚙️</span><span lang="kk" class="lang-content">Атқарушы</span><span lang="en" class="lang-content">Actuator</span><span lang="ru" class="lang-content">Привод</span>
+        <small><span lang="kk" class="lang-content">қозғалады</span><span lang="en" class="lang-content">moves</span><span lang="ru" class="lang-content">движется</span></small></div>
+      <div class="arrow">➜</div>
+      <div class="loopnode" style="border-color:rgba(180,83,9,.45);color:#b45309"><span class="ic">🔁</span><span lang="kk" class="lang-content">Кері байланыс</span><span lang="en" class="lang-content">Feedback</span><span lang="ru" class="lang-content">Обратная связь</span>
+        <small><span lang="kk" class="lang-content">тексереді</span><span lang="en" class="lang-content">checks</span><span lang="ru" class="lang-content">проверяет</span></small></div>
+    </div>
+    <p class="text-center text-stone-500 text-sm mt-4" style="font-style:italic">
+      <span lang="kk" class="lang-content">«Кері байланыс» нәтижені қайтадан сенсорға жеткізеді — сонда тізбек тұйықталып, робот қатесін өзі түзетеді.</span>
+      <span lang="en" class="lang-content">"Feedback" sends the result back to the sensor — so the loop closes and the robot corrects its own error.</span>
+      <span lang="ru" class="lang-content">«Обратная связь» возвращает результат снова к датчику — так цепь замыкается, и робот сам исправляет свою ошибку.</span>
+    </p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="tip">
+      <h4>↪️ <span lang="kk" class="lang-content">Ашық тізбек</span><span lang="en" class="lang-content">Open loop</span><span lang="ru" class="lang-content">Разомкнутая цепь</span></h4>
+      <p><span lang="kk" class="lang-content">Машина бұйрықты орындайды, бірақ нәтижені тексермейді. Мысалы: микротолқынды пеш 2 минут қыздырады — тамақтың ысыған-ысымағанын білмейді. Қарапайым, бірақ дәл емес.</span><span lang="en" class="lang-content">The machine carries out the command but does not check the result. Example: a microwave heats for 2 minutes — it does not know whether the food is hot. Simple, but not accurate.</span><span lang="ru" class="lang-content">Машина выполняет команду, но не проверяет результат. Пример: микроволновка греет 2 минуты — она не знает, нагрелась ли еда. Просто, но неточно.</span></p>
+    </div>
+    <div class="tip">
+      <h4>🔁 <span lang="kk" class="lang-content">Тұйық тізбек (кері байланыс)</span><span lang="en" class="lang-content">Closed loop (feedback)</span><span lang="ru" class="lang-content">Замкнутая цепь (обратная связь)</span></h4>
+      <p><span lang="kk" class="lang-content">Машина нәтижені үнемі өлшеп, қажет шамаға дейін түзетеді. Мысалы: үтік температураны өлшеп, керегінен асса өшіреді, түссе қайта қосады. Дәлірек әрі ақылды.</span><span lang="en" class="lang-content">The machine constantly measures the result and adjusts to the needed value. Example: an iron measures the temperature, switches off above the set point and on again below it. More accurate and "smart".</span><span lang="ru" class="lang-content">Машина постоянно измеряет результат и подстраивается к нужному значению. Пример: утюг измеряет температуру, выключается выше уставки и включается ниже. Точнее и «умнее».</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW A ROBOT AVOIDS A WALL: step-by-step -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Мысал: робот қабырғадан қалай бұрылады</span>
+    <span lang="en" class="lang-content">Example: how a robot turns away from a wall</span>
+    <span lang="ru" class="lang-content">Пример: как робот объезжает стену</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Ультрадыбыстық сенсоры бар қарапайым робот-арбаның бір қадамдық алгоритмі.</span>
+    <span lang="en" class="lang-content">The step-by-step algorithm of a simple robot cart with an ultrasonic sensor.</span>
+    <span lang="ru" class="lang-content">Пошаговый алгоритм простой робот-тележки с ультразвуковым датчиком.</span>
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="stepcard"><div class="step-num">1</div><div>
+      <h4><span lang="kk" class="lang-content">Өлшеу</span><span lang="en" class="lang-content">Measure</span><span lang="ru" class="lang-content">Измерить</span></h4>
+      <p><span lang="kk" class="lang-content">Сенсор алдыдағы кедергіге дейінгі қашықтықты өлшейді (мысалы, 15 см).</span><span lang="en" class="lang-content">The sensor measures the distance to the obstacle ahead (for example, 15 cm).</span><span lang="ru" class="lang-content">Датчик измеряет расстояние до препятствия впереди (например, 15 см).</span></p>
+    </div></div>
+    <div class="stepcard"><div class="step-num">2</div><div>
+      <h4><span lang="kk" class="lang-content">Салыстыру</span><span lang="en" class="lang-content">Compare</span><span lang="ru" class="lang-content">Сравнить</span></h4>
+      <p><span lang="kk" class="lang-content">Контроллер «егер қашықтық 20 см-ден кіші болса» деген ережемен мәнді шегараммен салыстырады.</span><span lang="en" class="lang-content">The controller compares the value with a limit using the rule "if distance is less than 20 cm".</span><span lang="ru" class="lang-content">Контроллер сравнивает значение с порогом по правилу «если расстояние меньше 20 см».</span></p>
+    </div></div>
+    <div class="stepcard"><div class="step-num">3</div><div>
+      <h4><span lang="kk" class="lang-content">Шешім</span><span lang="en" class="lang-content">Decide</span><span lang="ru" class="lang-content">Решить</span></h4>
+      <p><span lang="kk" class="lang-content">Ереже орындалса — «тоқта да бұрыл», орындалмаса — «алға жүре бер» деген бұйрық таңдалады.</span><span lang="en" class="lang-content">If the rule is true — choose "stop and turn"; if not — choose "keep going forward".</span><span lang="ru" class="lang-content">Если правило выполнено — выбирается команда «стоп и поворот», если нет — «двигаться вперёд».</span></p>
+    </div></div>
+    <div class="stepcard"><div class="step-num">4</div><div>
+      <h4><span lang="kk" class="lang-content">Әрекет</span><span lang="en" class="lang-content">Act</span><span lang="ru" class="lang-content">Действовать</span></h4>
+      <p><span lang="kk" class="lang-content">Контроллер қозғалтқыштарға кернеу береді: бір дөңгелекті тоқтатып, екіншісін айналдырып, робот бұрылады.</span><span lang="en" class="lang-content">The controller sends voltage to the motors: it stops one wheel, spins the other, and the robot turns.</span><span lang="ru" class="lang-content">Контроллер подаёт напряжение на двигатели: останавливает одно колесо, крутит другое — и робот поворачивает.</span></p>
+    </div></div>
+    <div class="stepcard"><div class="step-num">5</div><div>
+      <h4><span lang="kk" class="lang-content">Қайталау</span><span lang="en" class="lang-content">Repeat</span><span lang="ru" class="lang-content">Повторить</span></h4>
+      <p><span lang="kk" class="lang-content">Бағдарлама бірінші қадамға қайта оралады. Бұл цикл секундына ондаған рет қайталанады.</span><span lang="en" class="lang-content">The program returns to step one. This cycle repeats dozens of times per second.</span><span lang="ru" class="lang-content">Программа возвращается к шагу один. Этот цикл повторяется десятки раз в секунду.</span></p>
+    </div></div>
+    <div class="stepcard" style="background:rgba(225,29,72,0.05)"><div class="step-num" style="background:#b45309">✓</div><div>
+      <h4><span lang="kk" class="lang-content">Нәтиже</span><span lang="en" class="lang-content">Result</span><span lang="ru" class="lang-content">Результат</span></h4>
+      <p><span lang="kk" class="lang-content">Робот ешкімнің көмегінсіз кедергілерден өзі айналып, бөлмеде еркін жүреді.</span><span lang="en" class="lang-content">With nobody helping, the robot avoids obstacles by itself and moves freely around the room.</span><span lang="ru" class="lang-content">Без чьей-либо помощи робот сам объезжает препятствия и свободно движется по комнате.</span></p>
+    </div></div>
+  </div>
+</section>
+
+<!-- WHERE ROBOTS WORK: gallery + types -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Роботтар қайда жұмыс істейді</span>
+    <span lang="en" class="lang-content">Where robots work</span>
+    <span lang="ru" class="lang-content">Где работают роботы</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">🔍</div>
+      <div class="pic"><img src="../../assets/labor_boys/lb25_factory.jpg" alt="Роботы на упаковочной линии"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Зауыттағы автоматты желі</span><span lang="en" class="lang-content">Automated factory line</span><span lang="ru" class="lang-content">Автоматическая линия на заводе</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">өнімді қораптайтын роботтар</span><span lang="en" class="lang-content">robots packing the product</span><span lang="ru" class="lang-content">роботы упаковывают продукцию</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Конвейерден өнім үздіксіз ағады, ал бірнеше робот-қол оларды тез әрі дәл қорапқа жинайды — тәулік бойы шаршамай.</span><span lang="en" class="lang-content">Product flows non-stop along the conveyor, and several robot arms pack it into boxes quickly and exactly — around the clock without tiring.</span><span lang="ru" class="lang-content">По конвейеру непрерывно идёт продукция, а несколько рук-роботов быстро и точно укладывают её в коробки — круглые сутки без усталости.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="zoom-hint">🔍</div>
+      <div class="pic"><img src="../../assets/labor_boys/lb25_nao.jpg" alt="Человекоподобный робот NAO"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Гуманоид (адам тәрізді) робот</span><span lang="en" class="lang-content">Humanoid robot</span><span lang="ru" class="lang-content">Человекоподобный робот</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">оқуға арналған NAO роботы</span><span lang="en" class="lang-content">NAO robot, used for learning</span><span lang="ru" class="lang-content">робот NAO для обучения</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Мұндай роботта камера, микрофон, қозғалатын буындар бар. Оны бағдарламалап жүруге, сөйлеуге, биге үйретеді — робототехниканы оқуға таптырмас.</span><span lang="en" class="lang-content">Such a robot has a camera, a microphone and movable joints. It can be programmed to walk, speak and dance — perfect for learning robotics.</span><span lang="ru" class="lang-content">У такого робота есть камера, микрофон и подвижные суставы. Его программируют ходить, говорить и танцевать — отлично подходит для изучения робототехники.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE: types table -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Роботтардың түрлері мен пайдасы</span>
+    <span lang="en" class="lang-content">Types of robots and their benefit</span>
+    <span lang="ru" class="lang-content">Виды роботов и их польза</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Сала → робот → не істейді → адамға не үшін пайдалы.</span>
+    <span lang="en" class="lang-content">Field → robot → what it does → why it helps people.</span>
+    <span lang="ru" class="lang-content">Область → робот → что делает → чем полезен человеку.</span>
+  </p>
+
+  <!-- RU -->
+  <div class="lang-content table-wrap" lang="ru">
+    <table class="rt">
+      <thead><tr><th>Область</th><th>Робот / машина</th><th>Что делает</th><th>Польза</th></tr></thead>
+      <tbody>
+        <tr><td><b>Промышленность</b></td><td>Робот-манипулятор</td><td>Сваривает, красит, собирает и упаковывает детали</td><td>Точность, скорость, работа без усталости</td></tr>
+        <tr><td><b>Дом / быт</b></td><td>Робот-пылесос, стиральная машина</td><td>Убирает пол, сам задаёт воду и время стирки</td><td>Экономит время и силы человека</td></tr>
+        <tr><td><b>Медицина</b></td><td>Хирургический робот, робот-протез</td><td>Помогает врачу точно оперировать, заменяет руку</td><td>Высокая точность, помощь людям</td></tr>
+        <tr><td><b>Опасные места</b></td><td>Робот-разведчик, дрон</td><td>Тушит пожар, осматривает завалы, снимает с воздуха</td><td>Бережёт жизнь и здоровье человека</td></tr>
+        <tr><td><b>Транспорт</b></td><td>Беспилотный автомобиль</td><td>Сам ведёт машину по датчикам и камерам</td><td>Меньше ошибок водителя</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- KK -->
+  <div class="lang-content table-wrap" lang="kk">
+    <table class="rt">
+      <thead><tr><th>Сала</th><th>Робот / машина</th><th>Не істейді</th><th>Пайдасы</th></tr></thead>
+      <tbody>
+        <tr><td><b>Өнеркәсіп</b></td><td>Робот-манипулятор</td><td>Дәнекерлейді, бояйды, жинайды, бөлшекті қораптайды</td><td>Дәлдік, жылдамдық, шаршамай жұмыс</td></tr>
+        <tr><td><b>Үй / тұрмыс</b></td><td>Шаңсорғыш-робот, кір жуу машинасы</td><td>Еденді тазалайды, су мен уақытты өзі реттейді</td><td>Адамның уақыты мен күшін үнемдейді</td></tr>
+        <tr><td><b>Медицина</b></td><td>Хирургиялық робот, робот-протез</td><td>Дәрігерге дәл ота жасауға көмектеседі, қолды алмастырады</td><td>Жоғары дәлдік, адамға көмек</td></tr>
+        <tr><td><b>Қауіпті орындар</b></td><td>Барлаушы робот, дрон</td><td>Өрт сөндіреді, үйіндіні қарайды, әуеден түсіреді</td><td>Адамның өмірі мен денсаулығын сақтайды</td></tr>
+        <tr><td><b>Көлік</b></td><td>Жүргізушісіз автомобиль</td><td>Сенсор мен камера арқылы өзі жүреді</td><td>Жүргізуші қатесі азаяды</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- EN -->
+  <div class="lang-content table-wrap" lang="en">
+    <table class="rt">
+      <thead><tr><th>Field</th><th>Robot / machine</th><th>What it does</th><th>Benefit</th></tr></thead>
+      <tbody>
+        <tr><td><b>Industry</b></td><td>Robot manipulator</td><td>Welds, paints, assembles and packs parts</td><td>Accuracy, speed, work without tiring</td></tr>
+        <tr><td><b>Home / household</b></td><td>Robot vacuum, washing machine</td><td>Cleans the floor, sets water and time by itself</td><td>Saves a person's time and effort</td></tr>
+        <tr><td><b>Medicine</b></td><td>Surgical robot, robotic prosthesis</td><td>Helps a doctor operate precisely, replaces a hand</td><td>High accuracy, help for people</td></tr>
+        <tr><td><b>Dangerous places</b></td><td>Scout robot, drone</td><td>Puts out fires, inspects rubble, films from the air</td><td>Protects human life and health</td></tr>
+        <tr><td><b>Transport</b></td><td>Self-driving car</td><td>Drives itself using sensors and cameras</td><td>Fewer driver mistakes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SAFETY + CLOSING -->
+<section class="mb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+    <div class="tip">
+      <h4>⚠️ <span lang="kk" class="lang-content">Қауіпсіздік ережелері</span><span lang="en" class="lang-content">Safety rules</span><span lang="ru" class="lang-content">Правила безопасности</span></h4>
+      <p style="margin-bottom:.5rem"><span lang="kk" class="lang-content">• Қозғалыстағы робот-қолдың жұмыс аймағына қол сұқпа — ол адамды «көрмеуі» мүмкін.</span><span lang="en" class="lang-content">• Never reach into the working area of a moving robot arm — it may not "see" a person.</span><span lang="ru" class="lang-content">• Не суй руки в рабочую зону движущегося робота — он может «не видеть» человека.</span></p>
+      <p style="margin-bottom:.5rem"><span lang="kk" class="lang-content">• Сымдарды қоспас бұрын қуатты ажырат; полярлықты (+ және −) шатастырма.</span><span lang="en" class="lang-content">• Switch the power off before connecting wires; do not mix up polarity (+ and −).</span><span lang="ru" class="lang-content">• Перед подключением проводов отключи питание; не путай полярность (+ и −).</span></p>
+      <p><span lang="kk" class="lang-content">• Әрбір автоматты машинада «STOP» (төтенше тоқтату) түймесі болуы керек.</span><span lang="en" class="lang-content">• Every automatic machine must have a "STOP" (emergency stop) button.</span><span lang="ru" class="lang-content">• У каждой автоматической машины должна быть кнопка «STOP» (аварийный останов).</span></p>
+    </div>
+    <div class="card-rose rounded-custom p-6 md:p-7" style="display:flex;flex-direction:column;justify-content:center">
+      <h3 class="heading-font text-xl font-extrabold mb-3">
+        <span lang="kk" class="lang-content">💬 Қорытынды</span>
+        <span lang="en" class="lang-content">💬 In a nutshell</span>
+        <span lang="ru" class="lang-content">💬 Главное</span>
+      </h3>
+      <p style="line-height:1.7;font-size:1.02rem">
+        <span lang="kk" class="lang-content">Робот — сезетін (сенсор), ойлайтын (контроллер) және әрекет ететін (атқарушы) машина. Автоматика осы үшеуін «өлшеу → шешу → әрекет → кері байланыс» тізбегіне біріктіреді. Дұрыс құрастырылған робот ауыр, қауіпті әрі бірсарынды жұмысты адамнан гөрі дәл әрі шаршамай атқарады — ал адам оны жобалап, бағдарламалап басқарады.</span>
+        <span lang="en" class="lang-content">A robot is a machine that senses (sensor), thinks (controller) and acts (actuator). Automation joins these three into the loop "measure → decide → act → feedback". A well-built robot does heavy, dangerous and monotonous work more accurately and tirelessly than a human — while the human designs, programs and controls it.</span>
+        <span lang="ru" class="lang-content">Робот — это машина, которая воспринимает (датчик), думает (контроллер) и действует (привод). Автоматика объединяет эти три части в цепь «измерить → решить → действовать → обратная связь». Хорошо собранный робот делает тяжёлую, опасную и однообразную работу точнее и без устали, чем человек, — а человек его проектирует, программирует и им управляет.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX (keep inside #poster-container) -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

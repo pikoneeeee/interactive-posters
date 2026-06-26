@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сопряжения</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-blue-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 2 · Геометриялық салулар</span>
+      <span lang="en" class="lang-content">Graphics · Section 2 · Geometric Constructions</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 2 · Геометрические построения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">〜 Жалғастырулар (сопряжения)</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">〜 Tangent Transitions (Fillets)</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-blue-800">〜 Сопряжения</h1>
+    <p class="mt-2 text-slate-600 text-base">
+      <span lang="kk" class="lang-content">Тегіс өту — тікелей сызықтан доғаға немесе бір доғадан екіншісіне.</span>
+      <span lang="en" class="lang-content">A smooth transition from a straight line to an arc or between two arcs.</span>
+      <span lang="ru" class="lang-content">Плавный переход от прямой к дуге или от дуги к дуге.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Definition -->
+<section class="mb-8">
+  <div class="card rounded-custom p-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="card-accent rounded-xl p-4 text-center">
+        <p class="text-3xl mb-2">📌</p>
+        <p class="font-bold text-blue-800 mb-1">
+          <span lang="kk" class="lang-content">Жалғастыру нүктесі</span>
+          <span lang="en" class="lang-content">Point of Tangency</span>
+          <span lang="ru" class="lang-content">Точка сопряжения</span>
+        </p>
+        <p class="text-slate-600 text-sm">
+          <span lang="kk" class="lang-content">Сызық пен доғаның тегіс қосылатын жері</span>
+          <span lang="en" class="lang-content">Where the line and arc meet smoothly</span>
+          <span lang="ru" class="lang-content">Место плавного соединения линии и дуги</span>
+        </p>
+      </div>
+      <div class="card-accent rounded-xl p-4 text-center">
+        <p class="text-3xl mb-2">🎯</p>
+        <p class="font-bold text-blue-800 mb-1">
+          <span lang="kk" class="lang-content">Жалғастыру радиусы R</span>
+          <span lang="en" class="lang-content">Fillet Radius R</span>
+          <span lang="ru" class="lang-content">Радиус сопряжения R</span>
+        </p>
+        <p class="text-slate-600 text-sm">
+          <span lang="kk" class="lang-content">Тегіс өту доғасының радиусы</span>
+          <span lang="en" class="lang-content">Radius of the connecting arc</span>
+          <span lang="ru" class="lang-content">Радиус соединяющей дуги перехода</span>
+        </p>
+      </div>
+      <div class="card-accent rounded-xl p-4 text-center">
+        <p class="text-3xl mb-2">⚙️</p>
+        <p class="font-bold text-blue-800 mb-1">
+          <span lang="kk" class="lang-content">Қолданылуы</span>
+          <span lang="en" class="lang-content">Application</span>
+          <span lang="ru" class="lang-content">Применение</span>
+        </p>
+        <p class="text-slate-600 text-sm">
+          <span lang="kk" class="lang-content">Бөлшектердің тегіс өту контурлары</span>
+          <span lang="en" class="lang-content">Smooth part outlines, rounded corners</span>
+          <span lang="ru" class="lang-content">Контуры деталей с плавными переходами</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Line to line (through arc) -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">1️⃣ Екі тікелей арасындағы жалғастыру</span>
+    <span lang="en" class="lang-content">1️⃣ Fillet Between Two Lines</span>
+    <span lang="ru" class="lang-content">1️⃣ Сопряжение двух прямых дугой</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 220" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Two lines -->
+        <line x1="20" y1="40" x2="200" y2="40" stroke="#1e293b" stroke-width="2.5"/>
+        <line x1="200" y1="40" x2="200" y2="190" stroke="#1e293b" stroke-width="2.5"/>
+        <!-- Construction: parallel lines at distance R -->
+        <line x1="20" y1="90" x2="155" y2="90" stroke="#2563eb" stroke-width="1" stroke-dasharray="4,2"/>
+        <line x1="150" y1="40" x2="150" y2="190" stroke="#2563eb" stroke-width="1" stroke-dasharray="4,2"/>
+        <!-- Centre of arc -->
+        <circle cx="150" cy="90" r="5" fill="#ef4444"/>
+        <text x="155" y="87" font-size="10" fill="#ef4444" font-weight="bold">O</text>
+        <!-- Tangent points -->
+        <circle cx="150" cy="40" r="4" fill="#16a34a"/>
+        <circle cx="200" cy="90" r="4" fill="#16a34a"/>
+        <text x="155" y="38" font-size="9" fill="#16a34a">K₁</text>
+        <text x="205" y="88" font-size="9" fill="#16a34a">K₂</text>
+        <!-- Fillet arc -->
+        <path d="M 150,40 A 50,50 0 0,1 200,90" fill="none" stroke="#1d4ed8" stroke-width="3"/>
+        <!-- R label -->
+        <line x1="150" y1="90" x2="200" y2="90" stroke="#64748b" stroke-width="1"/>
+        <text x="170" y="85" font-size="10" fill="#64748b">R=50</text>
+        <!-- Arrow R -->
+        <line x1="150" y1="90" x2="150" y2="40" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2"/>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <ol class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-3"><span class="step-num">1</span><span lang="kk" class="lang-content">Жалғастыру радиусы R берілген. Екі тікелейге де <b>R қашықтықта параллель сызықтар</b> сыз</span><span lang="en" class="lang-content">Given radius R. Draw lines <b>parallel to each line at distance R</b></span><span lang="ru" class="lang-content">Задан радиус R. Проведи линии, <b>параллельные каждой прямой на расстоянии R</b></span></li>
+        <li class="flex gap-3"><span class="step-num">2</span><span lang="kk" class="lang-content">Параллель сызықтардың қиылысуы — жалғастыру <b>доғасының орталығы O</b></span><span lang="en" class="lang-content">Their intersection is the <b>arc centre O</b></span><span lang="ru" class="lang-content">Пересечение параллельных — <b>центр дуги O</b></span></li>
+        <li class="flex gap-3"><span class="step-num">3</span><span lang="kk" class="lang-content">O-дан екі тікелейге перпендикуляр түсіру — <b>К₁ және К₂ жалғастыру нүктелері</b></span><span lang="en" class="lang-content">Drop perpendiculars from O to the lines — these are <b>tangent points K₁ and K₂</b></span><span lang="ru" class="lang-content">Из O опустить перпендикуляры — <b>точки сопряжения К₁ и К₂</b></span></li>
+        <li class="flex gap-3"><span class="step-num">4</span><span lang="kk" class="lang-content">O орталығынан R радиуспен К₁-ден К₂-ге дейін <b>доға</b> сызу</span><span lang="en" class="lang-content">Draw the <b>arc</b> from K₁ to K₂ with centre O, radius R</span><span lang="ru" class="lang-content">Из O радиусом R провести <b>дугу</b> от К₁ до К₂</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- External and internal fillet -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-blue-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">2️⃣ Сыртқы және ішкі жалғастыру</span>
+    <span lang="en" class="lang-content">2️⃣ External and Internal Tangency</span>
+    <span lang="ru" class="lang-content">2️⃣ Внешнее и внутреннее сопряжение</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- External -->
+    <div class="card rounded-custom p-6">
+      <h3 class="font-bold text-blue-800 mb-4 text-center">
+        <span lang="kk" class="lang-content">Сыртқы жалғастыру</span>
+        <span lang="en" class="lang-content">External Tangency</span>
+        <span lang="ru" class="lang-content">Внешнее сопряжение</span>
+      </h3>
+      <div class="flex justify-center mb-4">
+        <svg viewBox="0 0 240 160" style="width:220px;height:140px" xmlns="http://www.w3.org/2000/svg">
+          <!-- Two circles -->
+          <circle cx="70" cy="80" r="40" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <circle cx="180" cy="80" r="30" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <!-- External arc connecting them -->
+          <path d="M 110,80 A 100,100 0 0,1 150,80" fill="none" stroke="#1d4ed8" stroke-width="3"/>
+          <!-- Centres -->
+          <circle cx="70" cy="80" r="3" fill="#64748b"/>
+          <circle cx="180" cy="80" r="3" fill="#64748b"/>
+          <text x="63" y="77" font-size="9" fill="#64748b">O₁</text>
+          <text x="183" y="77" font-size="9" fill="#64748b">O₂</text>
+          <!-- Centre of fillet arc -->
+          <circle cx="125" cy="40" r="4" fill="#ef4444"/>
+          <text x="129" y="38" font-size="9" fill="#ef4444">O</text>
+          <line x1="70" y1="80" x2="125" y2="40" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="180" y1="80" x2="125" y2="40" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="50" y="150" font-size="8" fill="#2563eb">OO₁ = R + r₁,  OO₂ = R + r₂</text>
+        </svg>
+      </div>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Жалғастыру орталығы: OO₁ = R + r₁</span>
+        <span lang="en" class="lang-content">Fillet centre: OO₁ = R + r₁</span>
+        <span lang="ru" class="lang-content">Центр сопряжения: OO₁ = R + r₁</span>
+      </p>
+    </div>
+    <!-- Internal -->
+    <div class="card rounded-custom p-6">
+      <h3 class="font-bold text-blue-800 mb-4 text-center">
+        <span lang="kk" class="lang-content">Ішкі жалғастыру</span>
+        <span lang="en" class="lang-content">Internal Tangency</span>
+        <span lang="ru" class="lang-content">Внутреннее сопряжение</span>
+      </h3>
+      <div class="flex justify-center mb-4">
+        <svg viewBox="0 0 240 160" style="width:220px;height:140px" xmlns="http://www.w3.org/2000/svg">
+          <!-- Two circles -->
+          <circle cx="70" cy="80" r="40" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <circle cx="175" cy="80" r="35" fill="none" stroke="#1e293b" stroke-width="2"/>
+          <!-- Internal arc -->
+          <path d="M 30,80 Q 120,20 210,80" fill="none" stroke="#1d4ed8" stroke-width="3"/>
+          <!-- Centres -->
+          <circle cx="70" cy="80" r="3" fill="#64748b"/>
+          <circle cx="175" cy="80" r="3" fill="#64748b"/>
+          <text x="63" y="77" font-size="9" fill="#64748b">O₁</text>
+          <text x="178" y="77" font-size="9" fill="#64748b">O₂</text>
+          <!-- Centre of fillet arc -->
+          <circle cx="120" cy="115" r="4" fill="#ef4444"/>
+          <text x="124" y="113" font-size="9" fill="#ef4444">O</text>
+          <line x1="70" y1="80" x2="120" y2="115" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="175" y1="80" x2="120" y2="115" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="35" y="150" font-size="8" fill="#2563eb">OO₁ = R − r₁,  OO₂ = R − r₂</text>
+        </svg>
+      </div>
+      <p class="text-slate-600 text-sm text-center">
+        <span lang="kk" class="lang-content">Жалғастыру орталығы: OO₁ = R − r₁</span>
+        <span lang="en" class="lang-content">Fillet centre: OO₁ = R − r₁</span>
+        <span lang="ru" class="lang-content">Центр сопряжения: OO₁ = R − r₁</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="card-blue rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Негізгі формулалар</span>
+    <span lang="en" class="lang-content">🧠 Key Formulas</span>
+    <span lang="ru" class="lang-content">🧠 Ключевые формулы</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-2"><span lang="kk" class="lang-content">Тікелей + тікелей</span><span lang="en" class="lang-content">Line + Line</span><span lang="ru" class="lang-content">Прямая + прямая</span></p>
+      <p class="text-blue-200"><span lang="kk" class="lang-content">Параллель сызықтарды R қашықтықта жүргіз → қиылысу = O</span><span lang="en" class="lang-content">Draw parallels at R → intersection = O</span><span lang="ru" class="lang-content">Параллели на R → пересечение = O</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-2"><span lang="kk" class="lang-content">Сыртқы жалғастыру</span><span lang="en" class="lang-content">External tangency</span><span lang="ru" class="lang-content">Внешнее сопряжение</span></p>
+      <div class="font-mono text-yellow-200 mt-1">OO₁ = R + r₁</div>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-2"><span lang="kk" class="lang-content">Ішкі жалғастыру</span><span lang="en" class="lang-content">Internal tangency</span><span lang="ru" class="lang-content">Внутреннее сопряжение</span></p>
+      <div class="font-mono text-yellow-200 mt-1">OO₁ = R − r₁</div>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

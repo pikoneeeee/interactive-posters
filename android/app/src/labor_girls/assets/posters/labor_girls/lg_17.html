@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дефекты машинной строчки и уход за машиной</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.55;}
+.step b{color:#881337;}
+table.def{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.96);border-radius:1rem;overflow:hidden;
+  box-shadow:0 4px 18px rgba(136,19,55,.08);font-size:.93rem;}
+table.def th{background:#9f1239;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;
+  padding:.7rem .85rem;text-align:left;font-size:.9rem;}
+table.def td{padding:.7rem .85rem;border-top:1px solid rgba(190,18,60,.13);color:#44403c;vertical-align:top;line-height:1.45;}
+table.def tr:nth-child(even) td{background:rgba(225,29,72,0.035);}
+table.def td b{color:#881337;}
+table.def .em{color:#be123c;font-weight:700;}
+.diag-card{background:rgba(255,255,255,0.96);border:1px solid rgba(190,18,60,.16);border-radius:1.1rem;
+  padding:1.1rem 1rem 1.2rem;box-shadow:0 3px 14px rgba(136,19,55,.07);text-align:center;}
+.diag-card svg{width:100%;height:auto;display:block;}
+.diag-card .t{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.02rem;margin-top:.6rem;}
+.diag-card .t.ok{color:#15803d;} .diag-card .t.bad{color:#be123c;}
+.diag-card .d{color:#57534e;font-size:.88rem;line-height:1.45;margin-top:.25rem;}
+.care{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1.1rem;overflow:hidden;
+  box-shadow:0 3px 14px rgba(136,19,55,.07);cursor:pointer;transition:all .22s;display:flex;flex-direction:column;}
+.care:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(136,19,55,.16);}
+.care .pic{height:215px;background:#1c1917;}
+.care .pic img{width:100%;height:100%;object-fit:cover;display:block;}
+.care .body{padding:1rem 1.1rem 1.2rem;}
+.care .body h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.05rem;}
+.care .body p{color:#57534e;font-size:.9rem;line-height:1.5;margin-top:.3rem;}
+.rule{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:1rem 1.15rem;}
+.rule h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.0rem;margin-bottom:.25rem;}
+.rule p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.freq{background:linear-gradient(135deg,#fff,#fff5f7);border:1px solid rgba(190,18,60,.18);border-radius:.9rem;
+  padding:.85rem 1rem;display:flex;gap:.7rem;align-items:flex-start;}
+.freq .ic{font-size:1.7rem;line-height:1;}
+.freq b{color:#881337;font-family:'Montserrat',sans-serif;}
+.freq p{color:#57534e;font-size:.9rem;line-height:1.4;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · 3-бөлім · Тігін ісі</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Section 3 · Sewing</span>
+      <span lang="ru" class="lang-content">Художественный труд · Раздел 3 · Швейное дело</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪡 Машина жігінің ақаулары және машинаға күтім</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪡 Machine Stitch Defects &amp; Machine Care</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🪡 Дефекты машинной строчки и уход за машиной</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Жіптің керілуін қалай теңгереміз, ақауларды қалай тауып түзетеміз және машинаны қалай ұзақ сақтаймыз.</span>
+      <span lang="en" class="lang-content">How to balance thread tension, find and fix faults, and keep your machine working for years.</span>
+      <span lang="ru" class="lang-content">Как уравновесить натяжение нитей, найти и устранить дефекты и сохранить машину надолго.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content">Машина жігі — <b>екі жіптің</b> ісі: жоғарғы (инедегі) жіп пен төменгі (шүмектегі) жіп. Дұрыс жікте олар <b>дәл матаның ортасында</b> түйіседі, сондықтан жіктің беті де, асты да бірдей әдемі. Егер жоғарғы немесе төменгі жіптің <b>керілуі</b> бұзылса, не ине, не жіп дұрыс таңдалмаса — жікте ақау пайда болады: ілмектер, тіс түсу, мата бүрісу, жіптің не иненің сынуы. Көп ақаудың себебі қарапайым: дұрыс емес тарту, доғал не қисық ине, шаң-түкпен ластанған механизм. Сондықтан <b>ақауды тану</b> мен <b>машинаға күтім</b> — бір тақырыптың екі жағы.</span>
+    <span lang="en" class="lang-content">A machine stitch is the work of <b>two threads</b>: the upper (needle) thread and the lower (bobbin) thread. In a correct stitch they interlock <b>exactly in the middle of the fabric</b>, so the top and the underside look equally neat. If the <b>tension</b> of the upper or lower thread is wrong, or the needle or thread is poorly chosen, a defect appears: loops, skipped stitches, puckering, broken thread or a broken needle. Most faults have simple causes — wrong tension, a blunt or bent needle, a mechanism clogged with lint. That is why <b>recognising defects</b> and <b>caring for the machine</b> are two sides of one topic.</span>
+    <span lang="ru" class="lang-content">Машинная строчка — это работа <b>двух нитей</b>: верхней (игольной) и нижней (челночной). В правильной строчке они переплетаются <b>точно в середине ткани</b>, поэтому и лицо, и изнанка выглядят одинаково аккуратно. Если нарушено <b>натяжение</b> верхней или нижней нити либо неверно подобраны игла и нитки, появляется дефект: петли, пропуски, стягивание ткани, обрыв нити или поломка иглы. У большинства дефектов причины простые — неправильное натяжение, тупая или погнутая игла, забитый пухом механизм. Поэтому <b>распознавание дефектов</b> и <b>уход за машиной</b> — две стороны одной темы.</span>
+  </p>
+</section>
+
+<!-- STITCH QUALITY — SVG cross-sections -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Жіптің керілуі: жік сапасы</span>
+    <span lang="en" class="lang-content">Thread Tension: Stitch Quality</span>
+    <span lang="ru" class="lang-content">Натяжение нитей: качество строчки</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Қиманы қараңыз: <b style="color:#be123c">қызыл</b> — жоғарғы жіп, <b style="color:#1d4ed8">көк</b> — шүмек жібі. Түйіндескен жер қайда екеніне қараңыз.</span>
+    <span lang="en" class="lang-content">Look at the cross-section: <b style="color:#be123c">red</b> = upper thread, <b style="color:#1d4ed8">blue</b> = bobbin thread. Watch where they interlock.</span>
+    <span lang="ru" class="lang-content">Смотрите на разрез: <b style="color:#be123c">красная</b> — верхняя нить, <b style="color:#1d4ed8">синяя</b> — челночная. Следите, где они переплетаются.</span>
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <!-- GOOD -->
+    <div class="diag-card">
+      <svg viewBox="0 0 260 150" role="img" aria-label="balanced stitch">
+        <rect x="20" y="48" width="220" height="22" rx="3" fill="#e7e5e4" stroke="#a8a29e"/>
+        <rect x="20" y="80" width="220" height="22" rx="3" fill="#d6d3d1" stroke="#a8a29e"/>
+        <text x="246" y="63" font-size="9" fill="#78716c">лицо</text>
+        <text x="246" y="95" font-size="9" fill="#78716c">изн.</text>
+        <!-- red top thread runs along the top, dips to middle -->
+        <path d="M20 54 H60 Q72 54 72 75 Q72 54 84 54 H120 Q132 54 132 75 Q132 54 144 54 H180 Q192 54 192 75 Q192 54 204 54 H240" fill="none" stroke="#dc2626" stroke-width="3.4" stroke-linecap="round"/>
+        <!-- blue bobbin thread runs along bottom, rises to middle -->
+        <path d="M20 96 H66 Q72 96 72 75 Q72 96 78 96 H126 Q132 96 132 75 Q132 96 138 96 H186 Q192 96 192 75 Q192 96 198 96 H240" fill="none" stroke="#2563eb" stroke-width="3.4" stroke-linecap="round"/>
+        <line x1="72" y1="75" x2="72" y2="75"/>
+        <circle cx="72" cy="75" r="3.4" fill="#7c3aed"/><circle cx="132" cy="75" r="3.4" fill="#7c3aed"/><circle cx="192" cy="75" r="3.4" fill="#7c3aed"/>
+      </svg>
+      <div class="t ok">✔ <span lang="kk" class="lang-content">Дұрыс жік</span><span lang="en" class="lang-content">Balanced stitch</span><span lang="ru" class="lang-content">Правильная строчка</span></div>
+      <div class="d"><span lang="kk" class="lang-content">Түйін матаның дәл ортасында. Беті мен асты бірдей таза.</span><span lang="en" class="lang-content">The knot sits in the middle of the fabric. Top and underside look the same.</span><span lang="ru" class="lang-content">Узелок переплетения — в середине ткани. Лицо и изнанка одинаковы.</span></div>
+    </div>
+
+    <!-- TOP TOO TIGHT -->
+    <div class="diag-card">
+      <svg viewBox="0 0 260 150" role="img" aria-label="upper thread too tight">
+        <rect x="20" y="48" width="220" height="22" rx="3" fill="#e7e5e4" stroke="#a8a29e"/>
+        <rect x="20" y="80" width="220" height="22" rx="3" fill="#d6d3d1" stroke="#a8a29e"/>
+        <text x="246" y="63" font-size="9" fill="#78716c">лицо</text>
+        <text x="246" y="95" font-size="9" fill="#78716c">изн.</text>
+        <!-- knot pulled UP to the top surface; blue loops show on top -->
+        <path d="M20 54 H64 Q72 54 72 56 Q72 54 80 54 H124 Q132 54 132 56 Q132 54 140 54 H184 Q192 54 192 56 Q192 54 200 54 H240" fill="none" stroke="#dc2626" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M20 96 H60 Q72 96 72 56 Q72 96 84 96 H120 Q132 96 132 56 Q132 96 144 96 H180 Q192 96 192 56 Q192 96 204 96 H240" fill="none" stroke="#2563eb" stroke-width="3.4" stroke-linecap="round"/>
+        <circle cx="72" cy="56" r="3.4" fill="#7c3aed"/><circle cx="132" cy="56" r="3.4" fill="#7c3aed"/><circle cx="192" cy="56" r="3.4" fill="#7c3aed"/>
+      </svg>
+      <div class="t bad">✘ <span lang="kk" class="lang-content">Жоғарғы жіп қатты керілген</span><span lang="en" class="lang-content">Upper thread too tight</span><span lang="ru" class="lang-content">Верхняя нить натянута сильно</span></div>
+      <div class="d"><span lang="kk" class="lang-content">Түйін бетке шығады, төменгі жіп беттен көрінеді. <b class="em">Шешімі:</b> жоғарғы керуді азайту.</span><span lang="en" class="lang-content">The knot is pulled to the top; bobbin thread shows on the face. <b class="em">Fix:</b> loosen upper tension.</span><span lang="ru" class="lang-content">Узел вытянут наверх, нижняя нить видна с лица. <b class="em">Решение:</b> ослабить верхнее натяжение.</span></div>
+    </div>
+
+    <!-- TOP TOO LOOSE -->
+    <div class="diag-card">
+      <svg viewBox="0 0 260 150" role="img" aria-label="upper thread too loose">
+        <rect x="20" y="48" width="220" height="22" rx="3" fill="#e7e5e4" stroke="#a8a29e"/>
+        <rect x="20" y="80" width="220" height="22" rx="3" fill="#d6d3d1" stroke="#a8a29e"/>
+        <text x="246" y="63" font-size="9" fill="#78716c">лицо</text>
+        <text x="246" y="95" font-size="9" fill="#78716c">изн.</text>
+        <!-- knot pulled DOWN to underside; red loops show on bottom -->
+        <path d="M20 54 H60 Q72 54 72 94 Q72 54 84 54 H120 Q132 54 132 94 Q132 54 144 54 H180 Q192 54 192 94 Q192 54 204 54 H240" fill="none" stroke="#dc2626" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M20 96 H64 Q72 96 72 94 Q72 96 80 96 H124 Q132 96 132 94 Q132 96 140 96 H184 Q192 96 192 94 Q192 96 200 96 H240" fill="none" stroke="#2563eb" stroke-width="3.4" stroke-linecap="round"/>
+        <circle cx="72" cy="94" r="3.4" fill="#7c3aed"/><circle cx="132" cy="94" r="3.4" fill="#7c3aed"/><circle cx="192" cy="94" r="3.4" fill="#7c3aed"/>
+      </svg>
+      <div class="t bad">✘ <span lang="kk" class="lang-content">Жоғарғы жіп бос керілген</span><span lang="en" class="lang-content">Upper thread too loose</span><span lang="ru" class="lang-content">Верхняя нить натянута слабо</span></div>
+      <div class="d"><span lang="kk" class="lang-content">Түйін астына түсіп, астында ілмектер пайда болады. <b class="em">Шешімі:</b> жоғарғы керуді күшейту.</span><span lang="en" class="lang-content">The knot drops to the underside; loops appear below. <b class="em">Fix:</b> tighten upper tension.</span><span lang="ru" class="lang-content">Узел уходит вниз, снизу появляются петли. <b class="em">Решение:</b> усилить верхнее натяжение.</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DEFECTS TABLE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Жиі кездесетін ақаулар: себебі мен шешімі</span>
+    <span lang="en" class="lang-content">Common Defects: Cause &amp; Fix</span>
+    <span lang="ru" class="lang-content">Частые дефекты: причина и решение</span>
+  </h2>
+
+  <div class="lang-content" lang="ru">
+    <table class="def">
+      <thead><tr><th style="width:24%">Дефект</th><th style="width:40%">Причина</th><th style="width:36%">Как устранить</th></tr></thead>
+      <tbody>
+        <tr><td><b>Петли снизу</b> (на изнанке)</td><td>Слабое натяжение <b>верхней</b> нити; неправильная заправка верхней нити.</td><td>Усилить верхнее натяжение; перезаправить верхнюю нить при поднятой лапке.</td></tr>
+        <tr><td><b>Петли сверху</b> (с лица)</td><td>Слабое натяжение <b>нижней</b> (челночной) нити; неверно вставлена шпулька.</td><td>Подтянуть винт шпульного колпачка; правильно вставить шпульку.</td></tr>
+        <tr><td><b>Стягивание ткани</b> (сборки)</td><td>Слишком сильное натяжение обеих нитей; слишком толстая игла/нитки для тонкой ткани.</td><td>Ослабить натяжение; взять иглу и нитки тоньше; уменьшить длину стежка.</td></tr>
+        <tr><td><b>Пропуски стежков</b></td><td>Тупая, погнутая или не та игла; игла вставлена не до упора.</td><td>Заменить иглу на новую нужного типа; вставить иглу до упора плоской стороной к себе/назад.</td></tr>
+        <tr><td><b>Обрыв верхней нити</b></td><td>Сильное натяжение; узлы на нитке; острые заусенцы; неверная заправка.</td><td>Ослабить натяжение; взять ровную нить; перезаправить; проверить игольную пластину.</td></tr>
+        <tr><td><b>Поломка иглы</b></td><td>Тянут ткань руками; толстая ткань тонкой иглой; ослаб винт иглы.</td><td>Не тянуть ткань — её ведут зубцы; подобрать иглу по ткани; затянуть винт иглы.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="kk">
+    <table class="def">
+      <thead><tr><th style="width:24%">Ақау</th><th style="width:40%">Себебі</th><th style="width:36%">Жою жолы</th></tr></thead>
+      <tbody>
+        <tr><td><b>Астында ілмек</b> (теріс жағы)</td><td><b>Жоғарғы</b> жіптің керілуі әлсіз; жоғарғы жіп қате тартылған.</td><td>Жоғарғы керуді күшейту; табанды көтеріп, жоғарғы жіпті қайта тарту.</td></tr>
+        <tr><td><b>Үстінде ілмек</b> (беткі жағы)</td><td><b>Төменгі</b> (шүмек) жіптің керілуі әлсіз; шүмек қате салынған.</td><td>Шүмек қалпақшасының бұрандасын қатайту; шүмекті дұрыс салу.</td></tr>
+        <tr><td><b>Мата бүрісуі</b> (жиырылу)</td><td>Екі жіптің керілуі тым күшті; жұқа матаға жуан ине/жіп.</td><td>Керуді азайту; жіңішке ине мен жіп алу; тігіс ұзындығын кішірейту.</td></tr>
+        <tr><td><b>Тіс түсу</b> (өткізіп кету)</td><td>Доғал, қисық немесе сай келмейтін ине; ине толық кірмеген.</td><td>Жаңа, дұрыс типті инеге ауыстыру; инені тірелгенше кіргізу.</td></tr>
+        <tr><td><b>Жоғарғы жіптің үзілуі</b></td><td>Күшті керу; жіптегі түйіндер; өткір қылтанақтар; қате тарту.</td><td>Керуді азайту; тегіс жіп алу; қайта тарту; ине тақтасын тексеру.</td></tr>
+        <tr><td><b>Иненің сынуы</b></td><td>Матаны қолмен тарту; жұқа инемен жуан мата; ине бұрандасы босаған.</td><td>Матаны тартпау — оны тісшелер жүргізеді; инені матаға сай таңдау; бұранданы қатайту.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="en">
+    <table class="def">
+      <thead><tr><th style="width:24%">Defect</th><th style="width:40%">Cause</th><th style="width:36%">How to fix</th></tr></thead>
+      <tbody>
+        <tr><td><b>Loops underneath</b> (on the back)</td><td>Weak tension of the <b>upper</b> thread; upper thread badly threaded.</td><td>Tighten upper tension; re-thread the top with the presser foot raised.</td></tr>
+        <tr><td><b>Loops on top</b> (on the face)</td><td>Weak tension of the <b>lower</b> (bobbin) thread; bobbin inserted wrongly.</td><td>Tighten the bobbin-case screw; insert the bobbin correctly.</td></tr>
+        <tr><td><b>Puckered fabric</b> (gathers)</td><td>Both threads too tight; needle/thread too thick for thin fabric.</td><td>Loosen tension; use a finer needle and thread; shorten the stitch.</td></tr>
+        <tr><td><b>Skipped stitches</b></td><td>Blunt, bent or wrong needle; needle not pushed up fully.</td><td>Fit a new needle of the right type; insert it all the way up.</td></tr>
+        <tr><td><b>Upper thread breaks</b></td><td>Tension too tight; knots in the thread; sharp burrs; bad threading.</td><td>Loosen tension; use smooth thread; re-thread; check the needle plate.</td></tr>
+        <tr><td><b>Needle breaks</b></td><td>Pulling fabric by hand; thick fabric with a thin needle; loose needle screw.</td><td>Don't pull the fabric — the feed dogs move it; match needle to fabric; tighten the screw.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- pucker photo example -->
+  <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+    <div class="genre-card md:col-span-1" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p17_pucker.jpg" alt="Стягивание ткани"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Мата бүрісуі</span><span lang="en" class="lang-content">Puckered seam</span><span lang="ru" class="lang-content">Стягивание ткани</span></div>
+        <div class="genre-cap"><span lang="kk" class="lang-content">керу тым күшті</span><span lang="en" class="lang-content">tension too tight</span><span lang="ru" class="lang-content">слишком сильное натяжение</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Жік бойымен мата жиырылады. Керуді азайтып, жіңішке ине мен жіп алу керек.</span><span lang="en" class="lang-content">The cloth gathers along the seam. Loosen the tension and use a finer needle and thread.</span><span lang="ru" class="lang-content">Ткань собирается вдоль шва. Нужно ослабить натяжение, взять тоньше иглу и нитку.</span></div>
+      </div>
+    </div>
+    <div class="md:col-span-2">
+      <p class="lead">
+        <span lang="kk" class="lang-content"><b>Қалай тексеру керек?</b> Әрқашан жұмыс матасының қиығында сынама жік салыңыз. Жікті екі жағынан да қараңыз: егер бір жіп екінші жақтан көрініп тұрса — сол жақтың керілуі әлсіз. Алдымен <b>жоғарғы керуді</b> реттеңіз (ол реттегіш оңай қол жетеді), шүмек бұрандасына сирек тиісіңіз. Кез келген ақауда ең бірінші <b>инені</b> және <b>жіптің дұрыс тартылғанын</b> тексеріңіз — көп жағдайда себеп нақ сонда.</span>
+        <span lang="en" class="lang-content"><b>How to check.</b> Always sew a test seam on a scrap of your fabric. Look at both sides of the stitch: if one thread shows through on the other side, that side's tension is weak. Adjust the <b>upper tension</b> first (its dial is easy to reach) and touch the bobbin screw only rarely. With any fault, first check the <b>needle</b> and that the <b>thread is correctly threaded</b> — that is the cause most of the time.</span>
+        <span lang="ru" class="lang-content"><b>Как проверить.</b> Всегда делайте пробную строчку на лоскуте своей ткани. Смотрите строчку с двух сторон: если одна нить видна с другой стороны — у той стороны слабое натяжение. Сначала регулируйте <b>верхнее натяжение</b> (его регулятор легко доступен), винт шпульки трогайте редко. При любом дефекте первым делом проверьте <b>иглу</b> и <b>правильность заправки нити</b> — чаще всего причина именно в этом.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MACHINE CARE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Машинаға күтім: 4 қадам</span>
+    <span lang="en" class="lang-content">Caring for the Machine: 4 Steps</span>
+    <span lang="ru" class="lang-content">Уход за машиной: 4 шага</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз. Кез келген күтім алдында машинаны <b>тоқтан ажыратыңыз</b>.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge. Before any care, <b>unplug the machine</b>.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить. Перед любым уходом <b>отключите машину от сети</b>.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="care-grid">
+
+    <div class="care" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p17_bobbincase.jpg" alt="Чистка челночного устройства"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">1. Шүмек ұясын тазалау</span><span lang="en" class="lang-content">1. Clean the shuttle area</span><span lang="ru" class="lang-content">1. Чистка челночного отсека</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Шүмекті алып, иненің тақтасы мен ұяны жұмсақ щёткамен шаң-түктен тазалаңыз. Мата талшығы дәл осында жиналады.</span><span lang="en" class="lang-content">Take out the bobbin case and brush lint from the needle plate and the shuttle race. Fabric fluff collects right here.</span><span lang="ru" class="lang-content">Выньте шпульный колпачок и мягкой кисточкой удалите пух из-под игольной пластины и из челночного гнезда. Именно здесь скапливается ворс.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">1. Шүмекті тазалау</span><span lang="en" class="lang-content">1. Clean the shuttle</span><span lang="ru" class="lang-content">1. Чистка челнока</span></h3>
+        <p><span lang="kk" class="lang-content">Шаң-түкті щёткамен алып тастаңыз — ілмек пен үзілудің басты себебі.</span><span lang="en" class="lang-content">Brush out the lint — the main cause of loops and breakage.</span><span lang="ru" class="lang-content">Уберите пух кисточкой — главная причина петель и обрывов.</span></p>
+      </div>
+    </div>
+
+    <div class="care" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p17_bobbinwind.jpg" alt="Намотка шпульки"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">2. Шүмекті дұрыс орау</span><span lang="en" class="lang-content">2. Wind the bobbin evenly</span><span lang="ru" class="lang-content">2. Ровная намотка шпульки</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Жіп шүмекке біркелкі, тығыз оралуы керек. Тегіс емес орам — керудің бұзылуы мен ілмектің себебі.</span><span lang="en" class="lang-content">The thread must wind onto the bobbin evenly and firmly. Uneven winding causes wrong tension and loops.</span><span lang="ru" class="lang-content">Нить должна ложиться на шпульку ровно и плотно. Неровная намотка — причина сбоев натяжения и петель.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">2. Шүмекті орау</span><span lang="en" class="lang-content">2. Wind the bobbin</span><span lang="ru" class="lang-content">2. Намотка шпульки</span></h3>
+        <p><span lang="kk" class="lang-content">Жіпті біркелкі ораңыз; артық толтырмаңыз.</span><span lang="en" class="lang-content">Wind evenly; do not overfill the bobbin.</span><span lang="ru" class="lang-content">Наматывайте ровно; не переполняйте шпульку.</span></p>
+      </div>
+    </div>
+
+    <div class="care" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p17_oiling.jpg" alt="Смазка машины"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">3. Майлау</span><span lang="en" class="lang-content">3. Oiling</span><span lang="ru" class="lang-content">3. Смазка</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Тек арнайы машина майын қолданыңыз, нұсқаулықтағы нүктелерге 1 тамшыдан тамызыңыз. Артық май матаны былғайды — содан соң қиындыға тігіп сүртіңіз.</span><span lang="en" class="lang-content">Use only special sewing-machine oil, one drop at the points shown in the manual. Excess oil stains fabric — sew on a scrap afterwards to wipe it off.</span><span lang="ru" class="lang-content">Используйте только специальное машинное масло, по 1 капле в точки из инструкции. Лишнее масло пачкает ткань — после смазки прострочите лоскут, чтобы снять излишки.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">3. Майлау</span><span lang="en" class="lang-content">3. Oiling</span><span lang="ru" class="lang-content">3. Смазка</span></h3>
+        <p><span lang="kk" class="lang-content">Арнайы маймен, нұсқаулық бойынша — артық майламаңыз.</span><span lang="en" class="lang-content">Special oil, as the manual says — never over-oil.</span><span lang="ru" class="lang-content">Специальным маслом по инструкции — без избытка.</span></p>
+      </div>
+    </div>
+
+    <div class="care" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p17_needle.jpg" alt="Игла: выбор и замена"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">4. Инені тексеру мен ауыстыру</span><span lang="en" class="lang-content">4. Check &amp; change the needle</span><span lang="ru" class="lang-content">4. Проверка и замена иглы</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Инені матаға қарай таңдаңыз (жұқаға — жіңішке, жуанға — жуан). Доғал не қисық инені дереу ауыстырыңыз: ол тіс түсіру мен үзілудің басты себебі.</span><span lang="en" class="lang-content">Choose the needle to match the fabric (fine for thin, thick for heavy). Replace a blunt or bent needle at once: it is the main cause of skipped stitches and breakage.</span><span lang="ru" class="lang-content">Подбирайте иглу под ткань (тонкая — для лёгкой, толстая — для плотной). Тупую или погнутую иглу сразу меняйте: это главная причина пропусков и обрывов.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">4. Ине</span><span lang="en" class="lang-content">4. The needle</span><span lang="ru" class="lang-content">4. Игла</span></h3>
+        <p><span lang="kk" class="lang-content">Матаға сай таңдаңыз; доғал инені ауыстырыңыз.</span><span lang="en" class="lang-content">Match it to the fabric; replace it when blunt.</span><span lang="ru" class="lang-content">Подбирайте под ткань; тупую — заменяйте.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CARE SCHEDULE + RULES -->
+<section class="mb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <div>
+      <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+        <span lang="kk" class="lang-content">Күтім кестесі</span>
+        <span lang="en" class="lang-content">Care Schedule</span>
+        <span lang="ru" class="lang-content">График ухода</span>
+      </h2>
+      <div class="flex flex-col gap-3">
+        <div class="freq"><div class="ic">🧵</div><div><b><span lang="kk" class="lang-content">Әр жұмыстан кейін</span><span lang="en" class="lang-content">After every session</span><span lang="ru" class="lang-content">После каждой работы</span></b><p><span lang="kk" class="lang-content">Шаң-түкті щёткамен тазалап, машинаны қаптамамен жабыңыз.</span><span lang="en" class="lang-content">Brush out the lint and cover the machine with its case.</span><span lang="ru" class="lang-content">Очистите от пуха щёточкой и накройте машину чехлом.</span></p></div></div>
+        <div class="freq"><div class="ic">🗓️</div><div><b><span lang="kk" class="lang-content">Жиі тіксеңіз — жиі</span><span lang="en" class="lang-content">If you sew often</span><span lang="ru" class="lang-content">При частом шитье</span></b><p><span lang="kk" class="lang-content">Шүмек ұясын тереңірек тазалаңыз, инені мезгілінде жаңартыңыз.</span><span lang="en" class="lang-content">Deep-clean the shuttle area and renew the needle regularly.</span><span lang="ru" class="lang-content">Глубже чистите челночный отсек и вовремя меняйте иглу.</span></p></div></div>
+        <div class="freq"><div class="ic">🛢️</div><div><b><span lang="kk" class="lang-content">Сирек — майлау</span><span lang="en" class="lang-content">Occasionally — oil</span><span lang="ru" class="lang-content">Изредка — смазка</span></b><p><span lang="kk" class="lang-content">Нұсқаулықтағы нүктелерге арнайы май (заманауи көп машина майлауды қажет етпейді).</span><span lang="en" class="lang-content">Special oil at the points in the manual (many modern machines need none).</span><span lang="ru" class="lang-content">Специальное масло в точки из инструкции (многим современным машинам смазка не нужна).</span></p></div></div>
+      </div>
+    </div>
+    <div>
+      <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+        <span lang="kk" class="lang-content">Қауіпсіздік пен сақтау ережелері</span>
+        <span lang="en" class="lang-content">Safety &amp; Storage Rules</span>
+        <span lang="ru" class="lang-content">Правила безопасности и хранения</span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="rule"><h4>🔌 <span lang="kk" class="lang-content">Тоқтан ажыратыңыз</span><span lang="en" class="lang-content">Unplug it</span><span lang="ru" class="lang-content">Отключайте от сети</span></h4><p><span lang="kk" class="lang-content">Тазалау, майлау, ине ауыстыру алдында желіден ажыратыңыз.</span><span lang="en" class="lang-content">Disconnect before cleaning, oiling or changing the needle.</span><span lang="ru" class="lang-content">Перед чисткой, смазкой и заменой иглы выньте вилку.</span></p></div>
+        <div class="rule"><h4>👀 <span lang="kk" class="lang-content">Саусақты сақтаңыз</span><span lang="en" class="lang-content">Mind your fingers</span><span lang="ru" class="lang-content">Берегите пальцы</span></h4><p><span lang="kk" class="lang-content">Саусақты инеден аулақ ұстаңыз; шашты жинаңыз.</span><span lang="en" class="lang-content">Keep fingers away from the needle; tie back hair.</span><span lang="ru" class="lang-content">Держите пальцы вдали от иглы; уберите волосы.</span></p></div>
+        <div class="rule"><h4>🧹 <span lang="kk" class="lang-content">Таза ұстаңыз</span><span lang="en" class="lang-content">Keep it clean</span><span lang="ru" class="lang-content">Держите в чистоте</span></h4><p><span lang="kk" class="lang-content">Шаңнан қаптамамен қорғаңыз; құрғақ жерде сақтаңыз.</span><span lang="en" class="lang-content">Protect from dust with a cover; store in a dry place.</span><span lang="ru" class="lang-content">Защищайте чехлом от пыли; храните в сухом месте.</span></p></div>
+        <div class="rule"><h4>🪡 <span lang="kk" class="lang-content">Бос жүргізбеңіз</span><span lang="en" class="lang-content">Don't run empty</span><span lang="ru" class="lang-content">Не шейте «вхолостую»</span></h4><p><span lang="kk" class="lang-content">Матасыз және жіпсіз тіге бермеңіз — ине мен шүмекке зиян.</span><span lang="en" class="lang-content">Avoid sewing without fabric and thread — it harms needle and shuttle.</span><span lang="ru" class="lang-content">Не строчите без ткани и ниток — вредно для иглы и челнока.</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="card rounded-custom p-7 md:p-8 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+    <span lang="kk" class="lang-content">💬 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">💬 Remember</span>
+    <span lang="ru" class="lang-content">💬 Запомните</span>
+  </h3>
+  <p class="lead" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Әдемі жік — теңгерілген керу мен таза, дұрыс инеден туады. Ақаудың 90%-ы үш себептен: <b>қате керу, доғал ине, ластанған механизм</b>. Әр жұмыстан кейін шаң-түкті тазалаңыз, инені дер кезінде жаңартыңыз, машинаны желіден ажыратып, қаптамамен жабыңыз — сонда машина көп жыл адал қызмет етеді.</span>
+    <span lang="en" class="lang-content">A neat stitch comes from balanced tension and a clean, correct needle. About 90% of faults have three causes: <b>wrong tension, a blunt needle, a clogged mechanism</b>. Brush out the lint after every session, renew the needle in time, unplug the machine and cover it — and it will serve you faithfully for many years.</span>
+    <span lang="ru" class="lang-content">Аккуратная строчка рождается из уравновешенного натяжения и чистой, правильной иглы. Около 90% дефектов имеют три причины: <b>неверное натяжение, тупая игла, забитый механизм</b>. Очищайте пух после каждой работы, вовремя меняйте иглу, отключайте машину от сети и накрывайте чехлом — и она прослужит вам верой и правдой долгие годы.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){
+  if(lang==='kz')lang='kk';
+  currentLang=lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+function openLB(card){
+  document.getElementById('lb-img').src=card.querySelector('.pic img').src;
+  var n=card.querySelector('.genre-name'); document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';
+  var cap=card.querySelector('.genre-cap'); document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';
+  var d=card.querySelector('.genre-desc'); document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

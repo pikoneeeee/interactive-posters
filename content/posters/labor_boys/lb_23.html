@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Основы электротехники: цепь и схема</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lb_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.svgwrap{background:#fffdf9;border:1px solid rgba(190,18,60,.16);border-radius:1.25rem;padding:1.1rem;
+  box-shadow:0 4px 16px rgba(136,19,55,.07);}
+.svgwrap svg{display:block;width:100%;height:auto;}
+.note{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:.95rem 1.15rem;}
+.note p{color:#57534e;font-size:.93rem;line-height:1.5;}
+.note b{color:#881337;}
+.symtbl{width:100%;border-collapse:collapse;font-size:.95rem;}
+.symtbl th{background:rgba(190,18,60,.10);color:#881337;font-family:'Montserrat',sans-serif;
+  text-align:left;padding:.6rem .8rem;border-bottom:2px solid rgba(190,18,60,.25);}
+.symtbl td{padding:.55rem .8rem;border-bottom:1px solid rgba(190,18,60,.12);color:#44403c;vertical-align:middle;}
+.symtbl tr:hover td{background:rgba(190,18,60,.04);}
+.symtbl .sym{text-align:center;width:90px;}
+.symtbl .sym svg{display:inline-block;vertical-align:middle;}
+.rule{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1rem;padding:1.1rem 1.15rem;
+  box-shadow:0 2px 10px rgba(136,19,55,.05);transition:all .2s;}
+.rule:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(136,19,55,.13);}
+.rule .ic{font-size:2rem;line-height:1;}
+.rule h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;margin:.4rem 0 .2rem;}
+.rule p{color:#57534e;font-size:.9rem;line-height:1.45;}
+.compcard{cursor:pointer;}
+.compcard .pic{height:200px;background:#1c1917;}
+.compcard .pic img{width:100%;height:100%;object-fit:contain;display:block;}
+.flow{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1rem;}
+.flow p{color:#44403c;font-size:.97rem;line-height:1.55;}
+.flow b{color:#881337;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек (ұлдар) · 4-бөлім · Машина және электротехника</span>
+      <span lang="en" class="lang-content">Art &amp; Craft (Boys) · Section 4 · Machines &amp; Electrics</span>
+      <span lang="ru" class="lang-content">Художественный труд (мальчики) · Раздел 4 · Машины и электротехника</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">⚡ Электротехника негіздері: тізбек және сұлба</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">⚡ Basics of Electrics: Circuit and Diagram</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">⚡ Основы электротехники: цепь и схема</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Ток қалай жүреді, тізбек неден құралады және оны сұлбамен қалай белгілейді.</span>
+      <span lang="en" class="lang-content">How current flows, what a circuit is made of, and how we draw it as a diagram.</span>
+      <span lang="ru" class="lang-content">Как течёт ток, из чего состоит цепь и как её изображают схемой.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content"><b>Электр тізбегі</b> — электр тогы жүретін тұйық жол. Онда үш міндетті бөлік болады: <b>қорек көзі</b> (батарея, аккумулятор), <b>тұтынушы</b> (шам, қозғалтқыш, қыздырғыш) және оларды жалғайтын <b>сымдар</b>. Көбіне тізбекке <b>кілт</b> (ажыратқыш) қосылады — ол жолды ашып-жабады. Ток тек тізбек <b>тұйық</b> болғанда ғана жүреді: бір жер ажыраса — ток тоқтайды. Инженерлер тізбекті сурет арқылы емес, шартты белгілерден тұратын <b>электр сұлбасымен</b> бейнелейді — ол қысқа, түсінікті әрі бүкіл әлемге ортақ «тіл».</span>
+    <span lang="en" class="lang-content">An <b>electric circuit</b> is a closed path along which electric current flows. It has three essential parts: a <b>source</b> (battery, accumulator), a <b>load</b> (lamp, motor, heater) and the <b>wires</b> that join them. Usually a <b>switch</b> is added to open and close the path. Current flows only when the circuit is <b>closed</b>: break it at any point and the current stops. Engineers do not draw a picture of every part — they use an <b>electric diagram</b> made of standard symbols. It is short, clear and is a single "language" understood worldwide.</span>
+    <span lang="ru" class="lang-content"><b>Электрическая цепь</b> — это замкнутый путь, по которому течёт электрический ток. В ней есть три обязательные части: <b>источник</b> (батарея, аккумулятор), <b>потребитель</b> (лампа, двигатель, нагреватель) и соединяющие их <b>провода</b>. Обычно в цепь добавляют <b>ключ</b> (выключатель), который размыкает и замыкает путь. Ток идёт, только когда цепь <b>замкнута</b>: разорви её в любом месте — и ток прекратится. Инженеры рисуют не картинку каждой детали, а <b>электрическую схему</b> из условных обозначений — это коротко, понятно и едино во всём мире.</span>
+  </p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <span class="badge">🔋 <span lang="kk" class="lang-content">қорек көзі</span><span lang="en" class="lang-content">source</span><span lang="ru" class="lang-content">источник</span></span>
+    <span class="badge">💡 <span lang="kk" class="lang-content">тұтынушы</span><span lang="en" class="lang-content">load</span><span lang="ru" class="lang-content">потребитель</span></span>
+    <span class="badge">🧵 <span lang="kk" class="lang-content">сымдар</span><span lang="en" class="lang-content">wires</span><span lang="ru" class="lang-content">провода</span></span>
+    <span class="badge">🔘 <span lang="kk" class="lang-content">кілт</span><span lang="en" class="lang-content">switch</span><span lang="ru" class="lang-content">ключ</span></span>
+    <span class="badge">🔁 <span lang="kk" class="lang-content">тұйық жол</span><span lang="en" class="lang-content">closed loop</span><span lang="ru" class="lang-content">замкнутый путь</span></span>
+  </div>
+</section>
+
+<!-- COMPONENTS GALLERY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Тізбектің бөліктері</span>
+    <span lang="en" class="lang-content">The parts of a circuit</span>
+    <span lang="ru" class="lang-content">Из чего состоит цепь</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb23_battery.jpg" alt="Батарейка"></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">тұрақты кернеу 1,5 В</span><span lang="en" class="lang-content">steady voltage 1.5 V</span><span lang="ru" class="lang-content">постоянное напряжение 1,5 В</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Батареяның екі полюсі бар: «+» және «−». Кернеу осы екеуінің арасында пайда болады да, тізбекте токты қозғайды.</span><span lang="en" class="lang-content">A battery has two poles: "+" and "−". The voltage between them is what pushes the current around the circuit.</span><span lang="ru" class="lang-content">У батарейки два полюса: «+» и «−». Напряжение между ними и заставляет ток двигаться по цепи.</span></div>
+      <div class="body">
+        <h3 class="genre-name">🔋 <span lang="kk" class="lang-content">Қорек көзі</span><span lang="en" class="lang-content">Source</span><span lang="ru" class="lang-content">Источник</span></h3>
+        <p class="genre-desc" style="margin-top:.4rem"><span lang="kk" class="lang-content">Энергия береді. Полюстері «+» және «−». Маркада кернеу жазылады: 1,5 В.</span><span lang="en" class="lang-content">Supplies energy. Its poles are "+" and "−"; the label shows the voltage: 1.5 V.</span><span lang="ru" class="lang-content">Даёт энергию. Полюса «+» и «−»; на корпусе указано напряжение: 1,5 В.</span></p>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb23_bulb.jpg" alt="Лампа"></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">қыздыру шамы</span><span lang="en" class="lang-content">incandescent lamp</span><span lang="ru" class="lang-content">лампа накаливания</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Ток жіңішке вольфрам сым (спираль) арқылы өткенде ол қызып, жарық шығарады. Бұл — электр энергиясын жарық пен жылуға айналдыру.</span><span lang="en" class="lang-content">When current passes through the thin tungsten filament it heats up and glows. This turns electrical energy into light and heat.</span><span lang="ru" class="lang-content">Когда ток проходит через тонкую вольфрамовую нить, она раскаляется и светится. Так электрическая энергия превращается в свет и тепло.</span></div>
+      <div class="body">
+        <h3 class="genre-name">💡 <span lang="kk" class="lang-content">Тұтынушы</span><span lang="en" class="lang-content">Load</span><span lang="ru" class="lang-content">Потребитель</span></h3>
+        <p class="genre-desc" style="margin-top:.4rem"><span lang="kk" class="lang-content">Энергияны пайдалы жұмысқа айналдырады. Шам — жарыққа, қозғалтқыш — қозғалысқа.</span><span lang="en" class="lang-content">Turns energy into useful work — a lamp into light, a motor into motion.</span><span lang="ru" class="lang-content">Превращает энергию в полезную работу: лампа — в свет, двигатель — в движение.</span></p>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_boys/lb23_switch.jpg" alt="Выключатель"></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">қабырға ажыратқышы</span><span lang="en" class="lang-content">wall switch</span><span lang="ru" class="lang-content">настенный выключатель</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Кілт тізбекті ашады (ток жоқ) немесе жабады (ток бар). Басқанда ішіндегі екі түйіспе бір-біріне тиіп, жолды тұйықтайды.</span><span lang="en" class="lang-content">A switch opens the circuit (no current) or closes it (current flows). Pressing it brings two contacts together to complete the path.</span><span lang="ru" class="lang-content">Ключ размыкает цепь (тока нет) или замыкает (ток идёт). При нажатии два контакта внутри соединяются и замыкают путь.</span></div>
+      <div class="body">
+        <h3 class="genre-name">🔘 <span lang="kk" class="lang-content">Кілт (ажыратқыш)</span><span lang="en" class="lang-content">Switch</span><span lang="ru" class="lang-content">Ключ (выключатель)</span></h3>
+        <p class="genre-desc" style="margin-top:.4rem"><span lang="kk" class="lang-content">Тізбекті қолмен ашып-жабады — токты басқарудың қарапайым жолы.</span><span lang="en" class="lang-content">Opens and closes the circuit by hand — the simplest way to control current.</span><span lang="ru" class="lang-content">Размыкает и замыкает цепь вручную — простейший способ управлять током.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIRCUIT vs DIAGRAM -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Нақты тізбек және оның сұлбасы</span>
+    <span lang="en" class="lang-content">A real circuit and its diagram</span>
+    <span lang="ru" class="lang-content">Реальная цепь и её схема</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-7 items-center">
+    <!-- real photo -->
+    <div class="genre-card compcard" onclick="openLB(this)">
+      <div class="pic" style="height:300px"><img src="../../assets/labor_boys/lb23_circuit.jpg" alt="Цепь на макетной плате"></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Жинақталған тізбек</span><span lang="en" class="lang-content">An assembled circuit</span><span lang="ru" class="lang-content">Собранная цепь</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">батарея · кнопка · резистор · жарықдиод</span><span lang="en" class="lang-content">battery · button · resistor · LED</span><span lang="ru" class="lang-content">батарея · кнопка · резистор · светодиод</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Макет тақтада жиналған нақты тізбек: 9 В батарея қорек береді, кнопка — кілт қызметін атқарады, резистор токты шектейді, жарықдиод жанады. Дәл осыны сұлба бірнеше белгімен бейнелейді.</span><span lang="en" class="lang-content">A real circuit built on a breadboard: a 9 V battery is the source, a push-button acts as the switch, a resistor limits the current and an LED lights up. A diagram shows exactly this with a few symbols.</span><span lang="ru" class="lang-content">Реальная цепь на макетной плате: батарея 9 В — источник, кнопка работает как ключ, резистор ограничивает ток, светодиод горит. Схема изображает то же самое несколькими значками.</span></div>
+    </div>
+    <!-- schematic SVG -->
+    <div class="svgwrap">
+      <svg viewBox="0 0 460 300" role="img" aria-label="Schematic diagram">
+        <!-- wire frame -->
+        <rect x="60" y="60" width="340" height="180" fill="none" stroke="#881337" stroke-width="3"/>
+        <!-- mask gaps where symbols sit -->
+        <rect x="40" y="135" width="40" height="30" fill="#fffdf9"/>
+        <rect x="195" y="44" width="70" height="32" fill="#fffdf9"/>
+        <rect x="380" y="135" width="40" height="30" fill="#fffdf9"/>
+        <rect x="195" y="224" width="70" height="32" fill="#fffdf9"/>
+        <!-- battery (left side, vertical) -->
+        <line x1="48" y1="142" x2="72" y2="142" stroke="#0f766e" stroke-width="4"/>
+        <line x1="48" y1="158" x2="72" y2="158" stroke="#0f766e" stroke-width="4"/>
+        <line x1="44" y1="148" x2="76" y2="148" stroke="#0f766e" stroke-width="8"/>
+        <text x="30" y="146" font-family="Inter" font-size="13" font-weight="800" fill="#0f766e">+</text>
+        <text x="30" y="165" font-family="Inter" font-size="14" font-weight="800" fill="#0f766e">−</text>
+        <!-- switch (top) -->
+        <circle cx="205" cy="60" r="3.5" fill="#881337"/>
+        <line x1="205" y1="60" x2="248" y2="46" stroke="#be123c" stroke-width="3"/>
+        <circle cx="255" cy="60" r="3.5" fill="#881337"/>
+        <text x="200" y="38" font-family="Inter" font-size="12" font-weight="700" fill="#be123c">SW</text>
+        <!-- lamp (right side): circle with X -->
+        <circle cx="400" cy="150" r="20" fill="#fff7ed" stroke="#b45309" stroke-width="3"/>
+        <line x1="386" y1="136" x2="414" y2="164" stroke="#b45309" stroke-width="3"/>
+        <line x1="414" y1="136" x2="386" y2="164" stroke="#b45309" stroke-width="3"/>
+        <!-- resistor (bottom): rectangle -->
+        <rect x="205" y="227" width="50" height="22" fill="#fff" stroke="#a16207" stroke-width="3"/>
+        <!-- current direction arrow -->
+        <polygon points="330,60 318,54 318,66" fill="#be123c"/>
+        <text x="300" y="50" font-family="Inter" font-size="11" font-weight="700" fill="#be123c"><tspan lang="kk" class="lang-content">ток</tspan><tspan lang="en" class="lang-content">I</tspan><tspan lang="ru" class="lang-content">ток</tspan></text>
+        <!-- labels -->
+        <text x="86" y="168" font-family="Inter" font-size="12" font-weight="700" fill="#0f766e"><tspan lang="kk" class="lang-content">GB</tspan><tspan lang="en" class="lang-content">GB</tspan><tspan lang="ru" class="lang-content">GB</tspan></text>
+        <text x="372" y="195" font-family="Inter" font-size="12" font-weight="700" fill="#b45309">HL</text>
+        <text x="262" y="244" font-family="Inter" font-size="12" font-weight="700" fill="#a16207">R</text>
+      </svg>
+      <p class="text-center text-stone-500 text-sm mt-2"><span lang="kk" class="lang-content">Сол сурет — шартты белгілермен</span><span lang="en" class="lang-content">The same circuit — in standard symbols</span><span lang="ru" class="lang-content">Та же цепь — условными обозначениями</span></p>
+    </div>
+  </div>
+  <div class="note mt-5"><p>📐 <b><span lang="kk" class="lang-content">Сұлба неге ыңғайлы?</span><span lang="en" class="lang-content">Why is a diagram handy?</span><span lang="ru" class="lang-content">Чем удобна схема?</span></b> <span lang="kk" class="lang-content">Ол бөлшектердің көрінісін емес, олардың жалғануын көрсетеді. Сондықтан кез келген елдің инженері оны бірден оқиды әрі тура солай құрастыра алады.</span><span lang="en" class="lang-content">It shows how parts are connected, not how they look. So an engineer in any country can read it at a glance and build the circuit exactly the same way.</span><span lang="ru" class="lang-content">Она показывает не внешний вид деталей, а их соединение. Поэтому инженер любой страны сразу её прочитает и соберёт цепь точно так же.</span></p></div>
+</section>
+
+<!-- SYMBOL LEGEND (3 per-language tables) -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Негізгі шартты белгілер</span>
+    <span lang="en" class="lang-content">Basic circuit symbols</span>
+    <span lang="ru" class="lang-content">Основные условные обозначения</span>
+  </h2>
+  <div class="card rounded-custom p-5">
+    <div class="lang-content" lang="ru">
+      <table class="symtbl">
+        <thead><tr><th>Обозначение</th><th>Элемент</th><th>Что делает</th></tr></thead>
+        <tbody>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="22" y2="17" stroke="#0f766e" stroke-width="3"/><line x1="22" y1="9" x2="22" y2="25" stroke="#0f766e" stroke-width="6"/><line x1="30" y1="5" x2="30" y2="29" stroke="#0f766e" stroke-width="3"/><line x1="30" y1="17" x2="54" y2="17" stroke="#0f766e" stroke-width="3"/></svg></td><td>Источник (батарея)</td><td>Создаёт напряжение, «толкает» ток. Длинная черта — «+».</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><circle cx="30" cy="17" r="11" fill="none" stroke="#b45309" stroke-width="3"/><line x1="22" y1="9" x2="38" y2="25" stroke="#b45309" stroke-width="3"/><line x1="38" y1="9" x2="22" y2="25" stroke="#b45309" stroke-width="3"/></svg></td><td>Лампа</td><td>Потребитель: превращает ток в свет и тепло.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="22" y2="17" stroke="#be123c" stroke-width="3"/><circle cx="22" cy="17" r="3" fill="#be123c"/><line x1="22" y1="17" x2="42" y2="7" stroke="#be123c" stroke-width="3"/><circle cx="44" cy="17" r="3" fill="#be123c"/><line x1="44" y1="17" x2="54" y2="17" stroke="#be123c" stroke-width="3"/></svg></td><td>Ключ (выключатель)</td><td>Размыкает или замыкает цепь.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="16" y2="17" stroke="#a16207" stroke-width="3"/><rect x="16" y="10" width="28" height="14" fill="none" stroke="#a16207" stroke-width="3"/><line x1="44" y1="17" x2="54" y2="17" stroke="#a16207" stroke-width="3"/></svg></td><td>Резистор</td><td>Сопротивление: ограничивает силу тока.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="54" y2="17" stroke="#881337" stroke-width="3"/></svg></td><td>Провод</td><td>Соединяет элементы, проводит ток.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="kk">
+      <table class="symtbl">
+        <thead><tr><th>Белгі</th><th>Элемент</th><th>Қызметі</th></tr></thead>
+        <tbody>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="22" y2="17" stroke="#0f766e" stroke-width="3"/><line x1="22" y1="9" x2="22" y2="25" stroke="#0f766e" stroke-width="6"/><line x1="30" y1="5" x2="30" y2="29" stroke="#0f766e" stroke-width="3"/><line x1="30" y1="17" x2="54" y2="17" stroke="#0f766e" stroke-width="3"/></svg></td><td>Қорек көзі (батарея)</td><td>Кернеу тудырады, токты «итереді». Ұзын сызық — «+».</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><circle cx="30" cy="17" r="11" fill="none" stroke="#b45309" stroke-width="3"/><line x1="22" y1="9" x2="38" y2="25" stroke="#b45309" stroke-width="3"/><line x1="38" y1="9" x2="22" y2="25" stroke="#b45309" stroke-width="3"/></svg></td><td>Шам</td><td>Тұтынушы: токты жарық пен жылуға айналдырады.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="22" y2="17" stroke="#be123c" stroke-width="3"/><circle cx="22" cy="17" r="3" fill="#be123c"/><line x1="22" y1="17" x2="42" y2="7" stroke="#be123c" stroke-width="3"/><circle cx="44" cy="17" r="3" fill="#be123c"/><line x1="44" y1="17" x2="54" y2="17" stroke="#be123c" stroke-width="3"/></svg></td><td>Кілт (ажыратқыш)</td><td>Тізбекті ашады не жабады.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="16" y2="17" stroke="#a16207" stroke-width="3"/><rect x="16" y="10" width="28" height="14" fill="none" stroke="#a16207" stroke-width="3"/><line x1="44" y1="17" x2="54" y2="17" stroke="#a16207" stroke-width="3"/></svg></td><td>Резистор</td><td>Кедергі: ток күшін шектейді.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="54" y2="17" stroke="#881337" stroke-width="3"/></svg></td><td>Сым</td><td>Элементтерді жалғайды, токты өткізеді.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="en">
+      <table class="symtbl">
+        <thead><tr><th>Symbol</th><th>Element</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="22" y2="17" stroke="#0f766e" stroke-width="3"/><line x1="22" y1="9" x2="22" y2="25" stroke="#0f766e" stroke-width="6"/><line x1="30" y1="5" x2="30" y2="29" stroke="#0f766e" stroke-width="3"/><line x1="30" y1="17" x2="54" y2="17" stroke="#0f766e" stroke-width="3"/></svg></td><td>Source (battery)</td><td>Creates voltage and "pushes" the current. Long line = "+".</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><circle cx="30" cy="17" r="11" fill="none" stroke="#b45309" stroke-width="3"/><line x1="22" y1="9" x2="38" y2="25" stroke="#b45309" stroke-width="3"/><line x1="38" y1="9" x2="22" y2="25" stroke="#b45309" stroke-width="3"/></svg></td><td>Lamp</td><td>A load: turns current into light and heat.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="22" y2="17" stroke="#be123c" stroke-width="3"/><circle cx="22" cy="17" r="3" fill="#be123c"/><line x1="22" y1="17" x2="42" y2="7" stroke="#be123c" stroke-width="3"/><circle cx="44" cy="17" r="3" fill="#be123c"/><line x1="44" y1="17" x2="54" y2="17" stroke="#be123c" stroke-width="3"/></svg></td><td>Switch</td><td>Opens or closes the circuit.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="16" y2="17" stroke="#a16207" stroke-width="3"/><rect x="16" y="10" width="28" height="14" fill="none" stroke="#a16207" stroke-width="3"/><line x1="44" y1="17" x2="54" y2="17" stroke="#a16207" stroke-width="3"/></svg></td><td>Resistor</td><td>Resistance: limits the strength of the current.</td></tr>
+          <tr><td class="sym"><svg width="60" height="34"><line x1="6" y1="17" x2="54" y2="17" stroke="#881337" stroke-width="3"/></svg></td><td>Wire</td><td>Connects the elements and carries the current.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES vs PARALLEL -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Тізбектей және параллель жалғау</span>
+    <span lang="en" class="lang-content">Series and parallel connection</span>
+    <span lang="ru" class="lang-content">Последовательное и параллельное соединение</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="svgwrap">
+      <p class="heading-font font-extrabold mb-2" style="color:#881337"><span lang="kk" class="lang-content">Тізбектей</span><span lang="en" class="lang-content">Series</span><span lang="ru" class="lang-content">Последовательное</span></p>
+      <svg viewBox="0 0 400 170" role="img" aria-label="Series circuit">
+        <rect x="40" y="40" width="320" height="90" fill="none" stroke="#881337" stroke-width="3"/>
+        <rect x="24" y="75" width="32" height="22" fill="#fffdf9"/>
+        <line x1="30" y1="80" x2="50" y2="80" stroke="#0f766e" stroke-width="4"/>
+        <line x1="30" y1="92" x2="50" y2="92" stroke="#0f766e" stroke-width="7"/>
+        <!-- two lamps on top wire -->
+        <rect x="130" y="26" width="40" height="30" fill="#fffdf9"/>
+        <circle cx="150" cy="40" r="14" fill="#fff7ed" stroke="#b45309" stroke-width="3"/>
+        <line x1="140" y1="30" x2="160" y2="50" stroke="#b45309" stroke-width="2.5"/><line x1="160" y1="30" x2="140" y2="50" stroke="#b45309" stroke-width="2.5"/>
+        <rect x="240" y="26" width="40" height="30" fill="#fffdf9"/>
+        <circle cx="260" cy="40" r="14" fill="#fff7ed" stroke="#b45309" stroke-width="3"/>
+        <line x1="250" y1="30" x2="270" y2="50" stroke="#b45309" stroke-width="2.5"/><line x1="270" y1="30" x2="250" y2="50" stroke="#b45309" stroke-width="2.5"/>
+      </svg>
+      <p class="text-stone-500 text-sm mt-1"><span lang="kk" class="lang-content">Бір жол: ток барлығынан кезекпен өтеді.</span><span lang="en" class="lang-content">One path: current passes through each in turn.</span><span lang="ru" class="lang-content">Один путь: ток идёт через все по очереди.</span></p>
+    </div>
+    <div class="svgwrap">
+      <p class="heading-font font-extrabold mb-2" style="color:#881337"><span lang="kk" class="lang-content">Параллель</span><span lang="en" class="lang-content">Parallel</span><span lang="ru" class="lang-content">Параллельное</span></p>
+      <svg viewBox="0 0 400 170" role="img" aria-label="Parallel circuit">
+        <!-- outer wire -->
+        <rect x="40" y="40" width="320" height="90" fill="none" stroke="#881337" stroke-width="3"/>
+        <rect x="24" y="75" width="32" height="22" fill="#fffdf9"/>
+        <line x1="30" y1="80" x2="50" y2="80" stroke="#0f766e" stroke-width="4"/>
+        <line x1="30" y1="92" x2="50" y2="92" stroke="#0f766e" stroke-width="7"/>
+        <!-- two vertical branches -->
+        <line x1="200" y1="40" x2="200" y2="130" stroke="#881337" stroke-width="3"/>
+        <line x1="290" y1="40" x2="290" y2="130" stroke="#881337" stroke-width="3"/>
+        <!-- lamps on branches -->
+        <rect x="186" y="70" width="28" height="30" fill="#fffdf9"/>
+        <circle cx="200" cy="85" r="14" fill="#fff7ed" stroke="#b45309" stroke-width="3"/>
+        <line x1="190" y1="75" x2="210" y2="95" stroke="#b45309" stroke-width="2.5"/><line x1="210" y1="75" x2="190" y2="95" stroke="#b45309" stroke-width="2.5"/>
+        <rect x="276" y="70" width="28" height="30" fill="#fffdf9"/>
+        <circle cx="290" cy="85" r="14" fill="#fff7ed" stroke="#b45309" stroke-width="3"/>
+        <line x1="280" y1="75" x2="300" y2="95" stroke="#b45309" stroke-width="2.5"/><line x1="300" y1="75" x2="280" y2="95" stroke="#b45309" stroke-width="2.5"/>
+      </svg>
+      <p class="text-stone-500 text-sm mt-1"><span lang="kk" class="lang-content">Бірнеше жол: әрқайсысының өз тармағы бар.</span><span lang="en" class="lang-content">Several paths: each has its own branch.</span><span lang="ru" class="lang-content">Несколько путей: у каждого своя ветвь.</span></p>
+    </div>
+  </div>
+  <!-- 3 per-language comparison tables -->
+  <div class="card rounded-custom p-5">
+    <div class="lang-content" lang="ru">
+      <table class="symtbl">
+        <thead><tr><th>Признак</th><th>Последовательное</th><th>Параллельное</th></tr></thead>
+        <tbody>
+          <tr><td>Путь тока</td><td>Один общий путь</td><td>Несколько ветвей</td></tr>
+          <tr><td>Если одна лампа перегорит</td><td>Гаснут все</td><td>Остальные горят</td></tr>
+          <tr><td>Яркость ламп</td><td>Тусклее (делят напряжение)</td><td>Полная (у каждой своё напряжение)</td></tr>
+          <tr><td>Где встречается</td><td>Гирлянда старого типа</td><td>Розетки и лампы в доме</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="kk">
+      <table class="symtbl">
+        <thead><tr><th>Белгісі</th><th>Тізбектей</th><th>Параллель</th></tr></thead>
+        <tbody>
+          <tr><td>Ток жолы</td><td>Бір ортақ жол</td><td>Бірнеше тармақ</td></tr>
+          <tr><td>Бір шам күйсе</td><td>Бәрі сөнеді</td><td>Қалғаны жанып тұрады</td></tr>
+          <tr><td>Шамдардың жарығы</td><td>Әлсіздеу (кернеуді бөліседі)</td><td>Толық (әрқайсысында өз кернеуі)</td></tr>
+          <tr><td>Қайда кездеседі</td><td>Ескі түрдегі гирлянда</td><td>Үйдегі розетка мен шамдар</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="lang-content" lang="en">
+      <table class="symtbl">
+        <thead><tr><th>Feature</th><th>Series</th><th>Parallel</th></tr></thead>
+        <tbody>
+          <tr><td>Current path</td><td>One shared path</td><td>Several branches</td></tr>
+          <tr><td>If one lamp burns out</td><td>All go dark</td><td>The rest keep glowing</td></tr>
+          <tr><td>Brightness of lamps</td><td>Dimmer (they share the voltage)</td><td>Full (each gets its own voltage)</td></tr>
+          <tr><td>Where you meet it</td><td>Old-style string of lights</td><td>Sockets and lamps in a house</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- STEP BY STEP -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Қарапайым тізбекті қалай құрастырамыз</span>
+    <span lang="en" class="lang-content">How to build a simple circuit</span>
+    <span lang="ru" class="lang-content">Как собрать простую цепь</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <div class="flow"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Сұлбаны оқы.</span><span lang="en" class="lang-content">Read the diagram.</span><span lang="ru" class="lang-content">Прочитай схему.</span></b> <span lang="kk" class="lang-content">Қандай элементтер бар және олар қалай жалғанатынын анықта.</span><span lang="en" class="lang-content">Find out which elements are needed and how they connect.</span><span lang="ru" class="lang-content">Определи, какие элементы нужны и как они соединяются.</span></p></div>
+    <div class="flow"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Бөлшектерді дайында.</span><span lang="en" class="lang-content">Lay out the parts.</span><span lang="ru" class="lang-content">Подготовь детали.</span></b> <span lang="kk" class="lang-content">Батарея, шам (немесе жарықдиод), кілт, сымдар. Кернеулері сәйкес болсын.</span><span lang="en" class="lang-content">Battery, lamp (or LED), switch, wires — make sure their voltages match.</span><span lang="ru" class="lang-content">Батарея, лампа (или светодиод), ключ, провода. Проверь, что напряжения подходят.</span></p></div>
+    <div class="flow"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">«+» полюстен баста.</span><span lang="en" class="lang-content">Start from the "+" pole.</span><span lang="ru" class="lang-content">Начни с полюса «+».</span></b> <span lang="kk" class="lang-content">Батареяның «+» жағынан кілтке, одан шамға, шамнан «−» полюске қарай жалға.</span><span lang="en" class="lang-content">Run a wire from "+" to the switch, then to the lamp, and back to the "−" pole.</span><span lang="ru" class="lang-content">Проведи провод от «+» к ключу, затем к лампе и обратно к полюсу «−».</span></p></div>
+    <div class="flow"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Жалғауларды тексер.</span><span lang="en" class="lang-content">Check the joints.</span><span lang="ru" class="lang-content">Проверь соединения.</span></b> <span lang="kk" class="lang-content">Барлық түйіспе берік әрі тұйық па? Жалаңаш сымдар бір-біріне тимеуі керек.</span><span lang="en" class="lang-content">Are all contacts firm and the loop closed? Bare wires must not touch each other.</span><span lang="ru" class="lang-content">Все контакты надёжны, петля замкнута? Оголённые провода не должны касаться.</span></p></div>
+    <div class="flow" style="margin-bottom:0"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Кілтті бас.</span><span lang="en" class="lang-content">Flip the switch.</span><span lang="ru" class="lang-content">Включи ключ.</span></b> <span lang="kk" class="lang-content">Тізбек тұйықталады — шам жанады. Жанбаса, полюстер мен жалғауларды қайта қара.</span><span lang="en" class="lang-content">The circuit closes and the lamp lights up. If not, recheck the poles and joints.</span><span lang="ru" class="lang-content">Цепь замыкается — лампа загорается. Если нет, проверь полюса и соединения.</span></p></div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Қауіпсіздік ережелері</span>
+    <span lang="en" class="lang-content">Safety rules</span>
+    <span lang="ru" class="lang-content">Правила безопасности</span>
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="rule"><div class="ic">🔋</div><h4><span lang="kk" class="lang-content">Тек батареямен жұмыс істе</span><span lang="en" class="lang-content">Work only with batteries</span><span lang="ru" class="lang-content">Работай только с батарейками</span></h4><p><span lang="kk" class="lang-content">Сабақта төмен кернеулі қорек (батарея) қолдан. 220 В розеткаға ешқашан тиме.</span><span lang="en" class="lang-content">In class use low-voltage sources (batteries). Never touch a 220 V socket.</span><span lang="ru" class="lang-content">На уроке используй источники низкого напряжения. Никогда не лезь в розетку 220 В.</span></p></div>
+    <div class="rule"><div class="ic">⚡</div><h4><span lang="kk" class="lang-content">Қысқа тұйықтаудан сақтан</span><span lang="en" class="lang-content">Avoid a short circuit</span><span lang="ru" class="lang-content">Избегай короткого замыкания</span></h4><p><span lang="kk" class="lang-content">«+» мен «−» тұтынушысыз тура жалғама — сым қызып, батарея бұзылады.</span><span lang="en" class="lang-content">Never join "+" and "−" without a load — the wire heats up and the battery is damaged.</span><span lang="ru" class="lang-content">Не соединяй «+» и «−» без потребителя — провод нагреется, батарея испортится.</span></p></div>
+    <div class="rule"><div class="ic">💧</div><h4><span lang="kk" class="lang-content">Құрғақ қолмен</span><span lang="en" class="lang-content">Dry hands only</span><span lang="ru" class="lang-content">Только сухими руками</span></h4><p><span lang="kk" class="lang-content">Су ток өткізеді. Дымқыл қолмен немесе су маңында электрмен жұмыс істеме.</span><span lang="en" class="lang-content">Water conducts current. Don't work with electricity with wet hands or near water.</span><span lang="ru" class="lang-content">Вода проводит ток. Не работай с электричеством мокрыми руками или у воды.</span></p></div>
+    <div class="rule"><div class="ic">🔌</div><h4><span lang="kk" class="lang-content">Алдымен ажырат</span><span lang="en" class="lang-content">Disconnect first</span><span lang="ru" class="lang-content">Сначала отключи</span></h4><p><span lang="kk" class="lang-content">Тізбекті өзгертер алдында батареяны ажырат — содан кейін ғана жұмыс істе.</span><span lang="en" class="lang-content">Disconnect the battery before changing the circuit — only then make changes.</span><span lang="ru" class="lang-content">Перед изменением цепи отключи батарею — и только потом работай.</span></p></div>
+    <div class="rule"><div class="ic">🧯</div><h4><span lang="kk" class="lang-content">Қызуды байқа</span><span lang="en" class="lang-content">Watch for heat</span><span lang="ru" class="lang-content">Следи за нагревом</span></h4><p><span lang="kk" class="lang-content">Сым не элемент қызып кетсе, дереу ажырат та, мұғалімге айт.</span><span lang="en" class="lang-content">If a wire or part gets hot, disconnect at once and tell the teacher.</span><span lang="ru" class="lang-content">Если провод или деталь нагрелись, сразу отключи и скажи учителю.</span></p></div>
+    <div class="rule"><div class="ic">👨‍🏫</div><h4><span lang="kk" class="lang-content">Мұғаліммен бірге</span><span lang="en" class="lang-content">With the teacher</span><span lang="ru" class="lang-content">Вместе с учителем</span></h4><p><span lang="kk" class="lang-content">Жаңа тізбекті қосар алдында оны мұғалімге тексерт.</span><span lang="en" class="lang-content">Have the teacher check a new circuit before you switch it on.</span><span lang="ru" class="lang-content">Перед включением новой цепи покажи её учителю.</span></p></div>
+  </div>
+</section>
+
+<!-- REMEMBER -->
+<section class="card-rose rounded-custom p-7 md:p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-3">
+    <span lang="kk" class="lang-content">💡 Есте сақта</span>
+    <span lang="en" class="lang-content">💡 Remember</span>
+    <span lang="ru" class="lang-content">💡 Запомните</span>
+  </h3>
+  <p class="text-lg" style="max-width:64rem;line-height:1.7">
+    <span lang="kk" class="lang-content">Электр тогы тек <b>тұйық тізбекте</b> жүреді, оның негізі — қорек көзі, тұтынушы және сымдар. <b>Сұлба</b> — сол тізбектің шартты белгілермен жазылған тілі: оны оқи білсең, кез келген схеманы құрастыра аласың. Әрқашан қауіпсіздік ережесін сақта. <b>Тізбекті түсін — сұлбаны оқы!</b></span>
+    <span lang="en" class="lang-content">Electric current flows only in a <b>closed circuit</b>, whose core is a source, a load and wires. A <b>diagram</b> is that circuit written in the language of standard symbols: learn to read it and you can build any circuit. Always follow the safety rules. <b>Understand the circuit — read the diagram!</b></span>
+    <span lang="ru" class="lang-content">Электрический ток течёт только в <b>замкнутой цепи</b>, основа которой — источник, потребитель и провода. <b>Схема</b> — это та же цепь, записанная языком условных обозначений: научишься её читать — соберёшь любую цепь. Всегда соблюдай правила безопасности. <b>Пойми цепь — прочитай схему!</b></span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+<script>
+var currentLang='ru';
+function switchLang(lang){if(lang==='kz')lang='kk';currentLang=lang;var c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+function openLB(card){document.getElementById('lb-img').src=card.querySelector('.pic img').src;var n=card.querySelector('.genre-name');document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';var cap=card.querySelector('.genre-cap');document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';var d=card.querySelector('.genre-desc');document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

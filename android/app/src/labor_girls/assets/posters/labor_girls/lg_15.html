@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ручные швы и стежки</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.5;}
+.step b{color:#881337;}
+/* tool cards */
+.tool{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1rem;overflow:hidden;
+  box-shadow:0 3px 14px rgba(136,19,55,.07);transition:all .2s;}
+.tool:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(136,19,55,.14);}
+.tool .pic{background:#fff;display:flex;align-items:center;justify-content:center;height:150px;border-bottom:1px solid rgba(190,18,60,.1);}
+.tool .pic img{max-width:100%;max-height:100%;object-fit:contain;}
+.tool .body{padding:.85rem 1rem 1rem;}
+.tool h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1rem;margin-bottom:.2rem;}
+.tool p{color:#57534e;font-size:.86rem;line-height:1.4;}
+/* stitch catalog cards */
+.stitch{background:rgba(255,255,255,0.95);border:1px solid rgba(190,18,60,.16);border-radius:1rem;overflow:hidden;
+  box-shadow:0 3px 14px rgba(136,19,55,.07);cursor:pointer;transition:all .2s;}
+.stitch:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(136,19,55,.15);}
+.stitch .pic{background:#fff;display:flex;align-items:center;justify-content:center;height:200px;border-bottom:1px solid rgba(190,18,60,.1);}
+.stitch .pic img{max-width:100%;max-height:100%;object-fit:contain;}
+.stitch .body{padding:1rem 1.15rem 1.2rem;}
+.stitch h3{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.08rem;}
+.stitch .sub{color:#a16207;font-size:.8rem;font-style:italic;margin-bottom:.4rem;}
+.stitch p{color:#57534e;font-size:.92rem;line-height:1.5;}
+.stitch .use{margin-top:.55rem;font-size:.82rem;color:#9f1239;font-weight:700;}
+/* safety */
+.safe{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:1rem 1.15rem;}
+.safe h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1.02rem;margin-bottom:.25rem;}
+.safe p{color:#57534e;font-size:.92rem;line-height:1.45;}
+.badge{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.04em;padding:.18rem .6rem;border-radius:999px;
+  background:#fee2e2;color:#9f1239;text-transform:uppercase;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · Тігін ісі · Қолмен тігу</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Sewing · Hand Sewing</span>
+      <span lang="ru" class="lang-content">Художественный труд · Швейное дело · Ручное шитьё</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🧵 Қол тігістері мен қарама-қарсы жіптер</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🧵 Hand Stitches &amp; Seams</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🧵 Ручные швы и стежки</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Иненің әр қозғалысы — болашақ бұйымның негізі. Негізгі қол тігістерін үйренеміз.</span>
+      <span lang="en" class="lang-content">Every movement of the needle is the foundation of a future garment. Let's learn the basic hand stitches.</span>
+      <span lang="ru" class="lang-content">Каждое движение иглы — основа будущего изделия. Изучаем базовые ручные стежки.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10 grid grid-cols-1 lg:grid-cols-3 gap-7 items-center">
+  <div class="lg:col-span-2">
+    <p class="lead">
+      <span lang="kk" class="lang-content"><b>Тігіс (стежок)</b> — бұл иненің матаға бір кіріп, бір шығуынан пайда болатын жіптің ең кіші бөлігі. Бірнеше бірдей тігіс қатар орналасса, <b>тігін жол (строчка)</b> құрайды, ал екі матаны қосатын жалпы байланыс <b>жік (шов)</b> деп аталады. Қолмен тігу — тігін ісінің бастауы: машина жоқ кезде немесе нәзік, дәл жұмыс қажет болғанда қол тігісі таптырмайды. Жиекті бекіту, түймені қадау, бұйымды жөндеу, кесте салу — мұның бәрі қол тігісінен басталады. Сондықтан әр тігістің атын, түрін және қайда қолданылатынын білу маңызды.</span>
+      <span lang="en" class="lang-content">A <b>stitch</b> is the smallest piece of thread, made by one in-and-out movement of the needle through the fabric. Several identical stitches in a row form a <b>line of stitching</b>, while the overall join of two pieces of fabric is called a <b>seam</b>. Hand sewing is the very beginning of needlework: when there is no machine, or when delicate, precise work is needed, hand stitches are indispensable. Finishing an edge, sewing on a button, mending a garment, embroidering a pattern — it all starts with a hand stitch. That is why it matters to know the name, the type and the use of every stitch.</span>
+      <span lang="ru" class="lang-content"><b>Стежок</b> — это наименьший участок нитки, который получается за одно движение иглы «туда и обратно» сквозь ткань. Несколько одинаковых стежков подряд образуют <b>строчку</b>, а общее соединение двух деталей ткани называется <b>швом</b>. Ручное шитьё — это самое начало швейного дела: когда нет машины или нужна тонкая, точная работа, ручные стежки незаменимы. Обработать край, пришить пуговицу, починить изделие, вышить узор — всё начинается с ручного стежка. Поэтому важно знать название, вид и назначение каждого стежка.</span>
+    </p>
+    <p class="lead mt-3">
+      <span lang="kk" class="lang-content">Тігістер екі топқа бөлінеді: <b>уақытша</b> (бұйымды дайындау кезінде, кейін суырылып алынады — мысалы, сметочный) және <b>тұрақты</b> (бұйымда мәңгі қалады — мысалы, артқы ине тігісі, петельный). Әдемі әрі берік тігіс үшін жіп тартылуы біркелкі, тігістер ұзындығы бірдей болуы тиіс.</span>
+      <span lang="en" class="lang-content">Stitches fall into two groups: <b>temporary</b> ones (used while preparing the garment and removed later — for example, the tacking stitch) and <b>permanent</b> ones (which stay in the garment for good — for example, the back stitch or the buttonhole stitch). For a neat and strong result the thread tension must be even and the stitches the same length.</span>
+      <span lang="ru" class="lang-content">Стежки делятся на две группы: <b>временные</b> (используются при подготовке изделия и потом удаляются — например, смёточный) и <b>постоянные</b> (остаются в изделии навсегда — например, стежок «назад иголку» или петельный). Чтобы шов был аккуратным и прочным, натяжение нити должно быть ровным, а стежки — одинаковой длины.</span>
+    </p>
+  </div>
+  <div class="art-frame mv-pic" onclick="openLB(this)">
+    <div class="art-mat pic" style="height:230px"><img src="../../assets/labor_girls/p15_hero.jpg" alt=""></div>
+    <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Қолмен тігілген тігістер</span><span lang="en" class="lang-content">Hand-sewn stitches</span><span lang="ru" class="lang-content">Ручные стежки на ткани</span></div>
+    <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Біркелкі тартылған, бірдей ұзындықтағы тігістер — сапалы жұмыстың белгісі.</span><span lang="en" class="lang-content">Even tension and equal length are signs of quality hand work.</span><span lang="ru" class="lang-content">Ровное натяжение и одинаковая длина — признак качественной ручной работы.</span></div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">🧰 Қол тігісінің құрал-саймандары</span>
+    <span lang="en" class="lang-content">🧰 Tools for Hand Sewing</span>
+    <span lang="ru" class="lang-content">🧰 Инструменты для ручного шитья</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Жұмыс басталмай тұрып барлық құрал дайын болуы керек.</span>
+    <span lang="en" class="lang-content">All tools should be ready before the work begins.</span>
+    <span lang="ru" class="lang-content">Все инструменты должны быть готовы до начала работы.</span>
+  </p>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div class="tool">
+      <div class="pic"><img src="../../assets/labor_girls/p15_needle.jpg" alt=""></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Ине</span><span lang="en" class="lang-content">Needle</span><span lang="ru" class="lang-content">Игла</span></h3>
+        <p><span lang="kk" class="lang-content">Көзі бар үшкір құрал. Мата қалыңдығына қарай таңдалады.</span><span lang="en" class="lang-content">A sharp tool with an eye. Chosen to match the fabric's thickness.</span><span lang="ru" class="lang-content">Острый инструмент с ушком. Подбирается по толщине ткани.</span></p>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="pic"><img src="../../assets/labor_girls/p15_needle.jpg" alt=""></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Жіп</span><span lang="en" class="lang-content">Thread</span><span lang="ru" class="lang-content">Нитки</span></h3>
+        <p><span lang="kk" class="lang-content">Мата түсі мен түріне сәйкес таңдалады; ұзындығы ≈ 50 см.</span><span lang="en" class="lang-content">Matched to the fabric's colour and type; length about 50 cm.</span><span lang="ru" class="lang-content">Подбираются по цвету и типу ткани; длина около 50 см.</span></p>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="pic"><img src="../../assets/labor_girls/p15_thimble.jpg" alt=""></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Оймақ</span><span lang="en" class="lang-content">Thimble</span><span lang="ru" class="lang-content">Напёрсток</span></h3>
+        <p><span lang="kk" class="lang-content">Саусақты ине шаншудан қорғайды, инені итеруге көмектеседі.</span><span lang="en" class="lang-content">Protects the finger from needle pricks and helps push the needle.</span><span lang="ru" class="lang-content">Защищает палец от укола и помогает проталкивать иглу.</span></p>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="pic"><img src="../../assets/labor_girls/p15_scissors.jpg" alt=""></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Қайшы</span><span lang="en" class="lang-content">Scissors</span><span lang="ru" class="lang-content">Ножницы</span></h3>
+        <p><span lang="kk" class="lang-content">Мата мен жіпті кесуге арналған өткір құрал.</span><span lang="en" class="lang-content">A sharp tool for cutting fabric and thread.</span><span lang="ru" class="lang-content">Острый инструмент для резки ткани и нити.</span></p>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="pic"><img src="../../assets/labor_girls/p15_tape.jpg" alt=""></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Сантиметр</span><span lang="en" class="lang-content">Tape measure</span><span lang="ru" class="lang-content">Сантиметр</span></h3>
+        <p><span lang="kk" class="lang-content">Иілгіш өлшеуіш таспа — өлшем алуға қажет.</span><span lang="en" class="lang-content">A flexible measuring tape for taking measurements.</span><span lang="ru" class="lang-content">Гибкая мерная лента для снятия мерок.</span></p>
+      </div>
+    </div>
+    <div class="tool">
+      <div class="pic"><img src="../../assets/labor_girls/p15_tape.jpg" alt=""></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Бор</span><span lang="en" class="lang-content">Tailor's chalk</span><span lang="ru" class="lang-content">Портновский мел</span></h3>
+        <p><span lang="kk" class="lang-content">Матаға сызық пен белгі салуға; ізі оңай кетеді.</span><span lang="en" class="lang-content">For drawing lines and marks on fabric; the trace rubs off easily.</span><span lang="ru" class="lang-content">Для линий и пометок на ткани; след легко удаляется.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STITCH CATALOG -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">📖 Негізгі қол тігістерінің каталогы</span>
+    <span lang="en" class="lang-content">📖 Catalogue of Basic Hand Stitches</span>
+    <span lang="ru" class="lang-content">📖 Каталог основных ручных стежков</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    <!-- running / smetochny -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_running.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Сметочный (көктеу) тігісі</span><span lang="en" class="lang-content">Tacking (basting) stitch</span><span lang="ru" class="lang-content">Смёточный (намёточный) стежок</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">уақытша тігіс</span><span lang="en" class="lang-content">temporary stitch</span><span lang="ru" class="lang-content">временный стежок</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Ине тігінен өтіп, ірі бірдей тігістер салады. Детальдарды уақытша қосады, кейін суырылады.</span><span lang="en" class="lang-content">The needle makes large, even running stitches to hold pieces together temporarily; later removed.</span><span lang="ru" class="lang-content">Игла делает крупные ровные стежки, временно соединяя детали; потом удаляется.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Сметочный (көктеу)</span><span lang="en" class="lang-content">Tacking (basting)</span><span lang="ru" class="lang-content">Смёточный (намёточный)</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">ірі, уақытша тігіс</span><span lang="en" class="lang-content">large, temporary stitch</span><span lang="ru" class="lang-content">крупный, временный стежок</span></div>
+        <p><span lang="kk" class="lang-content">Ине матадан бірнеше рет біркелкі кіріп-шығады, ірі тігістер пайда болады. Детальдарды тігер алдында уақытша бекіту үшін.</span><span lang="en" class="lang-content">The needle goes in and out evenly several times, making large stitches. Used to fix pieces temporarily before sewing.</span><span lang="ru" class="lang-content">Игла несколько раз равномерно входит и выходит, образуя крупные стежки. Чтобы временно скрепить детали перед шитьём.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ детальдарды көктеу, кейін суырылады</span><span lang="en" class="lang-content">↳ basting pieces, removed afterwards</span><span lang="ru" class="lang-content">↳ намётка деталей, затем удаляется</span></div>
+      </div>
+    </div>
+
+    <!-- forward / vperyod igolku -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_running.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">«Алға ине» тігісі</span><span lang="en" class="lang-content">Running stitch (forward)</span><span lang="ru" class="lang-content">Стежок «вперёд иголку»</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">негізгі қарапайым тігіс</span><span lang="en" class="lang-content">basic simple stitch</span><span lang="ru" class="lang-content">базовый простой стежок</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Ине тек алға жылжиды, тігіс пен аралық бірдей. Ең қарапайым әрі негізгі тігіс.</span><span lang="en" class="lang-content">The needle moves only forward; stitches and gaps are equal. The simplest, most basic stitch.</span><span lang="ru" class="lang-content">Игла движется только вперёд; стежки и промежутки равны. Самый простой базовый стежок.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">«Алға ине»</span><span lang="en" class="lang-content">Running («forward»)</span><span lang="ru" class="lang-content">«Вперёд иголку»</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">тігіс = аралық</span><span lang="en" class="lang-content">stitch = gap</span><span lang="ru" class="lang-content">стежок = промежуток</span></div>
+        <p><span lang="kk" class="lang-content">Ине әрқашан алға кетеді, бетте де, астында да тігіс ұзындығы бірдей. Барлық қол тігісінің негізі болып табылады.</span><span lang="en" class="lang-content">The needle always goes forward; the stitch length is the same on top and underneath. It is the basis of all hand stitches.</span><span lang="ru" class="lang-content">Игла всегда идёт вперёд; длина стежка одинакова сверху и снизу. Основа всех ручных стежков.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ жинау, әрлеу жолы</span><span lang="en" class="lang-content">↳ gathering, decorative lines</span><span lang="ru" class="lang-content">↳ сборки, декоративные строчки</span></div>
+      </div>
+    </div>
+
+    <!-- back stitch -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_back.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">«Артқа ине» тігісі</span><span lang="en" class="lang-content">Back stitch</span><span lang="ru" class="lang-content">Стежок «назад иголку»</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">сызба-схема · берік тігіс</span><span lang="en" class="lang-content">schematic · strong stitch</span><span lang="ru" class="lang-content">схема · прочный стежок</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Ине артқа қайтып, алдыңғы тігіске жалғасады. Беттен тұтас машина жолына ұқсайды, өте берік.</span><span lang="en" class="lang-content">The needle goes back to the previous stitch. On the surface it looks like a solid machine line and is very strong.</span><span lang="ru" class="lang-content">Игла возвращается назад к предыдущему стежку. С лица напоминает сплошную машинную строчку, очень прочный.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">«Артқа ине»</span><span lang="en" class="lang-content">Back stitch</span><span lang="ru" class="lang-content">«Назад иголку»</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">ең берік қол тігісі</span><span lang="en" class="lang-content">strongest hand stitch</span><span lang="ru" class="lang-content">самый прочный ручной шов</span></div>
+        <p><span lang="kk" class="lang-content">Әр жаңа тігісте ине бір қадам артқа қайтады — беттен тұтас жол шығады. Машина болмаған жерде тігісті ауыстырады.</span><span lang="en" class="lang-content">For each new stitch the needle steps one step back — the surface shows a continuous line. It replaces machine stitching where there is no machine.</span><span lang="ru" class="lang-content">При каждом новом стежке игла отступает на шаг назад — с лица получается сплошная линия. Заменяет машинную строчку там, где машины нет.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ берік жік, жөндеу</span><span lang="en" class="lang-content">↳ strong seams, mending</span><span lang="ru" class="lang-content">↳ прочные швы, ремонт</span></div>
+      </div>
+    </div>
+
+    <!-- buttonhole / blanket -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_buttonhole.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Ілмекті (жиектеу) тігісі</span><span lang="en" class="lang-content">Buttonhole / blanket stitch</span><span lang="ru" class="lang-content">Петельный (обмёточный) стежок</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">жиекті бекітетін тігіс</span><span lang="en" class="lang-content">edge-finishing stitch</span><span lang="ru" class="lang-content">краеобмёточный стежок</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Әр тігісте жіп ілмек жасап, мата жиегін орап бекітеді. Шетті шашылудан сақтайды.</span><span lang="en" class="lang-content">At each stitch the thread makes a loop and wraps the fabric edge, protecting it from fraying.</span><span lang="ru" class="lang-content">На каждом стежке нить образует петлю и обвивает край ткани, защищая от осыпания.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Ілмекті (жиектеу)</span><span lang="en" class="lang-content">Buttonhole / blanket</span><span lang="ru" class="lang-content">Петельный (обмёточный)</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">жиекті өңдеу</span><span lang="en" class="lang-content">finishing edges</span><span lang="ru" class="lang-content">обработка края</span></div>
+        <p><span lang="kk" class="lang-content">Жіп әр тігісте ілмекке түсіп, мата шетін орайды. Шет шашылмайды, әрі әдемі жиек шығады.</span><span lang="en" class="lang-content">The thread loops at each stitch and binds the fabric edge. The edge does not fray and looks neat.</span><span lang="ru" class="lang-content">Нить на каждом стежке ложится петлёй и обвивает край ткани. Край не осыпается и выглядит аккуратно.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ ілмек, жиек өңдеу, аппликация</span><span lang="en" class="lang-content">↳ buttonholes, edges, appliqué</span><span lang="ru" class="lang-content">↳ петли, обработка края, аппликация</span></div>
+      </div>
+    </div>
+
+    <!-- stem stitch -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_stem.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Сабақты тігіс</span><span lang="en" class="lang-content">Stem stitch</span><span lang="ru" class="lang-content">Стебельчатый стежок</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">сызба-схема · кесте тігісі</span><span lang="en" class="lang-content">schematic · embroidery stitch</span><span lang="ru" class="lang-content">схема · вышивальный стежок</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Тігістер бір-бірін жартылай жауып, бұралған иректей сызық береді. Контур мен сабақ салуға қолайлы.</span><span lang="en" class="lang-content">Stitches partly overlap, giving a twisted rope-like line. Good for outlines and plant stems.</span><span lang="ru" class="lang-content">Стежки частично перекрывают друг друга, давая витую верёвочную линию. Хорош для контуров и стеблей.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Сабақты</span><span lang="en" class="lang-content">Stem stitch</span><span lang="ru" class="lang-content">Стебельчатый</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">иректі сызық</span><span lang="en" class="lang-content">twisted line</span><span lang="ru" class="lang-content">витая линия</span></div>
+        <p><span lang="kk" class="lang-content">Тігістер қабаттасып, арқан тәрізді тегіс әрі бұралған сызық жасайды. Кестеде контур мен сабақ үшін.</span><span lang="en" class="lang-content">Stitches overlap to form a smooth, rope-like twisted line. In embroidery it is used for outlines and stems.</span><span lang="ru" class="lang-content">Стежки накладываются, образуя гладкую витую линию, похожую на верёвочку. В вышивке — для контуров и стеблей.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ кестедегі контур, сабақ, өрнек</span><span lang="en" class="lang-content">↳ embroidery outlines, stems</span><span lang="ru" class="lang-content">↳ контуры, стебли в вышивке</span></div>
+      </div>
+    </div>
+
+    <!-- chain stitch -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_chain.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Шынжырлы тігіс</span><span lang="en" class="lang-content">Chain stitch</span><span lang="ru" class="lang-content">Тамбурный стежок</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">сәндік кесте тігісі</span><span lang="en" class="lang-content">decorative embroidery stitch</span><span lang="ru" class="lang-content">декоративный стежок</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Әр тігіс алдыңғы ілмектен өтіп, шынжыр сияқты тізбек құрайды. Қазақ кестесінде жиі кездеседі.</span><span lang="en" class="lang-content">Each stitch passes through the previous loop, forming a chain. Common in Kazakh embroidery.</span><span lang="ru" class="lang-content">Каждый стежок проходит сквозь предыдущую петлю, образуя цепочку. Часто встречается в казахской вышивке.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Шынжырлы (тамбур)</span><span lang="en" class="lang-content">Chain stitch</span><span lang="ru" class="lang-content">Тамбурный</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">ілмек-тізбек</span><span lang="en" class="lang-content">loop chain</span><span lang="ru" class="lang-content">цепочка из петель</span></div>
+        <p><span lang="kk" class="lang-content">Ине шыққан жерден қайта кіріп, жіптен ілмек қалдырады; келесі ілмек алдыңғысынан өтеді — шынжыр пайда болады.</span><span lang="en" class="lang-content">The needle re-enters where it came out, leaving a loop; the next loop passes through the previous one — a chain appears.</span><span lang="ru" class="lang-content">Игла входит там же, где вышла, оставляя петлю; следующая петля проходит сквозь предыдущую — получается цепочка.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ ою-өрнек кестесі, контур толтыру</span><span lang="en" class="lang-content">↳ ornamental embroidery, fillings</span><span lang="ru" class="lang-content">↳ орнаментальная вышивка, заполнение</span></div>
+      </div>
+    </div>
+
+    <!-- whip / over the edge (generated diagram) -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_whip.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">«Жиектен асыра» тігісі</span><span lang="en" class="lang-content">Whip / over-edge stitch</span><span lang="ru" class="lang-content">Стежок «через край»</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">сызба-схема</span><span lang="en" class="lang-content">schematic diagram</span><span lang="ru" class="lang-content">схема стежка</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Жіп екі мата жиегінен қиғаш асып, оларды қосады әрі шетін бекітеді.</span><span lang="en" class="lang-content">The thread passes diagonally over the edge of two fabrics, joining them and binding the edge.</span><span lang="ru" class="lang-content">Нить наискосок перекидывается через край двух тканей, соединяя их и закрепляя срез.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">«Жиектен асыра»</span><span lang="en" class="lang-content">Whip / over-edge</span><span lang="ru" class="lang-content">«Через край»</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">қиғаш, жиекті орайтын</span><span lang="en" class="lang-content">diagonal, edge-wrapping</span><span lang="ru" class="lang-content">косой, обвивающий край</span></div>
+        <p><span lang="kk" class="lang-content">Жіп мата шетінен қиғаш асып отырады. Екі бөлікті қосуға немесе шетті шашылудан сақтауға арналған.</span><span lang="en" class="lang-content">The thread is thrown diagonally over the fabric edge. Used to join two pieces or to stop the edge from fraying.</span><span lang="ru" class="lang-content">Нить наискосок перекидывается через срез ткани. Служит для соединения двух деталей или защиты края от осыпания.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ бөлшектерді қосу, жиекті өңдеу</span><span lang="en" class="lang-content">↳ joining pieces, edge finishing</span><span lang="ru" class="lang-content">↳ соединение деталей, обработка среза</span></div>
+      </div>
+    </div>
+
+    <!-- herringbone / cross — kozlik (generated diagram) -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_herringbone.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Айқыш («ешкі») тігісі</span><span lang="en" class="lang-content">Cross / herringbone stitch</span><span lang="ru" class="lang-content">Крестообразный стежок («козлик»)</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">сызба-схема</span><span lang="en" class="lang-content">schematic diagram</span><span lang="ru" class="lang-content">схема стежка</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Қиғаш тігістер кезектесіп қиылысып, қатарласқан Х-тер тізбегін жасайды. Икемді әрі сәндік.</span><span lang="en" class="lang-content">Diagonal stitches cross in turn, making a row of X shapes. Flexible and decorative.</span><span lang="ru" class="lang-content">Косые стежки попеременно перекрещиваются, образуя ряд крестиков (Х). Эластичный и декоративный.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Айқыш («ешкі»)</span><span lang="en" class="lang-content">Cross / herringbone</span><span lang="ru" class="lang-content">Крестообразный («козлик»)</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">қиылысқан Х-тер</span><span lang="en" class="lang-content">crossing X shapes</span><span lang="ru" class="lang-content">пересекающиеся крестики</span></div>
+        <p><span lang="kk" class="lang-content">Ине кезек-кезек қиғаш жүріп, тігістер бір-бірін қиып өтеді — қатар Х-тер шығады. Икемді жіктер мен әрлеуге қолайлы.</span><span lang="en" class="lang-content">The needle moves diagonally in turns, and the stitches cross each other — a row of X's appears. Suits flexible seams and trims.</span><span lang="ru" class="lang-content">Игла идёт наискосок попеременно, и стежки перекрещиваются — выходит ряд крестиков. Подходит для эластичных швов и отделки.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ икемді жиек, әрлеу, төменгі бүкті бекіту</span><span lang="en" class="lang-content">↳ stretchy hems, trims, securing folds</span><span lang="ru" class="lang-content">↳ эластичные подгибы, отделка, подшивка</span></div>
+      </div>
+    </div>
+
+    <!-- cross stitch sampler (real) -->
+    <div class="stitch" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p15_cross.jpg" alt=""></div>
+      <div class="genre-name" style="display:none"><span lang="kk" class="lang-content">Крест тігісі (айқас)</span><span lang="en" class="lang-content">Cross-stitch</span><span lang="ru" class="lang-content">Шов «крестик» (счётный)</span></div>
+      <div class="genre-cap" style="display:none"><span lang="kk" class="lang-content">саналмалы кесте</span><span lang="en" class="lang-content">counted embroidery</span><span lang="ru" class="lang-content">счётная вышивка</span></div>
+      <div class="genre-desc" style="display:none"><span lang="kk" class="lang-content">Екі қиғаш тігіс Х құрайды; крестиктерден сурет пен өрнек жинақталады.</span><span lang="en" class="lang-content">Two diagonal stitches form an X; patterns and pictures are built from crosses.</span><span lang="ru" class="lang-content">Два косых стежка образуют Х; из крестиков складываются узоры и картинки.</span></div>
+      <div class="body">
+        <h3><span lang="kk" class="lang-content">Крест (айқас)</span><span lang="en" class="lang-content">Cross-stitch</span><span lang="ru" class="lang-content">«Крестик»</span></h3>
+        <div class="sub"><span lang="kk" class="lang-content">екі тігістен Х</span><span lang="en" class="lang-content">X from two stitches</span><span lang="ru" class="lang-content">Х из двух стежков</span></div>
+        <p><span lang="kk" class="lang-content">Әр крестик екі қиғаш тігістен тұрады. Біркелкі крестиктерден тұтас сурет пен ою-өрнек шығады.</span><span lang="en" class="lang-content">Each cross is made of two diagonal stitches. Even crosses combine into whole pictures and ornaments.</span><span lang="ru" class="lang-content">Каждый крестик состоит из двух косых стежков. Из ровных крестиков складываются целые картинки и орнаменты.</span></p>
+        <div class="use"><span lang="kk" class="lang-content">↳ сәндік кесте, өрнек, сурет</span><span lang="en" class="lang-content">↳ decorative embroidery, patterns</span><span lang="ru" class="lang-content">↳ декоративная вышивка, узоры</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECURING THE THREAD -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">🧷 Жіпті басында және соңында қалай бекітеміз</span>
+    <span lang="en" class="lang-content">🧷 How to Secure the Thread at the Start and End</span>
+    <span lang="ru" class="lang-content">🧷 Как закрепить нить в начале и в конце</span>
+  </h2>
+  <div class="card rounded-custom p-6 md:p-7">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-10">
+      <div>
+        <p class="font-bold mb-3" style="color:#881337"><span lang="kk" class="lang-content">Басында (тігер алдында):</span><span lang="en" class="lang-content">At the start (before sewing):</span><span lang="ru" class="lang-content">В начале (перед шитьём):</span></p>
+        <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Жіпті өткіземіз.</span><span lang="en" class="lang-content">Thread the needle.</span><span lang="ru" class="lang-content">Вдеваем нить.</span></b> <span lang="kk" class="lang-content">Жіптің ұшын инеге өткізіп, ыңғайлы ұзындықта (≈50 см) ұстаймыз.</span><span lang="en" class="lang-content">Pass the thread end through the needle's eye and keep a comfortable length (about 50 cm).</span><span lang="ru" class="lang-content">Продеваем кончик нити в ушко иглы и берём удобную длину (около 50 см).</span></p></div>
+        <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Түйін жасаймыз.</span><span lang="en" class="lang-content">Make a knot.</span><span lang="ru" class="lang-content">Делаем узелок.</span></b> <span lang="kk" class="lang-content">Жіптің ұзын ұшына кішкене түйін байлаймыз, ол матадан өтіп кетпейді.</span><span lang="en" class="lang-content">Tie a small knot at the long end so it will not slip through the fabric.</span><span lang="ru" class="lang-content">Завязываем на длинном конце маленький узелок, чтобы он не проскочил сквозь ткань.</span></p></div>
+        <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Бірінші тігіс.</span><span lang="en" class="lang-content">First stitch.</span><span lang="ru" class="lang-content">Первый стежок.</span></b> <span lang="kk" class="lang-content">Инені астынан жоғары шығарамыз — түйін мата астында жасырын қалады.</span><span lang="en" class="lang-content">Bring the needle up from underneath — the knot stays hidden on the wrong side.</span><span lang="ru" class="lang-content">Выводим иглу снизу вверх — узелок прячется с изнанки.</span></p></div>
+      </div>
+      <div class="mt-5 lg:mt-0">
+        <p class="font-bold mb-3" style="color:#881337"><span lang="kk" class="lang-content">Соңында (тігіс бітерде):</span><span lang="en" class="lang-content">At the end (when finishing):</span><span lang="ru" class="lang-content">В конце (при завершении):</span></p>
+        <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Кері тігіс.</span><span lang="en" class="lang-content">A back stitch.</span><span lang="ru" class="lang-content">Закрепочный стежок.</span></b> <span lang="kk" class="lang-content">Соңғы орында 2–3 ұсақ тігісті бір жерге қайталап саламыз.</span><span lang="en" class="lang-content">Make 2–3 tiny stitches in the same spot at the end.</span><span lang="ru" class="lang-content">В конце делаем 2–3 мелких стежка на одном месте.</span></p></div>
+        <div class="step"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Ілмектен өткіземіз.</span><span lang="en" class="lang-content">Pass through a loop.</span><span lang="ru" class="lang-content">Протягиваем в петлю.</span></b> <span lang="kk" class="lang-content">Соңғы тігістен пайда болған ілмекке инені 1–2 рет өткізіп тартамыз.</span><span lang="en" class="lang-content">Pass the needle through the loop of the last stitch once or twice and pull.</span><span lang="ru" class="lang-content">Иглу 1–2 раза продеваем в петлю последнего стежка и затягиваем.</span></p></div>
+        <div class="step"><div class="step-num">6</div><p><b><span lang="kk" class="lang-content">Артығын кесеміз.</span><span lang="en" class="lang-content">Trim the excess.</span><span lang="ru" class="lang-content">Обрезаем лишнее.</span></b> <span lang="kk" class="lang-content">Жіптің ұшын түйінге жақын қайшымен қиямыз — бос ұш қалмасын.</span><span lang="en" class="lang-content">Cut the thread close to the knot with scissors, leaving no loose tail.</span><span lang="ru" class="lang-content">Обрезаем нить ножницами близко к узелку, не оставляя длинного хвостика.</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">⚠️ Инемен және қайшымен жұмыс қауіпсіздігі</span>
+    <span lang="en" class="lang-content">⚠️ Safety with the Needle and Scissors</span>
+    <span lang="ru" class="lang-content">⚠️ Безопасность с иглой и ножницами</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Бұл ережелерді әрқашан сақтаймыз.</span>
+    <span lang="en" class="lang-content">Always follow these rules.</span>
+    <span lang="ru" class="lang-content">Эти правила соблюдаем всегда.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="safe"><h4>📌 <span lang="kk" class="lang-content">Инені санап ұста</span><span lang="en" class="lang-content">Count your needles</span><span lang="ru" class="lang-content">Считай иголки</span></h4><p><span lang="kk" class="lang-content">Иненің саны жұмыс басында да, соңында да бірдей болуы керек. Инені ауызға салуға, киімге қадауға болмайды.</span><span lang="en" class="lang-content">The number of needles must be the same before and after work. Never put a needle in your mouth or stick it into your clothes.</span><span lang="ru" class="lang-content">Число иголок должно совпадать в начале и в конце работы. Нельзя брать иглу в рот или втыкать в одежду.</span></p></div>
+    <div class="safe"><h4>🧷 <span lang="kk" class="lang-content">Инені орнында сақта</span><span lang="en" class="lang-content">Store needles safely</span><span lang="ru" class="lang-content">Храни иглу в игольнице</span></h4><p><span lang="kk" class="lang-content">Инені тек ине жастықшасында (игольница) сақтаймыз, үстелде шашып қалдырмаймыз.</span><span lang="en" class="lang-content">Keep needles only in a pincushion; never leave them scattered on the table.</span><span lang="ru" class="lang-content">Иглы держим только в игольнице, не оставляем разбросанными на столе.</span></p></div>
+    <div class="safe"><h4>🪡 <span lang="kk" class="lang-content">Оймақты қолдан</span><span lang="en" class="lang-content">Use a thimble</span><span lang="ru" class="lang-content">Пользуйся напёрстком</span></h4><p><span lang="kk" class="lang-content">Қалың матаны тігерде саусақты қорғау үшін оймақ киеміз — ине шаншымайды.</span><span lang="en" class="lang-content">Wear a thimble when sewing thick fabric to protect your finger from pricks.</span><span lang="ru" class="lang-content">При шитье плотной ткани надеваем напёрсток, чтобы не уколоть палец.</span></p></div>
+    <div class="safe"><h4>✂️ <span lang="kk" class="lang-content">Қайшыны дұрыс бер</span><span lang="en" class="lang-content">Pass scissors safely</span><span lang="ru" class="lang-content">Передавай ножницы кольцами</span></h4><p><span lang="kk" class="lang-content">Қайшыны жабық күйде, сақинасын алға қаратып береміз. Ұшымен ешкімге қаратпаймыз.</span><span lang="en" class="lang-content">Pass scissors closed, with the rings (handles) forward. Never point the tips at anyone.</span><span lang="ru" class="lang-content">Ножницы передаём закрытыми, кольцами вперёд. Остриём ни на кого не направляем.</span></p></div>
+    <div class="safe"><h4>✂️ <span lang="kk" class="lang-content">Қайшыны жабып қой</span><span lang="en" class="lang-content">Keep scissors closed</span><span lang="ru" class="lang-content">Клади ножницы сомкнутыми</span></h4><p><span lang="kk" class="lang-content">Қайшыны үстелге жүзін жауып, оң жаққа қойамыз. Ашық қалдырмаймыз.</span><span lang="en" class="lang-content">Put scissors on the table closed, on your right side. Do not leave them open.</span><span lang="ru" class="lang-content">Ножницы кладём на стол сомкнутыми, справа. Не оставляем раскрытыми.</span></p></div>
+    <div class="safe"><h4>💡 <span lang="kk" class="lang-content">Жарық пен отырыс</span><span lang="en" class="lang-content">Light &amp; posture</span><span lang="ru" class="lang-content">Свет и осанка</span></h4><p><span lang="kk" class="lang-content">Жақсы жарықта, арқаны тік ұстап жұмыс істейміз. Жұмыстан кейін орынды жинаймыз.</span><span lang="en" class="lang-content">Work in good light with a straight back. Tidy your workplace afterwards.</span><span lang="ru" class="lang-content">Работаем при хорошем свете, держа спину прямо. После работы убираем рабочее место.</span></p></div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="card rounded-custom p-7 md:p-8 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+    <span lang="kk" class="lang-content">💬 Қорытынды</span>
+    <span lang="en" class="lang-content">💬 In a nutshell</span>
+    <span lang="ru" class="lang-content">💬 Главное</span>
+  </h3>
+  <p class="lead" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Қол тігістерін білу — тігін ісінің әліппесі. Уақытша тігіс (көктеу) детальдарды дайындайды, берік тігіс («артқа ине») оларды мықтап қосады, ал жиектеу мен сәндік тігістер (петельный, сабақты, шынжырлы, крест) бұйымды әрі берік, әрі әдемі етеді. Біркелкі тартылған, бірдей ұзындықтағы тігіс — ұқыпты қол жұмысының басты белгісі.</span>
+    <span lang="en" class="lang-content">Knowing hand stitches is the ABC of needlework. The temporary stitch (tacking) prepares the pieces, the strong stitch (back stitch) joins them firmly, and the edge and decorative stitches (buttonhole, stem, chain, cross) make the garment both durable and beautiful. An even, equal-length stitch is the main sign of careful hand work.</span>
+    <span lang="ru" class="lang-content">Знание ручных стежков — это азбука швейного дела. Временный стежок (смёточный) готовит детали, прочный стежок («назад иголку») крепко их соединяет, а краевые и декоративные стежки (петельный, стебельчатый, тамбурный, крестик) делают изделие и прочным, и красивым. Ровный стежок одинаковой длины — главный признак аккуратной ручной работы.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){
+  if(lang==='kz')lang='kk';
+  currentLang=lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+function openLB(card){
+  document.getElementById('lb-img').src=card.querySelector('.pic img').src;
+  var n=card.querySelector('.genre-name'); document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';
+  var cap=card.querySelector('.genre-cap'); document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';
+  var d=card.querySelector('.genre-desc'); document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

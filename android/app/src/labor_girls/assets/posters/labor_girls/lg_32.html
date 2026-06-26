@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Уход за одеждой: стирка, хранение, мелкий ремонт</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+.lead{font-size:1.05rem;line-height:1.75;color:#44403c;}
+.lead b{color:#881337;}
+.step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem;}
+.step p{color:#44403c;font-size:.97rem;line-height:1.5;}
+.step b{color:#881337;}
+.sym{background:rgba(255,255,255,0.96);border:1px solid rgba(190,18,60,.16);border-radius:.9rem;
+  padding:.85rem .9rem;display:flex;gap:.7rem;align-items:center;box-shadow:0 2px 10px rgba(136,19,55,.05);}
+.sym .gi{font-size:1.9rem;line-height:1;flex-shrink:0;width:2.2rem;text-align:center;}
+.sym h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:.96rem;margin-bottom:.1rem;}
+.sym p{color:#57534e;font-size:.84rem;line-height:1.35;}
+.tip{background:rgba(225,29,72,0.05);border:1px solid rgba(190,18,60,.2);border-radius:.9rem;padding:.95rem 1.1rem;}
+.tip h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:1rem;margin-bottom:.25rem;}
+.tip p{color:#57534e;font-size:.9rem;line-height:1.45;}
+table.cmp{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.97);border-radius:1rem;overflow:hidden;
+  box-shadow:0 4px 16px rgba(136,19,55,.07);}
+table.cmp th{background:#9f1239;color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:.92rem;
+  padding:.7rem .8rem;text-align:left;}
+table.cmp td{padding:.65rem .8rem;font-size:.9rem;color:#44403c;border-bottom:1px solid rgba(190,18,60,.12);vertical-align:top;}
+table.cmp tr:last-child td{border-bottom:none;}
+table.cmp tr:nth-child(even) td{background:rgba(190,18,60,.04);}
+table.cmp td b{color:#881337;}
+.temp{background:rgba(255,255,255,0.96);border:1px solid rgba(190,18,60,.16);border-radius:1rem;
+  padding:1rem .9rem 1.1rem;text-align:center;box-shadow:0 2px 10px rgba(136,19,55,.05);}
+.temp .num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.6rem;color:#be123c;line-height:1;}
+.temp h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#881337;font-size:.92rem;margin:.35rem 0 .2rem;}
+.temp p{color:#57534e;font-size:.82rem;line-height:1.35;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1300px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · Тұрмыс мәдениеті · Киімге күтім</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Home Skills · Garment Care</span>
+      <span lang="ru" class="lang-content">Художественный труд · Культура быта · Уход за одеждой</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🧺 Киімге күтім: жуу, сақтау, ұсақ жөндеу</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🧺 Garment Care: Washing, Storage &amp; Minor Repairs</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🧺 Уход за одеждой: стирка, хранение, мелкий ремонт</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">Дұрыс күтім киімнің көркі мен ғұмырын ұзартады.</span>
+      <span lang="en" class="lang-content">Proper care keeps clothes beautiful and makes them last.</span>
+      <span lang="ru" class="lang-content">Правильный уход сохраняет вид одежды и продлевает ей жизнь.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card rounded-custom p-7 mb-10">
+  <p class="lead">
+    <span lang="kk" class="lang-content"><b>Киімге күтім</b> — оны таза, бүтін әрі әдемі күйде ұстау. Сапалы киім қымбат тұрады, ал дұрыс күтім оның ғұмырын бірнеше есе ұзартады әрі ақша үнемдейді. Күтімнің үш тірегі бар: <b>жуу</b> (киімді дұрыс тазарту), <b>сақтау</b> (мыжылмай, киеден қорғап ұстау) және <b>ұсақ жөндеу</b> (түймені қадау, жыртықты тігу). Әр киімнің ішінде күтім тәсілін көрсететін жапсырма (ярлык) болады — алдымен соны оқу керек.</span>
+    <span lang="en" class="lang-content"><b>Garment care</b> means keeping clothes clean, whole and good-looking. Quality clothing is expensive, and proper care makes it last far longer and saves money. Care rests on three pillars: <b>washing</b> (cleaning clothes correctly), <b>storage</b> (keeping them un-creased and protected from moths) and <b>minor repairs</b> (sewing on a button, mending a tear). Every garment has a label showing how to care for it — read it first.</span>
+    <span lang="ru" class="lang-content"><b>Уход за одеждой</b> — это содержание её в чистоте, целости и опрятном виде. Качественная одежда стоит дорого, а правильный уход продлевает ей жизнь в несколько раз и экономит деньги. У ухода три опоры: <b>стирка</b> (правильная чистка), <b>хранение</b> (без заломов и защита от моли) и <b>мелкий ремонт</b> (пришить пуговицу, зашить порванное). На каждой вещи есть ярлык со способом ухода — его и нужно прочесть первым.</span>
+  </p>
+</section>
+
+<!-- CARE SYMBOLS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">Күтім таңбалары (ярлықты оқу)</span>
+    <span lang="en" class="lang-content">Care Symbols (Reading the Label)</span>
+    <span lang="ru" class="lang-content">Символы ухода (читаем ярлык)</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">Әр киімнің жапсырмасында 5 негізгі таңба болады. Оң жақтағы нақты ярлықты үлкейту үшін басыңыз.</span>
+    <span lang="en" class="lang-content">Every label has 5 basic symbols. Tap the real label on the right to enlarge it.</span>
+    <span lang="ru" class="lang-content">На ярлыке каждой вещи 5 основных символов. Нажмите на настоящий ярлык справа, чтобы увеличить.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div class="sym"><div class="gi">🪣</div><div><h4><span lang="kk" class="lang-content">Жуу (ыдыс)</span><span lang="en" class="lang-content">Washing (tub)</span><span lang="ru" class="lang-content">Стирка (таз)</span></h4><p><span lang="kk" class="lang-content">Ішіндегі сан — ең жоғары t°. Қол — тек қолмен жуу.</span><span lang="en" class="lang-content">The number inside is the max t°. A hand means hand-wash only.</span><span lang="ru" class="lang-content">Цифра внутри — макс. t°. Рука — только ручная стирка.</span></p></div></div>
+      <div class="sym"><div class="gi">🔺</div><div><h4><span lang="kk" class="lang-content">Ағарту (үшбұрыш)</span><span lang="en" class="lang-content">Bleaching (triangle)</span><span lang="ru" class="lang-content">Отбеливание (треугольник)</span></h4><p><span lang="kk" class="lang-content">Сызылған болса — ағартуға болмайды.</span><span lang="en" class="lang-content">Crossed out — do not bleach.</span><span lang="ru" class="lang-content">Перечёркнут — отбеливать нельзя.</span></p></div></div>
+      <div class="sym"><div class="gi">⬜</div><div><h4><span lang="kk" class="lang-content">Кептіру (шаршы)</span><span lang="en" class="lang-content">Drying (square)</span><span lang="ru" class="lang-content">Сушка (квадрат)</span></h4><p><span lang="kk" class="lang-content">Ішінде шеңбер — кептіргіш машина. Нүктелер — t° деңгейі.</span><span lang="en" class="lang-content">Circle inside = tumble dryer; dots = heat level.</span><span lang="ru" class="lang-content">Круг внутри — сушка в машине; точки — уровень t°.</span></p></div></div>
+      <div class="sym"><div class="gi">🔌</div><div><h4><span lang="kk" class="lang-content">Үтіктеу (үтік)</span><span lang="en" class="lang-content">Ironing (iron)</span><span lang="ru" class="lang-content">Глажка (утюг)</span></h4><p><span lang="kk" class="lang-content">Нүкте саны — рұқсат етілген t° (1 = төмен, 3 = жоғары).</span><span lang="en" class="lang-content">Dots show allowed t° (1 = low, 3 = high).</span><span lang="ru" class="lang-content">Точки — допустимая t° (1 = низкая, 3 = высокая).</span></p></div></div>
+      <div class="sym" style="grid-column:1 / -1"><div class="gi">⭕</div><div><h4><span lang="kk" class="lang-content">Кәсіби тазалау (шеңбер)</span><span lang="en" class="lang-content">Professional cleaning (circle)</span><span lang="ru" class="lang-content">Профчистка (круг)</span></h4><p><span lang="kk" class="lang-content">Химиялық тазалауды (химчистка) білдіреді. Сызылған шеңбер — химтазалауға болмайды.</span><span lang="en" class="lang-content">A circle means dry-cleaning; a crossed circle means do not dry-clean.</span><span lang="ru" class="lang-content">Круг означает химчистку; перечёркнутый круг — химчистка запрещена.</span></p></div></div>
+    </div>
+    <div>
+      <div class="genre-card" onclick="openLB(this)">
+        <div class="pic" style="height:300px"><img src="../../assets/labor_girls/p32_label.jpg" alt="Настоящий ярлык с символами ухода"></div>
+        <div class="body genre-name" style="display:none"><span lang="kk" class="lang-content">Нақты күтім жапсырмасы</span><span lang="en" class="lang-content">A real care label</span><span lang="ru" class="lang-content">Настоящий ярлык ухода</span></div>
+        <div class="body genre-cap" style="display:none"><span lang="kk" class="lang-content">100% жүн · қолмен жуу</span><span lang="en" class="lang-content">100% wool · hand wash</span><span lang="ru" class="lang-content">100% шерсть · ручная стирка</span></div>
+      </div>
+      <p class="text-center text-xs mt-2 text-stone-500"><span lang="kk" class="lang-content">«HAND WASH WITH CARE» — абайлап қолмен жуу.</span><span lang="en" class="lang-content">"HAND WASH WITH CARE" — wash gently by hand.</span><span lang="ru" class="lang-content">«HAND WASH WITH CARE» — бережная ручная стирка.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- WASHING -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">1. Жуу: дұрыс тазарту</span>
+    <span lang="en" class="lang-content">1. Washing: Cleaning the Right Way</span>
+    <span lang="ru" class="lang-content">1. Стирка: правильная чистка</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p32_machine.jpg" alt="Стиральная машина"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Кір жуғыш машина</span><span lang="en" class="lang-content">Washing machine</span><span lang="ru" class="lang-content">Стиральная машина</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Барабанды толтырмаңыз — киімнің таза болуы үшін бос орын керек.</span><span lang="en" class="lang-content">Don't overfill the drum — clothes need room to come out clean.</span><span lang="ru" class="lang-content">Не перегружайте барабан — белью нужно место, чтобы отстираться.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p32_detergent.jpg" alt="Средства для стирки"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Жуғыш заттар</span><span lang="en" class="lang-content">Detergents</span><span lang="ru" class="lang-content">Средства для стирки</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Ұнтақ, гель, капсула. Мөлшерін асырмаңыз — артық көбік зиян.</span><span lang="en" class="lang-content">Powder, gel, pods. Don't overdose — extra foam is harmful.</span><span lang="ru" class="lang-content">Порошок, гель, капсулы. Не превышайте дозу — лишняя пена вредна.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/p32_iron.jpg" alt="Глажка рубашки"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Үтіктеу</span><span lang="en" class="lang-content">Ironing</span><span lang="ru" class="lang-content">Глажка</span></div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Матаға сай t° қойыңыз. Жібек пен синтетика — төмен қызуда.</span><span lang="en" class="lang-content">Set the t° to match the fabric. Silk and synthetics — low heat.</span><span lang="ru" class="lang-content">Ставьте t° под ткань. Шёлк и синтетику — на низком нагреве.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="temp"><div class="num">30°</div><h4><span lang="kk" class="lang-content">Нәзік маталар</span><span lang="en" class="lang-content">Delicates</span><span lang="ru" class="lang-content">Деликатные</span></h4><p><span lang="kk" class="lang-content">Жүн, жібек, синтетика.</span><span lang="en" class="lang-content">Wool, silk, synthetics.</span><span lang="ru" class="lang-content">Шерсть, шёлк, синтетика.</span></p></div>
+    <div class="temp"><div class="num">40°</div><h4><span lang="kk" class="lang-content">Түрлі түсті</span><span lang="en" class="lang-content">Colours</span><span lang="ru" class="lang-content">Цветное</span></h4><p><span lang="kk" class="lang-content">Күнделікті мақта-мата киім.</span><span lang="en" class="lang-content">Everyday cotton clothes.</span><span lang="ru" class="lang-content">Повседневная х/б одежда.</span></p></div>
+    <div class="temp"><div class="num">60°</div><h4><span lang="kk" class="lang-content">Ақ зығыр</span><span lang="en" class="lang-content">White linen</span><span lang="ru" class="lang-content">Бельё, белое</span></h4><p><span lang="kk" class="lang-content">Төсек-орын, сүлгі.</span><span lang="en" class="lang-content">Bedding and towels.</span><span lang="ru" class="lang-content">Постель и полотенца.</span></p></div>
+    <div class="temp"><div class="num">↔</div><h4><span lang="kk" class="lang-content">Түс бойынша бөлу</span><span lang="en" class="lang-content">Sort by colour</span><span lang="ru" class="lang-content">Сортируйте</span></h4><p><span lang="kk" class="lang-content">Ақ, түрлі түс, қараны бөлек жуыңыз.</span><span lang="en" class="lang-content">Wash whites, colours and darks apart.</span><span lang="ru" class="lang-content">Белое, цветное и тёмное — отдельно.</span></p></div>
+  </div>
+</section>
+
+<!-- STORAGE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">2. Сақтау: киімді ұзақ сақтау</span>
+    <span lang="en" class="lang-content">2. Storage: Keeping Clothes Well</span>
+    <span lang="ru" class="lang-content">2. Хранение: бережём вещи</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="genre-card" onclick="openLB(this)">
+        <div class="pic" style="height:240px"><img src="../../assets/labor_girls/p32_closet.jpg" alt="Одежда на вешалках"></div>
+        <div class="body genre-name" style="display:none"><span lang="kk" class="lang-content">Ілгіште сақтау</span><span lang="en" class="lang-content">Hanging storage</span><span lang="ru" class="lang-content">Хранение на вешалках</span></div>
+        <div class="body genre-cap" style="display:none"><span lang="kk" class="lang-content">көйлек, костюм, пальто</span><span lang="en" class="lang-content">shirts, suits, coats</span><span lang="ru" class="lang-content">рубашки, костюмы, пальто</span></div>
+      </div>
+      <div class="genre-card" onclick="openLB(this)">
+        <div class="pic" style="height:240px"><img src="../../assets/labor_girls/p32_folded.jpg" alt="Сложенная одежда"></div>
+        <div class="body genre-name" style="display:none"><span lang="kk" class="lang-content">Бүктеп сақтау</span><span lang="en" class="lang-content">Folded storage</span><span lang="ru" class="lang-content">Хранение в сложенном виде</span></div>
+        <div class="body genre-cap" style="display:none"><span lang="kk" class="lang-content">тоқыма, джинсы, футболка</span><span lang="en" class="lang-content">knits, jeans, T-shirts</span><span lang="ru" class="lang-content">трикотаж, джинсы, футболки</span></div>
+      </div>
+    </div>
+    <div>
+      <p class="font-bold mb-3" style="color:#881337"><span lang="kk" class="lang-content">Дұрыс сақтаудың 4 ережесі:</span><span lang="en" class="lang-content">4 rules of good storage:</span><span lang="ru" class="lang-content">4 правила хранения:</span></p>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Таза әрі құрғақ.</span><span lang="en" class="lang-content">Clean &amp; dry.</span><span lang="ru" class="lang-content">Чистое и сухое.</span></b> <span lang="kk" class="lang-content">Кір не дымқыл киімді сақтауға қоймаңыз — иіс пен зең пайда болады.</span><span lang="en" class="lang-content">Never store dirty or damp clothes — they get smelly and mouldy.</span><span lang="ru" class="lang-content">Не убирайте грязные или влажные вещи — появятся запах и плесень.</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Ілу не бүктеу.</span><span lang="en" class="lang-content">Hang or fold.</span><span lang="ru" class="lang-content">Вешать или складывать.</span></b> <span lang="kk" class="lang-content">Костюм, көйлекті іледі; тоқыманы бүктейді (созылмас үшін).</span><span lang="en" class="lang-content">Hang suits and shirts; fold knitwear so it won't stretch.</span><span lang="ru" class="lang-content">Костюмы и рубашки — на плечики; трикотаж складывают, чтобы не вытянулся.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Киеден қорғау.</span><span lang="en" class="lang-content">Protect from moths.</span><span lang="ru" class="lang-content">Защита от моли.</span></b> <span lang="kk" class="lang-content">Жүн киімнің қасына лаванда не арнайы зат қойыңыз.</span><span lang="en" class="lang-content">Put lavender or special repellent near woollens.</span><span lang="ru" class="lang-content">К шерсти кладите лаванду или специальное средство.</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">Ауа алмасуы.</span><span lang="en" class="lang-content">Let it breathe.</span><span lang="ru" class="lang-content">Доступ воздуха.</span></b> <span lang="kk" class="lang-content">Шкафты тығыздамаңыз; маусымдық киімді мата қапқа салыңыз.</span><span lang="en" class="lang-content">Don't cram the wardrobe; keep seasonal clothes in cloth bags.</span><span lang="ru" class="lang-content">Не набивайте шкаф; сезонные вещи — в тканевых чехлах.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MINOR REPAIRS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-1" style="color:#881337">
+    <span lang="kk" class="lang-content">3. Ұсақ жөндеу: түймені қадау</span>
+    <span lang="en" class="lang-content">3. Minor Repairs: Sewing on a Button</span>
+    <span lang="ru" class="lang-content">3. Мелкий ремонт: пришиваем пуговицу</span>
+  </h2>
+  <p class="text-stone-500 mb-5 text-sm">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін суретті басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a photo to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на фото, чтобы увеличить.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <div>
+      <div class="step"><div class="step-num">1</div><p><b><span lang="kk" class="lang-content">Жіпті дайындау.</span><span lang="en" class="lang-content">Prepare the thread.</span><span lang="ru" class="lang-content">Подготовьте нитку.</span></b> <span lang="kk" class="lang-content">Матаға сай түсті жіпті инеге өткізіп, ұшын түйіңіз.</span><span lang="en" class="lang-content">Thread a needle with matching colour and knot the end.</span><span lang="ru" class="lang-content">Вденьте в иглу нитку в цвет ткани и завяжите узелок.</span></p></div>
+      <div class="step"><div class="step-num">2</div><p><b><span lang="kk" class="lang-content">Орынды белгілеу.</span><span lang="en" class="lang-content">Mark the spot.</span><span lang="ru" class="lang-content">Наметьте место.</span></b> <span lang="kk" class="lang-content">Түйме түсетін жерден ішке қарай инені шығарыңыз.</span><span lang="en" class="lang-content">Bring the needle up from the back at the button's place.</span><span lang="ru" class="lang-content">Выведите иглу с изнанки в точке пуговицы.</span></p></div>
+      <div class="step"><div class="step-num">3</div><p><b><span lang="kk" class="lang-content">Тігу.</span><span lang="en" class="lang-content">Stitch.</span><span lang="ru" class="lang-content">Пришейте.</span></b> <span lang="kk" class="lang-content">Тесіктер арқылы 5–6 рет инені өткізіп, түймені бекітіңіз.</span><span lang="en" class="lang-content">Pass the needle through the holes 5–6 times to fix the button.</span><span lang="ru" class="lang-content">Пройдите иглой через отверстия 5–6 раз, закрепляя пуговицу.</span></p></div>
+      <div class="step"><div class="step-num">4</div><p><b><span lang="kk" class="lang-content">«Аяқ» жасау.</span><span lang="en" class="lang-content">Make a shank.</span><span lang="ru" class="lang-content">Сделайте «ножку».</span></b> <span lang="kk" class="lang-content">Түйме мен мата арасына жіпті орап, кішкене аяқ жасаңыз.</span><span lang="en" class="lang-content">Wind thread between button and cloth to form a small stem.</span><span lang="ru" class="lang-content">Обмотайте нить между пуговицей и тканью — получится ножка.</span></p></div>
+      <div class="step"><div class="step-num">5</div><p><b><span lang="kk" class="lang-content">Бекіту.</span><span lang="en" class="lang-content">Finish off.</span><span lang="ru" class="lang-content">Закрепите.</span></b> <span lang="kk" class="lang-content">Ішкі жағынан 2–3 түйін жасап, артық жіпті қиыңыз.</span><span lang="en" class="lang-content">Tie 2–3 knots on the back and trim the extra thread.</span><span lang="ru" class="lang-content">С изнанки сделайте 2–3 узелка и обрежьте лишнюю нить.</span></p></div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="genre-card" onclick="openLB(this)">
+        <div class="pic" style="height:230px"><img src="../../assets/labor_girls/p32_button.jpg" alt="Пришивание пуговицы иглой"></div>
+        <div class="body genre-name" style="display:none"><span lang="kk" class="lang-content">Түймені қадау</span><span lang="en" class="lang-content">Sewing on a button</span><span lang="ru" class="lang-content">Пришивание пуговицы</span></div>
+        <div class="body genre-cap" style="display:none"><span lang="kk" class="lang-content">ине мен жіп</span><span lang="en" class="lang-content">needle and thread</span><span lang="ru" class="lang-content">игла и нить</span></div>
+      </div>
+      <div class="genre-card" onclick="openLB(this)">
+        <div class="pic" style="height:230px"><img src="../../assets/labor_girls/p32_thread.jpg" alt="Катушки ниток разных цветов"></div>
+        <div class="body genre-name" style="display:none"><span lang="kk" class="lang-content">Түрлі түсті жіптер</span><span lang="en" class="lang-content">Threads of many colours</span><span lang="ru" class="lang-content">Нитки разных цветов</span></div>
+        <div class="body genre-cap" style="display:none"><span lang="kk" class="lang-content">матаға сай түс таңдаңыз</span><span lang="en" class="lang-content">choose a matching colour</span><span lang="ru" class="lang-content">подберите нить в цвет</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAIN / FABRIC TABLE -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Мата түріне қарай күтім</span>
+    <span lang="en" class="lang-content">Care by Type of Fabric</span>
+    <span lang="ru" class="lang-content">Уход в зависимости от ткани</span>
+  </h2>
+
+  <div class="lang-content" lang="ru">
+    <table class="cmp">
+      <tr><th>Ткань</th><th>Стирка</th><th>Глажка</th><th>Особенность</th></tr>
+      <tr><td><b>Хлопок</b></td><td>до 60°, машинная</td><td>горячий утюг (•••)</td><td>прочный, может сесть в горячей воде</td></tr>
+      <tr><td><b>Шерсть</b></td><td>30°, ручная/деликат</td><td>тёплый утюг через ткань</td><td>боится горячей воды и трения — садится</td></tr>
+      <tr><td><b>Шёлк</b></td><td>30°, ручная, мягко</td><td>низкий нагрев (•)</td><td>нежный, нельзя выкручивать</td></tr>
+      <tr><td><b>Синтетика</b></td><td>30–40°, машинная</td><td>низкий нагрев (•)</td><td>быстро сохнет, боится высокой t°</td></tr>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="kk">
+    <table class="cmp">
+      <tr><th>Мата</th><th>Жуу</th><th>Үтіктеу</th><th>Ерекшелігі</th></tr>
+      <tr><td><b>Мақта</b></td><td>60°-қа дейін, машинамен</td><td>ыстық үтік (•••)</td><td>берік, ыстық суда отырып қалуы мүмкін</td></tr>
+      <tr><td><b>Жүн</b></td><td>30°, қолмен/нәзік</td><td>мата арқылы жылы үтік</td><td>ыстық су мен үйкелістен отырады</td></tr>
+      <tr><td><b>Жібек</b></td><td>30°, қолмен, жұмсақ</td><td>төмен қызу (•)</td><td>нәзік, сығуға болмайды</td></tr>
+      <tr><td><b>Синтетика</b></td><td>30–40°, машинамен</td><td>төмен қызу (•)</td><td>тез кебеді, жоғары t°-дан қорқады</td></tr>
+    </table>
+  </div>
+
+  <div class="lang-content" lang="en">
+    <table class="cmp">
+      <tr><th>Fabric</th><th>Washing</th><th>Ironing</th><th>Note</th></tr>
+      <tr><td><b>Cotton</b></td><td>up to 60°, machine</td><td>hot iron (•••)</td><td>strong; may shrink in hot water</td></tr>
+      <tr><td><b>Wool</b></td><td>30°, hand / delicate</td><td>warm iron through a cloth</td><td>shrinks with hot water and friction</td></tr>
+      <tr><td><b>Silk</b></td><td>30°, hand, gentle</td><td>low heat (•)</td><td>delicate; never wring it out</td></tr>
+      <tr><td><b>Synthetics</b></td><td>30–40°, machine</td><td>low heat (•)</td><td>dries fast; afraid of high t°</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="mb-10">
+  <h2 class="heading-font text-2xl font-extrabold mb-4" style="color:#881337">
+    <span lang="kk" class="lang-content">Пайдалы кеңестер</span>
+    <span lang="en" class="lang-content">Useful Tips</span>
+    <span lang="ru" class="lang-content">Полезные советы</span>
+  </h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="tip"><h4>🏷️ <span lang="kk" class="lang-content">Алдымен ярлық</span><span lang="en" class="lang-content">Read the label</span><span lang="ru" class="lang-content">Сначала ярлык</span></h4><p><span lang="kk" class="lang-content">Жумас бұрын күтім жапсырмасын міндетті түрде оқыңыз.</span><span lang="en" class="lang-content">Always read the care label before washing.</span><span lang="ru" class="lang-content">Перед стиркой обязательно читайте ярлык ухода.</span></p></div>
+    <div class="tip"><h4>🌀 <span lang="kk" class="lang-content">Аударып салыңыз</span><span lang="en" class="lang-content">Turn inside out</span><span lang="ru" class="lang-content">Выворачивайте</span></h4><p><span lang="kk" class="lang-content">Түсті және баспасы бар киімді теріс айналдырып жуыңыз.</span><span lang="en" class="lang-content">Wash coloured and printed items inside out.</span><span lang="ru" class="lang-content">Цветное и с принтом стирайте наизнанку.</span></p></div>
+    <div class="tip"><h4>⚡ <span lang="kk" class="lang-content">Дағды бірден</span><span lang="en" class="lang-content">Treat stains fast</span><span lang="ru" class="lang-content">Пятно — сразу</span></h4><p><span lang="kk" class="lang-content">Дақты неғұрлым тез кетірсе, соғұрлым оңай шығады.</span><span lang="en" class="lang-content">The sooner you treat a stain, the easier it comes out.</span><span lang="ru" class="lang-content">Чем быстрее убрать пятно, тем легче оно отстирается.</span></p></div>
+    <div class="tip"><h4>🧵 <span lang="kk" class="lang-content">Жөндеу жинағы</span><span lang="en" class="lang-content">A repair kit</span><span lang="ru" class="lang-content">Набор для ремонта</span></h4><p><span lang="kk" class="lang-content">Ине, жіп, түйме — үйде әрқашан болсын.</span><span lang="en" class="lang-content">Keep a needle, thread and spare buttons at home.</span><span lang="ru" class="lang-content">Держите дома иглу, нитки и запасные пуговицы.</span></p></div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="card rounded-custom p-7 md:p-8 border-l-8" style="border-color:#be123c">
+  <h3 class="heading-font text-xl font-extrabold mb-3" style="color:#881337">
+    <span lang="kk" class="lang-content">💬 Қорытынды</span>
+    <span lang="en" class="lang-content">💬 In a nutshell</span>
+    <span lang="ru" class="lang-content">💬 Главное</span>
+  </h3>
+  <p class="lead" style="max-width:64rem">
+    <span lang="kk" class="lang-content">Киімге күтім — үш қарапайым әдеттен тұрады: ярлықты оқып дұрыс жуу, таза әрі құрғақ күйде сақтау, ұсақ ақауды дер кезінде жөндеу. Осы дағдыларды меңгерген адам киімін ұзақ жаңа күйде ұстайды, ақша мен ресурс үнемдейді әрі ұқыптылыққа баулиды.</span>
+    <span lang="en" class="lang-content">Garment care comes down to three simple habits: wash correctly by reading the label, store clothes clean and dry, and repair small faults in time. Master these skills and your clothes stay new for longer — saving money and resources and teaching you to be tidy.</span>
+    <span lang="ru" class="lang-content">Уход за одеждой сводится к трём простым привычкам: правильно стирать, читая ярлык; хранить вещи чистыми и сухими; вовремя устранять мелкие дефекты. Освоив эти навыки, вы дольше сохраните одежду новой, сэкономите деньги и ресурсы и приучитесь к аккуратности.</span>
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap"><div id="lb-name" class="genre-name"></div><div id="lb-art" class="genre-cap"></div><div id="lb-desc" class="genre-desc"></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var currentLang='ru';
+function switchLang(lang){
+  if(lang==='kz')lang='kk';
+  currentLang=lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+function openLB(card){
+  document.getElementById('lb-img').src=card.querySelector('.pic img').src;
+  var n=card.querySelector('.genre-name'); document.getElementById('lb-name').innerHTML=n?n.innerHTML:'';
+  var cap=card.querySelector('.genre-cap'); document.getElementById('lb-art').innerHTML=cap?cap.innerHTML:'';
+  var d=card.querySelector('.genre-desc'); document.getElementById('lb-desc').innerHTML=d?d.innerHTML:'';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}if(s==='kz')s='kk';switchLang(s);})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

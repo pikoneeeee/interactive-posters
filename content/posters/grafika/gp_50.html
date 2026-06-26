@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вращение (Revolve)</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_emerald.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-emerald-500">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 12 · 3D-модельдеу</span>
+      <span lang="en" class="lang-content">Graphics · Section 12 · 3D Modelling</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 12 · 3D-моделирование</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🔄 Айналдыру (Revolve)</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🔄 Revolve</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-emerald-800">🔄 Вращение (Revolve)</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Профильді ось маңайында айналдыру арқылы айналмалы дене жасау.</span>
+      <span lang="en" class="lang-content">Creating a body of revolution by rotating a profile around an axis.</span>
+      <span lang="ru" class="lang-content">Создание тела вращения поворотом профиля вокруг оси.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- The concept -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">💡 Айналдыру принципі</span>
+    <span lang="en" class="lang-content">💡 The Revolve Concept</span>
+    <span lang="ru" class="lang-content">💡 Принцип вращения</span>
+  </h2>
+  <div class="blueprint p-6 mb-4">
+    <svg viewBox="0 0 620 240" style="width:100%;max-width:620px;display:block;margin:auto" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- ────── STAGE 1: Profile + axis ────── -->
+      <text x="100" y="25" font-size="11" fill="#059669" text-anchor="middle" font-weight="bold">① Профиль + ось</text>
+      <!-- Vertical axis -->
+      <line x1="75" y1="50" x2="75" y2="200" stroke="#dc2626" stroke-width="2" stroke-dasharray="10,3,2,3"/>
+      <text x="65" y="45" font-size="10" fill="#dc2626" font-weight="bold">ось</text>
+      <!-- Profile (vase shape, half) -->
+      <path d="M 75,60 L 85,60 Q 95,75 100,90 Q 110,110 105,130 Q 100,150 110,170 L 120,190 L 75,190 Z"
+            fill="rgba(5,150,105,0.25)" stroke="#059669" stroke-width="2"/>
+      <text x="125" y="120" font-size="9" fill="#059669">профиль</text>
+
+      <!-- Arrow to next -->
+      <line x1="160" y1="120" x2="225" y2="120" stroke="#7c3aed" stroke-width="2"/>
+      <polygon points="225,120 215,115 215,125" fill="#7c3aed"/>
+      <text x="192" y="110" font-size="9" fill="#7c3aed" text-anchor="middle">Revolve</text>
+
+      <!-- ────── STAGE 2: Partial rotation 180° ────── -->
+      <text x="320" y="25" font-size="11" fill="#7c3aed" text-anchor="middle" font-weight="bold">② Поворот 180°</text>
+      <!-- Axis -->
+      <line x1="320" y1="50" x2="320" y2="200" stroke="#dc2626" stroke-width="2" stroke-dasharray="10,3,2,3"/>
+      <!-- Half rotation result: same profile + curved arrow -->
+      <path d="M 320,60 L 330,60 Q 340,75 345,90 Q 355,110 350,130 Q 345,150 355,170 L 365,190 L 320,190 Z"
+            fill="rgba(124,58,237,0.25)" stroke="#7c3aed" stroke-width="2"/>
+      <!-- Mirror -->
+      <path d="M 320,60 L 310,60 Q 300,75 295,90 Q 285,110 290,130 Q 295,150 285,170 L 275,190 L 320,190 Z"
+            fill="rgba(124,58,237,0.18)" stroke="#7c3aed" stroke-width="2"/>
+      <!-- Curved arrow showing rotation -->
+      <path d="M 290,80 Q 320,55 350,80" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+      <polygon points="350,80 343,75 345,84" fill="#7c3aed"/>
+      <text x="320" y="50" font-size="9" fill="#7c3aed" text-anchor="middle">180°</text>
+
+      <!-- Arrow to final -->
+      <line x1="405" y1="120" x2="470" y2="120" stroke="#7c3aed" stroke-width="2"/>
+      <polygon points="470,120 460,115 460,125" fill="#7c3aed"/>
+      <text x="437" y="110" font-size="9" fill="#7c3aed" text-anchor="middle">360°</text>
+
+      <!-- ────── STAGE 3: Full 360° body of revolution ────── -->
+      <text x="555" y="25" font-size="11" fill="#2563eb" text-anchor="middle" font-weight="bold">③ Полное тело вращения</text>
+      <!-- Axis (visible) -->
+      <line x1="555" y1="55" x2="555" y2="200" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="10,3,2,3" opacity="0.6"/>
+
+      <!-- Top ellipse (rim) -->
+      <ellipse cx="555" cy="60" rx="10" ry="3" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <!-- Body profile (right side) -->
+      <path d="M 565,60 Q 575,75 580,90 Q 590,110 585,130 Q 580,150 590,170 L 600,190"
+            fill="none" stroke="#2563eb" stroke-width="2"/>
+      <!-- Body profile (left side, mirror) -->
+      <path d="M 545,60 Q 535,75 530,90 Q 520,110 525,130 Q 530,150 520,170 L 510,190"
+            fill="none" stroke="#2563eb" stroke-width="2"/>
+      <!-- Bottom ellipse -->
+      <ellipse cx="555" cy="190" rx="45" ry="10" fill="rgba(37,99,235,0.30)" stroke="#2563eb" stroke-width="2"/>
+      <!-- Middle ellipse (waist) -->
+      <ellipse cx="555" cy="130" rx="30" ry="7" fill="none" stroke="#2563eb" stroke-width="1.2" opacity="0.5"/>
+      <!-- Fill body -->
+      <path d="M 555,60 Q 575,75 580,90 Q 590,110 585,130 Q 580,150 590,170 L 600,190 L 510,190 L 520,170 Q 530,150 525,130 Q 520,110 530,90 Q 535,75 555,60 Z"
+            fill="rgba(37,99,235,0.12)" stroke="none"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Examples -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">🎯 Қандай бөлшектер айналу денесі?</span>
+    <span lang="en" class="lang-content">🎯 What Parts are Bodies of Revolution?</span>
+    <span lang="ru" class="lang-content">🎯 Какие детали — тела вращения?</span>
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div class="tile"><div class="tile-icon">🔩</div><p class="font-bold text-emerald-800 mt-2 text-sm"><span lang="kk" class="lang-content">Білік</span><span lang="en" class="lang-content">Shaft</span><span lang="ru" class="lang-content">Вал</span></p></div>
+    <div class="tile"><div class="tile-icon">⚙️</div><p class="font-bold text-emerald-800 mt-2 text-sm"><span lang="kk" class="lang-content">Втулка</span><span lang="en" class="lang-content">Bushing</span><span lang="ru" class="lang-content">Втулка</span></p></div>
+    <div class="tile"><div class="tile-icon">🥫</div><p class="font-bold text-emerald-800 mt-2 text-sm"><span lang="kk" class="lang-content">Цилиндр</span><span lang="en" class="lang-content">Cylinder</span><span lang="ru" class="lang-content">Цилиндр</span></p></div>
+    <div class="tile"><div class="tile-icon">🏺</div><p class="font-bold text-emerald-800 mt-2 text-sm"><span lang="kk" class="lang-content">Кувшин</span><span lang="en" class="lang-content">Vase</span><span lang="ru" class="lang-content">Ваза</span></p></div>
+    <div class="tile"><div class="tile-icon">💡</div><p class="font-bold text-emerald-800 mt-2 text-sm"><span lang="kk" class="lang-content">Шам</span><span lang="en" class="lang-content">Lamp</span><span lang="ru" class="lang-content">Лампа</span></p></div>
+    <div class="tile"><div class="tile-icon">🍷</div><p class="font-bold text-emerald-800 mt-2 text-sm"><span lang="kk" class="lang-content">Бокал</span><span lang="en" class="lang-content">Wine glass</span><span lang="ru" class="lang-content">Бокал</span></p></div>
+  </div>
+</section>
+
+<!-- Rules -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-emerald-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">⚠️ Маңызды ережелер</span>
+    <span lang="en" class="lang-content">⚠️ Important Rules</span>
+    <span lang="ru" class="lang-content">⚠️ Важные правила</span>
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="card rounded-custom p-5 border-l-4 border-green-500">
+      <h3 class="font-bold text-green-700 mb-3">✅ <span lang="kk" class="lang-content">Дұрыс</span><span lang="en" class="lang-content">Correct</span><span lang="ru" class="lang-content">Правильно</span></h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>✔ <span lang="kk" class="lang-content">Профиль <b>осьті кеспеуі тиіс</b> (тек жанаса алады)</span><span lang="en" class="lang-content">Profile <b>must not cross</b> the axis (only touch)</span><span lang="ru" class="lang-content">Профиль <b>не должен пересекать</b> ось (только касаться)</span></li>
+        <li>✔ <span lang="kk" class="lang-content">Профиль <b>жабық</b> болуы керек</span><span lang="en" class="lang-content">Profile must be <b>closed</b></span><span lang="ru" class="lang-content">Профиль должен быть <b>замкнут</b></span></li>
+        <li>✔ <span lang="kk" class="lang-content">Ось — сплошная сызық немесе эскиз сызығы</span><span lang="en" class="lang-content">Axis — a line or sketch line</span><span lang="ru" class="lang-content">Ось — линия или линия эскиза</span></li>
+      </ul>
+    </div>
+    <div class="card rounded-custom p-5 border-l-4 border-red-500">
+      <h3 class="font-bold text-red-700 mb-3">❌ <span lang="kk" class="lang-content">Қате</span><span lang="en" class="lang-content">Wrong</span><span lang="ru" class="lang-content">Ошибки</span></h3>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li>✖ <span lang="kk" class="lang-content">Профиль ось арқылы өтсе → нөлдік қалыңдық</span><span lang="en" class="lang-content">Profile crossing axis → zero-thickness body</span><span lang="ru" class="lang-content">Профиль через ось → нулевая толщина</span></li>
+        <li>✖ <span lang="kk" class="lang-content">Профиль ашық → беттің моделі (Surface) шығады</span><span lang="en" class="lang-content">Open profile → surface only (not solid)</span><span lang="ru" class="lang-content">Открытый профиль → только поверхность</span></li>
+        <li>✖ <span lang="kk" class="lang-content">Бірнеше тұйық контур → екі-ұшты модель</span><span lang="en" class="lang-content">Multiple closed loops → ambiguous result</span><span lang="ru" class="lang-content">Несколько замкнутых контуров → ошибка</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="card-emerald rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Айналдыру = 2D × 360°</span>
+    <span lang="en" class="lang-content">🧠 Revolve = 2D × 360°</span>
+    <span lang="ru" class="lang-content">🧠 Revolve = 2D × 360°</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">90° / 180° / 270° / 360°</span>
+        <span lang="en" class="lang-content">90° / 180° / 270° / 360°</span>
+        <span lang="ru" class="lang-content">90° / 180° / 270° / 360°</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Кез келген бұрыш мүмкін</span>
+        <span lang="en" class="lang-content">Any angle possible</span>
+        <span lang="ru" class="lang-content">Возможен любой угол</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Профиль + Ось</span>
+        <span lang="en" class="lang-content">Profile + Axis</span>
+        <span lang="ru" class="lang-content">Профиль + Ось</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Екі компонент — бір операция</span>
+        <span lang="en" class="lang-content">Two components — one operation</span>
+        <span lang="ru" class="lang-content">Два компонента — одна операция</span>
+      </p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">
+        <span lang="kk" class="lang-content">Айналу денелері</span>
+        <span lang="en" class="lang-content">Bodies of revolution</span>
+        <span lang="ru" class="lang-content">Тела вращения</span>
+      </p>
+      <p class="text-emerald-100">
+        <span lang="kk" class="lang-content">Біліктер, втулкалар, ыдыстар</span>
+        <span lang="en" class="lang-content">Shafts, bushings, vessels</span>
+        <span lang="ru" class="lang-content">Валы, втулки, сосуды</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){const c=document.getElementById('poster-container');c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});try{localStorage.setItem('poster_lang',lang);}catch(e){}}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body></html>

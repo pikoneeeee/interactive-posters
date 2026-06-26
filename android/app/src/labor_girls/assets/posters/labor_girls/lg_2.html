@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Натюрморт. Декоративный национальный натюрморт</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_lg_style.css">
+<style>
+/* light-direction demo */
+#lightDemo .sh,#lightDemo .hl,#lightDemo .sun{display:none;}
+#lightDemo.light-left .sh-l,#lightDemo.light-left .hl-l,#lightDemo.light-left .sun-l{display:inline;}
+#lightDemo.light-top  .sh-t,#lightDemo.light-top  .hl-t,#lightDemo.light-top  .sun-t{display:inline;}
+#lightDemo.light-right .sh-r,#lightDemo.light-right .hl-r,#lightDemo.light-right .sun-r{display:inline;}
+/* drawing-stages demo */
+#stageDemo .l-constr,#stageDemo .l-outline,#stageDemo .l-shade,#stageDemo .l-color{display:none;}
+#stageDemo.s1 .l-constr{display:inline;}
+#stageDemo.s2 .l-outline{display:inline;}
+#stageDemo.s3 .l-outline,#stageDemo.s3 .l-shade{display:inline;}
+#stageDemo.s4 .l-outline,#stageDemo.s4 .l-shade,#stageDemo.s4 .l-color{display:inline;}
+.sd{display:none;}
+#stageWrap.show1 .sd1,#stageWrap.show2 .sd2,#stageWrap.show3 .sd3,#stageWrap.show4 .sd4{display:block;}
+.demo-btn{padding:10px 18px;border-radius:999px;border:2px solid rgba(190,18,60,.35);background:#fff;
+  color:#881337;font-weight:700;cursor:pointer;transition:all .15s;font-size:1rem;}
+.demo-btn:hover{background:rgba(190,18,60,.07);}
+.demo-btn.active{background:#be123c;color:#fff;border-color:#be123c;}
+.term{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.5rem;}
+.term .dot{width:.85rem;height:.85rem;border-radius:50%;margin-top:.3rem;flex-shrink:0;}
+</style>
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<!-- HEADER -->
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8" style="border-color:#be123c">
+  <div>
+    <p class="text-rose-400 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Көркем еңбек · 1-бөлім · Бейнелеу өнері</span>
+      <span lang="en" class="lang-content">Art &amp; Craft · Section 1 · Visual Arts</span>
+      <span lang="ru" class="lang-content">Художественный труд · Раздел 1 · Визуальное искусство</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🍇 Натюрморт. Сәндік натюрморт</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🍇 Still Life. Decorative Still Life</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold" style="color:#881337">🍇 Натюрморт. Декоративный натюрморт</h1>
+    <p class="mt-2 text-stone-600 text-base">
+      <span lang="kk" class="lang-content">«Заттардың тыныш тіршілігі» — өнердегі заттар әлемі.</span>
+      <span lang="en" class="lang-content">“The quiet life of things” — the world of objects in art.</span>
+      <span lang="ru" class="lang-content">«Тихая жизнь вещей» — мир предметов в искусстве.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="card card-accent rounded-custom p-6 mb-8">
+  <p class="text-stone-700 text-base md:text-lg leading-relaxed">
+    <span lang="kk" class="lang-content"><b>Натюрморт</b> (фр. <i>nature morte</i> — «өлі табиғат», нид. <i>stilleven</i> — «тыныш тіршілік») — жансыз заттарды бейнелейтін жанр: гүлдер, жемістер, ыдыс-аяқ, тұрмыстық бұйымдар.</span>
+    <span lang="en" class="lang-content"><b>Still life</b> (Fr. <i>nature morte</i> — “dead nature”, Du. <i>stilleven</i> — “still life”) is the genre of inanimate objects: flowers, fruit, dishes and household items.</span>
+    <span lang="ru" class="lang-content"><b>Натюрморт</b> (фр. <i>nature morte</i> — «мёртвая природа», нидерл. <i>stilleven</i> — «тихая жизнь») — жанр, посвящённый неодушевлённым предметам: цветам, плодам, посуде, предметам быта.</span>
+  </p>
+</section>
+
+<!-- TYPES -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-5" style="color:#881337">
+    <span lang="kk" class="lang-content">🗂️ Натюрморт түрлері</span>
+    <span lang="en" class="lang-content">🗂️ Types of Still Life</span>
+    <span lang="ru" class="lang-content">🗂️ Виды натюрморта</span>
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div class="tile"><div class="tile-icon">🌷</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Гүлді</span><span lang="en" class="lang-content">Floral</span><span lang="ru" class="lang-content">Цветочный</span></p></div>
+    <div class="tile"><div class="tile-icon">🍎</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Жеміс-көкөніс</span><span lang="en" class="lang-content">Fruit</span><span lang="ru" class="lang-content">Плодовый</span></p></div>
+    <div class="tile"><div class="tile-icon">🥖</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Ас үй</span><span lang="en" class="lang-content">Kitchen</span><span lang="ru" class="lang-content">Кухонный</span></p></div>
+    <div class="tile"><div class="tile-icon">⚱️</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Тұрмыстық</span><span lang="en" class="lang-content">Objects</span><span lang="ru" class="lang-content">Бытовой</span></p></div>
+    <div class="tile"><div class="tile-icon">🎻</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Музыкалық</span><span lang="en" class="lang-content">Musical</span><span lang="ru" class="lang-content">Музыкальный</span></p></div>
+    <div class="tile"><div class="tile-icon">📚</div><p class="heading-font font-bold mt-2 text-sm" style="color:#881337"><span lang="kk" class="lang-content">Оқу</span><span lang="en" class="lang-content">Study</span><span lang="ru" class="lang-content">Учебный</span></p></div>
+  </div>
+</section>
+
+<!-- MASTERPIECES -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">🖼️ Әлемдік натюрморт үлгілері</span>
+    <span lang="en" class="lang-content">🖼️ Masterpiece Still Lifes</span>
+    <span lang="ru" class="lang-content">🖼️ Шедевры натюрморта</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">🔍 Үлкейту үшін кескінді басыңыз.</span>
+    <span lang="en" class="lang-content">🔍 Tap a painting to enlarge it.</span>
+    <span lang="ru" class="lang-content">🔍 Нажмите на картину, чтобы увеличить.</span>
+  </p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/naturmort.jpg" alt="Корзина с фруктами"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Жеміс натюрморты</span><span lang="en" class="lang-content">Fruit still life</span><span lang="ru" class="lang-content">Плодовый натюрморт</span></div>
+        <div class="genre-cap">Caravaggio — «Basket of Fruit»</div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Жемістердің көлемі мен табиғилығы.</span><span lang="en" class="lang-content">Volume and realism of the fruit.</span><span lang="ru" class="lang-content">Объём и натуральность плодов.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/nm_flowers.jpg" alt="Букет цветов"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Гүлді натюрморт</span><span lang="en" class="lang-content">Floral still life</span><span lang="ru" class="lang-content">Цветочный натюрморт</span></div>
+        <div class="genre-cap">A. Bosschaert — «Flower Still Life»</div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Гүлдердің нәзіктігі мен бөлшектері.</span><span lang="en" class="lang-content">Delicacy and detail of flowers.</span><span lang="ru" class="lang-content">Хрупкость и детализация цветов.</span></div>
+      </div>
+    </div>
+    <div class="genre-card" onclick="openLB(this)">
+      <div class="pic"><img src="../../assets/labor_girls/nm_dutch.jpg" alt="Завтрак"></div>
+      <div class="body">
+        <div class="genre-name"><span lang="kk" class="lang-content">Ас үй натюрморты</span><span lang="en" class="lang-content">Breakfast piece</span><span lang="ru" class="lang-content">Кухонный («завтрак»)</span></div>
+        <div class="genre-cap">P. Claesz — «Ontbijt» (Breakfast)</div>
+        <div class="genre-desc"><span lang="kk" class="lang-content">Заттардың фактурасы мен жарығы.</span><span lang="en" class="lang-content">Texture and light of objects.</span><span lang="ru" class="lang-content">Фактура и свет предметов.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHT DEMO -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">💡 Жарық, көлеңке, көлем</span>
+    <span lang="en" class="lang-content">💡 Light, Shadow, Volume</span>
+    <span lang="ru" class="lang-content">💡 Свет, тень, объём</span>
+  </h2>
+  <p class="text-stone-500 mb-5">
+    <span lang="kk" class="lang-content">Бір көзден түскен жарық затқа көлем береді. Шар мен алмадағы жарық пен көлеңкені қараңыз.</span>
+    <span lang="en" class="lang-content">Light from a single source gives an object volume. Look at the light and shadow on the sphere and apple.</span>
+    <span lang="ru" class="lang-content">Свет от одного источника лепит объём. Рассмотрите свет и тень на шаре и яблоке.</span>
+  </p>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div>
+      <div class="art-frame">
+        <div class="art-mat" style="height:330px"><img src="../../assets/labor_girls/gen_light.jpg" alt="Свет и тень на шаре и яблоке"></div>
+      </div>
+    </div>
+    <div>
+      <p class="heading-font font-bold mb-3" style="color:#881337">
+        <span lang="kk" class="lang-content">Жарық-көлеңкенің 5 элементі</span>
+        <span lang="en" class="lang-content">5 elements of light &amp; shade</span>
+        <span lang="ru" class="lang-content">5 элементов светотени</span>
+      </p>
+      <div class="term"><span class="dot" style="background:#fff;border:1px solid #d6c2a8"></span><span><b><span lang="kk" class="lang-content">Жарқырау (блик)</span><span lang="en" class="lang-content">Highlight</span><span lang="ru" class="lang-content">Блик</span></b> — <span lang="kk" class="lang-content">ең жарық нүкте.</span><span lang="en" class="lang-content">the brightest spot.</span><span lang="ru" class="lang-content">самое яркое пятно.</span></span></div>
+      <div class="term"><span class="dot" style="background:#f0d9b5"></span><span><b><span lang="kk" class="lang-content">Жарық</span><span lang="en" class="lang-content">Light</span><span lang="ru" class="lang-content">Свет</span></b> — <span lang="kk" class="lang-content">жарық түсетін бет.</span><span lang="en" class="lang-content">the lit surface.</span><span lang="ru" class="lang-content">освещённая поверхность.</span></span></div>
+      <div class="term"><span class="dot" style="background:#c9a16a"></span><span><b><span lang="kk" class="lang-content">Жартылай көлеңке</span><span lang="en" class="lang-content">Half-tone</span><span lang="ru" class="lang-content">Полутень</span></b> — <span lang="kk" class="lang-content">жарықтан көлеңкеге өту.</span><span lang="en" class="lang-content">transition to shadow.</span><span lang="ru" class="lang-content">переход к тени.</span></span></div>
+      <div class="term"><span class="dot" style="background:#6f4a22"></span><span><b><span lang="kk" class="lang-content">Өз көлеңкесі</span><span lang="en" class="lang-content">Form shadow</span><span lang="ru" class="lang-content">Собственная тень</span></b> — <span lang="kk" class="lang-content">заттың көлеңкелі жағы.</span><span lang="en" class="lang-content">the object's dark side.</span><span lang="ru" class="lang-content">тёмная сторона предмета.</span></span></div>
+      <div class="term"><span class="dot" style="background:#3f2a16"></span><span><b><span lang="kk" class="lang-content">Түсетін көлеңке</span><span lang="en" class="lang-content">Cast shadow</span><span lang="ru" class="lang-content">Падающая тень</span></b> — <span lang="kk" class="lang-content">заттан үстелге түседі.</span><span lang="en" class="lang-content">cast onto the table.</span><span lang="ru" class="lang-content">падает от предмета на стол.</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES DEMO -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">✏️ Натюрморт салу кезеңдері</span>
+    <span lang="en" class="lang-content">✏️ Stages of Drawing a Still Life</span>
+    <span lang="ru" class="lang-content">✏️ Этапы рисования натюрморта</span>
+  </h2>
+  <div id="stageWrap" class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center show1">
+    <div class="blueprint" style="background:#fbf3e8;border:1px solid rgba(190,18,60,.15);border-radius:1rem;padding:1rem">
+      <svg id="stageDemo" class="s1" viewBox="0 0 360 280" style="width:100%;max-width:380px;display:block;margin:auto">
+        <line x1="0" y1="232" x2="360" y2="232" stroke="#b9854f" stroke-width="3"/>
+        <!-- COLOR fills (stage 4) -->
+        <g class="l-color">
+          <ellipse cx="150" cy="183" rx="44" ry="54" fill="#d9a066"/>
+          <rect x="137" y="116" width="26" height="38" rx="4" fill="#d9a066"/>
+          <circle cx="248" cy="200" r="28" fill="#c0392b"/>
+        </g>
+        <!-- SHADE (stage 3+) -->
+        <g class="l-shade" stroke="#7c5a33" stroke-width="1.4" opacity="0.55">
+          <line x1="168" y1="150" x2="186" y2="210"/><line x1="178" y1="150" x2="190" y2="205"/>
+          <line x1="186" y1="160" x2="194" y2="200"/>
+          <line x1="262" y1="184" x2="270" y2="214"/><line x1="268" y1="190" x2="272" y2="212"/>
+          <ellipse cx="180" cy="236" rx="70" ry="8" fill="rgba(60,30,20,0.18)" stroke="none"/>
+        </g>
+        <!-- OUTLINE (stage 2+) -->
+        <g class="l-outline" fill="none" stroke="#3f2a2e" stroke-width="2.5">
+          <ellipse cx="150" cy="183" rx="44" ry="54"/>
+          <rect x="137" y="116" width="26" height="38" rx="4"/>
+          <ellipse cx="150" cy="116" rx="15" ry="5"/>
+          <circle cx="248" cy="200" r="28"/>
+          <path d="M248 174 q4 -9 11 -11" stroke-width="2.5"/>
+        </g>
+        <!-- CONSTRUCTION (stage 1) -->
+        <g class="l-constr" fill="none" stroke="#be123c" stroke-width="1.4" stroke-dasharray="5,4">
+          <rect x="104" y="108" width="92" height="128"/>
+          <line x1="150" y1="100" x2="150" y2="244"/>
+          <ellipse cx="150" cy="116" rx="15" ry="5"/>
+          <ellipse cx="150" cy="183" rx="44" ry="54"/>
+          <rect x="220" y="172" width="56" height="56"/>
+          <circle cx="248" cy="200" r="28"/>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <button class="demo-btn active" id="st1" onclick="setStage(1)">1</button>
+        <button class="demo-btn" id="st2" onclick="setStage(2)">2</button>
+        <button class="demo-btn" id="st3" onclick="setStage(3)">3</button>
+        <button class="demo-btn" id="st4" onclick="setStage(4)">4</button>
+      </div>
+      <div class="sd sd1">
+        <div class="genre-name"><span lang="kk" class="lang-content">1. Орналастыру (компоновка)</span><span lang="en" class="lang-content">1. Layout</span><span lang="ru" class="lang-content">1. Компоновка</span></div>
+        <p class="genre-desc"><span lang="kk" class="lang-content">Заттарды параққа орналастырамыз, жалпы өлшем мен осьтерді белгілейміз.</span><span lang="en" class="lang-content">Place the objects on the sheet; mark overall size and axes.</span><span lang="ru" class="lang-content">Размещаем предметы на листе, намечаем общий размер и оси.</span></p>
+      </div>
+      <div class="sd sd2">
+        <div class="genre-name"><span lang="kk" class="lang-content">2. Құрылымдау</span><span lang="en" class="lang-content">2. Construction</span><span lang="ru" class="lang-content">2. Построение</span></div>
+        <p class="genre-desc"><span lang="kk" class="lang-content">Пішіндерді дәл саламыз: эллипстер, пропорциялар, контур.</span><span lang="en" class="lang-content">Build accurate shapes: ellipses, proportions, contour.</span><span lang="ru" class="lang-content">Точно строим формы: эллипсы, пропорции, контур.</span></p>
+      </div>
+      <div class="sd sd3">
+        <div class="genre-name"><span lang="kk" class="lang-content">3. Жарық пен көлеңке</span><span lang="en" class="lang-content">3. Light &amp; shadow</span><span lang="ru" class="lang-content">3. Свет и тень</span></div>
+        <p class="genre-desc"><span lang="kk" class="lang-content">Көлеңкелерді саулемен саламыз, көлем береміз.</span><span lang="en" class="lang-content">Add hatching and shadows to create volume.</span><span lang="ru" class="lang-content">Штриховкой кладём тени, создаём объём.</span></p>
+      </div>
+      <div class="sd sd4">
+        <div class="genre-name"><span lang="kk" class="lang-content">4. Түс пен бөлшектер</span><span lang="en" class="lang-content">4. Colour &amp; details</span><span lang="ru" class="lang-content">4. Цвет и детали</span></div>
+        <p class="genre-desc"><span lang="kk" class="lang-content">Түс саламыз, фактура мен ұсақ бөлшектерді пысықтаймыз.</span><span lang="en" class="lang-content">Apply colour, refine texture and small details.</span><span lang="ru" class="lang-content">Накладываем цвет, прорабатываем фактуру и детали.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECORATIVE NATIONAL -->
+<section class="mb-10">
+  <h2 class="heading-font text-xl uppercase tracking-widest mb-2" style="color:#881337">
+    <span lang="kk" class="lang-content">🇰🇿 Сәндік ұлттық натюрморт</span>
+    <span lang="en" class="lang-content">🇰🇿 Decorative National Still Life</span>
+    <span lang="ru" class="lang-content">🇰🇿 Декоративный национальный натюрморт</span>
+  </h2>
+  <div class="card rounded-custom p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+    <div class="flex flex-col items-center justify-center">
+      <div class="art-frame" style="max-width:430px;width:100%">
+        <div class="art-mat" style="height:330px"><img src="../../assets/labor_girls/gen_decor.jpg" alt="Казахский декоративный натюрморт"></div>
+      </div>
+      <p class="text-center mt-2" style="color:#a16207;font-size:.85rem;font-style:italic">
+        <span lang="kk" class="lang-content">Сәндік натюрморт: стильдеу, жазықтық, ою-өрнек</span>
+        <span lang="en" class="lang-content">Decorative still life: stylization, flatness, ornament</span>
+        <span lang="ru" class="lang-content">Декоративный натюрморт: стилизация, плоскость, орнамент</span>
+      </p>
+    </div>
+    <div>
+      <p class="text-stone-700 mb-4">
+        <span lang="kk" class="lang-content"><b>Сәндік натюрморт</b> — заттар шынайы емес, <b>стильденген</b> түрде беріледі: жазық, әсем, өрнекті.</span>
+        <span lang="en" class="lang-content"><b>A decorative still life</b> shows objects not realistically but <b>stylized</b>: flat, ornamental, decorative.</span>
+        <span lang="ru" class="lang-content"><b>Декоративный натюрморт</b> изображает предметы не реалистично, а <b>стилизованно</b>: плоско, узорно, декоративно.</span>
+      </p>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="card-accent rounded-xl p-3">
+          <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Шынайы</span><span lang="en" class="lang-content">Realistic</span><span lang="ru" class="lang-content">Реалистичный</span></p>
+          <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Көлем, жарық-көлеңке, перспектива.</span><span lang="en" class="lang-content">Volume, light &amp; shade, perspective.</span><span lang="ru" class="lang-content">Объём, светотень, перспектива.</span></p>
+        </div>
+        <div class="card-accent rounded-xl p-3">
+          <p class="font-bold text-sm mb-1" style="color:#881337"><span lang="kk" class="lang-content">Сәндік</span><span lang="en" class="lang-content">Decorative</span><span lang="ru" class="lang-content">Декоративный</span></p>
+          <p class="text-stone-600 text-xs"><span lang="kk" class="lang-content">Жазықтық, симметрия, ою-өрнек, локаль түс.</span><span lang="en" class="lang-content">Flatness, symmetry, ornament, local colour.</span><span lang="ru" class="lang-content">Плоскость, симметрия, орнамент, локальный цвет.</span></p>
+        </div>
+      </div>
+      <div class="mt-3">
+        <span class="badge"><span lang="kk" class="lang-content">Ою-өрнек</span><span lang="en" class="lang-content">Ornament</span><span lang="ru" class="lang-content">Орнамент</span></span>
+        <span class="badge"><span lang="kk" class="lang-content">Симметрия</span><span lang="en" class="lang-content">Symmetry</span><span lang="ru" class="lang-content">Симметрия</span></span>
+        <span class="badge"><span lang="kk" class="lang-content">Жазықтық</span><span lang="en" class="lang-content">Flatness</span><span lang="ru" class="lang-content">Плоскостность</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="card-rose rounded-custom p-8">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Key Takeaways</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Натюрморт</span><span lang="en" class="lang-content">Still life</span><span lang="ru" class="lang-content">Натюрморт</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Жансыз заттар әлемі.</span><span lang="en" class="lang-content">The world of inanimate objects.</span><span lang="ru" class="lang-content">Мир неодушевлённых предметов.</span></p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">Жарық → көлем</span><span lang="en" class="lang-content">Light → volume</span><span lang="ru" class="lang-content">Свет → объём</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Блик, жарық, көлеңке, рефлекс.</span><span lang="en" class="lang-content">Highlight, light, shadow, reflex.</span><span lang="ru" class="lang-content">Блик, свет, тень, рефлекс.</span></p>
+    </div>
+    <div class="bg-white/15 rounded-xl p-4">
+      <p class="font-bold mb-1"><span lang="kk" class="lang-content">4 кезең</span><span lang="en" class="lang-content">4 stages</span><span lang="ru" class="lang-content">4 этапа</span></p>
+      <p class="text-rose-100 text-sm"><span lang="kk" class="lang-content">Орналастыру → құрылым → жарық-көлеңке → түс.</span><span lang="en" class="lang-content">Layout → construction → shading → colour.</span><span lang="ru" class="lang-content">Компоновка → построение → светотень → цвет.</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lb" onclick="closeLB()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLB()" aria-label="close">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-cap">
+      <div id="lb-name" class="genre-name"></div>
+      <div id="lb-art" class="genre-cap"></div>
+      <div id="lb-desc" class="genre-desc"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- language ---------- */
+var currentLang = 'ru';
+function switchLang(lang){
+  if(lang==='kz') lang='kk';
+  currentLang = lang;
+  var c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.lang===lang); });
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+
+/* ---------- light direction demo ---------- */
+function setLight(dir){
+  document.getElementById('lightDemo').setAttribute('class','light-'+dir);
+  ['left','top','right'].forEach(function(d){
+    document.getElementById('lb-'+d).classList.toggle('active', d===dir);
+  });
+}
+
+/* ---------- drawing stages demo ---------- */
+function setStage(n){
+  document.getElementById('stageDemo').setAttribute('class','s'+n);
+  var w=document.getElementById('stageWrap');
+  w.className = w.className.replace(/show\d/,'show'+n);
+  for(var i=1;i<=4;i++){ document.getElementById('st'+i).classList.toggle('active', i===n); }
+}
+
+/* ---------- lightbox ---------- */
+function openLB(card){
+  document.getElementById('lb-img').src = card.querySelector('.pic img').src;
+  document.getElementById('lb-name').innerHTML = card.querySelector('.genre-name').innerHTML;
+  document.getElementById('lb-art').innerHTML  = card.querySelector('.genre-cap').innerHTML;
+  document.getElementById('lb-desc').innerHTML = card.querySelector('.genre-desc').innerHTML;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB(){ document.getElementById('lightbox').classList.remove('open'); }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLB(); });
+
+/* ---------- init ---------- */
+(function(){
+  var s='ru'; try{s=localStorage.getItem('poster_lang')||'ru';}catch(e){}
+  if(s==='kz')s='kk';
+  if(typeof switchLang==='function') switchLang(s);
+})();
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>

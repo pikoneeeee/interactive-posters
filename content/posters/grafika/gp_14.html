@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Спирали и технические кривые</title>
+<link rel="stylesheet" href="../../libs/tailwind.min.css">
+<link rel="stylesheet" href="../../libs/fonts.css">
+<link rel="stylesheet" href="_gp_style_teal.css">
+</head>
+<body class="p-5 md:p-10">
+<div id="poster-container" class="lang-ru" style="max-width:1400px;margin:auto">
+
+<header class="card rounded-custom p-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-l-8 border-teal-600">
+  <div>
+    <p class="text-slate-500 font-light tracking-widest text-sm uppercase mb-2">
+      <span lang="kk" class="lang-content">Графика · Бөлім 2 · Геометриялық салулар</span>
+      <span lang="en" class="lang-content">Graphics · Section 2 · Geometric Constructions</span>
+      <span lang="ru" class="lang-content">Графика · Раздел 2 · Геометрические построения</span>
+    </p>
+    <h1 lang="kk" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🌀 Спиральдар және техникалық қисықтар</h1>
+    <h1 lang="en" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🌀 Spirals and Technical Curves</h1>
+    <h1 lang="ru" class="lang-content heading-font text-3xl md:text-4xl font-extrabold text-teal-800">🌀 Спирали и технические кривые</h1>
+    <p class="mt-2 text-slate-600">
+      <span lang="kk" class="lang-content">Архимед спиралі мен эвольвента — нүктелер бойынша салу және техникада қолданылуы.</span>
+      <span lang="en" class="lang-content">Archimedean spiral and involute — point-by-point construction and technical applications.</span>
+      <span lang="ru" class="lang-content">Спираль Архимеда и эвольвента — построение по точкам и применение в технике.</span>
+    </p>
+  </div>
+  <div class="flex gap-2 flex-shrink-0">
+    <button onclick="switchLang('ru')" data-lang="ru" class="lang-btn active">RU</button>
+    <button onclick="switchLang('kk')" data-lang="kk" class="lang-btn">KZ</button>
+    <button onclick="switchLang('en')" data-lang="en" class="lang-btn">EN</button>
+  </div>
+</header>
+
+<!-- Archimedes spiral -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">1️⃣ Архимед спиралі</span>
+    <span lang="en" class="lang-content">1️⃣ Archimedean Spiral</span>
+    <span lang="ru" class="lang-content">1️⃣ Спираль Архимеда</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 300" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Centre -->
+        <circle cx="150" cy="150" r="3" fill="#0d9488"/>
+        <!-- Concentric reference circles -->
+        <circle cx="150" cy="150" r="30" fill="none" stroke="rgba(13,148,136,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+        <circle cx="150" cy="150" r="60" fill="none" stroke="rgba(13,148,136,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+        <circle cx="150" cy="150" r="90" fill="none" stroke="rgba(13,148,136,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+        <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(13,148,136,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- Radial reference lines -->
+        <line x1="150" y1="150" x2="270" y2="150" stroke="rgba(13,148,136,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="150" y1="150" x2="150" y2="30" stroke="rgba(13,148,136,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="150" y1="150" x2="30" y2="150" stroke="rgba(13,148,136,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="150" y1="150" x2="150" y2="270" stroke="rgba(13,148,136,0.15)" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- Diagonal ref lines -->
+        <line x1="150" y1="150" x2="235" y2="65" stroke="rgba(13,148,136,0.10)" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="150" y1="150" x2="65" y2="65" stroke="rgba(13,148,136,0.10)" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="150" y1="150" x2="65" y2="235" stroke="rgba(13,148,136,0.10)" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="150" y1="150" x2="235" y2="235" stroke="rgba(13,148,136,0.10)" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <!-- Spiral path (r = a*θ, one full turn then part of second) -->
+        <path d="M 150,150
+          C 165,148 178,140 180,120
+          C 182,100 170,82 150,78
+          C 130,75 112,87 108,108
+          C 104,128 116,148 136,154
+          C 155,160 176,153 185,134
+          C 194,115 188,90 172,77
+          C 156,64 133,62 115,73
+          C 96,84 88,105 95,125
+          C 102,145 122,158 144,160
+          C 166,163 186,152 196,132
+          C 206,112 202,86 187,71
+          C 171,55 148,50 126,58
+          C 104,66 90,88 91,112"
+          fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Points on spiral -->
+        <circle cx="180" cy="150" r="4" fill="#ef4444"/>
+        <circle cx="150" cy="90" r="4" fill="#ef4444"/>
+        <circle cx="110" cy="150" r="4" fill="#ef4444"/>
+        <circle cx="150" cy="210" r="4" fill="#ef4444"/>
+        <!-- Labels -->
+        <text x="183" y="148" font-size="9" fill="#ef4444">P₁(a)</text>
+        <text x="152" y="85" font-size="9" fill="#ef4444">P₂(2a)</text>
+        <text x="82" y="148" font-size="9" fill="#ef4444">P₃(3a)</text>
+        <text x="152" y="222" font-size="9" fill="#ef4444">P₄(4a)</text>
+        <!-- Step annotation -->
+        <text x="158" y="166" font-size="8" fill="#0d9488">шаг a</text>
+      </svg>
+    </div>
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-teal-700">Архимед спиралі</b> — тұрақты жылдамдықпен айнала отырып, ортадан тұрақты жылдамдықпен алшақтайтын нүктенің жолы. r = a·θ, мұндағы a — бір айналымдағы қадам.</span>
+        <span lang="en" class="lang-content"><b class="text-teal-700">Archimedean spiral</b> — the locus of a point moving away from the centre at a constant rate while rotating at a constant angular speed. r = a·θ, where a is the pitch per revolution.</span>
+        <span lang="ru" class="lang-content"><b class="text-teal-700">Спираль Архимеда</b> — траектория точки, равномерно удаляющейся от центра при равномерном вращении. r = a·θ, где a — шаг за один оборот.</span>
+      </p>
+      <h4 class="font-bold text-teal-800 mb-3 text-sm">
+        <span lang="kk" class="lang-content">📋 Нүктелер бойынша салу алгоритмі:</span>
+        <span lang="en" class="lang-content">📋 Point-by-point construction:</span>
+        <span lang="ru" class="lang-content">📋 Алгоритм построения по точкам:</span>
+      </h4>
+      <ol class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2"><span class="step-num text-xs">1</span><span lang="kk" class="lang-content">Орталықтан бастап <b>«a»</b> қадамын анықтау (1 айналымдағы радиустың өсімі)</span><span lang="en" class="lang-content">Choose pitch <b>a</b> (radius increment per full revolution)</span><span lang="ru" class="lang-content">Выбрать шаг <b>a</b> (приращение радиуса за один оборот)</span></li>
+        <li class="flex gap-2"><span class="step-num text-xs">2</span><span lang="kk" class="lang-content">Шеңберді 8 (немесе 12) тең бөлікке бөлу → P₁, P₂, ... нүктелерін алу</span><span lang="en" class="lang-content">Divide the circle into 8 (or 12) equal parts → get points P₁, P₂ …</span><span lang="ru" class="lang-content">Разделить окружность на 8 (12) равных частей → точки P₁, P₂…</span></li>
+        <li class="flex gap-2"><span class="step-num text-xs">3</span><span lang="kk" class="lang-content">1-ші бөлікте — a/8 радиусы, 2-шіде — 2a/8, т.с.с.</span><span lang="en" class="lang-content">At 1st division — radius a/8; at 2nd — 2a/8, etc.</span><span lang="ru" class="lang-content">На 1-м делении — радиус a/8; на 2-м — 2a/8, и т.д.</span></li>
+        <li class="flex gap-2"><span class="step-num text-xs">4</span><span lang="kk" class="lang-content">Нүктелерді лекалмен тегіс сызықпен жалғастыру</span><span lang="en" class="lang-content">Connect points smoothly with a french curve</span><span lang="ru" class="lang-content">Соединить точки плавной кривой с помощью лекала</span></li>
+      </ol>
+      <div class="card-accent rounded-xl p-3 mt-4 text-sm">
+        <p class="font-bold text-teal-700 mb-1">⚙️ <span lang="kk" class="lang-content">Техникада:</span><span lang="en" class="lang-content">Technical uses:</span><span lang="ru" class="lang-content">Применение:</span></p>
+        <ul class="text-slate-600 space-y-1">
+          <li>• <span lang="kk" class="lang-content">Кулачок механизмі (равномерное перемещение)</span><span lang="en" class="lang-content">Cam mechanisms (uniform motion)</span><span lang="ru" class="lang-content">Кулачки с равномерным перемещением</span></li>
+          <li>• <span lang="kk" class="lang-content">Сағат серіппелері</span><span lang="en" class="lang-content">Clock and watch springs</span><span lang="ru" class="lang-content">Часовые пружины</span></li>
+          <li>• <span lang="kk" class="lang-content">Токарлық патрон (самоцентрирование)</span><span lang="en" class="lang-content">Lathe chuck jaws (self-centering)</span><span lang="ru" class="lang-content">Кулачки токарного патрона</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Involute -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">2️⃣ Шеңбердің эвольвентасы</span>
+    <span lang="en" class="lang-content">2️⃣ Involute of a Circle</span>
+    <span lang="ru" class="lang-content">2️⃣ Эвольвента окружности</span>
+  </h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card rounded-custom p-6">
+      <p class="text-slate-700 text-sm mb-4">
+        <span lang="kk" class="lang-content"><b class="text-teal-700">Эвольвента</b> — шеңберге оралған жіпті шешіп жатқандағы жіп ұшының сызатын жолы. Берілген шеңбер — <b>негіздік шеңбер</b> (основная окружность).</span>
+        <span lang="en" class="lang-content"><b class="text-teal-700">Involute</b> — the locus of the end of a taut string being unwound from a circle. That circle is called the <b>base circle</b>.</span>
+        <span lang="ru" class="lang-content"><b class="text-teal-700">Эвольвента</b> — кривая, описываемая концом натянутой нити, разматываемой с окружности. Эта окружность называется <b>основной</b>.</span>
+      </p>
+      <h4 class="font-bold text-teal-800 mb-3 text-sm">
+        <span lang="kk" class="lang-content">📋 Салу алгоритмі:</span>
+        <span lang="en" class="lang-content">📋 Construction:</span>
+        <span lang="ru" class="lang-content">📋 Алгоритм:</span>
+      </h4>
+      <ol class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2"><span class="step-num text-xs">1</span><span lang="kk" class="lang-content">R радиусты негіздік шеңбер сызу. Оны n бөлікке бөлу.</span><span lang="en" class="lang-content">Draw the base circle of radius R. Divide it into n parts.</span><span lang="ru" class="lang-content">Начертить основную окружность радиуса R. Разделить на n частей.</span></li>
+        <li class="flex gap-2"><span class="step-num text-xs">2</span><span lang="kk" class="lang-content">Әр бөлу нүктесінде шеңберге жанама сызу.</span><span lang="en" class="lang-content">At each division point draw a tangent to the circle.</span><span lang="ru" class="lang-content">В каждой точке деления провести касательную к окружности.</span></li>
+        <li class="flex gap-2"><span class="step-num text-xs">3</span><span lang="kk" class="lang-content">1-ші жанамада доғаның длинасын (πR·k/n) белгілеу.</span><span lang="en" class="lang-content">On the k-th tangent, mark off length = arc length k·πR/n.</span><span lang="ru" class="lang-content">На k-й касательной отложить длину = k·πR/n.</span></li>
+        <li class="flex gap-2"><span class="step-num text-xs">4</span><span lang="kk" class="lang-content">Белгіленген нүктелерді лекалмен жалғастыру.</span><span lang="en" class="lang-content">Connect the marked points smoothly with a french curve.</span><span lang="ru" class="lang-content">Соединить отмеченные точки плавной кривой лекалом.</span></li>
+      </ol>
+    </div>
+    <div class="blueprint flex items-center justify-center">
+      <svg viewBox="0 0 300 300" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Base circle -->
+        <circle cx="150" cy="150" r="70" fill="none" stroke="#0d9488" stroke-width="2"/>
+        <circle cx="150" cy="150" r="3" fill="#0d9488"/>
+        <text x="153" y="148" font-size="9" fill="#0d9488">O</text>
+        <!-- Radial divisions on base circle -->
+        <line x1="150" y1="150" x2="220" y2="150" stroke="rgba(13,148,136,0.25)" stroke-width="1"/>
+        <line x1="150" y1="150" x2="199" y2="90" stroke="rgba(13,148,136,0.25)" stroke-width="1"/>
+        <line x1="150" y1="150" x2="135" y2="82" stroke="rgba(13,148,136,0.25)" stroke-width="1"/>
+        <line x1="150" y1="150" x2="80" y2="110" stroke="rgba(13,148,136,0.25)" stroke-width="1"/>
+        <!-- Division points on circle -->
+        <circle cx="220" cy="150" r="4" fill="#ef4444"/>
+        <circle cx="199" cy="90" r="4" fill="#ef4444"/>
+        <circle cx="135" cy="82" r="4" fill="#ef4444"/>
+        <circle cx="80" cy="110" r="4" fill="#ef4444"/>
+        <!-- Tangent lines at points -->
+        <line x1="220" y1="120" x2="220" y2="180" stroke="rgba(13,148,136,0.4)" stroke-width="1" stroke-dasharray="4,2"/>
+        <line x1="170" y1="72" x2="228" y2="108" stroke="rgba(13,148,136,0.4)" stroke-width="1" stroke-dasharray="4,2"/>
+        <!-- Involute path (approximate) -->
+        <path d="M 220,150 Q 245,100 220,68 Q 195,40 160,35 Q 120,32 88,55 Q 55,78 48,120 Q 42,160 65,192 Q 88,224 130,234 Q 172,244 210,225" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Labels -->
+        <text x="222" y="148" font-size="9" fill="#ef4444">P₁</text>
+        <text x="202" y="87" font-size="9" fill="#ef4444">P₂</text>
+        <text x="115" y="82" font-size="9" fill="#ef4444">P₃</text>
+        <text x="62" y="110" font-size="9" fill="#ef4444">P₄</text>
+        <text x="152" y="178" font-size="9" fill="#0d9488">R</text>
+        <!-- R label line -->
+        <line x1="150" y1="150" x2="150" y2="218" stroke="#64748b" stroke-width="0.8" stroke-dasharray="3,2"/>
+        <text x="240" y="245" font-size="9" fill="#ef4444">эвольвента</text>
+      </svg>
+    </div>
+  </div>
+  <div class="card rounded-custom p-5 mt-4">
+    <h4 class="font-bold text-teal-800 mb-3">
+      <span lang="kk" class="lang-content">⚙️ Техникада қолданылуы</span>
+      <span lang="en" class="lang-content">⚙️ Technical Applications</span>
+      <span lang="ru" class="lang-content">⚙️ Применение в технике</span>
+    </h4>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="card-accent rounded-xl p-3 text-sm text-center">
+        <div class="text-2xl mb-1">⚙️</div>
+        <p class="font-bold text-teal-800"><span lang="kk" class="lang-content">Тіс профилі</span><span lang="en" class="lang-content">Gear tooth profile</span><span lang="ru" class="lang-content">Профиль зубьев шестерни</span></p>
+        <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Эвольвентті тіс профилі тұрақты берілу коэффициентін қамтамасыз етеді</span><span lang="en" class="lang-content">Involute tooth profile ensures constant velocity ratio</span><span lang="ru" class="lang-content">Эвольвентный профиль зубьев обеспечивает постоянное передаточное отношение</span></p>
+      </div>
+      <div class="card-accent rounded-xl p-3 text-sm text-center">
+        <div class="text-2xl mb-1">🔄</div>
+        <p class="font-bold text-teal-800"><span lang="kk" class="lang-content">Редукторлар</span><span lang="en" class="lang-content">Gearboxes</span><span lang="ru" class="lang-content">Редукторы</span></p>
+        <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Барлық заманауи беріліс жүйелерінде</span><span lang="en" class="lang-content">Used in all modern gear transmissions</span><span lang="ru" class="lang-content">Во всех современных зубчатых передачах</span></p>
+      </div>
+      <div class="card-accent rounded-xl p-3 text-sm text-center">
+        <div class="text-2xl mb-1">🚗</div>
+        <p class="font-bold text-teal-800"><span lang="kk" class="lang-content">Автомобиль КПП</span><span lang="en" class="lang-content">Automotive gearbox</span><span lang="ru" class="lang-content">АКПП/МКПП автомобиля</span></p>
+        <p class="text-slate-600 text-xs mt-1"><span lang="kk" class="lang-content">Барлық шестерняларда эвольвентті профиль</span><span lang="en" class="lang-content">All automotive gears use involute profiles</span><span lang="ru" class="lang-content">Все шестерни — эвольвентный профиль</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison table -->
+<section class="mb-8">
+  <h2 class="heading-font text-xl text-teal-800 uppercase tracking-widest mb-5">
+    <span lang="kk" class="lang-content">📊 Салыстырма кесте</span>
+    <span lang="en" class="lang-content">📊 Comparison Table</span>
+    <span lang="ru" class="lang-content">📊 Сравнительная таблица</span>
+  </h2>
+  <div class="card rounded-custom p-6">
+    <table class="t">
+      <thead>
+        <tr>
+          <th><span lang="kk" class="lang-content">Қасиет</span><span lang="en" class="lang-content">Property</span><span lang="ru" class="lang-content">Свойство</span></th>
+          <th><span lang="kk" class="lang-content">Архимед спиралі</span><span lang="en" class="lang-content">Archimedean Spiral</span><span lang="ru" class="lang-content">Спираль Архимеда</span></th>
+          <th><span lang="kk" class="lang-content">Эвольвента</span><span lang="en" class="lang-content">Involute</span><span lang="ru" class="lang-content">Эвольвента</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span lang="kk" class="lang-content">Формула</span><span lang="en" class="lang-content">Formula</span><span lang="ru" class="lang-content">Формула</span></td><td>r = a·θ</td><td><span lang="kk" class="lang-content">Жіп шешу траекториясы</span><span lang="en" class="lang-content">Unwound string path</span><span lang="ru" class="lang-content">Траектория разматываемой нити</span></td></tr>
+        <tr><td><span lang="kk" class="lang-content">Негізгі қасиет</span><span lang="en" class="lang-content">Key property</span><span lang="ru" class="lang-content">Ключевое свойство</span></td><td><span lang="kk" class="lang-content">Тұрақты қадам</span><span lang="en" class="lang-content">Constant pitch</span><span lang="ru" class="lang-content">Постоянный шаг</span></td><td><span lang="kk" class="lang-content">Тұрақты берілу коэффициенті</span><span lang="en" class="lang-content">Constant velocity ratio</span><span lang="ru" class="lang-content">Постоянное передаточное отношение</span></td></tr>
+        <tr><td><span lang="kk" class="lang-content">Қолданылуы</span><span lang="en" class="lang-content">Application</span><span lang="ru" class="lang-content">Применение</span></td><td><span lang="kk" class="lang-content">Кулачок, серіппе, патрон</span><span lang="en" class="lang-content">Cams, springs, chucks</span><span lang="ru" class="lang-content">Кулачки, пружины, патроны</span></td><td><span lang="kk" class="lang-content">Шестерня тістерінің профилі</span><span lang="en" class="lang-content">Gear tooth profiles</span><span lang="ru" class="lang-content">Профили зубьев шестерён</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="card-teal rounded-custom p-8 text-white">
+  <h3 class="heading-font text-xl font-extrabold mb-4">
+    <span lang="kk" class="lang-content">🧠 Есте сақтаңыз</span>
+    <span lang="en" class="lang-content">🧠 Remember</span>
+    <span lang="ru" class="lang-content">🧠 Запомните</span>
+  </h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">🌀 <span lang="kk" class="lang-content">Архимед спиралі</span><span lang="en" class="lang-content">Archimedean Spiral</span><span lang="ru" class="lang-content">Спираль Архимеда</span></p>
+      <p class="text-teal-100"><span lang="kk" class="lang-content">r = a·θ — радиус бұрышқа пропорционал. Тұрақты қадам — ең негізгі қасиет.</span><span lang="en" class="lang-content">r = a·θ — radius proportional to angle. Constant pitch is the key property.</span><span lang="ru" class="lang-content">r = a·θ — радиус пропорционален углу. Главное свойство — постоянный шаг.</span></p>
+    </div>
+    <div class="bg-white/10 rounded-xl p-4">
+      <p class="font-bold mb-1">⚙️ <span lang="kk" class="lang-content">Эвольвента</span><span lang="en" class="lang-content">Involute</span><span lang="ru" class="lang-content">Эвольвента</span></p>
+      <p class="text-teal-100"><span lang="kk" class="lang-content">Барлық заманауи шестерняларда — эвольвентті тіс профилі. Тұрақты берілу қамтамасыз етіледі.</span><span lang="en" class="lang-content">All modern gears use involute tooth profiles — ensures constant velocity ratio.</span><span lang="ru" class="lang-content">Все современные шестерни — эвольвентный профиль. Обеспечивает постоянное передаточное отношение.</span></p>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+function switchLang(lang){
+  const c=document.getElementById('poster-container');
+  c.className=c.className.replace(/lang-\w+/,'')+' lang-'+lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang);});
+  try{localStorage.setItem('poster_lang',lang);}catch(e){}
+}
+</script>
+<script>/* poster-lang-init */
+(function(){var s='ru';try{s=localStorage.getItem('poster_lang')||'ru'}catch(e){}
+if(s==='kz')s='kk';if(typeof switchLang==='function')switchLang(s);})()
+</script>
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</body>
+</html>
