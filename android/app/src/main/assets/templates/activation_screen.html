@@ -37,7 +37,7 @@
         .subtitle {
             font-size: 14px;
             color: rgba(255,255,255,0.55);
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
         .input-group {
             position: relative;
@@ -50,18 +50,16 @@
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.06);
             color: white;
-            font-size: 20px;
+            font-size: 15px;
             font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
             text-align: center;
-            text-transform: uppercase;
             outline: none;
             transition: border-color 0.3s;
+            word-break: break-all;
         }
         input::placeholder {
             color: rgba(255, 255, 255, 0.3);
             font-size: 14px;
-            letter-spacing: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         input:focus {
@@ -86,6 +84,29 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
+        /* Главная кнопка — сканировать QR */
+        .qr-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            font-size: 19px;
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+        .manual-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: rgba(255,255,255,0.35);
+            font-size: 13px;
+            margin: 18px 0;
+        }
+        .manual-divider::before,
+        .manual-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .manual-divider:not(:empty)::before { margin-right: 12px; }
+        .manual-divider:not(:empty)::after { margin-left: 12px; }
         .status {
             margin-top: 20px;
             padding: 14px 16px;
@@ -135,14 +156,14 @@
     <div class="container">
         <div class="logo">🔐</div>
         <h1>Активация продукта</h1>
-        <p class="subtitle">Введите лицензионный ключ для активации</p>
+        <p class="subtitle">Отсканируйте QR-код камерой, выберите картинку с QR (кнопка «QR из файла» в сканере) или введите ключ вручную</p>
 
         <div id="deviceIdBlock" style="
             background: rgba(255,255,255,0.06);
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 10px;
             padding: 10px 14px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             text-align: center;
         ">
             <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 4px;">
@@ -159,12 +180,17 @@
             ">загрузка...</div>
         </div>
 
+        <button id="scanBtn" class="qr-btn" onclick="scanQr()">📷 Сканировать QR-код</button>
+
+        <div class="manual-divider">или введите ключ вручную</div>
+
         <div class="input-group">
             <input type="text" id="licenseKey"
-                   placeholder="XXXX-XXXX-XXXX-XXXX-XXXX"
-                   maxlength="24"
+                   placeholder="OL1-…"
+                   maxlength="200"
                    autocomplete="off"
-                   autocapitalize="characters"
+                   autocapitalize="off"
+                   autocorrect="off"
                    spellcheck="false">
         </div>
         <button id="activateBtn" onclick="activateLicense()">Активировать</button>
@@ -182,16 +208,6 @@
         const btn = document.getElementById('activateBtn');
         const statusEl = document.getElementById('status');
 
-        // Автоформатирование: добавляем дефисы при вводе
-        input.addEventListener('input', function() {
-            let val = this.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-            let parts = [];
-            for (let i = 0; i < val.length && i < 20; i += 4) {
-                parts.push(val.substring(i, i + 4));
-            }
-            this.value = parts.join('-');
-        });
-
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') activateLicense();
         });
@@ -205,15 +221,20 @@
             }
         }
 
+        // Сканировать QR-код через камеру (Android)
+        function scanQr() {
+            if (typeof Android !== 'undefined' && typeof Android.scanQr === 'function') {
+                showStatus('loading', 'Открываю камеру…');
+                Android.scanQr();
+            } else {
+                showStatus('error', 'Сканер доступен только на устройстве с камерой.');
+            }
+        }
+
         function activateLicense() {
             const key = input.value.trim();
             if (!key) {
-                showStatus('error', 'Введите ключ лицензии');
-                input.focus();
-                return;
-            }
-            if (key.replace(/-/g, '').length !== 20) {
-                showStatus('error', 'Ключ должен содержать 20 символов (без дефисов)');
+                showStatus('error', 'Отсканируйте QR-код или вставьте ключ');
                 input.focus();
                 return;
             }

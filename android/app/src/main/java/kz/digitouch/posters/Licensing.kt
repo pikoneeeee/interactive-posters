@@ -3,7 +3,10 @@ package kz.digitouch.posters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.Settings
+import android.util.Base64
 import android.util.Log
+import org.bouncycastle.crypto.params.Ed25519PublicKeyParameters
+import org.bouncycastle.crypto.signers.Ed25519Signer
 import org.json.JSONObject
 import java.io.File
 import java.security.MessageDigest
@@ -11,102 +14,77 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import javax.crypto.Cipher
 import javax.crypto.Mac
+import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 /**
- * Система лицензирования для Android — порт licensing.py.
+ * Лицензирование v4 (Ed25519) — порт product_core (новое ядро).
  *
- * Формат ключа, секрет HMAC, схема шифрования license.dat — полностью совпадают
- * с Windows-версией. Поэтому один и тот же ключ работает на обеих платформах
- * (но активируется отдельно — лицензия привязывается к устройству).
+ * Лицензия: строка "OL1-" + base64url( payload(7) + content_key(32) + sig(64) ).
+ *   payload: product_id(1) variant_id(1) client_id(2) duration_months(2) flags(1)
+ *   sig = Ed25519(приватный_ключ, payload + content_key + device_id)
+ *
+ * В сборку встроен ТОЛЬКО публичный ключ проверки (product_config.json) →
+ * подделать лицензию нельзя. Ключ контента приходит ВНУТРИ лицензии (его нет в
+ * APK) и хранится в device-bound license.dat; им расшифровывается контент
+ * (assets зашифрованы маркером OLENC2 / AES-256-GCM).
+ *
+ * variant_id = предмет (см. VARIANT_ID каждого flavor). Лицензия принимается,
+ * только если её variant совпадает с вариантом сборки → ключ физики не активирует
+ * химию, а ключ «все предметы» (variant 0) — сборку allsubjects.
  */
 object Licensing {
 
     private const val TAG = "Licensing"
     private const val LICENSE_FILENAME = "license.dat"
-    private const val ENC_SALT = "interactive-posters-license-v2"
+    private const val ENC_SALT = "product-core-license-v3"   // соль шифрования license.dat
     private const val PBKDF2_ITERATIONS = 100_000
     private const val MAX_CLOCK_DRIFT_HOURS = 24
-    private const val LICENSE_VERSION = 2
+    private const val LICENSE_VERSION = 4
+    private const val LICENSE_PREFIX = "OL1-"
+    private val CONTENT_MAGIC = "OLENC1\n".toByteArray(Charsets.US_ASCII)   // старый (keystream)
+    private val CONTENT_MAGIC2 = "OLENC2\n".toByteArray(Charsets.US_ASCII)  // AES-256-GCM (быстро)
 
-    // ─── Обфусцированный секрет (XOR _MASK ^ _KDATA) ────────────────
-    // Должен быть идентичен licensing.py (генерируется python keygen.py embed)
-    private val MASK = intArrayOf(
-        0, 4, 51, 226, 213, 62, 45, 201, 14, 126, 242, 86, 239, 239, 194, 85,
-        33, 129, 246, 245, 37, 190, 237, 248, 147, 87, 202, 192, 203, 201, 17, 91
-    )
-    private val KDATA = intArrayOf(
-        89, 136, 108, 16, 86, 143, 66, 45, 110, 88, 175, 143, 29, 158, 55, 107,
-        170, 111, 116, 154, 64, 224, 210, 220, 4, 150, 168, 123, 166, 18, 231, 195
-    )
+    private var PUBLIC_KEY = ByteArray(0)   // Ed25519 публичный ключ (из product_config.json)
+    private var PRODUCT_ID = 0
+    private var EXPECTED_VARIANT = -1       // вариант (предмет) этой сборки; -1 = любой
+    private var contentKey: ByteArray? = null   // ключ контента активной лицензии
 
-    private fun getSecret(): ByteArray =
-        ByteArray(MASK.size) { i -> ((MASK[i] xor KDATA[i]) and 0xFF).toByte() }
+    fun init(publicKey: IntArray, productId: Int, expectedVariant: Int) {
+        PUBLIC_KEY = ByteArray(publicKey.size) { (publicKey[it] and 0xFF).toByte() }
+        PRODUCT_ID = productId
+        EXPECTED_VARIANT = expectedVariant
+    }
 
-    // ─── Маппинг предметов ──────────────────────────────────────────
-    private val SUBJECTS_REV = mapOf(
-        0 to "physics", 1 to "mathematics", 2 to "biology", 3 to "chemistry",
-        4 to "geography", 5 to "informatics", 6 to "historykaz", 7 to "worldhistory",
-        8 to "kazakhlang", 9 to "russianlang", 10 to "englishlang"
-    )
-
-    // ─── Результат валидации ────────────────────────────────────────
-    data class KeyPayload(
-        val subjectIdx: Int,
-        val subject: String,
-        val clientId: Int,
-        val durationMonths: Int,
-        val flags: Int
-    )
-
-    data class LicenseStatus(
-        val valid: Boolean,
-        val reason: String,
-        val subject: String? = null,
-        val expiresAt: String? = null,
-        val daysLeft: Int? = null
-    )
+    /** Ключ расшифровки контента из активной лицензии (null, если не активировано). */
+    fun getContentKey(): ByteArray? = contentKey
 
     // ─── Device ID ──────────────────────────────────────────────────
 
     @SuppressLint("HardwareIds")
     fun getDeviceId(context: Context): String {
         val raw = try {
-            Settings.Secure.getString(
-                context.contentResolver,
-                Settings.Secure.ANDROID_ID
-            ) ?: ""
-        } catch (e: Exception) {
-            ""
-        }
+            Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID) ?: ""
+        } catch (e: Exception) { "" }
         val source = raw.ifBlank {
             "fallback-${android.os.Build.MANUFACTURER}-${android.os.Build.MODEL}-${android.os.Build.SERIAL}"
         }
-        val sha256 = MessageDigest.getInstance("SHA-256").digest(source.toByteArray(Charsets.UTF_8))
-        return sha256.joinToString("") { "%02X".format(it) }.substring(0, 16)
+        val sha = MessageDigest.getInstance("SHA-256").digest(source.toByteArray(Charsets.UTF_8))
+        return sha.joinToString("") { "%02X".format(it) }.substring(0, 16)
     }
 
-    // ─── Base32 (RFC 4648, без padding) ─────────────────────────────
+    // ─── Ed25519 (BouncyCastle, низкоуровнево) ──────────────────────
 
-    private const val BASE32_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
+    private fun verifyEd25519(pub: ByteArray, msg: ByteArray, sig: ByteArray): Boolean = try {
+        val signer = Ed25519Signer()
+        signer.init(false, Ed25519PublicKeyParameters(pub, 0))
+        signer.update(msg, 0, msg.size)
+        signer.verifySignature(sig)
+    } catch (e: Exception) { false }
 
-    private fun base32Decode(input: String): ByteArray? {
-        val clean = input.uppercase().filter { it in BASE32_ALPHABET }
-        val bits = StringBuilder()
-        for (c in clean) {
-            val v = BASE32_ALPHABET.indexOf(c)
-            if (v < 0) return null
-            bits.append(v.toString(2).padStart(5, '0'))
-        }
-        val out = ByteArray(bits.length / 8)
-        for (i in out.indices) {
-            out[i] = bits.substring(i * 8, i * 8 + 8).toInt(2).toByte()
-        }
-        return out
-    }
-
-    // ─── HMAC-SHA256 ────────────────────────────────────────────────
+    // ─── HMAC / keystream (совместимо с _protocol) ──────────────────
 
     private fun hmacSha256(key: ByteArray, data: ByteArray): ByteArray {
         val mac = Mac.getInstance("HmacSHA256")
@@ -114,316 +92,191 @@ object Licensing {
         return mac.doFinal(data)
     }
 
-    // ─── Валидация ключа (HMAC) ─────────────────────────────────────
+    private fun keystreamXor(data: ByteArray, key: ByteArray): ByteArray {
+        val out = ByteArray(data.size)
+        var offset = 0; var counter = 0
+        while (offset < data.size) {
+            val cb = byteArrayOf(
+                ((counter ushr 24) and 0xFF).toByte(), ((counter ushr 16) and 0xFF).toByte(),
+                ((counter ushr 8) and 0xFF).toByte(), (counter and 0xFF).toByte())
+            val bk = hmacSha256(key, cb)
+            val end = minOf(offset + 32, data.size)
+            for (j in offset until end) out[j] = (data[j].toInt() xor bk[j - offset].toInt()).toByte()
+            offset += 32; counter++
+        }
+        return out
+    }
 
-    /**
-     * Возвращает payload или null. На Pair.second — текст ошибки если null.
-     * HMAC проверяется с учётом device_id → ключ валиден ТОЛЬКО на целевом устройстве.
-     */
-    fun validateKey(keyStr: String, context: Context): Pair<KeyPayload?, String> {
-        val clean = keyStr.replace("-", "").replace(" ", "").uppercase()
-        if (clean.length != 20) return null to "Неверный формат ключа"
+    private fun encryptRaw(plaintext: ByteArray, key: ByteArray): ByteArray {
+        val ct = keystreamXor(plaintext, key)
+        val tag = hmacSha256(key, ct).copyOfRange(0, 16)
+        return tag + ct
+    }
 
-        val raw = base32Decode(clean) ?: return null to "Неверные символы в ключе"
-        if (raw.size != 12) return null to "Неверный формат ключа"
-
-        val payload = raw.copyOfRange(0, 4)
-        val sig = raw.copyOfRange(4, 12)
-        // HMAC подписывает payload + device_id → ключ привязан к устройству
-        val deviceId = getDeviceId(context)
-        val hmacData = payload + deviceId.toByteArray(Charsets.UTF_8)
-        val expected = hmacSha256(getSecret(), hmacData).copyOfRange(0, 8)
-
-        // Сравнение в постоянном времени
+    private fun decryptRaw(raw: ByteArray, key: ByteArray): ByteArray? {
+        if (raw.size < 17) return null
+        val tag = raw.copyOfRange(0, 16)
+        val ct = raw.copyOfRange(16, raw.size)
+        val expected = hmacSha256(key, ct).copyOfRange(0, 16)
         var diff = 0
-        for (i in sig.indices) diff = diff or (sig[i].toInt() xor expected[i].toInt())
-        if (diff != 0) return null to "Ключ не подходит для этого устройства"
-
-        val v = ((payload[0].toInt() and 0xFF) shl 24) or
-                ((payload[1].toInt() and 0xFF) shl 16) or
-                ((payload[2].toInt() and 0xFF) shl 8) or
-                (payload[3].toInt() and 0xFF)
-
-        val subjectIdx = (v ushr 28) and 0xF
-        val clientId = (v ushr 12) and 0xFFFF
-        val durationMonths = (v ushr 4) and 0xFF
-        val flags = v and 0xF
-        val subject = SUBJECTS_REV[subjectIdx] ?: "unknown"
-
-        return KeyPayload(subjectIdx, subject, clientId, durationMonths, flags) to ""
+        for (i in tag.indices) diff = diff or (tag[i].toInt() xor expected[i].toInt())
+        if (diff != 0) return null
+        return keystreamXor(ct, key)
     }
 
-    // ─── PBKDF2-HMAC-SHA256 (ручная реализация для совместимости) ───
+    /** Расшифровка файла контента. OLENC2 — AES-GCM; OLENC1 — старый keystream; без маркера — plaintext. */
+    fun decryptContent(raw: ByteArray): ByteArray? {
+        if (raw.size >= CONTENT_MAGIC2.size && raw.copyOfRange(0, CONTENT_MAGIC2.size).contentEquals(CONTENT_MAGIC2)) {
+            val key = contentKey ?: return null
+            return try {
+                val body = raw.copyOfRange(CONTENT_MAGIC2.size, raw.size)
+                val nonce = body.copyOfRange(0, 12)
+                val ct = body.copyOfRange(12, body.size)
+                val c = Cipher.getInstance("AES/GCM/NoPadding")
+                c.init(Cipher.DECRYPT_MODE, SecretKeySpec(key, "AES"), GCMParameterSpec(128, nonce))
+                c.doFinal(ct)
+            } catch (e: Exception) { null }
+        }
+        if (raw.size >= CONTENT_MAGIC.size && raw.copyOfRange(0, CONTENT_MAGIC.size).contentEquals(CONTENT_MAGIC)) {
+            val key = contentKey ?: return null
+            return decryptRaw(raw.copyOfRange(CONTENT_MAGIC.size, raw.size), key)
+        }
+        return raw  // без маркера — plaintext (бесплатные предметы)
+    }
 
-    private fun pbkdf2HmacSha256(
-        password: ByteArray,
-        salt: ByteArray,
-        iterations: Int,
-        dkLen: Int
-    ): ByteArray {
-        val hLen = 32  // SHA-256
-        val blocks = (dkLen + hLen - 1) / hLen
-        val out = ByteArray(dkLen)
-        var outOffset = 0
+    // ─── license.dat (шифруется ключом от device_id) ────────────────
+
+    private fun pbkdf2(password: ByteArray, salt: ByteArray, iterations: Int, dkLen: Int): ByteArray {
+        val hLen = 32; val blocks = (dkLen + hLen - 1) / hLen
+        val out = ByteArray(dkLen); var off = 0
         for (i in 1..blocks) {
-            // U1 = PRF(password, salt || INT_32_BE(i))
-            val saltInt = ByteArray(salt.size + 4)
-            System.arraycopy(salt, 0, saltInt, 0, salt.size)
-            saltInt[salt.size]     = ((i ushr 24) and 0xFF).toByte()
-            saltInt[salt.size + 1] = ((i ushr 16) and 0xFF).toByte()
-            saltInt[salt.size + 2] = ((i ushr 8) and 0xFF).toByte()
-            saltInt[salt.size + 3] = (i and 0xFF).toByte()
-
-            var u = hmacSha256(password, saltInt)
-            val t = u.copyOf()
-            for (c in 2..iterations) {
-                u = hmacSha256(password, u)
-                for (k in t.indices) t[k] = (t[k].toInt() xor u[k].toInt()).toByte()
-            }
-            val toCopy = minOf(hLen, dkLen - outOffset)
-            System.arraycopy(t, 0, out, outOffset, toCopy)
-            outOffset += toCopy
+            val si = ByteArray(salt.size + 4)
+            System.arraycopy(salt, 0, si, 0, salt.size)
+            si[salt.size] = ((i ushr 24) and 0xFF).toByte(); si[salt.size + 1] = ((i ushr 16) and 0xFF).toByte()
+            si[salt.size + 2] = ((i ushr 8) and 0xFF).toByte(); si[salt.size + 3] = (i and 0xFF).toByte()
+            var u = hmacSha256(password, si); val t = u.copyOf()
+            for (c in 2..iterations) { u = hmacSha256(password, u); for (k in t.indices) t[k] = (t[k].toInt() xor u[k].toInt()).toByte() }
+            val n = minOf(hLen, dkLen - off); System.arraycopy(t, 0, out, off, n); off += n
         }
         return out
     }
 
-    private fun deriveEncKey(deviceId: String): ByteArray =
-        pbkdf2HmacSha256(
-            deviceId.toByteArray(Charsets.UTF_8),
-            ENC_SALT.toByteArray(Charsets.UTF_8),
-            PBKDF2_ITERATIONS,
-            32
-        )
+    private fun deriveEncKey(deviceId: String) =
+        pbkdf2(deviceId.toByteArray(Charsets.UTF_8), ENC_SALT.toByteArray(Charsets.UTF_8), PBKDF2_ITERATIONS, 32)
 
-    // ─── Шифрование (HMAC-keystream XOR + integrity tag) ────────────
-
-    private fun encryptLicense(data: JSONObject, deviceId: String): ByteArray {
-        val key = deriveEncKey(deviceId)
-        val plaintext = data.toString().toByteArray(Charsets.UTF_8)
-        val ciphertext = ByteArray(plaintext.size)
-
-        var offset = 0
-        var counter = 0
-        while (offset < plaintext.size) {
-            val counterBytes = byteArrayOf(
-                ((counter ushr 24) and 0xFF).toByte(),
-                ((counter ushr 16) and 0xFF).toByte(),
-                ((counter ushr 8) and 0xFF).toByte(),
-                (counter and 0xFF).toByte()
-            )
-            val blockKey = hmacSha256(key, counterBytes)
-            val end = minOf(offset + 32, plaintext.size)
-            for (j in offset until end) {
-                ciphertext[j] = (plaintext[j].toInt() xor blockKey[j - offset].toInt()).toByte()
-            }
-            offset += 32
-            counter += 1
-        }
-
-        val tag = hmacSha256(key, ciphertext).copyOfRange(0, 16)
-        val out = ByteArray(16 + ciphertext.size)
-        System.arraycopy(tag, 0, out, 0, 16)
-        System.arraycopy(ciphertext, 0, out, 16, ciphertext.size)
-        return out
-    }
+    private fun encryptLicense(data: JSONObject, deviceId: String) =
+        encryptRaw(data.toString().toByteArray(Charsets.UTF_8), deriveEncKey(deviceId))
 
     private fun decryptLicense(raw: ByteArray, deviceId: String): JSONObject? {
-        if (raw.size < 17) return null
-        val key = deriveEncKey(deviceId)
-        val tag = raw.copyOfRange(0, 16)
-        val ciphertext = raw.copyOfRange(16, raw.size)
-
-        val expectedTag = hmacSha256(key, ciphertext).copyOfRange(0, 16)
-        var diff = 0
-        for (i in tag.indices) diff = diff or (tag[i].toInt() xor expectedTag[i].toInt())
-        if (diff != 0) return null
-
-        val plaintext = ByteArray(ciphertext.size)
-        var offset = 0
-        var counter = 0
-        while (offset < ciphertext.size) {
-            val counterBytes = byteArrayOf(
-                ((counter ushr 24) and 0xFF).toByte(),
-                ((counter ushr 16) and 0xFF).toByte(),
-                ((counter ushr 8) and 0xFF).toByte(),
-                (counter and 0xFF).toByte()
-            )
-            val blockKey = hmacSha256(key, counterBytes)
-            val end = minOf(offset + 32, ciphertext.size)
-            for (j in offset until end) {
-                plaintext[j] = (ciphertext[j].toInt() xor blockKey[j - offset].toInt()).toByte()
-            }
-            offset += 32
-            counter += 1
-        }
-
-        return try {
-            JSONObject(String(plaintext, Charsets.UTF_8))
-        } catch (e: Exception) {
-            null
-        }
+        val pt = decryptRaw(raw, deriveEncKey(deviceId)) ?: return null
+        return try { JSONObject(String(pt, Charsets.UTF_8)) } catch (e: Exception) { null }
     }
 
-    // ─── Утилиты даты ────────────────────────────────────────────────
-    // Python isoformat(timespec='seconds') без таймзоны: "2025-04-15T10:30:45"
+    // ─── Утилиты ────────────────────────────────────────────────────
 
-    private fun isoFormat(date: Date): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
-        sdf.timeZone = TimeZone.getDefault()  // как datetime.now() без tz
-        return sdf.format(date)
-    }
-
-    private fun parseIso(s: String): Date? {
-        return try {
-            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
-            sdf.timeZone = TimeZone.getDefault()
-            sdf.parse(s)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
+    private fun isoFormat(d: Date): String =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).apply { timeZone = TimeZone.getDefault() }.format(d)
+    private fun parseIso(s: String): Date? = try {
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).apply { timeZone = TimeZone.getDefault() }.parse(s)
+    } catch (e: Exception) { null }
+    private fun sha256Hex(s: String) =
+        MessageDigest.getInstance("SHA-256").digest(s.toByteArray(Charsets.UTF_8)).joinToString("") { "%02x".format(it) }
     private fun monthsWord(n: Int): String {
         if (n % 100 in 11..19) return "месяцев"
-        return when (n % 10) {
-            1 -> "месяц"
-            2, 3, 4 -> "месяца"
-            else -> "месяцев"
-        }
+        return when (n % 10) { 1 -> "месяц"; 2, 3, 4 -> "месяца"; else -> "месяцев" }
+    }
+    private fun licenseFile(c: Context) = File(c.filesDir, LICENSE_FILENAME)
+
+    data class LicenseStatus(
+        val valid: Boolean, val reason: String,
+        val variantId: Int? = null, val expiresAt: String? = null, val daysLeft: Int? = null
+    )
+
+    private data class Decoded(val payload: ByteArray, val contentKey: ByteArray,
+                              val productId: Int, val variantId: Int, val clientId: Int, val duration: Int)
+
+    // ─── Валидация лицензии ─────────────────────────────────────────
+
+    private fun validate(licenseStr: String, context: Context): Pair<Decoded?, String> {
+        var s = licenseStr.trim().replace(" ", "").replace("\n", "")
+        if (s.startsWith(LICENSE_PREFIX)) s = s.substring(LICENSE_PREFIX.length)
+        val raw = try {
+            Base64.decode(s, Base64.URL_SAFE or Base64.NO_PADDING or Base64.NO_WRAP)
+        } catch (e: Exception) { return null to "Неверный формат лицензии" }
+        if (raw.size != 7 + 32 + 64) return null to "Неверный формат лицензии"
+
+        val payload = raw.copyOfRange(0, 7)
+        val ck = raw.copyOfRange(7, 39)
+        val sig = raw.copyOfRange(39, 103)
+        val deviceId = getDeviceId(context)
+        val msg = payload + ck + deviceId.uppercase().toByteArray(Charsets.UTF_8)
+        if (!verifyEd25519(PUBLIC_KEY, msg, sig)) return null to "Лицензия не подходит для этого устройства"
+
+        val productId = payload[0].toInt() and 0xFF
+        val variantId = payload[1].toInt() and 0xFF
+        val clientId = ((payload[2].toInt() and 0xFF) shl 8) or (payload[3].toInt() and 0xFF)
+        val duration = ((payload[4].toInt() and 0xFF) shl 8) or (payload[5].toInt() and 0xFF)
+        if (productId != PRODUCT_ID) return null to "Лицензия от другого продукта"
+        if (EXPECTED_VARIANT >= 0 && variantId != EXPECTED_VARIANT)
+            return null to "Ключ для другого предмета этой сборки"
+        return Decoded(payload, ck, productId, variantId, clientId, duration) to ""
     }
 
-    private fun sha256Hex(s: String): String {
-        val bytes = MessageDigest.getInstance("SHA-256").digest(s.toByteArray(Charsets.UTF_8))
-        return bytes.joinToString("") { "%02x".format(it) }
-    }
-
-    // ─── Файл лицензии ──────────────────────────────────────────────
-
-    private fun licenseFile(context: Context): File =
-        File(context.filesDir, LICENSE_FILENAME)
-
-    // ─── Активация ──────────────────────────────────────────────────
-
-    /**
-     * Активирует ключ. Возвращает (true, сообщение) или (false, ошибка).
-     *
-     * @param expectedSubject если задан — ключ должен быть для этого предмета
-     *                        (для однопредметных flavor-сборок).
-     *                        "all" / null — любой предмет.
-     */
-    fun activateKey(
-        context: Context,
-        keyStr: String,
-        expectedSubject: String? = null
-    ): Pair<Boolean, String> {
-        val (payload, err) = validateKey(keyStr, context)
-        if (payload == null) return false to err
-
-        // Проверка соответствия предмета для flavor-сборки
-        if (expectedSubject != null && expectedSubject != "all"
-            && payload.subject != expectedSubject) {
-            return false to "Ключ для предмета «${payload.subject}», " +
-                    "а это приложение для «$expectedSubject»."
-        }
-
+    /** Активация. Принимается длинная лицензия v4 (OL1-…), полученная по QR или строкой. */
+    fun activateLicense(context: Context, licenseStr: String): Pair<Boolean, String> {
+        val s = licenseStr.trim()
+        if (!s.startsWith(LICENSE_PREFIX))
+            return false to "Отсканируйте QR-код лицензии (или вставьте ключ, начинающийся с OL1-)."
+        val (d, err) = validate(s, context)
+        if (d == null) return false to err
         val deviceId = getDeviceId(context)
         val now = Date()
-        val expires = Date(now.time + payload.durationMonths.toLong() * 30L * 24L * 3600L * 1000L)
-
+        val expires = Date(now.time + d.duration.toLong() * 30L * 24L * 3600L * 1000L)
         val data = JSONObject().apply {
-            put("key_hash", sha256Hex(keyStr.uppercase()))
+            put("key_hash", sha256Hex(s))
             put("device_id", deviceId)
-            put("subject", payload.subject)
-            put("subject_idx", payload.subjectIdx)
-            put("client_id", payload.clientId)
-            put("duration_months", payload.durationMonths)
-            put("activated_at", isoFormat(now))
-            put("expires_at", isoFormat(expires))
-            put("last_check", isoFormat(now))
-            put("version", LICENSE_VERSION)
+            put("product_id", d.productId); put("variant_id", d.variantId); put("client_id", d.clientId)
+            put("duration_months", d.duration)
+            put("content_key", d.contentKey.joinToString("") { "%02x".format(it) })
+            put("activated_at", isoFormat(now)); put("expires_at", isoFormat(expires))
+            put("last_check", isoFormat(now)); put("version", LICENSE_VERSION)
         }
-
         return try {
-            val encrypted = encryptLicense(data, deviceId)
-            licenseFile(context).writeBytes(encrypted)
-            true to "Активация успешна! Лицензия действительна " +
-                    "${payload.durationMonths} ${monthsWord(payload.durationMonths)}."
+            licenseFile(context).writeBytes(encryptLicense(data, deviceId))
+            contentKey = d.contentKey
+            true to "Активация успешна! Лицензия действительна ${d.duration} ${monthsWord(d.duration)}."
         } catch (e: Exception) {
-            Log.e(TAG, "Ошибка сохранения лицензии", e)
-            false to "Ошибка сохранения лицензии: ${e.message}"
+            Log.e(TAG, "Ошибка сохранения", e); false to "Ошибка сохранения лицензии: ${e.message}"
         }
     }
-
-    // ─── Проверка лицензии ──────────────────────────────────────────
 
     fun getLicenseStatus(context: Context): LicenseStatus {
         val file = licenseFile(context)
-        if (!file.exists()) {
-            return LicenseStatus(false, "Лицензия не найдена")
-        }
-
-        val raw = try {
-            file.readBytes()
-        } catch (e: Exception) {
-            return LicenseStatus(false, "Ошибка чтения файла лицензии")
-        }
-
+        if (!file.exists()) return LicenseStatus(false, "Лицензия не найдена")
+        val raw = try { file.readBytes() } catch (e: Exception) { return LicenseStatus(false, "Ошибка чтения файла") }
         val deviceId = getDeviceId(context)
         val data = decryptLicense(raw, deviceId)
             ?: return LicenseStatus(false, "Лицензия повреждена или принадлежит другому устройству")
-
-        if (data.optInt("version") != LICENSE_VERSION) {
-            return LicenseStatus(false, "Устаревший формат лицензии")
-        }
-        if (data.optString("device_id") != deviceId) {
-            return LicenseStatus(false, "Лицензия привязана к другому устройству")
-        }
+        if (data.optInt("version") != LICENSE_VERSION) return LicenseStatus(false, "Устаревший формат лицензии")
+        if (data.optString("device_id") != deviceId) return LicenseStatus(false, "Лицензия привязана к другому устройству")
+        if (data.optInt("product_id") != PRODUCT_ID) return LicenseStatus(false, "Лицензия от другого продукта")
+        if (EXPECTED_VARIANT >= 0 && data.optInt("variant_id", -1) != EXPECTED_VARIANT)
+            return LicenseStatus(false, "Лицензия для другого предмета")
 
         val now = Date()
+        val lastCheck = parseIso(data.optString("last_check", ""))
+        if (lastCheck != null && (lastCheck.time - now.time) > MAX_CLOCK_DRIFT_HOURS * 3600L * 1000L)
+            return LicenseStatus(false, "Обнаружено изменение системных часов.")
+        val expiresAt = parseIso(data.optString("expires_at", "")) ?: return LicenseStatus(false, "Повреждены данные лицензии")
+        if (now.after(expiresAt)) return LicenseStatus(false, "Срок действия лицензии истёк", expiresAt = data.optString("expires_at"))
 
-        // Защита от перевода часов назад
-        val lastCheckStr = data.optString("last_check", "")
-        val lastCheck = parseIso(lastCheckStr)
-        if (lastCheck != null) {
-            val driftMs = lastCheck.time - now.time
-            if (driftMs > MAX_CLOCK_DRIFT_HOURS * 3600L * 1000L) {
-                return LicenseStatus(false,
-                    "Обнаружено изменение системных часов. Обратитесь в поддержку.")
-            }
-        }
-
-        val expiresAtStr = data.optString("expires_at", "")
-        val expiresAt = parseIso(expiresAtStr)
-            ?: return LicenseStatus(false, "Повреждены данные лицензии")
-
-        if (now.after(expiresAt)) {
-            return LicenseStatus(false, "Срок действия лицензии истёк",
-                expiresAt = expiresAtStr)
-        }
+        val ckHex = data.optString("content_key", "")
+        if (ckHex.length == 64) contentKey = ByteArray(32) { ((Character.digit(ckHex[it*2],16) shl 4) or Character.digit(ckHex[it*2+1],16)).toByte() }
 
         val daysLeft = ((expiresAt.time - now.time) / (24L * 3600L * 1000L)).toInt()
-
-        // Обновляем last_check
-        try {
-            data.put("last_check", isoFormat(now))
-            file.writeBytes(encryptLicense(data, deviceId))
-        } catch (e: Exception) {
-            Log.w(TAG, "Не удалось обновить last_check", e)
-        }
-
-        return LicenseStatus(
-            valid = true,
-            reason = "OK",
-            subject = data.optString("subject", null),
-            expiresAt = expiresAtStr,
-            daysLeft = daysLeft
-        )
+        try { data.put("last_check", isoFormat(now)); file.writeBytes(encryptLicense(data, deviceId)) } catch (e: Exception) {}
+        return LicenseStatus(true, "OK", data.optInt("variant_id"), data.optString("expires_at"), daysLeft)
     }
 
     fun isActivated(context: Context): Boolean = getLicenseStatus(context).valid
-
-    fun getActivatedSubject(context: Context): String? {
-        val s = getLicenseStatus(context)
-        return if (s.valid) s.subject else null
-    }
 }

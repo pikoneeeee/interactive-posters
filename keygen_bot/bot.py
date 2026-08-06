@@ -11,10 +11,14 @@ Telegram-бот для генерации лицензионных ключей 
     /start      — Приветствие
     /help       — Список команд
     /gen        — Сгенерировать ключ (интерактивно)
+    /genqr      — QR-лицензия v4 (все продукты на новом ядре)
+    /cancel     — Отменить текущий диалог
     /verify     — Проверить ключ
-    /list       — Список выданных ключей (последние 20)
-    /listall    — Все ключи
-    /revoke     — Отозвать ключ (удалить из БД)
+    /list       — Список выданных ключей v2 (последние 20)
+    /listall    — Все ключи v2
+    /pclist     — Список выданных QR-лицензий v4 (последние 20)
+    /pclistall  — Все QR-лицензии v4
+    /revoke     — Отозвать ключ v2 (удалить из БД)
 """
 
 import asyncio
@@ -23,18 +27,172 @@ import sys
 
 from aiogram import Bot, Dispatcher, Router, F
 from aiogram.types import (
-    Message, CallbackQuery,
+    Message, CallbackQuery, ErrorEvent,
     InlineKeyboardMarkup, InlineKeyboardButton,
     ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove,
+    BufferedInputFile,
 )
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
+from aiogram.client.session.aiohttp import AiohttpSession
 from dotenv import load_dotenv
 
 # Добавляем родительскую папку в path для импорта keygen
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import keygen
+
+# ─── product-core v4: QR-лицензии для новых продуктов ───
+import io
+import json
+from datetime import datetime
+import pc_protocol as pcp
+
+PC_KEYSTORE = os.getenv("PC_KEYSTORE",
+                        os.path.join(os.path.dirname(os.path.abspath(__file__)), "pc_ecosystem.keys"))
+
+PC_PRODUCTS = {
+    # Интерактивные плакаты — поштучная продажа предметов: variant = предмет,
+    # variant 0 = «Все предметы» (сборка allsubjects). Список ДОЛЖЕН совпадать с
+    # SUBJECT_VARIANTS в android/sync_content.py и VARIANT_ID во build.gradle.kts.
+    "interactive-posters": {"id": 1, "name": "Интерактивные плакаты", "variants": {
+        0: "Все предметы", 1: "Физика", 2: "Математика", 3: "Биология", 4: "Химия",
+        5: "География", 6: "Информатика", 7: "История Казахстана", 8: "Всемирная история",
+        9: "Қазақ тілі", 10: "Русский язык", 11: "Английский язык",
+    }},
+    "interactive-map":    {"id": 4, "name": "Historic Map",       "variant": 0},
+    "smart-dictionary":   {"id": 2, "name": "Smart Dictionary",       "variant": 0},
+    "math-tools":         {"id": 5, "name": "Interactive Math",    "variant": 0},
+    "music-encyclopedia": {"id": 6, "name": "Music Vision",        "variant": 0},
+    "speech-therapy":     {"id": 7, "name": "Logo Games",          "variant": 0},
+    "3d-models":          {"id": 3, "name": "3D Models",           "variant": 0},
+    "virtual-stands": {"id": 9, "name": "Virtual Stands", "variants": {
+        0: "Все предметы", 1: "Биология", 2: "Химия", 3: "Физика",
+    }},
+}
+
+def _pc_license(product_id, variant_id, client_id, months, device_id):
+    ks = json.loads(open(PC_KEYSTORE, encoding="utf-8").read())
+    priv = bytes.fromhex(ks["ed25519_priv"])
+    content_key = pcp.derive_content_key(bytes.fromhex(ks["content_master"]), product_id, variant_id)
+    payload = pcp.pack_payload(product_id, variant_id, client_id, months)
+    sig = pcp.sign_license(priv, payload, content_key, device_id)
+    return pcp.encode_license(payload, content_key, sig)
+
+def _get_or_create_pc_client_id(name: str) -> int:
+    """ID клиента по названию школы: если школа уже встречалась — тот же ID, иначе новый."""
+    conn = keygen._init_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS pc_clients (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+    """)
+    norm = name.strip().lower()
+    for row_id, row_name in conn.execute("SELECT id, name FROM pc_clients"):
+        if row_name.strip().lower() == norm:
+            conn.close()
+            return row_id
+    cur = conn.execute(
+        "INSERT INTO pc_clients (name, created_at) VALUES (?, ?)",
+        (name, datetime.utcnow().isoformat())
+    )
+    conn.commit()
+    cid = cur.lastrowid
+    conn.close()
+    return cid
+
+
+def _save_pc_license(product_slug, product_id, variant_id, client_id, client_name, device_id, months, issued_by):
+    """Записывает выданную QR-лицензию (v4) в базу — для /pclist и /pclistall."""
+    conn = keygen._init_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS pc_licenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_slug TEXT NOT NULL,
+            product_id INTEGER NOT NULL,
+            variant_id INTEGER NOT NULL,
+            client_id INTEGER NOT NULL,
+            client_name TEXT NOT NULL,
+            device_id TEXT NOT NULL,
+            months INTEGER NOT NULL,
+            issued_by INTEGER NOT NULL,
+            created_at TEXT NOT NULL
+        )
+    """)
+    conn.execute(
+        "INSERT INTO pc_licenses (product_slug, product_id, variant_id, client_id, client_name, "
+        "device_id, months, issued_by, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (product_slug, product_id, variant_id, client_id, client_name, device_id, months, issued_by,
+         datetime.utcnow().isoformat())
+    )
+    conn.commit()
+    conn.close()
+
+
+async def _show_pc_licenses(message: Message, limit=None):
+    conn = keygen._init_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS pc_licenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_slug TEXT NOT NULL,
+            product_id INTEGER NOT NULL,
+            variant_id INTEGER NOT NULL,
+            client_id INTEGER NOT NULL,
+            client_name TEXT NOT NULL,
+            device_id TEXT NOT NULL,
+            months INTEGER NOT NULL,
+            issued_by INTEGER NOT NULL,
+            created_at TEXT NOT NULL
+        )
+    """)
+    query = ("SELECT product_slug, variant_id, client_name, device_id, months, created_at "
+             "FROM pc_licenses ORDER BY id DESC")
+    if limit:
+        query += f" LIMIT {limit}"
+    rows = conn.execute(query).fetchall()
+    total = conn.execute("SELECT COUNT(*) FROM pc_licenses").fetchone()[0]
+    conn.close()
+
+    if not rows:
+        await message.answer("📋 QR-лицензий пока нет.")
+        return
+
+    lines = [f"📋 *QR-лицензии* (показано {len(rows)} из {total}):\n"]
+    for i, (slug, vid, cname, did, months, created) in enumerate(rows, 1):
+        prod = PC_PRODUCTS.get(slug, {})
+        vlabel = f" — {prod['variants'].get(vid, vid)}" if prod.get("variants") else ""
+        lines.append(
+            f"`{i}.` {prod.get('name', slug)}{vlabel}\n"
+            f"    {cname} | `{did}` | {months}мес | {created[:10]}\n"
+        )
+
+    text = '\n'.join(lines)
+    if len(text) > 4000:
+        parts, current = [], ""
+        for line in lines:
+            if len(current) + len(line) > 3900:
+                parts.append(current)
+                current = line
+            else:
+                current += '\n' + line
+        if current:
+            parts.append(current)
+        for part in parts:
+            await message.answer(part, parse_mode="Markdown")
+    else:
+        await message.answer(text, parse_mode="Markdown")
+
+
+def _qr_png(text):
+    import qrcode
+    qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=14, border=4)
+    qr.add_data(text)
+    qr.make(fit=True)
+    buf = io.BytesIO()
+    qr.make_image(fill_color="black", back_color="white").save(buf, format="PNG")
+    return buf.getvalue()
 
 # ─── Конфигурация ─────────────────────────────────────────────
 load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env'))
@@ -86,11 +244,15 @@ async def cmd_start(message: Message):
     await message.answer(
         "🔐 *Keygen Bot — Интерактивные плакаты*\n\n"
         "Команды:\n"
-        "/gen — Сгенерировать ключ\n"
-        "/verify — Проверить ключ\n"
-        "/list — Последние 20 ключей\n"
-        "/listall — Все ключи\n"
-        "/revoke — Удалить ключ из БД\n"
+        "/gen — Ключ v2 для плакат (устаревший формат)\n"
+        "/genqr — QR-лицензия v4 (все продукты на новом ядре)\n"
+        "/cancel — Отменить текущий диалог\n"
+        "/verify — Проверить ключ v2\n"
+        "/list — Последние 20 ключей v2\n"
+        "/listall — Все ключи v2\n"
+        "/pclist — Последние 20 QR-лицензий v4\n"
+        "/pclistall — Все QR-лицензии v4\n"
+        "/revoke — Удалить ключ v2 из БД\n"
         "/help — Справка",
         parse_mode="Markdown"
     )
@@ -104,20 +266,40 @@ async def cmd_help(message: Message):
     subjects_list = ', '.join(sorted(keygen.SUBJECTS.keys()))
     await message.answer(
         "📋 *Справка*\n\n"
-        "*Генерация ключа (/gen):*\n"
+        "*QR-лицензия v4 (/genqr) — для всех продуктов на новом ядре:*\n"
+        "1. Выберите продукт (и предмет, если продукт многопредметный)\n"
+        "2. Введите Device ID\n"
+        "3. Введите название школы/клиента (ID подбирается сам)\n"
+        "4. Выберите срок — бот пришлёт QR-код + строку лицензии\n"
+        "Выданные QR-лицензии видны в /pclist и /pclistall.\n\n"
+        "*Отмена (/cancel):* сбрасывает текущий диалог на любом шаге.\n\n"
+        "*Генерация ключа v2 (/gen) — устаревший формат, только плакаты:*\n"
         "1. Выберите предмет\n"
         "2. Введите ID клиента (0–65535)\n"
         "3. Выберите срок (месяцы)\n"
         "4. Добавьте заметку (опционально)\n\n"
-        f"*Доступные предметы:*\n`{subjects_list}`\n\n"
+        f"*Доступные предметы (v2):*\n`{subjects_list}`\n\n"
         "*Проверка (/verify):*\n"
-        "Отправьте ключ в формате XXXX-XXXX-XXXX-XXXX-XXXX\n\n"
-        "*Формат ключа:*\n"
+        "Отправьте ключ в формате XXXX-XXXX-XXXX-XXXX-XXXX (только для ключей v2)\n\n"
+        "*Формат ключа v2:*\n"
         "• Привязан к предмету и клиенту\n"
         "• Срок действия начинается с момента активации\n"
         "• Привязывается к устройству при активации",
         parse_mode="Markdown"
     )
+
+
+# ─── /cancel — Отмена текущего диалога (работает на любом шаге) ─
+@router.message(Command("cancel"))
+async def cmd_cancel(message: Message, state: FSMContext):
+    if not is_admin(message.from_user.id):
+        return
+    current = await state.get_state()
+    await state.clear()
+    if current is None:
+        await message.answer("Нечего отменять.")
+    else:
+        await message.answer("❌ Отменено.")
 
 
 # ─── /gen — Генерация ключа (шаг 1: предмет) ─────────────────
@@ -273,6 +455,166 @@ async def gen_note_and_create(message: Message, state: FSMContext):
 
     except Exception as e:
         await message.answer(f"❌ Ошибка генерации: `{e}`", parse_mode="Markdown")
+
+
+# ─── /genqr — QR-лицензия v4 (новые продукты на ядре) ──────────
+class PcGen(StatesGroup):
+    product = State()
+    variant = State()
+    device_id = State()
+    client_id = State()
+    months = State()
+
+
+@router.message(Command("genqr"))
+async def cmd_genqr(message: Message, state: FSMContext):
+    if not is_admin(message.from_user.id):
+        return
+    await state.clear()
+    rows = [[InlineKeyboardButton(text=v["name"], callback_data=f"pcp_{k}")]
+            for k, v in PC_PRODUCTS.items()]
+    await message.answer("🆕 *QR-лицензия (v4)*\n\nШаг 1/4: выберите продукт:",
+                         reply_markup=InlineKeyboardMarkup(inline_keyboard=rows), parse_mode="Markdown")
+    await state.set_state(PcGen.product)
+
+
+@router.callback_query(F.data.startswith("pcp_"), PcGen.product)
+async def pcgen_product(callback: CallbackQuery, state: FSMContext):
+    try:
+        key = callback.data.replace("pcp_", "")
+        await state.update_data(pc=key)
+        prod = PC_PRODUCTS[key]
+        variants = prod.get("variants")
+        if variants:
+            # Многовариантный продукт (плакаты): выбираем предмет/«Все предметы»
+            rows, row = [], []
+            for vid, vname in variants.items():
+                row.append(InlineKeyboardButton(text=vname, callback_data=f"pcv_{vid}"))
+                if len(row) == 2:
+                    rows.append(row); row = []
+            if row:
+                rows.append(row)
+            await callback.message.edit_text(
+                f"Продукт: *{prod['name']}*\n\nШаг 2: выберите предмет (вариант лицензии):",
+                reply_markup=InlineKeyboardMarkup(inline_keyboard=rows), parse_mode="Markdown")
+            await state.set_state(PcGen.variant)
+        else:
+            await callback.message.edit_text(
+                f"Продукт: *{prod['name']}*\n\n"
+                "Введите *Device ID* (16 hex с экрана активации доски):",
+                parse_mode="Markdown")
+            await state.set_state(PcGen.device_id)
+    except Exception as e:
+        await state.clear()
+        await callback.message.answer(f"❌ Ошибка: {e}\nНачните заново: /genqr")
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("pcv_"), PcGen.variant)
+async def pcgen_variant(callback: CallbackQuery, state: FSMContext):
+    try:
+        vid = int(callback.data.replace("pcv_", ""))
+        await state.update_data(variant=vid)
+        data = await state.get_data()
+        prod = PC_PRODUCTS[data["pc"]]
+        vname = prod["variants"].get(vid, str(vid))
+        await callback.message.edit_text(
+            f"Продукт: *{prod['name']}* — *{vname}*\n\n"
+            "Введите *Device ID* (16 hex с экрана активации доски):",
+            parse_mode="Markdown")
+        await state.set_state(PcGen.device_id)
+    except Exception as e:
+        await state.clear()
+        await callback.message.answer(f"❌ Ошибка: {e}\nНачните заново: /genqr")
+    await callback.answer()
+
+
+@router.message(PcGen.device_id)
+async def pcgen_device(message: Message, state: FSMContext):
+    if not is_admin(message.from_user.id):
+        return
+    try:
+        did = message.text.strip().upper()
+        if len(did) != 16:
+            await message.answer("❌ Device ID должен быть ровно 16 символов. Ещё раз:")
+            return
+        await state.update_data(device_id=did)
+        await message.answer(f"💻 Устройство: `{did}`\n\nШаг 3/4: название школы/клиента:", parse_mode="Markdown")
+        await state.set_state(PcGen.client_id)
+    except Exception as e:
+        await state.clear()
+        await message.answer(f"❌ Ошибка: {e}\nНачните заново: /genqr")
+
+
+@router.message(PcGen.client_id)
+async def pcgen_client(message: Message, state: FSMContext):
+    if not is_admin(message.from_user.id):
+        return
+    name = message.text.strip()
+    if not name:
+        await message.answer("❌ Введите название школы/клиента:")
+        return
+    cid = _get_or_create_pc_client_id(name)
+    await state.update_data(client_id=cid, client_name=name)
+    rows = [
+        [InlineKeyboardButton(text="3 мес", callback_data="pcd_3"),
+         InlineKeyboardButton(text="6 мес", callback_data="pcd_6"),
+         InlineKeyboardButton(text="12 мес", callback_data="pcd_12")],
+        [InlineKeyboardButton(text="24 мес", callback_data="pcd_24"),
+         InlineKeyboardButton(text="36 мес", callback_data="pcd_36"),
+         InlineKeyboardButton(text="60 мес", callback_data="pcd_60")],
+    ]
+    await message.answer(f"👤 Клиент: *{name}* (#{cid})\n\nШаг 4/4: срок действия:",
+                         reply_markup=InlineKeyboardMarkup(inline_keyboard=rows), parse_mode="Markdown")
+    await state.set_state(PcGen.months)
+
+
+@router.callback_query(F.data.startswith("pcd_"), PcGen.months)
+async def pcgen_months(callback: CallbackQuery, state: FSMContext):
+    months = int(callback.data.replace("pcd_", ""))
+    data = await state.get_data()
+    await state.clear()
+    prod = PC_PRODUCTS[data["pc"]]
+    did = data["device_id"]
+    cid = data["client_id"]
+    cname = data.get("client_name", f"#{cid}")
+    variant = data.get("variant", prod.get("variant", 0))
+    vlabel = f" — {prod['variants'].get(variant, variant)}" if prod.get("variants") else ""
+    try:
+        lic = _pc_license(prod["id"], variant, cid, months, did)
+        png = _qr_png(lic)
+        caption = (
+            f"✅ QR-лицензия готова\n\n"
+            f"Продукт: {prod['name']}{vlabel} (id {prod['id']})\n"
+            f"Устройство: {did}\n"
+            f"Клиент: {cname} (#{cid})   Срок: {months} мес.\n\n"
+            "На доске: «📷 Сканировать QR-код» → наведите камеру на этот QR."
+        )
+        await callback.message.answer_photo(BufferedInputFile(png, filename=f"license_{did}.png"), caption=caption)
+
+        await callback.message.answer(lic)
+
+        _save_pc_license(data["pc"], prod["id"], variant, cid, cname, did, months, callback.from_user.id)
+    except FileNotFoundError:
+        await callback.message.answer("❌ Не найден ключ подписи (PC_KEYSTORE / pc_ecosystem.keys рядом с ботом).")
+    except Exception as e:
+        await callback.message.answer(f"❌ Ошибка: {e}")
+    await callback.answer()
+
+
+# ─── /pclist, /pclistall — Выданные QR-лицензии (v4) ───────────
+@router.message(Command("pclist"))
+async def cmd_pclist(message: Message):
+    if not is_admin(message.from_user.id):
+        return
+    await _show_pc_licenses(message, limit=20)
+
+
+@router.message(Command("pclistall"))
+async def cmd_pclistall(message: Message):
+    if not is_admin(message.from_user.id):
+        return
+    await _show_pc_licenses(message, limit=None)
 
 
 # ─── /verify — Проверить ключ ──────────────────────────────────
@@ -453,9 +795,25 @@ async def fallback(message: Message):
     await message.answer("Используйте /help для списка команд.")
 
 
+# ─── Глобальный обработчик ошибок ──────────────────────────────
+# Ловит исключения из любых хендлеров без собственного try/except,
+# чтобы админ видел сообщение об ошибке, а не тишину в чате.
+@router.errors()
+async def global_error_handler(event: ErrorEvent):
+    upd = event.update
+    chat_msg = upd.message or (upd.callback_query.message if upd.callback_query else None)
+    print(f"⚠️ Необработанная ошибка: {event.exception}")
+    if chat_msg:
+        try:
+            await chat_msg.answer(f"❌ Непредвиденная ошибка: {event.exception}\nСбросить диалог: /cancel")
+        except Exception:
+            pass
+    return True
+
+
 # ─── Запуск ───────────────────────────────────────────────────
 async def main():
-    bot = Bot(token=BOT_TOKEN)
+    bot = Bot(token=BOT_TOKEN, session=AiohttpSession(timeout=120))
     dp = Dispatcher()
     dp.include_router(router)
 

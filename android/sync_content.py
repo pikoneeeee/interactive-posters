@@ -22,12 +22,21 @@ import os
 import shutil
 import sys
 
+import oi_protocol   # сборочная криптография v4 (рядом со sync_content.py)
+
 # Пути
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)  # interactive-posters/
 CONTENT_DIR = os.path.join(PROJECT_ROOT, 'content')
 ANDROID_APP = os.path.join(SCRIPT_DIR, 'app')
 MAIN_ASSETS = os.path.join(ANDROID_APP, 'src', 'main', 'assets')
+
+# Мусор, который НЕ должен попадать в APK (бэкапы, архивы, заметки разработчика).
+# Применяется ко всем copytree — поэтому .bak/.zip/.rar/_STYLE_GUIDE.md и т.п.
+# не синхронизируются в assets и не шифруются/не раздувают сборку.
+_IGNORE_JUNK = shutil.ignore_patterns(
+    '*.bak', '*.md', '*.zip', '*.rar', '*.7z', '*.orig', '*.tmp', '*.rej',
+    '__pycache__', '*.pyc', 'Thumbs.db', '.DS_Store')
 
 # Все предметы (id из subjects.json)
 ALL_SUBJECTS = [
@@ -36,6 +45,77 @@ ALL_SUBJECTS = [
     'kazakhlang', 'russianlang', 'englishlang',
     'music', 'grafika', 'labor_girls', 'labor_boys', 'nvp'
 ]
+
+# ── Новое ядро v4: защита контента + активация ──────────────────────────────
+# Продукт «Интерактивные плакаты» в экосистеме.
+PRODUCT_ID = 1
+
+# Лицензируемые предметы → variant_id. ДОЛЖНО совпадать с VARIANT_ID во
+# build.gradle.kts и со списком предметов в боте (/genqr). Бесплатные предметы
+# (music, grafika, labor_*, nvp) сюда НЕ входят — их контент не шифруется.
+# allsubjects = вариант 0 («все предметы»).
+SUBJECT_VARIANTS = {
+    'physics': 1, 'mathematics': 2, 'biology': 3, 'chemistry': 4,
+    'geography': 5, 'informatics': 6, 'historykaz': 7, 'worldhistory': 8,
+    'kazakhlang': 9, 'russianlang': 10, 'englishlang': 11,
+}
+VARIANT_ALL = 0   # ключ «все предметы» (сборка allsubjects)
+
+# Мастер-ключ и публичный ключ экосистемы (заполняются load_keys() в main)
+MASTER = None
+PUB = None
+
+
+def load_keys():
+    """Находит ecosystem.keys и возвращает (content_master, ed25519_pub) в bytes.
+
+    Приоритет: переменная OI_KEYS → android/ecosystem.keys → копия в репозитории
+    экосистемы. Приватный ключ подписи НЕ используется (лицензии подписывает бот)."""
+    candidates = [
+        os.environ.get('OI_KEYS'),
+        os.path.join(SCRIPT_DIR, 'ecosystem.keys'),
+        r'D:\oi-orda-ecosystem\product-core\ecosystem.keys',
+    ]
+    for p in candidates:
+        if p and os.path.exists(p):
+            with open(p, 'r', encoding='utf-8') as f:
+                ks = json.load(f)
+            print(f"🔑 Ключи экосистемы: {p}")
+            return bytes.fromhex(ks['content_master']), bytes.fromhex(ks['ed25519_pub'])
+    print("❌ Не найден ecosystem.keys (мастер-ключ экосистемы).")
+    print("   Без него нельзя зашифровать контент и встроить публичный ключ активации.")
+    print("   Положите ecosystem.keys в папку android/ или задайте переменную OI_KEYS.")
+    print(f"   Искал: {[c for c in candidates if c]}")
+    sys.exit(1)
+
+
+def write_product_config():
+    """Кладёт product_config.json в main/assets: product_id + публичный ключ Ed25519."""
+    cfg = {'product_id': PRODUCT_ID, 'public_key': list(PUB)}
+    os.makedirs(MAIN_ASSETS, exist_ok=True)
+    path = os.path.join(MAIN_ASSETS, 'product_config.json')
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(cfg, f, ensure_ascii=False)
+    print(f"  ✓ product_config.json (product_id={PRODUCT_ID}, публичный ключ Ed25519)")
+
+
+def encrypt_dir(directory, content_key):
+    """Шифрует ВСЕ файлы в directory на месте (OLENC2/AES-GCM). Идемпотентно:
+    уже зашифрованные файлы пропускает. Возвращает число зашифрованных файлов."""
+    if not os.path.isdir(directory):
+        return 0
+    n = 0
+    for root, _dirs, files in os.walk(directory):
+        for fn in files:
+            fp = os.path.join(root, fn)
+            with open(fp, 'rb') as f:
+                raw = f.read()
+            if oi_protocol.is_encrypted(raw):
+                continue
+            with open(fp, 'wb') as f:
+                f.write(oi_protocol.encrypt_content(raw, content_key))
+            n += 1
+    return n
 
 
 def sync_common_assets():
@@ -83,6 +163,9 @@ def sync_common_assets():
         shutil.copy2(icon_src, os.path.join(MAIN_ASSETS, 'shanyrak_icon.svg'))
         print(f"  ✓ shanyrak_icon.svg")
 
+    # product_config.json — публичный ключ активации v4 (встраивается во все сборки)
+    write_product_config()
+
 
 def sync_subject_posters(subject_id):
     """Копирует плакаты одного предмета в его flavor-каталог"""
@@ -111,6 +194,22 @@ def sync_subject_posters(subject_id):
             subj_assets,
             os.path.join(ANDROID_APP, 'src', 'allsubjects', 'assets', 'assets', subject_id)
         )
+
+    # ── Шифрование контента (новое ядро v4) ──────────────────────────
+    # Свой flavor лицензируемого предмета — ключом этого предмета (variant).
+    # Бесплатные предметы (нет в SUBJECT_VARIANTS) в своём flavor НЕ шифруются.
+    if subject_id in SUBJECT_VARIANTS:
+        ck = oi_protocol.derive_content_key(MASTER, PRODUCT_ID, SUBJECT_VARIANTS[subject_id])
+        enc = encrypt_dir(dst_dir, ck)
+        enc += encrypt_dir(os.path.join(ANDROID_APP, 'src', subject_id, 'assets', 'assets', subject_id), ck)
+        print(f"  🔒 {subject_id}: зашифровано {enc} файлов (вариант {SUBJECT_VARIANTS[subject_id]})")
+    # Копия в allsubjects всегда шифруется ключом «все предметы» (variant 0):
+    # вся сборка allsubjects открывается одним ключом «все».
+    ck_all = oi_protocol.derive_content_key(MASTER, PRODUCT_ID, VARIANT_ALL)
+    enc_all = encrypt_dir(dst_all, ck_all)
+    enc_all += encrypt_dir(os.path.join(ANDROID_APP, 'src', 'allsubjects', 'assets', 'assets', subject_id), ck_all)
+    if enc_all:
+        print(f"  🔒 allsubjects/{subject_id}: зашифровано {enc_all} файлов (вариант {VARIANT_ALL})")
 
     # Создаём subjects_<id>.json с единственным предметом для этого flavor
     create_single_subject_json(subject_id)
@@ -165,7 +264,7 @@ def sync_common_subdir_except_subjects(src, dst):
         s = os.path.join(src, name)
         d = os.path.join(dst, name)
         if os.path.isdir(s):
-            shutil.copytree(s, d)
+            shutil.copytree(s, d, ignore=_IGNORE_JUNK)
             count += sum(len(files) for _, _, files in os.walk(d))
         else:
             shutil.copy2(s, d)
@@ -182,7 +281,7 @@ def sync_folder(src, dst):
     if os.path.exists(dst):
         shutil.rmtree(dst)
 
-    shutil.copytree(src, dst)
+    shutil.copytree(src, dst, ignore=_IGNORE_JUNK)
     count = sum(len(files) for _, _, files in os.walk(dst))
     folder_name = os.path.basename(src)
     print(f"  ✓ {folder_name}/ ({count} файлов)")
@@ -232,6 +331,10 @@ def main():
                 print(f"⚠ Неизвестный предмет: {a}")
                 print(f"  Доступные: {', '.join(ALL_SUBJECTS)}")
                 return
+
+    # Ключи экосистемы (мастер контента + публичный ключ активации)
+    global MASTER, PUB
+    MASTER, PUB = load_keys()
 
     # 1. Общие файлы (всегда)
     sync_common_assets()

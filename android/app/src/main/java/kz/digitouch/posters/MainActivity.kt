@@ -7,26 +7,42 @@ import android.view.View
 import android.view.WindowManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.app.AlertDialog
 import android.widget.Button
 import android.widget.ImageButton
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.ByteArrayInputStream
+import java.io.FileNotFoundException
 import java.io.IOException
 
 /**
  * Главная Activity — полноэкранный WebView с навигацией по плакатам.
  *
  * Навигация: subjects → topics → poster
- * JS-мост: Android.bridge.* (заменяет QWebChannel из PySide6)
+ * JS-мост: Android.* (заменяет QWebChannel из PySide6)
+ *
+ * Защита (новое ядро v4): контент предметов в assets ЗАШИФРОВАН (OLENC2/AES-GCM) и
+ * отдаётся через WebViewAssetLoader с расшифровкой В ПАМЯТИ ключом из активной
+ * лицензии — в распакованном APK исходных плакатов нет. Активация — лицензией v4
+ * (Ed25519) по QR-коду или строкой OL1-…; вариант лицензии = предмет (см. VARIANT_ID).
+ * Бесплатные предметы (REQUIRES_ACTIVATION=false) не шифруются и отдаются как есть.
  */
 class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "Posters"
+        private const val DOMAIN = "appassets.androidplatform.net"
     }
 
     private lateinit var webView: WebView
@@ -48,6 +64,38 @@ class MainActivity : AppCompatActivity() {
 
     // ID предмета из BuildConfig (для однопредметных сборок)
     private val flavorSubjectId: String by lazy { BuildConfig.SUBJECT_ID }
+
+    // ── QR-сканер лицензии + разрешение камеры ──────────────────────
+    private val scanLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { res ->
+        if (res.resultCode == RESULT_OK) {
+            val text = res.data?.getStringExtra("qr")
+            if (text != null) activateWith(text)
+        }
+    }
+    private val cameraPermLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        // Без разрешения камера не нужна для «QR из файла» и ручного ввода —
+        // открываем сканер в режиме no_camera, а не глухую ошибку.
+        if (granted) launchScan() else launchScan(noCamera = true)
+    }
+    private fun launchScan(noCamera: Boolean = false) {
+        scanLauncher.launch(Intent(this, QrScanActivity::class.java)
+            .putExtra(QrScanActivity.EXTRA_NO_CAMERA, noCamera))
+    }
+
+    /** Активация лицензией v4 (из QR или строки). При успехе — переход к плакатам.
+     *  Проверку соответствия предмета (variant) делает сам Licensing по BuildConfig.VARIANT_ID. */
+    private fun activateWith(key: String) {
+        val (ok, message) = Licensing.activateLicense(this, key)
+        val esc = message.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"")
+        runOnUiThread {
+            if (ok) {
+                webView.evaluateJavascript("if(typeof onActivationSuccess==='function')onActivationSuccess('$esc');", null)
+                webView.postDelayed({ navigateAfterActivation() }, 1500)
+            } else {
+                webView.evaluateJavascript("if(typeof onActivationError==='function')onActivationError('$esc');", null)
+            }
+        }
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +120,16 @@ class MainActivity : AppCompatActivity() {
         btnPrev = findViewById(R.id.btnPrev)
         btnNext = findViewById(R.id.btnNext)
 
+        // ── Лицензирование v4: публичный ключ + product_id из product_config.json,
+        //    вариант (предмет) — из BuildConfig.VARIANT_ID ──
+        val cfg = loadConfig()
+        val pub = cfg.optJSONArray("public_key")
+        val productId = cfg.optInt("product_id", 1)
+        Licensing.init(
+            if (pub != null) IntArray(pub.length()) { pub.getInt(it) } else IntArray(0),
+            productId, BuildConfig.VARIANT_ID
+        )
+
         btnDeviceId.setOnClickListener {
             val deviceId = Licensing.getDeviceId(this)
             AlertDialog.Builder(this)
@@ -86,8 +144,8 @@ class MainActivity : AppCompatActivity() {
         webView.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
-            allowFileAccess = true
-            allowContentAccess = true
+            allowFileAccess = false
+            allowContentAccess = false
             setSupportZoom(true)
             builtInZoomControls = true
             displayZoomControls = false
@@ -101,6 +159,13 @@ class MainActivity : AppCompatActivity() {
 
         webView.webChromeClient = WebChromeClient()
         webView.webViewClient = object : WebViewClient() {
+            override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
+                val url = request?.url ?: return null
+                if (url.host != DOMAIN) return null
+                val path = (url.path ?: "").trimStart('/')
+                return serveAsset(path)
+            }
+
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 Log.d(TAG, "Page loaded: $url")
@@ -136,7 +201,7 @@ class MainActivity : AppCompatActivity() {
 
         // ── Gate активации ────────────────────────────────────────
         // Для сборок с REQUIRES_ACTIVATION=false (напр. music, grafika)
-        // лицензия не проверяется и ключ не запрашивается.
+        // лицензия не проверяется и ключ не запрашивается (контент не шифруется).
         if (BuildConfig.REQUIRES_ACTIVATION) {
             val status = Licensing.getLicenseStatus(this)
             if (!status.valid) {
@@ -151,6 +216,16 @@ class MainActivity : AppCompatActivity() {
 
         navigateAfterActivation()
     }
+
+    /** product_config.json (public_key, product_id) — встраивается при сборке (sync_content.py). */
+    private fun loadConfig(): JSONObject = try {
+        JSONObject(assets.open("product_config.json").bufferedReader().use { it.readText() })
+    } catch (e: Exception) {
+        Log.w(TAG, "нет product_config.json — активация работать не будет")
+        JSONObject()
+    }
+
+    private fun assetUrl(path: String): String = "https://$DOMAIN/$path"
 
     /** Навигация после успешной активации (или если уже активирована). */
     private fun navigateAfterActivation() {
@@ -169,7 +244,7 @@ class MainActivity : AppCompatActivity() {
         btnBack.visibility = View.GONE
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
-        webView.loadUrl("file:///android_asset/templates/activation_screen.html")
+        webView.loadUrl(assetUrl("templates/activation_screen.html"))
     }
 
     // =====================================================================
@@ -178,7 +253,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadAllData() {
         try {
-            // subjects.json
+            // subjects.json (метаданные — не шифруются)
             val subjectsJson = loadAssetText("subjects.json")
             if (subjectsJson != null) {
                 val root = JSONObject(subjectsJson)
@@ -223,18 +298,19 @@ class MainActivity : AppCompatActivity() {
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
 
-        webView.loadUrl("file:///android_asset/templates/subjects_screen.html")
+        webView.loadUrl(assetUrl("templates/subjects_screen.html"))
     }
 
     private fun showTopicsScreen() {
         Log.d(TAG, "showTopicsScreen() subject=$currentSubject")
         currentScreen = "topics"
-        // В однопредметной сборке кнопка "Назад" из тем не нужна
-        btnBack.visibility = if (flavorSubjectId == "all") View.VISIBLE else View.GONE
+        // «Назад» на экране тем рисует HTML-шаблон (← Назад). Нативную кнопку прячем,
+        // иначе на сборке allsubjects кнопок «Назад» было две (нативная каз. + HTML рус.).
+        btnBack.visibility = View.GONE
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
 
-        webView.loadUrl("file:///android_asset/templates/topics_screen.html")
+        webView.loadUrl(assetUrl("templates/topics_screen.html"))
     }
 
     private fun showPosterScreen(topicId: String) {
@@ -245,25 +321,24 @@ class MainActivity : AppCompatActivity() {
         currentTopicForScroll = topicId
         currentScreen = "poster"
 
-        val posterPath = "file:///android_asset/posters/$currentSubject/$topicId.html"
-
-        // Проверяем наличие файла
+        // Проверяем наличие файла (читаем сырые — возможно зашифрованные — байты)
+        val assetRel = "posters/$currentSubject/$topicId.html"
         val exists = try {
-            assets.open("posters/$currentSubject/$topicId.html").close()
+            assets.open(assetRel).close()
             true
         } catch (e: IOException) {
             false
         }
 
         if (exists) {
-            webView.loadUrl("$posterPath?lang=$currentLang")
+            webView.loadUrl(assetUrl("$assetRel?lang=$currentLang"))
             btnBack.visibility = View.VISIBLE
             btnPrev.visibility = View.VISIBLE
             btnNext.visibility = View.VISIBLE
         } else {
-            Log.e(TAG, "Poster not found: posters/$currentSubject/$topicId.html")
+            Log.e(TAG, "Poster not found: $assetRel")
             webView.loadData(
-                "<html><body><h1>Плакат не найден</h1><p>posters/$currentSubject/$topicId.html</p></body></html>",
+                "<html><body><h1>Плакат не найден</h1><p>$assetRel</p></body></html>",
                 "text/html", "UTF-8"
             )
         }
@@ -353,8 +428,6 @@ class MainActivity : AppCompatActivity() {
         val arr = JSONArray()
         for ((id, subj) in subjectsStructure) {
             // Для однопредметных сборок: показываем только свой предмет
-            // (На самом деле в однопредметных сборках экран предметов не показывается,
-            //  но на всякий случай фильтруем)
             if (flavorSubjectId != "all" && id != flavorSubjectId) continue
 
             val item = JSONObject()
@@ -389,6 +462,8 @@ class MainActivity : AppCompatActivity() {
 
         val isLang = subj.optBoolean("is_language_subject", false)
         val nameEscaped = subjectName.replace("'", "\\'").replace("\"", "\\\"")
+        // Однопредметная сборка: экран тем — домашний, HTML-кнопка «Назад» не нужна.
+        val backDisplay = if (flavorSubjectId == "all") "" else "none"
 
         // Скролл к текущей теме при возврате из плаката
         val scrollScript = if (currentTopicForScroll != null) {
@@ -412,6 +487,8 @@ class MainActivity : AppCompatActivity() {
                 renderTopics(window.topicsData);
                 $scrollScript
             }
+            var backBtn = document.getElementById('back-btn');
+            if (backBtn) { backBtn.style.display = '$backDisplay'; }
             var langSel = document.getElementById('lang-selector');
             if (langSel) {
                 langSel.style.display = $isLang ? 'none' : 'flex';
@@ -436,7 +513,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =====================================================================
-    // УТИЛИТЫ
+    // ОТДАЧА ASSETS С РАСШИФРОВКОЙ В ПАМЯТИ
+    // =====================================================================
+
+    /**
+     * Отдаёт файл из assets по https://DOMAIN/<path>. Зашифрованные файлы (маркер OLENC2)
+     * расшифровываются ключом активной лицензии; без ключа — 403 (контент закрыт).
+     * Обычные файлы (templates, libs, fonts, locales) отдаются как есть.
+     */
+    private fun serveAsset(path: String): WebResourceResponse? {
+        if (path.isEmpty()) return null
+        return try {
+            val raw = assets.open(path).use { it.readBytes() }
+            val data = Licensing.decryptContent(raw)
+                ?: return WebResourceResponse("text/plain", "UTF-8", 403, "Locked",
+                    emptyMap(), ByteArrayInputStream(ByteArray(0)))
+            val mime = mimeFor(path)
+            WebResourceResponse(mime, if (isText(mime)) "UTF-8" else null, ByteArrayInputStream(data))
+        } catch (e: FileNotFoundException) {
+            null
+        } catch (e: Exception) {
+            Log.e(TAG, "ошибка отдачи $path", e); null
+        }
+    }
+
+    private fun mimeFor(path: String): String = when (path.substringBefore('?').substringAfterLast('.', "").lowercase()) {
+        "html", "htm" -> "text/html"; "js", "mjs" -> "application/javascript"; "css" -> "text/css"
+        "json", "map" -> "application/json"; "svg" -> "image/svg+xml"; "png" -> "image/png"
+        "jpg", "jpeg" -> "image/jpeg"; "gif" -> "image/gif"; "webp" -> "image/webp"; "ico" -> "image/x-icon"
+        "woff" -> "font/woff"; "woff2" -> "font/woff2"; "ttf" -> "font/ttf"; "otf" -> "font/otf"
+        "glb" -> "model/gltf-binary"; "gltf" -> "model/gltf+json"; "wasm" -> "application/wasm"
+        "mp3" -> "audio/mpeg"; "wav" -> "audio/wav"; "ogg" -> "audio/ogg"; "mp4" -> "video/mp4"
+        else -> "application/octet-stream"
+    }
+    private fun isText(m: String) =
+        m.startsWith("text/") || m == "application/javascript" || m == "application/json" || m == "image/svg+xml"
+
+    // =====================================================================
+    // УТИЛИТЫ (анти-копирование и производительность)
     // =====================================================================
 
     /**
@@ -518,8 +632,6 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Инъекция CSS/JS оптимизаций для слабых устройств DigiTouch.
-     * Отключает тяжёлые эффекты: backdrop-filter, box-shadow, canvas shadowBlur,
-     * сложные transitions и hover-анимации.
      */
     private fun injectPerformanceFixes() {
         val css = """
@@ -547,7 +659,6 @@ class MainActivity : AppCompatActivity() {
                 document.head.appendChild(style);
 
                 // Отключаем shadowBlur на всех canvas
-                var origArc = CanvasRenderingContext2D.prototype.arc;
                 var origFill = CanvasRenderingContext2D.prototype.fill;
                 var _fillHook = function() {
                     this.shadowBlur = 0;
@@ -619,31 +730,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         /**
-         * Вызывается с экрана активации. Проверяет ключ через [Licensing.activateKey],
-         * сохраняет лицензию и переходит к плакатам.
+         * Вызывается с экрана активации (кнопка «Активировать» / ввод ключа OL1-…).
+         * Активирует лицензию v4 и переходит к плакатам.
          */
         @JavascriptInterface
         fun activateKey(key: String) {
             Log.d(TAG, "JS → activateKey(${key.take(4)}…)")
-            // В однопредметной сборке принимаем только ключи для своего предмета.
-            // В сборке "all" — любой валидный ключ.
-            val expected = if (flavorSubjectId == "all") null else flavorSubjectId
-            val (ok, message) = Licensing.activateKey(this@MainActivity, key, expected)
-            val esc = message.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"")
+            runOnUiThread { activateWith(key) }
+        }
+
+        /** Вызывается кнопкой «Сканировать QR-код»: запрос камеры → сканер. */
+        @JavascriptInterface
+        fun scanQr() {
             runOnUiThread {
-                if (ok) {
-                    webView.evaluateJavascript(
-                        "if(typeof onActivationSuccess==='function')onActivationSuccess('$esc');",
-                        null
-                    )
-                    // Небольшая задержка, чтобы пользователь увидел сообщение
-                    webView.postDelayed({ navigateAfterActivation() }, 1500)
-                } else {
-                    webView.evaluateJavascript(
-                        "if(typeof onActivationError==='function')onActivationError('$esc');",
-                        null
-                    )
-                }
+                if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) launchScan()
+                else cameraPermLauncher.launch(Manifest.permission.CAMERA)
             }
         }
     }
