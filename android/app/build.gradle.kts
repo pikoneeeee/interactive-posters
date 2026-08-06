@@ -11,8 +11,8 @@ android {
         applicationId = "kz.digitouch.posters"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.0.1"
+        versionCode = 3
+        versionName = "1.1.0"
 
         // Сокращаем нативные библиотеки (CameraX/ML Kit) до досочных ABI — иначе APK раздувается.
         ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a") }
@@ -24,22 +24,50 @@ android {
         buildConfigField("int", "VARIANT_ID", "-1")
     }
 
-    // Подпись релизных APK
+    // Подпись релизных APK — ОБЩИЙ ключ экосистемы (oilab-release.jks).
+    //
+    // ВАЖНО: с Android 8.0 ANDROID_ID уникален для связки «ключ подписи + устройство».
+    // Device ID выводится из ANDROID_ID, поэтому продукты, подписанные РАЗНЫМИ ключами,
+    // показывают на одной доске РАЗНЫЕ Device ID. Плакаты подписываются тем же ключом,
+    // что и остальные продукты ядра, — тогда Device ID у доски один на все продукты.
+    //
+    // Файл keystore НЕ коммитится (см. .gitignore). Ищется по порядку:
+    //   переменная OI_KEYSTORE → android/app/ → рабочая копия product-core.
+    val keystoreCandidates = listOfNotNull(
+        System.getenv("OI_KEYSTORE"),
+        "oilab-release.jks",
+        "D:/oi-orda-ecosystem/product-core/android_shell/app/oilab-release.jks",
+    ).map { file(it) }
+    val oilabKeystore = keystoreCandidates.firstOrNull { it.exists() }
+    if (oilabKeystore == null) {
+        project.logger.warn(
+            "⚠ oilab-release.jks не найден — release будет подписан DEBUG-ключом, " +
+            "Device ID НЕ совпадёт с другими продуктами. Положите keystore в android/app/ " +
+            "или задайте OI_KEYSTORE."
+        )
+    } else {
+        project.logger.lifecycle("🔑 Подпись APK: ${oilabKeystore.path}")
+    }
+
     signingConfigs {
         create("release") {
-            // Укажите свои пути к keystore:
-            // storeFile = file("keystore/release.jks")
-            // storePassword = "your_store_password"
-            // keyAlias = "your_key_alias"
-            // keyPassword = "your_key_password"
+            if (oilabKeystore != null) {
+                storeFile = oilabKeystore
+                storePassword = System.getenv("OI_KEYSTORE_PASS") ?: "oilab2026"
+                keyAlias = System.getenv("OI_KEYSTORE_ALIAS") ?: "oilab"
+                keyPassword = System.getenv("OI_KEYSTORE_PASS") ?: "oilab2026"
+            }
         }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            // Подписываем debug-ключом для sideloading на доски DigiTouch
-            signingConfig = signingConfigs.getByName("debug")
+            // Без keystore падаем на debug-ключ (предупреждение выше), но Device ID
+            // тогда НЕ совпадёт с остальными продуктами — в продажу такое отдавать нельзя.
+            signingConfig = signingConfigs.getByName(
+                if (oilabKeystore != null) "release" else "debug"
+            )
         }
         debug {
             isDebuggable = true
