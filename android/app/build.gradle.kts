@@ -135,6 +135,16 @@ android {
             buildConfigField("String", "APP_TITLE", "\"Информатика\"")
             buildConfigField("int", "VARIANT_ID", "6")
         }
+        // ГРУППОВАЯ сборка: два предмета в одном APK, один ключ активации.
+        // SUBJECT_ID через запятую; список и VARIANT_ID обязаны совпадать с
+        // SUBJECT_GROUPS в sync_content.py и со списком в боте.
+        create("history") {
+            dimension = "subject"
+            applicationIdSuffix = ".history"
+            buildConfigField("String", "SUBJECT_ID", "\"historykaz,worldhistory\"")
+            buildConfigField("String", "APP_TITLE", "\"История\"")
+            buildConfigField("int", "VARIANT_ID", "12")
+        }
         create("historykaz") {
             dimension = "subject"
             applicationIdSuffix = ".historykaz"

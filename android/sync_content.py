@@ -61,6 +61,14 @@ SUBJECT_VARIANTS = {
 }
 VARIANT_ALL = 0   # ключ «все предметы» (сборка allsubjects)
 
+# Групповые сборки: ОДИН APK на несколько предметов и ОДИН ключ активации.
+# variant должен быть уникален и совпадать с VARIANT_ID во build.gradle.kts
+# и со списком в боте (/genqr).
+SUBJECT_GROUPS = {
+    'history': {'subjects': ['historykaz', 'worldhistory'], 'variant': 12,
+                'title': 'История'},
+}
+
 # Мастер-ключ и публичный ключ экосистемы (заполняются load_keys() в main)
 MASTER = None
 PUB = None
@@ -217,6 +225,46 @@ def sync_subject_posters(subject_id):
     return count
 
 
+def sync_group_flavor(group_id):
+    """Собирает flavor-группу: плакаты нескольких предметов в одном APK,
+    зашифрованные ОДНИМ ключом группы, и общий subjects.json."""
+    g = SUBJECT_GROUPS[group_id]
+    ck = oi_protocol.derive_content_key(MASTER, PRODUCT_ID, g['variant'])
+    total, enc = 0, 0
+
+    for subj in g['subjects']:
+        src = os.path.join(CONTENT_DIR, 'posters', subj)
+        if not os.path.exists(src):
+            print(f"  ✗ Нет папки предмета: {src}")
+            continue
+        dst = os.path.join(ANDROID_APP, 'src', group_id, 'assets', 'posters', subj)
+        total += sync_folder(src, dst)
+        enc += encrypt_dir(dst, ck)
+
+        # Предметные ресурсы (картинки и т.п.)
+        subj_assets = os.path.join(CONTENT_DIR, 'assets', subj)
+        if os.path.exists(subj_assets):
+            a_dst = os.path.join(ANDROID_APP, 'src', group_id, 'assets', 'assets', subj)
+            sync_folder(subj_assets, a_dst)
+            enc += encrypt_dir(a_dst, ck)
+
+    # subjects.json со ВСЕМИ предметами группы
+    full_path = os.path.join(CONTENT_DIR, 'subjects.json')
+    if os.path.exists(full_path):
+        with open(full_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        filtered = [x for x in data.get('subjects', []) if x['id'] in g['subjects']]
+        out_dir = os.path.join(ANDROID_APP, 'src', group_id, 'assets')
+        os.makedirs(out_dir, exist_ok=True)
+        with open(os.path.join(out_dir, 'subjects.json'), 'w', encoding='utf-8') as f:
+            json.dump({'subjects': filtered}, f, ensure_ascii=False, indent=2)
+        topics = sum(len(x.get('topics', [])) for x in filtered)
+        print(f"  ✓ subjects.json для {group_id}: {len(filtered)} предм., {topics} тем")
+
+    print(f"  🔒 {group_id}: {total} файлов, зашифровано {enc} (вариант {g['variant']})")
+    return total
+
+
 def create_single_subject_json(subject_id):
     """Создаёт отфильтрованный subjects.json для однопредметного flavor"""
     full_path = os.path.join(CONTENT_DIR, 'subjects.json')
@@ -321,15 +369,21 @@ def main():
     # Определяем какие предметы синхронизировать
     if not args:
         subjects = ALL_SUBJECTS
+        groups = list(SUBJECT_GROUPS)
         print("🔄 Полная синхронизация всех предметов")
     else:
-        subjects = []
+        subjects, groups = [], []
         for a in args:
             if a in ALL_SUBJECTS:
                 subjects.append(a)
+            elif a in SUBJECT_GROUPS:
+                groups.append(a)
+                # предметы группы синхронизируем и по отдельности (для allsubjects)
+                subjects.extend(x for x in SUBJECT_GROUPS[a]['subjects'] if x not in subjects)
             else:
                 print(f"⚠ Неизвестный предмет: {a}")
                 print(f"  Доступные: {', '.join(ALL_SUBJECTS)}")
+                print(f"  Группы: {', '.join(SUBJECT_GROUPS)}")
                 return
 
     # Ключи экосистемы (мастер контента + публичный ключ активации)
@@ -346,6 +400,14 @@ def main():
         print(f"\n📁 {subj}:")
         count = sync_subject_posters(subj)
         total += count
+
+    # 3. Групповые сборки (несколько предметов в одном APK, один ключ)
+    if groups:
+        print("\n=== Групповые сборки ===")
+        for gid in groups:
+            members = ", ".join(SUBJECT_GROUPS[gid]["subjects"])
+            print(f"\n📦 {gid} ({members}):")
+            total += sync_group_flavor(gid)
 
     print(f"\n✅ Синхронизация завершена! Всего файлов: {total}")
     print(f"\nДля сборки APK запустите:")

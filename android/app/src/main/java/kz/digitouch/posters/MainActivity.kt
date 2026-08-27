@@ -62,8 +62,15 @@ class MainActivity : AppCompatActivity() {
     private var subjectsStructure = mutableMapOf<String, JSONObject>()
     private var translations = mutableMapOf<String, JSONObject>()
 
-    // ID предмета из BuildConfig (для однопредметных сборок)
+    // Предметы сборки из BuildConfig. SUBJECT_ID = "all" (все предметы),
+    // один предмет ("physics") или несколько через запятую ("historykaz,worldhistory").
     private val flavorSubjectId: String by lazy { BuildConfig.SUBJECT_ID }
+    private val isAllSubjects: Boolean by lazy { flavorSubjectId == "all" }
+    private val flavorSubjects: List<String> by lazy {
+        flavorSubjectId.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+    }
+    /** true — если в сборке ровно один предмет: экран тем сразу домашний. */
+    private val isSingleSubject: Boolean by lazy { !isAllSubjects && flavorSubjects.size == 1 }
 
     // ── QR-сканер лицензии + разрешение камеры ──────────────────────
     private val scanLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { res ->
@@ -229,8 +236,8 @@ class MainActivity : AppCompatActivity() {
 
     /** Навигация после успешной активации (или если уже активирована). */
     private fun navigateAfterActivation() {
-        if (flavorSubjectId != "all" && subjectsStructure.containsKey(flavorSubjectId)) {
-            currentSubject = flavorSubjectId
+        if (isSingleSubject && subjectsStructure.containsKey(flavorSubjects[0])) {
+            currentSubject = flavorSubjects[0]
             showTopicsScreen()
         } else {
             showSubjectsScreen()
@@ -244,6 +251,8 @@ class MainActivity : AppCompatActivity() {
         btnBack.visibility = View.GONE
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
+        // ID устройства нужен только здесь — для получения ключа
+        btnDeviceId.visibility = View.VISIBLE
         webView.loadUrl(assetUrl("templates/activation_screen.html"))
     }
 
@@ -297,6 +306,7 @@ class MainActivity : AppCompatActivity() {
         btnBack.visibility = View.GONE
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
+        btnDeviceId.visibility = View.GONE
 
         webView.loadUrl(assetUrl("templates/subjects_screen.html"))
     }
@@ -309,6 +319,7 @@ class MainActivity : AppCompatActivity() {
         btnBack.visibility = View.GONE
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
+        btnDeviceId.visibility = View.GONE
 
         webView.loadUrl(assetUrl("templates/topics_screen.html"))
     }
@@ -335,6 +346,7 @@ class MainActivity : AppCompatActivity() {
             btnBack.visibility = View.VISIBLE
             btnPrev.visibility = View.VISIBLE
             btnNext.visibility = View.VISIBLE
+            btnDeviceId.visibility = View.GONE
         } else {
             Log.e(TAG, "Poster not found: $assetRel")
             webView.loadData(
@@ -427,8 +439,8 @@ class MainActivity : AppCompatActivity() {
     private fun updateSubjectsScreen() {
         val arr = JSONArray()
         for ((id, subj) in subjectsStructure) {
-            // Для однопредметных сборок: показываем только свой предмет
-            if (flavorSubjectId != "all" && id != flavorSubjectId) continue
+            // Предметные сборки: показываем только предметы этой сборки
+            if (!isAllSubjects && id !in flavorSubjects) continue
 
             val item = JSONObject()
             item.put("id", id)
@@ -463,7 +475,8 @@ class MainActivity : AppCompatActivity() {
         val isLang = subj.optBoolean("is_language_subject", false)
         val nameEscaped = subjectName.replace("'", "\\'").replace("\"", "\\\"")
         // Однопредметная сборка: экран тем — домашний, HTML-кнопка «Назад» не нужна.
-        val backDisplay = if (flavorSubjectId == "all") "" else "none"
+        // Если предметов несколько — назад ведёт к выбору предмета.
+        val backDisplay = if (isSingleSubject) "none" else ""
 
         // Скролл к текущей теме при возврате из плаката
         val scrollScript = if (currentTopicForScroll != null) {
@@ -686,8 +699,8 @@ class MainActivity : AppCompatActivity() {
         when (currentScreen) {
             "poster" -> goBack()
             "topics" -> {
-                if (flavorSubjectId == "all") goBack()
-                else super.onBackPressed()
+                if (isSingleSubject) super.onBackPressed()
+                else goBack()
             }
             else -> super.onBackPressed()
         }

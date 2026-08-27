@@ -43,6 +43,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import keygen
 
 # ─── product-core v4: QR-лицензии для новых продуктов ───
+import base64
 import io
 import json
 from datetime import datetime
@@ -57,7 +58,8 @@ PC_PRODUCTS = {
     # SUBJECT_VARIANTS в android/sync_content.py и VARIANT_ID во build.gradle.kts.
     "interactive-posters": {"id": 1, "name": "Интерактивные плакаты", "variants": {
         0: "Все предметы", 1: "Физика", 2: "Математика", 3: "Биология", 4: "Химия",
-        5: "География", 6: "Информатика", 7: "История Казахстана", 8: "Всемирная история",
+        5: "География", 6: "Информатика",
+        12: "История (Казахстана + Всемирная)",
         9: "Қазақ тілі", 10: "Русский язык", 11: "Английский язык",
     }},
     "interactive-map":    {"id": 4, "name": "Historic Map",       "variant": 0},
@@ -78,6 +80,60 @@ def _pc_license(product_id, variant_id, client_id, months, device_id):
     payload = pcp.pack_payload(product_id, variant_id, client_id, months)
     sig = pcp.sign_license(priv, payload, content_key, device_id)
     return pcp.encode_license(payload, content_key, sig)
+
+# ─── LEGACY-20: короткий ключ для сборок со старым ядром ───────────
+# Запасная схема: ключ XXXX-XXXX-XXXX-XXXX-XXXX вводится руками, QR не нужен.
+# Секрет выводится из мастер-ключа той же формулой, что и при сборке
+# (product-core-legacy20/build/android.py -> _legacy_secret), поэтому ключи
+# подходят к APK из ветки legacy-20char.
+#
+# Плакаты (id 1) — исключение: у них своя старая схема со своим secrets.key,
+# ключи для них выдаёт keygen.py (как и раньше в /gen).
+import hashlib
+import hmac as _hmac
+import struct
+
+# Предмет плакатов -> индекс в старом ключе (keygen.SUBJECTS)
+POSTER_SUBJECT_BY_VARIANT = {
+    0: "allsubjects", 1: "physics", 2: "mathematics", 3: "biology", 4: "chemistry",
+    5: "geography", 6: "informatics", 7: "historykaz", 8: "worldhistory",
+    9: "kazakhlang", 10: "russianlang", 11: "englishlang",
+}
+
+
+def _legacy20_secret(product_id: int) -> bytes:
+    ks = json.loads(open(PC_KEYSTORE, encoding="utf-8").read())
+    master = bytes.fromhex(ks["content_master"])
+    return _hmac.new(master, f"legacy20:{product_id}".encode(), hashlib.sha256).digest()
+
+
+def _legacy20_key(product_id: int, variant_id: int, client_id: int,
+                  months: int, device_id: str) -> str:
+    """Короткий ключ для продуктов на ядре legacy-20char."""
+    secret = _legacy20_secret(product_id)
+    val = ((variant_id & 0xF) << 28) | ((client_id & 0xFFFF) << 12) | \
+          ((months & 0xFF) << 4)
+    payload = struct.pack(">I", val)
+    sig = _hmac.new(secret, payload + device_id.upper().encode(), hashlib.sha256).digest()[:8]
+    enc = base64.b32encode(payload + sig).decode().rstrip("=")
+    return "-".join(enc[i:i + 4] for i in range(0, 20, 4))
+
+
+def _legacy_key_for(pc_slug: str, product_id: int, variant_id: int,
+                    client_id: int, months: int, device_id: str) -> str:
+    """Плакаты — своим старым генератором, остальные — схемой legacy20."""
+    if pc_slug == "interactive-posters":
+        subject = POSTER_SUBJECT_BY_VARIANT.get(variant_id)
+        if subject is None:
+            raise ValueError(
+                f"для варианта {variant_id} короткого ключа не существует: "
+                "объединённая сборка «История» есть только в новой версии — "
+                "выдайте QR-лицензию вместо ключа 20 символов")
+        secret = keygen.load_secret()
+        return keygen.encode_key(keygen.SUBJECTS[subject], client_id, months, 0,
+                                 secret, device_id)
+    return _legacy20_key(product_id, variant_id, client_id, months, device_id)
+
 
 def _get_or_create_pc_client_id(name: str) -> int:
     """ID клиента по названию школы: если школа уже встречалась — тот же ID, иначе новый."""
@@ -471,11 +527,29 @@ async def cmd_genqr(message: Message, state: FSMContext):
     if not is_admin(message.from_user.id):
         return
     await state.clear()
+    await state.update_data(legacy=False)
     rows = [[InlineKeyboardButton(text=v["name"], callback_data=f"pcp_{k}")]
             for k, v in PC_PRODUCTS.items()]
+    # Отдельной кнопкой — тот же ход, но короткий ключ для сборок со старым ядром
+    rows.append([InlineKeyboardButton(text="(не желательно) Старые версии (ключ 20 символов)",
+                                      callback_data="pcold")])
     await message.answer("🆕 *QR-лицензия (v4)*\n\nШаг 1/4: выберите продукт:",
                          reply_markup=InlineKeyboardMarkup(inline_keyboard=rows), parse_mode="Markdown")
     await state.set_state(PcGen.product)
+
+
+@router.callback_query(F.data == "pcold", PcGen.product)
+async def pcgen_legacy(callback: CallbackQuery, state: FSMContext):
+    """Переключает тот же диалог в режим короткого ключа (сборки без QR)."""
+    await state.update_data(legacy=True)
+    rows = [[InlineKeyboardButton(text=v["name"], callback_data=f"pcp_{k}")]
+            for k, v in PC_PRODUCTS.items()]
+    await callback.message.edit_text(
+        "🔑 *Ключ 20 символов (старые сборки)*\n\n"
+        "Для APK, где активация вводится руками и QR нет.\n\n"
+        "Шаг 1/4: выберите продукт:",
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=rows), parse_mode="Markdown")
+    await callback.answer()
 
 
 @router.callback_query(F.data.startswith("pcp_"), PcGen.product)
@@ -580,19 +654,33 @@ async def pcgen_months(callback: CallbackQuery, state: FSMContext):
     cname = data.get("client_name", f"#{cid}")
     variant = data.get("variant", prod.get("variant", 0))
     vlabel = f" — {prod['variants'].get(variant, variant)}" if prod.get("variants") else ""
+    legacy = data.get("legacy", False)
     try:
-        lic = _pc_license(prod["id"], variant, cid, months, did)
-        png = _qr_png(lic)
-        caption = (
-            f"✅ QR-лицензия готова\n\n"
-            f"Продукт: {prod['name']}{vlabel} (id {prod['id']})\n"
-            f"Устройство: {did}\n"
-            f"Клиент: {cname} (#{cid})   Срок: {months} мес.\n\n"
-            "На доске: «📷 Сканировать QR-код» → наведите камеру на этот QR."
-        )
-        await callback.message.answer_photo(BufferedInputFile(png, filename=f"license_{did}.png"), caption=caption)
-
-        await callback.message.answer(lic)
+        if legacy:
+            # Старые сборки: короткий ключ, вводится руками, QR не нужен
+            key = _legacy_key_for(data["pc"], prod["id"], variant, cid, months, did)
+            await callback.message.answer(
+                f"🔑 *Ключ 20 символов готов*\n\n"
+                f"Продукт: {prod['name']}{vlabel} (id {prod['id']})\n"
+                f"Устройство: `{did}`\n"
+                f"Клиент: {cname} (#{cid})   Срок: {months} мес.\n\n"
+                "На доске: введите ключ на экране активации.\n"
+                "_Только для сборок со старым ядром (без QR)._",
+                parse_mode="Markdown")
+            await callback.message.answer(f"`{key}`", parse_mode="Markdown")
+        else:
+            lic = _pc_license(prod["id"], variant, cid, months, did)
+            png = _qr_png(lic)
+            caption = (
+                f"✅ QR-лицензия готова\n\n"
+                f"Продукт: {prod['name']}{vlabel} (id {prod['id']})\n"
+                f"Устройство: {did}\n"
+                f"Клиент: {cname} (#{cid})   Срок: {months} мес.\n\n"
+                "На доске: «📷 Сканировать QR-код» → наведите камеру на этот QR."
+            )
+            await callback.message.answer_photo(
+                BufferedInputFile(png, filename=f"license_{did}.png"), caption=caption)
+            await callback.message.answer(lic)
 
         _save_pc_license(data["pc"], prod["id"], variant, cid, cname, did, months, callback.from_user.id)
     except FileNotFoundError:

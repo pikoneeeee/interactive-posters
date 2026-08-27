@@ -69,6 +69,11 @@ ALL_SUBJECTS = [
     'music', 'grafika', 'labor_girls', 'nvp', 'labor_boys'
 ]
 
+# Групповые сборки: один APK на несколько предметов (см. SUBJECT_GROUPS
+# в sync_content.py). Собираются как обычный flavor, но в 'all' не входят —
+# иначе история собиралась бы дважды.
+GROUP_FLAVORS = ['history']
+
 # Короткие алиасы для удобства
 ALIASES = {
     'math': 'mathematics',
@@ -199,7 +204,7 @@ def main():
             break
         # Разрешаем алиасы
         resolved = ALIASES.get(a, a)
-        if resolved in ALL_SUBJECTS or resolved == 'allsubjects':
+        if resolved in ALL_SUBJECTS or resolved in GROUP_FLAVORS or resolved == 'allsubjects':
             subjects_to_build.append(resolved)
         else:
             print(f"⚠ Неизвестный предмет: {a}")
