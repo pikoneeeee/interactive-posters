@@ -43,8 +43,16 @@ ALL_SUBJECTS = [
     'physics', 'mathematics', 'biology', 'chemistry',
     'geography', 'informatics', 'historykaz', 'worldhistory',
     'kazakhlang', 'russianlang', 'englishlang',
-    'music', 'grafika', 'labor_girls', 'labor_boys', 'nvp'
+    'music', 'grafika', 'labor_girls', 'labor_boys', 'nvp',
+    # Коллекции карт — такие же предметы (есть в subjects.json и content/posters/).
+    # Без них их картинки (241 МБ) уезжали в общий main и попадали в КАЖДЫЙ APK.
+    'histmaps', 'geomaps',
 ]
+
+# Папки content/assets/, не принадлежащие ни одному предмету. В общий main их НЕ
+# кладём: каждый flavor получает только те файлы, на которые реально ссылаются
+# ЕГО плакаты (иначе все 29 МБ карт едут в каждый APK, включая НВП и физику).
+SHARED_ASSET_DIRS = ['maps']
 
 # ── Новое ядро v4: защита контента + активация ──────────────────────────────
 # Продукт «Интерактивные плакаты» в экосистеме.
@@ -219,6 +227,13 @@ def sync_subject_posters(subject_id):
     if enc_all:
         print(f"  🔒 allsubjects/{subject_id}: зашифровано {enc_all} файлов (вариант {VARIANT_ALL})")
 
+    # Общие карты: только те файлы, на которые ссылаются плакаты этого предмета
+    ck_subj = (oi_protocol.derive_content_key(MASTER, PRODUCT_ID, SUBJECT_VARIANTS[subject_id])
+               if subject_id in SUBJECT_VARIANTS else None)
+    sync_shared_assets(subject_id, [subject_id], ck_subj)
+    sync_shared_assets('allsubjects', [subject_id],
+                       oi_protocol.derive_content_key(MASTER, PRODUCT_ID, VARIANT_ALL))
+
     # Создаём subjects_<id>.json с единственным предметом для этого flavor
     create_single_subject_json(subject_id)
 
@@ -248,6 +263,9 @@ def sync_group_flavor(group_id):
             sync_folder(subj_assets, a_dst)
             enc += encrypt_dir(a_dst, ck)
 
+    # Общие карты для всех предметов группы — одним ключом группы
+    total += sync_shared_assets(group_id, g['subjects'], ck)
+
     # subjects.json со ВСЕМИ предметами группы
     full_path = os.path.join(CONTENT_DIR, 'subjects.json')
     if os.path.exists(full_path):
@@ -262,6 +280,68 @@ def sync_group_flavor(group_id):
         print(f"  ✓ subjects.json для {group_id}: {len(filtered)} предм., {topics} тем")
 
     print(f"  🔒 {group_id}: {total} файлов, зашифровано {enc} (вариант {g['variant']})")
+    return total
+
+
+def collect_shared_asset_refs(subject_ids):
+    """Какие файлы общих папок (SHARED_ASSET_DIRS) нужны этим предметам.
+
+    Сканирует плакаты и вытаскивает ссылки вида assets/<папка>/<файл>.
+    Возвращает {папка: {относительные пути файлов}}.
+    """
+    import re
+    pats = {d: re.compile(r"assets/" + d + r"/([^\"'\s\)>]+)")
+            for d in SHARED_ASSET_DIRS}
+    found = {d: set() for d in SHARED_ASSET_DIRS}
+    for sid in subject_ids:
+        base = os.path.join(CONTENT_DIR, 'posters', sid)
+        if not os.path.exists(base):
+            continue
+        for root, _, files in os.walk(base):
+            for f in files:
+                if not f.lower().endswith(('.html', '.htm')):
+                    continue
+                try:
+                    txt = open(os.path.join(root, f), encoding='utf-8', errors='ignore').read()
+                except Exception:
+                    continue
+                for d, pat in pats.items():
+                    found[d].update(x.split('?')[0] for x in pat.findall(txt))
+    return found
+
+
+def sync_shared_assets(flavor, subject_ids, content_key=None):
+    """Кладёт в flavor только используемые файлы общих папок и шифрует их.
+
+    Так карты едут лишь в те сборки, где на них реально ссылаются плакаты.
+    """
+    refs = collect_shared_asset_refs(subject_ids)
+    total = enc_total = 0
+    for d, files in refs.items():
+        if not files:
+            continue
+        src_root = os.path.join(CONTENT_DIR, 'assets', d)
+        dst_root = os.path.join(ANDROID_APP, 'src', flavor, 'assets', 'assets', d)
+        copied = 0
+        for rel in sorted(files):
+            src = os.path.join(src_root, rel.replace('/', os.sep))
+            if not os.path.exists(src):
+                print(f"  ⚠ нет файла assets/{d}/{rel}")
+                continue
+            dst = os.path.join(dst_root, rel.replace('/', os.sep))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(src, dst)
+            copied += 1
+        if copied:
+            size_mb = sum(os.path.getsize(os.path.join(r, f))
+                          for r, _, fs in os.walk(dst_root) for f in fs) / 1048576
+            note = ''
+            if content_key is not None:
+                e = encrypt_dir(dst_root, content_key)
+                enc_total += e
+                note = f", зашифровано {e}"
+            print(f"  🗺 {flavor}/{d}: {copied} файлов, {size_mb:.1f} МБ{note}")
+            total += copied
     return total
 
 
@@ -307,8 +387,10 @@ def sync_common_subdir_except_subjects(src, dst):
 
     count = 0
     for name in sorted(os.listdir(src)):
-        if name in ALL_SUBJECTS:
-            continue  # предметные ресурсы → в свой flavor, не в общий main
+        if name in ALL_SUBJECTS or name in SHARED_ASSET_DIRS:
+            # предметные ресурсы → в свой flavor; общие папки карт → только
+            # в те flavor'ы, чьи плакаты на них ссылаются (sync_shared_assets)
+            continue
         s = os.path.join(src, name)
         d = os.path.join(dst, name)
         if os.path.isdir(s):
