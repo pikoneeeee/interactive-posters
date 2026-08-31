@@ -61,6 +61,7 @@ PC_PRODUCTS = {
         5: "География", 6: "Информатика",
         12: "История (Казахстана + Всемирная)",
         9: "Қазақ тілі", 10: "Русский язык", 11: "Английский язык",
+        13: "НВП",
     }},
     "interactive-map":    {"id": 4, "name": "Historic Map",       "variant": 0},
     "smart-dictionary":   {"id": 2, "name": "Smart Dictionary",       "variant": 0},

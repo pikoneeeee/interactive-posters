@@ -209,8 +209,7 @@ android {
             applicationIdSuffix = ".nvp"
             buildConfigField("String", "SUBJECT_ID", "\"nvp\"")
             buildConfigField("String", "APP_TITLE", "\"Начальная военная подготовка\"")
-            // Без активации — лицензионный ключ не запрашивается
-            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
+            buildConfigField("int", "VARIANT_ID", "13")
         }
         create("labor_boys") {
             dimension = "subject"

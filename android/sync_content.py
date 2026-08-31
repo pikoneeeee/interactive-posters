@@ -71,6 +71,7 @@ SUBJECT_VARIANTS = {
     'physics': 1, 'mathematics': 2, 'biology': 3, 'chemistry': 4,
     'geography': 5, 'informatics': 6, 'historykaz': 7, 'worldhistory': 8,
     'kazakhlang': 9, 'russianlang': 10, 'englishlang': 11,
+    'nvp': 13,
 }
 VARIANT_ALL = 0   # ключ «все предметы» (сборка allsubjects)
 
@@ -127,7 +128,13 @@ def write_flavor_config(flavor, variant_id):
     кладём сюда ключ контента этого варианта: у каждого предмета он свой,
     а общий main один на все сборки. Assets флейвора перекрывают main.
     """
+    out_path = os.path.join(ANDROID_APP, 'src', flavor, 'assets', 'product_config.json')
     if not LEGACY20:
+        # ВАЖНО: убираем конфиг от прошлой ЗАПАСНОЙ сборки, иначе встроенный
+        # ключ контента утечёт в обычную сборку и она примет короткий ключ.
+        if os.path.exists(out_path):
+            os.remove(out_path)
+            print(f"  ✓ {flavor}: убран встроенный ключ от запасной сборки")
         return
     ck = oi_protocol.derive_content_key(MASTER, PRODUCT_ID, variant_id)
     mask = os.urandom(32)
