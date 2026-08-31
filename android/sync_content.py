@@ -54,6 +54,11 @@ ALL_SUBJECTS = [
 # ЕГО плакаты (иначе все 29 МБ карт едут в каждый APK, включая НВП и физику).
 SHARED_ASSET_DIRS = ['maps']
 
+# Запасная сборка: ключ контента кладётся В APK (обфусцирован XOR-маской), чтобы
+# принимать короткий ключ из 20 символов без QR. Защита слабее — только как
+# крайний вариант. Включается флагом --legacy20.
+LEGACY20 = False
+
 # ── Новое ядро v4: защита контента + активация ──────────────────────────────
 # Продукт «Интерактивные плакаты» в экосистеме.
 PRODUCT_ID = 1
@@ -113,6 +118,30 @@ def write_product_config():
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(cfg, f, ensure_ascii=False)
     print(f"  ✓ product_config.json (product_id={PRODUCT_ID}, публичный ключ Ed25519)")
+
+
+def write_flavor_config(flavor, variant_id):
+    """product_config.json для конкретной сборки.
+
+    В обычном режиме не нужен (хватает общего из main). В режиме --legacy20
+    кладём сюда ключ контента этого варианта: у каждого предмета он свой,
+    а общий main один на все сборки. Assets флейвора перекрывают main.
+    """
+    if not LEGACY20:
+        return
+    ck = oi_protocol.derive_content_key(MASTER, PRODUCT_ID, variant_id)
+    mask = os.urandom(32)
+    cfg = {
+        'product_id': PRODUCT_ID,
+        'public_key': list(PUB),
+        'ck_mask': list(mask),
+        'ck_data': [m ^ c for m, c in zip(mask, ck)],
+    }
+    out_dir = os.path.join(ANDROID_APP, 'src', flavor, 'assets')
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, 'product_config.json'), 'w', encoding='utf-8') as f:
+        json.dump(cfg, f, ensure_ascii=False)
+    print(f"  🔓 {flavor}: ключ контента встроен (вариант {variant_id}) — короткий ключ")
 
 
 def encrypt_dir(directory, content_key):
@@ -234,6 +263,9 @@ def sync_subject_posters(subject_id):
     sync_shared_assets('allsubjects', [subject_id],
                        oi_protocol.derive_content_key(MASTER, PRODUCT_ID, VARIANT_ALL))
 
+    if subject_id in SUBJECT_VARIANTS:
+        write_flavor_config(subject_id, SUBJECT_VARIANTS[subject_id])
+
     # Создаём subjects_<id>.json с единственным предметом для этого flavor
     create_single_subject_json(subject_id)
 
@@ -279,6 +311,7 @@ def sync_group_flavor(group_id):
         topics = sum(len(x.get('topics', [])) for x in filtered)
         print(f"  ✓ subjects.json для {group_id}: {len(filtered)} предм., {topics} тем")
 
+    write_flavor_config(group_id, g['variant'])
     print(f"  🔒 {group_id}: {total} файлов, зашифровано {enc} (вариант {g['variant']})")
     return total
 
@@ -447,6 +480,12 @@ def main():
     if '--help' in args or '-h' in args:
         print(__doc__)
         return
+
+    global LEGACY20
+    if '--legacy20' in args:
+        LEGACY20 = True
+        args = [a for a in args if a != '--legacy20']
+        print("🔓 Режим ЗАПАСНОЙ сборки: активация коротким ключом (20 символов)")
 
     # Определяем какие предметы синхронизировать
     if not args:

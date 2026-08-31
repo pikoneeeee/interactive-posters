@@ -81,57 +81,43 @@ def _pc_license(product_id, variant_id, client_id, months, device_id):
     sig = pcp.sign_license(priv, payload, content_key, device_id)
     return pcp.encode_license(payload, content_key, sig)
 
-# ─── LEGACY-20: короткий ключ для сборок со старым ядром ───────────
-# Запасная схема: ключ XXXX-XXXX-XXXX-XXXX-XXXX вводится руками, QR не нужен.
-# Секрет выводится из мастер-ключа той же формулой, что и при сборке
-# (product-core-legacy20/build/android.py -> _legacy_secret), поэтому ключи
-# подходят к APK из ветки legacy-20char.
-#
-# Плакаты (id 1) — исключение: у них своя старая схема со своим secrets.key,
-# ключи для них выдаёт keygen.py (как и раньше в /gen).
+# ─── LEGACY-20: короткий ключ (20 символов) для запасных сборок ────
+# Сборка с флагом --legacy20 несёт ключ контента внутри APK, поэтому её можно
+# активировать коротким ключом с клавиатуры — без QR и без камеры. Защита слабее
+# (контент достаётся из APK), поэтому это крайний вариант, а не основной.
 import hashlib
 import hmac as _hmac
 import struct
 
-# Предмет плакатов -> индекс в старом ключе (keygen.SUBJECTS)
-POSTER_SUBJECT_BY_VARIANT = {
-    0: "allsubjects", 1: "physics", 2: "mathematics", 3: "biology", 4: "chemistry",
-    5: "geography", 6: "informatics", 7: "historykaz", 8: "worldhistory",
-    9: "kazakhlang", 10: "russianlang", 11: "englishlang",
-}
-
-
-def _legacy20_secret(product_id: int) -> bytes:
-    ks = json.loads(open(PC_KEYSTORE, encoding="utf-8").read())
-    master = bytes.fromhex(ks["content_master"])
-    return _hmac.new(master, f"legacy20:{product_id}".encode(), hashlib.sha256).digest()
-
 
 def _legacy20_key(product_id: int, variant_id: int, client_id: int,
                   months: int, device_id: str) -> str:
-    """Короткий ключ для продуктов на ядре legacy-20char."""
-    secret = _legacy20_secret(product_id)
-    val = ((variant_id & 0xF) << 28) | ((client_id & 0xFFFF) << 12) | \
-          ((months & 0xFF) << 4)
-    payload = struct.pack(">I", val)
-    sig = _hmac.new(secret, payload + device_id.upper().encode(), hashlib.sha256).digest()[:8]
-    enc = base64.b32encode(payload + sig).decode().rstrip("=")
+    """Короткий ключ (20 символов) для сборок --legacy20.
+
+    Формат ДОЛЖЕН совпадать с Licensing.decodeShort в ядре:
+        payload = variant(1Б) + client(2Б, big-endian) + months(1Б)
+        mac     = HMAC-SHA256(ключ_контента, payload + DEVICE_ID)[:8]
+        ключ    = base32(payload + mac) → XXXX-XXXX-XXXX-XXXX-XXXX
+    Ключ MAC — тот же ключ контента, что встроен в APK
+    (derive_content_key(master, product_id, variant_id)).
+    """
+    ks = json.loads(open(PC_KEYSTORE, encoding="utf-8").read())
+    content_key = pcp.derive_content_key(bytes.fromhex(ks["content_master"]),
+                                         product_id, variant_id)
+    payload = struct.pack(">BHB", variant_id & 0xFF, client_id & 0xFFFF, months & 0xFF)
+    mac = _hmac.new(content_key, payload + device_id.upper().encode(),
+                    hashlib.sha256).digest()[:8]
+    enc = base64.b32encode(payload + mac).decode().rstrip("=")
     return "-".join(enc[i:i + 4] for i in range(0, 20, 4))
 
 
 def _legacy_key_for(pc_slug: str, product_id: int, variant_id: int,
                     client_id: int, months: int, device_id: str) -> str:
-    """Плакаты — своим старым генератором, остальные — схемой legacy20."""
-    if pc_slug == "interactive-posters":
-        subject = POSTER_SUBJECT_BY_VARIANT.get(variant_id)
-        if subject is None:
-            raise ValueError(
-                f"для варианта {variant_id} короткого ключа не существует: "
-                "объединённая сборка «История» есть только в новой версии — "
-                "выдайте QR-лицензию вместо ключа 20 символов")
-        secret = keygen.load_secret()
-        return keygen.encode_key(keygen.SUBJECTS[subject], client_id, months, 0,
-                                 secret, device_id)
+    """Короткий ключ для любой сборки --legacy20 (в т.ч. плакатов).
+
+    Плакаты теперь на том же ядре, поэтому отдельная старая схема
+    (keygen.py + secrets.key) больше не нужна — формат единый для всех продуктов.
+    """
     return _legacy20_key(product_id, variant_id, client_id, months, device_id)
 
 

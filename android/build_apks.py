@@ -106,17 +106,19 @@ def flavor_name(subject_id):
     return subject_id[0].upper() + subject_id[1:]
 
 
-def sync_content(subjects):
+def sync_content(subjects, legacy20=False):
     """Запускает sync_content.py"""
     print("\n📦 Синхронизация контента...")
     cmd = [sys.executable, os.path.join(SCRIPT_DIR, 'sync_content.py')] + subjects
+    if legacy20:
+        cmd.append('--legacy20')
     result = subprocess.run(cmd, cwd=SCRIPT_DIR)
     if result.returncode != 0:
         print("❌ Ошибка синхронизации контента!")
         sys.exit(1)
 
 
-def build_apk(subject_id, debug=False):
+def build_apk(subject_id, debug=False, legacy20=False):
     """Собирает APK для одного предмета"""
     build_type = 'Debug' if debug else 'Release'
     task = f"assemble{flavor_name(subject_id)}{build_type}"
@@ -158,7 +160,8 @@ def build_apk(subject_id, debug=False):
 
     if apk_src and os.path.exists(apk_src):
         os.makedirs(DIST_DIR, exist_ok=True)
-        apk_dst = os.path.join(DIST_DIR, f'{subject_id}-{bt}.apk')
+        suffix = '-legacy20' if legacy20 else ''
+        apk_dst = os.path.join(DIST_DIR, f'{subject_id}{suffix}-{bt}.apk')
         shutil.copy2(apk_src, apk_dst)
         size_mb = os.path.getsize(apk_dst) / (1024 * 1024)
         print(f"   ✅ {apk_dst} ({size_mb:.1f} MB)")
@@ -194,6 +197,7 @@ def main():
 
     # Парсим аргументы
     debug = '--debug' in args or '-d' in args
+    legacy20 = '--legacy20' in args
     subjects_to_build = []
 
     for a in args:
@@ -218,13 +222,13 @@ def main():
 
     # Синхронизация контента
     sync_subjects = subjects_to_build if 'allsubjects' not in subjects_to_build else ALL_SUBJECTS
-    sync_content(sync_subjects)
+    sync_content(sync_subjects, legacy20=legacy20)
 
     # Сборка
     success = 0
     failed = 0
     for subj in subjects_to_build:
-        if build_apk(subj, debug=debug):
+        if build_apk(subj, debug=debug, legacy20=legacy20):
             success += 1
         else:
             failed += 1

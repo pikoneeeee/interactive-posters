@@ -51,11 +51,16 @@ object Licensing {
     private var PRODUCT_ID = 0
     private var EXPECTED_VARIANT = -1       // вариант (предмет) этой сборки; -1 = любой
     private var contentKey: ByteArray? = null   // ключ контента активной лицензии
+    // Ключ контента, встроенный в сборку. Есть ТОЛЬКО в запасных сборках
+    // (--legacy20): по нему проверяется короткий ключ из 20 символов.
+    private var embeddedContentKey: ByteArray? = null
 
-    fun init(publicKey: IntArray, productId: Int, expectedVariant: Int) {
+    fun init(publicKey: IntArray, productId: Int, expectedVariant: Int,
+             embeddedKey: ByteArray? = null) {
         PUBLIC_KEY = ByteArray(publicKey.size) { (publicKey[it] and 0xFF).toByte() }
         PRODUCT_ID = productId
         EXPECTED_VARIANT = expectedVariant
+        embeddedContentKey = embeddedKey
     }
 
     /** Ключ расшифровки контента из активной лицензии (null, если не активировано). */
@@ -223,10 +228,74 @@ object Licensing {
     }
 
     /** Активация. Принимается длинная лицензия v4 (OL1-…), полученная по QR или строкой. */
+    // ─── Короткий ключ (20 символов): запасная активация без QR ──────
+    // Формат совпадает с генератором бота (_legacy20_key):
+    //   payload = variant(1Б) + client(2Б BE) + months(1Б)
+    //   mac     = HMAC-SHA256(встроенный_ключ_контента, payload + DEVICE_ID)[:8]
+
+    private data class ShortInfo(val variant: Int, val client: Int, val months: Int)
+
+    private fun base32Decode(s: String): ByteArray? {
+        val alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
+        var buffer = 0L; var bits = 0
+        val out = java.io.ByteArrayOutputStream()
+        for (ch in s) {
+            val v = alpha.indexOf(ch); if (v < 0) return null
+            buffer = (buffer shl 5) or v.toLong(); bits += 5
+            if (bits >= 8) { bits -= 8; out.write(((buffer shr bits) and 0xFFL).toInt()) }
+        }
+        return out.toByteArray()
+    }
+
+    private fun decodeShort(keyStr: String, key: ByteArray, deviceId: String): ShortInfo? {
+        val s = keyStr.uppercase().replace("-", "").replace(" ", "").trim()
+        val raw = base32Decode(s) ?: return null
+        if (raw.size != 12) return null
+        val payload = raw.copyOfRange(0, 4)
+        val mac = raw.copyOfRange(4, 12)
+        val expect = hmacSha256(key, payload + deviceId.uppercase().toByteArray(Charsets.UTF_8))
+            .copyOfRange(0, 8)
+        var diff = 0
+        for (i in mac.indices) diff = diff or (mac[i].toInt() xor expect[i].toInt())
+        if (diff != 0) return null
+        val variant = payload[0].toInt() and 0xFF
+        val client = ((payload[1].toInt() and 0xFF) shl 8) or (payload[2].toInt() and 0xFF)
+        val months = payload[3].toInt() and 0xFF
+        return ShortInfo(variant, client, months)
+    }
+
+    private fun activateShort(context: Context, keyStr: String): Pair<Boolean, String> {
+        val key = embeddedContentKey
+            ?: return false to "Отсканируйте QR-код лицензии (или вставьте ключ, начинающийся с OL1-)."
+        val deviceId = getDeviceId(context)
+        val info = decodeShort(keyStr, key, deviceId)
+            ?: return false to "Ключ неверен или не для этого устройства"
+        if (EXPECTED_VARIANT >= 0 && info.variant != EXPECTED_VARIANT)
+            return false to "Ключ от другого предмета"
+        val now = Date()
+        val expires = Date(now.time + info.months.toLong() * 30L * 24L * 3600L * 1000L)
+        val data = JSONObject().apply {
+            put("key_hash", sha256Hex(keyStr.trim().uppercase()))
+            put("device_id", deviceId)
+            put("product_id", PRODUCT_ID); put("variant_id", info.variant)
+            put("client_id", info.client); put("duration_months", info.months)
+            put("activated_at", isoFormat(now)); put("expires_at", isoFormat(expires))
+            put("last_check", isoFormat(now)); put("version", LICENSE_VERSION)
+            put("short", true)
+        }
+        return try {
+            licenseFile(context).writeBytes(encryptLicense(data, deviceId))
+            contentKey = key
+            true to "Активация успешна! Лицензия действительна ${info.months} ${monthsWord(info.months)}."
+        } catch (e: Exception) {
+            Log.e(TAG, "Ошибка сохранения", e); false to "Ошибка сохранения лицензии: ${e.message}"
+        }
+    }
+
     fun activateLicense(context: Context, licenseStr: String): Pair<Boolean, String> {
         val s = licenseStr.trim()
-        if (!s.startsWith(LICENSE_PREFIX))
-            return false to "Отсканируйте QR-код лицензии (или вставьте ключ, начинающийся с OL1-)."
+        // Короткий ключ (20 символов) — только в запасных сборках со встроенным ключом
+        if (!s.startsWith(LICENSE_PREFIX)) return activateShort(context, s)
         val (d, err) = validate(s, context)
         if (d == null) return false to err
         val deviceId = getDeviceId(context)
@@ -271,7 +340,12 @@ object Licensing {
         if (now.after(expiresAt)) return LicenseStatus(false, "Срок действия лицензии истёк", expiresAt = data.optString("expires_at"))
 
         val ckHex = data.optString("content_key", "")
-        if (ckHex.length == 64) contentKey = ByteArray(32) { ((Character.digit(ckHex[it*2],16) shl 4) or Character.digit(ckHex[it*2+1],16)).toByte() }
+        if (ckHex.length == 64) {
+            contentKey = ByteArray(32) { ((Character.digit(ckHex[it*2],16) shl 4) or Character.digit(ckHex[it*2+1],16)).toByte() }
+        } else if (data.optBoolean("short", false)) {
+            // Короткий ключ: ключа контента в лицензии нет — он встроен в сборку
+            contentKey = embeddedContentKey
+        }
 
         val daysLeft = ((expiresAt.time - now.time) / (24L * 3600L * 1000L)).toInt()
         try { data.put("last_check", isoFormat(now)); file.writeBytes(encryptLicense(data, deviceId)) } catch (e: Exception) {}

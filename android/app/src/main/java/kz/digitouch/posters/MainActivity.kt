@@ -14,6 +14,8 @@ import android.webkit.WebViewClient
 import android.app.AlertDialog
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -50,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnDeviceId: Button
     private lateinit var btnPrev: ImageButton
     private lateinit var btnNext: ImageButton
+    private lateinit var headerBar: LinearLayout
+    private lateinit var tvTitle: TextView
 
     // Состояние навигации
     private var currentScreen = "subjects"   // activation | subjects | topics | poster
@@ -126,15 +130,26 @@ class MainActivity : AppCompatActivity() {
         btnDeviceId = findViewById(R.id.btnDeviceId)
         btnPrev = findViewById(R.id.btnPrev)
         btnNext = findViewById(R.id.btnNext)
+        headerBar = findViewById(R.id.headerBar)
+        tvTitle = findViewById(R.id.tvTitle)
 
         // ── Лицензирование v4: публичный ключ + product_id из product_config.json,
         //    вариант (предмет) — из BuildConfig.VARIANT_ID ──
         val cfg = loadConfig()
         val pub = cfg.optJSONArray("public_key")
         val productId = cfg.optInt("product_id", 1)
+        // Встроенный ключ контента есть только в запасных сборках (--legacy20):
+        // по нему принимается короткий ключ из 20 символов. Лежит в assets
+        // не открыто, а как XOR двух массивов.
+        var embeddedKey: ByteArray? = null
+        val ckMask = cfg.optJSONArray("ck_mask")
+        val ckData = cfg.optJSONArray("ck_data")
+        if (ckMask != null && ckData != null && ckMask.length() == 32 && ckData.length() == 32) {
+            embeddedKey = ByteArray(32) { ((ckMask.getInt(it) xor ckData.getInt(it)) and 0xFF).toByte() }
+        }
         Licensing.init(
             if (pub != null) IntArray(pub.length()) { pub.getInt(it) } else IntArray(0),
-            productId, BuildConfig.VARIANT_ID
+            productId, BuildConfig.VARIANT_ID, embeddedKey
         )
 
         btnDeviceId.setOnClickListener {
@@ -248,9 +263,11 @@ class MainActivity : AppCompatActivity() {
     private fun showActivationScreen() {
         Log.d(TAG, "showActivationScreen()")
         currentScreen = "activation"
+        headerBar.visibility = View.VISIBLE
         btnBack.visibility = View.GONE
         btnPrev.visibility = View.GONE
         btnNext.visibility = View.GONE
+        tvTitle.text = ""
         // ID устройства нужен только здесь — для получения ключа
         btnDeviceId.visibility = View.VISIBLE
         webView.loadUrl(assetUrl("templates/activation_screen.html"))
@@ -303,10 +320,7 @@ class MainActivity : AppCompatActivity() {
     private fun showSubjectsScreen() {
         Log.d(TAG, "showSubjectsScreen()")
         currentScreen = "subjects"
-        btnBack.visibility = View.GONE
-        btnPrev.visibility = View.GONE
-        btnNext.visibility = View.GONE
-        btnDeviceId.visibility = View.GONE
+        headerBar.visibility = View.GONE
 
         webView.loadUrl(assetUrl("templates/subjects_screen.html"))
     }
@@ -316,10 +330,7 @@ class MainActivity : AppCompatActivity() {
         currentScreen = "topics"
         // «Назад» на экране тем рисует HTML-шаблон (← Назад). Нативную кнопку прячем,
         // иначе на сборке allsubjects кнопок «Назад» было две (нативная каз. + HTML рус.).
-        btnBack.visibility = View.GONE
-        btnPrev.visibility = View.GONE
-        btnNext.visibility = View.GONE
-        btnDeviceId.visibility = View.GONE
+        headerBar.visibility = View.GONE
 
         webView.loadUrl(assetUrl("templates/topics_screen.html"))
     }
@@ -343,10 +354,12 @@ class MainActivity : AppCompatActivity() {
 
         if (exists) {
             webView.loadUrl(assetUrl("$assetRel?lang=$currentLang"))
+            headerBar.visibility = View.VISIBLE
             btnBack.visibility = View.VISIBLE
             btnPrev.visibility = View.VISIBLE
             btnNext.visibility = View.VISIBLE
             btnDeviceId.visibility = View.GONE
+            tvTitle.text = topicTitle(topicId)
         } else {
             Log.e(TAG, "Poster not found: $assetRel")
             webView.loadData(
@@ -361,8 +374,6 @@ class MainActivity : AppCompatActivity() {
         when (currentScreen) {
             "poster" -> {
                 currentScreen = "topics"
-                btnPrev.visibility = View.GONE
-                btnNext.visibility = View.GONE
                 showTopicsScreen()
             }
             "topics" -> {
@@ -401,6 +412,20 @@ class MainActivity : AppCompatActivity() {
     // =====================================================================
     // СТРЕЛКИ НАВИГАЦИИ (пред./след. плакат)
     // =====================================================================
+
+    /** Название темы для хедера: title_ru, иначе name. */
+    private fun topicTitle(topicId: String): String {
+        val subj = subjectsStructure[currentSubject] ?: return ""
+        val topics = subj.optJSONArray("topics") ?: return ""
+        for (i in 0 until topics.length()) {
+            val tp = topics.getJSONObject(i)
+            if (tp.getString("id") == topicId) {
+                val ru = tp.optString("title_ru", "")
+                return if (ru.isNotEmpty()) ru else tp.optString("name", "")
+            }
+        }
+        return ""
+    }
 
     private fun getTopicIds(): List<String> {
         val subj = subjectsStructure[currentSubject] ?: return emptyList()
