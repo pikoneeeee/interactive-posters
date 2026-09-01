@@ -219,6 +219,14 @@ android {
             // Без активации — лицензионный ключ не запрашивается
             buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
         }
+        create("geomaps") {
+            dimension = "subject"
+            applicationIdSuffix = ".geomaps"
+            buildConfigField("String", "SUBJECT_ID", "\"geomaps\"")
+            buildConfigField("String", "APP_TITLE", "\"Географические карты\"")
+            // Без активации — лицензионный ключ не запрашивается
+            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
+        }
     }
 
     compileOptions {
