@@ -269,6 +269,9 @@ def sync_subject_posters(subject_id):
     sync_shared_assets(subject_id, [subject_id], ck_subj)
     sync_shared_assets('allsubjects', [subject_id],
                        oi_protocol.derive_content_key(MASTER, PRODUCT_ID, VARIANT_ALL))
+    sync_cross_subject_iframes(subject_id, [subject_id], ck_subj)
+    sync_cross_subject_iframes('allsubjects', [subject_id],
+                       oi_protocol.derive_content_key(MASTER, PRODUCT_ID, VARIANT_ALL))
 
     if subject_id in SUBJECT_VARIANTS:
         write_flavor_config(subject_id, SUBJECT_VARIANTS[subject_id])
@@ -304,6 +307,7 @@ def sync_group_flavor(group_id):
 
     # Общие карты для всех предметов группы — одним ключом группы
     total += sync_shared_assets(group_id, g['subjects'], ck)
+    total += sync_cross_subject_iframes(group_id, g['subjects'], ck)
 
     # subjects.json со ВСЕМИ предметами группы
     full_path = os.path.join(CONTENT_DIR, 'subjects.json')
@@ -348,6 +352,76 @@ def collect_shared_asset_refs(subject_ids):
                 for d, pat in pats.items():
                     found[d].update(x.split('?')[0] for x in pat.findall(txt))
     return found
+
+
+def sync_cross_subject_iframes(flavor, subject_ids, content_key=None):
+    """Плакаты, встроенные через <iframe src="../<другой_предмет>/файл.html">
+    из ЧУЖОГО предмета (напр. geomaps -> geography/geo_map_*.html) — если их не
+    докопировать в сборку, iframe грузит несуществующий файл. Копирует такие
+    страницы + их собственные ссылки на общие карты (SHARED_ASSET_DIRS).
+    """
+    import re
+    iframe_re = re.compile(r'''(?:src|href)\s*=\s*["']\.\./([a-zA-Z0-9_]+)/([^"'#]+\.html)["']''')
+    refs = {}
+    for sid in subject_ids:
+        base = os.path.join(CONTENT_DIR, 'posters', sid)
+        if not os.path.exists(base):
+            continue
+        for f in os.listdir(base):
+            if not f.lower().endswith(('.html', '.htm')):
+                continue
+            txt = open(os.path.join(base, f), encoding='utf-8', errors='ignore').read()
+            for other_subj, other_file in iframe_re.findall(txt):
+                if other_subj not in subject_ids:
+                    refs.setdefault(other_subj, set()).add(other_file)
+
+    total = 0
+    for other_subj, files in refs.items():
+        other_dir = os.path.join(CONTENT_DIR, 'posters', other_subj)
+        dst_dir = os.path.join(ANDROID_APP, 'src', flavor, 'assets', 'posters', other_subj)
+        os.makedirs(dst_dir, exist_ok=True)
+        embedded_texts = []
+        for fn in sorted(files):
+            src = os.path.join(other_dir, fn)
+            if not os.path.exists(src):
+                print(f"  ⚠ iframe-ссылка не найдена: {other_subj}/{fn}")
+                continue
+            shutil.copy2(src, os.path.join(dst_dir, fn))
+            embedded_texts.append(open(src, encoding='utf-8', errors='ignore').read())
+            total += 1
+        if content_key is not None and embedded_texts:
+            total_enc = encrypt_dir(dst_dir, content_key)
+            print(f"  🔗 {flavor}: подключено {len(embedded_texts)} стр. из {other_subj}/ (iframe), "
+                  f"зашифровано {total_enc}")
+        elif embedded_texts:
+            print(f"  🔗 {flavor}: подключено {len(embedded_texts)} стр. из {other_subj}/ (iframe)")
+
+        # Общие карты, на которые ссылаются САМИ подключённые страницы
+        for d in SHARED_ASSET_DIRS:
+            pat = re.compile(r"assets/" + d + r"/([^\"'\s\)>]+)")
+            files2 = set()
+            for txt in embedded_texts:
+                files2.update(x.split('?')[0] for x in pat.findall(txt))
+            if not files2:
+                continue
+            src_root = os.path.join(CONTENT_DIR, 'assets', d)
+            dst_root = os.path.join(ANDROID_APP, 'src', flavor, 'assets', 'assets', d)
+            copied = 0
+            for rel in sorted(files2):
+                s = os.path.join(src_root, rel.replace('/', os.sep))
+                if not os.path.exists(s):
+                    print(f"  ⚠ нет файла assets/{d}/{rel}")
+                    continue
+                dd = os.path.join(dst_root, rel.replace('/', os.sep))
+                os.makedirs(os.path.dirname(dd), exist_ok=True)
+                shutil.copy2(s, dd)
+                copied += 1
+            if copied and content_key is not None:
+                e = encrypt_dir(dst_root, content_key)
+                print(f"  🗺 {flavor}/{d} (для iframe): {copied} файлов, зашифровано {e}")
+            elif copied:
+                print(f"  🗺 {flavor}/{d} (для iframe): {copied} файлов")
+    return total
 
 
 def sync_shared_assets(flavor, subject_ids, content_key=None):

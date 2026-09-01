@@ -227,6 +227,14 @@ android {
             // Без активации — лицензионный ключ не запрашивается
             buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
         }
+        create("histmaps") {
+            dimension = "subject"
+            applicationIdSuffix = ".histmaps"
+            buildConfigField("String", "SUBJECT_ID", "\"histmaps\"")
+            buildConfigField("String", "APP_TITLE", "\"Исторические карты\"")
+            // Без активации — лицензионный ключ не запрашивается
+            buildConfigField("Boolean", "REQUIRES_ACTIVATION", "false")
+        }
     }
 
     compileOptions {

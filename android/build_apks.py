@@ -67,7 +67,7 @@ ALL_SUBJECTS = [
     'geography', 'informatics', 'historykaz', 'worldhistory',
     'kazakhlang', 'russianlang', 'englishlang',
     'music', 'grafika', 'labor_girls', 'nvp', 'labor_boys',
-    'geomaps',
+    'geomaps', 'histmaps',
 ]
 
 # Групповые сборки: один APK на несколько предметов (см. SUBJECT_GROUPS
